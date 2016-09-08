@@ -374,6 +374,9 @@ definitions:
       favicon:
         type: string
         description: Fav icon from the url
+      renew_interval:
+        type: integer
+        description: x
       expire_time:
         type: string
         format: dateTime
