@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<info>
+    <id>passman</id>
+    <name>Passman</name>
+    <description>A password manager for Nextcloud</description>
+    <licence>AGPL</licence>
+    <author>Sander Brand</author>
+    <version>1.0.1</version>
+    <namespace>Passman</namespace>
+    <category>other</category>
+    <website>https://github.com/nextcloud/passman/</website>
+    <bugs>https://github.com/nextcloud/passman/issues</bugs>
+    <repository type="git">git@github.com:nextcloud/passman.git</repository>
+    <dependencies>
+        <owncloud min-version="9.2" max-version="10" />
+    </dependencies>
+</info>
