@@ -29,28 +29,56 @@ class CredentialController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function create() {
+	public function createCredential() {
 		return;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function get($credential_id) {
+	public function getCredential($credential_id) {
 		return;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function update($credential_id) {
+	public function updateCredential($credential_id) {
 		return;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function delete($credential_id) {
+	public function deleteCredential($credential_id) {
+		return;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function getRevision($credential_id) {
+		return;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function deleteRevision($credential_id) {
+		return;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function uploadFile($credential_id) {
+		return;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function deleteFile($credential_id) {
 		return;
 	}
 }
