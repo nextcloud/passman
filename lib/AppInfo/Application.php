@@ -13,9 +13,7 @@ namespace OCA\Passman\AppInfo;
 use OC\Files\View;
 
 use OCA\Passman\Controller\CredentialController;
-use OCA\Passman\Controller\FileController;
 use OCA\Passman\Controller\PageController;
-use OCA\Passman\Controller\RevisionController;
 use OCA\Passman\Controller\VaultController;
 
 use OCP\AppFramework\App;
@@ -34,9 +32,7 @@ class Application extends App {
 		});
 		// Aliases for the controllers so we can use the automatic DI
 		$container->registerAlias('CredentialController', CredentialController::class);
-		$container->registerAlias('FileController', FileController::class);
 		$container->registerAlias('PageController', PageController::class);
-		$container->registerAlias('RevisionController', RevisionController::class);
 		$container->registerAlias('VaultController', VaultController::class);
 	}
 	/**

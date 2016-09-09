@@ -14,9 +14,9 @@ namespace OCA\Passman\Controller;
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Controller;
 
-class PageController extends ApiController {
+class PageController extends Controller {
 
 
 	private $userId;
@@ -40,4 +40,7 @@ class PageController extends ApiController {
 		$params = ['user' => $this->userId];
 		return new TemplateResponse('passman', 'main', $params);  // templates/main.php
 	}
+
+
+
 }

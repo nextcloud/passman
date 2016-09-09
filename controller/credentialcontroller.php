@@ -12,6 +12,8 @@
 namespace OCA\Passman\Controller;
 
 use OCP\IRequest;
+use OCA\Passman\Credential;
+
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\ApiController;
