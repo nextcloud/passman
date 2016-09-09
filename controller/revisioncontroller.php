@@ -29,7 +29,7 @@ class RevisionController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function get() {
+	public function get($credential_id) {
 		return;
 	}
 
@@ -37,7 +37,7 @@ class RevisionController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function delete() {
+	public function delete($credential_id, $revision_id) {
 		return;
 	}
 }

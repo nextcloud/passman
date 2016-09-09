@@ -30,7 +30,7 @@ class FileController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function upload() {
+	public function upload($credential_id) {
 		return;
 	}
 
@@ -38,7 +38,7 @@ class FileController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function delete() {
+	public function delete($credential_id, $file_id) {
 		return;
 	}
 }

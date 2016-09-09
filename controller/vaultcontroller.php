@@ -36,21 +36,21 @@ class VaultController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function get() {
+	public function get($vault_id) {
 		return;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function update() {
+	public function update($vault_id) {
 		return;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function delete() {
+	public function delete($vault_id) {
 		return;
 	}
 }

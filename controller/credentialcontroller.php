@@ -36,21 +36,21 @@ class CredentialController extends Controller {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function get() {
+	public function get($credential_id) {
 		return;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function update() {
+	public function update($credential_id) {
 		return;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function delete() {
+	public function delete($credential_id) {
 		return;
 	}
 }
