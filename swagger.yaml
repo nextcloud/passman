@@ -8,8 +8,8 @@ info:
   license:
     name: AGPL
     url: https://github.com/nextcloud/passman/blob/master/LICENSE
-# the domain of the service
-host: api.uber.com
+# the domain of the servi
+host: localhost
 # array of all schemes that your API supports
 schemes:
   - https
