@@ -12,7 +12,7 @@
 namespace OCA\Passman\AppInfo;
 
 use OCP\AppFramework\App;
-
+use OCP\Util;
 require_once __DIR__ . '/autoload.php';
 
 $app = new App('passman');
@@ -41,3 +41,10 @@ $container->query('OCP\INavigationManager')->add(function () use ($container) {
 		'name' => $l10n->t('Passwords'),
 	];
 });
+
+/**
+ * Loading translations
+ *
+ * The string has to match the app's folder name
+ */
+Util::addTranslations('passman');

@@ -14,9 +14,9 @@ namespace OCA\Passman\Controller;
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\AppFramework\Controller;
+use OCP\AppFramework\ApiController;
 
-class VaultController extends Controller {
+class VaultController extends ApiController {
 
 
 	private $userId;
