@@ -1,0 +1,477 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: Passman API
+  description: Passman, a simple password manager for owncloud
+  version: "1.0.0 draft"
+  license:
+    name: AGPL
+    url: https://github.com/nextcloud/passman/blob/master/LICENSE
+# the domain of the service
+host: localhost
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /api/v1
+
+produces:
+  - application/json
+paths:
+  /vaults:
+    get:
+      summary: Get vaults
+      description: |
+        The vaults endpoint returns information about the vaults a user has.   
+        A vault contains credentials
+      tags:
+        - Vault
+      responses:
+        200:
+          description: An array of vaults
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Vault'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a vault
+      tags:
+        - Vault        
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              vault_name:
+                type: string
+      responses:
+        200:
+          description: The created vault
+          schema:
+              $ref: '#/definitions/Vault'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+            
+  /vaults/{vault_id}:
+    get:
+      summary: Get a vault
+      description: |
+        Returns a vault, in a vault are the encrypted credentials
+      tags:
+        - Vault
+      
+      parameters:
+        - name: vault_id 
+          in: path
+          required: true
+          type: integer
+          
+      responses:
+        200:
+          description: An array of vaults
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Credential'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    patch:
+      summary: Update a vault
+      tags:
+        - Vault      
+      parameters:
+        - name: vault_id
+          in: path
+          required: true
+          type: integer
+          
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              vault_name:
+                type: string
+      responses:
+        200:
+          description: The updated vault
+          schema:
+              $ref: '#/definitions/Vault'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  
+    delete:
+      summary: Delete a vault permanently
+      tags:
+        - Item      
+      parameters:
+        - name: vault_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  
+  /credentials:
+    post:
+      summary: Create a credential
+      description: |
+        Posting to this endpoint will create an item. No need to set item_id when creating an item.
+      tags:
+        - Credential        
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Credential'
+      responses:
+        200:
+          description: The created item
+          schema:
+              $ref: '#/definitions/Credential'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
+  
+  /credentials/{credential_id}:
+    get: 
+      summary: Get an item
+      tags:
+        - Credential      
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: The requested item
+          schema:
+              $ref: '#/definitions/Credential'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'       
+    patch:
+      summary: Update a item
+      tags:
+        - Credential      
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          type: integer
+          
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Credential'
+      responses:
+        200:
+          description: The updated item
+          schema:
+              $ref: '#/definitions/Credential'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+    delete:
+      summary: Delete a item permanently
+      description: For a 'soft' delete set delete_time
+      tags:
+        - Credential      
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+ 
+ 
+ 
+  /credentials/{credential_id}/revisions:
+    get:
+      summary: Get revisions
+      tags:
+        - Revision      
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: The updated vault
+          schema:
+              $ref: '#/definitions/CredentialRevision'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+
+
+
+  /credentials/{credential_id}/revisions/{revision_id}:
+    delete:
+      summary: Delete revision
+      tags:
+        - Revision      
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          type: integer
+        - name: revision_id
+          in: path
+          required: true
+          type: integer          
+      responses:
+        200:
+          description: OK
+
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+  
+
+  /credentials/{credential_id}/file:
+    post:
+      summary: Upload and attach a file to an item
+      tags:
+        - File     
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          type: integer
+        - name: file
+          in: formData
+          description: The uploaded file data
+          required: true
+          type: file        
+      responses:
+        200:
+          description: The result
+          schema:
+            type: object
+            properties:
+              result:
+                type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+  
+  /credentials/{credential_id}/file/{file_id}:
+    delete:
+      tags:
+        - File      
+      summary: Delete a file
+      parameters:
+        - name: credential_id
+          in: path
+          required: true
+          type: integer      
+        - name: file_id
+          in: path
+          required: true
+          type: integer      
+      responses:
+        200:
+          description: OK
+    
+            
+definitions:
+  Vault:
+    type: object
+    properties:
+      vault_id:
+        type: integer
+        format: int64
+        description: The id of the vault
+      name:
+        type: string
+        description: Name of the vault
+      created:
+        type: string
+        format: dateTime
+        description: Time the vault was created
+
+  Credential:
+    type: object
+    properties:
+      item_id:
+        type: integer
+        format: int64
+      user_id:
+        type: string
+      vault:
+        type: integer
+        description: The id of the vault the item belongs to
+      label:
+        type: string
+        description: Name of the item
+      description:
+        type: string
+        description: Description the user the item has given
+      created:
+        type: string
+        format: dateTime
+        description: Time the item was created
+      changed:
+        type: string
+        format: dateTime
+        description: Time the item was changed
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/Tag'
+      email:
+        type: string
+        description: Saved e-mail
+      username:
+        type: string
+        description: Saved username
+      password: 
+        type: string
+        description: The stored password, encrypted with sjcl        
+      url:
+        type: string
+        description: Saved url of the item
+      favicon:
+        type: string
+        description: Fav icon from the url
+      renew_interval:
+        type: integer
+        description: x
+      expire_time:
+        type: string
+        format: dateTime
+        description: Timestamp when the password expires, set NULL to not expire items
+      delete_time:
+        type: string
+        format: dateTime
+        description: If an item is deleted this contains the timestamp, else it's 0
+
+      files:
+        type: array
+        description: An array containing encrypted files
+        items:
+          $ref: '#/definitions/File'
+      custom_fields:
+        type: array
+        description: An array of user defined fields
+        items:
+          $ref: '#/definitions/CustomField'          
+      otp:
+        type: object
+        description: This field holds the One Time Password data
+        properties:
+          otp_secret:
+            type: string
+          qr_code:
+            type: string
+  
+  
+  CredentialRevision:
+    type: object
+    properties:
+      revision_id: 
+        type: integer
+        format: int64
+      created: 
+        type: string
+        format: dateTime
+      item:
+          $ref: '#/definitions/Credential'
+          
+        
+  File:
+    type: object
+    properties:
+      file_id:
+        type: integer
+        format: int64
+        description: The file id
+      filename: 
+        type: string
+        description: The uploaded file name
+      type:
+        type: string
+        description: Detected file type
+      mimetype:
+        type: string
+        description: Mime type of the file
+      size:
+        type: integer
+        description: Size of the file in bytes
+      file_data:
+        type: string
+        description: sjcl encrypted file
+      created:
+        type: string
+        format: dateTime
+        
+        
+  CustomField:
+    type: object
+    properties:
+      label:
+        type: string
+        description: Label of the custom field
+      value:
+        type: string
+        description: Value of the custom field
+      
+  
+  Tag:
+    type: object
+    properties:
+      tag_id: 
+        type: integer
+      name: 
+        type: string
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
