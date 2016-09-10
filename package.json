@@ -1,6 +1,6 @@
 {
-  "name": "my-project-name",
-  "version": "0.1.0",
+  "name": "Passman",
+  "version": "0.0.1",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
