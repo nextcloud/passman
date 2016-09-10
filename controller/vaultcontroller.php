@@ -13,17 +13,50 @@ namespace OCA\Passman\Controller;
 
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\ApiController;
 
 class VaultController extends ApiController {
-
-
 	private $userId;
 
 	public function __construct($AppName, IRequest $request, $UserId) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function listVaults() {
+
+		$vaults = [
+			array(
+				'vault_id' => uniqid(),
+				'name' => 'Vault ' . rand(1, 20),
+				'created' => time(),
+				'last_access' => time()
+			),
+			array(
+				'id' => uniqid(),
+				'name' => 'Vault ' . rand(1, 20),
+				'created' => time(),
+				'last_access' => time()
+			),
+			array(
+				'id' => uniqid(),
+				'name' => 'Vault ' . rand(1, 20),
+				'created' => time(),
+				'last_access' => time()
+			),
+			array(
+				'id' => uniqid(),
+				'name' => 'Vault ' . rand(1, 20),
+				'created' => time(),
+				'last_access' => time()
+			)
+		];
+		return new JSONResponse($vaults);
 	}
 
 	/**

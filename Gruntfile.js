@@ -10,12 +10,12 @@ module.exports = function (grunt) {
 				quoteChar: '\'',
 				useStrict: true,
 				htmlmin: {
-					collapseBooleanAttributes: true,
+					collapseBooleanAttributes: false,
 					collapseWhitespace: true,
 					removeAttributeQuotes: false,
 					removeComments: true,
 					removeEmptyAttributes: false,
-					removeRedundantAttributes: true,
+					removeRedundantAttributes: false,
 					removeScriptTypeAttributes: false,
 					removeStyleLinkTypeAttributes: false
 				}
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 		//@TODO JSHint, comile sass
 		watch: {
 			scripts: {
-				files: ['Gruntfile.js', 'views/*.html'],
+				files: ['Gruntfile.js', 'templates/views/*.html','sass/*','sass/partials/*'],
 				tasks: ['html2js','sass'],
 				options: {
 					spawn: false,

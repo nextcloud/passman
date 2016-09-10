@@ -46,8 +46,8 @@ class Application extends App {
 			return [
 				'id' => $c->getAppName(),
 				'order' => 10,
-				'name' => $c->query(IL10N::class)->t('Password'),
-				'href' => $server->getURLGenerator()->linkToRoute('passman.PageController.index'),
+				'name' => $c->query(IL10N::class)->t('Passwords'),
+				'href' => $server->getURLGenerator()->linkToRoute('passman.page.index'),
 				'icon' => $server->getURLGenerator()->imagePath($c->getAppName(), 'app.svg'),
 			];
 		};

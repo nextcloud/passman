@@ -22,7 +22,7 @@ return [
 		['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
 
 		//Vault
-		['name' => 'vault#index', 'url' => '/api/v1/vaults', 'verb' => 'GET'],
+		['name' => 'vault#listVaults', 'url' => '/api/v1/vaults', 'verb' => 'GET'],
 		['name' => 'vault#create', 'url' => '/api/v1/vaults', 'verb' => 'POST'],
 		['name' => 'vault#get', 'url' => '/api/v1/vaults/{vault_id}', 'verb' => 'GET'],
 		['name' => 'vault#update', 'url' => '/api/v1/vaults/{vault_id}', 'verb' => 'PATCH'],

@@ -8,10 +8,6 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+	.controller('MainCtrl', ['$scope', 'VaultService', function ($scope, VaultService) {
+		$scope.selectedVault = false;
+	}]);

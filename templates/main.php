@@ -14,6 +14,11 @@ script('passman', 'vendor/angular-touch/angular-touch.min');
 script('passman', 'app/app');
 script('passman', 'templates');
 script('passman', 'app/controllers/main');
+script('passman', 'app/controllers/vault');
+script('passman', 'app/filters/propsfilter');
+script('passman', 'app/services/cacheservice');
+script('passman', 'app/services/vaultservice');
+script('passman', 'app/services/credentialservice');
 
 
 /*
@@ -22,8 +27,8 @@ script('passman', 'app/controllers/main');
 style('passman', 'app');
 ?>
 
-<div id="app" ng-app="passmanApp">
-	<div id="app-navigation">
+<div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
+	<div id="app-navigation" ng-if="selectedVault">
 		<ul>
 			<li><a href="#">First level entry</a></li>
 			<li>

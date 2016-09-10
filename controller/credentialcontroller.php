@@ -17,8 +17,9 @@ use OCA\Passman\Credential;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Controller;
 
-class CredentialController extends ApiController {
+class CredentialController extends Controller {
 
 
 	private $userId;

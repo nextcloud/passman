@@ -1,3 +1,57 @@
+.button-geen {
+  background: #37ce02;
+  color: #fff; }
 
+.button-geen:hover {
+  background: #3ad802;
+  color: #fff; }
+
+.button-red {
+  background: #ce3702;
+  color: #fff; }
+
+.button-red:hover {
+  background: #d83a02;
+  color: #fff; }
+
+.vault_wrapper {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 420px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-clip: padding-box;
+  /* stops bg color from leaking outside the border: */
+  box-shadow: 0 1px 1px #777;
+  background: #eee;
+  display: block; }
+  .vault_wrapper .vaultlist {
+    z-index: 500; }
+    .vault_wrapper .vaultlist li, .vault_wrapper .vaultlist div, .vault_wrapper .vaultlist span, .vault_wrapper .vaultlist small {
+      cursor: pointer; }
+    .vault_wrapper .vaultlist small {
+      color: #8e8e8e; }
+    .vault_wrapper .vaultlist li.selected {
+      background-color: #0082c9 !important;
+      color: #ddd; }
+    .vault_wrapper .vaultlist li {
+      border-bottom: 1px solid #8e8e8e;
+      padding: 16px; }
+    .vault_wrapper .vaultlist li:hover {
+      background-color: #f7f7f7; }
+  .vault_wrapper .login_form {
+    padding: 16px; }
+    .vault_wrapper .login_form input[type="password"], .vault_wrapper .login_form input[type="text"] {
+      width: 100%;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      background-clip: padding-box;
+      /* stops bg color from leaking outside the border: */ }
+    .vault_wrapper .login_form .button_wrapper .button {
+      width: 45%;
+      display: inline-block; }
+    .vault_wrapper .login_form .button {
+      margin-top: 10px; }
 
 /*# sourceMappingURL=app.css.map */
