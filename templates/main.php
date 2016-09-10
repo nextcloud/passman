@@ -19,7 +19,7 @@ script('passman', 'app/controllers/main');
 /*
  * Styles
  */
-style('passman', 'style');
+style('passman', 'app');
 ?>
 
 <div id="app" ng-app="passmanApp">

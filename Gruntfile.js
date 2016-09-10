@@ -6,7 +6,19 @@ module.exports = function (grunt) {
 		html2js: {
 			options: {
 				// custom options, see below
-				base: 'templates'
+				base: 'templates',
+				quoteChar: '\'',
+				useStrict: true,
+				htmlmin: {
+					collapseBooleanAttributes: true,
+					collapseWhitespace: true,
+					removeAttributeQuotes: false,
+					removeComments: true,
+					removeEmptyAttributes: false,
+					removeRedundantAttributes: true,
+					removeScriptTypeAttributes: false,
+					removeStyleLinkTypeAttributes: false
+				}
 			},
 			main: {
 				src: ['templates/views/**/*.html'],
@@ -14,11 +26,25 @@ module.exports = function (grunt) {
 			}
 		},
 
+		sass: {
+			dist: {
+				files:  [
+					{
+						expand: true,
+						cwd: "sass",
+						src: ["**/app.scss"],
+						dest: "css",
+						ext: ".css"
+					}
+				]
+			}
+		},
+
 		//@TODO JSHint, comile sass
 		watch: {
 			scripts: {
 				files: ['Gruntfile.js', 'views/*.html'],
-				tasks: ['html2js'],
+				tasks: ['html2js','sass'],
 				options: {
 					spawn: false,
 					interrupt: true,
@@ -38,6 +64,7 @@ module.exports = function (grunt) {
 	});
 
 	// Load the plugin that provides the "uglify" task.
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-contrib-watch');
