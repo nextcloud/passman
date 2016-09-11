@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', function ($scope, VaultService, SettingsService, CredentialService) {
+	.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', '$location', function ($scope, VaultService, SettingsService, CredentialService, $location) {
 		VaultService.getVaults().then(function (vaults) {
 			$scope.vaults = vaults;
 			if(SettingsService.getSetting('defaultVault') != null){
@@ -43,6 +43,13 @@ angular.module('passmanApp')
 			}
 		};
 
+		$scope.toggleRememberPassword = function(){
+			$scope.remember_vault_password = !$scope.remember_vault_password;
+			if($scope.remember_vault_password != true){
+				SettingsService.setSetting('defaultVault', null);
+			}
+		};
+
 		$scope.clearState = function () {
 			$scope.list_selected_vault = false;
 			$scope.creating_vault = false;
@@ -56,31 +63,51 @@ angular.module('passmanApp')
 			$scope.creating_vault = true;
 		};
 
-
+		var _loginToVault = function (vault, vault_key) {
+			var _vault = angular.copy(vault)
+			_vault.vaultKey = angular.copy(vault_key);
+			VaultService.setActiveVault(_vault);
+			$location.path('/vault/'+ vault.vault_id);
+		}
+		
 		$scope.vaultDecryptionKey = '';
-		$scope.loginToVault = function (vault) {
+		$scope.loginToVault = function (vault, vault_key) {
+			$scope.error = false;
+			var _vault = angular.copy(vault)
+			_vault.vaultKey = angular.copy(vault_key);
+			VaultService.setActiveVault(_vault);
 			VaultService.getVault(vault).then(function(credentials){
 				for(var i = 0; i < credentials.length; i++){
 					var credential = credentials[i];
+					console.log(credential);
 					if(credential.hidden = true){
-						console.log(credential);
+						try {
+							var c = CredentialService.decryptCredential(credential);
+							if(c.password === 'lorum ipsum'){
+								console.log($scope.remember_vault_password);
+								if($scope.remember_vault_password ){
+									SettingsService.setSetting('defaultVaultPass', vault_key);
+								}
+								_loginToVault(vault, vault_key);
+							}
+						} catch (e){
+							$scope.error = 'Incorrect vault password!'
+						}
 						break;
 					}
 				}
 			})
 		};
 
-		$scope.vaultKey = '';
-		$scope.vaultKey_2 = '';
-		$scope.createVault = function(vault_name){
+		$scope.createVault = function(vault_name, vault_key, vault_key2){
 			if($scope.vaultKey != $scope.vaultKey_2){
 				//@todo Show an message
 				return;
 			}
 			VaultService.createVault(vault_name).then(function (vault) {
-				$scope.vaults.push(vault)
-				var _vault = angular.copy(vault)
-				_vault.vaultKey = angular.copy($scope.vaultKey);
+				$scope.vaults.push(vault);
+				var _vault = angular.copy(vault);
+				_vault.vaultKey = angular.copy(vault_key);
 				VaultService.setActiveVault(_vault);
 				var test_credential = CredentialService.newCredential();
 				test_credential.label = 'Test key for vault '+ vault_name;
@@ -88,8 +115,7 @@ angular.module('passmanApp')
 				test_credential.vault_id = vault.vault_id;
 				test_credential.password = 'lorum ipsum';
 				CredentialService.createCredential(test_credential).then(function (result) {
-					console.log('succes =)')
-					console.log(result)
+					_loginToVault(vault, vault_key);
 					//@TODO Redirect to newly created vault
 				})
 			});

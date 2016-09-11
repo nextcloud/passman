@@ -28,4 +28,8 @@ class CredentialService {
 	public function createCredential($credential) {
 		return $this->credentialMapper->create($credential);
 	}
+
+	public function getCredentialsByVaultId($vault_id, $user_id){
+		return $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
+	}
 }

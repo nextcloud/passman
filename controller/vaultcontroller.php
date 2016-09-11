@@ -15,19 +15,22 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\VaultService;
-
+use OCA\Passman\Service\CredentialService;
 
 class VaultController extends ApiController {
 	private $userId;
 	private $vaultService;
+	private $credentialService;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
-								VaultService $vaultService) {
+								VaultService $vaultService,
+								CredentialService $credentialService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->vaultService = $vaultService;
+		$this->credentialService = $credentialService;
 	}
 
 	/**
@@ -51,7 +54,8 @@ class VaultController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function get($vault_id) {
-		return;
+		$credentials = $this->credentialService->getCredentialsByVaultId($vault_id, $this->userId);
+		return new JSONResponse($credentials);
 	}
 
 	/**

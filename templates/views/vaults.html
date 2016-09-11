@@ -34,14 +34,14 @@
 			</div>
 			<div>
 				Vault password
-				<input type="text" ng-model="vaultKey">
+				<input type="text" ng-model="vault_key">
 			</div>
 			<div>
 				Repeat vault password
-				<input type="text" ng-model="vaultKey_2">
+				<input type="text" ng-model="vault_key2">
 			</div>
 			<div class="button_wrapper">
-				<div class="button button-geen" ng-click="createVault(vault_name)">
+				<div class="button button-geen" ng-click="createVault(vault_name, vault_key, vault_key2)">
 					Create vault
 				</div>
 				<div class="button button-red" ng-click="clearState()">
@@ -58,10 +58,15 @@
 			</ul>
 		</div>
 		<div class="login_form">
+			<div ng-show="error" class="error">
+				<ul>
+					<li>{{error}}</li>
+				</ul>
+			</div>
 			Please input the password for {{list_selected_vault.name}}
 
 			<div>
-				<input type="password" ng-model="vaultDecryptionKey">
+				<input type="password" ng-model="vault_key">
 			</div>
 			<div>
 				<div>
@@ -72,12 +77,12 @@
 				</div>
 				<div>
 					<label>
-						<input type="checkbox" ng-model="remember_vault_password">
+						<input type="checkbox" ng-checked="remember_vault_password" ng-click="toggleRememberPassword()">
 						Login automatically to this vault.
 					</label>
 				</div>
 			</div>
-			<div class="button button-geen" ng-click="loginToVault(list_selected_vault)">
+			<div class="button button-geen" ng-click="loginToVault(list_selected_vault, vault_key)">
 				Decrypt vault
 			</div>
 		</div>

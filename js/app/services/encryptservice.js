@@ -21,18 +21,15 @@ angular.module('passmanApp')
 		return {
 			encryptString: function(string){
 				var _key = VaultService.getActiveVault().vaultKey;
-				var rp = {
-
-				};
+				console.log(_key);
+				var rp = {};
 				var ct = sjcl.encrypt(_key, string, encryption_config, rp);
 				return  window.btoa(ct);
 			},
 			decryptString: function(ciphertext){
 				ciphertext =  window.atob(ciphertext);
 				var _key = VaultService.getActiveVault().vaultKey;
-				var rp = {
-
-				};
+				var rp = {};
 				try {
 					return sjcl.decrypt(_key, ciphertext, encryption_config, rp)
 				} catch(e) {

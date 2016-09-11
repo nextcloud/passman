@@ -25,6 +25,10 @@ angular
 				templateUrl: 'views/vaults.html',
 				controller: 'VaultCtrl'
 			})
+			.when('/vault/:vault_id', {
+				templateUrl: 'views/show_vault.html',
+				controller: 'CredentialCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

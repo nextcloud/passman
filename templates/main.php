@@ -17,6 +17,7 @@ script('passman', 'app/app');
 script('passman', 'templates');
 script('passman', 'app/controllers/main');
 script('passman', 'app/controllers/vault');
+script('passman', 'app/controllers/credential');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');

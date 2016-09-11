@@ -67,6 +67,14 @@ angular.module('passmanApp')
 						return response;
 					}
 				});
+			},
+			decryptCredential: function (credential) {
+				for(var i = 0; i < _encryptedFields.length; i++){
+					var field = _encryptedFields[i];
+					var fieldValue = angular.copy(credential[field]);
+					credential[field] = JSON.parse(EncryptService.decryptString(fieldValue));
+				}
+				return credential;
 			}
 		}
 	}]);

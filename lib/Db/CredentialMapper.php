@@ -26,17 +26,10 @@ class CredentialMapper extends Mapper {
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
 	 */
-	public function find($vault_id) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
-			'WHERE `user_id` = ? LIMIT 1';
-		return $this->findEntity($sql, [$vault_id]);
-	}
-
-	public function findVaultsFromUser($userId){
-		$sql = 'SELECT id, name, created, guid, last_access FROM `*PREFIX*passman_vaults` ' .
-			'WHERE `user_id` = ? ';
-		$params = [$userId];
-		return $this->findEntities($sql, $params);
+	public function getCredentialsByVaultId($vault_id, $user_id) {
+		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
+			'WHERE `user_id` = ? and vault_id = ? LIMIT 1';
+		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 
 	public function create($raw_credential){

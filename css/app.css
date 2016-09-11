@@ -42,6 +42,8 @@
       background-color: #f7f7f7; }
   .vault_wrapper .login_form {
     padding: 16px; }
+    .vault_wrapper .login_form .error {
+      color: #ce3702; }
     .vault_wrapper .login_form input[type="password"], .vault_wrapper .login_form input[type="text"] {
       width: 100%;
       -webkit-border-radius: 5px;

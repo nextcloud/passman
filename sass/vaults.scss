@@ -31,6 +31,9 @@
   }
   .login_form{
     padding: 16px;
+    .error{
+      color: #ce3702;
+    }
     input[type="password"], input[type="text"]{
       width: 100%;
       @include border-radius(5px);
