@@ -16,7 +16,8 @@ angular
 		'ngRoute',
 		'ngSanitize',
 		'ngTouch',
-		'templates-main'
+		'templates-main',
+		'LocalStorageModule'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider
@@ -29,4 +30,7 @@ angular
 			});
 	}).config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
-}]);
+}]).config(function (localStorageServiceProvider) {
+	localStorageServiceProvider
+		.setNotify(true, true);
+});
