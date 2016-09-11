@@ -13,7 +13,9 @@
 							<small class="ng-binding ng-scope">
 								Created: {{vault.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 								|
-								Last accessed: {{vault.last_access * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+								Last accessed:
+								<span ng-if="vault.last_access > 0">{{vault.last_access * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
+								<span ng-if="vault.last_access === 0">Never</span>
 							</small>
 						</span>
 					</div>
@@ -29,6 +31,14 @@
 			Please give your new vault a name.
 			<div>
 				<input type="text" ng-model="vault_name">
+			</div>
+			<div>
+				Vault password
+				<input type="text" ng-model="vaultKey">
+			</div>
+			<div>
+				Repeat vault password
+				<input type="text" ng-model="vaultKey_2">
 			</div>
 			<div class="button_wrapper">
 				<div class="button button-geen" ng-click="createVault(vault_name)">
@@ -51,7 +61,7 @@
 			Please input the password for {{list_selected_vault.name}}
 
 			<div>
-				<input type="password">
+				<input type="password" ng-model="vaultDecryptionKey">
 			</div>
 			<div>
 				<div>
@@ -67,7 +77,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="button button-geen">
+			<div class="button button-geen" ng-click="loginToVault(list_selected_vault)">
 				Decrypt vault
 			</div>
 		</div>

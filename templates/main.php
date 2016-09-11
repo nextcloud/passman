@@ -10,6 +10,7 @@ script('passman', 'vendor/angular-route/angular-route.min');
 script('passman', 'vendor/angular-sanitize/angular-sanitize.min');
 script('passman', 'vendor/angular-touch/angular-touch.min');
 script('passman', 'vendor/angular-local-storage/angular-local-storage.min');
+script('passman', 'vendor/sjcl/sjcl');
 
 
 script('passman', 'app/app');
@@ -21,6 +22,7 @@ script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
 script('passman', 'app/services/settingsservice');
+script('passman', 'app/services/encryptservice');
 
 
 /*

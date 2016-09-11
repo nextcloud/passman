@@ -12,28 +12,57 @@
 namespace OCA\Passman\Controller;
 
 use OCP\IRequest;
-use OCA\Passman\Credential;
-
-use OCP\AppFramework\Http\TemplateResponse;
-use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
-use OCP\AppFramework\Controller;
-
-class CredentialController extends Controller {
+use OCA\Passman\Service\CredentialService;
 
 
+class CredentialController extends ApiController {
 	private $userId;
-
-	public function __construct($AppName, IRequest $request, $UserId){
+	private $credentialService;
+	public function __construct($AppName,
+								IRequest $request,
+								$UserId,
+								CredentialService $credentialService){
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
+		$this->credentialService = $credentialService;
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function createCredential() {
-		return;
+	public function createCredential($changed, $created,
+									 $credential_id, $custom_fields, $delete_time,
+									 $description, $email, $expire_time, $favicon, $files, $guid,
+									 $hidden, $label, $otp, $password, $renew_interval,
+									 $tags, $url, $username, $vault_id) {
+		$credential = array(
+			'credential_id' => $credential_id,
+			'guid' => $guid,
+			'user_id' => $this->userId,
+			'vault_id' => $vault_id,
+			'label' => $label,
+			'description' => $description,
+			'created' => $created,
+			'changed' => $changed,
+			'tags' => $tags,
+			'email' => $email,
+			'username' => $username,
+			'password' => $password,
+			'url' => $url,
+			'favicon' => $favicon,
+			'renew_interval' => $renew_interval,
+			'expire_time' => $expire_time,
+			'delete_time' => $delete_time,
+			'files' => $files,
+			'custom_fields' => $custom_fields,
+			'otp' => $otp,
+			'hidden' => $hidden,
+
+		);
+		$credential = $this->credentialService->createCredential($credential);
+		return new JSONResponse($credential);
 	}
 
 	/**

@@ -10,9 +10,10 @@
 angular.module('passmanApp')
 	.service('VaultService', ['$http', 'CacheService', function ($http, CacheService) {
 		// AngularJS will instantiate a singleton by calling "new" on this function
+		var _activeVault;
 		return {
 			getVaults: function(){
-				var queryUrl = OC.generateUrl('apps/passman/api/v1/vaults');
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults');
 				return $http.get(queryUrl).then(function (response) {
 					if(response.data){
 						return response.data;
@@ -21,8 +22,14 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			setActiveVault: function(vault){
+				_activeVault = vault;
+			},
+			getActiveVault: function(vault){
+				return _activeVault;
+			},
 			createVault: function (vaultName) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v1/vaults');
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults');
 				return $http.post(queryUrl, { vault_name: vaultName }).then(function (response) {
 					if(response.data){
 						return response.data;
@@ -32,7 +39,7 @@ angular.module('passmanApp')
 				});
 			},
 			getVault: function (vault) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v1/vaults/' + vault.vault_id);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
 				return $http.get(queryUrl).then(function (response) {
 					if(response.data){
 						return response.data;
@@ -42,7 +49,7 @@ angular.module('passmanApp')
 				});
 			},
 			updateVault: function (vault) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v1/vaults/' + vault.vault_id);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
 				return $http.post(queryUrl).then(function (response) {
 					if(response.data){
 						return response.data;
@@ -52,7 +59,7 @@ angular.module('passmanApp')
 				});
 			},
 			deleteVault: function (vault) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v1/vaults/' + vault.vault_id);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
 				return $http.delete(queryUrl).then(function (response) {
 					if(response.data){
 						return response.data;

@@ -12,10 +12,11 @@
 namespace OCA\Passman\Controller;
 
 use OCP\IRequest;
-use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\VaultService;
+
+
 class VaultController extends ApiController {
 	private $userId;
 	private $vaultService;

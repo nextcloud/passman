@@ -54,4 +54,8 @@
     .vault_wrapper .login_form .button {
       margin-top: 10px; }
 
+@media screen and (max-width: 768px) {
+  .vault_wrapper {
+    width: 90%; } }
+
 /*# sourceMappingURL=app.css.map */
