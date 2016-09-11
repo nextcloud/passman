@@ -26,9 +26,15 @@ angular.module('passmanApp')
 
 		$scope.selectVault = function(vault){
 			$scope.list_selected_vault = vault;
-		}
+		};
 
 		$scope.newVault = function(){
 			$scope.creating_vault = true;
-		}
+		};
+
+		$scope.createVault = function(vault_name){
+			VaultService.createVault(vault_name).then(function (result) {
+				console.log(result)
+			})
+		};
 	}]);

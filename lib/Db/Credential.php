@@ -9,7 +9,7 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman;
+namespace OCA\Passman\Db;
 use OCP\Activity\IManager;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
@@ -17,7 +17,7 @@ use OCP\IL10N;
 /**
  * @brief Class for managing the data in the activities
  */
-class Vault {
+class Credential {
 
 	/** @var IDBConnection */
 	protected $connection;
@@ -29,11 +29,4 @@ class Vault {
 		$this->connection = $connection;
 	}
 
-	public function get(){
-
-	}
-
-	public function save(Vault $vault){
-
-	}
 }

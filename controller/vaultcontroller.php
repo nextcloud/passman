@@ -14,15 +14,19 @@ namespace OCA\Passman\Controller;
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\ApiController;
-
+use OCA\Passman\Service\VaultService;
 class VaultController extends ApiController {
 	private $userId;
+	private $vaultService;
 
-	public function __construct($AppName, IRequest $request, $UserId) {
+	public function __construct($AppName,
+								IRequest $request,
+								$UserId,
+								VaultService $vaultService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
+		$this->vaultService = $vaultService;
 	}
 
 	/**
@@ -30,40 +34,16 @@ class VaultController extends ApiController {
 	 */
 	public function listVaults() {
 
-		$vaults = [
-			array(
-				'vault_id' => uniqid(),
-				'name' => 'Vault ' . rand(1, 20),
-				'created' => time(),
-				'last_access' => time()
-			),
-			array(
-				'id' => uniqid(),
-				'name' => 'Vault ' . rand(1, 20),
-				'created' => time(),
-				'last_access' => time()
-			),
-			array(
-				'id' => uniqid(),
-				'name' => 'Vault ' . rand(1, 20),
-				'created' => time(),
-				'last_access' => time()
-			),
-			array(
-				'id' => uniqid(),
-				'name' => 'Vault ' . rand(1, 20),
-				'created' => time(),
-				'last_access' => time()
-			)
-		];
+		$vaults = $this->vaultService->getByUser($this->userId);
 		return new JSONResponse($vaults);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function create() {
-		return;
+	public function create($vault_name) {
+		$vault = $this->vaultService->createVault($vault_name, $this->userId);
+		return new JSONResponse($vault);
 	}
 
 	/**

@@ -18,19 +18,20 @@
 						</span>
 					</div>
 				</li>
+				<li ng-if="vaults.length === 0">No vaults found, why not create one?</li>
 			</ul>
 
 		</div>
 	</div>
 
 	<div ng-if="creating_vault">
-		<div class="login_form">
+		<div class="login_form" ng-init="vault_name = '' ">
 			Please give your new vault a name.
 			<div>
-				<input type="text">
+				<input type="text" ng-model="vault_name">
 			</div>
 			<div class="button_wrapper">
-				<div class="button button-geen">
+				<div class="button button-geen" ng-click="createVault(vault_name)">
 					Create vault
 				</div>
 				<div class="button button-red" ng-click="clearState()">
