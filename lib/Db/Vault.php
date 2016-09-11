@@ -28,7 +28,9 @@ use \OCP\AppFramework\Db\Entity;
  */
 
 
-class Vault extends Entity {
+class Vault extends Entity implements  \JsonSerializable{
+
+	use EntityJSONSerializer;
 
 	protected $guid;
 	protected $name;
@@ -40,5 +42,28 @@ class Vault extends Entity {
 		// add types in constructor
 		$this->addType('created', 'integer');
 		$this->addType('lastAccess', 'integer');
+	}
+
+	public static function fromRow($row){
+		$vault = new Vault();
+		$vault->setId($row['id']);
+		$vault->setGuid($row['guid']);
+		$vault->setName($row['name']);
+		$vault->setCreated($row['created']);
+		$vault->setlastAccess($row['last_access']);
+		return $vault;
+	}
+
+	/**
+	 * Turns entitie attributes into an array
+	 */
+	public function jsonSerialize() {
+		return [
+			'id' => $this->getId(),
+			'guid' => $this->getGuid(),
+			'name' => $this->getName(),
+			'created' => $this->getCreated(),
+			'last_access' => $this->getlastAccess(),
+		];
 	}
 }

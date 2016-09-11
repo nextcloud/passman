@@ -11,10 +11,9 @@
 namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
-
 use OCP\IDBConnection;
 use OCP\AppFramework\Db\Mapper;
-//use OCA\Passman\Db\Vault;
+
 class VaultMapper extends Mapper {
 	private $utils;
 	public function __construct(IDBConnection $db, Utils $utils) {
@@ -34,7 +33,7 @@ class VaultMapper extends Mapper {
 	}
 
 	public function findVaultsFromUser($userId){
-		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
+		$sql = 'SELECT id, name, created, guid, last_access FROM `*PREFIX*passman_vaults` ' .
 			'WHERE `user_id` = ? ';
 		$params = [$userId];
 		return $this->findEntities($sql, $params);
