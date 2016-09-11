@@ -17,7 +17,8 @@ angular
 		'ngSanitize',
 		'ngTouch',
 		'templates-main',
-		'LocalStorageModule'
+		'LocalStorageModule',
+		'offClick'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider

@@ -14,6 +14,23 @@
   background: #d83a02;
   color: #fff; }
 
+.popovermenu {
+  margin-top: 7px;
+  height: 100px;
+  right: -2px !important; }
+  .popovermenu ul {
+    display: block;
+    width: 100px;
+    height: 75px; }
+    .popovermenu ul li {
+      padding: 0px; }
+    .popovermenu ul .menuitem {
+      font-size: 12px;
+      display: inline; }
+  .popovermenu .action {
+    padding: 10px;
+    margin: -10px; }
+
 .vault_wrapper {
   margin: 0 auto;
   margin-top: 20px;
@@ -59,5 +76,31 @@
 @media screen and (max-width: 768px) {
   .vault_wrapper {
     width: 90%; } }
+.credential-table {
+  width: 100%;
+  margin-top: 44px; }
+  .credential-table tr:hover {
+    background-color: whitesmoke; }
+  .credential-table tr td {
+    cursor: pointer;
+    padding: 5px;
+    border-bottom: 1px solid #eeeeee; }
+    .credential-table tr td .tags {
+      float: right; }
+      .credential-table tr td .tags .tag {
+        background-color: rgba(240, 240, 240, 0.9);
+        padding: 4px;
+        font-size: 11px; }
+    .credential-table tr td .icon-more {
+      display: inline-block;
+      float: right;
+      margin-left: 5px;
+      margin-top: 1px;
+      opacity: 0.4;
+      height: 20px;
+      width: 32px;
+      cursor: pointer; }
+    .credential-table tr td .icon-more:hover {
+      opacity: 1; }
 
 /*# sourceMappingURL=app.css.map */

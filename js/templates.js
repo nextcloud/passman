@@ -3,7 +3,7 @@ angular.module('templates-main', ['views/show_vault.html', 'views/vaults.html'])
 angular.module('views/show_vault.html', []).run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('views/show_vault.html',
-    'Welcome to the vault! {{active_vault}} Credentials: {{credentials}}');
+    '<div id="controls"><div class="breadcrumb"></div><div class="actions creatable"><span href="#" class="button new"><span class="icon icon-add"></span> <span>New</span></span></div></div><table class="credential-table" ng-init="menuOpen = false"><tr ng-repeat="credential in credentials"><td><span class="label">{{credential.label}}</span> <span class="icon icon-more" ng-click="menuOpen = !menuOpen" off-click="menuOpen = false;"></span> <span class="tags"><span class="tag">Tag 1</span> <span class="tag">Tag 2</span> <span class="tag">Tag 4</span> <span class="tag">Tag 4</span> <span class="tag">Long tag xD</span></span><div class="actionList popovermenu bubble menu" ng-show="menuOpen"><ul><li><span class="menuitem action"><span class="icon icon-rename"></span><span>Edit</span></span></li><li><span href="#" class="menuitem action"><span class="icon icon-share"></span><span>Share</span></span></li><li><span class="menuitem action" data-action="Delete"><span class="icon icon-delete"></span><span>Delete</span></span></li></ul></div></td></tr></table>');
 }]);
 
 angular.module('views/vaults.html', []).run(['$templateCache', function($templateCache) {

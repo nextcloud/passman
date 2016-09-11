@@ -1,5 +1,48 @@
-Welcome to the vault!
-{{active_vault}}
-Credentials:
-
-{{credentials}}
+<div id="controls">
+	<div class="breadcrumb">
+		<!--<div class="crumb svg last" data-dir="/"><a-->
+		<!--href="/ncdev/index.php/apps/files?dir=/"><img class="svg"-->
+		<!--src="/ncdev/core/img/places/home.svg"-->
+		<!--alt="Home"></a>-->
+		<!--</div>-->
+	</div>
+	<div class="actions creatable">
+		<span href="#" class="button new">
+			<span class="icon icon-add"></span>
+			<span>New</span></span>
+	</div>
+</div>
+<table class="credential-table" ng-init="menuOpen = false">
+	<tr ng-repeat="credential in credentials">
+		<td>
+			<span class="label">{{credential.label}}</span>
+			<span class="icon icon-more" ng-click="menuOpen = !menuOpen" off-click="menuOpen = false;"></span>
+			<span class="tags">
+				<span class="tag">Tag 1</span>
+				<span class="tag">Tag 2</span>
+				<span class="tag">Tag 4</span>
+				<span class="tag">Tag 4</span>
+				<span class="tag">Long tag xD</span>
+			</span>
+			<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
+				<ul>
+					<li><span
+						   class="menuitem action"
+						  ><span
+							class="icon icon-rename"></span><span>Edit</span></span>
+					</li>
+					<li><span href="#"
+						   class="menuitem action"
+						 ><span
+							class="icon icon-share"></span><span>Share</span></span>
+					</li>
+					<li><span
+						   class="menuitem action"
+						   data-action="Delete"><span
+							class="icon icon-delete"></span><span>Delete</span></span>
+					</li>
+				</ul>
+			</div>
+		</td>
+	</tr>
+</table>

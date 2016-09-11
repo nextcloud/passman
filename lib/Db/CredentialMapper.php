@@ -28,7 +28,7 @@ class CredentialMapper extends Mapper {
 	 */
 	public function getCredentialsByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `user_id` = ? and vault_id = ? LIMIT 1';
+			'WHERE `user_id` = ? and vault_id = ?';
 		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 

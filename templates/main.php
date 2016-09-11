@@ -10,6 +10,7 @@ script('passman', 'vendor/angular-route/angular-route.min');
 script('passman', 'vendor/angular-sanitize/angular-sanitize.min');
 script('passman', 'vendor/angular-touch/angular-touch.min');
 script('passman', 'vendor/angular-local-storage/angular-local-storage.min');
+script('passman', 'vendor/angular-off-click/angular-off-click.min');
 script('passman', 'vendor/sjcl/sjcl');
 
 
