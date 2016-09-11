@@ -18,7 +18,8 @@ angular
 		'ngTouch',
 		'templates-main',
 		'LocalStorageModule',
-		'offClick'
+		'offClick',
+		'ngPasswordMeter'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider

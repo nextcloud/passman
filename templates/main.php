@@ -11,6 +11,7 @@ script('passman', 'vendor/angular-sanitize/angular-sanitize.min');
 script('passman', 'vendor/angular-touch/angular-touch.min');
 script('passman', 'vendor/angular-local-storage/angular-local-storage.min');
 script('passman', 'vendor/angular-off-click/angular-off-click.min');
+script('passman', 'vendor/ng-password-meter/ng-password-meter');
 script('passman', 'vendor/sjcl/sjcl');
 
 
@@ -32,6 +33,7 @@ script('passman', 'app/services/encryptservice');
  * Styles
  */
 style('passman', 'app');
+style('passman', 'vendor/ng-password-meter/ng-password-meter');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">

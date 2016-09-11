@@ -30,15 +30,21 @@
 		<div class="login_form" ng-init="vault_name = '' ">
 			Please give your new vault a name.
 			<div>
-				<input type="text" ng-model="vault_name">
+				<input type="text" ng-model="vault_name" required>
 			</div>
 			<div>
 				Vault password
-				<input type="text" ng-model="vault_key">
+				<input type="password" ng-model="vault_key" required>
+				<ng-password-meter password="vault_key"></ng-password-meter>
 			</div>
 			<div>
 				Repeat vault password
-				<input type="text" ng-model="vault_key2">
+				<input type="password" ng-model="vault_key2" required>
+			</div>
+			<div ng-show="error" class="error">
+				<ul>
+					<li>{{error}}</li>
+				</ul>
 			</div>
 			<div class="button_wrapper">
 				<div class="button button-geen" ng-click="createVault(vault_name, vault_key, vault_key2)">

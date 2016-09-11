@@ -1,3 +1,26 @@
+.actions.creatable {
+  padding-left: 10px; }
+  .actions.creatable .bubble {
+    position: relative;
+    width: 185px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-clip: padding-box;
+    /* stops bg color from leaking outside the border: */
+    box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+    .actions.creatable .bubble ul li {
+      padding-left: 10px; }
+    .actions.creatable .bubble ul .menuitem {
+      font-size: 12px;
+      display: inline; }
+  .actions.creatable .bubble:after {
+    right: inherit;
+    left: 10px;
+    top: -19px; }
+
+#app-content-wrapper {
+  min-height: 95%; }
+
 .button-geen {
   background: #37ce02;
   color: #fff; }
@@ -13,24 +36,6 @@
 .button-red:hover {
   background: #d83a02;
   color: #fff; }
-
-.popovermenu {
-  margin-top: 7px;
-  height: 100px;
-  width: 100px;
-  right: -2px !important; }
-  .popovermenu ul {
-    display: block;
-    width: 100px;
-    height: 75px; }
-    .popovermenu ul li {
-      padding: 0px; }
-    .popovermenu ul .menuitem {
-      font-size: 12px;
-      display: inline; }
-  .popovermenu .action {
-    padding: 10px;
-    margin: -10px; }
 
 .vault_wrapper {
   margin: 0 auto;
@@ -103,6 +108,24 @@
       cursor: pointer; }
     .credential-table tr td .icon-more:hover {
       opacity: 1; }
+    .credential-table tr td .popovermenu {
+      margin-top: 7px;
+      height: 100px;
+      width: 100px;
+      right: -2px !important;
+      box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+      .credential-table tr td .popovermenu ul {
+        display: block;
+        width: 100px;
+        height: 75px; }
+        .credential-table tr td .popovermenu ul li {
+          padding: 0px; }
+        .credential-table tr td .popovermenu ul .menuitem {
+          font-size: 12px;
+          display: inline; }
+      .credential-table tr td .popovermenu .action {
+        padding: 10px;
+        margin: -10px; }
 
 .settings-container div {
   padding-left: 15px; }

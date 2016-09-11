@@ -56,6 +56,7 @@ angular.module('passmanApp')
 		$scope.clearState = function () {
 			$scope.list_selected_vault = false;
 			$scope.creating_vault = false;
+			$scope.error = false;
 		};
 
 		$scope.selectVault = function(vault){
@@ -103,8 +104,8 @@ angular.module('passmanApp')
 		};
 
 		$scope.createVault = function(vault_name, vault_key, vault_key2){
-			if($scope.vaultKey != $scope.vaultKey_2){
-				//@todo Show an message
+			if(vault_key != vault_key2){
+				$scope.error = 'Passwords do not match';
 				return;
 			}
 			VaultService.createVault(vault_name).then(function (vault) {

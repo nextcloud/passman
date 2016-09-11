@@ -7,16 +7,31 @@
 		<!--</div>-->
 	</div>
 	<div class="actions creatable">
-		<span href="#" class="button new">
-			<span class="icon icon-add"></span>
-			<span>New</span></span>
+		<span ng-click="menuOpen = !menuOpen" class="button new" ng-init="menuOpen = false"  off-click="menuOpen = false;">
+			<span
+				 >New</span></span>
+			<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
+				<ul>
+					<li><span
+							class="menuitem action"
+					><span
+							class="icon icon-rename"></span><span>New credential</span></span>
+					</li>
+					<li><span href="#"
+							  class="menuitem action"
+					><span
+							class="icon icon-shared"></span><span>New shared credential</span></span>
+					</li>
+				</ul>
+			</div>
 	</div>
 </div>
 <table class="credential-table" ng-init="menuOpen = false">
 	<tr ng-repeat="credential in credentials">
 		<td>
 			<span class="label">{{credential.label}}</span>
-			<span class="icon icon-more" ng-click="menuOpen = !menuOpen" off-click="menuOpen = false;"></span>
+			<span class="icon icon-more" ng-click="menuOpen = !menuOpen"
+				  off-click="menuOpen = false;"></span>
 			<span class="tags">
 				<span class="tag">Tag 1</span>
 				<span class="tag">Tag 2</span>
@@ -27,18 +42,18 @@
 			<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
 				<ul>
 					<li><span
-						   class="menuitem action"
-						  ><span
+							class="menuitem action"
+					><span
 							class="icon icon-rename"></span><span>Edit</span></span>
 					</li>
 					<li><span href="#"
-						   class="menuitem action"
-						 ><span
+							  class="menuitem action"
+					><span
 							class="icon icon-share"></span><span>Share</span></span>
 					</li>
 					<li><span
-						   class="menuitem action"
-						   data-action="Delete"><span
+							class="menuitem action"
+							data-action="Delete"><span
 							class="icon icon-delete"></span><span>Delete</span></span>
 					</li>
 				</ul>
