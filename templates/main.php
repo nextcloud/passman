@@ -17,6 +17,7 @@ script('passman', 'vendor/sjcl/sjcl');
 script('passman', 'app/app');
 script('passman', 'templates');
 script('passman', 'app/controllers/main');
+script('passman', 'app/controllers/menu');
 script('passman', 'app/controllers/vault');
 script('passman', 'app/controllers/credential');
 script('passman', 'app/filters/propsfilter');
@@ -34,7 +35,7 @@ style('passman', 'app');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
-	<div id="app-navigation" ng-if="selectedVault">
+	<div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
 		<ul>
 			<li><a href="#">First level entry</a></li>
 			<li>
@@ -45,14 +46,18 @@ style('passman', 'app');
 				</ul>
 			</li>
 		</ul>
-		<div id="app-settings">
+		<div id="app-settings" ng-init="settingsShown = false;">
 			<div id="app-settings-header">
 				<button class="settings-button"
-						data-apps-slide-toggle="#app-settings-content"
-				></button>
+						ng-click="settingsShown = !settingsShown"
+				>Settings</button>
 			</div>
-			<div id="app-settings-content">
+			<div id="app-settings-content" ng-show="settingsShown">
 				<!-- Your settings in here -->
+				<div class="settings-container">
+					<div><span class="link">Settings</span></div>
+					<div><span class="link" ng-click="logout()">Logout</span></div>
+				</div>
 			</div>
 		</div>
 	</div>

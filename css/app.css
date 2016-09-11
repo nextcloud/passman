@@ -17,6 +17,7 @@
 .popovermenu {
   margin-top: 7px;
   height: 100px;
+  width: 100px;
   right: -2px !important; }
   .popovermenu ul {
     display: block;
@@ -102,5 +103,25 @@
       cursor: pointer; }
     .credential-table tr td .icon-more:hover {
       opacity: 1; }
+
+.settings-container div {
+  padding-left: 15px; }
+  .settings-container div .link {
+    color: #0066ff !important;
+    cursor: pointer; }
+  .settings-container div .link:hover {
+    text-decoration: underline; }
+
+#app-settings-content:not(.ng-hide) {
+  height: 60px;
+  display: inherit !important;
+  padding: 0;
+  transition: height 0.15s ease-out; }
+
+#app-settings-content.ng-hide {
+  display: inherit !important;
+  height: 0;
+  padding: 0;
+  transition: height 0.15s ease-in; }
 
 /*# sourceMappingURL=app.css.map */

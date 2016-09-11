@@ -8,10 +8,10 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-  .controller('MenuCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+	.controller('MenuCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', '$rootScope', function ($scope, VaultService, SettingsService, $location, $rootScope) {
+		$scope.logout = function () {
+			SettingsService.setSetting('defaultVaultPass', false);
+			$rootScope.$broadcast('logout');
+			$location.path('/');
+		}
+	}]);

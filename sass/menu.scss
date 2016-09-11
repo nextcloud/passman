@@ -1,0 +1,12 @@
+.settings-container{
+  div{
+    padding-left: 15px;
+    .link{
+      color: rgb(0, 102, 255) !important;
+      cursor: pointer;
+    }
+    .link:hover{
+      text-decoration: underline;
+    }
+  }
+}
