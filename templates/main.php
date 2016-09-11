@@ -13,6 +13,7 @@ script('passman', 'vendor/angular-local-storage/angular-local-storage.min');
 script('passman', 'vendor/angular-off-click/angular-off-click.min');
 script('passman', 'vendor/ng-password-meter/ng-password-meter');
 script('passman', 'vendor/sjcl/sjcl');
+script('passman', 'vendor/zxcvbn/zxcvbn');
 
 
 script('passman', 'app/app');

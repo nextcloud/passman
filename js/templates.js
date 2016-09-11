@@ -1,4 +1,10 @@
-angular.module('templates-main', ['views/show_vault.html', 'views/vaults.html']);
+angular.module('templates-main', ['views/partials/password-meter.html', 'views/show_vault.html', 'views/vaults.html']);
+
+angular.module('views/partials/password-meter.html', []).run(['$templateCache', function($templateCache) {
+  'use strict';
+  $templateCache.put('views/partials/password-meter.html',
+    '<div class="pass-meter {{masterClass}}"><div class="{{colClass}} pass-meter-col {{first}}"><div class="indicator"></div></div><div class="{{colClass}} pass-meter-col {{second}}"><div class="indicator"></div></div><div class="{{colClass}} pass-meter-col {{third}}"><div class="indicator"></div></div><div class="{{colClass}} pass-meter-col {{fourth}}"><div class="indicator"></div></div><div class="details" ng-click="toggleScore()">Details</div><div class="pass-meter-message">{{message}}</div><div class="detail_box" ng-show="scoreShown">{{score}}</div></div>');
+}]);
 
 angular.module('views/show_vault.html', []).run(['$templateCache', function($templateCache) {
   'use strict';

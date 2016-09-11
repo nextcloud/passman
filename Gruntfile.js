@@ -43,7 +43,7 @@ module.exports = function (grunt) {
 		//@TODO JSHint, comile sass
 		watch: {
 			scripts: {
-				files: ['Gruntfile.js', 'templates/views/*.html','sass/*','sass/partials/*'],
+				files: ['Gruntfile.js', 'templates/views/**/*.html', 'templates/views/*.html','sass/*','sass/partials/*'],
 				tasks: ['html2js','sass'],
 				options: {
 					spawn: false,
