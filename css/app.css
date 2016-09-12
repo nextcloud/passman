@@ -91,6 +91,8 @@
     cursor: pointer;
     padding: 5px;
     border-bottom: 1px solid #eeeeee; }
+    .credential-table tr td .label {
+      float: left; }
     .credential-table tr td .tags {
       float: right; }
       .credential-table tr td .tags .tag {
