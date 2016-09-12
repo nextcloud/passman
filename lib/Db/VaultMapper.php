@@ -49,4 +49,10 @@ class VaultMapper extends Mapper {
 		return parent::insert($vault);
 	}
 
+	public function setLastAccess($vault_id){
+		$vault = new Vault();
+		$vault->setId($vault_id);
+		$vault->setlastAccess(time());
+		$this->update($vault);
+	}
 }

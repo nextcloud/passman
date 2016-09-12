@@ -32,4 +32,8 @@ class VaultService {
 	public function createVault($vault_name, $userId) {
 		return $this->vaultMapper->create($vault_name, $userId);
 	}
+
+	public function setLastAccess($vault_id){
+		return $this->vaultMapper->setLastAccess($vault_id);
+	}
 }
