@@ -34,7 +34,7 @@ angular.module('passmanApp')
 		var _encryptedFields = ['description','username','password','files','custom_fields','otp'];
 		return {
 			newCredential: function () {
-				return angular.extend({}, credential);
+				return angular.copy(credential);
 			},
 			createCredential: function (credential) {
 				for(var i = 0; i < _encryptedFields.length; i++){

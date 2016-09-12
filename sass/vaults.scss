@@ -34,6 +34,11 @@
     .error{
       color: #ce3702;
     }
+    .pw-input{
+      .last_access{
+        color: #8e8e8e;
+      }
+    }
     input[type="password"], input[type="text"]{
       width: 100%;
       @include border-radius(5px);

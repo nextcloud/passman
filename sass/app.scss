@@ -4,6 +4,8 @@
 @import 'container';
 @import 'partials/button';
 @import 'partials/popovermenu';
+@import 'partials/tabs';
+@import 'partials/pwgen';
 @import 'vaults';
 @import 'credentials';
 @import 'menu';
@@ -22,4 +24,10 @@
 }
 .ui-dialog{
   z-index: 9999;
+}
+#notification{
+  .row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }

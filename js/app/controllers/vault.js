@@ -22,7 +22,8 @@ angular.module('passmanApp')
 					var vault = vaults[i];
 					if(vault.guid == default_vault.guid){
 						$scope.default_vault = true;
-						$scope.list_selected_vault = SettingsService.getSetting('defaultVault');
+						$scope.list_selected_vault = vault;
+						SettingsService.setSetting('defaultVault', vault);
 						if(SettingsService.getSetting('defaultVaultPass') != ''){
 							$location.path('/vault/'+ vault.vault_id);
 						}
@@ -48,6 +49,10 @@ angular.module('passmanApp')
 
 		$scope.toggleRememberPassword = function(){
 			$scope.remember_vault_password = !$scope.remember_vault_password;
+			if($scope.remember_vault_password){
+				SettingsService.setSetting('defaultVault', $scope.list_selected_vault);
+				$scope.default_vault = true;
+			}
 			if($scope.remember_vault_password != true){
 				SettingsService.setSetting('defaultVault', null);
 			}
@@ -83,12 +88,10 @@ angular.module('passmanApp')
 			VaultService.getVault(vault).then(function(credentials){
 				for(var i = 0; i < credentials.length; i++){
 					var credential = credentials[i];
-					console.log(credential);
 					if(credential.hidden = true){
 						try {
 							var c = CredentialService.decryptCredential(credential);
 							if(c.password === 'lorum ipsum'){
-								console.log($scope.remember_vault_password);
 								if($scope.remember_vault_password ){
 									SettingsService.setSetting('defaultVaultPass', vault_key);
 								}

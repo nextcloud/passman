@@ -27,19 +27,19 @@
 					scope.toggleScore = function () {
 						scope.scoreShown = !scope.scoreShown;
 					}
+					jQuery('.match-sequence').hide()
 					scope.toggleMatchBreakdown = function () {
+						scope.matchBreakdown = true;
 						var width = ($window.innerWidth > 420) ? $window.innerWidth * 0.85 : $window.innerWidth * 0.8;
-						var ms_elem = jQuery('.match-sequence')
+						var ms_elem = jQuery('.match-sequence');
 						ms_elem.dialog({
 							title: 'Password breakdown',
 							width: width,
 							open: function () {
 								var _totalWidth = 0;
-
-								jQuery('.match-sequence').find('.sequence').each(function (key, el) {
+								ms_elem.find('.sequence').each(function (key, el) {
 									_totalWidth += jQuery(el).width()+20;
-								})
-								console.log(_totalWidth, $window.innerWidth * 0.85)
+								});
 								if (_totalWidth < $window.innerWidth * 0.85) {
 									ms_elem.dialog("option", "width", _totalWidth);
 									jQuery('.ui-dialog').position({
@@ -56,7 +56,10 @@
 										}
 									});
 								}
-								jQuery('.match-sequence').find('.container').width(_totalWidth);
+								jQuery('.match-sequence').find('.sequence_container').width(_totalWidth);
+							},
+							close: function () {
+
 							}
 
 						})

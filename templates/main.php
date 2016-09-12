@@ -14,7 +14,8 @@ script('passman', 'vendor/angular-off-click/angular-off-click.min');
 script('passman', 'vendor/ng-password-meter/ng-password-meter');
 script('passman', 'vendor/sjcl/sjcl');
 script('passman', 'vendor/zxcvbn/zxcvbn');
-
+script('passman', 'vendor/ng-clipboard/clipboard.min');
+script('passman', 'vendor/ng-clipboard/ngclipboard');
 
 script('passman', 'app/app');
 script('passman', 'templates');
@@ -22,12 +23,14 @@ script('passman', 'app/controllers/main');
 script('passman', 'app/controllers/menu');
 script('passman', 'app/controllers/vault');
 script('passman', 'app/controllers/credential');
+script('passman', 'app/controllers/edit_credential');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
 script('passman', 'app/services/settingsservice');
 script('passman', 'app/services/encryptservice');
+script('passman', 'app/directives/passwordgen');
 
 
 /*
@@ -35,6 +38,9 @@ script('passman', 'app/services/encryptservice');
  */
 style('passman', 'app');
 style('passman', 'vendor/ng-password-meter/ng-password-meter');
+style('passman', 'vendor/bootstrap/bootstrap.min');
+style('passman', 'vendor/bootstrap/bootstrap-theme.min');
+style('passman', 'vendor/font-awesome/font-awesome.min');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">

@@ -19,7 +19,8 @@ angular
 		'templates-main',
 		'LocalStorageModule',
 		'offClick',
-		'ngPasswordMeter'
+		'ngPasswordMeter',
+		'ngclipboard'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider
@@ -30,6 +31,14 @@ angular
 			.when('/vault/:vault_id', {
 				templateUrl: 'views/show_vault.html',
 				controller: 'CredentialCtrl'
+			})
+			.when('/vault/:vault_id/new', {
+				templateUrl: 'views/edit_credential.html',
+				controller: 'CredentialEditCtrl'
+			})
+			.when('/vault/:vault_id/edit/:credential_id', {
+				templateUrl: 'views/edit_credential.html',
+				controller: 'CredentialEditCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'
