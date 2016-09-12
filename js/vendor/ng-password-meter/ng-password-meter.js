@@ -56,7 +56,7 @@
 
 						if (scope.strength == 0) {
 							scope.first = 'poor';
-							scope.message	= 'Poor';
+							scope.message	= 'poor';
 						} else if (scope.strength == 1) {
 							scope.first = 'poor';
 							scope.second = 'poor';
