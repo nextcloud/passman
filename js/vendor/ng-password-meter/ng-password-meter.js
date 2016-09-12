@@ -18,13 +18,22 @@
 				scope: {
 					password: '=',
 					strength: '=?',
+					score: '=?',
 				},
 				link: function(scope) {
 
 					scope.scoreShown = false;
+					scope.matchBreakdown = false;
 					scope.toggleScore = function(){
 						scope.scoreShown = !scope.scoreShown;
 					}
+					scope.toggleMatchBreakdown = function(){
+						//scope.matchBreakdown = !scope.matchBreakdown;
+						var _dialog_width = ((180 * scope.score.sequence.length) < 720) ? 200 * scope.score.sequence.length : 720;
+						jQuery('.match-sequence').dialog({
+							width: _dialog_width
+						})
+					};
 
 					var measureStrength = function(p) {
 						console.log();
