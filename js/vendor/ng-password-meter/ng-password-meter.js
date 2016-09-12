@@ -31,7 +31,8 @@
 						//scope.matchBreakdown = !scope.matchBreakdown;
 						var _dialog_width = ((180 * scope.score.sequence.length) < 720) ? 200 * scope.score.sequence.length : 720;
 						jQuery('.match-sequence').dialog({
-							width: _dialog_width
+							width: _dialog_width,
+							title: 'Password breakdown'
 						})
 					};
 
