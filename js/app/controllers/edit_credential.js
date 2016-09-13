@@ -34,10 +34,6 @@ angular.module('passmanApp')
 			color: 'purple'
 		}];
 
-		$scope.pwGenerated = function(pass){
-			$scope.storedCredential.password_repeat = pass;
-		};
-
 		$scope.pwSettings = {
 			'length': 12,
 			'useUppercase': true,
@@ -71,7 +67,7 @@ angular.module('passmanApp')
 			$location.path('/vault/'+ $routeParams.vault_id);
 		} else {
 			$scope.storedCredential = storedCredential;
-			$scope.storedCredential.password_repeat = storedCredential.password;
+			$scope.storedCredential.password_repeat = angular.copy(storedCredential.password);
 		}
 
 
@@ -88,4 +84,35 @@ angular.module('passmanApp')
 		$scope.isActiveTab = function (tab) {
 			return tab.url == $scope.currentTab.url;
 		};
+
+		/**
+		 * Below general edit functions
+		 */
+
+		$scope.pwGenerated = function(pass){
+			$scope.storedCredential.password_repeat = pass;
+		};
+
+		var _customField = {
+			label: '',
+			value: '',
+			secret: false
+		};
+		$scope.new_custom_field = angular.copy(_customField);
+
+		$scope.addCustomField = function(){
+			if(!$scope.new_custom_field.label){
+				//@TODO move OC.Notification to a service
+				OC.Notification.showTemporary('Please fill in a label');
+			}
+			if(!$scope.new_custom_field.value){
+				//@TODO move OC.Notification to a service
+				OC.Notification.showTemporary('Please fill in a value!');
+			}
+			if(!$scope.new_custom_field.label || !$scope.new_custom_field.value){
+				return;
+			}
+			$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
+			$scope.new_custom_field = angular.copy(_customField);
+		}
 	}]);

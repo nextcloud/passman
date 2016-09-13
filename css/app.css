@@ -223,6 +223,21 @@
     float: left; }
   .edit_credential .password_settings label .label {
     float: left; }
+    .edit_credential .password_settings label .label.sm {
+      font-size: 12px; }
+.edit_credential .custom_fields {
+  margin-top: 10px; }
+  .edit_credential .custom_fields table {
+    width: 100%; }
+    .edit_credential .custom_fields table thead th {
+      background-color: #0082c9;
+      color: #fff; }
+    .edit_credential .custom_fields table thead th.field_actions {
+      width: 15%; }
+    .edit_credential .custom_fields table tr td.field_actions {
+      font-size: 13px; }
+    .edit_credential .custom_fields table tr td, .edit_credential .custom_fields table tr th {
+      padding: 5px; }
 
 .settings-container div {
   padding-left: 15px; }

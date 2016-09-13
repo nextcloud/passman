@@ -144,7 +144,7 @@ angular.module('passmanApp')
 				scope.$watch("password", function () {
 					scope.model = scope.password;
 					scope.password_repeat = scope.model;
-					scope.callback(scope.password)
+
 					if(scope.password !== undefined && scope.password !== null && scope.password !== "") {
 						scope.passwordNotNull = true;
 					} else {
@@ -153,6 +153,7 @@ angular.module('passmanApp')
 				});
 				//
 				scope.onSuccess = function(e) {
+					//@TODO move OC.Notification to a service
 					OC.Notification.showTemporary('Password copied to clipboard!');
 					e.clearSelection();
 				};
@@ -177,6 +178,7 @@ angular.module('passmanApp')
 							scope.generatePasswordProgress();
 						} else {
 							scope.disabled = false;
+							scope.callback(scope.password)
 						}
 					}, 10);
 				};

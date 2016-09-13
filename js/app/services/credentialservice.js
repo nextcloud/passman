@@ -25,9 +25,9 @@ angular.module('passmanApp')
 			'favicon': null,
 			'renew_interval': null,
 			'expire_time': null,
-			'delete_time': null,
-			'files': null,
-			'custom_fields': null,
+			'delete_time': 0,
+			'files': [],
+			'custom_fields': [],
 			'otp': null,
 			'hidden': false
 		};

@@ -1,0 +1,51 @@
+<div class="row">
+	<div class="col-xs-4">
+		<label>Field label</label>
+		<input type="text" ng-model="new_custom_field.label">
+	</div>
+	<div class="col-xs-4">
+		<label>Field value</label>
+		<input type="text" ng-model="new_custom_field.value" ng-show="!new_custom_field.secret">
+		<input type="password" ng-model="new_custom_field.value" ng-show="new_custom_field.secret">
+		<label>
+			<input type="checkbox" ng-model="new_custom_field.secret"> Secret value
+		</label>
+	</div>
+	<div class="col-xs-2">
+		<label class="invisible">Add</label>
+		<button ng-click="addCustomField()">+</button>
+	</div>
+</div>
+<div class="row custom_fields" ng-if="storedCredential.custom_fields.length > 0">
+	<div class="col-xs-12 table" ng-init="edit = false;">
+		<table>
+			<thead>
+			<tr>
+				<th class="field_label">Label</th>
+				<th class="field_value">Value</th>
+				<th class="field_secret">Secret value</th>
+				<th class="field_actions">Actions</th>
+			</tr>
+			</thead>
+			<tr ng-repeat="field in storedCredential.custom_fields">
+				<td>
+					<span  ng-show="!edit">{{field.label}}</span>
+					<input ng-model="field.label" type="text" ng-show="edit">
+				</td>
+				<td>
+					<span ng-if="!field.secret && !edit">{{field.value}}</span>
+					<span  ng-if="field.secret && !edit"><span ng-repeat="n in [] | range:field.value.length">*</span></span>
+
+
+					<input ng-model="field.value" type="text" ng-show="edit && !secret">
+					<input ng-model="field.value" type="text" ng-show="edit && secret">
+				</td>
+				<td><input type="checkbox" ng-model="field.secret"></td>
+				<td class="field_actions">
+					<i class="fa fa-edit" ng-click ="edit = true"></i>
+					<i class="fa fa-trash"></i>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
