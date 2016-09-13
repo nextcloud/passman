@@ -235,8 +235,10 @@
     .edit_credential .custom_fields table thead th.field_actions {
       width: 15%; }
     .edit_credential .custom_fields table tr td.field_actions {
-      font-size: 13px; }
+      font-size: 13px;
+      width: 15%; }
     .edit_credential .custom_fields table tr td, .edit_credential .custom_fields table tr th {
+      width: 20%;
       padding: 5px; }
 
 .settings-container div {
