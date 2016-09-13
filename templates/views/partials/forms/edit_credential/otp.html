@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="col-xs-2 nopadding">
+			OTP Type
+		</div>
+		<div class="col-xs-6 nopadding">
+			<label for="otpImg"><input type="radio" name="seletcOTPType"
+									   value="image" ng-model="otpType"
+									   id="otpImg">Upload an image</label>
+			<label for="otpStr"><input type="radio" name="seletcOTPType"
+									   value="string" ng-model="otpType"
+									   id="otpStr">Set the secret
+				manually</label>
+		</div>
+		<div class="col-xs-12 nopadding">
+			<input type="file" qrread on-read="parseQR(qrdata)"
+				   on-read="parseQR(qrdata)" ng-show="otpType==='image'"/>
+			<label ng-show="otpType==='string'">Enter the two-factor
+				secret</label>
+			<input type="text" ng-model="currentItem.otpsecret.secret"
+				   class="otpSecret form-control" ng-show="otpType==='string'"/>
+		</div>
+	</div>
+	<hr>
+	<div class="col-xs-12" ng-if="storedCredential.otp">Current OTP settings</div>
+	<div class="col-xs-5 col-sm-4 col-md-2" ng-if="storedCredential.otp.qr_uri">
+		<img ng-src="{{storedCredential.otp.qr_uri.image}}" />
+	</div>
+	<div class="col-sm-4 col-sm-5 col-md-5">
+		<table ng-show="storedCredential.otp">
+			<tr ng-show="storedCredential.otp.type">
+				<td>Type:</td>
+				<td>{{storedCredential.otp.type}}</td>
+			</tr>
+			<tr ng-show="storedCredential.otp.label">
+				<td>Label:</td>
+				<td>{{storedCredential.otp.label}}</td>
+			</tr>
+			<tr ng-show="storedCredential.otp.issuer">
+				<td>Issuer:</td>
+				<td>{{storedCredential.otp.issuer}}</td>
+			</tr>
+			<tr ng-show="storedCredential.otp.secret">
+				<td>Secret:</td>
+				<td>{{storedCredential.otp.secret}}</td>
+			</tr>
+			<tr ng-show="storedCredential.otp.secret">
+				<td>OTP:</td>
+				<td><span otp-generator
+						  secret="storedCredential.otp.secret"></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

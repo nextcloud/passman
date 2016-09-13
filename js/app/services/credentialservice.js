@@ -28,7 +28,7 @@ angular.module('passmanApp')
 			'delete_time': 0,
 			'files': [],
 			'custom_fields': [],
-			'otp': null,
+			'otp': {},
 			'hidden': false
 		};
 		var _encryptedFields = ['description','username','password','files','custom_fields','otp'];
@@ -67,6 +67,14 @@ angular.module('passmanApp')
 						return response;
 					}
 				});
+			},
+			encryptCredential: function (credential) {
+				for(var i = 0; i < _encryptedFields.length; i++){
+					var field = _encryptedFields[i];
+					var fieldValue = angular.copy(credential[field]);
+					credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue));
+				}
+				return credential;
 			},
 			decryptCredential: function (credential) {
 				for(var i = 0; i < _encryptedFields.length; i++){

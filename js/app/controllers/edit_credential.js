@@ -64,10 +64,10 @@ angular.module('passmanApp')
 		var storedCredential = SettingsService.getSetting('edit_credential');
 
 		if (!storedCredential) {
-			$location.path('/vault/'+ $routeParams.vault_id);
+			$location.path('/vault/' + $routeParams.vault_id);
 		} else {
-			$scope.storedCredential = storedCredential;
-			$scope.storedCredential.password_repeat = angular.copy(storedCredential.password);
+			$scope.storedCredential = CredentialService.decryptCredential(angular.copy(storedCredential));
+			$scope.storedCredential.password_repeat = angular.copy($scope.storedCredential.password);
 		}
 
 
@@ -89,7 +89,7 @@ angular.module('passmanApp')
 		 * Below general edit functions
 		 */
 
-		$scope.pwGenerated = function(pass){
+		$scope.pwGenerated = function (pass) {
 			$scope.storedCredential.password_repeat = pass;
 		};
 
@@ -100,19 +100,77 @@ angular.module('passmanApp')
 		};
 		$scope.new_custom_field = angular.copy(_customField);
 
-		$scope.addCustomField = function(){
-			if(!$scope.new_custom_field.label){
+		$scope.addCustomField = function () {
+			if (!$scope.new_custom_field.label) {
 				//@TODO move OC.Notification to a service
 				OC.Notification.showTemporary('Please fill in a label');
 			}
-			if(!$scope.new_custom_field.value){
+			if (!$scope.new_custom_field.value) {
 				//@TODO move OC.Notification to a service
 				OC.Notification.showTemporary('Please fill in a value!');
 			}
-			if(!$scope.new_custom_field.label || !$scope.new_custom_field.value){
+			if (!$scope.new_custom_field.label || !$scope.new_custom_field.value) {
 				return;
 			}
 			$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
 			$scope.new_custom_field = angular.copy(_customField);
+		};
+
+		$scope.deleteCustomField = function(field){
+			var idx = $scope.storedCredential.custom_fields.indexOf(field);
+			$scope.storedCredential.custom_fields.splice(idx, 1);
+		}
+
+		$scope.new_file = {
+			name: '',
+			data: null
+		};
+
+		$scope.deleteFile = function(file){
+			var idx = $scope.storedCredential.files.indexOf(file);
+			$scope.storedCredential.files.splice(idx, 1);
+			//@TODO Delete file
+		};
+
+		$scope.fileLoaded = function (file) {
+			var _file = {
+				created: new Date(),
+				filename: file.name,
+				size: file.size,
+				mimetype: file.type
+			};
+			//@TODO upload file.data
+			$scope.storedCredential.files.push(_file)
+
+			$scope.$apply()
+		};
+
+		$scope.fileLoadError = function (error, file) {
+			console.log(error, file)
+		};
+
+		$scope.selected_file = '';
+		$scope.fileprogress = [];
+		$scope.fileSelectProgress = function (progress) {
+			if (progress) {
+				$scope.fileprogress = progress;
+				$scope.$apply()
+
+			}
+		}
+
+		$scope.parseQR = function(QRCode){
+			var re = /otpauth:\/\/(totp|hotp)\/(.*)\?(secret|issuer)=(.*)&(issuer|secret)=(.*)/, parsedQR,qrInfo;
+			parsedQR = (QRCode.qrData.match(re));
+			if(parsedQR)
+			qrInfo = {
+				type: parsedQR[1],
+				label: decodeURIComponent(parsedQR[2]),
+				qr_uri: QRCode
+			};
+			qrInfo[parsedQR[3]] = parsedQR[4];
+			qrInfo[parsedQR[5]] = parsedQR[6];
+			$scope.storedCredential.otp = qrInfo;
+			$scope.$apply()
 		}
 	}]);

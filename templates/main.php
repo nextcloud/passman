@@ -16,6 +16,10 @@ script('passman', 'vendor/sjcl/sjcl');
 script('passman', 'vendor/zxcvbn/zxcvbn');
 script('passman', 'vendor/ng-clipboard/clipboard.min');
 script('passman', 'vendor/ng-clipboard/ngclipboard');
+script('passman', 'vendor/angular-xeditable/xeditable.min');
+script('passman', 'vendor/sha/sha');
+script('passman', 'vendor/llqrcode/llqrcode');
+
 
 script('passman', 'app/app');
 script('passman', 'templates');
@@ -32,6 +36,10 @@ script('passman', 'app/services/credentialservice');
 script('passman', 'app/services/settingsservice');
 script('passman', 'app/services/encryptservice');
 script('passman', 'app/directives/passwordgen');
+script('passman', 'app/directives/fileselect');
+script('passman', 'app/directives/progressbar');
+script('passman', 'app/directives/otp');
+script('passman', 'app/directives/qrreader');
 
 
 /*
@@ -42,6 +50,7 @@ style('passman', 'vendor/ng-password-meter/ng-password-meter');
 style('passman', 'vendor/bootstrap/bootstrap.min');
 style('passman', 'vendor/bootstrap/bootstrap-theme.min');
 style('passman', 'vendor/font-awesome/font-awesome.min');
+style('passman', 'vendor/angular-xeditable/xeditable.min');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">

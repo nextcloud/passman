@@ -20,7 +20,8 @@ angular
 		'LocalStorageModule',
 		'offClick',
 		'ngPasswordMeter',
-		'ngclipboard'
+		'ngclipboard',
+		'xeditable',
 	])
 	.config(function ($routeProvider) {
 		$routeProvider

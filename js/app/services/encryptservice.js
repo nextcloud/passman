@@ -21,7 +21,6 @@ angular.module('passmanApp')
 		return {
 			encryptString: function(string){
 				var _key = VaultService.getActiveVault().vaultKey;
-				console.log(_key);
 				var rp = {};
 				var ct = sjcl.encrypt(_key, string, encryption_config, rp);
 				return  window.btoa(ct);
