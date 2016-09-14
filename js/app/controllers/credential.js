@@ -64,8 +64,6 @@ angular.module('passmanApp')
 					_credentials.push(credential);
 				}
 				$scope.credentials = _credentials;
-
-				//@Todo: Set last accessed
 			});
 		};
 

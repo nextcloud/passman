@@ -17,7 +17,7 @@ angular.module('passmanApp')
 			'description': null,
 			'created': null,
 			'changed': null,
-			'tags': null,
+			'tags': null, //2TODO Dit moet nog gemaakt worden
 			'email': null,
 			'username': null,
 			'password': null,

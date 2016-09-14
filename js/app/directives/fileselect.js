@@ -52,7 +52,7 @@ angular.module('passmanApp')
 					//Now load the files
 					for (var i = 0; i < e.target.files.length; i++) {
 						_currentFile = e.target.files[i];
-						var mb_limit = 2000; //@TODO remove this after test (Set to 2mb)
+						var mb_limit = 5;
 						if (_currentFile.size > (mb_limit * 1024 * 1024)) {
 							scope.error('TO_BIG', _currentFile);
 						}

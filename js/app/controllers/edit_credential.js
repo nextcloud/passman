@@ -131,7 +131,6 @@ angular.module('passmanApp')
 			FileService.deleteFile(file).then(function () {
 				$scope.storedCredential.files.splice(idx, 1);
 			});
-			//@TODO Delete file
 		};
 
 		$scope.fileLoaded = function (file) {

@@ -123,7 +123,6 @@ angular.module('passmanApp')
 				test_credential.password = 'lorum ipsum';
 				CredentialService.createCredential(test_credential).then(function (result) {
 					_loginToVault(vault, vault_key);
-					//@TODO Redirect to newly created vault
 				})
 			});
 		};
