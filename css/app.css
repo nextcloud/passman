@@ -203,56 +203,58 @@
         padding: 10px;
         margin: -10px; }
 
-.edit_credential label {
-  display: block; }
-.edit_credential input[type="text"], .edit_credential input[type="password"] {
-  width: 100%; }
-.edit_credential .tags {
-  float: left; }
-  .edit_credential .tags .tag {
-    background-color: rgba(240, 240, 240, 0.9);
-    padding: 4px;
-    font-size: 11px; }
-.edit_credential .credential_textarea {
-  width: 100%;
-  height: 100px; }
-.edit_credential .password_settings label {
-  overflow: hidden; }
-  .edit_credential .password_settings label input[type="checkbox"] {
-    width: auto !important;
-    float: left; }
-  .edit_credential .password_settings label .label {
-    float: left; }
-    .edit_credential .password_settings label .label.sm {
-      font-size: 12px; }
-.edit_credential .custom_fields, .edit_credential .files {
-  margin-top: 10px; }
-  .edit_credential .custom_fields table, .edit_credential .files table {
+.edit_credential {
+  padding-top: 10px; }
+  .edit_credential label {
+    display: block; }
+  .edit_credential input[type="text"], .edit_credential input[type="password"] {
     width: 100%; }
-    .edit_credential .custom_fields table thead th, .edit_credential .files table thead th {
-      color: #fff; }
-    .edit_credential .custom_fields table thead th.field_actions, .edit_credential .files table thead th.field_actions {
-      width: 15%; }
-    .edit_credential .custom_fields table tr td.field_actions, .edit_credential .files table tr td.field_actions {
-      font-size: 13px;
-      width: 15%; }
-      .edit_credential .custom_fields table tr td.field_actions i, .edit_credential .files table tr td.field_actions i {
-        cursor: pointer; }
-    .edit_credential .custom_fields table tr td, .edit_credential .custom_fields table tr th, .edit_credential .files table tr td, .edit_credential .files table tr th {
-      width: 20%;
-      padding: 5px; }
-      .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, .edit_credential .files table tr td .editable-has-buttons.editable-input, .edit_credential .files table tr th .editable-has-buttons.editable-input {
-        width: 55%; }
-    .edit_credential .custom_fields table tr td, .edit_credential .files table tr td {
-      height: 50px;
-      vertical-align: middle; }
-.edit_credential .file_tab .progress {
-  margin-top: 10px;
-  height: 10px; }
-  .edit_credential .file_tab .progress .progress-bar {
-    height: 10px;
-    background-image: none;
-    background-color: #0082c9; }
+  .edit_credential .tags {
+    float: left; }
+    .edit_credential .tags .tag {
+      background-color: rgba(240, 240, 240, 0.9);
+      padding: 4px;
+      font-size: 11px; }
+  .edit_credential .credential_textarea {
+    width: 100%;
+    height: 100px; }
+  .edit_credential .password_settings label {
+    overflow: hidden; }
+    .edit_credential .password_settings label input[type="checkbox"] {
+      width: auto !important;
+      float: left; }
+    .edit_credential .password_settings label .label {
+      float: left; }
+      .edit_credential .password_settings label .label.sm {
+        font-size: 12px; }
+  .edit_credential .custom_fields, .edit_credential .files {
+    margin-top: 10px; }
+    .edit_credential .custom_fields table, .edit_credential .files table {
+      width: 100%; }
+      .edit_credential .custom_fields table thead th, .edit_credential .files table thead th {
+        color: #fff; }
+      .edit_credential .custom_fields table thead th.field_actions, .edit_credential .files table thead th.field_actions {
+        width: 15%; }
+      .edit_credential .custom_fields table tr td.field_actions, .edit_credential .files table tr td.field_actions {
+        font-size: 13px;
+        width: 15%; }
+        .edit_credential .custom_fields table tr td.field_actions i, .edit_credential .files table tr td.field_actions i {
+          cursor: pointer; }
+      .edit_credential .custom_fields table tr td, .edit_credential .custom_fields table tr th, .edit_credential .files table tr td, .edit_credential .files table tr th {
+        width: 20%;
+        padding: 5px; }
+        .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, .edit_credential .files table tr td .editable-has-buttons.editable-input, .edit_credential .files table tr th .editable-has-buttons.editable-input {
+          width: 55%; }
+      .edit_credential .custom_fields table tr td, .edit_credential .files table tr td {
+        height: 50px;
+        vertical-align: middle; }
+  .edit_credential .file_tab .progress {
+    margin-top: 10px;
+    height: 10px; }
+    .edit_credential .file_tab .progress .progress-bar {
+      height: 10px;
+      background-image: none;
+      background-color: #0082c9; }
 
 .settings-container div {
   padding-left: 15px; }

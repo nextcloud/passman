@@ -59,7 +59,7 @@
 								jQuery('.match-sequence').find('.sequence_container').width(_totalWidth);
 							},
 							close: function () {
-
+								$('.ui-dialog').remove();
 							}
 
 						})
