@@ -99,18 +99,4 @@ class CredentialController extends ApiController {
 	public function deleteRevision($credential_id) {
 		return;
 	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function uploadFile($credential_id) {
-		return;
-	}
-
-	/**
-	 * @NoAdminRequired
-	 */
-	public function deleteFile($credential_id) {
-		return;
-	}
 }

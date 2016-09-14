@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams) {
+	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService) {
 		$scope.active_vault = VaultService.getActiveVault();
 
 
@@ -119,7 +119,7 @@ angular.module('passmanApp')
 		$scope.deleteCustomField = function(field){
 			var idx = $scope.storedCredential.custom_fields.indexOf(field);
 			$scope.storedCredential.custom_fields.splice(idx, 1);
-		}
+		};
 
 		$scope.new_file = {
 			name: '',
@@ -128,19 +128,24 @@ angular.module('passmanApp')
 
 		$scope.deleteFile = function(file){
 			var idx = $scope.storedCredential.files.indexOf(file);
-			$scope.storedCredential.files.splice(idx, 1);
+			FileService.deleteFile(file).then(function () {
+				$scope.storedCredential.files.splice(idx, 1);
+			});
 			//@TODO Delete file
 		};
 
 		$scope.fileLoaded = function (file) {
 			var _file = {
-				created: new Date(),
 				filename: file.name,
 				size: file.size,
-				mimetype: file.type
+				mimetype: file.type,
+				data: file.data
 			};
-			//@TODO upload file.data
-			$scope.storedCredential.files.push(_file)
+			FileService.uploadFile(_file).then(function (result) {
+				delete result.file_data;
+				$scope.storedCredential.files.push(result);
+			});
+
 
 			$scope.$apply()
 		};

@@ -39,8 +39,8 @@ return [
 		['name' => 'credential#deleteRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'DELETE'],
 
 		//File stuff
-		['name' => 'credential#uploadFile', 'url' => '/api/v2/credentials/{credential_id}/file', 'verb' => 'POST'],
-		['name' => 'credential#deleteFile', 'url' => '/api/v2/credentials/{credential_id}/file/{file_id}', 'verb' => 'DELETE'],
+		['name' => 'file#uploadFile', 'url' => '/api/v2/file', 'verb' => 'POST'],
+		['name' => 'file#deleteFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'DELETE'],
 
 	]
 ];

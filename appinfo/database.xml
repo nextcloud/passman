@@ -262,10 +262,10 @@
 				<length>64</length>
 			</field>
 			<field>
-				<name>item_id</name>
+				<name>mimetype</name>
 				<type>text</type>
+				<length>255</length>
 				<notnull>true</notnull>
-				<length>64</length>
 			</field>
 			<field>
 				<name>filename</name>
@@ -292,12 +292,6 @@
 				<name>passman_file_id_index</name>
 				<field>
 					<name>id</name>
-				</field>
-			</index>
-			<index>
-				<name>passman_file_item_id_index</name>
-				<field>
-					<name>item_id</name>
 				</field>
 			</index>
 			<index>

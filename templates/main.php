@@ -34,6 +34,7 @@ script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
 script('passman', 'app/services/settingsservice');
+script('passman', 'app/services/fileservice');
 script('passman', 'app/services/encryptservice');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');

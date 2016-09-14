@@ -97,7 +97,7 @@ class Credential extends Entity implements  \JsonSerializable{
 
 
 	/**
-	 * Turns entitie attributes into an array
+	 * Turns entity attributes into an array
 	 */
 	public function jsonSerialize() {
 		return [

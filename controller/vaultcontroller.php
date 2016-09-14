@@ -17,6 +17,7 @@ use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Service\CredentialService;
 
+
 class VaultController extends ApiController {
 	private $userId;
 	private $vaultService;
