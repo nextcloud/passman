@@ -40,7 +40,7 @@ module.exports = function (grunt) {
 			}
 		},
 
-		//@TODO JSHint, comile sass
+		//@TODO JSHint
 		watch: {
 			scripts: {
 				files: ['Gruntfile.js', 'templates/views/{,*/}{,*/}{,*/}*.html', 'templates/views/*.html','sass/*','sass/partials/*'],

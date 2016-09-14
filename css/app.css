@@ -236,6 +236,8 @@
             color: #fff; }
           #app-content #app-content-wrapper .edit_credential .custom_fields table thead th.field_actions, #app-content #app-content-wrapper .edit_credential .files table thead th.field_actions {
             width: 15%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr:hover, #app-content #app-content-wrapper .edit_credential .files table tr:hover {
+            background-color: transparent; }
           #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions {
             font-size: 13px;
             width: 15%; }
@@ -267,9 +269,10 @@
         height: 25%;
         display: inline-block; }
       #app-content #app-content-wrapper .app_sidebar table {
-        width: 100%; }
-        #app-content #app-content-wrapper .app_sidebar table tr td:first-child {
-          width: 15%; }
+        width: 100%;
+        margin-bottom: 10px; }
+        #app-content #app-content-wrapper .app_sidebar table tr:hover {
+          background-color: #fff; }
         #app-content #app-content-wrapper .app_sidebar table tr td {
           padding: 2px;
           width: auto;

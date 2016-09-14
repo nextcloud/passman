@@ -33,7 +33,8 @@ angular.module('passmanApp')
 
 		$scope.editCredential = function(credential){
 			var credential = angular.copy(credential);
-			SettingsService.setSetting('edit_credential',credential);
+			$rootScope.$emit('app_menu', false);
+			SettingsService.setSetting('edit_credential', CredentialService.encryptCredential(credential));
 			$location.path('/vault/'+  $scope.active_vault.vault_id +'/edit/'+ credential.credential_id)
 		};
 
@@ -72,6 +73,8 @@ angular.module('passmanApp')
 				$scope.credentials = _credentials;
 			});
 		};
+
+		//@TODO Download files
 
 		if ($scope.active_vault) {
 			$scope.$parent.selectedVault = true;

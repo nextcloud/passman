@@ -7,141 +7,164 @@
 		<!--</div>-->
 	</div>
 	<div class="actions creatable">
-		<span ng-click="menuOpen = !menuOpen" class="button new" ng-init="menuOpen = false"  off-click="menuOpen = false;">
+		<span ng-click="menuOpen = !menuOpen" class="button new"
+			  ng-init="menuOpen = false" off-click="menuOpen = false;">
 			<span
-				 >New</span></span>
-			<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
-				<ul>
-					<li>
-						<span ng-click="addCredential()" class="menuitem action">
+			>New</span></span>
+		<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
+			<ul>
+				<li>
+						<span ng-click="addCredential()"
+							  class="menuitem action">
 							<span
-							class="icon icon-rename"></span>
+									class="icon icon-rename"></span>
 							<span>New credential</span>
 						</span>
-					</li>
-					<li>
+				</li>
+				<li>
 						<span href="#" class="menuitem action">
 							<span class="icon icon-shared"></span>
 							<span>New shared credential</span>
 						</span>
-					</li>
-				</ul>
-			</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
-<table class="credential-table" ng-init="menuOpen = false;">
-	<tr ng-repeat="credential in credentials" ng-if="credential.hidden == 0 && credential.delete_time == 0" ng-click="selectCredential(credential)" ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
-		<td>
-			<span class="label">{{credential.label}}</span>
-			<span class="icon icon-more" ng-click="menuOpen = !menuOpen"
-				  off-click="menuOpen = false;"></span>
-			<span class="tags">
+<div off-click="closeSelected()">
+	<table class="credential-table" ng-init="menuOpen = false;">
+		<tr ng-repeat="credential in credentials"
+			ng-if="credential.hidden == 0 && credential.delete_time == 0"
+			ng-click="selectCredential(credential)"
+			ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
+			<td>
+				<span class="label">{{credential.label}}</span>
+				<span class="tags">
 				<span class="tag">Tag 1</span>
 				<span class="tag">Tag 2</span>
 				<span class="tag">Tag 4</span>
 				<span class="tag">Tag 4</span>
 				<span class="tag">Long tag xD</span>
 			</span>
-			<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
-				<ul>
-					<li ng-click="editCredential(credential)"><span
-							class="menuitem action"
-					><span
-							class="icon icon-rename"></span><span>Edit</span></span>
-					</li>
-					<li><span href="#"
-							  class="menuitem action"
-					><span
-							class="icon icon-share"></span><span>Share</span></span>
-					</li>
-					<li><span
-							class="menuitem action"
-							data-action="Delete"><span
-							class="icon icon-delete"></span><span>Delete</span></span>
-					</li>
-				</ul>
-			</div>
-		</td>
-	</tr>
-</table>
-
-<div id="app-sidebar" class="detailsView scroll-container app_sidebar"
-	 ng-show="selectedCredential">
-	<table>
-		<tr ng-show="selectedCredential.label">
-			<td>
-				Label
-			</td>
-			<td>
-				{{selectedCredential.label}}
-			</td>
-		</tr>
-		<tr ng-show="selectedCredential.username">
-			<td>
-				Account
-			</td>
-			<td>
-				<span credential-field value="selectedCredential.username"></span>
-			</td>
-		</tr>
-		<tr ng-show="selectedCredential.password">
-			<td>
-				Password
-			</td>
-			<td>
-				<span credential-field value="selectedCredential.password" secret="'true'"></span>
-			</td>
-		</tr>
-		<tr ng-show="selectedCredential.email">
-			<td>
-				E-mail
-			</td>
-			<td>
-				<span credential-field value="selectedCredential.email"></span>
-			</td>
-		</tr>
-		<tr ng-show="selectedCredential.url">
-			<td>
-				URL
-			</td>
-			<td>
-				<span credential-field value="selectedCredential.url"></span>
-			</td>
-		</tr>
-		<tr ng-show="selectedCredential.files.length > 0">
-			<td>
-				Files
-			</td>
-			<td>
-				<div ng-repeat="file in selectedCredential.files" class="link">
-					{{file.filename}} ({{file.size | bytes}})
-				</div>
-			</td>
-		</tr>
-		<tr ng-repeat="field in selectedCredential.custom_fields">
-			<td>
-				{{field.label}}
-			</td>
-			<td>
-				<span credential-field value="field.value" secret="field.secret"></span>
-			</td>
-		</tr>
-		<tr  ng-show="selectedCredential.changed">
-			<td>
-				Changed
-			</td>
-			<td>
-				{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
-			</td>
-		</tr>
-		<tr ng-show="selectedCredential.created">
-			<td>
-				Created
-			</td>
-			<td>
-				{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+				<!--<div class="actionList popovermenu bubble menu"
+					 ng-show="menuOpen">
+					<ul>
+						<li><span
+								class="menuitem action"
+						></span>
+						</li>
+						<li><span href="#"
+								  class="menuitem action"
+						><span
+								class="icon icon-share"></span><span>Share</span></span>
+						</li>
+						<li><span
+								class="menuitem action"
+								data-action="Delete"><span
+								class="icon icon-delete"></span><span>Delete</span></span>
+						</li>
+					</ul>
+				</div> -->
 			</td>
 		</tr>
 	</table>
-	<span class="close icon-close" ng-click="closeSelected()" alt="Close"></span>
+
+	<div id="app-sidebar" class="detailsView scroll-container app_sidebar"
+		 ng-show="selectedCredential">
+		<span class="close icon-close" ng-click="closeSelected()"
+			  alt="Close"></span>
+		<table>
+			<tr ng-show="selectedCredential.label">
+				<td>
+					Label
+				</td>
+				<td>
+					{{selectedCredential.label}}
+				</td>
+			</tr>
+			<tr ng-show="selectedCredential.username">
+				<td>
+					Account
+				</td>
+				<td>
+					<span credential-field
+						  value="selectedCredential.username"></span>
+				</td>
+			</tr>
+			<tr ng-show="selectedCredential.password">
+				<td>
+					Password
+				</td>
+				<td>
+					<span credential-field value="selectedCredential.password"
+						  secret="'true'"></span>
+				</td>
+			</tr>
+			<tr ng-show="selectedCredential.email">
+				<td>
+					E-mail
+				</td>
+				<td>
+					<span credential-field
+						  value="selectedCredential.email"></span>
+				</td>
+			</tr>
+			<tr ng-show="selectedCredential.url">
+				<td>
+					URL
+				</td>
+				<td>
+					<span credential-field
+						  value="selectedCredential.url"></span>
+				</td>
+			</tr>
+			<tr ng-show="selectedCredential.files.length > 0">
+				<td>
+					Files
+				</td>
+				<td>
+					<div ng-repeat="file in selectedCredential.files"
+						 class="link">
+						{{file.filename}} ({{file.size | bytes}})
+					</div>
+				</td>
+			</tr>
+			<tr ng-repeat="field in selectedCredential.custom_fields">
+				<td>
+					{{field.label}}
+				</td>
+				<td>
+					<span credential-field value="field.value"
+						  secret="field.secret"></span>
+				</td>
+			</tr>
+			<tr ng-show="selectedCredential.changed">
+				<td>
+					Changed
+				</td>
+				<td>
+					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+				</td>
+			</tr>
+			<tr ng-show="selectedCredential.created">
+				<td>
+					Created
+				</td>
+				<td>
+					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+				</td>
+			</tr>
+		</table>
+		<div>
+			<span class="button" ng-click="editCredential(selectedCredential)">
+				<span class="fa fa-edit"></span> Edit
+			</span>
+			<span class="button">
+				<span class="fa fa-trash"></span> Delete
+			</span>
+			<span class="button">
+				<span class="fa fa-share"></span> Share
+			</span>
+		</div>
+	</div>
 </div>

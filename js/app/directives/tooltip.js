@@ -20,8 +20,9 @@ angular.module('passmanApp')
 						$(el).attr('title', scope.tooltip);
 						$(el).tooltip();
 						$(el).attr('title',  scope.tooltip).tooltip('fixTitle');
+						$('.tooltip-inner').text(scope.tooltip); // Dirty hack
 						if($(el).is(':visible')){
-							$(el).tooltip('show')
+							//$(el).tooltip('show')
 						}
 
 					}
