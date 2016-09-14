@@ -75,6 +75,8 @@ angular.module('passmanApp')
 		};
 
 		//@TODO Download files
+		//@TODO TagService which holds all the tags
+		//@TODO Show otp field
 
 		if ($scope.active_vault) {
 			$scope.$parent.selectedVault = true;

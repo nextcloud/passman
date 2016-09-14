@@ -162,7 +162,8 @@ angular.module('passmanApp')
 				$scope.$apply()
 
 			}
-		}
+		};
+		//@TODO Set tags, read them from tag service
 
 		$scope.parseQR = function(QRCode){
 			var re = /otpauth:\/\/(totp|hotp)\/(.*)\?(secret|issuer)=(.*)&(issuer|secret)=(.*)/, parsedQR,qrInfo;
