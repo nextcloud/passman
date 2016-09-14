@@ -1,26 +1,3 @@
-.actions.creatable {
-  padding-left: 10px; }
-  .actions.creatable .bubble {
-    position: relative;
-    width: 185px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    background-clip: padding-box;
-    /* stops bg color from leaking outside the border: */
-    box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
-    .actions.creatable .bubble ul li {
-      padding-left: 10px; }
-    .actions.creatable .bubble ul .menuitem {
-      font-size: 12px;
-      display: inline; }
-  .actions.creatable .bubble:after {
-    right: inherit;
-    left: 10px;
-    top: -19px; }
-
-#app-content-wrapper {
-  min-height: 95%; }
-
 .button-geen {
   background: #37ce02;
   color: #fff; }
@@ -156,105 +133,147 @@
 @media screen and (max-width: 768px) {
   .vault_wrapper {
     width: 90%; } }
-.credential-table {
-  width: 100%;
-  margin-top: 44px; }
-  .credential-table tr:hover {
-    background-color: whitesmoke; }
-  .credential-table tr td {
-    cursor: pointer;
-    padding: 5px;
-    border-bottom: 1px solid #eeeeee; }
-    .credential-table tr td .label {
-      float: left; }
-    .credential-table tr td .tags {
-      float: right; }
-      .credential-table tr td .tags .tag {
-        background-color: rgba(240, 240, 240, 0.9);
-        padding: 4px;
-        font-size: 11px; }
-    .credential-table tr td .icon-more {
-      display: inline-block;
-      float: right;
-      margin-left: 5px;
-      margin-top: 1px;
-      opacity: 0.4;
-      height: 20px;
-      width: 32px;
-      cursor: pointer; }
-    .credential-table tr td .icon-more:hover {
-      opacity: 1; }
-    .credential-table tr td .popovermenu {
-      margin-top: 7px;
-      height: 100px;
-      width: 100px;
-      right: -2px !important;
-      box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
-      .credential-table tr td .popovermenu ul {
-        display: block;
-        width: 100px;
-        height: 75px; }
-        .credential-table tr td .popovermenu ul li {
-          padding: 0px; }
-        .credential-table tr td .popovermenu ul .menuitem {
+#app-content {
+  overflow-x: hidden; }
+  #app-content #app-content-wrapper {
+    min-height: 95%; }
+    #app-content #app-content-wrapper .actions.creatable {
+      padding-left: 10px; }
+      #app-content #app-content-wrapper .actions.creatable .bubble {
+        position: relative;
+        width: 185px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-clip: padding-box;
+        /* stops bg color from leaking outside the border: */
+        box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+        #app-content #app-content-wrapper .actions.creatable .bubble ul li {
+          padding-left: 10px; }
+        #app-content #app-content-wrapper .actions.creatable .bubble ul .menuitem {
           font-size: 12px;
           display: inline; }
-      .credential-table tr td .popovermenu .action {
-        padding: 10px;
-        margin: -10px; }
-
-.edit_credential {
-  padding-top: 10px; }
-  .edit_credential label {
-    display: block; }
-  .edit_credential input[type="text"], .edit_credential input[type="password"] {
-    width: 100%; }
-  .edit_credential .tags {
-    float: left; }
-    .edit_credential .tags .tag {
-      background-color: rgba(240, 240, 240, 0.9);
-      padding: 4px;
-      font-size: 11px; }
-  .edit_credential .credential_textarea {
-    width: 100%;
-    height: 100px; }
-  .edit_credential .password_settings label {
-    overflow: hidden; }
-    .edit_credential .password_settings label input[type="checkbox"] {
-      width: auto !important;
-      float: left; }
-    .edit_credential .password_settings label .label {
-      float: left; }
-      .edit_credential .password_settings label .label.sm {
-        font-size: 12px; }
-  .edit_credential .custom_fields, .edit_credential .files {
-    margin-top: 10px; }
-    .edit_credential .custom_fields table, .edit_credential .files table {
-      width: 100%; }
-      .edit_credential .custom_fields table thead th, .edit_credential .files table thead th {
-        color: #fff; }
-      .edit_credential .custom_fields table thead th.field_actions, .edit_credential .files table thead th.field_actions {
-        width: 15%; }
-      .edit_credential .custom_fields table tr td.field_actions, .edit_credential .files table tr td.field_actions {
-        font-size: 13px;
-        width: 15%; }
-        .edit_credential .custom_fields table tr td.field_actions i, .edit_credential .files table tr td.field_actions i {
+      #app-content #app-content-wrapper .actions.creatable .bubble:after {
+        right: inherit;
+        left: 10px;
+        top: -19px; }
+    #app-content #app-content-wrapper .credential-table {
+      width: 100%;
+      margin-top: 44px; }
+      #app-content #app-content-wrapper .credential-table tr:hover {
+        background-color: whitesmoke; }
+      #app-content #app-content-wrapper .credential-table tr.selected {
+        background-color: #f8f8f8; }
+      #app-content #app-content-wrapper .credential-table tr td {
+        cursor: pointer;
+        padding: 5px;
+        border-bottom: 1px solid #eeeeee; }
+        #app-content #app-content-wrapper .credential-table tr td .label {
+          float: left; }
+        #app-content #app-content-wrapper .credential-table tr td .tags {
+          float: right; }
+          #app-content #app-content-wrapper .credential-table tr td .tags .tag {
+            background-color: rgba(240, 240, 240, 0.9);
+            padding: 4px;
+            font-size: 11px; }
+        #app-content #app-content-wrapper .credential-table tr td .icon-more {
+          display: inline-block;
+          float: right;
+          margin-left: 5px;
+          margin-top: 1px;
+          opacity: 0.4;
+          height: 20px;
+          width: 32px;
           cursor: pointer; }
-      .edit_credential .custom_fields table tr td, .edit_credential .custom_fields table tr th, .edit_credential .files table tr td, .edit_credential .files table tr th {
-        width: 20%;
-        padding: 5px; }
-        .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, .edit_credential .files table tr td .editable-has-buttons.editable-input, .edit_credential .files table tr th .editable-has-buttons.editable-input {
-          width: 55%; }
-      .edit_credential .custom_fields table tr td, .edit_credential .files table tr td {
-        height: 50px;
-        vertical-align: middle; }
-  .edit_credential .file_tab .progress {
-    margin-top: 10px;
-    height: 10px; }
-    .edit_credential .file_tab .progress .progress-bar {
-      height: 10px;
-      background-image: none;
-      background-color: #0082c9; }
+        #app-content #app-content-wrapper .credential-table tr td .icon-more:hover {
+          opacity: 1; }
+        #app-content #app-content-wrapper .credential-table tr td .popovermenu {
+          margin-top: 25px;
+          height: 100px;
+          width: 100px;
+          right: -2px !important;
+          box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+          #app-content #app-content-wrapper .credential-table tr td .popovermenu ul {
+            display: block;
+            width: 100px;
+            height: 75px; }
+            #app-content #app-content-wrapper .credential-table tr td .popovermenu ul li {
+              padding: 0px; }
+            #app-content #app-content-wrapper .credential-table tr td .popovermenu ul .menuitem {
+              font-size: 12px;
+              display: inline; }
+          #app-content #app-content-wrapper .credential-table tr td .popovermenu .action {
+            padding: 10px;
+            margin: -10px; }
+    #app-content #app-content-wrapper .edit_credential {
+      padding-top: 10px; }
+      #app-content #app-content-wrapper .edit_credential label {
+        display: block; }
+      #app-content #app-content-wrapper .edit_credential input[type="text"], #app-content #app-content-wrapper .edit_credential input[type="password"] {
+        width: 100%; }
+      #app-content #app-content-wrapper .edit_credential .tags {
+        float: left; }
+        #app-content #app-content-wrapper .edit_credential .tags .tag {
+          background-color: rgba(240, 240, 240, 0.9);
+          padding: 4px;
+          font-size: 11px; }
+      #app-content #app-content-wrapper .edit_credential .credential_textarea {
+        width: 100%;
+        height: 100px; }
+      #app-content #app-content-wrapper .edit_credential .password_settings label {
+        overflow: hidden; }
+        #app-content #app-content-wrapper .edit_credential .password_settings label input[type="checkbox"] {
+          width: auto !important;
+          float: left; }
+        #app-content #app-content-wrapper .edit_credential .password_settings label .label {
+          float: left; }
+          #app-content #app-content-wrapper .edit_credential .password_settings label .label.sm {
+            font-size: 12px; }
+      #app-content #app-content-wrapper .edit_credential .custom_fields, #app-content #app-content-wrapper .edit_credential .files {
+        margin-top: 10px; }
+        #app-content #app-content-wrapper .edit_credential .custom_fields table, #app-content #app-content-wrapper .edit_credential .files table {
+          width: 100%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table thead th, #app-content #app-content-wrapper .edit_credential .files table thead th {
+            color: #fff; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table thead th.field_actions, #app-content #app-content-wrapper .edit_credential .files table thead th.field_actions {
+            width: 15%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions {
+            font-size: 13px;
+            width: 15%; }
+            #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions i, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions i {
+              cursor: pointer; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .custom_fields table tr th, #app-content #app-content-wrapper .edit_credential .files table tr td, #app-content #app-content-wrapper .edit_credential .files table tr th {
+            width: 20%;
+            padding: 5px; }
+            #app-content #app-content-wrapper .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .files table tr td .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .files table tr th .editable-has-buttons.editable-input {
+              width: 55%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .files table tr td {
+            height: 50px;
+            vertical-align: middle; }
+      #app-content #app-content-wrapper .edit_credential .file_tab .progress {
+        margin-top: 10px;
+        height: 10px; }
+        #app-content #app-content-wrapper .edit_credential .file_tab .progress .progress-bar {
+          height: 10px;
+          background-image: none;
+          background-color: #0082c9; }
+    #app-content #app-content-wrapper .view_pane {
+      -webkit-box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
+      -moz-box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
+      box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
+      padding-top: 10px;
+      position: absolute;
+      bottom: 0;
+      background-color: #eee;
+      left: 0;
+      right: 0;
+      display: none;
+      overflow-y: auto; }
+      #app-content #app-content-wrapper .view_pane .row {
+        margin-left: 0;
+        margin-right: 0; }
+      #app-content #app-content-wrapper .view_pane.item_selected {
+        height: 20%;
+        display: inline-block; }
 
 .settings-container div {
   padding-left: 15px; }

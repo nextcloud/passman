@@ -29,8 +29,8 @@
 			</div>
 	</div>
 </div>
-<table class="credential-table" ng-init="menuOpen = false">
-	<tr ng-repeat="credential in credentials">
+<table class="credential-table" ng-init="menuOpen = false;">
+	<tr ng-repeat="credential in credentials" ng-if="credential.hidden == 0 && credential.delete_time == 0" ng-click="selectCredential(credential)" ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 		<td>
 			<span class="label">{{credential.label}}</span>
 			<span class="icon icon-more" ng-click="menuOpen = !menuOpen"
@@ -44,7 +44,7 @@
 			</span>
 			<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
 				<ul>
-					<li><span
+					<li ng-click="editCredential(credential)"><span
 							class="menuitem action"
 					><span
 							class="icon icon-rename"></span><span>Edit</span></span>
@@ -64,3 +64,65 @@
 		</td>
 	</tr>
 </table>
+
+<div class="view_pane" ng-class="{'item_selected': selectedCredential}" >
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-1">
+			Label
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.label}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-1">
+			Account
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.label}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-1">
+			Password
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.label}}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-1">
+			Files
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.label}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-1">
+			Custom fields
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.label}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-1">
+			Changed
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.label}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-1">
+			Created
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.label}}
+		</div>
+	</div>
+
+
+</div>

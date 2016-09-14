@@ -13,6 +13,7 @@ angular.module('passmanApp')
 			uploadFile: function (file) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/file');
 				var _file = angular.copy(file);
+				_file.filename = EncryptService.encryptString(_file.filename);
 				var data = EncryptService.encryptString(angular.copy(file.data));
 				_file.data = data;
 				return $http.post(queryUrl, _file).then(function (response) {

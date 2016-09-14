@@ -30,6 +30,7 @@ script('passman', 'app/controllers/credential');
 script('passman', 'app/controllers/edit_credential');
 script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
+script('passman', 'app/filters/decrypt');
 script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');

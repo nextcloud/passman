@@ -110,9 +110,9 @@
 			</field>
 			<field>
 				<name>vault_id</name>
-				<type>text</type>
+				<type>integer</type>
 				<notnull>true</notnull>
-				<length>64</length>
+				<length>8</length>
 			</field>
 
 			<field>

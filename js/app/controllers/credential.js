@@ -31,6 +31,18 @@ angular.module('passmanApp')
 			$location.path('/vault/'+  $scope.active_vault.vault_id +'/new')
 		};
 
+		$scope.editCredential = function(credential){
+			var credential = angular.copy(credential);
+			SettingsService.setSetting('edit_credential',credential);
+			$location.path('/vault/'+  $scope.active_vault.vault_id +'/edit/'+ credential.credential_id)
+		};
+
+		$scope.selectedCredential = false;
+		$scope.selectCredential = function (credential) {
+			console.log(credential);
+			$scope.selectedCredential = credential
+		}
+
 		$rootScope.$on('logout', function () {
 			console.log('Logout received, clean up');
 			$scope.credentials = [];

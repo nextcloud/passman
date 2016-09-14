@@ -93,6 +93,8 @@ class Credential extends Entity implements  \JsonSerializable{
 		$this->addType('renewInterval', 'integer');
 		$this->addType('expireTime', 'integer');
 		$this->addType('deleteTime', 'integer');
+		$this->addType('vault_id', 'integer');
+		$this->addType('credential_id', 'integer');
 	}
 
 

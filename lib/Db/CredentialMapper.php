@@ -58,4 +58,26 @@ class CredentialMapper extends Mapper {
 		return parent::insert($credential);
 	}
 
+	public function update($raw_credential){
+		$credential = new Credential();
+		$credential->setId($raw_credential['credential_id']);
+		$credential->setUserId($raw_credential['user_id']);
+		$credential->setLabel($raw_credential['label']);
+		$credential->setDescription($raw_credential['description']);
+		$credential->setChanged($this->utils->getTime());
+		$credential->setTags($raw_credential['tags']);
+		$credential->setEmail($raw_credential['email']);
+		$credential->setUsername($raw_credential['username']);
+		$credential->setPassword($raw_credential['password']);
+		$credential->setUrl($raw_credential['url']);
+		$credential->setFavicon($raw_credential['favicon']);
+		$credential->setRenewInterval($raw_credential['renew_interval']);
+		$credential->setExpireTime($raw_credential['expire_time']);
+		$credential->setFiles($raw_credential['files']);
+		$credential->setCustomFields($raw_credential['custom_fields']);
+		$credential->setOtp($raw_credential['otp']);
+		$credential->setHidden($raw_credential['hidden']);
+		return parent::update($credential);
+	}
+
 }

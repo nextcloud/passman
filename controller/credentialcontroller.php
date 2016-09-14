@@ -20,10 +20,11 @@ use OCA\Passman\Service\CredentialService;
 class CredentialController extends ApiController {
 	private $userId;
 	private $credentialService;
+
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
-								CredentialService $credentialService){
+								CredentialService $credentialService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
@@ -75,8 +76,33 @@ class CredentialController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function updateCredential($credential_id) {
-		return;
+	public function updateCredential($changed, $created,
+									 $credential_id, $custom_fields, $delete_time,
+									 $description, $email, $expire_time, $favicon, $files, $guid,
+									 $hidden, $label, $otp, $password, $renew_interval,
+									 $tags, $url, $username, $vault_id) {
+		$credential = array(
+			'credential_id' => $credential_id,
+			'guid' => $guid,
+			'user_id' => $this->userId,
+			'label' => $label,
+			'description' => $description,
+			'created' => $created,
+			'changed' => $changed,
+			'tags' => $tags,
+			'email' => $email,
+			'username' => $username,
+			'password' => $password,
+			'url' => $url,
+			'favicon' => $favicon,
+			'renew_interval' => $renew_interval,
+			'expire_time' => $expire_time,
+			'files' => $files,
+			'custom_fields' => $custom_fields,
+			'otp' => $otp,
+		);
+		$credential = $this->credentialService->updateCredential($credential);
+		return new JSONResponse($credential);
 	}
 
 	/**

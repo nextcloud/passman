@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService) {
+	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService) {
 		$scope.active_vault = VaultService.getActiveVault();
 
 
@@ -143,6 +143,7 @@ angular.module('passmanApp')
 			};
 			FileService.uploadFile(_file).then(function (result) {
 				delete result.file_data;
+				result.filename = EncryptService.decryptString(result.filename);
 				$scope.storedCredential.files.push(result);
 			});
 
@@ -177,5 +178,27 @@ angular.module('passmanApp')
 			qrInfo[parsedQR[5]] = parsedQR[6];
 			$scope.storedCredential.otp = qrInfo;
 			$scope.$apply()
+		};
+		
+		$scope.saveCredential = function () {
+
+			delete $scope.storedCredential.password_repeat;
+			if(!$scope.storedCredential.credential_id){
+				$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
+				CredentialService.createCredential($scope.storedCredential).then(function (result) {
+					$location.path('/vault/' + $routeParams.vault_id);
+					//@TODO Show notification
+				})
+			} else {
+				CredentialService.updateCredential($scope.storedCredential).then(function (result) {
+					SettingsService.setSetting('edit_credential', null);
+					$location.path('/vault/' + $routeParams.vault_id);
+					//@TODO Show notification
+				})
+			}
+		};
+
+		$scope.cancel = function(){
+			$location.path('/vault/' + $routeParams.vault_id);
 		}
 	}]);
