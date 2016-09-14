@@ -6,14 +6,6 @@
  * @description
  * # passwordGen
  */
-var template = '<div class="pw-gen">'+
-'<input type="password" ng-model="password" ng-if="!passwordVisible">' +
-'<input type="text" ng-model="password" ng-if="passwordVisible">' +
-'<span class="generate_pw">' +
-'<div class="cell"><i class="fa fa-refresh"></i></div>' +
-'<div class="cell"><i ng-click="toggleVisibility()" class="fa" ng-class="{\'fa-eye\': passwordVisible, \'fa-eye-slash\': !passwordVisible }"></i></div>' +
-'<div class="cell"><i class="fa fa-clipboard"></i></div>' +
-'</span></div>';
 
 angular.module('passmanApp')
 	.directive('passwordGen', function ($timeout,$window) {
@@ -124,9 +116,9 @@ angular.module('passmanApp')
 			"<input  ng-show=\"passwordVisible\"  type=\"text\"      ng-disabled=\"disabled\"  class=\"form-control                                    \" ng-model=\"password\" placeholder=\"{{placeholder}}\">" +
 
 			'<span class="generate_pw">' +
-			'<div class="cell" ng-click="generatePasswordStart()"><i class="fa fa-refresh" ></i></div>' +
-			'<div class="cell" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': passwordVisible, \'fa-eye-slash\': !passwordVisible }"></i></div>' +
-			'<div class="cell"><i class="fa fa-clipboard"  ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{password}}"></i></div>' +
+			'<div class="cell" tooltip="\'Generate password\'" ng-click="generatePasswordStart()"><i class="fa fa-refresh"></i></div>' +
+			'<div class="cell" tooltip="\'Toggle password visibility\'" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': passwordVisible, \'fa-eye-slash\': !passwordVisible }"></i></div>' +
+			'<div class="cell" tooltip="\'Copy password to clipboard\'"><i class="fa fa-clipboard" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{password}}"></i></div>' +
 			"</button>" +
 			"</div>" +
 			"</div>",

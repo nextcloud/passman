@@ -40,6 +40,8 @@ script('passman', 'app/directives/fileselect');
 script('passman', 'app/directives/progressbar');
 script('passman', 'app/directives/otp');
 script('passman', 'app/directives/qrreader');
+script('passman', 'app/directives/tooltip');
+script('passman', 'app/directives/use-theme');
 
 
 /*

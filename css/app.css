@@ -230,7 +230,6 @@
   .edit_credential .custom_fields table, .edit_credential .files table {
     width: 100%; }
     .edit_credential .custom_fields table thead th, .edit_credential .files table thead th {
-      background-color: #0082c9;
       color: #fff; }
     .edit_credential .custom_fields table thead th.field_actions, .edit_credential .files table thead th.field_actions {
       width: 15%; }
