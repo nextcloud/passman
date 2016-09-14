@@ -86,7 +86,7 @@ style('passman', 'vendor/angular-xeditable/xeditable.min');
 		</div>
 	</div>
 
-	<div id="app-content">
+	<div id="app-content" ng-class="{'with-app-sidebar': app_sidebar}">
 		<div id="app-content-wrapper" ng-view="">
 
 		</div>

@@ -256,26 +256,22 @@
           height: 10px;
           background-image: none;
           background-color: #0082c9; }
-    #app-content #app-content-wrapper .view_pane {
-      -webkit-box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
-      -moz-box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
-      box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
+    #app-content #app-content-wrapper .app_sidebar {
       padding: 10px;
-      position: absolute;
-      bottom: 0;
-      background-color: #eee;
-      left: 0;
-      right: 0;
-      display: none;
       overflow-y: auto; }
-      #app-content #app-content-wrapper .view_pane.item_selected {
+      #app-content #app-content-wrapper .app_sidebar .close.icon-close {
+        position: absolute;
+        top: 10px;
+        right: 10px; }
+      #app-content #app-content-wrapper .app_sidebar.item_selected {
         height: 25%;
         display: inline-block; }
-      #app-content #app-content-wrapper .view_pane table {
+      #app-content #app-content-wrapper .app_sidebar table {
         width: 100%; }
-        #app-content #app-content-wrapper .view_pane table tr td:first-child {
+        #app-content #app-content-wrapper .app_sidebar table tr td:first-child {
           width: 15%; }
-        #app-content #app-content-wrapper .view_pane table tr td {
+        #app-content #app-content-wrapper .app_sidebar table tr td {
+          padding: 2px;
           width: auto;
           white-space: nowrap;
           height: 20px;

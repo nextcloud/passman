@@ -65,9 +65,10 @@
 	</tr>
 </table>
 
-<div class="view_pane" ng-class="{'item_selected': selectedCredential}" >
+<div id="app-sidebar" class="detailsView scroll-container app_sidebar"
+	 ng-show="selectedCredential">
 	<table>
-		<tr>
+		<tr ng-show="selectedCredential.label">
 			<td>
 				Label
 			</td>
@@ -75,7 +76,7 @@
 				{{selectedCredential.label}}
 			</td>
 		</tr>
-		<tr ng-if="selectedCredential.username">
+		<tr ng-show="selectedCredential.username">
 			<td>
 				Account
 			</td>
@@ -83,7 +84,7 @@
 				<span credential-field value="selectedCredential.username"></span>
 			</td>
 		</tr>
-		<tr ng-if="selectedCredential.password">
+		<tr ng-show="selectedCredential.password">
 			<td>
 				Password
 			</td>
@@ -91,7 +92,7 @@
 				<span credential-field value="selectedCredential.password" secret="'true'"></span>
 			</td>
 		</tr>
-		<tr ng-if="selectedCredential.email">
+		<tr ng-show="selectedCredential.email">
 			<td>
 				E-mail
 			</td>
@@ -99,7 +100,7 @@
 				<span credential-field value="selectedCredential.email"></span>
 			</td>
 		</tr>
-		<tr ng-if="selectedCredential.url">
+		<tr ng-show="selectedCredential.url">
 			<td>
 				URL
 			</td>
@@ -107,7 +108,7 @@
 				<span credential-field value="selectedCredential.url"></span>
 			</td>
 		</tr>
-		<tr ng-if="selectedCredential.files.length > 0">
+		<tr ng-show="selectedCredential.files.length > 0">
 			<td>
 				Files
 			</td>
@@ -125,7 +126,7 @@
 				<span credential-field value="field.value" secret="field.secret"></span>
 			</td>
 		</tr>
-		<tr>
+		<tr  ng-show="selectedCredential.changed">
 			<td>
 				Changed
 			</td>
@@ -133,7 +134,7 @@
 				{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 			</td>
 		</tr>
-		<tr>
+		<tr ng-show="selectedCredential.created">
 			<td>
 				Created
 			</td>
@@ -142,6 +143,5 @@
 			</td>
 		</tr>
 	</table>
-
-
+	<span class="close icon-close" ng-click="closeSelected()" alt="Close"></span>
 </div>

@@ -41,7 +41,13 @@ angular.module('passmanApp')
 		$scope.selectCredential = function (credential) {
 			console.log(credential);
 			$scope.selectedCredential = CredentialService.decryptCredential(angular.copy(credential));
-		}
+			$rootScope.$emit('app_menu', true);
+		};
+
+		$scope.closeSelected = function () {
+			$rootScope.$emit('app_menu', false);
+			$scope.selectedCredential = false;
+		};
 
 		$rootScope.$on('logout', function () {
 			console.log('Logout received, clean up');

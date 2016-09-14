@@ -8,6 +8,9 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('MainCtrl', ['$scope', 'VaultService', function ($scope, VaultService) {
+	.controller('MainCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 		$scope.selectedVault = false;
+		$rootScope.$on('app_menu', function(evt, shown){
+			$scope.app_sidebar = shown;
+		})
 	}]);
