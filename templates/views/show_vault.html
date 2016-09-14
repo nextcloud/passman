@@ -66,75 +66,82 @@
 </table>
 
 <div class="view_pane" ng-class="{'item_selected': selectedCredential}" >
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			Label
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.label}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			Account
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.username}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			Password
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.password}}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			E-mail
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.email}}
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			Files
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			<div ng-repeat="file in selectedCredential.files" class="link">
-				{{file.filename}} ({{file.size}})
-			</div>
-		</div>
-	</div>
-	<div class="row" ng-repeat="field in selectedCredential.custom_fields">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			{{field.label}}
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{field.value}}
-			{{field.secret}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			Changed
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-2">
-			Created
-		</div>
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
-		</div>
-	</div>
+	<table>
+		<tr>
+			<td>
+				Label
+			</td>
+			<td>
+				{{selectedCredential.label}}
+			</td>
+		</tr>
+		<tr ng-if="selectedCredential.username">
+			<td>
+				Account
+			</td>
+			<td>
+				<span credential-field value="selectedCredential.username"></span>
+			</td>
+		</tr>
+		<tr ng-if="selectedCredential.password">
+			<td>
+				Password
+			</td>
+			<td>
+				<span credential-field value="selectedCredential.password" secret="'true'"></span>
+			</td>
+		</tr>
+		<tr ng-if="selectedCredential.email">
+			<td>
+				E-mail
+			</td>
+			<td>
+				<span credential-field value="selectedCredential.email"></span>
+			</td>
+		</tr>
+		<tr ng-if="selectedCredential.url">
+			<td>
+				URL
+			</td>
+			<td>
+				<span credential-field value="selectedCredential.url"></span>
+			</td>
+		</tr>
+		<tr ng-if="selectedCredential.files.length > 0">
+			<td>
+				Files
+			</td>
+			<td>
+				<div ng-repeat="file in selectedCredential.files" class="link">
+					{{file.filename}} ({{file.size | bytes}})
+				</div>
+			</td>
+		</tr>
+		<tr ng-repeat="field in selectedCredential.custom_fields">
+			<td>
+				{{field.label}}
+			</td>
+			<td>
+				<span credential-field value="field.value" secret="field.secret"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Changed
+			</td>
+			<td>
+				{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Created
+			</td>
+			<td>
+				{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+			</td>
+		</tr>
+	</table>
 
 
 </div>

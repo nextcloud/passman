@@ -15,9 +15,16 @@ angular.module('passmanApp')
 			},
 
 			link: function (scope, el, attr, ctrl) {
-				scope.$watch('tooltip', function(){
-					$(el).attr('title', scope.tooltip);
-					$(el).tooltip()
+				scope.$watch('tooltip', function (newVal, old) {
+					if (scope.tooltip) {
+						$(el).attr('title', scope.tooltip);
+						$(el).tooltip();
+						$(el).attr('title',  scope.tooltip).tooltip('fixTitle');
+						if($(el).is(':visible')){
+							$(el).tooltip('show')
+						}
+
+					}
 				})
 			}
 		};

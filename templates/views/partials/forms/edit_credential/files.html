@@ -24,7 +24,7 @@
 				<td>
 					{{file.created}}
 				</td>
-				<td>{{file.size}}</td>
+				<td>{{file.size | bytes}}</td>
 				<td class="field_actions">
 					<i class="fa fa-trash" ng-click="deleteFile(file)"></i>
 				</td>

@@ -260,7 +260,7 @@
       -webkit-box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
       -moz-box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
       box-shadow: 0px -4px 3px rgba(150, 150, 150, 0.75);
-      padding-top: 10px;
+      padding: 10px;
       position: absolute;
       bottom: 0;
       background-color: #eee;
@@ -268,12 +268,30 @@
       right: 0;
       display: none;
       overflow-y: auto; }
-      #app-content #app-content-wrapper .view_pane .row {
-        margin-left: 0;
-        margin-right: 0; }
       #app-content #app-content-wrapper .view_pane.item_selected {
-        height: 20%;
+        height: 25%;
         display: inline-block; }
+      #app-content #app-content-wrapper .view_pane table {
+        width: 100%; }
+        #app-content #app-content-wrapper .view_pane table tr td:first-child {
+          width: 15%; }
+        #app-content #app-content-wrapper .view_pane table tr td {
+          width: auto;
+          white-space: nowrap;
+          height: 20px;
+          vertical-align: middle; }
+
+.credential_field {
+  overflow: hidden; }
+  .credential_field .cell, .credential_field .value {
+    float: left; }
+  .credential_field .tools {
+    margin-left: 10px;
+    overflow: hidden;
+    float: left; }
+    .credential_field .tools .cell {
+      cursor: pointer;
+      margin-right: 4px; }
 
 .settings-container div {
   padding-left: 15px; }
