@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope', function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope) {
+	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope','EncryptService', function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, EncryptService) {
 		$scope.active_vault = VaultService.getActiveVault();
 		if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 			if (!$scope.active_vault) {
@@ -40,7 +40,7 @@ angular.module('passmanApp')
 		$scope.selectedCredential = false;
 		$scope.selectCredential = function (credential) {
 			console.log(credential);
-			$scope.selectedCredential = credential
+			$scope.selectedCredential = CredentialService.decryptCredential(angular.copy(credential));
 		}
 
 		$rootScope.$on('logout', function () {

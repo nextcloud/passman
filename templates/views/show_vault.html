@@ -67,7 +67,7 @@
 
 <div class="view_pane" ng-class="{'item_selected': selectedCredential}" >
 	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-1">
+		<div class="col-xs-2 col-sm-2 col-md-2">
 			Label
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-4">
@@ -75,52 +75,64 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-1">
+		<div class="col-xs-2 col-sm-2 col-md-2">
 			Account
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.label}}
+			{{selectedCredential.username}}
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-1">
+		<div class="col-xs-2 col-sm-2 col-md-2">
 			Password
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.label}}
+			{{selectedCredential.password}}
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-1">
+		<div class="col-xs-2 col-sm-2 col-md-2">
+			E-mail
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			{{selectedCredential.email}}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-2 col-sm-2 col-md-2">
 			Files
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.label}}
+			<div ng-repeat="file in selectedCredential.files" class="link">
+				{{file.filename}} ({{file.size}})
+			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-1">
-			Custom fields
+	<div class="row" ng-repeat="field in selectedCredential.custom_fields">
+		<div class="col-xs-2 col-sm-2 col-md-2">
+			{{field.label}}
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.label}}
+			{{field.value}}
+			{{field.secret}}
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-1">
+		<div class="col-xs-2 col-sm-2 col-md-2">
 			Changed
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.label}}
+			{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-2 col-sm-2 col-md-1">
+		<div class="col-xs-2 col-sm-2 col-md-2">
 			Created
 		</div>
 		<div class="col-xs-6 col-sm-4 col-md-4">
-			{{selectedCredential.label}}
+			{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 		</div>
 	</div>
 
