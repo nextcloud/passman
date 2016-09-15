@@ -9,11 +9,7 @@
  */
 angular.module('passmanApp')
 	.service('TagService', ['$filter', function ($filter) {
-		var _tags = [
-			{text: 'test'},
-			{text: 'test 1'},
-			{text: 'example'},
-		];
+		var _tags = [];
 		return {
 			getTags: function () {
 				return _tags;
