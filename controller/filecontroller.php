@@ -45,6 +45,12 @@ class FileController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
+	public function getFile($file_id) {
+		return $this->fileService->getFile($file_id, $this->userId);
+	}
+	/**
+	 * @NoAdminRequired
+	 */
 	public function deleteFile($file_id) {
 		return $this->fileService->deleteFile($file_id, $this->userId);
 	}

@@ -14,6 +14,13 @@
   background: #d83a02;
   color: #fff; }
 
+.link {
+  color: #0066ff !important;
+  cursor: pointer; }
+
+.link:hover {
+  text-decoration: underline; }
+
 .tab_header {
   list-style: none;
   padding: 0;
@@ -216,6 +223,8 @@
           background-color: rgba(240, 240, 240, 0.9);
           padding: 4px;
           font-size: 11px; }
+      #app-content #app-content-wrapper .edit_credential tags-input .tags {
+        width: 100%; }
       #app-content #app-content-wrapper .edit_credential .credential_textarea {
         width: 100%;
         height: 100px; }
@@ -294,11 +303,6 @@
 
 .settings-container div {
   padding-left: 15px; }
-  .settings-container div .link {
-    color: #0066ff !important;
-    cursor: pointer; }
-  .settings-container div .link:hover {
-    text-decoration: underline; }
 
 #app-settings-content:not(.ng-hide) {
   height: 60px;

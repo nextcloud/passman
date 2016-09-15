@@ -33,17 +33,10 @@
 			<textarea class="credential_textarea" ng-model="storedCredential.description"></textarea>
 		</div>
 		<label>Add Tag</label>
-		<div>
-			<input type="text" placeholder="Add a tag">
+		<div class="tags_input">
+			<tags-input ng-model="storedCredential.tags" replace-spaces-with-dashes="false">
+				<auto-complete source="getTags($query)" min-length="0"></auto-complete>
+			</tags-input>
 		</div>
-		<label>Tags</label>
-		<div>
-			<div class="tags">
-				<div class="tag">
-					test
-				</div>
-			</div>
-		</div>
-
 	</div>
 </div>

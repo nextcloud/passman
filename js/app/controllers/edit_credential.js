@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService) {
+	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService) {
 		$scope.active_vault = VaultService.getActiveVault();
 
 
@@ -70,6 +70,10 @@ angular.module('passmanApp')
 			$scope.storedCredential.password_repeat = angular.copy($scope.storedCredential.password);
 		}
 
+		$scope.getTags = function ($query) {
+			console.log($query)
+			return TagService.searchTag($query);
+		};
 
 		$scope.currentTab = {
 			title: 'General',

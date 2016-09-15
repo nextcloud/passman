@@ -40,6 +40,7 @@ return [
 
 		//File stuff
 		['name' => 'file#uploadFile', 'url' => '/api/v2/file', 'verb' => 'POST'],
+		['name' => 'file#getFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'GET'],
 		['name' => 'file#deleteFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'DELETE'],
 
 	]

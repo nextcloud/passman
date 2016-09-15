@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc service
- * @name passmanApp.VaultService
+ * @name passmanApp.CacheService
  * @description
- * # VaultService
+ * # CacheService
  * Service in the passmanApp.
  */
 angular.module('passmanApp')

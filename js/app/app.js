@@ -22,6 +22,7 @@ angular
 		'ngPasswordMeter',
 		'ngclipboard',
 		'xeditable',
+		'ngTagsInput'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider

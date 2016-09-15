@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope','EncryptService', function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, EncryptService) {
+	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope', 'FileService', 'EncryptService', function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService) {
 		$scope.active_vault = VaultService.getActiveVault();
 		if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 			if (!$scope.active_vault) {
@@ -73,7 +73,19 @@ angular.module('passmanApp')
 			});
 		};
 
-		//@TODO Download files
+		$scope.downloadFile = function (file) {
+			FileService.getFile(file).then(function (result) {
+				var file_data = EncryptService.decryptString(result.file_data);
+				var uriContent = FileService.dataURItoBlob(file_data, file.mimetype), a = document.createElement("a");
+				a.style = "display: none";
+				a.href = uriContent;
+				a.download = escapeHTML(file.filename);
+				document.body.appendChild(a);
+				a.click();
+				window.URL.revokeObjectURL(uriContent);
+			});
+		};
+
 		//@TODO TagService which holds all the tags
 		//@TODO Show otp field
 

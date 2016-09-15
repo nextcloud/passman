@@ -124,7 +124,7 @@
 				</td>
 				<td>
 					<div ng-repeat="file in selectedCredential.files"
-						 class="link">
+						 class="link" ng-click="downloadFile(file)">
 						{{file.filename}} ({{file.size | bytes}})
 					</div>
 				</td>

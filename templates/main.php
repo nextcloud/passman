@@ -16,6 +16,7 @@ script('passman', 'vendor/sjcl/sjcl');
 script('passman', 'vendor/zxcvbn/zxcvbn');
 script('passman', 'vendor/ng-clipboard/clipboard.min');
 script('passman', 'vendor/ng-clipboard/ngclipboard');
+script('passman', 'vendor/ng-tags-input/ng-tags-input.min');
 script('passman', 'vendor/angular-xeditable/xeditable.min');
 script('passman', 'vendor/sha/sha');
 script('passman', 'vendor/llqrcode/llqrcode');
@@ -37,6 +38,7 @@ script('passman', 'app/services/credentialservice');
 script('passman', 'app/services/settingsservice');
 script('passman', 'app/services/fileservice');
 script('passman', 'app/services/encryptservice');
+script('passman', 'app/services/tagservice');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');
 script('passman', 'app/directives/progressbar');
@@ -45,17 +47,19 @@ script('passman', 'app/directives/qrreader');
 script('passman', 'app/directives/tooltip');
 script('passman', 'app/directives/use-theme');
 script('passman', 'app/directives/credentialfield');
+script('passman', 'app/directives/ngenter');
 
 
 /*
  * Styles
  */
-style('passman', 'app');
 style('passman', 'vendor/ng-password-meter/ng-password-meter');
 style('passman', 'vendor/bootstrap/bootstrap.min');
 style('passman', 'vendor/bootstrap/bootstrap-theme.min');
 style('passman', 'vendor/font-awesome/font-awesome.min');
 style('passman', 'vendor/angular-xeditable/xeditable.min');
+style('passman', 'vendor/ng-tags-input/ng-tags-input.min');
+style('passman', 'app');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">

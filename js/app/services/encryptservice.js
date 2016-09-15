@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc service
- * @name passmanApp.VaultService
+ * @name passmanApp.EncryptService
  * @description
- * # VaultService
+ * # EncryptService
  * Service in the passmanApp.
  */
 angular.module('passmanApp')

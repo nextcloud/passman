@@ -26,10 +26,10 @@ class FileMapper extends Mapper {
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
 	 */
-	public function getFile($itemId, $fileId) {
+	public function getFile($file_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_files` ' .
-			'WHERE `id` = ? and `item_id` = ? ';
-		return $this->findEntities($sql, [$fileId, $itemId]);
+			'WHERE `id` = ? and `user_id` = ? ';
+		return $this->findEntities($sql, [$file_id, $user_id]);
 	}
 
 	public function create($file_raw, $userId){
