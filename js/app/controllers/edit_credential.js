@@ -71,7 +71,6 @@ angular.module('passmanApp')
 		}
 
 		$scope.getTags = function ($query) {
-			console.log($query)
 			return TagService.searchTag($query);
 		};
 
@@ -186,6 +185,7 @@ angular.module('passmanApp')
 		
 		$scope.saveCredential = function () {
 			//@TODO  validation
+
 			delete $scope.storedCredential.password_repeat;
 			if(!$scope.storedCredential.credential_id){
 				$scope.storedCredential.vault_id = $scope.active_vault.vault_id;

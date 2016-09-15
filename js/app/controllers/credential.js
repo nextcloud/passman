@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope', 'FileService', 'EncryptService', function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService) {
+	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope', 'FileService', 'EncryptService', 'TagService', function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService) {
 		$scope.active_vault = VaultService.getActiveVault();
 		if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 			if (!$scope.active_vault) {
@@ -20,6 +20,7 @@ angular.module('passmanApp')
 				_vault.vaultKey = angular.copy(SettingsService.getSetting('defaultVaultPass'));
 				VaultService.setActiveVault(_vault);
 				$scope.active_vault = _vault;
+				//@TODO check if vault exists
 			}
 
 		}
@@ -66,7 +67,9 @@ angular.module('passmanApp')
 				var _credentials = [];
 				for (var i = 0; i < credentials.length; i++) {
 					var credential = angular.copy(credentials[i]);
-					/*var credential = CredentialService.decryptCredential(angular.copy(credentials[i]));*/
+					var _tags = CredentialService.decryptCredential(angular.copy(credentials[i])).tags;
+					TagService.addTags(_tags)
+					credential.tags_raw = _tags;
 					_credentials.push(credential);
 				}
 				$scope.credentials = _credentials;

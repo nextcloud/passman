@@ -181,7 +181,8 @@
           #app-content #app-content-wrapper .credential-table tr td .tags .tag {
             background-color: rgba(240, 240, 240, 0.9);
             padding: 4px;
-            font-size: 11px; }
+            font-size: 11px;
+            margin-right: 3px; }
         #app-content #app-content-wrapper .credential-table tr td .icon-more {
           display: inline-block;
           float: right;

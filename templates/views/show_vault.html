@@ -39,12 +39,9 @@
 			ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 			<td>
 				<span class="label">{{credential.label}}</span>
-				<span class="tags">
-				<span class="tag">Tag 1</span>
-				<span class="tag">Tag 2</span>
-				<span class="tag">Tag 4</span>
-				<span class="tag">Tag 4</span>
-				<span class="tag">Long tag xD</span>
+			<span class="tags">
+				<span class="tag" ng-repeat="tag in credential.tags_raw">{{tag.text}}</span>
+
 			</span>
 				<!--<div class="actionList popovermenu bubble menu"
 					 ng-show="menuOpen">

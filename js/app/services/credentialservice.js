@@ -17,7 +17,7 @@ angular.module('passmanApp')
 			'description': null,
 			'created': null,
 			'changed': null,
-			'tags': null, //2TODO Dit moet nog gemaakt worden
+			'tags': [],
 			'email': null,
 			'username': null,
 			'password': null,
@@ -84,7 +84,12 @@ angular.module('passmanApp')
 				for (var i = 0; i < _encryptedFields.length; i++) {
 					var field = _encryptedFields[i];
 					var fieldValue = angular.copy(credential[field]);
-					credential[field] = JSON.parse(EncryptService.decryptString(fieldValue));
+					try{
+						credential[field] = JSON.parse(EncryptService.decryptString(fieldValue));
+					} catch (e){
+						console.log('Field' + field + ' in '+ credential.label +' could not be parsed! Value:'+ fieldValue)
+					}
+
 				}
 				return credential;
 			}
