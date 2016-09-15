@@ -32,15 +32,14 @@ angular.module('passmanApp')
 		};
 
 		$scope.editCredential = function(credential){
-			var credential = angular.copy(credential);
+			var _credential = angular.copy(credential);
 			$rootScope.$emit('app_menu', false);
-			SettingsService.setSetting('edit_credential', CredentialService.encryptCredential(credential));
-			$location.path('/vault/'+  $scope.active_vault.vault_id +'/edit/'+ credential.credential_id)
+			SettingsService.setSetting('edit_credential', CredentialService.encryptCredential(_credential));
+			$location.path('/vault/'+  $scope.active_vault.vault_id +'/edit/'+ _credential.credential_id)
 		};
 
 		$scope.selectedCredential = false;
 		$scope.selectCredential = function (credential) {
-			console.log(credential);
 			$scope.selectedCredential = CredentialService.decryptCredential(angular.copy(credential));
 			$rootScope.$emit('app_menu', true);
 		};
