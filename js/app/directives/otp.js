@@ -41,10 +41,12 @@ angular.module('passmanApp')
 			}
 			return {
 				restrict: 'A',
+				template: '<span class="otp_generator"><span credential-field value="otp" secret="\'true\'"></span> <span ng-bind="timeleft"></span></span>',
 				transclude: false,
 				scope: {
 					secret: '='
 				},
+				replace: true,
 				link: function (scope, element) {
 					scope.otp = null;
 					scope.timeleft = null;
@@ -82,10 +84,6 @@ angular.module('passmanApp')
 							$timeout.cancel(scope.timer);
 						}
 					}, true);
-					//@TODO FIX THIS UGLY SHIT
-					var html = '<span pw="otp">{{otp}}</span> Time left: <span ng-bind="timeleft"></span>';
-					element.html($compile(html)(scope));
-
 					scope.$on(
 						"$destroy",
 						function (event) {

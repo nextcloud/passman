@@ -89,6 +89,7 @@ class CredentialController extends ApiController {
 			'description' => $description,
 			'created' => $created,
 			'changed' => $changed,
+			'vault_id' => $vault_id,
 			'tags' => $tags,
 			'email' => $email,
 			'username' => $username,
@@ -99,6 +100,8 @@ class CredentialController extends ApiController {
 			'expire_time' => $expire_time,
 			'files' => $files,
 			'custom_fields' => $custom_fields,
+			'delete_time' => $delete_time,
+			'hidden' => $hidden,
 			'otp' => $otp,
 		);
 		$credential = $this->credentialService->updateCredential($credential);

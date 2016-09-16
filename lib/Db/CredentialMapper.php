@@ -59,11 +59,20 @@ class CredentialMapper extends Mapper {
 	}
 
 	public function update($raw_credential){
+		if(!$raw_credential['guid']){
+			$raw_credential['guid'] =  $this->utils->GUID();
+		}
+		if(!$raw_credential['created']){
+			$raw_credential['created'] = $this->utils->getTime();
+		}
 		$credential = new Credential();
 		$credential->setId($raw_credential['credential_id']);
+		$credential->setGuid($raw_credential['guid']);
+		$credential->setVaultId($raw_credential['vault_id']);
 		$credential->setUserId($raw_credential['user_id']);
 		$credential->setLabel($raw_credential['label']);
 		$credential->setDescription($raw_credential['description']);
+		$credential->setCreated($raw_credential['created']);
 		$credential->setChanged($this->utils->getTime());
 		$credential->setTags($raw_credential['tags']);
 		$credential->setEmail($raw_credential['email']);
@@ -77,6 +86,7 @@ class CredentialMapper extends Mapper {
 		$credential->setCustomFields($raw_credential['custom_fields']);
 		$credential->setOtp($raw_credential['otp']);
 		$credential->setHidden($raw_credential['hidden']);
+		$credential->setDeleteTime($raw_credential['delete_time']);
 		return parent::update($credential);
 	}
 

@@ -1,6 +1,40 @@
-.settings-container{
-  div{
+.settings-container {
+  div {
     padding-left: 15px;
 
+  }
+}
+
+.nav-trashbin {
+  position: fixed !important;
+  bottom: 44px;
+  width: inherit !important;
+  background-color: #fff;
+  border-right: 1px solid #eee;
+  a {
+    padding: 0 20px;
+    .fa {
+      margin-right: 15px;
+    }
+  }
+}
+
+#app-navigation {
+  li{
+    a.taginput{
+      opacity: 1;
+    }
+    a{
+      overflow: visible;
+      tags-input{
+        opacity: 1.0;
+        li{
+          width: auto !important;
+        }
+      }
+    }
+  }
+  > ul ul {
+    display: inherit !important;
   }
 }

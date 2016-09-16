@@ -29,12 +29,19 @@
 				</li>
 			</ul>
 		</div>
+		<input type="text" ng-model="itemFilter.label">
+		<span class="title" ng-if="delete_time">
+			Showing deleted since:
+			<span ng-if="delete_time == 1">All time</span>
+			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
+
+		</span>
 	</div>
 </div>
 <div off-click="closeSelected()">
 	<table class="credential-table" ng-init="menuOpen = false;">
-		<tr ng-repeat="credential in credentials"
-			ng-if="credential.hidden == 0 && credential.delete_time == 0"
+		<tr ng-repeat="credential in credentials | filter:itemFilter | tagFilter:selectedtags"
+			ng-if="credential.hidden == 0 && showCredentialRow(credential)"
 			ng-click="selectCredential(credential)"
 			ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 			<td>
@@ -97,6 +104,15 @@
 						  secret="'true'"></span>
 				</td>
 			</tr>
+			<tr ng-show="selectedCredential.otp.secret">
+				<td>
+					OTP
+				</td>
+				<td>
+					<span otp-generator
+						   secret="selectedCredential.otp.secret"></span>
+				</td>
+			</tr>
 			<tr ng-show="selectedCredential.email">
 				<td>
 					E-mail
@@ -151,15 +167,24 @@
 					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 				</td>
 			</tr>
+
 		</table>
+
+		<div class="tags">
+				<span class="tag" ng-repeat="tag in selectedCredential.tags">{{tag.text}}</span>
+		</div>
+
 		<div ng-show="selectedCredential">
-			<span class="button" ng-click="editCredential(selectedCredential)">
+			<span class="button" ng-click="editCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
 				<span class="fa fa-edit"></span> Edit
 			</span>
-			<span class="button">
-				<span class="fa fa-trash"></span> Delete
+			<span class="button" ng-click="deleteCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
+				<span class="fa fa-trash" ></span> Delete
 			</span>
-			<span class="button">
+			<span class="button" ng-if="selectedCredential.delete_time > 0" ng-click="recoverCredential(selectedCredential)">
+				<span class="fa fa-recycle"  ></span> Recover
+			</span>
+			<span class="button" ng-if="selectedCredential.delete_time == 0" >
 				<span class="fa fa-share"></span> Share
 			</span>
 		</div>

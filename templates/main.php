@@ -32,6 +32,7 @@ script('passman', 'app/controllers/edit_credential');
 script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');
+script('passman', 'app/filters/tagfilter');
 script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
@@ -39,6 +40,7 @@ script('passman', 'app/services/settingsservice');
 script('passman', 'app/services/fileservice');
 script('passman', 'app/services/encryptservice');
 script('passman', 'app/services/tagservice');
+script('passman', 'app/services/notificationservice');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');
 script('passman', 'app/directives/progressbar');
@@ -65,26 +67,38 @@ style('passman', 'app');
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
 	<div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
 		<ul>
-			<li><a href="#">First level entry</a></li>
-			<li>
-				<a href="#">First level container</a>
-				<ul>
-					<li><a href="#">Second level entry</a></li>
-					<li><a href="#">Second level entry</a></li>
-				</ul>
+			<li class="taginput">
+				<a class="taginput">
+					<tags-input ng-model="selectedTags" replace-spaces-with-dashes="false">
+						<auto-complete source="getTags($query)" min-length="0"></auto-complete>
+					</tags-input>
+				</a>
+			</li>
+
+			<li ng-repeat="tag in available_tags" ng-if="selectedTags.indexOf(tag) == -1">
+				<a ng-click="tagClicked(tag)">{{tag.text}}</a>
+			</li>
+			<li data-id="trashbin" class="nav-trashbin">
+				<a ng-click="toggleDeleteTime()"
+				   ng-class="{'active': delete_time > 0}">
+					<i href="#" class="fa fa-trash"></i>
+					Deleted credentials
+				</a>
 			</li>
 		</ul>
 		<div id="app-settings" ng-init="settingsShown = false;">
 			<div id="app-settings-header">
 				<button class="settings-button"
 						ng-click="settingsShown = !settingsShown"
-				>Settings</button>
+				>Settings
+				</button>
 			</div>
 			<div id="app-settings-content" ng-show="settingsShown">
 				<!-- Your settings in here -->
 				<div class="settings-container">
 					<div><span class="link">Settings</span></div>
-					<div><span class="link" ng-click="logout()">Logout</span></div>
+					<div><span class="link" ng-click="logout()">Logout</span>
+					</div>
 				</div>
 			</div>
 		</div>

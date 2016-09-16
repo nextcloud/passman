@@ -8,7 +8,8 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService) {
+	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService',
+		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService) {
 		$scope.active_vault = VaultService.getActiveVault();
 
 
@@ -105,12 +106,10 @@ angular.module('passmanApp')
 
 		$scope.addCustomField = function () {
 			if (!$scope.new_custom_field.label) {
-				//@TODO move OC.Notification to a service
-				OC.Notification.showTemporary('Please fill in a label');
+				NotificationService.showNotification('Please fill in a label', 3000);
 			}
 			if (!$scope.new_custom_field.value) {
-				//@TODO move OC.Notification to a service
-				OC.Notification.showTemporary('Please fill in a value!');
+				NotificationService.showNotification('Please fill in a value!', 3000);
 			}
 			if (!$scope.new_custom_field.label || !$scope.new_custom_field.value) {
 				return;
@@ -166,7 +165,7 @@ angular.module('passmanApp')
 
 			}
 		};
-		//@TODO Set tags, read them from tag service
+
 
 		$scope.parseQR = function(QRCode){
 			var re = /otpauth:\/\/(totp|hotp)\/(.*)\?(secret|issuer)=(.*)&(issuer|secret)=(.*)/, parsedQR,qrInfo;
@@ -191,13 +190,13 @@ angular.module('passmanApp')
 				$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
 				CredentialService.createCredential($scope.storedCredential).then(function (result) {
 					$location.path('/vault/' + $routeParams.vault_id);
-					//@TODO Show notification
+					NotificationService.showNotification('Credential created!', 5000)
 				})
 			} else {
 				CredentialService.updateCredential($scope.storedCredential).then(function (result) {
 					SettingsService.setSetting('edit_credential', null);
 					$location.path('/vault/' + $routeParams.vault_id);
-					//@TODO Show notification
+					NotificationService.showNotification('Credential updated!', 5000)
 				})
 			}
 		};

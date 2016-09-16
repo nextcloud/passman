@@ -22,7 +22,7 @@
 					<a href="#" editable-text="file.filename">{{ file.filename || "empty" }}</a>
 				</td>
 				<td>
-					{{file.created}}
+					{{file.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 				</td>
 				<td>{{file.size | bytes}}</td>
 				<td class="field_actions">

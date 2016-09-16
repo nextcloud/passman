@@ -56,7 +56,7 @@
 .pw-gen {
   overflow: hidden; }
   .pw-gen input {
-    width: calc(100% - 76px) !important;
+    width: calc(100% - 80px) !important;
     float: left;
     background: #fff;
     color: #555;
@@ -163,6 +163,10 @@
         right: inherit;
         left: 10px;
         top: -19px; }
+      #app-content #app-content-wrapper .actions.creatable .title {
+        width: calc( 100% - 185px);
+        text-align: center;
+        display: inline-block; }
     #app-content #app-content-wrapper .credential-table {
       width: 100%;
       margin-top: 44px; }
@@ -287,8 +291,15 @@
           padding: 2px;
           width: auto;
           white-space: nowrap;
-          height: 20px;
+          height: 25px;
           vertical-align: middle; }
+      #app-content #app-content-wrapper .app_sidebar .tags {
+        margin-top: 15px;
+        margin-bottom: 15px; }
+        #app-content #app-content-wrapper .app_sidebar .tags .tag {
+          background-color: rgba(240, 240, 240, 0.9);
+          padding: 4px;
+          margin-right: 3px; }
 
 .credential_field {
   overflow: hidden; }
@@ -304,6 +315,28 @@
 
 .settings-container div {
   padding-left: 15px; }
+
+.nav-trashbin {
+  position: fixed !important;
+  bottom: 44px;
+  width: inherit !important;
+  background-color: #fff;
+  border-right: 1px solid #eee; }
+  .nav-trashbin a {
+    padding: 0 20px; }
+    .nav-trashbin a .fa {
+      margin-right: 15px; }
+
+#app-navigation li a.taginput {
+  opacity: 1; }
+#app-navigation li a {
+  overflow: visible; }
+  #app-navigation li a tags-input {
+    opacity: 1.0; }
+    #app-navigation li a tags-input li {
+      width: auto !important; }
+#app-navigation > ul ul {
+  display: inherit !important; }
 
 #app-settings-content:not(.ng-hide) {
   height: 60px;
