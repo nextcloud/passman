@@ -103,11 +103,10 @@ angular.module('passmanApp')
 			};
 			$scope.selectedtags = [];
 			$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
-				var _selectedTags = []
+				var _selectedTags = [];
 				for(var x = 0; x < _sTags.length; x++){
 					_selectedTags.push(_sTags[x].text)
 				}
-				console.log(_selectedTags)
 				$scope.selectedtags = _selectedTags;
 			});
 

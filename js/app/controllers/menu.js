@@ -16,6 +16,8 @@ angular.module('passmanApp')
 				$location.path('/');
 			};
 
+			// @TODO Show only tag's that exist in the list (when filtered on tag)
+
 			$scope.selectedTags = [];
 			$scope.getTags = function ($query) {
 				console.log(TagService.searchTag($query));
