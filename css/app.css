@@ -186,7 +186,11 @@
             background-color: rgba(240, 240, 240, 0.9);
             padding: 4px;
             font-size: 11px;
-            margin-right: 3px; }
+            margin-right: 3px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            background-clip: padding-box;
+            /* stops bg color from leaking outside the border: */ }
         #app-content #app-content-wrapper .credential-table tr td .icon-more {
           display: inline-block;
           float: right;
@@ -337,6 +341,9 @@
       width: auto !important; }
 #app-navigation > ul ul {
   display: inherit !important; }
+
+#app-content.with-app-sidebar {
+  margin-right: 32%; }
 
 #app-settings-content:not(.ng-hide) {
   height: 60px;
