@@ -77,4 +77,33 @@ jQuery(document).ready(function () {
 		angular.element('#app-content-wrapper').scope().deleteCredential(credential);
 		angular.element('#app-content-wrapper').scope().$apply();
 	});
+	var adjustControlsWidth = function() {
+		if($('#controls').length) {
+			var controlsWidth;
+			// if there is a scrollbar …
+			if($('#app-content').get(0).scrollHeight > $('#app-content').height()) {
+				if($(window).width() > 768) {
+					controlsWidth = $('#content').width() - $('#app-navigation').width() - OC.Util.getScrollBarWidth();
+					if (!$('#app-sidebar').hasClass('hidden') && !$('#app-sidebar').hasClass('disappear')) {
+						controlsWidth -= $('#app-sidebar').width();
+					}
+				} else {
+					controlsWidth = $('#content').width() - OC.Util.getScrollBarWidth();
+				}
+			} else { // if there is none
+				if($(window).width() > 768) {
+					controlsWidth = $('#content').width() - $('#app-navigation').width();
+					if (!$('#app-sidebar').hasClass('hidden') && !$('#app-sidebar').hasClass('disappear')) {
+						//controlsWidth -= $('#app-sidebar').width();
+					}
+				} else {
+					controlsWidth = $('#content').width();
+				}
+			}
+			$('#controls').css('width', controlsWidth);
+			$('#controls').css('min-width', controlsWidth);
+		}
+	};
+	$(window).resize(_.debounce(adjustControlsWidth, 256));
+	adjustControlsWidth()
 });

@@ -1,16 +1,20 @@
 <div id="controls">
 	<div class="breadcrumb">
-		<!--<div class="crumb svg last" data-dir="/"><a-->
-		<!--href="/ncdev/index.php/apps/files?dir=/"><img class="svg"-->
-		<!--src="/ncdev/core/img/places/home.svg"-->
-		<!--alt="Home"></a>-->
-		<!--</div>-->
+		<div class="breadcrumb">
+			<div class="crumb svg ui-droppable" data-dir="/">
+				<a><i class="fa fa-home"></i></a>
+			</div>
+			<div class="crumb svg last">
+				<a>{{active_vault.name}}</a>
+			</div>
+		</div>
 	</div>
 	<div class="actions creatable">
+
 		<span ng-click="menuOpen = !menuOpen" class="button new"
 			  ng-init="menuOpen = false" off-click="menuOpen = false;">
 			<span
-			>New</span></span>
+			>+</span></span>
 		<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
 			<ul>
 				<li>
@@ -30,7 +34,8 @@
 			</ul>
 		</div>
 		<div class="searchboxContainer">
-			<input type="text" ng-model="itemFilter.label" class="searchbox" placeholder="Search credential...">
+			<input type="text" ng-model="itemFilter.label" class="searchbox"
+				   placeholder="Search credential...">
 		</div>
 		<span class="title" ng-if="delete_time">
 			Showing deleted since:
@@ -40,7 +45,7 @@
 		</span>
 	</div>
 </div>
-<div off-click="closeSelected()">
+<div off-click="closeSelected()" off-click-filter="'.link, .credential-table'">
 	<table class="credential-table" ng-init="menuOpen = false;">
 		<tr ng-repeat="credential in credentials | filter:itemFilter | tagFilter:selectedtags | as:this:'filtered_credentials'"
 			ng-if="credential.hidden == 0 && showCredentialRow(credential)"
@@ -49,7 +54,7 @@
 			<td>
 				<span class="icon"><i class="fa fa-lock"></i> </span>
 				<span class="label">{{credential.label}}</span>
-			<span class="tags">
+				<span class="tags">
 				<span class="tag" ng-repeat="tag in credential.tags_raw">{{tag.text}}</span>
 
 			</span>
@@ -113,7 +118,7 @@
 				</td>
 				<td>
 					<span otp-generator
-						   secret="selectedCredential.otp.secret"></span>
+						  secret="selectedCredential.otp.secret"></span>
 				</td>
 			</tr>
 			<tr ng-show="selectedCredential.email">
@@ -159,7 +164,8 @@
 					Changed
 				</td>
 				<td>
-					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @
+					HH:mm:ss'}}
 				</td>
 			</tr>
 			<tr ng-show="selectedCredential.created">
@@ -167,27 +173,31 @@
 					Created
 				</td>
 				<td>
-					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @
+					HH:mm:ss'}}
 				</td>
 			</tr>
 
 		</table>
 
 		<div class="tags">
-				<span class="tag" ng-repeat="tag in selectedCredential.tags">{{tag.text}}</span>
+			<span class="tag" ng-repeat="tag in selectedCredential.tags">{{tag.text}}</span>
 		</div>
 
 		<div ng-show="selectedCredential">
-			<span class="button" ng-click="editCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
+			<span class="button" ng-click="editCredential(selectedCredential)"
+				  ng-if="selectedCredential.delete_time == 0">
 				<span class="fa fa-edit"></span> Edit
 			</span>
-			<span class="button" ng-click="deleteCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
-				<span class="fa fa-trash" ></span> Delete
+			<span class="button" ng-click="deleteCredential(selectedCredential)"
+				  ng-if="selectedCredential.delete_time == 0">
+				<span class="fa fa-trash"></span> Delete
 			</span>
-			<span class="button" ng-if="selectedCredential.delete_time > 0" ng-click="recoverCredential(selectedCredential)">
-				<span class="fa fa-recycle"  ></span> Recover
+			<span class="button" ng-if="selectedCredential.delete_time > 0"
+				  ng-click="recoverCredential(selectedCredential)">
+				<span class="fa fa-recycle"></span> Recover
 			</span>
-			<span class="button" ng-if="selectedCredential.delete_time == 0" >
+			<span class="button" ng-if="selectedCredential.delete_time == 0">
 				<span class="fa fa-share"></span> Share
 			</span>
 		</div>

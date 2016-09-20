@@ -106,8 +106,10 @@ style('passman', 'app');
 	</div>
 
 	<div id="app-content" ng-class="{'with-app-sidebar': app_sidebar}">
-		<div id="app-content-wrapper" ng-view="">
+		<div id="app-content-wrapper">
+			<div id="content" ng-view="">
 
+			</div>
 		</div>
 	</div>
 </div>
