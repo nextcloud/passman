@@ -144,8 +144,11 @@
   overflow-x: hidden; }
   #app-content #app-content-wrapper {
     min-height: 95%; }
+    #app-content #app-content-wrapper #controls {
+      width: calc( 100% - 280px ); }
     #app-content #app-content-wrapper .actions.creatable {
-      padding-left: 10px; }
+      padding-left: 10px;
+      width: 100%; }
       #app-content #app-content-wrapper .actions.creatable .bubble {
         position: relative;
         width: 185px;
@@ -164,9 +167,14 @@
         left: 10px;
         top: -19px; }
       #app-content #app-content-wrapper .actions.creatable .title {
-        width: calc( 100% - 185px);
+        width: calc( 100% - 325px);
         text-align: center;
+        display: inline-block;
+        font-weight: bold; }
+      #app-content #app-content-wrapper .actions.creatable .searchboxContainer {
         display: inline-block; }
+        #app-content #app-content-wrapper .actions.creatable .searchboxContainer .searchbox {
+          display: inline-block; }
     #app-content #app-content-wrapper .credential-table {
       width: 100%;
       margin-top: 44px; }

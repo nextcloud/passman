@@ -29,7 +29,9 @@
 				</li>
 			</ul>
 		</div>
-		<input type="text" ng-model="itemFilter.label">
+		<div class="searchboxContainer">
+			<input type="text" ng-model="itemFilter.label" class="searchbox" placeholder="Search credential...">
+		</div>
 		<span class="title" ng-if="delete_time">
 			Showing deleted since:
 			<span ng-if="delete_time == 1">All time</span>
