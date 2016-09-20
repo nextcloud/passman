@@ -18,7 +18,9 @@ angular.module('passmanApp')
 				for (var ct = 0; ct < c.tags_raw.length; ct++) {
 					var t = c.tags_raw[ct];
 					if(tags.indexOf(t.text) != -1){
-						_credentials.push(c);
+						if(_credentials.indexOf(c) === -1){
+							_credentials.push(c);
+						}
 					}
 				}
 			}
