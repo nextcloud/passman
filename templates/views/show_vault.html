@@ -187,7 +187,7 @@
 			<span class="button" ng-if="selectedCredential.delete_time > 0" ng-click="recoverCredential(selectedCredential)">
 				<span class="fa fa-recycle"  ></span> Recover
 			</span>
-			<span class="button" ng-if="selectedCredential.delete_time == 0" >
+			<span class="button" ng-if="selectedCredential.delete_time == 0" ng-click="shareCredential(selectedCredential)">
 				<span class="fa fa-share"></span> Share
 			</span>
 		</div>
