@@ -18,7 +18,6 @@ angular.module('passmanApp')
 
 			$scope.selectedTags = [];
 			$scope.getTags = function ($query) {
-				console.log(TagService.searchTag($query));
 				return TagService.searchTag($query);
 			};
 
