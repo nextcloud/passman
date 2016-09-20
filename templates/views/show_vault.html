@@ -45,6 +45,7 @@
 			ng-click="selectCredential(credential)"
 			ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 			<td>
+				<span class="icon"><i class="fa fa-lock"></i> </span>
 				<span class="label">{{credential.label}}</span>
 			<span class="tags">
 				<span class="tag" ng-repeat="tag in credential.tags_raw">{{tag.text}}</span>
