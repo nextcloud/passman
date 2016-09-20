@@ -24,6 +24,27 @@ angular.module('passmanApp')
 				return TagService.searchTag($query);
 			};
 
+			$scope.filtered_tags = [];
+			$rootScope.$on('limit_tags_in_list', function (evt, tags) {
+				$scope.filtered_tags = [];
+				for (var i = 0; i < tags.length; i++) {
+					var tag = {
+						text: tags[i]
+					};
+
+					var found = false;
+					for (var x = 0; x < $scope.selectedTags.length; x++) {
+						if($scope.selectedTags[x].text === tag.text){
+							found = true;
+						}
+					}
+					if(found === false){
+						$scope.filtered_tags.push(tag);
+					}
+
+				}
+			});
+
 			$scope.$watch('selectedTags', function () {
 				$rootScope.$broadcast('selected_tags_updated', $scope.selectedTags)
 			}, true);
@@ -35,7 +56,11 @@ angular.module('passmanApp')
 			$scope.available_tags = TagService.getTags();
 
 			$scope.$watch(function () {
-				return TagService.getTags();
+				if ($scope.selectedTags.length === 0) {
+					return TagService.getTags();
+				} else {
+					return $scope.filtered_tags;
+				}
 			}, function (tags) {
 				$scope.available_tags = tags;
 			}, true);

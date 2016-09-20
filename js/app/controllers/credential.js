@@ -102,12 +102,32 @@ angular.module('passmanApp')
 				label: ''
 			};
 			$scope.selectedtags = [];
+			var to;
 			$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
 				var _selectedTags = [];
 				for(var x = 0; x < _sTags.length; x++){
 					_selectedTags.push(_sTags[x].text)
 				}
 				$scope.selectedtags = _selectedTags;
+				$timeout.cancel(to);
+				if(_selectedTags.length > 0) {
+					to = $timeout(function () {
+						if ($scope.filtered_credentials) {
+							var _filtered_tags = [];
+							for (var i = 0; i < $scope.filtered_credentials.length; i++) {
+								var tags = $scope.filtered_credentials[i].tags_raw;
+								for(var x = 0; x < tags.length; x++){
+									var tag = tags[x].text;
+									if(_filtered_tags.indexOf(tag) === -1){
+										_filtered_tags.push(tag);
+									}
+								}
+							}
+
+							$rootScope.$emit('limit_tags_in_list', _filtered_tags);
+						}
+					}, 50)
+				}
 			});
 
 			$scope.delete_time = 0;

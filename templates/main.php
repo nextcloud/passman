@@ -33,6 +33,7 @@ script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');
 script('passman', 'app/filters/tagfilter');
+script('passman', 'app/filters/as');
 script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
