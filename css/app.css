@@ -178,14 +178,17 @@
         cursor: pointer;
         padding: 5px;
         border-bottom: 1px solid #eeeeee; }
-        #app-content #app-content-wrapper .credential-table tr td .label {
-          float: left; }
+        #app-content #app-content-wrapper .credential-table tr td .icon {
+          font-size: 19px;
+          float: left;
+          margin-right: 5px;
+          margin-left: 3px; }
         #app-content #app-content-wrapper .credential-table tr td .tags {
           float: right; }
           #app-content #app-content-wrapper .credential-table tr td .tags .tag {
             background-color: rgba(240, 240, 240, 0.9);
             padding: 4px;
-            font-size: 11px;
+            font-size: 12px;
             margin-right: 3px;
             -webkit-border-radius: 5px;
             border-radius: 5px;
@@ -341,9 +344,6 @@
       width: auto !important; }
 #app-navigation > ul ul {
   display: inherit !important; }
-
-#app-content.with-app-sidebar {
-  margin-right: 32%; }
 
 #app-settings-content:not(.ng-hide) {
   height: 60px;
