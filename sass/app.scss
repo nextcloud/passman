@@ -9,10 +9,6 @@
 @import 'credentials';
 @import 'menu';
 
-#app-content.with-app-sidebar {
-  margin-right: 32%;
-}
-
 #app-settings-content:not(.ng-hide) {
   height: 60px;
   display: inherit !important;
