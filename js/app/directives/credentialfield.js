@@ -24,7 +24,7 @@ angular.module('passmanApp')
 			'</div>' +
 			'<div class="tools">' +
 			'<div class="cell" ng-if="toggle" tooltip="\'Toggle visibility\'" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': !valueVisible, \'fa-eye-slash\': valueVisible }"></i></div>' +
-			'<div class="cell" tooltip="copy_msg"><i class="fa fa-clipboard" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{value}}"></i></div>' +
+			'<div class="cell" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{value}}"><i  tooltip="copy_msg" class="fa fa-clipboard"></i></div>' +
 			'</div></span>',
 			link: function (scope, elem, attrs, modelCtrl) {
 				scope.$watch("value", function () {
