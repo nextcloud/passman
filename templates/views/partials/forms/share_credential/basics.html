@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-xs-12 col-md-6">
+		<div>
+			<table class="table">
+				<thead>
+				<tr>
+					<td><input type="text" placeholder="Search user or groups"></td>
+
+					<td>
+						<select>
+							<option ng-repeat="lvl in accessLevels"
+									value="{{lvl.value}}">
+								{{lvl.label}}
+							</option>
+						</select>
+						<button class="button">
+							+
+						</button>
+					</td>
+				</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-md-6">
+		<table class="table shared_table">
+			<thead>
+			<tr>
+				<td>User / group</td>
+				<td>Access</td>
+			</tr>
+			</thead>
+			<tr ng-repeat="user in share_settings.credentialSharedWithUserAndGroup">
+				<td>{{user.userId}}</td>
+				<td>{{user.accessLevel}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

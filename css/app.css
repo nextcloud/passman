@@ -352,6 +352,9 @@
 #app-navigation > ul ul {
   display: inherit !important; }
 
+.table {
+  width: 100%; }
+
 #app-settings-content:not(.ng-hide) {
   height: 60px;
   display: inherit !important;

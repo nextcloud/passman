@@ -41,6 +41,9 @@ angular
 			.when('/vault/:vault_id/edit/:credential_id', {
 				templateUrl: 'views/edit_credential.html',
 				controller: 'CredentialEditCtrl'
+			}).when('/vault/:vault_id/:credential_id/share', {
+				templateUrl: 'views/share_credential.html',
+				controller: 'ShareCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'

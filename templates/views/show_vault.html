@@ -10,7 +10,6 @@
 		</div>
 	</div>
 	<div class="actions creatable">
-
 		<span ng-click="menuOpen = !menuOpen" class="button new"
 			  ng-init="menuOpen = false" off-click="menuOpen = false;">
 			<span
@@ -45,7 +44,7 @@
 		</span>
 	</div>
 </div>
-<div off-click="closeSelected()" off-click-filter="'.link, .credential-table'">
+<div off-click="closeSelected()">
 	<table class="credential-table" ng-init="menuOpen = false;">
 		<tr ng-repeat="credential in credentials | filter:itemFilter | tagFilter:selectedtags | as:this:'filtered_credentials'"
 			ng-if="credential.hidden == 0 && showCredentialRow(credential)"
@@ -145,8 +144,7 @@
 					Changed
 				</td>
 				<td>
-					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @
-					HH:mm:ss'}}
+					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 				</td>
 			</tr>
 			<tr ng-show="selectedCredential.created">
@@ -154,31 +152,28 @@
 					Created
 				</td>
 				<td>
-					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @
-					HH:mm:ss'}}
+					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 				</td>
 			</tr>
 
 		</table>
 
 		<div class="tags">
-			<span class="tag" ng-repeat="tag in selectedCredential.tags">{{tag.text}}</span>
+				<span class="tag" ng-repeat="tag in selectedCredential.tags">{{tag.text}}</span>
 		</div>
 
 		<div ng-show="selectedCredential">
-			<span class="button" ng-click="editCredential(selectedCredential)"
-				  ng-if="selectedCredential.delete_time == 0">
+			<span class="button" ng-click="editCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
 				<span class="fa fa-edit"></span> Edit
 			</span>
-			<span class="button" ng-click="deleteCredential(selectedCredential)"
-				  ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-trash"></span> Delete
+			<span class="button" ng-click="deleteCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
+				<span class="fa fa-trash" ></span> Delete
 			</span>
 			<span class="button" ng-if="selectedCredential.delete_time > 0"
 				  ng-click="recoverCredential(selectedCredential)">
 				<span class="fa fa-recycle"></span> Recover
 			</span>
-			<span class="button" ng-if="selectedCredential.delete_time == 0">
+			<span class="button" ng-if="selectedCredential.delete_time == 0" ng-click="shareCredential(selectedCredential)">
 				<span class="fa fa-share"></span> Share
 			</span>
 		</div>
