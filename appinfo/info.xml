@@ -12,6 +12,6 @@
     <bugs>https://github.com/nextcloud/passman/issues</bugs>
     <repository type="git">git@github.com:nextcloud/passman.git</repository>
     <dependencies>
-        <owncloud min-version="9.2" max-version="10" />
+        <owncloud min-version="9" max-version="10" />
     </dependencies>
 </info>
