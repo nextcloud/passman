@@ -32,6 +32,18 @@ class CredentialMapper extends Mapper {
 		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 
+	public function getExpiredCredentials($timestamp){
+		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
+			'WHERE `expire_time` > 0 AND `expire_time` < ?';
+		return $this->findEntities($sql, [$timestamp]);
+	}
+
+	public function getCredentialById($credential_id, $user_id){
+		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
+			'WHERE `id` = ? and `user_id` = ? ';
+		return $this->findEntity($sql,[$credential_id, $user_id]);
+	}
+
 	public function create($raw_credential){
 		$credential = new Credential();
 
@@ -58,7 +70,7 @@ class CredentialMapper extends Mapper {
 		return parent::insert($credential);
 	}
 
-	public function update($raw_credential){
+	public function updateCredential($raw_credential){
 		if(!$raw_credential['guid']){
 			$raw_credential['guid'] =  $this->utils->GUID();
 		}
@@ -90,4 +102,11 @@ class CredentialMapper extends Mapper {
 		return parent::update($credential);
 	}
 
+	public function deleteCredential(Credential $credential){
+		$this->delete($credential);
+	}
+
+	public function upd(Credential $credential){
+		$this->update($credential);
+	}
 }

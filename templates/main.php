@@ -11,6 +11,7 @@ script('passman', 'vendor/angular-sanitize/angular-sanitize.min');
 script('passman', 'vendor/angular-touch/angular-touch.min');
 script('passman', 'vendor/angular-local-storage/angular-local-storage.min');
 script('passman', 'vendor/angular-off-click/angular-off-click.min');
+script('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker.min');
 script('passman', 'vendor/ng-password-meter/ng-password-meter');
 script('passman', 'vendor/sjcl/sjcl');
 script('passman', 'vendor/zxcvbn/zxcvbn');
@@ -43,6 +44,7 @@ script('passman', 'app/services/fileservice');
 script('passman', 'app/services/encryptservice');
 script('passman', 'app/services/tagservice');
 script('passman', 'app/services/notificationservice');
+script('passman', 'app/services/shareservice');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');
 script('passman', 'app/directives/progressbar');
@@ -63,6 +65,7 @@ style('passman', 'vendor/bootstrap/bootstrap-theme.min');
 style('passman', 'vendor/font-awesome/font-awesome.min');
 style('passman', 'vendor/angular-xeditable/xeditable.min');
 style('passman', 'vendor/ng-tags-input/ng-tags-input.min');
+style('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker');
 style('passman', 'app');
 ?>
 

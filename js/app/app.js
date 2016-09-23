@@ -22,7 +22,8 @@ angular
 		'ngPasswordMeter',
 		'ngclipboard',
 		'xeditable',
-		'ngTagsInput'
+		'ngTagsInput',
+		'angularjs-datetime-picker'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider
@@ -108,5 +109,7 @@ jQuery(document).ready(function () {
 		}
 	};
 	$(window).resize(_.debounce(adjustControlsWidth, 256));
-	adjustControlsWidth()
+	setTimeout(function(){
+		adjustControlsWidth()
+	},200)
 });

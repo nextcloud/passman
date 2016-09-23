@@ -171,9 +171,9 @@
         display: inline-block;
         font-weight: bold; }
       #app-content #app-content-wrapper .actions.creatable .searchboxContainer {
-        display: inline-block;
-        float: right;
-        margin-right: 10px; }
+        position: absolute;
+        right: 10px;
+        top: 0; }
         #app-content #app-content-wrapper .actions.creatable .searchboxContainer .searchbox {
           display: inline-block; }
     #app-content #app-content-wrapper .credential-table {
@@ -203,6 +203,8 @@
             border-radius: 5px;
             background-clip: padding-box;
             /* stops bg color from leaking outside the border: */ }
+          #app-content #app-content-wrapper .credential-table tr td .tags .tag:last-child {
+            margin-right: 8px; }
         #app-content #app-content-wrapper .credential-table tr td .icon-more {
           display: inline-block;
           float: right;
@@ -351,6 +353,13 @@
       width: auto !important; }
 #app-navigation > ul ul {
   display: inherit !important; }
+
+.sharing_table td:first-child {
+  width: 55%; }
+  .sharing_table td:first-child tags-input .tags {
+    width: 100%; }
+  .sharing_table td:first-child .autocomplete {
+    margin-top: 35px; }
 
 .table {
   width: 100%; }

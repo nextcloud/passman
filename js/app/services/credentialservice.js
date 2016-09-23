@@ -46,6 +46,8 @@ angular.module('passmanApp')
 					_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue));
 				}
 
+				_credential.expire_time = new Date( angular.copy(credential.expire_time) ).getTime() / 1000;
+
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials');
 				return $http.post(queryUrl, _credential).then(function (response) {
 					if (response.data) {
@@ -62,9 +64,30 @@ angular.module('passmanApp')
 					var fieldValue = angular.copy(credential[field]);
 					_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue));
 				}
+				_credential.expire_time = new Date( angular.copy(credential.expire_time) ).getTime() / 1000;
 
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential.credential_id);
 				return $http.patch(queryUrl, _credential).then(function (response) {
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+			},
+			getCredential: function(id){
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + id);
+				return $http.get(queryUrl).then(function (response) {
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+			},
+			destroyCredential: function(id){
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + id);
+				return $http.delete(queryUrl).then(function (response) {
 					if (response.data) {
 						return response.data;
 					} else {

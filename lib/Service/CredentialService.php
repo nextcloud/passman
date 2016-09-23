@@ -30,10 +30,25 @@ class CredentialService {
 	}
 
 	public function updateCredential($credential) {
-		return $this->credentialMapper->update($credential);
+		return $this->credentialMapper->updateCredential($credential);
+	}
+	public function upd($credential) {
+		return $this->credentialMapper->upd($credential);
 	}
 
-	public function getCredentialsByVaultId($vault_id, $user_id){
+	public function deleteCredential($credential){
+		return $this->credentialMapper->deleteCredential($credential);
+	}
+
+	public function getCredentialsByVaultId($vault_id, $user_id) {
 		return $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
+	}
+
+	public function getExpiredCredentials($timestamp) {
+		return $this->credentialMapper->getExpiredCredentials($timestamp);
+	}
+
+	public function getCredentialById($credential_id, $user_id){
+		return $this->credentialMapper->getCredentialById($credential_id, $user_id);
 	}
 }
