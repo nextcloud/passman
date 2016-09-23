@@ -26,6 +26,8 @@ class NotificationService {
 	}
 
 	function credentialExpiredNotification($credential){
+		$urlGenerator = \OC::$server->getURLGenerator();
+		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('','index.php/apps/passman/#/vault/'. $credential->getVaultId() .'/edit/'. $credential->getId()));
 		$notification = $this->manager->createNotification();
 		$acceptAction = $notification->createAction();
 		$acceptAction->setLabel('change')
@@ -40,7 +42,7 @@ class NotificationService {
 			->setDateTime(new \DateTime())
 			->setObject('credential', $credential->getId()) // $type and $id
 			->setSubject('credential_expired', [$credential->getLabel()]) // $subject and $parameters
-			->setLink('/apps/passman/#/vault/'. $credential->getVaultId() .'/edit/'. $credential->getId())
+			->setLink($link)
 			->addAction($acceptAction)
 			->addAction($declineAction);
 

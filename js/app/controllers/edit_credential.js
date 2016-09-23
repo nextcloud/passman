@@ -65,7 +65,9 @@ angular.module('passmanApp')
 			var storedCredential = SettingsService.getSetting('edit_credential');
 
 			if (!storedCredential) {
-				$location.path('/vault/' + $routeParams.vault_id);
+				CredentialService.getCredential($routeParams.credential_id).then(function(result){
+					$scope.storedCredential = CredentialService.decryptCredential(angular.copy(result));
+				});
 			} else {
 				$scope.storedCredential = CredentialService.decryptCredential(angular.copy(storedCredential));
 				$scope.storedCredential.password_repeat = angular.copy($scope.storedCredential.password);

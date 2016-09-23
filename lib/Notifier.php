@@ -38,7 +38,7 @@ class Notifier implements INotifier {
 			// Deal with known subjects
 			case 'credential_expired':
 				$notification->setParsedSubject(
-					(string) $l->t('Your credential "%s" expired', $notification->getSubjectParameters())
+					(string) $l->t('Your credential "%s" expired, click here to update the credential.', $notification->getSubjectParameters())
 				);
 
 				// Deal with the actions for a known subject
