@@ -16,7 +16,7 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\ILogger;
 use OCA\Passman\Utility\Utils;
 use OCA\Passman\Activity;
-
+use OCP\IDBConnection;
 class CronService {
 
 	private $credentialService;
@@ -24,25 +24,33 @@ class CronService {
 	private $utils;
 	private $notificationService;
 	private $activityService;
-
-	public function __construct(CredentialService $credentialService, ILogger $logger, Utils $utils, NotificationService $notificationService, ActivityService $activityService) {
+	private $db;
+	public function __construct(CredentialService $credentialService, ILogger $logger, Utils $utils, NotificationService $notificationService, ActivityService $activityService, $db) {
 		$this->credentialService = $credentialService;
 		$this->logger = $logger;
 		$this->utils = $utils;
 		$this->notificationService = $notificationService;
 		$this->activityService = $activityService;
+		$this->db = $db;
 	}
 
 	public function expireCredentials() {
 		$this->logger->info('Passman cron test', array('app' => 'passman'));
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
 		foreach($expired_credentials as $credential){
-			$this->notificationService->credentialExpiredNotification($credential);
 			$link = ''; // @TODO create direct link to credential
-			$this->activityService->add(
-				Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
-				'', array(),
-				$link,  $credential->getUserId(), Activity::TYPE_ITEM_ACTION);
+
+			$sql = 'SELECT count(*) as rows from `*PREFIX*notifications` WHERE `object_type`= \'credential\' AND object_id=?';
+			$query = $this->db->prepareQuery($sql);
+			$query->bindParam(1, $credential->getId(), \PDO::PARAM_INT);
+			$result = $query->execute();
+			if($result->fetchRow()['rows'] === 0) {
+				$this->activityService->add(
+					Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
+					'', array(),
+					$link, $credential->getUserId(), Activity::TYPE_ITEM_ACTION);
+				$this->notificationService->credentialExpiredNotification($credential);
+			}
 
 		}
 	}

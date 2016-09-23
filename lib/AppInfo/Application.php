@@ -66,10 +66,14 @@ class Application extends App {
 				$c->query('Logger'),
 				$c->query('Utils'),
 				$c->query('NotificationService'),
-				$c->query('ActivityService')
+				$c->query('ActivityService'),
+				$c->query('ServerContainer')->getDb()
 			);
 		});
 
+		$container->registerService('Db', function () {
+			return new Db();
+		});
 
 		$container->registerService('Logger', function($c) {
 			return $c->query('ServerContainer')->getLogger();

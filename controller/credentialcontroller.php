@@ -115,7 +115,8 @@ class CredentialController extends ApiController {
 		);
 
 
-		$storedCredential = $this->credentialService->getCredentialById($credential_id);
+		$storedCredential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+
 		$link = ''; // @TODO create direct link to credential
 
 		if (($storedCredential->getDeleteTime() == 0) && $delete_time > 0) {
