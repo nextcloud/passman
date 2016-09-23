@@ -168,14 +168,10 @@ angular.module('passmanApp')
 
 			$rootScope.$on('logout', function () {
 				console.log('Logout received, clean up');
-				$scope.credentials = [];
-				if ($scope.hasOwnProperty('$parent')) {
-					if ($scope.$parent.hasOwnProperty('selectedVault')) {
-						$scope.$parent.selectedVault = false;
-					}
-				}
-
 				$scope.active_vault = null;
+				$scope.credentials = [];
+//				$scope.$parent.selectedVault = false;
+
 			});
 
 			var fetchCredentials = function () {
