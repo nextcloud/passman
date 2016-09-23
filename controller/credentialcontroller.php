@@ -15,19 +15,23 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
-
+use OCA\Passman\Activity;
+use OCA\Passman\Service\ActivityService;
 
 class CredentialController extends ApiController {
 	private $userId;
 	private $credentialService;
+	private $activityService;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
-								CredentialService $credentialService) {
+								CredentialService $credentialService,
+								ActivityService $activityService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
+		$this->activityService = $activityService;
 	}
 
 	/**
@@ -63,6 +67,11 @@ class CredentialController extends ApiController {
 
 		);
 		$credential = $this->credentialService->createCredential($credential);
+		$link = ''; // @TODO create direct link to credential
+		$this->activityService->add(
+			Activity::SUBJECT_ITEM_CREATED_SELF, array($label, $this->userId),
+			'', array(),
+			$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		return new JSONResponse($credential);
 	}
 
@@ -104,7 +113,36 @@ class CredentialController extends ApiController {
 			'hidden' => $hidden,
 			'otp' => $otp,
 		);
+
+
+		$storedCredential = $this->credentialService->getCredentialById($credential_id);
+		$link = ''; // @TODO create direct link to credential
+
+		if (($storedCredential->getDeleteTime() == 0) && $delete_time > 0) {
+			$this->activityService->add(
+				'item_deleted_self', array($label, $this->userId),
+				'', array(),
+				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		} else if (($storedCredential->getDeleteTime() > 0) && $delete_time == 0) {
+			$this->activityService->add(
+				'item_recovered_self', array($label, $this->userId),
+				'', array(),
+				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		} else if ($label != $storedCredential->getLabel()) {
+			$this->activityService->add(
+				'item_renamed_self', array($storedCredential->getLabel(), $label, $this->userId),
+				'', array(),
+				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		} else {
+			$this->activityService->add(
+				'item_edited_self', array($label, $this->userId),
+				'', array(),
+				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		}
+
+
 		$credential = $this->credentialService->updateCredential($credential);
+
 		return new JSONResponse($credential);
 	}
 

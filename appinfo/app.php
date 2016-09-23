@@ -15,7 +15,7 @@ namespace OCA\Passman\AppInfo;
 use OCP\Util;
 use OCP\BackgroundJob;
 use OCA\Passman\Notifier;
-
+use OCA\Passman\Activity;
 require_once __DIR__ . '/autoload.php';
 
 $app = new \OCA\Passman\AppInfo\Application();
@@ -34,6 +34,13 @@ $manager->registerNotifier(function() {
 		'id' => 'passman',
 		'name' => $l->t('Passwords'),
 	];
+});
+
+$manager = \OC::$server->getActivityManager();
+$manager->registerExtension(function() {
+	return new Activity(
+		\OC::$server->getL10NFactory()
+	);
 });
 
 /**

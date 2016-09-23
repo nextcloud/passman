@@ -16,6 +16,7 @@ use OCA\Passman\Controller\CredentialController;
 use OCA\Passman\Controller\PageController;
 use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Controller\VaultController;
+use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CronService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Utility\Utils;
@@ -63,7 +64,8 @@ class Application extends App {
 				$c->query('CredentialService'),
 				$c->query('Logger'),
 				$c->query('Utils'),
-				$c->query('NotificationService')
+				$c->query('NotificationService'),
+				$c->query('ActivityService')
 			);
 		});
 
@@ -78,6 +80,7 @@ class Application extends App {
 		$container->registerAlias('VaultController', VaultController::class);
 		$container->registerAlias('CredentialService', CredentialService::class);
 		$container->registerAlias('NotificationService', NotificationService::class);
+		$container->registerAlias('ActivityService', ActivityService::class);
 		$container->registerAlias('Utils', Utils::class);
 	}
 
