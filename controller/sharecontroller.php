@@ -27,9 +27,7 @@ use OCA\Passman\Service\UserService;
 
 class ShareController extends ApiController {
 	private $userId;
-	private $vaultService;
-	private $credentialService;
-	private $userService;
+	private $activityService;
 	private $groupManager;
 	private $userManager;
 
@@ -42,13 +40,14 @@ class ShareController extends ApiController {
 								IRequest $request,
 								IUser $UserId,
 								IGroupManager $groupManager,
-								IUserManager $userManager
+								IUserManager $userManager,
+								ActivityService $activityService
 	) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->userManager = $userManager;
 		$this->groupManager = $groupManager;
-
+		$this->activityService = $activityService;
 	}
 
 
@@ -94,5 +93,14 @@ class ShareController extends ApiController {
 		return new JSONResponse($this->result);
 	}
 
+
+	public function share($credential){
+
+		$link = '';
+		$this->activityService->add(
+			'item_shared', array($credential->label, $this->userId),
+			'', array(),
+			$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+	}
 
 }
