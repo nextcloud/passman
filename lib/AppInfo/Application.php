@@ -16,7 +16,10 @@ use OCA\Passman\Controller\CredentialController;
 use OCA\Passman\Controller\PageController;
 use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Controller\VaultController;
-use OCA\Passman\Service\UserService;
+use OCA\Passman\Service\CronService;
+use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Utility\Utils;
+use OCA\Passman\Service\NotificationService;
 
 use OCP\AppFramework\App;
 use OCP\IL10N;
@@ -52,10 +55,30 @@ class Application extends App {
 			);
 		});
 
+
+
+		/** Cron  **/
+		$container->registerService('CronService', function ($c) {
+			return new CronService(
+				$c->query('CredentialService'),
+				$c->query('Logger'),
+				$c->query('Utils'),
+				$c->query('NotificationService')
+			);
+		});
+
+
+		$container->registerService('Logger', function($c) {
+			return $c->query('ServerContainer')->getLogger();
+		});
+
 		// Aliases for the controllers so we can use the automatic DI
 		$container->registerAlias('CredentialController', CredentialController::class);
 		$container->registerAlias('PageController', PageController::class);
 		$container->registerAlias('VaultController', VaultController::class);
+		$container->registerAlias('CredentialService', CredentialService::class);
+		$container->registerAlias('NotificationService', NotificationService::class);
+		$container->registerAlias('Utils', Utils::class);
 	}
 
 	/**

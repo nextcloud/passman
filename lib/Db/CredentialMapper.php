@@ -32,6 +32,12 @@ class CredentialMapper extends Mapper {
 		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 
+	public function getExpiredCredentials($timestamp){
+		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
+			'WHERE `expire_time` > 0 AND `expire_time` < ?';
+		return $this->findEntities($sql, [$timestamp]);
+	}
+
 	public function create($raw_credential){
 		$credential = new Credential();
 

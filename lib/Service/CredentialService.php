@@ -36,4 +36,7 @@ class CredentialService {
 	public function getCredentialsByVaultId($vault_id, $user_id){
 		return $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
 	}
+	public function getExpiredCredentials($timestamp){
+		return $this->credentialMapper->getExpiredCredentials($timestamp);
+	}
 }

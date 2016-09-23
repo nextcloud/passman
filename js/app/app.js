@@ -22,7 +22,8 @@ angular
 		'ngPasswordMeter',
 		'ngclipboard',
 		'xeditable',
-		'ngTagsInput'
+		'ngTagsInput',
+		'angularjs-datetime-picker'
 	])
 	.config(function ($routeProvider) {
 		$routeProvider
