@@ -95,7 +95,7 @@ angular.module('passmanApp')
 				if (notification) {
 					NotificationService.hideNotification(notification);
 				}
-				NotificationService.showNotification('Credential recovered <a class="undoRestore" data-item-id="' + credential.credential_id + '">[Undo]</a>', 7500,
+				NotificationService.showNotification('Credential recovered <a class="undoRestore" data-item-id="' + credential.credential_id + '">[Undo]</a>', 5000,
 					function () {
 						CredentialService.updateCredential(_credential).then(function (result) {
 							notification = false;
@@ -103,6 +103,19 @@ angular.module('passmanApp')
 						});
 					});
 
+			};
+
+			$scope.destroyCredential = function(credential){
+				var _credential = angular.copy(credential);
+				CredentialService.destroyCredential(_credential.credential_id).then(function (result) {
+					for (var i = 0; i < $scope.credentials.length; i++) {
+						if ($scope.credentials[i].credential_id == credential.credential_id) {
+							$scope.credentials.splice(i,1);
+							NotificationService.showNotification('Credential destroyed', 5000);
+							break;
+						}
+					}
+				});
 			};
 
 			$scope.itemFilter = {

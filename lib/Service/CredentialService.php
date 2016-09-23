@@ -36,6 +36,10 @@ class CredentialService {
 		return $this->credentialMapper->upd($credential);
 	}
 
+	public function deleteCredential($credential){
+		return $this->credentialMapper->deleteCredential($credential);
+	}
+
 	public function getCredentialsByVaultId($vault_id, $user_id) {
 		return $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
 	}

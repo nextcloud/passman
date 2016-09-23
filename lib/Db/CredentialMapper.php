@@ -102,6 +102,10 @@ class CredentialMapper extends Mapper {
 		return parent::update($credential);
 	}
 
+	public function deleteCredential(Credential $credential){
+		$this->delete($credential);
+	}
+
 	public function upd(Credential $credential){
 		$this->update($credential);
 	}

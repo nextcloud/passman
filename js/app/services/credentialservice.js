@@ -85,6 +85,16 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			destroyCredential: function(id){
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + id);
+				return $http.delete(queryUrl).then(function (response) {
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+			},
 			encryptCredential: function (credential) {
 				for (var i = 0; i < _encryptedFields.length; i++) {
 					var field = _encryptedFields[i];

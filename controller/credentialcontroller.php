@@ -151,7 +151,17 @@ class CredentialController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function deleteCredential($credential_id) {
-		return;
+		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+		if($credential){
+			$result = $this->credentialService->deleteCredential($credential);
+			$this->activityService->add(
+				'item_destroyed_self', array($credential->getLabel()),
+				'', array(),
+				'', $this->userId, Activity::TYPE_ITEM_ACTION);
+		} else {
+			$result = false;
+		}
+		return new JSONResponse($result);
 	}
 
 
