@@ -108,5 +108,7 @@ jQuery(document).ready(function () {
 		}
 	};
 	$(window).resize(_.debounce(adjustControlsWidth, 256));
-	adjustControlsWidth()
+	setTimeout(function(){
+		adjustControlsWidth()
+	},200)
 });

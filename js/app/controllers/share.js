@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams) {
+	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService) {
 		$scope.active_vault = VaultService.getActiveVault();
 
 		$scope.tabs = [{
@@ -60,21 +60,9 @@ angular.module('passmanApp')
 		};
 
 
-		$scope.searchUsersAndGroups = function($query){
-
-		};
 
 		$scope.share_settings = {
-			credentialSharedWithUserAndGroup:[
-				{
-					userId: 'someuser',
-					accessLevel: 'CAN_VIEW'
-				},
-				{
-					userId: 'someuser',
-					accessLevel: 'CAN_EDIT'
-				}
-			]
+			credentialSharedWithUserAndGroup:[]
 		};
 
 		$scope.accessLevels = [
@@ -86,8 +74,30 @@ angular.module('passmanApp')
 				label: 'Can view',
 				value: 'CAN_VIEW'
 			}
-		]
+		];
 
+		$scope.inputSharedWith = [];
+		$scope.selectedAccessLevel = 'CAN_VIEW';
+
+		$scope.searchUsers = function($query){
+			 return ShareService.search($query)
+		};
+
+		$scope.shareWith = function(shareWith, selectedAccessLevel){
+			$scope.inputSharedWith = [];
+			if(shareWith.length > 0) {
+				for (var i = 0; i < shareWith.length; i++) {
+					$scope.share_settings.credentialSharedWithUserAndGroup.push(
+						{
+							userId: shareWith[i].uid,
+							displayName: shareWith[i].text,
+							type: shareWith[i].type,
+							accessLevel: selectedAccessLevel
+						}
+					)
+				}
+			}
+		}
 
 
 	}]);

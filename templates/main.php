@@ -43,6 +43,7 @@ script('passman', 'app/services/fileservice');
 script('passman', 'app/services/encryptservice');
 script('passman', 'app/services/tagservice');
 script('passman', 'app/services/notificationservice');
+script('passman', 'app/services/shareservice');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');
 script('passman', 'app/directives/progressbar');
