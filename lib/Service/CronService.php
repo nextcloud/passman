@@ -40,7 +40,7 @@ class CronService {
 		foreach($expired_credentials as $credential){
 			$link = ''; // @TODO create direct link to credential
 
-			$sql = 'SELECT count(*) as rows from `*PREFIX*notifications` WHERE `object_type`= \'credential\' AND object_id=?';
+			$sql = 'SELECT count(*) as rows from `*PREFIX*notifications` WHERE `subject`= \'credential_expired\' AND object_id=?';
 			$query = $this->db->prepareQuery($sql);
 			$query->bindParam(1, $credential->getId(), \PDO::PARAM_INT);
 			$result = $query->execute();
