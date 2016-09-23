@@ -38,10 +38,10 @@ class CredentialMapper extends Mapper {
 		return $this->findEntities($sql, [$timestamp]);
 	}
 
-	public function getCredentialById($credential_id){
+	public function getCredentialById($credential_id, $user_id){
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `id` = ?';
-		return $this->findEntity($sql,[$credential_id]);
+			'WHERE `id` = ? and `user_id` = ? ';
+		return $this->findEntity($sql,[$credential_id, $user_id]);
 	}
 
 	public function create($raw_credential){
@@ -70,7 +70,7 @@ class CredentialMapper extends Mapper {
 		return parent::insert($credential);
 	}
 
-	public function update($raw_credential){
+	public function updateCredential($raw_credential){
 		if(!$raw_credential['guid']){
 			$raw_credential['guid'] =  $this->utils->GUID();
 		}
@@ -102,4 +102,7 @@ class CredentialMapper extends Mapper {
 		return parent::update($credential);
 	}
 
+	public function upd(Credential $credential){
+		$this->update($credential);
+	}
 }

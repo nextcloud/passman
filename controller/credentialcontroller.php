@@ -79,8 +79,7 @@ class CredentialController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function getCredential($credential_id) {
-		//@TODO check user
-		return new JSONResponse($this->credentialService->getCredentialById($credential_id));
+		return new JSONResponse($this->credentialService->getCredentialById($credential_id, $this->userId));
 	}
 
 	/**

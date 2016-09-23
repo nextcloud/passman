@@ -28,14 +28,15 @@ class NotificationService {
 	function credentialExpiredNotification($credential){
 		$urlGenerator = \OC::$server->getURLGenerator();
 		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('','index.php/apps/passman/#/vault/'. $credential->getVaultId() .'/edit/'. $credential->getId()));
+		$api = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
-		$acceptAction = $notification->createAction();
-		$acceptAction->setLabel('change')
-					 ->setLink('/apps/passman/api/v1/', 'POST');
+		$remindAction = $notification->createAction();
+		$remindAction->setLabel('remind')
+			->setLink($api. '/api/internal/notifications/remind/'. $credential->getId() , 'POST');
 
 		$declineAction = $notification->createAction();
 		$declineAction->setLabel('ignore')
-			->setLink('/apps/passman/internal/notifications/read', 'DELETE');
+			->setLink($api . '/api/internal/notifications/read/'. $credential->getId(), 'DELETE');
 
 		$notification->setApp('passman')
 			->setUser($credential->getUserId())
@@ -43,8 +44,8 @@ class NotificationService {
 			->setObject('credential', $credential->getId()) // $type and $id
 			->setSubject('credential_expired', [$credential->getLabel()]) // $subject and $parameters
 			->setLink($link)
-			->addAction($acceptAction)
-			->addAction($declineAction);
+			->addAction($declineAction)
+			->addAction($remindAction);
 
 		$this->manager->notify($notification);
 	}

@@ -44,9 +44,9 @@ class Notifier implements INotifier {
 				// Deal with the actions for a known subject
 				foreach ($notification->getActions() as $action) {
 					switch ($action->getLabel()) {
-						case 'change':
+						case 'remind':
 							$action->setParsedLabel(
-								(string) $l->t('Change')
+								(string) $l->t('Remind me later')
 							);
 							break;
 

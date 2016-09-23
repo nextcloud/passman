@@ -46,5 +46,10 @@ return [
 		//Sharing stuff
 		['name' => 'share#search', 'url' => '/api/v2/sharing/search', 'verb' => 'POST'],
 
+
+		//Internal API
+		['name' => 'internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],
+		['name' => 'internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],
+
 	]
 ];
