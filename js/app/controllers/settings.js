@@ -32,7 +32,6 @@ angular.module('passmanApp')
 		$scope.$watch(function () {
 			return VaultService.getActiveVault()
 		}, function (vault) {
-			console.log(vault);
 			$scope.active_vault = vault;
 		});
 
