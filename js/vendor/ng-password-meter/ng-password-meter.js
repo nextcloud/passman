@@ -27,20 +27,21 @@
 					scope.toggleScore = function () {
 						scope.scoreShown = !scope.scoreShown;
 					}
-					jQuery('.match-sequence').hide()
+					jQuery('.match-sequence').hide();
 					scope.toggleMatchBreakdown = function () {
 						scope.matchBreakdown = true;
 						var width = ($window.innerWidth > 420) ? $window.innerWidth * 0.85 : $window.innerWidth * 0.8;
-						var ms_elem = jQuery('.match-sequence');
+						var ms_elem = jQuery('.match-sequence:eq(0)');
 						ms_elem.dialog({
 							title: 'Password breakdown',
 							width: width,
 							open: function () {
 								var _totalWidth = 0;
 								ms_elem.find('.sequence').each(function (key, el) {
-									_totalWidth += jQuery(el).width()+20;
+									_totalWidth += jQuery(el).width() + 20;
 								});
 								if (_totalWidth < $window.innerWidth * 0.85) {
+									ms_elem.width(_totalWidth);
 									ms_elem.dialog("option", "width", _totalWidth);
 									jQuery('.ui-dialog').position({
 										my: "center",
