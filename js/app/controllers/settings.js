@@ -17,9 +17,19 @@ angular.module('passmanApp')
 			title: 'Password Tool',
 			url: 'views/partials/forms/settings/tool.html'
 
+		},
+		{
+			title: 'Import credentials',
+			url: 'views/partials/forms/settings/import.html'
+
+		},
+		{
+			title: 'Export credentials',
+			url: 'views/partials/forms/settings/export.html'
+
 		}];
 
-		$scope.currentTab = $scope.tabs[1];
+		$scope.currentTab = $scope.tabs[0];
 
 		$scope.onClickTab = function (tab) {
 			$scope.currentTab = tab;

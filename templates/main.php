@@ -33,6 +33,8 @@ script('passman', 'app/controllers/edit_credential');
 script('passman', 'app/controllers/share');
 script('passman', 'app/controllers/revision');
 script('passman', 'app/controllers/settings');
+script('passman', 'app/controllers/import');
+script('passman', 'app/controllers/export');
 script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');
