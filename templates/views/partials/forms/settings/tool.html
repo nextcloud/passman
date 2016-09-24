@@ -1,0 +1,45 @@
+<div class="row">
+	<div class="col-xs-12">
+		<p>The password tool will scan your password, calculate the avarage
+			crack time and, if below the threshold, show them</p>
+	</div>
+	<div class="col-xs-12" ng-init="minStrength = 3;">
+		Minimum password stength <input type="number" min="1" max="4" value="3"
+										ng-model="minStrength">
+		<button ng-click="startScan(minStrength)">Start scan</button>
+	</div>
+</div>
+<div class="row" ng-show="scan_result">
+	<div class="col-xs-12">
+		<p>Passman scanned your passwords, and here is the result.<br/>
+			A total of <b>{{scan_result.length}}</b> weak credentials.<br/>
+		</p>
+		<table class="table scan-result-table">
+			<thead>
+			<tr>
+				<td>Label</td>
+				<td>Score</td>
+				<td>Password</td>
+				<td>Action</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="result in scan_result | orderBy:'password_zxcvbn_result.score'">
+				<td>{{result.label}}</td>
+				<td class="score">
+					<ng-password-meter
+							password="result.password"></ng-password-meter>
+				</td>
+				<td>
+					<span credential-field value="result.password"
+						  secret="'true'"></span>
+				</td>
+				<td>
+					<a class="link" ng-href="#/vault/{{active_vault.vault_id}}/edit/{{result.credential_id}}" tooltip="'Edit credential'"><i  class="fa fa-edit"></i></a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>

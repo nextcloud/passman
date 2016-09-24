@@ -91,12 +91,8 @@
 						scope.strength = _score.score;
 						scope.masterClass = '';
 
-						if (scope.strength == 0) {
+						if (scope.strength <= 1) {
 							scope.first = 'poor';
-							scope.message = 'poor';
-						} else if (scope.strength == 1) {
-							scope.first = 'poor';
-							scope.second = 'poor';
 							scope.message = 'poor';
 						} else if (scope.strength == 2) {
 							scope.first = 'weak';

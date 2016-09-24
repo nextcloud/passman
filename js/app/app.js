@@ -49,6 +49,10 @@ angular
 				templateUrl: 'views/credential_revisions.html',
 				controller: 'RevisionCtrl'
 			})
+			.when('/vault/:vault_id/settings', {
+				templateUrl: 'views/settings.html',
+				controller: 'SettingsCtrl'
+			})
 			.otherwise({
 				redirectTo: '/'
 			});

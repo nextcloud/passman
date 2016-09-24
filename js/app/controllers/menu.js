@@ -21,6 +21,12 @@ angular.module('passmanApp')
 				return TagService.searchTag($query);
 			};
 
+			$scope.$watch(function(){
+				return VaultService.getActiveVault()
+			}, function(vault){
+				$scope.active_vault = vault;
+			});
+
 			$scope.filtered_tags = [];
 			$rootScope.$on('limit_tags_in_list', function (evt, tags) {
 				$scope.filtered_tags = [];

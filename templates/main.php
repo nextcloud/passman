@@ -32,6 +32,7 @@ script('passman', 'app/controllers/credential');
 script('passman', 'app/controllers/edit_credential');
 script('passman', 'app/controllers/share');
 script('passman', 'app/controllers/revision');
+script('passman', 'app/controllers/settings');
 script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');
@@ -102,7 +103,7 @@ style('passman', 'app');
 			<div id="app-settings-content" ng-show="settingsShown">
 				<!-- Your settings in here -->
 				<div class="settings-container">
-					<div><span class="link">Settings</span></div>
+					<div><a class="link" ng-href="#/vault/{{active_vault.vault_id}}/settings">Settings</a></div>
 					<div><span class="link" ng-click="logout()">Logout</span></div>
 					<div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">Donate</a></div>
 				</div>

@@ -1,0 +1,26 @@
+<div id="controls">
+	<div class="actions creatable">
+		<div class="breadcrumb">
+			<div class="crumb svg ui-droppable" >
+				<a ng-click="logout()"><i class="fa fa-home"></i></a>
+			</div>
+			<div class="crumb svg">
+				<a ng-click="cancel()">{{active_vault.name}}</a>
+			</div>
+			<div class="crumb svg last">
+				<a>Settings</a>
+			</div>
+		</div>
+	</div>
+</div>
+<ul class="tab_header">
+	<li ng-repeat="tab in tabs track by $index" class="tab"
+		ng-class="{active:isActiveTab(tab)}"
+		ng-click="onClickTab(tab)">{{tab.title}}</li>
+</ul>
+
+<div class="tab_container edit_credential">
+	<div ng-include="currentTab.url"></div>
+</div>
+
+

@@ -365,6 +365,12 @@
 .table {
   width: 100%; }
 
+.scan-result-table {
+  margin-top: 10px; }
+  .scan-result-table .score {
+    padding-left: 0px;
+    padding-right: 15px; }
+
 #app-settings-content:not(.ng-hide) {
   height: 60px;
   display: inherit !important;
