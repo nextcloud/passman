@@ -163,23 +163,28 @@
 		</div>
 
 		<div ng-show="selectedCredential">
-			<span class="button" ng-click="editCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
+			<button class="button" ng-click="editCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
 				<span class="fa fa-edit"></span> Edit
-			</span>
-			<span class="button" ng-click="deleteCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
+			</button>
+			<button class="button" ng-click="deleteCredential(selectedCredential)" ng-if="selectedCredential.delete_time == 0" >
 				<span class="fa fa-trash" ></span> Delete
-			</span>
-			<span class="button" ng-if="selectedCredential.delete_time > 0"
+			</button>
+			<button class="button" ng-click="shareCredential(selectedCredential)"  ng-if="selectedCredential.delete_time == 0" >
+				<span class="fa fa-share"></span> Share
+			</button>
+
+			<button class="button" ng-click="getRevisions(selectedCredential)"  ng-if="selectedCredential.delete_time == 0" >
+				<span class="fa fa-undo"></span> Revisions
+			</button>
+
+			<button class="button" ng-if="selectedCredential.delete_time > 0"
 				  ng-click="recoverCredential(selectedCredential)">
 				<span class="fa fa-recycle"></span> Recover
-			</span>
-			<span class="button" ng-if="selectedCredential.delete_time > 0"
+			</button>
+			<button class="button" ng-if="selectedCredential.delete_time > 0"
 				  ng-click="destroyCredential(selectedCredential)">
 				<span class="fa fa-bomb"></span> Destroy
-			</span>
-			<span class="button" ng-if="selectedCredential.delete_time == 0" ng-click="shareCredential(selectedCredential)">
-				<span class="fa fa-share"></span> Share
-			</span>
+			</button>
 		</div>
 	</div>
 </div>
