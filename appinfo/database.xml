@@ -63,6 +63,11 @@
 				<type>clob</type>
 				<notnull>false</notnull>
 			</field>
+			<field>
+				<name>sharing_keys_generated</name>
+				<type>integer</type>
+				<length>8</length>
+			</field>
 			<index>
 				<name>passman_vault_last_access_index</name>
 				<field>
