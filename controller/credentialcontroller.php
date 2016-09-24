@@ -17,21 +17,25 @@ use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Activity;
 use OCA\Passman\Service\ActivityService;
+use OCA\Passman\Service\CredentialRevisionService;
 
 class CredentialController extends ApiController {
 	private $userId;
 	private $credentialService;
 	private $activityService;
+	private $credentialRevisionService;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
 								CredentialService $credentialService,
-								ActivityService $activityService) {
+								ActivityService $activityService,
+								CredentialRevisionService $credentialRevisionService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
 		$this->activityService = $activityService;
+		$this->credentialRevisionService = $credentialRevisionService;
 	}
 
 	/**
@@ -89,7 +93,7 @@ class CredentialController extends ApiController {
 									 $credential_id, $custom_fields, $delete_time,
 									 $description, $email, $expire_time, $favicon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id) {
+									 $tags, $url, $username, $vault_id, $revision_created) {
 		$credential = array(
 			'credential_id' => $credential_id,
 			'guid' => $guid,
@@ -118,8 +122,12 @@ class CredentialController extends ApiController {
 		$storedCredential = $this->credentialService->getCredentialById($credential_id, $this->userId);
 
 		$link = ''; // @TODO create direct link to credential
-
-		if (($storedCredential->getDeleteTime() == 0) && $delete_time > 0) {
+		if ($revision_created) {
+			$this->activityService->add(
+				'item_apply_revision_self', array($label, $this->userId, $revision_created),
+				'', array(),
+				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		} else if (($storedCredential->getDeleteTime() == 0) && $delete_time > 0) {
 			$this->activityService->add(
 				'item_deleted_self', array($label, $this->userId),
 				'', array(),
@@ -133,7 +141,7 @@ class CredentialController extends ApiController {
 			$this->activityService->add(
 				'item_renamed_self', array($storedCredential->getLabel(), $label, $this->userId),
 				'', array(),
-				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+				$link, $this->userId, Activity::TYPE_ITEM_RENAMED);
 		} else {
 			$this->activityService->add(
 				'item_edited_self', array($label, $this->userId),
@@ -141,7 +149,7 @@ class CredentialController extends ApiController {
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 
-
+		$this->credentialRevisionService->createRevision($storedCredential, $this->userId, $credential_id);
 		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);
@@ -152,7 +160,7 @@ class CredentialController extends ApiController {
 	 */
 	public function deleteCredential($credential_id) {
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
-		if($credential){
+		if ($credential) {
 			$result = $this->credentialService->deleteCredential($credential);
 			$this->activityService->add(
 				'item_destroyed_self', array($credential->getLabel()),
@@ -169,13 +177,15 @@ class CredentialController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function getRevision($credential_id) {
-		return;
+		$result = $this->credentialRevisionService->getRevisions($credential_id, $this->userId);
+		return new JSONResponse($result);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function deleteRevision($credential_id) {
-		return;
+	public function deleteRevision($credential_id, $revision_id) {
+		$result = $this->credentialRevisionService->deleteRevision($revision_id, $this->userId);
+		return new JSONResponse($result);
 	}
 }

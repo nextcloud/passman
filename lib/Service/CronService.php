@@ -48,7 +48,7 @@ class CronService {
 				$this->activityService->add(
 					Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
 					'', array(),
-					$link, $credential->getUserId(), Activity::TYPE_ITEM_ACTION);
+					$link, $credential->getUserId(), Activity::TYPE_ITEM_EXPIRED);
 				$this->notificationService->credentialExpiredNotification($credential);
 			}
 

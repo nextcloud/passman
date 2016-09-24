@@ -45,6 +45,9 @@ angular
 			}).when('/vault/:vault_id/:credential_id/share', {
 				templateUrl: 'views/share_credential.html',
 				controller: 'ShareCtrl'
+			}).when('/vault/:vault_id/:credential_id/revisions', {
+				templateUrl: 'views/credential_revisions.html',
+				controller: 'RevisionCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'
