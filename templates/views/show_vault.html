@@ -139,7 +139,14 @@
 						  secret="field.secret"></span>
 				</td>
 			</tr>
-			<tr ng-show="selectedCredential.changed">
+			<tr ng-show="selectedCredential.expire_time > 0">
+				<td>
+					Expire time
+				</td>
+				<td>
+					{{selectedCredential.expire_time * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+				</td>
+			</tr><tr ng-show="selectedCredential.changed">
 				<td>
 					Changed
 				</td>
