@@ -41,6 +41,13 @@ angular.module('passmanApp')
 				$location.path('/vault/' + $scope.active_vault.vault_id + '/edit/' + _credential.credential_id)
 			};
 
+			$scope.getRevisions = function (credential) {
+				var _credential = angular.copy(credential);
+				$rootScope.$emit('app_menu', false);
+				SettingsService.setSetting('revision_credential', CredentialService.encryptCredential(_credential));
+				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.credential_id + '/revisions')
+			};
+
 			$scope.shareCredential = function (credential) {
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
