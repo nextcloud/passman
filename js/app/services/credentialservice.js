@@ -125,6 +125,16 @@ angular.module('passmanApp')
 						return response;
 					}
 				});
+			},
+			deleteRevision:  function(credential_id, revision_id){
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential_id + '/revision/' + revision_id);
+				return $http.delete(queryUrl).then(function (response) {
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
 			}
 		}
 	}]);

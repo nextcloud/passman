@@ -32,4 +32,8 @@ class CredentialRevisionService {
 	public function getRevisions($credential_id, $user_id){
 		return $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
 	}
+
+	public function deleteRevision($revision_id, $user_id){
+		return $this->credentialRevisionMapper->deleteRevision($revision_id, $user_id);
+	}
 }

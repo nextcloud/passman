@@ -43,10 +43,10 @@ class CredentialRevisionMapper extends Mapper {
 		return $this->insert($revision);
 	}
 
-	public function deleteFile($revision_id, $user_id) {
-		$file = new CredentialRevision();
-		$file->setId($revision_id);
-		$file->setUserId($user_id);
-		$this->delete($file);
+	public function deleteRevision($revision_id, $user_id) {
+		$revision = new CredentialRevision();
+		$revision->setId($revision_id);
+		$revision->setUserId($user_id);
+		$this->delete($revision);
 	}
 }
