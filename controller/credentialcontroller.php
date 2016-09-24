@@ -17,21 +17,24 @@ use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Activity;
 use OCA\Passman\Service\ActivityService;
-
+use OCA\Passman\Service\CredentialRevisionService;
 class CredentialController extends ApiController {
 	private $userId;
 	private $credentialService;
 	private $activityService;
+	private $credentialRevisionService;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
 								CredentialService $credentialService,
-								ActivityService $activityService) {
+								ActivityService $activityService,
+								CredentialRevisionService $credentialRevisionService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
 		$this->activityService = $activityService;
+		$this->credentialRevisionService = $credentialRevisionService;
 	}
 
 	/**
@@ -141,7 +144,7 @@ class CredentialController extends ApiController {
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 
-
+		$this->credentialRevisionService->createRevision($credential, $this->userId, $credential_id);
 		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);
@@ -169,7 +172,8 @@ class CredentialController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function getRevision($credential_id) {
-		return;
+		$result = $this->credentialRevisionService->getRevisions($credential_id, $this->userId);
+		return new JSONResponse($result);
 	}
 
 	/**

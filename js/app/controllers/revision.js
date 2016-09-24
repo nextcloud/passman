@@ -28,13 +28,23 @@ angular.module('passmanApp')
 		}
 		var storedCredential = SettingsService.getSetting('edit_credential');
 
+		var getRevisions = function () {
+			CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
+				console.log(revisions)
+			})
+		};
+
 		if (!storedCredential) {
 			CredentialService.getCredential($routeParams.credential_id).then(function(result){
 				$scope.storedCredential = CredentialService.decryptCredential(angular.copy(result));
+				getRevisions();
 			});
 		} else {
 			$scope.storedCredential = CredentialService.decryptCredential(angular.copy(storedCredential));
+			getRevisions();
 		}
+
+
 
 		$scope.cancel = function () {
 			$location.path('/vault/' + $routeParams.vault_id);
