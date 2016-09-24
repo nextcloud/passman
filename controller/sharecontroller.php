@@ -21,8 +21,8 @@ use OCP\IUserManager;
 use OCP\IUser;
 
 use OCA\Passman\Service\VaultService;
-use OCA\Passman\Service\CredentialService;
-use OCA\Passman\Service\UserService;
+use OCA\Passman\Service\ActivityService;
+
 
 
 class ShareController extends ApiController {

@@ -50,10 +50,7 @@ class Application extends App {
 				$server->getUserSession()->getUser(),
 				$server->getGroupManager(),
 				$server->getUserManager(),
-				$server->getShareManager(),
-				$server->getURLGenerator(),
-				$server->getL10N($c->query('AppName')),
-				$c->query('ActivityService')
+ 				$c->query('ActivityService')
 			);
 		});
 
