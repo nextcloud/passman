@@ -15,22 +15,27 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
+use \OC_App;
 
 class InternalController extends ApiController {
 	private $userId;
 	private $credentialService;
+
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
-								CredentialService $credentialService){
+								CredentialService $credentialService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
 	}
 
-	function remind($credential_id){
+	/**
+	 * @NoAdminRequired
+	 */
+	public function remind($credential_id) {
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
-		$credential->setExpireTime(time()+ (24 * 60 * 60));
+		$credential->setExpireTime(time() + (24 * 60 * 60));
 		$this->credentialService->upd($credential);
 
 		$manager = \OC::$server->getNotificationManager();
@@ -41,7 +46,10 @@ class InternalController extends ApiController {
 		$manager->markProcessed($notification);
 	}
 
-	function read($credential_id){
+	/**
+	 * @NoAdminRequired
+	 */
+	public function read($credential_id) {
 
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
 		$credential->setExpireTime(0);
@@ -54,4 +62,12 @@ class InternalController extends ApiController {
 			->setUser($this->userId);
 		$manager->markProcessed($notification);
 	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function getAppVersion() {
+		return new JSONResponse(array('version' => OC_App::getAppVersion('passman')));
+	}
+
 }

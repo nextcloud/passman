@@ -51,7 +51,7 @@ angular.module('views/partials/forms/settings/export.html', []).run(['$templateC
 angular.module('views/partials/forms/settings/general_settings.html', []).run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('views/partials/forms/settings/general_settings.html',
-    '<div class="row"><div class="col-xs-12 col-md-6"><h3>Change vault key</h3><label>Old vault password</label><input type="password" ng-model="oldVaultPass"><label>New vault password</label><password-gen ng-model="newVaultPass"></password-gen><ng-password-meter password="newVaultPass"></ng-password-meter><label>New vault password</label><input type="password" ng-model="newVaultPass2"> <button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)" tooltip="\'Not working :P\'">Change</button></div><div class="col-xs-12 col-md-6"></div></div>');
+    '<div class="row"><div class="col-xs-12 col-md-6"><h3>Change vault key</h3><label>Old vault password</label><input type="password" ng-model="oldVaultPass"><label>New vault password</label><password-gen ng-model="newVaultPass"></password-gen><ng-password-meter password="newVaultPass"></ng-password-meter><label>New vault password</label><input type="password" ng-model="newVaultPass2"> <button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)" tooltip="\'Not working :P\'">Change</button></div><div class="col-xs-12 col-md-6"><h3>About passman</h3><p>Version: <b>{{passman_version}}</b><br>Bla bla about passman, our vision, and donate link.</p></div></div>');
 }]);
 
 angular.module('views/partials/forms/settings/import.html', []).run(['$templateCache', function($templateCache) {
