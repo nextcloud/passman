@@ -203,7 +203,7 @@ class Activity implements \OCP\Activity\IExtension {
 			case self::TYPE_ITEM_SHARED:
 				return 'icon-share';
 			case self::TYPE_ITEM_RENAMED:
-				return '';
+				return 'icon-rename';
 		}
 		return false;
 	}
