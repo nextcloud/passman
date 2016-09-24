@@ -170,7 +170,9 @@ angular.module('passmanApp')
 							scope.generatePasswordProgress();
 						} else {
 							scope.disabled = false;
-							scope.callback(scope.password)
+							if(scope.callback) {
+								scope.callback(scope.password)
+							}
 						}
 					}, 10);
 				};
