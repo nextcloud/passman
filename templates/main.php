@@ -58,7 +58,8 @@ script('passman', 'app/directives/tooltip');
 script('passman', 'app/directives/use-theme');
 script('passman', 'app/directives/credentialfield');
 script('passman', 'app/directives/ngenter');
-
+script('passman', 'importers/import-main');
+script('passman', 'importers/importer-keepasscsv');
 
 /*
  * Styles

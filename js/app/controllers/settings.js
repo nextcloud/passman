@@ -11,14 +11,16 @@ angular.module('passmanApp')
 	.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http',
 		function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http) {
 
-			$scope.tabs = [{
-				title: 'General settings',
-				url: 'views/partials/forms/settings/general_settings.html'
-			}, {
-				title: 'Password Tool',
-				url: 'views/partials/forms/settings/tool.html'
+			$scope.tabs = [
+				{
+					title: 'General settings',
+					url: 'views/partials/forms/settings/general_settings.html'
+				},
+				{
+					title: 'Password Tool',
+					url: 'views/partials/forms/settings/tool.html'
 
-			},
+				},
 				{
 					title: 'Import credentials',
 					url: 'views/partials/forms/settings/import.html'
@@ -30,7 +32,7 @@ angular.module('passmanApp')
 
 				}];
 
-			$scope.currentTab = $scope.tabs[0];
+			$scope.currentTab = $scope.tabs[2];
 
 			$scope.onClickTab = function (tab) {
 				$scope.currentTab = tab;
@@ -42,7 +44,7 @@ angular.module('passmanApp')
 
 			var getPassmanVersion = function () {
 				var url = OC.generateUrl('apps/passman/api/internal/version');
-				$http.get(url).then(function(result){
+				$http.get(url).then(function (result) {
 					$scope.passman_version = result.data.version;
 				})
 			};

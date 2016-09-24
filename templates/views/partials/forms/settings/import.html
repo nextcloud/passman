@@ -1,3 +1,14 @@
 <div ng-controller="ImportCtrl">
-	Import credentials
+	<div class="row">
+		<div class="col-xs-12" ng-init="importerType">
+			<label>Import type
+			<select ng-model="importerType">
+				<option ng-repeat="importer in available_importers" value="{{importer.value}}">
+					{{importer.name}}
+				</option>
+			</select></label>
+			<input ng-if="importerType" type="file" file-select success="fileLoaded" error="fileLoadError" progress="fileSelectProgress"><br />
+			<button class="button" ng-click="startImport(importerType)" ng-if="importerType">Import</button>
+		</div>
+	</div>
 </div>
