@@ -144,7 +144,7 @@ class CredentialController extends ApiController {
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 
-		$this->credentialRevisionService->createRevision($credential, $this->userId, $credential_id);
+		$this->credentialRevisionService->createRevision($storedCredential, $this->userId, $credential_id);
 		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);

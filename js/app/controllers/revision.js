@@ -8,7 +8,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams) {
+	.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope) {
 
 		if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 			if (!$scope.active_vault) {
@@ -31,6 +31,7 @@ angular.module('passmanApp')
 		var getRevisions = function () {
 			CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
 				console.log(revisions)
+				$scope.revisions = revisions;
 			})
 		};
 
@@ -44,7 +45,16 @@ angular.module('passmanApp')
 			getRevisions();
 		}
 
+		$scope.selectRevision = function(revision){
+			$scope.selectedRevision = angular.copy(revision);
+			$scope.selectedRevision.credential_data = CredentialService.decryptCredential(angular.copy(revision.credential_data));
+			$rootScope.$emit('app_menu', true);
+		};
 
+		$scope.closeSelected = function () {
+			$rootScope.$emit('app_menu', false);
+			$scope.selectedRevision = false;
+		};
 
 		$scope.cancel = function () {
 			$location.path('/vault/' + $routeParams.vault_id);
