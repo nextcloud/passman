@@ -53,7 +53,16 @@
 				<notnull>false</notnull>
 				<unsigned>true</unsigned>
 			</field>
-
+			<field>
+				<name>public_sharing_key</name>
+				<type>clob</type>
+				<notnull>false</notnull>
+			</field>
+			<field>
+				<name>private_sharing_key</name>
+				<type>clob</type>
+				<notnull>false</notnull>
+			</field>
 			<index>
 				<name>passman_vault_last_access_index</name>
 				<field>
