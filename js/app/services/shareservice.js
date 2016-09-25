@@ -28,22 +28,32 @@ angular.module('passmanApp')
 				var step = function() {
 					// run for 100 ms
 					if(!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
-						console.log(state);
-						console.log({
-							// 'data_length': state.n.data.length,
-							'bits' : state.bits,
-							'pBits': state.pBits,
-							'qBits': state.qBits
-						});
+						// console.log(state);
+						if (state.p !== null) {
+							progress(50);
+						}
+						else {
+							progress(0);
+						}
+
+						// console.log({
+						// 	// 'data_length': state.n.data.length,
+						// 	'bits' : state.bits,
+						// 	'num' : state.num,
+						// 	'numBitLength' : state.num !== null ? state.num.bitLength() : null,
+						// 	'pBitLength' : state.p !== null ? state.p.bitLength() : null,
+						// 	'qBitLength' : state.q !== null ? state.q.bitLength() : null,
+						// 	'pqState' : state.pqState,
+						// 	'pBits': state.pBits,
+						// 	'qBits': state.qBits
+						// });
 						setTimeout(step, 1);
 					}
 					else {
-						// done, turn off progress indicator, use state.keys
 						callback(state.keys);
 					}
 				};
-				// turn on progress indicator, schedule generation to run
-				setTimeout(step);
+				setTimeout(step, 100);
 			},
 			rsaKeyPairToPEM: function(keypair){
 				return {
