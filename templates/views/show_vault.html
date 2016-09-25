@@ -33,7 +33,7 @@
 			</ul>
 		</div>
 		<div class="searchboxContainer">
-			<input type="text" ng-model="itemFilter.label" class="searchbox"
+			<input type="text" ng-model="filterOptions.filterText" class="searchbox"
 				   placeholder="Search credential...">
 		</div>
 		<span class="title" ng-if="delete_time">
@@ -46,7 +46,7 @@
 </div>
 <div off-click="closeSelected()">
 	<table class="credential-table" ng-init="menuOpen = false;">
-		<tr ng-repeat="credential in credentials | credentialSearch:itemFilter | tagFilter:selectedtags | as:this:'filtered_credentials'"
+		<tr ng-repeat="credential in credentials | credentialSearch:filterOptions | tagFilter:selectedtags | as:this:'filtered_credentials'"
 			ng-if="credential.hidden == 0 && showCredentialRow(credential)"
 			ng-click="selectCredential(credential)"
 			ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">

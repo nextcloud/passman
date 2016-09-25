@@ -125,9 +125,12 @@ angular.module('passmanApp')
 				});
 			};
 
-			$scope.itemFilter = {
-				label: ''
+
+			$scope.filterOptions = {
+				filterText: '',
+				fields: ['label', 'username', 'email', 'password', 'custom_fields']
 			};
+
 			$scope.selectedtags = [];
 			var to;
 			$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
@@ -177,7 +180,7 @@ angular.module('passmanApp')
 
 			$scope.selectedCredential = false;
 			$scope.selectCredential = function (credential) {
-				$scope.selectedCredential = CredentialService.decryptCredential(angular.copy(credential));
+				$scope.selectedCredential = angular.copy(credential);
 				$rootScope.$emit('app_menu', true);
 			};
 
@@ -199,10 +202,10 @@ angular.module('passmanApp')
 					var _credentials = [];
 					for (var i = 0; i < credentials.length; i++) {
 						var credential = angular.copy(credentials[i]);
-						var _tags = CredentialService.decryptCredential(angular.copy(credentials[i])).tags;
-						TagService.addTags(_tags);
-						credential.tags_raw = _tags;
-						_credentials.push(credential);
+						var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
+						TagService.addTags(_c.tags);
+						credential.tags_raw = _c.tags;
+						_credentials.push(_c);
 					}
 					$scope.credentials = _credentials;
 				});
