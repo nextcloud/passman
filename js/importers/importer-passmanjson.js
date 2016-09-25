@@ -11,7 +11,7 @@ PassmanImporter.passmanJson = {
 	}
 };
 
-PassmanImporter.passmanJson.readFile = function (file_data) {
+PassmanImporter.passmanJson.readFile = function (file_data, callback) {
 	var parsed_json = PassmanImporter.readJson(file_data);
 	var credential_list = [];
 	for (var i = 0; i < parsed_json.length; i++) {
@@ -56,5 +56,5 @@ PassmanImporter.passmanJson.readFile = function (file_data) {
 			credential_list.push(_credential);
 		}
 	}
-	return credential_list;
+	callback(credential_list);
 };

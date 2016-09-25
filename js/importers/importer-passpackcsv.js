@@ -11,7 +11,7 @@ PassmanImporter.passpackCsv = {
 	}
 };
 
-PassmanImporter.passpackCsv.readFile = function (file_data) {
+PassmanImporter.passpackCsv.readFile = function (file_data, callback) {
 	var parsed_csv = PassmanImporter.readCsv(file_data, false);
 	var credential_list = [];
 	for (var i = 0; i < parsed_csv.length; i++) {
@@ -38,5 +38,5 @@ PassmanImporter.passpackCsv.readFile = function (file_data) {
 			credential_list.push(_credential);
 		}
 	}
-	return credential_list;
+	callback(credential_list);
 };
