@@ -22,8 +22,6 @@ angular.module('passmanApp')
 				});
 			},
 			generateRSAKeys: function(key_length, progress, callback){
-				// return forge.pki.rsa.generateKeyPair(key_length);
-
 				var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
 				var step = function() {
 					// run for 100 ms
@@ -35,18 +33,6 @@ angular.module('passmanApp')
 						else {
 							progress(0);
 						}
-
-						// console.log({
-						// 	// 'data_length': state.n.data.length,
-						// 	'bits' : state.bits,
-						// 	'num' : state.num,
-						// 	'numBitLength' : state.num !== null ? state.num.bitLength() : null,
-						// 	'pBitLength' : state.p !== null ? state.p.bitLength() : null,
-						// 	'qBitLength' : state.q !== null ? state.q.bitLength() : null,
-						// 	'pqState' : state.pqState,
-						// 	'pBits': state.pBits,
-						// 	'qBits': state.qBits
-						// });
 						setTimeout(step, 1);
 					}
 					else {
