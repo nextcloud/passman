@@ -8,6 +8,8 @@ angular.module('passmanApp')
         $scope.progress = 1;
         $scope.generating = false;
 
+		$scope.sharing_keys = ShareService.getSharingKeys();
+
 		$scope.generateKeys = function (length) {
 		    $scope.progress = 1;
             $scope.generating = true;
@@ -27,7 +29,6 @@ angular.module('passmanApp')
 
 				var _vault = angular.copy($scope.active_vault);
 				_vault.private_sharing_key = EncryptService.encryptString(_vault.private_sharing_key);
-				_vault.public_sharing_key = EncryptService.encryptString(_vault.public_sharing_key);
                 VaultService.updateSharingKeys(_vault).then(function (result) {
                     console.log('done')
                 })

@@ -8,8 +8,7 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('ShareService', ['$http', function ($http) {
-		var _tags = [];
+	.service('ShareService', ['$http', 'VaultService', 'EncryptService', function ($http, VaultService, EncryptService) {
 		return {
 			search: function (string) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/search');
@@ -45,6 +44,13 @@ angular.module('passmanApp')
 				return {
 					'publicKey' 	: forge.pki.publicKeyToPem(keypair.publicKey),
 					'privateKey' 	: forge.pki.privateKeyToPem(keypair.privateKey)
+				};
+			},
+			getSharingKeys: function(){
+				var vault = VaultService.getActiveVault();
+				return{
+					'private_sharing_key': EncryptService.decryptString(angular.copy(vault.private_sharing_key)),
+					'public_sharing_key': vault.public_sharing_key
 				};
 			},
 			rsaPrivateKeyFromPEM: function(private_pem) {

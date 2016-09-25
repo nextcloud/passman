@@ -50,6 +50,7 @@ class Vault extends Entity implements  \JsonSerializable{
 		// add types in constructor
 		$this->addType('created', 'integer');
 		$this->addType('lastAccess', 'integer');
+		$this->addType('sharing_keys_generated', 'integer');
 	}
 	/**
 	 * Turns entity attributes into an array
