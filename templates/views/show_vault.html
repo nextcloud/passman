@@ -47,7 +47,7 @@
 </div>
 <div off-click="closeSelected()">
 	<table class="credential-table" ng-init="menuOpen = false;">
-		<tr ng-repeat="credential in credentials | credentialSearch:filterOptions | tagFilter:selectedtags | as:this:'filtered_credentials'"
+		<tr ng-repeat="credential in credentials | credentialSearch:filterOptions | tagFilter:selectedtags | orderBy:'label'| as:this:'filtered_credentials'"
 			ng-if="credential.hidden == 0 && showCredentialRow(credential)"
 			ng-click="selectCredential(credential)"
 			ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">

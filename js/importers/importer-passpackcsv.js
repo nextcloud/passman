@@ -21,10 +21,20 @@ PassmanImporter.passpackCsv.readFile = function (file_data) {
 		_credential.username = row[1];
 		_credential.password = row[2];
 		_credential.url = row[3];
-		_credential.tags = row[4].split(' ').map(function(item){ return {text: item }});
+		var tags = row[4].split(' ');
+		if (tags.length > 0) {
+			_credential.tags = tags.map(function (item) {
+				if (item) {
+					return {text: item}
+				}
+
+			}).filter(function (item) {
+				return (item);
+			});
+		}
 		_credential.description = row[5];
 		_credential.email = row[6];
-		if(_credential.label){
+		if (_credential.label) {
 			credential_list.push(_credential);
 		}
 	}
