@@ -8,7 +8,7 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('VaultService', ['$http', 'CacheService', function ($http, CacheService) {
+	.service('VaultService', ['$http', function ($http) {
 		// AngularJS will instantiate a singleton by calling "new" on this function
 		var _activeVault;
 		return {

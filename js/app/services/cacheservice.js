@@ -8,6 +8,14 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('CacheService', [function () {
-		// AngularJS will instantiate a singleton by calling "new" on this function
+	.service('CacheService', ['localStorageService', 'EncryptService', function (localStorageService, EncryptService) {
+		return {
+			get: function(name){
+				return EncryptService.decryptString(localStorageService.get(name));
+			},
+			set: function (key, value) {
+				value = EncryptService.encryptString(value);
+				localStorageService.set(key, value);
+			}
+		}
 	}]);
