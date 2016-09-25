@@ -2,8 +2,8 @@
  * Created by wolfi on 25/09/16.
  */
 angular.module('passmanApp')
-	.controller('SharingSettingsCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService',
-										function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService) {
+	.controller('SharingSettingsCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'EncryptService',
+										function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, EncryptService) {
 		$scope.active_vault = VaultService.getActiveVault();
         $scope.progress = 1;
         $scope.generating = false;
@@ -24,7 +24,11 @@ angular.module('passmanApp')
                 $scope.active_vault.private_sharing_key = pem.privateKey;
                 $scope.active_vault.public_sharing_key = pem.publicKey;
 
-                VaultService.updateSharingKeys($scope.active_vault).then(function (result) {
+
+				var _vault = angular.copy($scope.active_vault);
+				_vault.private_sharing_key = EncryptService.encryptString(_vault.private_sharing_key);
+				_vault.public_sharing_key = EncryptService.encryptString(_vault.public_sharing_key);
+                VaultService.updateSharingKeys(_vault).then(function (result) {
                     console.log('done')
                 })
             });
