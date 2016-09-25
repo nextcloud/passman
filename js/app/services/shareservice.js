@@ -20,6 +20,15 @@ angular.module('passmanApp')
 						return response;
 					}
 				});
+			},
+			generateRSAKeys: function(key_length){
+				return forge.pki.rsa.generateKeyPair(key_length);
+			},
+			rsaKeyPairToPEM: function(keypair){
+				return {
+					'publicKey' 	: forge.pki.publicKeyToPem(keypair.publicKey),
+					'privateKey' 	: forge.pki.privateKeyToPem(keypair.privateKey)
+				};
 			}
 		}
 	}]);

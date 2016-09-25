@@ -1,0 +1,26 @@
+<div ng-controller="SharingSettingsCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>Private Key</label>
+            <textarea class="col-md-12">{{active_vault.private_sharing_key}}</textarea>
+        </div>
+        <div class="col-md-6">
+            <label>Public key</label>
+            <textarea class="col-md-12">{{active_vault.public_sharing_key}}</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <label>Key size
+                <select ng-model="key_size">
+                    <option value="512">512</option>
+                    <option value="1024">1024</option>
+                    <option value="2048">2048</option>
+                    <option value="4096">4096</option>
+                </select>
+                <button ng-click="generateKeys(key_size)" class="btn btn-default">Generate sharing keys</button>
+            </label>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-angular.module('templates-main', ['views/credential_revisions.html', 'views/edit_credential.html', 'views/partials/forms/edit_credential/basics.html', 'views/partials/forms/edit_credential/custom_fields.html', 'views/partials/forms/edit_credential/files.html', 'views/partials/forms/edit_credential/otp.html', 'views/partials/forms/edit_credential/password.html', 'views/partials/forms/settings/export.html', 'views/partials/forms/settings/general_settings.html', 'views/partials/forms/settings/import.html', 'views/partials/forms/settings/tool.html', 'views/partials/forms/share_credential/basics.html', 'views/partials/forms/share_credential/expire_settings.html', 'views/partials/password-meter.html', 'views/settings.html', 'views/share_credential.html', 'views/show_vault.html', 'views/vaults.html']);
+angular.module('templates-main', ['views/credential_revisions.html', 'views/edit_credential.html', 'views/partials/forms/edit_credential/basics.html', 'views/partials/forms/edit_credential/custom_fields.html', 'views/partials/forms/edit_credential/files.html', 'views/partials/forms/edit_credential/otp.html', 'views/partials/forms/edit_credential/password.html', 'views/partials/forms/settings/export.html', 'views/partials/forms/settings/general_settings.html', 'views/partials/forms/settings/import.html', 'views/partials/forms/settings/sharing.html', 'views/partials/forms/settings/tool.html', 'views/partials/forms/share_credential/basics.html', 'views/partials/forms/share_credential/expire_settings.html', 'views/partials/password-meter.html', 'views/settings.html', 'views/share_credential.html', 'views/show_vault.html', 'views/vaults.html']);
 
 angular.module('views/credential_revisions.html', []).run(['$templateCache', function($templateCache) {
   'use strict';
@@ -58,6 +58,12 @@ angular.module('views/partials/forms/settings/import.html', []).run(['$templateC
   'use strict';
   $templateCache.put('views/partials/forms/settings/import.html',
     '<div ng-controller="ImportCtrl"><div class="row"><div class="col-xs-12"><label>Import type<select ng-init="importerType" ng-model="importerType" ng-change="setImporter(importerType)"><option ng-repeat="importer in available_importers" value="{{importer}}">{{importer.name}}</option></select></label><div><b>{{selectedImporter.description}}</b></div><input ng-if="selectedImporter" type="file" file-select success="fileLoaded" error="fileLoadError" progress="fileSelectProgress"><br><button class="button" ng-click="startImport()" ng-if="selectedImporter">Import</button></div></div></div>');
+}]);
+
+angular.module('views/partials/forms/settings/sharing.html', []).run(['$templateCache', function($templateCache) {
+  'use strict';
+  $templateCache.put('views/partials/forms/settings/sharing.html',
+    '<div ng-controller="SharingSettingsCtrl"><div class="row"><div class="col-md-6"><label>Private Key</label><textarea class="col-md-12">{{active_vault.private_sharing_key}}</textarea></div><div class="col-md-6"><label>Public key</label><textarea class="col-md-12">{{active_vault.public_sharing_key}}</textarea></div></div><div class="row"><div class="col-md-12"><label>Key size<select ng-model="key_size"><option value="512">512</option><option value="1024">1024</option><option value="2048">2048</option><option value="4096">4096</option></select><button ng-click="generateKeys(key_size)" class="btn btn-default">Generate sharing keys</button></label></div></div></div>');
 }]);
 
 angular.module('views/partials/forms/settings/tool.html', []).run(['$templateCache', function($templateCache) {

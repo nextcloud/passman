@@ -21,6 +21,7 @@ script('passman', 'vendor/ng-tags-input/ng-tags-input.min');
 script('passman', 'vendor/angular-xeditable/xeditable.min');
 script('passman', 'vendor/sha/sha');
 script('passman', 'vendor/llqrcode/llqrcode');
+script('passman', 'vendor/forge.0.6.9.min');
 
 
 script('passman', 'app/app');
@@ -31,6 +32,7 @@ script('passman', 'app/controllers/vault');
 script('passman', 'app/controllers/credential');
 script('passman', 'app/controllers/edit_credential');
 script('passman', 'app/controllers/share');
+script('passman', 'app/controllers/share_settings');
 script('passman', 'app/controllers/revision');
 script('passman', 'app/controllers/settings');
 script('passman', 'app/controllers/import');

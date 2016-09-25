@@ -30,7 +30,12 @@ angular.module('passmanApp')
 					title: 'Export credentials',
 					url: 'views/partials/forms/settings/export.html'
 
-				}];
+				},
+				{
+					title: 'Sharing',
+					url:'views/partials/forms/settings/sharing.html'
+				}
+			];
 
 			$scope.currentTab = $scope.tabs[2];
 
