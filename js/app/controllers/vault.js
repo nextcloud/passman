@@ -128,7 +128,6 @@ angular.module('passmanApp')
 				return;
 			}
 			VaultService.createVault(vault_name).then(function (vault) {
-				$scope.creating_vault_msg = 'Creating vault..'
 				$scope.vaults.push(vault);
 				var _vault = angular.copy(vault);
 				_vault.vaultKey = angular.copy(vault_key);
