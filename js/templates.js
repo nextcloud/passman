@@ -57,7 +57,7 @@ angular.module('views/partials/forms/settings/general_settings.html', []).run(['
 angular.module('views/partials/forms/settings/import.html', []).run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('views/partials/forms/settings/import.html',
-    '<div ng-controller="ImportCtrl"><div class="row"><div class="col-xs-12" ng-init="importerType"><label>Import type<select ng-model="importerType"><option ng-repeat="importer in available_importers" value="{{importer.value}}">{{importer.name}}</option></select></label><input ng-if="importerType" type="file" file-select success="fileLoaded" error="fileLoadError" progress="fileSelectProgress"><br><button class="button" ng-click="startImport(importerType)" ng-if="importerType">Import</button></div></div></div>');
+    '<div ng-controller="ImportCtrl"><div class="row"><div class="col-xs-12"><label>Import type<select ng-init="importerType" ng-model="importerType" ng-change="setImporter(importerType)"><option ng-repeat="importer in available_importers" value="{{importer}}">{{importer.name}}</option></select></label><div><b>{{selectedImporter.description}}</b></div><input ng-if="selectedImporter" type="file" file-select success="fileLoaded" error="fileLoadError" progress="fileSelectProgress"><br><button class="button" ng-click="startImport()" ng-if="selectedImporter">Import</button></div></div></div>');
 }]);
 
 angular.module('views/partials/forms/settings/tool.html', []).run(['$templateCache', function($templateCache) {

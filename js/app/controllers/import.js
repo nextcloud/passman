@@ -11,23 +11,26 @@ angular.module('passmanApp')
 	.controller('ImportCtrl', ['$scope', '$window', function ($scope, $window) {
 		//@TODo read the available importers from $window.PassmanImporter
 		$scope.available_importers = [
-			{
-				name: 'KeePass CSV',
-				value: 'keepassCsv'
-			},
-			{
-				name: 'LastPass CSV',
-				value: 'lastpassCsv'
-			},
-			{
-				name: 'Passman CSV',
-				value: 'passmanCsv'
-			},
-			{
-				name: 'Passman JSON',
-				value: 'passmanJson'
-			}
+
 		];
+
+
+		$scope.$watch(function(){
+			return $window.PassmanImporter;
+		}, function (importers) {
+			for(var key in importers){
+				var importer = importers[key];
+				if(importer.hasOwnProperty('info')){
+					$scope.available_importers.push(importer.info);
+				}
+			}
+		}, true);
+
+		$scope.setImporter = function (importer) {
+			importer = JSON.parse(importer);
+			$scope.selectedImporter = importer;
+		};
+
 		var file_data;
 		$scope.fileLoaded = function (file) {
 			file_data = file.data.split(',');
@@ -41,9 +44,9 @@ angular.module('passmanApp')
 
 		};
 
-		$scope.startImport = function(importerType){
+		$scope.startImport = function(){
 			if(file_data){
-				var parsed_data = $window.PassmanImporter[importerType].readFile(file_data);
+				var parsed_data = $window.PassmanImporter[$scope.selectedImporter.id].readFile(file_data);
 				console.log('Data parsed!', parsed_data);
 			}
 		}

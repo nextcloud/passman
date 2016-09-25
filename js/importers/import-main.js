@@ -71,14 +71,20 @@ PassmanImporter.newCredential = function () {
 	return credential;
 };
 
-PassmanImporter.readCsv = function( csv ){
+PassmanImporter.readCsv = function( csv, hasHeadings ){
+	hasHeadings = (hasHeadings === undefined) ? true : hasHeadings;
 	var lines = [];
 	var rows = csv.split('\n');
-	var headings = this.parseRow_(rows[0]);
-
-	for (var i = 1, row; row = rows[i]; i++) {
-		row = this.toObject_(headings, this.parseRow_(row));
-		lines.push(row);
+	if(hasHeadings) {
+		var headings = this.parseRow_(rows[0]);
+		for (var i = 1, row; row = rows[i]; i++) {
+			row = this.toObject_(headings, this.parseRow_(row));
+			lines.push(row);
+		}
+	} else {
+		for (var i = 1, row; row = rows[i]; i++) {
+			lines.push(this.parseRow_(row));
+		}
 	}
 	return lines;
 };
