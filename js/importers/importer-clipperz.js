@@ -41,7 +41,9 @@ PassmanImporter.clippers.readFile = function (file_data) {
 					}
 				)
 			}
-			credential_list.push(_credential);
+			if(_credential.label){
+				credential_list.push(_credential);
+			}
 		}
 	}
 	return credential_list;
