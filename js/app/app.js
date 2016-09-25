@@ -123,5 +123,19 @@ jQuery(document).ready(function () {
 	$(window).resize(_.debounce(adjustControlsWidth, 400));
 	setTimeout(function(){
 		adjustControlsWidth(true)
-	},200)
+	},200);
+
+	//@Fack this
+	$(document).on('click', '#app-navigation-toggle', function(){
+		setTimeout(function(){
+			if($('#app-content').css('transform').toString().indexOf('matrix') >= 0){
+				$('#passman-controls').css('width', 'calc( 100% - 245px)');
+				$('#passman-controls').css('top', '0');
+			} else {
+				$('#passman-controls').css('left', 0);
+				$('#passman-controls').css('top', '44px');
+				$('#passman-controls').css('width', '100%');
+			}
+		}, 350);
+	})
 });

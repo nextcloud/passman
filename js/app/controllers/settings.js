@@ -37,7 +37,7 @@ angular.module('passmanApp')
 				}
 			];
 
-			$scope.currentTab = $scope.tabs[2];
+			$scope.currentTab = $scope.tabs[0];
 
 			$scope.onClickTab = function (tab) {
 				$scope.currentTab = tab;

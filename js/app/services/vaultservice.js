@@ -58,6 +58,16 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			updateSharingKeys: function (vault) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id +'/sharing-keys');
+				return $http.post(queryUrl, vault).then(function (response) {
+					if(response.data){
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+			},
 			deleteVault: function (vault) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
 				return $http.delete(queryUrl).then(function (response) {

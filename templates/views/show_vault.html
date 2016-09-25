@@ -1,4 +1,4 @@
-<div id="controls">
+<div id="passman-controls">
 	<div class="breadcrumb">
 		<div class="breadcrumb">
 			<div class="crumb svg ui-droppable" data-dir="/">
@@ -32,16 +32,17 @@
 				</li>
 			</ul>
 		</div>
-		<div class="searchboxContainer">
-			<input type="text" ng-model="filterOptions.filterText" class="searchbox"
-				   placeholder="Search credential...">
-		</div>
+
 		<span class="title" ng-if="delete_time">
 			Showing deleted since:
 			<span ng-if="delete_time == 1">All time</span>
 			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 
 		</span>
+	</div>
+	<div class="searchboxContainer">
+		<input type="text" ng-model="filterOptions.filterText" class="searchbox"
+			   placeholder="Search credential...">
 	</div>
 </div>
 <div off-click="closeSelected()">
