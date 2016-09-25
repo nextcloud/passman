@@ -24,7 +24,11 @@ PassmanImporter.parseRow_ = function(row, isHeading) {
 	}
 	return row;
 };
-
+PassmanImporter.htmlDecode = function(input){
+	var e = document.createElement('div');
+	e.innerHTML = input;
+	return e.childNodes[0].nodeValue;
+};
 PassmanImporter.toObject_ = function(headings, row) {
 	var result = {};
 	for (var i = 0, ii = row.length; i < ii; i++) {
@@ -87,4 +91,8 @@ PassmanImporter.readCsv = function( csv, hasHeadings ){
 		}
 	}
 	return lines;
+};
+
+PassmanImporter.readJson = function (string){
+	return JSON.parse(string);
 };

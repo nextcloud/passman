@@ -88,7 +88,7 @@ jQuery(document).ready(function () {
 		angular.element('#app-content-wrapper').scope().deleteCredential(credential);
 		angular.element('#app-content-wrapper').scope().$apply();
 	});
-	var adjustControlsWidth = function() {
+	var adjustControlsWidth = function(r) {
 		if($('#controls').length) {
 			var controlsWidth;
 			// if there is a scrollbar …
@@ -111,12 +111,17 @@ jQuery(document).ready(function () {
 					controlsWidth = $('#content').width();
 				}
 			}
-			$('#controls').css('width', controlsWidth);
-			$('#controls').css('min-width', controlsWidth);
+			if(r){
+				var magic = 0;
+			} else {
+				var magic = 85;
+			}
+			$('#controls').css('width', controlsWidth+magic);
+			$('#controls').css('min-width', controlsWidth+magic);
 		}
 	};
-	$(window).resize(_.debounce(adjustControlsWidth, 256));
+	$(window).resize(_.debounce(adjustControlsWidth, 400));
 	setTimeout(function(){
-		adjustControlsWidth()
+		adjustControlsWidth(true)
 	},200)
 });

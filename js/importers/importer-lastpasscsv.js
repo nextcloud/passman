@@ -17,13 +17,15 @@ PassmanImporter.lastpassCsv.readFile = function (file_data) {
 	for (var i = 0; i < parsed_csv.length; i++) {
 		var row = parsed_csv[i];
 		var _credential = PassmanImporter.newCredential();
-		_credential.label = row.name;
+		_credential.label = PassmanImporter.htmlDecode(row.name);
 		_credential.username = row.username;
 		_credential.password = row.password;
 		_credential.url = row.url;
 		_credential.tags = [{text: row.grouping}];
 		_credential.description = row.extra;
-		credential_list.push(_credential);
+		if(_credential.label){
+			credential_list.push(_credential);
+		}
 	}
 	return credential_list;
 };

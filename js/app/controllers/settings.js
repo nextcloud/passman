@@ -10,7 +10,7 @@
 angular.module('passmanApp')
 	.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http',
 		function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http) {
-
+			$scope.active_vault = VaultService.getActiveVault();
 			$scope.tabs = [
 				{
 					title: 'General settings',
@@ -58,7 +58,9 @@ angular.module('passmanApp')
 			$scope.$watch(function () {
 				return VaultService.getActiveVault()
 			}, function (vault) {
-				$scope.active_vault = vault;
+				if(vault) {
+					$scope.active_vault = vault;
+				}
 			});
 
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {

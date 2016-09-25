@@ -42,6 +42,7 @@ script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');
 script('passman', 'app/filters/tagfilter');
 script('passman', 'app/filters/as');
+script('passman', 'app/filters/credentialsearch');
 script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
@@ -60,10 +61,13 @@ script('passman', 'app/directives/tooltip');
 script('passman', 'app/directives/use-theme');
 script('passman', 'app/directives/credentialfield');
 script('passman', 'app/directives/ngenter');
+script('passman', 'app/directives/autoscroll');
 script('passman', 'importers/import-main');
 script('passman', 'importers/importer-keepasscsv');
 script('passman', 'importers/importer-lastpasscsv');
 script('passman', 'importers/importer-dashlanecsv');
+script('passman', 'importers/importer-zohocsv');
+script('passman', 'importers/importer-passmanjson');
 
 /*
  * Styles

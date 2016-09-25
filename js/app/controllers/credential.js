@@ -9,8 +9,8 @@
  */
 angular.module('passmanApp')
 	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService',
-		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService) {
+		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService',
+		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -125,9 +125,12 @@ angular.module('passmanApp')
 				});
 			};
 
-			$scope.itemFilter = {
-				label: ''
+
+			$scope.filterOptions = {
+				filterText: '',
+				fields: ['label', 'username', 'email', 'password', 'custom_fields']
 			};
+
 			$scope.selectedtags = [];
 			var to;
 			$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
@@ -177,7 +180,7 @@ angular.module('passmanApp')
 
 			$scope.selectedCredential = false;
 			$scope.selectCredential = function (credential) {
-				$scope.selectedCredential = CredentialService.decryptCredential(angular.copy(credential));
+				$scope.selectedCredential = angular.copy(credential);
 				$rootScope.$emit('app_menu', true);
 			};
 
@@ -194,17 +197,31 @@ angular.module('passmanApp')
 
 			});
 
+
+			try {
+				var credential_cache = JSON.parse(CacheService.get('credential_cache_'+ $scope.active_vault.vault_id));
+				if(credential_cache.length > 0){
+					$scope.credentials = credential_cache;
+					for (var i = 0; i < credential_cache.length; i++) {
+						TagService.addTags(credential_cache[i].tags_raw);
+					}
+				}
+			} catch (e){
+
+			}
+
 			var fetchCredentials = function () {
 				VaultService.getVault($scope.active_vault).then(function (credentials) {
 					var _credentials = [];
 					for (var i = 0; i < credentials.length; i++) {
-						var credential = angular.copy(credentials[i]);
-						var _tags = CredentialService.decryptCredential(angular.copy(credentials[i])).tags;
-						TagService.addTags(_tags);
-						credential.tags_raw = _tags;
-						_credentials.push(credential);
+						var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
+						_c.tags_raw = _c.tags;
+						TagService.addTags( _c.tags);
+						_credentials.push(_c);
 					}
 					$scope.credentials = _credentials;
+					CacheService.set('credential_cache_'+ $scope.active_vault.vault_id, JSON.stringify(_credentials));
+
 				});
 			};
 
