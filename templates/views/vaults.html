@@ -20,7 +20,9 @@
 						</span>
 					</div>
 				</li>
-				<li ng-if="vaults.length === 0">No vaults found, why not create one?</li>
+				<li ng-if="vaults.length === 0">No vaults found, why not create
+					one?
+				</li>
 			</ul>
 
 		</div>
@@ -47,8 +49,16 @@
 				</ul>
 			</div>
 			<div class="button_wrapper">
-				<div class="button button-geen" ng-click="createVault(vault_name, vault_key, vault_key2)">
-					Create vault
+				<div class="button button-geen" ng-if="!creating_keys"
+					 ng-click="createVault(vault_name, vault_key, vault_key2)">
+					<span>Create vault</span>
+
+				</div>
+				<div class="button" ng-if="creating_keys">
+					<span>
+						<i class="fa fa-spinner fa-spin"></i>
+						{{creating_keys}}
+					</span>
 				</div>
 				<div class="button button-red" ng-click="clearState()">
 					Cancel
@@ -81,18 +91,22 @@
 			<div>
 				<div>
 					<label>
-						<input type="checkbox" ng-checked="default_vault" ng-click="toggleDefaultVault()">
+						<input type="checkbox" ng-checked="default_vault"
+							   ng-click="toggleDefaultVault()">
 						Set this vault as default.
 					</label>
 				</div>
 				<div>
 					<label>
-						<input type="checkbox" ng-checked="remember_vault_password" ng-click="toggleRememberPassword()">
+						<input type="checkbox"
+							   ng-checked="remember_vault_password"
+							   ng-click="toggleRememberPassword()">
 						Login automatically to this vault.
 					</label>
 				</div>
 			</div>
-			<div class="button button-geen" ng-click="loginToVault(list_selected_vault, vault_key)">
+			<div class="button button-geen"
+				 ng-click="loginToVault(list_selected_vault, vault_key)">
 				Decrypt vault
 			</div>
 		</div>
