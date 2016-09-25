@@ -147,6 +147,7 @@
     #app-content #app-content-wrapper #controls {
       border-bottom: 1px solid #c9c9c9; }
     #app-content #app-content-wrapper .actions.creatable {
+      float: left;
       overflow: hidden; }
       #app-content #app-content-wrapper .actions.creatable .bubble {
         position: relative;
@@ -170,12 +171,12 @@
         text-align: center;
         display: inline-block;
         font-weight: bold; }
-      #app-content #app-content-wrapper .actions.creatable .searchboxContainer {
-        position: absolute;
-        right: 10px;
-        top: 0; }
-        #app-content #app-content-wrapper .actions.creatable .searchboxContainer .searchbox {
-          display: inline-block; }
+    #app-content #app-content-wrapper .searchboxContainer {
+      display: inline-block;
+      margin-right: 14px;
+      float: right; }
+      #app-content #app-content-wrapper .searchboxContainer .searchbox {
+        display: inline-block; }
     #app-content #app-content-wrapper .credential-table {
       width: 100%;
       margin-top: 44px; }
@@ -396,5 +397,34 @@
 #notification .row {
   margin-left: 0 !important;
   margin-right: 0 !important; }
+
+#app-content #app-content-wrapper #passman-controls {
+  border-bottom: 1px solid #c9c9c9; }
+
+#app-navigation + #app-content #passman-controls {
+  left: 250px; }
+
+#passman-controls {
+  box-sizing: border-box;
+  position: fixed;
+  top: 45px;
+  right: 0;
+  left: 0;
+  padding: 0 !important;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 50;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: calc( 100% - 250px ) !important;
+  height: 44px !important; }
+
+#passman-controls .button, #passman-controls, #passman-controls input[type='submit'], #passman-controls input[type='text'], #passman-controls input[type='password'], #passman-controls select {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 36px;
+  padding: 7px 10px; }
 
 /*# sourceMappingURL=app.css.map */
