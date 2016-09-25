@@ -6,9 +6,16 @@ angular.module('passmanApp')
     $scope.active_vault = VaultService.getActiveVault();
 
     $scope.generateKeys = function(length) {
-        var rsa = ShareService.rsaKeyPairToPEM(ShareService.generateRSAKeys(length));
-        console.log(rsa);
-        $scope.active_vault.private_sharing_key = rsa.privateKey;
-        $scope.active_vault.public_sharing_key = rsa.publicKey;
+        // var rsa = ShareService.rsaKeyPairToPEM(ShareService.generateRSAKeys(length));
+        ShareService.generateRSAKeys(length, function(progress){
+            console.log(progress);
+        }, function(kp){
+           console.log(kp);
+        });
+        // console.log(rsa);
+        // $scope.active_vault.private_sharing_key = rsa.privateKey;
+        // $scope.active_vault.public_sharing_key = rsa.publicKey;
+        // console.log(ShareService.rsaPublicKeyFromPEM(rsa.publicKey));
+        // console.log(ShareService.rsaPrivateKeyFromPEM(rsa.privateKey));
     }
 }]);
