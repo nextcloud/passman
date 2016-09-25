@@ -19,7 +19,8 @@
                     <option value="2048">2048</option>
                     <option value="4096">4096</option>
                 </select>
-                <button ng-click="generateKeys(key_size)" class="btn btn-default">Generate sharing keys</button>
+                <button ng-if="!generating" ng-click="generateKeys(key_size)">Generate sharing keys</button>
+                <button ng-if="generating"><i class="fa fa-spinner fa-spin"></i> Generating sharing keys step {{progress}}/2</button>
             </label>
         </div>
     </div>
