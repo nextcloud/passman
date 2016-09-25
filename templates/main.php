@@ -58,10 +58,13 @@ script('passman', 'app/directives/tooltip');
 script('passman', 'app/directives/use-theme');
 script('passman', 'app/directives/credentialfield');
 script('passman', 'app/directives/ngenter');
+script('passman', 'app/directives/autoscroll');
 script('passman', 'importers/import-main');
 script('passman', 'importers/importer-keepasscsv');
 script('passman', 'importers/importer-lastpasscsv');
 script('passman', 'importers/importer-dashlanecsv');
+script('passman', 'importers/importer-zohocsv');
+script('passman', 'importers/importer-passmanjson');
 
 /*
  * Styles

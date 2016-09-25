@@ -371,6 +371,13 @@
     padding-left: 0px;
     padding-right: 15px; }
 
+.import_log {
+  max-height: 600px;
+  overflow-y: auto; }
+  .import_log textarea {
+    width: 90%;
+    height: 200px; }
+
 #app-settings-content:not(.ng-hide) {
   height: 60px;
   display: inherit !important;

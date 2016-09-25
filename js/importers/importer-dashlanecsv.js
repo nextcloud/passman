@@ -31,7 +31,9 @@ PassmanImporter.dashLaneCsv.readFile = function (file_data) {
 		_credential.password = row_data[row_data.length - 2];
 		_credential.url = row_data[0];
 		_credential.description = row_data[row_data.length - 1];
-		credential_list.push(_credential);
+		if(_credential.label){
+			credential_list.push(_credential);
+		}
 	}
 	return credential_list;
 };

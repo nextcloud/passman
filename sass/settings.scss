@@ -5,3 +5,12 @@
     padding-right: 15px;
   }
 }
+
+.import_log {
+  max-height: 600px;
+  overflow-y: auto;
+  textarea{
+    width: 90%;
+    height: 200px;
+  }
+}
