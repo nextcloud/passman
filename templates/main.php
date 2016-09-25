@@ -60,6 +60,7 @@ script('passman', 'app/directives/credentialfield');
 script('passman', 'app/directives/ngenter');
 script('passman', 'importers/import-main');
 script('passman', 'importers/importer-keepasscsv');
+script('passman', 'importers/importer-lastpasscsv');
 
 /*
  * Styles

@@ -6,16 +6,22 @@ if(!window['PassmanImporter']){
 PassmanImporter.parseRow_ = function(row, isHeading) {
 	// Strip leading quote.
 	row = row.trim();
+	var isQuoted = false;
 	if (row.charAt(0) == '"') {
 		row = row.substring(1);
+		isQuoted = true;
 	}
 	if (row.charAt(row.length - 2) == '"') {
 		row = row.substring(0, row.length - 2);
+		isQuoted = true;
 	}
 	// Strip trailing quote. There seems to be a character between the last quote
 	// and the line ending, hence 2 instead of 1.
-
-    row = row.split('","');
+	if(isQuoted == true) {
+		row = row.split('","');
+	} else {
+		row = row.split(',');
+	}
 	return row;
 };
 
@@ -69,6 +75,7 @@ PassmanImporter.readCsv = function( csv ){
 	var lines = [];
 	var rows = csv.split('\n');
 	var headings = this.parseRow_(rows[0]);
+
 	for (var i = 1, row; row = rows[i]; i++) {
 		row = this.toObject_(headings, this.parseRow_(row));
 		lines.push(row);
