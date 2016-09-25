@@ -39,9 +39,7 @@
   border-bottom: 1px solid #c9c9c9;
 }
 
-#app-navigation+#app-content #passman-controls {
-  left: 250px;
-}
+
 #passman-controls {
   box-sizing: border-box;
   position: fixed;
@@ -57,10 +55,20 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  width: calc( 100% - 250px ) !important;
+
   height: 44px !important;
 }
-
+@media only screen and (max-width: 768px){
+  #passman-controls{
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 768px){
+  #app-navigation+#app-content #passman-controls {
+    left: 250px;
+    width: calc( 100% - 250px ) !important;
+  }
+}
 #passman-controls .button,  #passman-controls, #passman-controls input[type='submit'],  #passman-controls input[type='text'],  #passman-controls input[type='password'],  #passman-controls select {
   box-sizing: border-box;
   display: inline-block;
