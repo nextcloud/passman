@@ -204,7 +204,7 @@ angular.module('passmanApp')
 						var credential = angular.copy(credentials[i]);
 						var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
 						TagService.addTags(_c.tags);
-						credential.tags_raw = _c.tags;
+						_c.tags_raw = _c.tags;
 						_credentials.push(_c);
 					}
 					$scope.credentials = _credentials;
