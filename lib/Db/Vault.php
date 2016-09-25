@@ -62,6 +62,7 @@ class Vault extends Entity implements  \JsonSerializable{
 			'created' => $this->getCreated(),
 			'private_sharing_key' => $this->getPrivateSharingKey(),
 			'public_sharing_key' => $this->getPublicSharingKey(),
+			'sharing_keys_generated' => $this->getSharingKeysGenerated(),
 			'last_access' => $this->getlastAccess(),
 		];
 	}

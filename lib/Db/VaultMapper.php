@@ -33,7 +33,7 @@ class VaultMapper extends Mapper {
 	}
 
 	public function findVaultsFromUser($userId){
-		$sql = 'SELECT id, name, created, guid, last_access FROM `*PREFIX*passman_vaults` ' .
+		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
 			'WHERE `user_id` = ? ';
 		$params = [$userId];
 		return $this->findEntities($sql, $params);
