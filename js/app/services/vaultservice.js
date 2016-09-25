@@ -23,6 +23,13 @@ angular.module('passmanApp')
 				});
 			},
 			setActiveVault: function(vault){
+				this.getVaults().then(function(vaults){
+					for(var v = 0; v < vaults.length; v++){
+						if(vaults[v].vault_id == vault.vault_id){
+							_activeVault = angular.merge(_activeVault, vaults[v]);
+						}
+					}
+				});
 				_activeVault = vault;
 			},
 			getActiveVault: function(vault){
