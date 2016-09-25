@@ -55,4 +55,13 @@ class VaultMapper extends Mapper {
 		$vault->setlastAccess(time());
 		$this->update($vault);
 	}
+
+	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
+		$vault = new Vault();
+		$vault->setId($vault_id);
+		$vault->setPrivateSharingKey($privateKey);
+		$vault->setPublicSharingKey($publicKey);
+		$vault->setSharingKeysGenerated($this->utils->getTime());
+		$this->update($vault);
+	}
 }

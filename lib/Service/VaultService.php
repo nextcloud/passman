@@ -36,4 +36,8 @@ class VaultService {
 	public function setLastAccess($vault_id){
 		return $this->vaultMapper->setLastAccess($vault_id);
 	}
+
+	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
+		return $this->vaultMapper->updateSharingKeys($vault_id, $privateKey, $publicKey);
+	}
 }

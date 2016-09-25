@@ -70,6 +70,14 @@ class VaultController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
+	public function updateSharingKeys($vault_id, $private_sharing_key, $public_sharing_key) {
+		$this->vaultService->updateSharingKeys($vault_id, $private_sharing_key, $public_sharing_key);
+		return;
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
 	public function delete($vault_id) {
 		return;
 	}
