@@ -68,6 +68,7 @@ script('passman', 'importers/importer-lastpasscsv');
 script('passman', 'importers/importer-dashlanecsv');
 script('passman', 'importers/importer-zohocsv');
 script('passman', 'importers/importer-passmanjson');
+script('passman', 'importers/importer-clipperz');
 
 /*
  * Styles
