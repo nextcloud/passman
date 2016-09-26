@@ -7,7 +7,7 @@ PassmanImporter.randomData = {
 	info: {
 		name: 'Random data',
 		id: 'randomData',
-		description: 'Create\'s 10 random credentials for testing purposes.'
+		description: 'Create\'s 50 random credentials for testing purposes.'
 	}
 };
 
@@ -39,34 +39,52 @@ PassmanImporter.randomData.readFile = function (file_data, callback) {
 					url: url,
 					dataType: 'json',
 					success: function (data) {
-						var _credential = PassmanImporter.newCredential();
-						label = (Math.random() >= 0.5) ? data.domain : data.email_d + ' - ' + data.email_u;
-						_credential.label = label;
-						_credential.username = data.username;
-						_credential.password = data.password;
-						_credential.url = data.url;
+						if(data) {
+							var _credential = PassmanImporter.newCredential();
+							label = (Math.random() >= 0.5) ? data.domain : data.email_d + ' - ' + data.email_u;
+							_credential.label = label;
+							_credential.username = data.username;
+							_credential.password = data.password;
+							_credential.url = data.url;
 
-						var tag_amount = Math.floor(Math.random() * 5);
-						for (var ta = 0; ta < tag_amount; ta++) {
-							var item = tags[Math.floor(Math.random() * tags.length)];
-							var tag = {
-								text: item
-							};
-							if (_credential.tags.indexOf(tag) === -1) {
-								_credential.tags.push(tag);
+							var tag_amount = Math.floor(Math.random() * 5);
+							var ta = 0;
+							var tags = [];
+							while (ta < tag_amount) {
+								var item = tags[Math.floor(Math.random() * tags.length)];
+								var tag = {
+									text: item
+								};
+								if (tags.indexOf(tag) === -1) {
+									tags.push(tag);
+									ta++
+								}
 							}
-						}
-						credential_list.push(_credential);
-						if (i < max) {
-							var progress = {
-								percent: i / max * 100,
-								loaded: i,
-								total: max
-							};
-							_this.call_progress(progress);
-							generateCredential(max, i + 1, callback)
+
+							_credential.tags = tags.map(function (item) {
+								if (item) {
+									return {text: item}
+								}
+
+							}).filter(function (item) {
+								return (item);
+							});
+
+							credential_list.push(_credential);
+
+							if (i < max) {
+								var progress = {
+									percent: i / max * 100,
+									loaded: i,
+									total: max
+								};
+								_this.call_progress(progress);
+								generateCredential(max, i + 1, callback)
+							} else {
+								callback(credential_list)
+							}
 						} else {
-							callback(credential_list)
+							generateCredential(max, i , callback)
 						}
 					}
 				});
@@ -74,7 +92,7 @@ PassmanImporter.randomData.readFile = function (file_data, callback) {
 		};
 
 
-		generateCredential(350, 1, function (credential_list) {
+		generateCredential(50, 1, function (credential_list) {
 			_this.call_then(credential_list);
 		});
 	});

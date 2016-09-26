@@ -15,13 +15,15 @@ angular.module('passmanApp')
 		if(tags.length > 0) {
 			for (var ci = 0; ci < credentials.length; ci++) {
 				var c = credentials[ci];
+				var matches = 0;
 				for (var ct = 0; ct < c.tags_raw.length; ct++) {
 					var t = c.tags_raw[ct];
 					if(tags.indexOf(t.text) != -1){
-						if(_credentials.indexOf(c) === -1){
-							_credentials.push(c);
-						}
+						matches++;
 					}
+				}
+				if(matches === tags.length){
+					_credentials.push(c);
 				}
 			}
 		}
