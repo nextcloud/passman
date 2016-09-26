@@ -14,7 +14,7 @@ host: api.uber.com
 schemes:
   - https
 # will be prefixed to all paths
-basePath: /api/v1
+basePath: /api/v2
 
 produces:
   - application/json
@@ -265,7 +265,7 @@ paths:
             $ref: '#/definitions/Error'   
   
 
-  /credentials/{credential_id}/file:
+  /file:
     post:
       summary: Upload and attach a file to an item
       tags:
@@ -273,10 +273,6 @@ paths:
       consumes:
         - multipart/form-data
       parameters:
-        - name: credential_id
-          in: path
-          required: true
-          type: integer
         - name: file
           in: formData
           description: The uploaded file data
@@ -295,16 +291,12 @@ paths:
           schema:
             $ref: '#/definitions/Error'   
   
-  /credentials/{credential_id}/file/{file_id}:
+  /file/{file_id}:
     delete:
       tags:
         - File      
       summary: Delete a file
       parameters:
-        - name: credential_id
-          in: path
-          required: true
-          type: integer      
         - name: file_id
           in: path
           required: true
@@ -312,7 +304,18 @@ paths:
       responses:
         200:
           description: OK
-    
+    get:
+      tags:
+        - File      
+      summary: Get file contents
+      parameters:
+        - name: file_id
+          in: path
+          required: true
+          type: integer      
+      responses:
+        200:
+          description: OK    
             
 definitions:
   Vault:
@@ -403,7 +406,7 @@ definitions:
         properties:
           otp_secret:
             type: string
-          qr_code:
+          qr_uri:
             type: string
   
   
@@ -416,7 +419,7 @@ definitions:
       created: 
         type: string
         format: dateTime
-      item:
+      credential:
           $ref: '#/definitions/Credential'
           
         
@@ -430,12 +433,9 @@ definitions:
       filename: 
         type: string
         description: The uploaded file name
-      type:
+      guid: 
         type: string
-        description: Detected file type
-      mimetype:
-        type: string
-        description: Mime type of the file
+        description: The guid of the file
       size:
         type: integer
         description: Size of the file in bytes
