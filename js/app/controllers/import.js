@@ -107,8 +107,12 @@ angular.module('passmanApp')
 				$window.PassmanImporter[$scope.selectedImporter.id]
 				.readFile(file_data)
 				.then(function(parseddata){
-					$scope.file_read_percent = 100;
 					parsed_data = parseddata;
+					$scope.file_read_progress = {
+						percent: 100,
+						loaded: parsed_data.length,
+						total: parsed_data.length
+					};
 					_log('Parsed '+ parsed_data.length + ' credentials, starting to import');
 					if( parsed_data.length > 0){
 						addCredential(0);
