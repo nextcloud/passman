@@ -282,13 +282,6 @@
         #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .files table tr td {
           height: 50px;
           vertical-align: middle; }
-    #app-content #app-content-wrapper .edit_credential .file_tab .progress {
-      margin-top: 10px;
-      height: 10px; }
-      #app-content #app-content-wrapper .edit_credential .file_tab .progress .progress-bar {
-        height: 10px;
-        background-image: none;
-        background-color: #0082c9; }
     #app-content #app-content-wrapper .app_sidebar {
       padding: 10px;
       overflow-y: auto; }
@@ -330,6 +323,14 @@
     .credential_field .tools .cell {
       cursor: pointer;
       margin-right: 4px; }
+
+.progress {
+  margin-top: 10px;
+  height: 10px; }
+  .progress .progress-bar {
+    height: 10px;
+    background-image: none;
+    background-color: #0082c9; }
 
 .settings-container div {
   padding-left: 15px; }

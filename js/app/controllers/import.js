@@ -51,8 +51,12 @@ angular.module('passmanApp')
 		};
 
 		var parsed_data;
-		$scope.current_import_index = 0;
-		$scope.current_import_length = 0;
+
+		$scope.import_progress = {
+			progress: 0,
+			loaded: 0,
+			total: 0
+		};
 		var addCredential = function(parsed_data_index){
 			if(!parsed_data[parsed_data_index]){
 				return;
@@ -66,36 +70,54 @@ angular.module('passmanApp')
 				return
 			}
 			_log('Adding  '+ _credential.label);
-			$scope.current_import_index = parsed_data_index;
 			_credential.vault_id = $scope.active_vault.vault_id;
 			CredentialService.createCredential(_credential).then(function (result) {
 				if(result.credential_id){
 					_log('Added  '+ _credential.label);
 					if(parsed_data[ parsed_data_index +1]) {
+						$scope.import_progress = {
+							progress: parsed_data_index / parsed_data.length * 100,
+							loaded: parsed_data_index,
+							total: parsed_data.length
+						};
+
 						addCredential(parsed_data_index +1)
 					} else {
+						$scope.import_progress =  {
+							progress: 100,
+							loaded: parsed_data.length-1,
+							total: parsed_data.length-1
+						};
 						_log('DONE!');
 					}
 				}
 			})
 		};
 
+
+		$scope.file_read_progress = {
+			percent: 0,
+			loaded: 0,
+			total: 0
+		};
 		$scope.startImport = function(){
+			$scope.import_progress = 0;
+			$scope.file_read_percent = 0;
 			if(file_data){
 				$window.PassmanImporter[$scope.selectedImporter.id]
 				.readFile(file_data)
 				.then(function(parseddata){
-					console.log("woof!");
+					$scope.file_read_percent = 100;
 					parsed_data = parseddata;
 					_log('Parsed '+ parsed_data.length + ' credentials, starting to import');
-					$scope.current_import_length = parsed_data.length;
 					if( parsed_data.length > 0){
 						addCredential(0);
 					} else {
 						// @TODO Show message no data found
 					}
-				}).progress(function(percentage){
-					console.log(percentage + '%');
+				}).progress(function(progress){
+					$scope.file_read_progress = progress;
+					$scope.$apply();
 				});
 			}
 		}
