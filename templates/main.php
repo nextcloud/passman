@@ -62,6 +62,7 @@ script('passman', 'app/directives/use-theme');
 script('passman', 'app/directives/credentialfield');
 script('passman', 'app/directives/ngenter');
 script('passman', 'app/directives/autoscroll');
+script('passman', 'app/directives/clickselect');
 script('passman', 'importers/import-main');
 script('passman', 'importers/importer-keepasscsv');
 script('passman', 'importers/importer-lastpasscsv');

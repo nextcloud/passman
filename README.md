@@ -1,14 +1,34 @@
-# passman
-Passman is a password manager for Nextcloud
-Place this app in **nextcloud/apps/**
+#Passman
+Passman is a full featured password manager. 
+Features:
+- Vaults
+- Import from different password managers
+- Credentials are stored with 256 bit AES
+- Ability to add custom fields to credentials
+- Build in One Time password generator
+- Password analyzer
+- Share passwords
 
-## Building the app
+##Screenshots
+![Logged in to vault](http://i.imgur.com/ciShQZg.png)   
 
-The app can be built by using the provided Makefile by running:
-`npm install`
+![Credential selected](http://i.imgur.com/3tENldT.png)   
 
-## Building the templates.
-Passman uses compiled Angular js templates.   
-A grunt task compiles the views (located in templates/views), to `templates.js`. 
-You can compile the templates using `grunt`
-If you are a developer and want to watch the changes you made use: `grunt watch`
+![Edit credential](http://i.imgur.com/Iwm3hUe.png)   
+
+![Password tool](http://i.imgur.com/ZYkN70r.png)
+
+For more screenshots: [Click here](http://imgur.com/a/giKVt)
+
+## Development
+Passman uses a single `.js` file for the templates.
+`templates.js` is build width `grunt`.
+To watch for changes use `grunt watch`
+
+## Main developers
+- Brantje
+- Animalillo
+
+## Contributors
+Add yours when creating a pull request!
+- None
