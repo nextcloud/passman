@@ -25,6 +25,16 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			getVaultsByUser: function (userId) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vaults/'+ userId);
+				return $http.get(queryUrl, {search: string}).then(function (response) {
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+			},
 			generateRSAKeys: function(key_length, progress, callback){
 				var p = new C_Promise(function(){
 					var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);

@@ -47,6 +47,7 @@ return [
 
 		//Sharing stuff
 		['name' => 'share#search', 'url' => '/api/v2/sharing/search', 'verb' => 'POST'],
+		['name' => 'share#getVaultsByUser', 'url' => '/api/v2/sharing/vaults/{user_id}', 'verb' => 'GET'],
 
 
 		//Internal API
