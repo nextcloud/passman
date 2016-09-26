@@ -85,8 +85,8 @@ angular.module('passmanApp')
 					} else {
 						$scope.import_progress =  {
 							progress: 100,
-							loaded: parsed_data.length-1,
-							total: parsed_data.length-1
+							loaded: parsed_data.length,
+							total: parsed_data.length
 						};
 						_log('DONE!');
 					}

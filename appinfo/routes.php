@@ -27,6 +27,7 @@ return [
 		['name' => 'vault#get', 'url' => '/api/v2/vaults/{vault_id}', 'verb' => 'GET'],
 		['name' => 'vault#update', 'url' => '/api/v2/vaults/{vault_id}', 'verb' => 'PATCH'],
 		['name' => 'vault#delete', 'url' => '/api/v2/vaults/{vault_id}', 'verb' => 'DELETE'],
+		//@TODO make frontend use PATCH
 		['name' => 'vault#updateSharingKeys', 'url' => '/api/v2/vaults/{vault_id}/sharing-keys', 'verb' => 'POST'],
 
 		//Credential

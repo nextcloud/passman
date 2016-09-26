@@ -57,7 +57,7 @@ PassmanImporter.randomData.readFile = function (file_data, callback) {
 							}
 						}
 						credential_list.push(_credential);
-						if (i <= max) {
+						if (i < max) {
 							var progress = {
 								percent: i / max * 100,
 								loaded: i,
@@ -74,7 +74,7 @@ PassmanImporter.randomData.readFile = function (file_data, callback) {
 		};
 
 
-		generateCredential(10, 1, function (credential_list) {
+		generateCredential(350, 1, function (credential_list) {
 			_this.call_then(credential_list);
 		});
 	});
