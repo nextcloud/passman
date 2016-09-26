@@ -26,7 +26,7 @@ angular.module('passmanApp')
 				});
 			},
 			generateRSAKeys: function(key_length, progress, callback){
-				var p = new C_Promise(function(promise){
+				var p = new C_Promise(function(){
 					var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
 					var step = function() {
 						// run for 100 ms
@@ -34,32 +34,32 @@ angular.module('passmanApp')
 							// console.log(state);
 							if (state.p !== null) {
 								// progress(50);
-								promise.call_progress(50);
+								this.call_progress(50);
 							}
 							else {
 								// progress(0);
-								promise.call_progress(50);
+								this.call_progress(0);
 							}
-							setTimeout(step, 1);
+							setTimeout(step.bind(this), 1);
 						}
 						else {
 							// callback(state.keys);
-							promise.call_then(state.keys);
+							this.call_then(state.keys);
 						}
 					};
-					setTimeout(step, 100);
+					setTimeout(step.bind(this), 100);
 				});
 				return p;
 			},
 			generateSharedKey: function(size){
 				size = size || 20;
-				return new C_Promise(function(promise){ /** prmise C_Promise **/
+				return new C_Promise(function(){
 					CRYPTO.PASSWORD.generate(size,
 						function(pass) {
-							promise.call_then(pass);
+							this.call_then(pass);
 						},
 						function(progress) {
-							promise.call_progress(progress);
+							this.call_progress(progress);
 						}
 					);
 				})
