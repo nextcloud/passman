@@ -76,13 +76,14 @@ angular.module('passmanApp')
 			var key_size = 1024;
 			ShareService.generateRSAKeys(key_size).progress(function (progress) {
 				var p = progress > 0 ? 2 : 1;
-				$scope.$apply();
 				$scope.creating_keys = 'Generating sharing keys (' + p + ' / 2)';
+				$scope.$apply();
 			}).then(function (kp) {
 				var pem = ShareService.rsaKeyPairToPEM(kp);
 				$scope.creating_keys = false;
 				$scope.sharing_keys.private_sharing_key = pem.privateKey;
 				$scope.sharing_keys.public_sharing_key = pem.publicKey;
+				$scope.$apply();
 			});
 
 		};
