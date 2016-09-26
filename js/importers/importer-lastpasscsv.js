@@ -12,20 +12,23 @@ PassmanImporter.lastpassCsv = {
 };
 
 PassmanImporter.lastpassCsv.readFile = function (file_data, callback) {
-	var parsed_csv = PassmanImporter.readCsv(file_data);
-	var credential_list = [];
-	for (var i = 0; i < parsed_csv.length; i++) {
-		var row = parsed_csv[i];
-		var _credential = PassmanImporter.newCredential();
-		_credential.label = PassmanImporter.htmlDecode(row.name);
-		_credential.username = row.username;
-		_credential.password = row.password;
-		_credential.url = row.url;
-		_credential.tags = [{text: row.grouping}];
-		_credential.description = row.extra;
-		if(_credential.label){
-			credential_list.push(_credential);
+	return new C_Promise(function(){
+		var parsed_csv = PassmanImporter.readCsv(file_data);
+		var credential_list = [];
+		for (var i = 0; i < parsed_csv.length; i++) {
+			var row = parsed_csv[i];
+			var _credential = PassmanImporter.newCredential();
+			_credential.label = PassmanImporter.htmlDecode(row.name);
+			_credential.username = row.username;
+			_credential.password = row.password;
+			_credential.url = row.url;
+			_credential.tags = [{text: row.grouping}];
+			_credential.description = row.extra;
+			if(_credential.label){
+				credential_list.push(_credential);
+			}
+			this.call_progress(i/parsed_csv.length*100);
 		}
-	}
-	callback(credential_list);
+		this.call_then(credential_list)
+	});
 };
