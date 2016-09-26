@@ -16,8 +16,18 @@
 			<button class="button" ng-click="startImport()"
 					ng-if="selectedImporter">Import
 			</button>
-			<div ng-if="current_import_length">
-				{{ current_import_index }} / {{ current_import_length - 1}}
+
+			<div ng-if="file_read_progress.percent > 0">
+				Read progress
+				<div progress-bar="file_read_progress.percent"></div>
+				<br />
+				{{ file_read_progress.loaded }} / {{ file_read_progress.total }}
+			</div>
+			<div ng-if="import_progress.progress > 0">
+				Upload progress
+				<div progress-bar="import_progress.progress"></div>
+				<br />
+				{{ import_progress.loaded }} / {{ import_progress.total }}
 			</div>
 		</div>
 		<div class="col-xs-6">
