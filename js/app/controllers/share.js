@@ -101,12 +101,24 @@ angular.module('passmanApp')
 
 		$scope.applyShare = function(){
 			console.log("boom!");
-			var list = $scope.share_settings.credentialSharedWithUserAndGroup;
-			console.log(list);
-			for (var i = 0; i < list.length; i++){
-				ShareService.getVaultsByUser(list[i].user_id).then(function(data){
-					console.log(data);
-				})
-			}
+			ShareService.generateSharedKey(20).then(function(key){
+				console.log(key);
+				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
+				console.log(list);
+				for (var i = 0; i < list.length; i++){
+					ShareService.getVaultsByUser(list[i].userId).then(function(data){
+						console.log(data);
+						for (var x = 0; x < data.length; x++) {
+							var rsa = ShareService.rsaPublicKeyFromPEM(data[x].public_sharing_key);
+							console.log("parsed RSA public key");
+							var cyphertext = rsa.encrypt(key);
+							console.log(cyphertext);
+							cyphertext=  forge.util.encode64(cyphertext);
+							console.log(cyphertext);
+							console.log(cyphertext.length);
+						}
+					})
+				}
+			})
 		}
 	}]);
