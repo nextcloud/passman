@@ -85,6 +85,7 @@ class Application extends App {
 		$container->registerAlias('VaultController', VaultController::class);
 		$container->registerAlias('CredentialService', CredentialService::class);
 		$container->registerAlias('NotificationService', NotificationService::class);
+		$container->registerAlias('ActivityService', ActivityService::class);
 		$container->registerAlias('VaultService', VaultService::class);
 		$container->registerAlias('Utils', Utils::class);
 	}
