@@ -21,7 +21,7 @@ Features:
 For more screenshots: [Click here](http://imgur.com/a/giKVt)
 
 ## Development
-Passman uses a single `.js` file for the templayes.
+Passman uses a single `.js` file for the templates.
 `templates.js` is build width `grunt`.
 To watch for changes use `grunt watch`
 
