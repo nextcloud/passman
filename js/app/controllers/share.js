@@ -68,16 +68,16 @@ angular.module('passmanApp')
 		$scope.accessLevels = [
 			{
 				label: 'Can edit',
-				value: 'CAN_EDIT'
+				value: '2'
 			},
 			{
 				label: 'Can view',
-				value: 'CAN_VIEW'
+				value: '1'
 			}
 		];
 
 		$scope.inputSharedWith = [];
-		$scope.selectedAccessLevel = 'CAN_VIEW';
+		$scope.selectedAccessLevel = '1';
 
 		$scope.searchUsers = function($query){
 			 return ShareService.search($query)
@@ -99,5 +99,14 @@ angular.module('passmanApp')
 			}
 		}
 
-
+		$scope.applyShare = function(){
+			console.log("boom!");
+			var list = $scope.share_settings.credentialSharedWithUserAndGroup;
+			console.log(list);
+			for (var i = 0; i < list.length; i++){
+				ShareService.getVaultsByUser(list[i].user_id).then(function(data){
+					console.log(data);
+				})
+			}
+		}
 	}]);
