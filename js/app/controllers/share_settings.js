@@ -4,7 +4,7 @@
 angular.module('passmanApp')
 	.controller('SharingSettingsCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'EncryptService',
 										function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, EncryptService) {
-		$scope.vault = VaultService.getActiveVault();
+		$scope.active_vault = VaultService.getActiveVault();
 		$scope.sharing_keys = ShareService.getSharingKeys();
 
         $scope.progress = 1;
@@ -23,10 +23,10 @@ angular.module('passmanApp')
 
                 var pem = ShareService.rsaKeyPairToPEM(kp)
 
-                $scope.vault.private_sharing_key = EncryptService.encryptString(pem.privateKey);
-                $scope.vault.public_sharing_key = pem.publicKey;
+                $scope.active_vault.private_sharing_key = EncryptService.encryptString(pem.privateKey);
+                $scope.active_vault.public_sharing_key = pem.publicKey;
 
-                VaultService.updateSharingKeys($scope.vault).then(function (result) {
+                VaultService.updateSharingKeys($scope.active_vault).then(function (result) {
                     $scope.sharing_keys = ShareService.getSharingKeys();
                 })
             });
