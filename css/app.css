@@ -144,8 +144,14 @@
   overflow-x: hidden; }
   #app-content #app-content-wrapper {
     min-height: 95%; }
-    #app-content #app-content-wrapper #controls {
+    #app-content #app-content-wrapper #passman-controls {
       border-bottom: 1px solid #c9c9c9; }
+    #app-content #app-content-wrapper .title {
+      width: calc( 100% - 325px);
+      text-align: center;
+      display: inline-block;
+      font-weight: bold;
+      margin-top: 10px; }
     #app-content #app-content-wrapper .actions.creatable {
       float: left;
       overflow: hidden; }
@@ -166,11 +172,6 @@
         right: inherit;
         left: 10px;
         top: -19px; }
-      #app-content #app-content-wrapper .actions.creatable .title {
-        width: calc( 100% - 325px);
-        text-align: center;
-        display: inline-block;
-        font-weight: bold; }
     #app-content #app-content-wrapper .searchboxContainer {
       display: inline-block;
       margin-right: 14px;
@@ -332,6 +333,34 @@
     background-image: none;
     background-color: #0082c9; }
 
+.loaderContainer {
+  height: 140px;
+  width: 120px;
+  margin-top: 30px;
+  margin-left: -60px;
+  top: 50%;
+  left: 50%;
+  position: absolute; }
+
+.loaderContainer .text {
+  width: 120px;
+  text-align: center; }
+
+.loader {
+  border-bottom: 10px solid #1d2d44;
+  border-left: 10px solid #c9c9c9;
+  border-right: 10px solid #c9c9c9;
+  border-top: 10px solid #c9c9c9;
+  height: 120px;
+  width: 120px;
+  border-radius: 120px;
+  animation: 1.1s linear 0s normal none infinite running load8; }
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
 .settings-container div {
   padding-left: 15px; }
 

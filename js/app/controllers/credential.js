@@ -52,7 +52,7 @@ angular.module('passmanApp')
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
 				SettingsService.setSetting('share_credential', CredentialService.encryptCredential(_credential));
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.credential_id +'/share')
+				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.credential_id + '/share')
 			};
 
 			var notification;
@@ -112,12 +112,12 @@ angular.module('passmanApp')
 
 			};
 
-			$scope.destroyCredential = function(credential){
+			$scope.destroyCredential = function (credential) {
 				var _credential = angular.copy(credential);
 				CredentialService.destroyCredential(_credential.credential_id).then(function (result) {
 					for (var i = 0; i < $scope.credentials.length; i++) {
 						if ($scope.credentials[i].credential_id == credential.credential_id) {
-							$scope.credentials.splice(i,1);
+							$scope.credentials.splice(i, 1);
 							NotificationService.showNotification('Credential destroyed', 5000);
 							break;
 						}
@@ -135,20 +135,20 @@ angular.module('passmanApp')
 			var to;
 			$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
 				var _selectedTags = [];
-				for(var x = 0; x < _sTags.length; x++){
+				for (var x = 0; x < _sTags.length; x++) {
 					_selectedTags.push(_sTags[x].text)
 				}
 				$scope.selectedtags = _selectedTags;
 				$timeout.cancel(to);
-				if(_selectedTags.length > 0) {
+				if (_selectedTags.length > 0) {
 					to = $timeout(function () {
 						if ($scope.filtered_credentials) {
 							var _filtered_tags = [];
 							for (var i = 0; i < $scope.filtered_credentials.length; i++) {
 								var tags = $scope.filtered_credentials[i].tags_raw;
-								for(var x = 0; x < tags.length; x++){
+								for (var x = 0; x < tags.length; x++) {
 									var tag = tags[x].text;
-									if(_filtered_tags.indexOf(tag) === -1){
+									if (_filtered_tags.indexOf(tag) === -1) {
 										_filtered_tags.push(tag);
 									}
 								}
@@ -197,33 +197,46 @@ angular.module('passmanApp')
 
 			});
 
+			$scope.show_spinner = true;
+			// A timeout give the browser some time to render a loading spinner.
+			$timeout(function(){
 
-			try {
-				var credential_cache = JSON.parse(CacheService.get('credential_cache_'+ $scope.active_vault.vault_id));
-				if(credential_cache.length > 0){
-					$scope.credentials = credential_cache;
-					for (var i = 0; i < credential_cache.length; i++) {
-						TagService.addTags(credential_cache[i].tags_raw);
+				try {
+					var credential_cache = JSON.parse(CacheService.get('credential_cache_' + $scope.active_vault.vault_id));
+					if (credential_cache.length > 0) {
+						$scope.show_spinner = false;
+						$scope.credentials = credential_cache;
+						for (var i = 0; i < credential_cache.length; i++) {
+							TagService.addTags(credential_cache[i].tags_raw);
+						}
 					}
+				} catch (e) {
+
 				}
-			} catch (e){
 
-			}
+				var fetchCredentials = function () {
+					VaultService.getVault($scope.active_vault).then(function (credentials) {
+						var _credentials = [];
+						for (var i = 0; i < credentials.length; i++) {
+							var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
+							_c.tags_raw = _c.tags;
+							TagService.addTags(_c.tags);
+							_credentials.push(_c);
+						}
+						$scope.credentials = _credentials;
+						$scope.show_spinner = false;
+						CacheService.set('credential_cache_' + $scope.active_vault.vault_id, JSON.stringify(_credentials));
 
-			var fetchCredentials = function () {
-				VaultService.getVault($scope.active_vault).then(function (credentials) {
-					var _credentials = [];
-					for (var i = 0; i < credentials.length; i++) {
-						var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
-						_c.tags_raw = _c.tags;
-						TagService.addTags( _c.tags);
-						_credentials.push(_c);
-					}
-					$scope.credentials = _credentials;
-					CacheService.set('credential_cache_'+ $scope.active_vault.vault_id, JSON.stringify(_credentials));
+					});
+				};
 
-				});
-			};
+				if ($scope.active_vault) {
+					$scope.$parent.selectedVault = true;
+					fetchCredentials();
+				}
+
+			}, 50);
+
 
 			$scope.downloadFile = function (file) {
 				FileService.getFile(file).then(function (result) {
@@ -238,8 +251,4 @@ angular.module('passmanApp')
 				});
 			};
 
-			if ($scope.active_vault) {
-				$scope.$parent.selectedVault = true;
-				fetchCredentials();
-			}
 		}]);
