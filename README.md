@@ -2,6 +2,7 @@
 Passman is a full featured password manager. 
 Features:
 - Vaults
+- Vault key is never send to the server
 - Import from different password managers
 - Credentials are stored with 256 bit AES
 - Ability to add custom fields to credentials
