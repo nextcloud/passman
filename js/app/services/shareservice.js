@@ -9,6 +9,11 @@
  */
 angular.module('passmanApp')
 	.service('ShareService', ['$http', 'VaultService', 'EncryptService', function ($http, VaultService, EncryptService) {
+		// Setup sjcl random engine to max paranoia level and start collecting data
+		var paranoia_level = 10
+		sjcl.random.setDefaultParanoia(paranoia_level);
+		sjcl.random.startCollectors();
+
 		return {
 			search: function (string) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/search');
@@ -21,24 +26,43 @@ angular.module('passmanApp')
 				});
 			},
 			generateRSAKeys: function(key_length, progress, callback){
-				var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
-				var step = function() {
-					// run for 100 ms
-					if(!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
-						// console.log(state);
-						if (state.p !== null) {
-							progress(50);
+				var p = new C_Promise(function(promise){
+					var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
+					var step = function() {
+						// run for 100 ms
+						if(!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
+							// console.log(state);
+							if (state.p !== null) {
+								// progress(50);
+								promise.call_progress(50);
+							}
+							else {
+								// progress(0);
+								promise.call_progress(50);
+							}
+							setTimeout(step, 1);
 						}
 						else {
-							progress(0);
+							// callback(state.keys);
+							promise.call_then(state.keys);
 						}
-						setTimeout(step, 1);
-					}
-					else {
-						callback(state.keys);
-					}
-				};
-				setTimeout(step, 100);
+					};
+					setTimeout(step, 100);
+				});
+				return p;
+			},
+			generateSharedKey: function(size){
+				size = size || 20;
+				return new C_Promise(function(promise){ /** prmise C_Promise **/
+					CRYPTO.PASSWORD.generate(size,
+						function(pass) {
+							promise.call_then(pass);
+						},
+						function(progress) {
+							promise.call_progress(progress);
+						}
+					);
+				})
 			},
 			rsaKeyPairToPEM: function(keypair){
 				return {
