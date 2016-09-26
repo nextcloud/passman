@@ -56,11 +56,13 @@ class ShareController extends ApiController {
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
 
 		foreach ($usersTmp as $user) {
-			$users[] = array(
-				'text' => $user->getDisplayName(),
-				'uid' => $user->getUID(),
-				'type' => 'user'
-			);
+			if($this->userId != $user->getUID()) {
+				$users[] = array(
+					'text' => $user->getDisplayName(),
+					'uid' => $user->getUID(),
+					'type' => 'user'
+				);
+			}
 		}
 		$this->result = array_merge($this->result, $users);
 	}
