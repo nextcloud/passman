@@ -11,7 +11,7 @@ PassmanImporter.dashLaneCsv = {
 	}
 };
 
-PassmanImporter.dashLaneCsv.readFile = function (file_data) {
+PassmanImporter.dashLaneCsv.readFile = function (file_data, callback) {
 	var rows = file_data.split('\n');
 	var credential_list = [];
 	for (var i = 1, row; row = rows[i]; i++) {
@@ -35,5 +35,5 @@ PassmanImporter.dashLaneCsv.readFile = function (file_data) {
 			credential_list.push(_credential);
 		}
 	}
-	return credential_list;
+	callback(credential_list);
 };

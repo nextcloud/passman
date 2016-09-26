@@ -11,7 +11,7 @@ PassmanImporter.clippers = {
 	}
 };
 
-PassmanImporter.clippers.readFile = function (file_data) {
+PassmanImporter.clippers.readFile = function (file_data, callback) {
 	var credential_list = [];
 	var re = /<textarea>(.*?)<\/textarea>/gi;
 	var matches = re.exec(file_data);
@@ -41,8 +41,10 @@ PassmanImporter.clippers.readFile = function (file_data) {
 					}
 				)
 			}
-			credential_list.push(_credential);
+			if(_credential.label){
+				credential_list.push(_credential);
+			}
 		}
 	}
-	return credential_list;
+	callback(credential_list);
 };

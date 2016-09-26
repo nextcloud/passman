@@ -70,4 +70,12 @@ class InternalController extends ApiController {
 		return new JSONResponse(array('version' => OC_App::getAppVersion('passman')));
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
+	public function generatePerson() {
+		$random_person = json_decode(file_get_contents('http://api.namefake.com/'));
+		return new JSONResponse($random_person);
+	}
+
 }

@@ -11,7 +11,7 @@ PassmanImporter.zohoCsv = {
 	}
 };
 
-PassmanImporter.zohoCsv.readFile = function (file_data) {
+PassmanImporter.zohoCsv.readFile = function (file_data, callback) {
 	var parsed_csv = PassmanImporter.readCsv(file_data, false);
 	var credential_list = [];
 	for (var i = 0; i < parsed_csv.length; i++) {
@@ -26,5 +26,5 @@ PassmanImporter.zohoCsv.readFile = function (file_data) {
 			credential_list.push(_credential);
 		}
 	}
-	return credential_list;
+	callback(credential_list);
 };

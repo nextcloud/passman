@@ -52,6 +52,7 @@ return [
 		['name' => 'internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],
 		['name' => 'internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],
 		['name' => 'internal#getAppVersion', 'url' => '/api/internal/version', 'verb' => 'GET'],
+		['name' => 'internal#generatePerson', 'url' => '/api/internal/generate_person', 'verb' => 'GET'],
 
 	]
 ];

@@ -82,14 +82,17 @@ angular.module('passmanApp')
 
 		$scope.startImport = function(){
 			if(file_data){
-				parsed_data = $window.PassmanImporter[$scope.selectedImporter.id].readFile(file_data);
-				_log('Parsed '+ parsed_data.length + ' credentials, starting to import');
-				$scope.current_import_length = parsed_data.length;
-				if( parsed_data.length > 0){
-					addCredential(0);
-				} else {
-					// @TODO Show message no data found
-				}
+				$window.PassmanImporter[$scope.selectedImporter.id].readFile(file_data, function(parseddata){
+					parsed_data = parseddata;
+					_log('Parsed '+ parsed_data.length + ' credentials, starting to import');
+					$scope.current_import_length = parsed_data.length;
+					if( parsed_data.length > 0){
+						addCredential(0);
+					} else {
+						// @TODO Show message no data found
+					}
+				});
+
 
 			}
 		}
