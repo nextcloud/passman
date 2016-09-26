@@ -38,7 +38,14 @@ PassmanImporter.passpackCsv.readFile = function (file_data, callback) {
 			if (_credential.label) {
 				credential_list.push(_credential);
 			}
-			this.call_progress(i/parsed_csv.length*100);
+
+			var progress = {
+				percent: i/parsed_csv.length*100,
+				loaded: i,
+				total: parsed_csv.length
+			};
+
+			this.call_progress(progress);
 		}
 		this.call_then(credential_list);
 	})

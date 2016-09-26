@@ -58,12 +58,12 @@ PassmanImporter.randomData.readFile = function (file_data, callback) {
 						}
 						credential_list.push(_credential);
 						if (i <= max) {
-							var values = {
+							var progress = {
 								percent: i / max * 100,
 								loaded: i,
 								total: max
 							};
-							_this.call_progress(values);
+							_this.call_progress(progress);
 							generateCredential(max, i + 1, callback)
 						} else {
 							callback(credential_list)

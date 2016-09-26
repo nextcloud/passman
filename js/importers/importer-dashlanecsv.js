@@ -35,7 +35,13 @@ PassmanImporter.dashLaneCsv.readFile = function (file_data, callback) {
 			if(_credential.label){
 				credential_list.push(_credential);
 			}
-			this.call_progress(i/rows.length*100);
+
+			var progress = {
+				percent: i/rows.length*100,
+				loaded: i,
+				total: rows.length
+			};
+			this.call_progress(progress);
 		}
 		this.call_then(credential_list);
 	});

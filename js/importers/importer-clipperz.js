@@ -45,7 +45,12 @@ PassmanImporter.clippers.readFile = function (file_data, callback) {
 				if(_credential.label){
 					credential_list.push(_credential);
 				}
-				this.call_progress(i/json_objects.length*100);
+				var progress = {
+					percent: i/json_objects.length*100,
+					loaded: i,
+					total: json_objects.length
+				};
+				this.call_progress(progress);
 			}
 		}
 		this.call_then(credential_list);
