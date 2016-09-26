@@ -27,7 +27,7 @@ angular.module('passmanApp')
 			},
 			getVaultsByUser: function (userId) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vaults/'+ userId);
-				return $http.get(queryUrl, {search: string}).then(function (response) {
+				return $http.get(queryUrl, {search: userId}).then(function (response) {
 					if (response.data) {
 						return response.data;
 					} else {
@@ -64,12 +64,13 @@ angular.module('passmanApp')
 			generateSharedKey: function(size){
 				size = size || 20;
 				return new C_Promise(function(){
+					var t = this;
 					CRYPTO.PASSWORD.generate(size,
 						function(pass) {
-							this.call_then(pass);
+							t.call_then(pass);
 						},
 						function(progress) {
-							this.call_progress(progress);
+							t.call_progress(progress);
 						}
 					);
 				})
