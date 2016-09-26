@@ -67,12 +67,10 @@ angular.module('passmanApp')
 		$scope.selectVault = function (vault) {
 			$scope.list_selected_vault = vault;
 		};
-		$scope.sharing_keys= {};
+		$scope.sharing_keys = {};
 		$scope.newVault = function () {
 			$scope.creating_vault = true;
-			var _vault = {
-
-			};
+			var _vault = {};
 			var key_size = 1024;
 			ShareService.generateRSAKeys(key_size).progress(function (progress) {
 				var p = progress > 0 ? 2 : 1;
@@ -102,23 +100,19 @@ angular.module('passmanApp')
 			_vault.vaultKey = angular.copy(vault_key);
 			VaultService.setActiveVault(_vault);
 			VaultService.getVault(vault).then(function (credentials) {
-				for (var i = 0; i < credentials.length; i++) {
-					var credential = credentials[i];
-					if (credential.hidden = true) {
-						try {
-							var c = CredentialService.decryptCredential(credential);
-							if (c.password === 'lorum ipsum') {
-								if ($scope.remember_vault_password) {
-									SettingsService.setSetting('defaultVaultPass', vault_key);
-								}
-								_loginToVault(vault, vault_key);
-							}
-						} catch (e) {
-							$scope.error = 'Incorrect vault password!'
-						}
-						break;
+
+				var credential = credentials[0];
+
+				try {
+					var c = CredentialService.decryptCredential(credential);
+					if ($scope.remember_vault_password) {
+						SettingsService.setSetting('defaultVaultPass', vault_key);
 					}
+					_loginToVault(vault, vault_key);
+				} catch (e) {
+					$scope.error = 'Incorrect vault password!'
 				}
+
 			})
 		};
 
