@@ -49,19 +49,15 @@ PassmanImporter.randomData.readFile = function (file_data, callback) {
 
 							var tag_amount = Math.floor(Math.random() * 5);
 							var ta = 0;
-							var tags = [];
+							var _tags = [];
 							while (ta < tag_amount) {
 								var item = tags[Math.floor(Math.random() * tags.length)];
-								var tag = {
-									text: item
-								};
-								if (tags.indexOf(tag) === -1) {
-									tags.push(tag);
+								if (_tags.indexOf(item) === -1) {
+									_tags.push(item);
 									ta++
 								}
 							}
-
-							_credential.tags = tags.map(function (item) {
+							_credential.tags = _tags.map(function (item) {
 								if (item) {
 									return {text: item}
 								}
@@ -69,7 +65,6 @@ PassmanImporter.randomData.readFile = function (file_data, callback) {
 							}).filter(function (item) {
 								return (item);
 							});
-
 							credential_list.push(_credential);
 
 							if (i < max) {
