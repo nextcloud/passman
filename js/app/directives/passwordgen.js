@@ -137,10 +137,9 @@ angular.module('passmanApp')
 					scope.model = scope.password;
 					scope.password_repeat = scope.model;
 
-					if(scope.password !== undefined && scope.password !== null && scope.password !== "") {
-						scope.passwordNotNull = true;
-					} else {
-						scope.passwordNotNull = false;
+					if(!scope.password) {
+						console.log('Generating new pw');
+						scope.generatePasswordStart();
 					}
 				});
 				//
