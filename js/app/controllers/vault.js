@@ -134,7 +134,6 @@ angular.module('passmanApp')
 					_vault.public_sharing_key = angular.copy($scope.sharing_keys.public_sharing_key);
 					_vault.private_sharing_key = EncryptService.encryptString(angular.copy($scope.sharing_keys.private_sharing_key));
 					VaultService.updateSharingKeys(_vault).then(function (result) {
-						VaultService.setActiveVault(_vault);
 						_loginToVault(vault, vault_key);
 					})
 				})
