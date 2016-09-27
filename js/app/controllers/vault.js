@@ -114,6 +114,7 @@ angular.module('passmanApp')
 								_loginToVault(vault, vault_key);
 							}
 						} catch (e) {
+							console.log(e)
 							$scope.error = 'Incorrect vault password!'
 						}
 						break;

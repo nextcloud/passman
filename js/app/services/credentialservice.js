@@ -111,6 +111,7 @@ angular.module('passmanApp')
 						credential[field] = JSON.parse(EncryptService.decryptString(fieldValue));
 					} catch (e){
 						console.log('Field' + field + ' in '+ credential.label +' could not be parsed! Value:'+ fieldValue)
+						throw e
 					}
 
 				}
