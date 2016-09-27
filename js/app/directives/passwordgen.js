@@ -151,7 +151,7 @@ angular.module('passmanApp')
 
 				scope.onError = function(e) {
 					OC.Notification.showTemporary('Press Ctrl+C to copy!');
-				}
+				};
 				scope.progressDivShow = false;
 				scope.generatePasswordStart = function() {
 					scope.progressDivShow = true;

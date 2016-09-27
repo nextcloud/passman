@@ -125,6 +125,10 @@ angular.module('passmanApp')
 				});
 			};
 
+			$scope.view_mode = 'list'; //@TODO make this a setting
+			$scope.switchViewMode = function (viewMode) {
+				$scope.view_mode = viewMode;
+			};
 
 			$scope.filterOptions = {
 				filterText: '',

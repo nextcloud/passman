@@ -65,6 +65,7 @@ script('passman', 'app/directives/credentialfield');
 script('passman', 'app/directives/ngenter');
 script('passman', 'app/directives/autoscroll');
 script('passman', 'app/directives/clickselect');
+script('passman', 'app/directives/colorfromstring');
 script('passman', 'importers/import-main');
 script('passman', 'importers/importer-keepasscsv');
 script('passman', 'importers/importer-lastpasscsv');
@@ -128,7 +129,7 @@ style('passman', 'app');
 		</div>
 	</div>
 
-	<div id="app-content" ng-class="{'with-app-sidebar': app_sidebar}">
+	<div id="app-content">
 		<div id="app-content-wrapper">
 			<div id="content" ng-view="">
 

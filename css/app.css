@@ -172,6 +172,36 @@
         right: inherit;
         left: 10px;
         top: -19px; }
+    #app-content #app-content-wrapper .viewModes {
+      float: right;
+      margin-right: 5px;
+      margin-top: 3px; }
+      #app-content #app-content-wrapper .viewModes .view-mode:first-child {
+        -webkit-border-bottom-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        border-top-left-radius: 5px;
+        background-clip: padding-box;
+        border: 1px solid rgba(240, 240, 240, 0.9); }
+      #app-content #app-content-wrapper .viewModes .view-mode:last-child {
+        -webkit-border-bottom-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        border-top-right-radius: 5px;
+        background-clip: padding-box;
+        border: 1px solid rgba(240, 240, 240, 0.9); }
+      #app-content #app-content-wrapper .viewModes .view-mode {
+        display: inline-block;
+        padding: 7px;
+        background-color: rgba(240, 240, 240, 0.9); }
+      #app-content #app-content-wrapper .viewModes .view-mode.active {
+        display: inline-block;
+        padding: 7px;
+        background-color: rgba(226, 226, 226, 0.9); }
+      #app-content #app-content-wrapper .viewModes .view-mode {
+        cursor: pointer;
+        display: inline-block;
+        padding: 7px; }
     #app-content #app-content-wrapper .searchboxContainer {
       display: inline-block;
       margin-right: 14px;
@@ -194,19 +224,6 @@
           float: left;
           margin-right: 5px;
           margin-left: 3px; }
-        #app-content #app-content-wrapper .credential-table tr td .tags {
-          float: right; }
-          #app-content #app-content-wrapper .credential-table tr td .tags .tag {
-            background-color: rgba(240, 240, 240, 0.9);
-            padding: 4px;
-            font-size: 12px;
-            margin-right: 3px;
-            -webkit-border-radius: 5px;
-            border-radius: 5px;
-            background-clip: padding-box;
-            /* stops bg color from leaking outside the border: */ }
-          #app-content #app-content-wrapper .credential-table tr td .tags .tag:last-child {
-            margin-right: 8px; }
         #app-content #app-content-wrapper .credential-table tr td .icon-more {
           display: inline-block;
           float: right;
@@ -236,6 +253,58 @@
           #app-content #app-content-wrapper .credential-table tr td .popovermenu .action {
             padding: 10px;
             margin: -10px; }
+    #app-content #app-content-wrapper .tags {
+      float: right; }
+      #app-content #app-content-wrapper .tags .tag {
+        background-color: rgba(240, 240, 240, 0.9);
+        padding: 4px;
+        font-size: 12px;
+        margin-right: 3px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-clip: padding-box;
+        /* stops bg color from leaking outside the border: */ }
+      #app-content #app-content-wrapper .tags .tag:last-child {
+        margin-right: 8px; }
+    #app-content #app-content-wrapper .grid-view {
+      margin-top: 44px;
+      display: flex;
+      flex-wrap: wrap; }
+      #app-content #app-content-wrapper .grid-view .credential {
+        display: flex;
+        padding: 0.5em;
+        width: 100%;
+        border: 1px solid rgba(240, 240, 240, 0.9);
+        margin: 25px;
+        cursor: pointer;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-clip: padding-box;
+        /* stops bg color from leaking outside the border: */ }
+        #app-content #app-content-wrapper .grid-view .credential .credential_content {
+          display: flex;
+          flex-direction: column;
+          background-color: #fff;
+          width: 100%;
+          font-size: 1.75em;
+          text-align: center; }
+          #app-content #app-content-wrapper .grid-view .credential .credential_content .label {
+            padding-top: 1em;
+            padding-left: 1em;
+            padding-right: 1em;
+            line-height: 1.3em; }
+          #app-content #app-content-wrapper .grid-view .credential .credential_content .tags .tag {
+            margin-top: 5px;
+            display: inline-block; }
+      @media all and (min-width: 40em) {
+        #app-content #app-content-wrapper .grid-view .credential {
+          width: 40%; } }
+      @media all and (min-width: 58em) {
+        #app-content #app-content-wrapper .grid-view .credential {
+          width: 26%; } }
+      @media all and (min-width: 78em) {
+        #app-content #app-content-wrapper .grid-view .credential {
+          width: 20%; } }
     #app-content #app-content-wrapper .edit_credential label {
       display: block; }
     #app-content #app-content-wrapper .edit_credential input[type="text"], #app-content #app-content-wrapper .edit_credential input[type="password"] {
