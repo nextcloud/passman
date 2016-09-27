@@ -107,8 +107,14 @@ angular.module('passmanApp')
 				for (var i = 0; i < _encryptedFields.length; i++) {
 					var field = _encryptedFields[i];
 					var fieldValue = angular.copy(credential[field]);
+					try {
+						var field_decrypted_value = EncryptService.decryptString(fieldValue)
+					} catch (e){
+						console.log(e)
+						throw e
+					}
 					try{
-						credential[field] = JSON.parse(EncryptService.decryptString(fieldValue));
+						credential[field] = JSON.parse(field_decrypted_value);
 					} catch (e){
 						console.log('Field' + field + ' in '+ credential.label +' could not be parsed! Value:'+ fieldValue)
 						throw e

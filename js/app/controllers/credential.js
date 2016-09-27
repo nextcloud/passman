@@ -218,10 +218,22 @@ angular.module('passmanApp')
 					VaultService.getVault($scope.active_vault).then(function (credentials) {
 						var _credentials = [];
 						for (var i = 0; i < credentials.length; i++) {
-							var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
-							_c.tags_raw = _c.tags;
-							TagService.addTags(_c.tags);
-							_credentials.push(_c);
+							try {
+								var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
+							} catch (e){
+								CacheService.set('credential_cache_' + $scope.active_vault.vault_id, []);
+								NotificationService.showNotification('An error happend during decryption', 5000);
+								$rootScope.$broadcast('logout');
+								SettingsService.setSetting('defaultVaultPass', null);
+								SettingsService.setSetting('defaultVault', null);
+								$location.path('/')
+
+							}
+							if(_c) {
+								_c.tags_raw = _c.tags;
+								TagService.addTags(_c.tags);
+								_credentials.push(_c);
+							}
 						}
 						$scope.credentials = _credentials;
 						$scope.show_spinner = false;

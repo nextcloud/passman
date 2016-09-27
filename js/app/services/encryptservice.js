@@ -32,8 +32,7 @@ angular.module('passmanApp')
 				try {
 					return sjcl.decrypt(_key, ciphertext, encryption_config, rp)
 				} catch(e) {
-					Error("Can't decrypt: "+e);
-					return;
+					throw e;
 				}
 			}
 		}

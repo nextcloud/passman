@@ -11,8 +11,9 @@ angular.module('passmanApp')
 	.service('SettingsService', ['localStorageService', function (localStorageService) {
 		var settings = {
 			defaultVault: null,
-			defaultVaultPassword: null
+			defaultVaultPass: null
 		};
+		var neverSend = ['defaultVault', 'defaultVaultPass'];
 
 		var cookie = localStorageService.get('settings');
 		settings = angular.merge(settings, cookie);
