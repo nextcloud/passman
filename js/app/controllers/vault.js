@@ -24,7 +24,7 @@ angular.module('passmanApp')
 						$scope.default_vault = true;
 						$scope.list_selected_vault = vault;
 						SettingsService.setSetting('defaultVault', vault);
-						if (SettingsService.getSetting('defaultVaultPass') != '') {
+						if (SettingsService.getSetting('defaultVaultPass')) {
 							$location.path('/vault/' + vault.vault_id);
 						}
 						break;
