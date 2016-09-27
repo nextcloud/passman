@@ -80,7 +80,7 @@
 					ng-if="credential.hidden == 0 && showCredentialRow(credential)"
 					ng-click="selectCredential(credential)"
 				color-from-string="credential.label">
-					<div class="credential_content">
+					<div class="credential_content" use-theme>
 						<div class="label">{{credential.label}}</div>
 						<div class="tags">
 							<div class="tag" ng-repeat="tag in credential.tags_raw">{{tag.text}}</div>

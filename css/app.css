@@ -272,11 +272,9 @@
       flex-wrap: wrap; }
       #app-content #app-content-wrapper .grid-view .credential {
         display: flex;
-        padding: 0.5em;
         width: 100%;
-        border: 1px solid rgba(240, 240, 240, 0.9);
+        border: 2px solid rgba(240, 240, 240, 0.9);
         margin: 25px;
-        cursor: pointer;
         -webkit-border-radius: 5px;
         border-radius: 5px;
         background-clip: padding-box;
@@ -286,16 +284,20 @@
           flex-direction: column;
           background-color: #fff;
           width: 100%;
+          cursor: pointer;
           font-size: 1.75em;
           text-align: center; }
           #app-content #app-content-wrapper .grid-view .credential .credential_content .label {
-            padding-top: 1em;
+            padding-top: 0.5em;
             padding-left: 1em;
             padding-right: 1em;
-            line-height: 1.3em; }
-          #app-content #app-content-wrapper .grid-view .credential .credential_content .tags .tag {
-            margin-top: 5px;
-            display: inline-block; }
+            line-height: 1.3em;
+            color: #ddd; }
+          #app-content #app-content-wrapper .grid-view .credential .credential_content .tags {
+            margin-bottom: 0.5em; }
+            #app-content #app-content-wrapper .grid-view .credential .credential_content .tags .tag {
+              margin-top: 5px;
+              display: inline-block; }
       @media all and (min-width: 40em) {
         #app-content #app-content-wrapper .grid-view .credential {
           width: 40%; } }
