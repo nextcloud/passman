@@ -79,7 +79,7 @@
 				<li class="credential" ng-repeat="credential in credentials | credentialSearch:filterOptions | tagFilter:selectedtags | orderBy:'label'| as:this:'filtered_credentials'"
 					ng-if="credential.hidden == 0 && showCredentialRow(credential)"
 					ng-click="selectCredential(credential)"
-					use-theme color="'true'">
+					use-theme type="'border-color'">
 					<div class="credential_content" >
 						<div class="label">{{credential.label}}</div>
 						<div class="tags">

@@ -291,7 +291,8 @@
             padding-top: 0.5em;
             padding-left: 1em;
             padding-right: 1em;
-            line-height: 1.3em; }
+            line-height: 1.3em;
+            word-wrap: break-word; }
           #app-content #app-content-wrapper .grid-view .credential .credential_content .tags {
             margin-bottom: 0.5em; }
             #app-content #app-content-wrapper .grid-view .credential .credential_content .tags .tag {
