@@ -275,14 +275,14 @@
         width: 100%;
         border: 2px solid rgba(240, 240, 240, 0.9);
         margin: 25px;
-        -webkit-border-radius: 5px;
-        border-radius: 5px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
         background-clip: padding-box;
         /* stops bg color from leaking outside the border: */ }
         #app-content #app-content-wrapper .grid-view .credential .credential_content {
           display: flex;
+          padding: 2px;
           flex-direction: column;
-          background-color: #fff;
           width: 100%;
           cursor: pointer;
           font-size: 1.75em;
@@ -291,11 +291,11 @@
             padding-top: 0.5em;
             padding-left: 1em;
             padding-right: 1em;
-            line-height: 1.3em;
-            color: #ddd; }
+            line-height: 1.3em; }
           #app-content #app-content-wrapper .grid-view .credential .credential_content .tags {
             margin-bottom: 0.5em; }
             #app-content #app-content-wrapper .grid-view .credential .credential_content .tags .tag {
+              color: #000 !important;
               margin-top: 5px;
               display: inline-block; }
       @media all and (min-width: 40em) {
