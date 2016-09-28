@@ -97,10 +97,9 @@ angular.module('passmanApp')
 					)
 				}
 			}
-		}
+		};
 
 		$scope.applyShare = function(){
-			console.log("boom!");
 			ShareService.generateSharedKey(20).then(function(key){
 				console.log(key);
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
@@ -108,16 +107,16 @@ angular.module('passmanApp')
 				for (var i = 0; i < list.length; i++){
 					ShareService.getVaultsByUser(list[i].userId).then(function(data){
 						console.log(data);
-						for (var x = 0; x < data.length; x++) {
-							var rsa = ShareService.rsaPublicKeyFromPEM(data[x].public_sharing_key);
-							console.log("parsed RSA public key");
-							var cyphertext = rsa.encrypt(key);
-							console.log(cyphertext);
-							cyphertext=  forge.util.encode64(cyphertext);
-							console.log(cyphertext);
-							console.log(cyphertext.length);
-						}
-					})
+						var start = new Date().getTime() / 1000;;
+						ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
+						.progress(function(data){
+							console.log(data);
+						})
+						.then(function(result){
+							console.log(result);
+							console.log("Took: " +  ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
+						});
+					});
 				}
 			})
 		}

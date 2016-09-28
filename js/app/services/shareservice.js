@@ -29,6 +29,9 @@ angular.module('passmanApp')
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vaults/'+ userId);
 				return $http.get(queryUrl, {search: userId}).then(function (response) {
 					if (response.data) {
+						for (var i = 0; i < response.data.length; i++){
+							response.data[i].public_sharing_key = forge.pki.publicKeyFromPem(response.data[i].public_sharing_key);
+						}
 						return response.data;
 					} else {
 						return response;
@@ -93,6 +96,37 @@ angular.module('passmanApp')
 			},
 			rsaPublicKeyFromPEM: function(public_pem){
 				return forge.pki.publicKeyFromPem(public_pem);
+			},
+			/**
+			 * Cyphers an array of string in a non-blocking way
+			 * @param vaults[] 	An array of vaults with the processed public keys
+			 * @param string	The string to cypher
+			 */
+			cypherRSAStringWithPublicKeyBulkAsync: function(vaults, string){
+				var workload = function(){
+					if (this.current_index < this.vaults.length > 0 && this.vaults.length > 0) {
+						this.data.push(
+							forge.util.encode64(
+								this.vaults[this.current_index].public_sharing_key.encrypt(this.string)
+							)
+						);
+						this.current_index++;
+
+						this.call_progress(this.current_index);
+						setTimeout(workload.bind(this), 1);
+					}
+					else{
+						this.call_then(this.data);
+					}
+				};
+				return new C_Promise(function(){
+					this.data = [];
+					this.vaults = vaults;
+					this.string = string;
+					this.current_index = 0;
+
+					setTimeout(workload.bind(this), 0);
+				});
 			}
 		}
 	}]);
