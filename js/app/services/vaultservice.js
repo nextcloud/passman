@@ -10,8 +10,9 @@
 angular.module('passmanApp')
 	.service('VaultService', ['$http', function ($http) {
 		// AngularJS will instantiate a singleton by calling "new" on this function
+		var _this = this;
 		var _activeVault;
-		return {
+		var service = {
 			getVaults: function(){
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults');
 				return $http.get(queryUrl).then(function (response) {
@@ -23,7 +24,7 @@ angular.module('passmanApp')
 				});
 			},
 			setActiveVault: function(vault){
-				_activeVault = vault;
+				_activeVault = angular.copy(vault);
 			},
 			getActiveVault: function(vault){
 				return _activeVault;
@@ -32,7 +33,16 @@ angular.module('passmanApp')
 				if(!_activeVault.vault_settings){
 					return default_value
 				} else {
-					return _activeVault.vault_settings[key] | default_value;
+					return (_activeVault.vault_settings[key] !== undefined) ? _activeVault.vault_settings[key] : default_value
+				}
+
+			},
+			setVaultSetting: function(key, value){
+				if(!_activeVault.vault_settings){
+					return false;
+				} else {
+					_activeVault.vault_settings[key] = value;
+					_this.updateVault(_activeVault);
 				}
 
 			},
@@ -52,6 +62,8 @@ angular.module('passmanApp')
 					if(response.data){
 						if(response.data.vault_settings){
 							response.data.vault_settings = JSON.parse(window.atob(response.data.vault_settings))
+						} else {
+							response.data.vault_settings = {};
 						}
 						return response.data;
 					} else {
@@ -63,7 +75,7 @@ angular.module('passmanApp')
 				var _vault = angular.copy(vault);
 				delete vault.defaultVaultPass;
 				delete vault.defaultVault;
-
+				_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings))
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.vault_id);
 				return $http.patch(queryUrl, _vault).then(function (response) {
 					if(response.data){
@@ -93,5 +105,7 @@ angular.module('passmanApp')
 					}
 				});
 			}
-		}
+		};
+
+		return service;
 	}]);
