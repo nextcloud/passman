@@ -93,7 +93,7 @@ class CredentialController extends ApiController {
 									 $credential_id, $custom_fields, $delete_time,
 									 $description, $email, $expire_time, $favicon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id, $revision_created) {
+									 $tags, $url, $username, $vault_id, $revision_created, $is_shared) {
 		$credential = array(
 			'credential_id' => $credential_id,
 			'guid' => $guid,
@@ -116,6 +116,7 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
+			'is_shared' => $is_shared,
 		);
 
 
