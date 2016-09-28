@@ -89,6 +89,7 @@ angular.module('passmanApp')
 		var _loginToVault = function (vault, vault_key) {
 			var _vault = angular.copy(vault);
 			_vault.vaultKey = angular.copy(vault_key);
+			delete _vault.credentials;
 			VaultService.setActiveVault(_vault);
 			$location.path('/vault/' + vault.vault_id);
 		};
@@ -98,6 +99,7 @@ angular.module('passmanApp')
 			$scope.error = false;
 			var _vault = angular.copy(vault);
 			_vault.vaultKey = angular.copy(vault_key);
+
 			VaultService.setActiveVault(_vault);
 			VaultService.getVault(vault).then(function (vault) {
 				var credential = vault.credentials[0];

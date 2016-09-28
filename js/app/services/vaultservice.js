@@ -26,7 +26,7 @@ angular.module('passmanApp')
 			setActiveVault: function(vault){
 				_activeVault = angular.copy(vault);
 			},
-			getActiveVault: function(vault){
+			getActiveVault: function(){
 				return _activeVault;
 			},
 			getVaultSetting: function(key, default_value){

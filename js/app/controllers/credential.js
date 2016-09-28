@@ -22,6 +22,7 @@ angular.module('passmanApp')
 					_vault.vaultKey = angular.copy(SettingsService.getSetting('defaultVaultPass'));
 					VaultService.setActiveVault(_vault);
 					$scope.active_vault = _vault;
+
 					//@TODO check if vault exists
 				}
 
@@ -29,7 +30,6 @@ angular.module('passmanApp')
 
 
 			$scope.show_spinner = true;
-
 
 			var fetchCredentials = function () {
 				VaultService.getVault($scope.active_vault).then(function (vault) {
@@ -58,7 +58,7 @@ angular.module('passmanApp')
 
 			if ($scope.active_vault) {
 				$scope.$parent.selectedVault = true;
-				fetchCredentials();
+				fetchCredentials()
 			}
 
 
