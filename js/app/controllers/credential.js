@@ -38,6 +38,7 @@ angular.module('passmanApp')
 					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 						try {
 							$scope.active_vault.credentials[i] = CredentialService.decryptCredential(angular.copy(vault.credentials[i]));
+							$scope.active_vault.credentials[i].tags_raw = $scope.active_vault.credentials[i].tags;
 						} catch (e) {
 							NotificationService.showNotification('An error happend during decryption', 5000);
 							$rootScope.$broadcast('logout');
@@ -52,7 +53,6 @@ angular.module('passmanApp')
 						}
 					}
 					$scope.show_spinner = false;
-
 				});
 			};
 
