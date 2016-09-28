@@ -85,9 +85,9 @@ angular.module('passmanApp')
 			});
 
 			$scope.startScan = function (minStrength) {
-				VaultService.getVault($scope.active_vault).then(function (credentials) {
+				VaultService.getVault($scope.active_vault).then(function (vault) {
 					var results = [];
-					for (var i = 0; i < credentials.length; i++) {
+					for (var i = 0; i < vault.credentials.length; i++) {
 						var c = CredentialService.decryptCredential(angular.copy(credentials[i]));
 						if (c.password && c.password.length > 0 && c.hidden == 0) {
 							var zxcvbn_result = zxcvbn(c.password);
