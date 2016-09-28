@@ -11,7 +11,32 @@ angular.module('passmanApp')
 	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService',
 		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService) {
 			$scope.active_vault = VaultService.getActiveVault();
+			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
+				if (!$scope.active_vault) {
+					$location.path('/')
+				}
+			} else {
+				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
+					var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
+					VaultService.getVault(_vault).then(function (vault) {
+						VaultService.setActiveVault(vault);
+						$scope.active_vault = vault;
 
+						$scope.pwSettings = VaultService.getVaultSetting('pwSettings',
+							{
+								'length': 12,
+								'useUppercase': true,
+								'useLowercase': true,
+								'useDigits': true,
+								'useSpecialChars': true,
+								'minimumDigitCount': 3,
+								'avoidAmbiguousCharacters': false,
+								'requireEveryCharType': true,
+								'generateOnCreate': true,
+							})
+					})
+				}
+			}
 
 			$scope.tabs = [{
 				title: 'General',
@@ -35,16 +60,7 @@ angular.module('passmanApp')
 				color: 'purple'
 			}];
 
-			$scope.pwSettings = {
-				'length': 12,
-				'useUppercase': true,
-				'useLowercase': true,
-				'useDigits': true,
-				'useSpecialChars': true,
-				'minimumDigitCount': 3,
-				'avoidAmbiguousCharacters': false,
-				'requireEveryCharType': true
-			};
+
 
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {

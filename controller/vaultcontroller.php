@@ -56,15 +56,40 @@ class VaultController extends ApiController {
 	 */
 	public function get($vault_id) {
 		$credentials = $this->credentialService->getCredentialsByVaultId($vault_id, $this->userId);
-		$this->vaultService->setLastAccess($vault_id);
-		return new JSONResponse($credentials);
+		$vault = $this->vaultService->getById($vault_id, $this->userId);
+		$vault = $vault[0];
+		if($vault) {
+			$result = array(
+				'vault_id' => $vault->getId(),
+				'guid' => $vault->getGuid(),
+				'name' => $vault->getName(),
+				'created' => $vault->getCreated(),
+				'private_sharing_key' => $vault->getPrivateSharingKey(),
+				'public_sharing_key' => $vault->getPublicSharingKey(),
+				'sharing_keys_generated' => $vault->getSharingKeysGenerated(),
+				'vault_settings' => $vault->getVaultSettings(),
+				'last_access' => $vault->getlastAccess()
+			);
+			$result['credentials'] = $credentials;
+			$this->vaultService->setLastAccess($vault_id, $this->userId);
+		} else {
+			$result = array();
+		}
+		return new JSONResponse($result);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function update($vault_id) {
-		return;
+	public function update($vault_id, $name, $vault_settings) {
+		$vault = array_pop($this->vaultService->getById($vault_id, $this->userId));
+		if($name) {
+			$vault->setName($name);
+		}
+		if($vault_settings) {
+			$vault->setVaultSettings($vault_settings);
+		}
+		$this->vaultService->updateVault($vault);
 	}
 
 	/**

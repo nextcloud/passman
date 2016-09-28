@@ -31,6 +31,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getPrivateSharingKey()
  * @method void setSharingKeysGenerated(integer $value)
  * @method integer getSharingKeysGenerated()
+ * @method void setVaultSettings(integer $value)
+ * @method integer getVaultSettings()
  */
 
 
@@ -46,11 +48,13 @@ class Vault extends Entity implements  \JsonSerializable{
 	protected $publicSharingKey;
 	protected $privateSharingKey;
 	protected $sharingKeysGenerated;
+	protected $vaultSettings;
+
 	public function __construct() {
 		// add types in constructor
 		$this->addType('created', 'integer');
 		$this->addType('lastAccess', 'integer');
-		$this->addType('sharing_keys_generated', 'integer');
+		$this->addType('sharingKeysGenerated', 'integer');
 	}
 	/**
 	 * Turns entity attributes into an array
@@ -61,9 +65,7 @@ class Vault extends Entity implements  \JsonSerializable{
 			'guid' => $this->getGuid(),
 			'name' => $this->getName(),
 			'created' => $this->getCreated(),
-			'private_sharing_key' => $this->getPrivateSharingKey(),
 			'public_sharing_key' => $this->getPublicSharingKey(),
-			'sharing_keys_generated' => $this->getSharingKeysGenerated(),
 			'last_access' => $this->getlastAccess(),
 		];
 	}

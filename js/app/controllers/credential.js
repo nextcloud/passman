@@ -22,10 +22,46 @@ angular.module('passmanApp')
 					_vault.vaultKey = angular.copy(SettingsService.getSetting('defaultVaultPass'));
 					VaultService.setActiveVault(_vault);
 					$scope.active_vault = _vault;
+
 					//@TODO check if vault exists
 				}
 
 			}
+
+
+			$scope.show_spinner = true;
+
+			var fetchCredentials = function () {
+				VaultService.getVault($scope.active_vault).then(function (vault) {
+					$scope.active_vault = angular.merge($scope.active_vault, vault);
+					var _credentials = [];
+					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+						try {
+							$scope.active_vault.credentials[i] = CredentialService.decryptCredential(angular.copy(vault.credentials[i]));
+							$scope.active_vault.credentials[i].tags_raw = $scope.active_vault.credentials[i].tags;
+						} catch (e) {
+							NotificationService.showNotification('An error happend during decryption', 5000);
+							$rootScope.$broadcast('logout');
+							SettingsService.setSetting('defaultVaultPass', null);
+							SettingsService.setSetting('defaultVault', null);
+							$location.path('/')
+
+						}
+						if ($scope.active_vault.credentials[i]) {
+							TagService.addTags($scope.active_vault.credentials[i].tags);
+
+						}
+					}
+					$scope.show_spinner = false;
+				});
+			};
+
+			if ($scope.active_vault) {
+				$scope.$parent.selectedVault = true;
+				fetchCredentials()
+			}
+
+
 
 			$scope.addCredential = function () {
 				var new_credential = CredentialService.newCredential();
@@ -200,40 +236,6 @@ angular.module('passmanApp')
 //				$scope.$parent.selectedVault = false;
 
 			});
-
-			$scope.show_spinner = true;
-
-
-			var fetchCredentials = function () {
-				VaultService.getVault($scope.active_vault).then(function (credentials) {
-					var _credentials = [];
-					for (var i = 0; i < credentials.length; i++) {
-						try {
-							var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
-						} catch (e) {
-							NotificationService.showNotification('An error happend during decryption', 5000);
-							$rootScope.$broadcast('logout');
-							SettingsService.setSetting('defaultVaultPass', null);
-							SettingsService.setSetting('defaultVault', null);
-							$location.path('/')
-
-						}
-						if (_c) {
-							_c.tags_raw = _c.tags;
-							TagService.addTags(_c.tags);
-							_credentials.push(_c);
-						}
-					}
-					$scope.credentials = _credentials;
-					$scope.show_spinner = false;
-
-				});
-			};
-
-			if ($scope.active_vault) {
-				$scope.$parent.selectedVault = true;
-				fetchCredentials();
-			}
 
 
 			$scope.downloadFile = function (file) {

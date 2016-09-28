@@ -133,14 +133,18 @@ angular.module('passmanApp')
 				};
 
 				scope.passwordNotNull = false;
+				scope.$watch("settings", function () {
+					if(scope.settings) {
+						if (!scope.password && scope.settings.generateOnCreate) {
+							scope.generatePasswordStart();
+						}
+					}
+				});
+
+
 				scope.$watch("password", function () {
 					scope.model = scope.password;
 					scope.password_repeat = scope.model;
-
-					if(!scope.password) {
-						console.log('Generating new pw');
-						scope.generatePasswordStart();
-					}
 				});
 				//
 				scope.onSuccess = function(e) {

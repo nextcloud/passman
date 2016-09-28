@@ -34,6 +34,7 @@ angular.module('passmanApp')
 				} catch(e) {
 					throw e;
 				}
-			}
+			},
+
 		}
 	}]);
