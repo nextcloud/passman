@@ -67,7 +67,7 @@ class VaultController extends ApiController {
 				'private_sharing_key' => $vault->getPrivateSharingKey(),
 				'public_sharing_key' => $vault->getPublicSharingKey(),
 				'sharing_keys_generated' => $vault->getSharingKeysGenerated(),
-				'settings' => $vault->getSettings(),
+				'vault_settings' => $vault->getVaultSettings(),
 				'last_access' => $vault->getlastAccess()
 			);
 			$result['credentials'] = $credentials;
@@ -81,9 +81,15 @@ class VaultController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function update($vault_id) {
-		$this->vaultService->getById($vault_id, $this->userId);
-
+	public function update($vault_id, $name, $vault_settings) {
+		$vault = array_pop($this->vaultService->getById($vault_id, $this->userId));
+		if($name) {
+			$vault->setName($name);
+		}
+		if($vault_settings) {
+			$vault->setVaultSettings($vault_settings);
+		}
+		$this->vaultService->updateVault($vault);
 	}
 
 	/**

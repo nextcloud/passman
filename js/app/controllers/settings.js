@@ -8,9 +8,51 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http',
-		function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http) {
-			$scope.active_vault = VaultService.getActiveVault();
+	.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService',
+		function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService) {
+
+			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
+				if (!$scope.active_vault) {
+					$location.path('/')
+				}
+			} else {
+				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
+					var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
+					VaultService.setActiveVault(_vault);
+					$scope.active_vault = _vault;
+
+				}
+			}
+
+			var _settings = {
+				pwSettings: {
+					'length': 12,
+					'useUppercase': true,
+					'useLowercase': true,
+					'useDigits': true,
+					'useSpecialChars': true,
+					'minimumDigitCount': 3,
+					'avoidAmbiguousCharacters': false,
+					'requireEveryCharType': true
+				}
+			};
+
+			$scope.vault_settings = angular.merge(_settings, $scope.active_vault.vault_settings);
+			console.log($scope.vault_settings);
+
+
+			$scope.saveVaultSettings = function () {
+				var _vault = $scope.active_vault;
+				_vault.vault_settings = angular.copy($scope.vault_settings);
+				_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings));
+				VaultService.updateVault(_vault).then(function () {
+					console.log('done');
+				});
+			};
+
+
+
+
 			$scope.tabs = [
 				{
 					title: 'General settings',
@@ -19,6 +61,11 @@ angular.module('passmanApp')
 				{
 					title: 'Password Audit',
 					url: 'views/partials/forms/settings/tool.html'
+
+				},
+				{
+					title: 'Password settings',
+					url: 'views/partials/forms/settings/password_settings.html'
 
 				},
 				{
@@ -33,7 +80,7 @@ angular.module('passmanApp')
 				},
 				{
 					title: 'Sharing',
-					url:'views/partials/forms/settings/sharing.html'
+					url: 'views/partials/forms/settings/sharing.html'
 				}
 			];
 
@@ -58,7 +105,7 @@ angular.module('passmanApp')
 			$scope.$watch(function () {
 				return VaultService.getActiveVault()
 			}, function (vault) {
-				if(vault) {
+				if (vault) {
 					$scope.active_vault = vault;
 				}
 			});
@@ -108,7 +155,6 @@ angular.module('passmanApp')
 
 			$scope.cancel = function () {
 				$location.path('/vault/' + $routeParams.vault_id);
-
 			};
 
 		}]);

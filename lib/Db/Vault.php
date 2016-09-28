@@ -31,8 +31,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getPrivateSharingKey()
  * @method void setSharingKeysGenerated(integer $value)
  * @method integer getSharingKeysGenerated()
- * @method void setSettings(integer $value)
- * @method integer getSettings()
+ * @method void setVaultSettings(integer $value)
+ * @method integer getVaultSettings()
  */
 
 
@@ -48,7 +48,7 @@ class Vault extends Entity implements  \JsonSerializable{
 	protected $publicSharingKey;
 	protected $privateSharingKey;
 	protected $sharingKeysGenerated;
-	protected $settings;
+	protected $vaultSettings;
 
 	public function __construct() {
 		// add types in constructor

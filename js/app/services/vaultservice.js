@@ -42,6 +42,9 @@ angular.module('passmanApp')
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
 				return $http.get(queryUrl).then(function (response) {
 					if(response.data){
+						if(response.data.vault_settings){
+							response.data.vault_settings = JSON.parse(window.atob(response.data.vault_settings))
+						}
 						return response.data;
 					} else {
 						return response;
@@ -53,8 +56,8 @@ angular.module('passmanApp')
 				delete vault.defaultVaultPass;
 				delete vault.defaultVault;
 
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
-				return $http.patch(queryUrl).then(function (response) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.vault_id);
+				return $http.patch(queryUrl, _vault).then(function (response) {
 					if(response.data){
 						return response.data;
 					} else {

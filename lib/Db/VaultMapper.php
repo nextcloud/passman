@@ -58,6 +58,10 @@ class VaultMapper extends Mapper {
 		$this->update($vault);
 	}
 
+	public function updateVault(Vault $vault){
+		$this->update($vault);
+	}
+
 	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
 		$vault = new Vault();
 		$vault->setId($vault_id);

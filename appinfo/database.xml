@@ -37,7 +37,7 @@
 				<notnull>true</notnull>
 			</field>
 			<field>
-				<name>settings</name>
+				<name>vault_settings</name>
 				<type>clob</type>
 				<notnull>false</notnull>
 			</field>
