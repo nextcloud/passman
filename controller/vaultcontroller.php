@@ -56,8 +56,10 @@ class VaultController extends ApiController {
 	 */
 	public function get($vault_id) {
 		$credentials = $this->credentialService->getCredentialsByVaultId($vault_id, $this->userId);
-		$this->vaultService->setLastAccess($vault_id);
-		return new JSONResponse($credentials);
+		$result = $this->vaultService->getById($vault_id, $this->userId);
+		$result['credentials'] = $credentials;
+		$this->vaultService->setLastAccess($vault_id, $this->userId);
+		return new JSONResponse($result);
 	}
 
 	/**
