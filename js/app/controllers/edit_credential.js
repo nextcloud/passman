@@ -10,8 +10,33 @@
 angular.module('passmanApp')
 	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService',
 		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService) {
-			$scope.active_vault = VaultService.getActiveVault();
+			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
+				if (!$scope.active_vault) {
+					$location.path('/')
+				}
+			} else {
+				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
+					var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
+					VaultService.getVault(_vault).then(function (vault) {
+						vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+						VaultService.setActiveVault(vault);
+						$scope.active_vault = vault;
 
+						$scope.pwSettings = VaultService.getVaultSetting('pwSettings',
+							{
+								'length': 12,
+								'useUppercase': true,
+								'useLowercase': true,
+								'useDigits': true,
+								'useSpecialChars': true,
+								'minimumDigitCount': 3,
+								'avoidAmbiguousCharacters': false,
+								'requireEveryCharType': true,
+								'generateOnCreate': true,
+							})
+					})
+				}
+			}
 
 			$scope.tabs = [{
 				title: 'General',
@@ -35,16 +60,6 @@ angular.module('passmanApp')
 				color: 'purple'
 			}];
 
-			$scope.pwSettings = {
-				'length': 12,
-				'useUppercase': true,
-				'useLowercase': true,
-				'useDigits': true,
-				'useSpecialChars': true,
-				'minimumDigitCount': 3,
-				'avoidAmbiguousCharacters': false,
-				'requireEveryCharType': true
-			};
 
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -65,7 +80,7 @@ angular.module('passmanApp')
 			var storedCredential = SettingsService.getSetting('edit_credential');
 
 			if (!storedCredential) {
-				CredentialService.getCredential($routeParams.credential_id).then(function(result){
+				CredentialService.getCredential($routeParams.credential_id).then(function (result) {
 					$scope.storedCredential = CredentialService.decryptCredential(angular.copy(result));
 				});
 			} else {
@@ -171,10 +186,10 @@ angular.module('passmanApp')
 			$scope.renewIntervalValue = 0;
 			$scope.renewIntervalModifier = '0';
 
-			$scope.updateInterval = function(renewIntervalValue, renewIntervalModifier){
+			$scope.updateInterval = function (renewIntervalValue, renewIntervalModifier) {
 				var value = parseInt(renewIntervalValue);
 				var modifier = parseInt(renewIntervalModifier);
-				if( value && modifier) {
+				if (value && modifier) {
 					$scope.storedCredential.renew_interval = value * modifier;
 				}
 			};

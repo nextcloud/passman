@@ -99,8 +99,8 @@ angular.module('passmanApp')
 			var _vault = angular.copy(vault);
 			_vault.vaultKey = angular.copy(vault_key);
 			VaultService.setActiveVault(_vault);
-			VaultService.getVault(vault).then(function (credentials) {
-				var credential = credentials[0];
+			VaultService.getVault(vault).then(function (vault) {
+				var credential = vault.credentials[0];
 				try {
 					var c = CredentialService.decryptCredential(credential);
 					if ($scope.remember_vault_password) {
