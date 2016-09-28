@@ -15,6 +15,10 @@
 			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 
 	</span>
+	<span class="title" ng-show="active_vault.credentials && !delete_time">
+			Showing {{filtered_credentials.length}} of {{active_vault.credentials.length}} credentials
+
+	</span>
 	<div class="actions creatable">
 		<span ng-click="menuOpen = !menuOpen" class="button new"
 			  ng-init="menuOpen = false" off-click="menuOpen = false;">

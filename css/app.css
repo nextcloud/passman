@@ -147,7 +147,7 @@
     #app-content #app-content-wrapper #passman-controls {
       border-bottom: 1px solid #c9c9c9; }
     #app-content #app-content-wrapper .title {
-      width: calc( 100% - 325px);
+      width: calc( 100% - 370px);
       text-align: center;
       display: inline-block;
       font-weight: bold;
@@ -379,7 +379,8 @@
           vertical-align: middle; }
       #app-content #app-content-wrapper .app_sidebar .tags {
         margin-top: 15px;
-        margin-bottom: 15px; }
+        margin-bottom: 15px;
+        float: none; }
         #app-content #app-content-wrapper .app_sidebar .tags .tag {
           background-color: rgba(240, 240, 240, 0.9);
           padding: 4px;
