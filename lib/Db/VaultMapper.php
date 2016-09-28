@@ -26,11 +26,12 @@ class VaultMapper extends Mapper {
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
 	 */
-	public function find($vault_id) {
+	public function find($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
-			'WHERE `user_id` = ?';
-		return $this->findEntities($sql, [$vault_id]);
+			'WHERE `id`= ? and `user_id` = ?';
+		return $this->findEntities($sql, [$vault_id, $user_id]);
 	}
+
 
 	public function findVaultsFromUser($userId){
 		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
@@ -45,14 +46,15 @@ class VaultMapper extends Mapper {
 		$vault->setUserId($userId);
 		$vault->setGuid($this->utils->GUID());
 		$vault->setCreated($this->utils->getTime());
-		$vault->setlastAccess(0);
+		$vault->setLastAccess(0);
 		return parent::insert($vault);
 	}
 
-	public function setLastAccess($vault_id){
+	public function setLastAccess($vault_id, $user_id){
 		$vault = new Vault();
 		$vault->setId($vault_id);
-		$vault->setlastAccess(time());
+		$vault->setUserId($user_id);
+		$vault->setLastAccess(time());
 		$this->update($vault);
 	}
 
