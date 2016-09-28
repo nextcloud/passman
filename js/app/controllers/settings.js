@@ -33,7 +33,8 @@ angular.module('passmanApp')
 					'useSpecialChars': true,
 					'minimumDigitCount': 3,
 					'avoidAmbiguousCharacters': false,
-					'requireEveryCharType': true
+					'requireEveryCharType': true,
+					'generateOnCreate': true,
 				}
 			};
 
@@ -46,7 +47,7 @@ angular.module('passmanApp')
 				_vault.vault_settings = angular.copy($scope.vault_settings);
 				_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings));
 				VaultService.updateVault(_vault).then(function () {
-					console.log('done');
+					VaultService.setActiveVault(_vault);
 				});
 			};
 

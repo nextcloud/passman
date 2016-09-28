@@ -28,6 +28,14 @@ angular.module('passmanApp')
 			getActiveVault: function(vault){
 				return _activeVault;
 			},
+			getVaultSetting: function(key, default_value){
+				if(!_activeVault.vault_settings){
+					return default_value
+				} else {
+					return _activeVault.vault_settings[key] | default_value;
+				}
+
+			},
 			createVault: function (vaultName) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults');
 				return $http.post(queryUrl, { vault_name: vaultName }).then(function (response) {

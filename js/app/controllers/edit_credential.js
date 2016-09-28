@@ -34,17 +34,22 @@ angular.module('passmanApp')
 				url: 'views/partials/forms/edit_credential/otp.html',
 				color: 'purple'
 			}];
+			if($scope.active_vault.vault_settings && $scope.active_vault.vault_settings.pwSettings){
+				$scope.pwSettings = angular.copy($scope.active_vault.vault_settings.pwSettings);
+			} else {
+				$scope.pwSettings = {
+					'length': 12,
+					'useUppercase': true,
+					'useLowercase': true,
+					'useDigits': true,
+					'useSpecialChars': true,
+					'minimumDigitCount': 3,
+					'avoidAmbiguousCharacters': false,
+					'requireEveryCharType': true,
+					'generateOnCreate': true,
+				};
+			}
 
-			$scope.pwSettings = {
-				'length': 12,
-				'useUppercase': true,
-				'useLowercase': true,
-				'useDigits': true,
-				'useSpecialChars': true,
-				'minimumDigitCount': 3,
-				'avoidAmbiguousCharacters': false,
-				'requireEveryCharType': true
-			};
 
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
