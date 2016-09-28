@@ -23,13 +23,6 @@ angular.module('passmanApp')
 				});
 			},
 			setActiveVault: function(vault){
-				this.getVaults().then(function(vaults){
-					for(var v = 0; v < vaults.length; v++){
-						if(vaults[v].vault_id == vault.vault_id){
-							_activeVault = angular.merge(_activeVault, vaults[v]);
-						}
-					}
-				});
 				_activeVault = vault;
 			},
 			getActiveVault: function(vault){
@@ -56,8 +49,12 @@ angular.module('passmanApp')
 				});
 			},
 			updateVault: function (vault) {
+				var _vault = angular.copy(vault);
+				delete vault.defaultVaultPass;
+				delete vault.defaultVault;
+
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
-				return $http.post(queryUrl).then(function (response) {
+				return $http.patch(queryUrl).then(function (response) {
 					if(response.data){
 						return response.data;
 					} else {
