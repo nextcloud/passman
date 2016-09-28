@@ -29,12 +29,29 @@ class VaultService {
 		return $this->vaultMapper->findVaultsFromUser($userId);
 	}
 
+	public function getById($vault_id, $user_id) {
+		$vault = $this->vaultMapper->find($vault_id, $user_id);
+		$vault = $vault[0];
+		$return = array(
+			'vault_id' => $vault->getId(),
+			'guid' => $vault->getGuid(),
+			'name' => $vault->getName(),
+			'created' => $vault->getCreated(),
+			'private_sharing_key' => $vault->getPrivateSharingKey(),
+			'public_sharing_key' => $vault->getPublicSharingKey(),
+			'sharing_keys_generated' => $vault->getSharingKeysGenerated(),
+			'settings' => $vault->getSettings(),
+			'last_access' => $vault->getlastAccess()
+		);
+		return $return;
+	}
+
 	public function createVault($vault_name, $userId) {
 		return $this->vaultMapper->create($vault_name, $userId);
 	}
 
-	public function setLastAccess($vault_id){
-		return $this->vaultMapper->setLastAccess($vault_id);
+	public function setLastAccess($vault_id, $user_id){
+		return $this->vaultMapper->setLastAccess($vault_id, $user_id);
 	}
 
 	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
