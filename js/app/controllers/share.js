@@ -106,6 +106,7 @@ angular.module('passmanApp')
 				console.log(list);
 				for (var i = 0; i < list.length; i++){
 					ShareService.getVaultsByUser(list[i].userId).then(function(data){
+						list[i].vaults = data;
 						console.log(data);
 						var start = new Date().getTime() / 1000;;
 						ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
