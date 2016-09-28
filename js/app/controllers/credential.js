@@ -202,56 +202,38 @@ angular.module('passmanApp')
 			});
 
 			$scope.show_spinner = true;
-			// A timeout give the browser some time to render a loading spinner.
-			$timeout(function(){
 
-				try {
-					var credential_cache = JSON.parse(CacheService.get('credential_cache_' + $scope.active_vault.vault_id));
-					if (credential_cache.length > 0) {
-						$scope.show_spinner = false;
-						$scope.credentials = credential_cache;
-						for (var i = 0; i < credential_cache.length; i++) {
-							TagService.addTags(credential_cache[i].tags_raw);
+
+			var fetchCredentials = function () {
+				VaultService.getVault($scope.active_vault).then(function (credentials) {
+					var _credentials = [];
+					for (var i = 0; i < credentials.length; i++) {
+						try {
+							var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
+						} catch (e) {
+							NotificationService.showNotification('An error happend during decryption', 5000);
+							$rootScope.$broadcast('logout');
+							SettingsService.setSetting('defaultVaultPass', null);
+							SettingsService.setSetting('defaultVault', null);
+							$location.path('/')
+
+						}
+						if (_c) {
+							_c.tags_raw = _c.tags;
+							TagService.addTags(_c.tags);
+							_credentials.push(_c);
 						}
 					}
-				} catch (e) {
+					$scope.credentials = _credentials;
+					$scope.show_spinner = false;
 
-				}
+				});
+			};
 
-				var fetchCredentials = function () {
-					VaultService.getVault($scope.active_vault).then(function (credentials) {
-						var _credentials = [];
-						for (var i = 0; i < credentials.length; i++) {
-							try {
-								var _c = CredentialService.decryptCredential(angular.copy(credentials[i]));
-							} catch (e){
-								CacheService.set('credential_cache_' + $scope.active_vault.vault_id, []);
-								NotificationService.showNotification('An error happend during decryption', 5000);
-								$rootScope.$broadcast('logout');
-								SettingsService.setSetting('defaultVaultPass', null);
-								SettingsService.setSetting('defaultVault', null);
-								$location.path('/')
-
-							}
-							if(_c) {
-								_c.tags_raw = _c.tags;
-								TagService.addTags(_c.tags);
-								_credentials.push(_c);
-							}
-						}
-						$scope.credentials = _credentials;
-						$scope.show_spinner = false;
-						CacheService.set('credential_cache_' + $scope.active_vault.vault_id, JSON.stringify(_credentials));
-
-					});
-				};
-
-				if ($scope.active_vault) {
-					$scope.$parent.selectedVault = true;
-					fetchCredentials();
-				}
-
-			}, 50);
+			if ($scope.active_vault) {
+				$scope.$parent.selectedVault = true;
+				fetchCredentials();
+			}
 
 
 			$scope.downloadFile = function (file) {
