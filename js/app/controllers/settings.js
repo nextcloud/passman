@@ -17,7 +17,7 @@ angular.module('passmanApp')
 					url: 'views/partials/forms/settings/general_settings.html'
 				},
 				{
-					title: 'Password Tool',
+					title: 'Password Audit',
 					url: 'views/partials/forms/settings/tool.html'
 
 				},
