@@ -49,7 +49,7 @@ class Vault extends Entity implements  \JsonSerializable{
 	protected $privateSharingKey;
 	protected $sharingKeysGenerated;
 	protected $vaultSettings;
-
+	
 	public function __construct() {
 		// add types in constructor
 		$this->addType('created', 'integer');
