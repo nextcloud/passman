@@ -147,7 +147,7 @@
     #app-content #app-content-wrapper #passman-controls {
       border-bottom: 1px solid #c9c9c9; }
     #app-content #app-content-wrapper .title {
-      width: calc( 100% - 375px);
+      width: calc(100% - 375px);
       text-align: center;
       display: inline-block;
       font-weight: bold;
@@ -400,11 +400,18 @@
 
 .progress {
   margin-top: 10px;
-  height: 10px; }
+  height: 20px; }
   .progress .progress-bar {
-    height: 10px;
+    position: relative;
+    height: 20px;
     background-image: none;
     background-color: #0082c9; }
+    .progress .progress-bar .progress-label {
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      text-align: center;
+      width: 100%; }
 
 .loaderContainer {
   height: 140px;

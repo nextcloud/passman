@@ -30,6 +30,11 @@
 				</tr>
 				</thead>
 			</table>
+
+			<div ng-if="share_settings.cypher_progress.done > 0">
+				Cyphering...
+				<div progress-bar="share_settings.cypher_progress" index="share_settings.cypher_progress.done" total="share_settings.cypher_progress.total"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -55,11 +60,6 @@
 	</div>
 </div>
 
-<div class="row" ng-if="share_settings.cypher_progress.done > 0">
-	Cyphering...
-	<div progress-bar="share_settings.cypher_progress"></div>
-	{{ share_settings.cypher_progress.done }} / {{ share_settings.cypher_progress.total }}
-</div>
 
 <script type="text/ng-template" id="autocomplete-template">
 	<i class="fa fa-user" ng-if="data.type === 'user'"></i>
