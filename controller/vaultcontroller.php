@@ -46,17 +46,15 @@ class VaultController extends ApiController {
 		foreach($vaults as $vault){
 			$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 			$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
-			$challenge_password = $credential->{$secret_field}();
-			$vault = array(
+			array_push($result, array(
 				'vault_id' => $vault->getId(),
 				'guid' => $vault->getGuid(),
 				'name' => $vault->getName(),
 				'created' => $vault->getCreated(),
 				'public_sharing_key' => $vault->getPublicSharingKey(),
 				'last_access' => $vault->getlastAccess(),
-				'challenge_password' => $challenge_password
-			);
-			array_push($result, $vault);
+				'challenge_password' => $credential->{$secret_field}()
+			));
 		}
 
 		return new JSONResponse($result);
