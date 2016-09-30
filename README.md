@@ -34,3 +34,8 @@ To watch for changes use `grunt watch`
 ## Contributors
 Add yours when creating a pull request!
 - None
+
+
+## FAQ
+**are you adding something to check if malicious code is executing on the browser?**   
+No, because malitous code could edit the functions that check for malicious code.
