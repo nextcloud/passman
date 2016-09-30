@@ -415,6 +415,19 @@
 				<length>64</length>
 			</field>
 			<field>
+				<name>vault_id</name>
+				<type>integer</type>
+				<notnull>true</notnull>
+				<unsigned>true</unsigned>
+				<length>8</length>
+			</field>
+			<field>
+				<name>vault_guid</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>64</length>
+			</field>
+			<field>
 				<name>user_id</name>
 				<type>text</type>
 				<notnull>false</notnull>
@@ -429,7 +442,7 @@
 			<field>
 				<name>created</name>
 				<type>integer</type>
-				<length>8</length>
+				<length>64</length>
 				<default>0</default>
 				<notnull>false</notnull>
 				<unsigned>true</unsigned>
@@ -437,7 +450,7 @@
 			<field>
 				<name>expire</name>
 				<type>integer</type>
-				<length>8</length>
+				<length>64</length>
 				<default>0</default>
 				<notnull>false</notnull>
 				<unsigned>true</unsigned>
@@ -445,10 +458,15 @@
 			<field>
 				<name>permissions</name>
 				<type>integer</type>
-				<length>2</length>
+				<length>3</length>
 				<default>0</default>
 				<notnull>true</notnull>
 				<unsigned>true</unsigned>
+			</field>
+			<field>
+				<name>shared_key</name>
+				<type>clob</type>
+				<notnull>true</notnull>
 			</field>
 		</declaration>
 	</table>
@@ -467,6 +485,8 @@
 			<field>
 				<name>item_id</name>
 				<type>integer</type>
+				<notnull>true</notnull><name>shared_key</name>
+				<type>clob</type>
 				<notnull>true</notnull>
 				<length>8</length>
 			</field>
@@ -477,14 +497,14 @@
 				<length>64</length>
 			</field>
 			<field>
-				<name>vault_id</name>
+				<name>target_vault_id</name>
 				<type>integer</type>
 				<notnull>true</notnull>
 				<unsigned>true</unsigned>
 				<length>8</length>
 			</field>
 			<field>
-				<name>vault_guid</name>
+				<name>target_vault_guid</name>
 				<type>text</type>
 				<notnull>true</notnull>
 				<length>64</length>
