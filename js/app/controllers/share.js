@@ -63,12 +63,12 @@ angular.module('passmanApp')
 
 		$scope.share_settings = {
 			credentialSharedWithUserAndGroup:[
-				{
-					accessLevel:1,
-					displayName:"wolf",
-					userId:"wolf",
-					type:'user'
-				},
+				// {
+				// 	accessLevel:1,
+				// 	displayName:"wolf",
+				// 	userId:"wolf",
+				// 	type:'user'
+				// },
 				{
 					accessLevel:1,
 					displayName:"cat",
@@ -104,13 +104,15 @@ angular.module('passmanApp')
 			$scope.inputSharedWith = [];
 			if(shareWith.length > 0) {
 				for (var i = 0; i < shareWith.length; i++) {
+					var obj = {
+						userId: shareWith[i].uid,
+						displayName: shareWith[i].text,
+						type: shareWith[i].type,
+						accessLevel: selectedAccessLevel
+					};
+					if (obj.type == 'group') obj.users = shareWith[i].users;
 					$scope.share_settings.credentialSharedWithUserAndGroup.push(
-						{
-							userId: shareWith[i].uid,
-							displayName: shareWith[i].text,
-							type: shareWith[i].type,
-							accessLevel: selectedAccessLevel
-						}
+						obj
 					)
 				}
 			}
@@ -125,8 +127,12 @@ angular.module('passmanApp')
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 				console.log(list);
 				for (var i = 0; i < list.length; i++){
-					var iterator = i;
+					var iterator = i; 	// Keeps it available inside the promises callback
+
 					if (list[i].type == "user") {
+						if ($scope.isUserReady(list[iterator].userId)){		// Check if the user has already been processed on a group
+							continue;
+						}
 						ShareService.getVaultsByUser(list[i].userId).then(function (data) {
 							$scope.share_settings.cypher_progress.total += data.length;
 
@@ -147,18 +153,24 @@ angular.module('passmanApp')
 						list[i].processed = true;
 					}
 					else if (list[i].type == "group"){
-						for (var x = 0; x < list[i].users.length; x++){
-							if ($scope.isUserReady(list[i].users[x].userId)){
+						for (var x = 0; x < list[iterator].users.length; x++){
+							var xiterator = x;		// Keeps it available inside the promises callback
+							if ($scope.isUserReady(list[iterator].users[x].userId)){			// Check if the user was already processed all alone
 								continue;
 							}
-							ShareService.getVaultsByUser(list[i].userId).then(function (data) {
-								list[i].vaults = data;
+							ShareService.getVaultsByUser(list[iterator].users[xiterator].userId).then(function (data) {
+								if (data.length == 0) return;
+								$scope.share_settings.cypher_progress.total += data.length;
+
+								list[iterator].users[xiterator].vaults = data;
 								console.log(data);
+
 								var start = new Date().getTime() / 1000;
 
 								ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
 									.progress(function (data) {
-										console.log(data);
+										// console.log(data);
+										$scope.share_settings.cypher_progress.done ++;
 									})
 									.then(function (result) {
 										console.log(result);
