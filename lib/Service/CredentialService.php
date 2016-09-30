@@ -44,6 +44,10 @@ class CredentialService {
 		return $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
 	}
 
+	public function getRandomCredentialByVaultId($vault_id, $user_id) {
+		return array_pop($this->credentialMapper->getRandomCredentialByVaultId($vault_id, $user_id));
+	}
+
 	public function getExpiredCredentials($timestamp) {
 		return $this->credentialMapper->getExpiredCredentials($timestamp);
 	}

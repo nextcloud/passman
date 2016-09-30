@@ -38,9 +38,28 @@ class VaultController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function listVaults() {
-
+		$result = array();
 		$vaults = $this->vaultService->getByUser($this->userId);
-		return new JSONResponse($vaults);
+
+		$protected_credential_fields = array('getDescription','getEmail','getUsername','getPassword');
+
+		foreach($vaults as $vault){
+			$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
+			$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
+			$challenge_password = $credential->{$secret_field}();
+			$vault = array(
+				'vault_id' => $vault->getId(),
+				'guid' => $vault->getGuid(),
+				'name' => $vault->getName(),
+				'created' => $vault->getCreated(),
+				'public_sharing_key' => $vault->getPublicSharingKey(),
+				'last_access' => $vault->getlastAccess(),
+				'challenge_password' => $challenge_password
+			);
+			array_push($result, $vault);
+		}
+
+		return new JSONResponse($result);
 	}
 
 	/**
