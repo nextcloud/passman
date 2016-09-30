@@ -22,7 +22,7 @@ angular.module('passmanApp')
 					_vault.vaultKey = angular.copy(SettingsService.getSetting('defaultVaultPass'));
 					VaultService.setActiveVault(_vault);
 					$scope.active_vault = _vault;
-
+					console.log(_vault)
 					//@TODO check if vault exists
 				}
 

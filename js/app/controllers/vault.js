@@ -101,19 +101,17 @@ angular.module('passmanApp')
 			_vault.vaultKey = angular.copy(vault_key);
 
 			VaultService.setActiveVault(_vault);
-			VaultService.getVault(vault).then(function (vault) {
-				var credential = vault.credentials[0];
-				try {
-					var c = CredentialService.decryptCredential(credential);
-					if ($scope.remember_vault_password) {
-						SettingsService.setSetting('defaultVaultPass', vault_key);
-					}
-					_loginToVault(vault, vault_key);
-
-				} catch (e) {
-					$scope.error = 'Incorrect vault password!'
+			try {
+				var c = EncryptService.decryptString(vault.challenge_password);
+				if ($scope.remember_vault_password) {
+					SettingsService.setSetting('defaultVaultPass', vault_key);
 				}
-			})
+				_loginToVault(vault, vault_key);
+
+			} catch (e) {
+				$scope.error = 'Incorrect vault password!'
+			}
+
 		};
 
 

@@ -105,12 +105,15 @@ angular.module('passmanApp')
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 				console.log(list);
 				for (var i = 0; i < list.length; i++){
+					console.log(list[i]);
 					if (list[i].type == "user") {
 						ShareService.getVaultsByUser(list[i].userId).then(function (data) {
+							console.log(list);
+							console.log(i);
 							list[i].vaults = data;
 							console.log(data);
 							var start = new Date().getTime() / 1000;
-							;
+
 							ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
 								.progress(function (data) {
 									console.log(data);
@@ -131,7 +134,7 @@ angular.module('passmanApp')
 								list[i].vaults = data;
 								console.log(data);
 								var start = new Date().getTime() / 1000;
-								;
+
 								ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
 									.progress(function (data) {
 										console.log(data);
