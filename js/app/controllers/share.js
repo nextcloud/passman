@@ -105,12 +105,10 @@ angular.module('passmanApp')
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 				console.log(list);
 				for (var i = 0; i < list.length; i++){
-					console.log(list[i]);
+					var iterator = i;
 					if (list[i].type == "user") {
 						ShareService.getVaultsByUser(list[i].userId).then(function (data) {
-							console.log(list);
-							console.log(i);
-							list[i].vaults = data;
+							list[iterator].vaults = data;
 							console.log(data);
 							var start = new Date().getTime() / 1000;
 
