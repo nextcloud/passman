@@ -59,7 +59,7 @@
 </div>
 <div off-click="closeSelected()">
 
-	<div class="loaderContainer" ng-show="show_spinner">
+	<div class="loaderContainer" ng-if="show_spinner">
 		<div class="loader" use-theme type="'border-bottom-color'"></div>
 	</div>
 	<div ng-init="menuOpen = false;">
@@ -79,7 +79,7 @@
 				</td>
 			</tr>
 		</table>
-		<ul class="grid-view" ng-show="view_mode === 'grid'">
+		<ul class="grid-view" ng-if="view_mode === 'grid'">
 				<li class="credential" ng-repeat="credential in active_vault.credentials | credentialSearch:filterOptions | tagFilter:selectedtags | orderBy:'label'| as:this:'filtered_credentials'"
 					ng-if="credential.hidden == 0 && showCredentialRow(credential)"
 					ng-click="selectCredential(credential)"

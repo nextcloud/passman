@@ -8,8 +8,8 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService',
-		function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService) {
+	.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService','NotificationService',
+		function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService) {
 			$scope.vault_settings = {};
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
@@ -34,7 +34,7 @@ angular.module('passmanApp')
 								'minimumDigitCount': 3,
 								'avoidAmbiguousCharacters': false,
 								'requireEveryCharType': true,
-								'generateOnCreate': true,
+								'generateOnCreate': true
 							})
 					})
 				}
@@ -46,6 +46,7 @@ angular.module('passmanApp')
 				_vault.vault_settings = angular.copy($scope.vault_settings);
 				VaultService.updateVault(_vault).then(function () {
 					VaultService.setActiveVault(_vault);
+					NotificationService.showNotification('Settings saved', 5000);
 				});
 			};
 
