@@ -90,6 +90,12 @@ style('passman', 'app');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
+
+	<div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
+		Warning! Using http with passman can be insecure!
+		<i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
+	</div>
+
 	<div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
 		<ul>
 			<li class="taginput">
