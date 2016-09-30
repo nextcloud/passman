@@ -15,6 +15,7 @@ angular.module('passmanApp')
 				'<div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}"aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%;" use-theme>'+
 				'<span class="sr-only">{{progress}}% Complete</span>' +
 				'<span ng-if="index && total" class="progress-label" use-theme type="\'color\'" color="\'true\'">{{index}} / {{total}}</span>'+
+				'<span ng-if="!index && !total" class="progress-label" use-theme type="\'color\'" color="\'true\'">{{progress}}%</span>'+
 				'</div>'+
 				'</div>',
 			scope: {
