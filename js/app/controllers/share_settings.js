@@ -16,7 +16,7 @@ angular.module('passmanApp')
 
             ShareService.generateRSAKeys(length).progress(function(progress){
                 $scope.progress = progress > 0 ? 2:1;
-                $scope.$apply();
+                $scope.$digest();
             }).then(function(kp){
                 console.log('stuff done');
                 $scope.generating = false;

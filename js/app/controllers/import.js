@@ -40,7 +40,7 @@ angular.module('passmanApp')
 			file_data = file.data.split(',');
 			file_data = decodeURIComponent(escape(window.atob( file_data[1] ))); //window.atob();
 			_log('File read successfully!')
-			$scope.$apply();
+			$scope.$digest();
 		};
 
 		$scope.fileLoadError = function (file) {
@@ -121,7 +121,7 @@ angular.module('passmanApp')
 					}
 				}).progress(function(progress){
 					$scope.file_read_progress = progress;
-					$scope.$apply();
+					$scope.$digest();
 				});
 			}
 		}

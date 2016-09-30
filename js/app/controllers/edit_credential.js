@@ -169,7 +169,7 @@ angular.module('passmanApp')
 				});
 
 
-				$scope.$apply()
+				$scope.$digest()
 			};
 
 			$scope.fileLoadError = function (error, file) {
@@ -181,7 +181,7 @@ angular.module('passmanApp')
 			$scope.fileSelectProgress = function (progress) {
 				if (progress) {
 					$scope.fileprogress = progress;
-					$scope.$apply()
+					$scope.$digest()
 
 				}
 			};
@@ -208,7 +208,7 @@ angular.module('passmanApp')
 				qrInfo[parsedQR[3]] = parsedQR[4];
 				qrInfo[parsedQR[5]] = parsedQR[6];
 				$scope.storedCredential.otp = qrInfo;
-				$scope.$apply()
+				$scope.$digest()
 			};
 
 			$scope.saveCredential = function () {

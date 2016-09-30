@@ -81,11 +81,13 @@ jQuery(document).ready(function () {
 	jQuery(document).on('click', '.undoDelete', function () {
 		var credential = findItemByID($(this).attr('data-item-id'));
 		angular.element('#app-content-wrapper').scope().recoverCredential(credential);
+		//Outside anglular we need $apply
 		angular.element('#app-content-wrapper').scope().$apply();
 	});
 	jQuery(document).on('click', '.undoRestore', function () {
 		var credential = findItemByID($(this).attr('data-item-id'));
 		angular.element('#app-content-wrapper').scope().deleteCredential(credential);
+		//Outside anglular we need $apply
 		angular.element('#app-content-wrapper').scope().$apply();
 	});
 	var adjustControlsWidth = function(r) {
