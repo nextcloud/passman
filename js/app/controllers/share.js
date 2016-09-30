@@ -62,7 +62,24 @@ angular.module('passmanApp')
 
 
 		$scope.share_settings = {
-			credentialSharedWithUserAndGroup:[]
+			credentialSharedWithUserAndGroup:[
+				{
+					accessLevel:1,
+					displayName:"wolf",
+					userId:"wolf",
+					type:'user'
+				},
+				{
+					accessLevel:1,
+					displayName:"cat",
+					userId:"cat",
+					type:'user'
+				}
+			],
+			cypher_progress:{
+				done:0,
+				total:0
+			}
 		};
 
 		$scope.accessLevels = [
@@ -100,6 +117,9 @@ angular.module('passmanApp')
 		};
 
 		$scope.applyShare = function(){
+			$scope.share_settings.cypher_progress.done = 0;
+			$scope.share_settings.cypher_progress.total = 0;
+
 			ShareService.generateSharedKey(20).then(function(key){
 				console.log(key);
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
@@ -108,13 +128,16 @@ angular.module('passmanApp')
 					var iterator = i;
 					if (list[i].type == "user") {
 						ShareService.getVaultsByUser(list[i].userId).then(function (data) {
+							$scope.share_settings.cypher_progress.total += data.length;
+
 							list[iterator].vaults = data;
 							console.log(data);
 							var start = new Date().getTime() / 1000;
 
 							ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
 								.progress(function (data) {
-									console.log(data);
+									$scope.share_settings.cypher_progress.done ++;
+									$scope.$digest();
 								})
 								.then(function (result) {
 									console.log(result);
