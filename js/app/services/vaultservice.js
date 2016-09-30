@@ -73,8 +73,9 @@ angular.module('passmanApp')
 			},
 			updateVault: function (vault) {
 				var _vault = angular.copy(vault);
-				delete vault.defaultVaultPass;
-				delete vault.defaultVault;
+				delete _vault.defaultVaultPass;
+				delete _vault.defaultVault;
+				delete _vault.vaultKey;
 				_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings))
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.vault_id);
 				return $http.patch(queryUrl, _vault).then(function (response) {
