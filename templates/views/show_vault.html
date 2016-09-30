@@ -71,9 +71,9 @@
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 				<td>
 					<span class="icon"><i class="fa fa-lock"></i> </span>
-					<span class="label">{{credential.label}}</span>
+					<span class="label">{{ ::credential.label}}</span>
 					<span class="tags">
-				<span class="tag" ng-repeat="tag in credential.tags_raw">{{tag.text}}</span>
+				<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 
 			</span>
 				</td>
@@ -85,9 +85,9 @@
 					ng-click="selectCredential(credential)"
 					use-theme type="'border-color'">
 					<div class="credential_content" >
-						<div class="label">{{credential.label}}</div>
+						<div class="label">{{ ::credential.label}}</div>
 						<div class="tags">
-							<div class="tag" ng-repeat="tag in credential.tags_raw">{{tag.text}}</div>
+							<div class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</div>
 						</div>
 					</div>
 				</li>
