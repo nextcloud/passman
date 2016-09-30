@@ -33,9 +33,6 @@ use \OCP\AppFramework\Db\Entity;
  * @method integer getSharingKeysGenerated()
  * @method void setVaultSettings(integer $value)
  * @method integer getVaultSettings()
- * @method void setVaultPass(string $value)
- * @method string getVaultPass()
-
  */
 
 
@@ -52,8 +49,7 @@ class Vault extends Entity implements  \JsonSerializable{
 	protected $privateSharingKey;
 	protected $sharingKeysGenerated;
 	protected $vaultSettings;
-	protected $vaultPass;
-
+	
 	public function __construct() {
 		// add types in constructor
 		$this->addType('created', 'integer');
