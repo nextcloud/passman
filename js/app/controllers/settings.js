@@ -44,7 +44,6 @@ angular.module('passmanApp')
 
 
 			$scope.saveVaultSettings = function () {
-				console.log($scope.new_vault_name);
 				var _vault = $scope.active_vault;
 				_vault.name = $scope.new_vault_name;
 				_vault.vault_settings = angular.copy($scope.vault_settings);
