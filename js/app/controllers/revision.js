@@ -18,12 +18,27 @@ angular.module('passmanApp')
 			} else {
 				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
 					var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
-					_vault.vaultKey = angular.copy(SettingsService.getSetting('defaultVaultPass'));
-					VaultService.setActiveVault(_vault);
-					$scope.active_vault = _vault;
-
+					VaultService.getVault(_vault).then(function (vault) {
+						vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+						VaultService.setActiveVault(vault);
+						$scope.active_vault = vault;
+						$scope.$parent.selectedVault = true;
+						$scope.vault_settings.pwSettings = VaultService.getVaultSetting('pwSettings',
+							{
+								'length': 12,
+								'useUppercase': true,
+								'useLowercase': true,
+								'useDigits': true,
+								'useSpecialChars': true,
+								'minimumDigitCount': 3,
+								'avoidAmbiguousCharacters': false,
+								'requireEveryCharType': true,
+								'generateOnCreate': true
+							})
+					})
 				}
 			}
+
 			if ($scope.active_vault) {
 				$scope.$parent.selectedVault = true;
 			}
