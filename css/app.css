@@ -42,7 +42,6 @@
     -ms-transition: background-color 250ms linear;
     transition: background-color 250ms linear; }
   .tab_header li.active {
-    background-color: #0082c9 !important;
     color: #fff; }
 
 .tab_container {
