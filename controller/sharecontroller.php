@@ -77,9 +77,20 @@ class ShareController extends ApiController {
 
 
 		foreach ($groupsTmp as $group) {
+		    $group_users = $group->getUsers();
+            $final_users = [];
+            foreach ($group_users as $user){
+                $final_users[] = [
+                    'text' => $user->getDisplayName(),
+                    'uid' => $user->getUID(),
+                    'type' => 'user'
+                ];
+            }
+
 			$groups[] = array(
 				'text' => $group->getGID(),
 				'uid' => $group->getGID(),
+                'users' => $final_users,
 				'type' => 'group'
 			);
 		}

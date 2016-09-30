@@ -105,20 +105,65 @@ angular.module('passmanApp')
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 				console.log(list);
 				for (var i = 0; i < list.length; i++){
-					ShareService.getVaultsByUser(list[i].userId).then(function(data){
-						list[i].vaults = data;
-						console.log(data);
-						var start = new Date().getTime() / 1000;;
-						ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
-						.progress(function(data){
+					if (list[i].type == "user") {
+						ShareService.getVaultsByUser(list[i].userId).then(function (data) {
+							list[i].vaults = data;
 							console.log(data);
-						})
-						.then(function(result){
-							console.log(result);
-							console.log("Took: " +  ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
+							var start = new Date().getTime() / 1000;
+							;
+							ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
+								.progress(function (data) {
+									console.log(data);
+								})
+								.then(function (result) {
+									console.log(result);
+									console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
+								});
 						});
-					});
+						list[i].processed = true;
+					}
+					else if (list[i].type == "group"){
+						for (var x = 0; x < list[i].users.length; x++){
+							if ($scope.isUserReady(list[i].users[x].userId)){
+								continue;
+							}
+							ShareService.getVaultsByUser(list[i].userId).then(function (data) {
+								list[i].vaults = data;
+								console.log(data);
+								var start = new Date().getTime() / 1000;
+								;
+								ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
+									.progress(function (data) {
+										console.log(data);
+									})
+									.then(function (result) {
+										console.log(result);
+										console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
+									});
+							});
+							list[i].processed = true;
+						}
+					}
 				}
 			})
+		};
+
+		$scope.isUserReady = function (userId){
+			var list = $scope.share_settings.credentialSharedWithUserAndGroup;
+			for (var i = 0; i < list.length; i++){
+				if (list[i].type == "user"){
+					if (list[i].userId == userId && list[i].ready){
+						return true;
+					}
+				}
+				else if (list[i].type == "group"){
+					for (var x = 0; x < list[i].users.length; x++){
+						if (list[i].users[x].userId == userId && list[i].users[x].ready){
+							return true;
+						}
+					}
+				}
+			}
+			return false;
 		}
 	}]);
