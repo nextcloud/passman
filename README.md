@@ -22,6 +22,18 @@ Features:
 
 For more screenshots: [Click here](http://imgur.com/a/giKVt)
 
+## Code reviews
+If you have any improvements regarding our code.
+Please do the following
+- Clone us
+- Make your edits
+- Add your name to the contributors 
+- Send a PR   
+
+Or if you're feeling lazy, create an issue, and we'll think about it.
+
+
+
 ## Development
 Passman uses a single `.js` file for the templates.
 `templates.js` is build width `grunt`.
