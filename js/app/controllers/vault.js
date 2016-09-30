@@ -101,11 +101,8 @@ angular.module('passmanApp')
 			_vault.vaultKey = angular.copy(vault_key);
 
 			VaultService.setActiveVault(_vault);
-
-
-			var challenge_password = vault.challenge_password;
 			try {
-				var c = EncryptService.decryptString(challenge_password);
+				var c = EncryptService.decryptString(vault.challenge_password);
 				if ($scope.remember_vault_password) {
 					SettingsService.setSetting('defaultVaultPass', vault_key);
 				}
