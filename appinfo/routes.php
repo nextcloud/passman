@@ -20,6 +20,7 @@
 return [
 	'routes' => [
 		['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
+		['name' => 'page#bookmarklet', 'url' => '/bookmarklet', 'verb' => 'GET'],
 
 		//Vault
 		['name' => 'vault#listVaults', 'url' => '/api/v2/vaults', 'verb' => 'GET'],
