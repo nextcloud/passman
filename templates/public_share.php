@@ -1,0 +1,1 @@
+Public shared credential
