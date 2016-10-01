@@ -160,7 +160,7 @@
     #app-content #app-content-wrapper #passman-controls {
       border-bottom: 1px solid #c9c9c9; }
     #app-content #app-content-wrapper .title {
-      width: calc(100% - 375px);
+      width: calc(100% - 380px);
       text-align: center;
       display: inline-block;
       font-weight: bold;
