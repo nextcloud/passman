@@ -42,14 +42,20 @@ class CronService {
 
 			$sql = 'SELECT count(*) as rows from `*PREFIX*notifications` WHERE `subject`= \'credential_expired\' AND object_id=?';
 			$query = $this->db->prepareQuery($sql);
-			$query->bindParam(1, $credential->getId(), \PDO::PARAM_INT);
+			$id = $credential->getId();
+			$query->bindParam(1, $id, \PDO::PARAM_INT);
 			$result = $query->execute();
-			if($result->fetchRow()['rows'] === 0) {
+			$this->logger->debug($credential->getLabel() .' is expired, checking notifications!', array('app' => 'passman'));
+			if($result->fetchRow()['rows'] == 0) {
+				$this->logger->debug($credential->getLabel() .' is expired, adding notification!', array('app' => 'passman'));
+
 				$this->activityService->add(
 					Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
 					'', array(),
 					$link, $credential->getUserId(), Activity::TYPE_ITEM_EXPIRED);
 				$this->notificationService->credentialExpiredNotification($credential);
+			} else {
+				$this->logger->debug($credential->getLabel() .' is expired, already notified!', array('app' => 'passman'));
 			}
 
 		}
