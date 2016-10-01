@@ -123,6 +123,7 @@ angular.module('passmanApp')
 			$scope.share_settings.cypher_progress.done = 0;
 			$scope.share_settings.cypher_progress.total = 0;
 			$scope.share_settings.cypher_progress.times = [];
+			$scope.share_settings.cypher_progress.times_total = [];
 
 			ShareService.generateSharedKey(20).then(function(key){
 				console.log(key);
@@ -159,4 +160,14 @@ angular.module('passmanApp')
 				}
 			})
 		};
+
+		$scope.calculate_total_time = function(){
+			$scope.share_settings.cypher_progress.times = $scope.share_settings.cypher_progress.times || [];
+			var total = 0;
+			for (var i = 0; i < $scope.share_settings.cypher_progress.times.length; i++){
+				total += $scope.share_settings.cypher_progress.times[i].time;
+			}
+			console.log(total);
+			return total;
+		}
 	}]);

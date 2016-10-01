@@ -10,6 +10,34 @@ angular.module('passmanApp')
         $scope.progress = 1;
         $scope.generating = false;
 
+
+
+        $scope.available_sizes = [
+            {
+                size: 1024,
+                name: 1024
+            },
+            {
+                size: 2048,
+                name: 2048
+            },
+            {
+                size: 4096,
+                name: 4096
+            }
+        ];
+
+        $scope.setKeySize = function (size) {
+            for (var i = 0; i < $scope.available_sizes.length; i++) {
+                if ($scope.available_sizes[i].size == size) {
+                    $scope.key_size = $scope.available_sizes[i];
+                    return;
+                }
+            }
+        };
+
+        $scope.setKeySize(2048);
+
 		$scope.generateKeys = function (length) {
 		    $scope.progress = 1;
             $scope.generating = true;
