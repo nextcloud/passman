@@ -35,6 +35,13 @@ module.exports = function (grunt) {
 						src: ["**/app.scss"],
 						dest: "css",
 						ext: ".css"
+					},
+					{
+						expand: true,
+						cwd: "sass",
+						src: ["**/bookmarklet.scss"],
+						dest: "css",
+						ext: ".css"
 					}
 				]
 			}
