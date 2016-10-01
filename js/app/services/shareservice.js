@@ -25,6 +25,17 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			shareWithUser: function (credential, target_user_data){
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/share');
+				return $http.post(queryUrl,
+					{
+						item_id: credential.credential_id,
+						item_guid: credential.guid,
+						permissions: target_user_data.accessLevel,
+						vaults: target_user_data.vaults,
+					}
+				);
+			},
 			getVaultsByUser: function (userId) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vaults/'+ userId);
 				return $http.get(queryUrl, {search: userId}).then(function (response) {
@@ -105,10 +116,12 @@ angular.module('passmanApp')
 			cypherRSAStringWithPublicKeyBulkAsync: function(vaults, string){
 				var workload = function(){
 					if (this.current_index < this.vaults.length > 0 && this.vaults.length > 0) {
+						var _vault = angular.copy(this.vaults[this.current_index]);
+						_vault.key = forge.util.encode64(
+							_vault.public_sharing_key.encrypt(this.string)
+						);
 						this.data.push(
-							forge.util.encode64(
-								this.vaults[this.current_index].public_sharing_key.encrypt(this.string)
-							)
+							_vault
 						);
 						this.current_index++;
 

@@ -5,7 +5,7 @@
  * Time: 14:19
  */
 
-namespace OCA\passman\lib\Db;
+namespace OCA\Passman\Db;
 
 use OCP\AppFramework\Db\Entity;
 

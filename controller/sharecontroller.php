@@ -12,6 +12,7 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Db\Vault;
+use OCA\Passman\Service\ShareService;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -32,6 +33,8 @@ class ShareController extends ApiController {
 	private $groupManager;
 	private $userManager;
 	private $vaultService;
+    private $shareService;
+
 	private $limit = 50;
 	private $offset = 0;
 
@@ -43,7 +46,8 @@ class ShareController extends ApiController {
 								IGroupManager $groupManager,
 								IUserManager $userManager,
 								ActivityService $activityService,
-								VaultService $vaultService
+								VaultService $vaultService,
+                                ShareService $shareService
 	) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
@@ -51,8 +55,12 @@ class ShareController extends ApiController {
 		$this->groupManager = $groupManager;
 		$this->activityService = $activityService;
 		$this->vaultService = $vaultService;
+        $this->shareService = $shareService;
 	}
 
+    public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions){
+        $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions);
+    }
 
 	public function searchUsers($search) {
 		$users = array();
@@ -119,7 +127,7 @@ class ShareController extends ApiController {
 		foreach($user_vaults as $vault){
 			array_push($result,
 				array(
-					'vault_id' => $vault,
+					'vault_id' => $vault->getId(),
 					'guid' => $vault->getGuid(),
 					'public_sharing_key' => $vault->getPublicSharingKey(),
 					'user_id' => $user_id,

@@ -6,11 +6,11 @@
  * Time: 14:20
  */
 
-namespace OCA\passman\lib\Db;
+namespace OCA\Passman\Db;
 
 
 use OCP\AppFramework\Db\Mapper;
-use OCP\IGroup;
+use OCP\IDBConnection;
 use OCP\IUser;
 use OCA\Passman\Utility\Utils;
 
