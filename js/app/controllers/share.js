@@ -63,12 +63,12 @@ angular.module('passmanApp')
 
 		$scope.share_settings = {
 			credentialSharedWithUserAndGroup:[
-				// {
-				// 	accessLevel:1,
-				// 	displayName:"wolf",
-				// 	userId:"wolf",
-				// 	type:'user'
-				// },
+				{
+					accessLevel:1,
+					displayName:"wolf",
+					userId:"wolf",
+					type:'user'
+				},
 				{
 					accessLevel:1,
 					displayName:"cat",
@@ -110,7 +110,7 @@ angular.module('passmanApp')
 						type: shareWith[i].type,
 						accessLevel: selectedAccessLevel
 					};
-					if (obj.type == 'group') obj.users = shareWith[i].users;
+					// if (obj.type == 'group') obj.users = shareWith[i].users;
 					$scope.share_settings.credentialSharedWithUserAndGroup.push(
 						obj
 					)
@@ -119,8 +119,10 @@ angular.module('passmanApp')
 		};
 
 		$scope.applyShare = function(){
+			$scope.share_settings.cypher_progress.percent = 0;
 			$scope.share_settings.cypher_progress.done = 0;
 			$scope.share_settings.cypher_progress.total = 0;
+			$scope.share_settings.cypher_progress.times = [];
 
 			ShareService.generateSharedKey(20).then(function(key){
 				console.log(key);
@@ -130,9 +132,6 @@ angular.module('passmanApp')
 					var iterator = i; 	// Keeps it available inside the promises callback
 
 					if (list[i].type == "user") {
-						if ($scope.isUserReady(list[iterator].userId)){		// Check if the user has already been processed on a group
-							continue;
-						}
 						ShareService.getVaultsByUser(list[i].userId).then(function (data) {
 							$scope.share_settings.cypher_progress.total += data.length;
 
@@ -143,63 +142,21 @@ angular.module('passmanApp')
 							ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
 								.progress(function (data) {
 									$scope.share_settings.cypher_progress.done ++;
+									$scope.share_settings.cypher_progress.percent = $scope.share_settings.cypher_progress.done / $scope.share_settings.cypher_progress.total * 100;
 									$scope.$digest();
 								})
 								.then(function (result) {
 									console.log(result);
 									console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
+									$scope.share_settings.cypher_progress.times.push({
+										time: ((new Date().getTime() / 1000) - start),
+										user: data[0].user_id
+									});
+									$scope.$digest();
 								});
 						});
-						list[i].processed = true;
-					}
-					else if (list[i].type == "group"){
-						for (var x = 0; x < list[iterator].users.length; x++){
-							var xiterator = x;		// Keeps it available inside the promises callback
-							if ($scope.isUserReady(list[iterator].users[x].userId)){			// Check if the user was already processed all alone
-								continue;
-							}
-							ShareService.getVaultsByUser(list[iterator].users[xiterator].userId).then(function (data) {
-								if (data.length == 0) return;
-								$scope.share_settings.cypher_progress.total += data.length;
-
-								list[iterator].users[xiterator].vaults = data;
-								console.log(data);
-
-								var start = new Date().getTime() / 1000;
-
-								ShareService.cypherRSAStringWithPublicKeyBulkAsync(data, key)
-									.progress(function (data) {
-										// console.log(data);
-										$scope.share_settings.cypher_progress.done ++;
-									})
-									.then(function (result) {
-										console.log(result);
-										console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
-									});
-							});
-							list[i].processed = true;
-						}
 					}
 				}
 			})
 		};
-
-		$scope.isUserReady = function (userId){
-			var list = $scope.share_settings.credentialSharedWithUserAndGroup;
-			for (var i = 0; i < list.length; i++){
-				if (list[i].type == "user"){
-					if (list[i].userId == userId && list[i].ready){
-						return true;
-					}
-				}
-				else if (list[i].type == "group"){
-					for (var x = 0; x < list[i].users.length; x++){
-						if (list[i].users[x].userId == userId && list[i].users[x].ready){
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-		}
 	}]);

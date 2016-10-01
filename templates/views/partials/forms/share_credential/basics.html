@@ -33,9 +33,26 @@
 
 			<div ng-if="share_settings.cypher_progress.done > 0">
 				Cyphering...
-				<div progress-bar="share_settings.cypher_progress" index="share_settings.cypher_progress.done" total="share_settings.cypher_progress.total"></div>
+				<div progress-bar="share_settings.cypher_progress.percent" index="share_settings.cypher_progress.done" total="share_settings.cypher_progress.total"></div>
 			</div>
 		</div>
+	</div>
+	<div class="col-xs-12 col-md-6">
+		<table class="table">
+			<thead>
+			<tr>
+				<td>User</td>
+				<td>Crypto time</td>
+			</tr>
+			</thead>
+			<tr ng-repeat="user in share_settings.cypher_progress.times">
+				<td>
+					<i class="fa fa-user"></i>
+					{{user.user}}
+				</td>
+				<td>{{user.time}} s</td>
+			</tr>
+		</table>
 	</div>
 </div>
 <div class="row">
