@@ -1,0 +1,41 @@
+header, nav{
+  display: none;
+}
+#content{
+
+}
+#content-wrapper{
+  padding-top: 0;
+
+}
+
+#app-content-wrapper{
+  min-height: inherit !important;
+}
+
+.warning_bar .fa-times {
+ margin-right: 20px;
+}
+.tab_container{
+  padding-top: 10px;
+  div{
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+  margin-bottom: 20px;
+}
+.vault_wrapper{
+  margin-top: 70px;
+}
+.active_vault{
+  float: right;
+  text-align: right;
+  padding-right: 5px;
+  font-size: 10px;
+}
+.tab_header{
+  margin: 0;
+}
+.angularjs-datetime-picker{
+  z-index: 9999;
+}
