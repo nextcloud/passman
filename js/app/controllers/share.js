@@ -175,7 +175,6 @@ angular.module('passmanApp')
 			for (var i = 0; i < $scope.share_settings.cypher_progress.times.length; i++){
 				total += $scope.share_settings.cypher_progress.times[i].time;
 			}
-			console.log(total);
 			return total;
 		}
 	}]);
