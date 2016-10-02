@@ -44,6 +44,7 @@ angular.module('passmanApp')
 							delete _shared_credential.credential_data;
 							_shared_credential_data.acl = _shared_credential;
 							_shared_credential_data.tags_raw = _shared_credential_data.tags;
+							console.log(_shared_credential_data)
 							$scope.active_vault.credentials.push(_shared_credential_data);
 						}
 					}

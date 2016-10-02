@@ -213,34 +213,41 @@
 		</div>
 
 		<div ng-show="selectedCredential">
-			<button class="button" ng-click="editCredential(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-edit"></span> Edit
-			</button>
-			<button class="button"
-					ng-click="deleteCredential(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-trash"></span> Delete
-			</button>
-			<button class="button"
-					ng-click="shareCredential(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-share"></span> Share
-			</button>
+			<div ng-if="!selectedCredential.acl || selectedCredential.acl.permissions == 2">
+				<button class="button"
+						ng-click="editCredential(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0">
+					<span class="fa fa-edit"></span> Edit
+				</button>
+				<button class="button"
+						ng-click="deleteCredential(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0">
+					<span class="fa fa-trash"></span> Delete
+				</button>
+				<button class="button"
+						ng-click="shareCredential(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0">
+					<span class="fa fa-share"></span> Share
+				</button>
 
-			<button class="button" ng-click="getRevisions(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-undo"></span> Revisions
-			</button>
+				<button class="button"
+						ng-click="getRevisions(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0">
+					<span class="fa fa-undo"></span> Revisions
+				</button>
 
-			<button class="button" ng-if="selectedCredential.delete_time > 0"
-					ng-click="recoverCredential(selectedCredential)">
-				<span class="fa fa-recycle"></span> Recover
-			</button>
-			<button class="button" ng-if="selectedCredential.delete_time > 0"
-					ng-click="destroyCredential(selectedCredential)">
-				<span class="fa fa-bomb"></span> Destroy
-			</button>
+				<button class="button"
+						ng-if="selectedCredential.delete_time > 0"
+						ng-click="recoverCredential(selectedCredential)">
+					<span class="fa fa-recycle"></span> Recover
+				</button>
+				<button class="button"
+						ng-if="selectedCredential.delete_time > 0"
+						ng-click="destroyCredential(selectedCredential)">
+					<span class="fa fa-bomb"></span> Destroy
+				</button>
+			</div>
+
 		</div>
 	</div>
 </div>
@@ -258,7 +265,8 @@
 			<td>Date</td>
 		</tr>
 		</thead>
-		<tr ng-repeat="share_request in incoming_share_requests" ng-if="share_request.target_vault_id == active_vault.vault_id">
+		<tr ng-repeat="share_request in incoming_share_requests"
+			ng-if="share_request.target_vault_id == active_vault.vault_id">
 			<td>
 				{{share_request.credential_label}}
 			</td>
@@ -273,7 +281,8 @@
 				HH:mm:ss'}}
 			</td>
 			<td>
-				<span class="link" ng-click="acceptShareRequest(share_request)">Accept</span>  | <span class="link">Decline</span>
+				<span class="link" ng-click="acceptShareRequest(share_request)">Accept</span>
+				| <span class="link">Decline</span>
 			</td>
 		</tr>
 	</table>
