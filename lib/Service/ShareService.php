@@ -77,7 +77,7 @@ class ShareService {
         $acl->setExpire(0);
         $acl->setPermissions($permissions);
         $acl->setVaultId($request->getTargetVaultId());
-        $acl->getVaultGuid($request->getTargetVaultGuid());
+        $acl->setVaultGuid($request->getTargetVaultGuid());
         $acl->setSharedKey($final_shared_key);
 
         $this->sharingACL->createACLEntry($acl);
