@@ -71,7 +71,17 @@ angular.module('passmanApp')
 					});
 				}
 			});
-
+			
+			$scope.acceptShareRequest = function(share_request){
+				console.log('Accepted share request', share_request);
+				var crypted_shared_key = '';
+				ShareService.saveSharingRequest(share_request, crypted_shared_key).then(function (result) {
+					console.log(result)
+				})	
+			};
+			
+			
+			
 			$scope.addCredential = function () {
 				var new_credential = CredentialService.newCredential();
 				var enc_c = CredentialService.encryptCredential(new_credential);

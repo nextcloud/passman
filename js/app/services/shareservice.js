@@ -63,7 +63,9 @@ angular.module('passmanApp')
 					item_guid: request.item_guid,
 					target_vault_guid: request.target_vault_guid,
 					final_shared_key: crypted_shared_key
-				});
+				}).then(function (response) {
+					return response.data;
+				})
 			},
 			encryptSharedCredential: function(credential, sharedKey){
 				var _credential = angular.copy(credential);
