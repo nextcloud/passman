@@ -77,6 +77,7 @@ angular.module('passmanApp')
 			},
 			encryptSharedCredential: function(credential, sharedKey){
 				var _credential = angular.copy(credential);
+				_credential.shared_key = EncryptService.encryptString(sharedKey);
 				var encrypted_fields = CredentialService.getEncryptedFields();
 				for(var i = 0; i < encrypted_fields.length; i++){
 					var field = encrypted_fields[i];

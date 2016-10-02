@@ -55,7 +55,7 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getOtp()
  * @method void setHidden(bool $value)
  * @method string getHidden()
- * @method void setSharedkey(string $value)
+ * @method void setSharedKey(string $value)
  * @method string getSharedKey()
 
 
@@ -98,7 +98,6 @@ class Credential extends Entity implements  \JsonSerializable{
 		$this->addType('deleteTime', 'integer');
 		$this->addType('vaultId', 'integer');
 		$this->addType('credentialId', 'integer');
-		$this->addType('isShared', 'integer');
 		$this->addType('hidden', 'integer');
 	}
 
