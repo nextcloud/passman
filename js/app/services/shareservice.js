@@ -49,6 +49,18 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			getPendingRequests: function () {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/pending');
+				return $http.get(queryUrl);
+			},
+			saveSharingRequest: function (request, crypted_shared_key) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/save');
+				return $http.post(queryUrl, {
+					item_guid: request.item_guid,
+					target_vault_guid: request.target_vault_guid,
+					final_shared_key: crypted_shared_key
+				});
+			},
 			encryptSharedCredential: function(credential, sharedKey){
 				var _credential = angular.copy(credential);
 				var encrypted_fields = CredentialService.getEncryptedFields();
