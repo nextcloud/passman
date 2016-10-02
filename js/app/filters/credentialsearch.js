@@ -22,7 +22,7 @@ angular.module('passmanApp')
 					for(var f = 0; f < filter.fields.length; f++){
 						var field = filter.fields[f];
 						if(typeof c[field] === 'string' ){
-							if(c[field].indexOf(filter.filterText) >= 0){
+							if(c[field].toLowerCase().indexOf(filter.filterText.toLowerCase()) >= 0){
 								_credentials.push(c);
 								break;
 							}
