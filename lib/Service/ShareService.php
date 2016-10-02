@@ -9,6 +9,7 @@
 namespace OCA\Passman\Service;
 
 
+use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\ShareRequestMapper;
 use OCA\Passman\Db\SharingACL;
@@ -17,10 +18,12 @@ use OCA\Passman\Db\SharingACLMapper;
 class ShareService {
     private $sharingACL;
     private $shareRequest;
+    private $credential;
 
-    public function __construct(SharingACLMapper $sharingACL, ShareRequestMapper $shareRequest) {
+    public function __construct(SharingACLMapper $sharingACL, ShareRequestMapper $shareRequest, CredentialMapper $credentials) {
         $this->sharingACL = $sharingACL;
         $this->shareRequest = $shareRequest;
+        $this->credential = $credentials;
     }
 
     /**
@@ -88,4 +91,16 @@ class ShareService {
     public function getUserPendingRequests($user_id){
         return $this->shareRequest->getUserPendingRequests($user_id);
     }
+
+    public function getSharedItems($user_id, $vault_id){
+        $entries = $this->sharingACL->getVaultEntries($user_id, $vault_id);
+        $return = [];
+        foreach ($entries as $entry){
+            $tmp = $entry->jsonSerialize();
+            $tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId());
+            $return[] = $tmp;
+        }
+        return $return;
+    }
+
 }

@@ -37,4 +37,15 @@ class SharingACLMapper extends Mapper {
     public function createACLEntry(SharingACL $acl){
         return $this->insert($acl);
     }
+
+    /**
+     * Gets the currently accepted share requests from the given user for the given vault guid
+     * @param $user_id
+     * @param $vault_id
+     * @return SharingACL[]
+     */
+    public function getVaultEntries($user_id, $vault_id) {
+        $q = "SELECT * FROM {{ self::TABLE_NAME }} WHERE target_user_id = ? AND target_vault_guid = ?";
+        return $this->findEntities($q, [$user_id, $vault_id]);
+    }
 }
