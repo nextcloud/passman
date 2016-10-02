@@ -125,6 +125,8 @@ angular.module('passmanApp')
 				var _vault = angular.copy(vault);
 				_vault.vaultKey = angular.copy(vault_key);
 				VaultService.setActiveVault(_vault);
+				SettingsService.setSetting('defaultVaultPass', null);
+				SettingsService.setSetting('defaultVault', null);
 				var test_credential = CredentialService.newCredential();
 				test_credential.label = 'Test key for vault ' + vault_name;
 				test_credential.hidden = true;
