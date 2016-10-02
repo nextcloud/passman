@@ -99,9 +99,15 @@ angular.module('passmanApp')
 			};
 
 			console.log($scope.active_vault)
-			ShareService.getCredendialsSharedWithUs($scope.active_vault.guid).then(function(share_credentials){
-				console.log(share_credentials)
-			})
+			ShareService.getCredendialsSharedWithUs($scope.active_vault.guid).then(function(shared_credentials){
+				for(var c = 0; c < shared_credentials.length; c++){
+					var _shared_credential = shared_credentials[c];
+					console.log(_shared_credential)
+					var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
+					_shared_credential = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
+					console.log(_shared_credential);
+				}
+			});
 			
 			
 			$scope.addCredential = function () {
