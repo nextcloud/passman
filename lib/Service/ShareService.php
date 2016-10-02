@@ -115,4 +115,12 @@ class ShareService {
 		$this->shareRequest->deleteShareRequest($t);
 
 	}
+
+	public  function getSharingRequestById($id){
+		return $this->shareRequest->getSharingRequestById($id);
+	}
+
+	public function getShareRequestsByItemId($item_id){
+		return $this->shareRequest->getShareRequestsByItemId($item_id);
+	}
 }
