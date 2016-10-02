@@ -81,9 +81,17 @@ class Notifier implements INotifier {
 				}
 				return $notification;
 				break;
+
 			case 'credential_share_denied':
 				$notification->setParsedSubject(
 					(string) $l->t('%s has declined your share request for "%s".', $notification->getSubjectParameters())
+				);
+				return $notification;
+				break;
+
+			case 'credential_share_accepted':
+				$notification->setParsedSubject(
+					(string) $l->t('%s has accepted your share request for "%s".', $notification->getSubjectParameters())
 				);
 				return $notification;
 				break;

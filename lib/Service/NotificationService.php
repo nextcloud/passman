@@ -83,4 +83,15 @@ class NotificationService {
 		$this->manager->notify($notification);
 	}
 
+
+	function credentialAcceptedSharedNotification($data){
+		$notification = $this->manager->createNotification();
+		$notification->setApp('passman')
+			->setUser($data['target_user'])
+			->setDateTime(new \DateTime())
+			->setObject('passman_share_request', $data['req_id']) // $type and $id
+			->setSubject('credential_share_accepted', [$data['from_user'], $data['credential_label']]); // $subject and $parameters
+		$this->manager->notify($notification);
+	}
+
 }

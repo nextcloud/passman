@@ -176,6 +176,18 @@ class ShareController extends ApiController {
 			->setUser($this->userId->getUID());
 		$manager->markProcessed($notification);
 
+		$notification = array(
+			'from_user' => ucfirst($this->userId->getDisplayName()),
+			'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
+			'target_user' => $sr->getFromUserId(),
+			'req_id' => $sr->getId()
+		);
+
+		$this->notificationService->credentialAcceptedSharedNotification(
+			$notification
+		);
+
+
 		$this->shareService->applyShare($item_guid, $target_vault_guid, $final_shared_key);
 	}
 
