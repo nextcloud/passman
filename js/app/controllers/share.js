@@ -62,6 +62,13 @@ angular.module('passmanApp')
 
 
 		$scope.share_settings = {
+			linkSharing:{
+				enabled: false,
+				settings:{
+					type: 'null', // can be date or view_amount or null (for no expire)
+					amount: null
+				}
+			},
 			credentialSharedWithUserAndGroup:[
 				{
 					accessLevel:1,
@@ -135,6 +142,10 @@ angular.module('passmanApp')
 
 			ShareService.generateSharedKey(20).then(function(key){
 				console.log(key);
+
+
+				var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
+
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 				console.log(list);
 				for (var i = 0; i < list.length; i++){

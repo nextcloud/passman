@@ -24,6 +24,7 @@ use OCP\IUser;
 
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Service\ActivityService;
+use OCA\Passman\Activity;
 
 
 
