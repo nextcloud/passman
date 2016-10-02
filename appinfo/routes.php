@@ -50,7 +50,7 @@ return [
 		['name' => 'share#search', 'url' => '/api/v2/sharing/search', 'verb' => 'POST'],
 		['name' => 'share#getVaultsByUser', 'url' => '/api/v2/sharing/vaults/{user_id}', 'verb' => 'GET'],
         ['name' => 'share#applyIntermediateShare', 'url' => '/api/v2/sharing/share', 'verb' => 'POST'],
-        ['name' => 'share#savePendingRequest', 'url' => '/api/v2/sharing/save' 'verb' => 'POST'],
+        ['name' => 'share#savePendingRequest', 'url' => '/api/v2/sharing/save', 'verb' => 'POST'],
         ['name' => 'share#getPendingRequests', 'url' => '/api/v2/sharing/pending', 'verb' => 'POST'],
 
 
