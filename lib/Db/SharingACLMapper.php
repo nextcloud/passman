@@ -15,7 +15,7 @@ use OCP\IUser;
 use OCA\Passman\Utility\Utils;
 
 class SharingACLMapper extends Mapper {
-    const TABLE_NAME = '`*PREFIX*passman_sharing_acl`';
+    const TABLE_NAME = '*PREFIX*passman_sharing_acl';
 
     public function __construct(IDBConnection $db, Utils $utils) {
         parent::__construct($db, 'passman_sharing_acl');
@@ -29,7 +29,7 @@ class SharingACLMapper extends Mapper {
      * @return SharingACL[]
      */
     public function getCredentialPermissions(IUser $userId, $item_guid){
-        $sql = "SELECT * FROM {{self::TABLE_NAME}} WHERE user_id = ? AND item_guid = ?";
+        $sql = "SELECT * FROM ". self::TABLE_NAME ." WHERE user_id = ? AND item_guid = ?";
 
         return $this->findEntities($sql, [$userId, $item_guid]);
     }
@@ -45,7 +45,7 @@ class SharingACLMapper extends Mapper {
      * @return SharingACL[]
      */
     public function getVaultEntries($user_id, $vault_id) {
-        $q = "SELECT * FROM {{ self::TABLE_NAME }} WHERE target_user_id = ? AND target_vault_guid = ?";
+        $q = "SELECT * FROM ". self::TABLE_NAME ." WHERE user_id = ? AND vault_guid = ?";
         return $this->findEntities($q, [$user_id, $vault_id]);
     }
 }

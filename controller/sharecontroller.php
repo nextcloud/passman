@@ -211,7 +211,7 @@ class ShareController extends ApiController {
      * @NoAdminRequired
      */
 	public function getVaultItems($vault_guid){
-        $this->shareService->getSharedItems($this->userId, $vault_guid);
+        $this->shareService->getSharedItems($this->userId->getUID(), $vault_guid);
     }
 
 	public function deleteShareRequest($share_request_id){
