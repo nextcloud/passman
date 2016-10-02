@@ -61,6 +61,26 @@ class Notifier implements INotifier {
 				}
 				return $notification;
 				break;
+
+			case 'credential_shared':
+				$notification->setParsedSubject(
+					(string) $l->t('%s shared "%s" with you. Click here to accept', $notification->getSubjectParameters())
+				);
+
+				// Deal with the actions for a known subject
+				foreach ($notification->getActions() as $action) {
+					switch ($action->getLabel()) {
+						case 'decline':
+							$action->setParsedLabel(
+								(string) $l->t('Decline')
+							);
+							break;
+					}
+
+					$notification->addParsedAction($action);
+				}
+				return $notification;
+				break;
 			default:
 				// Unknown subject => Unknown notification => throw
 				throw new \InvalidArgumentException();

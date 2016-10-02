@@ -54,7 +54,9 @@ class Application extends App {
 				$server->getUserManager(),
  				$c->query('ActivityService'),
  				$c->query('VaultService'),
-                $c->query('ShareService')
+                $c->query('ShareService'),
+                $c->query('CredentialService'),
+                $c->query('NotificationService')
 			);
 		});
 

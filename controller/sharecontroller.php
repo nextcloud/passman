@@ -12,6 +12,8 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Db\Vault;
+use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Service\NotificationService;
 use OCA\Passman\Service\ShareService;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
@@ -27,14 +29,15 @@ use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Activity;
 
 
-
 class ShareController extends ApiController {
 	private $userId;
 	private $activityService;
 	private $groupManager;
 	private $userManager;
 	private $vaultService;
-    private $shareService;
+	private $shareService;
+	private $credentialService;
+	private $notificationService;
 
 	private $limit = 50;
 	private $offset = 0;
@@ -46,27 +49,60 @@ class ShareController extends ApiController {
 								IUserManager $userManager,
 								ActivityService $activityService,
 								VaultService $vaultService,
-                                ShareService $shareService
+								ShareService $shareService,
+								CredentialService $credentialService,
+								NotificationService $notificationService
 	) {
 		parent::__construct($AppName, $request);
+
 		$this->userId = $UserId;
 		$this->userManager = $userManager;
 		$this->groupManager = $groupManager;
 		$this->activityService = $activityService;
 		$this->vaultService = $vaultService;
-        $this->shareService = $shareService;
+		$this->shareService = $shareService;
+		$this->credentialService = $credentialService;
+		$this->notificationService = $notificationService;
 	}
 
-    public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions){
-        return new JSONResponse($this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions));
-    }
+	public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions) {
+		/**
+		 * Assemble notification
+		 */
+		$credential = $this->credentialService->getCredentialById($item_id, $this->userId->getUID());
+		$result = $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions);
+		if ($credential) {
+			$processed_users = array();
+
+			foreach ($result as $vault){
+				if(!in_array($vault->getTargetUserId(), $processed_users)){
+					$target_user = $vault->getTargetUserId();
+					$notification = array(
+						'from_user' => ucfirst($this->userId->getDisplayName()),
+						'credential_label' => $credential->getLabel(),
+						'credential_id' => $credential->getId(),
+						'item_id' => $credential->getId(),
+						'target_user' => $target_user,
+						'req_id' => $vault->getId()
+					);
+					$this->notificationService->credentialSharedNotification(
+						$notification
+					);
+					array_push($processed_users, $target_user);
+				}
+			}
+
+
+		}
+		return new JSONResponse($result);
+	}
 
 	public function searchUsers($search) {
 		$users = array();
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
 
 		foreach ($usersTmp as $user) {
-			if($this->userId != $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
+			if ($this->userId != $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
 				$users[] = array(
 					'text' => $user->getDisplayName(),
 					'uid' => $user->getUID(),
@@ -90,10 +126,10 @@ class ShareController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function getVaultsByUser($user_id){
+	public function getVaultsByUser($user_id) {
 		$user_vaults = $this->vaultService->getByUser($user_id);
 		$result = array();
-		foreach($user_vaults as $vault){
+		foreach ($user_vaults as $vault) {
 			array_push($result,
 				array(
 					'vault_id' => $vault->getId(),
@@ -105,7 +141,7 @@ class ShareController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-	public function share($credential){
+	public function share($credential) {
 
 		$link = '';
 		$this->activityService->add(
@@ -115,11 +151,11 @@ class ShareController extends ApiController {
 	}
 
 	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
-	    $this->shareService->applyShare($item_guid, $target_vault_guid, $final_shared_key);
-    }
+		$this->shareService->applyShare($item_guid, $target_vault_guid, $final_shared_key);
+	}
 
 	public function getPendingRequests() {
-	    return new JSONResponse($this->shareService->getUserPendingRequests());
-    }
+		return new JSONResponse($this->shareService->getUserPendingRequests());
+	}
 
 }
