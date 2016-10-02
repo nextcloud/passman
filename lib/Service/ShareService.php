@@ -93,8 +93,8 @@ class ShareService {
         return $this->shareRequest->getUserPendingRequests($user_id);
     }
 
-    public function getSharedItems($user_id, $vault_id){
-        $entries = $this->sharingACL->getVaultEntries($user_id, $vault_id);
+    public function getSharedItems($user_id, $vault_guid){
+        $entries = $this->sharingACL->getVaultEntries($user_id, $vault_guid);
         $return = [];
         foreach ($entries as $entry){
             $tmp = $entry->jsonSerialize();
