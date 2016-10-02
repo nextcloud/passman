@@ -9,6 +9,7 @@
 namespace OCA\Passman\Db;
 
 
+use Icewind\SMB\Share;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
@@ -52,4 +53,8 @@ class ShareRequestMapper extends Mapper {
         $q = "SELECT * FROM *PREFIX*". self::TABLE_NAME ." WHERE target_user_id = ?";
         return $this->findEntities($q, [$user_id]);
     }
+
+    public function deleteShareRequest(ShareRequest $shareRequest){
+    	$this->delete($shareRequest);
+	}
 }

@@ -103,4 +103,16 @@ class ShareService {
         return $return;
     }
 
+
+	/**
+	 * Deletes an share reuqest by id
+	 * @param $share_request_id
+	 *
+	 */
+	public function deleteShareRequestById($id){
+		$t = new ShareRequest();
+		$t->setId($id);
+		$this->shareRequest->deleteShareRequest($t);
+
+	}
 }

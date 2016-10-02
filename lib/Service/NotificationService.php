@@ -64,7 +64,7 @@ class NotificationService {
 		$notification->setApp('passman')
 			->setUser($data['target_user'])
 			->setDateTime(new \DateTime())
-			->setObject('credential', $data['item_id']) // $type and $id
+			->setObject('passman_share_request', $data['req_id']) // $type and $id
 			->setSubject('credential_shared', [$data['from_user'], $data['credential_label']]) // $subject and $parameters
 			->setLink($link)
 			->addAction($declineAction);

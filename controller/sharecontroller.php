@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\Vault;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\NotificationService;
@@ -191,5 +192,18 @@ class ShareController extends ApiController {
 	public function getSharedItems($vault_guid){
 
     }
+
+	public function deleteShareRequest($share_request_id){
+		echo $share_request_id;
+
+		$manager = \OC::$server->getNotificationManager();
+		$notification = $manager->createNotification();
+		$notification->setApp('passman')
+			->setObject('passman_share_request', $share_request_id)
+			->setUser($this->userId->getUID());
+		$manager->markProcessed($notification);
+		//@TODO load other requests and delete them by item id.
+		$this->shareService->deleteShareRequestById($share_request_id);
+	}
 
 }
