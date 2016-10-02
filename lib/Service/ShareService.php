@@ -98,6 +98,9 @@ class ShareService {
 
         $return = [];
         foreach ($entries as $entry){
+            // Check if the user can read the credential, probably unnecesary, but just to be sure
+            if (!$entry->hasPermission(SharingACL::READ)) continue;
+            
             $tmp = $entry->jsonSerialize();
             $tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId())->jsonSerialize();
             unset($tmp['credential_data']['shared_key']);
