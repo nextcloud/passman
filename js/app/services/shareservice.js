@@ -67,8 +67,8 @@ angular.module('passmanApp')
 					return response.data;
 				})
 			},
-			getSharedVaultItems: function (vault_guid) {
-				var queryUrl = OC.generateUrl('/api/v2/sharing/vault/'+ vault_guid +'/get');
+			getCredendialsSharedWithUs: function (vault_guid) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vault/'+ vault_guid +'/get');
 				return $http.get(queryUrl).then(function (response) {
 					if(response.data){
 						return response.data;
