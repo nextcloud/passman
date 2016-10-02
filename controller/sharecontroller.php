@@ -113,4 +113,12 @@ class ShareController extends ApiController {
 			$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 	}
 
+	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
+	    $this->shareService->applyShare($item_guid, $target_vault_guid, $final_shared_key);
+    }
+
+	public function getPendingRequests() {
+	    return new JSONResponse($this->shareService->getUserPendingRequests());
+    }
+
 }

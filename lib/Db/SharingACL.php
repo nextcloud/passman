@@ -7,6 +7,7 @@
 
 namespace OCA\Passman\Db;
 
+use OCA\Passman\Utility\PermissionEntity;
 use OCP\AppFramework\Db\Entity;
 
 /**
@@ -18,18 +19,34 @@ use OCP\AppFramework\Db\Entity;
  * @method string getItemGuid()
  * @method void setUserId(string $value)
  * @method string getUserid()
- * @method void setGroupId(string $value)
- * @method string getGroupId()
  * @method void setCreated(integer $value)
  * @method integer getCreated()
  * @method void setExpire(integer $value)
  * @method integer getExpire()
  * @method void setPermissions(integer $value)
  * @method integer getPermissions()
+ * @method void setVaultId(integer $value)
+ * @method integer getVaultId()
+ * @method void setVaultGuid(string $vault)
+ * @method string getVaultGuid()
+ * @method void setSharedKey(string $value)
+ * @method string getSharedKey()
  */
 
-class SharingACL extends Entity implements \JsonSerializable
+class SharingACL extends PermissionEntity implements \JsonSerializable
 {
+
+    protected
+        $itemId,
+        $itemGuid,
+        $userId,
+        $created,
+        $expire,
+        $permissions,
+        $vaultId,
+        $vaultGuid,
+        $sharedKey;
+
 
     public function __construct() {
         // add types in constructor

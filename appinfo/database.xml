@@ -434,12 +434,6 @@
 				<length>64</length>
 			</field>
 			<field>
-				<name>group_id</name>
-				<type>text</type>
-				<notnull>false</notnull>
-				<length>64</length>
-			</field>
-			<field>
 				<name>created</name>
 				<type>integer</type>
 				<length>64</length>
@@ -494,6 +488,12 @@
 				<name>item_guid</name>
 				<type>text</type>
 				<notnull>true</notnull>
+				<length>64</length>
+			</field>
+			<field>
+				<name>target_user_id</name>
+				<type>text</type>
+				<notnull>false</notnull>
 				<length>64</length>
 			</field>
 			<field>

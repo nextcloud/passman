@@ -14,8 +14,7 @@ use OCP\IDBConnection;
 use OCP\IUser;
 use OCA\Passman\Utility\Utils;
 
-class SharingACLMapper extends Mapper
-{
+class SharingACLMapper extends Mapper {
     const TABLE_NAME = '`*PREFIX*passman_sharing_acl`';
 
     public function __construct(IDBConnection $db, Utils $utils) {
@@ -33,5 +32,9 @@ class SharingACLMapper extends Mapper
         $sql = "SELECT * FROM {{self::TABLE_NAME}} WHERE user_id = ? AND item_guid = ?";
 
         return $this->findEntities($sql, [$userId, $item_guid]);
+    }
+
+    public function createACLEntry(SharingACL $acl){
+        return $this->insert($acl);
     }
 }

@@ -11,6 +11,7 @@ namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\ShareRequestMapper;
+use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\SharingACLMapper;
 
 class ShareService {
@@ -24,12 +25,11 @@ class ShareService {
 
     /**
      * Creates requests for all the items on the request array of objects.
-     * This array objects must follow this spec:
-     *      {
-     *          vault_id:   The id of the target vault
-     *          guid:       The guid of the target vault
-     *          key:        The shared key cyphered with the target vault RSA public key
-     *      }
+     * This array must follow this spec:
+     *      user_id:    The target user id
+     *      vault_id:   The id of the target vault
+     *      guid:       The guid of the target vault
+     *      key:        The shared key cyphered with the target vault RSA public key
      * @param $target_item_id   string      The shared item ID
      * @param $target_item_guid string      The shared item GUID
      * @param $request_array    array
@@ -43,6 +43,7 @@ class ShareService {
             $t = new ShareRequest();
             $t->setItemId($target_item_id);
             $t->setItemGuid($target_item_guid);
+            $t->setTargetUserId($req['user_id']);
             $t->setTargetVaultId($req['vault_id']);
             $t->setTargetVaultGuid($req['guid']);
             $t->setSharedKey($req['key']);
@@ -51,5 +52,39 @@ class ShareService {
 			array_push($requests, $this->shareRequest->createRequest($t));
         }
         return $requests;
+    }
+
+    /**
+     * Applies the given share, defaults to no expire
+     * @param $item_guid
+     * @param $target_vault_guid
+     * @param $final_shared_key
+     */
+    public function applyShare($item_guid, $target_vault_guid, $final_shared_key){
+        $request = $this->shareRequest->getRequestByGuid($item_guid, $target_vault_guid);
+        $permissions = $request->getPermissions();
+
+        $acl = new SharingACL();
+        $acl->setItemId($request->getItemId());
+        $acl->setItemGuid($request->getItemGuid());
+        $acl->setUserId($request->getTargetUserId());
+        $acl->setCreated($request->getCreated());
+        $acl->setExpire(0);
+        $acl->setPermissions($permissions);
+        $acl->setVaultId($request->getTargetVaultId());
+        $acl->getVaultGuid($request->getTargetVaultGuid());
+        $acl->setSharedKey($final_shared_key);
+
+        $this->sharingACL->createACLEntry($acl);
+        $this->shareRequest->cleanItemRequestsForUser($request->getItemId(), $request->getTargetUserId());
+    }
+
+    /**
+     * Obtains pending requests for the given user ID
+     * @param $user_id
+     * @return \OCA\Passman\Db\ShareRequest[]
+     */
+    public function getUserPendingRequests($user_id){
+        return $this->shareRequest->getUserPendingRequests($user_id);
     }
 }
