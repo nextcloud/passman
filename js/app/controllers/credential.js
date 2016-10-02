@@ -30,6 +30,18 @@ angular.module('passmanApp')
 
 			$scope.show_spinner = true;
 
+			var getSharedCredentials = function() {
+				ShareService.getCredendialsSharedWithUs($scope.active_vault.guid).then(function (shared_credentials) {
+					for (var c = 0; c < shared_credentials.length; c++) {
+						var _shared_credential = shared_credentials[c];
+						console.log(_shared_credential)
+						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
+						_shared_credential = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
+						console.log(_shared_credential);
+					}
+				});
+			}
+
 			var fetchCredentials = function () {
 				VaultService.getVault($scope.active_vault).then(function (vault) {
 					var vaultKey = angular.copy($scope.active_vault.vaultKey);
@@ -59,6 +71,7 @@ angular.module('passmanApp')
 							TagService.addTags($scope.active_vault.credentials[i].tags);
 						}
 					}
+					getSharedCredentials();
 					$scope.show_spinner = false;
 				});
 			};
@@ -98,21 +111,13 @@ angular.module('passmanApp')
 					}
 					if(active_share_requests === false){
 						jQuery('.ui-dialog').remove();
+						getSharedCredentials();
 					}
 					console.log(result)
 				})	
 			};
 
-			console.log($scope.active_vault)
-			ShareService.getCredendialsSharedWithUs($scope.active_vault.guid).then(function(shared_credentials){
-				for(var c = 0; c < shared_credentials.length; c++){
-					var _shared_credential = shared_credentials[c];
-					console.log(_shared_credential)
-					var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
-					_shared_credential = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
-					console.log(_shared_credential);
-				}
-			});
+
 			
 			
 			$scope.addCredential = function () {
