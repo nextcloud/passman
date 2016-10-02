@@ -111,7 +111,7 @@ class ShareController extends ApiController {
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
 
 		foreach ($usersTmp as $user) {
-			if ($this->userId != $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
+			if ($this->userId->getUID() != $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
 				$users[] = array(
 					'text' => $user->getDisplayName(),
 					'uid' => $user->getUID(),
