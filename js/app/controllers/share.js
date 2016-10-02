@@ -100,24 +100,17 @@ angular.module('passmanApp')
             //@TODO Improve this so we can add, edit and remove users and permissions.
 			$scope.inputSharedWith = [];
 			if(shareWith.length > 0) {
-			    shareWithMainLoop:
 				for (var i = 0; i < shareWith.length; i++) {
 			        // Avoid adding twice the same user.
-			        for (var x = 0; x < $scope.share_settings.credentialSharedWithUserAndGroup.length; x++){
-			            if (shareWith[x].uid == $scope.share_settings.credentialSharedWithUserAndGroup[i].userId){
-			                continue shareWithMainLoop;
-                        }
-                    }
 					var obj = {
 						userId: shareWith[i].uid,
 						displayName: shareWith[i].text,
 						type: shareWith[i].type,
 						accessLevel: selectedAccessLevel
 					};
-					// if (obj.type == 'group') obj.users = shareWith[i].users;
-					$scope.share_settings.credentialSharedWithUserAndGroup.push(
-						obj
-					)
+					if($scope.share_settings.credentialSharedWithUserAndGroup.indexOf(obj) === -1){
+						$scope.share_settings.credentialSharedWithUserAndGroup.push(obj)
+					}
 				}
 			}
 		};
