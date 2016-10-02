@@ -167,6 +167,15 @@ class ShareController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
+		$sr = $this->shareService->getRequestByGuid($item_guid, $target_vault_guid);
+
+		$manager = \OC::$server->getNotificationManager();
+		$notification = $manager->createNotification();
+		$notification->setApp('passman')
+			->setObject('passman_share_request', $sr->getId())
+			->setUser($this->userId->getUID());
+		$manager->markProcessed($notification);
+
 		$this->shareService->applyShare($item_guid, $target_vault_guid, $final_shared_key);
 	}
 

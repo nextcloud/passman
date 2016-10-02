@@ -120,4 +120,13 @@ class ShareService {
 	public function getShareRequestById($id){
 		return $this->shareRequest->getShareRequestById($id);
 	}
+
+	/*
+	 * Get an share request by $item_guid and $target_vault_guid
+	 *
+	 */
+	public function getRequestByGuid($item_guid, $target_vault_guid){
+		return $this->shareRequest->getRequestByGuid($item_guid, $target_vault_guid);
+	}
+
 }
