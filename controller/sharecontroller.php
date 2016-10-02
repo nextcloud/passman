@@ -194,6 +194,18 @@ class ShareController extends ApiController {
     }
 
 	public function deleteShareRequest($share_request_id){
+		$sr = $this->shareService->getShareRequestById($share_request_id);
+		$notification = array(
+			'from_user' => ucfirst($this->userId->getDisplayName()),
+			'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
+			'target_user' => $sr->getFromUserId(),
+			'req_id' => $sr->getId()
+		);
+		$this->notificationService->credentialDeclinedSharedNotification(
+			$notification
+		);
+
+
 		$manager = \OC::$server->getNotificationManager();
 		$notification = $manager->createNotification();
 		$notification->setApp('passman')
@@ -201,7 +213,7 @@ class ShareController extends ApiController {
 			->setUser($this->userId->getUID());
 		$manager->markProcessed($notification);
 		//@TODO load other requests and delete them by item id.
-		$sr = $this->shareService->getShareRequestById($share_request_id);
+
 		$this->shareService->cleanItemRequestsForUser($sr);
 		return new JSONResponse(array('result'=> true));
 	}
