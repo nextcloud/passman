@@ -99,7 +99,8 @@ class ShareService {
         $return = [];
         foreach ($entries as $entry){
             $tmp = $entry->jsonSerialize();
-            $tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId());
+            $tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId())->jsonSerialize();
+            unset($tmp['credential_data']['shared_key']);
             $return[] = $tmp;
         }
         return $return;
