@@ -50,13 +50,14 @@ angular.module('passmanApp')
 				});
 			},
 			encryptSharedCredential: function(credential, sharedKey){
-				var _credential = angular.copy(_credential);
+				var _credential = angular.copy(credential);
 				var encrypted_fields = CredentialService.getEncryptedFields();
 				for(var i = 0; i < encrypted_fields.length; i++){
 					var field = encrypted_fields[i];
 					var fieldValue = angular.copy(credential[field]);
 					_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue), sharedKey);
 				}
+				return _credential;
 			},
 			decryptSharedCredential: function (credential, sharedKey) {
 				var _credential = angular.copy(credential);
