@@ -38,8 +38,6 @@ class ShareController extends ApiController {
 	private $limit = 50;
 	private $offset = 0;
 
-	private $result = [];
-
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
@@ -67,7 +65,7 @@ class ShareController extends ApiController {
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
 
 		foreach ($usersTmp as $user) {
-			if($this->userId != $user->getUID()) {
+			if($this->userId != $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
 				$users[] = array(
 					'text' => $user->getDisplayName(),
 					'uid' => $user->getUID(),
@@ -75,46 +73,16 @@ class ShareController extends ApiController {
 				);
 			}
 		}
-		$this->result = array_merge($this->result, $users);
+		return $users;
 	}
 
-	public function searchGroups($search){
-
-		$groups = array();
-		$groupsTmp = $this->groupManager->search($search, $this->limit, $this->offset);
-
-
-		foreach ($groupsTmp as $group) {
-		    $group_users = $group->getUsers();
-            $final_users = [];
-            foreach ($group_users as $user){
-                $final_users[] = [
-                    'text' => $user->getDisplayName(),
-                    'uid' => $user->getUID(),
-                    'type' => 'user'
-                ];
-            }
-
-			$groups[] = array(
-				'text' => $group->getGID(),
-				'uid' => $group->getGID(),
-                'users' => $final_users,
-				'type' => 'group'
-			);
-		}
-
-
-		$this->result = array_merge($this->result, $groups);
-	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function search($search) {
-		$this->searchUsers($search);
-		$this->searchGroups($search);
-
-		return new JSONResponse($this->result);
+		$user_search = $this->searchUsers($search);
+		return new JSONResponse($user_search);
 	}
 
 
