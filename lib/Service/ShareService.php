@@ -88,4 +88,16 @@ class ShareService {
     public function getUserPendingRequests($user_id){
         return $this->shareRequest->getUserPendingRequests($user_id);
     }
+
+	/**
+	 * Deletes an share reuqest by id
+	 * @param $share_request_id
+	 *
+	 */
+	public function deleteShareRequestById($id){
+		$t = new ShareRequest();
+		$t->setId($id);
+		$this->shareRequest->deleteShareRequest($t);
+
+	}
 }

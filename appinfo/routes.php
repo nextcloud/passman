@@ -52,6 +52,7 @@ return [
         ['name' => 'share#applyIntermediateShare', 'url' => '/api/v2/sharing/share', 'verb' => 'POST'],
         ['name' => 'share#savePendingRequest', 'url' => '/api/v2/sharing/save', 'verb' => 'POST'],
         ['name' => 'share#getPendingRequests', 'url' => '/api/v2/sharing/pending', 'verb' => 'GET'],
+        ['name' => 'share#deleteShareRequest', 'url' => '/api/v2/sharing/decline/{share_request_id}', 'verb' => 'DELETE'],
 
 
 		//Internal API
