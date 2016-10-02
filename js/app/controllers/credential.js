@@ -22,7 +22,6 @@ angular.module('passmanApp')
 					_vault.vaultKey = angular.copy(SettingsService.getSetting('defaultVaultPass'));
 					VaultService.setActiveVault(_vault);
 					$scope.active_vault = _vault;
-					console.log(_vault)
 					//@TODO check if vault exists
 				}
 
@@ -33,7 +32,10 @@ angular.module('passmanApp')
 
 			var fetchCredentials = function () {
 				VaultService.getVault($scope.active_vault).then(function (vault) {
-					$scope.active_vault = angular.merge($scope.active_vault, vault);
+					var vaultKey = angular.copy($scope.active_vault.vaultKey);
+					$scope.active_vault = vault;
+					$scope.active_vault.vaultKey = vaultKey;
+					VaultService.setActiveVault($scope.active_vault);
 					var _credentials = [];
 					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 						try {
@@ -75,10 +77,10 @@ angular.module('passmanApp')
 			$scope.acceptShareRequest = function(share_request){
 				console.log('Accepted share request', share_request);
 				var crypted_shared_key = share_request.shared_key;
-				var private_key = VaultService.getActiveVault();
+				var _vault = VaultService.getActiveVault();
 
-				console.log(private_key);return;
-				private_key = ShareService.rsaPrivateKeyFromPEM(private_key);
+				console.log(_vault);return;
+				//private_key = ShareService.rsaPrivateKeyFromPEM(private_key);
 				crypted_shared_key = private_key.decrypt(forge.util.decode64(crypted_shared_key));
 				crypted_shared_key = EncryptService.encryptString(crypted_shared_key);
 
