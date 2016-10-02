@@ -38,10 +38,9 @@ class ShareRequestMapper extends Mapper {
     }
 
     public function cleanItemRequestsForUser($item_id, $target_user_id){
-        $req = new ShareRequest();
-        $req->setItemId($item_id);
-        $req->setTargetUserId($target_user_id);
-        return $this->delete($req);
+		$q = "DELETE FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_id = ? AND target_user_id = ?";
+		$this->execute($q, [$item_id, $target_user_id]);
+        return $this->execute($q, [$item_id, $target_user_id]);
     }
 
     /**
@@ -56,5 +55,10 @@ class ShareRequestMapper extends Mapper {
 
     public function deleteShareRequest(ShareRequest $shareRequest){
     	$this->delete($shareRequest);
+	}
+
+	public function getShareRequestById($id){
+		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE id = ?";
+		return $this->findEntity($q, [$id]);
 	}
 }

@@ -9,6 +9,7 @@
 namespace OCA\Passman\Service;
 
 
+use Icewind\SMB\Share;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\ShareRequestMapper;
@@ -106,13 +107,17 @@ class ShareService {
 
 	/**
 	 * Deletes an share reuqest by id
-	 * @param $share_request_id
-	 *
+	 * @param ShareRequest $request
+	 * @return \OCA\Passman\Db\ShareRequest[]
 	 */
-	public function deleteShareRequestById($id){
-		$t = new ShareRequest();
-		$t->setId($id);
-		$this->shareRequest->deleteShareRequest($t);
+	public function cleanItemRequestsForUser(ShareRequest $request){
+		return $this->shareRequest->cleanItemRequestsForUser($request->getItemId(), $request->getTargetUserId());
+	}
 
+	/**
+	 * Get an share request by id
+	 */
+	public function getShareRequestById($id){
+		return $this->shareRequest->getShareRequestById($id);
 	}
 }
