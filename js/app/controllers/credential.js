@@ -85,6 +85,15 @@ angular.module('passmanApp')
 				ShareService.saveSharingRequest(share_request, crypted_shared_key).then(function (result) {
 					var idx = $scope.incoming_share_requests.indexOf(share_request);
 					$scope.incoming_share_requests.splice(idx, 1);
+					var active_share_requests = false;
+					for(var v = 0; v < $scope.incoming_share_requests.length; v++){
+						if($scope.incoming_share_requests[v].target_vault_id == $scope.active_vault.vault_id){
+							active_share_requests = true;
+						}
+					}
+					if(active_share_requests === false){
+						jQuery('.ui-dialog').remove();
+					}
 					console.log(result)
 				})	
 			};
