@@ -39,7 +39,13 @@ angular.module('passmanApp')
 					var _credentials = [];
 					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 						try {
-							$scope.active_vault.credentials[i] = CredentialService.decryptCredential(angular.copy(vault.credentials[i]));
+							if(!$scope.active_vault.credentials[i].shared_key) {
+								$scope.active_vault.credentials[i] = CredentialService.decryptCredential(angular.copy(vault.credentials[i]));
+
+							} else {
+								var enc_key = EncryptService.decryptString(vault.credentials[i].shared_key);
+								$scope.active_vault.credentials[i] = ShareService.decryptSharedCredential(angular.copy(vault.credentials[i]), enc_key);
+							}
 							$scope.active_vault.credentials[i].tags_raw = $scope.active_vault.credentials[i].tags;
 						} catch (e) {
 							NotificationService.showNotification('An error happend during decryption', 5000);
@@ -49,9 +55,8 @@ angular.module('passmanApp')
 							$location.path('/')
 
 						}
-						if ($scope.active_vault.credentials[i]) {
+						if ($scope.active_vault.credentials[i].tags) {
 							TagService.addTags($scope.active_vault.credentials[i].tags);
-
 						}
 					}
 					$scope.show_spinner = false;

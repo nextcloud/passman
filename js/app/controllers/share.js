@@ -133,7 +133,7 @@ angular.module('passmanApp')
 				console.log(key);
 
 				var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
-				CredentialService.updateCredential(encryptedSharedCredential);
+				CredentialService.updateCredential(encryptedSharedCredential, true);
 
 				var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 				console.log(list);
