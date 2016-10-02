@@ -64,7 +64,6 @@ angular.module('passmanApp')
 			}
 
 			ShareService.getPendingRequests().then(function (shareRequests) {
-				console.log(shareRequests)
 				if(shareRequests.length > 0){
 					$scope.incoming_share_requests = shareRequests;
 					jQuery('.share_popup').dialog({
@@ -84,6 +83,8 @@ angular.module('passmanApp')
 				crypted_shared_key = EncryptService.encryptString(crypted_shared_key);
 
 				ShareService.saveSharingRequest(share_request, crypted_shared_key).then(function (result) {
+					var idx = $scope.incoming_share_requests.indexOf(share_request);
+					$scope.incoming_share_requests.splice(idx, 1);
 					console.log(result)
 				})	
 			};
