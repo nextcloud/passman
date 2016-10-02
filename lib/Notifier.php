@@ -64,7 +64,7 @@ class Notifier implements INotifier {
 
 			case 'credential_shared':
 				$notification->setParsedSubject(
-					(string) $l->t('%s shared "%s" credential with you. Click here to accept', $notification->getSubjectParameters())
+					(string) $l->t('%s shared "%s" with you. Click here to accept', $notification->getSubjectParameters())
 				);
 
 				// Deal with the actions for a known subject
