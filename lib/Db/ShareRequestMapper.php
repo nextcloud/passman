@@ -22,6 +22,6 @@ class ShareRequestMapper extends Mapper {
     }
 
     public function createRequest(ShareRequest $request){
-        $this->insert($request);
+        return $this->insert($request);
     }
 }

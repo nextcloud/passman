@@ -57,7 +57,7 @@ class ShareController extends ApiController {
 	}
 
     public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions){
-        $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions);
+        return new JSONResponse($this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions));
     }
 
 	public function searchUsers($search) {

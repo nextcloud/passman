@@ -32,25 +32,24 @@ class ShareService {
      *      }
      * @param $target_item_id   string      The shared item ID
      * @param $target_item_guid string      The shared item GUID
-     * @param $request_array    \stdClass[]
+     * @param $request_array    array
      * @param $permissions      integer     Must be created with a bitmask from options on the ShareRequest class
+	 * @return array						Array of sharing requests
      */
     public function createBulkRequests($target_item_id, $target_item_guid, $request_array, $permissions) {
         $created = (new \DateTime())->getTimestamp();
-
+		$requests = array();
         foreach ($request_array as $req){
             $t = new ShareRequest();
             $t->setItemId($target_item_id);
             $t->setItemGuid($target_item_guid);
-            $t->setTargetVaultId($req->vault_id);
-            $t->setTargetVaultGuid($req->guid);
-            $t->setSharedKey($req->key);
+            $t->setTargetVaultId($req['vault_id']);
+            $t->setTargetVaultGuid($req['guid']);
+            $t->setSharedKey($req['key']);
             $t->setPermissions($permissions);
             $t->setCreated($created);
-
-            var_dump($req);
-            var_dump($t);
-            $this->shareRequest->createRequest($t);
+			array_push($requests, $this->shareRequest->createRequest($t));
         }
+        return $requests;
     }
 }
