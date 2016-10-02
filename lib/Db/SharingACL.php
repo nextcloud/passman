@@ -18,7 +18,7 @@ use OCP\AppFramework\Db\Entity;
  * @method void setItemGuid(string $value)
  * @method string getItemGuid()
  * @method void setUserId(string $value)
- * @method string getUserid()
+ * @method string getUserId()
  * @method void setCreated(integer $value)
  * @method integer getCreated()
  * @method void setExpire(integer $value)
@@ -69,8 +69,7 @@ class SharingACL extends PermissionEntity implements \JsonSerializable
             'acl_id' => $this->getId(),
             'item_id' => $this->getItemId(),
             'item_guid' => $this->getItemGuid(),
-            'user_id' => $this->getUserid(),
-            'group_id' => $this->getGroupId(),
+            'user_id' => $this->getUserId(),
             'created' => $this->getCreated(),
             'expire' => $this->getExpire(),
             'permissions' => $this->getPermissions(),

@@ -95,6 +95,7 @@ class ShareService {
 
     public function getSharedItems($user_id, $vault_guid){
         $entries = $this->sharingACL->getVaultEntries($user_id, $vault_guid);
+
         $return = [];
         foreach ($entries as $entry){
             $tmp = $entry->jsonSerialize();

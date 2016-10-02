@@ -48,8 +48,12 @@ class CredentialMapper extends Mapper {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `id` = ?';
         // If we want to check the owner, add it to the query
-        if ($user_id !== null) $sql .= ' and `user_id` = ? ';
-		return $this->findEntity($sql,[$credential_id, $user_id]);
+		$params = [$credential_id];
+        if ($user_id !== null){
+        	$sql .= ' and `user_id` = ? ';
+			array_push($params, $user_id);
+		}
+		return $this->findEntity($sql,$params);
 	}
 
 	public function getCredentialLabelById($credential_id){
