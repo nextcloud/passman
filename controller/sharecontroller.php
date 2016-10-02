@@ -182,18 +182,16 @@ class ShareController extends ApiController {
 	}
 
 	public function deleteShareRequest($share_request_id){
-		$sr = $this->shareService->getSharingRequestById($share_request_id);
-		$share_requests = $this->shareService->getShareRequestsByItemId($sr->getItemId());
-		foreach ($share_requests as $share_request){
-			$this->shareService->deleteShareRequestById($share_request->getId());
-		}
+		echo $share_request_id;
+
 		$manager = \OC::$server->getNotificationManager();
 		$notification = $manager->createNotification();
 		$notification->setApp('passman')
 			->setObject('passman_share_request', $share_request_id)
 			->setUser($this->userId->getUID());
 		$manager->markProcessed($notification);
-		return new JSONResponse(array('result'=>true));
+		//@TODO load other requests and delete them by item id.
+		$this->shareService->deleteShareRequestById($share_request_id);
 	}
 
 }

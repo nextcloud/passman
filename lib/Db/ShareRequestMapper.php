@@ -57,14 +57,4 @@ class ShareRequestMapper extends Mapper {
     public function deleteShareRequest(ShareRequest $shareRequest){
     	$this->delete($shareRequest);
 	}
-
-	public function getSharingRequestById($id){
-		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE id = ?";
-		return $this->findEntity($q, [$id]);
-	}
-
-	public function getShareRequestsByItemId($item_id){
-		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_id = ?";
-		return $this->findEntities($q, [$item_id]);
-	}
 }
