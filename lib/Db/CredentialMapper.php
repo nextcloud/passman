@@ -50,6 +50,12 @@ class CredentialMapper extends Mapper {
 		return $this->findEntity($sql,[$credential_id, $user_id]);
 	}
 
+	public function getCredentialLabelById($credential_id){
+		$sql = 'SELECT id, label FROM `*PREFIX*passman_credentials` ' .
+			'WHERE `id` = ? ';
+		return $this->findEntity($sql,[$credential_id]);
+	}
+
 	public function create($raw_credential){
 		$credential = new Credential();
 

@@ -65,6 +65,10 @@ class ShareController extends ApiController {
 		$this->notificationService = $notificationService;
 	}
 
+
+	/**
+	 * @NoAdminRequired
+	 */
 	public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions) {
 		/**
 		 * Assemble notification
@@ -97,6 +101,9 @@ class ShareController extends ApiController {
 		return new JSONResponse($result);
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
 	public function searchUsers($search) {
 		$users = array();
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
@@ -150,12 +157,26 @@ class ShareController extends ApiController {
 			$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
 	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
 		$this->shareService->applyShare($item_guid, $target_vault_guid, $final_shared_key);
 	}
 
+	/**
+	 * @NoAdminRequired
+	 */
 	public function getPendingRequests() {
-		return new JSONResponse($this->shareService->getUserPendingRequests());
+		$requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
+		$results = array();
+		foreach ($requests as $request){
+			$result = $request->jsonSerialize();
+			$c = $this->credentialService->getCredentialLabelById($request->getItemId());
+			$result['credential_label'] = $c->getLabel();
+			array_push($results, $result);
+		}
+		return new JSONResponse($results);
 	}
 
 }

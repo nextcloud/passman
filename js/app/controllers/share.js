@@ -70,18 +70,7 @@ angular.module('passmanApp')
 				}
 			},
 			credentialSharedWithUserAndGroup:[
-				{
-					accessLevel:1,
-					displayName:"wolf",
-					userId:"wolf",
-					type:'user'
-				},
-				{
-					accessLevel:1,
-					displayName:"cat",
-					userId:"cat",
-					type:'user'
-				}
+
 			],
 			cypher_progress:{
 				done:0,

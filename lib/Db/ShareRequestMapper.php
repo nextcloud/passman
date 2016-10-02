@@ -49,7 +49,7 @@ class ShareRequestMapper extends Mapper {
      * @return ShareRequest[]
      */
     public function getUserPendingRequests($user_id){
-        $q = "SELECT * FROM *PREFIX*{{self::TABLE_NAME }} WHERE user_id = ?";
+        $q = "SELECT * FROM *PREFIX*". self::TABLE_NAME ." WHERE target_user_id = ?";
         return $this->findEntities($q, [$user_id]);
     }
 }

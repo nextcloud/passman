@@ -9,8 +9,8 @@
  */
 angular.module('passmanApp')
 	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService',
-		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService) {
+		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService',
+		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -61,7 +61,9 @@ angular.module('passmanApp')
 				fetchCredentials()
 			}
 
-
+			ShareService.getPendingRequests().then(function (shareRequests) {
+				console.log(shareRequests)
+			});
 
 			$scope.addCredential = function () {
 				var new_credential = CredentialService.newCredential();
