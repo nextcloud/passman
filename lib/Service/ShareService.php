@@ -36,7 +36,7 @@ class ShareService {
      * @param $permissions      integer     Must be created with a bitmask from options on the ShareRequest class
 	 * @return array						Array of sharing requests
      */
-    public function createBulkRequests($target_item_id, $target_item_guid, $request_array, $permissions) {
+    public function createBulkRequests($target_item_id, $target_item_guid, $request_array, $permissions, $credential_owner) {
         $created = (new \DateTime())->getTimestamp();
 		$requests = array();
         foreach ($request_array as $req){
@@ -49,6 +49,7 @@ class ShareService {
             $t->setSharedKey($req['key']);
             $t->setPermissions($permissions);
             $t->setCreated($created);
+			$t->setFromUserId($credential_owner);
 			array_push($requests, $this->shareRequest->createRequest($t));
         }
         return $requests;

@@ -51,7 +51,11 @@ angular.module('passmanApp')
 			},
 			getPendingRequests: function () {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/pending');
-				return $http.get(queryUrl);
+				return $http.get(queryUrl).then(function (response) {
+					if(response.data){
+						return response.data;
+					}
+				});
 			},
 			saveSharingRequest: function (request, crypted_shared_key) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/save');

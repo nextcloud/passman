@@ -63,6 +63,13 @@ angular.module('passmanApp')
 
 			ShareService.getPendingRequests().then(function (shareRequests) {
 				console.log(shareRequests)
+				if(shareRequests.length > 0){
+					$scope.incoming_share_requests = shareRequests;
+					jQuery('.share_popup').dialog({
+						width: 600,
+						position:['center', 90]
+					});
+				}
 			});
 
 			$scope.addCredential = function () {

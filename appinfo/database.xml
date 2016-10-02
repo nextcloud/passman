@@ -497,6 +497,12 @@
 				<length>64</length>
 			</field>
 			<field>
+				<name>from_user_id</name>
+				<type>text</type>
+				<notnull>false</notnull>
+				<length>64</length>
+			</field>
+			<field>
 				<name>target_vault_id</name>
 				<type>integer</type>
 				<notnull>true</notnull>

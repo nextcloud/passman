@@ -31,6 +31,8 @@ use OCP\AppFramework\Db\Entity;
  * @method integer getPermissions()
  * @method void setCreated(integer $value)
  * @method integer getCreated()
+ * @method void setFromUserId(integer $value)
+ * @method integer getFromUserId()
  */
 
 class ShareRequest extends PermissionEntity implements \JsonSerializable {
@@ -43,7 +45,8 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
         $targetVaultGuid,
         $sharedKey,
         $permissions,
-        $created;
+        $created,
+		$fromUserId;
 
     public function __construct() {
         // add types in constructor
@@ -68,7 +71,7 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
             'target_user_id' => $this->getTargetUserId(),
             'target_vault_id' => $this->getTargetVaultId(),
             'target_vault_guid' => $this->getTargetVaultGuid(),
-            'item_guid' => $this->getItemGuid(),
+            'from_user_id' => $this->getFromUserId(),
             'shared_key' => $this->getSharedKey(),
             'permissions' => $this->getPermissions(),
             'created' => $this->getCreated(),
