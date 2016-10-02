@@ -150,6 +150,10 @@ class ShareController extends ApiController {
 		return new JSONResponse($result);
 	}
 
+    /**
+     * @NoAdminRequired
+     * @param $credential
+     */
 	public function share($credential) {
 
 		$link = '';
@@ -180,6 +184,14 @@ class ShareController extends ApiController {
 		}
 		return new JSONResponse($results);
 	}
+
+    /**
+     * Obtains the list of credentials shared with this vault
+     * @NoAdminRequired
+     */
+	public function getSharedItems($vault_guid){
+
+    }
 
 	public function deleteShareRequest($share_request_id){
 		echo $share_request_id;
