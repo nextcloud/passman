@@ -14,7 +14,7 @@ use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
 
 class ShareRequestMapper extends Mapper {
-    const TABLE_NAME = '`*PREFIX*passman_share_request`';
+    const TABLE_NAME = 'passman_share_request';
 
     public function __construct(IDBConnection $db, Utils $utils) {
         parent::__construct($db, self::TABLE_NAME);
@@ -22,6 +22,6 @@ class ShareRequestMapper extends Mapper {
     }
 
     public function createRequest(ShareRequest $request){
-        parent::insert($request);
+        $this->insert($request);
     }
 }
