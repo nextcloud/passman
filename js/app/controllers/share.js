@@ -62,6 +62,13 @@ angular.module('passmanApp')
 
 
 		$scope.share_settings = {
+			linkSharing:{
+				enabled: false,
+				settings:{
+					type: 'null', // can be date or view_amount or null (for no expire)
+					amount: null
+				}
+			},
 			credentialSharedWithUserAndGroup:[
 				{
 					accessLevel:1,
