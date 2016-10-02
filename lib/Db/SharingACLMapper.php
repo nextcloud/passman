@@ -18,7 +18,7 @@ class SharingACLMapper extends Mapper {
     const TABLE_NAME = '`*PREFIX*passman_sharing_acl`';
 
     public function __construct(IDBConnection $db, Utils $utils) {
-        parent::__construct($db, 'passman_vaults');
+        parent::__construct($db, 'passman_sharing_acl');
         $this->utils = $utils;
     }
 

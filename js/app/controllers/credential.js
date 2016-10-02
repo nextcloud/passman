@@ -77,10 +77,9 @@ angular.module('passmanApp')
 			$scope.acceptShareRequest = function(share_request){
 				console.log('Accepted share request', share_request);
 				var crypted_shared_key = share_request.shared_key;
-				var _vault = VaultService.getActiveVault();
+				var private_key = EncryptService.decryptString(VaultService.getActiveVault().private_sharing_key);
 
-				console.log(_vault);return;
-				//private_key = ShareService.rsaPrivateKeyFromPEM(private_key);
+				private_key = ShareService.rsaPrivateKeyFromPEM(private_key);
 				crypted_shared_key = private_key.decrypt(forge.util.decode64(crypted_shared_key));
 				crypted_shared_key = EncryptService.encryptString(crypted_shared_key);
 
