@@ -8,9 +8,9 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('ShareService', ['$http', 'VaultService', 'EncryptService', function ($http, VaultService, EncryptService) {
+	.service('ShareService', ['$http', 'VaultService', 'EncryptService', 'CredentialService', function ($http, VaultService, EncryptService, CredentialService) {
 		// Setup sjcl random engine to max paranoia level and start collecting data
-		var paranoia_level = 10
+		var paranoia_level = 10;
 		sjcl.random.setDefaultParanoia(paranoia_level);
 		sjcl.random.startCollectors();
 
@@ -49,6 +49,38 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			encryptSharedCredential: function(credential, sharedKey){
+				var _credential = angular.copy(_credential);
+				var encrypted_fields = CredentialService.getEncryptedFields();
+				for(var i = 0; i < encrypted_fields.length; i++){
+					var field = encrypted_fields[i];
+					var fieldValue = angular.copy(credential[field]);
+					_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue), sharedKey);
+				}
+			},
+			decryptSharedCredential: function (credential, sharedKey) {
+				var _credential = angular.copy(credential);
+				var encrypted_fields = CredentialService.getEncryptedFields();
+				for (var i = 0; i < encrypted_fields.length; i++) {
+					var field = encrypted_fields[i];
+					var fieldValue = angular.copy(_credential[field]);
+					try {
+						var field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
+					} catch (e){
+						console.log(e);
+						throw e
+					}
+					try{
+						_credential[field] = JSON.parse(field_decrypted_value);
+					} catch (e){
+						console.log('Field' + field + ' in '+ _credential.label +' could not be parsed! Value:'+ fieldValue)
+						throw e
+					}
+
+				}
+				return _credential;
+			},
+
 			generateRSAKeys: function(key_length, progress, callback){
 				var p = new C_Promise(function(){
 					var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
