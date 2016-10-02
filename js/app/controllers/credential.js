@@ -36,8 +36,19 @@ angular.module('passmanApp')
 						var _shared_credential = shared_credentials[c];
 						console.log(_shared_credential)
 						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
-						_shared_credential = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
-						console.log(_shared_credential);
+						try {
+							var _shared_credential_data = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
+						} catch (e){
+
+						}
+						if(_shared_credential_data){
+							console.log(_shared_credential);
+							console.log(_shared_credential_data);
+							delete _shared_credential.credential_data;
+							_shared_credential_data.acl = _shared_credential;
+							console.log(_shared_credential_data);
+							$scope.active_vault.credentials.push(_shared_credential_data);
+						}
 					}
 				});
 			}
