@@ -6,6 +6,7 @@
  * @description
  * # ShareService
  * Service in the passmanApp.
+ * This file is part of passman, licensed under AGPLv3
  */
 angular.module('passmanApp')
 	.service('ShareService', ['$http', 'VaultService', 'EncryptService', 'CredentialService', function ($http, VaultService, EncryptService, CredentialService) {
