@@ -77,8 +77,8 @@ angular.module('passmanApp')
 				linkSharing: {
 					enabled: false,
 					settings: {
-						type: 'null', // can be date or view_amount or null (for no expire)
-						amount: null,
+						expire_time: 0,
+						expire_views: 0,
 						acl: link_acl
 					}
 				},
@@ -192,6 +192,18 @@ angular.module('passmanApp')
 									});
 							});
 						}
+					}
+
+					if($scope.share_settings.linkSharing.enabled){
+						var shareObj = {
+							item_id: '',
+							permissions: $scope.share_settings.linkSharing.settings.acl.getAccessLevel(),
+							expire_timestamp: $scope.share_settings.linkSharing.settings.expire_time,
+							expire_views: $scope.share_settings.linkSharing.settings.expire_views
+						};
+						ShareService.createPublicSharedCredential(shareObj).then(function(){
+
+						});
 					}
 				})
 			};
