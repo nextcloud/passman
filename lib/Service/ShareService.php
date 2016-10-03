@@ -103,6 +103,8 @@ class ShareService {
 
             $tmp = $entry->jsonSerialize();
             $tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId())->jsonSerialize();
+
+            if (!$entry->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
             unset($tmp['credential_data']['shared_key']);
             $return[] = $tmp;
         }
