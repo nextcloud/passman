@@ -62,12 +62,24 @@ angular.module('passmanApp')
 			};
 
 			$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + $scope.storedCredential.guid;
+
+			$scope.default_permissions = new SharingACL(0);
+			$scope.default_permissions.addPermission(
+				$scope.default_permissions.permissions.READ |
+				$scope.default_permissions.permissions.WRITE |
+				$scope.default_permissions.permissions.FILES
+			);
+
+			var link_acl = angular.copy($scope.default_permissions);
+			link_acl.removePermission($scope.default_permissions.permissions.WRITE)
+
 			$scope.share_settings = {
 				linkSharing: {
 					enabled: false,
 					settings: {
 						type: 'null', // can be date or view_amount or null (for no expire)
-						amount: null
+						amount: null,
+						acl: link_acl
 					}
 				},
 				credentialSharedWithUserAndGroup: [],
@@ -77,12 +89,6 @@ angular.module('passmanApp')
 				}
 			};
 
-			$scope.default_permissions = new SharingACL(0);
-			$scope.default_permissions.addPermission(
-				$scope.default_permissions.permissions.READ |
-				$scope.default_permissions.permissions.WRITE |
-				$scope.default_permissions.permissions.FILES
-			);
 
 			$scope.accessLevels = [
 				{
@@ -139,7 +145,7 @@ angular.module('passmanApp')
 						NotificationService.showNotification('Credential unshared', 4000)
 					})
 				})
-			}
+			};
 
 			$scope.applyShare = function () {
 				$scope.share_settings.cypher_progress.percent = 0;
