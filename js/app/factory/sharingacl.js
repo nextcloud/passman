@@ -8,7 +8,9 @@ angular.module('passmanApp').factory('SharingACL', function(){
         var permission = acl_permission;
         var permissions = {
             READ: 0x01,
-            WRITE: 0x03,
+            WRITE: 0x02,
+            FILES: 0x04,
+            HISTORY: 0x08,
             OWNER: 0x80,
         };
     }
