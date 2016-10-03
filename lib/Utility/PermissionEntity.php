@@ -46,7 +46,7 @@ class PermissionEntity extends Entity {
      */
     public function removePermission($permission) {
         $tmp = $this->getPermissions();
-        $tmp = $tmp & !$permission;
+        $tmp = $tmp & ~$permission;
         $this->setPermissions($tmp);
     }
 }
