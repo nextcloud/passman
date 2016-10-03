@@ -135,9 +135,8 @@ class ShareService {
 
         if (!$acl->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
         unset($tmp['credential_data']['shared_key']);
-        $return[] = $tmp;
 
-        return $return;
+        return $tmp;
     }
 
     /**
