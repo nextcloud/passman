@@ -297,6 +297,8 @@ class ShareController extends ApiController {
      * @PublicPage
      */
 	public function getPublicCredentialData($credential_guid) {
+		//@TODO if ExpireViews --, if 0 delete
+		//@TODO Check expire date
 	    try {
             $credential = $this->shareService->getSharedItem(null, $credential_guid);
             return new JSONResponse($credential);

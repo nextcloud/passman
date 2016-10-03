@@ -61,7 +61,6 @@ angular.module('passmanApp')
 				$location.path('/vault/' + $scope.storedCredential.vault_id);
 			};
 
-			$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + $scope.storedCredential.guid;
 
 			$scope.default_permissions = new SharingACL(0);
 			$scope.default_permissions.addPermission(
@@ -138,12 +137,11 @@ angular.module('passmanApp')
 			};
 
 			$scope.unshareCredential = function (credential) {
-				ShareService.unshareCredential(credential).then(function () {
-					var _credential = angular.copy(credential);
-					_credential.shared_key = null;
-					CredentialService.updateCredential(_credential).then(function () {
-						NotificationService.showNotification('Credential unshared', 4000)
-					})
+				ShareService.unshareCredential(credential);
+				var _credential = angular.copy(credential);
+				_credential.shared_key = null;
+				CredentialService.updateCredential(_credential).then(function () {
+					NotificationService.showNotification('Credential unshared', 4000)
 				})
 			};
 
@@ -196,12 +194,15 @@ angular.module('passmanApp')
 
 					if($scope.share_settings.linkSharing.enabled){
 						var shareObj = {
-							item_id: '',
+							item_id: $scope.storedCredential.credential_id,
+							item_guid: $scope.storedCredential.guid,
 							permissions: $scope.share_settings.linkSharing.settings.acl.getAccessLevel(),
 							expire_timestamp: $scope.share_settings.linkSharing.settings.expire_time,
 							expire_views: $scope.share_settings.linkSharing.settings.expire_views
 						};
 						ShareService.createPublicSharedCredential(shareObj).then(function(){
+							var hash = window.btoa($scope.storedCredential.guid + '<::>'+ key)
+							$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
 
 						});
 					}

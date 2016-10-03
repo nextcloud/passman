@@ -419,14 +419,14 @@
 			<field>
 				<name>vault_id</name>
 				<type>integer</type>
-				<notnull>true</notnull>
+				<notnull>false</notnull>
 				<unsigned>true</unsigned>
 				<length>8</length>
 			</field>
 			<field>
 				<name>vault_guid</name>
 				<type>text</type>
-				<notnull>true</notnull>
+				<notnull>false</notnull>
 				<length>64</length>
 			</field>
 			<field>
@@ -470,7 +470,7 @@
 			<field>
 				<name>shared_key</name>
 				<type>clob</type>
-				<notnull>true</notnull>
+				<notnull>false</notnull>
 			</field>
 		</declaration>
 	</table>
