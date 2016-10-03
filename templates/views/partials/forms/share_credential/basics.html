@@ -16,12 +16,6 @@
 					</td>
 
 					<td>
-						<select ng-model="selectedAccessLevel">
-							<option ng-repeat="lvl in accessLevels"
-									value="{{lvl.value}}">
-								{{lvl.label}}
-							</option>
-						</select>
 						<button class="button"
 								ng-click="shareWith(inputSharedWith, selectedAccessLevel)">
 							+
@@ -62,8 +56,11 @@
 			   ng-show="share_settings.credentialSharedWithUserAndGroup.length > 0">
 			<thead>
 			<tr>
-				<td>User / group</td>
-				<td>Access</td>
+				<td>User</td>
+				<td>Read</td>
+				<td>Write</td>
+				<td>Files</td>
+				<td>Revisions</td>
 			</tr>
 			</thead>
 			<tr ng-repeat="user in share_settings.credentialSharedWithUserAndGroup">
@@ -71,8 +68,12 @@
 					<i class="fa fa-user" ng-if="user.type === 'user'"></i>
 					<i class="fa fa-group" ng-if="user.type === 'group'"></i>
 					{{user.userId}}
+					{{user}}
 				</td>
-				<td>{{user.accessLevel}}</td>
+				<td><input type="checkbox" ng-checked="hasPermission(user.acl, 'READ')"> </td>
+				<td><input type="checkbox"></td>
+				<td><input type="checkbox"></td>
+				<td><input type="checkbox"></td>
 			</tr>
 		</table>
 	</div>

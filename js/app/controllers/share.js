@@ -89,7 +89,7 @@ angular.module('passmanApp')
 			];
 			console.log(SharingACL);
 			var acl = new SharingACL(0);
-			acl.addPermission(acl.permissions.HISTORY)
+
 			console.log(acl);
 			$scope.inputSharedWith = [];
 			$scope.selectedAccessLevel = '1';
@@ -98,17 +98,22 @@ angular.module('passmanApp')
 				return ShareService.search($query)
 			};
 
+			$scope.hasPermission = function(acl, permission){
+				console.log(acl, permission)
+			};
+
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {
 				//@TODO Improve this so we can add, edit and remove users and permissions.
 				$scope.inputSharedWith = [];
 				if (shareWith.length > 0) {
 					for (var i = 0; i < shareWith.length; i++) {
-
+						var acl = new SharingACL(0);
+						acl.addPermission(acl.permissions.READ | acl.permissions.WRITE | acl.permissions.FILES);
 						var obj = {
 							userId: shareWith[i].uid,
 							displayName: shareWith[i].text,
 							type: shareWith[i].type,
-							accessLevel: selectedAccessLevel
+							accessLevel: acl
 						};
 						if ($scope.share_settings.credentialSharedWithUserAndGroup.indexOf(obj) === -1) {
 							$scope.share_settings.credentialSharedWithUserAndGroup.push(obj)
