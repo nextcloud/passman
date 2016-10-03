@@ -119,6 +119,22 @@ class ShareService {
         return $return;
     }
 
+    public function getSharedItem($user_id, $item_guid){
+        $acl = $this->sharingACL->getItemACL($user_id, $item_guid);
+
+        // Check if the user can read the credential, probably unnecesary, but just to be sure
+        if (!$acl->hasPermission(SharingACL::READ)) return null;
+
+        $return = $acl->jsonSerialize();
+        $tmp['credential_data'] = $this->credential->getCredentialById($acl->getItemId())->jsonSerialize();
+
+        if (!$acl->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
+        unset($tmp['credential_data']['shared_key']);
+        $return[] = $tmp;
+
+        return $return;
+    }
+
     /**
      * Gets history from the given item checking the user's permissions to access it
      * @param $user_id
