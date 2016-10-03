@@ -366,6 +366,12 @@
 				<type>clob</type>
 				<notnull>true</notnull>
 			</field>
+			<field>
+				<name>edited_by</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>64</length>
+			</field>
 			<index>
 				<name>passman_revision_id_index</name>
 				<field>
