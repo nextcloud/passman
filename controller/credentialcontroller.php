@@ -102,10 +102,13 @@ class CredentialController extends ApiController {
 									 $description, $email, $expire_time, $favicon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
 									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl) {
+
+
+		$storedCredential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+
 		$credential = array(
 			'credential_id' => $credential_id,
 			'guid' => $guid,
-			'user_id' => $this->userId,
 			'label' => $label,
 			'description' => $description,
 			'created' => $created,
@@ -124,17 +127,18 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
-			'shared_key' => (!empty($shared_key)) ? $shared_key : '',
+			'shared_key' => ($shared_key === null) ? null : $storedCredential->getSharedKey(),
 		);
 
-		$storedCredential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+		
+
         if ($storedCredential->getUserId() !== $this->userId){
             $acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
             if (!$acl->hasPermission(SharingACL::WRITE)){
                 return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
             }
         }
-
+		//@TODO Add activities for non owned items
 		$link = ''; // @TODO create direct link to credential
 		if ($revision_created) {
 			$this->activityService->add(
@@ -163,7 +167,7 @@ class CredentialController extends ApiController {
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 
-		$this->credentialRevisionService->createRevision($storedCredential, $this->userId, $credential_id);
+		$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);
 		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);

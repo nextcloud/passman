@@ -4,7 +4,7 @@
 		Enable link sharing.<br/>
 		<input type="text" ng-model="share_link" select-on-click
 			   ng-if="share_settings.linkSharing.enabled">
-		<div>
+		<div ng-if="share_settings.linkSharing.enabled">
 			Expire settings:
 			<select ng-model="share_settings.linkSharing.settings.type">
 				<option value="null">Does not expire</option>
@@ -31,7 +31,7 @@
 			<input type="number"
 				   ng-model="share_settings.linkSharing.settings.value">
 		</div>
-		<div>
+		<div  ng-if="share_settings.linkSharing.enabled">
 			<table>
 				<tr>
 					<td><input type="checkbox"

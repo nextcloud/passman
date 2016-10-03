@@ -25,8 +25,8 @@ class CredentialRevisionService {
 		$this->credentialRevisionMapper = $credentialRevisionMapper;
 	}
 
-	public function createRevision($credential, $userId, $credential_id) {
-		return $this->credentialRevisionMapper->create($credential, $userId, $credential_id);
+	public function createRevision($credential, $userId, $credential_id, $edited_by) {
+		return $this->credentialRevisionMapper->create($credential, $userId, $credential_id, $edited_by);
 	}
 
 	public function getRevisions($credential_id, $user_id = null){

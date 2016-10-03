@@ -38,12 +38,13 @@ class CredentialRevisionMapper extends Mapper {
 		return $this->findEntities($sql, $params);
 	}
 
-	public function create($credential, $userId, $credential_id) {
+	public function create($credential, $userId, $credential_id, $edited_by) {
 		$revision = new CredentialRevision();
 		$revision->setGuid($this->utils->GUID());
 		$revision->setUserId($userId);
 		$revision->setCreated($this->utils->getTime());
 		$revision->setCredentialId($credential_id);
+		$revision->setEditedBy($edited_by);
 		$revision->setCredentialData(base64_encode(serialize($credential)));
 		return $this->insert($revision);
 	}
