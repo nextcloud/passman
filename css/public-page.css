@@ -41,7 +41,8 @@ table {
   table td:first-child {
     min-width: 110px; }
   table td {
-    padding-bottom: 1em; }
+    padding-bottom: 1em;
+    vertical-align: top; }
 
 .tags .tag {
   background-color: rgba(240, 240, 240, 0.9);
