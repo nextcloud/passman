@@ -36,6 +36,7 @@ angular.module('passmanApp')
 					for (var c = 0; c < shared_credentials.length; c++) {
 						var _shared_credential = shared_credentials[c];
 						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
+						console.log(decrypted_key)
 						try {
 							var _shared_credential_data = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
 						} catch (e){
@@ -67,6 +68,7 @@ angular.module('passmanApp')
 
 							} else {
 								var enc_key = EncryptService.decryptString(vault.credentials[i].shared_key);
+								console.log(enc_key)
 								$scope.active_vault.credentials[i] = ShareService.decryptSharedCredential(angular.copy(vault.credentials[i]), enc_key);
 							}
 							$scope.active_vault.credentials[i].tags_raw = $scope.active_vault.credentials[i].tags;

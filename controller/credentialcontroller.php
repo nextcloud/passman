@@ -130,7 +130,7 @@ class CredentialController extends ApiController {
 			'shared_key' => ($shared_key === null) ? null : $storedCredential->getSharedKey(),
 		);
 
-		
+
 
         if ($storedCredential->getUserId() !== $this->userId){
             $acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
