@@ -197,6 +197,7 @@ angular.module('passmanApp')
 			};
 
 			$scope.uploadChanges = function (user) {
+				user.accessLevel = angular.copy(user.acl.getAccessLevel());
 				ShareService.shareWithUser(storedCredential, user);
 				//@TODO Encrypt the credential once all users have the sharing keys.
 			};
