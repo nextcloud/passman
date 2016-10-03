@@ -21,6 +21,7 @@ return [
 	'routes' => [
 		['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
 		['name' => 'page#bookmarklet', 'url' => '/bookmarklet', 'verb' => 'GET'],
+		['name' => 'page#publicSharePage', 'url' => '/share/public', 'verb' => 'GET'],
 
 		//Vault
 		['name' => 'vault#listVaults', 'url' => '/api/v2/vaults', 'verb' => 'GET'],

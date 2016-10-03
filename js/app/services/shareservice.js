@@ -67,6 +67,16 @@ angular.module('passmanApp')
 					return response.data;
 				})
 			},
+			getPublicSharedCredential: function (request, crypted_shared_key) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public/view');
+				return $http.get(queryUrl).then(function (response) {
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+			},
 			getCredendialsSharedWithUs: function (vault_guid) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vault/'+ vault_guid +'/get');
 				return $http.get(queryUrl).then(function (response) {

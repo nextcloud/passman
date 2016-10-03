@@ -59,8 +59,8 @@ angular.module('passmanApp')
 			$location.path('/vault/' + $scope.storedCredential.vault_id);
 		};
 
-
-
+		console.log($location);
+		$scope.share_link = $location.$$protocol + '://'+ $location.$$host + OC.generateUrl('apps/passman/share/public#') + $scope.storedCredential.guid;
 		$scope.share_settings = {
 			linkSharing:{
 				enabled: false,

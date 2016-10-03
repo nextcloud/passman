@@ -48,7 +48,16 @@ class PageController extends Controller {
 	 */
 	public function bookmarklet($url='',$title='') {
 		$params = array('url' => $url, 'label' => $title);
-		return new TemplateResponse('passman', 'bookmarklet', $params);
+
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 * @PublicPage
+	 */
+	public function publicSharePage($shareKey) {
+		return new TemplateResponse('passman', 'public_share');
 	}
 
 }
