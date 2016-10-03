@@ -110,11 +110,7 @@ angular.module('passmanApp')
 			};
 
 			$scope.setPermission = function(acl, permission){
-				if(acl.hasPermission(permission)){
-					acl.removePermission(permission);
-				} else {
-					acl.addPermission(permission);
-				}
+				acl.togglePermission(permission);
 			};
 
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {

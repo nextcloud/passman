@@ -40,6 +40,10 @@ angular.module('passmanApp').factory('SharingACL', function(){
         this.permission = this.permission & ~permission;
     };
 
+    ACL.prototype.togglePermission = function(permission){
+        this.permission ^= permission;
+    }
+
     ACL.prototype.getAccessLevel = function() {
         return this.permission;
     };
