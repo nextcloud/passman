@@ -6,7 +6,7 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('PublicSharedCredential', ['$scope', 'ShareService', function ($scope, ShareService) {
+	.controller('PublicSharedCredential', ['$scope', 'ShareService','$window', function ($scope, ShareService, $window) {
 		$scope.test = 'hello world';
 
 		$scope.loading = false;
@@ -75,12 +75,18 @@ angular.module('passmanApp')
 
 		$scope.loadSharedCredential = function () {
 			$scope.loading = true;
-			ShareService.getPublicSharedCredential().then(function (sharedCredential) {
-				//Decrypt stuff here
-
-				//And then set it
+			var guid = $window.location.hash.replace('#','');
+			ShareService.getPublicSharedCredential(guid).then(function (sharedCredential) {
 				$scope.loading = false;
-				$scope.shared_credential = example_shared_credential;
+				console.log(sharedCredential)
+				if(sharedCredential.status === 200){
+					$scope.shared_credential = example_shared_credential;
+				} else {
+					$scope.expired = true;
+				}
+
+			}, function(error){
+				return false;
 			})
 
 		}

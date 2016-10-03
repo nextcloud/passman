@@ -64,7 +64,7 @@ style('passman', 'public-page');
 	<div class="row">
 		<div class="col-xs-8 col-xs-push-2 col-xs-pull-2 credential_container">
 			<h2>Passman</h2>
-			<div ng-if="!shared_credential">
+			<div ng-if="!shared_credential && !expired">
 				<span class="text">{name} has shared a credential with you.</span>
 				<button class="button-geen" ng-if="!loading"
 						ng-click="loadSharedCredential()">Click here to request
@@ -73,6 +73,9 @@ style('passman', 'public-page');
 				<button class="button-geen" ng-if="loading"><i
 						class="fa fa-spinner fa-spin"></i>Loading...
 				</button>
+			</div>
+			<div ng-if="expired">
+				Awwhh.... this credential is expired :(.
 			</div>
 			<div ng-if="shared_credential">
 				<table class="table">

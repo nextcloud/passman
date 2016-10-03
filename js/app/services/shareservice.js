@@ -25,7 +25,7 @@ angular.module('passmanApp')
 					}
 				});
 			},
-			shareWithUser: function (credential, target_user_data){
+			shareWithUser: function (credential, target_user_data) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/share');
 				return $http.post(queryUrl,
 					{
@@ -37,10 +37,10 @@ angular.module('passmanApp')
 				);
 			},
 			getVaultsByUser: function (userId) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vaults/'+ userId);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vaults/' + userId);
 				return $http.get(queryUrl, {search: userId}).then(function (response) {
 					if (response.data) {
-						for (var i = 0; i < response.data.length; i++){
+						for (var i = 0; i < response.data.length; i++) {
 							response.data[i].public_sharing_key = forge.pki.publicKeyFromPem(response.data[i].public_sharing_key);
 						}
 						return response.data;
@@ -52,7 +52,7 @@ angular.module('passmanApp')
 			getPendingRequests: function () {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/pending');
 				return $http.get(queryUrl).then(function (response) {
-					if(response.data){
+					if (response.data) {
 						return response.data;
 					}
 				});
@@ -68,34 +68,37 @@ angular.module('passmanApp')
 				})
 			},
 			unshareCredential: function (credential) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/unshare/'+ credential.guid);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/unshare/' + credential.guid);
 				return $http.delete(queryUrl).then(function (response) {
 					return response.data;
 				})
 			},
 			getPublicSharedCredential: function (credential_guid) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/'+ credential_guid);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential_guid);
+				return $http.get(queryUrl).then(function (response) {
+						if (response.data) {
+							return response;
+						} else {
+							return response;
+						}
+					},
+					function (result) {
+						return result;
+					})
+			},
+			getCredendialsSharedWithUs: function (vault_guid) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vault/' + vault_guid + '/get');
 				return $http.get(queryUrl).then(function (response) {
 					if (response.data) {
 						return response.data;
-					} else {
-						return response;
 					}
 				});
 			},
-			getCredendialsSharedWithUs: function (vault_guid) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vault/'+ vault_guid +'/get');
-				return $http.get(queryUrl).then(function (response) {
-					if(response.data){
-						return response.data;
-					}
-				});
-			},
-			encryptSharedCredential: function(credential, sharedKey){
+			encryptSharedCredential: function (credential, sharedKey) {
 				var _credential = angular.copy(credential);
 				_credential.shared_key = EncryptService.encryptString(sharedKey);
 				var encrypted_fields = CredentialService.getEncryptedFields();
-				for(var i = 0; i < encrypted_fields.length; i++){
+				for (var i = 0; i < encrypted_fields.length; i++) {
 					var field = encrypted_fields[i];
 					var fieldValue = angular.copy(credential[field]);
 					_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue), sharedKey);
@@ -108,7 +111,7 @@ angular.module('passmanApp')
 				for (var i = 0; i < encrypted_fields.length; i++) {
 					var field = encrypted_fields[i];
 					var fieldValue = angular.copy(_credential[field]);
-					if(_credential.hasOwnProperty(field)) {
+					if (_credential.hasOwnProperty(field)) {
 						try {
 							var field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
 						} catch (e) {
@@ -126,12 +129,12 @@ angular.module('passmanApp')
 				return _credential;
 			},
 
-			generateRSAKeys: function(key_length, progress, callback){
-				var p = new C_Promise(function(){
+			generateRSAKeys: function (key_length, progress, callback) {
+				var p = new C_Promise(function () {
 					var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
-					var step = function() {
+					var step = function () {
 						// run for 100 ms
-						if(!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
+						if (!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
 							// console.log(state);
 							if (state.p !== null) {
 								// progress(50);
@@ -152,46 +155,46 @@ angular.module('passmanApp')
 				});
 				return p;
 			},
-			generateSharedKey: function(size){
+			generateSharedKey: function (size) {
 				size = size || 20;
-				return new C_Promise(function(){
+				return new C_Promise(function () {
 					var t = this;
 					CRYPTO.PASSWORD.generate(size,
-						function(pass) {
+						function (pass) {
 							t.call_then(pass);
 						},
-						function(progress) {
+						function (progress) {
 							t.call_progress(progress);
 						}
 					);
 				})
 			},
-			rsaKeyPairToPEM: function(keypair){
+			rsaKeyPairToPEM: function (keypair) {
 				return {
-					'publicKey' 	: forge.pki.publicKeyToPem(keypair.publicKey),
-					'privateKey' 	: forge.pki.privateKeyToPem(keypair.privateKey)
+					'publicKey': forge.pki.publicKeyToPem(keypair.publicKey),
+					'privateKey': forge.pki.privateKeyToPem(keypair.privateKey)
 				};
 			},
-			getSharingKeys: function(){
+			getSharingKeys: function () {
 				var vault = VaultService.getActiveVault();
-				return{
+				return {
 					'private_sharing_key': EncryptService.decryptString(angular.copy(vault.private_sharing_key)),
 					'public_sharing_key': vault.public_sharing_key
 				};
 			},
-			rsaPrivateKeyFromPEM: function(private_pem) {
+			rsaPrivateKeyFromPEM: function (private_pem) {
 				return forge.pki.privateKeyFromPem(private_pem);
 			},
-			rsaPublicKeyFromPEM: function(public_pem){
+			rsaPublicKeyFromPEM: function (public_pem) {
 				return forge.pki.publicKeyFromPem(public_pem);
 			},
 			/**
 			 * Cyphers an array of string in a non-blocking way
-			 * @param vaults[] 	An array of vaults with the processed public keys
-			 * @param string	The string to cypher
+			 * @param vaults[]    An array of vaults with the processed public keys
+			 * @param string    The string to cypher
 			 */
-			cypherRSAStringWithPublicKeyBulkAsync: function(vaults, string){
-				var workload = function(){
+			cypherRSAStringWithPublicKeyBulkAsync: function (vaults, string) {
+				var workload = function () {
 					if (this.current_index < this.vaults.length > 0 && this.vaults.length > 0) {
 						var _vault = angular.copy(this.vaults[this.current_index]);
 						_vault.key = forge.util.encode64(
@@ -205,11 +208,11 @@ angular.module('passmanApp')
 						this.call_progress(this.current_index);
 						setTimeout(workload.bind(this), 1);
 					}
-					else{
+					else {
 						this.call_then(this.data);
 					}
 				};
-				return new C_Promise(function(){
+				return new C_Promise(function () {
 					this.data = [];
 					this.vaults = vaults;
 					this.string = string;
