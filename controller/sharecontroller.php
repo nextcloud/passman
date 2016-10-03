@@ -295,9 +295,9 @@ class ShareController extends ApiController {
      * @NoCSRFRequired
      * @PublicPage
      */
-	public function getCredentialData($credential_guid) {
+	public function getPublicCredentialData($credential_guid) {
 	    try {
-            $credential = $this->shareService->getSharedItem($this->userId, $credential_guid);
+            $credential = $this->shareService->getSharedItem(null, $credential_guid);
             return new JSONResponse($credential);
         }
         catch (DoesNotExistException $ex){
