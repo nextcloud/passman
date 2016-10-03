@@ -109,6 +109,14 @@ angular.module('passmanApp')
 				return acl.hasPermission(permission);
 			};
 
+			$scope.setPermission = function(acl, permission){
+				if(acl.hasPermission(permission)){
+					acl.removePermission(permission);
+				} else {
+					acl.addPermission(permission);
+				}
+			};
+
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {
 				//@TODO Improve this so we can add, edit and remove users and permissions.
 				$scope.inputSharedWith = [];

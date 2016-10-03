@@ -68,12 +68,11 @@
 					<i class="fa fa-user" ng-if="user.type === 'user'"></i>
 					<i class="fa fa-group" ng-if="user.type === 'group'"></i>
 					{{user.userId}}
-					{{user}}
 				</td>
-				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.READ)"> </td>
-				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.WRITE)"></td>
-				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.FILES)"></td>
-				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.HISTORY)"></td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.READ)" ng-checked="hasPermission(user.acl, default_permissions.permissions.READ)"> </td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.WRITE)" ng-checked="hasPermission(user.acl, default_permissions.permissions.WRITE)"></td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.FILES)" ng-checked="hasPermission(user.acl, default_permissions.permissions.FILES)"></td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.HISTORY)" ng-checked="hasPermission(user.acl, default_permissions.permissions.HISTORY)"></td>
 			</tr>
 		</table>
 	</div>
