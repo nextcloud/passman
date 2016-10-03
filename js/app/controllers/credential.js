@@ -37,7 +37,6 @@ angular.module('passmanApp')
 						var _shared_credential = shared_credentials[c];
 						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
 						console.log('This credential is shared with us: ', decrypted_key);
-						console.log(decrypted_key)
 						try {
 							var _shared_credential_data = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
 						} catch (e){

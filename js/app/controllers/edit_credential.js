@@ -219,7 +219,6 @@ angular.module('passmanApp')
 					var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
 					console.log('Saving using key', enc_key)
 					var _credential = ShareService.encryptSharedCredential($scope.storedCredential, enc_key);
-					console.log(_credential);
 					delete _credential.shared_key;
 					CredentialService.updateCredential(_credential).then(function (result) {
 						SettingsService.setSetting('edit_credential', null);
