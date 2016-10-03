@@ -34,6 +34,7 @@ class CronService {
 		$this->db = $db;
 	}
 	//@TODO rename to a general name with sub tasks
+	//@TODO Add cron task which expires shared credentials
 	public function expireCredentials() {
 		$this->logger->info('Passman cron test', array('app' => 'passman'));
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
