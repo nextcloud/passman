@@ -1,0 +1,64 @@
+header {
+  display: none; }
+
+#content-wrapper {
+  padding-top: 0; }
+
+.credential_container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #f8f8f8;
+  border: 1px solid #c9c9c9;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-clip: padding-box;
+  /* stops bg color from leaking outside the border: */ }
+  .credential_container .text {
+    text-align: center; }
+  .credential_container h2 {
+    font-weight: bold; }
+  .credential_container button, .credential_container .text {
+    margin: 0 auto;
+    display: block; }
+    .credential_container button i, .credential_container .text i {
+      margin-right: 5px; }
+
+.credential_field {
+  overflow: hidden; }
+  .credential_field .cell, .credential_field .value {
+    float: left; }
+  .credential_field .tools {
+    margin-left: 10px;
+    overflow: hidden;
+    float: left; }
+    .credential_field .tools .cell {
+      cursor: pointer;
+      margin-right: 4px; }
+
+table {
+  white-space: normal; }
+  table td:first-child {
+    min-width: 110px; }
+  table td {
+    padding-bottom: 1em; }
+
+.tags .tag {
+  background-color: rgba(240, 240, 240, 0.9);
+  padding: 4px;
+  font-size: 12px;
+  margin-right: 3px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-clip: padding-box;
+  /* stops bg color from leaking outside the border: */ }
+.tags .tag:last-child {
+  margin-right: 8px; }
+
+.footer {
+  font-size: 10px;
+  position: relative;
+  bottom: -20px;
+  text-align: center; }
+
+/*# sourceMappingURL=public-page.css.map */

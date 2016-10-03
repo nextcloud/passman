@@ -214,7 +214,7 @@ angular.module('passmanApp')
 			$scope.saveCredential = function () {
 				//@TODO  validation
 				//@TODO When credential is expired and has renew interval set, calc new expire time.
-
+				console.log(JSON.stringify($scope.storedCredential));
 				delete $scope.storedCredential.password_repeat;
 				if (!$scope.storedCredential.credential_id) {
 					$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
