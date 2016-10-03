@@ -16,6 +16,7 @@ use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\ShareRequestMapper;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\SharingACLMapper;
+use OCP\AppFramework\Db\DoesNotExistException;
 
 class ShareService {
     private $sharingACL;
@@ -128,7 +129,7 @@ class ShareService {
         $acl = $this->sharingACL->getItemACL($user_id, $item_guid);
 
         // Check if the user can read the credential, probably unnecesary, but just to be sure
-        if (!$acl->hasPermission(SharingACL::READ)) return null;
+        if (!$acl->hasPermission(SharingACL::READ)) throw new DoesNotExistException("Item not found or wrong access level");
 
         $tmp = $acl->jsonSerialize();
         $tmp['credential_data'] = $this->credential->getCredentialById($acl->getItemId())->jsonSerialize();
