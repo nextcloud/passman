@@ -75,7 +75,7 @@ style('passman', 'public-page');
 				</button>
 			</div>
 			<div ng-if="expired">
-				Awwhh.... this credential is expired :(.
+				Awwhh.... credential not found. Maybe it expired
 			</div>
 			<div ng-if="shared_credential">
 				<table class="table">
