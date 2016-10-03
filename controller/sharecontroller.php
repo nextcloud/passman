@@ -95,6 +95,8 @@ class ShareController extends ApiController {
 		/**
 		 * Assemble notification
 		 */
+		//@TODO add expire_time
+		//@TODO add expire_views
 		$credential = $this->credentialService->getCredentialById($item_id, $this->userId->getUID());
 		$credential_owner = $credential->getUserId();
 		$result = $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions, $credential_owner);
