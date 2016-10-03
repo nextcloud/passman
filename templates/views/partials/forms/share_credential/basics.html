@@ -70,10 +70,10 @@
 					{{user.userId}}
 					{{user}}
 				</td>
-				<td><input type="checkbox" ng-checked="hasPermission(user.acl, 'READ')"> </td>
-				<td><input type="checkbox"></td>
-				<td><input type="checkbox"></td>
-				<td><input type="checkbox"></td>
+				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.READ)"> </td>
+				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.WRITE)"></td>
+				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.FILES)"></td>
+				<td><input type="checkbox" ng-checked="hasPermission(user.acl, default_permissions.permissions.HISTORY)"></td>
 			</tr>
 		</table>
 	</div>
