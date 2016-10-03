@@ -18,7 +18,7 @@ angular.module('passmanApp')
 				url: 'views/partials/forms/share_credential/basics.html',
 			}, {
 				title: 'Share link',
-				url: 'views/partials/forms/share_credential/expire_settings.html',
+				url: 'views/partials/forms/share_credential/link_sharing.html',
 				color: 'green'
 			}];
 			$scope.currentTab = {
