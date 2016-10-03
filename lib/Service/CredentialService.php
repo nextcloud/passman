@@ -53,8 +53,8 @@ class CredentialService {
 		return $this->credentialMapper->getExpiredCredentials($timestamp);
 	}
 
-	public function getCredentialById($credential_id, $user_id){
-		return $this->credentialMapper->getCredentialById($credential_id, $user_id);
+	public function getCredentialById($credential_id){
+		return $this->credentialMapper->getCredentialById($credential_id);
 	}
 	public function getCredentialLabelById($credential_id){
 		return $this->credentialMapper->getCredentialLabelById($credential_id);

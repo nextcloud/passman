@@ -8,8 +8,8 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService',
-		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService) {
+	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService',
+		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -62,7 +62,6 @@ angular.module('passmanApp')
 			}];
 
 
-
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
 					$location.path('/')
@@ -82,7 +81,7 @@ angular.module('passmanApp')
 			var storedCredential = SettingsService.getSetting('edit_credential');
 
 			if (!storedCredential) {
-				CredentialService.getCredential($routeParams.credential_id).then(function(result){
+				CredentialService.getCredential($routeParams.credential_id).then(function (result) {
 					$scope.storedCredential = CredentialService.decryptCredential(angular.copy(result));
 				});
 			} else {
@@ -188,10 +187,10 @@ angular.module('passmanApp')
 			$scope.renewIntervalValue = 0;
 			$scope.renewIntervalModifier = '0';
 
-			$scope.updateInterval = function(renewIntervalValue, renewIntervalModifier){
+			$scope.updateInterval = function (renewIntervalValue, renewIntervalModifier) {
 				var value = parseInt(renewIntervalValue);
 				var modifier = parseInt(renewIntervalModifier);
-				if( value && modifier) {
+				if (value && modifier) {
 					$scope.storedCredential.renew_interval = value * modifier;
 				}
 			};
@@ -214,21 +213,34 @@ angular.module('passmanApp')
 			$scope.saveCredential = function () {
 				//@TODO  validation
 				//@TODO When credential is expired and has renew interval set, calc new expire time.
-				console.log(JSON.stringify($scope.storedCredential));
 				delete $scope.storedCredential.password_repeat;
-				if (!$scope.storedCredential.credential_id) {
-					$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
-					CredentialService.createCredential($scope.storedCredential).then(function (result) {
-						$location.path('/vault/' + $routeParams.vault_id);
-						NotificationService.showNotification('Credential created!', 5000)
-					})
-				} else {
-					CredentialService.updateCredential($scope.storedCredential).then(function (result) {
+
+				if ($scope.storedCredential.hasOwnProperty('acl')) {
+					var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
+					console.log(enc_key)
+					var _credential = ShareService.encryptSharedCredential($scope.storedCredential, enc_key);
+					console.log(_credential);
+					CredentialService.updateCredential(_credential).then(function (result) {
 						SettingsService.setSetting('edit_credential', null);
 						$location.path('/vault/' + $routeParams.vault_id);
 						NotificationService.showNotification('Credential updated!', 5000)
 					})
+				} else {
+					if (!$scope.storedCredential.credential_id) {
+						$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
+						CredentialService.createCredential($scope.storedCredential).then(function (result) {
+							$location.path('/vault/' + $routeParams.vault_id);
+							NotificationService.showNotification('Credential created!', 5000)
+						})
+					} else {
+						CredentialService.updateCredential($scope.storedCredential).then(function (result) {
+							SettingsService.setSetting('edit_credential', null);
+							$location.path('/vault/' + $routeParams.vault_id);
+							NotificationService.showNotification('Credential updated!', 5000)
+						})
+					}
 				}
+
 			};
 
 			$scope.cancel = function () {

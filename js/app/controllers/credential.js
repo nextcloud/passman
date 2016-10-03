@@ -9,8 +9,8 @@
  */
 angular.module('passmanApp')
 	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService',
-		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService) {
+		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL',
+		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -32,6 +32,7 @@ angular.module('passmanApp')
 
 			var getSharedCredentials = function() {
 				ShareService.getCredendialsSharedWithUs($scope.active_vault.guid).then(function (shared_credentials) {
+					console.log('Shared credentials', shared_credentials);
 					for (var c = 0; c < shared_credentials.length; c++) {
 						var _shared_credential = shared_credentials[c];
 						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
@@ -43,6 +44,7 @@ angular.module('passmanApp')
 						if(_shared_credential_data){
 							delete _shared_credential.credential_data;
 							_shared_credential_data.acl = _shared_credential;
+							_shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
 							_shared_credential_data.tags_raw = _shared_credential_data.tags;
 							console.log(_shared_credential_data)
 							$scope.active_vault.credentials.push(_shared_credential_data);
@@ -99,6 +101,17 @@ angular.module('passmanApp')
 					});
 				}
 			});
+
+			$scope.permissions = new SharingACL(0);
+
+			$scope.hasPermission = function(acl, permission){
+				if(acl) {
+					return acl.hasPermission(permission);
+				} else {
+					return true;
+				}
+
+			};
 			
 			$scope.acceptShareRequest = function(share_request){
 				console.log('Accepted share request', share_request);
