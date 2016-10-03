@@ -217,10 +217,9 @@ angular.module('passmanApp')
 
 				if ($scope.storedCredential.hasOwnProperty('acl')) {
 					var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
-					console.log('Saving using key', enc_key)
 					var _credential = ShareService.encryptSharedCredential($scope.storedCredential, enc_key);
 					delete _credential.shared_key;
-					CredentialService.updateCredential(_credential).then(function (result) {
+					CredentialService.updateCredential(_credential, true).then(function (result) {
 						SettingsService.setSetting('edit_credential', null);
 						$location.path('/vault/' + $routeParams.vault_id);
 						NotificationService.showNotification('Credential updated!', 5000)

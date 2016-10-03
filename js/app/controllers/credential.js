@@ -36,7 +36,6 @@ angular.module('passmanApp')
 					for (var c = 0; c < shared_credentials.length; c++) {
 						var _shared_credential = shared_credentials[c];
 						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
-						console.log('This credential is shared with us: ', decrypted_key);
 						try {
 							var _shared_credential_data = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
 						} catch (e){
@@ -47,7 +46,6 @@ angular.module('passmanApp')
 							_shared_credential_data.acl = _shared_credential;
 							_shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
 							_shared_credential_data.tags_raw = _shared_credential_data.tags;
-							console.log(_shared_credential_data)
 							$scope.active_vault.credentials.push(_shared_credential_data);
 						}
 					}
@@ -68,7 +66,6 @@ angular.module('passmanApp')
 
 							} else {
 								var enc_key = EncryptService.decryptString(vault.credentials[i].shared_key);
-								console.log('This credential is shared with others key: ', enc_key);
 								$scope.active_vault.credentials[i] = ShareService.decryptSharedCredential(angular.copy(vault.credentials[i]), enc_key);
 							}
 							$scope.active_vault.credentials[i].tags_raw = $scope.active_vault.credentials[i].tags;
