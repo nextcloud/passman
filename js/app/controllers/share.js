@@ -138,6 +138,7 @@ angular.module('passmanApp')
 
 			$scope.unshareCredential = function (credential) {
 				ShareService.unshareCredential(credential);
+				//@TODO check why an item locks up after being shared with only a link
 				var _credential = angular.copy(credential);
 				_credential.shared_key = null;
 				CredentialService.updateCredential(_credential).then(function () {
