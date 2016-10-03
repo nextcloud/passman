@@ -80,7 +80,6 @@ class ShareController extends ApiController {
         $acl = new SharingACL();
 
         $acl->setItemId($item_id);
-        $acl->setVaultGuid($item_guid);
         $acl->setPermissions($permissions);
         $acl->setExpire($expire_timestamp);
         $acl->setExpireViews($expire_views);
