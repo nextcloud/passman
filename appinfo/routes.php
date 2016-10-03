@@ -57,6 +57,7 @@ return [
         ['name' => 'share#deleteShareRequest', 'url' => '/api/v2/sharing/decline/{share_request_id}', 'verb' => 'DELETE'],
         ['name' => 'share#getVaultItems', 'url' => '/api/v2/sharing/vault/{vault_guid}/get', 'verb' => 'GET'],
         ['name' => 'share#getRevisions', 'url' => '/api/v2/sharing/revisions/{item_guid}', 'verb' => 'GET'],
+        ['name' => 'share#getCredentialData', 'url' => '/api/v2/sharing/credential/{credential_guid}', 'verb' => 'GET'],
 
 		//Internal API
 		['name' => 'internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],

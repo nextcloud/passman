@@ -57,8 +57,16 @@ class SharingACLMapper extends Mapper {
      * @return SharingACL
      */
     public function getItemACL($user_id, $item_guid) {
-        $q = "SELECT * FROM " . self::TABLE_NAME . " WHERE user_id = ? AND item_guid = ?";
-        return $this->findEntity($q, [$user_id, $item_guid]);
+        $q = "SELECT * FROM " . self::TABLE_NAME . " WHERE item_guid = ? AND ";
+        $filter = [$item_guid];
+        if ($user_id == null){
+            $q .= 'user_id is null';
+        }
+        else {
+            $q .= 'user_id = ? ';
+            $filter[] = $user_id;
+        }
+        return $this->findEntity($q, $filter);
     }
 
     /**

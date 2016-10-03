@@ -16,6 +16,8 @@ use OCA\Passman\Db\Vault;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\NotificationService;
 use OCA\Passman\Service\ShareService;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -221,6 +223,11 @@ class ShareController extends ApiController {
 		return new JSONResponse($results);
 	}
 
+    /**
+     * @param $item_guid
+     * @return JSONResponse
+     * @NoAdminRequired
+     */
 	public function getRevisions($item_guid){
 	    return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
     }
@@ -233,6 +240,11 @@ class ShareController extends ApiController {
 		return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
     }
 
+    /**
+     * @param $share_request_id
+     * @return JSONResponse
+     * @NoAdminRequired
+     */
 	public function deleteShareRequest($share_request_id){
 		$sr = $this->shareService->getShareRequestById($share_request_id);
 		$notification = array(
@@ -258,4 +270,20 @@ class ShareController extends ApiController {
 		return new JSONResponse(array('result'=> true));
 	}
 
+    /**
+     * @param $credential_guid
+     * @return JSONResponse
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     * @PublicPage
+     */
+	public function getCredentialData($credential_guid) {
+	    try {
+            $credential = $this->shareService->getSharedItem($this->userId, $credential_guid);
+            return new JSONResponse($credential);
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundResponse();
+        }
+    }
 }
