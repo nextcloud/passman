@@ -126,6 +126,21 @@ class ShareController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
+	public function unshareCredential($item_guid){
+		$acl_list = $this->shareService->getCredentialAclList($item_guid);
+		$request_list = $this->shareService->getShareRequestsByGuid($item_guid);
+		foreach ($acl_list as $ACL){
+			$this->shareService->deleteShareACL($ACL);
+		}
+		foreach($request_list as $request){
+			$this->shareService->deleteShareRequest($request);
+		}
+		return new JSONResponse(array('result' => true));
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
 	public function search($search) {
 		$user_search = $this->searchUsers($search);
 		return new JSONResponse($user_search);
