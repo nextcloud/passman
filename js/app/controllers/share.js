@@ -87,7 +87,9 @@ angular.module('passmanApp')
 					value: '1'
 				}
 			];
-			console.log(SharingACL);
+			var acl = new SharingACL(0);
+			acl.addPermission(acl.HISTORY)
+			console.log(acl);
 			$scope.inputSharedWith = [];
 			$scope.selectedAccessLevel = '1';
 
