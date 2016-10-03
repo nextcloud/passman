@@ -130,7 +130,7 @@ class ShareService {
         // Check if the user can read the credential, probably unnecesary, but just to be sure
         if (!$acl->hasPermission(SharingACL::READ)) return null;
 
-        $return = $acl->jsonSerialize();
+        $tmp = $acl->jsonSerialize();
         $tmp['credential_data'] = $this->credential->getCredentialById($acl->getItemId())->jsonSerialize();
 
         if (!$acl->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
