@@ -54,7 +54,10 @@ class CredentialService {
 	}
 
 	public function getCredentialById($credential_id, $user_id){
-		return $this->credentialMapper->getCredentialById($credential_id, $user_id);
+        $credential = $this->credentialMapper->getCredentialById($credential_id);
+        if ($credential->getUserId() == $user_id){
+            return $credential;
+        }
 	}
 	public function getCredentialLabelById($credential_id){
 		return $this->credentialMapper->getCredentialLabelById($credential_id);

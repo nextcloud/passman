@@ -44,6 +44,11 @@ class CredentialMapper extends Mapper {
 		return $this->findEntities($sql, [$timestamp]);
 	}
 
+    /**
+     * @param $credential_id
+     * @param null $user_id
+     * @return Credential
+     */
 	public function getCredentialById($credential_id, $user_id = null){
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `id` = ?';
