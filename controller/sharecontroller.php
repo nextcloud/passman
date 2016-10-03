@@ -12,6 +12,7 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Db\ShareRequest;
+use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\Vault;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\NotificationService;
@@ -68,6 +69,23 @@ class ShareController extends ApiController {
 		$this->notificationService = $notificationService;
 	}
 
+    /**
+     * @param $item_id
+     * @param $item_guid
+     * @param $permissions
+     * @param $expire_timestamp
+     * @NoAdminRequired
+     */
+    public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp) {
+        $acl = new SharingACL();
+
+        $acl->setItemId($item_id);
+        $acl->setVaultGuid($item_guid);
+        $acl->setPermissions($permissions);
+        $acl->setExpire($expire_timestamp);
+
+        $this->shareService($acl);
+    }
 
 	/**
 	 * @NoAdminRequired

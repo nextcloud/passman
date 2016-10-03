@@ -67,6 +67,11 @@ class ShareService {
         return $requests;
     }
 
+    public function createACLEntry(SharingACL $acl){
+        if ($acl->getCreated() == null) $acl->setCreated((new \DateTime())->getTimestamp());
+        return $this->sharingACL->createACLEntry($acl);
+    }
+
     /**
      * Applies the given share, defaults to no expire
      * @param $item_guid
