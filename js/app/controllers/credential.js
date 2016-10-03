@@ -32,22 +32,19 @@ angular.module('passmanApp')
 
 			var getSharedCredentials = function() {
 				ShareService.getCredendialsSharedWithUs($scope.active_vault.guid).then(function (shared_credentials) {
-					console.log('Shared credentials', shared_credentials);
 					for (var c = 0; c < shared_credentials.length; c++) {
-						var _shared_credential = angular.copy(shared_credentials[c]);
-						console.log(_shared_credential)
+						var _shared_credential = shared_credentials[c];
 						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
-						console.log(decrypted_key)
 						try {
 							var _shared_credential_data = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
 						} catch (e){
 
 						}
 						if(_shared_credential_data){
-							/*delete _shared_credential.credential_data;
+							delete _shared_credential.credential_data;
 							_shared_credential_data.acl = _shared_credential;
 							_shared_credential_data.tags_raw = _shared_credential_data.tags;
-							console.log(_shared_credential_data)*/
+							console.log(_shared_credential_data)
 							$scope.active_vault.credentials.push(_shared_credential_data);
 						}
 					}
@@ -56,7 +53,6 @@ angular.module('passmanApp')
 
 			var fetchCredentials = function () {
 				VaultService.getVault($scope.active_vault).then(function (vault) {
-					console.log('Credentials', vault.credentials);
 					var vaultKey = angular.copy($scope.active_vault.vaultKey);
 					$scope.active_vault = vault;
 					$scope.active_vault.vaultKey = vaultKey;
@@ -108,7 +104,6 @@ angular.module('passmanApp')
 				console.log('Accepted share request', share_request);
 				var crypted_shared_key = share_request.shared_key;
 				var private_key = EncryptService.decryptString(VaultService.getActiveVault().private_sharing_key);
-				console.log(private_key);
 
 				private_key = ShareService.rsaPrivateKeyFromPEM(private_key);
 				crypted_shared_key = private_key.decrypt(forge.util.decode64(crypted_shared_key));
@@ -127,6 +122,7 @@ angular.module('passmanApp')
 						jQuery('.ui-dialog').remove();
 						getSharedCredentials();
 					}
+					console.log(result)
 				})	
 			};
 

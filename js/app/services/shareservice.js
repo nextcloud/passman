@@ -68,12 +68,6 @@ angular.module('passmanApp')
 					return response.data;
 				})
 			},
-			unshareCredential: function (credential) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/unshare/'+ credential.guid);
-				return $http.delete(queryUrl).then(function (response) {
-					return response.data;
-				})
-			},
 			getPublicSharedCredential: function (request, crypted_shared_key) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public/view');
 				return $http.get(queryUrl).then(function (response) {
@@ -109,21 +103,19 @@ angular.module('passmanApp')
 				for (var i = 0; i < encrypted_fields.length; i++) {
 					var field = encrypted_fields[i];
 					var fieldValue = angular.copy(_credential[field]);
-					console.log('Field:', field)
-					if(fieldValue) {
-						try {
-							var field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
-						} catch (e) {
-							console.log(e);
-							throw e
-						}
-						try {
-							_credential[field] = JSON.parse(field_decrypted_value);
-						} catch (e) {
-							console.log('Field' + field + ' in ' + _credential.label + ' could not be parsed! Value:' + fieldValue)
-							throw e
-						}
+					try {
+						var field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
+					} catch (e){
+						console.log(e);
+						throw e
 					}
+					try{
+						_credential[field] = JSON.parse(field_decrypted_value);
+					} catch (e){
+						console.log('Field' + field + ' in '+ _credential.label +' could not be parsed! Value:'+ fieldValue)
+						throw e
+					}
+
 				}
 				return _credential;
 			},

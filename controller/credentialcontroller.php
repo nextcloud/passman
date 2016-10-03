@@ -116,7 +116,7 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
-			'shared_key' => ($shared_key) ? $shared_key : null,
+			'shared_key' => $shared_key,
 		);
 
 
@@ -151,7 +151,7 @@ class CredentialController extends ApiController {
 		}
 
 		$this->credentialRevisionService->createRevision($storedCredential, $this->userId, $credential_id);
-		//$credential = $this->credentialService->updateCredential($credential);
+		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);
 	}

@@ -68,7 +68,10 @@ angular.module('passmanApp')
 						var fieldValue = angular.copy(credential[field]);
 						_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue));
 					}
+				} else {
+					console.log('Skipping encryption')
 				}
+
 				_credential.expire_time = new Date( angular.copy(credential.expire_time) ).getTime() / 1000;
 
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential.credential_id);
