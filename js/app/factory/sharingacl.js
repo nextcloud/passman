@@ -5,16 +5,16 @@
 
 angular.module('passmanApp').factory('SharingACL', function(){
     function ACL(acl_permission){
-        var permission = acl_permission;
-        var permissions = {
-            READ: 0x01,
-            WRITE: 0x02,
-            FILES: 0x04,
-            HISTORY: 0x08,
-            OWNER: 0x80,
-        };
+        this.permission = acl_permission;
     }
 
+    ACL.prototype.permissions = {
+        READ: 0x01,
+        WRITE: 0x02,
+        FILES: 0x04,
+        HISTORY: 0x08,
+        OWNER: 0x80,
+    };
     /**
      * Checks if a user has the given permission/s
      * @param permission
