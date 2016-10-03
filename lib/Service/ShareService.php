@@ -11,6 +11,7 @@ namespace OCA\Passman\Service;
 
 use Icewind\SMB\Share;
 use OCA\Passman\Db\CredentialMapper;
+use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\ShareRequestMapper;
 use OCA\Passman\Db\SharingACL;
@@ -118,6 +119,12 @@ class ShareService {
         return $return;
     }
 
+    /**
+     * Gets history from the given item checking the user's permissions to access it
+     * @param $user_id
+     * @param $item_guid
+     * @return CredentialRevision[]
+     */
     public function getItemHistory($user_id, $item_guid) {
         $acl = $this->sharingACL->getItemACL($user_id, $item_guid);
         if (!$acl->hasPermission(SharingACL::READ | SharingACL::HISTORY)) return [];
