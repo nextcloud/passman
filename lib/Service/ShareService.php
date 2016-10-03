@@ -167,6 +167,16 @@ class ShareService {
 		return $this->sharingACL->getCredentialAclList($item_guid);
 	}
 
+    /**
+     * Gets the ACL on the credential for the user
+     * @param $user_id
+     * @param $item_guid
+     * @return SharingACL
+     */
+	public function getCredentialAclForUser($user_id, $item_guid){
+	    return $this->sharingACL->getItemACL($user_id, $item_guid);
+    }
+
 	/**
 	 * Get pending share requests by guid
 	 *

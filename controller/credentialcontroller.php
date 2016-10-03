@@ -11,6 +11,9 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Db\SharingACL;
+use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -18,24 +21,29 @@ use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Activity;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialRevisionService;
+use OCA\Passman\Service\ShareService;
 
 class CredentialController extends ApiController {
 	private $userId;
 	private $credentialService;
 	private $activityService;
 	private $credentialRevisionService;
+    private $sharingService;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
 								CredentialService $credentialService,
 								ActivityService $activityService,
-								CredentialRevisionService $credentialRevisionService) {
+								CredentialRevisionService $credentialRevisionService,
+                                ShareService $sharingService
+    ) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
 		$this->activityService = $activityService;
 		$this->credentialRevisionService = $credentialRevisionService;
+        $this->sharingService = $sharingService;
 	}
 
 	/**
@@ -120,6 +128,12 @@ class CredentialController extends ApiController {
 		);
 
 		$storedCredential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+        if ($storedCredential->getUserId() !== $this->userId){
+            $acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
+            if (!$acl->hasPermission(SharingACL::WRITE)){
+                return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+            }
+        }
 
 		$link = ''; // @TODO create direct link to credential
 		if ($revision_created) {

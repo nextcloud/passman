@@ -11,6 +11,8 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\Db\SharingACL;
+use OCA\Passman\Db\SharingACLMapper;
 use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -20,9 +22,11 @@ use OCA\Passman\Db\CredentialMapper;
 class CredentialService {
 
 	private $credentialMapper;
+    private $sharingACL;
 
-	public function __construct(CredentialMapper $credentialMapper) {
+	public function __construct(CredentialMapper $credentialMapper, SharingACLMapper $sharingACL) {
 		$this->credentialMapper = $credentialMapper;
+        $this->sharingACL = $sharingACL;
 	}
 
 	public function createCredential($credential) {
@@ -58,6 +62,13 @@ class CredentialService {
         if ($credential->getUserId() == $user_id){
             return $credential;
         }
+        else {
+            $acl = $this->sharingACL->getItemACL($user_id, $credential->getGuid());
+            if ($acl->hasPermission(SharingACL::READ));
+            return $credential;
+        }
+
+        throw new DoesNotExistException("Did expect one result but found none when executing");
 	}
 	public function getCredentialLabelById($credential_id){
 		return $this->credentialMapper->getCredentialLabelById($credential_id);
