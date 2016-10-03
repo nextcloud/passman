@@ -33,7 +33,7 @@ class CronService {
 		$this->activityService = $activityService;
 		$this->db = $db;
 	}
-
+	//@TODO rename to a general name with sub tasks
 	public function expireCredentials() {
 		$this->logger->info('Passman cron test', array('app' => 'passman'));
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
