@@ -77,6 +77,13 @@ angular.module('passmanApp')
 				}
 			};
 
+			$scope.default_permissions = new SharingACL(0);
+			$scope.default_permissions.addPermission(
+				$scope.default_permissions.permissions.READ |
+				$scope.default_permissions.permissions.WRITE |
+				$scope.default_permissions.permissions.FILES
+			);
+
 			$scope.accessLevels = [
 				{
 					label: 'Can edit',
@@ -99,7 +106,7 @@ angular.module('passmanApp')
 			};
 
 			$scope.hasPermission = function(acl, permission){
-				console.log(acl, permission)
+				return acl.hasPermission(permission);
 			};
 
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {
@@ -107,13 +114,11 @@ angular.module('passmanApp')
 				$scope.inputSharedWith = [];
 				if (shareWith.length > 0) {
 					for (var i = 0; i < shareWith.length; i++) {
-						var acl = new SharingACL(0);
-						acl.addPermission(acl.permissions.READ | acl.permissions.WRITE | acl.permissions.FILES);
 						var obj = {
 							userId: shareWith[i].uid,
 							displayName: shareWith[i].text,
 							type: shareWith[i].type,
-							accessLevel: acl
+							acl: angular.copy($scope.default_permissions)
 						};
 						if ($scope.share_settings.credentialSharedWithUserAndGroup.indexOf(obj) === -1) {
 							$scope.share_settings.credentialSharedWithUserAndGroup.push(obj)
