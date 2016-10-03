@@ -85,7 +85,7 @@ class ShareController extends ApiController {
         $acl->setExpire($expire_timestamp);
         $acl->setExpireViews($expire_views);
 
-        $this->shareService($acl);
+        $this->shareService->createACLEntry($acl);
     }
 
 	/**
