@@ -213,32 +213,32 @@
 		</div>
 
 		<div ng-show="selectedCredential">
-			<div ng-if="!selectedCredential.acl || selectedCredential.acl.permissions == 2">
+			<div>
 				<button class="button"
 						ng-click="editCredential(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0">
+						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
 					<span class="fa fa-edit"></span> Edit
 				</button>
 				<button class="button"
 						ng-click="deleteCredential(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0">
+						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
 					<span class="fa fa-trash"></span> Delete
 				</button>
 				<button class="button"
 						ng-click="shareCredential(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0">
+						ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined">
 					<span class="fa fa-share"></span> Share
 				</button>
 
 				<button class="button"
 						ng-click="getRevisions(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0">
+						ng-if="selectedCredential.delete_time == 0  && hasPermission(selectedCredential.acl.permissions, permissions.permissions.HISTORY)">
 					<span class="fa fa-undo"></span> Revisions
 				</button>
 
 				<button class="button"
 						ng-if="selectedCredential.delete_time > 0"
-						ng-click="recoverCredential(selectedCredential)">
+						ng-click="recoverCredential(selectedCredential) && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
 					<span class="fa fa-recycle"></span> Recover
 				</button>
 				<button class="button"
@@ -247,7 +247,6 @@
 					<span class="fa fa-bomb"></span> Destroy
 				</button>
 			</div>
-
 		</div>
 	</div>
 </div>
