@@ -81,7 +81,7 @@ angular.module('passmanApp')
 		$scope.accessLevels = [
 			{
 				label: 'Can edit',
-				value: '2'
+				value: '11'
 			},
 			{
 				label: 'Can view',
