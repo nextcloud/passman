@@ -6,7 +6,6 @@
  * @description
  * # ShareService
  * Service in the passmanApp.
- * This file is part of passman, licensed under AGPLv3
  */
 angular.module('passmanApp')
 	.service('ShareService', ['$http', 'VaultService', 'EncryptService', 'CredentialService', function ($http, VaultService, EncryptService, CredentialService) {
@@ -65,6 +64,12 @@ angular.module('passmanApp')
 					target_vault_guid: request.target_vault_guid,
 					final_shared_key: crypted_shared_key
 				}).then(function (response) {
+					return response.data;
+				})
+			},
+			unshareCredential: function (credential) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/unshare/'+ credential.guid);
+				return $http.delete(queryUrl).then(function (response) {
 					return response.data;
 				})
 			},
