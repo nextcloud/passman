@@ -9,7 +9,7 @@
  * This file is part of passman, licensed under AGPLv3
  */
 angular.module('passmanApp')
-	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService) {
+	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService) {
 		$scope.active_vault = VaultService.getActiveVault();
 
 		$scope.tabs = [{
@@ -60,7 +60,6 @@ angular.module('passmanApp')
 			$location.path('/vault/' + $scope.storedCredential.vault_id);
 		};
 
-		console.log($location);
 		$scope.share_link = $location.$$protocol + '://'+ $location.$$host + OC.generateUrl('apps/passman/share/public#') + $scope.storedCredential.guid;
 		$scope.share_settings = {
 			linkSharing:{
@@ -115,6 +114,16 @@ angular.module('passmanApp')
 				}
 			}
 		};
+
+		$scope.unshareCredential = function(credential){
+			ShareService.unshareCredential(credential).then(function(){
+				var _credential = angular.copy(credential);
+				_credential.shared_key = null;
+				CredentialService.updateCredential(_credential).then(function () {
+					NotificationService.showNotification('Credential unshared', 4000)
+				})
+			})
+		}
 
 		$scope.applyShare = function(){
 			$scope.share_settings.cypher_progress.percent = 0;
