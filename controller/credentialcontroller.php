@@ -127,14 +127,17 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
-			'shared_key' => ($shared_key === null) ? null : $storedCredential->getSharedKey(),
+			'shared_key' => $shared_key,
 		);
 
 
 
         if ($storedCredential->getUserId() !== $this->userId){
             $acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
-            if (!$acl->hasPermission(SharingACL::WRITE)){
+            if ($acl->hasPermission(SharingACL::WRITE)) {
+                $credential['shared_key'] = $storedCredential->getSharedKey();
+            }
+            else {
                 return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
             }
         }
