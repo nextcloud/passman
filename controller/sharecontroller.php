@@ -221,6 +221,10 @@ class ShareController extends ApiController {
 		return new JSONResponse($results);
 	}
 
+	public function getRevisions($item_guid){
+	    return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
+    }
+
     /**
      * Obtains the list of credentials shared with this vault
      * @NoAdminRequired

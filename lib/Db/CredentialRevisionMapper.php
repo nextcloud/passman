@@ -27,10 +27,15 @@ class CredentialRevisionMapper extends Mapper {
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
 	 */
-	public function getRevisions($credential_id, $user_id) {
+	public function getRevisions($credential_id, $user_id = null) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_revisions` ' .
-			'WHERE `credential_id` = ? and `user_id` = ? ';
-		return $this->findEntities($sql, [$credential_id, $user_id]);
+			'WHERE `credential_id` = ?';
+        $params = [$credential_id];
+        if ($user_id !== null) {
+            $sql.= ' and `user_id` = ? ';
+            $params[] = $user_id;
+        }
+		return $this->findEntities($sql, $params);
 	}
 
 	public function create($credential, $userId, $credential_id) {

@@ -20,11 +20,18 @@ class ShareService {
     private $sharingACL;
     private $shareRequest;
     private $credential;
+    private $revisions;
 
-    public function __construct(SharingACLMapper $sharingACL, ShareRequestMapper $shareRequest, CredentialMapper $credentials) {
+    public function __construct(
+        SharingACLMapper $sharingACL,
+        ShareRequestMapper $shareRequest,
+        CredentialMapper $credentials,
+        CredentialRevisionService $revisions
+    ) {
         $this->sharingACL = $sharingACL;
         $this->shareRequest = $shareRequest;
         $this->credential = $credentials;
+        $this->revisions = $revisions;
     }
 
     /**
@@ -109,6 +116,13 @@ class ShareService {
             $return[] = $tmp;
         }
         return $return;
+    }
+
+    public function getItemHistory($user_id, $item_guid) {
+        $acl = $this->sharingACL->getItemACL($user_id, $item_guid);
+        if (!$acl->hasPermission(SharingACL::READ | SharingACL::HISTORY)) return [];
+
+        return $this->revisions->getRevisions($acl->getItemId());
     }
 
 

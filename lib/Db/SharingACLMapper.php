@@ -4,6 +4,7 @@
  * User: wolfi
  * Date: 24/09/16
  * Time: 14:20
+ * This file is part of passman, licensed under AGPLv3
  */
 
 namespace OCA\Passman\Db;
@@ -47,6 +48,17 @@ class SharingACLMapper extends Mapper {
     public function getVaultEntries($user_id, $vault_id) {
         $q = "SELECT * FROM ". self::TABLE_NAME ." WHERE user_id = ? AND vault_guid = ?";
         return $this->findEntities($q, [$user_id, $vault_id]);
+    }
+
+    /**
+     * Gets the acl for a given item guid
+     * @param $user_id
+     * @param $item_guid
+     * @return SharingACL
+     */
+    public function getItemACL($user_id, $item_guid) {
+        $q = "SELECT * FROM " . self::TABLE_NAME . " WHERE user_id = ? AND item_guid = ?";
+        return $this->findEntity($q, [$user_id, $item_guid]);
     }
 
     /**

@@ -4,6 +4,7 @@
  * User: wolfi
  * Date: 2/10/16
  * Time: 13:27
+ * This file is part of passman, licensed under AGPLv3
  */
 
 namespace OCA\Passman\Utility;

@@ -29,7 +29,7 @@ class CredentialRevisionService {
 		return $this->credentialRevisionMapper->create($credential, $userId, $credential_id);
 	}
 
-	public function getRevisions($credential_id, $user_id){
+	public function getRevisions($credential_id, $user_id = null){
 		return $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
 	}
 
