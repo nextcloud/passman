@@ -76,13 +76,14 @@ class ShareController extends ApiController {
      * @param $expire_timestamp
      * @NoAdminRequired
      */
-    public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp) {
+    public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
         $acl = new SharingACL();
 
         $acl->setItemId($item_id);
         $acl->setVaultGuid($item_guid);
         $acl->setPermissions($permissions);
         $acl->setExpire($expire_timestamp);
+        $acl->setExpireViews($expire_views);
 
         $this->shareService($acl);
     }
