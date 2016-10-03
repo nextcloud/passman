@@ -103,26 +103,25 @@ angular.module('passmanApp')
 				return _credential;
 			},
 			decryptSharedCredential: function (credential, sharedKey) {
-				//@TODO Check permissions and skip that fields if we can't access
 				var _credential = angular.copy(credential);
 				var encrypted_fields = CredentialService.getEncryptedFields();
 				for (var i = 0; i < encrypted_fields.length; i++) {
 					var field = encrypted_fields[i];
 					var fieldValue = angular.copy(_credential[field]);
-					try {
-						var field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
-					} catch (e){
-						console.log('Field ' + field + ' in '+ _credential.label +' could not be decrypted! Value:'+ fieldValue);
-						// console.log(e);
-						// throw e
+					if(_credential.hasOwnProperty(field)) {
+						try {
+							var field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
+						} catch (e) {
+							console.log(e);
+							throw e
+						}
+						try {
+							_credential[field] = JSON.parse(field_decrypted_value);
+						} catch (e) {
+							console.log('Field' + field + ' in ' + _credential.label + ' could not be parsed! Value:' + fieldValue)
+							throw e
+						}
 					}
-					try{
-						_credential[field] = JSON.parse(field_decrypted_value);
-					} catch (e){
-						console.log('Field' + field + ' in '+ _credential.label +' could not be parsed! Value:'+ fieldValue)
-						// throw e
-					}
-
 				}
 				return _credential;
 			},
