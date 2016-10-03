@@ -85,7 +85,7 @@ class CredentialMapper extends Mapper {
 		$credential->setCustomFields($raw_credential['custom_fields']);
 		$credential->setOtp($raw_credential['otp']);
 		$credential->setHidden($raw_credential['hidden']);
-		$credential->setSharedKey($raw_credential['is_shared']);
+		$credential->setSharedKey($raw_credential['shared_key']);
 		return parent::insert($credential);
 	}
 
@@ -119,6 +119,7 @@ class CredentialMapper extends Mapper {
 		$credential->setHidden($raw_credential['hidden']);
 		$credential->setDeleteTime($raw_credential['delete_time']);
 		$credential->setSharedKey($raw_credential['shared_key']);
+		var_dump($credential);
 		return parent::update($credential);
 	}
 

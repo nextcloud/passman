@@ -116,9 +116,8 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
-			'shared_key' => ($shared_key) ? $shared_key : null,
+			'shared_key' => (!empty($shared_key)) ? $shared_key : '',
 		);
-
 
 		$storedCredential = $this->credentialService->getCredentialById($credential_id, $this->userId);
 
