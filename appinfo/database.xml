@@ -452,6 +452,14 @@
 				<unsigned>true</unsigned>
 			</field>
 			<field>
+				<name>expire_views</name>
+				<type>integer</type>
+				<length>64</length>
+				<default>0</default>
+				<notnull>false</notnull>
+				<unsigned>true</unsigned>
+			</field>
+			<field>
 				<name>permissions</name>
 				<type>integer</type>
 				<length>3</length>

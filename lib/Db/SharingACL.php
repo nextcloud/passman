@@ -23,6 +23,8 @@ use OCP\AppFramework\Db\Entity;
  * @method integer getCreated()
  * @method void setExpire(integer $value)
  * @method integer getExpire()
+ * @method void setExpireViews(integer $value)
+ * @method integer getExpireViews()
  * @method void setPermissions(integer $value)
  * @method integer getPermissions()
  * @method void setVaultId(integer $value)
@@ -42,6 +44,7 @@ class SharingACL extends PermissionEntity implements \JsonSerializable
         $userId,
         $created,
         $expire,
+		$expireViews,
         $permissions,
         $vaultId,
         $vaultGuid,
@@ -53,6 +56,7 @@ class SharingACL extends PermissionEntity implements \JsonSerializable
         $this->addType('itemId', 'integer');
         $this->addType('created', 'integer');
         $this->addType('expire', 'integer');
+        $this->addType('expireViews', 'integer');
         $this->addType('permissions', 'integer');
     }
 
@@ -72,6 +76,7 @@ class SharingACL extends PermissionEntity implements \JsonSerializable
             'user_id' => $this->getUserId(),
             'created' => $this->getCreated(),
             'expire' => $this->getExpire(),
+            'expire_views' => $this->getExpireViews(),
             'permissions' => $this->getPermissions(),
             'vault_id' => $this->getVaultId(),
             'vault_guid' => $this->getVaultGuid(),
