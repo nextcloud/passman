@@ -109,8 +109,10 @@ angular.module('passmanApp')
 							userId: acl.user_id,
 							displayName: acl.user_id,
 							type: 'user',
-							acl: new SharingACL(acl.permissions)
+							acl: new SharingACL(acl.permissions),
+							acl_id: acl.acl_id
 						};
+
 						$scope.share_settings.credentialSharedWithUserAndGroup.push(obj);
 					}
 
@@ -179,7 +181,7 @@ angular.module('passmanApp')
 					for (var i = 0; i < list.length; i++) {
 						var iterator = i; 	// Keeps it available inside the promises callback
 
-						if (list[i].type == "user") {
+						if (list[i].type == "user" && !list[i].hasOwnProperty('acl_id')) {
 							ShareService.getVaultsByUser(list[i].userId).then(function (data) {
 								$scope.share_settings.cypher_progress.total += data.length;
 
