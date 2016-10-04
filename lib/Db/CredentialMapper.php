@@ -124,7 +124,6 @@ class CredentialMapper extends Mapper {
 		$credential->setHidden($raw_credential['hidden']);
 		$credential->setDeleteTime($raw_credential['delete_time']);
 		$credential->setSharedKey($raw_credential['shared_key']);
-		var_dump($credential);
 		return parent::update($credential);
 	}
 

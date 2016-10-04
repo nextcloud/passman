@@ -127,7 +127,7 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
-			'shared_key' => $shared_key,
+			'shared_key' => ($shared_key === NULL) ? '' : $shared_key,
 		);
 
 
