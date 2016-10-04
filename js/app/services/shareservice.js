@@ -68,11 +68,22 @@ angular.module('passmanApp')
 				})
 			},
 			unshareCredential: function (credential) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/' + credential.guid);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid);
 				return $http.delete(queryUrl).then(function (response) {
 					return response.data;
 				})
 			},
+
+
+			getSharedCredentialRevisions: function (credential) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/'+ credential.guid +'/revisions');
+				return $http.get(queryUrl).then(function (response) {
+					if (response.data) {
+						return response.data;
+					}
+				});
+			},
+
 			createPublicSharedCredential: function (shareObj) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public');
 				return $http.post(queryUrl, shareObj).then(function (response) {
@@ -80,7 +91,20 @@ angular.module('passmanApp')
 				})
 			},
 			getPublicSharedCredential: function (credential_guid) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public/credential/' + credential_guid);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential_guid +'/public');
+				return $http.get(queryUrl).then(function (response) {
+						if (response.data) {
+							return response;
+						} else {
+							return response;
+						}
+					},
+					function (result) {
+						return result;
+					})
+			},
+			getSharedCredentialACL: function (credential) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' +  credential.guid +'/acl');
 				return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response;
