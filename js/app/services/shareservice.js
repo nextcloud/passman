@@ -68,7 +68,7 @@ angular.module('passmanApp')
 				})
 			},
 			unshareCredential: function (credential) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/unshare/' + credential.guid);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/' + credential.guid);
 				return $http.delete(queryUrl).then(function (response) {
 					return response.data;
 				})
