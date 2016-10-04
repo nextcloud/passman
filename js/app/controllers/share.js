@@ -200,13 +200,14 @@ angular.module('passmanApp')
 							};
 							ShareService.updateCredentialAcl($scope.storedCredential, acl);
 						} else {
-							ShareService.getVaultsByUser(list[i].userId).then(function (data) {
-								$scope.share_settings.cypher_progress.total += data.length;
+							var crypt = function (iterator) {
+								ShareService.getVaultsByUser(list[i].userId).then(function (data) {
+									$scope.share_settings.cypher_progress.total += data.length;
 
-								list[iterator].vaults = data;
-								var start = new Date().getTime() / 1000;
-								console.log('Begin messing with permissions');
-								ShareService.cypherRSAStringWithPublicKeyBulkAsync(list[iterator].vaults, enc_key)
+									list[iterator].vaults = data;
+									var start = new Date().getTime() / 1000;
+									console.log('Begin messing with permissions');
+									ShareService.cypherRSAStringWithPublicKeyBulkAsync(list[iterator].vaults, enc_key)
 									.progress(function (data) {
 										$scope.share_settings.cypher_progress.done++;
 										$scope.share_settings.cypher_progress.percent = $scope.share_settings.cypher_progress.done / $scope.share_settings.cypher_progress.total * 100;
@@ -223,7 +224,9 @@ angular.module('passmanApp')
 										$scope.uploadChanges(list[iterator]);
 										$scope.$digest();
 									});
-							});
+								});
+							}
+							crypt(iterator);
 						}
 					}
 
