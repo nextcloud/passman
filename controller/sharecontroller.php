@@ -301,6 +301,16 @@ class ShareController extends ApiController {
 	public function getPublicCredentialData($credential_guid) {
 		//@TODO if ExpireViews --, if 0 delete
 		//@TODO Check expire date
+		$acl = $this->shareService->getACL(null, $credential_guid);
+		$views = $acl->getExpireViews();
+		if($views === 0){
+			return new NotFoundResponse();
+		} else {
+			$views--;
+			$acl->setExpireViews($views);
+			$this->shareService->updateCredentialACL($acl);
+		}
+
 	    try {
             $credential = $this->shareService->getSharedItem(null, $credential_guid);
             return new JSONResponse($credential);

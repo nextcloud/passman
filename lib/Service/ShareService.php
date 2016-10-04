@@ -107,6 +107,12 @@ class ShareService {
         return $this->shareRequest->getUserPendingRequests($user_id);
     }
 
+    /**
+     * Get shared credentials from a user
+     * @param $user_id
+     * @param $vault_guid
+	 * @return \OCA\Passman\Db\SharingACL[]
+     */
     public function getSharedItems($user_id, $vault_guid){
         $entries = $this->sharingACL->getVaultEntries($user_id, $vault_guid);
 
@@ -124,6 +130,16 @@ class ShareService {
         }
         return $return;
     }
+
+   /*
+    * Gets the acl for a given item guid
+    * @param $user_id
+    * @param $item_guid
+    * @return SharingACL
+    */
+    public function getACL($user_id, $item_guid){
+		return $this->sharingACL->getItemACL($user_id, $item_guid);
+	}
 
     public function getSharedItem($user_id, $item_guid){
         $acl = $this->sharingACL->getItemACL($user_id, $item_guid);
@@ -219,12 +235,17 @@ class ShareService {
 	}
 
 	/**
-	 * Get pending share requests by guid
+	 * Delete ACL
 	 *
 	 * @param  ShareRequest $request
 	 * @return \OCA\Passman\Db\ShareRequest[]
 	 */
 	public function deleteShareACL(SharingACL $ACL) {
 		return $this->sharingACL->deleteShareACL($ACL);
+	}
+
+
+	public function updateCredentialACL(SharingACL $sharingACL){
+		return $this->sharingACL->updateCredentialACL($sharingACL);
 	}
 }

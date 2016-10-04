@@ -70,6 +70,16 @@ class SharingACLMapper extends Mapper {
     }
 
     /**
+     * Update the acl for a given item guid
+     * @param $user_id
+     * @param $item_guid
+     * @return SharingACL
+     */
+    public function updateCredentialACL(SharingACL $sharingACL) {
+        return $this->update($sharingACL);
+    }
+
+    /**
      * Gets the currently accepted share requests from the given user for the given vault guid
      * @param $user_id
      * @param $vault_id
