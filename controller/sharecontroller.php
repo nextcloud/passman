@@ -48,7 +48,7 @@ class ShareController extends ApiController {
 
 	public function __construct($AppName,
 								IRequest $request,
-								$UserId,
+								IUser $UserId,
 								IGroupManager $groupManager,
 								IUserManager $userManager,
 								ActivityService $activityService,
