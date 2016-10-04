@@ -77,15 +77,26 @@ class ShareController extends ApiController {
      * @NoAdminRequired
      */
     public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
-        $acl = new SharingACL();
+
+    	try{
+			$acl = $this->shareService->getACL(null, $item_guid);
+		} catch (DoesNotExistException $exception){
+			$acl = new SharingACL();
+		}
+
+
 
         $acl->setItemId($item_id);
         $acl->setItemGuid($item_guid);
         $acl->setPermissions($permissions);
         $acl->setExpire($expire_timestamp);
         $acl->setExpireViews($expire_views);
+		if(!$acl->getId()){
+			$this->shareService->createACLEntry($acl);
+		} else {
+			$this->shareService->updateCredentialACL($acl);
+		}
 
-        $this->shareService->createACLEntry($acl);
     }
 
 	/**
@@ -102,7 +113,6 @@ class ShareController extends ApiController {
 		$result = $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions, $credential_owner);
 		if ($credential) {
 			$processed_users = array();
-
 			foreach ($result as $vault){
 				if(!in_array($vault->getTargetUserId(), $processed_users)){
 					$target_user = $vault->getTargetUserId();
@@ -351,4 +361,17 @@ class ShareController extends ApiController {
             return new NotFoundResponse();
         }
     }
+
+    public function updateSharedCredentialACL($item_guid, $user_id, $permission){
+		try{
+			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+		} catch (DoesNotExistException $exception){
+			return new NotFoundResponse();
+		}
+		if($this->userId->getUID() == $credential->getUserId()){
+			$acl = $this->shareService->getACL($user_id, $item_guid);
+			$acl->setPermissions($permission);
+			$this->shareService->updateCredentialACL($acl);
+		}
+	}
 }

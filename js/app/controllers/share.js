@@ -163,7 +163,7 @@ angular.module('passmanApp')
 					NotificationService.showNotification('Credential unshared', 4000)
 				})
 			};
-
+			console.log($scope.storedCredential);
 			$scope.applyShare = function () {
 				$scope.share_settings.cypher_progress.percent = 0;
 				$scope.share_settings.cypher_progress.done = 0;
@@ -171,17 +171,35 @@ angular.module('passmanApp')
 				$scope.share_settings.cypher_progress.times = [];
 				$scope.share_settings.cypher_progress.times_total = [];
 
-				ShareService.generateSharedKey(20).then(function (key) {
-
-					var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
-					CredentialService.updateCredential(encryptedSharedCredential, true);
+				//Credential is already shared
+				if($scope.storedCredential.shared_key !== null){
+					console.log('Shared key found');
+					if($scope.share_settings.linkSharing.enabled){
+						var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
+						var shareObj = {
+							item_id: $scope.storedCredential.credential_id,
+							item_guid: $scope.storedCredential.guid,
+							permissions: $scope.share_settings.linkSharing.settings.acl.getAccessLevel(),
+							expire_timestamp: expire_time,
+							expire_views: $scope.share_settings.linkSharing.settings.expire_views
+						};
+						//ShareService.createPublicSharedCredential(shareObj);
+					}
 
 					var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 					console.log(list);
+					var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
 					for (var i = 0; i < list.length; i++) {
-						var iterator = i; 	// Keeps it available inside the promises callback
-
-						if (list[i].type == "user" && !list[i].hasOwnProperty('acl_id')) {
+						var iterator = i;
+						var target_user = list[i];
+						console.log(target_user)
+						if(target_user.hasOwnProperty('acl_id')){
+							var acl = {
+								user_id: target_user.userId,
+								permission: target_user.acl.getAccessLevel()
+							};
+							ShareService.updateCredentialAcl($scope.storedCredential, acl);
+						} else {
 							ShareService.getVaultsByUser(list[i].userId).then(function (data) {
 								$scope.share_settings.cypher_progress.total += data.length;
 
@@ -189,7 +207,7 @@ angular.module('passmanApp')
 								console.log(data);
 								var start = new Date().getTime() / 1000;
 
-								ShareService.cypherRSAStringWithPublicKeyBulkAsync(list[iterator].vaults, key)
+								ShareService.cypherRSAStringWithPublicKeyBulkAsync(list[iterator].vaults, enc_key)
 									.progress(function (data) {
 										$scope.share_settings.cypher_progress.done++;
 										$scope.share_settings.cypher_progress.percent = $scope.share_settings.cypher_progress.done / $scope.share_settings.cypher_progress.total * 100;
@@ -210,23 +228,64 @@ angular.module('passmanApp')
 						}
 					}
 
-					if($scope.share_settings.linkSharing.enabled){
-						var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
-						var shareObj = {
-							item_id: $scope.storedCredential.credential_id,
-							item_guid: $scope.storedCredential.guid,
-							permissions: $scope.share_settings.linkSharing.settings.acl.getAccessLevel(),
-							expire_timestamp: expire_time,
-							expire_views: $scope.share_settings.linkSharing.settings.expire_views
-						};
-						ShareService.createPublicSharedCredential(shareObj).then(function(){
-							var hash = window.btoa($scope.storedCredential.guid + '<::>'+ key)
-							$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+				} else {
 
-						});
-					}
-					NotificationService.showNotification('Credential shared', 4000)
-				})
+					ShareService.generateSharedKey(20).then(function (key) {
+
+						var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
+						CredentialService.updateCredential(encryptedSharedCredential, true);
+
+						var list = $scope.share_settings.credentialSharedWithUserAndGroup;
+						console.log(list);
+						for (var i = 0; i < list.length; i++) {
+							var iterator = i; 	// Keeps it available inside the promises callback
+							if (list[i].type == "user") {
+								ShareService.getVaultsByUser(list[i].userId).then(function (data) {
+									$scope.share_settings.cypher_progress.total += data.length;
+
+									list[iterator].vaults = data;
+									console.log(data);
+									var start = new Date().getTime() / 1000;
+
+									ShareService.cypherRSAStringWithPublicKeyBulkAsync(list[iterator].vaults, key)
+										.progress(function (data) {
+											$scope.share_settings.cypher_progress.done++;
+											$scope.share_settings.cypher_progress.percent = $scope.share_settings.cypher_progress.done / $scope.share_settings.cypher_progress.total * 100;
+											$scope.$digest();
+										})
+										.then(function (result) {
+											console.log(result);
+											console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
+											$scope.share_settings.cypher_progress.times.push({
+												time: ((new Date().getTime() / 1000) - start),
+												user: data[0].user_id
+											});
+											list[iterator].vaults = result;
+											$scope.uploadChanges(list[iterator]);
+											$scope.$digest();
+										});
+								});
+							}
+						}
+
+						if($scope.share_settings.linkSharing.enabled){
+							var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
+							var shareObj = {
+								item_id: $scope.storedCredential.credential_id,
+								item_guid: $scope.storedCredential.guid,
+								permissions: $scope.share_settings.linkSharing.settings.acl.getAccessLevel(),
+								expire_timestamp: expire_time,
+								expire_views: $scope.share_settings.linkSharing.settings.expire_views
+							};
+							ShareService.createPublicSharedCredential(shareObj).then(function(){
+								var hash = window.btoa($scope.storedCredential.guid + '<::>'+ key)
+								$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+
+							});
+						}
+						NotificationService.showNotification('Credential shared', 4000)
+					})
+				}
 			};
 
 			$scope.uploadChanges = function (user) {
