@@ -185,7 +185,6 @@ angular.module('passmanApp')
 
 					user.vaults = data;
 					var start = new Date().getTime() / 1000;
-					console.log('Begin messing with permissions');
 					ShareService.cypherRSAStringWithPublicKeyBulkAsync(user.vaults, enc_key)
 						.progress(function (data) {
 							$scope.share_settings.cypher_progress.done++;
@@ -237,12 +236,10 @@ angular.module('passmanApp')
 					}
 
 					var list = $scope.share_settings.credentialSharedWithUserAndGroup;
-					console.log(list);
 
 					for (var i = 0; i < list.length; i++) {
 						var iterator = i;
 						var target_user = list[i];
-						console.log(target_user)
 						if(target_user.hasOwnProperty('acl_id')){
 							var acl = {
 								user_id: target_user.userId,
@@ -264,7 +261,6 @@ angular.module('passmanApp')
 						});
 
 						var list = $scope.share_settings.credentialSharedWithUserAndGroup;
-						console.log(list);
 						for (var i = 0; i < list.length; i++) {
 							if (list[i].type == "user") {
 								$scope.applyShareToUser(list[i], key);
