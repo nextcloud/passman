@@ -43,7 +43,8 @@ class ShareRequestMapper extends Mapper {
      * @return ShareRequest[]
      */
     public function getRequestsByItemGuid($item_guid){
-        $q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? GROUP BY user_id";
+        $this->db->executeQuery("SET sql_mode = '';");
+        $q = "SELECT *, target_user_id FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? GROUP BY target_user_id;";
         return $this->findEntities($q, [$item_guid]);
     }
 

@@ -82,7 +82,7 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
         return [
             'item_id' => $this->getItemId(),
             'item_guid' => $this->getItemGuid(),
-            'user_id' => $this->getFromUserId(),
+            'user_id' => $this->getTargetUserId(),
             'created' => $this->getCreated(),
             'permissions' => $this->getPermissions(),
             'vault_id' => $this->getTargetUserId(),
