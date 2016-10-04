@@ -199,8 +199,9 @@ angular.module('passmanApp')
 								user: data[0].user_id
 							});
 							user.vaults = result;
-							console.log(user)
-							$scope.uploadChanges(user);
+							if(!user.hasOwnProperty('acl')) {
+								$scope.uploadChanges(user);
+							}
 							$scope.$digest();
 						});
 				});
@@ -219,6 +220,7 @@ angular.module('passmanApp')
 				//Credential is already shared
 				if($scope.storedCredential.shared_key && $scope.storedCredential.shared_key != '' && $scope.storedCredential.shared_key != null){
 					console.log('Shared key found');
+					var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
 					if($scope.share_settings.linkSharing.enabled){
 						var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
 						var shareObj = {
@@ -228,12 +230,15 @@ angular.module('passmanApp')
 							expire_timestamp: expire_time,
 							expire_views: $scope.share_settings.linkSharing.settings.expire_views
 						};
-						//ShareService.createPublicSharedCredential(shareObj);
+						ShareService.createPublicSharedCredential(shareObj).then(function () {
+							var hash = window.btoa($scope.storedCredential.guid + '<::>'+ enc_key)
+							$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+						})
 					}
 
 					var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 					console.log(list);
-					var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+
 					for (var i = 0; i < list.length; i++) {
 						var iterator = i;
 						var target_user = list[i];
@@ -254,7 +259,9 @@ angular.module('passmanApp')
 					ShareService.generateSharedKey(20).then(function (key) {
 
 						var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
-						CredentialService.updateCredential(encryptedSharedCredential, true);
+						CredentialService.updateCredential(encryptedSharedCredential, true).then(function(sharedCredential){
+							$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
+						});
 
 						var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 						console.log(list);
@@ -274,7 +281,7 @@ angular.module('passmanApp')
 								expire_views: $scope.share_settings.linkSharing.settings.expire_views
 							};
 							ShareService.createPublicSharedCredential(shareObj).then(function(){
-								var hash = window.btoa($scope.storedCredential.guid + '<::>'+ key)
+								var hash = window.btoa($scope.storedCredential.guid + '<::>'+ key);
 								$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
 
 							});
