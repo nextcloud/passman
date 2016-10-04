@@ -358,7 +358,7 @@ class ShareController extends ApiController {
             }
         }
         catch (DoesNotExistException $ex){
-            return new NotFoundResponse();
+            return new JSONResponse(array());
         }
     }
 

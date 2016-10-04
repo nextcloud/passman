@@ -48,11 +48,13 @@ angular.module('passmanApp')
 				}
 			}
 			var storedCredential = SettingsService.getSetting('share_credential');
-			if (!storedCredential) {
+
+			if(!storedCredential) {
 				$location.path('/vault/' + $routeParams.vault_id);
 			} else {
 				$scope.storedCredential = CredentialService.decryptCredential(angular.copy(storedCredential));
 			}
+
 			if ($scope.active_vault) {
 				$scope.$parent.selectedVault = true;
 			}
@@ -90,7 +92,9 @@ angular.module('passmanApp')
 
 
 			ShareService.getSharedCredentialACL($scope.storedCredential).then(function (aclList) {
-				var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+
+				var enc_key = ($scope.storedCredential.shared_key) ? EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key)) : false;
+
 				for(var i = 0; i < aclList.length; i++){
 					var acl = aclList[i];
 					if(acl.user_id === null){
@@ -102,8 +106,10 @@ angular.module('passmanApp')
 								acl: new SharingACL(acl.permissions)
 							}
 						};
-						var hash = window.btoa($scope.storedCredential.guid + '<::>'+ enc_key)
-						$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+						if(enc_key) {
+							var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key)
+							$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+						}
 					} else {
 						var obj = {
 							userId: acl.user_id,
@@ -163,16 +169,16 @@ angular.module('passmanApp')
 					NotificationService.showNotification('Credential unshared', 4000)
 				})
 			};
-			console.log($scope.storedCredential);
+
 			$scope.applyShare = function () {
 				$scope.share_settings.cypher_progress.percent = 0;
 				$scope.share_settings.cypher_progress.done = 0;
 				$scope.share_settings.cypher_progress.total = 0;
 				$scope.share_settings.cypher_progress.times = [];
 				$scope.share_settings.cypher_progress.times_total = [];
-
+				console.log($scope.storedCredential);
 				//Credential is already shared
-				if($scope.storedCredential.shared_key !== null){
+				if($scope.storedCredential.shared_key && $scope.storedCredential.shared_key != '' && $scope.storedCredential.shared_key != null){
 					console.log('Shared key found');
 					if($scope.share_settings.linkSharing.enabled){
 						var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
@@ -225,7 +231,7 @@ angular.module('passmanApp')
 										$scope.$digest();
 									});
 								});
-							}
+							};
 							crypt(iterator);
 						}
 					}
@@ -242,29 +248,33 @@ angular.module('passmanApp')
 						for (var i = 0; i < list.length; i++) {
 							var iterator = i; 	// Keeps it available inside the promises callback
 							if (list[i].type == "user") {
-								ShareService.getVaultsByUser(list[i].userId).then(function (data) {
-									$scope.share_settings.cypher_progress.total += data.length;
-									list[iterator].vaults = data;
-									var start = new Date().getTime() / 1000;
-									console.log('Begin messing with permissions');
-									ShareService.cypherRSAStringWithPublicKeyBulkAsync(list[iterator].vaults, key)
-										.progress(function (data) {
-											$scope.share_settings.cypher_progress.done++;
-											$scope.share_settings.cypher_progress.percent = $scope.share_settings.cypher_progress.done / $scope.share_settings.cypher_progress.total * 100;
-											$scope.$digest();
-										})
-										.then(function (result) {
-											console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
-											$scope.share_settings.cypher_progress.times.push({
-												time: ((new Date().getTime() / 1000) - start),
-												user: data[0].user_id
+								var crypt = function (iterator) {
+									ShareService.getVaultsByUser(list[i].userId).then(function (data) {
+										$scope.share_settings.cypher_progress.total += data.length;
+
+										list[iterator].vaults = data;
+										var start = new Date().getTime() / 1000;
+										console.log('Begin messing with permissions');
+										ShareService.cypherRSAStringWithPublicKeyBulkAsync(list[iterator].vaults, enc_key)
+											.progress(function (data) {
+												$scope.share_settings.cypher_progress.done++;
+												$scope.share_settings.cypher_progress.percent = $scope.share_settings.cypher_progress.done / $scope.share_settings.cypher_progress.total * 100;
+												$scope.$digest();
+											})
+											.then(function (result) {
+												console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
+												$scope.share_settings.cypher_progress.times.push({
+													time: ((new Date().getTime() / 1000) - start),
+													user: data[0].user_id
+												});
+												list[iterator].vaults = result;
+												console.log(list[iterator])
+												$scope.uploadChanges(list[iterator]);
+												$scope.$digest();
 											});
-											list[iterator].vaults = result;
-											console.log(list[iterator])
-											$scope.uploadChanges(list[iterator]);
-											$scope.$digest();
-										});
-								});
+									});
+								};
+								crypt(iterator);
 							}
 						}
 

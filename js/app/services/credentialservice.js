@@ -68,10 +68,7 @@ angular.module('passmanApp')
 						var fieldValue = angular.copy(credential[field]);
 						_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue));
 					}
-				} else {
-					console.log('Skipping encryption')
 				}
-
 				_credential.expire_time = new Date( angular.copy(credential.expire_time) ).getTime() / 1000;
 
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential.credential_id);
@@ -115,6 +112,7 @@ angular.module('passmanApp')
 				for (var i = 0; i < _encryptedFields.length; i++) {
 					var field = _encryptedFields[i];
 					var fieldValue = angular.copy(credential[field]);
+
 					try {
 						var field_decrypted_value = EncryptService.decryptString(fieldValue)
 					} catch (e){
@@ -125,7 +123,7 @@ angular.module('passmanApp')
 						credential[field] = JSON.parse(field_decrypted_value);
 					} catch (e){
 						console.log('Field' + field + ' in '+ credential.label +' could not be parsed! Value:'+ fieldValue)
-						throw e
+
 					}
 
 				}
