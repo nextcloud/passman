@@ -80,7 +80,7 @@ class ShareService {
      * @param $final_shared_key
      */
     public function applyShare($item_guid, $target_vault_guid, $final_shared_key){
-        $request = $this->shareRequest->getRequestByGuid($item_guid, $target_vault_guid);
+        $request = $this->shareRequest->getRequestByItemAndVaultGuid($item_guid, $target_vault_guid);
         $permissions = $request->getPermissions();
 
         $acl = new SharingACL();
@@ -191,7 +191,7 @@ class ShareService {
 	 *
 	 */
 	public function getRequestByGuid($item_guid, $target_vault_guid) {
-		return $this->shareRequest->getRequestByGuid($item_guid, $target_vault_guid);
+		return $this->shareRequest->getRequestByItemAndVaultGuid($item_guid, $target_vault_guid);
 	}
 
 	/**
@@ -203,6 +203,10 @@ class ShareService {
 	public function getCredentialAclList($item_guid) {
 		return $this->sharingACL->getCredentialAclList($item_guid);
 	}
+
+	public function getCredentialPendingAclList($item_guid){
+        return $this->shareRequest->getRequestsByItemGuid($item_guid);
+    }
 
     /**
      * Gets the ACL on the credential for the user

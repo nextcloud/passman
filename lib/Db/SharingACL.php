@@ -81,6 +81,7 @@ class SharingACL extends PermissionEntity implements \JsonSerializable
             'vault_id' => $this->getVaultId(),
             'vault_guid' => $this->getVaultGuid(),
             'shared_key' => $this->getSharedKey(),
+            'pending' => false,
         ];
     }
 }

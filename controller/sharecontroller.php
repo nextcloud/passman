@@ -348,9 +348,14 @@ class ShareController extends ApiController {
 
     public function getItemAcl($item_guid){
         $acl = $this->shareService->getCredentialAclList($item_guid);
+        $pending = $this->shareService->getCredentialPendingAclList($item_guid);
         try {
             $credential = $this->credentialService->getCredentialByGUID($item_guid);
             if ($credential->getUserId() == $this->userId->getUID()){
+                foreach ($pending as &$item){
+                    $item = $item->asACLJson();
+                }
+                $acl = array_merge($acl, $pending);
                 return new JSONResponse($acl);
             }
             else{

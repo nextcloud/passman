@@ -32,9 +32,19 @@ class ShareRequestMapper extends Mapper {
      * @param $target_vault_guid
      * @return ShareRequest
      */
-    public function getRequestByGuid($item_guid, $target_vault_guid){
+    public function getRequestByItemAndVaultGuid($item_guid, $target_vault_guid){
         $q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? AND target_vault_guid = ?";
         return $this->findEntity($q, [$item_guid, $target_vault_guid]);
+    }
+
+    /**
+     * Get shared items for the given item_guid
+     * @param $item_guid
+     * @return ShareRequest[]
+     */
+    public function getRequestsByItemGuid($item_guid){
+        $q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? GROUP BY user_id";
+        return $this->findEntities($q, [$item_guid]);
     }
 
     public function cleanItemRequestsForUser($item_id, $target_user_id){

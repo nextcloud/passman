@@ -77,4 +77,18 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
             'created' => $this->getCreated(),
         ];
     }
+
+    function asACLJson(){
+        return [
+            'item_id' => $this->getItemId(),
+            'item_guid' => $this->getItemGuid(),
+            'user_id' => $this->getFromUserId(),
+            'created' => $this->getCreated(),
+            'permissions' => $this->getPermissions(),
+            'vault_id' => $this->getTargetUserId(),
+            'vault_guid' => $this->getTargetVaultGuid(),
+            'shared_key' => $this->getSharedKey(),
+            'pending'   => true,
+        ];
+    }
 }
