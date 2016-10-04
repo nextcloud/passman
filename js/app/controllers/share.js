@@ -87,6 +87,10 @@ angular.module('passmanApp')
 				cypher_progress: {
 					done: 0,
 					total: 0
+				},
+				upload_progress: {
+					done: 0,
+					total: 0
 				}
 			};
 
@@ -208,6 +212,9 @@ angular.module('passmanApp')
 				$scope.share_settings.cypher_progress.total = 0;
 				$scope.share_settings.cypher_progress.times = [];
 				$scope.share_settings.cypher_progress.times_total = [];
+				$scope.share_settings.upload_progress.done = 0;
+				$scope.share_settings.upload_progress.total = 0;
+
 				console.log($scope.storedCredential);
 				//Credential is already shared
 				if($scope.storedCredential.shared_key && $scope.storedCredential.shared_key != '' && $scope.storedCredential.shared_key != null){
@@ -278,8 +285,14 @@ angular.module('passmanApp')
 			};
 
 			$scope.uploadChanges = function (user) {
+				$scope.share_settings.upload_progress.total ++;
+
 				user.accessLevel = angular.copy(user.acl.getAccessLevel());
-				ShareService.shareWithUser(storedCredential, user);
+				ShareService.shareWithUser(storedCredential, user)
+				.then(function(data){
+					$scope.share_settings.upload_progress.done ++;
+					$scope.share_settings.upload_progress.percent = $scope.share_settings.upload_progress.done / $scope.share_settings.upload_progress.total * 100;
+				});
 			};
 
 			$scope.calculate_total_time = function () {
