@@ -340,7 +340,7 @@ class ShareController extends ApiController {
         $acl = $this->shareService->getCredentialAclList($item_guid);
         try {
             $credential = $this->credentialService->getCredentialByGUID($item_guid);
-            if ($credential->getUserId() == $this->userId){
+            if ($credential->getUserId() == $this->userId->getUID()){
                 return new JSONResponse($acl);
             }
             else{
