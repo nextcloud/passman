@@ -199,7 +199,7 @@ angular.module('passmanApp')
 								user: data[0].user_id
 							});
 							user.vaults = result;
-							if(!user.hasOwnProperty('acl')) {
+							if(!user.hasOwnProperty('acl_id')) {
 								$scope.uploadChanges(user);
 							}
 							$scope.$digest();
