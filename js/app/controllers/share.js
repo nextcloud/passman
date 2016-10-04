@@ -76,8 +76,8 @@ angular.module('passmanApp')
 				linkSharing: {
 					enabled: false,
 					settings: {
-						expire_time: 0,
-						expire_views: 0,
+						expire_time: new Date("2999-12-31T22:59:59"),
+						expire_views: 5,
 						acl: link_acl
 					}
 				},
@@ -99,10 +99,9 @@ angular.module('passmanApp')
 					value: '1'
 				}
 			];
-			console.log(SharingACL);
 			var acl = new SharingACL(0);
 
-			console.log(acl);
+
 			$scope.inputSharedWith = [];
 			$scope.selectedAccessLevel = '1';
 
@@ -138,7 +137,6 @@ angular.module('passmanApp')
 
 			$scope.unshareCredential = function (credential) {
 				ShareService.unshareCredential(credential);
-				//@TODO check why an item locks up after being shared with only a link
 				var _credential = angular.copy(credential);
 				_credential.shared_key = null;
 				CredentialService.updateCredential(_credential).then(function () {
@@ -154,7 +152,6 @@ angular.module('passmanApp')
 				$scope.share_settings.cypher_progress.times_total = [];
 
 				ShareService.generateSharedKey(20).then(function (key) {
-					console.log(key);
 
 					var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
 					CredentialService.updateCredential(encryptedSharedCredential, true);
@@ -194,11 +191,12 @@ angular.module('passmanApp')
 					}
 
 					if($scope.share_settings.linkSharing.enabled){
+						var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
 						var shareObj = {
 							item_id: $scope.storedCredential.credential_id,
 							item_guid: $scope.storedCredential.guid,
 							permissions: $scope.share_settings.linkSharing.settings.acl.getAccessLevel(),
-							expire_timestamp: $scope.share_settings.linkSharing.settings.expire_time,
+							expire_timestamp: expire_time,
 							expire_views: $scope.share_settings.linkSharing.settings.expire_views
 						};
 						ShareService.createPublicSharedCredential(shareObj).then(function(){
@@ -207,13 +205,13 @@ angular.module('passmanApp')
 
 						});
 					}
+					NotificationService.showNotification('Credential shared', 4000)
 				})
 			};
 
 			$scope.uploadChanges = function (user) {
 				user.accessLevel = angular.copy(user.acl.getAccessLevel());
 				ShareService.shareWithUser(storedCredential, user);
-				//@TODO Encrypt the credential once all users have the sharing keys.
 			};
 
 			$scope.calculate_total_time = function () {

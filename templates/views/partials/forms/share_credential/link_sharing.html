@@ -11,11 +11,12 @@
 				  class="link"
 				  future-only
 				  close-on-select="false"
-			> No expire date set</span>
+				  timestamp="true"
+			>{{ share_settings.linkSharing.settings.expire_time | date:'dd-MM-yyyy @ HH:mm:ss' }}</span>
 
 		</div>
 		<div ng-show="share_settings.linkSharing.enabled">
-			Share until views
+			Expire after views<br />
 			<input type="number"
 				   ng-model="share_settings.linkSharing.settings.expire_views">
 		</div>

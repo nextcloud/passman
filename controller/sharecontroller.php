@@ -285,7 +285,6 @@ class ShareController extends ApiController {
 			->setObject('passman_share_request', $share_request_id)
 			->setUser($this->userId->getUID());
 		$manager->markProcessed($notification);
-		//@TODO load other requests and delete them by item id.
 
 		$this->shareService->cleanItemRequestsForUser($sr);
 		return new JSONResponse(array('result'=> true));
@@ -299,16 +298,20 @@ class ShareController extends ApiController {
      * @PublicPage
      */
 	public function getPublicCredentialData($credential_guid) {
-		//@TODO if ExpireViews --, if 0 delete
+
 		//@TODO Check expire date
 		$acl = $this->shareService->getACL(null, $credential_guid);
 		$views = $acl->getExpireViews();
 		if($views === 0){
 			return new NotFoundResponse();
-		} else {
+		} else if($views != -1) {
 			$views--;
 			$acl->setExpireViews($views);
 			$this->shareService->updateCredentialACL($acl);
+		}
+
+		if($acl->getExpire() > 0 && time() > $acl->getExpire()){
+			return new NotFoundResponse();
 		}
 
 	    try {

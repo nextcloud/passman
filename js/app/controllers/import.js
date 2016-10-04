@@ -9,7 +9,6 @@
  */
 angular.module('passmanApp')
 	.controller('ImportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', function ($scope, $window, CredentialService, VaultService) {
-		//@TODo read the available importers from $window.PassmanImporter
 		$scope.available_importers = [
 
 		];
