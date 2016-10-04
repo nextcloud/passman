@@ -107,7 +107,7 @@ angular.module('passmanApp')
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' +  credential.guid +'/acl');
 				return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
-							return response;
+							return response.data;
 						} else {
 							return response;
 						}

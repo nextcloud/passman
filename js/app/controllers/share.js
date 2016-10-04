@@ -9,8 +9,8 @@
  * This file is part of passman, licensed under AGPLv3
  */
 angular.module('passmanApp')
-	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL',
-		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL) {
+	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL','EncryptService',
+		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService) {
 			$scope.active_vault = VaultService.getActiveVault();
 
 			$scope.tabs = [{
@@ -90,8 +90,32 @@ angular.module('passmanApp')
 
 
 			ShareService.getSharedCredentialACL($scope.storedCredential).then(function (aclList) {
-				console.log(aclList);
-			})
+				var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+				for(var i = 0; i < aclList.length; i++){
+					var acl = aclList[i];
+					if(acl.user_id === null){
+						$scope.share_settings.linkSharing ={
+							enabled: true,
+							settings: {
+								expire_time: new Date(acl.expire * 1000),
+								expire_views: acl.expire_views,
+								acl: new SharingACL(acl.permissions)
+							}
+						};
+						var hash = window.btoa($scope.storedCredential.guid + '<::>'+ enc_key)
+						$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+					} else {
+						var obj = {
+							userId: acl.user_id,
+							displayName: acl.user_id,
+							type: 'user',
+							acl: new SharingACL(acl.permissions)
+						};
+						$scope.share_settings.credentialSharedWithUserAndGroup.push(obj);
+					}
+
+				}
+			});
 
 			var acl = new SharingACL(0);
 
