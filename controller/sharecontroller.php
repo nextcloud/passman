@@ -188,24 +188,16 @@ class ShareController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-    /**
-     * @NoAdminRequired
-     * @param $credential
-     */
-	public function share($credential) {
-
-		$link = '';
-		$this->activityService->add(
-			'item_shared', array($credential->label, $this->userId),
-			'', array(),
-			$link, $this->userId, Activity::TYPE_ITEM_ACTION);
-	}
-
 	/**
 	 * @NoAdminRequired
 	 */
 	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
-		$sr = $this->shareService->getRequestByGuid($item_guid, $target_vault_guid);
+	    try {
+            $sr = $this->shareService->getRequestByGuid($item_guid, $target_vault_guid);
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundResponse();
+        }
 
 		$manager = \OC::$server->getNotificationManager();
 		$notification = $manager->createNotification();
@@ -233,15 +225,20 @@ class ShareController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function getPendingRequests() {
-		$requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
-		$results = array();
-		foreach ($requests as $request){
-			$result = $request->jsonSerialize();
-			$c = $this->credentialService->getCredentialLabelById($request->getItemId());
-			$result['credential_label'] = $c->getLabel();
-			array_push($results, $result);
-		}
-		return new JSONResponse($results);
+	    try {
+            $requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
+            $results = array();
+            foreach ($requests as $request) {
+                $result = $request->jsonSerialize();
+                $c = $this->credentialService->getCredentialLabelById($request->getItemId());
+                $result['credential_label'] = $c->getLabel();
+                array_push($results, $result);
+            }
+            return new JSONResponse($results);
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundResponse();
+        }
 	}
 
     /**
@@ -250,7 +247,12 @@ class ShareController extends ApiController {
      * @NoAdminRequired
      */
 	public function getRevisions($item_guid){
-	    return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
+	    try {
+            return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundResponse();
+        }
     }
 
     /**
@@ -258,7 +260,12 @@ class ShareController extends ApiController {
      * @NoAdminRequired
      */
 	public function getVaultItems($vault_guid){
-		return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
+	    try {
+            return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundResponse();
+        }
     }
 
     /**
@@ -267,27 +274,33 @@ class ShareController extends ApiController {
      * @NoAdminRequired
      */
 	public function deleteShareRequest($share_request_id){
-		$sr = $this->shareService->getShareRequestById($share_request_id);
-		$notification = array(
-			'from_user' => ucfirst($this->userId->getDisplayName()),
-			'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
-			'target_user' => $sr->getFromUserId(),
-			'req_id' => $sr->getId()
-		);
-		$this->notificationService->credentialDeclinedSharedNotification(
-			$notification
-		);
+	    try{
+
+            $sr = $this->shareService->getShareRequestById($share_request_id);
+            $notification = array(
+                'from_user' => ucfirst($this->userId->getDisplayName()),
+                'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
+                'target_user' => $sr->getFromUserId(),
+                'req_id' => $sr->getId()
+            );
+            $this->notificationService->credentialDeclinedSharedNotification(
+                $notification
+            );
 
 
-		$manager = \OC::$server->getNotificationManager();
-		$notification = $manager->createNotification();
-		$notification->setApp('passman')
-			->setObject('passman_share_request', $share_request_id)
-			->setUser($this->userId->getUID());
-		$manager->markProcessed($notification);
+            $manager = \OC::$server->getNotificationManager();
+            $notification = $manager->createNotification();
+            $notification->setApp('passman')
+                ->setObject('passman_share_request', $share_request_id)
+                ->setUser($this->userId->getUID());
+            $manager->markProcessed($notification);
 
-		$this->shareService->cleanItemRequestsForUser($sr);
-		return new JSONResponse(array('result'=> true));
+            $this->shareService->cleanItemRequestsForUser($sr);
+            return new JSONResponse(array('result'=> true));
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundResponse();
+        }
 	}
 
     /**
