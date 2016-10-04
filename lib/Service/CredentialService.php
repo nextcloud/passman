@@ -73,4 +73,8 @@ class CredentialService {
 	public function getCredentialLabelById($credential_id){
 		return $this->credentialMapper->getCredentialLabelById($credential_id);
 	}
+
+	public function getCredentialByGUID($credential_guid){
+	    return $this->credentialMapper->getCredentialByGUID($credential_guid);
+    }
 }

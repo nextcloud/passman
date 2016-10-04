@@ -322,4 +322,20 @@ class ShareController extends ApiController {
             return new NotFoundResponse();
         }
     }
+
+    public function getItemAcl($item_guid){
+        $acl = $this->shareService->getCredentialAclList($item_guid);
+        try {
+            $credential = $this->credentialService->getCredentialByGUID($item_guid);
+            if ($credential->getUserId() == $this->userId){
+                return new JSONResponse($acl);
+            }
+            else{
+                return new NotFoundResponse();
+            }
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundResponse();
+        }
+    }
 }

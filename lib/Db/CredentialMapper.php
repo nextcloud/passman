@@ -134,4 +134,14 @@ class CredentialMapper extends Mapper {
 	public function upd(Credential $credential){
 		$this->update($credential);
 	}
+
+    /**
+     * Finds a credential by the given guid
+     * @param $credential_guid
+     * @return Credential
+     */
+	public function getCredentialByGUID($credential_guid){
+	    $q = 'SELECT * FROM `*PREFIX*passman_credentials` WHERE guid = ? ';
+        return $this->findEntity($q, [$credential_guid]);
+    }
 }
