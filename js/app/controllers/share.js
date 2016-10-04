@@ -89,16 +89,10 @@ angular.module('passmanApp')
 			};
 
 
-			$scope.accessLevels = [
-				{
-					label: 'Can edit',
-					value: '3'
-				},
-				{
-					label: 'Can view',
-					value: '1'
-				}
-			];
+			ShareService.getSharedCredentialACL($scope.storedCredential).then(function (aclList) {
+				console.log(aclList);
+			})
+
 			var acl = new SharingACL(0);
 
 
