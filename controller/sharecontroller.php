@@ -395,7 +395,7 @@ class ShareController extends ApiController {
 			} catch (DoesNotExistException $exception) {
 
 			}
-			
+
 			if ($acl === null) {
 				$sr = $this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id);
 				foreach ($sr as $shareRequest) {
