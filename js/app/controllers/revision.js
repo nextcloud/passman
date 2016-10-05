@@ -62,11 +62,11 @@ angular.module('passmanApp')
 				if($scope.storedCredential.hasOwnProperty('acl')){
 					key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
 				}
-				console.log(key);
+
 				if(key){
-					$scope.selectedRevision.credential_data = CredentialService.decryptCredential(angular.copy(revision.credential_data));
-				} else {
 					$scope.selectedRevision.credential_data = ShareService.decryptSharedCredential(angular.copy(revision.credential_data), key);
+				} else {
+					$scope.selectedRevision.credential_data = CredentialService.decryptCredential(angular.copy(revision.credential_data));
 				}
 
 				$rootScope.$emit('app_menu', true);

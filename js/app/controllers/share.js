@@ -300,12 +300,12 @@ angular.module('passmanApp')
 						}
 
 						CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
-							console.log(revisions);
 							for (var r = 0; r < revisions.length; r++) {
 								var _revision = revisions[r];
 								//Decrypt!
 								_revision.credential_data = CredentialService.decryptCredential(_revision.credential_data);
 								_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, key);
+								console.log('Used key for encrypting history ', key);
 								CredentialService.updateRevision(_revision);
 							}
 						});
