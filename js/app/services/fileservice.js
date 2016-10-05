@@ -10,11 +10,11 @@
 angular.module('passmanApp')
 	.service('FileService', ['$http', 'EncryptService', function ($http, EncryptService) {
 		return {
-			uploadFile: function (file) {
+			uploadFile: function (file, key) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/file');
 				var _file = angular.copy(file);
-				_file.filename = EncryptService.encryptString(_file.filename);
-				var data = EncryptService.encryptString(angular.copy(file.data));
+				_file.filename = EncryptService.encryptString(_file.filename, key);
+				var data = EncryptService.encryptString(angular.copy(file.data), key);
 				_file.data = data;
 				return $http.post(queryUrl, _file).then(function (response) {
 					if (response.data) {
@@ -45,6 +45,26 @@ angular.module('passmanApp')
 						} else {
 							return response.data;
 						}
+					} else {
+						return response;
+					}
+				});
+			},
+			/**
+			 * Update a file and it's contents
+			 * @param file
+			 * @param key Optional encryption key to use
+			 * @returns {*}
+			 */
+			updateFile: function(file, key){
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/file/'+ file.file_id);
+				var _file = angular.copy(file);
+				_file.filename = EncryptService.encryptString(_file.filename, key);
+				var data = EncryptService.encryptString(angular.copy(file.data), key);
+				_file.data = data;
+				return $http.patch(queryUrl, _file).then(function (response) {
+					if (response.data) {
+						return response.data;
 					} else {
 						return response;
 					}

@@ -9,7 +9,7 @@
  * This file is part of passman, licensed under AGPLv3
  */
 angular.module('passmanApp')
-	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL','EncryptService',
+	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL','EncryptService', 'FileService',
 		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService) {
 			$scope.active_vault = VaultService.getActiveVault();
 
@@ -157,7 +157,6 @@ angular.module('passmanApp')
 			$scope.setPermission = function(acl, permission){
 				acl.togglePermission(permission);
 			};
-			console.log($scope.storedCredential)
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {
 				//@TODO Improve this so we can add, edit and remove users and permissions.
 				$scope.inputSharedWith = [];
@@ -218,8 +217,9 @@ angular.module('passmanApp')
 						});
 				});
 			};
-
+			$scope.sharing_complete = true;
 			$scope.applyShare = function () {
+				$scope.sharing_complete = false;
 				$scope.share_settings.cypher_progress.percent = 0;
 				$scope.share_settings.cypher_progress.done = 0;
 				$scope.share_settings.cypher_progress.total = 0;
@@ -227,8 +227,6 @@ angular.module('passmanApp')
 				$scope.share_settings.cypher_progress.times_total = [];
 				$scope.share_settings.upload_progress.done = 0;
 				$scope.share_settings.upload_progress.total = 0;
-
-				console.log($scope.storedCredential);
 				//Credential is already shared
 				if($scope.storedCredential.shared_key && $scope.storedCredential.shared_key != '' && $scope.storedCredential.shared_key != null){
 					console.log('Shared key found');
@@ -271,11 +269,19 @@ angular.module('passmanApp')
 				} else {
 
 					ShareService.generateSharedKey(20).then(function (key) {
-
 						var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
 						CredentialService.updateCredential(encryptedSharedCredential, true).then(function(sharedCredential){
 							$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
 						});
+						console.log($scope.storedCredential);
+
+						//@TODO Update files with new key (async)
+						// Files are stored in $scope.storedCredential.files
+						// They need get downloaded with FileService.getFile
+						// Then decrypt the data obtained with var EncryptService.decryptString(result.file_data);
+						// To update a file you can use the FileService.updateFile
+
+						//@TODO Update revisions with new key (async)
 
 						var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 						for (var i = 0; i < list.length; i++) {
