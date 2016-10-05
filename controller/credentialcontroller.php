@@ -143,7 +143,6 @@ class CredentialController extends ApiController {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
 		}
-		//@TODO Add activities for non owned items
 		$link = ''; // @TODO create direct link to credential
 		$activity = false;
 		if ($revision_created) {
