@@ -36,7 +36,6 @@ angular.module('passmanApp')
 
 			var getRevisions = function () {
 				CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
-					console.log(revisions)
 					$scope.revisions = revisions;
 				})
 			};
