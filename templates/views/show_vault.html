@@ -72,8 +72,9 @@
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 				<td>
 					<span class="icon">
-						<i class="fa fa-lock" ng-if="!credential.acl"></i>
+						<i class="fa fa-lock" ng-if="!credential.acl && !credential.shared_key"></i>
 						<i class="fa fa-share-alt" ng-if="credential.acl"></i>
+						<i class="fa fa-share-alt-square" ng-if="credential.shared_key != null"></i>
 					</span>
 					<span class="label">{{ ::credential.label}}</span>
 					<span class="tags">
