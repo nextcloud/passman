@@ -253,7 +253,7 @@ class CredentialController extends ApiController {
         catch (DoesNotExistException $ex){
             return new NotFoundJSONResponse();
         }
-		
+
         // If the request was made by the owner of the credential
         if ($this->userId == $credential->getUserId()) {
             $result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);

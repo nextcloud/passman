@@ -100,12 +100,13 @@ angular.module('passmanApp')
 					key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
 				}
 				if(key){
-					_credential = ShareService.encryptSharedCredential($scope.storedCredential, key);
-
+					_credential = ShareService.encryptSharedCredential(_credential, key);
 				}
 				delete _credential.shared_key;
 
-				//_credential.revision_created =  $filter('date')(_revision.created * 1000 , "dd-MM-yyyy @ HH:mm:ss");
+				//Used in activity
+				_credential.revision_created =  $filter('date')(_revision.created * 1000 , "dd-MM-yyyy @ HH:mm:ss");
+				console.log(_credential);
 				CredentialService.updateCredential(_credential, (key)).then(function (result) {
 					SettingsService.setSetting('revision_credential', null);
 					$rootScope.$emit('app_menu', false);
