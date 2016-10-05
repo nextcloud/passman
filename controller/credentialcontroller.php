@@ -13,6 +13,7 @@ namespace OCA\Passman\Controller;
 
 use OCA\Files_External\NotFoundException;
 use OCA\Passman\Db\SharingACL;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IRequest;
@@ -255,5 +256,20 @@ class CredentialController extends ApiController {
 	public function deleteRevision($credential_id, $revision_id) {
 		$result = $this->credentialRevisionService->deleteRevision($revision_id, $this->userId);
 		return new JSONResponse($result);
+	}
+
+	/**
+	 * @NoAdminRequired
+	 */
+	public function updateRevision($credential_id, $revision_id, $credential_data){
+		$revision = null;
+		try{
+			$revision = $this->credentialRevisionService->getRevision($revision_id);
+		} catch(DoesNotExistException $exception){
+			return new NotFoundResponse();
+		}
+
+		$revision->setCredentialData($credential_data);
+		$this->credentialRevisionService->updateRevision($revision);
 	}
 }

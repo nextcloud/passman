@@ -41,6 +41,7 @@ return [
 		//Revisions
 		['name' => 'credential#getRevision', 'url' => '/api/v2/credentials/{credential_id}/revision', 'verb' => 'GET'],
 		['name' => 'credential#deleteRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'DELETE'],
+		['name' => 'credential#updateRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'PATCH'],
 
 		//File stuff
 		['name' => 'file#uploadFile', 'url' => '/api/v2/file', 'verb' => 'POST'],

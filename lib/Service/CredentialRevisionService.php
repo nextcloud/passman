@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\Db\CredentialRevision;
 use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -33,7 +34,15 @@ class CredentialRevisionService {
 		return $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
 	}
 
+	public function getRevision($credential_id, $user_id = null){
+		return $this->credentialRevisionMapper->getRevision($credential_id, $user_id);
+	}
+
 	public function deleteRevision($revision_id, $user_id){
 		return $this->credentialRevisionMapper->deleteRevision($revision_id, $user_id);
+	}
+
+	public function updateRevision(CredentialRevision $credentialRevision){
+		return $this->credentialRevisionMapper->update($credentialRevision);
 	}
 }

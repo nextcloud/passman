@@ -38,6 +38,22 @@ class CredentialRevisionMapper extends Mapper {
 		return $this->findEntities($sql, $params);
 	}
 
+	/**
+	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
+	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @return CredentialRevision
+	 */
+	public function getRevision($revision_id, $user_id = null) {
+		$sql = 'SELECT * FROM `*PREFIX*passman_revisions` ' .
+			'WHERE `id` = ?';
+        $params = [$revision_id];
+        if ($user_id !== null) {
+            $sql.= ' and `user_id` = ? ';
+            $params[] = $user_id;
+        }
+		return $this->findEntity($sql, $params);
+	}
+
 	public function create($credential, $userId, $credential_id, $edited_by) {
 		$revision = new CredentialRevision();
 		$revision->setGuid($this->utils->GUID());
