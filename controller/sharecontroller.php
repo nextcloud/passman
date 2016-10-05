@@ -16,6 +16,7 @@ use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\Vault;
 use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\NotificationService;
 use OCA\Passman\Service\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -23,6 +24,8 @@ use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\DataResponse;
 
 use OCP\IGroup;
 use OCP\IGroupManager;
@@ -43,6 +46,7 @@ class ShareController extends ApiController {
 	private $shareService;
 	private $credentialService;
 	private $notificationService;
+	private $fileService;
 
 	private $limit = 50;
 	private $offset = 0;
@@ -56,7 +60,8 @@ class ShareController extends ApiController {
 								VaultService $vaultService,
 								ShareService $shareService,
 								CredentialService $credentialService,
-								NotificationService $notificationService
+								NotificationService $notificationService,
+								FileService $fileService
 	) {
 		parent::__construct($AppName, $request);
 
@@ -68,6 +73,7 @@ class ShareController extends ApiController {
 		$this->shareService = $shareService;
 		$this->credentialService = $credentialService;
 		$this->notificationService = $notificationService;
+		$this->fileService = $fileService;
 	}
 
 	/**
@@ -385,6 +391,11 @@ class ShareController extends ApiController {
 		}
 	}
 
+	/**
+	 * @param $item_guid
+	 * @return JSONResponse
+	 * @NoAdminRequired
+	 */
 	public function getItemAcl($item_guid) {
 		$acl = $this->shareService->getCredentialAclList($item_guid);
 		$pending = $this->shareService->getCredentialPendingAclList($item_guid);
@@ -404,6 +415,33 @@ class ShareController extends ApiController {
 		}
 	}
 
+	/**
+	 * @param $credential_guid
+	 * @param $file_guid
+	 * @NoAdminRequired
+	 */
+	public function getFile($item_guid, $file_guid){
+		try {
+			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+		} catch (DoesNotExistException $e){
+			return new JSONResponse(array());
+		}
+
+		$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+		if (!$acl->hasPermission(SharingACL::FILES)){
+			return new NotFoundResponse();
+		} else {
+			return $this->fileService->getFileByGuid($file_guid);
+		}
+	}
+
+	/**
+	 * @param $item_guid
+	 * @param  $user_id
+	 * @param $permission
+	 * @return JSONResponse
+	 * @NoAdminRequired
+	 */
 	public function updateSharedCredentialACL($item_guid, $user_id, $permission) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);

@@ -56,20 +56,20 @@ class FileController extends ApiController {
 		return $this->fileService->deleteFile($file_id, $this->userId);
 	}
 
-	public function updateFile($file_id, $data, $filename, $mimetype, $size){
+	public function updateFile($file_id, $file_data, $filename, $mimetype, $size){
 		try{
 			$file = $this->fileService->getFile($file_id, $this->userId);
 		} catch (DoesNotExistException $doesNotExistException){
 
 		}
 		if($file){
-			if($data) {
-				$file->setFileData($data);
+			if($file_data) {
+				$file->setFileData($file_data);
 			}
 			if($filename) {
 				$file->setFilename($filename);
 			}
-			if($filename || $data){
+			if($filename || $file_data){
 				$this->fileService->updateFile($file);
 			}
 		}

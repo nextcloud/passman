@@ -10,7 +10,7 @@
  */
 angular.module('passmanApp')
 	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL','EncryptService', 'FileService',
-		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService) {
+		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService, FileService) {
 			$scope.active_vault = VaultService.getActiveVault();
 
 			$scope.tabs = [{
@@ -183,7 +183,18 @@ angular.module('passmanApp')
 				_credential.shared_key = null;
 				CredentialService.updateCredential(_credential).then(function () {
 					NotificationService.showNotification('Credential unshared', 4000)
-				})
+				});
+
+				for(var f = 0; f <  $scope.storedCredential.files.length; f++){
+					var _file =  $scope.storedCredential.files[f];
+					FileService.getFile(_file).then(function (fileData) {
+						console.log(fileData);
+						//Decrypt with old key
+						fileData.filename = EncryptService.decryptString(fileData.filename);
+						fileData.file_data = EncryptService.decryptString(fileData.file_data);
+						FileService.updateFile(fileData, $scope.active_vault.vaultKey);
+					})
+				}
 			};
 
 			/**
@@ -251,7 +262,6 @@ angular.module('passmanApp')
 					for (var i = 0; i < list.length; i++) {
 						var iterator = i;
 						var target_user = list[i];
-						console.log(target_user)
 						if(target_user.hasOwnProperty('created')){
 							console.log('Updating permissions')
 
@@ -273,13 +283,23 @@ angular.module('passmanApp')
 						CredentialService.updateCredential(encryptedSharedCredential, true).then(function(sharedCredential){
 							$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
 						});
-						console.log($scope.storedCredential);
 
 						//@TODO Update files with new key (async)
 						// Files are stored in $scope.storedCredential.files
 						// They need get downloaded with FileService.getFile
 						// Then decrypt the data obtained with var EncryptService.decryptString(result.file_data);
 						// To update a file you can use the FileService.updateFile
+
+						for(var f = 0; f <  $scope.storedCredential.files.length; f++){
+							var _file =  $scope.storedCredential.files[f];
+							FileService.getFile(_file).then(function (fileData) {
+								//Decrypt with old key
+								fileData.filename = EncryptService.decryptString(fileData.filename);
+								fileData.file_data = EncryptService.decryptString(fileData.file_data);
+								FileService.updateFile(fileData, key);
+							})
+						}
+
 
 						//@TODO Update revisions with new key (async)
 						// With CredentialService.getRevisions we can get the revisions.

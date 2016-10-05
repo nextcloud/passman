@@ -62,6 +62,7 @@ return [
         ['name' => 'share#unshareCredential', 'url' => '/api/v2/sharing/credential/{item_guid}', 'verb' => 'DELETE'],
         ['name' => 'share#getRevisions', 'url' => '/api/v2/sharing/credential/{item_guid}/revisions', 'verb' => 'GET'],
         ['name' => 'share#getItemAcl', 'url' => '/api/v2/sharing/credential/{item_guid}/acl', 'verb' => 'GET'],
+        ['name' => 'share#getFile', 'url' => '/api/v2/sharing/credential/{item_guid}/file/{file_guid}', 'verb' => 'GET'],
         ['name' => 'share#updateSharedCredentialACL', 'url' => '/api/v2/sharing/credential/{item_guid}/acl', 'verb' => 'PATCH'],
 
 		//Internal API

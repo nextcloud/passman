@@ -60,8 +60,8 @@ angular.module('passmanApp')
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/file/'+ file.file_id);
 				var _file = angular.copy(file);
 				_file.filename = EncryptService.encryptString(_file.filename, key);
-				var data = EncryptService.encryptString(angular.copy(file.data), key);
-				_file.data = data;
+				var data = EncryptService.encryptString(angular.copy(file.file_data), key);
+				_file.file_data = data;
 				return $http.patch(queryUrl, _file).then(function (response) {
 					if (response.data) {
 						return response.data;

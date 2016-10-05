@@ -58,7 +58,7 @@
 	</div>
 </div>
 {{filtered_credentials}}
-<div off-click="closeSelected()">
+<div off-click="closeSelected()" off-click-filter="'#downloadLink'">
 
 	<div class="loaderContainer" ng-if="show_spinner">
 		<div class="loader" use-theme type="'border-bottom-color'"></div>
@@ -164,7 +164,7 @@
 				</td>
 				<td>
 					<div ng-repeat="file in selectedCredential.files"
-						 class="link" ng-click="downloadFile(file)">
+						 class="link" ng-click="downloadFile(selectedCredential, file)">
 						{{file.filename}} ({{file.size | bytes}})
 					</div>
 				</td>
@@ -248,6 +248,7 @@
 				</button>
 			</div>
 		</div>
+
 	</div>
 </div>
 <div class="share_popup" style="display: none">

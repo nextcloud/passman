@@ -38,7 +38,24 @@ class FileMapper extends Mapper {
 			$sql .= ' and `user_id` = ? ';
 			array_push($params, $user_id);
 		}
-		return $this->findEntities($sql, $params);
+		return $this->findEntity($sql, $params);
+	}
+	/**
+	 * @param $file_id
+	 * @param null $user_id
+	 * @return File
+	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
+	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 */
+	public function getFileByGuid($file_guid, $user_id = null) {
+		$sql = 'SELECT * FROM `*PREFIX*passman_files` ' .
+			'WHERE `guid` = ?';
+		$params = [$file_guid];
+		if ($user_id !== null) {
+			$sql .= ' and `user_id` = ? ';
+			array_push($params, $user_id);
+		}
+		return $this->findEntity($sql, $params);
 	}
 
 	public function create($file_raw, $userId) {

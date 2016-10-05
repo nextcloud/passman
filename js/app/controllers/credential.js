@@ -316,17 +316,43 @@ angular.module('passmanApp')
 			});
 
 
-			$scope.downloadFile = function (file) {
-				FileService.getFile(file).then(function (result) {
-					var file_data = EncryptService.decryptString(result.file_data);
+			$scope.downloadFile = function (credential, file) {
+				console.log(credential, file);
+				var callback = function(result){
+					var key = null;
+					if(!result.hasOwnProperty('file_data')){
+						NotificationService.showNotification('Error downloading file, you probably don\'t have enough permissions', 5000);
+						return;
+
+					}
+					if(!credential.hasOwnProperty('acl') && credential.hasOwnProperty('shared_key')){
+						key = EncryptService.decryptString(angular.copy(credential.shared_key));
+					}
+					if(credential.hasOwnProperty('acl')){
+						key = EncryptService.decryptString(angular.copy(credential.acl.shared_key));
+					}
+
+					var file_data = EncryptService.decryptString(result.file_data, key);
 					var uriContent = FileService.dataURItoBlob(file_data, file.mimetype), a = document.createElement("a");
 					a.style = "display: none";
+					a.id= 'downloadLink';
 					a.href = uriContent;
 					a.download = escapeHTML(file.filename);
-					document.body.appendChild(a);
+					jQuery('.detailsView').append(a);
 					a.click();
 					window.URL.revokeObjectURL(uriContent);
-				});
+					jQuery('#downloadLink').remove();
+					setTimeout(function(){
+						$scope.selectedCredential = credential;
+					}, 200)
+				};
+
+				if(!credential.hasOwnProperty('acl')){
+					FileService.getFile(file).then(callback);
+				} else {
+					ShareService.downloadSharedFile(credential, file).then(callback);
+				}
+
 			};
 
 		}]);

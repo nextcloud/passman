@@ -20,6 +20,7 @@ use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CronService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\ShareService;
+use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCA\Passman\Service\NotificationService;
@@ -56,7 +57,8 @@ class Application extends App {
  				$c->query('VaultService'),
                 $c->query('ShareService'),
                 $c->query('CredentialService'),
-                $c->query('NotificationService')
+                $c->query('NotificationService'),
+                $c->query('FileService')
 			);
 		});
 
@@ -91,6 +93,7 @@ class Application extends App {
 		$container->registerAlias('NotificationService', NotificationService::class);
 		$container->registerAlias('ActivityService', ActivityService::class);
 		$container->registerAlias('VaultService', VaultService::class);
+		$container->registerAlias('FileService', FileService::class);
         $container->registerAlias('ShareService', ShareService::class);
 		$container->registerAlias('Utils', Utils::class);
 	}

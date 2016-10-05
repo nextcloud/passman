@@ -129,6 +129,14 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			downloadSharedFile: function (credential, file) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/'+ credential.guid +'/file/'+ file.guid);
+				return $http.get(queryUrl).then(function (response) {
+					if (response.data) {
+						return response.data;
+					}
+				});
+			},
 			encryptSharedCredential: function (credential, sharedKey) {
 				var _credential = angular.copy(credential);
 				_credential.shared_key = EncryptService.encryptString(sharedKey);
