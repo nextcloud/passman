@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -53,5 +54,24 @@ class FileController extends ApiController {
 	 */
 	public function deleteFile($file_id) {
 		return $this->fileService->deleteFile($file_id, $this->userId);
+	}
+
+	public function updateFile($file_id, $data, $filename, $mimetype, $size){
+		try{
+			$file = $this->fileService->getFile($file_id, $this->userId);
+		} catch (DoesNotExistException $doesNotExistException){
+
+		}
+		if($file){
+			if($data) {
+				$file->setFileData($data);
+			}
+			if($filename) {
+				$file->setFilename($filename);
+			}
+			if($filename || $data){
+				$this->fileService->updateFile($file);
+			}
+		}
 	}
 }

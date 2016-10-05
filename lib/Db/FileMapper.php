@@ -16,6 +16,7 @@ use OCP\AppFramework\Db\Mapper;
 
 class FileMapper extends Mapper {
 	private $utils;
+
 	public function __construct(IDBConnection $db, Utils $utils) {
 		parent::__construct($db, 'passman_files');
 		$this->utils = $utils;
@@ -23,16 +24,24 @@ class FileMapper extends Mapper {
 
 
 	/**
+	 * @param $file_id
+	 * @param null $user_id
+	 * @return File
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
 	 */
-	public function getFile($file_id, $user_id) {
+	public function getFile($file_id, $user_id = null) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_files` ' .
-			'WHERE `id` = ? and `user_id` = ? ';
-		return $this->findEntities($sql, [$file_id, $user_id]);
+			'WHERE `id` = ?';
+		$params = [$file_id];
+		if ($user_id !== null) {
+			$sql .= ' and `user_id` = ? ';
+			array_push($params, $user_id);
+		}
+		return $this->findEntities($sql, $params);
 	}
 
-	public function create($file_raw, $userId){
+	public function create($file_raw, $userId) {
 		$file = new File();
 		$file->setGuid($this->utils->GUID());
 		$file->setUserId($userId);
@@ -51,5 +60,9 @@ class FileMapper extends Mapper {
 		$file->setId($file_id);
 		$file->setUserId($userId);
 		$this->delete($file);
+	}
+
+	public function updateFile(File $file) {
+		return $this->update($file);
 	}
 }
