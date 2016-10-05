@@ -8,7 +8,7 @@
 angular.module('passmanApp')
 	.controller('PublicSharedCredential', ['$scope', 'ShareService','$window', function ($scope, ShareService, $window) {
 		$scope.test = 'hello world';
-
+		//@TODO Add download files 
 		$scope.loading = false;
 		$scope.loadSharedCredential = function () {
 			$scope.loading = true;
