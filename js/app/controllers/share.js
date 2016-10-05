@@ -192,7 +192,7 @@ angular.module('passmanApp')
 					FileService.getFile(_file).then(function (fileData) {
 						//Decrypt with old key
 						fileData.filename = EncryptService.decryptString(fileData.filename, enc_key);
-						fileData.file_data = EncryptService.decryptString(fileData.file_data);
+						fileData.file_data = EncryptService.decryptString(fileData.file_data, enc_key);
 						FileService.updateFile(fileData, $scope.active_vault.vaultKey);
 					})
 				}
@@ -200,7 +200,6 @@ angular.module('passmanApp')
 				CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
 					for (var r = 0; r < revisions.length; r++) {
 						var _revision = revisions[r];
-						//Decrypt!
 						_revision.credential_data = ShareService.decryptSharedCredential(_revision.credential_data, enc_key);
 						_revision.credential_data = CredentialService.encryptCredential(_revision.credential_data);
 						console.log('Used key for encrypting history ', enc_key);
