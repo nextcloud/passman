@@ -9,8 +9,8 @@
  */
 angular.module('passmanApp')
 	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL',
-		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL) {
+		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval',
+		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -30,89 +30,110 @@ angular.module('passmanApp')
 
 			$scope.show_spinner = true;
 
-			var getSharedCredentials = function() {
-				ShareService.getCredendialsSharedWithUs($scope.active_vault.guid).then(function (shared_credentials) {
-					console.log('Shared credentials', shared_credentials);
-					for (var c = 0; c < shared_credentials.length; c++) {
-						var _shared_credential = shared_credentials[c];
-						var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
-						try {
-							var _shared_credential_data = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
-						} catch (e){
-
-						}
-						if(_shared_credential_data){
-							delete _shared_credential.credential_data;
-							_shared_credential_data.acl = _shared_credential;
-							_shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
-							_shared_credential_data.tags_raw = _shared_credential_data.tags;
-							$scope.active_vault.credentials.push(_shared_credential_data);
-						}
-					}
-				});
-			};
-
 			var fetchCredentials = function () {
 				VaultService.getVault($scope.active_vault).then(function (vault) {
+
 					var vaultKey = angular.copy($scope.active_vault.vaultKey);
+					var _credentials = angular.copy(vault.credentials);
+					vault.credentials = [];
 					$scope.active_vault = vault;
 					$scope.active_vault.vaultKey = vaultKey;
 					VaultService.setActiveVault($scope.active_vault);
-					var _credentials = [];
-					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+					console.log(vault);
+					for (var i = 0; i < _credentials.length; i++) {
+						var _credential = _credentials[i];
 						try {
-							if(!$scope.active_vault.credentials[i].shared_key) {
-								$scope.active_vault.credentials[i] = CredentialService.decryptCredential(angular.copy(vault.credentials[i]));
+							if (!_credential.shared_key) {
+								_credential = CredentialService.decryptCredential(angular.copy(_credential));
 
 							} else {
-								var enc_key = EncryptService.decryptString(vault.credentials[i].shared_key);
-								$scope.active_vault.credentials[i] = ShareService.decryptSharedCredential(angular.copy(vault.credentials[i]), enc_key);
+								var enc_key = EncryptService.decryptString(_credential.shared_key);
+								_credential = ShareService.decryptSharedCredential(angular.copy(_credential), enc_key);
 							}
-							$scope.active_vault.credentials[i].tags_raw = $scope.active_vault.credentials[i].tags;
+							_credential.tags_raw = _credential.tags;
 						} catch (e) {
 							NotificationService.showNotification('An error happend during decryption', 5000);
-							$rootScope.$broadcast('logout');
-							SettingsService.setSetting('defaultVaultPass', null);
-							SettingsService.setSetting('defaultVault', null);
-							$location.path('/')
+							//$rootScope.$broadcast('logout');
+							//SettingsService.setSetting('defaultVaultPass', null);
+							//.setSetting('defaultVault', null);
+							//$location.path('/')
 
 						}
-						if ($scope.active_vault.credentials[i].tags) {
-							TagService.addTags($scope.active_vault.credentials[i].tags);
+						if (_credential.tags) {
+							TagService.addTags(_credential.tags);
 						}
+						_credentials[i] = _credential;
 					}
-					getSharedCredentials();
+
+					ShareService.getCredendialsSharedWithUs(vault.guid).then(function (shared_credentials) {
+						console.log('Shared credentials', shared_credentials);
+						for (var c = 0; c < shared_credentials.length; c++) {
+							var _shared_credential = shared_credentials[c];
+							var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
+							try {
+								var _shared_credential_data = ShareService.decryptSharedCredential(_shared_credential.credential_data, decrypted_key);
+							} catch (e) {
+
+							}
+							if (_shared_credential_data) {
+								delete _shared_credential.credential_data;
+								_shared_credential_data.acl = _shared_credential;
+								_shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
+								_shared_credential_data.tags_raw = _shared_credential_data.tags;
+								if (_shared_credential_data.tags) {
+									TagService.addTags(_shared_credential_data.tags);
+								}
+								_credentials.push(_shared_credential_data);
+							}
+						}
+						angular.merge($scope.active_vault.credentials, _credentials);
+					});
+
+					//getSharedCredentials();
 					$scope.show_spinner = false;
 				});
 			};
 
+			var getPendingShareRequests = function () {
+				ShareService.getPendingRequests().then(function (shareRequests) {
+					if (shareRequests.length > 0) {
+						$scope.incoming_share_requests = shareRequests;
+						jQuery('.share_popup').dialog({
+							width: 600,
+							position: ['center', 90]
+						});
+					}
+				});
+			};
+
+
+			var refresh_data_interval = null;
 			if ($scope.active_vault) {
 				$scope.$parent.selectedVault = true;
-				fetchCredentials()
+				fetchCredentials();
+				getPendingShareRequests();
+				refresh_data_interval = $interval(function () {
+					fetchCredentials();
+					getPendingShareRequests();
+				}, 60000 * 5)
 			}
-
-			ShareService.getPendingRequests().then(function (shareRequests) {
-				if(shareRequests.length > 0){
-					$scope.incoming_share_requests = shareRequests;
-					jQuery('.share_popup').dialog({
-						width: 600,
-						position:['center', 90]
-					});
-				}
+			$scope.$on('$destroy', function() {
+				$interval.cancel(refresh_data_interval);
 			});
+
 
 			$scope.permissions = new SharingACL(0);
 
-			$scope.hasPermission = function(acl, permission){
-				if(acl) {
+			$scope.hasPermission = function (acl, permission) {
+				if (acl) {
 					return acl.hasPermission(permission);
 				} else {
 					return true;
 				}
 
 			};
-			
-			$scope.acceptShareRequest = function(share_request){
+
+			$scope.acceptShareRequest = function (share_request) {
 				console.log('Accepted share request', share_request);
 				var crypted_shared_key = share_request.shared_key;
 				var private_key = EncryptService.decryptString(VaultService.getActiveVault().private_sharing_key);
@@ -125,22 +146,37 @@ angular.module('passmanApp')
 					var idx = $scope.incoming_share_requests.indexOf(share_request);
 					$scope.incoming_share_requests.splice(idx, 1);
 					var active_share_requests = false;
-					for(var v = 0; v < $scope.incoming_share_requests.length; v++){
-						if($scope.incoming_share_requests[v].target_vault_id == $scope.active_vault.vault_id){
+					for (var v = 0; v < $scope.incoming_share_requests.length; v++) {
+						if ($scope.incoming_share_requests[v].target_vault_id == $scope.active_vault.vault_id) {
 							active_share_requests = true;
 						}
 					}
-					if(active_share_requests === false){
+					if (active_share_requests === false) {
 						jQuery('.ui-dialog').remove();
-						getSharedCredentials();
+						fetchCredentials();
 					}
 					console.log(result)
-				})	
+				})
+			};
+
+			$scope.declineShareRequest = function(share_request){
+				ShareService.declineSharingRequest(share_request).then(function () {
+					var idx = $scope.incoming_share_requests.indexOf(share_request);
+					$scope.incoming_share_requests.splice(idx, 1);
+					var active_share_requests = false;
+					for (var v = 0; v < $scope.incoming_share_requests.length; v++) {
+						if ($scope.incoming_share_requests[v].target_vault_id == $scope.active_vault.vault_id) {
+							active_share_requests = true;
+						}
+					}
+					if (active_share_requests === false) {
+						jQuery('.ui-dialog').remove();
+						fetchCredentials();
+					}
+				})
 			};
 
 
-			
-			
 			$scope.addCredential = function () {
 				var new_credential = CredentialService.newCredential();
 				var enc_c = CredentialService.encryptCredential(new_credential);
@@ -318,38 +354,38 @@ angular.module('passmanApp')
 
 			$scope.downloadFile = function (credential, file) {
 				console.log(credential, file);
-				var callback = function(result){
+				var callback = function (result) {
 					var key = null;
-					if(!result.hasOwnProperty('file_data')){
+					if (!result.hasOwnProperty('file_data')) {
 						NotificationService.showNotification('Error downloading file, you probably don\'t have enough permissions', 5000);
 						return;
 
 					}
-					if(!credential.hasOwnProperty('acl') && credential.hasOwnProperty('shared_key')){
-						if(credential.shared_key) {
+					if (!credential.hasOwnProperty('acl') && credential.hasOwnProperty('shared_key')) {
+						if (credential.shared_key) {
 							key = EncryptService.decryptString(angular.copy(credential.shared_key));
 						}
 					}
-					if(credential.hasOwnProperty('acl')){
+					if (credential.hasOwnProperty('acl')) {
 						key = EncryptService.decryptString(angular.copy(credential.acl.shared_key));
 					}
 
 					var file_data = EncryptService.decryptString(result.file_data, key);
 					var uriContent = FileService.dataURItoBlob(file_data, file.mimetype), a = document.createElement("a");
 					a.style = "display: none";
-					a.id= 'downloadLink';
+					a.id = 'downloadLink';
 					a.href = uriContent;
 					a.download = escapeHTML(file.filename);
 					jQuery('.detailsView').append(a);
 					a.click();
 					window.URL.revokeObjectURL(uriContent);
 					jQuery('#downloadLink').remove();
-					setTimeout(function(){
+					setTimeout(function () {
 						$scope.selectedCredential = credential;
 					}, 200)
 				};
 
-				if(!credential.hasOwnProperty('acl')){
+				if (!credential.hasOwnProperty('acl')) {
 					FileService.getFile(file).then(callback);
 				} else {
 					ShareService.downloadSharedFile(credential, file).then(callback);

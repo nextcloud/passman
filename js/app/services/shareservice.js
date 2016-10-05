@@ -67,13 +67,19 @@ angular.module('passmanApp')
 					return response.data;
 				})
 			},
+			declineSharingRequest: function (request ) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/decline/'+ request.req_id);
+				return $http.delete(queryUrl).then(function (response) {
+					return response.data;
+				})
+			},
 			unshareCredential: function (credential) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid);
 				return $http.delete(queryUrl).then(function (response) {
 					return response.data;
 				})
 			},
-			
+
 			createPublicSharedCredential: function (shareObj) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public');
 				return $http.post(queryUrl, shareObj).then(function (response) {
