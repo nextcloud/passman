@@ -126,7 +126,8 @@ angular.module('passmanApp')
 
 			$scope.hasPermission = function (acl, permission) {
 				if (acl) {
-					return acl.hasPermission(permission);
+					var tmp = new SharingACL(acl.permission);
+					return tmp.hasPermission(permission);
 				} else {
 					return true;
 				}
