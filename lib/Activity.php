@@ -30,6 +30,8 @@ class Activity implements \OCP\Activity\IExtension {
 	const SUBJECT_ITEM_DESTROYED_SELF = 'item_destroyed_self';
 	const SUBJECT_ITEM_EXPIRED = 'item_expired';
 	const SUBJECT_ITEM_SHARED = 'item_shared';
+	const SUBJECT_ITEM_SHARE_RECEIVED = 'item_share_received';
+	const SUBJECT_ITEM_SHARED_PUBLICLY = 'item_shared_publicly';
 	const SUBJECT_ITEM_RENAMED = 'item_renamed';
 	const SUBJECT_ITEM_RENAMED_SELF = 'item_renamed_self';
 
@@ -135,7 +137,11 @@ class Activity implements \OCP\Activity\IExtension {
 				case self::SUBJECT_ITEM_EXPIRED:
 					return $l->t('The password of %1$s has expired, renew it now.', $params)->__toString();
 				case self::SUBJECT_ITEM_SHARED:
-					return $l->t('%s has been shared', $params)->__toString();
+					return $l->t('%1$s has been shared with %2$s', $params)->__toString();
+				case self::SUBJECT_ITEM_SHARE_RECEIVED:
+					return $l->t('You received a share request for %1$s from %2$s', $params)->__toString();
+				case self::SUBJECT_ITEM_SHARED_PUBLICLY:
+					return $l->t('%s has been shared with a link', $params)->__toString();
 			}
 		}
 		return false;
@@ -180,6 +186,7 @@ class Activity implements \OCP\Activity\IExtension {
 				case self::SUBJECT_ITEM_RENAMED_SELF:
 				case self::SUBJECT_ITEM_RENAMED:
 				case self::SUBJECT_ITEM_SHARED:
+				case self::SUBJECT_ITEM_SHARED_PUBLICLY:
 					return array(
 						0 => 'passman',
 					);

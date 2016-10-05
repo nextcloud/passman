@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Files_External\NotFoundException;
 use OCA\Passman\Db\SharingACL;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
@@ -28,7 +29,7 @@ class CredentialController extends ApiController {
 	private $credentialService;
 	private $activityService;
 	private $credentialRevisionService;
-    private $sharingService;
+	private $sharingService;
 
 	public function __construct($AppName,
 								IRequest $request,
@@ -36,14 +37,14 @@ class CredentialController extends ApiController {
 								CredentialService $credentialService,
 								ActivityService $activityService,
 								CredentialRevisionService $credentialRevisionService,
-                                ShareService $sharingService
-    ) {
+								ShareService $sharingService
+	) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
 		$this->activityService = $activityService;
 		$this->credentialRevisionService = $credentialRevisionService;
-        $this->sharingService = $sharingService;
+		$this->sharingService = $sharingService;
 	}
 
 	/**
@@ -80,10 +81,12 @@ class CredentialController extends ApiController {
 		);
 		$credential = $this->credentialService->createCredential($credential);
 		$link = ''; // @TODO create direct link to credential
-		$this->activityService->add(
-			Activity::SUBJECT_ITEM_CREATED_SELF, array($label, $this->userId),
-			'', array(),
-			$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		if(!$credential->getHidden()) {
+			$this->activityService->add(
+				Activity::SUBJECT_ITEM_CREATED_SELF, array($label, $this->userId),
+				'', array(),
+				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		}
 		return new JSONResponse($credential);
 	}
 
@@ -127,47 +130,91 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
-			'shared_key' => ($shared_key === NULL) ? '' : $shared_key,
+			'shared_key' => ($shared_key === null) ? '' : $shared_key,
 		);
 
 
-
-        if ($storedCredential->getUserId() !== $this->userId){
-            $acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
-            if ($acl->hasPermission(SharingACL::WRITE)) {
-                $credential['shared_key'] = $storedCredential->getSharedKey();
-            }
-            else {
-                return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
-            }
-        }
+		if ($storedCredential->getUserId() !== $this->userId) {
+			$acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
+			if ($acl->hasPermission(SharingACL::WRITE)) {
+				$credential['shared_key'] = $storedCredential->getSharedKey();
+			} else {
+				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+			}
+		}
 		//@TODO Add activities for non owned items
 		$link = ''; // @TODO create direct link to credential
+		$activity = false;
 		if ($revision_created) {
+			$activity = 'item_apply_revision';
 			$this->activityService->add(
-				'item_apply_revision_self', array($label, $this->userId, $revision_created),
+				$activity . '_self', array($label, $this->userId, $revision_created),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		} else if (($storedCredential->getDeleteTime() == 0) && $delete_time > 0) {
+			$activity = 'item_deleted';
 			$this->activityService->add(
-				'item_deleted_self', array($label, $this->userId),
+				$activity . '_self', array($label, $this->userId),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		} else if (($storedCredential->getDeleteTime() > 0) && $delete_time == 0) {
+			$activity = 'item_recovered';
 			$this->activityService->add(
-				'item_recovered_self', array($label, $this->userId),
+				$activity . '_self', array($label, $this->userId),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		} else if ($label != $storedCredential->getLabel()) {
+			$activity = 'item_renamed';
 			$this->activityService->add(
-				'item_renamed_self', array($storedCredential->getLabel(), $label, $this->userId),
+				$activity . '_self', array($storedCredential->getLabel(), $label, $this->userId),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_RENAMED);
 		} else {
+			$activity = 'item_edited';
 			$this->activityService->add(
-				'item_edited_self', array($label, $this->userId),
+				$activity . '_self', array($label, $this->userId),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
+		}
+		$acl_list = null;
+
+		try {
+			$acl_list = $this->sharingService->getCredentialAclList($storedCredential->getGuid());
+		} catch (DoesNotExistException $exception) {
+
+		}
+		if ($acl_list) {
+			$params = array();
+			switch ($activity) {
+				case 'item_recovered':
+				case 'item_deleted':
+				case 'item_edited':
+					$params = array($credential['label'], $this->userId);
+					break;
+				case 'item_apply_revision':
+					$params = array($credential['label'], $this->userId, $revision_created);
+					break;
+				case 'item_renamed':
+					$params = array($storedCredential->getLabel(), $label, $this->userId);
+					break;
+			}
+
+			foreach ($acl_list as $sharingACL) {
+				$target_user = $sharingACL->getUserId();
+				if($target_user == $this->userId){
+					continue;
+				}
+				$this->activityService->add(
+					$activity, $params,
+					'', array(),
+					$link, $target_user, Activity::TYPE_ITEM_ACTION);
+			}
+			if ($this->userId != $storedCredential->getUserId()) {
+				$this->activityService->add(
+					$activity, $params,
+					'', array(),
+					$link, $storedCredential->getUserId(), Activity::TYPE_ITEM_ACTION);
+			}
 		}
 
 		$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);

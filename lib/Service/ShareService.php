@@ -135,7 +135,7 @@ class ShareService {
 		return $return;
 	}
 
-	/*
+	/**
 	 * Gets the acl for a given item guid
 	 * @param $user_id
 	 * @param $item_guid

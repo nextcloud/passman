@@ -157,7 +157,7 @@ angular.module('passmanApp')
 			$scope.setPermission = function(acl, permission){
 				acl.togglePermission(permission);
 			};
-
+			console.log($scope.storedCredential)
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {
 				//@TODO Improve this so we can add, edit and remove users and permissions.
 				$scope.inputSharedWith = [];
@@ -169,7 +169,7 @@ angular.module('passmanApp')
 							type: shareWith[i].type,
 							acl: angular.copy($scope.default_permissions),
 							pending: true,
-							credential_guid: $scope.selectedCredential.guid
+							credential_guid: $scope.storedCredential.guid
 						};
 						if ($scope.share_settings.credentialSharedWithUserAndGroup.indexOf(obj) === -1) {
 							$scope.share_settings.credentialSharedWithUserAndGroup.push(obj)

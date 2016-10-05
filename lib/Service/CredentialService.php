@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\SharingACLMapper;
 use OCP\IConfig;
@@ -29,6 +30,12 @@ class CredentialService {
         $this->sharingACL = $sharingACL;
 	}
 
+	/**
+	 * Create a new credential
+	 * @param $user_id
+	 * @param $item_guid
+	 * @return Credential
+	 */
 	public function createCredential($credential) {
 		return $this->credentialMapper->create($credential);
 	}

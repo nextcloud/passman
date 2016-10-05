@@ -79,6 +79,12 @@ class ShareController extends ApiController {
 	 */
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
 
+		try{
+			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+		} catch (DoesNotExistException $exception){
+			return new NotFoundResponse();
+		}
+
 		try {
 			$acl = $this->shareService->getACL(null, $item_guid);
 		} catch (DoesNotExistException $exception) {
@@ -93,6 +99,11 @@ class ShareController extends ApiController {
 		$acl->setExpireViews($expire_views);
 		if (!$acl->getId()) {
 			$this->shareService->createACLEntry($acl);
+
+			$this->activityService->add(
+				'item_shared_publicly', [$credential->getLabel()],
+				'', array(),
+				'', $this->userId->getUID(), Activity::TYPE_ITEM_SHARED);
 		} else {
 			$this->shareService->updateCredentialACL($acl);
 		}
@@ -113,7 +124,7 @@ class ShareController extends ApiController {
 
 		$first_vault = $vaults[0];
 		try {
-			$shareRequests = $this->shareService->getPendingShareRequests($item_guid, $first_vault['user_id']);
+			$shareRequests = $this->shareService->getPendingShareRequestsForCredential($item_guid, $first_vault['user_id']);
 			if (count($shareRequests) > 0) {
 				return new JSONResponse(array('error' => 'User got already pending requests'));
 			}
@@ -150,9 +161,22 @@ class ShareController extends ApiController {
 						$notification
 					);
 					array_push($processed_users, $target_user);
+
+					$this->activityService->add(
+						'item_shared', [$credential->getLabel(), $target_user],
+						'', array(),
+						'', $this->userId->getUID(), Activity::TYPE_ITEM_SHARED);
+
+
+					$this->activityService->add(
+						'item_share_received', [$credential->getLabel(), $this->userId->getUID()],
+						'', array(),
+						'', $target_user, Activity::TYPE_ITEM_SHARED);
 				}
 			}
 		}
+
+
 		return new JSONResponse($result);
 	}
 
