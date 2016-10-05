@@ -326,7 +326,9 @@ angular.module('passmanApp')
 
 					}
 					if(!credential.hasOwnProperty('acl') && credential.hasOwnProperty('shared_key')){
-						key = EncryptService.decryptString(angular.copy(credential.shared_key));
+						if(credential.shared_key) {
+							key = EncryptService.decryptString(angular.copy(credential.shared_key));
+						}
 					}
 					if(credential.hasOwnProperty('acl')){
 						key = EncryptService.decryptString(angular.copy(credential.acl.shared_key));
