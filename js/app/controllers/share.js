@@ -282,6 +282,8 @@ angular.module('passmanApp')
 						// To update a file you can use the FileService.updateFile
 
 						//@TODO Update revisions with new key (async)
+						// With CredentialService.getRevisions we can get the revisions.
+						// Then we can update them using CredentialService.updateRevision
 
 						var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 						for (var i = 0; i < list.length; i++) {

@@ -139,6 +139,18 @@ angular.module('passmanApp')
 					}
 				});
 			},
+			updateRevision:  function(revision){
+				var _revision = angular.copy(revision);
+				_revision.revision_data = window.btoa(_revision.revision_data);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + id + '/revision/' + revision.id);
+				return $http.patch(queryUrl, revision).then(function (response) {
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+			},
 			deleteRevision:  function(credential_id, revision_id){
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential_id + '/revision/' + revision_id);
 				return $http.delete(queryUrl).then(function (response) {
