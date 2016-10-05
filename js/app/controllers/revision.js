@@ -51,7 +51,6 @@ angular.module('passmanApp')
 			}
 
 			$scope.selectRevision = function (revision) {
-				console.log(revision, $scope.storedCredential);
 				 var key;
 				$scope.selectedRevision = angular.copy(revision);
 
@@ -106,7 +105,6 @@ angular.module('passmanApp')
 
 				//Used in activity
 				_credential.revision_created =  $filter('date')(_revision.created * 1000 , "dd-MM-yyyy @ HH:mm:ss");
-				console.log(_credential);
 				CredentialService.updateCredential(_credential, (key)).then(function (result) {
 					SettingsService.setSetting('revision_credential', null);
 					$rootScope.$emit('app_menu', false);
