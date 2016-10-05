@@ -215,7 +215,7 @@ angular.module('passmanApp')
 				//@TODO When credential is expired and has renew interval set, calc new expire time.
 				delete $scope.storedCredential.password_repeat;
 				console.log($scope.storedCredential);
-				if(!$scope.storedCredential.credential_id){
+				if (!$scope.storedCredential.credential_id) {
 					$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
 					CredentialService.createCredential($scope.storedCredential).then(function (result) {
 						$location.path('/vault/' + $routeParams.vault_id);
@@ -224,21 +224,25 @@ angular.module('passmanApp')
 				} else {
 
 					var key, _credential;
-					if(!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')){
-						key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+					if (!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')) {
+
+						if ($scope.storedCredential.shared_key) {
+							key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+						}
 					}
-					if($scope.storedCredential.hasOwnProperty('acl')){
+
+					if ($scope.storedCredential.hasOwnProperty('acl')) {
 						key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
 					}
-					if(key){
+
+					if (key) {
 						_credential = ShareService.encryptSharedCredential($scope.storedCredential, key);
 					} else {
 						_credential = angular.copy($scope.storedCredential);
 					}
+
 					delete _credential.shared_key;
 					var _useKey = (key != null);
-					console.log(_credential);
-					//Used in activity
 
 					CredentialService.updateCredential(_credential, _useKey).then(function (result) {
 						SettingsService.setSetting('edit_credential', null);
