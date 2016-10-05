@@ -36,14 +36,14 @@ class CredentialController extends ApiController {
 
 	public function __construct($AppName,
 								IRequest $request,
-								IUser $UserId,
+								$userId,
 								CredentialService $credentialService,
 								ActivityService $activityService,
 								CredentialRevisionService $credentialRevisionService,
 								ShareService $sharingService
 	) {
 		parent::__construct($AppName, $request);
-		$this->userId = $UserId;
+		$this->userId = $userId;
 		$this->credentialService = $credentialService;
 		$this->activityService = $activityService;
 		$this->credentialRevisionService = $credentialRevisionService;
@@ -255,11 +255,11 @@ class CredentialController extends ApiController {
         }
 
         // If the request was made by the owner of the credential
-        if ($this->userId->getUID() == $credential->getUserId()) {
+        if ($this->userId == $credential->getUserId()) {
             $result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);
         }
         else {
-            $acl = $this->sharingService->getACL($this->userId->getUID(), $credential_guid);
+            $acl = $this->sharingService->getACL($this->userId, $credential_guid);
             if ($acl->hasPermission(SharingACL::HISTORY)){
                 $result = $this->credentialRevisionService->getRevisions($credential->getId());
             }

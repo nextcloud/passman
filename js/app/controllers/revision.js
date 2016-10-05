@@ -89,11 +89,24 @@ angular.module('passmanApp')
 			};
 
 			$scope.restoreRevision = function (revision) {
+				var key;
 				var _revision = angular.copy(revision);
 				var _credential = _revision.credential_data;
-				//@TODO make sure the shared key doesn't get restored
-				_credential.revision_created =  $filter('date')(_revision.created * 1000 , "dd-MM-yyyy @ HH:mm:ss");
-				CredentialService.updateCredential(_credential).then(function (result) {
+
+				if(!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')){
+					key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+				}
+				if($scope.storedCredential.hasOwnProperty('acl')){
+					key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
+				}
+				if(key){
+					_credential = ShareService.encryptSharedCredential($scope.storedCredential, key);
+
+				}
+				delete _credential.shared_key;
+
+				//_credential.revision_created =  $filter('date')(_revision.created * 1000 , "dd-MM-yyyy @ HH:mm:ss");
+				CredentialService.updateCredential(_credential, (key)).then(function (result) {
 					SettingsService.setSetting('revision_credential', null);
 					$rootScope.$emit('app_menu', false);
 					$location.path('/vault/' + $routeParams.vault_id);
