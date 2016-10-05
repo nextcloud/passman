@@ -13,28 +13,18 @@ angular.module('passmanApp')
 
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
-					$location.path('/')
+				//	$location.path('/')
 				}
 			} else {
 				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
 					var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
+					_vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+					VaultService.setActiveVault(_vault);
 					VaultService.getVault(_vault).then(function (vault) {
 						vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
 						VaultService.setActiveVault(vault);
 						$scope.active_vault = vault;
 						$scope.$parent.selectedVault = true;
-						$scope.vault_settings.pwSettings = VaultService.getVaultSetting('pwSettings',
-							{
-								'length': 12,
-								'useUppercase': true,
-								'useLowercase': true,
-								'useDigits': true,
-								'useSpecialChars': true,
-								'minimumDigitCount': 3,
-								'avoidAmbiguousCharacters': false,
-								'requireEveryCharType': true,
-								'generateOnCreate': true
-							})
 					})
 				}
 			}
@@ -46,6 +36,7 @@ angular.module('passmanApp')
 
 			var getRevisions = function () {
 				CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
+					console.log(revisions)
 					$scope.revisions = revisions;
 				})
 			};
@@ -86,6 +77,7 @@ angular.module('passmanApp')
 			$scope.restoreRevision = function (revision) {
 				var _revision = angular.copy(revision);
 				var _credential = _revision.credential_data;
+				//@TODO make sure the shared key doesn't get restored
 				_credential.revision_created =  $filter('date')(_revision.created * 1000 , "dd-MM-yyyy @ HH:mm:ss");
 				CredentialService.updateCredential(_credential).then(function (result) {
 					SettingsService.setSetting('revision_credential', null);
