@@ -70,35 +70,34 @@ class ShareController extends ApiController {
 		$this->notificationService = $notificationService;
 	}
 
-    /**
-     * @param $item_id
-     * @param $item_guid
-     * @param $permissions
-     * @param $expire_timestamp
-     * @NoAdminRequired
-     */
-    public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
+	/**
+	 * @param $item_id
+	 * @param $item_guid
+	 * @param $permissions
+	 * @param $expire_timestamp
+	 * @NoAdminRequired
+	 */
+	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
 
-    	try{
+		try {
 			$acl = $this->shareService->getACL(null, $item_guid);
-		} catch (DoesNotExistException $exception){
+		} catch (DoesNotExistException $exception) {
 			$acl = new SharingACL();
 		}
 
 
-
-        $acl->setItemId($item_id);
-        $acl->setItemGuid($item_guid);
-        $acl->setPermissions($permissions);
-        $acl->setExpire($expire_timestamp);
-        $acl->setExpireViews($expire_views);
-		if(!$acl->getId()){
+		$acl->setItemId($item_id);
+		$acl->setItemGuid($item_guid);
+		$acl->setPermissions($permissions);
+		$acl->setExpire($expire_timestamp);
+		$acl->setExpireViews($expire_views);
+		if (!$acl->getId()) {
 			$this->shareService->createACLEntry($acl);
 		} else {
 			$this->shareService->updateCredentialACL($acl);
 		}
 
-    }
+	}
 
 	/**
 	 * @NoAdminRequired
@@ -118,26 +117,26 @@ class ShareController extends ApiController {
 			if (count($shareRequests) > 0) {
 				return new JSONResponse(array('error' => 'User got already pending requests'));
 			}
-		} catch (DoesNotExistException $exception){
+		} catch (DoesNotExistException $exception) {
 
 		}
 
 		$acl = null;
 		try {
 			$acl = $this->shareService->getCredentialAclForUser($first_vault['user_id'], $item_guid);
-		} catch (DoesNotExistException $exception){
+		} catch (DoesNotExistException $exception) {
 
 		}
 
-		if($acl){
-			return new JSONResponse(array('error'=> 'User got already this credential'));
+		if ($acl) {
+			return new JSONResponse(array('error' => 'User got already this credential'));
 		}
 
 		$result = $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions, $credential_owner);
 		if ($credential) {
 			$processed_users = array();
-			foreach ($result as $vault){
-				if(!in_array($vault->getTargetUserId(), $processed_users)){
+			foreach ($result as $vault) {
+				if (!in_array($vault->getTargetUserId(), $processed_users)) {
 					$target_user = $vault->getTargetUserId();
 					$notification = array(
 						'from_user' => ucfirst($this->userId->getDisplayName()),
@@ -180,13 +179,13 @@ class ShareController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function unshareCredential($item_guid){
+	public function unshareCredential($item_guid) {
 		$acl_list = $this->shareService->getCredentialAclList($item_guid);
 		$request_list = $this->shareService->getShareRequestsByGuid($item_guid);
-		foreach ($acl_list as $ACL){
+		foreach ($acl_list as $ACL) {
 			$this->shareService->deleteShareACL($ACL);
 		}
-		foreach($request_list as $request){
+		foreach ($request_list as $request) {
 			$this->shareService->deleteShareRequest($request);
 		}
 		return new JSONResponse(array('result' => true));
@@ -223,12 +222,11 @@ class ShareController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
-	    try {
-            $sr = $this->shareService->getRequestByGuid($item_guid, $target_vault_guid);
-        }
-        catch (DoesNotExistException $ex){
-            return new NotFoundResponse();
-        }
+		try {
+			$sr = $this->shareService->getRequestByGuid($item_guid, $target_vault_guid);
+		} catch (DoesNotExistException $ex) {
+			return new NotFoundResponse();
+		}
 
 		$manager = \OC::$server->getNotificationManager();
 		$notification = $manager->createNotification();
@@ -256,156 +254,151 @@ class ShareController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function getPendingRequests() {
-	    try {
-            $requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
-            $results = array();
-            foreach ($requests as $request) {
-                $result = $request->jsonSerialize();
-                $c = $this->credentialService->getCredentialLabelById($request->getItemId());
-                $result['credential_label'] = $c->getLabel();
-                array_push($results, $result);
-            }
-            return new JSONResponse($results);
-        }
-        catch (DoesNotExistException $ex){
-            return new NotFoundResponse();
-        }
+		try {
+			$requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
+			$results = array();
+			foreach ($requests as $request) {
+				$result = $request->jsonSerialize();
+				$c = $this->credentialService->getCredentialLabelById($request->getItemId());
+				$result['credential_label'] = $c->getLabel();
+				array_push($results, $result);
+			}
+			return new JSONResponse($results);
+		} catch (DoesNotExistException $ex) {
+			return new NotFoundResponse();
+		}
 	}
 
-    /**
-     * @param $item_guid
-     * @return JSONResponse
-     * @NoAdminRequired
-     */
-	public function getRevisions($item_guid){
-	    try {
-            return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
-        }
-        catch (DoesNotExistException $ex){
-            return new NotFoundResponse();
-        }
-    }
-
-    /**
-     * Obtains the list of credentials shared with this vault
-     * @NoAdminRequired
-     */
-	public function getVaultItems($vault_guid){
-	    try {
-            return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
-        }
-        catch (DoesNotExistException $ex){
-            return new NotFoundResponse();
-        }
-    }
-
-    /**
-     * @param $share_request_id
-     * @return JSONResponse
-     * @NoAdminRequired
-     */
-	public function deleteShareRequest($share_request_id){
-	    try{
-
-            $sr = $this->shareService->getShareRequestById($share_request_id);
-            $notification = array(
-                'from_user' => ucfirst($this->userId->getDisplayName()),
-                'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
-                'target_user' => $sr->getFromUserId(),
-                'req_id' => $sr->getId()
-            );
-            $this->notificationService->credentialDeclinedSharedNotification(
-                $notification
-            );
-
-
-            $manager = \OC::$server->getNotificationManager();
-            $notification = $manager->createNotification();
-            $notification->setApp('passman')
-                ->setObject('passman_share_request', $share_request_id)
-                ->setUser($this->userId->getUID());
-            $manager->markProcessed($notification);
-
-            $this->shareService->cleanItemRequestsForUser($sr);
-            return new JSONResponse(array('result'=> true));
-        }
-        catch (DoesNotExistException $ex){
-            return new NotFoundResponse();
-        }
+	/**
+	 * @param $item_guid
+	 * @return JSONResponse
+	 * @NoAdminRequired
+	 */
+	public function getRevisions($item_guid) {
+		try {
+			return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
+		} catch (DoesNotExistException $ex) {
+			return new NotFoundResponse();
+		}
 	}
 
-    /**
-     * @param $credential_guid
-     * @return JSONResponse
-     * @NoAdminRequired
-     * @NoCSRFRequired
-     * @PublicPage
-     */
+	/**
+	 * Obtains the list of credentials shared with this vault
+	 *
+	 * @NoAdminRequired
+	 */
+	public function getVaultItems($vault_guid) {
+		try {
+			return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
+		} catch (DoesNotExistException $ex) {
+			return new NotFoundResponse();
+		}
+	}
+
+	/**
+	 * @param $share_request_id
+	 * @return JSONResponse
+	 * @NoAdminRequired
+	 */
+	public function deleteShareRequest($share_request_id) {
+		try {
+
+			$sr = $this->shareService->getShareRequestById($share_request_id);
+			$notification = array(
+				'from_user' => ucfirst($this->userId->getDisplayName()),
+				'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
+				'target_user' => $sr->getFromUserId(),
+				'req_id' => $sr->getId()
+			);
+			$this->notificationService->credentialDeclinedSharedNotification(
+				$notification
+			);
+
+
+			$manager = \OC::$server->getNotificationManager();
+			$notification = $manager->createNotification();
+			$notification->setApp('passman')
+				->setObject('passman_share_request', $share_request_id)
+				->setUser($this->userId->getUID());
+			$manager->markProcessed($notification);
+
+			$this->shareService->cleanItemRequestsForUser($sr);
+			return new JSONResponse(array('result' => true));
+		} catch (DoesNotExistException $ex) {
+			return new NotFoundResponse();
+		}
+	}
+
+	/**
+	 * @param $credential_guid
+	 * @return JSONResponse
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 * @PublicPage
+	 */
 	public function getPublicCredentialData($credential_guid) {
 
 		//@TODO Check expire date
 		$acl = $this->shareService->getACL(null, $credential_guid);
 		$views = $acl->getExpireViews();
-		if($views === 0){
+		if ($views === 0) {
 			return new NotFoundResponse();
-		} else if($views != -1) {
+		} else if ($views != -1) {
 			$views--;
 			$acl->setExpireViews($views);
 			$this->shareService->updateCredentialACL($acl);
 		}
 
-		if($acl->getExpire() > 0 && time() > $acl->getExpire()){
+		if ($acl->getExpire() > 0 && time() > $acl->getExpire()) {
 			return new NotFoundResponse();
 		}
 
-	    try {
-            $credential = $this->shareService->getSharedItem(null, $credential_guid);
-            return new JSONResponse($credential);
-        }
-        catch (DoesNotExistException $ex){
-            return new NotFoundResponse();
-        }
-    }
+		try {
+			$credential = $this->shareService->getSharedItem(null, $credential_guid);
+			return new JSONResponse($credential);
+		} catch (DoesNotExistException $ex) {
+			return new NotFoundResponse();
+		}
+	}
 
-    public function getItemAcl($item_guid){
-        $acl = $this->shareService->getCredentialAclList($item_guid);
-        $pending = $this->shareService->getCredentialPendingAclList($item_guid);
-        try {
-            $credential = $this->credentialService->getCredentialByGUID($item_guid);
-            if ($credential->getUserId() == $this->userId->getUID()){
-                foreach ($pending as &$item){
-                    $item = $item->asACLJson();
-                }
-                $acl = array_merge($acl, $pending);
-                return new JSONResponse($acl);
-            }
-            else{
-                return new NotFoundResponse();
-            }
-        }
-        catch (DoesNotExistException $ex){
-            return new JSONResponse(array());
-        }
-    }
-
-    public function updateSharedCredentialACL($item_guid, $user_id, $permission){
-		try{
+	public function getItemAcl($item_guid) {
+		$acl = $this->shareService->getCredentialAclList($item_guid);
+		$pending = $this->shareService->getCredentialPendingAclList($item_guid);
+		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
-		} catch (DoesNotExistException $exception){
+			if ($credential->getUserId() == $this->userId->getUID()) {
+				foreach ($pending as &$item) {
+					$item = $item->asACLJson();
+				}
+				$acl = array_merge($acl, $pending);
+				return new JSONResponse($acl);
+			} else {
+				return new NotFoundResponse();
+			}
+		} catch (DoesNotExistException $ex) {
+			return new JSONResponse(array());
+		}
+	}
+
+	public function updateSharedCredentialACL($item_guid, $user_id, $permission) {
+		try {
+			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+		} catch (DoesNotExistException $exception) {
 			return new NotFoundResponse();
 		}
-		if($this->userId->getUID() == $credential->getUserId()){
+		if ($this->userId->getUID() == $credential->getUserId()) {
 			$acl = null;
 			try {
 				$acl = $this->shareService->getACL($user_id, $item_guid);
 				$acl->setPermissions($permission);
 				return $this->shareService->updateCredentialACL($acl);
-			} catch (DoesNotExistException $exception){
+			} catch (DoesNotExistException $exception) {
 
 			}
-			if($acl === null){
+			
+			if ($acl === null) {
 				$sr = $this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id);
-				foreach ($sr as $shareRequest){
+				foreach ($sr as $shareRequest) {
 					$shareRequest->setPermissions($permission);
 					$this->shareService->updateCredentialShareRequest($shareRequest);
 				}
