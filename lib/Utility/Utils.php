@@ -10,19 +10,28 @@
  */
 
 namespace OCA\Passman\Utility;
+
 class Utils {
-	public function getTime() {
-		return time();
+    /**
+     * Gets the unix epoch UTC timestamp
+     * @return int
+     */
+	public static function getTime() {
+		return (new \DateTime())->getTimestamp();
 	}
 	/**
-	 * @return int the current unix time in miliseconds
+	 * @return int the current unix time in milliseconds
 	 */
-	public function getMicroTime() {
+	public static function getMicroTime() {
 		list($millisecs, $secs) = explode(" ", microtime());
 		return $secs . substr($millisecs, 2, 6);
 	}
 
-	public function GUID() {
+    /**
+     * Generates a Globally Unique ID
+     * @return string
+     */
+	public static function GUID() {
 		if (function_exists('com_create_guid') === true)
 		{
 			return trim(com_create_guid(), '{}');
