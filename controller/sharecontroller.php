@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Files_External\NotFoundException;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\Vault;
@@ -112,9 +113,24 @@ class ShareController extends ApiController {
 		$credential_owner = $credential->getUserId();
 
 		$first_vault = $vaults[0];
-		$shareRequests = $this->shareService->getPendingShareRequests($item_guid, $first_vault['user_id']);
-		if(count($shareRequests) > 0){
-			return new JSONResponse(array('error'=> 'User got already pending requests'));
+		try {
+			$shareRequests = $this->shareService->getPendingShareRequests($item_guid, $first_vault['user_id']);
+			if (count($shareRequests) > 0) {
+				return new JSONResponse(array('error' => 'User got already pending requests'));
+			}
+		} catch (DoesNotExistException $exception){
+
+		}
+
+		$acl = null;
+		try {
+			$acl = $this->shareService->getCredentialAclForUser($first_vault['user_id'], $item_guid);
+		} catch (DoesNotExistException $exception){
+
+		}
+
+		if($acl){
+			return new JSONResponse(array('error'=> 'User got already this credential'));
 		}
 
 		$result = $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions, $credential_owner);
@@ -379,9 +395,21 @@ class ShareController extends ApiController {
 			return new NotFoundResponse();
 		}
 		if($this->userId->getUID() == $credential->getUserId()){
-			$acl = $this->shareService->getACL($user_id, $item_guid);
-			$acl->setPermissions($permission);
-			$this->shareService->updateCredentialACL($acl);
+			$acl = null;
+			try {
+				$acl = $this->shareService->getACL($user_id, $item_guid);
+				$acl->setPermissions($permission);
+				return $this->shareService->updateCredentialACL($acl);
+			} catch (DoesNotExistException $exception){
+
+			}
+			if($acl === null){
+				$sr = $this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id);
+				foreach ($sr as $shareRequest){
+					$shareRequest->setPermissions($permission);
+					$this->shareService->updateCredentialShareRequest($shareRequest);
+				}
+			}
 
 		}
 	}

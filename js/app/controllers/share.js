@@ -94,43 +94,54 @@ angular.module('passmanApp')
 				}
 			};
 
-
-			ShareService.getSharedCredentialACL($scope.storedCredential).then(function (aclList) {
-
-				var enc_key = ($scope.storedCredential.shared_key) ? EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key)) : false;
-
-				for(var i = 0; i < aclList.length; i++){
-					var acl = aclList[i];
-					if(acl.user_id === null){
-						$scope.share_settings.linkSharing ={
-							enabled: true,
-							settings: {
-								expire_time: new Date(acl.expire * 1000),
-								expire_views: acl.expire_views,
-								acl: new SharingACL(acl.permissions)
+			var getAcl = function() {
+				ShareService.getSharedCredentialACL($scope.storedCredential).then(function (aclList) {
+					var _list = []
+					var enc_key = ($scope.storedCredential.shared_key) ? EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key)) : false;
+					for (var i = 0; i < aclList.length; i++) {
+						var acl = aclList[i];
+						if (acl.user_id === null) {
+							$scope.share_settings.linkSharing = {
+								enabled: true,
+								settings: {
+									expire_time: new Date(acl.expire * 1000),
+									expire_views: acl.expire_views,
+									acl: new SharingACL(acl.permissions)
+								}
+							};
+							if (enc_key) {
+								var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key)
+								$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
 							}
-						};
-						if(enc_key) {
-							var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key)
-							$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+						} else {
+							var obj = {
+								userId: acl.user_id,
+								displayName: acl.user_id,
+								type: 'user',
+								acl: new SharingACL(acl.permissions),
+								acl_id: acl.acl_id,
+								pending: acl.pending,
+								credential_guid: acl.item_guid,
+								created: acl.created
+							};
+
+							_list.push(obj);
 						}
-					} else {
-						var obj = {
-							userId: acl.user_id,
-							displayName: acl.user_id,
-							type: 'user',
-							acl: new SharingACL(acl.permissions),
-							acl_id: acl.acl_id
-						};
 
-						$scope.share_settings.credentialSharedWithUserAndGroup.push(obj);
 					}
-
-				}
-			});
-
+					$scope.share_settings.credentialSharedWithUserAndGroup = _list;
+				});
+			};
+			getAcl();
 			var acl = new SharingACL(0);
 
+
+			$scope.$watch('share_settings.upload_progress.done', function () {
+				console.log();
+				if($scope.share_settings.upload_progress.done == $scope.share_settings.upload_progress.total){
+					getAcl()
+				}
+			});
 
 			$scope.inputSharedWith = [];
 			$scope.selectedAccessLevel = '1';
@@ -156,7 +167,9 @@ angular.module('passmanApp')
 							userId: shareWith[i].uid,
 							displayName: shareWith[i].text,
 							type: shareWith[i].type,
-							acl: angular.copy($scope.default_permissions)
+							acl: angular.copy($scope.default_permissions),
+							pending: true,
+							credential_guid: $scope.selectedCredential.guid
 						};
 						if ($scope.share_settings.credentialSharedWithUserAndGroup.indexOf(obj) === -1) {
 							$scope.share_settings.credentialSharedWithUserAndGroup.push(obj)
@@ -240,13 +253,17 @@ angular.module('passmanApp')
 					for (var i = 0; i < list.length; i++) {
 						var iterator = i;
 						var target_user = list[i];
-						if(target_user.hasOwnProperty('acl_id')){
+						console.log(target_user)
+						if(target_user.hasOwnProperty('created')){
+							console.log('Updating permissions')
+
 							var acl = {
 								user_id: target_user.userId,
 								permission: target_user.acl.getAccessLevel()
 							};
 							ShareService.updateCredentialAcl($scope.storedCredential, acl);
 						} else {
+							console.log('Creating new share')
 							$scope.applyShareToUser(list[iterator], enc_key);
 						}
 					}

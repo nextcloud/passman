@@ -257,7 +257,14 @@ class ShareService {
 		return $this->shareRequest->updateShareRequest($shareRequest);
 	}
 
-	public function getPendingShareRequests($item_guid, $user_id){
+
+	/**
+	 * Get pending share requests by guid and uid
+	 *
+	 * @param  ShareRequest $request
+	 * @return \OCA\Passman\Db\ShareRequest[]
+	 */
+	public function getPendingShareRequestsForCredential($item_guid, $user_id){
 		return $this->shareRequest->getPendingShareRequests($item_guid, $user_id);
 	}
 }
