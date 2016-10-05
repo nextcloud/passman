@@ -13,6 +13,7 @@ namespace OCA\Passman\Controller;
 
 use OCA\Files_External\NotFoundException;
 use OCA\Passman\Db\SharingACL;
+use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
@@ -24,6 +25,7 @@ use OCA\Passman\Activity;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialRevisionService;
 use OCA\Passman\Service\ShareService;
+use OCP\IUser;
 
 class CredentialController extends ApiController {
 	private $userId;
@@ -34,7 +36,7 @@ class CredentialController extends ApiController {
 
 	public function __construct($AppName,
 								IRequest $request,
-								$UserId,
+								IUser $UserId,
 								CredentialService $credentialService,
 								ActivityService $activityService,
 								CredentialRevisionService $credentialRevisionService,
@@ -244,8 +246,28 @@ class CredentialController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function getRevision($credential_id) {
-		$result = $this->credentialRevisionService->getRevisions($credential_id, $this->userId);
+	public function getRevision($credential_guid) {
+	    try {
+            $credential = $this->credentialService->getCredentialByGUID($credential_guid);
+        }
+        catch (DoesNotExistException $ex){
+            return new NotFoundJSONResponse();
+        }
+
+        // If the request was made by the owner of the credential
+        if ($this->userId->getUID() == $credential->getUserId()) {
+            $result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);
+        }
+        else {
+            $acl = $this->sharingService->getACL($this->userId->getUID(), $credential_guid);
+            if ($acl->hasPermission(SharingACL::HISTORY)){
+                $result = $this->credentialRevisionService->getRevisions($credential->getId());
+            }
+            else {
+                return new NotFoundJSONResponse();
+            }
+        }
+
 		return new JSONResponse($result);
 	}
 

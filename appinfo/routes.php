@@ -39,7 +39,7 @@ return [
 		['name' => 'credential#deleteCredential', 'url' => '/api/v2/credentials/{credential_id}', 'verb' => 'DELETE'],
 
 		//Revisions
-		['name' => 'credential#getRevision', 'url' => '/api/v2/credentials/{credential_id}/revision', 'verb' => 'GET'],
+		['name' => 'credential#getRevision', 'url' => '/api/v2/credentials/{credential_guid}/revision', 'verb' => 'GET'],
 		['name' => 'credential#deleteRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'DELETE'],
 		['name' => 'credential#updateRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'PATCH'],
 
