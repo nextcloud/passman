@@ -180,7 +180,9 @@ angular.module('passmanApp')
 			$scope.unshareCredential = function (credential) {
 				ShareService.unshareCredential(credential);
 				var _credential = angular.copy(credential);
+				var enc_key = EncryptService.decryptString(angular.copy(_credential.shared_key));
 				_credential.shared_key = null;
+				_credential.unshare_action = true;
 				CredentialService.updateCredential(_credential).then(function () {
 					NotificationService.showNotification('Credential unshared', 4000)
 				});
@@ -189,11 +191,22 @@ angular.module('passmanApp')
 					var _file = $scope.storedCredential.files[f];
 					FileService.getFile(_file).then(function (fileData) {
 						//Decrypt with old key
-						fileData.filename = EncryptService.decryptString(fileData.filename);
+						fileData.filename = EncryptService.decryptString(fileData.filename, enc_key);
 						fileData.file_data = EncryptService.decryptString(fileData.file_data);
 						FileService.updateFile(fileData, $scope.active_vault.vaultKey);
 					})
 				}
+
+				CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
+					for (var r = 0; r < revisions.length; r++) {
+						var _revision = revisions[r];
+						//Decrypt!
+						_revision.credential_data = ShareService.decryptSharedCredential(_revision.credential_data, enc_key);
+						_revision.credential_data = CredentialService.encryptCredential(_revision.credential_data);
+						console.log('Used key for encrypting history ', enc_key);
+						CredentialService.updateRevision(_revision);
+					}
+				});
 			};
 
 			/**
