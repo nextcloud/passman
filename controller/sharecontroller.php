@@ -110,6 +110,13 @@ class ShareController extends ApiController {
 		//@TODO add expire_views
 		$credential = $this->credentialService->getCredentialById($item_id, $this->userId->getUID());
 		$credential_owner = $credential->getUserId();
+
+		$first_vault = $vaults[0];
+		$shareRequests = $this->shareService->getPendingShareRequests($item_guid, $first_vault['user_id']);
+		if(count($shareRequests) > 0){
+			return new JSONResponse(array('error'=> 'User got already pending requests'));
+		}
+
 		$result = $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions, $credential_owner);
 		if ($credential) {
 			$processed_users = array();
@@ -130,8 +137,6 @@ class ShareController extends ApiController {
 					array_push($processed_users, $target_user);
 				}
 			}
-
-
 		}
 		return new JSONResponse($result);
 	}
@@ -377,6 +382,7 @@ class ShareController extends ApiController {
 			$acl = $this->shareService->getACL($user_id, $item_guid);
 			$acl->setPermissions($permission);
 			$this->shareService->updateCredentialACL($acl);
+
 		}
 	}
 }

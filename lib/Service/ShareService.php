@@ -252,4 +252,12 @@ class ShareService {
 	public function updateCredentialACL(SharingACL $sharingACL){
 		return $this->sharingACL->updateCredentialACL($sharingACL);
 	}
+
+	public function updateCredentialShareRequest(ShareRequest $shareRequest){
+		return $this->shareRequest->updateShareRequest($shareRequest);
+	}
+
+	public function getPendingShareRequests($item_guid, $user_id){
+		return $this->shareRequest->getPendingShareRequests($item_guid, $user_id);
+	}
 }

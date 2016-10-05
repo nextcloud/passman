@@ -77,4 +77,14 @@ class ShareRequestMapper extends Mapper {
 		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE 	item_guid = ?";
 		return $this->findEntities($q, [$item_guid]);
 	}
+
+	public function updateShareRequest(ShareRequest $shareRequest){
+		return $this->update($shareRequest);
+	}
+
+	public function getPendingShareRequests($item_guid, $user_id){
+		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE 	item_guid = ? and target_user_id= ?";
+		return $this->findEntities($q, [$item_guid, $user_id]);
+	}
+
 }
