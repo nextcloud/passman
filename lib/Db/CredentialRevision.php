@@ -55,7 +55,7 @@ class CredentialRevision extends Entity implements \JsonSerializable {
 			'revision_id' => $this->getId(),
 			'guid' => $this->getGuid(),
 			'created' => $this->getCreated(),
-			'credential_data' => unserialize(base64_decode($this->getCredentialData())),
+			'credential_data' => json_decode(base64_decode($this->getCredentialData())),
             'edited_by' => $this->getEditedBy(),
 		];
 	}

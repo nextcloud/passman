@@ -141,9 +141,9 @@ angular.module('passmanApp')
 			},
 			updateRevision:  function(revision){
 				var _revision = angular.copy(revision);
-				_revision.revision_data = window.btoa(_revision.revision_data);
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + id + '/revision/' + revision.id);
-				return $http.patch(queryUrl, revision).then(function (response) {
+				_revision.credential_data = window.btoa(JSON.stringify(_revision.credential_data));
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + revision.credential_data.credential_id + '/revision/' + revision.revision_id);
+				return $http.patch(queryUrl, _revision).then(function (response) {
 					if (response.data) {
 						return response.data;
 					} else {

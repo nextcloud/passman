@@ -61,7 +61,7 @@ class CredentialRevisionMapper extends Mapper {
 		$revision->setCreated($this->utils->getTime());
 		$revision->setCredentialId($credential_id);
 		$revision->setEditedBy($edited_by);
-		$revision->setCredentialData(base64_encode(serialize($credential)));
+		$revision->setCredentialData(base64_encode(json_encode($credential)));
 		return $this->insert($revision);
 	}
 

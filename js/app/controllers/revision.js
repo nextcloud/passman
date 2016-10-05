@@ -8,8 +8,8 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', 'NotificationService', '$filter',
-		function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope, NotificationService, $filter) {
+	.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', 'NotificationService', '$filter', 'ShareService','EncryptService',
+		function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope, NotificationService, $filter, ShareService, EncryptService) {
 
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -52,8 +52,24 @@ angular.module('passmanApp')
 			}
 
 			$scope.selectRevision = function (revision) {
+				console.log(revision, $scope.storedCredential);
+				 var key;
+
+				return;
 				$scope.selectedRevision = angular.copy(revision);
-				$scope.selectedRevision.credential_data = CredentialService.decryptCredential(angular.copy(revision.credential_data));
+
+				if(!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')){
+					key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+				}
+				if($scope.storedCredential.hasOwnProperty('acl')){
+					key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
+				}
+				if(key){
+					$scope.selectedRevision.credential_data = CredentialService.decryptCredential(angular.copy(revision.credential_data));
+				} else {
+					$scope.selectedRevision.credential_data = ShareService.decryptSharedCredential(angular.copy(revision.credential_data), key);
+				}
+
 				$rootScope.$emit('app_menu', true);
 			};
 

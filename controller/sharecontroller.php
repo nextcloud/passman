@@ -419,12 +419,14 @@ class ShareController extends ApiController {
 	 * @param $credential_guid
 	 * @param $file_guid
 	 * @NoAdminRequired
+	 * @return JSONResponse
+	 * @return NotFoundResponse
 	 */
 	public function getFile($item_guid, $file_guid){
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
 		} catch (DoesNotExistException $e){
-			return new JSONResponse(array());
+			return new NotFoundResponse();
 		}
 
 		$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());

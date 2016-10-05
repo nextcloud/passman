@@ -9,7 +9,7 @@
  * This file is part of passman, licensed under AGPLv3
  */
 angular.module('passmanApp')
-	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL','EncryptService', 'FileService',
+	.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL', 'EncryptService', 'FileService',
 		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService, FileService) {
 			$scope.active_vault = VaultService.getActiveVault();
 
@@ -49,7 +49,7 @@ angular.module('passmanApp')
 			}
 			var storedCredential = SettingsService.getSetting('share_credential');
 
-			if(!storedCredential) {
+			if (!storedCredential) {
 				$location.path('/vault/' + $routeParams.vault_id);
 			} else {
 				$scope.storedCredential = CredentialService.decryptCredential(angular.copy(storedCredential));
@@ -94,7 +94,7 @@ angular.module('passmanApp')
 				}
 			};
 
-			var getAcl = function() {
+			var getAcl = function () {
 				ShareService.getSharedCredentialACL($scope.storedCredential).then(function (aclList) {
 					var _list = []
 					var enc_key = ($scope.storedCredential.shared_key) ? EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key)) : false;
@@ -138,7 +138,7 @@ angular.module('passmanApp')
 
 			$scope.$watch('share_settings.upload_progress.done', function () {
 				console.log();
-				if($scope.share_settings.upload_progress.done == $scope.share_settings.upload_progress.total){
+				if ($scope.share_settings.upload_progress.done == $scope.share_settings.upload_progress.total) {
 					getAcl()
 				}
 			});
@@ -150,11 +150,11 @@ angular.module('passmanApp')
 				return ShareService.search($query)
 			};
 
-			$scope.hasPermission = function(acl, permission){
+			$scope.hasPermission = function (acl, permission) {
 				return acl.hasPermission(permission);
 			};
 
-			$scope.setPermission = function(acl, permission){
+			$scope.setPermission = function (acl, permission) {
 				acl.togglePermission(permission);
 			};
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {
@@ -185,8 +185,8 @@ angular.module('passmanApp')
 					NotificationService.showNotification('Credential unshared', 4000)
 				});
 
-				for(var f = 0; f <  $scope.storedCredential.files.length; f++){
-					var _file =  $scope.storedCredential.files[f];
+				for (var f = 0; f < $scope.storedCredential.files.length; f++) {
+					var _file = $scope.storedCredential.files[f];
 					FileService.getFile(_file).then(function (fileData) {
 						//Decrypt with old key
 						fileData.filename = EncryptService.decryptString(fileData.filename);
@@ -220,7 +220,7 @@ angular.module('passmanApp')
 								user: data[0].user_id
 							});
 							user.vaults = result;
-							if(!user.hasOwnProperty('acl_id')) {
+							if (!user.hasOwnProperty('acl_id')) {
 								$scope.uploadChanges(user);
 							}
 							$scope.$digest();
@@ -238,11 +238,11 @@ angular.module('passmanApp')
 				$scope.share_settings.upload_progress.done = 0;
 				$scope.share_settings.upload_progress.total = 0;
 				//Credential is already shared
-				if($scope.storedCredential.shared_key && $scope.storedCredential.shared_key != '' && $scope.storedCredential.shared_key != null){
+				if ($scope.storedCredential.shared_key && $scope.storedCredential.shared_key != '' && $scope.storedCredential.shared_key != null) {
 					console.log('Shared key found');
 					var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
-					if($scope.share_settings.linkSharing.enabled){
-						var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
+					if ($scope.share_settings.linkSharing.enabled) {
+						var expire_time = new Date(angular.copy($scope.share_settings.linkSharing.settings.expire_time)).getTime() / 1000;
 						var shareObj = {
 							item_id: $scope.storedCredential.credential_id,
 							item_guid: $scope.storedCredential.guid,
@@ -251,7 +251,7 @@ angular.module('passmanApp')
 							expire_views: $scope.share_settings.linkSharing.settings.expire_views
 						};
 						ShareService.createPublicSharedCredential(shareObj).then(function () {
-							var hash = window.btoa($scope.storedCredential.guid + '<::>'+ enc_key)
+							var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key)
 							$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
 						})
 					}
@@ -261,7 +261,7 @@ angular.module('passmanApp')
 					for (var i = 0; i < list.length; i++) {
 						var iterator = i;
 						var target_user = list[i];
-						if(target_user.hasOwnProperty('created')){
+						if (target_user.hasOwnProperty('created')) {
 							console.log('Updating permissions')
 
 							var acl = {
@@ -279,7 +279,7 @@ angular.module('passmanApp')
 
 					ShareService.generateSharedKey(20).then(function (key) {
 						var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
-						CredentialService.updateCredential(encryptedSharedCredential, true).then(function(sharedCredential){
+						CredentialService.updateCredential(encryptedSharedCredential, true).then(function (sharedCredential) {
 							$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
 						});
 
@@ -289,8 +289,8 @@ angular.module('passmanApp')
 						// Then decrypt the data obtained with var EncryptService.decryptString(result.file_data);
 						// To update a file you can use the FileService.updateFile
 
-						for(var f = 0; f <  $scope.storedCredential.files.length; f++){
-							var _file =  $scope.storedCredential.files[f];
+						for (var f = 0; f < $scope.storedCredential.files.length; f++) {
+							var _file = $scope.storedCredential.files[f];
 							FileService.getFile(_file).then(function (fileData) {
 								//Decrypt with old key
 								fileData.filename = EncryptService.decryptString(fileData.filename);
@@ -299,6 +299,16 @@ angular.module('passmanApp')
 							})
 						}
 
+						CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
+							console.log(revisions);
+							for (var r = 0; r < revisions.length; r++) {
+								var _revision = revisions[r];
+								//Decrypt!
+								_revision.credential_data = CredentialService.decryptCredential(_revision.credential_data);
+								_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, key);
+								CredentialService.updateRevision(_revision);
+							}
+						});
 
 						//@TODO Update revisions with new key (async)
 						// With CredentialService.getRevisions we can get the revisions.
@@ -311,8 +321,8 @@ angular.module('passmanApp')
 							}
 						}
 
-						if($scope.share_settings.linkSharing.enabled){
-							var expire_time = new Date(angular.copy( $scope.share_settings.linkSharing.settings.expire_time)).getTime()/1000;
+						if ($scope.share_settings.linkSharing.enabled) {
+							var expire_time = new Date(angular.copy($scope.share_settings.linkSharing.settings.expire_time)).getTime() / 1000;
 							var shareObj = {
 								item_id: $scope.storedCredential.credential_id,
 								item_guid: $scope.storedCredential.guid,
@@ -320,8 +330,8 @@ angular.module('passmanApp')
 								expire_timestamp: expire_time,
 								expire_views: $scope.share_settings.linkSharing.settings.expire_views
 							};
-							ShareService.createPublicSharedCredential(shareObj).then(function(){
-								var hash = window.btoa($scope.storedCredential.guid + '<::>'+ key);
+							ShareService.createPublicSharedCredential(shareObj).then(function () {
+								var hash = window.btoa($scope.storedCredential.guid + '<::>' + key);
 								$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
 
 							});
@@ -332,14 +342,14 @@ angular.module('passmanApp')
 			};
 
 			$scope.uploadChanges = function (user) {
-				$scope.share_settings.upload_progress.total ++;
+				$scope.share_settings.upload_progress.total++;
 
 				user.accessLevel = angular.copy(user.acl.getAccessLevel());
 				ShareService.shareWithUser(storedCredential, user)
-				.then(function(data){
-					$scope.share_settings.upload_progress.done ++;
-					$scope.share_settings.upload_progress.percent = $scope.share_settings.upload_progress.done / $scope.share_settings.upload_progress.total * 100;
-				});
+					.then(function (data) {
+						$scope.share_settings.upload_progress.done++;
+						$scope.share_settings.upload_progress.percent = $scope.share_settings.upload_progress.done / $scope.share_settings.upload_progress.total * 100;
+					});
 			};
 
 			$scope.calculate_total_time = function () {

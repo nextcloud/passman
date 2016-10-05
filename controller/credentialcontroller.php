@@ -262,6 +262,12 @@ class CredentialController extends ApiController {
 	 */
 	public function updateRevision($credential_id, $revision_id, $credential_data){
 		$revision = null;
+		try {
+			$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+		} catch (DoesNotExistException $e) {
+			return new NotFoundResponse();
+		}
+
 		try{
 			$revision = $this->credentialRevisionService->getRevision($revision_id);
 		} catch(DoesNotExistException $exception){
@@ -269,6 +275,8 @@ class CredentialController extends ApiController {
 		}
 
 		$revision->setCredentialData($credential_data);
+
 		$this->credentialRevisionService->updateRevision($revision);
+		return new JSONResponse(array());
 	}
 }
