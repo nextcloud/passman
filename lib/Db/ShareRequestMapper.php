@@ -48,6 +48,12 @@ class ShareRequestMapper extends Mapper {
         return $this->findEntities($q, [$item_guid]);
     }
 
+    /**
+     * Deletes all pending requests for the given user to the given item
+     * @param $item_id          The item ID
+     * @param $target_user_id   The target user
+     * @return \PDOStatement    The result of running the db query
+     */
     public function cleanItemRequestsForUser($item_id, $target_user_id){
 		$q = "DELETE FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_id = ? AND target_user_id = ?";
 		$this->execute($q, [$item_id, $target_user_id]);
@@ -64,27 +70,65 @@ class ShareRequestMapper extends Mapper {
         return $this->findEntities($q, [$user_id]);
     }
 
+    /**
+     * Deletes the given share request
+     * @param ShareRequest $shareRequest    Request to delete
+     * @return ShareRequest                 The deleted request
+     */
     public function deleteShareRequest(ShareRequest $shareRequest){
-    	$this->delete($shareRequest);
+    	return $this->delete($shareRequest);
 	}
 
+    /**
+     * Gets a share request by it's unique incremental id
+     * @param $id
+     * @return ShareRequest
+     */
 	public function getShareRequestById($id){
 		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE id = ?";
 		return $this->findEntity($q, [$id]);
 	}
 
-	public function getShareRequestsByGuid($item_guid){
+    /**
+     * Gets all share requests by a given item GUID
+     * @param $item_guid
+     * @return ShareRequest[]
+     */
+	public function getShareRequestsByItemGuid($item_guid){
 		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE 	item_guid = ?";
 		return $this->findEntities($q, [$item_guid]);
 	}
 
+    /**
+     * Updates the given share request,
+     * @param ShareRequest $shareRequest
+     * @return ShareRequest
+     */
 	public function updateShareRequest(ShareRequest $shareRequest){
 		return $this->update($shareRequest);
 	}
 
+    /**
+     * Finds pending requests sent to the given user to the given item.
+     * @param $item_guid
+     * @param $user_id
+     * @return ShareRequest[]
+     */
 	public function getPendingShareRequests($item_guid, $user_id){
 		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE 	item_guid = ? and target_user_id= ?";
 		return $this->findEntities($q, [$item_guid, $user_id]);
 	}
+
+    /**
+     * Updates all pending requests with the given permissions
+     * @param $item_guid        The item for which to update the requests
+     * @param $user_id          The user for which to update the requests
+     * @param $permissions      The new permissions to apply
+     * @return \PDOStatement    The result of the operation
+     */
+	public function updatePendinRequestPermissions($item_guid, $user_id, $permissions){
+	    $q = "UPDATE *PREFIX*" . self::TABLE_NAME . " SET permissions = ? WHERE item_guid = ? AND target_user_id = ?";
+        return $this->execute($q, [$permissions, $item_guid, $user_id]);
+    }
 
 }
