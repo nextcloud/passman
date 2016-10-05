@@ -73,16 +73,7 @@ angular.module('passmanApp')
 					return response.data;
 				})
 			},
-
-
-			getSharedCredentialRevisions: function (credential) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/'+ credential.guid +'/revisions');
-				return $http.get(queryUrl).then(function (response) {
-					if (response.data) {
-						return response.data;
-					}
-				});
-			},
+			
 			createPublicSharedCredential: function (shareObj) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public');
 				return $http.post(queryUrl, shareObj).then(function (response) {

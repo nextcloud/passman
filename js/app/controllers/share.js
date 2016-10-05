@@ -291,6 +291,7 @@ angular.module('passmanApp')
 
 					ShareService.generateSharedKey(20).then(function (key) {
 						var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
+						encryptedSharedCredential.set_share_key = true;
 						CredentialService.updateCredential(encryptedSharedCredential, true).then(function (sharedCredential) {
 							$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
 						});
