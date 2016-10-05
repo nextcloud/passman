@@ -188,7 +188,6 @@ angular.module('passmanApp')
 				for(var f = 0; f <  $scope.storedCredential.files.length; f++){
 					var _file =  $scope.storedCredential.files[f];
 					FileService.getFile(_file).then(function (fileData) {
-						console.log(fileData);
 						//Decrypt with old key
 						fileData.filename = EncryptService.decryptString(fileData.filename);
 						fileData.file_data = EncryptService.decryptString(fileData.file_data);
