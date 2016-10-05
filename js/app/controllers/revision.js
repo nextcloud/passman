@@ -35,7 +35,7 @@ angular.module('passmanApp')
 			var storedCredential = SettingsService.getSetting('revision_credential');
 
 			var getRevisions = function () {
-				CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
+				CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
 					$scope.revisions = revisions;
 				})
 			};
