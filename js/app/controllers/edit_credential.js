@@ -211,6 +211,13 @@ angular.module('passmanApp')
 			};
 
 			$scope.saveCredential = function () {
+
+
+				if ($scope.new_custom_field.label && $scope.new_custom_field.value) {
+					$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
+				}
+
+
 				//@TODO  validation
 				//@TODO When credential is expired and has renew interval set, calc new expire time.
 				delete $scope.storedCredential.password_repeat;
