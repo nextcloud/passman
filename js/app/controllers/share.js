@@ -299,7 +299,7 @@ angular.module('passmanApp')
 							})
 						}
 
-						CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
+						CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
 							for (var r = 0; r < revisions.length; r++) {
 								var _revision = revisions[r];
 								//Decrypt!

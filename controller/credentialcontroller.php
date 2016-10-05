@@ -218,7 +218,9 @@ class CredentialController extends ApiController {
 					$link, $storedCredential->getUserId(), Activity::TYPE_ITEM_ACTION);
 			}
 		}
-
+		if($storedCredential->getSharedKey() === null){
+			$storedCredential->setSharedKey($shared_key);
+		}
 		$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);
 		$credential = $this->credentialService->updateCredential($credential);
 
