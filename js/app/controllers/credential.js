@@ -370,18 +370,22 @@ angular.module('passmanApp')
 					}
 
 					var file_data = EncryptService.decryptString(result.file_data, key);
-					var uriContent = FileService.dataURItoBlob(file_data, file.mimetype), a = document.createElement("a");
-					a.style = "display: none";
-					a.id = 'downloadLink';
-					a.href = uriContent;
-					a.download = escapeHTML(file.filename);
-					jQuery('.detailsView').append(a);
-					a.click();
-					window.URL.revokeObjectURL(uriContent);
-					jQuery('#downloadLink').remove();
+					download(file_data, escapeHTML(file.filename), file.mimetype)
+					//file.mimetype
+					//var uriContent = FileService.dataURItoBlob(file_data, file.mimetype), a = document.createElement("a");
+					// a.href = uriContent;
+					// a.download = escapeHTML(file.filename);
+					// var event = document.createEvent("MouseEvents");
+					// event.initMouseEvent(
+					// 	"click", true, false, window, 0, 0, 0, 0, 0
+					// 	, false, false, false, false, 0, null
+					// );
+					// window.URL.revokeObjectURL(uriContent);
+					// a.dispatchEvent(event);
+					// jQuery('#downloadLink').remove();
 					setTimeout(function () {
 						$scope.selectedCredential = credential;
-					}, 200)
+					}, 1000)
 				};
 
 				if (!credential.hasOwnProperty('acl')) {
