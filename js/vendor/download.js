@@ -101,7 +101,7 @@
 				anchor.className = "download-js-link";
 				anchor.innerHTML = "downloading...";
 				anchor.style.display = "none";
-				document.body.appendChild(anchor);
+				jQuery('.detailsView').append(anchor);
 				setTimeout(function() {
 					anchor.click();
 					document.body.removeChild(anchor);
