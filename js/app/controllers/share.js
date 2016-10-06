@@ -180,31 +180,21 @@ angular.module('passmanApp')
 			$scope.unshareCredential = function (credential) {
 				ShareService.unshareCredential(credential);
 				var _credential = angular.copy(credential);
-				var enc_key = EncryptService.decryptString(angular.copy(_credential.shared_key));
-				_credential.shared_key = null;
-				_credential.unshare_action = true;
-				CredentialService.updateCredential(_credential).then(function () {
-					NotificationService.showNotification('Credential unshared', 4000)
-				});
-
-				for (var f = 0; f < $scope.storedCredential.files.length; f++) {
-					var _file = $scope.storedCredential.files[f];
-					FileService.getFile(_file).then(function (fileData) {
-						//Decrypt with old key
-						fileData.filename = EncryptService.decryptString(fileData.filename, enc_key);
-						fileData.file_data = EncryptService.decryptString(fileData.file_data, enc_key);
-						FileService.updateFile(fileData, $scope.active_vault.vaultKey);
+				var old_key = EncryptService.decryptString(angular.copy(_credential.shared_key));
+				var new_key = VaultService.getActiveVault().vaultKey;
+				console.log(old_key, new_key);
+				console.log(_credential)
+				CredentialService.reencryptCredential(_credential.credential_id, old_key, new_key).progress(function(data){
+					console.log(data);
+				}).then(function(data){
+					console.log(data);
+					var _credential = data.cryptogram;
+					_credential.shared_key = null;
+					_credential.unshare_action = true;
+					console.log(_credential);
+					CredentialService.updateCredential(_credential, true).then(function () {
+						NotificationService.showNotification('Credential unshared', 4000)
 					})
-				}
-
-				CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
-					for (var r = 0; r < revisions.length; r++) {
-						var _revision = revisions[r];
-						_revision.credential_data = ShareService.decryptSharedCredential(_revision.credential_data, enc_key);
-						_revision.credential_data = CredentialService.encryptCredential(_revision.credential_data);
-						console.log('Used key for encrypting history ', enc_key);
-						CredentialService.updateRevision(_revision);
-					}
 				});
 			};
 
@@ -326,14 +316,19 @@ angular.module('passmanApp')
 						var encryptedSharedCredential = angular.copy($scope.storedCredential);
 						var old_key = VaultService.getActiveVault().vaultKey;
 						console.log(encryptedSharedCredential);
-						encryptedSharedCredential.set_share_key = true;
-						encryptedSharedCredential.shared_key = EncryptService.encryptString(key);
 
 						CredentialService.reencryptCredential(encryptedSharedCredential.credential_id, old_key, key).progress(function(data){
 							console.log(data);
 						}).then(function(data){
 							console.log(data);
-							console.error("FINAL CALLBACK");
+
+							var _credential = data.cryptogram;
+							_credential.set_share_key = true;
+							_credential.shared_key = EncryptService.encryptString(key);
+							console.log(_credential);
+							CredentialService.updateCredential(_credential, true).then(function () {
+								NotificationService.showNotification('Credential shared', 4000)
+							})
 						});
 
 						//@TODO Update revisions with new key (async)
@@ -362,7 +357,7 @@ angular.module('passmanApp')
 
 							});
 						}
-						NotificationService.showNotification('Credential shared', 4000)
+
 					})
 				}
 			};
