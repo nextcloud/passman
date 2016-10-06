@@ -183,19 +183,23 @@ angular.module('passmanApp')
 				var old_key = EncryptService.decryptString(angular.copy(_credential.shared_key));
 				var new_key = VaultService.getActiveVault().vaultKey;
 				console.log(old_key, new_key);
+				_credential.shared_key = null;
+				_credential.unshare_action = true;
 				console.log(_credential)
-				CredentialService.reencryptCredential(_credential.credential_id, old_key, new_key).progress(function(data){
-					console.log(data);
-				}).then(function(data){
-					console.log(data);
-					var _credential = data.cryptogram;
-					_credential.shared_key = null;
-					_credential.unshare_action = true;
-					console.log(_credential);
-					CredentialService.updateCredential(_credential, true).then(function () {
-						NotificationService.showNotification('Credential unshared', 4000)
-					})
-				});
+
+				_credential = CredentialService.encryptCredential(_credential, old_key)
+				CredentialService.updateCredential(_credential, true).then(function () {
+					NotificationService.showNotification('Credential unshared', 4000)
+					CredentialService.reencryptCredential(_credential.credential_id, old_key, new_key).progress(function(data){
+						console.log(data);
+					}).then(function(data){
+						console.log(data);
+						var _credential = data.cryptogram;
+
+						console.log(_credential);
+
+					});
+				})
 			};
 
 			/**
