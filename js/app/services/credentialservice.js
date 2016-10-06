@@ -251,7 +251,7 @@ angular.module('passmanApp')
 								}
 							}).bind(this));
 
-							if (!this.current + this.upload == this.total) {
+							if (this.current != (this.total / 2)) {
 								setTimeout(revision_workload.bind(this), 1);
 							}
 						};

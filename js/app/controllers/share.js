@@ -191,7 +191,9 @@ angular.module('passmanApp')
 					CredentialService.reencryptCredential(_credential.credential_id, old_key, new_key).progress(function(data){
 						console.log(data);
 					}).then(function(data){
-						console.error('This is still not called..')
+						console.warn(data);
+						//@TODO Implement action on reencryption finished
+						console.error('This is still NOW called..')
 					});
 				})
 			};
