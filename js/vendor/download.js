@@ -104,7 +104,7 @@
 				jQuery('.detailsView').append(anchor);
 				setTimeout(function() {
 					anchor.click();
-					document.body.removeChild(anchor);
+					jQuery('.download-js-link').remove();
 					if(winMode===true){setTimeout(function(){ self.URL.revokeObjectURL(anchor.href);}, 250 );}
 				}, 66);
 				return true;
