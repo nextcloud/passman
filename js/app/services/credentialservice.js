@@ -249,28 +249,37 @@ angular.module('passmanApp')
 					this.new_password = angular.copy(new_password);
 					this.promises = 0;
 
-					(new C_Promise(promise_credential_update.bind(this))).progress(function(data){
-						this.call_progress(data);
+					var master_promise = this;
+
+					var password_data = function(){
+						this.old_password = master_promise.old_password;
+						this.new_password = master_promise.new_password;
+						this.plain_credential = master_promise.plain_credential;
+					};
+
+					(new C_Promise(promise_credential_update.bind(new password_data()))).progress(function(data){
+						master_promise.call_progress(data);
 					}).then(function(data){
-						this.plain_credential = data;
-						this.promises ++;
-						(new C_Promise(promise_files_update.bind(this))).progress(function(data){
-							this.call_progress(data);
+						master_promise.plain_credential = data;
+						master_promise.promises ++;
+						(new C_Promise(promise_files_update.bind(new password_data()))).progress(function(data){
+							master_promise.call_progress(data);
 						}).then(function(data){
-							this.promises --;
-							if (this.promises == 0){
-								this.call_then("All done");
+							master_promise.promises --;
+							if (master_promise.promises == 0){
+								master_promise.call_then("All done");
 							}
 						});
-						this.promises ++;
-						(new C_Promise(promise_revisions_update.bind(this))).progress(function(data){
-							this.call_progress(data);
+
+						master_promise.promises ++;
+						(new C_Promise(promise_revisions_update.bind(new password_data()))).progress(function(data){
+							master_promise.call_progress(data);
 						}).then(function(data){
-							this.promises --;
-							if (this.promises == 0){
-								this.call_then("All done");
+							master_promise.promises --;
+							if (master_promise.promises == 0){
+								master_promise.call_then("All done");
 							}
-						})
+						});
 					});
 				};
 

@@ -328,6 +328,7 @@ angular.module('passmanApp')
 							console.log(data);
 						}).then(function(data){
 							console.log(data);
+
 						});
 
 						//@TODO Update revisions with new key (async)
