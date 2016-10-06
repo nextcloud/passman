@@ -8,7 +8,7 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', function ($http, EncryptService, VaultService, FileService) {
+	.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', 'CredentialService' function ($http, EncryptService, VaultService, FileService, CredentialService) {
 		var credential = {
 			'credential_id': null,
 			'guid': null,
