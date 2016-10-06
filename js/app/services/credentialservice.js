@@ -212,6 +212,10 @@ angular.module('passmanApp')
 							}).bind(this));
 						}).bind(this));
 					}
+					if (this.parent.plain_credential.files.length == 0){
+						this.call_progress(new progress_datatype(0,0));
+						this.call_then("No files to update");
+					}
 				};
 
 				var promise_revisions_update = function(){
@@ -223,16 +227,21 @@ angular.module('passmanApp')
 						this.revisions = revisions;
 
 						var revision_workload = function(){
+							if (this.revisions.length == 0){
+								this.call_progress(new progress_datatype(0,0));
+								this.call_then("No history to update");
+								return;
+							}
 							var _revision = revisions[this.current];
 							//Decrypt!
 							_revision.credential_data = service.decryptCredential(_revision.credential_data, this.parent.old_password);
-							_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, this.parent.new_password);
+							_revision.credential_data = service.encryptCredential(_revision.credential_data, this.parent.new_password);
 							console.log('Used key for encrypting history ', this.new_password);
 							this.current ++;
 
 							this.call_progress(new progress_datatype(this.current + this.upload, this.total));
 
-							this.updateRevision(_revision).then((function(data){
+							service.updateRevision(_revision).then((function(data){
 								this.upload ++;
 								this.call_progress(new progress_datatype(this.upload + this.current, this.total));
 								if (this.current + this.upload == this.total){
@@ -240,8 +249,11 @@ angular.module('passmanApp')
 								}
 							}).bind(this));
 
-							setTimeout(revision_workload.bind(this), 1);
+							if (!this.current + this.upload == this.total) {
+								setTimeout(revision_workload.bind(this), 1);
+							}
 						};
+						setTimeout(revision_workload.bind(this), 1);
 					}).bind(this));
 				};
 
@@ -261,12 +273,14 @@ angular.module('passmanApp')
 					(new C_Promise(promise_credential_update, new password_data())).progress(function(data){
 						master_promise.call_progress(data);
 					}).then(function(data){
+						console.warn("End credential update");
 						master_promise.plain_credential = data;
 						master_promise.promises ++;
 
 						(new C_Promise(promise_files_update, new password_data())).progress(function(data){
 							master_promise.call_progress(data);
 						}).then(function(data){
+							console.warn("End files update");
 							master_promise.promises --;
 							if (master_promise.promises == 0){
 								master_promise.call_then("All done");
@@ -277,6 +291,7 @@ angular.module('passmanApp')
 						(new C_Promise(promise_revisions_update, new password_data())).progress(function(data){
 							master_promise.call_progress(data);
 						}).then(function(data){
+							console.warn("End revisions update");
 							master_promise.promises --;
 							if (master_promise.promises == 0){
 								master_promise.call_then("All done");
