@@ -182,10 +182,8 @@ angular.module('passmanApp')
 				var _credential = angular.copy(credential);
 				var old_key = EncryptService.decryptString(angular.copy(_credential.shared_key));
 				var new_key = VaultService.getActiveVault().vaultKey;
-				console.log(old_key, new_key);
 				_credential.shared_key = null;
 				_credential.unshare_action = true;
-				console.log(_credential)
 
 				_credential = CredentialService.encryptCredential(_credential, old_key)
 				CredentialService.updateCredential(_credential, true).then(function () {
@@ -193,11 +191,7 @@ angular.module('passmanApp')
 					CredentialService.reencryptCredential(_credential.credential_id, old_key, new_key).progress(function(data){
 						console.log(data);
 					}).then(function(data){
-						console.log(data);
-						var _credential = data.cryptogram;
-
-						console.log(_credential);
-
+						console.error('This is still not called..')
 					});
 				})
 			};
@@ -316,22 +310,21 @@ angular.module('passmanApp')
 						// 		CredentialService.updateRevision(_revision);
 						// 	}
 						// });
-						console.log($scope.storedCredential)
 						var encryptedSharedCredential = angular.copy($scope.storedCredential);
 						var old_key = VaultService.getActiveVault().vaultKey;
-						console.log(encryptedSharedCredential);
 
 						CredentialService.reencryptCredential(encryptedSharedCredential.credential_id, old_key, key).progress(function(data){
 							console.log(data);
 						}).then(function(data){
 							console.log(data);
-
+							//This is here is not called
 							var _credential = data.cryptogram;
 							_credential.set_share_key = true;
 							_credential.shared_key = EncryptService.encryptString(key);
 							console.log(_credential);
 							CredentialService.updateCredential(_credential, true).then(function () {
 								NotificationService.showNotification('Credential shared', 4000)
+								$scope.sharing_complete = true;
 							})
 						});
 
