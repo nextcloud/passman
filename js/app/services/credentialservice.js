@@ -182,7 +182,10 @@ angular.module('passmanApp')
 						// Save data
 						service.updateCredential(this.parent.new_credential_cryptogram, true).then((function(data){
 							this.call_progress(new progress_datatype(2, 2));
-							this.call_then(this.parent.plain_credential);
+							this.call_then({
+								plain_text: this.parent.plain_credential,
+								cryptogram: this.parent.new_credential_cryptogram
+							});
 						}).bind(this));
 					}).bind(this));
 				};
@@ -269,13 +272,16 @@ angular.module('passmanApp')
 						this.new_password = master_promise.new_password;
 						this.plain_credential = master_promise.plain_credential;
 					};
+					this.credential_data = {};
 
 					(new C_Promise(promise_credential_update, new password_data())).progress(function(data){
 						master_promise.call_progress(data);
 					}).then(function(data){
 						console.warn("End credential update");
-						master_promise.plain_credential = data;
+						master_promise.plain_credential = data.plain_text;
 						master_promise.promises ++;
+
+						this.credential_data = data;
 
 						(new C_Promise(promise_files_update, new password_data())).progress(function(data){
 							master_promise.call_progress(data);
@@ -283,7 +289,7 @@ angular.module('passmanApp')
 							console.warn("End files update");
 							master_promise.promises --;
 							if (master_promise.promises == 0){
-								master_promise.call_then("All done");
+								master_promise.call_then(master_promise.credential_data);
 							}
 						});
 
@@ -294,7 +300,7 @@ angular.module('passmanApp')
 							console.warn("End revisions update");
 							master_promise.promises --;
 							if (master_promise.promises == 0){
-								master_promise.call_then("All done");
+								master_promise.call_then(master_promise.credential_data);
 							}
 						});
 					});
