@@ -39,7 +39,6 @@ angular.module('passmanApp')
 					$scope.active_vault = vault;
 					$scope.active_vault.vaultKey = vaultKey;
 					VaultService.setActiveVault($scope.active_vault);
-					console.log(vault);
 					for (var i = 0; i < _credentials.length; i++) {
 						var _credential = _credentials[i];
 						try {
