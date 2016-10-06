@@ -8,7 +8,9 @@
  * @copyright Marcos Zuriarga 2016
  */
 
-function C_Promise(workload){
+function C_Promise(workload, context){
+    this.parent = context;
+
     this.update = null; this.finally = null; this.error_function = null;
     this.then = function(callback){
         this.finally = callback;

@@ -172,37 +172,38 @@ angular.module('passmanApp')
 				};
 
 				var promise_credential_update = function(){
+					console.log(this);
 					service.getCredential(credential_id).then((function (credential) {
-						this.plain_credential = service.decryptCredential(credential, this.old_password);
-						this.new_credential_cryptogram = service.encryptCredential(this.plain_credential, this.new_password);
+						this.parent.plain_credential = service.decryptCredential(credential, this.parent.old_password);
+						this.parent.new_credential_cryptogram = service.encryptCredential(this.parent.plain_credential, this.parent.new_password);
 
 						this.call_progress(new progress_datatype(1, 2));
 
 						// Save data
-						service.updateCredential(this.new_credential_cryptogram, true).then((function(){
+						service.updateCredential(this.parent.new_credential_cryptogram, true).then((function(){
 							this.call_progress(new progress_datatype(2, 2));
-							this.call_then(this.plain_credential);
+							this.call_then(this.parent.plain_credential);
 						}).bind(this));
 					}).bind(this));
 				};
 
 				var promise_files_update = function(){
 					// Add the double of the files so we take encryption phase and upload to the server into the math
-					this.total = this.plain_credential.files.length * 2;	 // Binded on credential finish upload
+					this.total = this.parent.plain_credential.files.length * 2;	 // Binded on credential finish upload
 					this.current = 0;
 
-					for (var i = 0; i < this.plain_credential.files.length; i++){
-						var _file = this.plain_credential.files[i];
+					for (var i = 0; i < this.parent.plain_credential.files.length; i++){
+						var _file = this.parent.plain_credential.files[i];
 						FileService.getFile(_file).then((function (fileData) {
 							//Decrypt with old key
-							fileData.filename = EncryptService.decryptString(fileData.filename, this.old_password);
-							fileData.file_data = EncryptService.decryptString(fileData.file_data, this.old_password);
+							fileData.filename = EncryptService.decryptString(fileData.filename, this.parent.old_password);
+							fileData.file_data = EncryptService.decryptString(fileData.file_data, this.parent.old_password);
 
 							this.current ++;
 
 							this.call_progress(new progress_datatype(this.current, this.total));
 
-							FileService.updateFile(fileData, this.new_password).then((function(data){
+							FileService.updateFile(fileData, this.parent.new_password).then((function(data){
 								this.current++;
 								this.call_progress(new progress_datatype(this.current, this.total));
 								if (this.current == this.total) {
@@ -214,7 +215,7 @@ angular.module('passmanApp')
 				};
 
 				var promise_revisions_update = function(){
-					CredentialService.getRevisions(this.plain_credential.guid).then((function (revisions) {
+					CredentialService.getRevisions(this.parent.plain_credential.guid).then((function (revisions) {
 						// Double, so we include the actual upload of the data back to the server
 						this.total = revisions.length * 2;
 						this.upload = 0;
@@ -224,8 +225,8 @@ angular.module('passmanApp')
 						var revision_workload = function(){
 							var _revision = revisions[this.current];
 							//Decrypt!
-							_revision.credential_data = service.decryptCredential(_revision.credential_data, this.old_password);
-							_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, this.new_password);
+							_revision.credential_data = service.decryptCredential(_revision.credential_data, this.parent.old_password);
+							_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, this.parent.new_password);
 							console.log('Used key for encrypting history ', this.new_password);
 							this.current ++;
 
@@ -257,12 +258,12 @@ angular.module('passmanApp')
 						this.plain_credential = master_promise.plain_credential;
 					};
 
-					(new C_Promise(promise_credential_update.bind(new password_data()))).progress(function(data){
+					(new C_Promise(promise_credential_update, new password_data())).progress(function(data){
 						master_promise.call_progress(data);
 					}).then(function(data){
 						master_promise.plain_credential = data;
 						master_promise.promises ++;
-						(new C_Promise(promise_files_update.bind(new password_data()))).progress(function(data){
+						(new C_Promise(promise_files_update, new password_data())).progress(function(data){
 							master_promise.call_progress(data);
 						}).then(function(data){
 							master_promise.promises --;
@@ -272,7 +273,7 @@ angular.module('passmanApp')
 						});
 
 						master_promise.promises ++;
-						(new C_Promise(promise_revisions_update.bind(new password_data()))).progress(function(data){
+						(new C_Promise(promise_revisions_update, new password_data())).progress(function(data){
 							master_promise.call_progress(data);
 						}).then(function(data){
 							master_promise.promises --;
