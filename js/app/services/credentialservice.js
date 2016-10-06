@@ -239,7 +239,6 @@ angular.module('passmanApp')
 							//Decrypt!
 							_revision.credential_data = service.decryptCredential(_revision.credential_data, this.parent.old_password);
 							_revision.credential_data = service.encryptCredential(_revision.credential_data, this.parent.new_password);
-							console.log('Used key for encrypting history ', this.new_password);
 							this.current ++;
 
 							this.call_progress(new progress_datatype(this.current + this.upload, this.total));
@@ -281,7 +280,7 @@ angular.module('passmanApp')
 						master_promise.plain_credential = data.plain_text;
 						master_promise.promises ++;
 
-						this.credential_data = data;
+						master_promise.credential_data = data;
 
 						(new C_Promise(promise_files_update, new password_data())).progress(function(data){
 							master_promise.call_progress(data);
