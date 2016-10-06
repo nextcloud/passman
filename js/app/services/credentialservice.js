@@ -162,6 +162,9 @@ angular.module('passmanApp')
 				});
 			},
 			reencryptCredential: function(credential_id, old_password, new_password){
+
+				var service = this;
+
 				var progress_datatype = function(current, total){
 					this.current = current;
 					this.total = total;
@@ -169,16 +172,14 @@ angular.module('passmanApp')
 				};
 
 				var promise_credential_update = function(){
-					console.warn(this);
-					this.getCredential(credential_id).then((function (credential) {
-						this.plain_credential = this.decryptCredential(credential, this.old_password);
-						this.new_credential_cryptogram = this.encryptCredential(this.plain_credential, this.new_password);
+					service.getCredential(credential_id).then((function (credential) {
+						this.plain_credential = service.decryptCredential(credential, this.old_password);
+						this.new_credential_cryptogram = service.encryptCredential(this.plain_credential, this.new_password);
 
-						console.warn(this);
 						this.call_progress(new progress_datatype(1, 2));
 
 						// Save data
-						this.updateCredential(this.temp_data.new_credential_cryptogram, true).then((function(){
+						service.updateCredential(this.new_credential_cryptogram, true).then((function(){
 							this.call_progress(new progress_datatype(2, 2));
 							this.call_then(this.plain_credential);
 						}).bind(this));
@@ -223,7 +224,7 @@ angular.module('passmanApp')
 						var revision_workload = function(){
 							var _revision = revisions[this.current];
 							//Decrypt!
-							_revision.credential_data = this.decryptCredential(_revision.credential_data, this.old_password);
+							_revision.credential_data = service.decryptCredential(_revision.credential_data, this.old_password);
 							_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, this.new_password);
 							console.log('Used key for encrypting history ', this.new_password);
 							this.current ++;
@@ -273,7 +274,7 @@ angular.module('passmanApp')
 					});
 				};
 
-				return new C_Promise(promise_workload.bind(this));
+				return new C_Promise(promise_workload);
 			}
 		}
 	}]);
