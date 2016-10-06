@@ -253,12 +253,12 @@ angular.module('passmanApp')
 						this.promises ++;
 						(new C_Promise(promise_files_update.bind(this))).progress(function(data){
 							this.call_progress(data);
-						}).then(function(data)){
+						}).then(function(data){
 							this.promises --;
 							if (this.promises == 0){
 								this.call_then("All done");
 							}
-						}
+						});
 						this.promises ++;
 						(new C_Promise(promise_revisions_update.bind(this))).progress(function(data){
 							this.call_progress(data);
