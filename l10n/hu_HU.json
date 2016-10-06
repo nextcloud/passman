@@ -1,0 +1,25 @@
+{ "translations": {
+    "Passwords" : "Jelszavak",
+    "A Passman item has been created, modified or deleted" : "Egy Jelszókezelő elem létrehozva, módosítva vagy törölve",
+    "A Passman item has expired" : "Egy Jelszókezelő elem lejárt",
+    "A Passman item has been shared" : "Egy Jelszókezelő elem megosztva",
+    "A Passman item has been renamed" : "Egy Jelszókezelő elem átnvezve",
+    "%1$s has been created by %2$s" : "%1$s létrehozva %2$s által",
+    "You created %1$s" : "Létrehoztad: %1$s",
+    "%1$s has been updated by %2$s" : "%1$s frissítve lett %2$s által",
+    "You updated %1$s" : "Frissítetted: %1$s",
+    "%3$s has renamed %1$s to %2$s" : "%3$s átnevezte ezt: %1$s erre: %2$s",
+    "You renamed %1$s to %2$s" : "Átnevezted ezt: %1$s erre: %2$s",
+    "%1$s has been deleted by %2$s" : "%1$s törölve lett %2$s által",
+    "You deleted %1$s" : "Törölted: %1$s",
+    "%1$s has been recovered by %2$s" : "%1$s visszaállítva %2$s által",
+    "You recovered %1$s" : "Visszaállítottad: %1$s",
+    "%1$s has been permanently deleted by %2$s" : "%1$s véglegesen törölve %2$s által",
+    "You permanently deleted %1$s" : "Végelegesen törölted: %1$s",
+    "The password of %1$s has expired, renew it now." : "%1$s jelszava lejárt, újítsd meg most.",
+    "%s has been shared" : "%s meg lett osztva",
+    "Your credential \"%s\" expired, click here to update the credential." : "Your credential \"%s\" expired, click here to update the credential.",
+    "Remind me later" : "Emlékeztess később",
+    "Ignore" : "Mellőz"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
