@@ -168,11 +168,13 @@ angular.module('passmanApp')
 					this.calculated = current / total * 100;
 				};
 
-				var promise_credential_update = (function(){
+				var promise_credential_update = function(){
+					console.warn(this);
 					this.getCredential(credential_id).then((function (credential) {
 						this.plain_credential = this.decryptCredential(credential, this.old_password);
-						this.new_credential_cryptogram = this.encryptCredential(this.temp_data.plain_credential, this.new_password);
+						this.new_credential_cryptogram = this.encryptCredential(this.plain_credential, this.new_password);
 
+						console.warn(this);
 						this.call_progress(new progress_datatype(1, 2));
 
 						// Save data
@@ -181,9 +183,9 @@ angular.module('passmanApp')
 							this.call_then(this.plain_credential);
 						}).bind(this));
 					}).bind(this));
-				}).bind(this);
+				};
 
-				var promise_files_update = (function(){
+				var promise_files_update = function(){
 					// Add the double of the files so we take encryption phase and upload to the server into the math
 					this.total = this.plain_credential.files.length * 2;	 // Binded on credential finish upload
 					this.current = 0;
@@ -208,9 +210,9 @@ angular.module('passmanApp')
 							}).bind(this));
 						}).bind(this));
 					}
-				}).bind(this);
+				};
 
-				var promise_revisions_update = (function(){
+				var promise_revisions_update = function(){
 					CredentialService.getRevisions(this.plain_credential.guid).then((function (revisions) {
 						// Double, so we include the actual upload of the data back to the server
 						this.total = revisions.length * 2;
@@ -239,9 +241,9 @@ angular.module('passmanApp')
 							setTimeout(revision_workload.bind(this), 1);
 						};
 					}).bind(this));
-				}).bind(this);
+				};
 
-				var promise_workload = (function(){
+				var promise_workload = function(){
 					this.old_password = angular.copy(old_password);
 					this.new_password = angular.copy(new_password);
 					this.promises = 0;
@@ -264,14 +266,14 @@ angular.module('passmanApp')
 							this.call_progress(data);
 						}).then(function(data){
 							this.promises --;
-							if (this.prmises == 0){
+							if (this.promises == 0){
 								this.call_then("All done");
 							}
 						})
 					});
-				}).bind(this);
+				};
 
-				return new C_Promise(promise_workload);
+				return new C_Promise(promise_workload.bind(this));
 			}
 		}
 	}]);

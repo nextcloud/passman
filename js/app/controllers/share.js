@@ -323,7 +323,8 @@ angular.module('passmanApp')
 						// 	}
 						// });
 						var old_key = VaultService.getActiveVault().vaultKey
-						CredentialService.reencryptCredential(encryptedSharedCredential.id, old_key, key).progress(function(data){
+						console.log(encryptedSharedCredential);
+						CredentialService.reencryptCredential(encryptedSharedCredential.credential_id, old_key, key).progress(function(data){
 							console.log(data);
 						}).then(function(data){
 							console.log(data);
