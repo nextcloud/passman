@@ -87,10 +87,8 @@ angular.module('passmanApp')
 							}
 						}
 						angular.merge($scope.active_vault.credentials, _credentials);
+						$scope.show_spinner = false;
 					});
-
-					//getSharedCredentials();
-					$scope.show_spinner = false;
 				});
 			};
 
