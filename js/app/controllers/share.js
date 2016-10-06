@@ -291,36 +291,42 @@ angular.module('passmanApp')
 
 					ShareService.generateSharedKey(20).then(function (key) {
 						var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
-						encryptedSharedCredential.set_share_key = true;
-						CredentialService.updateCredential(encryptedSharedCredential, true).then(function (sharedCredential) {
-							$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
-						});
-
-						//@TODO Update files with new key (async)
-						// Files are stored in $scope.storedCredential.files
-						// They need get downloaded with FileService.getFile
-						// Then decrypt the data obtained with var EncryptService.decryptString(result.file_data);
-						// To update a file you can use the FileService.updateFile
-
-						for (var f = 0; f < $scope.storedCredential.files.length; f++) {
-							var _file = $scope.storedCredential.files[f];
-							FileService.getFile(_file).then(function (fileData) {
-								//Decrypt with old key
-								fileData.filename = EncryptService.decryptString(fileData.filename);
-								fileData.file_data = EncryptService.decryptString(fileData.file_data);
-								FileService.updateFile(fileData, key);
-							})
-						}
-
-						CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
-							for (var r = 0; r < revisions.length; r++) {
-								var _revision = revisions[r];
-								//Decrypt!
-								_revision.credential_data = CredentialService.decryptCredential(_revision.credential_data);
-								_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, key);
-								console.log('Used key for encrypting history ', key);
-								CredentialService.updateRevision(_revision);
-							}
+						// encryptedSharedCredential.set_share_key = true;
+						// CredentialService.updateCredential(encryptedSharedCredential, true).then(function (sharedCredential) {
+						// 	$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
+						// });
+                        //
+						// //@TODO Update files with new key (async)
+						// // Files are stored in $scope.storedCredential.files
+						// // They need get downloaded with FileService.getFile
+						// // Then decrypt the data obtained with var EncryptService.decryptString(result.file_data);
+						// // To update a file you can use the FileService.updateFile
+                        //
+						// for (var f = 0; f < $scope.storedCredential.files.length; f++) {
+						// 	var _file = $scope.storedCredential.files[f];
+						// 	FileService.getFile(_file).then(function (fileData) {
+						// 		//Decrypt with old key
+						// 		fileData.filename = EncryptService.decryptString(fileData.filename);
+						// 		fileData.file_data = EncryptService.decryptString(fileData.file_data);
+						// 		FileService.updateFile(fileData, key);
+						// 	})
+						// }
+                        //
+						// CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
+						// 	for (var r = 0; r < revisions.length; r++) {
+						// 		var _revision = revisions[r];
+						// 		//Decrypt!
+						// 		_revision.credential_data = CredentialService.decryptCredential(_revision.credential_data);
+						// 		_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, key);
+						// 		console.log('Used key for encrypting history ', key);
+						// 		CredentialService.updateRevision(_revision);
+						// 	}
+						// });
+						var old_key = VaultService.getActiveVault().vaultKey
+						CredentialService.reencryptCredential(encryptedSharedCredential.id, old_key, key).progress(function(data){
+							console.log(data);
+						}).then(function(data){
+							console.log(data);
 						});
 
 						//@TODO Update revisions with new key (async)
