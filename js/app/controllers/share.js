@@ -333,7 +333,7 @@ angular.module('passmanApp')
 							console.log(data);
 						}).then(function(data){
 							console.log(data);
-
+							console.error("FINAL CALLBACK");
 						});
 
 						//@TODO Update revisions with new key (async)
