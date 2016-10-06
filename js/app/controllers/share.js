@@ -290,7 +290,7 @@ angular.module('passmanApp')
 				} else {
 
 					ShareService.generateSharedKey(20).then(function (key) {
-						var encryptedSharedCredential = ShareService.encryptSharedCredential($scope.storedCredential, key);
+
 						// encryptedSharedCredential.set_share_key = true;
 						// CredentialService.updateCredential(encryptedSharedCredential, true).then(function (sharedCredential) {
 						// 	$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
@@ -322,8 +322,13 @@ angular.module('passmanApp')
 						// 		CredentialService.updateRevision(_revision);
 						// 	}
 						// });
-						var old_key = VaultService.getActiveVault().vaultKey
+						console.log($scope.storedCredential)
+						var encryptedSharedCredential = angular.copy($scope.storedCredential);
+						var old_key = VaultService.getActiveVault().vaultKey;
 						console.log(encryptedSharedCredential);
+						encryptedSharedCredential.set_share_key = true;
+						encryptedSharedCredential.shared_key = EncryptService.encryptString(key);
+
 						CredentialService.reencryptCredential(encryptedSharedCredential.credential_id, old_key, key).progress(function(data){
 							console.log(data);
 						}).then(function(data){

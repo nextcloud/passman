@@ -8,7 +8,7 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', 'CredentialService', function ($http, EncryptService, VaultService, FileService, CredentialService) {
+	.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', function ($http, EncryptService, VaultService, FileService) {
 		var credential = {
 			'credential_id': null,
 			'guid': null,
@@ -215,7 +215,7 @@ angular.module('passmanApp')
 				};
 
 				var promise_revisions_update = function(){
-					CredentialService.getRevisions(this.parent.plain_credential.guid).then((function (revisions) {
+					service.getRevisions(this.parent.plain_credential.guid).then((function (revisions) {
 						// Double, so we include the actual upload of the data back to the server
 						this.total = revisions.length * 2;
 						this.upload = 0;
