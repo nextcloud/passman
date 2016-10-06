@@ -172,15 +172,15 @@ angular.module('passmanApp')
 				};
 
 				var promise_credential_update = function(){
-					console.log(this);
 					service.getCredential(credential_id).then((function (credential) {
 						this.parent.plain_credential = service.decryptCredential(credential, this.parent.old_password);
-						this.parent.new_credential_cryptogram = service.encryptCredential(this.parent.plain_credential, this.parent.new_password);
+						var tmp = angular.copy(this.parent.plain_credential);
+						this.parent.new_credential_cryptogram = service.encryptCredential(tmp, this.parent.new_password);
 
 						this.call_progress(new progress_datatype(1, 2));
 
 						// Save data
-						service.updateCredential(this.parent.new_credential_cryptogram, true).then((function(){
+						service.updateCredential(this.parent.new_credential_cryptogram, true).then((function(data){
 							this.call_progress(new progress_datatype(2, 2));
 							this.call_then(this.parent.plain_credential);
 						}).bind(this));
@@ -263,6 +263,7 @@ angular.module('passmanApp')
 					}).then(function(data){
 						master_promise.plain_credential = data;
 						master_promise.promises ++;
+
 						(new C_Promise(promise_files_update, new password_data())).progress(function(data){
 							master_promise.call_progress(data);
 						}).then(function(data){
