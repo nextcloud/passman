@@ -26,11 +26,11 @@ return [
 		//Vault
 		['name' => 'vault#listVaults', 'url' => '/api/v2/vaults', 'verb' => 'GET'],
 		['name' => 'vault#create', 'url' => '/api/v2/vaults', 'verb' => 'POST'],
-		['name' => 'vault#get', 'url' => '/api/v2/vaults/{vault_id}', 'verb' => 'GET'],
-		['name' => 'vault#update', 'url' => '/api/v2/vaults/{vault_id}', 'verb' => 'PATCH'],
-		['name' => 'vault#delete', 'url' => '/api/v2/vaults/{vault_id}', 'verb' => 'DELETE'],
+		['name' => 'vault#get', 'url' => '/api/v2/vaults/{vault_guid}', 'verb' => 'GET'],
+		['name' => 'vault#update', 'url' => '/api/v2/vaults/{vault_guid}', 'verb' => 'PATCH'],
+		['name' => 'vault#delete', 'url' => '/api/v2/vaults/{vault_guid}', 'verb' => 'DELETE'],
 		//@TODO make frontend use PATCH
-		['name' => 'vault#updateSharingKeys', 'url' => '/api/v2/vaults/{vault_id}/sharing-keys', 'verb' => 'POST'],
+		['name' => 'vault#updateSharingKeys', 'url' => '/api/v2/vaults/{vault_guid}/sharing-keys', 'verb' => 'POST'],
 
 		//Credential
 		['name' => 'credential#createCredential', 'url' => '/api/v2/credentials', 'verb' => 'POST'],

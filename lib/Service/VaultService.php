@@ -34,6 +34,11 @@ class VaultService {
 		return $vault;
 	}
 
+	public function getByGuid($vault_guid, $user_id) {
+		$vault = $this->vaultMapper->findByGuid($vault_guid, $user_id);
+		return $vault;
+	}
+
 	public function createVault($vault_name, $userId) {
 		return $this->vaultMapper->create($vault_name, $userId);
 	}

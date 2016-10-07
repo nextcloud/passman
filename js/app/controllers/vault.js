@@ -25,7 +25,7 @@ angular.module('passmanApp')
 						$scope.list_selected_vault = vault;
 						SettingsService.setSetting('defaultVault', vault);
 						if (SettingsService.getSetting('defaultVaultPass')) {
-							$location.path('/vault/' + vault.vault_id);
+							$location.path('/vault/' + vault.guid);
 						}
 						break;
 					}
@@ -91,7 +91,7 @@ angular.module('passmanApp')
 			_vault.vaultKey = angular.copy(vault_key);
 			delete _vault.credentials;
 			VaultService.setActiveVault(_vault);
-			$location.path('/vault/' + vault.vault_id);
+			$location.path('/vault/' + vault.guid);
 		};
 
 		$scope.vaultDecryptionKey = '';

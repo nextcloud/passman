@@ -25,14 +25,30 @@ class VaultMapper extends Mapper {
 	/**
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @return Vault
 	 */
 	public function find($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
 			'WHERE `id`= ? and `user_id` = ?';
 		return $this->findEntities($sql, [$vault_id, $user_id]);
 	}
+	/**
+	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
+	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @return Vault
+	 */
+	public function findByGuid($vault_guid, $user_id) {
+		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
+			'WHERE `guid`= ? and `user_id` = ?';
+		return $this->findEntity($sql, [$vault_guid, $user_id]);
+	}
 
 
+	/**
+	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
+	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @return Vault
+	 */
 	public function findVaultsFromUser($userId){
 		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
 			'WHERE `user_id` = ? ';
