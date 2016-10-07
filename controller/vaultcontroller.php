@@ -42,9 +42,9 @@ class VaultController extends ApiController {
 		$result = array();
 		$vaults = $this->vaultService->getByUser($this->userId);
 
-		$protected_credential_fields = array('getDescription','getEmail','getUsername','getPassword');
+		$protected_credential_fields = array('getDescription', 'getEmail', 'getUsername', 'getPassword');
 
-		foreach($vaults as $vault){
+		foreach ($vaults as $vault) {
 			$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 			$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
 			array_push($result, array(
@@ -75,33 +75,31 @@ class VaultController extends ApiController {
 	public function get($vault_guid) {
 		//$vault_guid
 		$vault = null;
-		try{
+		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		} catch(DoesNotExistException $e){
+		} catch (DoesNotExistException $e) {
 
 		}
 		$result = array();
-		if($vault){
+		if ($vault) {
 			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
-			if($vault) {
-				$result = array(
-					'vault_id' => $vault->getId(),
-					'guid' => $vault->getGuid(),
-					'name' => $vault->getName(),
-					'created' => $vault->getCreated(),
-					'private_sharing_key' => $vault->getPrivateSharingKey(),
-					'public_sharing_key' => $vault->getPublicSharingKey(),
-					'sharing_keys_generated' => $vault->getSharingKeysGenerated(),
-					'vault_settings' => $vault->getVaultSettings(),
-					'last_access' => $vault->getlastAccess()
-				);
-				$result['credentials'] = $credentials;
 
-				$this->vaultService->setLastAccess($vault->getId(), $this->userId);
-			} else {
-				$result = array();
-			}
+			$result = array(
+				'vault_id' => $vault->getId(),
+				'guid' => $vault->getGuid(),
+				'name' => $vault->getName(),
+				'created' => $vault->getCreated(),
+				'private_sharing_key' => $vault->getPrivateSharingKey(),
+				'public_sharing_key' => $vault->getPublicSharingKey(),
+				'sharing_keys_generated' => $vault->getSharingKeysGenerated(),
+				'vault_settings' => $vault->getVaultSettings(),
+				'last_access' => $vault->getlastAccess()
+			);
+			$result['credentials'] = $credentials;
+
+			$this->vaultService->setLastAccess($vault->getId(), $this->userId);
 		}
+
 
 		return new JSONResponse($result);
 	}
@@ -111,10 +109,10 @@ class VaultController extends ApiController {
 	 */
 	public function update($vault_guid, $name, $vault_settings) {
 		$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		if($name) {
+		if ($name) {
 			$vault->setName($name);
 		}
-		if($vault_settings) {
+		if ($vault_settings) {
 			$vault->setVaultSettings($vault_settings);
 		}
 		$this->vaultService->updateVault($vault);
@@ -125,9 +123,9 @@ class VaultController extends ApiController {
 	 */
 	public function updateSharingKeys($vault_guid, $private_sharing_key, $public_sharing_key) {
 		$vault = null;
-		try{
+		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		} catch(DoesNotExistException $e){
+		} catch (DoesNotExistException $e) {
 
 		}
 
