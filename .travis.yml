@@ -57,7 +57,7 @@ before_script:
 script:
     - grunt jshint
     - php build/phpunit.phar -c phpunit.xml
- 	- php build/phpunit.phar -c phpunit.integration.xml
+    - php build/phpunit.phar -c phpunit.integration.xml
 #after_failure:
 #    - cat ../../data/owncloud.log
 
