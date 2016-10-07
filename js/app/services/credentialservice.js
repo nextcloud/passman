@@ -161,7 +161,7 @@ angular.module('passmanApp')
 					}
 				});
 			},
-			reencryptCredential: function(credential_id, old_password, new_password){
+			reencryptCredential: function(credential_guid, old_password, new_password){
 
 				var service = this;
 
@@ -172,7 +172,7 @@ angular.module('passmanApp')
 				};
 
 				var promise_credential_update = function(){
-					service.getCredential(credential_id).then((function (credential) {
+					service.getCredential(credential_guid).then((function (credential) {
 						this.parent.plain_credential = service.decryptCredential(credential, this.parent.old_password);
 						var tmp = angular.copy(this.parent.plain_credential);
 						this.parent.new_credential_cryptogram = service.encryptCredential(tmp, this.parent.new_password);
