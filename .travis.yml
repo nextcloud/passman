@@ -43,8 +43,6 @@ before_script:
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e 'create database oc_autotest;'; fi
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"; fi
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"; fi
-    - cd owncloud
-    - mkdir data
     - cd apps/$APP_NAME/
     - npm install
 #    - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
@@ -52,7 +50,6 @@ before_script:
 #    - php -S localhost:8080 &
 
 script:
-    - cd apps/$APP_NAME/
     - grunt jshint
 
 after_failure:
