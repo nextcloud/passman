@@ -229,6 +229,8 @@ angular.module('passmanApp')
 						});
 				});
 			};
+
+
 			$scope.sharing_complete = true;
 			$scope.applyShare = function () {
 				$scope.sharing_complete = false;
@@ -253,7 +255,7 @@ angular.module('passmanApp')
 							expire_views: $scope.share_settings.linkSharing.settings.expire_views
 						};
 						ShareService.createPublicSharedCredential(shareObj).then(function () {
-							var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key)
+							var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key);
 							$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
 						})
 					}
