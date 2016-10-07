@@ -9,8 +9,8 @@
  */
 angular.module('passmanApp')
 	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval',
-		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval) {
+		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter',
+		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -86,6 +86,7 @@ angular.module('passmanApp')
 							}
 						}
 						angular.merge($scope.active_vault.credentials, _credentials);
+						$scope.filtered_credentials = angular.copy($scope.active_vault.credentials);
 						$scope.show_spinner = false;
 					});
 				});
@@ -283,6 +284,14 @@ angular.module('passmanApp')
 				fields: ['label', 'username', 'email', 'password', 'custom_fields']
 			};
 
+
+			$scope.filtered_credentials = [];
+			$scope.$watch('[selectedtags, filterOptions, delete_time]', function(){
+				var credentials = angular.copy($scope.active_vault.credentials);
+				var filtered_credentials = $filter('credentialSearch')(credentials,$scope.filterOptions);
+				filtered_credentials = $filter('tagFilter')(filtered_credentials,$scope.selectedtags);
+				$scope.filtered_credentials = filtered_credentials;
+			}, true);
 			$scope.selectedtags = [];
 			var to;
 			$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
