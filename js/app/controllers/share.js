@@ -297,37 +297,6 @@ angular.module('passmanApp')
 
 					ShareService.generateSharedKey(20).then(function (key) {
 
-						// encryptedSharedCredential.set_share_key = true;
-						// CredentialService.updateCredential(encryptedSharedCredential, true).then(function (sharedCredential) {
-						// 	$scope.storedCredential = ShareService.decryptSharedCredential(sharedCredential, key);
-						// });
-                        //
-						// //@TODO Update files with new key (async)
-						// // Files are stored in $scope.storedCredential.files
-						// // They need get downloaded with FileService.getFile
-						// // Then decrypt the data obtained with var EncryptService.decryptString(result.file_data);
-						// // To update a file you can use the FileService.updateFile
-                        //
-						// for (var f = 0; f < $scope.storedCredential.files.length; f++) {
-						// 	var _file = $scope.storedCredential.files[f];
-						// 	FileService.getFile(_file).then(function (fileData) {
-						// 		//Decrypt with old key
-						// 		fileData.filename = EncryptService.decryptString(fileData.filename);
-						// 		fileData.file_data = EncryptService.decryptString(fileData.file_data);
-						// 		FileService.updateFile(fileData, key);
-						// 	})
-						// }
-                        //
-						// CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
-						// 	for (var r = 0; r < revisions.length; r++) {
-						// 		var _revision = revisions[r];
-						// 		//Decrypt!
-						// 		_revision.credential_data = CredentialService.decryptCredential(_revision.credential_data);
-						// 		_revision.credential_data = ShareService.encryptSharedCredential(_revision.credential_data, key);
-						// 		console.log('Used key for encrypting history ', key);
-						// 		CredentialService.updateRevision(_revision);
-						// 	}
-						// });
 						var encryptedSharedCredential = angular.copy($scope.storedCredential);
 						var old_key = VaultService.getActiveVault().vaultKey;
 
@@ -345,10 +314,6 @@ angular.module('passmanApp')
 								$scope.sharing_complete = true;
 							})
 						});
-
-						//@TODO Update revisions with new key (async)
-						// With CredentialService.getRevisions we can get the revisions.
-						// Then we can update them using CredentialService.updateRevision
 
 						var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 						for (var i = 0; i < list.length; i++) {
