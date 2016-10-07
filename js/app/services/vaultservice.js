@@ -31,9 +31,9 @@ angular.module('passmanApp')
 			},
 			getVaultSetting: function(key, default_value){
 				if(!_activeVault.vault_settings){
-					return default_value
+					return default_value;
 				} else {
-					return (_activeVault.vault_settings[key] !== undefined) ? _activeVault.vault_settings[key] : default_value
+					return (_activeVault.vault_settings[key] !== undefined) ? _activeVault.vault_settings[key] : default_value;
 				}
 
 			},
@@ -61,7 +61,7 @@ angular.module('passmanApp')
 				return $http.get(queryUrl).then(function (response) {
 					if(response.data){
 						if(response.data.vault_settings){
-							response.data.vault_settings = JSON.parse(window.atob(response.data.vault_settings))
+							response.data.vault_settings = JSON.parse(window.atob(response.data.vault_settings));
 						} else {
 							response.data.vault_settings = {};
 						}
@@ -76,7 +76,7 @@ angular.module('passmanApp')
 				delete _vault.defaultVaultPass;
 				delete _vault.defaultVault;
 				delete _vault.vaultKey;
-				_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings))
+				_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings));
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.guid);
 				return $http.patch(queryUrl, _vault).then(function (response) {
 					if(response.data){
