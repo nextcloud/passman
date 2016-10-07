@@ -19,6 +19,9 @@
 		<span ng-click="addCredential()" class="button new">
 			<span >+</span></span>
 	</div>
+	<div class="title" ng-show="filtered_credentials.length > 0">
+		Showing {{filtered_credentials.length}} of {{active_vault.credentials.length - 1}} credentials
+	</div>
 	<div class="searchboxContainer">
 		<input type="text" ng-model="filterOptions.filterText" class="searchbox"
 			   placeholder="Search credential..." select-on-click>

@@ -160,11 +160,17 @@
     #app-content #app-content-wrapper #passman-controls {
       border-bottom: 1px solid #c9c9c9; }
     #app-content #app-content-wrapper .title {
-      width: calc(100% - 380px);
+      width: calc(100% - 400px);
       text-align: center;
       display: inline-block;
       font-weight: bold;
       margin-top: 10px; }
+      @media screen and (max-width: 575px) {
+        #app-content #app-content-wrapper .title {
+          display: none; } }
+      @media screen and (min-width: 769px) and (max-width: 820px) {
+        #app-content #app-content-wrapper .title {
+          display: none; } }
     #app-content #app-content-wrapper .actions.creatable {
       float: left;
       overflow: hidden; }
