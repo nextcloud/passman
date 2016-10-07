@@ -165,7 +165,8 @@ angular.module('passmanApp')
 
 				var service = this;
 
-				var progress_datatype = function(current, total){
+				var progress_datatype = function(current, total, process){
+					this.process = process;
 					this.current = current;
 					this.total = total;
 					this.calculated = current / total * 100;
@@ -177,11 +178,11 @@ angular.module('passmanApp')
 						var tmp = angular.copy(this.parent.plain_credential);
 						this.parent.new_credential_cryptogram = service.encryptCredential(tmp, this.parent.new_password);
 
-						this.call_progress(new progress_datatype(1, 2));
+						this.call_progress(new progress_datatype(1, 2, 'credential'));
 
 						// Save data
 						service.updateCredential(this.parent.new_credential_cryptogram, true).then((function(data){
-							this.call_progress(new progress_datatype(2, 2));
+							this.call_progress(new progress_datatype(2, 2, 'credential'));
 							this.call_then({
 								plain_text: this.parent.plain_credential,
 								cryptogram: this.parent.new_credential_cryptogram
@@ -204,11 +205,11 @@ angular.module('passmanApp')
 
 							this.current ++;
 
-							this.call_progress(new progress_datatype(this.current, this.total));
+							this.call_progress(new progress_datatype(this.current, this.total, 'files'));
 
 							FileService.updateFile(fileData, this.parent.new_password).then((function(data){
 								this.current++;
-								this.call_progress(new progress_datatype(this.current, this.total));
+								this.call_progress(new progress_datatype(this.current, this.total, 'files'));
 								if (this.current == this.total) {
 									this.call_then('All files has been updated');
 								}
@@ -216,7 +217,7 @@ angular.module('passmanApp')
 						}).bind(this));
 					}
 					if (this.parent.plain_credential.files.length == 0){
-						this.call_progress(new progress_datatype(0,0));
+						this.call_progress(new progress_datatype(0,0, 'files'));
 						this.call_then("No files to update");
 					}
 				};
@@ -231,7 +232,7 @@ angular.module('passmanApp')
 
 						var revision_workload = function(){
 							if (this.revisions.length == 0){
-								this.call_progress(new progress_datatype(0,0));
+								this.call_progress(new progress_datatype(0,0, 'revisions'));
 								this.call_then("No history to update");
 								return;
 							}
@@ -241,11 +242,11 @@ angular.module('passmanApp')
 							_revision.credential_data = service.encryptCredential(_revision.credential_data, this.parent.new_password);
 							this.current ++;
 
-							this.call_progress(new progress_datatype(this.current + this.upload, this.total));
+							this.call_progress(new progress_datatype(this.current + this.upload, this.total, 'revisions'));
 
 							service.updateRevision(_revision).then((function(data){
 								this.upload ++;
-								this.call_progress(new progress_datatype(this.upload + this.current, this.total));
+								this.call_progress(new progress_datatype(this.upload + this.current, this.total, 'revisions'));
 								if (this.current + this.upload == this.total){
 									this.call_then("History updated");
 								}
