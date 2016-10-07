@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
@@ -78,7 +79,7 @@ class VaultController extends ApiController {
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
 		} catch (DoesNotExistException $e) {
-
+            return new NotFoundJSONResponse();
 		}
 		$result = array();
 		if ($vault) {
