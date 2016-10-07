@@ -11,7 +11,7 @@
     border-bottom-width: 0;
     margin: 0;
     padding: 10px 10px 10px 10px;
-    color: #e0dddd;
+
     cursor: pointer;
     border-right: 1px solid #eee;
     -webkit-transition: background-color 250ms linear;
@@ -19,9 +19,21 @@
     -o-transition: background-color 250ms linear;
     -ms-transition: background-color 250ms linear;
     transition: background-color 250ms linear;
+    .indicator {
+      display: none;
+    }
   }
   li.active {
     color: #fff;
+    position: relative;
+    .indicator {
+      display: inline-block;
+      position: absolute;
+      height: 7px;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+    }
   }
 }
 

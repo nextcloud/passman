@@ -23,18 +23,21 @@ angular.module('passmanApp')
 			restrict: 'A',
 			scope:{
 				type: '=type',
-				color: '='
+				color: '=',
+				negative: '='
 			},
 			link: function (scope, el, attr, ctrl) {
 				var _color = $('#header').css('background-color');
-
+				var _bg = _color;
+				if(scope.negative){
+					_bg = invertColor(_bg)
+				}
 				if(!scope.type) {
-					$(el).css('background-color', _color);
+					$(el).css('background-color', _bg);
 				} else {
-					$(el).css(scope.type, _color);
+					$(el).css(scope.type, _bg);
 				}
 				if(scope.color){
-
 					$(el).css('color', invertColor(_color));
 				}
 			}

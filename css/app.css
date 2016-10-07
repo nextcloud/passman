@@ -33,7 +33,6 @@
     border-bottom-width: 0;
     margin: 0;
     padding: 10px 10px 10px 10px;
-    color: #e0dddd;
     cursor: pointer;
     border-right: 1px solid #eee;
     -webkit-transition: background-color 250ms linear;
@@ -41,8 +40,18 @@
     -o-transition: background-color 250ms linear;
     -ms-transition: background-color 250ms linear;
     transition: background-color 250ms linear; }
+    .tab_header li.tab .indicator {
+      display: none; }
   .tab_header li.active {
-    color: #fff; }
+    color: #fff;
+    position: relative; }
+    .tab_header li.active .indicator {
+      display: inline-block;
+      position: absolute;
+      height: 7px;
+      left: 0;
+      right: 0;
+      bottom: -1px; }
 
 .tab_container {
   border: 1px solid;
@@ -327,53 +336,55 @@
       @media all and (min-width: 78em) {
         #app-content #app-content-wrapper .grid-view .credential {
           width: 20%; } }
-    #app-content #app-content-wrapper .edit_credential label {
-      display: block; }
-    #app-content #app-content-wrapper .edit_credential input[type="text"], #app-content #app-content-wrapper .edit_credential input[type="password"] {
-      width: 100%; }
-    #app-content #app-content-wrapper .edit_credential .tags {
-      float: left; }
-      #app-content #app-content-wrapper .edit_credential .tags .tag {
-        background-color: rgba(240, 240, 240, 0.9);
-        padding: 4px;
-        font-size: 11px; }
-    #app-content #app-content-wrapper .edit_credential tags-input .tags {
-      width: 100%; }
-    #app-content #app-content-wrapper .edit_credential .credential_textarea {
-      width: 100%;
-      height: 100px; }
-    #app-content #app-content-wrapper .edit_credential .password_settings label {
-      overflow: hidden; }
-      #app-content #app-content-wrapper .edit_credential .password_settings label input[type="checkbox"] {
-        width: auto !important;
-        float: left; }
-      #app-content #app-content-wrapper .edit_credential .password_settings label .label {
-        float: left; }
-        #app-content #app-content-wrapper .edit_credential .password_settings label .label.sm {
-          font-size: 12px; }
-    #app-content #app-content-wrapper .edit_credential .custom_fields, #app-content #app-content-wrapper .edit_credential .files {
-      margin-top: 10px; }
-      #app-content #app-content-wrapper .edit_credential .custom_fields table, #app-content #app-content-wrapper .edit_credential .files table {
+    #app-content #app-content-wrapper .edit_credential {
+      padding-top: 10px; }
+      #app-content #app-content-wrapper .edit_credential label {
+        display: block; }
+      #app-content #app-content-wrapper .edit_credential input[type="text"], #app-content #app-content-wrapper .edit_credential input[type="password"] {
         width: 100%; }
-        #app-content #app-content-wrapper .edit_credential .custom_fields table thead th, #app-content #app-content-wrapper .edit_credential .files table thead th {
-          color: #fff; }
-        #app-content #app-content-wrapper .edit_credential .custom_fields table thead th.field_actions, #app-content #app-content-wrapper .edit_credential .files table thead th.field_actions {
-          width: 15%; }
-        #app-content #app-content-wrapper .edit_credential .custom_fields table tr:hover, #app-content #app-content-wrapper .edit_credential .files table tr:hover {
-          background-color: transparent; }
-        #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions {
-          font-size: 13px;
-          width: 15%; }
-          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions i, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions i {
-            cursor: pointer; }
-        #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .custom_fields table tr th, #app-content #app-content-wrapper .edit_credential .files table tr td, #app-content #app-content-wrapper .edit_credential .files table tr th {
-          width: 20%;
-          padding: 5px; }
-          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .files table tr td .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .files table tr th .editable-has-buttons.editable-input {
-            width: 55%; }
-        #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .files table tr td {
-          height: 50px;
-          vertical-align: middle; }
+      #app-content #app-content-wrapper .edit_credential .tags {
+        float: left; }
+        #app-content #app-content-wrapper .edit_credential .tags .tag {
+          background-color: rgba(240, 240, 240, 0.9);
+          padding: 4px;
+          font-size: 11px; }
+      #app-content #app-content-wrapper .edit_credential tags-input .tags {
+        width: 100%; }
+      #app-content #app-content-wrapper .edit_credential .credential_textarea {
+        width: 100%;
+        height: 100px; }
+      #app-content #app-content-wrapper .edit_credential .password_settings label {
+        overflow: hidden; }
+        #app-content #app-content-wrapper .edit_credential .password_settings label input[type="checkbox"] {
+          width: auto !important;
+          float: left; }
+        #app-content #app-content-wrapper .edit_credential .password_settings label .label {
+          float: left; }
+          #app-content #app-content-wrapper .edit_credential .password_settings label .label.sm {
+            font-size: 12px; }
+      #app-content #app-content-wrapper .edit_credential .custom_fields, #app-content #app-content-wrapper .edit_credential .files {
+        margin-top: 10px; }
+        #app-content #app-content-wrapper .edit_credential .custom_fields table, #app-content #app-content-wrapper .edit_credential .files table {
+          width: 100%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table thead th, #app-content #app-content-wrapper .edit_credential .files table thead th {
+            color: #fff; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table thead th.field_actions, #app-content #app-content-wrapper .edit_credential .files table thead th.field_actions {
+            width: 15%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr:hover, #app-content #app-content-wrapper .edit_credential .files table tr:hover {
+            background-color: transparent; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions {
+            font-size: 13px;
+            width: 15%; }
+            #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions i, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions i {
+              cursor: pointer; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .custom_fields table tr th, #app-content #app-content-wrapper .edit_credential .files table tr td, #app-content #app-content-wrapper .edit_credential .files table tr th {
+            width: 20%;
+            padding: 5px; }
+            #app-content #app-content-wrapper .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .files table tr td .editable-has-buttons.editable-input, #app-content #app-content-wrapper .edit_credential .files table tr th .editable-has-buttons.editable-input {
+              width: 55%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .files table tr td {
+            height: 50px;
+            vertical-align: middle; }
     #app-content #app-content-wrapper .app_sidebar {
       padding: 10px;
       overflow-y: auto; }
