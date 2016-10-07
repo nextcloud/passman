@@ -181,6 +181,7 @@ angular.module('passmanApp')
 						this.call_progress(new progress_datatype(1, 2, 'credential'));
 
 						// Save data
+						this.parent.new_credential_cryptogram.skip_revision = true;
 						service.updateCredential(this.parent.new_credential_cryptogram, true).then((function(data){
 							this.call_progress(new progress_datatype(2, 2, 'credential'));
 							this.call_then({

@@ -198,16 +198,14 @@ angular.module('passmanApp')
 				var new_key = VaultService.getActiveVault().vaultKey;
 				_credential.shared_key = null;
 				_credential.unshare_action = true;
+				_credential.skip_revision = true;
 
-				_credential = CredentialService.encryptCredential(_credential, old_key)
+				_credential = CredentialService.encryptCredential(_credential, old_key);
 				CredentialService.updateCredential(_credential, true).then(function () {
-					NotificationService.showNotification('Credential unshared', 4000)
+					NotificationService.showNotification('Credential unshared', 4000);
 					CredentialService.reencryptCredential(_credential.guid, old_key, new_key).progress(function(data){
 						console.log(data);
 					}).then(function(data){
-						console.warn(data);
-						//@TODO Implement action on reencryption finished
-						console.error('This is still NOW called..')
 						getAcl();
 					});
 				})
@@ -307,10 +305,11 @@ angular.module('passmanApp')
 							//This is here is not called
 							var _credential = data.cryptogram;
 							_credential.set_share_key = true;
+							_credential.skip_revision = true;
 							_credential.shared_key = EncryptService.encryptString(key);
 							console.log(_credential);
 							CredentialService.updateCredential(_credential, true).then(function () {
-								NotificationService.showNotification('Credential shared', 4000)
+								NotificationService.showNotification('Credential shared', 4000);
 								$scope.sharing_complete = true;
 							})
 						});

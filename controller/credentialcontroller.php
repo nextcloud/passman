@@ -107,7 +107,7 @@ class CredentialController extends ApiController {
 									 $credential_id, $custom_fields, $delete_time, $credential_guid,
 									 $description, $email, $expire_time, $favicon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key) {
+									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision) {
 
 
 		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
@@ -225,7 +225,9 @@ class CredentialController extends ApiController {
 			$storedCredential->setSharedKey('');
 			$credential['shared_key'] = '';
 		}
-		$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);
+		if(!$skip_revision) {
+			$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);
+		}
 		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);
