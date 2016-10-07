@@ -170,7 +170,13 @@ angular.module('passmanApp')
 							pending: true,
 							credential_guid: $scope.storedCredential.guid
 						};
-						if ($scope.share_settings.credentialSharedWithUserAndGroup.indexOf(obj) === -1) {
+						var found = false;
+						for(var z = 0; z < $scope.share_settings.credentialSharedWithUserAndGroup.length; z++){
+							if($scope.share_settings.credentialSharedWithUserAndGroup[z].userId == shareWith[z].uid){
+								found = true;
+							}
+						}
+						if (found === false) {
 							$scope.share_settings.credentialSharedWithUserAndGroup.push(obj)
 						}
 					}
