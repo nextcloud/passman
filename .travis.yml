@@ -1,15 +1,16 @@
-sudo: required
-dist: trusty
 language: php
 php:
     - 5.6
     - 7
-#env:
-#    global:
-#        - CORE_BRANCH=stable9
+env:
+    global:
+        - CORE_BRANCH=master
+        - APP_NAME=passman
 #    matrix:
-#        - DB=pgsql
-#
+        - DB=mysql
+branches:
+  only:
+    - master
 #matrix:
 #    allow_failures:
 #        - env: DB=pgsql CORE_BRANCH=master
@@ -27,14 +28,15 @@ before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
 #    <- if [[ "$DB" == 'mysql' ]]; then sudo apt-get -y install mariadb-server; fi
+    - wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh
+    - bash ./before_install.sh $APP_NAME $CORE_BRANCH $DB
+     # Add some output debugging information
+    - cd ../server
+    - ./occ check
+    - ./occ status
+    - ./occ app:list
     - nvm install 5.9
     - npm install -g npm@latest
-#    - make
-#    - make appstore
-    # install core
-    - cd ../
-    - git clone https://github.com/owncloud/core.git --recursive --depth 1 -b $CORE_BRANCH owncloud
-    - mv passman owncloud/apps/
 #
 before_script:
 #    - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s oc_autotest; fi
@@ -43,12 +45,14 @@ before_script:
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"; fi
     - cd owncloud
     - mkdir data
+    - cd apps/$APP_NAME/
+    - npm install
 #    - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
 #    - ./occ app:enable passman
 #    - php -S localhost:8080 &
-    - cd apps/passman
 
 script:
+    - cd apps/$APP_NAME/
     - grunt jshint
 
 after_failure:
