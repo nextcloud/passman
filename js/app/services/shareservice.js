@@ -80,6 +80,13 @@ angular.module('passmanApp')
 				})
 			},
 
+			unshareCredentialFromUser: function (credential, user_id) {
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid +'/'+ user_id);
+				return $http.delete(queryUrl).then(function (response) {
+					return response.data;
+				})
+			},
+
 			createPublicSharedCredential: function (shareObj) {
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public');
 				return $http.post(queryUrl, shareObj).then(function (response) {

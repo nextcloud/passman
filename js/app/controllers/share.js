@@ -177,6 +177,15 @@ angular.module('passmanApp')
 				}
 			};
 
+			$scope.unshareUser = function(user){
+				ShareService.unshareCredentialFromUser($scope.storedCredential, user.userId).then(function (result) {
+					if(result.result === true){
+						var idx = $scope.share_settings.credentialSharedWithUserAndGroup.indexOf(user);
+						$scope.share_settings.credentialSharedWithUserAndGroup.splice(idx, 1);
+					}
+				})
+			};
+
 			$scope.unshareCredential = function (credential) {
 				ShareService.unshareCredential(credential);
 				var _credential = angular.copy(credential);

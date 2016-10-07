@@ -219,7 +219,45 @@ class ShareController extends ApiController {
 		}
 		foreach ($request_list as $request) {
 			$this->shareService->deleteShareRequest($request);
+			$manager = \OC::$server->getNotificationManager();
+			$notification = $manager->createNotification();
+			$notification->setApp('passman')
+				->setObject('passman_share_request', $request->getId())
+				->setUser($request->getTargetUserId());
+			$manager->markProcessed($notification);
 		}
+		return new JSONResponse(array('result' => true));
+	}
+
+
+	public function unshareCredentialFromUser($item_guid, $user_id){
+		$acl = null;
+		$sr = null;
+		try {
+			$acl = $this->shareService->getCredentialAclForUser($user_id, $item_guid);
+		} catch (DoesNotExistException $e){
+
+		}
+		try{
+			$sr =  array_pop($this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id));
+		} catch (DoesNotExistException $e){
+
+		}
+
+		if($sr){
+			$this->shareService->cleanItemRequestsForUser($sr);
+		}
+		if($acl){
+			$this->shareService->deleteShareACL($acl);
+		}
+
+		$manager = \OC::$server->getNotificationManager();
+		$notification = $manager->createNotification();
+		$notification->setApp('passman')
+			->setObject('passman_share_request', $sr->getId())
+			->setUser($user_id);
+		$manager->markProcessed($notification);
+
 		return new JSONResponse(array('result' => true));
 	}
 

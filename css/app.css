@@ -492,6 +492,11 @@
 .table {
   width: 100%; }
 
+.shared_table .fa-trash {
+  cursor: pointer; }
+.shared_table .fa-trash:hover {
+  color: #ce3702; }
+
 .scan-result-table {
   margin-top: 10px; }
   .scan-result-table .score {

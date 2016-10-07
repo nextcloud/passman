@@ -65,6 +65,7 @@
 				<td>Write</td>
 				<td>Files</td>
 				<td>Revisions</td>
+				<td></td>
 			</tr>
 			</thead>
 			<tr ng-repeat="user in share_settings.credentialSharedWithUserAndGroup">
@@ -77,6 +78,7 @@
 				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.WRITE)" ng-checked="hasPermission(user.acl, default_permissions.permissions.WRITE)"></td>
 				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.FILES)" ng-checked="hasPermission(user.acl, default_permissions.permissions.FILES)"></td>
 				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.HISTORY)" ng-checked="hasPermission(user.acl, default_permissions.permissions.HISTORY)"></td>
+				<td><i class="fa fa-trash" ng-click="unshareUser(user)"></i></td>
 			</tr>
 		</table>
 	</div>
