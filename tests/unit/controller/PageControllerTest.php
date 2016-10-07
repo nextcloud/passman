@@ -38,7 +38,6 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 
 	public function testBookmarklet() {
 		$result = $this->controller->bookmarklet('http://google.com', 'Google');
-		print_r($result->getParams());
 		$this->assertEquals(['url' => 'http://google.com', 'title' => 'Google'], $result->getParams());
 		$this->assertEquals('bookmarklet', $result->getTemplateName());
 		$this->assertTrue($result instanceof TemplateResponse);
