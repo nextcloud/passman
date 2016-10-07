@@ -16,12 +16,6 @@
 					</td>
 
 					<td>
-						<select ng-model="selectedAccessLevel">
-							<option ng-repeat="lvl in accessLevels"
-									value="{{lvl.value}}">
-								{{lvl.label}}
-							</option>
-						</select>
 						<button class="button"
 								ng-click="shareWith(inputSharedWith, selectedAccessLevel)">
 							+
@@ -33,9 +27,31 @@
 
 			<div ng-if="share_settings.cypher_progress.done > 0">
 				Cyphering...
-				<div progress-bar="share_settings.cypher_progress" index="share_settings.cypher_progress.done" total="share_settings.cypher_progress.total"></div>
+				<div progress-bar="share_settings.cypher_progress.percent" index="share_settings.cypher_progress.done" total="share_settings.cypher_progress.total"></div>
+			</div>
+			<div ng-if="share_settings.upload_progress.done > 0">
+				Uploading...
+				<div progress-bar="share_settings.upload_progress.percent" index="share_settings.upload_progress.done" total="share_settings.upload_progress.total"></div>
 			</div>
 		</div>
+	</div>
+	<div class="col-xs-12 col-md-6">
+		<table class="table">
+			<thead>
+			<tr>
+				<td>User</td>
+				<td>Crypto time</td>
+			</tr>
+			</thead>
+			<tr ng-repeat="user in share_settings.cypher_progress.times">
+				<td>
+					<i class="fa fa-user"></i>
+					{{user.user}}
+				</td>
+				<td>{{user.time}} s</td>
+			</tr>
+		</table>
+        Total time spent cyphering: {{ calculate_total_time() }}
 	</div>
 </div>
 <div class="row">
@@ -44,8 +60,11 @@
 			   ng-show="share_settings.credentialSharedWithUserAndGroup.length > 0">
 			<thead>
 			<tr>
-				<td>User / group</td>
-				<td>Access</td>
+				<td>User</td>
+				<td>Read</td>
+				<td>Write</td>
+				<td>Files</td>
+				<td>Revisions</td>
 			</tr>
 			</thead>
 			<tr ng-repeat="user in share_settings.credentialSharedWithUserAndGroup">
@@ -54,7 +73,10 @@
 					<i class="fa fa-group" ng-if="user.type === 'group'"></i>
 					{{user.userId}}
 				</td>
-				<td>{{user.accessLevel}}</td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.READ)" ng-checked="hasPermission(user.acl, default_permissions.permissions.READ)"> </td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.WRITE)" ng-checked="hasPermission(user.acl, default_permissions.permissions.WRITE)"></td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.FILES)" ng-checked="hasPermission(user.acl, default_permissions.permissions.FILES)"></td>
+				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.HISTORY)" ng-checked="hasPermission(user.acl, default_permissions.permissions.HISTORY)"></td>
 			</tr>
 		</table>
 	</div>

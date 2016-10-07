@@ -8,8 +8,8 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService',
-		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService) {
+	.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService',
+		function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -62,7 +62,6 @@ angular.module('passmanApp')
 			}];
 
 
-
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
 					$location.path('/')
@@ -82,7 +81,7 @@ angular.module('passmanApp')
 			var storedCredential = SettingsService.getSetting('edit_credential');
 
 			if (!storedCredential) {
-				CredentialService.getCredential($routeParams.credential_id).then(function(result){
+				CredentialService.getCredential($routeParams.credential_id).then(function (result) {
 					$scope.storedCredential = CredentialService.decryptCredential(angular.copy(result));
 				});
 			} else {
@@ -156,15 +155,29 @@ angular.module('passmanApp')
 			};
 
 			$scope.fileLoaded = function (file) {
+				var key;
 				var _file = {
 					filename: file.name,
 					size: file.size,
 					mimetype: file.type,
 					data: file.data
 				};
-				FileService.uploadFile(_file).then(function (result) {
+
+				if (!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')) {
+
+					if ($scope.storedCredential.shared_key) {
+						key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+					}
+				}
+
+				if ($scope.storedCredential.hasOwnProperty('acl')) {
+					key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
+				}
+
+
+				FileService.uploadFile(_file, key).then(function (result) {
 					delete result.file_data;
-					result.filename = EncryptService.decryptString(result.filename);
+					result.filename = EncryptService.decryptString(result.filename, key);
 					$scope.storedCredential.files.push(result);
 				});
 
@@ -188,10 +201,10 @@ angular.module('passmanApp')
 			$scope.renewIntervalValue = 0;
 			$scope.renewIntervalModifier = '0';
 
-			$scope.updateInterval = function(renewIntervalValue, renewIntervalModifier){
+			$scope.updateInterval = function (renewIntervalValue, renewIntervalModifier) {
 				var value = parseInt(renewIntervalValue);
 				var modifier = parseInt(renewIntervalModifier);
-				if( value && modifier) {
+				if (value && modifier) {
 					$scope.storedCredential.renew_interval = value * modifier;
 				}
 			};
@@ -212,10 +225,17 @@ angular.module('passmanApp')
 			};
 
 			$scope.saveCredential = function () {
+
+
+				if ($scope.new_custom_field.label && $scope.new_custom_field.value) {
+					$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
+				}
+
+
 				//@TODO  validation
 				//@TODO When credential is expired and has renew interval set, calc new expire time.
-
 				delete $scope.storedCredential.password_repeat;
+				console.log($scope.storedCredential);
 				if (!$scope.storedCredential.credential_id) {
 					$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
 					CredentialService.createCredential($scope.storedCredential).then(function (result) {
@@ -223,12 +243,35 @@ angular.module('passmanApp')
 						NotificationService.showNotification('Credential created!', 5000)
 					})
 				} else {
-					CredentialService.updateCredential($scope.storedCredential).then(function (result) {
+
+					var key, _credential;
+					if (!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')) {
+
+						if ($scope.storedCredential.shared_key) {
+							key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+						}
+					}
+
+					if ($scope.storedCredential.hasOwnProperty('acl')) {
+						key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
+					}
+
+					if (key) {
+						_credential = ShareService.encryptSharedCredential($scope.storedCredential, key);
+					} else {
+						_credential = angular.copy($scope.storedCredential);
+					}
+
+					delete _credential.shared_key;
+					var _useKey = (key != null);
+
+					CredentialService.updateCredential(_credential, _useKey).then(function (result) {
 						SettingsService.setSetting('edit_credential', null);
 						$location.path('/vault/' + $routeParams.vault_id);
 						NotificationService.showNotification('Credential updated!', 5000)
 					})
 				}
+
 			};
 
 			$scope.cancel = function () {

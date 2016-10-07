@@ -8,33 +8,23 @@
  * Controller of the passmanApp
  */
 angular.module('passmanApp')
-	.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', 'NotificationService', '$filter',
-		function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope, NotificationService, $filter) {
+	.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', 'NotificationService', '$filter', 'ShareService','EncryptService',
+		function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope, NotificationService, $filter, ShareService, EncryptService) {
 
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
-					$location.path('/')
+				//	$location.path('/')
 				}
 			} else {
 				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
 					var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
+					_vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+					VaultService.setActiveVault(_vault);
 					VaultService.getVault(_vault).then(function (vault) {
 						vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
 						VaultService.setActiveVault(vault);
 						$scope.active_vault = vault;
 						$scope.$parent.selectedVault = true;
-						$scope.vault_settings.pwSettings = VaultService.getVaultSetting('pwSettings',
-							{
-								'length': 12,
-								'useUppercase': true,
-								'useLowercase': true,
-								'useDigits': true,
-								'useSpecialChars': true,
-								'minimumDigitCount': 3,
-								'avoidAmbiguousCharacters': false,
-								'requireEveryCharType': true,
-								'generateOnCreate': true
-							})
 					})
 				}
 			}
@@ -45,7 +35,7 @@ angular.module('passmanApp')
 			var storedCredential = SettingsService.getSetting('revision_credential');
 
 			var getRevisions = function () {
-				CredentialService.getRevisions($scope.storedCredential.credential_id).then(function (revisions) {
+				CredentialService.getRevisions($scope.storedCredential.guid).then(function (revisions) {
 					$scope.revisions = revisions;
 				})
 			};
@@ -61,8 +51,24 @@ angular.module('passmanApp')
 			}
 
 			$scope.selectRevision = function (revision) {
+				 var key;
 				$scope.selectedRevision = angular.copy(revision);
-				$scope.selectedRevision.credential_data = CredentialService.decryptCredential(angular.copy(revision.credential_data));
+
+				if(!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')){
+					if($scope.storedCredential.shared_key) {
+						key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+					}
+				}
+				if($scope.storedCredential.hasOwnProperty('acl')){
+					key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
+				}
+
+				if(key){
+					$scope.selectedRevision.credential_data = ShareService.decryptSharedCredential(angular.copy(revision.credential_data), key);
+				} else {
+					$scope.selectedRevision.credential_data = CredentialService.decryptCredential(angular.copy(revision.credential_data));
+				}
+
 				$rootScope.$emit('app_menu', true);
 			};
 
@@ -84,10 +90,26 @@ angular.module('passmanApp')
 			};
 
 			$scope.restoreRevision = function (revision) {
+				var key;
 				var _revision = angular.copy(revision);
 				var _credential = _revision.credential_data;
+
+				if(!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')){
+					if ($scope.storedCredential.shared_key) {
+						key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+					}
+				}
+				if($scope.storedCredential.hasOwnProperty('acl')){
+					key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
+				}
+				if(key){
+					_credential = ShareService.encryptSharedCredential(_credential, key);
+				}
+				delete _credential.shared_key;
+
+				//Used in activity
 				_credential.revision_created =  $filter('date')(_revision.created * 1000 , "dd-MM-yyyy @ HH:mm:ss");
-				CredentialService.updateCredential(_credential).then(function (result) {
+				CredentialService.updateCredential(_credential, (key)).then(function (result) {
 					SettingsService.setSetting('revision_credential', null);
 					$rootScope.$emit('app_menu', false);
 					$location.path('/vault/' + $routeParams.vault_id);

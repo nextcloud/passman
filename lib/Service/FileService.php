@@ -25,8 +25,12 @@ class FileService {
 		$this->fileMapper = $fileMapper;
 	}
 
-	public function getFile($userId, $fileId) {
-		return $this->fileMapper->getFile($userId, $fileId);
+	public function getFile($fileId, $userId = null) {
+		return $this->fileMapper->getFile($fileId, $userId);
+	}
+
+	public function getFileByGuid($file_guid, $userId = null) {
+		return $this->fileMapper->getFileByGuid($file_guid, $userId);
 	}
 
 	public function createFile($file, $userId) {
@@ -35,6 +39,10 @@ class FileService {
 
 	public function deleteFile($file_id, $userId) {
 		return $this->fileMapper->deleteFile($file_id, $userId);
+	}
+
+	public function updateFile($file_id) {
+		return $this->fileMapper->updateFile($file_id);
 	}
 
 }

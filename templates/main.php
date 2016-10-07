@@ -22,6 +22,7 @@ script('passman', 'vendor/angular-xeditable/xeditable.min');
 script('passman', 'vendor/sha/sha');
 script('passman', 'vendor/llqrcode/llqrcode');
 script('passman', 'vendor/forge.0.6.9.min');
+script('passman', 'vendor/download');
 script('passman', 'lib/promise');
 script('passman', 'lib/crypto_wrap');
 
@@ -54,6 +55,7 @@ script('passman', 'app/services/encryptservice');
 script('passman', 'app/services/tagservice');
 script('passman', 'app/services/notificationservice');
 script('passman', 'app/services/shareservice');
+script('passman', 'app/factory/sharingacl');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');
 script('passman', 'app/directives/progressbar');

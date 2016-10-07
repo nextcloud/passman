@@ -39,18 +39,31 @@ return [
 		['name' => 'credential#deleteCredential', 'url' => '/api/v2/credentials/{credential_id}', 'verb' => 'DELETE'],
 
 		//Revisions
-		['name' => 'credential#getRevision', 'url' => '/api/v2/credentials/{credential_id}/revision', 'verb' => 'GET'],
+		['name' => 'credential#getRevision', 'url' => '/api/v2/credentials/{credential_guid}/revision', 'verb' => 'GET'],
 		['name' => 'credential#deleteRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'DELETE'],
+		['name' => 'credential#updateRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'PATCH'],
 
 		//File stuff
 		['name' => 'file#uploadFile', 'url' => '/api/v2/file', 'verb' => 'POST'],
 		['name' => 'file#getFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'GET'],
 		['name' => 'file#deleteFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'DELETE'],
+		['name' => 'file#updateFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'PATCH'],
 
 		//Sharing stuff
 		['name' => 'share#search', 'url' => '/api/v2/sharing/search', 'verb' => 'POST'],
 		['name' => 'share#getVaultsByUser', 'url' => '/api/v2/sharing/vaults/{user_id}', 'verb' => 'GET'],
-
+        ['name' => 'share#applyIntermediateShare', 'url' => '/api/v2/sharing/share', 'verb' => 'POST'],
+        ['name' => 'share#savePendingRequest', 'url' => '/api/v2/sharing/save', 'verb' => 'POST'],
+        ['name' => 'share#getPendingRequests', 'url' => '/api/v2/sharing/pending', 'verb' => 'GET'],
+        ['name' => 'share#deleteShareRequest', 'url' => '/api/v2/sharing/decline/{share_request_id}', 'verb' => 'DELETE'],
+        ['name' => 'share#getVaultItems', 'url' => '/api/v2/sharing/vault/{vault_guid}/get', 'verb' => 'GET'],
+        ['name' => 'share#createPublicShare', 'url' => '/api/v2/sharing/public', 'verb' => 'POST'],
+        ['name' => 'share#getPublicCredentialData', 'url' => '/api/v2/sharing/credential/{credential_guid}/public', 'verb' => 'GET'],
+        ['name' => 'share#unshareCredential', 'url' => '/api/v2/sharing/credential/{item_guid}', 'verb' => 'DELETE'],
+        ['name' => 'share#getRevisions', 'url' => '/api/v2/sharing/credential/{item_guid}/revisions', 'verb' => 'GET'],
+        ['name' => 'share#getItemAcl', 'url' => '/api/v2/sharing/credential/{item_guid}/acl', 'verb' => 'GET'],
+        ['name' => 'share#getFile', 'url' => '/api/v2/sharing/credential/{item_guid}/file/{file_guid}', 'verb' => 'GET'],
+        ['name' => 'share#updateSharedCredentialACL', 'url' => '/api/v2/sharing/credential/{item_guid}/acl', 'verb' => 'PATCH'],
 
 		//Internal API
 		['name' => 'internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],

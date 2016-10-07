@@ -26,6 +26,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method integer getCreated()
  * @method void setCredentialData(string $value)
  * @method string getCredentialData()
+ * @method void setEditedBy(string $value)
+ * @method string getEditedBy()
  */
 class CredentialRevision extends Entity implements \JsonSerializable {
 
@@ -36,6 +38,7 @@ class CredentialRevision extends Entity implements \JsonSerializable {
 	protected $userId;
 	protected $created;
 	protected $credentialData;
+    protected $editedBy;
 
 
 	public function __construct() {
@@ -52,7 +55,8 @@ class CredentialRevision extends Entity implements \JsonSerializable {
 			'revision_id' => $this->getId(),
 			'guid' => $this->getGuid(),
 			'created' => $this->getCreated(),
-			'credential_data' => unserialize(base64_decode($this->getCredentialData())),
+			'credential_data' => json_decode(base64_decode($this->getCredentialData())),
+            'edited_by' => $this->getEditedBy(),
 		];
 	}
 }

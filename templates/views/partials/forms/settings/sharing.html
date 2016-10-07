@@ -13,13 +13,13 @@
     <div class="row">
         <div class="col-md-12">
             <label>Key size
-                <select ng-model="key_size">
-                    <option value="512">512</option>
-                    <option value="1024">1024</option>
-                    <option value="2048">2048</option>
-                    <option value="4096">4096</option>
+                <select ng-model="key_size" ng-options="size.name for size in available_sizes">
+                    <!--<option value="512">512</option>-->
+                    <!--<option value="1024">1024</option>-->
+                    <!--<option value="2048">2048</option>-->
+                    <!--<option value="4096">4096</option>-->
                 </select>
-                <button ng-if="!generating" ng-click="generateKeys(key_size)">Generate sharing keys</button>
+                <button ng-if="!generating" ng-click="generateKeys(key_size.size)">Generate sharing keys</button>
                 <button ng-if="generating"><i class="fa fa-spinner fa-spin"></i> Generating sharing keys step {{progress}}/2</button>
             </label>
         </div>

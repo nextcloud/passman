@@ -50,4 +50,48 @@ class NotificationService {
 		$this->manager->notify($notification);
 	}
 
+
+	function credentialSharedNotification($data){
+		$urlGenerator = \OC::$server->getURLGenerator();
+		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('','index.php/apps/passman/#/'));
+		$api = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman'));
+		$notification = $this->manager->createNotification();
+
+		$declineAction = $notification->createAction();
+		$declineAction->setLabel('decline')
+			->setLink($api . '/api/v2/sharing/decline/'. $data['req_id'], 'DELETE');
+
+		$notification->setApp('passman')
+			->setUser($data['target_user'])
+			->setDateTime(new \DateTime())
+			->setObject('passman_share_request', $data['req_id']) // $type and $id
+			->setSubject('credential_shared', [$data['from_user'], $data['credential_label']]) // $subject and $parameters
+			->setLink($link)
+			->addAction($declineAction);
+
+		$this->manager->notify($notification);
+	}
+
+
+	function credentialDeclinedSharedNotification($data){
+		$notification = $this->manager->createNotification();
+		$notification->setApp('passman')
+			->setUser($data['target_user'])
+			->setDateTime(new \DateTime())
+			->setObject('passman_share_request', $data['req_id']) // $type and $id
+			->setSubject('credential_share_denied', [$data['from_user'], $data['credential_label']]); // $subject and $parameters
+		$this->manager->notify($notification);
+	}
+
+
+	function credentialAcceptedSharedNotification($data){
+		$notification = $this->manager->createNotification();
+		$notification->setApp('passman')
+			->setUser($data['target_user'])
+			->setDateTime(new \DateTime())
+			->setObject('passman_share_request', $data['req_id']) // $type and $id
+			->setSubject('credential_share_accepted', [$data['from_user'], $data['credential_label']]); // $subject and $parameters
+		$this->manager->notify($notification);
+	}
+
 }

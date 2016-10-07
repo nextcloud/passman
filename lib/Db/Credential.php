@@ -55,8 +55,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getOtp()
  * @method void setHidden(bool $value)
  * @method string getHidden()
- * @method void setIsShared(integer $value)
- * @method string getIsShared()
+ * @method void setSharedKey(string $value)
+ * @method string getSharedKey()
 
 
 
@@ -87,7 +87,7 @@ class Credential extends Entity implements  \JsonSerializable{
 	protected $customFields;
 	protected $otp;
 	protected $hidden;
-	protected $isShared;
+	protected $sharedKey;
 
 	public function __construct() {
 		// add types in constructor
@@ -98,7 +98,6 @@ class Credential extends Entity implements  \JsonSerializable{
 		$this->addType('deleteTime', 'integer');
 		$this->addType('vaultId', 'integer');
 		$this->addType('credentialId', 'integer');
-		$this->addType('isShared', 'integer');
 		$this->addType('hidden', 'integer');
 	}
 
@@ -129,7 +128,7 @@ class Credential extends Entity implements  \JsonSerializable{
 			'custom_fields' => $this->getCustomFields(),
 			'otp' => $this->getOtp(),
 			'hidden' => $this->getHidden(),
-			'is_shared' => $this->getIsShared(),
+			'shared_key' => $this->getSharedKey(),
 		];
 	}
 }

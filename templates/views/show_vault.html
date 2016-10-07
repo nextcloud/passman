@@ -20,30 +20,8 @@
 
 	</span>
 	<div class="actions creatable">
-		<span ng-click="menuOpen = !menuOpen" class="button new"
-			  ng-init="menuOpen = false" off-click="menuOpen = false;">
-			<span
-			>+</span></span>
-		<div class="actionList popovermenu bubble menu" ng-show="menuOpen">
-			<ul>
-				<li>
-						<span ng-click="addCredential()"
-							  class="menuitem action">
-							<span
-									class="icon icon-rename"></span>
-							<span>New credential</span>
-						</span>
-				</li>
-				<li>
-						<span href="#" class="menuitem action">
-							<span class="icon icon-shared"></span>
-							<span>New shared credential</span>
-						</span>
-				</li>
-			</ul>
-		</div>
-
-
+		<span ng-click="addCredential()" class="button new">
+			<span >+</span></span>
 	</div>
 	<div class="searchboxContainer">
 		<input type="text" ng-model="filterOptions.filterText" class="searchbox"
@@ -58,7 +36,7 @@
 	</div>
 </div>
 {{filtered_credentials}}
-<div off-click="closeSelected()">
+<div off-click="closeSelected()" off-click-filter="'.download-js-link'">
 
 	<div class="loaderContainer" ng-if="show_spinner">
 		<div class="loader" use-theme type="'border-bottom-color'"></div>
@@ -71,7 +49,11 @@
 				ng-click="selectCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 				<td>
-					<span class="icon"><i class="fa fa-lock"></i> </span>
+					<span class="icon">
+						<i class="fa fa-lock" ng-if="!credential.acl && !credential.shared_key"></i>
+						<i class="fa fa-share-alt" ng-if="credential.acl"></i>
+						<i class="fa fa-share-alt-square" ng-if="credential.shared_key"> </i>
+					</span>
 					<span class="label">{{ ::credential.label}}</span>
 					<span class="tags">
 				<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
@@ -81,17 +63,20 @@
 			</tr>
 		</table>
 		<ul class="grid-view" ng-if="view_mode === 'grid'">
-				<li class="credential" ng-repeat="credential in active_vault.credentials | credentialSearch:filterOptions | tagFilter:selectedtags | orderBy:'label'| as:this:'filtered_credentials'"
-					ng-if="credential.hidden == 0 && showCredentialRow(credential)"
-					ng-click="selectCredential(credential)"
-					use-theme type="'border-color'">
-					<div class="credential_content" >
-						<div class="label">{{ ::credential.label}}</div>
-						<div class="tags">
-							<div class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</div>
+			<li class="credential"
+				ng-repeat="credential in active_vault.credentials | credentialSearch:filterOptions | tagFilter:selectedtags | orderBy:'label'| as:this:'filtered_credentials'"
+				ng-if="credential.hidden == 0 && showCredentialRow(credential)"
+				ng-click="selectCredential(credential)"
+				use-theme type="'border-color'">
+				<div class="credential_content">
+					<div class="label">{{ ::credential.label}}</div>
+					<div class="tags">
+						<div class="tag" ng-repeat="tag in credential.tags_raw">
+							{{ ::tag.text}}
 						</div>
 					</div>
-				</li>
+				</div>
+			</li>
 		</ul>
 	</div>
 	<div id="app-sidebar" class="detailsView scroll-container app_sidebar"
@@ -158,7 +143,7 @@
 				</td>
 				<td>
 					<div ng-repeat="file in selectedCredential.files"
-						 class="link" ng-click="downloadFile(file)">
+						 class="link" ng-click="downloadFile(selectedCredential, file)">
 						{{file.filename}} ({{file.size | bytes}})
 					</div>
 				</td>
@@ -207,34 +192,77 @@
 		</div>
 
 		<div ng-show="selectedCredential">
-			<button class="button" ng-click="editCredential(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-edit"></span> Edit
-			</button>
-			<button class="button"
-					ng-click="deleteCredential(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-trash"></span> Delete
-			</button>
-			<button class="button"
-					ng-click="shareCredential(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-share"></span> Share
-			</button>
+			<div>
+				<button class="button"
+						ng-click="editCredential(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+					<span class="fa fa-edit"></span> Edit
+				</button>
+				<button class="button"
+						ng-click="deleteCredential(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+					<span class="fa fa-trash"></span> Delete
+				</button>
+				<button class="button"
+						ng-click="shareCredential(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined">
+					<span class="fa fa-share"></span> Share
+				</button>
 
-			<button class="button" ng-click="getRevisions(selectedCredential)"
-					ng-if="selectedCredential.delete_time == 0">
-				<span class="fa fa-undo"></span> Revisions
-			</button>
+				<button class="button"
+						ng-click="getRevisions(selectedCredential)"
+						ng-if="selectedCredential.delete_time == 0  && hasPermission(selectedCredential.acl.permissions, permissions.permissions.HISTORY)">
+					<span class="fa fa-undo"></span> Revisions
+				</button>
 
-			<button class="button" ng-if="selectedCredential.delete_time > 0"
-					ng-click="recoverCredential(selectedCredential)">
-				<span class="fa fa-recycle"></span> Recover
-			</button>
-			<button class="button" ng-if="selectedCredential.delete_time > 0"
-					ng-click="destroyCredential(selectedCredential)">
-				<span class="fa fa-bomb"></span> Destroy
-			</button>
+				<button class="button"
+						ng-if="selectedCredential.delete_time > 0"
+						ng-click="recoverCredential(selectedCredential) && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+					<span class="fa fa-recycle"></span> Recover
+				</button>
+				<button class="button"
+						ng-if="selectedCredential.delete_time > 0"
+						ng-click="destroyCredential(selectedCredential)">
+					<span class="fa fa-bomb"></span> Destroy
+				</button>
+			</div>
 		</div>
+
 	</div>
+</div>
+<div class="share_popup" style="display: none">
+	You have incoming share requests.<br/>
+	If you want to the credential in a other vault,<br/> logout of this vault
+	and login to the vault you want the shared credential in.
+	{{active_vault.vault_id}}
+	<table class="table">
+		<thead>
+		<tr>
+			<td>Label</td>
+			<td>Permissions</td>
+			<td>Received from</td>
+			<td>Date</td>
+		</tr>
+		</thead>
+		<tr ng-repeat="share_request in incoming_share_requests"
+			ng-if="share_request.target_vault_id == active_vault.vault_id">
+			<td>
+				{{share_request.credential_label}}
+			</td>
+			<td>
+				{{share_request.permissions}}
+			</td>
+			<td>
+				{{share_request.from_user_id}}
+			</td>
+			<td>
+				{{share_request.created * 1000 | date:'dd-MM-yyyy @
+				HH:mm:ss'}}
+			</td>
+			<td>
+				<span class="link" ng-click="acceptShareRequest(share_request)">Accept</span>
+				| <span class="link" ng-click="declineShareRequest(share_request)">Decline</span>
+			</td>
+		</tr>
+	</table>
 </div>

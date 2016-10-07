@@ -34,7 +34,7 @@ class CredentialMapper extends Mapper {
 
 	public function getRandomCredentialByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `user_id` = ? and vault_id = ? ORDER BY RAND() LIMIT 1';
+			'WHERE `user_id` = ? and vault_id = ? AND shared_key is NULL ORDER BY RAND() LIMIT 1';
 		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 
@@ -44,10 +44,27 @@ class CredentialMapper extends Mapper {
 		return $this->findEntities($sql, [$timestamp]);
 	}
 
-	public function getCredentialById($credential_id, $user_id){
+    /**
+     * @param $credential_id
+     * @param null $user_id
+     * @return Credential
+     */
+	public function getCredentialById($credential_id, $user_id = null){
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `id` = ? and `user_id` = ? ';
-		return $this->findEntity($sql,[$credential_id, $user_id]);
+			'WHERE `id` = ?';
+        // If we want to check the owner, add it to the query
+		$params = [$credential_id];
+        if ($user_id !== null){
+        	$sql .= ' and `user_id` = ? ';
+			array_push($params, $user_id);
+		}
+		return $this->findEntity($sql,$params);
+	}
+
+	public function getCredentialLabelById($credential_id){
+		$sql = 'SELECT id, label FROM `*PREFIX*passman_credentials` ' .
+			'WHERE `id` = ? ';
+		return $this->findEntity($sql,[$credential_id]);
 	}
 
 	public function create($raw_credential){
@@ -73,7 +90,7 @@ class CredentialMapper extends Mapper {
 		$credential->setCustomFields($raw_credential['custom_fields']);
 		$credential->setOtp($raw_credential['otp']);
 		$credential->setHidden($raw_credential['hidden']);
-		$credential->setIsShared($raw_credential['is_shared']);
+		$credential->setSharedKey($raw_credential['shared_key']);
 		return parent::insert($credential);
 	}
 
@@ -106,6 +123,7 @@ class CredentialMapper extends Mapper {
 		$credential->setOtp($raw_credential['otp']);
 		$credential->setHidden($raw_credential['hidden']);
 		$credential->setDeleteTime($raw_credential['delete_time']);
+		$credential->setSharedKey($raw_credential['shared_key']);
 		return parent::update($credential);
 	}
 
@@ -116,4 +134,14 @@ class CredentialMapper extends Mapper {
 	public function upd(Credential $credential){
 		$this->update($credential);
 	}
+
+    /**
+     * Finds a credential by the given guid
+     * @param $credential_guid
+     * @return Credential
+     */
+	public function getCredentialByGUID($credential_guid){
+	    $q = 'SELECT * FROM `*PREFIX*passman_credentials` WHERE guid = ? ';
+        return $this->findEntity($q, [$credential_guid]);
+    }
 }
