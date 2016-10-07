@@ -160,6 +160,9 @@ angular.module('passmanApp')
 				}
 				VaultService.getVault($scope.active_vault).then(function (vault) {
 					var _selected_credentials = [];
+					if(vault.credentials.length === 0){
+						$location.path('/');
+					}
 					for(var i =0; i < vault.credentials.length; i++){
 						var _credential = vault.credentials[i];
 						if(_credential.shared_key == null || _credential.shared_key == ''){
