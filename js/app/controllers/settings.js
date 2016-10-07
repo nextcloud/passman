@@ -186,9 +186,7 @@ angular.module('passmanApp')
 								changeCredential(index+1, oldVaultPass, newVaultPass);
 							} else {
 								console.log('Update complete!');
-								var vault =  VaultService.getActiveVault();
-								vault.vaultKey = newVaultPass;
-								VaultService.setActiveVault(vault);
+								//@TODO update private key with new pw
 							}
 						});
 					};
