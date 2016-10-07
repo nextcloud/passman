@@ -40,20 +40,20 @@ class FileController extends ApiController {
 			'mimetype' => $mimetype,
 			'file_data' => $data
 		);
-		return $this->fileService->createFile($file, $this->userId);
+		return new JSONResponse($this->fileService->createFile($file, $this->userId));
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function getFile($file_id) {
-		return $this->fileService->getFile($file_id, $this->userId);
+		return new JSONResponse($this->fileService->getFile($file_id, $this->userId));
 	}
 	/**
 	 * @NoAdminRequired
 	 */
 	public function deleteFile($file_id) {
-		return $this->fileService->deleteFile($file_id, $this->userId);
+		return new JSONResponse($this->fileService->deleteFile($file_id, $this->userId));
 	}
 
 	public function updateFile($file_id, $file_data, $filename, $mimetype, $size){
@@ -70,7 +70,7 @@ class FileController extends ApiController {
 				$file->setFilename($filename);
 			}
 			if($filename || $file_data){
-				$this->fileService->updateFile($file);
+				new JSONResponse($this->fileService->updateFile($file));
 			}
 		}
 	}
