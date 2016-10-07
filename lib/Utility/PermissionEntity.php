@@ -27,7 +27,7 @@ class PermissionEntity extends Entity {
     public function hasPermission($permission) {
         $tmp = $this->getPermissions();
         $tmp = $tmp & $permission;
-        return $tmp == $permission;
+        return $tmp === $permission;
     }
 
     /**
