@@ -60,7 +60,7 @@ angular.module('passmanApp')
 			}
 			$scope.cancel = function () {
 				SettingsService.setSetting('share_credential', null);
-				$location.path('/vault/' + $scope.storedCredential.vault_id);
+				$location.path('/vault/' + $routeParams.vault_id);
 			};
 
 
