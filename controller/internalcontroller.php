@@ -15,7 +15,7 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
-use \OC_App;
+
 
 class InternalController extends ApiController {
 	private $userId;
