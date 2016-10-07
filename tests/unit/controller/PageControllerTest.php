@@ -37,12 +37,4 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('main', $result->getTemplateName());
 		$this->assertTrue($result instanceof TemplateResponse);
 	}
-
-
-	public function testEcho() {
-		$result = $this->controller->doEcho('hi');
-		$this->assertEquals(['echo' => 'hi'], $result->getData());
-	}
-
-
 }
