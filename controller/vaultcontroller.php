@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -41,9 +42,9 @@ class VaultController extends ApiController {
 		$result = array();
 		$vaults = $this->vaultService->getByUser($this->userId);
 
-		$protected_credential_fields = array('getDescription','getEmail','getUsername','getPassword');
+		$protected_credential_fields = array('getDescription', 'getEmail', 'getUsername', 'getPassword');
 
-		foreach($vaults as $vault){
+		foreach ($vaults as $vault) {
 			$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 			$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
 			array_push($result, array(
@@ -71,11 +72,18 @@ class VaultController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function get($vault_id) {
-		$credentials = $this->credentialService->getCredentialsByVaultId($vault_id, $this->userId);
-		$vault = $this->vaultService->getById($vault_id, $this->userId);
-		$vault = $vault[0];
-		if($vault) {
+	public function get($vault_guid) {
+		//$vault_guid
+		$vault = null;
+		try {
+			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
+		} catch (DoesNotExistException $e) {
+
+		}
+		$result = array();
+		if ($vault) {
+			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
+
 			$result = array(
 				'vault_id' => $vault->getId(),
 				'guid' => $vault->getGuid(),
@@ -88,22 +96,23 @@ class VaultController extends ApiController {
 				'last_access' => $vault->getlastAccess()
 			);
 			$result['credentials'] = $credentials;
-			$this->vaultService->setLastAccess($vault_id, $this->userId);
-		} else {
-			$result = array();
+
+			$this->vaultService->setLastAccess($vault->getId(), $this->userId);
 		}
+
+
 		return new JSONResponse($result);
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
-	public function update($vault_id, $name, $vault_settings) {
-		$vault = array_pop($this->vaultService->getById($vault_id, $this->userId));
-		if($name) {
+	public function update($vault_guid, $name, $vault_settings) {
+		$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
+		if ($name) {
 			$vault->setName($name);
 		}
-		if($vault_settings) {
+		if ($vault_settings) {
 			$vault->setVaultSettings($vault_settings);
 		}
 		$this->vaultService->updateVault($vault);
@@ -112,8 +121,15 @@ class VaultController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function updateSharingKeys($vault_id, $private_sharing_key, $public_sharing_key) {
-		$this->vaultService->updateSharingKeys($vault_id, $private_sharing_key, $public_sharing_key);
+	public function updateSharingKeys($vault_guid, $private_sharing_key, $public_sharing_key) {
+		$vault = null;
+		try {
+			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
+		} catch (DoesNotExistException $e) {
+
+		}
+
+		$this->vaultService->updateSharingKeys($vault->getId(), $private_sharing_key, $public_sharing_key);
 		return;
 	}
 

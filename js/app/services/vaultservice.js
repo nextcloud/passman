@@ -57,7 +57,7 @@ angular.module('passmanApp')
 				});
 			},
 			getVault: function (vault) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid);
 				return $http.get(queryUrl).then(function (response) {
 					if(response.data){
 						if(response.data.vault_settings){
@@ -77,7 +77,7 @@ angular.module('passmanApp')
 				delete _vault.defaultVault;
 				delete _vault.vaultKey;
 				_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings))
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.vault_id);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.guid);
 				return $http.patch(queryUrl, _vault).then(function (response) {
 					if(response.data){
 						return response.data;
@@ -87,7 +87,7 @@ angular.module('passmanApp')
 				});
 			},
 			updateSharingKeys: function (vault) {
-				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id +'/sharing-keys');
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid +'/sharing-keys');
 				return $http.post(queryUrl, vault).then(function (response) {
 					if(response.data){
 						return response.data;

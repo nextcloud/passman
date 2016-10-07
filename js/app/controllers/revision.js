@@ -78,7 +78,7 @@ angular.module('passmanApp')
 			};
 
 			$scope.deleteRevision = function (revision) {
-				CredentialService.deleteRevision($scope.storedCredential.credential_id, revision.revision_id).then(function () {
+				CredentialService.deleteRevision($scope.storedCredential.guid, revision.revision_id).then(function () {
 					for (var i = 0; i < $scope.revisions.length; i++) {
 						if ($scope.revisions[i].revision_id == revision.revision_id) {
 							$scope.revisions.splice(i, 1);

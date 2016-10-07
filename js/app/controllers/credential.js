@@ -187,21 +187,21 @@ angular.module('passmanApp')
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
 				SettingsService.setSetting('edit_credential', CredentialService.encryptCredential(_credential));
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/edit/' + _credential.credential_id)
+				$location.path('/vault/' + $scope.active_vault.vault_id + '/edit/' + _credential.guid)
 			};
 
 			$scope.getRevisions = function (credential) {
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
 				SettingsService.setSetting('revision_credential', CredentialService.encryptCredential(_credential));
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.credential_id + '/revisions')
+				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.guid + '/revisions')
 			};
 
 			$scope.shareCredential = function (credential) {
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
 				SettingsService.setSetting('share_credential', CredentialService.encryptCredential(_credential));
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.credential_id + '/share')
+				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.guid + '/share')
 			};
 
 			var notification;

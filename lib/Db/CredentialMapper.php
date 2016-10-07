@@ -140,8 +140,13 @@ class CredentialMapper extends Mapper {
      * @param $credential_guid
      * @return Credential
      */
-	public function getCredentialByGUID($credential_guid){
+	public function getCredentialByGUID($credential_guid, $user_id = null){
 	    $q = 'SELECT * FROM `*PREFIX*passman_credentials` WHERE guid = ? ';
-        return $this->findEntity($q, [$credential_guid]);
+		$params = [$credential_guid];
+		if ($user_id !== null){
+			$q .= ' and `user_id` = ? ';
+			array_push($params, $user_id);
+		}
+        return $this->findEntity($q, $params);
     }
 }
