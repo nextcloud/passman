@@ -7,6 +7,7 @@
  * @author Marcos Zuriaga <wolfi@wolfi.es>
  * @copyright Marcos Zuriarga 2015
  */
+/*jshint curly: true */
 var CRYPTO = {    // Global variables of the object:
     paranoia_level: null,
 

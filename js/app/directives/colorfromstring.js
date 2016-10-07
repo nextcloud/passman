@@ -1,5 +1,5 @@
-'use strict';
-
+(function () {
+	'use strict';
 /**
  * @ngdoc directive
  * @name passmanApp.directive:passwordGen
@@ -26,9 +26,10 @@ angular.module('passmanApp')
 					return '#' + '00000'.substring(0, 6 - c.length) + c;
 				}
 				scope.$watch('string', function(){
-					$(el).css('border-color', genColor(scope.string));
-				})
+					jQuery(el).css('border-color', genColor(scope.string));
+				});
 
 			}
 		};
 	}]);
+}());

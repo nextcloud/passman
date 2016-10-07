@@ -1,0 +1,10 @@
+{
+  "maxerr"        : 50,
+  "jquery"        : true,    // jQuery
+  "globals"       : {
+    "angular": true,
+    "PassmanImporter": true,
+    "OC": true,
+    "window": true
+  }        // additional predefined global variables
+}

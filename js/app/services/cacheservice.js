@@ -1,5 +1,5 @@
-'use strict';
-
+(function () {
+	'use strict';
 /**
  * @ngdoc service
  * @name passmanApp.CacheService
@@ -17,5 +17,6 @@ angular.module('passmanApp')
 				value = EncryptService.encryptString(value);
 				localStorageService.set(key, value);
 			}
-		}
+		};
 	}]);
+}());
