@@ -6,7 +6,7 @@ env:
     global:
         - CORE_BRANCH=master
         - APP_NAME=passman
-#    matrix:
+    matrix:
         - DB=mysql
 branches:
   only:
@@ -56,12 +56,44 @@ before_script:
 
 
 script:
+    # Test the app
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then find . -name \*.php -exec php -l \"{}\" \;; fi"
+    - cd ../../
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then ./occ app:check-code $APP_NAME -c private -c strong-comparison; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '2' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
+    - cd apps/$APP_NAME/
+
+    #- php build/phpunit.phar -c phpunit.xml
+
+    # Create coverage report
+    #- sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
+    #- sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
+    #- cd ../
+
     - grunt jshint
-#    - php build/phpunit.phar -c phpunit.xml
-#    - php build/phpunit.phar -c phpunit.integration.xml
+
 
 #after_failure:
 #    - cat ../../data/owncloud.log
 
 addons:
     firefox: "latest"
+
+matrix:
+  include:
+    - php: 5.6
+      env: DB=mysql
+    - php: 5.6
+      env: DB=pgsql
+    - php: 5.6
+      env: DB=mysql;CODECHECK=1
+    - php: 5.6
+      env: DB=mysql;CODECHECK=2
+    - php: 5.6
+      env: DB=mysql;JSTESTS=1
+    - php: 7.0
+      env: DB=mysql;CODECHECK=1
+    - php: 7.0
+      env: DB=mysql;CODECHECK=2
+  allow_failures:
+    - env: DB=mysql;CODECHECK=2
