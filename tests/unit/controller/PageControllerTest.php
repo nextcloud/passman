@@ -29,12 +29,24 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-
 	public function testIndex() {
 		$result = $this->controller->index();
-
 		$this->assertEquals(['user' => 'john'], $result->getParams());
 		$this->assertEquals('main', $result->getTemplateName());
+		$this->assertTrue($result instanceof TemplateResponse);
+	}
+
+	public function testBookmarklet() {
+		$result = $this->controller->bookmarklet('http://google.com', 'Google');
+		print_r($result->getParams());
+		$this->assertEquals(['url' => 'http://google.com', 'title' => 'Google'], $result->getParams());
+		$this->assertEquals('bookmarklet', $result->getTemplateName());
+		$this->assertTrue($result instanceof TemplateResponse);
+	}
+
+	public function testPublicSharePage() {
+		$result = $this->controller->publicSharePage();
+		$this->assertEquals('public_share', $result->getTemplateName());
 		$this->assertTrue($result instanceof TemplateResponse);
 	}
 }
