@@ -138,7 +138,7 @@ angular.module('passmanApp')
 
 			$scope.$watch('share_settings.upload_progress.done', function () {
 				console.log();
-				if ($scope.share_settings.upload_progress.done == $scope.share_settings.upload_progress.total) {
+				if ($scope.share_settings.upload_progress.done == $scope.share_settings.upload_progress.total && $scope.share_settings.upload_progress.total > 0) {
 					getAcl()
 				}
 			});
@@ -208,6 +208,7 @@ angular.module('passmanApp')
 						console.warn(data);
 						//@TODO Implement action on reencryption finished
 						console.error('This is still NOW called..')
+						getAcl();
 					});
 				})
 			};

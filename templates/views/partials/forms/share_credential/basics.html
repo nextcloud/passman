@@ -35,7 +35,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 col-md-6">
+	<div class="col-xs-12 col-md-6" ng-show="share_settings.cypher_progress.times.length > 0">
 		<table class="table">
 			<thead>
 			<tr>
@@ -70,9 +70,10 @@
 			</thead>
 			<tr ng-repeat="user in share_settings.credentialSharedWithUserAndGroup">
 				<td>
-					<i class="fa fa-user" ng-if="user.type === 'user'"></i>
-					<i class="fa fa-group" ng-if="user.type === 'group'"></i>
+					<i class="fa fa-user" ng-if="user.pending === false"></i>
+					<i class="fa fa-user-times" ng-if="user.pending === true"></i>
 					{{user.userId}}
+					<small ng-if="user.pending === true" class="pull-right col-xs-4">Pending</small>
 				</td>
 				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.READ)" ng-checked="hasPermission(user.acl, default_permissions.permissions.READ)"> </td>
 				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.WRITE)" ng-checked="hasPermission(user.acl, default_permissions.permissions.WRITE)"></td>

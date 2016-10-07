@@ -498,6 +498,13 @@
 .table {
   width: 100%; }
 
+.share_credential {
+  padding-top: 10px; }
+  .share_credential input {
+    width: auto; }
+  .share_credential > div {
+    margin-bottom: 10px; }
+
 .shared_table .fa-trash {
   cursor: pointer; }
 .shared_table .fa-trash:hover {
