@@ -66,7 +66,7 @@ class CredentialService {
 
 	public function getCredentialById($credential_id, $user_id){
         $credential = $this->credentialMapper->getCredentialById($credential_id);
-        if ($credential->getUserId() == $user_id){
+        if ($credential->getUserId() === $user_id){
             return $credential;
         }
         else {
