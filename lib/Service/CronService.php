@@ -46,7 +46,7 @@ class CronService {
 			$query->bindParam(1, $id, \PDO::PARAM_INT);
 			$result = $query->execute();
 			$this->logger->debug($credential->getLabel() .' is expired, checking notifications!', array('app' => 'passman'));
-			if($result->fetchRow()['rows'] == 0) {
+			if($result->fetchRow()['rows'] === 0) {
 				$this->logger->debug($credential->getLabel() .' is expired, adding notification!', array('app' => 'passman'));
 
 				$this->activityService->add(
