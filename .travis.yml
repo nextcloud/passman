@@ -37,6 +37,7 @@ before_install:
     - ./occ app:list
     - nvm install 5.9
     - npm install -g npm@latest
+    - npm install grunt-cli -g
 #
 before_script:
 #    - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s oc_autotest; fi
