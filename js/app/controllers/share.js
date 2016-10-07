@@ -158,7 +158,6 @@ angular.module('passmanApp')
 				acl.togglePermission(permission);
 			};
 			$scope.shareWith = function (shareWith, selectedAccessLevel) {
-				//@TODO Improve this so we can add, edit and remove users and permissions.
 				$scope.inputSharedWith = [];
 				if (shareWith.length > 0) {
 					for (var i = 0; i < shareWith.length; i++) {
