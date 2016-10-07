@@ -152,19 +152,19 @@ class CredentialController extends ApiController {
 				$activity . '_self', array($label, $this->userId, $revision_created),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
-		} else if (($storedCredential->getDeleteTime() == 0) && $delete_time > 0) {
+		} else if (($storedCredential->getDeleteTime() === 0) && (int) $delete_time > 0) {
 			$activity = 'item_deleted';
 			$this->activityService->add(
 				$activity . '_self', array($label, $this->userId),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
-		} else if (($storedCredential->getDeleteTime() > 0) && $delete_time == 0) {
+		} else if (($storedCredential->getDeleteTime() > 0) && (int) $delete_time === 0) {
 			$activity = 'item_recovered';
 			$this->activityService->add(
 				$activity . '_self', array($label, $this->userId),
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
-		} else if ($label != $storedCredential->getLabel()) {
+		} else if ($label !== $storedCredential->getLabel()) {
 			$activity = 'item_renamed';
 			$this->activityService->add(
 				$activity . '_self', array($storedCredential->getLabel(), $label, $this->userId),
@@ -202,7 +202,7 @@ class CredentialController extends ApiController {
 
 			foreach ($acl_list as $sharingACL) {
 				$target_user = $sharingACL->getUserId();
-				if($target_user == $this->userId){
+				if($target_user === $this->userId){
 					continue;
 				}
 				$this->activityService->add(
@@ -210,18 +210,18 @@ class CredentialController extends ApiController {
 					'', array(),
 					$link, $target_user, Activity::TYPE_ITEM_ACTION);
 			}
-			if ($this->userId != $storedCredential->getUserId()) {
+			if ($this->userId !== $storedCredential->getUserId()) {
 				$this->activityService->add(
 					$activity, $params,
 					'', array(),
 					$link, $storedCredential->getUserId(), Activity::TYPE_ITEM_ACTION);
 			}
 		}
-		if($set_share_key == true){
+		if($set_share_key === true){
 			$storedCredential->setSharedKey($shared_key);
 			$credential['shared_key'] = $shared_key;
 		}
-		if($unshare_action == true){
+		if($unshare_action === true){
 			$storedCredential->setSharedKey('');
 			$credential['shared_key'] = '';
 		}
@@ -263,7 +263,7 @@ class CredentialController extends ApiController {
         }
 
         // If the request was made by the owner of the credential
-        if ($this->userId == $credential->getUserId()) {
+        if ($this->userId === $credential->getUserId()) {
             $result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);
         }
         else {
