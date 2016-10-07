@@ -71,7 +71,7 @@ class ShareService {
 	}
 
 	public function createACLEntry(SharingACL $acl) {
-		if ($acl->getCreated() == null) $acl->setCreated((new \DateTime())->getTimestamp());
+		if ($acl->getCreated() === null) $acl->setCreated((new \DateTime())->getTimestamp());
 		return $this->sharingACL->createACLEntry($acl);
 	}
 
