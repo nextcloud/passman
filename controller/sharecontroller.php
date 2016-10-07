@@ -246,18 +246,16 @@ class ShareController extends ApiController {
 
 		if($sr){
 			$this->shareService->cleanItemRequestsForUser($sr);
+			$manager = \OC::$server->getNotificationManager();
+			$notification = $manager->createNotification();
+			$notification->setApp('passman')
+				->setObject('passman_share_request', $sr->getId())
+				->setUser($user_id);
+			$manager->markProcessed($notification);
 		}
 		if($acl){
 			$this->shareService->deleteShareACL($acl);
 		}
-
-		$manager = \OC::$server->getNotificationManager();
-		$notification = $manager->createNotification();
-		$notification->setApp('passman')
-			->setObject('passman_share_request', $sr->getId())
-			->setUser($user_id);
-		$manager->markProcessed($notification);
-
 		return new JSONResponse(array('result' => true));
 	}
 
