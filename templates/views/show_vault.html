@@ -77,111 +77,85 @@
 	</div>
 	<div id="app-sidebar" class="detailsView scroll-container app_sidebar"
 		 ng-show="selectedCredential">
+		<h2>{{selectedCredential.label}}</h2>
 		<span class="close icon-close" ng-click="closeSelected()"
 			  alt="Close"></span>
-		<table>
-			<tr ng-show="selectedCredential.label">
-				<td>
-					Label
-				</td>
-				<td>
-					{{selectedCredential.label}}
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.username">
-				<td>
-					Account
-				</td>
-				<td>
-					<span credential-field
-						  value="selectedCredential.username"></span>
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.password">
-				<td>
-					Password
-				</td>
-				<td>
-					<span credential-field value="selectedCredential.password"
-						  secret="'true'"></span>
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.otp.secret">
-				<td>
-					OTP
-				</td>
-				<td>
-					<span otp-generator
-						  secret="selectedCredential.otp.secret"></span>
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.email">
-				<td>
-					E-mail
-				</td>
-				<td>
-					<span credential-field
-						  value="selectedCredential.email"></span>
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.url">
-				<td>
-					URL
-				</td>
-				<td>
-					<span credential-field
-						  value="selectedCredential.url"></span>
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.files.length > 0">
-				<td>
-					Files
-				</td>
-				<td>
-					<div ng-repeat="file in selectedCredential.files"
-						 class="link" ng-click="downloadFile(selectedCredential, file)">
-						{{file.filename}} ({{file.size | bytes}})
-					</div>
-				</td>
-			</tr>
-			<tr ng-repeat="field in selectedCredential.custom_fields">
-				<td>
-					{{field.label}}
-				</td>
-				<td>
-					<span credential-field value="field.value"
-						  secret="field.secret"></span>
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.expire_time > 0">
-				<td>
-					Expire time
-				</td>
-				<td>
-					{{selectedCredential.expire_time * 1000 | date:'dd-MM-yyyy @
-					HH:mm:ss'}}
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.changed">
-				<td>
-					Changed
-				</td>
-				<td>
-					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @
-					HH:mm:ss'}}
-				</td>
-			</tr>
-			<tr ng-show="selectedCredential.created">
-				<td>
-					Created
-				</td>
-				<td>
-					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @
-					HH:mm:ss'}}
-				</td>
-			</tr>
 
-		</table>
+		<div class="credential-data">
+			<div class="row" ng-show="selectedCredential.username">
+				<div class="col-xs-4 col-md-3 col-lg-3">Account</div>
+				<div class="col-xs-8 col-md-9 col-lg-9"><span credential-field
+													 value="selectedCredential.username"></span></div>
+			</div>
+
+
+			<div class="row" ng-show="selectedCredential.password">
+				<div class="col-xs-4 col-md-3 col-lg-3">Password</div>
+				<div class="col-xs-8 col-md-9 col-lg-9">
+					<span credential-field value="selectedCredential.password" secret="'true'">
+
+					</span>
+				</div>
+			</div>
+
+
+			<div class="row" ng-show="selectedCredential.otp.secret">
+				<div class="col-xs-4 col-md-3 col-lg-3">OTP</div>
+				<div class="col-xs-8 col-md-9 col-lg-9"><span otp-generator
+													 secret="selectedCredential.otp.secret"></span></div>
+			</div>
+
+
+			<div class="row" ng-show="selectedCredential.email">
+				<div class="col-xs-4 col-md-3 col-lg-3">E-mail</div>
+				<div class="col-xs-8 col-md-9 col-lg-9"><span credential-field
+													 value="selectedCredential.email"></span></div>
+			</div>
+
+			<div class="row" ng-show="selectedCredential.url">
+				<div class="col-xs-4 col-md-3 col-lg-3">URL</div>
+				<div class="col-xs-8 col-md-9 col-lg-9"><span credential-field
+													 value="selectedCredential.url"></span></div>
+			</div>
+
+			<div class="row" ng-show="selectedCredential.files.length > 0">
+				<div class="col-xs-4 col-md-3 col-lg-3">Files</div>
+				<div class="col-xs-8 col-md-9 col-lg-9"><div ng-repeat="file in selectedCredential.files"
+													class="link" ng-click="downloadFile(selectedCredential, file)">
+					{{file.filename}} ({{file.size | bytes}})
+				</div></div>
+			</div>
+
+			<div class="row" ng-repeat="field in selectedCredential.custom_fields">
+				<div class="col-xs-4 col-md-3 col-lg-3">{{field}}</div>
+				<div class="col-xs-8 col-md-9 col-lg-9"><span credential-field value="field.value"
+													 secret="field.secret"></span></div>
+			</div>
+
+
+			<div class="row" ng-show="selectedCredential.expire_time > 0">
+				<div class="col-xs-4 col-md-3 col-lg-3">Expire time</div>
+				<div class="col-xs-8 col-md-9 col-lg-9">
+					{{selectedCredential.expire_time * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+				</div>
+			</div>
+
+
+			<div class="row" ng-show="selectedCredential.changed">
+				<div class="col-xs-4 col-md-3 col-lg-3">Changed</div>
+				<div class="col-xs-8 col-md-9 col-lg-9">
+					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+				</div>
+			</div>
+
+
+			<div class="row" ng-show="selectedCredential.created">
+				<div class="col-xs-4 col-md-3 col-lg-3">Created</div>
+				<div class="col-xs-8 col-md-9 col-lg-9">
+					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+				</div></div>
+			</div>
+		</div>
 
 		<div class="tags">
 			<span class="tag" ng-repeat="tag in selectedCredential.tags">{{tag.text}}</span>

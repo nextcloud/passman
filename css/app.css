@@ -371,6 +371,9 @@
     #app-content #app-content-wrapper .app_sidebar {
       padding: 10px;
       overflow-y: auto; }
+      #app-content #app-content-wrapper .app_sidebar h2 {
+        margin-bottom: 10px;
+        font-weight: 400; }
       #app-content #app-content-wrapper .app_sidebar .close.icon-close {
         position: absolute;
         top: 10px;
@@ -379,22 +382,13 @@
       #app-content #app-content-wrapper .app_sidebar.item_selected {
         height: 25%;
         display: inline-block; }
-      #app-content #app-content-wrapper .app_sidebar table {
-        width: 100%;
-        margin-bottom: 10px; }
-        #app-content #app-content-wrapper .app_sidebar table tr:hover {
-          background-color: #fff; }
-        #app-content #app-content-wrapper .app_sidebar table tr td {
-          padding: 2px;
-          width: auto;
-          white-space: nowrap;
-          height: 25px;
-          vertical-align: middle; }
-      #app-content #app-content-wrapper .app_sidebar .tags {
+      #app-content #app-content-wrapper .app_sidebar .credential-data .row {
+        margin-bottom: 11px; }
+      #app-content #app-content-wrapper .app_sidebar .credential-data .tags {
         margin-top: 15px;
         margin-bottom: 15px;
         float: none; }
-        #app-content #app-content-wrapper .app_sidebar .tags .tag {
+        #app-content #app-content-wrapper .app_sidebar .credential-data .tags .tag {
           background-color: rgba(240, 240, 240, 0.9);
           padding: 4px;
           margin-right: 3px; }
@@ -403,6 +397,11 @@
   overflow: hidden; }
   .credential_field .cell, .credential_field .value {
     float: left; }
+  .credential_field .value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%; }
   .credential_field .tools {
     margin-left: 10px;
     overflow: hidden;
