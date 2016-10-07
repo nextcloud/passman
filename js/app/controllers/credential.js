@@ -287,6 +287,9 @@ angular.module('passmanApp')
 
 			$scope.filtered_credentials = [];
 			$scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function(){
+				if(!$scope.active_vault){
+					return;
+				}
 				if($scope.active_vault.credentials) {
 					var credentials = angular.copy($scope.active_vault.credentials);
 					var filtered_credentials = $filter('credentialSearch')(credentials, $scope.filterOptions);
