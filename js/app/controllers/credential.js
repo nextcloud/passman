@@ -28,9 +28,10 @@ angular.module('passmanApp')
 			}
 
 
-			$scope.show_spinner = true;
 
+			$scope.show_spinner = true;
 			var fetchCredentials = function () {
+
 				VaultService.getVault($scope.active_vault).then(function (vault) {
 
 					var vaultKey = angular.copy($scope.active_vault.vaultKey);
@@ -86,7 +87,6 @@ angular.module('passmanApp')
 							}
 						}
 						angular.merge($scope.active_vault.credentials, _credentials);
-						$scope.filtered_credentials = angular.copy($scope.active_vault.credentials);
 						$scope.show_spinner = false;
 					});
 				});
@@ -286,7 +286,7 @@ angular.module('passmanApp')
 
 
 			$scope.filtered_credentials = [];
-			$scope.$watch('[selectedtags, filterOptions, delete_time, show_spinner]', function(){
+			$scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function(){
 				var credentials = angular.copy($scope.active_vault.credentials);
 				var filtered_credentials = $filter('credentialSearch')(credentials,$scope.filterOptions);
 				filtered_credentials = $filter('tagFilter')(filtered_credentials,$scope.selectedtags);
