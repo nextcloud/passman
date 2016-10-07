@@ -373,7 +373,11 @@
       overflow-y: auto; }
       #app-content #app-content-wrapper .app_sidebar h2 {
         margin-bottom: 10px;
-        font-weight: 400; }
+        font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 90%; }
       #app-content #app-content-wrapper .app_sidebar .close.icon-close {
         position: absolute;
         top: 10px;

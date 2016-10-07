@@ -286,12 +286,14 @@ angular.module('passmanApp')
 
 
 			$scope.filtered_credentials = [];
-			$scope.$watch('[selectedtags, filterOptions, delete_time]', function(){
+			$scope.$watch('[selectedtags, filterOptions, delete_time, show_spinner]', function(){
 				var credentials = angular.copy($scope.active_vault.credentials);
 				var filtered_credentials = $filter('credentialSearch')(credentials,$scope.filterOptions);
 				filtered_credentials = $filter('tagFilter')(filtered_credentials,$scope.selectedtags);
+				filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
 				$scope.filtered_credentials = filtered_credentials;
 			}, true);
+
 			$scope.selectedtags = [];
 			var to;
 			$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
