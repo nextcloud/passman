@@ -13,11 +13,11 @@ namespace OCA\Passman\Utility;
 use OCP\AppFramework\Db\Entity;
 
 class PermissionEntity extends Entity {
-	CONST READ  =   0b00000001;
-	CONST WRITE =   0b00000010;
-	CONST FILES =   0b00000100;
+	CONST READ  = 0b00000001;
+	CONST WRITE = 0b00000010;
+	CONST FILES = 0b00000100;
 	CONST HISTORY = 0b00001000;
-	CONST OWNER =   0b10000000;
+	CONST OWNER = 0b10000000;
 
 	/**
 	 * Checks wether a user matches one or more permissions at once

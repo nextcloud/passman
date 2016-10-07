@@ -23,7 +23,7 @@ class FileController extends ApiController {
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
-								FileService $fileService){
+								FileService $fileService) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->fileService = $fileService;
@@ -56,20 +56,20 @@ class FileController extends ApiController {
 		return new JSONResponse($this->fileService->deleteFile($file_id, $this->userId));
 	}
 
-	public function updateFile($file_id, $file_data, $filename, $mimetype, $size){
-		try{
+	public function updateFile($file_id, $file_data, $filename, $mimetype, $size) {
+		try {
 			$file = $this->fileService->getFile($file_id, $this->userId);
-		} catch (DoesNotExistException $doesNotExistException){
+		} catch (DoesNotExistException $doesNotExistException) {
 
 		}
-		if($file){
-			if($file_data) {
+		if ($file) {
+			if ($file_data) {
 				$file->setFileData($file_data);
 			}
-			if($filename) {
+			if ($filename) {
 				$file->setFilename($filename);
 			}
-			if($filename || $file_data){
+			if ($filename || $file_data) {
 				new JSONResponse($this->fileService->updateFile($file));
 			}
 		}

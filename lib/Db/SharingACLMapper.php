@@ -29,13 +29,13 @@ class SharingACLMapper extends Mapper {
 	 * @param $item_guid
 	 * @return SharingACL[]
 	 */
-	public function getCredentialPermissions(IUser $userId, $item_guid){
-		$sql = "SELECT * FROM ". self::TABLE_NAME ." WHERE user_id = ? AND item_guid = ?";
+	public function getCredentialPermissions(IUser $userId, $item_guid) {
+		$sql = "SELECT * FROM " . self::TABLE_NAME . " WHERE user_id = ? AND item_guid = ?";
 
 		return $this->findEntities($sql, [$userId, $item_guid]);
 	}
 
-	public function createACLEntry(SharingACL $acl){
+	public function createACLEntry(SharingACL $acl) {
 		return $this->insert($acl);
 	}
 
@@ -46,7 +46,7 @@ class SharingACLMapper extends Mapper {
 	 * @return SharingACL[]
 	 */
 	public function getVaultEntries($user_id, $vault_id) {
-		$q = "SELECT * FROM ". self::TABLE_NAME ." WHERE user_id = ? AND vault_guid = ?";
+		$q = "SELECT * FROM " . self::TABLE_NAME . " WHERE user_id = ? AND vault_guid = ?";
 		return $this->findEntities($q, [$user_id, $vault_id]);
 	}
 
@@ -59,10 +59,9 @@ class SharingACLMapper extends Mapper {
 	public function getItemACL($user_id, $item_guid) {
 		$q = "SELECT * FROM " . self::TABLE_NAME . " WHERE item_guid = ? AND ";
 		$filter = [$item_guid];
-		if ($user_id === null){
+		if ($user_id === null) {
 			$q .= 'user_id is null';
-		}
-		else {
+		} else {
 			$q .= 'user_id = ? ';
 			$filter[] = $user_id;
 		}
@@ -86,11 +85,11 @@ class SharingACLMapper extends Mapper {
 	 * @return SharingACL[]
 	 */
 	public function getCredentialAclList($item_guid) {
-		$q = "SELECT * FROM ". self::TABLE_NAME ." WHERE item_guid = ?";
+		$q = "SELECT * FROM " . self::TABLE_NAME . " WHERE item_guid = ?";
 		return $this->findEntities($q, [$item_guid]);
 	}
 
-	public function deleteShareACL(SharingACL $ACL){
+	public function deleteShareACL(SharingACL $ACL) {
 		return $this->delete($ACL);
 	}
 }

@@ -25,6 +25,7 @@ class CredentialMapper extends Mapper {
 	/**
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @param integer $vault_id
 	 */
 	public function getCredentialsByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
@@ -38,29 +39,32 @@ class CredentialMapper extends Mapper {
 		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 
-	public function getExpiredCredentials($timestamp){
+	public function getExpiredCredentials($timestamp) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `expire_time` > 0 AND `expire_time` < ?';
 		return $this->findEntities($sql, [$timestamp]);
 	}
 
-    /**
-     * @param $credential_id
-     * @param null $user_id
-     * @return Credential
-     */
+	/**
+	 * @param $credential_id
+	 * @param null $user_id
+	 * @return Credential
+	 */
 	public function getCredentialById($credential_id, $user_id = null){
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `id` = ?';
-        // If we want to check the owner, add it to the query
+		// If we want to check the owner, add it to the query
 		$params = [$credential_id];
-        if ($user_id !== null){
-        	$sql .= ' and `user_id` = ? ';
+		if ($user_id !== null){
+			$sql .= ' and `user_id` = ? ';
 			array_push($params, $user_id);
 		}
 		return $this->findEntity($sql,$params);
 	}
 
+	/**
+	 * @param integer $credential_id
+	 */
 	public function getCredentialLabelById($credential_id){
 		$sql = 'SELECT id, label FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `id` = ? ';
@@ -94,11 +98,11 @@ class CredentialMapper extends Mapper {
 		return parent::insert($credential);
 	}
 
-	public function updateCredential($raw_credential){
-		if(!$raw_credential['guid']){
-			$raw_credential['guid'] =  $this->utils->GUID();
+	public function updateCredential($raw_credential) {
+		if (!$raw_credential['guid']) {
+			$raw_credential['guid'] = $this->utils->GUID();
 		}
-		if(!$raw_credential['created']){
+		if (!$raw_credential['created']) {
 			$raw_credential['created'] = $this->utils->getTime();
 		}
 		$credential = new Credential();
@@ -127,26 +131,26 @@ class CredentialMapper extends Mapper {
 		return parent::update($credential);
 	}
 
-	public function deleteCredential(Credential $credential){
+	public function deleteCredential(Credential $credential) {
 		$this->delete($credential);
 	}
 
-	public function upd(Credential $credential){
+	public function upd(Credential $credential) {
 		$this->update($credential);
 	}
 
-    /**
-     * Finds a credential by the given guid
-     * @param $credential_guid
-     * @return Credential
-     */
+	/**
+	 * Finds a credential by the given guid
+	 * @param $credential_guid
+	 * @return Credential
+	 */
 	public function getCredentialByGUID($credential_guid, $user_id = null){
-	    $q = 'SELECT * FROM `*PREFIX*passman_credentials` WHERE guid = ? ';
+		$q = 'SELECT * FROM `*PREFIX*passman_credentials` WHERE guid = ? ';
 		$params = [$credential_guid];
 		if ($user_id !== null){
 			$q .= ' and `user_id` = ? ';
 			array_push($params, $user_id);
 		}
-        return $this->findEntity($q, $params);
-    }
+		return $this->findEntity($q, $params);
+	}
 }

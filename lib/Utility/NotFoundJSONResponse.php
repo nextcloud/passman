@@ -14,11 +14,11 @@ use OCP\AppFramework\Http\JSONResponse;
 
 class NotFoundJSONResponse extends JSONResponse {
 
-    /**
-     * Creates a new json response with a not found status code.
-     * @param array $response_data
-     */
-    public function __construct($response_data = []) {
-        parent::__construct($response_data, Http::STATUS_NOT_FOUND);
-    }
+	/**
+	 * Creates a new json response with a not found status code.
+	 * @param array $response_data
+	 */
+	public function __construct($response_data = []) {
+		parent::__construct($response_data, Http::STATUS_NOT_FOUND);
+	}
 }

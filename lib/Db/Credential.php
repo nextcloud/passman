@@ -57,13 +57,10 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getHidden()
  * @method void setSharedKey(string $value)
  * @method string getSharedKey()
-
-
-
  */
 
 
-class Credential extends Entity implements  \JsonSerializable{
+class Credential extends Entity implements  \JsonSerializable {
 
 	use EntityJSONSerializer;
 

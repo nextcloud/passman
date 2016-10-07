@@ -49,9 +49,9 @@ class ActivityService {
 	 * @type = Can be passman_password or passman_password_shared
 	 * @priority = Int -> [10,20,30,40,50]
 	 */
-	public function add($subject,$subjectParams=array(),
-						$message='',$messageParams=array(),
-						$link='',$user=null,$type='') {
+	public function add($subject, $subjectParams = array(),
+						$message = '', $messageParams = array(),
+						$link = '', $user = null, $type = '') {
 		$activity = $this->manager->generateEvent();
 		$activity->setType($type);
 		$activity->setApp('passman');

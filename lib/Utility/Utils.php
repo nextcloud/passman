@@ -12,10 +12,10 @@
 namespace OCA\Passman\Utility;
 
 class Utils {
-    /**
-     * Gets the unix epoch UTC timestamp
-     * @return int
-     */
+	/**
+	 * Gets the unix epoch UTC timestamp
+	 * @return int
+	 */
 	public static function getTime() {
 		return (new \DateTime())->getTimestamp();
 	}
@@ -27,10 +27,10 @@ class Utils {
 		return $secs . substr($millisecs, 2, 6);
 	}
 
-    /**
-     * Generates a Globally Unique ID
-     * @return string
-     */
+	/**
+	 * Generates a Globally Unique ID
+	 * @return string
+	 */
 	public static function GUID() {
 		if (function_exists('com_create_guid') === true)
 		{

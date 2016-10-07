@@ -8,7 +8,6 @@
 namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\PermissionEntity;
-use OCP\AppFramework\Db\Entity;
 
 /**
  * @method void setId(integer $value)
@@ -38,50 +37,50 @@ use OCP\AppFramework\Db\Entity;
 class SharingACL extends PermissionEntity implements \JsonSerializable
 {
 
-    protected
-        $itemId,
-        $itemGuid,
-        $userId,
-        $created,
-        $expire,
+	protected
+		$itemId,
+		$itemGuid,
+		$userId,
+		$created,
+		$expire,
 		$expireViews,
-        $permissions,
-        $vaultId,
-        $vaultGuid,
-        $sharedKey;
+		$permissions,
+		$vaultId,
+		$vaultGuid,
+		$sharedKey;
 
 
-    public function __construct() {
-        // add types in constructor
-        $this->addType('itemId', 'integer');
-        $this->addType('created', 'integer');
-        $this->addType('expire', 'integer');
-        $this->addType('expireViews', 'integer');
-        $this->addType('permissions', 'integer');
-    }
+	public function __construct() {
+		// add types in constructor
+		$this->addType('itemId', 'integer');
+		$this->addType('created', 'integer');
+		$this->addType('expire', 'integer');
+		$this->addType('expireViews', 'integer');
+		$this->addType('permissions', 'integer');
+	}
 
-    /**
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     * @since 5.4.0
-     */
-    function jsonSerialize()
-    {
-        return [
-            'acl_id' => $this->getId(),
-            'item_id' => $this->getItemId(),
-            'item_guid' => $this->getItemGuid(),
-            'user_id' => $this->getUserId(),
-            'created' => $this->getCreated(),
-            'expire' => $this->getExpire(),
-            'expire_views' => $this->getExpireViews(),
-            'permissions' => $this->getPermissions(),
-            'vault_id' => $this->getVaultId(),
-            'vault_guid' => $this->getVaultGuid(),
-            'shared_key' => $this->getSharedKey(),
-            'pending' => false,
-        ];
-    }
+	/**
+	 * Specify data which should be serialized to JSON
+	 * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+	 * @return mixed data which can be serialized by <b>json_encode</b>,
+	 * which is a value of any type other than a resource.
+	 * @since 5.4.0
+	 */
+	function jsonSerialize()
+	{
+		return [
+			'acl_id' => $this->getId(),
+			'item_id' => $this->getItemId(),
+			'item_guid' => $this->getItemGuid(),
+			'user_id' => $this->getUserId(),
+			'created' => $this->getCreated(),
+			'expire' => $this->getExpire(),
+			'expire_views' => $this->getExpireViews(),
+			'permissions' => $this->getPermissions(),
+			'vault_id' => $this->getVaultId(),
+			'vault_guid' => $this->getVaultGuid(),
+			'shared_key' => $this->getSharedKey(),
+			'pending' => false,
+		];
+	}
 }

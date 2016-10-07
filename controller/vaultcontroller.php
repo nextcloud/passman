@@ -79,7 +79,7 @@ class VaultController extends ApiController {
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
 		} catch (DoesNotExistException $e) {
-            return new NotFoundJSONResponse();
+			return new NotFoundJSONResponse();
 		}
 		$result = array();
 		if ($vault) {

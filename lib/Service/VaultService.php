@@ -47,11 +47,11 @@ class VaultService {
 		return $this->vaultMapper->updateVault($vault);
 	}
 
-	public function setLastAccess($vault_id, $user_id){
+	public function setLastAccess($vault_id, $user_id) {
 		return $this->vaultMapper->setLastAccess($vault_id, $user_id);
 	}
 
-	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
+	public function updateSharingKeys($vault_id, $privateKey, $publicKey) {
 		return $this->vaultMapper->updateSharingKeys($vault_id, $privateKey, $publicKey);
 	}
 }

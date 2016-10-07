@@ -49,14 +49,14 @@ class VaultMapper extends Mapper {
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
 	 * @return Vault[]
 	 */
-	public function findVaultsFromUser($userId){
+	public function findVaultsFromUser($userId) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
 			'WHERE `user_id` = ? ';
 		$params = [$userId];
 		return $this->findEntities($sql, $params);
 	}
 
-	public function create($vault_name, $userId){
+	public function create($vault_name, $userId) {
 		$vault = new Vault();
 		$vault->setName($vault_name);
 		$vault->setUserId($userId);
@@ -66,7 +66,7 @@ class VaultMapper extends Mapper {
 		return parent::insert($vault);
 	}
 
-	public function setLastAccess($vault_id, $user_id){
+	public function setLastAccess($vault_id, $user_id) {
 		$vault = new Vault();
 		$vault->setId($vault_id);
 		$vault->setUserId($user_id);
@@ -74,11 +74,11 @@ class VaultMapper extends Mapper {
 		$this->update($vault);
 	}
 
-	public function updateVault(Vault $vault){
+	public function updateVault(Vault $vault) {
 		$this->update($vault);
 	}
 
-	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
+	public function updateSharingKeys($vault_id, $privateKey, $publicKey) {
 		$vault = new Vault();
 		$vault->setId($vault_id);
 		$vault->setPrivateSharingKey($privateKey);

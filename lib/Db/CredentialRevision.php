@@ -38,7 +38,7 @@ class CredentialRevision extends Entity implements \JsonSerializable {
 	protected $userId;
 	protected $created;
 	protected $credentialData;
-    protected $editedBy;
+	protected $editedBy;
 
 
 	public function __construct() {
@@ -56,7 +56,7 @@ class CredentialRevision extends Entity implements \JsonSerializable {
 			'guid' => $this->getGuid(),
 			'created' => $this->getCreated(),
 			'credential_data' => json_decode(base64_decode($this->getCredentialData())),
-            'edited_by' => $this->getEditedBy(),
+			'edited_by' => $this->getEditedBy(),
 		];
 	}
 }

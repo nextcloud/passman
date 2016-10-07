@@ -14,9 +14,7 @@ namespace OCA\Passman\Service;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\SharingACLMapper;
-use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
-
 use OCA\Passman\Db\CredentialMapper;
 
 
@@ -54,7 +52,7 @@ class CredentialService {
 	/**
 	 * @param Credential $credential
 	 */
-	public function deleteCredential($credential){
+	public function deleteCredential($credential) {
 		return $this->credentialMapper->deleteCredential($credential);
 	}
 
@@ -81,17 +79,17 @@ class CredentialService {
 	}
 
 	public function getCredentialById($credential_id, $user_id) {
-        $credential = $this->credentialMapper->getCredentialById($credential_id);
-        if ($credential->getUserId() === $user_id) {
-            return $credential;
-        }
-        else {
-            $acl = $this->sharingACL->getItemACL($user_id, $credential->getGuid());
-            if ($acl->hasPermission(SharingACL::READ));
-            return $credential;
-        }
+		$credential = $this->credentialMapper->getCredentialById($credential_id);
+		if ($credential->getUserId() === $user_id) {
+			return $credential;
+		}
+		else {
+			$acl = $this->sharingACL->getItemACL($user_id, $credential->getGuid());
+			if ($acl->hasPermission(SharingACL::READ));
+			return $credential;
+		}
 
-        throw new DoesNotExistException("Did expect one result but found none when executing");
+		throw new DoesNotExistException("Did expect one result but found none when executing");
 	}
 
 	/**
@@ -102,6 +100,6 @@ class CredentialService {
 	}
 
 	public function getCredentialByGUID($credential_guid, $user_id = null){
-	    return $this->credentialMapper->getCredentialByGUID($credential_guid, $user_id);
-    }
+		return $this->credentialMapper->getCredentialByGUID($credential_guid, $user_id);
+	}
 }

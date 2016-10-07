@@ -12,7 +12,7 @@ namespace OCA\Passman\Db;
 trait EntityJSONSerializer {
 	public function serializeFields($properties) {
 		$result = [];
-		foreach($properties as $property) {
+		foreach ($properties as $property) {
 			$result[$property] = $this->$property;
 		}
 		return $result;

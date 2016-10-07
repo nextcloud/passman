@@ -36,7 +36,7 @@ use \OCP\AppFramework\Db\Entity;
  */
 
 
-class Vault extends Entity implements  \JsonSerializable{
+class Vault extends Entity implements  \JsonSerializable {
 
 	use EntityJSONSerializer;
 

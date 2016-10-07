@@ -11,7 +11,6 @@
 
 namespace OCA\Passman\AppInfo;
 use OC\Files\View;
-
 use OCA\Passman\Controller\CredentialController;
 use OCA\Passman\Controller\PageController;
 use OCA\Passman\Controller\ShareController;
@@ -24,12 +23,10 @@ use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCA\Passman\Service\NotificationService;
-
 use OCP\AppFramework\App;
 use OCP\IL10N;
-use OCP\Util;
 class Application extends App {
-	public function __construct () {
+	public function __construct() {
 		parent::__construct('passman');
 		$container = $this->getContainer();
 		$server = $container->getServer();
@@ -55,17 +52,17 @@ class Application extends App {
 				$server->getUserManager(),
  				$c->query('ActivityService'),
  				$c->query('VaultService'),
-                $c->query('ShareService'),
-                $c->query('CredentialService'),
-                $c->query('NotificationService'),
-                $c->query('FileService')
+				$c->query('ShareService'),
+				$c->query('CredentialService'),
+				$c->query('NotificationService'),
+				$c->query('FileService')
 			);
 		});
 
 
 
 		/** Cron  **/
-		$container->registerService('CronService', function ($c) {
+		$container->registerService('CronService', function($c) {
 			return new CronService(
 				$c->query('CredentialService'),
 				$c->query('Logger'),
@@ -76,7 +73,7 @@ class Application extends App {
 			);
 		});
 
-		$container->registerService('Db', function () {
+		$container->registerService('Db', function() {
 			return new Db();
 		});
 
@@ -94,7 +91,7 @@ class Application extends App {
 		$container->registerAlias('ActivityService', ActivityService::class);
 		$container->registerAlias('VaultService', VaultService::class);
 		$container->registerAlias('FileService', FileService::class);
-        $container->registerAlias('ShareService', ShareService::class);
+		$container->registerAlias('ShareService', ShareService::class);
 		$container->registerAlias('Utils', Utils::class);
 	}
 
@@ -105,7 +102,7 @@ class Application extends App {
 		$c = $this->getContainer();
 		/** @var \OCP\IServerContainer $server */
 		$server = $c->getServer();
-		$navigationEntry = function () use ($c, $server) {
+		$navigationEntry = function() use ($c, $server) {
 			return [
 				'id' => $c->getAppName(),
 				'order' => 10,

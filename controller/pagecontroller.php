@@ -21,7 +21,7 @@ class PageController extends Controller {
 
 	private $userId;
 
-	public function __construct($AppName, IRequest $request, $UserId){
+	public function __construct($AppName, IRequest $request, $UserId) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 	}
@@ -38,7 +38,7 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		$params = ['user' => $this->userId];
-		return new TemplateResponse('passman', 'main', $params);  // templates/main.php
+		return new TemplateResponse('passman', 'main', $params); // templates/main.php
 	}
 
 
@@ -46,7 +46,7 @@ class PageController extends Controller {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function bookmarklet($url='',$title='') {
+	public function bookmarklet($url = '', $title = '') {
 		$params = array('url' => $url, 'label' => $title);
 		return new TemplateResponse('passman', 'bookmarklet', $params);
 	}

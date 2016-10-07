@@ -15,7 +15,7 @@ use \OCP\AppFramework\Db\Entity;
 /**
  * @method integer getId()
  * @method void setId(integer $value)
-  * @method void setGuid(string $value)
+ * @method void setGuid(string $value)
  * @method string getGuid()
  * @method void setUserId(string $value)
  * @method string getUserid()
@@ -32,7 +32,7 @@ use \OCP\AppFramework\Db\Entity;
  */
 
 
-class File extends Entity implements  \JsonSerializable{
+class File extends Entity implements  \JsonSerializable {
 
 	use EntityJSONSerializer;
 

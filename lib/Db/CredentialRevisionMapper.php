@@ -30,11 +30,11 @@ class CredentialRevisionMapper extends Mapper {
 	public function getRevisions($credential_id, $user_id = null) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_revisions` ' .
 			'WHERE `credential_id` = ?';
-        $params = [$credential_id];
-        if ($user_id !== null) {
-            $sql.= ' and `user_id` = ? ';
-            $params[] = $user_id;
-        }
+		$params = [$credential_id];
+		if ($user_id !== null) {
+			$sql.= ' and `user_id` = ? ';
+			$params[] = $user_id;
+		}
 		return $this->findEntities($sql, $params);
 	}
 
@@ -46,11 +46,11 @@ class CredentialRevisionMapper extends Mapper {
 	public function getRevision($revision_id, $user_id = null) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_revisions` ' .
 			'WHERE `id` = ?';
-        $params = [$revision_id];
-        if ($user_id !== null) {
-            $sql.= ' and `user_id` = ? ';
-            $params[] = $user_id;
-        }
+		$params = [$revision_id];
+		if ($user_id !== null) {
+			$sql.= ' and `user_id` = ? ';
+			$params[] = $user_id;
+		}
 		return $this->findEntity($sql, $params);
 	}
 

@@ -9,7 +9,6 @@
 namespace OCA\Passman\Service;
 
 
-use Icewind\SMB\Share;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
@@ -49,6 +48,7 @@ class ShareService {
 	 * @param $target_item_guid string      The shared item GUID
 	 * @param $request_array    array
 	 * @param $permissions      integer     Must be created with a bitmask from options on the ShareRequest class
+	 * @param string $credential_owner
 	 * @return array                        Array of sharing requests
 	 */
 	public function createBulkRequests($target_item_id, $target_item_guid, $request_array, $permissions, $credential_owner) {
@@ -188,31 +188,31 @@ class ShareService {
 	}
 
 
-    /**
-     * Deletes a share request by the item ID
-     * @param ShareRequest $request
-     * @return \PDOStatement
-     */
+	/**
+	 * Deletes a share request by the item ID
+	 * @param ShareRequest $request
+	 * @return \PDOStatement
+	 */
 	public function cleanItemRequestsForUser(ShareRequest $request) {
 		return $this->shareRequest->cleanItemRequestsForUser($request->getItemId(), $request->getTargetUserId());
 	}
 
-    /**
-     * Get an share request by id
-     * @param $id
-     * @return ShareRequest
-     */
+	/**
+	 * Get an share request by id
+	 * @param $id
+	 * @return ShareRequest
+	 */
 	public function getShareRequestById($id) {
 		return $this->shareRequest->getShareRequestById($id);
 	}
 
-    /**
-     * Get an share request by $item_guid and $target_vault_guid
-     *
-     * @param $item_guid
-     * @param $target_vault_guid
-     * @return ShareRequest
-     */
+	/**
+	 * Get an share request by $item_guid and $target_vault_guid
+	 *
+	 * @param $item_guid
+	 * @param $target_vault_guid
+	 * @return ShareRequest
+	 */
 	public function getRequestByGuid($item_guid, $target_vault_guid) {
 		return $this->shareRequest->getRequestByItemAndVaultGuid($item_guid, $target_vault_guid);
 	}
@@ -265,18 +265,17 @@ class ShareService {
 	/**
 	 * Delete ACL
 	 *
-	 * @param  ShareRequest $request
 	 * @return \OCA\Passman\Db\ShareRequest[]
 	 */
 	public function deleteShareACL(SharingACL $ACL) {
 		return $this->sharingACL->deleteShareACL($ACL);
 	}
 
-    /**
-     * Updates the given ACL entry
-     * @param SharingACL $sharingACL
-     * @return SharingACL
-     */
+	/**
+	 * Updates the given ACL entry
+	 * @param SharingACL $sharingACL
+	 * @return SharingACL
+	 */
 	public function updateCredentialACL(SharingACL $sharingACL) {
 		return $this->sharingACL->updateCredentialACL($sharingACL);
 	}
@@ -289,7 +288,6 @@ class ShareService {
 	/**
 	 * Get pending share requests by guid and uid
 	 *
-	 * @param  ShareRequest $request
 	 * @return \OCA\Passman\Db\ShareRequest[]
 	 */
 	public function getPendingShareRequestsForCredential($item_guid, $user_id) {
@@ -298,6 +296,6 @@ class ShareService {
 
 
 	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions){
-	    return $this->shareRequest->updatePendinRequestPermissions($item_guid, $user_id, $permissions);
-    }
+		return $this->shareRequest->updatePendinRequestPermissions($item_guid, $user_id, $permissions);
+	}
 }
