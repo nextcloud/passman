@@ -187,6 +187,7 @@ angular.module('passmanApp')
 							} else {
 								console.log('Update complete!');
 								//@TODO update private key with new pw
+								//@TODO Logout user
 							}
 						});
 					};
