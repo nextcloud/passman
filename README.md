@@ -1,5 +1,9 @@
 #Currently in BETA
 #Passman
+
+![scrutinizer](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)
+![travis](https://travis-ci.org/nextcloud/passman.svg?branch=master)
+
 Passman is a full featured password manager. 
 Features:
 - Vaults
