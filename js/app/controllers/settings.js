@@ -166,7 +166,6 @@ angular.module('passmanApp')
 					for(var i =0; i < vault.credentials.length; i++){
 						var _credential = vault.credentials[i];
 						if(_credential.shared_key == null || _credential.shared_key == ''){
-							t = CredentialService.decryptCredential(_credential, oldVaultPass);
 							_selected_credentials.push(_credential);
 						}
 					}
