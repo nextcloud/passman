@@ -195,6 +195,7 @@ angular.module('passmanApp')
 								vault.private_sharing_key = EncryptService.encryptString(vault.private_sharing_key, newVaultPass);
 								VaultService.updateSharingKeys(vault).then(function (result) {
 									$rootScope.$broadcast('logout')
+									NotificationService.showNotification('Please login with your new vault password', 5000);
 								});
 							}
 						});
@@ -203,6 +204,13 @@ angular.module('passmanApp')
 
 				})
 			};
+
+			$rootScope.$on('logout', function () {
+				$scope.active_vault = null;
+				VaultService.setActiveVault(null);
+				$location.path('/');
+
+			});
 
 			$scope.cancel = function () {
 				$location.path('/vault/' + $routeParams.vault_id);
