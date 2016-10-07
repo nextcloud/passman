@@ -48,7 +48,7 @@ class PageController extends Controller {
 	 */
 	public function bookmarklet($url='',$title='') {
 		$params = array('url' => $url, 'label' => $title);
-
+		return new TemplateResponse('passman', 'bookmarklet', $params);
 	}
 
 	/**
