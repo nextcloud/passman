@@ -69,7 +69,8 @@ script:
     #- sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
     #- sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
     #- cd ../
-    - grunt jshint
+    - sh -c "if [ '$JSTESTS' == '1' -a '$CODECHECK' = '1']; then grunt jshint > grunt.log; fi"
+    - sh -c "if [ '$JSTESTS' == '1' -a '$CODECHECK' = '1']; then cat grunt.log; fi"
 
 
 #after_failure:
