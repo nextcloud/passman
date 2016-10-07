@@ -1,4 +1,4 @@
-#Currently still in development
+#Currently in BETA
 #Passman
 Passman is a full featured password manager. 
 Features:
