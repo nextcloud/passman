@@ -49,7 +49,7 @@ before_script:
     - cd apps/passman
 
 script:
-    - make test
+    - grunt jshint
 
 after_failure:
     - cat ../../data/owncloud.log
