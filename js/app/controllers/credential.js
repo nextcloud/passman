@@ -213,16 +213,16 @@ angular.module('passmanApp')
 
 				}
 				_credential.delete_time = new Date().getTime() / 1000;
-				for (var i = 0; i < $scope.credentials.length; i++) {
-					if ($scope.credentials[i].credential_id == credential.credential_id) {
-						$scope.credentials[i].delete_time = _credential.delete_time;
+				for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+					if ($scope.active_vault.credentials[i].credential_id == credential.credential_id) {
+						$scope.active_vault.credentials[i].delete_time = _credential.delete_time;
 					}
 				}
 				$scope.closeSelected();
 				if (notification) {
 					NotificationService.hideNotification(notification);
 				}
-				notification = NotificationService.showNotification('Credential deleted <a class="undoDelete" data-item-id="' + credential.credential_id + '">[Undo]</a>', 5000,
+				notification = NotificationService.showNotification('Credential deleted', 5000,
 					function () {
 						CredentialService.updateCredential(_credential).then(function (result) {
 							if (result.delete_time > 0) {
@@ -241,9 +241,9 @@ angular.module('passmanApp')
 				} catch (e) {
 
 				}
-				for (var i = 0; i < $scope.credentials.length; i++) {
-					if ($scope.credentials[i].credential_id == credential.credential_id) {
-						$scope.credentials[i].delete_time = 0;
+				for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+					if ($scope.active_vault.credentials[i].credential_id == credential.credential_id) {
+						$scope.active_vault.credentials[i].delete_time = 0;
 					}
 				}
 				_credential.delete_time = 0;
@@ -251,7 +251,7 @@ angular.module('passmanApp')
 				if (notification) {
 					NotificationService.hideNotification(notification);
 				}
-				NotificationService.showNotification('Credential recovered <a class="undoRestore" data-item-id="' + credential.credential_id + '">[Undo]</a>', 5000,
+				NotificationService.showNotification('Credential recovered', 5000,
 					function () {
 						CredentialService.updateCredential(_credential).then(function (result) {
 							notification = false;
@@ -264,9 +264,9 @@ angular.module('passmanApp')
 			$scope.destroyCredential = function (credential) {
 				var _credential = angular.copy(credential);
 				CredentialService.destroyCredential(_credential.credential_id).then(function (result) {
-					for (var i = 0; i < $scope.credentials.length; i++) {
-						if ($scope.credentials[i].credential_id == credential.credential_id) {
-							$scope.credentials.splice(i, 1);
+					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+						if ($scope.active_vault.credentials[i].credential_id == credential.credential_id) {
+							$scope.active_vault.credentials.splice(i, 1);
 							NotificationService.showNotification('Credential destroyed', 5000);
 							break;
 						}
@@ -287,11 +287,13 @@ angular.module('passmanApp')
 
 			$scope.filtered_credentials = [];
 			$scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function(){
-				var credentials = angular.copy($scope.active_vault.credentials);
-				var filtered_credentials = $filter('credentialSearch')(credentials,$scope.filterOptions);
-				filtered_credentials = $filter('tagFilter')(filtered_credentials,$scope.selectedtags);
-				filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
-				$scope.filtered_credentials = filtered_credentials;
+				if($scope.active_vault.credentials) {
+					var credentials = angular.copy($scope.active_vault.credentials);
+					var filtered_credentials = $filter('credentialSearch')(credentials, $scope.filterOptions);
+					filtered_credentials = $filter('tagFilter')(filtered_credentials, $scope.selectedtags);
+					filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
+					$scope.filtered_credentials = filtered_credentials;
+				}
 			}, true);
 
 			$scope.selectedtags = [];
