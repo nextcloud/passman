@@ -188,7 +188,7 @@ angular.module('passmanApp')
 				_credential = CredentialService.encryptCredential(_credential, old_key)
 				CredentialService.updateCredential(_credential, true).then(function () {
 					NotificationService.showNotification('Credential unshared', 4000)
-					CredentialService.reencryptCredential(_credential.credential_id, old_key, new_key).progress(function(data){
+					CredentialService.reencryptCredential(_credential.guid, old_key, new_key).progress(function(data){
 						console.log(data);
 					}).then(function(data){
 						console.warn(data);
@@ -267,7 +267,6 @@ angular.module('passmanApp')
 						var target_user = list[i];
 						if (target_user.hasOwnProperty('created')) {
 							console.log('Updating permissions')
-
 							var acl = {
 								user_id: target_user.userId,
 								permission: target_user.acl.getAccessLevel()
@@ -317,7 +316,7 @@ angular.module('passmanApp')
 						var encryptedSharedCredential = angular.copy($scope.storedCredential);
 						var old_key = VaultService.getActiveVault().vaultKey;
 
-						CredentialService.reencryptCredential(encryptedSharedCredential.credential_id, old_key, key).progress(function(data){
+						CredentialService.reencryptCredential(encryptedSharedCredential.guid, old_key, key).progress(function(data){
 							console.log(data);
 						}).then(function(data){
 							console.log(data);

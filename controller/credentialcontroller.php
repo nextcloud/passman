@@ -96,21 +96,21 @@ class CredentialController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function getCredential($credential_id) {
-		return new JSONResponse($this->credentialService->getCredentialById($credential_id, $this->userId));
+	public function getCredential($credential_guid) {
+		return new JSONResponse($this->credentialService->getCredentialByGUID($credential_guid, $this->userId));
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function updateCredential($changed, $created,
-									 $credential_id, $custom_fields, $delete_time,
+									 $credential_id, $custom_fields, $delete_time, $credential_guid,
 									 $description, $email, $expire_time, $favicon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
 									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key) {
 
 
-		$storedCredential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 
 		$credential = array(
 			'credential_id' => $credential_id,
@@ -234,8 +234,8 @@ class CredentialController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function deleteCredential($credential_id) {
-		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+	public function deleteCredential($credential_guid) {
+		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 		if ($credential) {
 			$result = $this->credentialService->deleteCredential($credential);
 			$this->activityService->add(
@@ -288,18 +288,18 @@ class CredentialController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 */
-	public function updateRevision($credential_id, $revision_id, $credential_data){
+	public function updateRevision($credential_guid, $revision_id, $credential_data){
 		$revision = null;
 		try {
-			$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
+			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 		} catch (DoesNotExistException $e) {
-			return new NotFoundResponse();
+			return new NotFoundJSONResponse();
 		}
 
 		try{
 			$revision = $this->credentialRevisionService->getRevision($revision_id);
 		} catch(DoesNotExistException $exception){
-			return new NotFoundResponse();
+			return new NotFoundJSONResponse();
 		}
 
 		$revision->setCredentialData($credential_data);

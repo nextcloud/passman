@@ -34,14 +34,14 @@ return [
 
 		//Credential
 		['name' => 'credential#createCredential', 'url' => '/api/v2/credentials', 'verb' => 'POST'],
-		['name' => 'credential#getCredential', 'url' => '/api/v2/credentials/{credential_id}', 'verb' => 'GET'],
-		['name' => 'credential#updateCredential', 'url' => '/api/v2/credentials/{credential_id}', 'verb' => 'PATCH'],
-		['name' => 'credential#deleteCredential', 'url' => '/api/v2/credentials/{credential_id}', 'verb' => 'DELETE'],
+		['name' => 'credential#getCredential', 'url' => '/api/v2/credentials/{credential_guid}', 'verb' => 'GET'],
+		['name' => 'credential#updateCredential', 'url' => '/api/v2/credentials/{credential_guid}', 'verb' => 'PATCH'],
+		['name' => 'credential#deleteCredential', 'url' => '/api/v2/credentials/{credential_guid}', 'verb' => 'DELETE'],
 
 		//Revisions
 		['name' => 'credential#getRevision', 'url' => '/api/v2/credentials/{credential_guid}/revision', 'verb' => 'GET'],
-		['name' => 'credential#deleteRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'DELETE'],
-		['name' => 'credential#updateRevision', 'url' => '/api/v2/credentials/{credential_id}/revision/{revision_id}', 'verb' => 'PATCH'],
+		['name' => 'credential#deleteRevision', 'url' => '/api/v2/credentials/{credential_guid}/revision/{revision_id}', 'verb' => 'DELETE'],
+		['name' => 'credential#updateRevision', 'url' => '/api/v2/credentials/{credential_guid}/revision/{revision_id}', 'verb' => 'PATCH'],
 
 		//File stuff
 		['name' => 'file#uploadFile', 'url' => '/api/v2/file', 'verb' => 'POST'],
