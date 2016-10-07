@@ -9,8 +9,8 @@
  */
 angular.module('passmanApp')
 	.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter',
-		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter) {
+		'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams',
+		function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams) {
 			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
@@ -27,13 +27,9 @@ angular.module('passmanApp')
 
 			}
 
-
-
 			$scope.show_spinner = true;
 			var fetchCredentials = function () {
-
-				VaultService.getVault($scope.active_vault).then(function (vault) {
-
+				VaultService.getVault({guid: $routeParams.vault_id}).then(function (vault) {
 					var vaultKey = angular.copy($scope.active_vault.vaultKey);
 					var _credentials = angular.copy(vault.credentials);
 					vault.credentials = [];
