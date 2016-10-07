@@ -3,7 +3,7 @@
 		<h3>Rename vault</h3>
 		<label>New vault name</label>
 		<input type="text" ng-model="$parent.new_vault_name">
-		<button ng-click="saveVaultSettings()" tooltip="'Not working :P'">
+		<button ng-click="saveVaultSettings()">
 			Change
 		</button>
 
@@ -17,9 +17,19 @@
 		<ng-password-meter password="newVaultPass"></ng-password-meter>
 		<label>New vault password</label>
 		<input type="password" ng-model="newVaultPass2">
+		<div ng-show="error" class="error">
+			<ul>
+				<li>{{error}}</li>
+			</ul>
+		</div>
 		<button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)"
-				tooltip="'Not working :P'">Change
+				>Change
 		</button>
+		<div ng-show="change_pw.total > 0">
+			Please wait you vault is being updated, do not leave this page.<br />
+			<div progress-bar="change_pw.percent" index="change_pw.done" total="change_pw.total"></div>
+		</div>
+
 	</div>
 	<div class="col-xs-12 col-md-6">
 		<h3>About passman</h3>

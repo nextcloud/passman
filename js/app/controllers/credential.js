@@ -176,28 +176,28 @@ angular.module('passmanApp')
 				var new_credential = CredentialService.newCredential();
 				var enc_c = CredentialService.encryptCredential(new_credential);
 				SettingsService.setSetting('edit_credential', enc_c);
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/new')
+				$location.path('/vault/' + $scope.active_vault.guid + '/new')
 			};
 
 			$scope.editCredential = function (credential) {
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
 				SettingsService.setSetting('edit_credential', CredentialService.encryptCredential(_credential));
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/edit/' + _credential.guid)
+				$location.path('/vault/' + $scope.active_vault.guid + '/edit/' + _credential.guid)
 			};
 
 			$scope.getRevisions = function (credential) {
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
 				SettingsService.setSetting('revision_credential', CredentialService.encryptCredential(_credential));
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.guid + '/revisions')
+				$location.path('/vault/' + $scope.active_vault.guid + '/' + _credential.guid + '/revisions')
 			};
 
 			$scope.shareCredential = function (credential) {
 				var _credential = angular.copy(credential);
 				$rootScope.$emit('app_menu', false);
 				SettingsService.setSetting('share_credential', CredentialService.encryptCredential(_credential));
-				$location.path('/vault/' + $scope.active_vault.vault_id + '/' + _credential.guid + '/share')
+				$location.path('/vault/' + $scope.active_vault.guid + '/' + _credential.guid + '/share')
 			};
 
 			var notification;

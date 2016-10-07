@@ -148,6 +148,55 @@ angular.module('passmanApp')
 				});
 			};
 
+
+			$scope.changeVaultPassword = function (oldVaultPass,newVaultPass,newVaultPass2) {
+				if(oldVaultPass != VaultService.getActiveVault().vaultKey){
+					$scope.error ='Your old password is incorrect!'
+					return;
+				}
+				if(newVaultPass != newVaultPass2){
+					$scope.error ='New passwords do not match!';
+					return;
+				}
+				VaultService.getVault($scope.active_vault).then(function (vault) {
+					var _selected_credentials = [];
+					for(var i =0; i < vault.credentials.length; i++){
+						var _credential = vault.credentials[i];
+						if(_credential.shared_key == null || _credential.shared_key == ''){
+							t = CredentialService.decryptCredential(_credential, oldVaultPass);
+							_selected_credentials.push(_credential);
+						}
+					}
+					$scope.change_pw = {
+						percent: 0,
+						done: 0,
+						total: _selected_credentials.length
+					};
+					var changeCredential = function(index, oldVaultPass, newVaultPass){
+						CredentialService.reencryptCredential(_selected_credentials[index].guid, oldVaultPass, newVaultPass).progress(function(data){
+							console.log(data);
+						}).then(function(data){
+							var percent = index / _selected_credentials.length * 100;
+							$scope.change_pw = {
+								percent: percent,
+								done: index+1,
+								total: _selected_credentials.length
+							};
+							if(index < _selected_credentials.length -1){
+								changeCredential(index+1, oldVaultPass, newVaultPass);
+							} else {
+								console.log('Update complete!');
+								var vault =  VaultService.getActiveVault();
+								vault.vaultKey = newVaultPass;
+								VaultService.setActiveVault(vault);
+							}
+						});
+					};
+					changeCredential(0, VaultService.getActiveVault().vaultKey, newVaultPass);
+
+				})
+			};
+
 			$scope.cancel = function () {
 				$location.path('/vault/' + $routeParams.vault_id);
 			};

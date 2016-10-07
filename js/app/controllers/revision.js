@@ -10,10 +10,10 @@
 angular.module('passmanApp')
 	.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', 'NotificationService', '$filter', 'ShareService','EncryptService',
 		function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope, NotificationService, $filter, ShareService, EncryptService) {
-
+			$scope.active_vault = VaultService.getActiveVault();
 			if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 				if (!$scope.active_vault) {
-				//	$location.path('/')
+					$location.path('/')
 				}
 			} else {
 				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
