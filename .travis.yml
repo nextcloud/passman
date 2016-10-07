@@ -31,6 +31,7 @@ before_install:
     - wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh
     - bash ./before_install.sh $APP_NAME $CORE_BRANCH $DB
      # Add some output debugging information
+    - cd ../server
     - ./occ check
     - ./occ status
     - ./occ app:list
@@ -56,7 +57,7 @@ before_script:
 script:
     - grunt jshint
     - php build/phpunit.phar -c phpunit.xml
-    - php build/phpunit.phar -c phpunit.integration.xml
+ 	- php build/phpunit.phar -c phpunit.integration.xml
 #after_failure:
 #    - cat ../../data/owncloud.log
 
