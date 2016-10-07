@@ -149,6 +149,8 @@ angular.module('passmanApp')
 			};
 
 
+			$scope.cur_state = {};
+
 			$scope.changeVaultPassword = function (oldVaultPass,newVaultPass,newVaultPass2) {
 				if(oldVaultPass != VaultService.getActiveVault().vaultKey){
 					$scope.error ='Your old password is incorrect!'
@@ -176,7 +178,7 @@ angular.module('passmanApp')
 					};
 					var changeCredential = function(index, oldVaultPass, newVaultPass){
 						CredentialService.reencryptCredential(_selected_credentials[index].guid, oldVaultPass, newVaultPass).progress(function(data){
-							console.log(data);
+							$scope.cur_state = data;
 						}).then(function(data){
 							var percent = index / _selected_credentials.length * 100;
 							$scope.change_pw = {
@@ -188,8 +190,12 @@ angular.module('passmanApp')
 								changeCredential(index+1, oldVaultPass, newVaultPass);
 							} else {
 								console.log('Update complete!');
-								//@TODO update private key with new pw
-								//@TODO Logout user
+
+								vault.private_sharing_key = EncryptService.decryptString(angular.copy(vault.private_sharing_key), oldVaultPass);
+								vault.private_sharing_key = EncryptService.encryptString(vault.private_sharing_key, newVaultPass);
+								VaultService.updateSharingKeys(vault).then(function (result) {
+									$rootScope.$broadcast('logout')
+								});
 							}
 						});
 					};
