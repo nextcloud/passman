@@ -307,7 +307,6 @@ angular.module('passmanApp')
 							_credential.set_share_key = true;
 							_credential.skip_revision = true;
 							_credential.shared_key = EncryptService.encryptString(key);
-							console.log(_credential);
 							CredentialService.updateCredential(_credential, true).then(function () {
 								NotificationService.showNotification('Credential shared', 4000);
 								$scope.sharing_complete = true;
