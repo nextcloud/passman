@@ -16,30 +16,34 @@
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
 						$location.path('/');
+						return;
 					}
 				} else {
 					if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
 						var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
-						VaultService.getVault(_vault).then(function (vault) {
-							vault.vaultKey = angular.copy(SettingsService.getSetting('defaultVaultPass'));
-							VaultService.setActiveVault(vault);
-							$scope.active_vault = vault;
-
-							$scope.pwSettings = VaultService.getVaultSetting('pwSettings',
-								{
-									'length': 12,
-									'useUppercase': true,
-									'useLowercase': true,
-									'useDigits': true,
-									'useSpecialChars': true,
-									'minimumDigitCount': 3,
-									'avoidAmbiguousCharacters': false,
-									'requireEveryCharType': true,
-									'generateOnCreate': true
-								});
-						});
+						_vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+						VaultService.setActiveVault(_vault);
+						$scope.active_vault = _vault;
 					}
 				}
+
+				VaultService.getVault($scope.active_vault).then(function (vault) {
+					vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+					delete vault.credentials;
+					VaultService.setActiveVault(vault);
+					$scope.pwSettings = VaultService.getVaultSetting('pwSettings',
+						{
+							'length': 12,
+							'useUppercase': true,
+							'useLowercase': true,
+							'useDigits': true,
+							'useSpecialChars': true,
+							'minimumDigitCount': 3,
+							'avoidAmbiguousCharacters': false,
+							'requireEveryCharType': true,
+							'generateOnCreate': true
+						});
+				});
 
 				$scope.tabs = [{
 					title: 'General',
