@@ -69,6 +69,6 @@ class CredentialRevisionMapper extends Mapper {
 		$revision = new CredentialRevision();
 		$revision->setId($revision_id);
 		$revision->setUserId($user_id);
-		$this->delete($revision);
+		return $this->delete($revision);
 	}
 }
