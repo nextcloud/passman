@@ -28,7 +28,7 @@
 				}
 
 				VaultService.getVault($scope.active_vault).then(function (vault) {
-					vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+					vault.vaultKey = VaultService.getActiveVault().vaultKey;
 					delete vault.credentials;
 					VaultService.setActiveVault(vault);
 					$scope.pwSettings = VaultService.getVaultSetting('pwSettings',
