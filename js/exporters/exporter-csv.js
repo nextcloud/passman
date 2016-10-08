@@ -12,6 +12,7 @@ PassmanExporter.csv = {
 };
 
 PassmanExporter.csv.export = function (credentials) {
+	/** global: C_Promise */
 	return new C_Promise(function () {
 		var _this = this;
 		var headers = ['label','username','password','email','description','tags'];

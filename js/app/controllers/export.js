@@ -18,6 +18,7 @@
 				return $window.PassmanExporter;
 			}, function (exporters) {
 				for (var key in exporters) {
+
 					var exporter = exporters[key];
 					if (exporter.hasOwnProperty('info')) {
 						$scope.available_exporters.push(exporter.info);
