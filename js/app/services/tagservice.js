@@ -19,8 +19,10 @@
 				},
 				addTags: function (tags) {
 					for (var i = 0; i < tags.length; i++) {
-						if ($filter('filter')(_tags, {text: tags[i].text}).length === 0) {
-							_tags.push(tags[i]);
+						if (tags[i].text) {
+							if ($filter('filter')(_tags, {text: tags[i].text}).length === 0) {
+								_tags.push(tags[i]);
+							}
 						}
 					}
 				},
