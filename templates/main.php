@@ -77,6 +77,8 @@ script('passman', 'importers/importer-passmanjson');
 script('passman', 'importers/importer-clipperz');
 script('passman', 'importers/importer-passpackcsv');
 script('passman', 'importers/importer-randomdata');
+script('passman', 'exporters/exporter-main');
+script('passman', 'exporters/exporter-csv');
 
 /*
  * Styles

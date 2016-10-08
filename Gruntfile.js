@@ -34,6 +34,7 @@ module.exports = function (grunt) {
 				globals: {
 					"angular": true,
 					"PassmanImporter": true,
+					"PassmanExporter": true,
 					"OC": true,
 					"window": true,
 					"console": true,
