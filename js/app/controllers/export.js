@@ -17,11 +17,11 @@
 			$scope.$watch(function () {
 				return $window.PassmanExporter;
 			}, function (exporters) {
-				for (var key in exporters) {
-
-					var exporter = exporters[key];
-					if (exporter.hasOwnProperty('info')) {
-						$scope.available_exporters.push(exporter.info);
+				exporters = Object.keys( angular.copy(exporters ));
+				for (var i = 0; i < exporters.length; i++) {
+					var exporter = exporters[i];
+					if ($window.PassmanExporter[exporter].hasOwnProperty('info')) {
+						$scope.available_exporters.push($window.PassmanExporter[exporter].info);
 					}
 				}
 			}, true);
