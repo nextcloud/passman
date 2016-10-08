@@ -1,8 +1,3 @@
-// Importers should always start with this
-if (!window['PassmanExporter']) {
-	var PassmanExporter = {}
-}
-// Define the importer
 /** global: PassmanExporter */
 PassmanExporter.csv = {
 	info: {
