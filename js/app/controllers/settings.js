@@ -18,31 +18,40 @@
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
 						$location.path('/');
+						return;
 					}
 				} else {
 					if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {
 						var _vault = angular.copy(SettingsService.getSetting('defaultVault'));
-						VaultService.getVault(_vault).then(function (vault) {
-							vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
-							VaultService.setActiveVault(vault);
-							$scope.active_vault = vault;
-							$scope.$parent.selectedVault = true;
-							$scope.vault_settings.pwSettings = VaultService.getVaultSetting('pwSettings',
-								{
-									'length': 12,
-									'useUppercase': true,
-									'useLowercase': true,
-									'useDigits': true,
-									'useSpecialChars': true,
-									'minimumDigitCount': 3,
-									'avoidAmbiguousCharacters': false,
-									'requireEveryCharType': true,
-									'generateOnCreate': true
-								});
-							$scope.new_vault_name = angular.copy($scope.active_vault.name);
-						});
+						_vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+						VaultService.setActiveVault(_vault);
+						$scope.active_vault = _vault;
 					}
 				}
+
+				VaultService.getVault($scope.active_vault).then(function (vault) {
+					vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+					delete vault.credentials;
+					VaultService.setActiveVault(vault);
+					console.log(vault);
+					$scope.vault_settings = vault.vault_settings;
+					if(!$scope.vault_settings.hasOwnProperty('pwSettings')){
+						$scope.vault_settings.pwSettings = {
+							'length': 12,
+							'useUppercase': true,
+							'useLowercase': true,
+							'useDigits': true,
+							'useSpecialChars': true,
+							'minimumDigitCount': 3,
+							'avoidAmbiguousCharacters': false,
+							'requireEveryCharType': true,
+							'generateOnCreate': true
+						};
+					}
+				});
+
+
+
 				var http = location.protocol, slashes = http.concat("//"), host = slashes.concat(window.location.hostname), complete = host + location.pathname;
 				$scope.bookmarklet = $sce.trustAsHtml("<a class=\"button\" href=\"javascript:(function(){var a=window,b=document,c=encodeURIComponent,e=c(document.title),d=a.open('" + complete + "bookmarklet?url='+c(b.location)+'&title='+e,'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=750px,width=475px,resizable=0,alwaysRaised=1');a.setTimeout(function(){d.focus()},300);})();\">Save in passman</a>");
 
@@ -52,7 +61,7 @@
 					_vault.name = $scope.new_vault_name;
 					_vault.vault_settings = angular.copy($scope.vault_settings);
 					VaultService.updateVault(_vault).then(function () {
-						VaultService.setActiveVault(_vault);
+						//VaultService.setActiveVault(_vault);
 						$scope.active_vault.name = angular.copy(_vault.name);
 						NotificationService.showNotification('Settings saved', 5000);
 					});
