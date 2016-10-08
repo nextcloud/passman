@@ -45,7 +45,7 @@ angular.module('views/partials/forms/edit_credential/password.html', []).run(['$
 angular.module('views/partials/forms/settings/export.html', []).run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('views/partials/forms/settings/export.html',
-    '<div ng-controller="ExportCtrl">Export credentials</div>');
+    '<div ng-controller="ExportCtrl"><div class="row"><div class="col-xs-6"><label>Export type<select ng-init="raw" ng-model="raw" ng-change="setExporter(raw)"><option ng-repeat="exporter in available_exporters" value="{{exporter}}">{{exporter.name}}</option></select></label><div><b>{{selectedExporter.description}}</b></div><button class="button" ng-click="startExport()" ng-if="selectedExporter">Export</button></div><div class="col-xs-6"><div ng-if="log" class="import_log"><textarea id="import_log" auto-scroll="log">{{log.join(\'\\n\')}}</textarea></div></div></div></div>');
 }]);
 
 angular.module('views/partials/forms/settings/general_settings.html', []).run(['$templateCache', function($templateCache) {
