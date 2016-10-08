@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.5.4.1deb2ubuntu2
+- https://www.phpmyadmin.net
+-
+- Host: localhost
+- Generation Time: Oct 08, 2016 at 11:24 PM
+- Server version: 5.7.13-0ubuntu0.16.04.2
+- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="ncdev" collation="latin1_swedish_ci" charset="latin1">
+            <pma:table name="oc_passman_share_request">
+                CREATE TABLE `oc_passman_share_request` (
+                  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                  `shared_key` tinytext COLLATE utf8_bin NOT NULL,
+                  `item_guid` varchar(64) COLLATE utf8_bin NOT NULL,
+                  `target_vault_id` bigint(20) unsigned NOT NULL,
+                  `target_vault_guid` varchar(64) COLLATE utf8_bin NOT NULL,
+                  `item_id` tinytext COLLATE utf8_bin NOT NULL,
+                  `permissions` smallint(5) unsigned NOT NULL DEFAULT '0',
+                  `created` bigint(20) unsigned DEFAULT '0',
+                  `target_user_id` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+                  `from_user_id` varchar(64) COLLATE utf8_bin DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'ncdev'
+    -->
+    <database name="ncdev">
+        <!-- Table oc_passman_share_request -->
+        <table name="oc_passman_share_request">
+            <column name="id">25</column>
+            <column name="shared_key">co/Ws3Bhv0ZKkA6kbW2xMmGykAGK/qZt+N91CMs4pPNRtUjsvwiXkgSYi9saPgHxmiUgq7FFtS5GCv+J+CEqNnm6gcGZ13yi4A9GitKMVKSCYrM2FebbG9f3OlduVpTAYZjVsf5ykDK629x+cxHyqnW/t/1EP3CyN5oT/D3A7b0=</column>
+            <column name="item_guid">704C992E-AD8E-4DF2-8AB8-314C9CD3399C</column>
+            <column name="target_vault_id">6</column>
+            <column name="target_vault_guid">F06AB576-34EE-48FF-994C-C5C3AD5ED76E</column>
+            <column name="item_id">12</column>
+            <column name="permissions">7</column>
+            <column name="created">1475680383</column>
+            <column name="target_user_id">example2</column>
+            <column name="from_user_id">example</column>
+        </table>
+    </database>
+</pma_xml_export>
