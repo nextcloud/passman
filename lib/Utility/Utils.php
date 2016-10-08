@@ -23,8 +23,7 @@ class Utils {
 	 * @return int the current unix time in milliseconds
 	 */
 	public static function getMicroTime() {
-		list($millisecs, $secs) = explode(" ", microtime());
-		return $secs . substr($millisecs, 2, 6);
+		return microtime(true);
 	}
 
     /**
