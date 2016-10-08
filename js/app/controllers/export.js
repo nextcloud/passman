@@ -26,7 +26,6 @@
 			}, true);
 			$scope.log = [];
 			$scope.setExporter = function (exporter) {
-				console.log(exporter)
 				exporter = JSON.parse(exporter);
 				$scope.selectedExporter = exporter;
 			};
