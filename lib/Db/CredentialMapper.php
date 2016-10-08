@@ -128,7 +128,7 @@ class CredentialMapper extends Mapper {
 	}
 
 	public function deleteCredential(Credential $credential){
-		$this->delete($credential);
+		return $this->delete($credential);
 	}
 
 	public function upd(Credential $credential){

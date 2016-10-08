@@ -145,7 +145,6 @@ class CredentialController extends ApiController {
 			}
 		}
 		$link = ''; // @TODO create direct link to credential
-		$activity = false;
 		if ($revision_created) {
 			$activity = 'item_apply_revision';
 			$this->activityService->add(
@@ -182,9 +181,9 @@ class CredentialController extends ApiController {
 		try {
 			$acl_list = $this->sharingService->getCredentialAclList($storedCredential->getGuid());
 		} catch (DoesNotExistException $exception) {
-
+			// Just check if we have an acl list
 		}
-		if ($acl_list) {
+		if (!empty($acl_list)) {
 			$params = array();
 			switch ($activity) {
 				case 'item_recovered':
@@ -293,7 +292,7 @@ class CredentialController extends ApiController {
 	public function updateRevision($credential_guid, $revision_id, $credential_data){
 		$revision = null;
 		try {
-			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+			$this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 		} catch (DoesNotExistException $e) {
 			return new NotFoundJSONResponse();
 		}
