@@ -23,11 +23,11 @@ use OCA\Passman\Db\CredentialMapper;
 class CredentialService {
 
 	private $credentialMapper;
-	private $sharingACL;
+    private $sharingACL;
 
 	public function __construct(CredentialMapper $credentialMapper, SharingACLMapper $sharingACL) {
 		$this->credentialMapper = $credentialMapper;
-		$this->sharingACL = $sharingACL;
+        $this->sharingACL = $sharingACL;
 	}
 
 	/**
@@ -43,46 +43,30 @@ class CredentialService {
 	public function updateCredential($credential) {
 		return $this->credentialMapper->updateCredential($credential);
 	}
-
-	/**
-	 * @param Credential $credential
-	 */
 	public function upd($credential) {
 		return $this->credentialMapper->upd($credential);
 	}
 
-	/**
-	 * @param Credential $credential
-	 */
 	public function deleteCredential($credential){
 		return $this->credentialMapper->deleteCredential($credential);
 	}
 
-	/**
-	 * @param integer $vault_id
-	 */
 	public function getCredentialsByVaultId($vault_id, $user_id) {
 		return $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
 	}
 
-	/**
-	 * @param integer $vault_id
-	 */
 	public function getRandomCredentialByVaultId($vault_id, $user_id) {
 		$credentials = $this->credentialMapper->getRandomCredentialByVaultId($vault_id, $user_id);
 		return array_pop($credentials);
 	}
 
-	/**
-	 * @param integer $timestamp
-	 */
 	public function getExpiredCredentials($timestamp) {
 		return $this->credentialMapper->getExpiredCredentials($timestamp);
 	}
 
-	public function getCredentialById($credential_id, $user_id) {
+	public function getCredentialById($credential_id, $user_id){
         $credential = $this->credentialMapper->getCredentialById($credential_id);
-        if ($credential->getUserId() === $user_id) {
+        if ($credential->getUserId() === $user_id){
             return $credential;
         }
         else {
@@ -93,10 +77,6 @@ class CredentialService {
 
         throw new DoesNotExistException("Did expect one result but found none when executing");
 	}
-
-	/**
-	 * @param integer $credential_id
-	 */
 	public function getCredentialLabelById($credential_id){
 		return $this->credentialMapper->getCredentialLabelById($credential_id);
 	}
