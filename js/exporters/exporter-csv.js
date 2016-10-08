@@ -3,6 +3,7 @@ if (!window['PassmanExporter']) {
 	var PassmanExporter = {}
 }
 // Define the importer
+/** global: PassmanExporter */
 PassmanExporter.csv = {
 	info: {
 		name: 'CSV',
