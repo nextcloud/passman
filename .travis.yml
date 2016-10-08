@@ -37,7 +37,7 @@ before_install:
     - ./occ app:list
     - nvm install 5.9
     - npm install -g npm@latest
-    - npm install grunt-cli -g
+    - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
 
 
 #
@@ -51,7 +51,7 @@ before_script:
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
-    - npm install
+    - sh -c "if [ '$JSTESTS' = '1' ]; then npm install; fi"
 #    - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
 
 
@@ -69,7 +69,7 @@ script:
     #- sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
     #- sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
     #- cd ../
-    - sh -c "if [ '$JSTESTS' == '1' ]; then grunt jshint; fi"
+    -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
 
 
 #after_failure:
@@ -87,11 +87,11 @@ matrix:
     - php: 5.6
       env: DB=mysql;CODECHECK=1
     - php: 5.6
-      env: DB=mysql;CODECHECK=2
-    - php: 5.6
-      env: DB=mysql;JSTESTS=1
+      env: DB=mysql;JSTESTS=1;
     - php: 7.0
       env: DB=mysql;CODECHECK=1
+    - php: 5.6
+      env: DB=mysql;CODECHECK=2
     - php: 7.0
       env: DB=mysql;CODECHECK=2
   allow_failures:
