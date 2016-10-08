@@ -71,7 +71,9 @@ class ShareService {
 	}
 
 	public function createACLEntry(SharingACL $acl) {
-		if ($acl->getCreated() == null) $acl->setCreated((new \DateTime())->getTimestamp());
+		if ($acl->getCreated() === null) {
+			$acl->setCreated((new \DateTime())->getTimestamp());
+		}
 		return $this->sharingACL->createACLEntry($acl);
 	}
 
@@ -124,12 +126,16 @@ class ShareService {
 		$return = [];
 		foreach ($entries as $entry) {
 			// Check if the user can read the credential, probably unnecesary, but just to be sure
-			if (!$entry->hasPermission(SharingACL::READ)) continue;
+			if (!$entry->hasPermission(SharingACL::READ)) {
+				continue;
+			}
 
 			$tmp = $entry->jsonSerialize();
 			$tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId())->jsonSerialize();
 
-			if (!$entry->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
+			if (!$entry->hasPermission(SharingACL::FILES)) {
+				unset($tmp['credential_data']['files']);
+			}
 			unset($tmp['credential_data']['shared_key']);
 			$return[] = $tmp;
 		}
@@ -150,12 +156,16 @@ class ShareService {
 		$acl = $this->sharingACL->getItemACL($user_id, $item_guid);
 
 		// Check if the user can read the credential, probably unnecesary, but just to be sure
-		if (!$acl->hasPermission(SharingACL::READ)) throw new DoesNotExistException("Item not found or wrong access level");
+		if (!$acl->hasPermission(SharingACL::READ)) {
+			throw new DoesNotExistException("Item not found or wrong access level");
+		}
 
 		$tmp = $acl->jsonSerialize();
 		$tmp['credential_data'] = $this->credential->getCredentialById($acl->getItemId())->jsonSerialize();
 
-		if (!$acl->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
+		if (!$acl->hasPermission(SharingACL::FILES)) {
+			unset($tmp['credential_data']['files']);
+		}
 		unset($tmp['credential_data']['shared_key']);
 
 		return $tmp;
@@ -170,7 +180,9 @@ class ShareService {
 	 */
 	public function getItemHistory($user_id, $item_guid) {
 		$acl = $this->sharingACL->getItemACL($user_id, $item_guid);
-		if (!$acl->hasPermission(SharingACL::READ | SharingACL::HISTORY)) return [];
+		if (!$acl->hasPermission(SharingACL::READ | SharingACL::HISTORY)) {
+			return [];
+		}
 
 		return $this->revisions->getRevisions($acl->getItemId());
 	}

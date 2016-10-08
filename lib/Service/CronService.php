@@ -37,7 +37,7 @@ class CronService {
 	public function expireCredentials() {
 		$this->logger->info('Passman cron test', array('app' => 'passman'));
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
-		foreach($expired_credentials as $credential){
+		foreach ($expired_credentials as $credential) {
 			$link = ''; // @TODO create direct link to credential
 
 			$sql = 'SELECT count(*) as rows from `*PREFIX*notifications` WHERE `subject`= \'credential_expired\' AND object_id=?';
@@ -45,9 +45,9 @@ class CronService {
 			$id = $credential->getId();
 			$query->bindParam(1, $id, \PDO::PARAM_INT);
 			$result = $query->execute();
-			$this->logger->debug($credential->getLabel() .' is expired, checking notifications!', array('app' => 'passman'));
-			if($result->fetchRow()['rows'] == 0) {
-				$this->logger->debug($credential->getLabel() .' is expired, adding notification!', array('app' => 'passman'));
+			$this->logger->debug($credential->getLabel() . ' is expired, checking notifications!', array('app' => 'passman'));
+			if ($result->fetchRow()['rows'] === 0) {
+				$this->logger->debug($credential->getLabel() . ' is expired, adding notification!', array('app' => 'passman'));
 
 				$this->activityService->add(
 					Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
@@ -55,7 +55,7 @@ class CronService {
 					$link, $credential->getUserId(), Activity::TYPE_ITEM_EXPIRED);
 				$this->notificationService->credentialExpiredNotification($credential);
 			} else {
-				$this->logger->debug($credential->getLabel() .' is expired, already notified!', array('app' => 'passman'));
+				$this->logger->debug($credential->getLabel() . ' is expired, already notified!', array('app' => 'passman'));
 			}
 
 		}

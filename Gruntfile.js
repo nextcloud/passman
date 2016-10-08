@@ -42,6 +42,7 @@ module.exports = function (grunt) {
 					"forge": true,
 					"sjcl": true,
 					"jQuery": true,
+					"$": true,
 					"_": true,
 					"oc_requesttoken": true
 				}

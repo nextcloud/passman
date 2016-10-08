@@ -103,45 +103,45 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return string|false
 	 */
 	public function translate($app, $text, $params, $stripPath, $highlightParams, $languageCode) {
-		$l = new \OC_L10N('passman', $languageCode);
+		$l = \OC::$server->getL10NFactory()->get('passman', $languageCode);
 		if ($app === 'passman') {
 			switch ($text) {
 				case self::SUBJECT_ITEM_CREATED:
-					return $l->t('%1$s has been created by %2$s', $params)->__toString();
+					return $l->t('%1$s has been created by %2$s', $params);
 				case self::SUBJECT_ITEM_CREATED_SELF:
-					return $l->t('You created %1$s', $params)->__toString();
+					return $l->t('You created %1$s', $params);
 				case self::SUBJECT_ITEM_EDITED:
-					return $l->t('%1$s has been updated by %2$s', $params)->__toString();
+					return $l->t('%1$s has been updated by %2$s', $params);
 				case self::SUBJECT_ITEM_EDITED_SELF:
-					return $l->t('You updated %1$s', $params)->__toString();
+					return $l->t('You updated %1$s', $params);
 				case self::SUBJECT_APPLY_REV:
-					return $l->t('%2$s has revised %1$s to the revision of %3$s', $params)->__toString();
+					return $l->t('%2$s has revised %1$s to the revision of %3$s', $params);
 				case self::SUBJECT_APPLY_REV_SELF:
-					return $l->t('You reverted %1$s back to the revision of %3$s', $params)->__toString();
+					return $l->t('You reverted %1$s back to the revision of %3$s', $params);
 				case self::SUBJECT_ITEM_RENAMED:
-					return $l->t('%3$s has renamed %1$s to %2$s', $params)->__toString();
+					return $l->t('%3$s has renamed %1$s to %2$s', $params);
 				case self::SUBJECT_ITEM_RENAMED_SELF:
-					return $l->t('You renamed %1$s to %2$s', $params)->__toString();
+					return $l->t('You renamed %1$s to %2$s', $params);
 				case self::SUBJECT_ITEM_DELETED:
-					return $l->t('%1$s has been deleted by %2$s', $params)->__toString();
+					return $l->t('%1$s has been deleted by %2$s', $params);
 				case self::SUBJECT_ITEM_DELETED_SELF:
-					return $l->t('You deleted %1$s', $params)->__toString();
+					return $l->t('You deleted %1$s', $params);
 				case self::SUBJECT_ITEM_RECOVERED:
-					return $l->t('%1$s has been recovered by %2$s', $params)->__toString();
+					return $l->t('%1$s has been recovered by %2$s', $params);
 				case self::SUBJECT_ITEM_RECOVERED_SELF:
-					return $l->t('You recovered %1$s', $params)->__toString();
+					return $l->t('You recovered %1$s', $params);
 				case self::SUBJECT_ITEM_DESTROYED:
-					return $l->t('%1$s has been permanently deleted by %2$s', $params)->__toString();
+					return $l->t('%1$s has been permanently deleted by %2$s', $params);
 				case self::SUBJECT_ITEM_DESTROYED_SELF:
-					return $l->t('You permanently deleted %1$s', $params)->__toString();
+					return $l->t('You permanently deleted %1$s', $params);
 				case self::SUBJECT_ITEM_EXPIRED:
-					return $l->t('The password of %1$s has expired, renew it now.', $params)->__toString();
+					return $l->t('The password of %1$s has expired, renew it now.', $params);
 				case self::SUBJECT_ITEM_SHARED:
-					return $l->t('%1$s has been shared with %2$s', $params)->__toString();
+					return $l->t('%1$s has been shared with %2$s', $params);
 				case self::SUBJECT_ITEM_SHARE_RECEIVED:
-					return $l->t('You received a share request for %1$s from %2$s', $params)->__toString();
+					return $l->t('You received a share request for %1$s from %2$s', $params);
 				case self::SUBJECT_ITEM_SHARED_PUBLICLY:
-					return $l->t('%s has been shared with a link', $params)->__toString();
+					return $l->t('%s has been shared with a link', $params);
 			}
 		}
 		return false;

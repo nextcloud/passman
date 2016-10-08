@@ -196,7 +196,7 @@ class ShareController extends ApiController {
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
 
 		foreach ($usersTmp as $user) {
-			if ($this->userId->getUID() != $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
+			if ($this->userId->getUID() !== $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
 				$users[] = array(
 					'text' => $user->getDisplayName(),
 					'uid' => $user->getUID(),
@@ -416,7 +416,7 @@ class ShareController extends ApiController {
         $views = $acl->getExpireViews();
 		if ($views === 0) {
 			return new NotFoundJSONResponse();
-		} else if ($views != -1) {
+		} else if ($views !== -1) {
 			$views--;
 			$acl->setExpireViews($views);
 			$this->shareService->updateCredentialACL($acl);
@@ -441,7 +441,7 @@ class ShareController extends ApiController {
 		$pending = $this->shareService->getCredentialPendingAclList($item_guid);
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
-			if ($credential->getUserId() == $this->userId->getUID()) {
+			if ($credential->getUserId() === $this->userId->getUID()) {
 				foreach ($pending as &$item) {
 					$item = $item->asACLJson();
 				}
@@ -490,7 +490,7 @@ class ShareController extends ApiController {
 		} catch (DoesNotExistException $exception) {
 			return new NotFoundJSONResponse();
 		}
-		if ($this->userId->getUID() == $credential->getUserId()) {
+		if ($this->userId->getUID() === $credential->getUserId()) {
 			$acl = null;
 			try {
 				$acl = $this->shareService->getACL($user_id, $item_guid);

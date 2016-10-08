@@ -47,7 +47,7 @@ class VaultMapper extends Mapper {
 	/**
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
-	 * @return Vault
+	 * @return Vault[]
 	 */
 	public function findVaultsFromUser($userId){
 		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
