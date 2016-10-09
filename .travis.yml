@@ -8,18 +8,12 @@ env:
         - APP_NAME=passman
     matrix:
         - DB=mysql
-#matrix:
-#    allow_failures:
-#        - env: DB=pgsql CORE_BRANCH=master
-#    include:
-#        - php: 5.6
-#          env: DB=sqlite
-#        - php: 5.6
-#          env: DB=mysql
-#        - php: 5.6
-#          env: DB=pgsql CORE_BRANCH=master
-#    fast_finish: true
-#
+
+branches:
+  only:
+    - master
+
+
 before_install:
     # enable a display for running JavaScript tests
     - export DISPLAY=:99.0
