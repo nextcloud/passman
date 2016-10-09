@@ -79,8 +79,6 @@ addons:
 matrix:
   include:
     - php: 5.6
-      env: DB=pgsql
-    - php: 5.6
       env: DB=sqlite;CLOUD=owncloud;SERVER_FOLDER=core
     - php: 5.6
       env: DB=mysql;CLOUD=owncloud;SERVER_FOLDER=core
