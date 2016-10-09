@@ -8,9 +8,6 @@ env:
         - APP_NAME=passman
     matrix:
         - DB=mysql
-branches:
-  only:
-    - master
 #matrix:
 #    allow_failures:
 #        - env: DB=pgsql CORE_BRANCH=master
