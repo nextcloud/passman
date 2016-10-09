@@ -6,6 +6,8 @@ env:
     global:
         - CORE_BRANCH=master
         - APP_NAME=passman
+        - SERVER_FOLDER=server
+        - CLOUD=nextcloud
     matrix:
         - DB=mysql
 
@@ -19,13 +21,16 @@ before_install:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
 #    <- if [[ "$DB" == 'mysql' ]]; then sudo apt-get -y install mariadb-server; fi
-    - wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh
+    # - wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh
+    - sh -c "if [ '$CLOUD' = 'nextcloud' ]; then wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh; fi;"
+    - sh -c "if [ '$CLOUD' = 'owncloud' ]; then wget https://raw.githubusercontent.com/owncloud/administration/master/travis-ci/before_install.sh; fi;"
     - bash ./before_install.sh $APP_NAME $CORE_BRANCH $DB
      # Add some output debugging information
-    - cd ../server
+    - cd ../${SERVER_FOLDER}
     - ./occ check
     - ./occ status
     - ./occ app:list
+    - ./occ app:enable $APP_NAME
     - nvm install 5.9
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
@@ -37,7 +42,7 @@ before_script:
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e 'create database oc_autotest;'; fi
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"; fi
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"; fi
-    - ./occ app:enable passman
+
     - php -S localhost:8080 &
     - cd apps/$APP_NAME/
     - mkdir -p build
@@ -72,9 +77,11 @@ addons:
 matrix:
   include:
     - php: 5.6
-      env: DB=mysql
-    - php: 5.6
       env: DB=pgsql
+    - php: 5.6
+      env: DB=sqlite;CLOUD=owncloud;SERVER_FOLDER=core
+    - php: 5.6
+      env: DB=mysql;CLOUD=owncloud;SERVER_FOLDER=core
     - php: 5.6
       env: DB=mysql;CODECHECK=1
     - php: 5.6
@@ -85,5 +92,9 @@ matrix:
       env: DB=mysql;CODECHECK=2
     - php: 7.0
       env: DB=mysql;CODECHECK=2
+    - php: 7.0
+      env: DB=sqlite;CLOUD=owncloud;SERVER_FOLDER=core
+    - php: 7.0
+      env: DB=mysql;CLOUD=owncloud;SERVER_FOLDER=core
   allow_failures:
     - env: DB=mysql;CODECHECK=2
