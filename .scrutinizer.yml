@@ -1,0 +1,13 @@
+filter:
+    excluded_paths:
+        - 'js/vendor*'
+        - 'l10n/*'
+        - 'tests/*'
+
+imports:
+    - javascript
+    - php
+
+tools:
+    external_code_coverage:
+        timeout: 7200 # Timeout in seconds: 2 hours
