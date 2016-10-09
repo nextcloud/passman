@@ -20,7 +20,7 @@ use \OCP\AppFramework\Db\Entity;
  * @method void setGuid(string $value)
  * @method string getGuid()
  * @method void setUserId(string $value)
- * @method string getUserid()
+ * @method string getUserId()
  * @method void setCreated(integer $value)
  * @method integer getCreated()
  * @method void setLastAccess(integer $value)
@@ -31,8 +31,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getPrivateSharingKey()
  * @method void setSharingKeysGenerated(integer $value)
  * @method integer getSharingKeysGenerated()
- * @method void setVaultSettings(integer $value)
- * @method integer getVaultSettings()
+ * @method void setVaultSettings(string $value)
+ * @method string getVaultSettings()
  */
 
 
