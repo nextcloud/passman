@@ -10,6 +10,8 @@ env:
         - CLOUD=nextcloud
     matrix:
         - DB=mysql
+        - DB=sqlite
+        - DB=pgsql
 
 branches:
   only:
