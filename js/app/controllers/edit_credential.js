@@ -178,8 +178,8 @@
 					$scope.$digest();
 				};
 
-				$scope.fileLoadError = function (error, file) {
-					console.log(error, file);
+				$scope.fileLoadError = function (error) {
+					console.log('Error loading file', error);
 				};
 
 				$scope.selected_file = '';
@@ -228,7 +228,7 @@
 					//@TODO  validation
 					//@TODO When credential is expired and has renew interval set, calc new expire time.
 					delete $scope.storedCredential.password_repeat;
-					console.log($scope.storedCredential);
+					
 					if (!$scope.storedCredential.credential_id) {
 						$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
 						CredentialService.createCredential($scope.storedCredential).then(function (result) {

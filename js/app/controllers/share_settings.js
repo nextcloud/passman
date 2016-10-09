@@ -47,7 +47,6 @@
 						$scope.progress = progress > 0 ? 2 : 1;
 						$scope.$digest();
 					}).then(function (kp) {
-						console.log('stuff done');
 						$scope.generating = false;
 
 						var pem = ShareService.rsaKeyPairToPEM(kp);

@@ -165,13 +165,12 @@
 							try {
 								field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
 							} catch (e) {
-								console.log(e);
 								throw e;
 							}
 							try {
 								_credential[field] = JSON.parse(field_decrypted_value);
 							} catch (e) {
-								console.log('Field' + field + ' in ' + _credential.label + ' could not be parsed! Value:' + fieldValue);
+								console.warn('Field' + field + ' in ' + _credential.label + ' could not be parsed! Value:' + fieldValue);
 								throw e;
 							}
 						}
@@ -185,7 +184,6 @@
 						var step = function () {
 							// run for 100 ms
 							if (!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
-								// console.log(state);
 								if (state.p !== null) {
 									// progress(50);
 									this.call_progress(50);

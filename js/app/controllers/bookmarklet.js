@@ -305,8 +305,8 @@
 					$scope.$digest();
 				};
 
-				$scope.fileLoadError = function (error, file) {
-					console.log(error, file);
+				$scope.fileLoadError = function (error) {
+					console.log('Error loading file', error);
 				};
 
 				$scope.selected_file = '';

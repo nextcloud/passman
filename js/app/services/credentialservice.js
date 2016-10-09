@@ -116,13 +116,12 @@
 						try {
 							field_decrypted_value = EncryptService.decryptString(fieldValue, key);
 						} catch (e) {
-							console.log(e);
 							throw e;
 						}
 						try {
 							credential[field] = JSON.parse(field_decrypted_value);
 						} catch (e) {
-							console.log('Field' + field + ' in ' + credential.label + ' could not be parsed! Value:' + fieldValue);
+							console.warn('Field' + field + ' in ' + credential.label + ' could not be parsed! Value:' + fieldValue);
 
 						}
 
