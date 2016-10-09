@@ -67,7 +67,7 @@ script:
 
     # Create coverage report
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover coverage.clover; fi"
     #- cd ../
     -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
 
