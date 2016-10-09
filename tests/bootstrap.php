@@ -11,3 +11,16 @@
 
 require_once __DIR__ . '/../../../tests/bootstrap.php';
 require_once __DIR__ . '/../appinfo/autoload.php';
+
+
+
+// Fix for "Autoload path not allowed: .../tests/lib/testcase.php"
+\OC::$loader->addValidRoot(OC::$SERVERROOT . '/tests');
+// Fix for "Autoload path not allowed: .../activity/tests/testcase.php"
+\OC_App::loadApp('activity');
+// Fix for "Autoload path not allowed: .../files/lib/activity.php"
+\OC_App::loadApp('files');
+// Fix for "Autoload path not allowed: .../files_sharing/lib/activity.php"
+\OC_App::loadApp('files_sharing');
+
+OC_Hook::clear();
