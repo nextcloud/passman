@@ -138,8 +138,7 @@
 
 
 				$scope.$watch('share_settings.upload_progress.done', function () {
-					console.log();
-					if ($scope.share_settings.upload_progress.done === $scope.share_settings.upload_progress.total && $scope.share_settings.upload_progress.total > 0) {
+										if ($scope.share_settings.upload_progress.done === $scope.share_settings.upload_progress.total && $scope.share_settings.upload_progress.total > 0) {
 						getAcl();
 					}
 				});
@@ -204,9 +203,7 @@
 					_credential = CredentialService.encryptCredential(_credential, old_key);
 					CredentialService.updateCredential(_credential, true).then(function () {
 						NotificationService.showNotification('Credential unshared', 4000);
-						CredentialService.reencryptCredential(_credential.guid, old_key, new_key).progress(function (data) {
-							console.log(data);
-						}).then(function (data) {
+						CredentialService.reencryptCredential(_credential.guid, old_key, new_key).then(function (data) {
 							getAcl();
 						});
 					});
@@ -224,14 +221,13 @@
 						user.vaults = data;
 						var start = new Date().getTime() / 1000;
 						ShareService.cypherRSAStringWithPublicKeyBulkAsync(user.vaults, enc_key)
-							.progress(function (data) {
+							.progress(function () {
 								$scope.share_settings.cypher_progress.done++;
 								$scope.share_settings.cypher_progress.percent = $scope.share_settings.cypher_progress.done / $scope.share_settings.cypher_progress.total * 100;
 								$scope.$digest();
 							})
 							.then(function (result) {
-								console.log("Took: " + ((new Date().getTime() / 1000) - start) + "s to cypher the string for user [" + data[0].user_id + "]");
-								$scope.share_settings.cypher_progress.times.push({
+																$scope.share_settings.cypher_progress.times.push({
 									time: ((new Date().getTime() / 1000) - start),
 									user: data[0].user_id
 								});
@@ -257,8 +253,7 @@
 					$scope.share_settings.upload_progress.total = 0;
 					//Credential is already shared
 					if ($scope.storedCredential.shared_key && $scope.storedCredential.shared_key !== '' && $scope.storedCredential.shared_key !== null) {
-						console.log('Shared key found');
-						var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+												var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
 						if ($scope.share_settings.linkSharing.enabled) {
 							var expire_time = new Date(angular.copy($scope.share_settings.linkSharing.settings.expire_time)).getTime() / 1000;
 							var shareObj = {
@@ -298,10 +293,7 @@
 							var old_key = VaultService.getActiveVault().vaultKey;
 
 							CredentialService.reencryptCredential(encryptedSharedCredential.guid, old_key, key).progress(function (data) {
-								console.log(data);
-							}).then(function (data) {
-								console.log(data);
-								//This is here is not called
+															}).then(function (data) {
 								var _credential = data.cryptogram;
 								_credential.set_share_key = true;
 								_credential.skip_revision = true;

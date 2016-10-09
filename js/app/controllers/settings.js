@@ -199,8 +199,6 @@
 								if (index < _selected_credentials.length - 1) {
 									changeCredential(index + 1, oldVaultPass, newVaultPass);
 								} else {
-									console.log('Update complete!');
-
 									vault.private_sharing_key = EncryptService.decryptString(angular.copy(vault.private_sharing_key), oldVaultPass);
 									vault.private_sharing_key = EncryptService.encryptString(vault.private_sharing_key, newVaultPass);
 									VaultService.updateSharingKeys(vault).then(function (result) {

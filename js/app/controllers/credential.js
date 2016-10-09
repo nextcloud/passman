@@ -64,7 +64,6 @@
 						}
 
 						ShareService.getCredendialsSharedWithUs(vault.guid).then(function (shared_credentials) {
-							console.log('Shared credentials', shared_credentials);
 							for (var c = 0; c < shared_credentials.length; c++) {
 								var _shared_credential = shared_credentials[c];
 								var decrypted_key = EncryptService.decryptString(_shared_credential.shared_key);
@@ -132,7 +131,6 @@
 				};
 
 				$scope.acceptShareRequest = function (share_request) {
-					console.log('Accepted share request', share_request);
 					var crypted_shared_key = share_request.shared_key;
 					var private_key = EncryptService.decryptString(VaultService.getActiveVault().private_sharing_key);
 
@@ -356,7 +354,6 @@
 				};
 
 				$rootScope.$on('logout', function () {
-					console.log('Logout received, clean up');
 					$scope.active_vault = null;
 					$scope.credentials = [];
 //				$scope.$parent.selectedVault = false;
@@ -365,7 +362,6 @@
 
 
 				$scope.downloadFile = function (credential, file) {
-					console.log(credential, file);
 					var callback = function (result) {
 						var key = null;
 						if (!result.hasOwnProperty('file_data')) {
