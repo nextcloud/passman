@@ -30,10 +30,9 @@
 				}
 
 				VaultService.getVault($scope.active_vault).then(function (vault) {
-					vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
+					vault.vaultKey = VaultService.getActiveVault().vaultKey;
 					delete vault.credentials;
 					VaultService.setActiveVault(vault);
-					console.log(vault);
 					$scope.vault_settings = vault.vault_settings;
 					if(!$scope.vault_settings.hasOwnProperty('pwSettings')){
 						$scope.vault_settings.pwSettings = {
@@ -125,10 +124,6 @@
 					}
 				});
 
-				if ($scope.active_vault) {
-
-				}
-
 				$rootScope.$on('logout', function () {
 					$scope.selectedVault = false;
 				});
@@ -189,7 +184,7 @@
 						var changeCredential = function (index, oldVaultPass, newVaultPass) {
 							CredentialService.reencryptCredential(_selected_credentials[index].guid, oldVaultPass, newVaultPass).progress(function (data) {
 								$scope.cur_state = data;
-							}).then(function (data) {
+							}).then(function () {
 								var percent = index / _selected_credentials.length * 100;
 								$scope.change_pw = {
 									percent: percent,
@@ -199,11 +194,9 @@
 								if (index < _selected_credentials.length - 1) {
 									changeCredential(index + 1, oldVaultPass, newVaultPass);
 								} else {
-									console.log('Update complete!');
-
 									vault.private_sharing_key = EncryptService.decryptString(angular.copy(vault.private_sharing_key), oldVaultPass);
 									vault.private_sharing_key = EncryptService.encryptString(vault.private_sharing_key, newVaultPass);
-									VaultService.updateSharingKeys(vault).then(function (result) {
+									VaultService.updateSharingKeys(vault).then(function () {
 										$rootScope.$broadcast('logout');
 										NotificationService.showNotification('Please login with your new vault password', 5000);
 									});

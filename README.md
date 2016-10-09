@@ -17,6 +17,11 @@ Features:
 - Password analyzer
 - Share passwords
 
+## Tested on
+- NextCloud 10+
+- ownCloud 9.1+
+
+
 ##Screenshots
 ![Logged in to vault](http://i.imgur.com/ciShQZg.png)   
 
