@@ -4,3 +4,11 @@ tools:
     php_code_sniffer: true
     sensiolabs_security_checker: true
     php_code_coverage: true
+
+tests:
+    override:
+        -
+            command: 'phpunit --coverage-clover=some-file'
+                coverage:
+                    file: 'some-file'
+                    format: 'clover'
