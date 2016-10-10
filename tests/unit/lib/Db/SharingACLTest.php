@@ -10,6 +10,9 @@
 use \OCA\Passman\Db\SharingACL;
 use \OCA\Passman\Utility\PermissionEntity;
 
+/**
+ * @coversDefaultClass \OCA\Passman\Db\SharingACL
+ */
 class SharingACLTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id'			=> 55,
@@ -30,10 +33,18 @@ class SharingACLTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $acl;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		$this->acl = SharingACL::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::__construct
+	 * @covers ::fromRow
+	 * @covers ::getter
+	 */
 	public function testGetters() {
 		$this->assertEquals(self::TEST_DATA['id'], $this->acl->getId());
 		$this->assertEquals(self::TEST_DATA['item_id'], $this->acl->getItemId());
@@ -48,6 +59,9 @@ class SharingACLTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(self::TEST_DATA['shared_key'], $this->acl->getSharedKey());
 	}
 
+	/**
+	 * @covers ::setter
+	 */
 	public function testSetters() {
 		/**
 		 * Only testing one setter since if it works all setters should work because php magic.
@@ -60,16 +74,26 @@ class SharingACLTest extends PHPUnit_Framework_TestCase {
 		$this->setUp();
 	}
 
+	/**
+	 * @coversNothing
+	 */
 	public function testInheritedExpectedClasses() {
 		$this->assertInstanceOf(PermissionEntity::class, $this->acl);
 		$this->assertInstanceOf(\JsonSerializable::class, $this->acl);
 	}
 
+	/**
+	 * @coversNothing
+	 * @uses \OCA\Passman\Utility\PermissionEntity
+	 */
 	public function testPermissionSystemIsWorking(){
 		$this->assertTrue($this->acl->hasPermission(PermissionEntity::FILES));
 		$this->assertFalse($this->acl->hasPermission(PermissionEntity::OWNER));
 	}
 
+	/**
+	 * @covers ::jsonSerialize
+	 */
 	public function testJsonSerialize() {
 		$expected_data = [
 			'acl_id' 		=> self::TEST_DATA['id'],

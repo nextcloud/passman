@@ -9,6 +9,9 @@
  */
 use \OCA\Passman\Db\Vault;
 
+/**
+ * @coversDefaultClass  \OCA\Passman\Db\Vault
+ */
 class VaultTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id'						=> 1,
@@ -34,10 +37,18 @@ pbbPwdc88kGcdqBzWQIDAQAB
 	 */
 	protected $vault;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		$this->vault = Vault::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::getter
+	 * @covers ::__construct
+	 * @covers ::fromRow
+	 */
 	public function testGetters(){
 		$this->assertEquals(self::TEST_DATA['id'], $this->vault->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->vault->getGuid());
@@ -51,6 +62,9 @@ pbbPwdc88kGcdqBzWQIDAQAB
 		$this->assertEquals(self::TEST_DATA['vault_settings'], $this->vault->getVaultSettings());
 	}
 
+	/**
+	 * @covers ::setter
+	 */
 	public function testSetters(){
 		/**
 		 * Only testing one setter since if it works all setters should work because php magic.
@@ -62,11 +76,17 @@ pbbPwdc88kGcdqBzWQIDAQAB
 		$this->setUp();
 	}
 
+	/**
+	 * @coversNothing
+	 */
 	public function testInheritedExpectedClasses() {
 		$this->assertInstanceOf(\JsonSerializable::class, $this->vault);
 		$this->assertInstanceOf(\OCP\AppFramework\Db\Entity::class, $this->vault);
 	}
 
+	/**
+	 * @covers ::jsonSerialize
+	 */
 	public function testJsonSerialize() {
 		$expected_data = [
 			'vault_id' => self::TEST_DATA['id'],

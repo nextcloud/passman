@@ -9,6 +9,9 @@
  */
 use \OCA\Passman\Db\CredentialRevision;
 
+/**
+ * @coversDefaultClass \OCA\Passman\Db\CredentialRevision
+ */
 class CredentialRevisionTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id'			=> 30,
@@ -25,10 +28,16 @@ class CredentialRevisionTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $revision;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		$this->revision = CredentialRevision::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::__construct
+	 */
 	public function testGetters() {
 		$this->assertEquals(self::TEST_DATA['id'], $this->revision->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->revision->getGuid());
@@ -39,6 +48,10 @@ class CredentialRevisionTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(self::TEST_DATA['edited_by'], $this->revision->getEditedBy());
 	}
 
+	/**
+	 * @covers ::setter
+	 * @depends testGetters
+	 */
 	public function testSetters() {
 		/**
 		 * Only testing one setter, if a custom setter is added a test should be made
@@ -47,10 +60,10 @@ class CredentialRevisionTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('WolFi', $this->revision->getEditedBy());
 	}
 
+	/**
+	 * @covers ::jsonSerialize
+	 */
 	public function testJsonSerialize(){
-		// Make sure we use the test data and it's not ben tampered by previous tests
-		$this->setUp();
-
 		$expected_array = [
 			'revision_id' => self::TEST_DATA['id'],
 			'guid' => self::TEST_DATA['guid'],

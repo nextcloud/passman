@@ -9,13 +9,23 @@
  */
 use \OCA\Passman\Utility\NotFoundJSONResponse;
 use \OCP\AppFramework\Http;
+
+/**
+ * @coversDefaultClass \OCA\Passman\Utility\NotFoundJSONResponse
+ */
 class NotFoundJSONResponseTest extends PHPUnit_Framework_TestCase {
+	/**
+	 * @covers ::__construct
+	 */
 	public function testOnEmptyResponse(){
 		$data = new NotFoundJSONResponse();
 		$this->assertEquals(Http::STATUS_NOT_FOUND, $data->getStatus());
 		$this->assertJsonStringEqualsJsonString('[]', $data->render(), 'Expected empty JSON response');
 	}
 
+	/**
+	 * covers ::__construct
+	 */
 	public function testOnDataResult(){
 		$data = [
 			'field' => 'value',

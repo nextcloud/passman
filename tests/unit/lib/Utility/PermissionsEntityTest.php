@@ -8,17 +8,26 @@
  */
 use \OCA\Passman\Utility\PermissionEntity;
 
+/**
+ * @coversDefaultClass \OCA\Passman\Utility\PermissionEntity
+ */
 class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var PermissionEntity
 	 */
 	protected $permission;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		$this->permission = new PermissionEntity();
 		$this->permission->permissions = 0;
 	}
 
+	/**
+	 * @coversNothing
+	 */
 	public function testPermissionConstants(){
 		$this->assertEquals(0b00000001, PermissionEntity::READ);
 		$this->assertEquals(0b00000010, PermissionEntity::WRITE);
@@ -27,6 +36,9 @@ class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(0b10000000, PermissionEntity::OWNER);
 	}
 
+	/**
+	 * @covers ::addPermission
+	 */
 	public function testAddPermission(){
 		// Start with an empty permission
 		$this->permission->setPermissions(0);
@@ -41,6 +53,9 @@ class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(PermissionEntity::READ | PermissionEntity::FILES, $this->permission->getPermissions());
 	}
 
+	/**
+	 * @covers ::removePermission
+	 */
 	public function testRemovePermission(){
 		$base_permissions = PermissionEntity::READ | PermissionEntity::WRITE | PermissionEntity::HISTORY;
 
@@ -60,6 +75,9 @@ class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expected_permissions, $this->permission->getPermissions());
 	}
 
+	/**
+	 * @covers ::hasPermission
+	 */
 	public function testHasPermission() {
 		$base_permissions = PermissionEntity::READ | PermissionEntity::WRITE | PermissionEntity::HISTORY;
 

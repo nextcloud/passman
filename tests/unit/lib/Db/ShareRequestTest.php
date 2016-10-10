@@ -10,6 +10,9 @@
 use \OCA\Passman\Db\ShareRequest;
 use \OCA\Passman\Utility\PermissionEntity;
 
+/**
+ * @coversDefaultClass \OCA\Passman\Db\ShareRequest
+ */
 class ShareRequestTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id'				=> 233,
@@ -29,10 +32,18 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $request;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		$this->request = ShareRequest::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::getter
+	 * @covers ::__construct
+	 * @covers ::fromRow
+	 */
 	public function testGetters(){
 		$this->assertEquals(self::TEST_DATA['id'], $this->request->getId());
 		$this->assertEquals(self::TEST_DATA['item_id'], $this->request->getItemId());
@@ -46,6 +57,9 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(self::TEST_DATA['from_user_id'], $this->request->getFromUserId());
 	}
 
+	/**
+	 * @covers ::setter
+	 */
 	public function testSetters(){
 		/**
 		 * Only testing one setter since if it works all setters should work because php magic.
@@ -55,20 +69,27 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('ASDF THIS IS A KEY', $this->request->getSharedKey());
 	}
 
+	/**
+	 * @coversNothing
+	 * @uses \OCA\Passman\Utility\PermissionEntity
+	 */
 	public function testPermissionSystemIsWorking(){
 		$this->assertTrue($this->request->hasPermission(ShareRequest::FILES));
 		$this->assertFalse($this->request->hasPermission(ShareRequest::OWNER));
 	}
 
+	/**
+	 * @coversNothing
+	 */
 	public function testInheritsExpectedClasses(){
 		$this->assertInstanceOf(PermissionEntity::class, $this->request);
 		$this->assertInstanceOf(\JsonSerializable::class, $this->request);
 	}
 
+	/**
+	 * @covers ::jsonSerialize
+	 */
 	public function testJsonSerialize(){
-		// Ensure we have clean test data
-		$this->setUp();
-
 		$expected_result = [
 			'req_id' => self::TEST_DATA['id'],
 			'item_id' => self::TEST_DATA['item_id'],
@@ -87,10 +108,10 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($expected_result, $actual_data);
 	}
 
+	/**
+	 * @covers ::asACLJson
+	 */
 	public function testAsACLJson() {
-		// Ensure we have clean test data
-		$this->setUp();
-
 		$expected_result = [
 			'item_id' => self::TEST_DATA['item_id'],
 			'item_guid' => self::TEST_DATA['item_guid'],

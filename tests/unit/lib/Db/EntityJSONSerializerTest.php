@@ -9,6 +9,9 @@
  */
 use \OCA\Passman\Db\EntityJSONSerializer;
 
+/**
+ * @coversDefaultClass \OCA\Passman\Db\EntityJSONSerializer
+ */
 class EntityJSONSerializerTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_FIELDS = [
 		'an_string'	=> 'value',
@@ -33,11 +36,17 @@ class EntityJSONSerializerTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
+	/**
+	 * @covers ::serializeFields
+	 */
 	public function testSerializeFieldsFull(){
 		$actual_data = $this->trait->serializeFields(array_keys(self::TEST_FIELDS));
 		$this->assertEquals(self::TEST_FIELDS, $actual_data);
 	}
 
+	/**
+	 * @covers ::serializeFields
+	 */
 	public function testSerializeFieldsPartial(){
 		$fields = ['an_string', 'an_int', 'an_int_array'];
 		$actual_data = $this->trait->serializeFields($fields);

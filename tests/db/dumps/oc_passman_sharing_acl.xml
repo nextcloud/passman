@@ -1,57 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-- phpMyAdmin XML Dump
-- version 4.5.4.1deb2ubuntu2
-- https://www.phpmyadmin.net
--
-- Host: localhost
-- Generation Time: Oct 08, 2016 at 11:23 PM
-- Server version: 5.7.13-0ubuntu0.16.04.2
-- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
--->
-
-<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
-    <!--
-    - Structure schemas
-    -->
-    <pma:structure_schemas>
-        <pma:database name="ncdev" collation="latin1_swedish_ci" charset="latin1">
-            <pma:table name="oc_passman_sharing_acl">
-                CREATE TABLE `oc_passman_sharing_acl` (
-                  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                  `item_id` bigint(20) NOT NULL,
-                  `item_guid` varchar(64) COLLATE utf8_bin NOT NULL,
-                  `user_id` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-                  `created` bigint(20) unsigned DEFAULT '0',
-                  `expire` bigint(20) unsigned DEFAULT '0',
-                  `permissions` smallint(5) unsigned NOT NULL DEFAULT '0',
-                  `vault_id` bigint(20) unsigned DEFAULT NULL,
-                  `vault_guid` varchar(64) COLLATE utf8_bin DEFAULT NULL,
-                  `shared_key` longtext COLLATE utf8_bin,
-                  `expire_views` bigint(20) unsigned DEFAULT '0',
-                  PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-            </pma:table>
-        </pma:database>
-    </pma:structure_schemas>
-
-    <!--
-    - Database: 'ncdev'
-    -->
-    <database name="ncdev">
-        <!-- Table oc_passman_sharing_acl -->
-        <table name="oc_passman_sharing_acl">
-            <column name="id">22</column>
-            <column name="item_id">15</column>
-            <column name="item_guid">016EE970-E583-4152-9B6B-CF93AE39C5DA</column>
-            <column name="user_id">example</column>
-            <column name="created">1475685374</column>
-            <column name="expire">0</column>
-            <column name="permissions">15</column>
-            <column name="vault_id">5</column>
-            <column name="vault_guid">D91A06F3-208F-4478-A99B-42CC2EE504F3</column>
-            <column name="shared_key">eyJpdiI6InRuOXMzTkZNZVJJajVPL0tUNE5iVlEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJoNldBKzVBUm9JayIsImN0Ijoia1hlSTVtK2JsQXYyT282cE1FbEw2TzN5elYxL0svdWhKMTkySXhXbCJ9</column>
-            <column name="expire_views">0</column>
-        </table>
-    </database>
-</pma_xml_export>
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="ncdev">
+	<table_data name="oc_passman_sharing_acl">
+	<row>
+		<field name="id">22</field>
+		<field name="item_id">15</field>
+		<field name="item_guid">016EE970-E583-4152-9B6B-CF93AE39C5DA</field>
+		<field name="user_id">example</field>
+		<field name="created">1475685374</field>
+		<field name="expire">0</field>
+		<field name="permissions">15</field>
+		<field name="vault_id">5</field>
+		<field name="vault_guid">D91A06F3-208F-4478-A99B-42CC2EE504F3</field>
+		<field name="shared_key">eyJpdiI6InRuOXMzTkZNZVJJajVPL0tUNE5iVlEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJoNldBKzVBUm9JayIsImN0Ijoia1hlSTVtK2JsQXYyT282cE1FbEw2TzN5elYxL0svdWhKMTkySXhXbCJ9</field>
+		<field name="expire_views">0</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>

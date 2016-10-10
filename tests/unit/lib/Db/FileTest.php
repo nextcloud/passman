@@ -8,6 +8,9 @@
  */
 use \OCA\Passman\Db\File;
 
+/**
+ * @coversDefaultClass  \OCA\Passman\Db\File
+ */
 class FileTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id'		=> 21,
@@ -25,10 +28,18 @@ class FileTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $file;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		$this->file = File::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::getter
+	 * @covers ::__construct
+	 * @covers ::fromRow
+	 */
 	public function testGetters() {
 		$this->assertEquals(self::TEST_DATA['id'], $this->file->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->file->getGuid());
@@ -40,6 +51,9 @@ class FileTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(self::TEST_DATA['file_data'], $this->file->getFileData());
 	}
 
+	/**
+	 * @covers ::setter
+	 */
 	public function testSetters() {
 		/**
 		 * Only testing one setter since if it works all setters should work because php magic.
@@ -49,10 +63,10 @@ class FileTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('text/json', $this->file->getMimetype());
 	}
 
+	/**
+	 * @covers ::jsonSerialize
+	 */
 	public function testJsonSerialize(){
-		// Make sure we use test data
-		$this->setUp();
-
 		$expected_result = [
 			'file_id' => self::TEST_DATA['id'],
 			'filename' => self::TEST_DATA['filename'],

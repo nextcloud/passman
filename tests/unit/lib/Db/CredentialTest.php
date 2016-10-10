@@ -10,6 +10,12 @@
 use \OCA\Passman\Db\Credential;
 use \OCP\AppFramework\Db\Entity;
 
+/**
+ * @coversDefaultClass \OCA\Passman\Db\Credential
+ * @uses \OCA\Passman\Db\EntityJSONSerializer
+ * @uses \OCP\AppFramework\Db\Entity
+ * @uses \JsonSerializable
+ */
 class CredentialTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id' 		=> 5,
@@ -41,15 +47,26 @@ class CredentialTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $credential;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		$this->credential = Credential::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @coversNothing
+	 */
 	public function testInstances() {
 		$this->assertTrue($this->credential instanceof Entity);
 		$this->assertTrue($this->credential instanceof \JsonSerializable);
 	}
 
+	/**
+	 * @covers ::__construct
+	 * @covers ::getter
+	 * @covers ::fromRow
+	 */
 	public function testGetters(){
 		$this->assertEquals(self::TEST_DATA['id'], $this->credential->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->credential->getGuid());
@@ -75,6 +92,9 @@ class CredentialTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(self::TEST_DATA['shared_key'], $this->credential->getSharedKey());
 	}
 
+	/**
+	 * @covers ::setter
+	 */
 	public function testSetters() {
 		/**
 		 * Only testing one setter since if it works all setters should work because php magic.
@@ -84,10 +104,10 @@ class CredentialTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($this->credential->getUserId() === 'Sander');
 	}
 
+	/**
+	 * @covers ::jsonSerialize
+	 */
 	public function testJsonSerialize(){
-		// Make sure we are dealing with default test data and no other test has altered it
-		$this->setUp();
-
 		$json_array = $this->credential->jsonSerialize();
 
 		$comparision_array = [

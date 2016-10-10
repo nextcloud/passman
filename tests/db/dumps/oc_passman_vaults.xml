@@ -1,119 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-- phpMyAdmin XML Dump
-- version 4.5.4.1deb2ubuntu2
-- https://www.phpmyadmin.net
--
-- Host: localhost
-- Generation Time: Oct 08, 2016 at 11:41 PM
-- Server version: 5.7.13-0ubuntu0.16.04.2
-- PHP Version: 5.6.25-2+deb.sury.org~xenial+1
--->
-
-<pma_xml_export version="1.0" xmlns:pma="http://www.phpmyadmin.net/some_doc_url/">
-    <!--
-    - Structure schemas
-    -->
-    <pma:structure_schemas>
-        <pma:database name="ncdev" collation="latin1_swedish_ci" charset="latin1">
-            <pma:table name="oc_passman_vaults">
-                CREATE TABLE `oc_passman_vaults` (
-                  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                  `guid` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-                  `user_id` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-                  `name` varchar(100) COLLATE utf8_bin NOT NULL,
-                  `created` bigint(20) unsigned DEFAULT '0',
-                  `last_access` bigint(20) unsigned DEFAULT '0',
-                  `public_sharing_key` longtext COLLATE utf8_bin,
-                  `private_sharing_key` longtext COLLATE utf8_bin,
-                  `sharing_keys_generated` bigint(20) DEFAULT NULL,
-                  `vault_settings` longtext COLLATE utf8_bin,
-                  PRIMARY KEY (`id`),
-                  KEY `passman_vault_last_access_index` (`last_access`),
-                  KEY `passman_vault_guid_index` (`guid`),
-                  KEY `npassman_vault_id_index` (`id`),
-                  KEY `passman_vault_uid_id_index` (`user_id`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-            </pma:table>
-        </pma:database>
-    </pma:structure_schemas>
-
-    <!--
-    - Database: 'ncdev'
-    -->
-    <database name="ncdev">
-        <!-- Table oc_passman_vaults -->
-        <table name="oc_passman_vaults">
-            <column name="id">1</column>
-            <column name="guid">7439ED9E-5E2A-41C1-9509-64EE3043E8EB</column>
-            <column name="user_id">example</column>
-            <column name="name">Example vault 1</column>
-            <column name="created">1475962527</column>
-            <column name="last_access">1475962570</column>
-            <column name="public_sharing_key">-----BEGIN PUBLIC KEY-----
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="ncdev">
+	<table_data name="oc_passman_vaults">
+	<row>
+		<field name="id">1</field>
+		<field name="guid">7439ED9E-5E2A-41C1-9509-64EE3043E8EB</field>
+		<field name="user_id">example</field>
+		<field name="name">Example vault 1</field>
+		<field name="created">1475962527</field>
+		<field name="last_access">1475962570</field>
+		<field name="public_sharing_key">-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCjKLaR5GvaBBWuEOogz0cz8BXi
 bJSwB2NYbdC8n7vyTfmIBV2axkvVubMSvI+ppQcXhs/Zdpe9BRfks16i7GQPyQ7e
 cBHGc4eNArGU5Wad06hRYqD1TJY0PVf8H2m4ndA9kfwQS11Tsc8E/iB6mlQM7UL8
 f/6PKDSfIvK8VmivIQIDAQAB
 -----END PUBLIC KEY-----
-</column>
-            <column name="private_sharing_key">eyJpdiI6IlZMYTlQZHNQbjlFdHBKdnQvZGZuQkEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJYL05Qbk14bXRGbyIsImN0IjoiVitjbzhEcXprS2VFbW5KclQxVXRjdENtejJka0JTcllrejFHWkMvalIxTEJEWDIwS3psNGZpSlpuM05pRkJwditRQjl4VEJiL3MrNkx0Mm90dkx3VGdJM3VGc3JDWHkxVlVIWnpqVVQ1ZUJiQVFZUjQvRUJoc1dDZXp6bHVwUFhwNjg4SVJiVUFGakkvbDBiVEtXMVpZQnpiaFdQdGNRT2N0UG5hTDN4bUVMZktsRGlvU0pSVXRaNzJrOWtaSTRKdEJRNldNSzRGWENyZUdUemRkWFhodTVHeTdicGRNdHg3MnVXbEZRS1hzMzFieXk1ZzlRU1Y0azZXWGlTRlNvajBkeHRwM3Q3TDNObW4vR2RFNW1SbllHL1A4aUc2TWZvOXZSTjR1T1VMTGpTbEJ3eW96Nk40VTE2OEpKeXJxcVlBMHB6alEyWERlQmdxZGdvSW1Ia0tBckJyREZBSXNRVGFseWIzcE9HVlgvQVNlWStDaVozRjVJTkp1R1Avd1ZaZEtmek5pTUh1eWVZTlIvUEFRdGtPYyt6dTNDVFo4U3ZGdVMxRUtKdmJkNkZ0OTFsVHk5VWhKUjNITlRhQkgwS3dhbENvbEVsbVZvNGZtRG9KdE1NeTZ0clgzcDR1ZHBZUjJwbmZRUGRJQ0U1a0s1K2dPNTlDOFlYSXVWZWpWVU5YVmJudTdhMUl1b1dQU0JjL2ZFOS9ZMDBaVXNvZDFHSFNvbUdVUE5lUUVqZ1l2a3JseDVsYnZYKzJ6VWxlWnI2UEtEek05WEUrQzg5RWtUTkt6czlLT1hFaFVvWS8yQ1hWSEJZVjBFa3ROeUJlVmpHYWZLcWo5bFBxYkxkVklydnZsTVNibVRsUmFJeEVoM2NaQ0RsbjhKTXY0VGY1TWQzeGx5aE05WHFNMEhrbnpzRDNDZ3ZxaEdHeW9EOUhDaFczemZVbS9mY0JvODBQdy81K2FtMHRLQkNYcHVjMnFqTy9lRWlYOGhkM1VhZFRMOWhFVk5meituejJ1OGVEQURBM01XVHoxRDBtMnVjT0txSHFjUFROaG0xMG5WbXpiNFpVQ01VUnRnVWhSN0E1UW9tbUxOcmhjSXgyTFZwMGcvMUU2MFhDUDRYb1hoVllMbWQrT2I0eHFKNE9WNE54NmV4T05PZk1MWitSUE4walZ1cVhBeUxWMzJSZ08vdjNPMGJCc2grdGs3ZjJzaFRMM2gwQ1pUVUl3NVkvbUIxeEtTZ3FkdUVPV3h6ZGJpVUlXQWZIeWg3elFTNnkrU1NXcXl0NzlFWUJ0L3FzLzVyQzhxcWNsQldjRnY0K0V2aXlCOUFxSjVFUmdvOWJuVnpnc3cwYXV1K1BMb3oreVphNXZGWm10SnpEQnRLQlcvQnVFZlRJamZaclEwaTJXNmNjeWJRbFV5TnpjTy9CS3g1NXAzSExYdkJydFdZUzR4T0MwdVVUQVEvVDZ5ZlpTUFNCbnVjaUtNaGRwU0F0WEl5S1NzUnM2UlpRcmp5OTc5VEJkN2Y2M1NuOWE4RnZRaGYvc3NBQUdBVWYySk51cVQwWmZ0S0ZGL0UrSWh1aERlaHl4KzRMRnUwazdSdzEyLzByb1NnYXpTdm1WcDlua3ZoaUEifQ==</column>
-            <column name="sharing_keys_generated">1475962528</column>
-            <column name="vault_settings">NULL</column>
-        </table>
-        <table name="oc_passman_vaults">
-            <column name="id">2</column>
-            <column name="guid">0596D7A8-3BDD-4AD0-8D04-890EC795711B</column>
-            <column name="user_id">example</column>
-            <column name="name">Example vault 2</column>
-            <column name="created">1475962596</column>
-            <column name="last_access">1475962616</column>
-            <column name="public_sharing_key">-----BEGIN PUBLIC KEY-----
+</field>
+		<field name="private_sharing_key">eyJpdiI6IlZMYTlQZHNQbjlFdHBKdnQvZGZuQkEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJYL05Qbk14bXRGbyIsImN0IjoiVitjbzhEcXprS2VFbW5KclQxVXRjdENtejJka0JTcllrejFHWkMvalIxTEJEWDIwS3psNGZpSlpuM05pRkJwditRQjl4VEJiL3MrNkx0Mm90dkx3VGdJM3VGc3JDWHkxVlVIWnpqVVQ1ZUJiQVFZUjQvRUJoc1dDZXp6bHVwUFhwNjg4SVJiVUFGakkvbDBiVEtXMVpZQnpiaFdQdGNRT2N0UG5hTDN4bUVMZktsRGlvU0pSVXRaNzJrOWtaSTRKdEJRNldNSzRGWENyZUdUemRkWFhodTVHeTdicGRNdHg3MnVXbEZRS1hzMzFieXk1ZzlRU1Y0azZXWGlTRlNvajBkeHRwM3Q3TDNObW4vR2RFNW1SbllHL1A4aUc2TWZvOXZSTjR1T1VMTGpTbEJ3eW96Nk40VTE2OEpKeXJxcVlBMHB6alEyWERlQmdxZGdvSW1Ia0tBckJyREZBSXNRVGFseWIzcE9HVlgvQVNlWStDaVozRjVJTkp1R1Avd1ZaZEtmek5pTUh1eWVZTlIvUEFRdGtPYyt6dTNDVFo4U3ZGdVMxRUtKdmJkNkZ0OTFsVHk5VWhKUjNITlRhQkgwS3dhbENvbEVsbVZvNGZtRG9KdE1NeTZ0clgzcDR1ZHBZUjJwbmZRUGRJQ0U1a0s1K2dPNTlDOFlYSXVWZWpWVU5YVmJudTdhMUl1b1dQU0JjL2ZFOS9ZMDBaVXNvZDFHSFNvbUdVUE5lUUVqZ1l2a3JseDVsYnZYKzJ6VWxlWnI2UEtEek05WEUrQzg5RWtUTkt6czlLT1hFaFVvWS8yQ1hWSEJZVjBFa3ROeUJlVmpHYWZLcWo5bFBxYkxkVklydnZsTVNibVRsUmFJeEVoM2NaQ0RsbjhKTXY0VGY1TWQzeGx5aE05WHFNMEhrbnpzRDNDZ3ZxaEdHeW9EOUhDaFczemZVbS9mY0JvODBQdy81K2FtMHRLQkNYcHVjMnFqTy9lRWlYOGhkM1VhZFRMOWhFVk5meituejJ1OGVEQURBM01XVHoxRDBtMnVjT0txSHFjUFROaG0xMG5WbXpiNFpVQ01VUnRnVWhSN0E1UW9tbUxOcmhjSXgyTFZwMGcvMUU2MFhDUDRYb1hoVllMbWQrT2I0eHFKNE9WNE54NmV4T05PZk1MWitSUE4walZ1cVhBeUxWMzJSZ08vdjNPMGJCc2grdGs3ZjJzaFRMM2gwQ1pUVUl3NVkvbUIxeEtTZ3FkdUVPV3h6ZGJpVUlXQWZIeWg3elFTNnkrU1NXcXl0NzlFWUJ0L3FzLzVyQzhxcWNsQldjRnY0K0V2aXlCOUFxSjVFUmdvOWJuVnpnc3cwYXV1K1BMb3oreVphNXZGWm10SnpEQnRLQlcvQnVFZlRJamZaclEwaTJXNmNjeWJRbFV5TnpjTy9CS3g1NXAzSExYdkJydFdZUzR4T0MwdVVUQVEvVDZ5ZlpTUFNCbnVjaUtNaGRwU0F0WEl5S1NzUnM2UlpRcmp5OTc5VEJkN2Y2M1NuOWE4RnZRaGYvc3NBQUdBVWYySk51cVQwWmZ0S0ZGL0UrSWh1aERlaHl4KzRMRnUwazdSdzEyLzByb1NnYXpTdm1WcDlua3ZoaUEifQ==</field>
+		<field name="sharing_keys_generated">1475962528</field>
+		<field name="vault_settings" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="guid">0596D7A8-3BDD-4AD0-8D04-890EC795711B</field>
+		<field name="user_id">example</field>
+		<field name="name">Example vault 2</field>
+		<field name="created">1475962596</field>
+		<field name="last_access">1475962616</field>
+		<field name="public_sharing_key">-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCEabd4JR7wziF1JLhz9kzOogzs
 2uoCCInDZpEFj4Aw1xlGRwjoMa+/0jkr3ER6inlfxL0g4j3juUL/WViAybXbz2Ke
 HVfNaHLcJ9syx5/QAzZRYZqk1l+oW7TgNTrO4Tr7CnxS6ej/T2xV+OrwLPylWk12
 OfmionAkoyDQrQHVYQIDAQAB
 -----END PUBLIC KEY-----
-</column>
-            <column name="private_sharing_key">eyJpdiI6IjJRQ254WW1TenF3d01uWTdpa2M0VGciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJYL05Qbk14bXRGbyIsImN0Ijoic093ZHphR2NERmRQN3NUQ3ltWmxKbjhsdUN6cEpGYk9TeWFkS1J6MktSZ0tPODVITTd5bVJFWUh6dW1ZUU9mQ2VzT0NjWERaa0p5dStISmVUVFhqM3dFTjJkVk0wTkxiNG9GSFIveTlUbml0WStkQVZ5K3JlSzh6WVlEdDNnQnF1VUxUdS9JazNELzVWb2ZpV1ZOb0pSZGI4OU9WT0tIQkVWZnorQkNySmxXYWhWeVAvY255WGxHV3Z6UWtENWpyaFVDYm41dS9DUGdRZkFEcmdHT25QY1EzcUh0NThlWmg2dW0weFFrOXVQcE1uMkwxTlJ1QmxBZ1ZRMndDQXBHKzNjU01yV3VYVDY0Y3VMZzZONURVMW1EYWhEbWFiMDFYczJ5UEtzWWw4QWQxY21BeWR1dzdwVkt5VnRXbUg5ZVQvSUU5bGRuNWF6QzJLckc1M1N3WVpuWUsxSmhsYnh0cElRU2R1WEs4bTRLYUlveTVXQVhxS2N3TVYvL2hlQ09hVTM2VXVqV1NRRFJBY1Ftd3JvZGVSeGlEbzVUeEpWMi9zcGF0MXBlYmdTMGpHVzdBSXU3cjB5Uy9mOXhYNXQrWWNuV2ZSUnJKcTBwS3pQMjFlNkFoNkxHYXFUcVNRbjRaZkRGWGhRVHBvK3RZY2VtTUYvWFVjYjdIdmp6T1N4dWVqbjBZYW9OVzQxc2E3cEx6Q1VCVTNOcWQxTWxRaXllckI1UGlKZnd0Zy9URDVwTUdRMUd4ZGhDRWxJY2R2Y0gzbjI4ZGJvNlZjVmFPRUthVHNlOS9EMXJ5NkF4ekNXVzdZWnJjdkRrNHBYNVNjTXhFSFVYZDYydXp2OHRqRUl5SGJCSUQ3WWhGSVQ2Ym03TUtINElrRzQxd2UxZGtCSVEwZFJ5VGU3QWh0dlNLMm1MekJuc2NFUTFNbjNPU1NBV1dicWxmZWJqSktTN21ZNzliQ3QrYWdhN3UxVEZVTG5HcVIvS2ZoZHZncm9yMnMyVTRiWlNnWlBGeWd0NTA5clhnbjNOREhIQTVOcndhdit2RjNMSlhQZDNISmN2NWJ0MXRtYkV6R3lGRUpmQlYxOFpadW5jdHhZS25pTk5lR2U2em8yYy9STnVieFQ5cmIvSVVQWm9uR3A1SHJ1Slp4WkViTmVPNlVMQm1ueTh4UXNYTk9jU2RFNENWWVhYSVoydVRNWUJUcldTY1lkZUw1SzRRRHhKUUR1VFN5YjRrNkJxKzJMUEZwMWRXRms2NzJhQ1dkdVludjVEMGZSYlZwRE9iRmFxenZQNUd0YzJRZmw1WWVlNFJtY08zejdyRDFIS1hCVy93N3FGR0JINE9vY01CZ0hHZVlQdFg2VU9NWG9mWHd5UmR0TDhLRWJlUUZmYmVyeEZRSWJtKzkrdzNMYlBwSlNtd0hHU0dPelY2eDJHMm9oang2NjFrWTRQWitIT0l5eW5lT1E3cW4wOUlrSDVtR0wzM3ZPSWFSMlZVOElwWDhjNERabnl1MThoRk5tZDZEL2ZTcTFTQ3lrZU4xRXBaZllWSjkwcEMxaDJqZ0xqUWFXaHArVzcwWE1iNkFQcUZ5blFZRHo0ekxNaDhiZWFXK0V1NGdpbnczU0dkN0EifQ==</column>
-            <column name="sharing_keys_generated">1475962596</column>
-            <column name="vault_settings">NULL</column>
-        </table>
-        <table name="oc_passman_vaults">
-            <column name="id">3</column>
-            <column name="guid">EBCFA898-F6A2-4394-BC5C-826485D18661</column>
-            <column name="user_id">example 2</column>
-            <column name="name">Example vault 1</column>
-            <column name="created">1475962759</column>
-            <column name="last_access">1475962776</column>
-            <column name="public_sharing_key">-----BEGIN PUBLIC KEY-----
+</field>
+		<field name="private_sharing_key">eyJpdiI6IjJRQ254WW1TenF3d01uWTdpa2M0VGciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJYL05Qbk14bXRGbyIsImN0Ijoic093ZHphR2NERmRQN3NUQ3ltWmxKbjhsdUN6cEpGYk9TeWFkS1J6MktSZ0tPODVITTd5bVJFWUh6dW1ZUU9mQ2VzT0NjWERaa0p5dStISmVUVFhqM3dFTjJkVk0wTkxiNG9GSFIveTlUbml0WStkQVZ5K3JlSzh6WVlEdDNnQnF1VUxUdS9JazNELzVWb2ZpV1ZOb0pSZGI4OU9WT0tIQkVWZnorQkNySmxXYWhWeVAvY255WGxHV3Z6UWtENWpyaFVDYm41dS9DUGdRZkFEcmdHT25QY1EzcUh0NThlWmg2dW0weFFrOXVQcE1uMkwxTlJ1QmxBZ1ZRMndDQXBHKzNjU01yV3VYVDY0Y3VMZzZONURVMW1EYWhEbWFiMDFYczJ5UEtzWWw4QWQxY21BeWR1dzdwVkt5VnRXbUg5ZVQvSUU5bGRuNWF6QzJLckc1M1N3WVpuWUsxSmhsYnh0cElRU2R1WEs4bTRLYUlveTVXQVhxS2N3TVYvL2hlQ09hVTM2VXVqV1NRRFJBY1Ftd3JvZGVSeGlEbzVUeEpWMi9zcGF0MXBlYmdTMGpHVzdBSXU3cjB5Uy9mOXhYNXQrWWNuV2ZSUnJKcTBwS3pQMjFlNkFoNkxHYXFUcVNRbjRaZkRGWGhRVHBvK3RZY2VtTUYvWFVjYjdIdmp6T1N4dWVqbjBZYW9OVzQxc2E3cEx6Q1VCVTNOcWQxTWxRaXllckI1UGlKZnd0Zy9URDVwTUdRMUd4ZGhDRWxJY2R2Y0gzbjI4ZGJvNlZjVmFPRUthVHNlOS9EMXJ5NkF4ekNXVzdZWnJjdkRrNHBYNVNjTXhFSFVYZDYydXp2OHRqRUl5SGJCSUQ3WWhGSVQ2Ym03TUtINElrRzQxd2UxZGtCSVEwZFJ5VGU3QWh0dlNLMm1MekJuc2NFUTFNbjNPU1NBV1dicWxmZWJqSktTN21ZNzliQ3QrYWdhN3UxVEZVTG5HcVIvS2ZoZHZncm9yMnMyVTRiWlNnWlBGeWd0NTA5clhnbjNOREhIQTVOcndhdit2RjNMSlhQZDNISmN2NWJ0MXRtYkV6R3lGRUpmQlYxOFpadW5jdHhZS25pTk5lR2U2em8yYy9STnVieFQ5cmIvSVVQWm9uR3A1SHJ1Slp4WkViTmVPNlVMQm1ueTh4UXNYTk9jU2RFNENWWVhYSVoydVRNWUJUcldTY1lkZUw1SzRRRHhKUUR1VFN5YjRrNkJxKzJMUEZwMWRXRms2NzJhQ1dkdVludjVEMGZSYlZwRE9iRmFxenZQNUd0YzJRZmw1WWVlNFJtY08zejdyRDFIS1hCVy93N3FGR0JINE9vY01CZ0hHZVlQdFg2VU9NWG9mWHd5UmR0TDhLRWJlUUZmYmVyeEZRSWJtKzkrdzNMYlBwSlNtd0hHU0dPelY2eDJHMm9oang2NjFrWTRQWitIT0l5eW5lT1E3cW4wOUlrSDVtR0wzM3ZPSWFSMlZVOElwWDhjNERabnl1MThoRk5tZDZEL2ZTcTFTQ3lrZU4xRXBaZllWSjkwcEMxaDJqZ0xqUWFXaHArVzcwWE1iNkFQcUZ5blFZRHo0ekxNaDhiZWFXK0V1NGdpbnczU0dkN0EifQ==</field>
+		<field name="sharing_keys_generated">1475962596</field>
+		<field name="vault_settings" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">3</field>
+		<field name="guid">EBCFA898-F6A2-4394-BC5C-826485D18661</field>
+		<field name="user_id">example 2</field>
+		<field name="name">Example vault 1</field>
+		<field name="created">1475962759</field>
+		<field name="last_access">1475962776</field>
+		<field name="public_sharing_key">-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRYimgvN113KTiGj4gKThMVWgf
 MdVQ4DDx7aIZqIiLJk+zoZbIfwxQno3BYqvkf1oirp1pE/T3vSghECCeOIcN4kCf
 M/IpmIGnqAxPdThrF9TTRszG1ozaiLYSfA0L/rDmZp5AxyxuP/5eaBqFWzDnUG2F
 IpxmrLibjFpUyzY3swIDAQAB
 -----END PUBLIC KEY-----
-</column>
-            <column name="private_sharing_key">eyJpdiI6IkJXZmlOd1hyaUNIZXdRdHRoNldkR1EiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJQd3p0NHl3cWxlZyIsImN0IjoiclU5NFJNUDRNY1R4VFRVZXN6OXR5b2hDSDhMUkZiTlBzUTlFZndQL0FvQWNNQ2J5cEFMRkN3amRVS1o1elA3eVJqbkw1bnZMVFpteHY2cHE1a1g3QzhTWFRIay9VZlJKWC8wcHd6RGdKaEFFbUhJM0NscHRzblR0dTdEendMTUZzeS9mdStBalE3ZWVyaVRnQUxWODMxS2FHSXYyWStBZzArTThTWFlLMFlVQlhBS254S2NrbStVemNROEtiOHN6SG9pS0E4dUZvWTdsSExQanZubEVGcjJ6MXdVNXpkeUlibnlZcnB6TzlDeGJtenhNMXBBdDJwSVRyblRZc1ZoTElrZmg4TjJzYUVlbFR6T0FudXQ1VzBsUE55R2Vobm11ZFBZUjMzUGdRZjN5OU4yUjRYREVmaFF4RXlPTnh3THZib3hPTkFGMFdzMElWN2ZSZ2xlZ2JoT3JaV3B0b3hrdDFTQ0JYa1JWL1BzVWsrWnRQaUNkNkNRdlY0KytzNjBQV05uSzBjSDUybFRUOTMreTRtNDlGUXR1S3pZOUUxUmFjN3ZqQjR5MXQ2MGFHTWRJRER0a0hXU2dkVmlhVDhjWXNRRUt4N2t3KzhFeVF3NmloSnFnSWtxZkdZV3gyZ2xBcXJHZzRTWDBIL2h1NFJ1N3B2UmpyTnZua241ZlkxRUJ6YitqN0Nod2g3czdIcHA4SUVjZGxPbjkzZTQ0VS9XdEZ3N0p2RFVzVGNjSmN4dlNhOVFtWEk5THlITlB2TlFGcGtZMENFTUhDbkJIYms4MG54V1FCVU8xWEpKYURaaFFVK2dUbUVtN2ZIOVNHV1BHQ2xJeTJka2RFcjVNQVZqSG5nMkx0amNMUWdsRFN3S1hlNllFUStFY0F2M0hGdWROSXViZWFvSWs4bGE1QU9SVVU5OVZXR0lNYVp3N2l0UGV0YkZ3MEtFRzJ1aWVubEM2NllieGt6MWVHVURJNTNHRmxZMUdLNDVUN1AyaE1oUTd1czZWQW5vTnJBa0RYbjFVdlhyd0d3OU1TdytIcThwNEFnUFBUVXQwNk9xMC8rSW52bk5sY0hmclZFbXNzdHRMSGhaUGJXSnVkQ0U3YWtkdUh0OTJKQzBjN3JwdHlBbWVkNWpCQ2hzaXJaUmsxaHI4K1JudWltbVFqTG00QlV1YVhWMGJNTDZQK3k0U0F2NW1DNXJKcms5UVVtK0F0eUdKbGw3YmNCMTBhSXhja0dtdU43aDVJd3R5TEYvcGVNYjZ5RkFxdFlMOGVvd3ZJVDAya0Z5OWVYWDd0eHM0MFB0Z2hHeGN5WWd3emF1NUdGeFd6Q0d1Z0gwUCsxZVY0WXM1VUEvaGtWcjg4WXNMUWhNUFBCeTBNRjRpTkhNM2FnM0w4aSt6RFVDMHdLVDF1SllZajlqcnR4KzJUay8rS0xvdVVWbC9jR3ZZZW5zWThSeGV1cjJsQllub3BOZzJaUzN2SXRoYnRHLzVXTno3ZXIvUWNkU0dsczg3ek1RZ0JrYzN0eUliWUd2dzlKUXR6RjdqeUVaN05za2hmSHY5dDhQdVI0WVI4cXRWb09HQi84eWU2NC9zcWRLRmFFN3BObi8yZXEvdVRaZWFCbXhRUkEifQ==</column>
-            <column name="sharing_keys_generated">1475962759</column>
-            <column name="vault_settings">NULL</column>
-        </table>
-        <table name="oc_passman_vaults">
-            <column name="id">4</column>
-            <column name="guid">FA8D80E0-90AB-4D7A-9937-913F486C24EA</column>
-            <column name="user_id">example 2</column>
-            <column name="name">Example vault 2</column>
-            <column name="created">1475962790</column>
-            <column name="last_access">1475962835</column>
-            <column name="public_sharing_key">-----BEGIN PUBLIC KEY-----
+</field>
+		<field name="private_sharing_key">eyJpdiI6IkJXZmlOd1hyaUNIZXdRdHRoNldkR1EiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJQd3p0NHl3cWxlZyIsImN0IjoiclU5NFJNUDRNY1R4VFRVZXN6OXR5b2hDSDhMUkZiTlBzUTlFZndQL0FvQWNNQ2J5cEFMRkN3amRVS1o1elA3eVJqbkw1bnZMVFpteHY2cHE1a1g3QzhTWFRIay9VZlJKWC8wcHd6RGdKaEFFbUhJM0NscHRzblR0dTdEendMTUZzeS9mdStBalE3ZWVyaVRnQUxWODMxS2FHSXYyWStBZzArTThTWFlLMFlVQlhBS254S2NrbStVemNROEtiOHN6SG9pS0E4dUZvWTdsSExQanZubEVGcjJ6MXdVNXpkeUlibnlZcnB6TzlDeGJtenhNMXBBdDJwSVRyblRZc1ZoTElrZmg4TjJzYUVlbFR6T0FudXQ1VzBsUE55R2Vobm11ZFBZUjMzUGdRZjN5OU4yUjRYREVmaFF4RXlPTnh3THZib3hPTkFGMFdzMElWN2ZSZ2xlZ2JoT3JaV3B0b3hrdDFTQ0JYa1JWL1BzVWsrWnRQaUNkNkNRdlY0KytzNjBQV05uSzBjSDUybFRUOTMreTRtNDlGUXR1S3pZOUUxUmFjN3ZqQjR5MXQ2MGFHTWRJRER0a0hXU2dkVmlhVDhjWXNRRUt4N2t3KzhFeVF3NmloSnFnSWtxZkdZV3gyZ2xBcXJHZzRTWDBIL2h1NFJ1N3B2UmpyTnZua241ZlkxRUJ6YitqN0Nod2g3czdIcHA4SUVjZGxPbjkzZTQ0VS9XdEZ3N0p2RFVzVGNjSmN4dlNhOVFtWEk5THlITlB2TlFGcGtZMENFTUhDbkJIYms4MG54V1FCVU8xWEpKYURaaFFVK2dUbUVtN2ZIOVNHV1BHQ2xJeTJka2RFcjVNQVZqSG5nMkx0amNMUWdsRFN3S1hlNllFUStFY0F2M0hGdWROSXViZWFvSWs4bGE1QU9SVVU5OVZXR0lNYVp3N2l0UGV0YkZ3MEtFRzJ1aWVubEM2NllieGt6MWVHVURJNTNHRmxZMUdLNDVUN1AyaE1oUTd1czZWQW5vTnJBa0RYbjFVdlhyd0d3OU1TdytIcThwNEFnUFBUVXQwNk9xMC8rSW52bk5sY0hmclZFbXNzdHRMSGhaUGJXSnVkQ0U3YWtkdUh0OTJKQzBjN3JwdHlBbWVkNWpCQ2hzaXJaUmsxaHI4K1JudWltbVFqTG00QlV1YVhWMGJNTDZQK3k0U0F2NW1DNXJKcms5UVVtK0F0eUdKbGw3YmNCMTBhSXhja0dtdU43aDVJd3R5TEYvcGVNYjZ5RkFxdFlMOGVvd3ZJVDAya0Z5OWVYWDd0eHM0MFB0Z2hHeGN5WWd3emF1NUdGeFd6Q0d1Z0gwUCsxZVY0WXM1VUEvaGtWcjg4WXNMUWhNUFBCeTBNRjRpTkhNM2FnM0w4aSt6RFVDMHdLVDF1SllZajlqcnR4KzJUay8rS0xvdVVWbC9jR3ZZZW5zWThSeGV1cjJsQllub3BOZzJaUzN2SXRoYnRHLzVXTno3ZXIvUWNkU0dsczg3ek1RZ0JrYzN0eUliWUd2dzlKUXR6RjdqeUVaN05za2hmSHY5dDhQdVI0WVI4cXRWb09HQi84eWU2NC9zcWRLRmFFN3BObi8yZXEvdVRaZWFCbXhRUkEifQ==</field>
+		<field name="sharing_keys_generated">1475962759</field>
+		<field name="vault_settings" xsi:nil="true" />
+	</row>
+	<row>
+		<field name="id">4</field>
+		<field name="guid">FA8D80E0-90AB-4D7A-9937-913F486C24EA</field>
+		<field name="user_id">example 2</field>
+		<field name="name">Example vault 2</field>
+		<field name="created">1475962790</field>
+		<field name="last_access">1475962835</field>
+		<field name="public_sharing_key">-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDfTRBD13nnog5rJqVtoNXQPsJT
 1eB0HkBuWrZaYfmda33ET8DZ73Ymr4Zh5ofl1wU3Z5CZsbqMRf8lva7kUjHG5CXk
 WdgmwR5krJZJUjfIjq/qneialQL1JvHpRX38nlcqbg61GkYVvyN1g03xc3w9rfao
 iVGVHRB5Cv8A+X4WuQIDAQAB
 -----END PUBLIC KEY-----
-</column>
-            <column name="private_sharing_key">eyJpdiI6IklSQnRuM3krQ05rOXdmbzhUdTdPcnciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJQd3p0NHl3cWxlZyIsImN0IjoiZ1JyZzNuNnVtYXRNNjRNd1NtSnluN0xzNU1zTkNZN1dwK1FMdjhqNTZWTGREMmNJZTRXRDN2MTdWeEFBQTl1VjlCMnJtOHQyUHY2bzZlTTJzUytyTlNWS1lYVVFrZWxFaWFvOFdBVlJFQ1diakxIdFVXclYyZ1JXcG4vUmhkV2RockVaQmJ4cFdTRU5QTkFwVlNHdXdabktKS2cvZHZSMEFUR1ZxbmxxNnB0SUQ1N2ZXU3JRc3FkamI3Wms4ckVrV0RCYm01cVI4MWhhaDhwTjROWFhzV1pwak1Tc0JxNEpPTHlqc2JQNlMxSk9NajY1TlpmY1pYbkFadW1YZW40Wll0TnNEY2ZyNVQwRlFhUHNnTXVrSHZZTzJhVW85Sk5nZkZYREorRFEwNHNWcFpDK1ZrSFpZc0xQMU1GWHY3azhnZVk5UVJCR2pra1k1c2pMZkQ2YXBWdzQ2SGU2ZWduM28xWU1VV1JEQmNHSi93RmFtTUs3b01BczdnTkJKOUpyd0lqb29ESGkwbEozdmFxaEcyNGNuc2xOeHROejMveC9YSjgvM3ZQZ3lMTWFGQVh5eTR2Q2tQRk5HWFprTEhGMktvbEw4RVFtemxTWU1ZajQvdGYzamNtKzJyYXFCRUVWRWNGWVMxMnpFWGU2bjhDL3ptSzBrTk9YNDNibHIzdURod0ZmNktxM0F6eVFpekxMNWVzNVVod2RGL0NPU3lMT2oycVdYS0NlWTdCVVkwWURwdmQxNHFiL1NWN2E2Q2tKZ2s4cmhXa2w3TXRPdXJXT1dPaUg0czhBNmptSDdSdS9BZmNCQ1NmOFlPaDE0RlhSemRpYm5ydjFvSkxFRXVNaFY0SHZLd1liK0lyd3dYSm9obkFRSzdNWGV6QWsrNlphSTF1ZTRRazNvSVlUWWtWUXU0SE1zMXpSTmFiZ2g3ZlZaQnptRVhSTi9CSSszVytFd0JlZ0wyeTBxSGJ3WlRZNkNaeDZGZXdFZU55NUNDQ0QwOTBpWUVHL2hjRnhITW81VVN2dUhVcnJNQmlzN3ZYb0VSN0M1a3ozSmdZTWVEcGUxOEpUa2l3NVJMOERQQnErNmtLNG0zeUhvUExON2lCUHdua1QyOGdJNDNJdnlITFVmUTR0aUNFRWRaZWFjdVZIR0RBMFdxSmxYMEdmNHNCRzhISERrdU9GbmZUSWErWk9aZ0lOV2hiZzZLUGNDeDRKazZpZGU0TkQ3d1k1VU9qSzVCOTZKUFRNVlRNT0JFR2RIYzBvd2FTU0g4OUVwNG5XMndkV1kxemJnTUF1SHo2UjhoU21pUmwvS3JFZkhOYkh5a3llV2kxeWZZa0t0cjB0a2NvdXRJSDRIc2NOdVRDbmFEaGtVUVltOWlTTUVtN24zZ3o5U2Z1Yi9rNXBleU9yK0JVWUxGNis0eGsxQ2E0TXU5eHpTSHpwMGV1ZGYzbmpjOWt2RkFZTmc3VmdhbXpCYXUxL0Iyd2VwVVdSeVhqa2dwUytwdnVvaThqYThPdjhzVyttNUk3bU14THU2a3ptMHZsczBuYndWODB3TlArVGtET2tWWDFVWkRtYW9yYnhidis1VGtwU0REWTkrYVdvMDBQZ2Voa0w1R3FGVncifQ==</column>
-            <column name="sharing_keys_generated">1475962791</column>
-            <column name="vault_settings">NULL</column>
-        </table>
-    </database>
-</pma_xml_export>
+</field>
+		<field name="private_sharing_key">eyJpdiI6IklSQnRuM3krQ05rOXdmbzhUdTdPcnciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJQd3p0NHl3cWxlZyIsImN0IjoiZ1JyZzNuNnVtYXRNNjRNd1NtSnluN0xzNU1zTkNZN1dwK1FMdjhqNTZWTGREMmNJZTRXRDN2MTdWeEFBQTl1VjlCMnJtOHQyUHY2bzZlTTJzUytyTlNWS1lYVVFrZWxFaWFvOFdBVlJFQ1diakxIdFVXclYyZ1JXcG4vUmhkV2RockVaQmJ4cFdTRU5QTkFwVlNHdXdabktKS2cvZHZSMEFUR1ZxbmxxNnB0SUQ1N2ZXU3JRc3FkamI3Wms4ckVrV0RCYm01cVI4MWhhaDhwTjROWFhzV1pwak1Tc0JxNEpPTHlqc2JQNlMxSk9NajY1TlpmY1pYbkFadW1YZW40Wll0TnNEY2ZyNVQwRlFhUHNnTXVrSHZZTzJhVW85Sk5nZkZYREorRFEwNHNWcFpDK1ZrSFpZc0xQMU1GWHY3azhnZVk5UVJCR2pra1k1c2pMZkQ2YXBWdzQ2SGU2ZWduM28xWU1VV1JEQmNHSi93RmFtTUs3b01BczdnTkJKOUpyd0lqb29ESGkwbEozdmFxaEcyNGNuc2xOeHROejMveC9YSjgvM3ZQZ3lMTWFGQVh5eTR2Q2tQRk5HWFprTEhGMktvbEw4RVFtemxTWU1ZajQvdGYzamNtKzJyYXFCRUVWRWNGWVMxMnpFWGU2bjhDL3ptSzBrTk9YNDNibHIzdURod0ZmNktxM0F6eVFpekxMNWVzNVVod2RGL0NPU3lMT2oycVdYS0NlWTdCVVkwWURwdmQxNHFiL1NWN2E2Q2tKZ2s4cmhXa2w3TXRPdXJXT1dPaUg0czhBNmptSDdSdS9BZmNCQ1NmOFlPaDE0RlhSemRpYm5ydjFvSkxFRXVNaFY0SHZLd1liK0lyd3dYSm9obkFRSzdNWGV6QWsrNlphSTF1ZTRRazNvSVlUWWtWUXU0SE1zMXpSTmFiZ2g3ZlZaQnptRVhSTi9CSSszVytFd0JlZ0wyeTBxSGJ3WlRZNkNaeDZGZXdFZU55NUNDQ0QwOTBpWUVHL2hjRnhITW81VVN2dUhVcnJNQmlzN3ZYb0VSN0M1a3ozSmdZTWVEcGUxOEpUa2l3NVJMOERQQnErNmtLNG0zeUhvUExON2lCUHdua1QyOGdJNDNJdnlITFVmUTR0aUNFRWRaZWFjdVZIR0RBMFdxSmxYMEdmNHNCRzhISERrdU9GbmZUSWErWk9aZ0lOV2hiZzZLUGNDeDRKazZpZGU0TkQ3d1k1VU9qSzVCOTZKUFRNVlRNT0JFR2RIYzBvd2FTU0g4OUVwNG5XMndkV1kxemJnTUF1SHo2UjhoU21pUmwvS3JFZkhOYkh5a3llV2kxeWZZa0t0cjB0a2NvdXRJSDRIc2NOdVRDbmFEaGtVUVltOWlTTUVtN24zZ3o5U2Z1Yi9rNXBleU9yK0JVWUxGNis0eGsxQ2E0TXU5eHpTSHpwMGV1ZGYzbmpjOWt2RkFZTmc3VmdhbXpCYXUxL0Iyd2VwVVdSeVhqa2dwUytwdnVvaThqYThPdjhzVyttNUk3bU14THU2a3ptMHZsczBuYndWODB3TlArVGtET2tWWDFVWkRtYW9yYnhidis1VGtwU0REWTkrYVdvMDBQZ2Voa0w1R3FGVncifQ==</field>
+		<field name="sharing_keys_generated">1475962791</field>
+		<field name="vault_settings" xsi:nil="true" />
+	</row>
+	</table_data>
+</database>
+</mysqldump>

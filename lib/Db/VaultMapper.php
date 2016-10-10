@@ -56,6 +56,12 @@ class VaultMapper extends Mapper {
 		return $this->findEntities($sql, $params);
 	}
 
+	/**
+	 * Creates a vault
+	 * @param $vault_name
+	 * @param $userId
+	 * @return Vault
+	 */
 	public function create($vault_name, $userId){
 		$vault = new Vault();
 		$vault->setName($vault_name);
@@ -70,7 +76,7 @@ class VaultMapper extends Mapper {
 		$vault = new Vault();
 		$vault->setId($vault_id);
 		$vault->setUserId($user_id);
-		$vault->setLastAccess(time());
+		$vault->setLastAccess(Utils::getTime());
 		$this->update($vault);
 	}
 
