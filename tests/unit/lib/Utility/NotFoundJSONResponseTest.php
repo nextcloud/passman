@@ -12,7 +12,7 @@ use \OCP\AppFramework\Http;
 class NotFoundJSONResponseTest extends PHPUnit_Framework_TestCase {
 	public function testOnEmptyResponse(){
 		$data = new NotFoundJSONResponse();
-		$this->assertTrue($data->getStatus() === Http::STATUS_NOT_FOUND);
+		$this->assertEquals(Http::STATUS_NOT_FOUND, $data->getStatus());
 		$this->assertJsonStringEqualsJsonString('[]', $data->render(), 'Expected empty JSON response');
 	}
 
@@ -23,7 +23,7 @@ class NotFoundJSONResponseTest extends PHPUnit_Framework_TestCase {
 			'integer' => 21
 		];
 		$response = new NotFoundJSONResponse($data);
-		$this->assertTrue($response->getStatus() === Http::STATUS_NOT_FOUND);
+		$this->assertEquals(Http::STATUS_NOT_FOUND, $response->getStatus());
 		$this->assertJsonStringEqualsJsonString(json_encode($data), $response->render(), 'Rendered data does not match with expected data');
 	}
 }

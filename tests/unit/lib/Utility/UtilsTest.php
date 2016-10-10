@@ -21,7 +21,7 @@ class UtilsTest extends PHPUnit_Framework_TestCase {
 		sleep(1);
 		$new_time = Utils::getTime();
 
-		$this->assertTrue($old_time +1 === $new_time, "Evaluating that $old_time +1 === $new_time");
+		$this->assertEquals($old_time +1, $new_time, "Evaluating that $old_time +1 === $new_time");
 	}
 
 	public function testGetMicroTime(){

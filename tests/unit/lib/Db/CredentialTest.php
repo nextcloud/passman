@@ -10,6 +10,7 @@
 use \OCA\Passman\Db\Credential;
 use \OCP\AppFramework\Db\Entity;
 
+//@TODO Change assertTrue with assertEquals when applicable
 class CredentialTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id' 		=> 5,
@@ -51,28 +52,28 @@ class CredentialTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetters(){
-		$this->assertTrue($this->credential->getId() 		=== self::TEST_DATA['id']);
-		$this->assertTrue($this->credential->getGuid() 		=== self::TEST_DATA['guid']);
-		$this->assertTrue($this->credential->getVaultId() 	=== self::TEST_DATA['vault_id']);
-		$this->assertTrue($this->credential->getUserId() 	=== self::TEST_DATA['user_id']);
-		$this->assertTrue($this->credential->getLabel()		=== self::TEST_DATA['label']);
-		$this->assertTrue($this->credential->getDescription() === self::TEST_DATA['description']);
-		$this->assertTrue($this->credential->getCreated()	=== self::TEST_DATA['created']);
-		$this->assertTrue($this->credential->getChanged()	=== self::TEST_DATA['changed']);
-		$this->assertTrue($this->credential->getTags()		=== self::TEST_DATA['tags']);
-		$this->assertTrue($this->credential->getEmail()		=== self::TEST_DATA['email']);
-		$this->assertTrue($this->credential->getUsername()	=== self::TEST_DATA['username']);
-		$this->assertTrue($this->credential->getPassword()	=== self::TEST_DATA['password']);
-		$this->assertTrue($this->credential->getUrl()		=== self::TEST_DATA['url']);
-		$this->assertTrue($this->credential->getFavicon()	=== self::TEST_DATA['favicon']);
-		$this->assertTrue($this->credential->getRenewInterval() === self::TEST_DATA['renew_interval']);
-		$this->assertTrue($this->credential->getExpireTime() === self::TEST_DATA['expire_time']);
-		$this->assertTrue($this->credential->getDeleteTime() === self::TEST_DATA['delete_time']);
-		$this->assertTrue($this->credential->getFiles()		=== self::TEST_DATA['files']);
-		$this->assertTrue($this->credential->getCustomFields() === self::TEST_DATA['custom_fields']);
-		$this->assertTrue($this->credential->getOtp()		=== self::TEST_DATA['otp']);
-		$this->assertTrue($this->credential->getHidden()	=== self::TEST_DATA['hidden']);
-		$this->assertTrue($this->credential->getSharedKey() === self::TEST_DATA['shared_key']);
+		$this->assertEquals(self::TEST_DATA['id'], $this->credential->getId());
+		$this->assertEquals(self::TEST_DATA['guid'], $this->credential->getGuid());
+		$this->assertEquals(self::TEST_DATA['vault_id'], $this->credential->getVaultId());
+		$this->assertEquals(self::TEST_DATA['user_id'], $this->credential->getUserId());
+		$this->assertEquals(self::TEST_DATA['label'], $this->credential->getLabel());
+		$this->assertEquals(self::TEST_DATA['description'], $this->credential->getDescription());
+		$this->assertEquals(self::TEST_DATA['created'], $this->credential->getCreated());
+		$this->assertEquals(self::TEST_DATA['changed'], $this->credential->getChanged());
+		$this->assertEquals(self::TEST_DATA['tags'], $this->credential->getTags());
+		$this->assertEquals(self::TEST_DATA['email'], $this->credential->getEmail());
+		$this->assertEquals(self::TEST_DATA['username'], $this->credential->getUsername());
+		$this->assertEquals(self::TEST_DATA['password'], $this->credential->getPassword());
+		$this->assertEquals(self::TEST_DATA['url'], $this->credential->getUrl());
+		$this->assertEquals(self::TEST_DATA['favicon'], $this->credential->getFavicon());
+		$this->assertEquals(self::TEST_DATA['renew_interval'], $this->credential->getRenewInterval());
+		$this->assertEquals(self::TEST_DATA['expire_time'], $this->credential->getExpireTime());
+		$this->assertEquals(self::TEST_DATA['delete_time'], $this->credential->getDeleteTime());
+		$this->assertEquals(self::TEST_DATA['files'], $this->credential->getFiles());
+		$this->assertEquals(self::TEST_DATA['custom_fields'], $this->credential->getCustomFields());
+		$this->assertEquals(self::TEST_DATA['otp'], $this->credential->getOtp());
+		$this->assertEquals(self::TEST_DATA['hidden'], $this->credential->getHidden());
+		$this->assertEquals(self::TEST_DATA['shared_key'], $this->credential->getSharedKey());
 	}
 
 	public function testSetters() {

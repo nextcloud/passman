@@ -20,25 +20,25 @@ class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testPermissionConstants(){
-		$this->assertTrue(PermissionEntity::READ    === 0b00000001);
-		$this->assertTrue(PermissionEntity::WRITE   === 0b00000010);
-		$this->assertTrue(PermissionEntity::FILES   === 0b00000100);
-		$this->assertTrue(PermissionEntity::HISTORY === 0b00001000);
-		$this->assertTrue(PermissionEntity::OWNER   === 0b10000000);
+		$this->assertEquals(0b00000001, PermissionEntity::READ);
+		$this->assertEquals(0b00000010, PermissionEntity::WRITE);
+		$this->assertEquals(0b00000100, PermissionEntity::FILES);
+		$this->assertEquals(0b00001000, PermissionEntity::HISTORY);
+		$this->assertEquals(0b10000000, PermissionEntity::OWNER);
 	}
 
 	public function testAddPermission(){
 		// Start with an empty permission
 		$this->permission->setPermissions(0);
-		$this->assertTrue($this->permission->getPermissions() === 0);
+		$this->assertEquals(0, $this->permission->getPermissions());
 
 		// Add read permission
 		$this->permission->addPermission(PermissionEntity::READ);
-		$this->assertTrue($this->permission->getPermissions() === PermissionEntity::READ);
+		$this->assertEquals(PermissionEntity::READ, $this->permission->getPermissions());
 
 		// Try adding another permission and check if it has both
 		$this->permission->addPermission(PermissionEntity::FILES);
-		$this->assertTrue($this->permission->getPermissions() === (PermissionEntity::READ | PermissionEntity::FILES));
+		$this->assertEquals(PermissionEntity::READ | PermissionEntity::FILES, $this->permission->getPermissions());
 	}
 
 	public function testRemovePermission(){
@@ -46,17 +46,18 @@ class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
 
 		// Start with a set of permissions
 		$this->permission->setPermissions($base_permissions);
-		$this->assertTrue($this->permission->getPermissions() === $base_permissions);
+		$this->assertEquals($base_permissions, $this->permission->getPermissions());
 
 		// Remove write permission
 		$expected_permissions = PermissionEntity::READ | PermissionEntity::HISTORY;
 		$this->permission->removePermission(PermissionEntity::WRITE);
-		$this->assertTrue($this->permission->getPermissions() === $expected_permissions);
+		$this->assertEquals($expected_permissions, $this->permission->getPermissions());
+		$this->assertNotEquals($base_permissions, $this->permission->getPermissions());
 
 		// Remove history permission
 		$expected_permissions = PermissionEntity::READ;
 		$this->permission->removePermission(PermissionEntity::HISTORY);
-		$this->assertTrue($this->permission->getPermissions() === $expected_permissions);
+		$this->assertEquals($expected_permissions, $this->permission->getPermissions());
 	}
 
 	public function testHasPermission() {
