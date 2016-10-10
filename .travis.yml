@@ -30,6 +30,8 @@ before_install:
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor -g; fi"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager start &; fi"
 
 
 #
