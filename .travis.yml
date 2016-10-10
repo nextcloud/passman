@@ -29,6 +29,7 @@ before_install:
     - nvm install 5.9
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor -g; fi"
 
 
 #
@@ -60,8 +61,8 @@ script:
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
     #- cd ../
-    -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
-
+    - sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then protractor .protractor.js; fi"
 
 #after_failure:
 #    - cat ../../data/owncloud.log
