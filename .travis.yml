@@ -73,7 +73,7 @@ addons:
 matrix:
   include:
     - php: 5.6
-      env: DB=mysql
+      env: DB=mysql;PROTRAC=1
     - php: 5.6
       env: DB=pgsql
     - php: 5.6
