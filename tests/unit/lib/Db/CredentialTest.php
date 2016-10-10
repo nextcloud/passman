@@ -10,7 +10,6 @@
 use \OCA\Passman\Db\Credential;
 use \OCP\AppFramework\Db\Entity;
 
-//@TODO Change assertTrue with assertEquals when applicable
 class CredentialTest extends PHPUnit_Framework_TestCase {
 	CONST TEST_DATA = [
 		'id' 		=> 5,
