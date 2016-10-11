@@ -16,6 +16,3 @@ pipeline:
     when:
       matrix:
         TESTS: signed-off-check
-matrix:
-  include:
-    - TESTS: signed-off-check
