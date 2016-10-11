@@ -41,23 +41,23 @@ before_script:
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
-    - sh -c "if [ '$JSTESTS' = '1']; then npm install; fi"
+    - sh -c "if [ '$JSTESTS' = '1' ]; then npm install; fi"
 
 
 
 script:
     # Test the app
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' -a '$PROTRAC' != '1']; then find . -name \*.php -exec php -l \"{}\" \;; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' -a '$PROTRAC' != '1' ]; then find . -name \*.php -exec php -l \"{}\" \;; fi"
     - cd ../../
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' -a '$PROTRAC' != '1' ]; then ./occ app:check-code $APP_NAME -c private -c strong-comparison; fi"
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '2' -a '$PROTRAC' != '1' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
     - cd apps/$APP_NAME/
 
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1']; then php build/phpunit.phar -c phpunit.xml --coverage-clover clover.xml; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then php build/phpunit.phar -c phpunit.xml --coverage-clover clover.xml; fi"
 
     # Create coverage report
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1']; then wget https://scrutinizer-ci.com/ocular.phar; fi"
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1']; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
     #- cd ../
     - sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then protractor .protractor.js; fi"
