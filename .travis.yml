@@ -26,6 +26,7 @@ before_install:
      # Add some output debugging information
     - cd ../server
     - ls -al
+    - ls -al config/
     - ./occ check
     - ./occ status
     - ./occ app:list
