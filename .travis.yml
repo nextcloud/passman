@@ -31,7 +31,7 @@ before_install:
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor -g; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
-    - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager start & fi"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then nohup bash -c "webdriver-manager start 2>&1 &\"; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor@4.0.9; fi"
 
 
@@ -42,7 +42,7 @@ before_script:
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"; fi
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"; fi
     - ./occ app:enable passman
-    - php -S localhost:8080 &
+    - php -S localhost:8080 > /dev/null &
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
@@ -58,11 +58,11 @@ script:
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '2' -a '$PROTRAC' != '1' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
     - cd apps/$APP_NAME/
 
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1']; then php build/phpunit.phar -c phpunit.xml --coverage-clover clover.xml; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then php build/phpunit.phar -c phpunit.xml --coverage-clover clover.xml; fi"
 
     # Create coverage report
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1']; then wget https://scrutinizer-ci.com/ocular.phar; fi"
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1']; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
     #- cd ../
     - sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then protractor .protractor.js; fi"
