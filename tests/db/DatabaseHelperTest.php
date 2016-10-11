@@ -54,6 +54,14 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 	}
 
 	/**
+	 * Truncates a table, platform aware
+	 * @param $table_name
+	 */
+	public function truncateTable($table_name) {
+		$this->db->executeQuery($this->db->getDatabasePlatform()->getTruncateTableSQL($table_name));
+	}
+
+	/**
 	 * Initializes the table with the corresponding dataset on the dumps dir
 	 *
 	 * @param $table_name
@@ -62,7 +70,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 		$table = $this->getTableDataset($table_name);
 
 		// Cleanup any data currently inside the table
-		$this->db->executeQuery("TRUNCATE $table_name;");
+		$this->truncateTable($table_name);
 
 		// Fill the table with the data dumps
 		for ($i = 0; $i < $table->getRowCount(); $i++) {
