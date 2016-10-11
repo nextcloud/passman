@@ -31,7 +31,7 @@ before_install:
     - cd ../server
     - cat config/config.php
     - cat config/autoconfig.php
-    - cp conffig/autoconfig.php config/config.php
+    - cp config/autoconfig.php config/config.php
     - ./occ check
     - ./occ status
     - ./occ app:list
