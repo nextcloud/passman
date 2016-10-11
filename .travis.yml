@@ -30,7 +30,7 @@ before_install:
      # Add some output debugging information
     - cd ../server
     - cat config/config.php
-    - cat config/autcconfig.php
+    - cat config/autoconfig.php
     - ./occ check
     - ./occ status
     - ./occ app:list
