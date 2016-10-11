@@ -30,7 +30,7 @@ before_install:
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor -g; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager start > /dev/null 2>&1 & fi"
-    - sh -c "if [ '$PROTRAC' = '1' ]; npm install protractor@4.0.9"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor@4.0.9"
 
 
 #
