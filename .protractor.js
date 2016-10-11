@@ -13,6 +13,7 @@ exports.config = {
 	},
 	jasmineNodeOpts: {
 		silent: true,
+		print: function() {},
 		defaultTimeoutInterval: 30000
 	}
 
