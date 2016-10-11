@@ -29,6 +29,8 @@ before_install:
     - bash ./before_install.sh $APP_NAME $CORE_BRANCH $DB
      # Add some output debugging information
     - cd ../server
+    - cat config/config.php
+    - cat config/autcconfig.php
     - ./occ check
     - ./occ status
     - ./occ app:list
