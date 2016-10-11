@@ -18,6 +18,7 @@ before_install:
     # enable a display for running JavaScript tests
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
+    - chmod -R 777 /home/travis/build/nextcloud/passman
 #    <- if [[ "$DB" == 'mysql' ]]; then sudo apt-get -y install mariadb-server; fi
     - wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh
     - bash ./before_install.sh $APP_NAME $CORE_BRANCH $DB
