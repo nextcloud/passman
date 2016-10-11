@@ -40,7 +40,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 	}
 
 	public function setUp() {
-		$server = new \OC\Server(getenv('NEXTCLOUD_BASE_DIR'), new \OC\Config(getenv('NEXTCLOUD_CONFIG_DIR'), getenv('NEXTCLOUD_CONFIG_FILE')));
+		$server = new \OC\Server(getenv('SERVER_BASE_DIR'), new \OC\Config(getenv('SERVER_CONFIG_DIR'), getenv('SERVER_CONFIG_FILE')));
 		$this->app_container = $server->getAppContainer('passman');
 
 		$this->db = $this->app_container->getServer()->getDatabaseConnection();
