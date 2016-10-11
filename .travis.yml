@@ -29,10 +29,6 @@ before_install:
     - nvm install 5.9
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
-    - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor -g; fi"
-    - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
-    - sh -c "if [ '$PROTRAC' = '1' ]; then nohup bash -c "webdriver-manager start 2>&1 &\"; fi"
-    - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor@4.0.9; fi"
 
 
 #
@@ -42,7 +38,7 @@ before_script:
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"; fi
 #    - if [[ "$DB" == 'mysql' ]]; then mysql -u root -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"; fi
     - ./occ app:enable passman
-    - php -S localhost:8080 > /dev/null &
+    - php -S localhost:8080 &
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
@@ -52,20 +48,20 @@ before_script:
 
 script:
     # Test the app
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' -a '$PROTRAC' != '1']; then find . -name \*.php -exec php -l \"{}\" \;; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then find . -name \*.php -exec php -l \"{}\" \;; fi"
     - cd ../../
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' -a '$PROTRAC' != '1' ]; then ./occ app:check-code $APP_NAME -c private -c strong-comparison; fi"
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '2' -a '$PROTRAC' != '1' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then ./occ app:check-code $APP_NAME -c private -c strong-comparison; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '2' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
     - cd apps/$APP_NAME/
 
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then php build/phpunit.phar -c phpunit.xml --coverage-clover clover.xml; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php build/phpunit.phar -c phpunit.xml --coverage-clover clover.xml; fi"
 
     # Create coverage report
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' -a '$PROTRAC' != '1' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --format=php-clover clover.xml; fi"
     #- cd ../
-    - sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
-    - sh -c "if [ '$PROTRAC' = '1' ]; then protractor .protractor.js; fi"
+    -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
+
 
 #after_failure:
 #    - cat ../../data/owncloud.log
@@ -76,7 +72,7 @@ addons:
 matrix:
   include:
     - php: 5.6
-      env: DB=mysql;PROTRAC=1
+      env: DB=mysql
     - php: 5.6
       env: DB=pgsql
     - php: 5.6
