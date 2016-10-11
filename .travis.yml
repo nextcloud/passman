@@ -18,20 +18,15 @@ before_install:
     # enable a display for running JavaScript tests
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
-    - pwd
-    - ls -al
-#    <- if [[ "$DB" == 'mysql' ]]; then sudo apt-get -y install mariadb-server; fi
     - wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh
-    - pwd
-    - ls -al
     - bash ./before_install.sh $APP_NAME $CORE_BRANCH $DB
-     # Add some output debugging information
+
+    # Add some output debugging information
     - cd ../server
-    - pwd
-    - ls -al
-    - ls -al config/
     - ./occ check
     - ./occ status
+    - ./occ app:list
+    - ./occ app:enable $APP_NAME
     - ./occ app:list
     - nvm install 5.9
     - npm install -g npm@latest
