@@ -25,21 +25,19 @@ before_install:
     - ./occ status
     - ./occ app:list
     - ./occ user:add example --password-from-env
-    - php -S localhost:8080 > /dev/null 2>&1 &
-    - sleep 2
     - nvm install 5.9
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor -g; fi"
-    # sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
-    # sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager start > /dev/null 2>&1 & fi"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
+    - sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager start > /dev/null 2>&1 & fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install jasmine-spec-reporter protractor@4.0.9; fi"
 
 
 #
 before_script:
     - ./occ app:enable passman
-
+    - php -S localhost:8080 > /dev/null 2>&1 &
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
@@ -68,7 +66,7 @@ script:
 #    - cat ../../data/owncloud.log
 
 addons:
-    sauce_connect: true
+    firefox: "latest"
 
 matrix:
   include:
