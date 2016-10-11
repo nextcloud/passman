@@ -23,6 +23,7 @@ before_install:
   - ./occ status
   - ./occ app:list
   - ./occ app:enable $APP_NAME
+  - whoami
   - ls -al
   - ls -al config/
 
