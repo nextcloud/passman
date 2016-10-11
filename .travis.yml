@@ -66,7 +66,8 @@ script:
 #    - cat ../../data/owncloud.log
 
 addons:
-    firefox: "latest"
+    - firefox: "latest"
+    - sauce_connect: true
 
 matrix:
   include:
