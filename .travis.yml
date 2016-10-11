@@ -24,6 +24,7 @@ before_install:
     - ./occ check
     - ./occ status
     - ./occ app:list
+    - ./occ user:add example --password-from-env
     - nvm install 5.9
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
@@ -40,7 +41,7 @@ before_script:
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
-    - sh -c "if [ '$JSTESTS' = '1'  -o '$PROTRAC' = '1' ]; then npm install; fi"
+    - sh -c "if [ '$JSTESTS' = '1']; then npm install; fi"
 
 
 
