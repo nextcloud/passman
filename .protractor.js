@@ -22,8 +22,6 @@ if (process.env.TRAVIS) {
 } else {
 	_config.capabilities = {
 		'browserName': 'firefox', // or 'safari'
-		'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-		'build': process.env.TRAVIS_BUILD_NUMBER
 	}
 }
 
