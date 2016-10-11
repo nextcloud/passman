@@ -29,8 +29,8 @@ before_install:
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install protractor -g; fi"
-    #- sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
-    #- sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager start > /dev/null 2>&1 & fi"
+    # sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager update; fi"
+    # sh -c "if [ '$PROTRAC' = '1' ]; then webdriver-manager start > /dev/null 2>&1 & fi"
     - sh -c "if [ '$PROTRAC' = '1' ]; then npm install jasmine-spec-reporter protractor@4.0.9; fi"
 
 
