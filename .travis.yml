@@ -26,6 +26,7 @@ before_install:
     - ./occ app:list
     - ./occ user:add example --password-from-env
     - php -S localhost:8080 > /dev/null 2>&1 &
+    - sleep 2
     - nvm install 5.9
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
