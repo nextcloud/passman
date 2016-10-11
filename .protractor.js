@@ -2,11 +2,12 @@ exports.config = {
 	seleniumAddress: 'http://localhost:4444/wd/hub',
 	specs: ['tests/js/create_vault.js'],
 	capabilities: {
-		'browserName': 'firefox' // or 'safari'
+		'browserName': 'firefox', // or 'safari'
+		jasmineNodeOpts: {
+			print: function () {}
+		}
 	},
-	jasmineNodeOpts: {
-		print: function () {}
-	},
+
 	onPrepare: function () {
 		var SpecReporter = require('jasmine-spec-reporter');
 		// add jasmine spec reporter
