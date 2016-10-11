@@ -21,9 +21,11 @@ before_install:
     - chmod -R 777 /home/travis/build/nextcloud/passman
 #    <- if [[ "$DB" == 'mysql' ]]; then sudo apt-get -y install mariadb-server; fi
     - wget https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh
+    - ls -al
     - bash ./before_install.sh $APP_NAME $CORE_BRANCH $DB
      # Add some output debugging information
     - cd ../server
+    - ls -al
     - ./occ check
     - ./occ status
     - ./occ app:list
