@@ -7,15 +7,15 @@ exports.config = {
 		'build': process.env.TRAVIS_BUILD_NUMBER
 	},
 	framework: 'jasmine',
-	onPrepare: function () {
+	/*onPrepare: function () {
 		var SpecReporter = require('jasmine-spec-reporter');
 		// add jasmine spec reporter
 		jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: 'all'}));
-	},
+	},*/
 	jasmineNodeOpts: {
-		isVerbose : false,
-		includeStackTrace : false,
-		print: function () {}
+		showColors: true,
+		defaultTimeoutInterval: 30000,
+		isVerbose: true
 	}
 
 };
