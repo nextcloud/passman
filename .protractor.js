@@ -17,7 +17,8 @@ if (process.env.TRAVIS) {
 	_config.capabilities = {
 		'browserName': 'chrome',
 		'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
-		'build': process.env.TRAVIS_BUILD_NUMBER
+		'build': process.env.TRAVIS_BUILD_NUMBER,
+		'name': 'Build #'+ process.env.TRAVIS_BUILD_NUMBER
 	};
 } else {
 	_config.capabilities = {
