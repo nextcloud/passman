@@ -40,7 +40,7 @@ before_script:
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
-    - sh -c "if [ '$JSTESTS' = '1' ]; then npm install; fi"
+    - sh -c "if [ '$JSTESTS' = '1'  -o '$PROTRAC' = '1' ]; then npm install; fi"
 
 
 
