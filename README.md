@@ -6,7 +6,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/nextcloud/passman/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
 
 
-Passman is a full featured password manager. 
+Passman is a full featured password manager.    
 Features:
 - Vaults
 - Vault key is never send to the server
