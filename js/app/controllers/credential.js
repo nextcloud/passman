@@ -344,7 +344,9 @@
 
 				$scope.selectedCredential = false;
 				$scope.selectCredential = function (credential) {
-					credential.description_html = $sce.trustAsHtml(angular.copy(credential.description).replace("\n", '<br />'));
+					if(credential.description) {
+						credential.description_html = $sce.trustAsHtml(angular.copy(credential.description).replace("\n", '<br />'));
+					}
 					$scope.selectedCredential = angular.copy(credential);
 					$rootScope.$emit('app_menu', true);
 				};
