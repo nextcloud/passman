@@ -21,7 +21,9 @@ Features:
   - LastPass
   - DashLane
   - ZOHO
-  - Clipperz.is
+  - Clipperz.is   
+  
+
 ## Tested on
 - NextCloud 10+
 - ownCloud 9.1+
