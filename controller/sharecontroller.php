@@ -469,8 +469,8 @@ class ShareController extends ApiController {
 		} catch (DoesNotExistException $e){
 			return new NotFoundJSONResponse();
 		}
-
-		$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+		$userId = ($this->userId) ? $this->userId->getUID() : null;
+		$acl = $this->shareService->getACL($userId, $credential->getGuid());
 		if (!$acl->hasPermission(SharingACL::FILES)){
 			return new NotFoundJSONResponse();
 		} else {
