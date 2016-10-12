@@ -32,7 +32,6 @@ class Application extends App {
 	public function __construct () {
 		parent::__construct('passman');
 		$container = $this->getContainer();
-		$server = $container->getServer();
 		// Allow automatic DI for the View, until we migrated to Nodes API
 		$container->registerService(View::class, function() {
 			return new View('');

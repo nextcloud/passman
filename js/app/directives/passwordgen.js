@@ -9,7 +9,7 @@
 	 */
 
 	angular.module('passmanApp')
-		.directive('passwordGen', function ($timeout, $window) {
+		.directive('passwordGen', function ($timeout) {
 			/* jshint ignore:start */
 			function Arcfour () {
 				this.j = this.i = 0, this.S = []
@@ -136,7 +136,7 @@
 				"</button>" +
 				"</div>" +
 				"</div>",
-				link: function (scope, elem, attrs, modelCtrl) {
+				link: function (scope) {
 					scope.callback = scope.callback();
 					scope.$watch("model", function () {
 						scope.password = scope.model;

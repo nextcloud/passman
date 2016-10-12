@@ -111,7 +111,7 @@
 
 					//Used in activity
 					_credential.revision_created = $filter('date')(_revision.created * 1000, "dd-MM-yyyy @ HH:mm:ss");
-					CredentialService.updateCredential(_credential, (key)).then(function (result) {
+					CredentialService.updateCredential(_credential, (key)).then(function () {
 						SettingsService.setSetting('revision_credential', null);
 						$rootScope.$emit('app_menu', false);
 						$location.path('/vault/' + $routeParams.vault_id);

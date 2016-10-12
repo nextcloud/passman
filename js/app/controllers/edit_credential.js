@@ -231,7 +231,7 @@
 					
 					if (!$scope.storedCredential.credential_id) {
 						$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
-						CredentialService.createCredential($scope.storedCredential).then(function (result) {
+						CredentialService.createCredential($scope.storedCredential).then(function () {
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification('Credential created!', 5000);
 						});
@@ -259,7 +259,7 @@
 						var _useKey = (key != null);
 						var regex = /(<([^>]+)>)/ig;
 						_credential.description = _credential.description.replace(regex, "");
-						CredentialService.updateCredential(_credential, _useKey).then(function (result) {
+						CredentialService.updateCredential(_credential, _useKey).then(function () {
 							SettingsService.setSetting('edit_credential', null);
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification('Credential updated!', 5000);

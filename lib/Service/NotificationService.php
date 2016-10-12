@@ -21,7 +21,7 @@ class NotificationService {
 
 	private $manager;
 
-	public function __construct(FileMapper $fileMapper) {
+	public function __construct() {
 		$this->manager = \OC::$server->getNotificationManager();
 	}
 
@@ -41,8 +41,8 @@ class NotificationService {
 		$notification->setApp('passman')
 			->setUser($credential->getUserId())
 			->setDateTime(new \DateTime())
-			->setObject('credential', $credential->getId()) // $type and $id
-			->setSubject('credential_expired', [$credential->getLabel()]) // $subject and $parameters
+			->setObject('credential', $credential->getId()) // Set notification type and id
+			->setSubject('credential_expired', [$credential->getLabel()]) // set subject and parameters
 			->setLink($link)
 			->addAction($declineAction)
 			->addAction($remindAction);
@@ -64,8 +64,8 @@ class NotificationService {
 		$notification->setApp('passman')
 			->setUser($data['target_user'])
 			->setDateTime(new \DateTime())
-			->setObject('passman_share_request', $data['req_id']) // $type and $id
-			->setSubject('credential_shared', [$data['from_user'], $data['credential_label']]) // $subject and $parameters
+			->setObject('passman_share_request', $data['req_id']) // type and id
+			->setSubject('credential_shared', [$data['from_user'], $data['credential_label']]) // subject and parameters
 			->setLink($link)
 			->addAction($declineAction);
 
@@ -78,8 +78,8 @@ class NotificationService {
 		$notification->setApp('passman')
 			->setUser($data['target_user'])
 			->setDateTime(new \DateTime())
-			->setObject('passman_share_request', $data['req_id']) // $type and $id
-			->setSubject('credential_share_denied', [$data['from_user'], $data['credential_label']]); // $subject and $parameters
+			->setObject('passman_share_request', $data['req_id']) // type and id
+			->setSubject('credential_share_denied', [$data['from_user'], $data['credential_label']]); // subject and parameters
 		$this->manager->notify($notification);
 	}
 
@@ -89,8 +89,8 @@ class NotificationService {
 		$notification->setApp('passman')
 			->setUser($data['target_user'])
 			->setDateTime(new \DateTime())
-			->setObject('passman_share_request', $data['req_id']) // $type and $id
-			->setSubject('credential_share_accepted', [$data['from_user'], $data['credential_label']]); // $subject and $parameters
+			->setObject('passman_share_request', $data['req_id']) // type and id
+			->setSubject('credential_share_accepted', [$data['from_user'], $data['credential_label']]); // subject and parameters
 		$this->manager->notify($notification);
 	}
 

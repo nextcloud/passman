@@ -11,7 +11,7 @@ PassmanImporter.keepassCsv = {
 	}
 };
 
-PassmanImporter.keepassCsv.readFile = function (file_data, callback) {
+PassmanImporter.keepassCsv.readFile = function (file_data) {
 	var p = new C_Promise(function(){
 		var parsed_csv = PassmanImporter.readCsv(file_data);
 		var credential_list = [];

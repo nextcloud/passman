@@ -138,7 +138,7 @@
 					crypted_shared_key = private_key.decrypt(forge.util.decode64(crypted_shared_key));
 					crypted_shared_key = EncryptService.encryptString(crypted_shared_key);
 
-					ShareService.saveSharingRequest(share_request, crypted_shared_key).then(function (result) {
+					ShareService.saveSharingRequest(share_request, crypted_shared_key).then(function () {
 						var idx = $scope.incoming_share_requests.indexOf(share_request);
 						$scope.incoming_share_requests.splice(idx, 1);
 						var active_share_requests = false;
@@ -249,7 +249,7 @@
 					}
 					NotificationService.showNotification('Credential recovered', 5000,
 						function () {
-							CredentialService.updateCredential(_credential).then(function (result) {
+							CredentialService.updateCredential(_credential).then(function () {
 								notification = false;
 
 							});
@@ -259,7 +259,7 @@
 
 				$scope.destroyCredential = function (credential) {
 					var _credential = angular.copy(credential);
-					CredentialService.destroyCredential(_credential.credential_id).then(function (result) {
+					CredentialService.destroyCredential(_credential.credential_id).then(function () {
 						for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 							if ($scope.active_vault.credentials[i].credential_id === credential.credential_id) {
 								$scope.active_vault.credentials.splice(i, 1);

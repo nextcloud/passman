@@ -17,7 +17,7 @@
 					progress: '&progress'
 				},
 
-				link: function (scope, el, attr, ctrl) {
+				link: function (scope, el) {
 					scope.success = scope.success();
 					scope.error = scope.error();
 					scope.progress = scope.progress();
@@ -44,7 +44,6 @@
 
 					el.bind('change', function (e) {
 						var _queueTotalFileSize = 0;
-						var _queueProgressBytes = 0;
 						var i;
 						//Calcutate total size
 						for (i = 0; i < e.target.files.length; i++) {

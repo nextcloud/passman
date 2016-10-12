@@ -11,7 +11,7 @@ PassmanImporter.randomData = {
 	}
 };
 
-PassmanImporter.randomData.readFile = function (file_data, callback) {
+PassmanImporter.randomData.readFile = function () {
 	return new C_Promise(function () {
 		var tags =
 			['Social media',

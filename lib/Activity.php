@@ -241,7 +241,7 @@ class Activity implements \OCP\Activity\IExtension {
 				array(
 					'id' => 'passman',
 					'name' => (string) $l->t('Passwords'),
-					'url' => '',//FIXME: $this->URLGenerator->linkToRoute('activity.Activities.showList', array('filter' => 'passman')),
+					'url' => '',//FIXME: Currenlty we cannot link directly to links, so this needs to be fixed... this->URLGenerator->linkToRoute('activity.Activities.showList', array('filter' => 'passman')),
 				),
 			),
 		);
