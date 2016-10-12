@@ -25,11 +25,8 @@
 							}
 						}
 					}
-				},
-				removeTag: function (tag) {
-					var idx = _tags.indexOf(tag);
-					_tags.splice(idx, 1);
 				}
+
 			};
 		}]);
 }());
