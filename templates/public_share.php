@@ -22,6 +22,7 @@ script('passman', 'vendor/angular-xeditable/xeditable.min');
 script('passman', 'vendor/sha/sha');
 script('passman', 'vendor/llqrcode/llqrcode');
 script('passman', 'vendor/forge.0.6.9.min');
+script('passman', 'vendor/download');
 script('passman', 'lib/promise');
 script('passman', 'lib/crypto_wrap');
 
@@ -138,7 +139,7 @@ style('passman', 'public-page');
 						</td>
 						<td>
 							<div ng-repeat="file in shared_credential.files"
-								 class="link" ng-click="downloadFile(file)">
+								 class="link" ng-click="downloadFile(shared_credential, file)">
 								{{file.filename}} ({{file.size | bytes}})
 							</div>
 						</td>
