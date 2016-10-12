@@ -31,7 +31,6 @@
 
 			$scope.downloadFile = function (credential, file) {
 				ShareService.downloadSharedFile(credential, file).then(function (result) {
-					var key = null;
 					if (!result.hasOwnProperty('file_data')) {
 						NotificationService.showNotification('Error downloading file, you probably don\'t have enough permissions', 5000);
 						return;

@@ -7,7 +7,7 @@
 	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('useTheme', ['$window', function ($window) {
+		.directive('useTheme', [function () {
 
 			function invertColor (hexTripletColor) {
 				var color = hexTripletColor;
@@ -27,7 +27,7 @@
 					color: '=',
 					negative: '='
 				},
-				link: function (scope, el, attr, ctrl) {
+				link: function (scope, el) {
 					var _color = jQuery('#header').css('background-color');
 					var _bg = _color;
 					if (scope.negative) {

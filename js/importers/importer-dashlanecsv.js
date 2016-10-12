@@ -11,12 +11,12 @@ PassmanImporter.dashLaneCsv = {
 	}
 };
 
-PassmanImporter.dashLaneCsv.readFile = function (file_data, callback) {
+PassmanImporter.dashLaneCsv.readFile = function (file_data) {
 	return new C_Promise(function(){
 		var rows = file_data.split('\n');
 		var credential_list = [];
-		for (var i = 1, row; row = rows[i]; i++) {
-			row = rows[i];
+		for (var i = 0; i < rows.length; i++) {
+			var row = rows[i];
 			var row_data = row.split('","');
 			if (row_data[0].charAt(0) == '"') {
 				row_data[0] = row_data[0].substring(1);

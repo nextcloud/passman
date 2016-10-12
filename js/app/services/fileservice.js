@@ -72,13 +72,10 @@
 					});
 				},
 				dataURItoBlob: function (dataURI, ftype) {
-					var byteString, mimeString, ab, ia, bb, i;
+					var byteString, ab, ia, bb, i;
 					// convert base64 to raw binary data held in a string
 					// doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
 					byteString = atob(dataURI.split(',')[1]);
-
-					// separate out the mime component
-					mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
 					// write the bytes of the string to an ArrayBuffer
 					ab = new ArrayBuffer(byteString.length);

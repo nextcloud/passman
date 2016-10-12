@@ -3,7 +3,7 @@ if(!window['PassmanImporter']){
 	var PassmanImporter = {}
 }
 
-PassmanImporter.parseRow_ = function(row, isHeading) {
+PassmanImporter.parseRow_ = function(row) {
 	// Strip leading quote.
 	row = row.trim();
 	var isQuoted = false;

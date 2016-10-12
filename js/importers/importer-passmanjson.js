@@ -11,7 +11,7 @@ PassmanImporter.passmanJson = {
 	}
 };
 
-PassmanImporter.passmanJson.readFile = function (file_data, callback) {
+PassmanImporter.passmanJson.readFile = function (file_data) {
 	return new C_Promise(function(){
 		var parsed_json = PassmanImporter.readJson(file_data);
 		var credential_list = [];

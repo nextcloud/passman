@@ -60,7 +60,7 @@ class Notifier implements INotifier {
 					$notification->addParsedAction($action);
 				}
 				return $notification;
-				break;
+
 
 			case 'credential_shared':
 				$notification->setParsedSubject(
@@ -80,21 +80,18 @@ class Notifier implements INotifier {
 					$notification->addParsedAction($action);
 				}
 				return $notification;
-				break;
 
 			case 'credential_share_denied':
 				$notification->setParsedSubject(
 					(string) $l->t('%s has declined your share request for "%s".', $notification->getSubjectParameters())
 				);
 				return $notification;
-				break;
 
 			case 'credential_share_accepted':
 				$notification->setParsedSubject(
 					(string) $l->t('%s has accepted your share request for "%s".', $notification->getSubjectParameters())
 				);
 				return $notification;
-				break;
 			default:
 				// Unknown subject => Unknown notification => throw
 				throw new \InvalidArgumentException();

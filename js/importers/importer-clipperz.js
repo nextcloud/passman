@@ -11,7 +11,7 @@ PassmanImporter.clippers = {
 	}
 };
 
-PassmanImporter.clippers.readFile = function (file_data, callback) {
+PassmanImporter.clippers.readFile = function (file_data) {
 	return new C_Promise(function() {
 		var credential_list = [];
 		var re = /<textarea>(.*?)<\/textarea>/gi;

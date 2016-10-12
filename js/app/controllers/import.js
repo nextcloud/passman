@@ -42,9 +42,9 @@
 			};
 
 			$scope.fileLoadError = function (file) {
-				console.error('Error loading file');
+				console.error('Error loading file', file);
 			};
-			$scope.fileSelectProgress = function (progress) {
+			$scope.fileSelectProgress = function () {
 
 			};
 

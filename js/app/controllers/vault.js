@@ -71,7 +71,6 @@
 			$scope.sharing_keys = {};
 			$scope.newVault = function () {
 				$scope.creating_vault = true;
-				var _vault = {};
 				var key_size = 1024;
 				ShareService.generateRSAKeys(key_size).progress(function (progress) {
 					var p = progress > 0 ? 2 : 1;
@@ -103,7 +102,7 @@
 
 				VaultService.setActiveVault(_vault);
 				try {
-					var c = EncryptService.decryptString(vault.challenge_password);
+					EncryptService.decryptString(vault.challenge_password);
 					if ($scope.remember_vault_password) {
 						SettingsService.setSetting('defaultVaultPass', vault_key);
 					}
@@ -133,10 +132,10 @@
 					test_credential.hidden = true;
 					test_credential.vault_id = vault.vault_id;
 					test_credential.password = 'lorum ipsum';
-					CredentialService.createCredential(test_credential).then(function (result) {
+					CredentialService.createCredential(test_credential).then(function () {
 						_vault.public_sharing_key = angular.copy($scope.sharing_keys.public_sharing_key);
 						_vault.private_sharing_key = EncryptService.encryptString(angular.copy($scope.sharing_keys.private_sharing_key));
-						VaultService.updateSharingKeys(_vault).then(function (result) {
+						VaultService.updateSharingKeys(_vault).then(function () {
 							_loginToVault(vault, vault_key);
 						});
 					});

@@ -54,7 +54,7 @@
 						$scope.active_vault.private_sharing_key = EncryptService.encryptString(pem.privateKey);
 						$scope.active_vault.public_sharing_key = pem.publicKey;
 
-						VaultService.updateSharingKeys($scope.active_vault).then(function (result) {
+						VaultService.updateSharingKeys($scope.active_vault).then(function () {
 							$scope.sharing_keys = ShareService.getSharingKeys();
 						});
 					});

@@ -178,7 +178,7 @@
 					return _credential;
 				},
 
-				generateRSAKeys: function (key_length, progress, callback) {
+				generateRSAKeys: function (key_length) {
 					var p = new C_Promise(function () {
 						var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
 						var step = function () {

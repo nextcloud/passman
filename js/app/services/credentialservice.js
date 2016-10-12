@@ -181,7 +181,7 @@
 
 							// Save data
 							this.parent.new_credential_cryptogram.skip_revision = true;
-							service.updateCredential(this.parent.new_credential_cryptogram, true).then((function (data) {
+							service.updateCredential(this.parent.new_credential_cryptogram, true).then((function () {
 								this.call_progress(new progress_datatype(2, 2, 'credential'));
 								this.call_then({
 									plain_text: this.parent.plain_credential,
@@ -208,7 +208,7 @@
 
 								this.call_progress(new progress_datatype(this.current, this.total, 'files'));
 
-								FileService.updateFile(fileData, this.parent.new_password).then((function (data) {
+								FileService.updateFile(fileData, this.parent.new_password).then((function () {
 									this.current++;
 									this.call_progress(new progress_datatype(this.current, this.total, 'files'));
 									if (this.current === this.total) {
@@ -246,7 +246,7 @@
 
 								this.call_progress(new progress_datatype(this.current + this.upload, this.total, 'revisions'));
 
-								service.updateRevision(_revision).then((function (data) {
+								service.updateRevision(_revision).then((function () {
 									this.upload++;
 									this.call_progress(new progress_datatype(this.upload + this.current, this.total, 'revisions'));
 									if (this.current + this.upload === this.total) {
@@ -298,7 +298,7 @@
 							master_promise.promises++;
 							(new C_Promise(promise_revisions_update, new password_data())).progress(function (data) {
 								master_promise.call_progress(data);
-							}).then(function (data) {
+							}).then(function () {
 								console.warn("End revisions update");
 								master_promise.promises--;
 								if (master_promise.promises === 0) {

@@ -7,15 +7,15 @@
 	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('tooltip', ['$window', function ($window) {
+		.directive('tooltip', [function () {
 			return {
 				restrict: 'A',
 				scope: {
 					tooltip: '=tooltip'
 				},
 
-				link: function (scope, el, attr, ctrl) {
-					scope.$watch('tooltip', function (newVal, old) {
+				link: function (scope, el) {
+					scope.$watch('tooltip', function () {
 						if (scope.tooltip) {
 							jQuery(el).attr('title', scope.tooltip);
 							jQuery(el).tooltip();

@@ -54,7 +54,7 @@
 						secret: '='
 					},
 					replace: true,
-					link: function (scope, element) {
+					link: function (scope) {
 						scope.otp = null;
 						scope.timeleft = null;
 						scope.timer = null;
@@ -93,7 +93,7 @@
 						}, true);
 						scope.$on(
 							"$destroy",
-							function (event) {
+							function () {
 								$timeout.cancel(scope.timer);
 							}
 						);
