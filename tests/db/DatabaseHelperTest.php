@@ -103,6 +103,29 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 	}
 
 	/**
+	 * Finds a subset of rows from the dataset which field name matches
+	 * the specified value
+	 * @param $table_name	The name of the table to search into
+	 * @param $field_name	The field name
+	 * @param $value_match	The value to match data against
+	 * @return array		An array of rows
+	 */
+	public function findInDataset($table_name, $field_name, $value_match) {
+		$table = $this->getTableDataset($table_name);
+		$rows = $table->getRowCount();
+
+		$result = [];
+		for ($i = 0; $i < $rows; $i++) {
+			$row = $table->getRow($i);
+			if ($row[$field_name] == $value_match){
+				$result[] = $row;
+			}
+		}
+
+		return $result;
+	}
+
+	/**
 	 * @coversNothing
 	 */
 	public function testTablesSetup() {
