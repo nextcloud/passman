@@ -45,16 +45,16 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 	 * @covers ::fromRow
 	 */
 	public function testGetters(){
-		$this->assertEquals(self::TEST_DATA['id'], $this->request->getId());
-		$this->assertEquals(self::TEST_DATA['item_id'], $this->request->getItemId());
-		$this->assertEquals(self::TEST_DATA['item_guid'], $this->request->getItemGuid());
-		$this->assertEquals(self::TEST_DATA['target_user_id'], $this->request->getTargetUserId());
-		$this->assertEquals(self::TEST_DATA['target_vault_id'], $this->request->getTargetVaultId());
-		$this->assertEquals(self::TEST_DATA['target_vault_guid'], $this->request->getTargetVaultGuid());
-		$this->assertEquals(self::TEST_DATA['shared_key'], $this->request->getSharedKey());
-		$this->assertEquals(self::TEST_DATA['permissions'], $this->request->getPermissions());
-		$this->assertEquals(self::TEST_DATA['created'], $this->request->getCreated());
-		$this->assertEquals(self::TEST_DATA['from_user_id'], $this->request->getFromUserId());
+		$this->assertSame(self::TEST_DATA['id'], $this->request->getId());
+		$this->assertSame(self::TEST_DATA['item_id'], $this->request->getItemId());
+		$this->assertSame(self::TEST_DATA['item_guid'], $this->request->getItemGuid());
+		$this->assertSame(self::TEST_DATA['target_user_id'], $this->request->getTargetUserId());
+		$this->assertSame(self::TEST_DATA['target_vault_id'], $this->request->getTargetVaultId());
+		$this->assertSame(self::TEST_DATA['target_vault_guid'], $this->request->getTargetVaultGuid());
+		$this->assertSame(self::TEST_DATA['shared_key'], $this->request->getSharedKey());
+		$this->assertSame(self::TEST_DATA['permissions'], $this->request->getPermissions());
+		$this->assertSame(self::TEST_DATA['created'], $this->request->getCreated());
+		$this->assertSame(self::TEST_DATA['from_user_id'], $this->request->getFromUserId());
 	}
 
 	/**
@@ -105,7 +105,7 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 
 		$actual_data = $this->request->jsonSerialize();
 
-		$this->assertEquals($expected_result, $actual_data);
+		$this->assertSame($expected_result, $actual_data);
 	}
 
 	/**
@@ -126,6 +126,6 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 
 		$actual_data = $this->request->asACLJson();
 
-		$this->assertEquals($expected_result, $actual_data);
+		$this->assertSame($expected_result, $actual_data);
 	}
 }

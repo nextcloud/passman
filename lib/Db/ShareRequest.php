@@ -53,6 +53,8 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
         $this->addType('itemId', 'integer');
         $this->addType('vaultId', 'integer');
         $this->addType('permissions', 'integer');
+		$this->addType('created', 'integer');
+		$this->addType('targetVaultId', 'integer');
     }
 
     /**
