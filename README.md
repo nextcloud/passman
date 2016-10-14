@@ -29,6 +29,16 @@ Features:
 - ownCloud 9.1+
 
 
+## Supported databases
+- Sql lite*
+- Mysql / MariaDB*
+
+*Tested on travis
+
+Untested databases: 
+- pgsql
+
+
 ##Screenshots
 ![Logged in to vault](http://i.imgur.com/ciShQZg.png)   
 
