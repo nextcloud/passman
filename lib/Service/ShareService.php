@@ -216,7 +216,7 @@ class ShareService {
 	}
 
 	public function getCredentialPendingAclList($item_guid) {
-		return $this->shareRequest->getRequestsByItemGuid($item_guid);
+		return $this->shareRequest->getRequestsByItemGuidGroupedByUser($item_guid);
 	}
 
 	/**

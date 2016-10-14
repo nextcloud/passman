@@ -117,12 +117,30 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 		$result = [];
 		for ($i = 0; $i < $rows; $i++) {
 			$row = $table->getRow($i);
-			if ($row[$field_name] == $value_match){
+			if ($row[$field_name] === $value_match){
 				$result[] = $row;
 			}
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Filters the given array
+	 * @param $dataset		The data to filter
+	 * @param $field_name	The array key to match against
+	 * @param $value_match	The value to compare to
+	 */
+	public function filterDataset($dataset, $field_name, $value_match) {
+		$ret = [];
+
+		foreach ($dataset as $value){
+			if ($value[$field_name] === $value_match){
+				$ret[] = $value;
+			}
+		}
+
+		return $ret;
 	}
 
 	/**

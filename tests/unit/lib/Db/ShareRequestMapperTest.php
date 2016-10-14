@@ -30,6 +30,9 @@ class ShareRequestMapperTest extends DatabaseHelperTest {
 	 */
 	protected $dataset;
 
+	/**
+	 * @after
+	 */
 	public function setUp() {
 		parent::setUp();
 		$this->dataset = $this->getTableDataset(self::TABLES[0]);
@@ -93,5 +96,199 @@ class ShareRequestMapperTest extends DatabaseHelperTest {
 		$tmp->setId($data->getId());
 
 		$this->assertSame($tmp->jsonSerialize(), $insert_data->jsonSerialize());
+	}
+
+	/**
+	 * @covers ::getRequestsByItemGuidGroupedByUser
+	 */
+	public function testGetRequestsByItemGuidGroupedByUser() {
+		$dataset = $this->findInDataset(
+			self::TABLES[0],
+			'item_guid',
+			$this->dataset->getRow(0)['item_guid']
+		);
+
+		$result = $this->mapper->getRequestsByItemGuidGroupedByUser($dataset[0]['item_guid']);
+
+		$this->assertCount(count($dataset), $result);
+
+		foreach ($dataset as &$row) $row = ShareRequest::fromRow($row);
+
+		$this->assertEquals($dataset, $result);
+	}
+
+	/**
+	 * @covers ::getUserPendingRequests
+	 */
+	public function testGetUserPendingRequests() {
+		$dataset = $this->findInDataset(
+			self::TABLES[0],
+			'target_user_id',
+			$this->dataset->getRow(0)['target_user_id']
+		);
+
+		$result = $this->mapper->getUserPendingRequests($dataset[0]['target_user_id']);
+		$this->assertCount(count($dataset), $result);
+
+		foreach ($dataset as &$row) $row = ShareRequest::fromRow($row);
+
+		$this->assertEquals($dataset, $result);
+	}
+
+	/**
+	 * @covers ::cleanItemRequestsForUser
+	 */
+	public function testCleanItemRequestsForUser() {
+		$tmp = ShareRequest::fromRow($this->dataset->getRow(0));
+
+		// Useless confusing return type that does not match nextcloud phpdocs, not checking
+		$result = $this->mapper->cleanItemRequestsForUser($tmp->getItemId(), $tmp->getTargetUserId());
+
+		$result = $this->mapper->getUserPendingRequests($tmp->getTargetUserId());
+
+		foreach ($result as $row) {
+			if ($row->getItemId() === $tmp->getItemId()) {
+				$this->fail("The user("+$row->getTargetUserId()+") still has request pointing towards the item id: " + $row->getItemId() + " all the request for this user to that item should have been deleted on this test");
+				break;
+			}
+		}
+		$this->assertTrue(true);
+	}
+
+	/**
+	 * @covers ::getShareRequestById
+	 */
+	public function testGetShareRequestById() {
+		$expected = ShareRequest::fromRow($this->dataset->getRow(0));
+
+		$data = $this->mapper->getShareRequestById($expected->getId());
+		$this->assertInstanceOf(ShareRequest::class, $data);
+		$this->assertEquals($expected, $data);
+
+		$this->expectException(\OCP\AppFramework\Db\DoesNotExistException::class);
+		$this->mapper->getShareRequestById(PHP_INT_MAX);
+	}
+
+	/**
+	 * @covers ::deleteShareRequest
+	 */
+	public function testDeleteShareRequest() {
+		$tmp = ShareRequest::fromRow($this->dataset->getRow(0));
+
+		$result = $this->mapper->deleteShareRequest($tmp);
+		$this->assertInstanceOf(ShareRequest::class, $result);
+
+		$this->expectException(\OCP\AppFramework\Db\DoesNotExistException::class);
+		$this->mapper->getShareRequestById($tmp->getId());
+	}
+
+	/**
+	 * @covers ::getShareRequestsByItemGuid
+	 */
+	public function testGetShareRequestsByItemGuid() {
+		$dataset = $this->findInDataset(
+			self::TABLES[0],
+			'item_guid',
+			$this->dataset->getRow(0)['item_guid']
+		);
+
+		$data = $this->mapper->getShareRequestsByItemGuid($dataset[0]['item_guid']);
+		$this->assertCount(count($dataset), $data);
+
+		foreach ($dataset as &$row) $row = ShareRequest::fromRow($row);
+
+		$this->assertEquals($dataset, $data);
+	}
+
+	/**
+	 * @covers ::updateShareRequest
+	 */
+	public function testUpdateShareRequest() {
+		$req = ShareRequest::fromRow($this->dataset->getRow(0));
+
+		$data = $this->mapper->getShareRequestById($req->getId());
+		$this->assertEquals($req, $data);
+		$data->setTargetVaultId($data->getTargetVaultId() + 50);
+
+		$tmp = $this->mapper->updateShareRequest($data);
+		$this->assertEquals($data, $tmp);
+
+		$tmp = $this->mapper->getShareRequestById($req->getId());
+		$this->assertNotSame($req->getTargetVaultId(), $tmp->getTargetVaultId());
+		$this->assertSame($data->getTargetVaultId(), $tmp->getTargetVaultId());
+	}
+
+	/**
+	 * @covers ::getPendingShareRequests
+	 */
+	public function testGetPendingShareRequests() {
+		$dataset = $this->findInDataset(
+			self::TABLES[0],
+			'item_guid',
+			$this->dataset->getRow(0)['item_guid']
+		);
+		$dataset = $this->filterDataset(
+			$dataset,
+			'target_user_id',
+			$dataset[0]['target_user_id']
+		);
+
+		$data = $this->mapper->getPendingShareRequests(
+			$dataset[0]['item_guid'],
+			$dataset[0]['target_user_id']
+		);
+
+		foreach ($dataset as &$row) $row = ShareRequest::fromRow($row);
+
+		$this->assertCount(count($dataset), $data);
+		$this->assertEquals($dataset, $data);
+	}
+
+	/**
+	 * @TODO: Check why test fails, seems the database update is not executing properly somehow
+	 * @covers ::updatePendinRequestPermissions
+	 */
+	public function testUpdatePendinRequestPermissions() {
+		$dataset = $this->findInDataset(
+			self::TABLES[0],
+			'item_guid',
+			$this->dataset->getRow(0)['item_guid']
+		);
+		$dataset = $this->filterDataset(
+			$dataset,
+			'target_user_id',
+			$dataset[0]['target_user_id']
+		);
+
+		$this->mapper->updatePendinRequestPermissions(
+			$dataset[0]['item_guid'],
+			$dataset[0]['target_user_id'],
+			$dataset[0]['permissions'] + 4
+		);
+
+		$after_update = $this->mapper->getPendingShareRequests(
+			$dataset[0]['item_guid'],
+			$dataset[0]['target_user_id']
+		);
+
+		$this->assertCount(count($dataset), $after_update);
+
+		foreach ($dataset as &$row) $row = ShareRequest::fromRow($row);
+
+		foreach ($after_update as $row) {
+			foreach ($dataset as $compare) {
+				if ($compare->getId() === $row->getId()){
+					$this->assertNotEquals($compare->getPermissions(), $row->getPermissions());
+					$this->assertSame($compare->getPermissions() + 4, $row->getPermissions());
+
+					$tmp_data = $row->jsonSerialize();
+					$tmp_compare = $compare->jsonSerialize();
+
+					unset($tmp_compare['permissions']);
+					unset($tmp_data['permissions']);
+					$this->assertSame($tmp_compare, $tmp_data);
+				}
+			}
+		}
 	}
 }

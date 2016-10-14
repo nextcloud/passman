@@ -11,6 +11,7 @@ namespace OCA\Passman\Db;
 
 use Icewind\SMB\Share;
 use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
 
@@ -41,7 +42,7 @@ class ShareRequestMapper extends Mapper {
      * @param $item_guid
      * @return ShareRequest[]
      */
-    public function getRequestsByItemGuid($item_guid){
+    public function getRequestsByItemGuidGroupedByUser($item_guid){
         $this->db->executeQuery("SET sql_mode = '';");
         $q = "SELECT *, target_user_id FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? GROUP BY target_user_id;";
         return $this->findEntities($q, [$item_guid]);
@@ -82,6 +83,7 @@ class ShareRequestMapper extends Mapper {
      * Gets a share request by it's unique incremental id
      * @param $id
      * @return ShareRequest
+	 * @throws DoesNotExistException
      */
 	public function getShareRequestById($id){
 		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE id = ?";
