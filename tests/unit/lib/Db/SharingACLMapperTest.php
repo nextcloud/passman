@@ -47,7 +47,7 @@ class SharingACLMapperTest extends DatabaseHelperTest {
 
 	/**
 	 * @covers ::getItemACL
-	 * @uses SharingACL
+	 * @uses \OCA\Passman\Db\SharingACL
 	 */
 	public function testGetItemACL() {
 		$expected_acl = $this->dataset->getRow(0);
