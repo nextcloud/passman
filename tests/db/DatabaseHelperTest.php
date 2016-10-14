@@ -68,6 +68,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 	 */
 	public function setUpTable($table_name){
 		$table = $this->getTableDataset($table_name);
+		$table_no_prefix = substr($table_name, 3);
 
 		// Cleanup any data currently inside the table
 		$this->truncateTable($table_name);
@@ -76,19 +77,14 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 		for ($i = 0; $i < $table->getRowCount(); $i++) {
 			$row = $table->getRow($i);
 
-			$fields = "";
-			$values = "";
+			$qb = $this->db->getQueryBuilder();
+			$qb->insert($table_no_prefix);
+
 			foreach ($row as $key => $value){
-				$fields .= "`{$key}`, ";
-				$values .= is_numeric($value) ? $value : ("'{$value}'") ;
-				$values .= ", ";
+				$qb->setValue($key, is_numeric($value) ? $value : ("'{$value}'"));
 			}
 
-			$fields = substr($fields, 0, count($fields) -3);
-			$values = substr($values, 0, count($values) -3);
-
-			$q = "INSERT INTO $table_name ({$fields}) VALUES ({$values});";
-			$this->db->executeQuery($q);
+			$qb->execute();
 		}
 	}
 
