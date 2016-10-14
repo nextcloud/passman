@@ -43,7 +43,7 @@ class ShareRequestMapper extends Mapper {
      * @return ShareRequest[]
      */
     public function getRequestsByItemGuidGroupedByUser($item_guid){
-    	if (strtolower($this->db->getDatabasePlatform()->getName()) === 'mysql'){
+    	if (strtolower($this->db->getDatabasePlatform()->getName()) === 'mysql' || strtolower($this->db->getDatabasePlatform()->getName()) == 'pgsql'){
     		$this->db->executeQuery("SET sql_mode = '';");
 		}
         $q = "SELECT *, target_user_id FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? GROUP BY target_user_id;";

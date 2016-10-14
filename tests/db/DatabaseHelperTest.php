@@ -85,6 +85,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 			}
 
 			$qb->execute();
+			$this->db->lastInsertId();
 		}
 	}
 
