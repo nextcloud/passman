@@ -240,6 +240,15 @@
 				};
 
 
+
+				$scope.$on("$locationChangeStart", function(event) {
+					if(!sharing_complete){
+						if(!confirm("Are you sure you want to leave?\nThis will corrupt this credential")){
+							event.preventDefault();
+						}
+					}
+				});
+
 				$scope.sharing_complete = true;
 				$scope.applyShare = function () {
 					$scope.sharing_complete = false;
@@ -284,6 +293,7 @@
 							}
 						}
 						NotificationService.showNotification('Saved!', 4000);
+						$scope.sharing_complete = true;
 					} else {
 
 						ShareService.generateSharedKey(20).then(function (key) {
