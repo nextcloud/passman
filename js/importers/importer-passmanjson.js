@@ -24,6 +24,7 @@ PassmanImporter.passmanJson.readFile = function (file_data) {
 			_credential.email = item.email;
 			_credential.url = item.url;
 			_credential.tags = item.tags;
+			_credential.description = item.description;
 			//Check for custom fields
 			if (item.hasOwnProperty('customFields')) {
 				//Check for otp
