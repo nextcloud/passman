@@ -39,8 +39,11 @@ class CredentialMapper extends Mapper {
 	 */
 	public function getRandomCredentialByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `user_id` = ? and vault_id = ? AND shared_key is NULL ORDER BY RAND() LIMIT 1';
-		return $this->findEntities($sql, [$user_id, $vault_id]);
+			'WHERE `user_id` = ? and vault_id = ? AND shared_key is NULL';
+		$entities = $this->findEntities($sql, [$user_id, $vault_id]);
+		$count = count($entities);
+		$entities = array_splice($entities, rand(0, $count), 1);
+		return $entities;
 	}
 
 	/**
