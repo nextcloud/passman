@@ -32,12 +32,21 @@ class CredentialMapper extends Mapper {
 		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 
+	/**
+	 * @param $vault_id
+	 * @param $user_id
+	 * @return Credential[]
+	 */
 	public function getRandomCredentialByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `user_id` = ? and vault_id = ? AND shared_key is NULL ORDER BY RAND() LIMIT 1';
 		return $this->findEntities($sql, [$user_id, $vault_id]);
 	}
 
+	/**
+	 * @param $timestamp
+	 * @return Credential[]
+	 */
 	public function getExpiredCredentials($timestamp){
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `expire_time` > 0 AND `expire_time` < ?';

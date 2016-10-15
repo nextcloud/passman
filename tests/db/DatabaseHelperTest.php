@@ -81,7 +81,14 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 			$qb->insert($table_no_prefix);
 
 			foreach ($row as $key => $value){
-				$qb->setValue($key, is_numeric($value) ? $value : ("'{$value}'"));
+				if (is_null($value)) {
+					$value = 'NULL';
+				}
+				else if (!is_numeric($value)) {
+					$value = "'{$value}'";
+				}
+
+				$qb->setValue($key,  $value);
 			}
 
 			$qb->execute();
@@ -114,7 +121,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 		$result = [];
 		for ($i = 0; $i < $rows; $i++) {
 			$row = $table->getRow($i);
-			if ($row[$field_name] === $value_match){
+			if ($row[$field_name] == $value_match){
 				$result[] = $row;
 			}
 		}
@@ -132,7 +139,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 		$ret = [];
 
 		foreach ($dataset as $value){
-			if ($value[$field_name] === $value_match){
+			if ($value[$field_name] == $value_match){
 				$ret[] = $value;
 			}
 		}
