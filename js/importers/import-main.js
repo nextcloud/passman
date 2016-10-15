@@ -1,4 +1,4 @@
-var PassmanImporter = PassmanImporter || {};
+var PassmanImporter = {};
 (function(window, $, PassmanImporter) {
 	'use strict';
 
@@ -17,7 +17,7 @@ var PassmanImporter = PassmanImporter || {};
 		}
 		// Strip trailing quote. There seems to be a character between the last quote
 		// and the line ending, hence 2 instead of 1.
-		if(isQuoted == true) {
+		if(isQuoted === true) {
 			row = row.split('","');
 		} else {
 			row = row.split(',');
@@ -44,7 +44,9 @@ var PassmanImporter = PassmanImporter || {};
 	PassmanImporter.join_ = function(arr, sep) {
 		var parts = [];
 		for (var i = 0, ii = arr.length; i < ii; i++) {
-			arr[i] && parts.push(arr[i]);
+			if(arr[i]){
+				parts.push(arr[i]);
+			}
 		}
 		return parts.join(sep);
 	};
@@ -77,17 +79,19 @@ var PassmanImporter = PassmanImporter || {};
 
 	PassmanImporter.readCsv = function( csv, hasHeadings ){
 		hasHeadings = (hasHeadings === undefined) ? true : hasHeadings;
+		var i, _row;
 		var lines = [];
 		var rows = csv.split('\n');
 		if(hasHeadings) {
 			var headings = this.parseRow_(rows[0]);
-			for (var i = 1, row; row = rows[i]; i++) {
-				row = this.toObject_(headings, this.parseRow_(row));
-				lines.push(row);
+			for (i = 1; i < rows.length; i++) {
+				_row = this.toObject_(headings, this.parseRow_(rows[i]));
+				lines.push(_row);
 			}
 		} else {
-			for (var i = 1, row; row = rows[i]; i++) {
-				lines.push(this.parseRow_(row));
+			for (i = 1; i < rows.length; i++) {
+				_row = this.toObject_(null, this.parseRow_(rows[i]));
+				lines.push(_row);
 			}
 		}
 		return lines;
