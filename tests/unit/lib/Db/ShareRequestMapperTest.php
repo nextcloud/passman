@@ -246,13 +246,9 @@ class ShareRequestMapperTest extends DatabaseHelperTest {
 
 	/**
 	 * @TODO: Check why the fuck the dataset array gets altered when increasing permisions
-	 * @covers ::updatePendinRequestPermissions
+	 * @covers ::updatePendingRequestPermissions
 	 */
 	public function testUpdatePendinRequestPermissions() {
-		//$this->markTestIncomplete("Check why the fuck the dataset array gets altered when increasing permisions");
-		//$this->markTestSkipped("Update works, so skipping the test");
-		//if (true) return;
-
 		$dataset = $this->findInDataset(
 			self::TABLES[0],
 			'item_guid',
