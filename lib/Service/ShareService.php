@@ -286,6 +286,6 @@ class ShareService {
 
 
 	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions){
-	    return $this->shareRequest->updatePendinRequestPermissions($item_guid, $user_id, $permissions);
+	    return $this->shareRequest->updatePendingRequestPermissions($item_guid, $user_id, $permissions);
     }
 }

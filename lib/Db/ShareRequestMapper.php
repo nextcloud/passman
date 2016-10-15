@@ -129,7 +129,7 @@ class ShareRequestMapper extends Mapper {
      * @param $permissions      The new permissions to apply
      * @return \PDOStatement    The result of the operation
      */
-	public function updatePendinRequestPermissions($item_guid, $user_id, $permissions){
+	public function updatePendingRequestPermissions($item_guid, $user_id, $permissions){
 	    $q = "UPDATE *PREFIX*" . self::TABLE_NAME . " SET permissions = ? WHERE item_guid = ? AND target_user_id = ?";
         return $this->execute($q, [$permissions, $item_guid, $user_id]);
     }
