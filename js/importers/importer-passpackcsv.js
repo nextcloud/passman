@@ -7,7 +7,7 @@ PassmanImporter.passpackCsv = {
 	info: {
 		name: 'Passpack csv',
 		id: 'passpackCsv',
-		description: 'Create an csv export with the following options enabled: http://i.imgur.com/CaeTA4d.png'
+		description: 'Go to Tools -> Export. Select Comma Separated Values, All entries then continue.'
 	}
 };
 
