@@ -156,6 +156,18 @@
 
 				$scope.cur_state = {};
 
+
+				$scope.$on("$locationChangeStart", function(event) {
+					if($scope.change_pw){
+						if($scope.change_pw.total > 0 && $scope.change_pw.done < $scope.change_pw.total){
+							if(!confirm("Are you sure you want to leave?\nThis will corrupt all your credentials")){
+								event.preventDefault();
+							}
+						}
+					}
+				});
+
+
 				$scope.changeVaultPassword = function (oldVaultPass, newVaultPass, newVaultPass2) {
 					if (oldVaultPass !== VaultService.getActiveVault().vaultKey) {
 						$scope.error = 'Your old password is incorrect!';
