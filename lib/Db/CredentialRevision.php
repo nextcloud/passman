@@ -21,7 +21,7 @@ use \OCP\AppFramework\Db\Entity;
  * @method void setCredentialId(integer $value)
  * @method string getCredentialId()
  * @method void setUserId(string $value)
- * @method string getUserid()
+ * @method string getUserId()
  * @method void setCreated(integer $value)
  * @method integer getCreated()
  * @method void setCredentialData(string $value)
