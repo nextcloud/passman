@@ -242,7 +242,7 @@
 
 
 				$scope.$on("$locationChangeStart", function(event) {
-					if(!sharing_complete){
+					if(!$scope.sharing_complete){
 						if(!confirm("Are you sure you want to leave?\nThis will corrupt this credential")){
 							event.preventDefault();
 						}
