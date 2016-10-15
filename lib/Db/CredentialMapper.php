@@ -41,7 +41,7 @@ class CredentialMapper extends Mapper {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `user_id` = ? and vault_id = ? AND shared_key is NULL LIMIT 20';
 		$entities = $this->findEntities($sql, [$user_id, $vault_id]);
-		$count = count($entities);
+		$count = count($entities)-1;
 		$entities = array_splice($entities, rand(0, $count), 1);
 		return $entities;
 	}
