@@ -283,7 +283,7 @@
 								$scope.applyShareToUser(list[iterator], enc_key);
 							}
 						}
-
+						NotificationService.showNotification('Saved!', 4000);
 					} else {
 
 						ShareService.generateSharedKey(20).then(function (key) {
