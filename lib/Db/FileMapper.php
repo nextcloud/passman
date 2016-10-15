@@ -58,6 +58,11 @@ class FileMapper extends Mapper {
 		return $this->findEntity($sql, $params);
 	}
 
+	/**
+	 * @param $file_raw
+	 * @param $userId
+	 * @return File
+	 */
 	public function create($file_raw, $userId) {
 		$file = new File();
 		$file->setGuid($this->utils->GUID());

@@ -55,7 +55,7 @@ class VaultMapperTest extends DatabaseHelperTest {
 	 * @covers ::findByGuid
 	 */
 	public function testFindByGuid() {
-		$expected_data = $this->vaults_dataset->getRow(2);
+		$expected_data = $this->vaults_dataset->getRow(0);
 
 		$data = $this->vault_mapper->findByGuid($expected_data['guid'], $expected_data['user_id']);
 		$this->assertInstanceOf(Vault::class, $data);
@@ -70,8 +70,14 @@ class VaultMapperTest extends DatabaseHelperTest {
 	 * @covers ::findVaultsFromUser
 	 */
 	public function testFindVaultsFromUser() {
-		$user = 'example 2';
-		$expected_rows = 2;
+		$expected_row = $this->vaults_dataset->getRow(0);
+		$user = $expected_row['user_id'];
+		$expected_rows = $this->findInDataset(
+			self::TABLES[0],
+			'user_id',
+			$expected_row['user_id']
+		);
+		$expected_rows = count($expected_rows);
 
 		$data = $this->vault_mapper->findVaultsFromUser($user);
 
@@ -84,7 +90,7 @@ class VaultMapperTest extends DatabaseHelperTest {
 	 * @covers ::updateVault
 	 */
 	public function testUpdateVault() {
-		$row = $this->vaults_dataset->getRow(2);
+		$row = $this->vaults_dataset->getRow(0);
 		$db_row = $this->vault_mapper->findByGuid($row['guid'], $row['user_id']);
 		$db_row->setName("ASDF");
 
@@ -100,7 +106,7 @@ class VaultMapperTest extends DatabaseHelperTest {
 	 * @covers ::setLastAccess
 	 */
 	public function testSetLastAccess() {
-		$row = $this->vaults_dataset->getRow(3);
+		$row = $this->vaults_dataset->getRow(0);
 		$time = Utils::getTime();
 
 		$this->vault_mapper->setLastAccess($row['id'], $row['user_id']);
@@ -135,7 +141,7 @@ class VaultMapperTest extends DatabaseHelperTest {
 		$private_key = "a private key";
 		$public_key = "a public key";
 
-		$row = $this->vaults_dataset->getRow(1);
+		$row = $this->vaults_dataset->getRow(0);
 
 		$this->vault_mapper->updateSharingKeys($row['id'], $private_key, $public_key);
 		$data = $this->vault_mapper->findByGuid($row['guid'], $row['user_id']);

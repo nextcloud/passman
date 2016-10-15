@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="ncdev">
+	<table_data name="oc_passman_files">
+	<row>
+		<field name="id">1</field>
+		<field name="guid">0D3FCBEE-2766-4CE6-9EC8-F88784F246D8</field>
+		<field name="user_id">example</field>
+		<field name="mimetype">text/plain</field>
+		<field name="filename">eyJpdiI6InJMeGc2V0NDdlp2ZElQTVgyMUVnRXciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiIxRXAyV2xacFAwMCIsImN0IjoiZWVNNElueHJ5VDdmN1pRd0VmV2pYUjRoVWhEcyJ9</field>
+		<field name="size">12</field>
+		<field name="created">1476538148</field>
+		<field name="file_data">eyJpdiI6ImluQjIxZGFpZlpCR1pDNXo0YjBjUXciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiIxRXAyV2xacFAwMCIsImN0IjoiM0JXdHVVQWJVOUhObGF0ZmdIWmd4L1RmTjFCMEhSckJXU0VKQkpVaFpWZW16SWFPOWl3OUFGQVpRUmlNZnlZIn0=</field>
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="guid">90089406-36F1-43A7-BCD2-4CF88076D77C</field>
+		<field name="user_id">example</field>
+		<field name="mimetype">text/plain</field>
+		<field name="filename">eyJpdiI6IitOd05UT0NHL3I5dUhJU0J6ODIvU0EiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiIxRXAyV2xacFAwMCIsImN0IjoiZmpEUHMxOFJUVk9NRURGZjRXak9qTEtaVnFoOWdRIn0=</field>
+		<field name="size">13</field>
+		<field name="created">1476538176</field>
+		<field name="file_data">eyJpdiI6IlF5bzhpRHJGMkNwR3U1OEM0aFhLRHciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiIxRXAyV2xacFAwMCIsImN0IjoiWUdERVJPak5mRFhXZUVrQWNKTW1TZll3ZEFOVG45MUpHNnl0bXJwYW0wR1N6Ylo5N05HNlZPTTlpaUUrM3czWFpGQ3UifQ==</field>
+	</row>
+	<row>
+		<field name="id">3</field>
+		<field name="guid">C0F7D27A-DC07-47C3-91FF-8C52A43FFC68</field>
+		<field name="user_id">example2</field>
+		<field name="mimetype">text/plain</field>
+		<field name="filename">eyJpdiI6IjRiVkhLTUx2T0hjSWMrc0lRSWt0NnciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJEN1Y1Z0VYbWt6NCIsImN0IjoiWWtRSWVVWFNpOWtDWGFqV2c0MG02ZDB6Q2FFMCJ9</field>
+		<field name="size">12</field>
+		<field name="created">1476538297</field>
+		<field name="file_data">eyJpdiI6InlPMVFpbWlORERFcE9IRWlSMjdQa1EiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJEN1Y1Z0VYbWt6NCIsImN0IjoiNjJ3VFkvaTYwL0kxS2tXMnBaWGRLQnZrdHR2ekljVXhKQXdHUktXcXMrdVlnT0kybW94cHA3TEdNQlZhbHVVIn0=</field>
+	</row>
+	<row>
+		<field name="id">4</field>
+		<field name="guid">3F935ECF-C7B5-4135-BE08-43FE4D504AB9</field>
+		<field name="user_id">example2</field>
+		<field name="mimetype">text/plain</field>
+		<field name="filename">eyJpdiI6IjNHaUtleHd0VWxISkUzK1R3RXdaUUEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJEN1Y1Z0VYbWt6NCIsImN0Ijoid1dpcEJ1c2k5YVBYY2NvT3JnYnhtNHQwb3B2SExnIn0=</field>
+		<field name="size">13</field>
+		<field name="created">1476538312</field>
+		<field name="file_data">eyJpdiI6IlJPM25ScXZaUDRSZE1waWJKQThtS3ciLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJEN1Y1Z0VYbWt6NCIsImN0IjoiMlIyL2JvdWZCR1JYdERuSmNnNHk4R2tFM3ZaRGcwNENvVXlUYmhDa2Q0UWo3VE8rSUc4a2F6d29kVE50Vk9sYXhhNkEifQ==</field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>

@@ -18,7 +18,7 @@ use \OCP\AppFramework\Db\Entity;
   * @method void setGuid(string $value)
  * @method string getGuid()
  * @method void setUserId(string $value)
- * @method string getUserid()
+ * @method string getUserId()
  * @method void setMimetype(string $value)
  * @method string getMimetype()
  * @method void setFilename(string $value)
