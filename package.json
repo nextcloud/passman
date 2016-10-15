@@ -9,6 +9,7 @@
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-html2js": "^0.3.6",
-    "html-minifier": "^3.0.2"
+    "html-minifier": "^3.0.2",
+    "protractor": "^4.0.9"
   }
 }
