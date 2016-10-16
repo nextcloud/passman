@@ -15,7 +15,12 @@ use PHPUnit_Framework_TestCase;
 
 use OCP\AppFramework\Http\TemplateResponse;
 
-
+/**
+ * Class PageControllerTest
+ *
+ * @package OCA\Passman\Controller
+ * @coversDefaultClass  \OCA\Passman\Controller\PageController
+ */
 class PageControllerTest extends PHPUnit_Framework_TestCase {
 
 	private $controller;
@@ -29,6 +34,9 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @covers ::index
+	 */
 	public function testIndex() {
 		$result = $this->controller->index();
 		$this->assertEquals(['user' => 'john'], $result->getParams());
@@ -36,6 +44,9 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($result instanceof TemplateResponse);
 	}
 
+	/**
+	 * @covers ::bookmarklet
+	 */
 	public function testBookmarklet() {
 		$result = $this->controller->bookmarklet('http://google.com', 'Google');
 		$this->assertEquals(['url' => 'http://google.com', 'title' => 'Google'], $result->getParams());
@@ -43,6 +54,9 @@ class PageControllerTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($result instanceof TemplateResponse);
 	}
 
+	/**
+	 * @covers ::publicSharePage
+	 */
 	public function testPublicSharePage() {
 		$result = $this->controller->publicSharePage();
 		$this->assertEquals('public_share', $result->getTemplateName());

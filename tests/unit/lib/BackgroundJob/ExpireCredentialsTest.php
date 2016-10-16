@@ -31,7 +31,7 @@ use OCP\IConfig;
  *
  * @group DB
  * @package OCA\Passman\Tests\BackgroundJob
- * @covers ExpireCredentials
+ * @covers \OCA\Passman\BackgroundJob\ExpireCredentials
  */
 class ExpireCredentialsTest extends PHPUnit_Framework_TestCase {
 	public function testRun() {

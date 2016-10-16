@@ -15,7 +15,12 @@ use PHPUnit_Framework_TestCase;
 
 use OCP\AppFramework\Http\JSONResponse;
 
-
+/**
+ * Class InternalControllerTest
+ *
+ * @package OCA\Passman\Controller
+ * @coversDefaultClass \OCA\Passman\Controller\InternalController
+ */
 class InternalControllerTest extends PHPUnit_Framework_TestCase {
 
 	private $controller;
@@ -32,10 +37,17 @@ class InternalControllerTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	/**
+	 * @covers ::getAppVersion
+	 */
 	public function testGetAppVersion() {
 		$result = $this->controller->generatePerson();
 		$this->assertTrue($result instanceof JSONResponse);
 	}
+
+	/**
+	 * @covers ::generatePerson
+	 */
 	public function testGeneratePerson() {
 		$result = $this->controller->generatePerson();
 		$this->assertTrue($result instanceof JSONResponse);
