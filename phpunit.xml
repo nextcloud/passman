@@ -8,6 +8,7 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./lib/Db</directory>
             <directory suffix=".php">./lib/Utility</directory>
+            <directory suffix=".php">./controller</directory>
             <!--<file>/path/to/file</file>-->
             <!--<exclude>-->
                 <!--<directory suffix=".php">/path/to/dir</directory>-->
