@@ -1,41 +1,40 @@
-<div id="passman-controls">
-	<div class="breadcrumb">
+<div off-click="closeSelected()" off-click-filter="'.download-js-link, .sidebar-shown'">
+	<div id="passman-controls" ng-class="{ 'sidebar-shown': selectedCredential }">
 		<div class="breadcrumb">
-			<div class="crumb svg ui-droppable" data-dir="/">
-				<a><i class="fa fa-home"></i></a>
-			</div>
-			<div class="crumb svg last">
-				<a>{{active_vault.name}}</a>
+			<div class="breadcrumb">
+				<div class="crumb svg ui-droppable" data-dir="/">
+					<a><i class="fa fa-home"></i></a>
+				</div>
+				<div class="crumb svg last">
+					<a>{{active_vault.name}}</a>
+				</div>
 			</div>
 		</div>
-	</div>
-	<span class="title" ng-if="delete_time">
+		<span class="title" ng-if="delete_time">
 			Showing deleted since:
 			<span ng-if="delete_time == 1">All time</span>
 			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 
 	</span>
-	<div class="actions creatable">
+		<div class="actions creatable">
 		<span ng-click="addCredential()" class="button new">
 			<span >+</span></span>
-	</div>
-	<div class="title" ng-show="filtered_credentials.length > 0">
-		Showing {{filtered_credentials.length}} of {{active_vault.credentials.length - 1}} credentials
-	</div>
-	<div class="searchboxContainer">
-		<input type="text" ng-model="filterOptions.filterText" class="searchbox"
-			   placeholder="Search credential..." select-on-click>
-	</div>
-	<div class="viewModes">
-		<div class="view-mode" ng-class="{'active': view_mode === 'list' }"
-			 ng-click="switchViewMode('list')"><i class="fa fa-list"></i></div>
-		<div class="view-mode" ng-class="{'active': view_mode === 'grid' }"
-			 ng-click="switchViewMode('grid')"><i class="fa fa-th-large"></i>
+		</div>
+		<div class="title" ng-show="filtered_credentials.length > 0">
+			Showing {{filtered_credentials.length}} of {{active_vault.credentials.length - 1}} credentials
+		</div>
+		<div class="searchboxContainer">
+			<input type="text" ng-model="filterOptions.filterText" class="searchbox"
+				   placeholder="Search credential..." select-on-click clear-btn>
+		</div>
+		<div class="viewModes">
+			<div class="view-mode" ng-class="{'active': view_mode === 'list' }"
+				 ng-click="switchViewMode('list')"><i class="fa fa-list"></i></div>
+			<div class="view-mode" ng-class="{'active': view_mode === 'grid' }"
+				 ng-click="switchViewMode('grid')"><i class="fa fa-th-large"></i>
+			</div>
 		</div>
 	</div>
-</div>
-<div off-click="closeSelected()" off-click-filter="'.download-js-link'">
-
 	<div class="loaderContainer" ng-if="show_spinner">
 		<div class="loader" use-theme type="'border-bottom-color'"></div>
 	</div>
