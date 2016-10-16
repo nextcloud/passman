@@ -73,12 +73,20 @@ class CredentialMapper extends Mapper {
 		return $this->findEntity($sql,$params);
 	}
 
+	/**
+	 * @param $credential_id
+	 * @return Credential
+	 */
 	public function getCredentialLabelById($credential_id){
 		$sql = 'SELECT id, label FROM `*PREFIX*passman_credentials` ' .
 			'WHERE `id` = ? ';
 		return $this->findEntity($sql,[$credential_id]);
 	}
 
+	/**
+	 * @param $raw_credential
+	 * @return Credential
+	 */
 	public function create($raw_credential){
 		$credential = new Credential();
 
@@ -106,21 +114,20 @@ class CredentialMapper extends Mapper {
 		return parent::insert($credential);
 	}
 
+	/**
+	 * @param $raw_credential array An array containing all the credential fields
+	 * @return Credential The updated credential
+	 */
 	public function updateCredential($raw_credential){
-		if(!$raw_credential['guid']){
-			$raw_credential['guid'] =  $this->utils->GUID();
-		}
-		if(!$raw_credential['created']){
-			$raw_credential['created'] = $this->utils->getTime();
-		}
+		$original = $this->getCredentialByGUID($raw_credential['guid']);
 		$credential = new Credential();
-		$credential->setId($raw_credential['credential_id']);
-		$credential->setGuid($raw_credential['guid']);
-		$credential->setVaultId($raw_credential['vault_id']);
-		$credential->setUserId($raw_credential['user_id']);
+		$credential->setId($original->getId());
+		$credential->setGuid($original->getGuid());
+		$credential->setVaultId($original->getVaultId());
+		$credential->setUserId($original->getUserId());
 		$credential->setLabel($raw_credential['label']);
 		$credential->setDescription($raw_credential['description']);
-		$credential->setCreated($raw_credential['created']);
+		$credential->setCreated($original->getCreated());
 		$credential->setChanged($this->utils->getTime());
 		$credential->setTags($raw_credential['tags']);
 		$credential->setEmail($raw_credential['email']);
