@@ -13,7 +13,7 @@
 				scope: {
 					autoScroll: '='
 				},
-				link: function postLink (scope, element, attrs) {
+				link: function postLink (scope) {
 					scope.$watch('autoScroll', function () {
 						$('#import_log').scrollTop($('#import_log')[0].scrollHeight);
 					}, true);

@@ -90,7 +90,7 @@
 			Please input the password for {{list_selected_vault.name}}
 
 			<div class="pw-input">
-				<input type="password" ng-model="vault_key">
+				<input type="password" ng-model="vault_key" ng-enter="loginToVault(list_selected_vault, vault_key)">
 				<small class="last_access">Last accessed:
 					<span ng-if="list_selected_vault.last_access > 0">{{list_selected_vault.last_access * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 					<span ng-if="list_selected_vault.last_access === 0">Never</span>

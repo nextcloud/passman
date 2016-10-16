@@ -16,10 +16,27 @@ Features:
 - Build in One Time password generator
 - Password analyzer
 - Share passwords
+- Import from various password managers:
+  - KeePass
+  - LastPass
+  - DashLane
+  - ZOHO
+  - Clipperz.is   
+  
 
 ## Tested on
 - NextCloud 10+
 - ownCloud 9.1+
+
+
+## Supported databases
+- Sql lite*
+- Mysql / MariaDB*
+
+*Tested on travis
+
+Untested databases: 
+- pgsql
 
 
 ##Screenshots

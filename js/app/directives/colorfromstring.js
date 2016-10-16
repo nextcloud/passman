@@ -7,13 +7,13 @@
  * # passwordGen
  */
 angular.module('passmanApp')
-	.directive('colorFromString', ['$window', function ($window) {
+	.directive('colorFromString', [function () {
 		return {
 			restrict: 'A',
 			scope:{
 				string: '=colorFromString'
 			},
-			link: function (scope, el, attr, ctrl) {
+			link: function (scope, el) {
 				function genColor(str) { // java String#hashCode
 					var hash = 0;
 					for (var i = 0; i < str.length; i++) {

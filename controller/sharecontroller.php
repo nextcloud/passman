@@ -55,7 +55,7 @@ class ShareController extends ApiController {
 
 	public function __construct($AppName,
 								IRequest $request,
-								IUser $UserId,
+								$UserId,
 								IGroupManager $groupManager,
 								IUserManager $userManager,
 								ActivityService $activityService,
@@ -459,6 +459,7 @@ class ShareController extends ApiController {
 	 * @param $credential_guid
 	 * @param $file_guid
 	 * @NoAdminRequired
+	 * @PublicPage
 	 * @return JSONResponse
 	 * @return NotFoundResponse
 	 */
@@ -468,8 +469,8 @@ class ShareController extends ApiController {
 		} catch (DoesNotExistException $e){
 			return new NotFoundJSONResponse();
 		}
-
-		$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+		$userId = ($this->userId) ? $this->userId->getUID() : null;
+		$acl = $this->shareService->getACL($userId, $credential->getGuid());
 		if (!$acl->hasPermission(SharingACL::FILES)){
 			return new NotFoundJSONResponse();
 		} else {

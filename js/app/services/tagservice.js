@@ -25,10 +25,8 @@
 							}
 						}
 					}
-				},
-				removeTag: function (tag) {
-
 				}
+
 			};
 		}]);
 }());

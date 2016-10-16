@@ -7,7 +7,7 @@
 	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('progressBar', ['$window', function ($window) {
+		.directive('progressBar', [function () {
 			return {
 				restrict: 'A',
 				template: '' +
@@ -24,7 +24,7 @@
 					total: '=total'
 				},
 
-				link: function (scope, el, attr, ctrl) {
+				link: function () {
 
 				}
 			};

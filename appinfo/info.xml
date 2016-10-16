@@ -5,7 +5,7 @@
     <description>A password manager for Nextcloud</description>
     <licence>AGPL</licence>
     <author>Sander Brand</author>
-    <version>1.0.2.24</version>
+    <version>1.0.2.25</version>
     <namespace>Passman</namespace>
     <category>other</category>
     <website>https://github.com/nextcloud/passman/</website>
@@ -15,4 +15,9 @@
         <owncloud min-version="9" max-version="11" />
         <nextcloud min-version="9" max-version="11" />
     </dependencies>
+
+
+    <background-jobs>
+        <job>OCA\Passman\BackgroundJob\ExpireCredentials</job>
+    </background-jobs>
 </info>

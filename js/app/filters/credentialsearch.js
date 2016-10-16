@@ -13,6 +13,9 @@
 			return function (credentials, filter) {
 				var _credentials = [];
 				if (credentials) {
+					if(!filter){
+						return credentials;
+					}
 					if (filter.filterText.trim() === "") {
 						return credentials;
 					}
@@ -36,6 +39,8 @@
 						}
 					}
 					return _credentials;
+				} else {
+					return [];
 				}
 			};
 		});

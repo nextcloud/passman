@@ -15,7 +15,7 @@
 				defaultVault: null,
 				defaultVaultPass: null
 			};
-			var neverSend = ['defaultVault', 'defaultVaultPass'];
+
 
 			var cookie = localStorageService.get('settings');
 			settings = angular.merge(settings, cookie);

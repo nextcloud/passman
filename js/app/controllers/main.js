@@ -13,7 +13,7 @@
 			$scope.selectedVault = false;
 
 			$scope.http_warning_hidden = true;
-			if ($location.$$protocol === 'http') {
+			if ($location.$$protocol === 'http' && $location.$$host !== 'localhost' && $location.$host !== '127.0.0.1') {
 				$scope.using_http = true;
 				$scope.http_warning_hidden = false;
 

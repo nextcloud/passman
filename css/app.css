@@ -167,9 +167,17 @@
   #app-content #app-content-wrapper {
     min-height: 95%; }
     #app-content #app-content-wrapper #passman-controls {
+      text-align: center;
       border-bottom: 1px solid #c9c9c9; }
+      #app-content #app-content-wrapper #passman-controls.sidebar-shown {
+        padding-right: 27% !important; }
+        @media screen and (max-width: 765px) {
+          #app-content #app-content-wrapper #passman-controls.sidebar-shown .title {
+            display: none; } }
+        @media screen and (min-width: 769px) and (max-width: 1120px) {
+          #app-content #app-content-wrapper #passman-controls.sidebar-shown .title {
+            display: none; } }
     #app-content #app-content-wrapper .title {
-      width: calc(100% - 400px);
       text-align: center;
       display: inline-block;
       font-weight: bold;
@@ -236,6 +244,16 @@
       float: right; }
       #app-content #app-content-wrapper .searchboxContainer .searchbox {
         display: inline-block; }
+      #app-content #app-content-wrapper .searchboxContainer .searchclear {
+        color: #ccc;
+        cursor: pointer;
+        font-size: 18px;
+        height: 14px;
+        margin: auto;
+        position: absolute !important;
+        right: 10px;
+        top: 12px;
+        z-index: 99999999; }
     #app-content #app-content-wrapper .credential-table {
       width: 100%;
       margin-top: 44px; }
