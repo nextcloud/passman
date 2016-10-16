@@ -49,5 +49,3 @@ $manager->registerExtension(function() {
  * The string has to match the app's folder name
  */
 Util::addTranslations('passman');
-
-\OCP\BackgroundJob::addRegularTask('\OCA\Passman\Cron\ExpireCredentials', 'run');
