@@ -6,23 +6,22 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/nextcloud/passman/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
 
 
-Passman is a full featured password manager. 
+Passman is a full featured password manager.
 Features:
 - Vaults
-- Vault key is never send to the server
-- Import from different password managers
+- Vault key is never sent to the server
 - Credentials are stored with 256 bit AES
 - Ability to add custom fields to credentials
-- Build in One Time password generator
+- Built-in OTP(One Time Password) generator
 - Password analyzer
-- Share passwords
+- Share passwords internally and via link in a secure manner.
 - Import from various password managers:
   - KeePass
   - LastPass
   - DashLane
   - ZOHO
-  - Clipperz.is   
-  
+  - Clipperz.is
+
 
 ## Tested on
 - NextCloud 10+
@@ -30,12 +29,12 @@ Features:
 
 
 ## Supported databases
-- Sql lite*
-- Mysql / MariaDB*
+- SQL Lite*
+- MySQL / MariaDB*
 
 *Tested on travis
 
-Untested databases: 
+Untested databases:
 - pgsql
 
 
@@ -66,6 +65,7 @@ Or if you're feeling lazy, create an issue, and we'll think about it.
 Passman uses a single `.js` file for the templates.
 `templates.js` is build width `grunt`.
 To watch for changes use `grunt watch`
+To run the unit tests install phpunit globally, and stup the envioronment variables on the `launch_phpunit.sh` script then just run that script any argumetns passed to this script will be forwarded to phpunit.
 
 ## Main developers
 - Brantje
