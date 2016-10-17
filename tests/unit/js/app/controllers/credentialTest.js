@@ -1,10 +1,6 @@
 describe('CredentialCtrl', function() {
 	var ctrl, scope, rootScope;
-	beforeEach(module('passmanApp', function ($provide) {
-		$provide.value('$window', {
-			localStorage: localStorageMock()
-		});
-	}));
+	beforeEach(module('passmanApp'));
 	beforeEach(module('LocalStorageModule'));
 	beforeEach(module('mock.credentialsService'));
 
