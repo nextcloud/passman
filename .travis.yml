@@ -67,6 +67,7 @@ script:
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover coverage.clover; fi"
     #- cd ../
     -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
+    -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt karma; fi"
 
 
 #after_failure:
