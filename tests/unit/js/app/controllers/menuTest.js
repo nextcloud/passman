@@ -5,6 +5,8 @@ describe('MenuCtrl', function() {
 		});
 	}));
 
+	beforeEach(module('LocalStorageModule'));
+
 	var $controller;
 	var $scope;
 	beforeEach(inject(function(_$controller_){

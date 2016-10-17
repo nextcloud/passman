@@ -3,7 +3,7 @@
 var isTravis = (process.env.TRAVIS_BUILD_NUMBER) ? true : false;
 var browsers = ['Firefox'];
 if(!isTravis){
-	browsers = ['Chrome']
+	browsers = ['Chrome'];
 }
 module.exports = function (config) {
 	config.set({
@@ -74,5 +74,5 @@ module.exports = function (config) {
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
 		singleRun: true
-	})
+	});
 };
