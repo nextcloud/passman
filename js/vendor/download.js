@@ -6,7 +6,7 @@
 // v4.1 adds url download capability via solo URL argument (same domain/CORS only)
 // v4.2 adds semantic variable names, long (over 2MB) dataURL support, and hidden by default temp anchors
 // https://github.com/rndme/download
-
+/*
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
@@ -158,5 +158,5 @@
 			reader.readAsDataURL(blob);
 		}
 		return true;
-	}; /* end download() */
-}));
+	}; /* end download()
+}));*/

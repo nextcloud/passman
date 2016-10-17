@@ -10,8 +10,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('MenuCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', '$rootScope', 'TagService',
-			function ($scope, VaultService, SettingsService, $location, $rootScope, TagService) {
+		.controller('MenuCtrl', ['$scope', 'VaultService', '$location', '$rootScope', 'TagService','SettingsService',
+			function ($scope, VaultService, $location, $rootScope, TagService, SettingsService) {
 				$rootScope.logout = function () {
 					SettingsService.setSetting('defaultVaultPass', false);
 					$rootScope.$broadcast('logout');

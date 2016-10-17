@@ -78,6 +78,13 @@ module.exports = function (grunt) {
 			}
 		},
 
+		karma: {
+			unit: {
+				configFile: './karma.conf.js',
+				background: false
+			}
+		},
+
 		//@TODO JSHint
 		watch: {
 			scripts: {
@@ -107,6 +114,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-karma');
 	// Default task(s).
 	grunt.registerTask('default', ['html2js', 'sass']);
 	grunt.registerTask('hint', ['jshint']);

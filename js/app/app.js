@@ -125,7 +125,7 @@
 				$('#controls').css('min-width', controlsWidth + magic);
 			}
 		};
-		$(window).resize(_.debounce(adjustControlsWidth, 400));
+		$(window).resize(adjustControlsWidth, 400);
 		setTimeout(function () {
 			adjustControlsWidth(true);
 		}, 200);
