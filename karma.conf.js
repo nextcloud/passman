@@ -3,7 +3,7 @@
 var isTravis = (process.env.TRAVIS_BUILD_NUMBER) ? true : false;
 var browsers = ['Firefox'];
 if(!isTravis){
-	browsers.push('Chrome')
+	browsers = ['Chrome']
 }
 module.exports = function (config) {
 	config.set({
@@ -19,10 +19,10 @@ module.exports = function (config) {
 
 		// list of files / patterns to load in the browser
 		files: [
-			'tests/unit/js/mocks/*.js',
 			'../../core/vendor/jquery/dist/jquery.js',
 			'../../core/vendor/underscore/underscore.js',
 			'js/vendor/angular/angular.min.js',
+			'tests/unit/js/mocks/*.js',
 			'js/vendor/angular-mocks/angular-mocks.js',
 			'js/vendor/**/*.js',
 			'js/app/**/*.js',

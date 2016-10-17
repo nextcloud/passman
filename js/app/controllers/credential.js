@@ -26,7 +26,6 @@
 						$scope.active_vault = _vault;
 						//@TODO check if vault exists
 					}
-
 				}
 
 				$scope.show_spinner = true;

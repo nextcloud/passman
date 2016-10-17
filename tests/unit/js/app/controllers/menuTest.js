@@ -3,7 +3,6 @@ describe('MenuCtrl', function() {
 		$provide.value('$window', {
 			localStorage: localStorageMock()
 		});
-
 	}));
 
 	var $controller;
