@@ -62,8 +62,9 @@ Or if you're feeling lazy, create an issue, and we'll think about it.
 
 
 ## Development
-Passman uses a single `.js` file for the templates.
-`templates.js` is build width `grunt`.
+Passman uses a single `.js` file for the templates. This gives the benefit that we don't need to request every template with XHR.   
+For CSS we use SASS so you need ruby and sass installed.  
+`templates.js` and the CSS are build width `grunt`.
 To watch for changes use `grunt watch`
 To run the unit tests install phpunit globally, and stup the envioronment variables on the `launch_phpunit.sh` script then just run that script any argumetns passed to this script will be forwarded to phpunit.
 
