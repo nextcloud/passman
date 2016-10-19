@@ -1,5 +1,6 @@
 <?php
 /**
+ * Nextcloud - passman
  *
  * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
  * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
