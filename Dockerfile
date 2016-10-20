@@ -38,6 +38,8 @@ RUN /bin/bash -c "export DEBIAN_FRONTEND=noninteractive" && \
 	php-xml-serializer \
 	php-zip \
 	wget
+RUN a2enmod ssl
+RUN ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled
 ADD https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh /var/www/html/
 ADD ./appinfo/ /var/www/passman/appinfo/
 ADD ./controller/ /var/www/passman/controller/
@@ -76,6 +78,7 @@ RUN service mysql restart && \
 #		sed -i "s/);/'trusted-domains'=>array(0=>'localhost',1=>'172.17.0.2',2=>'passman.cc',3=>'demo.passman.cc'));/g" /var/www/html/config/config.php && \
 		chown -R www-data /var/www
 EXPOSE 80
+EXPOSE 443
 ENTRYPOINT 	service mysql start && \
 						service apache2 start && \
 						/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin" && \
