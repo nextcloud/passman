@@ -40,6 +40,8 @@ RUN /bin/bash -c "export DEBIAN_FRONTEND=noninteractive" && \
 	wget
 RUN a2enmod ssl
 RUN ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled
+RUN rm /etc/ssl/certs/ssl-cert-snakeoil.pem
+RUN rm /etc/ssl/private/ssl-cert-snakeoil.key
 ADD https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh /var/www/html/
 ADD ./appinfo/ /var/www/passman/appinfo/
 ADD ./controller/ /var/www/passman/controller/
