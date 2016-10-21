@@ -272,10 +272,9 @@
 				});
 
 				var getShareLink = function(hash){
-					console.log($location);
 					var port;
-					var defaultPort = ($location.$$protocol == 'http') ? 80 : 443;
-					port = (defaultPort != $location.$$port) ? ':'+ $location.$$port : '';
+					var defaultPort = ($location.$$protocol === 'http') ? 80 : 443;
+					port = (defaultPort !== $location.$$port) ? ':'+ $location.$$port : '';
 					return $location.$$protocol + '://' + $location.$$host + port + OC.generateUrl('apps/passman/share/public#') + hash;
 				};
 
