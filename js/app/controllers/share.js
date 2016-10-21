@@ -134,7 +134,7 @@
 								};
 								if (enc_key) {
 									var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key);
-									$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+									$scope.share_link = getShareLink(hash);
 								}
 							} else {
 								var obj = {
@@ -271,6 +271,14 @@
 					}
 				});
 
+				var getShareLink = function(hash){
+					console.log($location);
+					var port;
+					var defaultPort = ($location.$$protocol == 'http') ? 80 : 443;
+					port = (defaultPort != $location.$$port) ? ':'+ $location.$$port : '';
+					return $location.$$protocol + '://' + $location.$$host + port + OC.generateUrl('apps/passman/share/public#') + hash;
+				};
+
 				$scope.sharing_complete = true;
 				$scope.applyShare = function () {
 					$scope.sharing_complete = false;
@@ -295,7 +303,7 @@
 							};
 							ShareService.createPublicSharedCredential(shareObj).then(function () {
 								var hash = window.btoa($scope.storedCredential.guid + '<::>' + enc_key);
-								$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
+								$scope.share_link = getShareLink(hash);
 							});
 						}
 
@@ -353,8 +361,7 @@
 								};
 								ShareService.createPublicSharedCredential(shareObj).then(function () {
 									var hash = window.btoa($scope.storedCredential.guid + '<::>' + key);
-									$scope.share_link = $location.$$protocol + '://' + $location.$$host + OC.generateUrl('apps/passman/share/public#') + hash;
-
+									$scope.share_link = getShareLink(hash);
 								});
 							}
 
