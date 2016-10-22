@@ -29,7 +29,7 @@
 		.controller('SharingSettingsCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'EncryptService',
 			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, EncryptService) {
 				$scope.active_vault = VaultService.getActiveVault();
-				$scope.sharing_keys = ShareService.getSharingKeys();
+				$scope.sharing_keys = angular.copy(ShareService.getSharingKeys());
 
 				$scope.progress = 1;
 				$scope.generating = false;
@@ -81,5 +81,14 @@
 						});
 					});
 				};
+
+				$scope.updateSharingKeys = function () {
+					$scope.active_vault.private_sharing_key = EncryptService.encryptString(angular.copy($scope.sharing_keys.private_sharing_key));
+					$scope.active_vault.public_sharing_key = angular.copy($scope.sharing_keys.public_sharing_key);
+					VaultService.updateSharingKeys($scope.active_vault).then(function () {
+						$scope.sharing_keys = ShareService.getSharingKeys();
+					});
+				};
+
 			}]);
 }());
