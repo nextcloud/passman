@@ -91,6 +91,12 @@ class FileMapper extends Mapper {
 		return $this->insert($file);
 	}
 
+	/**
+	 * Delete a file by file_id and user id
+	 * @param $file_id
+	 * @param $userId
+	 * @return File
+	 */
 	public function deleteFile($file_id, $userId) {
 		$file = new File();
 		$file->setId($file_id);
@@ -98,6 +104,11 @@ class FileMapper extends Mapper {
 		$this->delete($file);
 	}
 
+	/**
+	 * Uodate file
+	 * @param File $file
+	 * @return File
+	 */
 	public function updateFile(File $file) {
 		return $this->update($file);
 	}

@@ -38,22 +38,53 @@ class CredentialRevisionService {
 		$this->credentialRevisionMapper = $credentialRevisionMapper;
 	}
 
+	/**
+	 * Create a new revision for a credential
+	 * @param $credential
+	 * @param $userId
+	 * @param $credential_id
+	 * @param $edited_by
+	 * @return CredentialRevision
+	 */
 	public function createRevision($credential, $userId, $credential_id, $edited_by) {
 		return $this->credentialRevisionMapper->create($credential, $userId, $credential_id, $edited_by);
 	}
 
+	/**
+	 * Get revisions of a credential
+	 * @param $credential_id
+	 * @param null $user_id
+	 * @return CredentialRevision[]
+	 */
 	public function getRevisions($credential_id, $user_id = null){
 		return $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
 	}
 
+	/**
+	 *
+	 * @param $credential_id
+	 * @param null $user_id
+	 * @return CredentialRevision
+	 */
 	public function getRevision($credential_id, $user_id = null){
 		return $this->credentialRevisionMapper->getRevision($credential_id, $user_id);
 	}
 
+	/**
+	 * Delete a revision
+	 * @param $revision_id
+	 * @param $user_id
+	 * @return CredentialRevision
+	 */
 	public function deleteRevision($revision_id, $user_id){
 		return $this->credentialRevisionMapper->deleteRevision($revision_id, $user_id);
 	}
 
+	/**
+	 * Update revision
+	 * @param CredentialRevision $credentialRevision
+	 * @return CredentialRevision
+	 */
 	public function updateRevision(CredentialRevision $credentialRevision){
 		return $this->credentialRevisionMapper->update($credentialRevision);
 	}

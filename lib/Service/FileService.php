@@ -37,22 +37,51 @@ class FileService {
 		$this->fileMapper = $fileMapper;
 	}
 
+	/**
+	 * Get a single file. This function also returns the file content.
+	 * @param $fileId
+	 * @param null $userId
+	 * @return \OCA\Passman\Db\File
+	 */
 	public function getFile($fileId, $userId = null) {
 		return $this->fileMapper->getFile($fileId, $userId);
 	}
 
+	/**
+	 * Get a single file. This function also returns the file content.
+	 * @param $file_guid
+	 * @param null $userId
+	 * @return \OCA\Passman\Db\File
+	 */
 	public function getFileByGuid($file_guid, $userId = null) {
 		return $this->fileMapper->getFileByGuid($file_guid, $userId);
 	}
 
+	/**
+	 * Upload a new file,
+	 * @param $file array
+	 * @param $userId
+	 * @return \OCA\Passman\Db\File
+	 */
 	public function createFile($file, $userId) {
 		return $this->fileMapper->create($file, $userId);
 	}
 
+	/**
+	 * Delete file
+	 * @param $file_id
+	 * @param $userId
+	 * @return \OCA\Passman\Db\File
+	 */
 	public function deleteFile($file_id, $userId) {
 		return $this->fileMapper->deleteFile($file_id, $userId);
 	}
 
+	/**
+	 * Update file
+	 * @param $file_id
+	 * @return \OCA\Passman\Db\File
+	 */
 	public function updateFile($file_id) {
 		return $this->fileMapper->updateFile($file_id);
 	}

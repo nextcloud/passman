@@ -38,7 +38,7 @@ class VaultMapper extends Mapper {
 	/**
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
-	 * @return Vault
+	 * @return Vault[]
 	 */
 	public function find($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
@@ -85,6 +85,11 @@ class VaultMapper extends Mapper {
 		return parent::insert($vault);
 	}
 
+	/**
+	 * Update last access time of a vault
+	 * @param $vault_id
+	 * @param $user_id
+	 */
 	public function setLastAccess($vault_id, $user_id){
 		$vault = new Vault();
 		$vault->setId($vault_id);
@@ -93,10 +98,20 @@ class VaultMapper extends Mapper {
 		$this->update($vault);
 	}
 
+	/**
+	 * Update vault
+	 * @param Vault $vault
+	 */
 	public function updateVault(Vault $vault){
 		$this->update($vault);
 	}
 
+	/**
+	 * Update the sharing key's
+	 * @param $vault_id
+	 * @param $privateKey
+	 * @param $publicKey
+	 */
 	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
 		$vault = new Vault();
 		$vault->setId($vault_id);

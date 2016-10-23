@@ -38,28 +38,15 @@ class ActivityService {
 	}
 
 	/**
-	 * @subject = One of these: item_created, item_edited, item_apply_revision
-	 *                          item_deleted, item_recovered, item_destroyed,
-	 *                          item_expired, item_shared
-	 *
-	 *
-	 *
-	 *
-	 * @subjectParams =  Subject     | Subject params
-	 *                  item_created = array($itemName,$user)
-	 *                  item_edited = array($itemName,$user)
-	 *                  item_apply_revision = array($itemName,$user,$revision);
-	 *                  item_deleted = array($itemName,$user)
-	 *                  item_recovered = array($itemName,$user)
-	 *                  item_destroyed = array($itemName,$user)
-	 *                  item_expired = array($itemName)
-	 *                  item_shared = array($itemName)
-	 * @message = Custom message (not needed)
-	 * @messageParams = Message params (not needed)
-	 * @link = will be -> <ownCloud>/apps/activity/$link
-	 * @user = Target user
-	 * @type = Can be passman_password or passman_password_shared
-	 * @priority = Int -> [10,20,30,40,50]
+	 * Create a new activity
+	 * @param $subject string Subject of the activity
+	 * @param $subjectParams array
+	 * @param $message string
+	 * @param $messageParams array
+	 * @param $link string
+	 * @param $user string
+	 * @param $type string
+	 * @return array
 	 */
 	public function add($subject,$subjectParams=array(),
 						$message='',$messageParams=array(),
