@@ -37,32 +37,70 @@ class VaultService {
 		$this->vaultMapper = $vaultMapper;
 	}
 
+	/**
+	 * Get vaults from a user.
+	 * @param $userId
+	 * @return \OCA\Passman\Db\Vault[]
+	 */
 	public function getByUser($userId) {
 		return $this->vaultMapper->findVaultsFromUser($userId);
 	}
 
+	/**
+	 * Get a single vault
+	 * @param $vault_id
+	 * @param $user_id
+	 * @return \OCA\Passman\Db\Vault[]
+	 */
 	public function getById($vault_id, $user_id) {
 		$vault = $this->vaultMapper->find($vault_id, $user_id);
 		return $vault;
 	}
 
+	/**
+	 * Get a single vault.
+	 * @param $vault_guid
+	 * @param $user_id
+	 * @return \OCA\Passman\Db\Vault
+	 */
 	public function getByGuid($vault_guid, $user_id) {
 		$vault = $this->vaultMapper->findByGuid($vault_guid, $user_id);
 		return $vault;
 	}
 
+	/**
+	 * Create a new vault.
+	 * @param $vault_name
+	 * @param $userId
+	 * @return \OCA\Passman\Db\Vault
+	 */
 	public function createVault($vault_name, $userId) {
 		return $this->vaultMapper->create($vault_name, $userId);
 	}
 
+	/**
+	 * Update vault
+	 * @param $vault
+	 */
 	public function updateVault($vault) {
 		return $this->vaultMapper->updateVault($vault);
 	}
 
+	/**
+	 * Update last access time of a vault.
+	 * @param $vault_id
+	 * @param $user_id
+	 */
 	public function setLastAccess($vault_id, $user_id){
 		return $this->vaultMapper->setLastAccess($vault_id, $user_id);
 	}
 
+	/**
+	 * Uodate sharing keys of a vault.
+	 * @param $vault_id
+	 * @param $privateKey
+	 * @param $publicKey
+	 */
 	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
 		return $this->vaultMapper->updateSharingKeys($vault_id, $privateKey, $publicKey);
 	}

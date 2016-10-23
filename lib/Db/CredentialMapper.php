@@ -36,8 +36,10 @@ class CredentialMapper extends Mapper {
 
 
 	/**
+	 * Obtains the credentials by vault id (not guid)
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @return Vault[]
 	 */
 	public function getCredentialsByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
@@ -46,9 +48,10 @@ class CredentialMapper extends Mapper {
 	}
 
 	/**
+	 * Get a random credentail from a vault
 	 * @param $vault_id
 	 * @param $user_id
-	 * @return Credential[]
+	 * @return Credential
 	 */
 	public function getRandomCredentialByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
@@ -60,6 +63,7 @@ class CredentialMapper extends Mapper {
 	}
 
 	/**
+	 * Get expired credentials
 	 * @param $timestamp
 	 * @return Credential[]
 	 */
@@ -70,6 +74,8 @@ class CredentialMapper extends Mapper {
 	}
 
     /**
+	 * Get an credential by id.
+	 * Optional user id
      * @param $credential_id
      * @param null $user_id
      * @return Credential
@@ -87,6 +93,7 @@ class CredentialMapper extends Mapper {
 	}
 
 	/**
+	 * Get credential label by id
 	 * @param $credential_id
 	 * @return Credential
 	 */
@@ -97,6 +104,7 @@ class CredentialMapper extends Mapper {
 	}
 
 	/**
+	 * Save credential to the database.
 	 * @param $raw_credential
 	 * @return Credential
 	 */
@@ -128,6 +136,7 @@ class CredentialMapper extends Mapper {
 	}
 
 	/**
+	 * Update a credential
 	 * @param $raw_credential array An array containing all the credential fields
 	 * @return Credential The updated credential
 	 */

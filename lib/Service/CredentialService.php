@@ -24,6 +24,7 @@
 namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\Credential;
+use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\SharingACLMapper;
 use OCP\IConfig;
@@ -52,30 +53,69 @@ class CredentialService {
 		return $this->credentialMapper->create($credential);
 	}
 
+	/**
+	 * Update credential
+	 * @param $credential array
+	 * @return Credential
+	 */
 	public function updateCredential($credential) {
 		return $this->credentialMapper->updateCredential($credential);
 	}
-	public function upd($credential) {
+
+	/**
+	 * Update credential
+	 * @param $credential Credential
+	 */
+	public function upd(Credential $credential) {
 		return $this->credentialMapper->upd($credential);
 	}
 
-	public function deleteCredential($credential){
+	/**
+	 * Delete credential
+	 * @param Credential $credential
+	 * @return \OCP\AppFramework\Db\Entity
+	 */
+	public function deleteCredential(Credential $credential){
 		return $this->credentialMapper->deleteCredential($credential);
 	}
 
+	/**
+	 * Get credentials by vault id
+	 * @param $vault_id
+	 * @param $user_id
+	 * @return \OCA\Passman\Db\Vault[]
+	 */
 	public function getCredentialsByVaultId($vault_id, $user_id) {
 		return $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
 	}
 
+	/**
+	 * Get a random credential from given vault
+	 * @param $vault_id
+	 * @param $user_id
+	 * @return mixed
+	 */
 	public function getRandomCredentialByVaultId($vault_id, $user_id) {
 		$credentials = $this->credentialMapper->getRandomCredentialByVaultId($vault_id, $user_id);
 		return array_pop($credentials);
 	}
 
+	/**
+	 * Get expired credentials.
+	 * @param $timestamp
+	 * @return \OCA\Passman\Db\Credential[]
+	 */
 	public function getExpiredCredentials($timestamp) {
 		return $this->credentialMapper->getExpiredCredentials($timestamp);
 	}
 
+	/**
+	 * Get a single credential.
+	 * @param $credential_id
+	 * @param $user_id
+	 * @return Credential
+	 * @throws DoesNotExistException
+	 */
 	public function getCredentialById($credential_id, $user_id){
         $credential = $this->credentialMapper->getCredentialById($credential_id);
         if ($credential->getUserId() === $user_id){
@@ -89,10 +129,22 @@ class CredentialService {
 
         throw new DoesNotExistException("Did expect one result but found none when executing");
 	}
+
+	/**
+	 * Get credential label by credential id.
+	 * @param $credential_id
+	 * @return Credential
+	 */
 	public function getCredentialLabelById($credential_id){
 		return $this->credentialMapper->getCredentialLabelById($credential_id);
 	}
 
+	/**
+	 * Get credential by guid
+	 * @param $credential_guid
+	 * @param null $user_id
+	 * @return Credential
+	 */
 	public function getCredentialByGUID($credential_guid, $user_id = null){
 	    return $this->credentialMapper->getCredentialByGUID($credential_guid, $user_id);
     }

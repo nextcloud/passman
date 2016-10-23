@@ -37,8 +37,10 @@ class CredentialRevisionMapper extends Mapper {
 
 
 	/**
+	 * Get revisions from a credential
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @return CredentialRevision[]
 	 */
 	public function getRevisions($credential_id, $user_id = null) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_revisions` ' .
@@ -68,6 +70,7 @@ class CredentialRevisionMapper extends Mapper {
 	}
 
 	/**
+	 * Create a revision
 	 * @param $credential
 	 * @param $userId
 	 * @param $credential_id
@@ -85,6 +88,13 @@ class CredentialRevisionMapper extends Mapper {
 		return $this->insert($revision);
 	}
 
+
+	/**
+	 * Delete a revision
+	 * @param $revision_id
+	 * @param $user_id
+	 * @return CredentialRevision
+	 */
 	public function deleteRevision($revision_id, $user_id) {
 		$revision = new CredentialRevision();
 		$revision->setId($revision_id);
