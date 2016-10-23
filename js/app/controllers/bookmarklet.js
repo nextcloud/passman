@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('BookmarkletCtrl', ['$scope', '$rootScope', '$location', 'VaultService', 'CredentialService', 'SettingsService', 'NotificationService', 'EncryptService', 'TagService', 'FileService',
-			function ($scope, $rootScope, $location, VaultService, CredentialService, SettingsService, NotificationService, EncryptService, TagService, FileService) {
+		.controller('BookmarkletCtrl', ['$scope', '$rootScope', '$location', 'VaultService', 'CredentialService', 'SettingsService', 'NotificationService', 'EncryptService', 'TagService', 'FileService', 'ShareService',
+			function ($scope, $rootScope, $location, VaultService, CredentialService, SettingsService, NotificationService, EncryptService, TagService, FileService, ShareService) {
 				$scope.active_vault = false;
 
 				$scope.http_warning_hidden = true;
