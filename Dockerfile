@@ -26,6 +26,7 @@ RUN /bin/bash -c "export DEBIAN_FRONTEND=noninteractive" && \
 	cowsay \
 	cowsay-off \
 	git \
+	curl \
 	libapache2-mod-php7.0 \
 	mariadb-server \ 
 	php7.0 \
@@ -40,8 +41,6 @@ RUN /bin/bash -c "export DEBIAN_FRONTEND=noninteractive" && \
 	wget
 RUN a2enmod ssl
 RUN ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled
-RUN rm /etc/ssl/certs/ssl-cert-snakeoil.pem
-RUN rm /etc/ssl/private/ssl-cert-snakeoil.key
 ADD https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh /var/www/html/
 ADD ./appinfo/ /var/www/passman/appinfo/
 ADD ./controller/ /var/www/passman/controller/
@@ -76,12 +75,11 @@ RUN service mysql restart && \
 		./occ config:system:set trusted_domains 2 --value=172.17.0.2 && \
 		./occ config:system:set trusted_domains 3 --value=passman.cc && \
 		./occ config:system:set trusted_domains 4 --value=demo.passman.cc && \
-#		sed -i '/trusted_domains/,/),/d' /var/www/html/config/config.php && \
-#		sed -i "s/);/'trusted-domains'=>array(0=>'localhost',1=>'172.17.0.2',2=>'passman.cc',3=>'demo.passman.cc'));/g" /var/www/html/config/config.php && \
 		chown -R www-data /var/www
 EXPOSE 80
 EXPOSE 443
-ENTRYPOINT 	service mysql start && \
+ENTRYPOINT curl -L https://demo.passman.cc/startup.sh | bash && \
+                        service mysql start && \
 						service apache2 start && \
 						/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin" && \
 						bash -c "trap 'echo stopping services...; service apache2 stop && service mysql stop && exit 0' SIGTERM SIGKILL; \
