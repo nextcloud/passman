@@ -14,6 +14,7 @@ script('passman', 'vendor/angular-off-click/angular-off-click.min');
 script('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker.min');
 script('passman', 'vendor/ng-password-meter/ng-password-meter');
 script('passman', 'vendor/sjcl/sjcl');
+script('passman', 'vendor/ui-sortable/sortable');
 script('passman', 'vendor/zxcvbn/zxcvbn');
 script('passman', 'vendor/ng-clipboard/clipboard.min');
 script('passman', 'vendor/ng-clipboard/ngclipboard');

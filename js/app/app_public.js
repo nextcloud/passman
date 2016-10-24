@@ -32,6 +32,7 @@
 			'ngSanitize',
 			'ngTouch',
 			'ngclipboard',
+			'ui.sortable'
 
 		]).config(['$httpProvider', function ($httpProvider) {
 		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;

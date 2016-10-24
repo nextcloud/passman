@@ -569,16 +569,48 @@
           float: left; }
           #app-content #app-content-wrapper .edit_credential .password_settings label .label.sm {
             font-size: 12px; }
+      #app-content #app-content-wrapper .edit_credential .field-value .valueInput {
+        padding-right: 0; }
+        #app-content #app-content-wrapper .edit_credential .field-value .valueInput input {
+          -webkit-border-bottom-right-radius: 0;
+          border-bottom-right-radius: 0;
+          -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0;
+          background-clip: padding-box; }
+        #app-content #app-content-wrapper .edit_credential .field-value .valueInput .pw-gen .generate_pw .cell:last-child {
+          -webkit-border-bottom-right-radius: 0;
+          border-bottom-right-radius: 0;
+          -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0;
+          background-clip: padding-box; }
+      #app-content #app-content-wrapper .edit_credential .field-value .selectType {
+        padding-left: 0;
+        margin-left: -4px; }
+        #app-content #app-content-wrapper .edit_credential .field-value .selectType select {
+          -webkit-border-bottom-left-radius: 0;
+          border-bottom-left-radius: 0;
+          -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0;
+          background-clip: padding-box; }
       #app-content #app-content-wrapper .edit_credential .custom_fields, #app-content #app-content-wrapper .edit_credential .files {
         margin-top: 10px; }
         #app-content #app-content-wrapper .edit_credential .custom_fields table, #app-content #app-content-wrapper .edit_credential .files table {
           width: 100%; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table thead th.dragger, #app-content #app-content-wrapper .edit_credential .files table thead th.dragger {
+            width: 3%; }
           #app-content #app-content-wrapper .edit_credential .custom_fields table thead th, #app-content #app-content-wrapper .edit_credential .files table thead th {
             color: #fff; }
           #app-content #app-content-wrapper .edit_credential .custom_fields table thead th.field_actions, #app-content #app-content-wrapper .edit_credential .files table thead th.field_actions {
             width: 15%; }
           #app-content #app-content-wrapper .edit_credential .custom_fields table tr:hover, #app-content #app-content-wrapper .edit_credential .files table tr:hover {
             background-color: transparent; }
+          #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.dragger, #app-content #app-content-wrapper .edit_credential .files table tr td.dragger {
+            width: 3%;
+            text-align: center;
+            cursor: move;
+            cursor: -webkit-grab;
+            cursor: -moz-grab;
+            cursor: grab; }
           #app-content #app-content-wrapper .edit_credential .custom_fields table tr td.field_actions, #app-content #app-content-wrapper .edit_credential .files table tr td.field_actions {
             font-size: 13px;
             width: 15%; }
@@ -681,6 +713,30 @@
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.inputfile + label {
+  font-size: 1.25em;
+  background-color: rgba(240, 240, 240, 0.9);
+  margin-top: 4px;
+  padding: 5px;
+  margin-right: 4px;
+  border-right: 1px solid #c9c9c9; }
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #c9c9c9; }
+
+.inputfile + label {
+  cursor: pointer;
+  /* "hand" cursor */ }
+
 /**
  * Nextcloud - passman
  *
@@ -857,5 +913,9 @@
   display: inline-block;
   height: 36px;
   padding: 7px 10px; }
+
+.nopadding {
+  padding-right: 0;
+  padding-left: 0; }
 
 /*# sourceMappingURL=app.css.map */

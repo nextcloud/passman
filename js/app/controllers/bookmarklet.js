@@ -274,25 +274,61 @@
 				var _customField = {
 					label: '',
 					value: '',
-					secret: false
+					secret: false,
+					field_type: 'text'
 				};
+				$scope.selected_field_type = 'text';
 				$scope.new_custom_field = angular.copy(_customField);
 
 				$scope.addCustomField = function () {
-					if (!$scope.new_custom_field.label) {
+					var _field = angular.copy($scope.new_custom_field);
+
+					if (!_field.label) {
 						NotificationService.showNotification('Please fill in a label', 3000);
 					}
-					if (!$scope.new_custom_field.value) {
+					if (!_field.value) {
 						NotificationService.showNotification('Please fill in a value!', 3000);
 					}
-					if (!$scope.new_custom_field.label || !$scope.new_custom_field.value) {
+					if (!_field.label || !_field.value) {
 						return;
 					}
-					$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
-					$scope.new_custom_field = angular.copy(_customField);
+					$scope.selected_field_type = 'text';
+
+					_field.secret = angular.copy(($scope.selected_field_type === 'password'));
+					_field.field_type =  angular.copy($scope.selected_field_type);
+					if(_field.field_type === 'file'){
+						var _file = $scope.new_custom_field.value;
+						FileService.uploadFile(_file).then(function (result) {
+							delete result.file_data;
+							result.filename = EncryptService.decryptString(result.filename);
+							_field.value = result;
+							$scope.storedCredential.custom_fields.push(_field);
+							$scope.new_custom_field = angular.copy(_customField);
+						});
+					} else {
+						$scope.storedCredential.custom_fields.push(_field);
+						$scope.new_custom_field = angular.copy(_customField);
+					}
+
+				};
+
+				$scope.addFileToCustomField = function (file) {
+					var _file = {
+						filename: file.name,
+						size: file.size,
+						mimetype: file.type,
+						data: file.data
+					};
+					$scope.new_custom_field.value = _file;
+					$scope.$digest();
 				};
 
 				$scope.deleteCustomField = function (field) {
+					if(field.hasOwnProperty('field_type')) {
+						if (field.field_type === 'file') {
+							FileService.deleteFile(field.value);
+						}
+					}
 					var idx = $scope.storedCredential.custom_fields.indexOf(field);
 					$scope.storedCredential.custom_fields.splice(idx, 1);
 				};
