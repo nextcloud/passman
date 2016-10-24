@@ -61,9 +61,9 @@ Or if you're feeling lazy, create an issue, and we'll think about it.
 
 ## Docker
 To run passman with docker you can use `docker run  -p 8080:80 -p 8443:443 brantje/passman`
-SSL certificates are not shipped by default, you have to mount them:   
+To use your own SSL cert mount them as below   
 Example:   
-`-v etc/ssl/certs/ssl-cert-snakeoil.pem:/etc/ssl/certs/ssl-cert-snakeoil.pem -v /etc/ssl/private/ssl-cert-snakeoil.key:/etc/ssl/private/ssl-cert-snakeoil.key`
+`docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /directory/cert.key:/data/ssl/cert.key brantje/passman`
 
 
 ## Development
