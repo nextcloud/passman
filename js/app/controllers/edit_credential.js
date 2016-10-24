@@ -280,7 +280,9 @@
 						delete _credential.shared_key;
 						var _useKey = (key != null);
 						var regex = /(<([^>]+)>)/ig;
-						_credential.description = _credential.description.replace(regex, "");
+						if(_credential.description) {
+							_credential.description = _credential.description.replace(regex, "");
+						}
 						CredentialService.updateCredential(_credential, _useKey).then(function () {
 							SettingsService.setSetting('edit_credential', null);
 							$location.path('/vault/' + $routeParams.vault_id);
