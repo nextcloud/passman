@@ -46,7 +46,8 @@
 			'ngclipboard',
 			'xeditable',
 			'ngTagsInput',
-			'angularjs-datetime-picker'
+			'angularjs-datetime-picker',
+			'ui.sortable'
 		])
 		.config(function ($routeProvider) {
 			$routeProvider
@@ -147,12 +148,14 @@
 				$('#controls').css('min-width', controlsWidth + magic);
 			}
 		};
+		/*
 		$(window).resize(adjustControlsWidth, 400);
 		setTimeout(function () {
 			adjustControlsWidth(true);
-		}, 200);
+		}, 200);*/
 
 		//@Fack this
+		/*
 		$(document).on('click', '#app-navigation-toggle', function () {
 			setTimeout(function () {
 				if ($('#app-content').css('transform').toString().indexOf('matrix') >= 0) {
@@ -164,6 +167,6 @@
 					$('#passman-controls').css('width', '100%');
 				}
 			}, 350);
-		});
+		});*/
 	});
 }());

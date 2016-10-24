@@ -1,6 +1,7 @@
 <div class="row file_tab">
 	<div class="col-xs-12 col-md-6">
-		<input type="file" file-select success="fileLoaded" error="fileLoadError" progress="fileSelectProgress">
+		<input class="inputfile" id="file" type="file" file-select success="fileLoaded" error="fileLoadError" progress="fileSelectProgress">
+		<label for="file"><i class="fa fa-upload" aria-hidden="true"></i> Choose a file</label>
 		<span ng-if="fileprogress.file_percent > 0">
 			<div progress-bar="fileprogress.file_percent"></div>
 		</span>
