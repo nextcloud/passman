@@ -19,9 +19,15 @@
     "%1$s has been permanently deleted by %2$s" : "%1$s byl trvale odstraněn uživatelem %2$s",
     "You permanently deleted %1$s" : "Trvale jste odstranil %1$s",
     "The password of %1$s has expired, renew it now." : "Heslo pro %1$s vypršelo, obnovte ho.",
-    "%s has been shared" : "%s byl sdílen",
+    "%1$s has been shared with %2$s" : "%1$s byl nasdílen uživatelem %2$s",
+    "You received a share request for %1$s from %2$s" : "Obdrželi jste nový požadavek na sdílení %1$s od uživatele %2$s",
+    "%s has been shared with a link" : "%s byl nasdílen pomocí odkazu",
     "Your credential \"%s\" expired, click here to update the credential." : "Vaše pověření \"%s\" vypršelo, klikněte zde pro obnovení",
     "Remind me later" : "Připomenout později",
-    "Ignore" : "Ignorovat"
+    "Ignore" : "Ignorovat",
+    "%s shared \"%s\" with you. Click here to accept" : "%s s tebou sdílí \"%s\". Kliknout pro přijetí",
+    "Decline" : "Zamítnout",
+    "%s has declined your share request for \"%s\"." : "%s zamítl(a) tvůj požadavek na sdílení \"%s\".",
+    "%s has accepted your share request for \"%s\"." : "%s přijal(a) tvůj požadavek na sdílení \"%s\"."
 },"pluralForm" :"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
 }

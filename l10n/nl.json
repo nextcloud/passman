@@ -19,9 +19,15 @@
     "%1$s has been permanently deleted by %2$s" : "%1$s werd permanent verwijderd door %2$s",
     "You permanently deleted %1$s" : "Je verwijderde %1$s permanent",
     "The password of %1$s has expired, renew it now." : "Het wachtwoord van %1$s is vervallen, vernieuw het nu.",
-    "%s has been shared" : "%s is gedeeld",
+    "%1$s has been shared with %2$s" : "%1$s is gedeeld met %2$s",
+    "You received a share request for %1$s from %2$s" : "Je ontving een verzoek om %1$s te delen met %2$s",
+    "%s has been shared with a link" : "%s is gedeeld met een link",
     "Your credential \"%s\" expired, click here to update the credential." : "Je inloggegevens \"%s\" vervielen, klik hier om ze te vernieuwen.",
     "Remind me later" : "Herinner me later",
-    "Ignore" : "Negeren"
+    "Ignore" : "Negeren",
+    "%s shared \"%s\" with you. Click here to accept" : "%s deelde \"%s\" met je. Klik hier om te accepteren",
+    "Decline" : "Afwijzen",
+    "%s has declined your share request for \"%s\"." : "%s weigerde je aanvraag om \"%s\" te delen.",
+    "%s has accepted your share request for \"%s\"." : "%s accepteerde je aanvraag om \"%s\" te delen."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

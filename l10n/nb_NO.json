@@ -19,9 +19,15 @@
     "%1$s has been permanently deleted by %2$s" : "%1$s er slettet permanent av %2$s",
     "You permanently deleted %1$s" : "Du slettet %1$s permanent",
     "The password of %1$s has expired, renew it now." : "Passordet til %1$s er utløpt, forny passordet nå.",
-    "%s has been shared" : "%s er delt",
+    "%1$s has been shared with %2$s" : "%1$s er delt med %2$s",
+    "You received a share request for %1$s from %2$s" : "Du mottok et delingsønske fra %1$s til %2$s",
+    "%s has been shared with a link" : "%s er delt med en lenke",
     "Your credential \"%s\" expired, click here to update the credential." : "Identiteten \"%s\" er utløpt, klikk her for å oppdatere.",
     "Remind me later" : "Påminnn meg senere",
-    "Ignore" : "Ignorer"
+    "Ignore" : "Ignorer",
+    "%s shared \"%s\" with you. Click here to accept" : "%s delte \"%s\" med deg. Klikk her for å akseptere",
+    "Decline" : "Avslå",
+    "%s has declined your share request for \"%s\"." : "%s har avvist din forespørsel om å dele \"%s\".",
+    "%s has accepted your share request for \"%s\"." : "%s har akseptert din forespørsel om å dele \"%s\"."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

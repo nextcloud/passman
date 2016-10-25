@@ -19,9 +19,15 @@ OC.L10N.register(
     "%1$s has been permanently deleted by %2$s" : "%1$s véglegesen törölve %2$s által",
     "You permanently deleted %1$s" : "Végelegesen törölted: %1$s",
     "The password of %1$s has expired, renew it now." : "%1$s jelszava lejárt, újítsd meg most.",
-    "%s has been shared" : "%s meg lett osztva",
+    "%1$s has been shared with %2$s" : "%1$s megosztva vele: %2$s",
+    "You received a share request for %1$s from %2$s" : "Megosztási kérést érkezett ehhez: %1$s tőle: %2$s",
+    "%s has been shared with a link" : "%s megosztva hivatkozással",
     "Your credential \"%s\" expired, click here to update the credential." : "Your credential \"%s\" expired, click here to update the credential.",
     "Remind me later" : "Emlékeztess később",
-    "Ignore" : "Mellőz"
+    "Ignore" : "Mellőz",
+    "%s shared \"%s\" with you. Click here to accept" : "%s megosztotta veled ezt: \"%s\". Kattints ide az elfogadáshoz",
+    "Decline" : "Elutasít",
+    "%s has declined your share request for \"%s\"." : "%s elutasította \"%s\" megosztási kérésedet.",
+    "%s has accepted your share request for \"%s\"." : "%s elfogadta \"%s\" megosztási kérésedet."
 },
 "nplurals=2; plural=(n != 1);");

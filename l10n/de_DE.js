@@ -21,9 +21,15 @@ OC.L10N.register(
     "%1$s has been permanently deleted by %2$s" : "%1$s wurde durch %2$s dauerhaft gelöscht",
     "You permanently deleted %1$s" : "Sie haben %1$s dauerhaft gelöscht",
     "The password of %1$s has expired, renew it now." : "Das Passwort von %1$s ist abgelaufen, bitte erneuern Sie es jetzt.",
-    "%s has been shared" : "%s wurde geteilt",
+    "%1$s has been shared with %2$s" : "%1$s wurde mit %2$s geteilt",
+    "You received a share request for %1$s from %2$s" : "Sie haben eine Anfrage zum Teilen von %1$s von %2$s erhalten",
+    "%s has been shared with a link" : "%s wurde über einen Link geteilt",
     "Your credential \"%s\" expired, click here to update the credential." : "Ihre Anmeldedaten \"%s\" sind abgelaufen, klicken Sie zur Aktualisierung ihrer Anmeldedaten hier.",
     "Remind me later" : "Erinnern Sie mich später",
-    "Ignore" : "Ignorieren"
+    "Ignore" : "Ignorieren",
+    "%s shared \"%s\" with you. Click here to accept" : "%s teilt \"%s\" mit Ihnen. Um dies zu akzeptieren, klicken Sie bitte hier",
+    "Decline" : "Ablehnen",
+    "%s has declined your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Ihnen abgelehnt.",
+    "%s has accepted your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Ihnen akzeptiert."
 },
 "nplurals=2; plural=(n != 1);");
