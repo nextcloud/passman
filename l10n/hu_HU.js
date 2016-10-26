@@ -22,12 +22,18 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s megosztva vele: %2$s",
     "You received a share request for %1$s from %2$s" : "Megosztási kérést érkezett ehhez: %1$s tőle: %2$s",
     "%s has been shared with a link" : "%s megosztva hivatkozással",
-    "Your credential \"%s\" expired, click here to update the credential." : "Your credential \"%s\" expired, click here to update the credential.",
+    "Your credential \"%s\" expired, click here to update the credential." : "A hitelesítésed lejárt, kattints ide a frissítéshez: \"%s\"",
     "Remind me later" : "Emlékeztess később",
     "Ignore" : "Mellőz",
     "%s shared \"%s\" with you. Click here to accept" : "%s megosztotta veled ezt: \"%s\". Kattints ide az elfogadáshoz",
     "Decline" : "Elutasít",
     "%s has declined your share request for \"%s\"." : "%s elutasította \"%s\" megosztási kérésedet.",
-    "%s has accepted your share request for \"%s\"." : "%s elfogadta \"%s\" megosztási kérésedet."
+    "%s has accepted your share request for \"%s\"." : "%s elfogadta \"%s\" megosztási kérésedet.",
+    "Settings" : "Beállítások",
+    "Connection to server lost" : "Megszakadt a kapcsolat a szerverrel",
+    "Problem loading page, reloading in 5 seconds" : "Probléma adódott az oldal betöltése közben, újratöltés 5 másodpercen belül",
+    "Saving..." : "Mentés...",
+    "Dismiss" : "Elutasít",
+    "seconds ago" : "pár másodperce"
 },
 "nplurals=2; plural=(n != 1);");
