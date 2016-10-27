@@ -28,6 +28,12 @@
     "%s shared \"%s\" with you. Click here to accept" : "%s teilt \"%s\" mit Ihnen. Um dies zu akzeptieren, klicken Sie bitte hier",
     "Decline" : "Ablehnen",
     "%s has declined your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Ihnen abgelehnt.",
-    "%s has accepted your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Ihnen akzeptiert."
+    "%s has accepted your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Ihnen akzeptiert.",
+    "Settings" : "Einstellungen",
+    "Connection to server lost" : "Verbindung zum Server verloren",
+    "Problem loading page, reloading in 5 seconds" : "Problem beim Laden der Seite, Seite wird in 5 Sekunden erneut geladen",
+    "Saving..." : "Speichere...",
+    "Dismiss" : "Ausblenden",
+    "seconds ago" : "Gerade ebene"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

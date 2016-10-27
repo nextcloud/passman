@@ -28,6 +28,12 @@
     "%s shared \"%s\" with you. Click here to accept" : "%s s tebou sdílí \"%s\". Kliknout pro přijetí",
     "Decline" : "Zamítnout",
     "%s has declined your share request for \"%s\"." : "%s zamítl(a) tvůj požadavek na sdílení \"%s\".",
-    "%s has accepted your share request for \"%s\"." : "%s přijal(a) tvůj požadavek na sdílení \"%s\"."
+    "%s has accepted your share request for \"%s\"." : "%s přijal(a) tvůj požadavek na sdílení \"%s\".",
+    "Settings" : "Nastavení",
+    "Connection to server lost" : "Připojení k serveru ztraceno",
+    "Problem loading page, reloading in 5 seconds" : "Problém s načítáním stránky, stránka se obnoví za 5 sekund",
+    "Saving..." : "Ukládám...",
+    "Dismiss" : "Zavřít",
+    "seconds ago" : "před pár sekundami"
 },"pluralForm" :"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;"
 }
