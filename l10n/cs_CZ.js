@@ -33,7 +33,7 @@ OC.L10N.register(
     "%s has accepted your share request for \"%s\"." : "%s přijal(a) tvůj požadavek na sdílení \"%s\".",
     "Settings" : "Nastavení",
     "Connection to server lost" : "Připojení k serveru ztraceno",
-    "Problem loading page, reloading in 5 seconds" : "Problém s načítáním stránky, stránka se obnoví za 5 sekund",
+    "Problem loading page, reloading in 5 seconds" : "Problém s načítáním stránky, obnovení za 5 sekund",
     "Saving..." : "Ukládám...",
     "Dismiss" : "Zavřít",
     "seconds ago" : "před pár sekundami"
