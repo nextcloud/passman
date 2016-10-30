@@ -30,6 +30,12 @@ OC.L10N.register(
     "%s shared \"%s\" with you. Click here to accept" : "%s ha condiviso \"%s\" con te. Fai clic qui per accettare",
     "Decline" : "Rifiuta",
     "%s has declined your share request for \"%s\"." : "%s ha rifiutato la tua richiesta di condivisione per \"%s\".",
-    "%s has accepted your share request for \"%s\"." : "%s ha accettato la tua richiesta di condivisione per \"%s\"."
+    "%s has accepted your share request for \"%s\"." : "%s ha accettato la tua richiesta di condivisione per \"%s\".",
+    "Settings" : "Impostazioni",
+    "Connection to server lost" : "Connessione al server interrotta",
+    "Problem loading page, reloading in 5 seconds" : "Problema durante il caricamento della pagina, aggiornamento tra 5 secondi",
+    "Saving..." : "Salvataggio in corso...",
+    "Dismiss" : "Annulla",
+    "seconds ago" : "secondi fa"
 },
 "nplurals=2; plural=(n != 1);");
