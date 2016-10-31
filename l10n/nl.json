@@ -28,6 +28,11 @@
     "%s shared \"%s\" with you. Click here to accept" : "%s deelde \"%s\" met je. Klik hier om te accepteren",
     "Decline" : "Afwijzen",
     "%s has declined your share request for \"%s\"." : "%s weigerde je aanvraag om \"%s\" te delen.",
-    "%s has accepted your share request for \"%s\"." : "%s accepteerde je aanvraag om \"%s\" te delen."
+    "%s has accepted your share request for \"%s\"." : "%s accepteerde je aanvraag om \"%s\" te delen.",
+    "Settings" : "Instellingen",
+    "Connection to server lost" : "Verbinding met server verloren",
+    "Saving..." : "Opslaan...",
+    "Dismiss" : "Negeren",
+    "seconds ago" : "seconden geleden"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
