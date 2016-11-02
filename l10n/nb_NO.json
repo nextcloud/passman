@@ -28,6 +28,12 @@
     "%s shared \"%s\" with you. Click here to accept" : "%s delte \"%s\" med deg. Klikk her for å akseptere",
     "Decline" : "Avslå",
     "%s has declined your share request for \"%s\"." : "%s har avvist din forespørsel om å dele \"%s\".",
-    "%s has accepted your share request for \"%s\"." : "%s har akseptert din forespørsel om å dele \"%s\"."
+    "%s has accepted your share request for \"%s\"." : "%s har akseptert din forespørsel om å dele \"%s\".",
+    "Settings" : "Innstillinger",
+    "Connection to server lost" : "Mistet tilkobling til tjeneren",
+    "Problem loading page, reloading in 5 seconds" : "Problem ved lasting av side, laster på nytt om 5 sekunder",
+    "Saving..." : "Lagrer...",
+    "Dismiss" : "Forkast",
+    "seconds ago" : "sekunder siden"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
