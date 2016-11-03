@@ -33,6 +33,7 @@ OC.L10N.register(
     "%s has accepted your share request for \"%s\"." : "%s accepteerde je aanvraag om \"%s\" te delen.",
     "Settings" : "Instellingen",
     "Connection to server lost" : "Verbinding met server verloren",
+    "Problem loading page, reloading in 5 seconds" : "Probleem met het laden van de pagina, wordt ververst in 5 seconden",
     "Saving..." : "Opslaan...",
     "Dismiss" : "Negeren",
     "seconds ago" : "seconden geleden"
