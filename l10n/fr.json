@@ -19,6 +19,7 @@
     "You permanently deleted %1$s" : "Vous avez supprimé définitivement %1$s",
     "The password of %1$s has expired, renew it now." : "Le mot de passe de %1$s a expiré, renouvelez-le dès à présent.",
     "%1$s has been shared with %2$s" : "%1$s a été partagé avec %2$s",
+    "You received a share request for %1$s from %2$s" : "Vous avez reçu une demande de partage pour %1$s de %2$s",
     "%s has been shared with a link" : "%s a été partagé avec un lien",
     "Your credential \"%s\" expired, click here to update the credential." : "Votre identifiant \"%s\" a expiré, cliquez ici pour le mettre à jour.",
     "Remind me later" : "Rappelez-moi plus tard",
