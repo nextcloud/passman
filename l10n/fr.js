@@ -10,6 +10,7 @@ OC.L10N.register(
     "You created %1$s" : "Vous avez créé %1$s",
     "%1$s has been updated by %2$s" : "%1$s a été mis à jour par %2$s",
     "You updated %1$s" : "Vous avez mis à jour %1$s",
+    "%2$s has revised %1$s to the revision of %3$s" : "%2$s a mis à jour %1$s vers la version %3$s",
     "You reverted %1$s back to the revision of %3$s" : "Vous avez rétabli %1$s à la version %3$s",
     "%3$s has renamed %1$s to %2$s" : "%3$s a renommé %1$s en %2$s",
     "You renamed %1$s to %2$s" : "Vous avez renommé %1$s en %2$s",
