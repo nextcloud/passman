@@ -18,10 +18,11 @@ use OCP\IL10N;
 
 class TranslationController extends ApiController {
 	private $trans;
+
 	public function __construct($AppName,
 								IRequest $request,
 								IL10N $trans
-								){
+	) {
 		parent::__construct($AppName, $request);
 		$this->trans = $trans;
 	}
@@ -31,7 +32,7 @@ class TranslationController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function getLanguageStrings($lang){
+	public function getLanguageStrings($lang) {
 		$translations = array(
 			// templates/views/partials/edit_credential/basics.html
 			'username' => $this->trans->t('Username'),
@@ -201,7 +202,6 @@ class TranslationController extends ApiController {
 			'unshare' => $this->trans->t('Unshare'),
 
 
-
 			// templates/views/show_vault.html
 			'deleted.since' => $this->trans->t('Showing deleted since'),
 			'alltime' => $this->trans->t('All time'),
@@ -224,14 +224,14 @@ class TranslationController extends ApiController {
 			'recover' => $this->trans->t('Recover'),
 			'destroy' => $this->trans->t('Destroy'),
 
-			'sharereq.title' =>  $this->trans->t('You have incoming share requests.'),
-			'sharereq.line1' =>  $this->trans->t('If you want to the credential in a other vault,'),
-			'sharereq.line2' =>  $this->trans->t('logout of this vault and login to the vault you want the shared credential in.'),
-			'permissions' =>  $this->trans->t('Permissions'),
-			'received.from' =>  $this->trans->t('Received from'),
-			'date' =>  $this->trans->t('Date'),
-			'accept' =>  $this->trans->t('Accept'),
-			'decline' =>  $this->trans->t('Decline'),
+			'sharereq.title' => $this->trans->t('You have incoming share requests.'),
+			'sharereq.line1' => $this->trans->t('If you want to the credential in a other vault,'),
+			'sharereq.line2' => $this->trans->t('logout of this vault and login to the vault you want the shared credential in.'),
+			'permissions' => $this->trans->t('Permissions'),
+			'received.from' => $this->trans->t('Received from'),
+			'date' => $this->trans->t('Date'),
+			'accept' => $this->trans->t('Accept'),
+			'decline' => $this->trans->t('Decline'),
 
 			// templates/views/vaults.html
 			'last.access' => $this->trans->t('Last accessed'),
@@ -242,16 +242,16 @@ class TranslationController extends ApiController {
 			'new.vault.pass' => $this->trans->t('Vault password'),
 			'new.vault.passr' => $this->trans->t('Repeat vault password'),
 			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing key\'s will have a strength of 1024 bit, which you can change later in settings.'),
-			'new.vault.create' =>  $this->trans->t('Create vault'),
-			'go.back.vaults' =>  $this->trans->t('Go back to vaults'),
-			'input.vault.password' =>  $this->trans->t('Please input the password for'),
-			'vault.default' =>  $this->trans->t('Set this vault as default.'),
-			'vault.auto.login' =>  $this->trans->t('Login automatically to this vault.'),
-			'vault.decrypt' =>  $this->trans->t('Decrypt vault'),
+			'new.vault.create' => $this->trans->t('Create vault'),
+			'go.back.vaults' => $this->trans->t('Go back to vaults'),
+			'input.vault.password' => $this->trans->t('Please input the password for'),
+			'vault.default' => $this->trans->t('Set this vault as default.'),
+			'vault.auto.login' => $this->trans->t('Login automatically to this vault.'),
+			'vault.decrypt' => $this->trans->t('Decrypt vault'),
 
 			// templates/bookmarklet.php
-			'http.warning' =>  $this->trans->t('Warning! Adding credentials over http can be insecure!'),
-			'bm.active.vault' =>  $this->trans->t('Logged in to {{vault_name}}'),
+			'http.warning' => $this->trans->t('Warning! Adding credentials over http can be insecure!'),
+			'bm.active.vault' => $this->trans->t('Logged in to {{vault_name}}'),
 			'change.vault' => $this->trans->t('Change vault'),
 
 			// templates/main.php
