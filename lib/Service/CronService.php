@@ -37,7 +37,7 @@ class CronService {
 	private $notificationService;
 	private $activityService;
 	private $db;
-	public function __construct(CredentialService $credentialService, ILogger $logger, Utils $utils, NotificationService $notificationService, ActivityService $activityService, $db) {
+	public function __construct(CredentialService $credentialService, ILogger $logger, Utils $utils, NotificationService $notificationService, ActivityService $activityService, IDBConnection $db) {
 		$this->credentialService = $credentialService;
 		$this->logger = $logger;
 		$this->utils = $utils;
@@ -54,14 +54,12 @@ class CronService {
 			$link = ''; // @TODO create direct link to credential
 
 			$sql = 'SELECT count(*) as rows from `*PREFIX*notifications` WHERE `subject`= \'credential_expired\' AND object_id=?';
-			$query = $this->db->prepareQuery($sql);
 			$id = $credential->getId();
-			$query->bindParam(1, $id, \PDO::PARAM_INT);
-			$result = $query->execute();
+			$result = $this->db->executeQuery($sql, array($id));
 			$this->logger->debug($credential->getLabel() .' is expired, checking notifications!', array('app' => 'passman'));
-			if($result->fetchRow()['rows'] === 0) {
+			$notifications = intval($result->fetch()['rows']);
+			if($notifications === 0) {
 				$this->logger->debug($credential->getLabel() .' is expired, adding notification!', array('app' => 'passman'));
-
 				$this->activityService->add(
 					Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
 					'', array(),

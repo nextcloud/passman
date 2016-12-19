@@ -36,6 +36,7 @@ use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCA\Passman\Service\NotificationService;
+use OCP\IDBConnection;
 
 use OCP\AppFramework\App;
 use OCP\IL10N;
@@ -75,7 +76,7 @@ class Application extends App {
 
 
 
-		/** Cron  **/
+		/** Cron **/
 		$container->registerService('CronService', function ($c) {
 			return new CronService(
 				$c->query('CredentialService'),
@@ -83,7 +84,7 @@ class Application extends App {
 				$c->query('Utils'),
 				$c->query('NotificationService'),
 				$c->query('ActivityService'),
-				$c->query('ServerContainer')->getDb()
+				$c->query('IDBConnection')
 			);
 		});
 
@@ -107,6 +108,7 @@ class Application extends App {
 		$container->registerAlias('FileService', FileService::class);
         $container->registerAlias('ShareService', ShareService::class);
 		$container->registerAlias('Utils', Utils::class);
+		$container->registerAlias('IDBConnection', IDBConnection::class);
 	}
 
 	/**
