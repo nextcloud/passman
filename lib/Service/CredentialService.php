@@ -123,11 +123,12 @@ class CredentialService {
         }
         else {
             $acl = $this->sharingACL->getItemACL($user_id, $credential->getGuid());
-            if ($acl->hasPermission(SharingACL::READ));
-            return $credential;
+            if ($acl->hasPermission(SharingACL::READ)) {
+				return $credential;
+			} else {
+				throw new DoesNotExistException("Did expect one result but found none when executing");
+			}
         }
-
-        throw new DoesNotExistException("Did expect one result but found none when executing");
 	}
 
 	/**

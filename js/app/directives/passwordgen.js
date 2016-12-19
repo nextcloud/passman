@@ -189,7 +189,7 @@
 						e.clearSelection();
 					};
 
-					scope.onError = function (e) {
+					scope.onError = function () {
 						OC.Notification.showTemporary('Press Ctrl+C to copy!');
 					};
 					scope.progressDivShow = false;

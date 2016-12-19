@@ -309,7 +309,7 @@
 
 							(new C_Promise(promise_files_update, new password_data())).progress(function (data) {
 								master_promise.call_progress(data);
-							}).then(function (data) {
+							}).then(function () {
 								console.warn("End files update");
 								master_promise.promises--;
 								if (master_promise.promises === 0) {
