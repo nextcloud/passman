@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-xs-12 col-md-6">
 		<label><input type="checkbox" ng-model="share_settings.linkSharing.enabled">
-		Enable link sharing.</label><br/>
-		<input type="text" ng-model="share_link" select-on-click placeholder="Click share first!"
+		{{ 'enable.link.sharing' | translate}}.</label><br/>
+		<input type="text" ng-model="share_link" select-on-click placeholder="{{ 'click.share' | translate}}!"
 			   ng-if="share_settings.linkSharing.enabled">
 		<div ng-show="share_settings.linkSharing.enabled">
-			Share until date
+			{{ 'share.until.date' | translate}}
 			<span datetime-picker
 				  ng-model="share_settings.linkSharing.settings.expire_time"
 				  class="link"
@@ -16,7 +16,7 @@
 
 		</div>
 		<div ng-show="share_settings.linkSharing.enabled">
-			Expire after views<br />
+			{{ 'expire.views' | translate}}<br />
 			<input type="number"
 				   ng-model="share_settings.linkSharing.settings.expire_views">
 		</div>
@@ -28,7 +28,7 @@
 							   ng-checked="hasPermission(share_settings.linkSharing.settings.acl, default_permissions.permissions.FILES)">
 					</td>
 					<td>
-						Show files
+						{{ 'show.files' | translate}}
 					</td>
 				</tr>
 			</table>

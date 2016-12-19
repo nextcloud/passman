@@ -32,9 +32,13 @@
 			'ngSanitize',
 			'ngTouch',
 			'ngclipboard',
-			'ui.sortable'
+			'ui.sortable',
+			'pascalprecht.translate'
 
 		]).config(['$httpProvider', function ($httpProvider) {
 		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
-	}]);
+	}]).config(function ($translateProvider) {
+		$translateProvider.useUrlLoader(OC.generateUrl('/apps/passman/api/v2/language'));
+		$translateProvider.preferredLanguage('en');
+	});
 }());

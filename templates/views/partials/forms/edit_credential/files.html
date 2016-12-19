@@ -1,7 +1,7 @@
 <div class="row file_tab">
 	<div class="col-xs-12 col-md-6">
 		<input class="inputfile" id="file" type="file" file-select success="fileLoaded" error="fileLoadError" progress="fileSelectProgress">
-		<label for="file"><i class="fa fa-upload" aria-hidden="true"></i> Choose a file</label>
+		<label for="file"><i class="fa fa-upload" aria-hidden="true"></i> {{'select.file' | translate}}</label>
 		<span ng-if="fileprogress.file_percent > 0">
 			<div progress-bar="fileprogress.file_percent"></div>
 		</span>
@@ -12,10 +12,10 @@
 		<table>
 			<thead use-theme>
 			<tr>
-				<th class="field_label">Filename</th>
-				<th class="field_value">Upload date</th>
-				<th class="field_secret">Size</th>
-				<th class="field_actions">Actions</th>
+				<th class="field_label">{{ 'file.name' | translate }}</th>
+				<th class="field_value">{{ 'upload.date' | translate}}</th>
+				<th class="field_secret">{{ 'size' | translate}}</th>
+				<th class="field_actions">{{ 'actions' | translate}}</th>
 			</tr>
 			</thead>
 			<tr ng-repeat="file in storedCredential.files">

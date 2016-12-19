@@ -71,7 +71,7 @@ style('passman', 'bookmarklet');
 
 <div id="app" ng-app="passmanApp" ng-controller="BookmarkletCtrl">
 	<div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
-		Warning! Adding credentials over http can be insecure!
+		{{ 'http.warning' | translate }}
 		<i class="fa fa-times fa-2x" alt="Close"
 		   ng-click="setHttpWarning(true);"></i>
 	</div>
@@ -81,8 +81,8 @@ style('passman', 'bookmarklet');
 		</div>
 		<div id="app-content-wrapper" ng-if="active_vault !== false">
 			<div class="active_vault">
-				Logged in to {{active_vault.name}}<br />
-				<span class="link" ng-click="logout()">Change vault</span>
+				{{ 'bm.active.vault' | translate}} {{active_vault.name}}<br />
+				<span class="link" ng-click="logout()">{{ 'change.vault' | translate }}</span>
 			</div>
 			<ul class="tab_header">
 				<li ng-repeat="tab in tabs track by $index" class="tab"
@@ -94,8 +94,8 @@ style('passman', 'bookmarklet');
 
 			<div class="tab_container edit_credential">
 				<div ng-include="currentTab.url"></div>
-				<button ng-click="saveCredential()">Save</button>
-				<button ng-click="cancel()">Cancel</button>
+				<button ng-click="saveCredential()">{{ 'save' | translate }}</button>
+				<button ng-click="cancel()">{{ 'cancel' | translate }}</button>
 			</div>
 		</div>
 	</div>

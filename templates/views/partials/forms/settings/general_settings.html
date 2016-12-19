@@ -1,21 +1,21 @@
 <div class="row">
 	<div class="col-xs-12 col-md-6">
-		<h3>Rename vault</h3>
-		<label>New vault name</label>
+		<h3>{{ 'rename.vault' | translate}}</h3>
+		<label>{{ 'rename.vault.name' | translate}}</label>
 		<input type="text" ng-model="$parent.new_vault_name">
 		<button ng-click="saveVaultSettings()">
-			Change
+			{{ 'change' | translate}}
 		</button>
 
 
-		<h3>Change vault key</h3>
-		<label>Old vault password</label>
+		<h3>{{ 'change.vault.key' | translate}}</h3>
+		<label>{{ 'old.vault.password' | translate}}</label>
 		<input type="password" ng-model="oldVaultPass">
-		<label>New vault password</label>
+		<label>{{ 'new.vault.password' | translate}}</label>
 		<password-gen ng-model="newVaultPass"
 		></password-gen>
 		<ng-password-meter password="newVaultPass"></ng-password-meter>
-		<label>New vault password</label>
+		<label>{{ 'new.vault.pw.r' | translate}}</label>
 		<input type="password" ng-model="newVaultPass2">
 		<div ng-show="error" class="error">
 			<ul>
@@ -23,30 +23,29 @@
 			</ul>
 		</div>
 		<button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)"
-				>Change
+				>{{ 'change' | translate}}
 		</button>
 		<div ng-show="change_pw.total > 0">
-			Please wait your vault is being updated, do not leave this page.<br />
-			Processing {{cur_state.process}}
+			{{'warning.leave' | translate}}<br />
+			{{ 'processing' | translate}} {{cur_state.process}}
 			<div progress-bar="cur_state.calculated" index="cur_state.current" total="cur_state.total"></div>
-			Total progress
+			{{ 'total.progress' | translate}}
 			<div progress-bar="change_pw.percent" index="change_pw.done" total="change_pw.total"></div>
 		</div>
 
 	</div>
 	<div class="col-xs-12 col-md-6">
-		<h3>About passman</h3>
+		<h3>{{ 'about.passman' | translate}}</h3>
 		<p>
-			Version: <b>{{passman_version}}</b><br/>
-			Bla bla about passman, changelog.
+			{{ 'version' | translate}}: <b>{{passman_version}}</b><br/>
 			<br/>
 			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2"
-			   target="_blank" class="link">Donate to support
-				development</a><br/>
+			   target="_blank" class="link">{{ 'donate.support' | translate}}</a><br/>
 		</p>
-		<h3>Bookmarklet</h3>
-		<div><p>Save your passwords with 1 click!<br/> Drag below button to your
-			bookmark toolbar.<br/></p>
+		<h3>{{ 'bookmarklet' | translate}}</h3>
+		<div><p>{{ 'bookmarklet.info1' | translate}}<br/>
+			{{ 'bookmarklet.info2' | translate}}
+			<br/></p>
 		</div>
 		<div><p ng-bind-html="bookmarklet" style="margin-top: 5px"></p></div>
 	</div>

@@ -47,7 +47,8 @@
 			'xeditable',
 			'ngTagsInput',
 			'angularjs-datetime-picker',
-			'ui.sortable'
+			'ui.sortable',
+			'pascalprecht.translate'
 		])
 		.config(function ($routeProvider) {
 			$routeProvider
@@ -85,6 +86,9 @@
 	}]).config(function (localStorageServiceProvider) {
 		localStorageServiceProvider
 			.setNotify(true, true);
+	}).config(function ($translateProvider) {
+		$translateProvider.useUrlLoader(OC.generateUrl('/apps/passman/api/v2/language'));
+		$translateProvider.preferredLanguage('en');
 	});
 
 	/**

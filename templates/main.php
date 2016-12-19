@@ -12,6 +12,8 @@ script('passman', 'vendor/angular-touch/angular-touch.min');
 script('passman', 'vendor/angular-local-storage/angular-local-storage.min');
 script('passman', 'vendor/angular-off-click/angular-off-click.min');
 script('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker.min');
+script('passman', 'vendor/angular-translate/angular-translate.min');
+script('passman', 'vendor/angular-translate/angular-translate-loader-url.min');
 script('passman', 'vendor/ng-password-meter/ng-password-meter');
 script('passman', 'vendor/sjcl/sjcl');
 script('passman', 'vendor/zxcvbn/zxcvbn');
@@ -98,7 +100,7 @@ style('passman', 'app');
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
 
 	<div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
-		Warning! Using http with passman can be insecure!
+		{{ 'http.warning' | translate }}
 		<i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
 	</div>
 
@@ -119,7 +121,7 @@ style('passman', 'app');
 				<a ng-click="toggleDeleteTime()"
 				   ng-class="{'active': delete_time > 0}">
 					<i href="#" class="fa fa-trash"></i>
-					Deleted credentials
+					{{ 'deleted.credentials' | translate }}
 				</a>
 			</li>
 		</ul>
@@ -127,15 +129,15 @@ style('passman', 'app');
 			<div id="app-settings-header">
 				<button class="settings-button"
 						ng-click="settingsShown = !settingsShown"
-				>Settings
+				>{{ 'settings' | translate }}
 				</button>
 			</div>
 			<div id="app-settings-content" ng-show="settingsShown">
 				<!-- Your settings in here -->
 				<div class="settings-container">
-					<div><a class="link" ng-href="#/vault/{{active_vault.guid}}/settings">Settings</a></div>
-					<div><span class="link" ng-click="logout()">Logout</span></div>
-					<div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">Donate</a></div>
+					<div><a class="link" ng-href="#/vault/{{active_vault.guid}}/settings">{{ 'settings' | translate }}</a></div>
+					<div><span class="link" ng-click="logout()">{{'logout' | translate }}</span></div>
+					<div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">{{ 'donate' | translate }}</a></div>
 				</div>
 			</div>
 		</div>
