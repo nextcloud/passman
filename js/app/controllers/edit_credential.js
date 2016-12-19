@@ -329,7 +329,7 @@
 						delete _credential.shared_key;
 						var _useKey = (key != null);
 						var regex = /(<([^>]+)>)/ig;
-						if(_credential.description) {
+						if(_credential.description && _credential.description != "") {
 							_credential.description = _credential.description.replace(regex, "");
 						}
 						CredentialService.updateCredential(_credential, _useKey).then(function () {
