@@ -87,6 +87,7 @@
 		localStorageServiceProvider
 			.setNotify(true, true);
 	}).config(function ($translateProvider) {
+		$translateProvider.useSanitizeValueStrategy('sanitize');
 		$translateProvider.useUrlLoader(OC.generateUrl('/apps/passman/api/v2/language'));
 		$translateProvider.preferredLanguage('en');
 	});
