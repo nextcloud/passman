@@ -14,7 +14,7 @@ namespace OCA\Passman\Controller;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
-use \OCP\IL10N;
+use OCP\IL10N;
 
 class TranslationController extends ApiController {
 	private $trans;
