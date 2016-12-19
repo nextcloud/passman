@@ -4,7 +4,7 @@ php:
     - 7
 env:
     global:
-        - CORE_BRANCH=master
+        - CORE_BRANCH=stable11
         - APP_NAME=passman
         - SERVER_FOLDER=server
         - CLOUD=nextcloud
