@@ -96,12 +96,13 @@
 
 				var link_acl = angular.copy($scope.default_permissions);
 				link_acl.removePermission($scope.default_permissions.permissions.WRITE);
-
+				var oneMonthLater = new Date();
+				oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
 				$scope.share_settings = {
 					linkSharing: {
 						enabled: false,
 						settings: {
-							expire_time: new Date("2999-12-31T22:59:59"),
+							expire_time: oneMonthLater,
 							expire_views: 5,
 							acl: link_acl
 						}
