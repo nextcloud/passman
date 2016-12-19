@@ -155,17 +155,21 @@
 						for (var i = 0; i < vault.credentials.length; i++) {
 							var c = angular.copy(vault.credentials[i]);
 							if (c.password && c.hidden === 0) {
-								c = CredentialService.decryptCredential(c);
-								if (c.password) {
-									var zxcvbn_result = zxcvbn(c.password);
-									if (zxcvbn_result.score <= minStrength) {
-										results.push({
-											credential_id: c.credential_id,
-											label: c.label,
-											password: c.password,
-											password_zxcvbn_result: zxcvbn_result
-										});
+								try {
+									c = CredentialService.decryptCredential(c);
+									if (c.password) {
+										var zxcvbn_result = zxcvbn(c.password);
+										if (zxcvbn_result.score <= minStrength) {
+											results.push({
+												credential_id: c.credential_id,
+												label: c.label,
+												password: c.password,
+												password_zxcvbn_result: zxcvbn_result
+											});
+										}
 									}
+								} catch (e){
+									console.warn(e);
 								}
 
 							}
