@@ -13,7 +13,7 @@
     <repository type="git">git@github.com:nextcloud/passman.git</repository>
     <dependencies>
         <owncloud min-version="9" max-version="11" />
-        <nextcloud min-version="9" max-version="11" />
+        <nextcloud min-version="9" max-version="12" />
     </dependencies>
 
 
