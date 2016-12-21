@@ -29,7 +29,6 @@ use OCA\Passman\Utility\Utils;
 class UtilsTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @covers ::GUID
-	 * @requires function com_create_guid
 	 */
 	public function testGUID(){
 		$pattern = '/[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}/';

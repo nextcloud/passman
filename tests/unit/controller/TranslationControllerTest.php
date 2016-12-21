@@ -49,8 +49,8 @@ class TranslationControllerTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @covers ::getLanguageStrings
 	 */
-	public function getLanguageStrings() {
-		$result = $this->controller->getLanguageStrings();
+	public function testGetLanguageStrings() {
+		$result = $this->controller->getLanguageStrings(null);
 		$this->assertTrue($result instanceof JSONResponse);
 	}
 }
