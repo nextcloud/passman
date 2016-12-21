@@ -31,7 +31,7 @@
 	 */
 
 	angular.module('passmanApp')
-		.directive('passwordGen', function ($timeout) {
+		.directive('passwordGen', function ($timeout, $translate) {
 			/* jshint ignore:start */
 			function Arcfour () {
 				this.j = this.i = 0, this.S = []
@@ -152,8 +152,8 @@
 				"<input  ng-show=\"passwordVisible\"  type=\"text\"      ng-disabled=\"disabled\"  class=\"form-control                                    \" ng-model=\"password\" placeholder=\"{{placeholder}}\">" +
 
 				'<span class="generate_pw">' +
-				'<div class="cell" tooltip="\'Generate password\'" ng-click="generatePasswordStart()"><i class="fa fa-refresh"></i></div>' +
-				'<div class="cell" tooltip="\'Toggle password visibility\'" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': passwordVisible, \'fa-eye-slash\': !passwordVisible }"></i></div>' +
+				'<div class="cell" tooltip="gen_msg" ng-click="generatePasswordStart()"><i class="fa fa-refresh"></i></div>' +
+				'<div class="cell" tooltip="tggltxt" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': passwordVisible, \'fa-eye-slash\': !passwordVisible }"></i></div>' +
 				'<div class="cell" tooltip="\'Copy password to clipboard\'"><i class="fa fa-clipboard" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{password}}"></i></div>' +
 				"</button>" +
 				"</div>" +
@@ -177,6 +177,11 @@
 						}
 					});
 
+					$translate(['password.gen', 'password.copy', 'copied', 'toggle.visibility']).then(function (translations) {
+						scope.tggltxt = translations['toggle.visibility'];
+						scope.copy_msg = translations['password.copy'];
+						scope.gen_msg = translations['password.gen'];
+					});
 
 					scope.$watch("password", function () {
 						scope.model = scope.password;
@@ -185,7 +190,7 @@
 					//
 					scope.onSuccess = function (e) {
 						//@TODO move OC.Notification to a service
-						OC.Notification.showTemporary('Password copied to clipboard!');
+						OC.Notification.showTemporary($translate.instant('password.copied'));
 						e.clearSelection();
 					};
 

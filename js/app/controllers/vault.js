@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', '$location', 'ShareService', 'EncryptService', function ($scope, VaultService, SettingsService, CredentialService, $location, ShareService, EncryptService) {
+		.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', '$location', 'ShareService', 'EncryptService', '$translate', function ($scope, VaultService, SettingsService, CredentialService, $location, ShareService, EncryptService, $translate) {
 			VaultService.getVaults().then(function (vaults) {
 				$scope.vaults = vaults;
 				if (SettingsService.getSetting('defaultVault') != null) {
@@ -96,7 +96,9 @@
 				var key_size = 1024;
 				ShareService.generateRSAKeys(key_size).progress(function (progress) {
 					var p = progress > 0 ? 2 : 1;
-					$scope.creating_keys = 'Generating sharing keys (' + p + ' / 2)';
+					var msg =  $translate.instant('generating.sharing.keys');
+					msg = msg.replace('%step', p);
+					$scope.creating_keys = msg;
 					$scope.$digest();
 				}).then(function (kp) {
 					var pem = ShareService.rsaKeyPairToPEM(kp);
@@ -131,7 +133,7 @@
 					_loginToVault(vault, vault_key);
 
 				} catch (e) {
-					$scope.error = 'Incorrect vault password!';
+					$scope.error = $translate.instant('invalid.vault.key')
 				}
 
 			};
@@ -139,7 +141,7 @@
 
 			$scope.createVault = function (vault_name, vault_key, vault_key2) {
 				if (vault_key !== vault_key2) {
-					$scope.error = 'Passwords do not match';
+					$scope.error = $translate.instant('password.do.not.match');
 					return;
 				}
 				VaultService.createVault(vault_name).then(function (vault) {

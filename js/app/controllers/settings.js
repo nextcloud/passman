@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService', 'NotificationService', '$sce',
-			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService, $sce) {
+		.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService', 'NotificationService', '$sce', '$translate',
+			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService, $sce, $translate) {
 				$scope.vault_settings = {};
 				$scope.new_vault_name = '';
 				$scope.active_vault = VaultService.getActiveVault();
@@ -72,9 +72,9 @@
 				});
 
 
-
+				var btn_txt = $translate.instant('bookmarklet.text');
 				var http = location.protocol, slashes = http.concat("//"), host = slashes.concat(window.location.hostname), complete = host + location.pathname;
-				$scope.bookmarklet = $sce.trustAsHtml("<a class=\"button\" href=\"javascript:(function(){var a=window,b=document,c=encodeURIComponent,e=c(document.title),d=a.open('" + complete + "bookmarklet?url='+c(b.location)+'&title='+e,'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=750px,width=475px,resizable=0,alwaysRaised=1');a.setTimeout(function(){d.focus()},300);})();\">Save in passman</a>");
+				$scope.bookmarklet = $sce.trustAsHtml("<a class=\"button\" href=\"javascript:(function(){var a=window,b=document,c=encodeURIComponent,e=c(document.title),d=a.open('" + complete + "bookmarklet?url='+c(b.location)+'&title='+e,'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=750px,width=475px,resizable=0,alwaysRaised=1');a.setTimeout(function(){d.focus()},300);})();\">"+ btn_txt +"</a>");
 
 
 				$scope.saveVaultSettings = function () {
@@ -84,38 +84,38 @@
 					VaultService.updateVault(_vault).then(function () {
 						//VaultService.setActiveVault(_vault);
 						$scope.active_vault.name = angular.copy(_vault.name);
-						NotificationService.showNotification('Settings saved', 5000);
+						NotificationService.showNotification($translate.instant('settings.saved'), 5000);
 					});
 				};
 
 
 				$scope.tabs = [
 					{
-						title: 'General settings',
+						title: $translate.instant('settings.general'),
 						url: 'views/partials/forms/settings/general_settings.html'
 					},
 					{
-						title: 'Password Audit',
+						title: $translate.instant('settings.audit'),
 						url: 'views/partials/forms/settings/tool.html'
 
 					},
 					{
-						title: 'Password settings',
+						title:$translate.instant('settings.password'),
 						url: 'views/partials/forms/settings/password_settings.html'
 
 					},
 					{
-						title: 'Import credentials',
+						title: $translate.instant('settings.import'),
 						url: 'views/partials/forms/settings/import.html'
 
 					},
 					{
-						title: 'Export credentials',
+						title: $translate.instant('settings.export'),
 						url: 'views/partials/forms/settings/export.html'
 
 					},
 					{
-						title: 'Sharing',
+						title: $translate.instant('settings.sharing'),
 						url: 'views/partials/forms/settings/sharing.html'
 					}
 				];
@@ -186,7 +186,7 @@
 				$scope.$on("$locationChangeStart", function(event) {
 					if($scope.change_pw){
 						if($scope.change_pw.total > 0 && $scope.change_pw.done < $scope.change_pw.total){
-							if(!confirm("Are you sure you want to leave?\nThis will corrupt all your credentials")){
+							if(!confirm($translate.instant('changepw.navigate.away.warning'))){
 								event.preventDefault();
 							}
 						}
@@ -196,11 +196,11 @@
 
 				$scope.changeVaultPassword = function (oldVaultPass, newVaultPass, newVaultPass2) {
 					if (oldVaultPass !== VaultService.getActiveVault().vaultKey) {
-						$scope.error = 'Your old password is incorrect!';
+						$scope.error = $translate.instant('incorrect.password');
 						return;
 					}
 					if (newVaultPass !== newVaultPass2) {
-						$scope.error = 'New passwords do not match!';
+						$scope.error = $translate.instant('password.no.match');
 						return;
 					}
 					VaultService.getVault($scope.active_vault).then(function (vault) {
@@ -236,7 +236,7 @@
 									vault.private_sharing_key = EncryptService.encryptString(vault.private_sharing_key, newVaultPass);
 									VaultService.updateSharingKeys(vault).then(function () {
 										$rootScope.$broadcast('logout');
-										NotificationService.showNotification('Please login with your new vault password', 5000);
+										NotificationService.showNotification($translate.instant('login.new.pass'), 5000);
 									});
 								}
 							});

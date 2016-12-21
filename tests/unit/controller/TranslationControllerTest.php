@@ -31,12 +31,11 @@ use PHPUnit_Framework_TestCase;
  * Class PageControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass  \OCA\Passman\Controller\PageController
+ * @coversDefaultClass  \OCA\Passman\Controller\TranslationController
  */
 class TranslationControllerTest extends PHPUnit_Framework_TestCase {
 
 	private $controller;
-	private $userId = 'john';
 
 	public function setUp() {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();

@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService) {
+		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -67,28 +67,33 @@
 						});
 				});
 
+				$scope.currentTab = {
+					title: $translate.instant('general'),
+					url: 'views/partials/forms/edit_credential/basics.html',
+					color: 'blue'
+				};
+
 				$scope.tabs = [{
-					title: 'General',
+					title: $translate.instant('general'),
 					url: 'views/partials/forms/edit_credential/basics.html',
 					color: 'blue'
 				}, {
-					title: 'Password',
+					title: $translate.instant('password'),
 					url: 'views/partials/forms/edit_credential/password.html',
 					color: 'green'
 				}, {
-					title: 'Custom fields',
+					title: $translate.instant('custom.fields'),
 					url: 'views/partials/forms/edit_credential/custom_fields.html',
 					color: 'orange'
 				}, {
-					title: 'Files',
+					title: $translate.instant('files'),
 					url: 'views/partials/forms/edit_credential/files.html',
 					color: 'yellow'
 				}, {
-					title: 'OTP',
+					title: $translate.instant('otp'),
 					url: 'views/partials/forms/edit_credential/otp.html',
 					color: 'purple'
 				}];
-
 
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
@@ -109,11 +114,6 @@
 					return TagService.searchTag($query);
 				};
 
-				$scope.currentTab = {
-					title: 'General',
-					url: 'views/partials/forms/edit_credential/basics.html',
-					color: 'blue'
-				};
 
 				$scope.onClickTab = function (tab) {
 					$scope.currentTab = tab;
@@ -145,10 +145,10 @@
 					var _field = angular.copy($scope.new_custom_field);
 
 					if (!_field.label) {
-						NotificationService.showNotification('Please fill in a label', 3000);
+						NotificationService.showNotification($translate.instant('error.no.label'), 3000);
 					}
 					if (!_field.value) {
-						NotificationService.showNotification('Please fill in a value!', 3000);
+						NotificationService.showNotification($translate.instant('error.no.value'), 3000);
 					}
 					if (!_field.label || !_field.value) {
 						return;
@@ -250,7 +250,7 @@
 				};
 
 				$scope.fileLoadError = function (error) {
-					console.log('Error loading file', error);
+					console.log($translate.instant('error.loading.file'), error);
 				};
 
 				$scope.selected_file = '';
@@ -304,7 +304,7 @@
 						$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
 						CredentialService.createCredential($scope.storedCredential).then(function () {
 							$location.path('/vault/' + $routeParams.vault_id);
-							NotificationService.showNotification('Credential created!', 5000);
+							NotificationService.showNotification($translate.instant('credential.created'), 5000);
 						});
 					} else {
 
@@ -335,7 +335,7 @@
 						CredentialService.updateCredential(_credential, _useKey).then(function () {
 							SettingsService.setSetting('edit_credential', null);
 							$location.path('/vault/' + $routeParams.vault_id);
-							NotificationService.showNotification('Credential updated!', 5000);
+							NotificationService.showNotification($translate.instant('credential.updated'), 5000);
 						});
 					}
 

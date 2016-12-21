@@ -34,6 +34,81 @@ class TranslationController extends ApiController {
 	 */
 	public function getLanguageStrings($lang) {
 		$translations = array(
+			// js/app/controllers/bookmarklet.js
+			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %step / 2)'),
+			'invalid.vault.key' => $this->trans->t('Incorrect vault password!'),
+			'password.do.not.match' => $this->trans->t('Passwords do not match'),
+			'general' => $this->trans->t('General'),
+			'custom.fields' => $this->trans->t('Custom Fields'),
+			'error.no.label' => $this->trans->t('Please fill in a label!'),
+			'error.no.value' => $this->trans->t('Please fill in a value!'),
+			'error.loading.file' => $this->trans->t('Error loading file'),
+
+			// js/app/controllers/credential.js
+			'error.decrypt' => $this->trans->t('An error happend during decryption'),
+			'credential.created' => $this->trans->t('Credential created!'),
+			'credential.deleted' => $this->trans->t('Credential deleted'),
+			'credential.updated' => $this->trans->t('Credential updated'),
+			'credential.recovered' => $this->trans->t('Credential recovered'),
+			'credential.destroyed' => $this->trans->t('Credential recovered'),
+			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably don\'t have enough permissions'),
+
+			// js/app/controllers/edit_credential.js
+
+
+			// js/app/controllers/export.js
+			'export.starting' => $this->trans->t('Starting export'),
+			'export.decrypt' => $this->trans->t('Decrypting credentials'),
+			'done' => $this->trans->t('Done'),
+
+			// js/app/controllers/import.js
+			'import.file.read' => $this->trans->t('File read successfully!'),
+
+			'import.no.label' => $this->trans->t('Credential has no label, skipping'),
+			'import.adding' => $this->trans->t('Adding {{credential}}'),
+			'import.added' => $this->trans->t('Added {{credential}}'),
+			'import.loaded' => $this->trans->t('Parsed {{num}} credentials, starting to import'),
+
+			// js/app/controllers/revision.js
+			'revision.deleted' => $this->trans->t('Revision deleted'),
+			'revision.restored' => $this->trans->t('Revision restored'),
+
+			// js/app/controllers/settings.js
+			'bookmarklet.text' => $this->trans->t('Save in passman'),
+			'settings.saved' => $this->trans->t('Settings saved'),
+			'settings.general' => $this->trans->t('General settings'),
+			'settings.audit' => $this->trans->t('Password Audit'),
+			'settings.password' => $this->trans->t('Password settings'),
+			'settings.import' => $this->trans->t('Import credentials'),
+			'settings.export' => $this->trans->t('Export credentials'),
+			'settings.sharing' => $this->trans->t('Sharing'),
+			'changepw.navigate.away.warning' => $this->trans->t('Are you sure you want to leave? This WILL corrupt all your credentials'),
+			'incorrect.password' => $this->trans->t('Your old password is incorrect!'),
+			'password.no.match' => $this->trans->t('New passwords do not match!'),
+			'login.new.pass' => $this->trans->t('Please login with your new vault password'),
+
+			// js/app/controllers/share.js
+			'share.u.g' => $this->trans->t('Share with users and groups'),
+			'share.link' => $this->trans->t('Share link'),
+			'share.navigate.away.warning' => $this->trans->t('Are you sure you want to leave? This will corrupt this credential'),
+			'credential.unshared' => $this->trans->t('Credential unshared'),
+			'credential.shared' => $this->trans->t('Credential shared'),
+			'saved' => $this->trans->t('Saved!'),
+
+			// js/app/directives/credentialfield.js
+			'toggle.visibility' => $this->trans->t('Toggle visibility'),
+			'copy' => $this->trans->t('Copy to clipboard'),
+			'copied' => $this->trans->t('Copied to clipboard!'),
+
+			// js/app/directives/passwordgen.js
+			'password.gen' => $this->trans->t('Generate password'),
+			'password.copy' => $this->trans->t('Copy password to clipboard'),
+			'password.copied' => $this->trans->t('Password copied to clipboard!'),
+
+			// js/app/directives/progressbar.js
+			'complete' => $this->trans->t('Complete'),
+
+
 			// templates/views/partials/edit_credential/basics.html
 			'username' => $this->trans->t('Username'),
 			'password.r' => $this->trans->t('Repeat password'),

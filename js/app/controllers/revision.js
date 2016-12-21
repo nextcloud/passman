@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', 'NotificationService', '$filter', 'ShareService', 'EncryptService',
-			function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope, NotificationService, $filter, ShareService, EncryptService) {
+		.controller('RevisionCtrl', ['$scope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$rootScope', 'NotificationService', '$filter', 'ShareService', 'EncryptService', '$translate',
+			function ($scope, SettingsService, VaultService, CredentialService, $location, $routeParams, $rootScope, NotificationService, $filter, ShareService, EncryptService, $translate) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -106,7 +106,7 @@
 						for (var i = 0; i < $scope.revisions.length; i++) {
 							if ($scope.revisions[i].revision_id === revision.revision_id) {
 								$scope.revisions.splice(i, 1);
-								NotificationService.showNotification('Revision deleted', 5000);
+								NotificationService.showNotification($translate.instant('revision.deleted'), 5000);
 								break;
 							}
 						}
@@ -137,7 +137,7 @@
 						SettingsService.setSetting('revision_credential', null);
 						$rootScope.$emit('app_menu', false);
 						$location.path('/vault/' + $routeParams.vault_id);
-						NotificationService.showNotification('Revision restored!', 5000);
+						NotificationService.showNotification($translate.instant('revision.restored'), 5000);
 					});
 				};
 

@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('ExportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', function ($scope, $window, CredentialService, VaultService) {
+		.controller('ExportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', '$translate', function ($scope, $window, CredentialService, VaultService, $translate) {
 			$scope.available_exporters = [];
 			$scope.active_vault = VaultService.getActiveVault();
 
@@ -58,10 +58,10 @@
 
 
 			$scope.startExport = function () {
-				_log('Starting export');
+				_log($translate.instant('export.starting'));
 				var _credentials = [];
 				VaultService.getVault(VaultService.getActiveVault()).then(function (vault) {
-					_log('Decrypting credentials');
+					_log($translate.instant('export.decrypt'));
 					if (vault.hasOwnProperty('credentials')) {
 						if (vault.credentials.length > 0) {
 							for (var i = 0; i < vault.credentials.length; i++) {
@@ -72,7 +72,7 @@
 								}
 							}
 							$window.PassmanExporter[$scope.selectedExporter.id].export(_credentials).then(function () {
-								_log('Done');
+								_log($translate.instant('done'));
 							});
 						}
 
