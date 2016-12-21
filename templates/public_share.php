@@ -2,6 +2,7 @@
 /*
  * Javascripts
  */
+/*build-js-start*/
 script('passman', 'vendor/angular/angular.min');
 script('passman', 'vendor/angular-animate/angular-animate.min');
 script('passman', 'vendor/angular-cookies/angular-cookies.min');
@@ -47,11 +48,12 @@ script('passman', 'app/directives/tooltip');
 script('passman', 'app/directives/use-theme');
 script('passman', 'app/directives/credentialfield');
 script('passman', 'app/directives/ngenter');
-
+/*build-js-end*/
 
 /*
  * Styles
  */
+/*build-css-start*/
 style('passman', 'vendor/ng-password-meter/ng-password-meter');
 style('passman', 'vendor/bootstrap/bootstrap.min');
 style('passman', 'vendor/bootstrap/bootstrap-theme.min');
@@ -60,6 +62,7 @@ style('passman', 'vendor/angular-xeditable/xeditable.min');
 style('passman', 'vendor/ng-tags-input/ng-tags-input.min');
 style('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker');
 style('passman', 'app');
+/*build-css-end*/
 style('passman', 'public-page');
 
 ?>

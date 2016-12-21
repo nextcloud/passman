@@ -1,7 +1,9 @@
 module.exports = function (grunt) {
-
+	var jsResources = [];
 	// Project configuration.
 	grunt.initConfig({
+		jsResources: [],
+		cssResources: [],
 		pkg: grunt.file.readJSON('package.json'),
 		html2js: {
 			options: {
@@ -48,11 +50,11 @@ module.exports = function (grunt) {
 					"oc_requesttoken": true
 				}
 			},
-			all: ['Gruntfile.js', 'js/app/**/*.js']
+			all: ['js/app/**/*.js']
 		},
 		sass: {
 			dist: {
-				files:  [
+				files: [
 					{
 						expand: true,
 						cwd: "sass",
@@ -88,8 +90,8 @@ module.exports = function (grunt) {
 		//@TODO JSHint
 		watch: {
 			scripts: {
-				files: ['Gruntfile.js', 'templates/views/{,*/}{,*/}{,*/}*.html', 'templates/views/*.html','sass/*','sass/partials/*'],
-				tasks: ['html2js','sass'],
+				files: ['Gruntfile.js', 'templates/views/{,*/}{,*/}{,*/}*.html', 'templates/views/*.html', 'sass/*', 'sass/partials/*'],
+				tasks: ['html2js', 'sass'],
 				options: {
 					spawn: false,
 					interrupt: true,
@@ -97,15 +99,267 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		// uglify: {
-		// 	options: {
-		// 		banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-		// 	},
-		// 	build: {
-		// 		src: 'src/<%= pkg.name %>.js',
-		// 		dest: 'build/<%= pkg.name %>.min.js'
-		// 	}
-		// }
+		/**
+		 * Build commands
+		 */
+		mkdir: {
+			dist: {
+				options: {
+					mode: 0700,
+					create: ['dist']
+				}
+			}
+		},
+
+		copy: {
+			dist: {
+				files: [
+					// includes files within path
+					{
+						expand: true,
+						src: [
+							'**',
+							'!templates/*.php',
+							'!templates/views/*',
+							'!templates/views/*/**',
+							'!templates/views',
+							'!js/*',
+							'!js/*/**',
+							'!node_modules/*/**',
+							'!node_modules',
+							'!css/**/*',
+							'!css/*.map',
+							'!css/app.*',
+							'css/bookmarklet.css',
+							'css/public-page.css',
+							'!dist/*',
+							'!dist/*/**',
+							'!dist',
+							'!tests/*/**',
+							'!tests/*',
+							'!tests', '' +
+							'!sass/*/**',
+							'!sass/*',
+							'!sass',
+							'!.drone.yml',
+							'!.gitignore',
+							'!.jshintrc',
+							'!.scrutinizer.yml',
+							'!.travis.yml',
+							'!Gruntfile.js',
+							'!karma.conf.js',
+							'!launch_phpunit.sh',
+							'!Makefile',
+							'!package.json',
+							'!phpunit.*',
+							'!Dockerfile',
+							'!swagger.yaml'
+						],
+						dest: 'dist/'
+					}
+				]
+			},
+			fonts: {
+				files: [
+					{
+						expand: true,
+						flatten: true,
+						src: ['css/vendor/font-awesome/*', '!**/*.css'],
+						dest: 'dist/css/'
+					}
+
+				]
+
+			}
+		},
+
+
+		uglify: {
+			options: {
+				mangle: false,
+				screwIE8: true,
+				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+				footer: "(function() { (function a() { try { (function b(i) { if (('' + (i / i)).length !== 1 ||     i % 20 === 0) { (function() {}).constructor('debugger')(); } else { debugger; }     b(++i); })(0); } catch (e) { setTimeout(a, 5000); } })() })();"
+			},
+			build: {
+				old_files_array: [
+					'js/vendor/angular/angular.min.js',
+					'js/vendor/angular-animate/angular-animate.min.js',
+					'js/vendor/angular-cookies/angular-cookies.min.js',
+					'js/vendor/angular-resource/angular-resource.min.js',
+					'js/vendor/angular-route/angular-route.min.js',
+					'js/vendor/angular-sanitize/angular-sanitize.min.js',
+					'js/vendor/angular-touch/angular-touch.min.js',
+					'js/vendor/angular-local-storage/angular-local-storage.min.js',
+					'js/vendor/angular-off-click/angular-off-click.min.js',
+					'js/vendor/angularjs-datetime-picker/angularjs-datetime-picker.min.js',
+					'js/vendor/angular-translate/angular-translate.min.js',
+					'js/vendor/angular-translate/angular-translate-loader-url.min.js',
+					'js/vendor/ng-password-meter/ng-password-meter.js',
+					'js/vendor/sjcl/sjcl.js',
+					'js/vendor/zxcvbn/zxcvbn.js',
+					'js/vendor/ng-clipboard/clipboard.min.js',
+					'js/vendor/ng-clipboard/ngclipboard.js',
+					'js/vendor/ng-tags-input/ng-tags-input.min.js',
+					'js/vendor/angular-xeditable/xeditable.min.js',
+					'js/vendor/sha/sha.js',
+					'js/vendor/llqrcode/llqrcode.js',
+					'js/vendor/download.js',
+					'js/vendor/ui-sortable/sortable.js', 'js/lib/promise.js',
+					'js/lib/crypto_wrap.js',
+					'js/app/app.js',
+					'js/app/filters/*.js',
+					'js/app/services/*.js',
+					'js/app/factory/*.js',
+					'js/app/directives/*.js',
+					'js/importers/import-main.js',
+					'js/importers/*.js',
+					'js/exporters/exporter-main.js',
+					'js/exporters/*.js',
+					'js/app/controllers/*.js',
+					'js/templates.js'
+				],
+				files: {
+					'dist/js/passman.min.js': [
+						'js/vendor/angular/angular.min.js',
+						'js/vendor/angular-animate/angular-animate.min.js',
+						'js/vendor/angular-cookies/angular-cookies.min.js',
+						'js/vendor/angular-resource/angular-resource.min.js',
+						'js/vendor/angular-route/angular-route.min.js',
+						'js/vendor/angular-sanitize/angular-sanitize.min.js',
+						'js/vendor/angular-touch/angular-touch.min.js',
+						'js/vendor/angular-local-storage/angular-local-storage.min.js',
+						'js/vendor/angular-off-click/angular-off-click.min.js',
+						'js/vendor/angularjs-datetime-picker/angularjs-datetime-picker.min.js',
+						'js/vendor/angular-translate/angular-translate.min.js',
+						'js/vendor/angular-translate/angular-translate-loader-url.min.js',
+						'js/vendor/ng-password-meter/ng-password-meter.js',
+						'js/vendor/sjcl/sjcl.js',
+						'js/vendor/zxcvbn/zxcvbn.js',
+						'js/vendor/ng-clipboard/clipboard.min.js',
+						'js/vendor/ng-clipboard/ngclipboard.js',
+						'js/vendor/ng-tags-input/ng-tags-input.min.js',
+						'js/vendor/angular-xeditable/xeditable.min.js',
+						'js/vendor/sha/sha.js',
+						'js/vendor/llqrcode/llqrcode.js',
+						'js/vendor/download.js',
+						'js/vendor/ui-sortable/sortable.js', 'js/lib/promise.js',
+						'js/lib/crypto_wrap.js',
+						'js/app/app.js',
+						'js/app/filters/*.js',
+						'js/app/services/*.js',
+						'js/app/factory/*.js',
+						'js/app/directives/*.js',
+						'js/importers/import-main.js',
+						'js/importers/*.js',
+						'js/exporters/exporter-main.js',
+						'js/exporters/*.js',
+						'js/app/controllers/*.js',
+						'js/templates.js'
+					]
+				}
+			}
+		},
+		concat: {
+			css: {
+				src: ['css/vendor/**/*.css', 'css/app.css'],
+				dest: 'dist/css/passman.css'
+			}
+		},
+		cssmin: {
+			options: {
+				shorthandCompacting: false,
+				roundingPrecision: -1
+			},
+			target: {
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/css',
+						src: ['passman.css'],
+						dest: 'dist/css',
+						ext: '.min.css'
+					},
+					{
+						expand: true,
+						cwd: 'dist/css',
+						src: ['bookmarklet.css', 'public-page.css'],
+						dest: 'dist/css',
+						ext: '.css'
+					}
+				]
+			}
+		},
+		clean: {
+			css: ['dist/css/passman.css', 'dist/css/bookmarklet.css', 'dist/css/public-page.css']
+		},
+		replace: {
+			dist: {
+				files: [
+					{
+						cwd: 'templates',
+						dest: 'dist/templates',
+						expand: true,
+						src: ['*.php']
+					}
+				],
+				options: {
+					patterns: [
+						{
+							//Grab the /*build-js-start*/ and /*build-js-end*/ comments and everything in-between
+							match: /\/\s?\*build\-js\-start[\s\S]*build\-js\-end+\*\//,
+							replacement: function (matchedString) {
+								jsResources = [];
+
+								var jsArray = matchedString.match(/script\([A-z']+,\s?'([\/A-z.-]+)'\);/g);
+								jsArray.forEach(function (file) {
+									var regex = /script\([A-z']+,\s?'([\/A-z.-]+)'\);/g;
+									var matches = regex.exec(file);
+									if (matches) {
+										jsResources.push("'js/" + matches[1] + ".js'");
+
+									}
+								});
+								//Replace the entire build-js-start to build-js-end block with this <script> tag
+
+								return "script('passman', 'passman.min');";
+							}
+						},
+						{
+							//Grab the /*build-css-start*/ and /*build-css-end*/ comments and everything in-between
+							match: /\/\s?\*build\-css\-start[\s\S]*build\-css\-end+\*\//,
+							replacement: function (matchedString) {
+								//Replace the entire build-css-start to build-css-end block with this <link> tag
+								return "style('passman', 'passman.min');"
+							}
+						}
+					]
+				}
+			},
+			strict: {
+				files: [
+					{
+						cwd: 'dist/js',
+						dest: 'dist/js',
+						expand: true,
+						src: ['*.js']
+					}
+				],
+				options: {
+					patterns: [
+						{
+							//Grab the <!--build-js-start--> and <!--build-js-end--> comments and everything in-between
+							match: /"use strict";/,
+							replacement: function (matchedString) {
+								//Replace the entire build-js-start to build-js-end block with this <script> tag
+								return '';
+							}
+						}
+					]
+				}
+			}
+		}
+
 	});
 
 	// Load the plugin that provides the "uglify" task.
@@ -115,8 +369,17 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-mkdir');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-replace');
+
+
 	// Default task(s).
 	grunt.registerTask('default', ['html2js', 'sass']);
 	grunt.registerTask('hint', ['jshint']);
+	grunt.registerTask('build', ['sass', 'jshint', 'html2js', 'mkdir:dist', 'copy:dist', 'copy:fonts', 'replace:dist', 'uglify', 'concat:css', 'cssmin', 'clean:css', 'replace:strict']);
 
 };
