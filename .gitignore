@@ -5,3 +5,4 @@ npm-debug.log
 
 # Don't mess with other dev's config
 launch_phpunit.sh
+dist
