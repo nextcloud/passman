@@ -54,7 +54,7 @@
 					var regex = new RegExp(expression);
 					$translate(['toggle.visibility', 'copy', 'copied']).then(function (translations) {
 						scope.tggltxt = translations['toggle.visibility'];
-						scope.copy_msg = translations['copy'];
+						scope.copy_msg = translations['copy.field'];
 					});
 
 					scope.$watch("value", function () {

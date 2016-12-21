@@ -97,7 +97,7 @@ class TranslationController extends ApiController {
 
 			// js/app/directives/credentialfield.js
 			'toggle.visibility' => $this->trans->t('Toggle visibility'),
-			'copy' => $this->trans->t('Copy to clipboard'),
+			'copy.field' => $this->trans->t('Copy to clipboard'),
 			'copied' => $this->trans->t('Copied to clipboard!'),
 
 			// js/app/directives/passwordgen.js
