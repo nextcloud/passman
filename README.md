@@ -24,7 +24,7 @@ Features:
 
 
 ## Tested on
-- NextCloud 10+
+- NextCloud 10 / 11
 - ownCloud 9.1+
 
 
