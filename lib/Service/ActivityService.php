@@ -51,16 +51,17 @@ class ActivityService {
 	public function add($subject,$subjectParams=array(),
 						$message='',$messageParams=array(),
 						$link='',$user=null,$type='') {
-		$activity = $this->manager->generateEvent();
-		$activity->setType($type);
-		$activity->setApp('passman');
-		$activity->setSubject($subject, $subjectParams);
-		$activity->setLink($link);
-		$activity->setAffectedUser($user);
-		$activity->setAuthor($user);
-		$activity->setTimestamp(time());
-		$activity->setMessage($message, $messageParams);
-		print_r($this->manager->publish($activity));
+		if($user) {
+			$activity = $this->manager->generateEvent();
+			$activity->setType($type);
+			$activity->setApp('passman');
+			$activity->setSubject($subject, $subjectParams);
+			$activity->setLink($link);
+			$activity->setAffectedUser($user);
+			$activity->setAuthor($user);
+			$activity->setTimestamp(time());
+			$activity->setMessage($message, $messageParams);
+		}
 		return array('success'=>'ok');
 	}
 }
