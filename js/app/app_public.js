@@ -32,7 +32,6 @@
 			'ngSanitize',
 			'ngTouch',
 			'ngclipboard',
-			'ui.sortable',
 			'pascalprecht.translate'
 
 		]).config(['$httpProvider', function ($httpProvider) {
