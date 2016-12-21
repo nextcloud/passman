@@ -29,7 +29,7 @@
 	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('progressBar', [function ($translate) {
+		.directive('progressBar', ['$translate', function ($translate) {
 			return {
 				restrict: 'A',
 				template: '' +
