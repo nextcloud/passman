@@ -1,38 +1,38 @@
 
 <div class="row">
 	<div class="col-xs-12 col-md-6">
-		<label >Label</label>
+		<label >{{ 'label' | translate}}</label>
 		<div>
 			<input type="text" ng-model="storedCredential.label">
 		</div>
-		<label>Usermame</label>
+		<label>{{ 'username' | translate}}</label>
 		<div>
 			<input type="text" ng-model="storedCredential.username">
 		</div>
-		<label>E-mail</label>
+		<label>{{ 'email' | translate}}</label>
 		<div>
 			<input type="text" ng-model="storedCredential.email">
 		</div>
-		<label>Password</label>
+		<label>{{ 'password' | translate}}</label>
 		<div>
 			<password-gen ng-model="storedCredential.password" settings="pwSettings" callback="pwGenerated"></password-gen>
 			<ng-password-meter password="storedCredential.password"></ng-password-meter>
 		</div>
 		<div>
-			<label>Repeat password</label>
+			<label>{{ 'password.r' | translate}}</label>
 			<input type="password" ng-model="storedCredential.password_repeat">
 		</div>
-		<label>URL</label>
+		<label>{{ 'url' | translate}}</label>
 		<div>
 			<input type="text" ng-model="storedCredential.url">
 		</div>
 	</div>
 	<div class="col-xs-12 col-md-6">
-		<label>Notes</label>
+		<label>{{ 'notes' | translate}}</label>
 		<div>
 			<textarea class="credential_textarea" ng-model="storedCredential.description"></textarea>
 		</div>
-		<label>Add Tag</label>
+		<label>{{ 'add.tag' | translate}}</label>
 		<div class="tags_input">
 			<tags-input ng-model="storedCredential.tags" replace-spaces-with-dashes="false">
 				<auto-complete source="getTags($query)" min-length="0"></auto-complete>

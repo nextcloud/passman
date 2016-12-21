@@ -66,6 +66,10 @@ return [
         ['name' => 'share#getFile', 'url' => '/api/v2/sharing/credential/{item_guid}/file/{file_guid}', 'verb' => 'GET'],
         ['name' => 'share#updateSharedCredentialACL', 'url' => '/api/v2/sharing/credential/{item_guid}/acl', 'verb' => 'PATCH'],
 
+
+		//Translations
+        ['name' => 'translation#getLanguageStrings', 'url' => '/api/v2/language', 'verb' => 'GET'],
+
 		//Internal API
 		['name' => 'internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],
 		['name' => 'internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],

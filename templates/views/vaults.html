@@ -11,17 +11,17 @@
 						<span class="ui-select-choices-row-inner">
 							<div class="ng-binding ng-scope">{{vault.name}}</div>
 							<small class="ng-binding ng-scope">
-								Created: {{vault.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
+
+								{{ 'created' | translate}}: {{vault.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 								|
-								Last accessed:
+								{{ 'last.access' | translate}}:
 								<span ng-if="vault.last_access > 0">{{vault.last_access * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
-								<span ng-if="vault.last_access === 0">Never</span>
+								<span ng-if="vault.last_access === 0">{{'never' | translate}}</span>
 							</small>
 						</span>
 					</div>
 				</li>
-				<li ng-if="vaults.length === 0">No vaults found, why not create
-					one?
+				<li ng-if="vaults.length === 0">{{ 'no.vaults' | translate}}
 				</li>
 			</ul>
 
@@ -30,17 +30,17 @@
 
 	<div ng-if="creating_vault">
 		<div class="login_form" ng-init="vault_name = '' ">
-			Please give your new vault a name.
+			{{'new.vault.name' | translate}}
 			<div>
 				<input type="text" ng-model="vault_name" required>
 			</div>
 			<div>
-				Vault password
+				{{ 'new.vault.pass' | translate}}
 				<input type="password" ng-model="vault_key" required>
 				<ng-password-meter password="vault_key"></ng-password-meter>
 			</div>
 			<div>
-				Repeat vault password
+				{{ 'new.vault.passr' | translate}}
 				<input type="password" ng-model="vault_key2" required>
 			</div>
 			<div ng-show="error" class="error">
@@ -49,14 +49,13 @@
 				</ul>
 			</div>
 			<div>
-				<small> Your sharing key's will have a strength of 1024
-					bit,<br/> which you can change later in settings.
+				<small> {{'new.vault.sharing_key_notice' | translate}}
 				</small>
 			</div>
 			<div class="button_wrapper">
 				<div class="button button-geen" ng-if="!creating_keys"
 					 ng-click="createVault(vault_name, vault_key, vault_key2)">
-					<span>Create vault</span>
+					<span>{{ 'new.vault.create' | translate }}</span>
 
 				</div>
 				<div class="button" ng-if="creating_keys">
@@ -66,7 +65,7 @@
 					</span>
 				</div>
 				<div class="button button-red" ng-click="clearState()">
-					Cancel
+					{{ 'cancel' | translate}}
 				</div>
 				<div class="hidden">
 					{{sharing_keys}}
@@ -78,7 +77,7 @@
 	<div ng-if="list_selected_vault != false">
 		<div class="vaultlist">
 			<ul>
-				<li ng-click="clearState()">Go back to vaults</li>
+				<li ng-click="clearState()">{{ 'go.back.vaults' | translate }}</li>
 			</ul>
 		</div>
 		<div class="login_form">
@@ -87,11 +86,11 @@
 					<li>{{error}}</li>
 				</ul>
 			</div>
-			Please input the password for {{list_selected_vault.name}}
+			{{ 'input.vault.password' | translate}} {{list_selected_vault.name}}
 
 			<div class="pw-input">
 				<input type="password" ng-model="vault_key" ng-enter="loginToVault(list_selected_vault, vault_key)">
-				<small class="last_access">Last accessed:
+				<small class="last_access">{{'last.access' | translate}}:
 					<span ng-if="list_selected_vault.last_access > 0">{{list_selected_vault.last_access * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 					<span ng-if="list_selected_vault.last_access === 0">Never</span>
 				</small>
@@ -101,7 +100,7 @@
 					<label>
 						<input type="checkbox" ng-checked="default_vault"
 							   ng-click="toggleDefaultVault()">
-						Set this vault as default.
+						{{ 'vault.default' | translate}}
 					</label>
 				</div>
 				<div>
@@ -109,13 +108,13 @@
 						<input type="checkbox"
 							   ng-checked="remember_vault_password"
 							   ng-click="toggleRememberPassword()">
-						Login automatically to this vault.
+						{{ 'vault.auto.login' | translate}}
 					</label>
 				</div>
 			</div>
 			<div class="button button-geen"
 				 ng-click="loginToVault(list_selected_vault, vault_key)">
-				Decrypt vault
+				{{ 'vault.decrypt' | translate}}
 			</div>
 		</div>
 	</div>

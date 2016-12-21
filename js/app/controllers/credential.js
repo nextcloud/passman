@@ -33,8 +33,8 @@
 	 */
 	angular.module('passmanApp')
 		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce',
-			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce) {
+			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate',
+			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -71,7 +71,8 @@
 								}
 								_credential.tags_raw = _credential.tags;
 							} catch (e) {
-								NotificationService.showNotification('An error happend during decryption', 5000);
+
+								NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
 								//$rootScope.$broadcast('logout');
 								//SettingsService.setSetting('defaultVaultPass', null);
 								//.setSetting('defaultVault', null);
@@ -239,7 +240,7 @@
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					notification = NotificationService.showNotification('Credential deleted', 5000,
+					notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000,
 						function () {
 							CredentialService.updateCredential(_credential).then(function (result) {
 								if (result.delete_time > 0) {
@@ -268,7 +269,7 @@
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					NotificationService.showNotification('Credential recovered', 5000,
+					NotificationService.showNotification($translate.instant('credential.recovered'), 5000,
 						function () {
 							CredentialService.updateCredential(_credential).then(function () {
 								notification = false;
@@ -284,7 +285,7 @@
 						for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 							if ($scope.active_vault.credentials[i].credential_id === credential.credential_id) {
 								$scope.active_vault.credentials.splice(i, 1);
-								NotificationService.showNotification('Credential destroyed', 5000);
+								NotificationService.showNotification($translate.instant('credential.destroyed)'), 5000);
 								break;
 							}
 						}
@@ -389,7 +390,7 @@
 					var callback = function (result) {
 						var key = null;
 						if (!result.hasOwnProperty('file_data')) {
-							NotificationService.showNotification('Error downloading file, you probably don\'t have enough permissions', 5000);
+							NotificationService.showNotification($translate.instant('error.loading.file.perm'), 5000);
 							return;
 
 						}

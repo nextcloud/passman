@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('ImportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', function ($scope, $window, CredentialService, VaultService) {
+		.controller('ImportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', '$translate', function ($scope, $window, CredentialService, VaultService, $translate) {
 			$scope.available_importers = [];
 			$scope.active_vault = VaultService.getActiveVault();
 
@@ -59,12 +59,12 @@
 			$scope.fileLoaded = function (file) {
 				file_data = file.data.split(',');
 				file_data = decodeURIComponent(escape(window.atob(file_data[1]))); //window.atob();
-				_log('File read successfully!');
+				_log($translate.instant('import.file.read'));
 				$scope.$digest();
 			};
 
 			$scope.fileLoadError = function (file) {
-				console.error('Error loading file', file);
+				console.error($translate.instant('error.loading.file'), file);
 			};
 			$scope.fileSelectProgress = function () {
 
@@ -84,16 +84,16 @@
 				var _credential = parsed_data[parsed_data_index];
 				if (!_credential.label) {
 					if (parsed_data[parsed_data_index + 1]) {
-						_log('Credential has no label, skipping');
+						_log($translate.instant('import.no.label'));
 						addCredential(parsed_data_index + 1);
 					}
 					return;
 				}
-				_log('Adding  ' + _credential.label);
+				_log($translate.instant('import.adding').replace('{{credential}}', _credential.label));
 				_credential.vault_id = $scope.active_vault.vault_id;
 				CredentialService.createCredential(_credential).then(function (result) {
 					if (result.credential_id) {
-						_log('Added  ' + _credential.label);
+						_log($translate.instant('import.added').replace('{{credential}}', _credential.label));
 						if (parsed_data[parsed_data_index + 1]) {
 							$scope.import_progress = {
 								progress: parsed_data_index / parsed_data.length * 100,
@@ -108,7 +108,7 @@
 								loaded: parsed_data.length,
 								total: parsed_data.length
 							};
-							_log('DONE!');
+							_log($translate.instant('done'));
 						}
 					}
 				});
@@ -133,7 +133,8 @@
 								loaded: parsed_data.length,
 								total: parsed_data.length
 							};
-							_log('Parsed ' + parsed_data.length + ' credentials, starting to import');
+							var msg = $translate.instant('import.loaded').replace('{{num}}', parsed_data.length);
+							_log(msg);
 							if (parsed_data.length > 0) {
 								addCredential(0);
 							} else {

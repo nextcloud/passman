@@ -1,3 +1,4 @@
+<?php
 /**
  * Nextcloud - passman
  *
@@ -20,24 +21,36 @@
  *
  */
 
-(function () {
-	'use strict';
+namespace OCA\Passman\Controller;
 
-	angular
-		.module('passmanApp', [
-			'ngAnimate',
-			'ngCookies',
-			'ngResource',
-			'ngRoute',
-			'ngSanitize',
-			'ngTouch',
-			'ngclipboard',
-			'pascalprecht.translate'
+use OCP\AppFramework\Http\JSONResponse;
+use PHPUnit_Framework_TestCase;
 
-		]).config(['$httpProvider', function ($httpProvider) {
-		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
-	}]).config(function ($translateProvider) {
-		$translateProvider.useUrlLoader(OC.generateUrl('/apps/passman/api/v2/language'));
-		$translateProvider.preferredLanguage('en');
-	});
-}());
+
+/**
+ * Class PageControllerTest
+ *
+ * @package OCA\Passman\Controller
+ * @coversDefaultClass  \OCA\Passman\Controller\TranslationController
+ */
+class TranslationControllerTest extends PHPUnit_Framework_TestCase {
+
+	private $controller;
+
+	public function setUp() {
+		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
+		$IL10N = $this->getMockBuilder('OCP\IL10N')->getMock();
+
+		$this->controller = new TranslationController(
+			'passman', $request, $IL10N
+		);
+	}
+
+	/**
+	 * @covers ::getLanguageStrings
+	 */
+	public function getLanguageStrings() {
+		$result = $this->controller->getLanguageStrings();
+		$this->assertTrue($result instanceof JSONResponse);
+	}
+}

@@ -30,7 +30,7 @@
 	 */
 
 	angular.module('passmanApp')
-		.directive('credentialField', ['$timeout', function ($timeout) {
+		.directive('credentialField', ['$timeout', '$translate', function ($timeout, $translate) {
 			return {
 				scope: {
 					value: '=value',
@@ -45,13 +45,17 @@
 				'<span ng-if="valueVisible">{{value}}</span>' +
 				'</div>' +
 				'<div class="tools">' +
-				'<div class="cell" ng-if="toggle" tooltip="\'Toggle visibility\'" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': !valueVisible, \'fa-eye-slash\': valueVisible }"></i></div>' +
+				'<div class="cell" ng-if="toggle" tooltip="tggltxt" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': !valueVisible, \'fa-eye-slash\': valueVisible }"></i></div>' +
 				'<div class="cell" ng-if="isLink"><a ng-href="{{value}}" target="_blank"><i tooltip="\'Open in new window\'" class="link fa fa-external-link"></i></a></div>' +
 				'<div class="cell" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{value}}"><i  tooltip="copy_msg" class="fa fa-clipboard"></i></div>' +
 				'</div></span>',
 				link: function (scope) {
 					var expression = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi;
 					var regex = new RegExp(expression);
+					$translate(['toggle.visibility', 'copy', 'copied']).then(function (translations) {
+						scope.tggltxt = translations['toggle.visibility'];
+						scope.copy_msg = translations['copy.field'];
+					});
 
 					scope.$watch("value", function () {
 						if (scope.value) {
@@ -69,13 +73,13 @@
 							scope.toggle = true;
 						}
 					}
-					scope.copy_msg = 'Copy to clipboard';
+
 					var timer;
 					scope.onSuccess = function () {
-						scope.copy_msg = 'Copied to clipboard!';
+						scope.copy_msg = $translate.instant('copied') ;
 						$timeout.cancel(timer);
 						timer = $timeout(function () {
-							scope.copy_msg = 'Copy to clipboard';
+							scope.copy_msg = $translate.instant('copy');
 						}, 5000);
 					};
 					scope.valueVisible = true;

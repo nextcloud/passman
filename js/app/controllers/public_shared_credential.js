@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('PublicSharedCredential', ['$scope', 'ShareService', '$window', 'EncryptService', 'NotificationService', function ($scope, ShareService, $window, EncryptService, NotificationService) {
+		.controller('PublicSharedCredential', ['$scope', 'ShareService', '$window', 'EncryptService', 'NotificationService', '$translate', function ($scope, ShareService, $window, EncryptService, NotificationService, $translate) {
 			var _key;
 			$scope.loading = false;
 			$scope.loadSharedCredential = function () {
@@ -54,7 +54,7 @@
 			$scope.downloadFile = function (credential, file) {
 				ShareService.downloadSharedFile(credential, file).then(function (result) {
 					if (!result.hasOwnProperty('file_data')) {
-						NotificationService.showNotification('Error downloading file, you probably don\'t have enough permissions', 5000);
+						NotificationService.showNotification($translate.instant('error.loading.file.perm'), 5000);
 						return;
 					}
 					var file_data = EncryptService.decryptString(result.file_data, _key);

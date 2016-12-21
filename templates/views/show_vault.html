@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<span class="title" ng-if="delete_time">
-			Showing deleted since:
+			{{ 'deleted.since' | translate }}:
 			<span ng-if="delete_time == 1">All time</span>
 			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 
@@ -20,12 +20,14 @@
 		<span ng-click="addCredential()" class="button new">
 			<span >+</span></span>
 		</div>
-		<div class="title" ng-show="filtered_credentials.length > 0">
-			Showing {{filtered_credentials.length}} of {{active_vault.credentials.length - 1}} credentials
+		<div class="title" ng-show="filtered_credentials.length > 0" translate="number.filtered"
+			translate-values="{number_filtered: filtered_credentials.length, credential_number: active_vault.credentials.length - 1}"
+		>
+
 		</div>
 		<div class="searchboxContainer">
 			<input type="text" ng-model="filterOptions.filterText" class="searchbox"
-				   placeholder="Search credential..." select-on-click clear-btn>
+				   placeholder="{{'search.credential' | translate}}" select-on-click clear-btn>
 		</div>
 		<div class="viewModes">
 			<div class="view-mode" ng-class="{'active': view_mode === 'list' }"
@@ -87,14 +89,14 @@
 
 		<div class="credential-data">
 			<div class="row" ng-show="selectedCredential.username">
-				<div class="col-xs-4 col-md-3 col-lg-3">Account</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{ 'account' | translate }}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9"><span credential-field
 													 value="selectedCredential.username"></span></div>
 			</div>
 
 
 			<div class="row" ng-show="selectedCredential.password">
-				<div class="col-xs-4 col-md-3 col-lg-3">Password</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{ 'password' | translate }}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9">
 					<span credential-field value="selectedCredential.password" secret="'true'">
 
@@ -104,31 +106,31 @@
 
 
 			<div class="row" ng-show="selectedCredential.otp.secret">
-				<div class="col-xs-4 col-md-3 col-lg-3">OTP</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{'otp' | translate}}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9"><span otp-generator
 													 secret="selectedCredential.otp.secret"></span></div>
 			</div>
 
 
 			<div class="row" ng-show="selectedCredential.email">
-				<div class="col-xs-4 col-md-3 col-lg-3">E-mail</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{'email' | translate}}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9"><span credential-field
 													 value="selectedCredential.email"></span></div>
 			</div>
 
 			<div class="row" ng-show="selectedCredential.url">
-				<div class="col-xs-4 col-md-3 col-lg-3">URL</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{ 'url' | translate}}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9"><span credential-field
 													 value="selectedCredential.url"></span></div>
 			</div>
 
 			<div class="row" ng-show="selectedCredential.description">
-				<div class="col-xs-4 col-md-3 col-lg-3">Notes</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{'notes' | translate}}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9" ng-bind-html="selectedCredential.description_html"></div>
 			</div>
 
 			<div class="row" ng-show="selectedCredential.files.length > 0">
-				<div class="col-xs-4 col-md-3 col-lg-3">Files</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{ 'files' | translate}}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9"><div ng-repeat="file in selectedCredential.files"
 													class="link" ng-click="downloadFile(selectedCredential, file)">
 					{{file.filename}} ({{file.size | bytes}})
@@ -146,7 +148,7 @@
 
 
 			<div class="row" ng-show="selectedCredential.expire_time > 0">
-				<div class="col-xs-4 col-md-3 col-lg-3">Expire time</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{ 'expire.time' | translate }}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9">
 					{{selectedCredential.expire_time * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 				</div>
@@ -154,7 +156,7 @@
 
 
 			<div class="row" ng-show="selectedCredential.changed">
-				<div class="col-xs-4 col-md-3 col-lg-3">Changed</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{ 'changed' | translate}}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9">
 					{{selectedCredential.changed * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 				</div>
@@ -162,7 +164,7 @@
 
 
 			<div class="row" ng-show="selectedCredential.created">
-				<div class="col-xs-4 col-md-3 col-lg-3">Created</div>
+				<div class="col-xs-4 col-md-3 col-lg-3">{{ 'created' | translate}}</div>
 				<div class="col-xs-8 col-md-9 col-lg-9">
 					{{selectedCredential.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
 				</div>
@@ -184,34 +186,34 @@
 				<button class="button"
 						ng-click="editCredential(selectedCredential)"
 						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-					<span class="fa fa-edit"></span> Edit
+					<span class="fa fa-edit"></span> {{ 'edit' | translate}}
 				</button>
 				<button class="button"
 						ng-click="deleteCredential(selectedCredential)"
 						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-					<span class="fa fa-trash"></span> Delete
+					<span class="fa fa-trash"></span> {{ 'delete' | translate}}
 				</button>
 				<button class="button"
 						ng-click="shareCredential(selectedCredential)"
 						ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined">
-					<span class="fa fa-share"></span> Share
+					<span class="fa fa-share"></span> {{ 'share' | translate}}
 				</button>
 
 				<button class="button"
 						ng-click="getRevisions(selectedCredential)"
 						ng-if="selectedCredential.delete_time == 0  && hasPermission(selectedCredential.acl.permissions, permissions.permissions.HISTORY)">
-					<span class="fa fa-undo"></span> Revisions
+					<span class="fa fa-undo"></span> {{ 'revisions' | translate}}
 				</button>
 
 				<button class="button"
 						ng-if="selectedCredential.delete_time > 0"
 						ng-click="recoverCredential(selectedCredential) && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-					<span class="fa fa-recycle"></span> Recover
+					<span class="fa fa-recycle"></span> {{'recover' | translate}}
 				</button>
 				<button class="button"
 						ng-if="selectedCredential.delete_time > 0"
 						ng-click="destroyCredential(selectedCredential)">
-					<span class="fa fa-bomb"></span> Destroy
+					<span class="fa fa-bomb"></span> {{'destroy' | translate}}
 				</button>
 			</div>
 		</div>
@@ -220,17 +222,17 @@
 </div>
 
 <div class="share_popup" style="display: none">
-	You have incoming share requests.<br/>
-	If you want to the credential in a other vault,<br/> logout of this vault
-	and login to the vault you want the shared credential in.
+	{{ 'sharereq.title' | translate}}<br/>
+	{{ 'sharereq.line1' | translate}}<br/>
+	{{ 'sharereq.line2' | translate}}
 	{{active_vault.vault_id}}
 	<table class="table">
 		<thead>
 		<tr>
-			<td>Label</td>
-			<td>Permissions</td>
-			<td>Received from</td>
-			<td>Date</td>
+			<td>{{ 'label' | translate}}</td>
+			<td>{{ 'permissions' | translate}}</td>
+			<td>{{ 'received.from' | translate}}</td>
+			<td>{{ 'date' | translate}}</td>
 		</tr>
 		</thead>
 		<tr ng-repeat="share_request in incoming_share_requests"
@@ -245,12 +247,11 @@
 				{{share_request.from_user_id}}
 			</td>
 			<td>
-				{{share_request.created * 1000 | date:'dd-MM-yyyy @
-				HH:mm:ss'}}
+				{{share_request.created * 1000 | date:'dd-MM-yyyy @	HH:mm:ss'}}
 			</td>
 			<td>
-				<span class="link" ng-click="acceptShareRequest(share_request)">Accept</span>
-				| <span class="link" ng-click="declineShareRequest(share_request)">Decline</span>
+				<span class="link" ng-click="acceptShareRequest(share_request)">{{ 'accept' | translate}}</span>
+				| <span class="link" ng-click="declineShareRequest(share_request)">{{ 'decline' | translate}}</span>
 			</td>
 		</tr>
 	</table>

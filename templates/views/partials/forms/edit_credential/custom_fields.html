@@ -1,13 +1,13 @@
 <div class="row">
 	<div class="col-xs-12 col-md-4">
-		<label>Field label</label>
+		<label>{{ 'field.label' | translate}}</label>
 		<input type="text" ng-model="new_custom_field.label">
 	</div>
 
 	<div class="col-xs-10 col-md-6 field-value">
 		<div class="row">
 			<div class="col-xs-12">
-				<label>Field value</label>
+				<label>{{ 'field.value' | translate}}</label>
 			</div>
 		</div>
 		<div class="row">
@@ -17,14 +17,14 @@
 							  settings="{generateOnCreate: false }" ></password-gen>
 				<span ng-show="selected_field_type ==='file'">
 					<input id="custom_field_file" class="inputfile" type="file" file-select success="addFileToCustomField" error="fileLoadError" progress="fileSelectProgress">
-					<label for="custom_field_file"><i class="fa fa-upload" aria-hidden="true"></i> {{ new_custom_field.value.filename || 'Choose a file'}}</label>
+					<label for="custom_field_file"><i class="fa fa-upload" aria-hidden="true"></i> {{ new_custom_field.value.filename || 'select.file' | translate}}</label>
 				</span>
 			</div>
 			<div class="col-xs-4 selectType">
 				<select class="form-control" ng-model="$parent.selected_field_type">
-					<option value="text">Text</option>
-					<option value="password">Password</option>
-					<option value="file">File</option>
+					<option value="text">{{ 'text' | translate}}</option>
+					<option value="password">{{ 'password' | translate}}</option>
+					<option value="file">{{ 'file' | translate}}</option>
 				</select>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<div class="col-xs-2 col-md-2">
-		<label class="invisible">Add</label>
+		<label class="invisible">{{'add' | translate}}</label>
 		<button ng-click="addCustomField()">+</button>
 	</div>
 </div>
@@ -46,10 +46,10 @@
 			<thead>
 			<tr use-theme>
 				<td class="dragger"></td>
-				<th class="field_label">Label</th>
-				<th class="field_value">Value</th>
-				<th class="field_secret">Type</th>
-				<th class="field_actions">Actions</th>
+				<th class="field_label">{{ 'label' | translate}}</th>
+				<th class="field_value">{{ 'value' | translate}}</th>
+				<th class="field_secret">{{ 'type' | translate}}</th>
+				<th class="field_actions">{{ 'actions' | translate}}</th>
 			</tr>
 			</thead>
 			<tbody ui-sortable ng-model="storedCredential.custom_fields">
@@ -61,7 +61,7 @@
 					<a href="#" editable-text="field.label">{{ field.label || "empty" }}</a>
 				</td>
 				<td>
-					<span ng-if="field.field_type === 'text'"><a href="#" editable-text="field.value">{{ field.value || "empty" }}</a></span>
+					<span ng-if="field.field_type === 'text'"><a href="#" editable-text="field.value">{{ field.value || 'empty' | translate }}</a></span>
 					<span ng-if="field.field_type === 'password'"><a href="#" editable-password="field.value"><span ng-repeat="n in [] | range:field.value.length">*</span></a></span>
 					<span ng-if="field.field_type === 'file'">{{field.value.filename}} ({{field.value.size | bytes}})</span>
 				</td>

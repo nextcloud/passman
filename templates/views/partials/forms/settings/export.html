@@ -1,7 +1,7 @@
 <div ng-controller="ExportCtrl">
 	<div class="row">
 		<div class="col-xs-6">
-			<label>Export type
+			<label>{{ 'export.type' | translate}}
 				<select ng-init="raw" ng-model="raw"
 						ng-change="setExporter(raw)">
 					<option ng-repeat="exporter in available_exporters"
@@ -11,7 +11,7 @@
 				</select></label>
 			<div><b>{{selectedExporter.description}}</b></div>
 			<button class="button" ng-click="startExport()"
-					ng-if="selectedExporter">Export
+					ng-if="selectedExporter">{{ 'export' | translate}}
 			</button>
 		</div>
 		<div class="col-xs-6">

@@ -32,22 +32,19 @@
 	 * This file is part of passman, licensed under AGPLv3
 	 */
 	angular.module('passmanApp')
-		.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL', 'EncryptService',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService) {
+		.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL', 'EncryptService', '$translate',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService, $translate) {
 				$scope.active_vault = VaultService.getActiveVault();
 
 				$scope.tabs = [{
-					title: 'Share with users and groups',
+					title: $translate.instant('share.u.g'),
 					url: 'views/partials/forms/share_credential/basics.html'
 				}, {
-					title: 'Share link',
+					title: $translate.instant('share.link'),
 					url: 'views/partials/forms/share_credential/link_sharing.html',
 					color: 'green'
 				}];
-				$scope.currentTab = {
-					title: 'General',
-					url: 'views/partials/forms/share_credential/basics.html'
-				};
+				$scope.currentTab = $scope.tabs[0];
 
 				$scope.onClickTab = function (tab) {
 					$scope.currentTab = tab;
@@ -224,7 +221,7 @@
 
 					_credential = CredentialService.encryptCredential(_credential, old_key);
 					CredentialService.updateCredential(_credential, true).then(function () {
-						NotificationService.showNotification('Credential unshared', 4000);
+						NotificationService.showNotification($translate.instant('credential.unshared'), 4000);
 						CredentialService.reencryptCredential(_credential.guid, old_key, new_key).then(function () {
 							getAcl();
 						});
@@ -266,7 +263,7 @@
 
 				$scope.$on("$locationChangeStart", function(event) {
 					if(!$scope.sharing_complete){
-						if(!confirm("Are you sure you want to leave?\nThis will corrupt this credential")){
+						if(!confirm($translate.instant('share.navigate.away.warning'))){
 							event.preventDefault();
 						}
 					}
@@ -322,7 +319,7 @@
 								$scope.applyShareToUser(list[iterator], enc_key);
 							}
 						}
-						NotificationService.showNotification('Saved!', 4000);
+						NotificationService.showNotification($translate.instant('saved'), 4000);
 						$scope.sharing_complete = true;
 					} else {
 
@@ -338,7 +335,7 @@
 								_credential.skip_revision = true;
 								_credential.shared_key = EncryptService.encryptString(key);
 								CredentialService.updateCredential(_credential, true).then(function () {
-									NotificationService.showNotification('Credential shared', 4000);
+									NotificationService.showNotification($translate.instant('credential.shared'), 4000);
 									$scope.sharing_complete = true;
 								});
 							});

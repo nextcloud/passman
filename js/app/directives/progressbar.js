@@ -29,13 +29,13 @@
 	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('progressBar', [function () {
+		.directive('progressBar', ['$translate', function ($translate) {
 			return {
 				restrict: 'A',
 				template: '' +
 				'<div class="progress">' +
 				'<div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}"aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%;" use-theme>' +
-				'<span class="sr-only">{{progress}}% Complete</span>' +
+				'<span class="sr-only">{{progress}}% {{completed_text}}</span>' +
 				'<span ng-if="index && total" class="progress-label" use-theme type="\'color\'" color="\'true\'">{{index}} / {{total}}</span>' +
 				'<span ng-if="!index && !total" class="progress-label" use-theme type="\'color\'" color="\'true\'">{{progress}}%</span>' +
 				'</div>' +
@@ -46,8 +46,10 @@
 					total: '=total'
 				},
 
-				link: function () {
-
+				link: function (scope) {
+					$translate(['complete']).then(function (translations) {
+						scope.completed_text = translations.complete;
+					});
 				}
 			};
 		}]);

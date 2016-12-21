@@ -1,7 +1,7 @@
 <div ng-controller="ImportCtrl">
 	<div class="row">
 		<div class="col-xs-6">
-			<label>Import type
+			<label>{{ 'import.type' | translate}}
 				<select ng-init="importerType" ng-model="importerType"
 						ng-change="setImporter(importerType)">
 					<option ng-repeat="importer in available_importers"
@@ -14,15 +14,15 @@
 				   success="fileLoaded" error="fileLoadError"
 				   progress="fileSelectProgress"><br/>
 			<button class="button" ng-click="startImport()"
-					ng-if="selectedImporter">Import
+					ng-if="selectedImporter">{{ 'import' | translate}}
 			</button>
 
 			<div ng-if="file_read_progress.percent > 0">
-				Read progress
+				{{ 'read.progress' | translate}}
 				<div progress-bar="file_read_progress.percent" index="file_read_progress.loaded" total="file_read_progress.total"></div>
 			</div>
 			<div ng-if="import_progress.progress > 0">
-				Upload progress
+				{{ 'upload.progress' | translate}}
 				<div progress-bar="import_progress.progress" index="import_progress.loaded" total="import_progress.total"></div>
 			</div>
 		</div>

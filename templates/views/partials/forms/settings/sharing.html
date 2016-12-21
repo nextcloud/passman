@@ -2,26 +2,26 @@
 
     <div class="row">
         <div class="col-md-6">
-            <label>Private Key</label>
+            <label>{{ 'priv.key' | translate}}</label>
             <textarea class="col-md-12">{{sharing_keys.private_sharing_key}}</textarea>
         </div>
         <div class="col-md-6">
-            <label>Public key</label>
+            <label>{{ 'pub.key' | translate}}</label>
             <textarea class="col-md-12">{{sharing_keys.public_sharing_key}}</textarea>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <label>Key size
+            <label>{{ 'key.size' | translate}}
                 <select ng-model="key_size" ng-options="size.name for size in available_sizes">
                     <!--<option value="512">512</option>-->
                     <!--<option value="1024">1024</option>-->
                     <!--<option value="2048">2048</option>-->
                     <!--<option value="4096">4096</option>-->
                 </select>
-                <button ng-click="updateSharingKeys()"><i class="fa fa-fa-floppy-o"></i> Save keys</button>
-                <button ng-if="!generating" ng-click="generateKeys(key_size.size)">Generate sharing keys</button>
-                <button ng-if="generating"><i class="fa fa-spinner fa-spin"></i> Generating sharing keys step {{progress}}/2</button>
+                <button ng-click="updateSharingKeys()"><i class="fa fa-fa-floppy-o"></i> {{ 'save.keys' | translate}}</button>
+                <button ng-if="!generating" ng-click="generateKeys(key_size.size)"> {{ 'gen.keys' | translate}}</button>
+                <button ng-if="generating"><i class="fa fa-spinner fa-spin"></i> {{ 'generating.keys' | translate}} ({{progress}}/2)</button>
             </label>
         </div>
     </div>
