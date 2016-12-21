@@ -2,6 +2,7 @@
 /*
  * Javascripts
  */
+/*build-js-start*/
 script('passman', 'vendor/angular/angular.min');
 script('passman', 'vendor/angular-animate/angular-animate.min');
 script('passman', 'vendor/angular-cookies/angular-cookies.min');
@@ -83,10 +84,13 @@ script('passman', 'importers/importer-passpackcsv');
 script('passman', 'importers/importer-randomdata');
 script('passman', 'exporters/exporter-main');
 script('passman', 'exporters/exporter-csv');
+/*build-js-end*/
+
 
 /*
  * Styles
  */
+/*build-css-start*/
 style('passman', 'vendor/ng-password-meter/ng-password-meter');
 style('passman', 'vendor/bootstrap/bootstrap.min');
 style('passman', 'vendor/bootstrap/bootstrap-theme.min');
@@ -95,6 +99,7 @@ style('passman', 'vendor/angular-xeditable/xeditable.min');
 style('passman', 'vendor/ng-tags-input/ng-tags-input.min');
 style('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker');
 style('passman', 'app');
+/*build-css-end*/
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
