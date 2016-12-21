@@ -67,7 +67,8 @@ class InternalController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function getAppVersion() {
-		return new JSONResponse(array('version' => \OC_App::getAppVersion('passman')));
+		$app = new \OC_App();
+		return new JSONResponse(array('version' => $app->getAppVersion('passman')));
 	}
 
 	/**
