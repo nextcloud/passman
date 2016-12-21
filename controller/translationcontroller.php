@@ -31,6 +31,7 @@ class TranslationController extends ApiController {
 	/**
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
+	 * @PublicPage
 	 */
 	public function getLanguageStrings($lang) {
 		$translations = array(
