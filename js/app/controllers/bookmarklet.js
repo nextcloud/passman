@@ -360,7 +360,7 @@
 				};
 
 				$scope.fileLoadError = function (error) {
-					console.log($translate.instant('error.loading.file'), error);
+					return error;
 				};
 
 				$scope.selected_file = '';

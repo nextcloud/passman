@@ -46,10 +46,10 @@
 					total: '=total'
 				},
 
-				link: function () {
+				link: function (scope) {
 					$translate(['complete']).then(function (translations) {
-						$scope.completed_text = translations['complete'];
-					})
+						scope.completed_text = translations.complete;
+					});
 				}
 			};
 		}]);

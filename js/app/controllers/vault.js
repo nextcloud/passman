@@ -133,7 +133,7 @@
 					_loginToVault(vault, vault_key);
 
 				} catch (e) {
-					$scope.error = $translate.instant('invalid.vault.key')
+					$scope.error = $translate.instant('invalid.vault.key');
 				}
 
 			};
