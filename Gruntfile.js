@@ -291,7 +291,7 @@ module.exports = function (grunt) {
 			}
 		},
 		clean: {
-			css: ['dist/css/passman.css', 'dist/css/bookmarklet.css', 'dist/css/public-page.css']
+			css: ['dist/css/passman.css']
 		},
 		replace: {
 			dist: {
