@@ -23,6 +23,8 @@ Features:
   - Clipperz.is
 
 
+For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
+
 ## Tested on
 - NextCloud 10 / 11
 - ownCloud 9.1+
