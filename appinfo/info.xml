@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<info>
+    <id>passman</id>
+    <name>Passman</name>
+    <description>A password manager for Nextcloud</description>
+    <licence>AGPL</licence>
+    <author>Sander Brand</author>
+    <version>2.0.0-RC1</version>
+    <author homepage="https://github.com/brantje">Sander Brand</author>
+    <author homepage="https://github.com/animalillo">Marcos</author>
+    <namespace>Passman</namespace>
+    <documentation>
+        <admin>https://github.com/nextcloud/passman#readme</admin>
+        <developer>https://github.com/nextcloud/passman/tree/master/docs</developer>
+    </documentation>
+    <category>other</category>
+    <website>https://github.com/nextcloud/passman/</website>
+    <bugs>https://github.com/nextcloud/passman/issues</bugs>
+    <repository type="git">https://github.com/nextcloud/passman.git</repository>
+    <screenshot small-thumbnail="https://i.imgur.com/ciShQZg.png">https://i.imgur.com/ciShQZg.png</screenshot>
+    <screenshot small-thumbnail="https://i.imgur.com/Iwm3hUe.png">https://i.imgur.com/Iwm3hUe.png</screenshot>
+    <dependencies>
+        <php min-version="5.6"/>
+        <owncloud min-version="9" max-version="11" />
+        <nextcloud min-version="9" max-version="12" />
+        <database>sqlite</database>
+        <database min-version="5.5">mysql</database>
+    </dependencies>
+
+
+    <background-jobs>
+        <job>OCA\Passman\BackgroundJob\ExpireCredentials</job>
+    </background-jobs>
+</info>
