@@ -5,7 +5,7 @@
     <description>A password manager for Nextcloud</description>
     <licence>AGPL</licence>
     <author>Sander Brand</author>
-    <version>1.9.0</version>
+    <version>2.0.0-RC1</version>
     <namespace>Passman</namespace>
     <category>other</category>
     <website>https://github.com/nextcloud/passman/</website>
