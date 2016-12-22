@@ -17,8 +17,8 @@
     <website>https://github.com/nextcloud/passman/</website>
     <bugs>https://github.com/nextcloud/passman/issues</bugs>
     <repository type="git">https://github.com/nextcloud/passman.git</repository>
-    <screenshot small-thumbnail="http://i.imgur.com/ciShQZg.png">http://i.imgur.com/ciShQZg.png</screenshot>
-    <screenshot small-thumbnail="http://i.imgur.com/Iwm3hUe.png">http://i.imgur.com/Iwm3hUe.png</screenshot>
+    <screenshot small-thumbnail="https://i.imgur.com/ciShQZg.png">https://i.imgur.com/ciShQZg.png</screenshot>
+    <screenshot small-thumbnail="https://i.imgur.com/Iwm3hUe.png">https://i.imgur.com/Iwm3hUe.png</screenshot>
     <dependencies>
         <php min-version="5.6"/>
         <owncloud min-version="9" max-version="11" />
