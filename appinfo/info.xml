@@ -2,23 +2,38 @@
 <info>
     <id>passman</id>
     <name>Passman</name>
-    <description>A password manager for Nextcloud</description>
+    <name>Notifications</name>
+    <description><![CDATA[
+Passman is a full featured password manager.
+Features:
+- Vaults
+- Vault key is never sent to the server
+- Credentials are stored with 256 bit AES
+- Ability to add custom fields to credentials
+- Built-in OTP(One Time Password) generator
+- Password analyzer
+- Share passwords internally and via link in a secure manner.
+- Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is, )
+For an demo of this app visit https://demo.passman.cc
+]]></description>
+
     <licence>AGPL</licence>
-    <author>Sander Brand</author>
     <version>2.0.0-RC1</version>
     <author homepage="https://github.com/brantje">Sander Brand</author>
-    <author homepage="https://github.com/animalillo">Marcos</author>
+    <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>
     <namespace>Passman</namespace>
     <documentation>
         <admin>https://github.com/nextcloud/passman#readme</admin>
         <developer>https://github.com/nextcloud/passman/tree/master/docs</developer>
     </documentation>
     <category>other</category>
-    <website>https://github.com/nextcloud/passman/</website>
+    <website>https://demo.passman.cc</website>
     <bugs>https://github.com/nextcloud/passman/issues</bugs>
     <repository type="git">https://github.com/nextcloud/passman.git</repository>
-    <screenshot small-thumbnail="https://i.imgur.com/ciShQZg.png">https://i.imgur.com/ciShQZg.png</screenshot>
-    <screenshot small-thumbnail="https://i.imgur.com/Iwm3hUe.png">https://i.imgur.com/Iwm3hUe.png</screenshot>
+    <screenshot small-thumbnail="https://img.passman.cc/thumbs/overview.png">https://img.passman.cc/overview.png</screenshot>
+    <screenshot small-thumbnail="https://img.passman.cc/thumbs/edit_credential.png">https://img.passman.cc/edit_credential.png</screenshot>
+    <screenshot small-thumbnail="https://img.passman.cc/thumbs/share_credential.png">https://img.passman.cc/share_credential.png</screenshot>
+    <screenshot small-thumbnail="https://img.passman.cc/thumbs/password_audit.png">https://img.passman.cc/password_audit.png</screenshot>
     <dependencies>
         <php min-version="5.6"/>
         <owncloud min-version="9" max-version="11" />
