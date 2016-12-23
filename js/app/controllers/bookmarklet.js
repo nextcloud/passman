@@ -218,34 +218,33 @@
 					$scope.http_warning_hidden = state;
 				};
 
-				$scope.currentTab = {
-					title: $translate.instant('general'),
-					url: 'views/partials/forms/edit_credential/basics.html',
-					color: 'blue'
-				};
 
-				$scope.tabs = [{
-					title: $translate.instant('general'),
-					url: 'views/partials/forms/edit_credential/basics.html',
-					color: 'blue'
-				}, {
-					title: $translate.instant('password'),
-					url: 'views/partials/forms/edit_credential/password.html',
-					color: 'green'
-				}, {
-					title: $translate.instant('custom.fields'),
-					url: 'views/partials/forms/edit_credential/custom_fields.html',
-					color: 'orange'
-				}, {
-					title: $translate.instant('files'),
-					url: 'views/partials/forms/edit_credential/files.html',
-					color: 'yellow'
-				}, {
-					title: $translate.instant('otp'),
-					url: 'views/partials/forms/edit_credential/otp.html',
-					color: 'purple'
-				}];
 
+
+				$translate(['general', 'password', 'custom.fields','files','otp']).then(function (translations) {
+					$scope.tabs = [{
+						title: translations.general,
+						url: 'views/partials/forms/edit_credential/basics.html',
+						color: 'blue'
+					}, {
+						title: translations.password,
+						url: 'views/partials/forms/edit_credential/password.html',
+						color: 'green'
+					}, {
+						title:translations['custom.fields'],
+						url: 'views/partials/forms/edit_credential/custom_fields.html',
+						color: 'orange'
+					}, {
+						title: translations.files,
+						url: 'views/partials/forms/edit_credential/files.html',
+						color: 'yellow'
+					}, {
+						title: translations.otp,
+						url: 'views/partials/forms/edit_credential/otp.html',
+						color: 'purple'
+					}];
+					$scope.currentTab = $scope.tabs[0];
+				});
 
 				$scope.getTags = function ($query) {
 					return TagService.searchTag($query);
