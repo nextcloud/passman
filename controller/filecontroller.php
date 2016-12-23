@@ -32,6 +32,7 @@ class FileController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function uploadFile($data, $filename, $mimetype, $size) {
 		$file = array(
@@ -45,12 +46,14 @@ class FileController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getFile($file_id) {
 		return new JSONResponse($this->fileService->getFile($file_id, $this->userId));
 	}
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function deleteFile($file_id) {
 		return new JSONResponse($this->fileService->deleteFile($file_id, $this->userId));

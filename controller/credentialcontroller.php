@@ -52,6 +52,7 @@ class CredentialController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function createCredential($changed, $created,
 									 $credential_id, $custom_fields, $delete_time,
@@ -95,6 +96,7 @@ class CredentialController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getCredential($credential_guid) {
 		return new JSONResponse($this->credentialService->getCredentialByGUID($credential_guid, $this->userId));
@@ -102,6 +104,7 @@ class CredentialController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function updateCredential($changed, $created,
 									 $credential_id, $custom_fields, $delete_time, $credential_guid,
@@ -234,6 +237,7 @@ class CredentialController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function deleteCredential($credential_guid) {
 		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
@@ -252,6 +256,7 @@ class CredentialController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getRevision($credential_guid) {
 	    try {
@@ -280,6 +285,7 @@ class CredentialController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function deleteRevision($credential_id, $revision_id) {
 		$result = $this->credentialRevisionService->deleteRevision($revision_id, $this->userId);
@@ -288,6 +294,7 @@ class CredentialController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function updateRevision($credential_guid, $revision_id, $credential_data){
 		$revision = null;
