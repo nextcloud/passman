@@ -30,7 +30,12 @@ class VaultController extends ApiController {
 								$UserId,
 								VaultService $vaultService,
 								CredentialService $credentialService) {
-		parent::__construct($AppName, $request);
+		parent::__construct(
+			$AppName,
+			$request,
+			'GET, POST, DELETE, PUT, PATCH',
+			'Authorization, Content-Type, Accept',
+			86400);
 		$this->userId = $UserId;
 		$this->vaultService = $vaultService;
 		$this->credentialService = $credentialService;
@@ -38,6 +43,7 @@ class VaultController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function listVaults() {
 		$result = array();
@@ -64,6 +70,7 @@ class VaultController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function create($vault_name) {
 		$vault = $this->vaultService->createVault($vault_name, $this->userId);
@@ -72,6 +79,7 @@ class VaultController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function get($vault_guid) {
 		//$vault_guid
@@ -107,6 +115,7 @@ class VaultController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function update($vault_guid, $name, $vault_settings) {
 		$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
@@ -121,6 +130,7 @@ class VaultController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function updateSharingKeys($vault_guid, $private_sharing_key, $public_sharing_key) {
 		$vault = null;
@@ -136,6 +146,7 @@ class VaultController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function delete($vault_id) {
 		return;
