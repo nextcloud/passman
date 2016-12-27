@@ -84,6 +84,7 @@ class ShareController extends ApiController {
 	 * @param $permissions
 	 * @param $expire_timestamp
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
 
@@ -120,6 +121,7 @@ class ShareController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions) {
 		/**
@@ -190,6 +192,7 @@ class ShareController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function searchUsers($search) {
 		$users = array();
@@ -210,6 +213,7 @@ class ShareController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function unshareCredential($item_guid) {
 		$acl_list = $this->shareService->getCredentialAclList($item_guid);
@@ -261,6 +265,7 @@ class ShareController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function search($search) {
 		$user_search = $this->searchUsers($search);
@@ -270,6 +275,7 @@ class ShareController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getVaultsByUser($user_id) {
 		$user_vaults = $this->vaultService->getByUser($user_id);
@@ -288,6 +294,7 @@ class ShareController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
 		try {
@@ -320,6 +327,7 @@ class ShareController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getPendingRequests() {
 		try {
@@ -341,6 +349,7 @@ class ShareController extends ApiController {
 	 * @param $item_guid
 	 * @return JSONResponse
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getRevisions($item_guid) {
 		try {
@@ -354,6 +363,7 @@ class ShareController extends ApiController {
 	 * Obtains the list of credentials shared with this vault
 	 *
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getVaultItems($vault_guid) {
 		try {
@@ -367,6 +377,7 @@ class ShareController extends ApiController {
 	 * @param $share_request_id
 	 * @return JSONResponse
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function deleteShareRequest($share_request_id) {
 		try {
@@ -435,6 +446,7 @@ class ShareController extends ApiController {
 	 * @param $item_guid
 	 * @return JSONResponse
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getItemAcl($item_guid) {
 		$acl = $this->shareService->getCredentialAclList($item_guid);
@@ -484,6 +496,7 @@ class ShareController extends ApiController {
 	 * @param $permission
 	 * @return JSONResponse
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function updateSharedCredentialACL($item_guid, $user_id, $permission) {
 		try {
