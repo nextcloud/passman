@@ -3,16 +3,16 @@
     <id>passman</id>
     <name>Passman</name>
     <summary>Passman is a full featured password manager.</summary>
-    <description><![CDATA[Passman is a full featured password manager.
-Features:
-- Vaults
-- Vault key is never sent to the server
-- Credentials are stored with 256 bit AES
-- Ability to add custom fields to credentials
-- Built-in OTP (One Time Password) generator
-- Password analyzer
-- Share passwords internally and via link in a secure manner.
-- Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )
+    <description><![CDATA[Passman is a full featured password manager.\n
+Features:\n
+- Vaults\n
+- Vault key is never sent to the server\n
+- Credentials are stored with 256 bit AES\n
+- Ability to add custom fields to credentials\n
+- Built-in OTP (One Time Password) generator\n
+- Password analyzer\n
+- Share passwords internally and via link in a secure manner.\n
+- Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )\n
 For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
 
@@ -25,7 +25,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         <admin>https://github.com/nextcloud/passman#readme</admin>
         <developer>https://github.com/nextcloud/passman/tree/master/docs</developer>
     </documentation>
-    <category>other</category>
+    <category>tools</category>
     <website>https://demo.passman.cc</website>
     <bugs>https://github.com/nextcloud/passman/issues</bugs>
     <repository type="git">https://github.com/nextcloud/passman.git</repository>
