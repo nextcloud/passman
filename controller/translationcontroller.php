@@ -96,6 +96,11 @@ class TranslationController extends ApiController {
 			'credential.shared' => $this->trans->t('Credential shared'),
 			'saved' => $this->trans->t('Saved!'),
 
+			// js/app/controllers/vault.js
+			'password.poor' => $this->trans->t('Poor'),
+			'password.weak' => $this->trans->t('Weak'),
+			'password.good' => $this->trans->t('Good'),
+			'password.strong' => $this->trans->t('Strong'),
 			// js/app/directives/credentialfield.js
 			'toggle.visibility' => $this->trans->t('Toggle visibility'),
 			'copy.field' => $this->trans->t('Copy to clipboard'),

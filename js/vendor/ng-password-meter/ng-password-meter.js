@@ -26,7 +26,7 @@
 					scope.matchBreakdown = false;
 					scope.toggleScore = function () {
 						scope.scoreShown = !scope.scoreShown;
-					}
+					};
 					jQuery('.match-sequence').hide();
 					scope.toggleMatchBreakdown = function () {
 						scope.matchBreakdown = true;

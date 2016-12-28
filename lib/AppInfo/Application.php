@@ -36,6 +36,7 @@ use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCA\Passman\Service\NotificationService;
+use OCP\IConfig;
 use OCP\IDBConnection;
 
 use OCP\AppFramework\App;
@@ -70,7 +71,8 @@ class Application extends App {
                 $c->query('ShareService'),
                 $c->query('CredentialService'),
                 $c->query('NotificationService'),
-                $c->query('FileService')
+                $c->query('FileService'),
+                $c->query('IConfig')
 			);
 		});
 
@@ -109,6 +111,7 @@ class Application extends App {
         $container->registerAlias('ShareService', ShareService::class);
 		$container->registerAlias('Utils', Utils::class);
 		$container->registerAlias('IDBConnection', IDBConnection::class);
+		$container->registerAlias('IConfig', IConfig::class);
 	}
 
 	/**

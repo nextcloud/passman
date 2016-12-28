@@ -43,10 +43,10 @@
 				{{ 'new.vault.passr' | translate}}
 				<input type="password" ng-model="vault_key2" required>
 			</div>
-			<div ng-show="error || vault_key_score.score < 2" class="error">
+			<div ng-show="error || vault_key_score.score < minimal_value_key_strength" class="error">
 				<ul>
 					<li ng-show="error">{{error}}</li>
-					<li ng-show="vault_key_score.score < 2">{{'min.vault.key.strength' | translate:'{strength:"weak"}'}}</li>
+					<li ng-show="vault_key_score.score < minimal_value_key_strength">{{'min.vault.key.strength' | translate:required_score}}</li>
 				</ul>
 			</div>
 			<div>
@@ -55,7 +55,7 @@
 			</div>
 			<div class="button_wrapper">
 				<button class="button button-geen" ng-if="!creating_keys"
-					 ng-click="createVault(vault_name, vault_key, vault_key2)" ng-disabled="vault_key_score.score < 2 || vault_key !== vault_key2 || vault_key === ''">
+					 ng-click="createVault(vault_name, vault_key, vault_key2)" ng-disabled="vault_key_score.score < minimal_value_key_strength || vault_key !== vault_key2 || vault_key === ''">
 					{{ 'new.vault.create' | translate }}
 				</button>
 				<div class="button" ng-if="creating_keys">

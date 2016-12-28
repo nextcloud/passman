@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCP\IConfig;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -20,14 +21,18 @@ use \OCP\App;
 class InternalController extends ApiController {
 	private $userId;
 	private $credentialService;
+	private $config;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
-								CredentialService $credentialService) {
+								CredentialService $credentialService,
+								IConfig $config
+	) {
 		parent::__construct($AppName, $request);
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
+		$this->config = $config;
 	}
 
 	/**
@@ -78,6 +83,32 @@ class InternalController extends ApiController {
 	public function generatePerson() {
 		$random_person = json_decode(file_get_contents('http://api.namefake.com/'));
 		return new JSONResponse($random_person);
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function getSettings() {
+		$settings = array(
+			'link_sharing_enabled' => $this->config->getAppValue('passman', 'link_sharing_enabled', 1),
+			'user_sharing_enabled' => $this->config->getAppValue('passman', 'user_sharing_enabled', 1),
+			'vault_key_strength' => $this->config->getAppValue('passman', 'vault_key_strength', 3),
+			'check_version' => $this->config->getAppValue('passman', 'check_version', 1),
+			'https_check' => $this->config->getAppValue('passman', 'https_check', 1),
+			'disable_contextmenu' => $this->config->getAppValue('passman', 'disable_contextmenu', 1),
+		);
+		return new JSONResponse($settings);
+	}
+
+	/**
+	 * @NoCSRFRequired
+	 */
+	public function saveSettings($key, $value) {
+		if (is_numeric($value)) {
+			$value = intval($value);
+		}
+		$this->config->setAppValue('passman', $key, $value);
 	}
 
 }

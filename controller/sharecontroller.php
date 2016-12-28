@@ -11,8 +11,6 @@
 
 namespace OCA\Passman\Controller;
 
-use OCA\Files_External\NotFoundException;
-use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\Vault;
 use OCA\Passman\Service\CredentialService;
@@ -23,16 +21,13 @@ use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\NotFoundResponse;
+use OCP\IConfig;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
-use OCP\AppFramework\Http;
-use OCP\AppFramework\Http\DataResponse;
 
-use OCP\IGroup;
 use OCP\IGroupManager;
 use OCP\IUserManager;
-use OCP\IUser;
 
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Service\ActivityService;
@@ -49,6 +44,7 @@ class ShareController extends ApiController {
 	private $credentialService;
 	private $notificationService;
 	private $fileService;
+	private $config;
 
 	private $limit = 50;
 	private $offset = 0;
@@ -63,7 +59,8 @@ class ShareController extends ApiController {
 								ShareService $shareService,
 								CredentialService $credentialService,
 								NotificationService $notificationService,
-								FileService $fileService
+								FileService $fileService,
+								IConfig $config
 	) {
 		parent::__construct($AppName, $request);
 
@@ -76,6 +73,13 @@ class ShareController extends ApiController {
 		$this->credentialService = $credentialService;
 		$this->notificationService = $notificationService;
 		$this->fileService = $fileService;
+		$this->config = $config;
+	}
+
+	private function isSharingEnabled() {
+		if ($this->config->getAppValue('passman', 'link_sharing_enabled', 1) === 0 || $this->config->getAppValue('passman', 'link_sharing_enabled', 1) === '0') {
+			return new JSONResponse(array());
+		}
 	}
 
 	/**
@@ -87,10 +91,12 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
+		$this->isSharingEnabled();
 
-		try{
+
+		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
-		} catch (DoesNotExistException $exception){
+		} catch (DoesNotExistException $exception) {
 			return new NotFoundResponse();
 		}
 
@@ -124,6 +130,7 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions) {
+		$this->isSharingEnabled();
 		/**
 		 * Assemble notification
 		 */
@@ -139,14 +146,14 @@ class ShareController extends ApiController {
 				return new JSONResponse(array('error' => 'User got already pending requests'));
 			}
 		} catch (DoesNotExistException $exception) {
-
+			// no need to catch this
 		}
 
 		$acl = null;
 		try {
 			$acl = $this->shareService->getCredentialAclForUser($first_vault['user_id'], $item_guid);
 		} catch (DoesNotExistException $exception) {
-
+			// no need to catch this
 		}
 
 		if ($acl) {
@@ -216,6 +223,7 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function unshareCredential($item_guid) {
+		$this->isSharingEnabled();
 		$acl_list = $this->shareService->getCredentialAclList($item_guid);
 		$request_list = $this->shareService->getShareRequestsByGuid($item_guid);
 		foreach ($acl_list as $ACL) {
@@ -234,21 +242,21 @@ class ShareController extends ApiController {
 	}
 
 
-	public function unshareCredentialFromUser($item_guid, $user_id){
+	public function unshareCredentialFromUser($item_guid, $user_id) {
 		$acl = null;
 		$sr = null;
 		try {
 			$acl = $this->shareService->getCredentialAclForUser($user_id, $item_guid);
-		} catch (DoesNotExistException $e){
+		} catch (DoesNotExistException $e) {
 
 		}
-		try{
-			$sr =  array_pop($this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id));
-		} catch (DoesNotExistException $e){
-
+		try {
+			$sr = array_pop($this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id));
+		} catch (DoesNotExistException $e) {
+			// no need to catch this
 		}
 
-		if($sr){
+		if ($sr) {
 			$this->shareService->cleanItemRequestsForUser($sr);
 			$manager = \OC::$server->getNotificationManager();
 			$notification = $manager->createNotification();
@@ -257,7 +265,7 @@ class ShareController extends ApiController {
 				->setUser($user_id);
 			$manager->markProcessed($notification);
 		}
-		if($acl){
+		if ($acl) {
 			$this->shareService->deleteShareACL($acl);
 		}
 		return new JSONResponse(array('result' => true));
@@ -355,7 +363,7 @@ class ShareController extends ApiController {
 		try {
 			return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
 		} catch (DoesNotExistException $ex) {
-			return new NotFoundResponse();
+			return new NotFoundJSONResponse();
 		}
 	}
 
@@ -366,6 +374,8 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getVaultItems($vault_guid) {
+		$this->isSharingEnabled();
+
 		try {
 			return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
 		} catch (DoesNotExistException $ex) {
@@ -404,7 +414,7 @@ class ShareController extends ApiController {
 			$this->shareService->cleanItemRequestsForUser($sr);
 			return new JSONResponse(array('result' => true));
 		} catch (DoesNotExistException $ex) {
-			return new NotFoundResponse();
+			return new NotFoundJSONResponse();
 		}
 	}
 
@@ -416,15 +426,15 @@ class ShareController extends ApiController {
 	 * @PublicPage
 	 */
 	public function getPublicCredentialData($credential_guid) {
-
+		$this->isSharingEnabled();
 		//@TODO Check expire date
 		$acl = $this->shareService->getACL(null, $credential_guid);
 
-        if ($acl->getExpire() > 0 && Utils::getTime() > $acl->getExpire()) {
+		if ($acl->getExpire() > 0 && Utils::getTime() > $acl->getExpire()) {
 			return new NotFoundJSONResponse();
 		}
 
-        $views = $acl->getExpireViews();
+		$views = $acl->getExpireViews();
 		if ($views === 0) {
 			return new NotFoundJSONResponse();
 		} else if ($views !== -1) {
@@ -475,15 +485,15 @@ class ShareController extends ApiController {
 	 * @return JSONResponse
 	 * @return NotFoundResponse
 	 */
-	public function getFile($item_guid, $file_guid){
+	public function getFile($item_guid, $file_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
-		} catch (DoesNotExistException $e){
+		} catch (DoesNotExistException $e) {
 			return new NotFoundJSONResponse();
 		}
 		$userId = ($this->userId) ? $this->userId->getUID() : null;
 		$acl = $this->shareService->getACL($userId, $credential->getGuid());
-		if (!$acl->hasPermission(SharingACL::FILES)){
+		if (!$acl->hasPermission(SharingACL::FILES)) {
 			return new NotFoundJSONResponse();
 		} else {
 			return $this->fileService->getFileByGuid($file_guid);

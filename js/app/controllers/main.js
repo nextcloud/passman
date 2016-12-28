@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('MainCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
+		.controller('MainCtrl', ['$scope', '$rootScope', '$location', 'SettingsService', function ($scope, $rootScope, $location, SettingsService) {
 			$scope.selectedVault = false;
 
 			$scope.http_warning_hidden = true;
@@ -40,6 +40,17 @@
 				$scope.http_warning_hidden = false;
 
 			}
+
+			$rootScope.$on('settings_loaded', function(){
+				if (SettingsService.getSetting('disable_contextmenu') === '1' || SettingsService.getSetting('disable_contextmenu') === 1) {
+					document.addEventListener('contextmenu', function (event) {
+						event.preventDefault();
+					});
+				}
+				if (SettingsService.getSetting('https_check') === '0' || SettingsService.getSetting('https_check') === 0) {
+					$scope.http_warning_hidden = true;
+				}
+			});
 
 			$rootScope.setHttpWarning = function (state) {
 				$scope.http_warning_hidden = state;

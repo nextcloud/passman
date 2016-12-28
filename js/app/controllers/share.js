@@ -32,9 +32,12 @@
 	 * This file is part of passman, licensed under AGPLv3
 	 */
 	angular.module('passmanApp')
-		.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL', 'EncryptService', '$translate',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService, $translate) {
+		.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL', 'EncryptService', '$translate', '$rootScope',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService, $translate, $rootScope) {
 				$scope.active_vault = VaultService.getActiveVault();
+
+
+
 
 				$scope.tabs = [{
 					title: $translate.instant('share.u.g'),
@@ -44,7 +47,30 @@
 					url: 'views/partials/forms/share_credential/link_sharing.html',
 					color: 'green'
 				}];
+
 				$scope.currentTab = $scope.tabs[0];
+
+
+				var settingsLoaded = function () {
+					var settings = SettingsService.getSettings();
+					if(settings.user_sharing_enabled === 0 || settings.user_sharing_enabled ==='0'){
+						$scope.tabs.splice(0,1);
+					}
+					if(settings.link_sharing_enabled === 0 || settings.link_sharing_enabled ==='0'){
+						$scope.tabs.splice(1,1);
+					}
+					if($scope.tabs.length > 0){
+						$scope.currentTab = $scope.tabs[0];
+					}
+				};
+
+				if(!SettingsService.getSetting('user_sharing_enabled')){
+					$rootScope.$on('settings_loaded', function () {
+						settingsLoaded();
+					});
+				} else {
+					settingsLoaded();
+				}
 
 				$scope.onClickTab = function (tab) {
 					$scope.currentTab = tab;

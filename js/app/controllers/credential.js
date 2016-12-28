@@ -194,6 +194,19 @@
 				};
 
 
+				var settingsLoaded = function () {
+					$scope.settings = SettingsService.getSettings();
+				};
+
+				if(!SettingsService.getSetting('user_sharing_enabled')){
+					$rootScope.$on('settings_loaded', function () {
+						settingsLoaded();
+					});
+				} else {
+					settingsLoaded();
+				}
+
+
 				$scope.addCredential = function () {
 					var new_credential = CredentialService.newCredential();
 					var enc_c = CredentialService.encryptCredential(new_credential);
