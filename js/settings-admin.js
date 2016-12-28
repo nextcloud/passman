@@ -117,5 +117,8 @@ $(document).ready(function () {
 	$('#passman_link_sharing_enabled').change(function () {
 		settings.setAdminKey('link_sharing_enabled', ($(this).is(":checked")) ? 1 : 0);
 	});
+	$('#vault_key_strength').change(function () {
+		settings.setAdminKey('vault_key_strength', $(this).val());
+	});
 
 });

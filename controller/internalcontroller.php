@@ -91,12 +91,12 @@ class InternalController extends ApiController {
 	 */
 	public function getSettings() {
 		$settings = array(
-			'link_sharing_enabled' => $this->config->getAppValue('passman', 'link_sharing_enabled', 1),
-			'user_sharing_enabled' => $this->config->getAppValue('passman', 'user_sharing_enabled', 1),
-			'vault_key_strength' => $this->config->getAppValue('passman', 'vault_key_strength', 3),
-			'check_version' => $this->config->getAppValue('passman', 'check_version', 1),
-			'https_check' => $this->config->getAppValue('passman', 'https_check', 1),
-			'disable_contextmenu' => $this->config->getAppValue('passman', 'disable_contextmenu', 1),
+			'link_sharing_enabled' => intval($this->config->getAppValue('passman', 'link_sharing_enabled', 1)),
+			'user_sharing_enabled' => intval($this->config->getAppValue('passman', 'user_sharing_enabled', 1)),
+			'vault_key_strength' => intval($this->config->getAppValue('passman', 'vault_key_strength', 3)),
+			'check_version' => intval($this->config->getAppValue('passman', 'check_version', 1)),
+			'https_check' => intval($this->config->getAppValue('passman', 'https_check', 1)),
+			'disable_contextmenu' => intval($this->config->getAppValue('passman', 'disable_contextmenu', 1)),
 		);
 		return new JSONResponse($settings);
 	}

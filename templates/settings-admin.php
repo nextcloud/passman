@@ -85,16 +85,16 @@ if ($checkVersion) {
 		<p>
 			<label for="vault_key_strength">Minimum vault key strength:</label>
 			<select name="vault_key_strength" id="vault_key_strength">
-				<option value="1" <?php if ($_['vault_key_strength'] === 1) print_unescaped('selected="selected"'); ?>>
+				<option value="0">
 					Poor
 				</option>
-				<option value="2" <?php if ($_['vault_key_strength'] === 2) print_unescaped('selected="selected"'); ?>>
+				<option value="2">
 					Weak
 				</option>
-				<option value="3" <?php if ($_['vault_key_strength'] === 3) print_unescaped('selected="selected"'); ?>>
+				<option value="3">
 					Good
 				</option>
-				<option value="4" <?php if ($_['vault_key_strength'] === 4) print_unescaped('selected="selected"'); ?>>
+				<option value="4">
 					Strong
 				</option>
 			</select>
