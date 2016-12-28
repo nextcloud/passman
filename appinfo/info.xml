@@ -2,6 +2,7 @@
 <info>
     <id>passman</id>
     <name>Passman</name>
+    <summary>Passman is a full featured password manager.</summary>
     <description><![CDATA[Passman is a full featured password manager.
 Features:
 - Vaults
