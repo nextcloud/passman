@@ -21,7 +21,7 @@
 				</span>
 			</div>
 			<div class="col-xs-4 selectType">
-				<select class="form-control" ng-model="$parent.selected_field_type">
+				<select class="form-control" ng-model="new_custom_field.field_type">
 					<option value="text">{{ 'text' | translate}}</option>
 					<option value="password">{{ 'password' | translate}}</option>
 					<option value="file">{{ 'file' | translate}}</option>
@@ -30,7 +30,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<ng-password-meter ng-if="selected_field_type ==='password'"
+				<ng-password-meter ng-if="new_custom_field.field_type ==='password'"
 								   password="new_custom_field.value"></ng-password-meter>
 			</div>
 		</div>
