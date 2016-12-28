@@ -203,6 +203,8 @@
 						$scope.error = $translate.instant('password.no.match');
 						return;
 					}
+					SettingsService.setSetting('defaultVault', null);
+					SettingsService.setSetting('defaultVaultPass', null);
 					VaultService.getVault($scope.active_vault).then(function (vault) {
 						var _selected_credentials = [];
 						if (vault.credentials.length === 0) {
@@ -210,8 +212,17 @@
 						}
 						for (var i = 0; i < vault.credentials.length; i++) {
 							var _credential = vault.credentials[i];
-							if (_credential.shared_key === null || _credential.shared_key === '') {
-								_selected_credentials.push(_credential);
+							if (_credential.shared_key === null || _credential.shared_key === '' || !_credential.hasOwnProperty('acl')) {
+								var _success;
+								try{
+									CredentialService.decryptCredential(_credential, VaultService.getActiveVault().vaultKey);
+									_success = true;
+								} catch (e){
+									_success = false;
+								}
+								if(_success) {
+									_selected_credentials.push(_credential);
+								}
 							}
 						}
 						$scope.change_pw = {
