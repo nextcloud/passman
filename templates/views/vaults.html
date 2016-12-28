@@ -29,7 +29,7 @@
 	</div>
 
 	<div ng-if="creating_vault">
-		<div class="login_form" ng-init="vault_name = '' ">
+		<div class="login_form" ng-init="vault_name = ''; vault_key=''; ">
 			{{'new.vault.name' | translate}}
 			<div>
 				<input type="text" ng-model="vault_name" required>
@@ -37,15 +37,16 @@
 			<div>
 				{{ 'new.vault.pass' | translate}}
 				<input type="password" ng-model="vault_key" required>
-				<ng-password-meter password="vault_key"></ng-password-meter>
+				<ng-password-meter password="vault_key" score="vault_key_score"></ng-password-meter>
 			</div>
 			<div>
 				{{ 'new.vault.passr' | translate}}
 				<input type="password" ng-model="vault_key2" required>
 			</div>
-			<div ng-show="error" class="error">
+			<div ng-show="error || vault_key_score.score < 2" class="error">
 				<ul>
-					<li>{{error}}</li>
+					<li ng-show="error">{{error}}</li>
+					<li ng-show="vault_key_score.score < 2">{{'min.vault.key.strength' | translate:'{strength:"weak"}'}}</li>
 				</ul>
 			</div>
 			<div>
@@ -53,11 +54,10 @@
 				</small>
 			</div>
 			<div class="button_wrapper">
-				<div class="button button-geen" ng-if="!creating_keys"
-					 ng-click="createVault(vault_name, vault_key, vault_key2)">
-					<span>{{ 'new.vault.create' | translate }}</span>
-
-				</div>
+				<button class="button button-geen" ng-if="!creating_keys"
+					 ng-click="createVault(vault_name, vault_key, vault_key2)" ng-disabled="vault_key_score.score < 2 || vault_key !== vault_key2 || vault_key === ''">
+					{{ 'new.vault.create' | translate }}
+				</button>
 				<div class="button" ng-if="creating_keys">
 					<span>
 						<i class="fa fa-spinner fa-spin"></i>
