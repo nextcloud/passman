@@ -299,7 +299,7 @@
 
 				$scope.filterOptions = {
 					filterText: '',
-					fields: ['label', 'username', 'email', 'password', 'custom_fields']
+					fields: ['label', 'username', 'email', 'custom_fields']
 				};
 
 
