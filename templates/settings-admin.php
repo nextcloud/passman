@@ -52,7 +52,7 @@ if ($checkVersion) {
 		<p>
 			<input type="checkbox" name="passman_sharing_enabled"
 				   id="passman_sharing_enabled" class="checkbox"
-				   value="1" <?php if ($_['user_sharing_enabled']) print_unescaped('checked="checked"'); ?> />
+				   value="1" />
 			<label for="passman_sharing_enabled">
 				<?php p($l->t('Allow users on this server to share passwords with other users')); ?>
 			</label>
