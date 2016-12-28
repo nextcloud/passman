@@ -73,27 +73,30 @@
 					color: 'blue'
 				};
 
-				$scope.tabs = [{
-					title: $translate.instant('general'),
-					url: 'views/partials/forms/edit_credential/basics.html',
-					color: 'blue'
-				}, {
-					title: $translate.instant('password'),
-					url: 'views/partials/forms/edit_credential/password.html',
-					color: 'green'
-				}, {
-					title: $translate.instant('custom.fields'),
-					url: 'views/partials/forms/edit_credential/custom_fields.html',
-					color: 'orange'
-				}, {
-					title: $translate.instant('files'),
-					url: 'views/partials/forms/edit_credential/files.html',
-					color: 'yellow'
-				}, {
-					title: $translate.instant('otp'),
-					url: 'views/partials/forms/edit_credential/otp.html',
-					color: 'purple'
-				}];
+				$translate(['general', 'password', 'custom.fields','files','otp']).then(function (translations) {
+					$scope.tabs = [{
+						title: translations.general,
+						url: 'views/partials/forms/edit_credential/basics.html',
+						color: 'blue'
+					}, {
+						title: translations.password,
+						url: 'views/partials/forms/edit_credential/password.html',
+						color: 'green'
+					}, {
+						title:translations['custom.fields'],
+						url: 'views/partials/forms/edit_credential/custom_fields.html',
+						color: 'orange'
+					}, {
+						title: translations.files,
+						url: 'views/partials/forms/edit_credential/files.html',
+						color: 'yellow'
+					}, {
+						title: translations.otp,
+						url: 'views/partials/forms/edit_credential/otp.html',
+						color: 'purple'
+					}];
+					$scope.currentTab = $scope.tabs[0];
+				});
 
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
@@ -143,7 +146,6 @@
 
 				$scope.addCustomField = function () {
 					var _field = angular.copy($scope.new_custom_field);
-
 					if (!_field.label) {
 						NotificationService.showNotification($translate.instant('error.no.label'), 3000);
 					}
@@ -154,9 +156,7 @@
 						return;
 					}
 					$scope.selected_field_type = 'text';
-
-					_field.secret = angular.copy(($scope.selected_field_type === 'password'));
-					_field.field_type =  angular.copy($scope.selected_field_type);
+					_field.secret = (_field.field_type === 'password');
 					if(_field.field_type === 'file'){
 						var key = false;
 						var _file = $scope.new_custom_field.value;
