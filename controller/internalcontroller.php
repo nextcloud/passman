@@ -15,7 +15,7 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
-
+use \OCP\App;
 
 class InternalController extends ApiController {
 	private $userId;
@@ -65,9 +65,11 @@ class InternalController extends ApiController {
 
 	/**
 	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getAppVersion() {
-		return new JSONResponse(array('version' => '1.0.2.25'));
+		$AppInstance = new App();
+		return new JSONResponse(array('version' => $AppInstance->getAppInfo("passman")["version"]));
 	}
 
 	/**
