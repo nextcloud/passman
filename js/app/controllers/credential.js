@@ -281,11 +281,11 @@
 
 				$scope.destroyCredential = function (credential) {
 					var _credential = angular.copy(credential);
-					CredentialService.destroyCredential(_credential.credential_id).then(function () {
+					CredentialService.destroyCredential(_credential.guid).then(function () {
 						for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 							if ($scope.active_vault.credentials[i].credential_id === credential.credential_id) {
 								$scope.active_vault.credentials.splice(i, 1);
-								NotificationService.showNotification($translate.instant('credential.destroyed)'), 5000);
+								NotificationService.showNotification($translate.instant('credential.destroyed'), 5000);
 								break;
 							}
 						}
