@@ -76,6 +76,8 @@ return [
 		['name' => 'internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],
 		['name' => 'internal#getAppVersion', 'url' => '/api/internal/version', 'verb' => 'GET'],
 		['name' => 'internal#generatePerson', 'url' => '/api/internal/generate_person', 'verb' => 'GET'],
+		['name' => 'internal#save_settings', 'url' => '/api/internal/settings/{key}/{value}', 'verb' => 'POST'],
+		['name' => 'internal#get_settings', 'url' => '/api/internal/settings', 'verb' => 'GET'],
 
 	]
 ];

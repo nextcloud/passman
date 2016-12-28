@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', '$location', 'ShareService', 'EncryptService', '$translate', function ($scope, VaultService, SettingsService, CredentialService, $location, ShareService, EncryptService, $translate) {
+		.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', '$location', 'ShareService', 'EncryptService', '$translate', '$rootScope', function ($scope, VaultService, SettingsService, CredentialService, $location, ShareService, EncryptService, $translate, $rootScope) {
 			VaultService.getVaults().then(function (vaults) {
 				$scope.vaults = vaults;
 				if (SettingsService.getSetting('defaultVault') != null) {
@@ -57,9 +57,26 @@
 			});
 
 
+			var key_strengths = [
+				'password.poor',
+				'password.poor',
+				'password.weak',
+				'password.good',
+				'password.strong'
+			];
+
 			$scope.default_vault = false;
 			$scope.remember_vault_password = false;
 			$scope.list_selected_vault = false;
+			$scope.minimal_value_key_strength = 3;
+
+			$rootScope.$on('settings_loaded', function () {
+				$scope.minimal_value_key_strength = SettingsService.getSetting('vault_key_strength');
+				$translate(key_strengths[SettingsService.getSetting('vault_key_strength')]).then(function(translation){
+					$scope.required_score = {'strength': translation};
+				});
+
+			});
 
 			$scope.toggleDefaultVault = function () {
 				$scope.default_vault = !$scope.default_vault;
@@ -96,7 +113,7 @@
 				var key_size = 1024;
 				ShareService.generateRSAKeys(key_size).progress(function (progress) {
 					var p = progress > 0 ? 2 : 1;
-					var msg =  $translate.instant('generating.sharing.keys');
+					var msg = $translate.instant('generating.sharing.keys');
 					msg = msg.replace('%step', p);
 					$scope.creating_keys = msg;
 					$scope.$digest();

@@ -195,7 +195,8 @@
 				</button>
 				<button class="button"
 						ng-click="shareCredential(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined">
+						ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined &&
+						(settings.user_sharing_enabled === 1 || settings.user_sharing_enabled === '1' || settings.link_sharing_enabled === 1 || settings.link_sharing_enabled === '1')">
 					<span class="fa fa-share"></span> {{ 'share' | translate}}
 				</button>
 

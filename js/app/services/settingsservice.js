@@ -32,12 +32,18 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('SettingsService', ['localStorageService', function (localStorageService) {
+		.service('SettingsService', ['localStorageService', '$http', '$rootScope', function (localStorageService, $http, $rootScope) {
 			var settings = {
 				defaultVault: null,
 				defaultVaultPass: null
 			};
 
+			$http.get(OC.generateUrl('apps/passman/api/internal/settings')).then(function (response) {
+				if (response.data) {
+					settings = angular.merge(settings, response.data);
+					$rootScope.$broadcast('settings_loaded');
+				}
+			});
 
 			var cookie = localStorageService.get('settings');
 			settings = angular.merge(settings, cookie);
