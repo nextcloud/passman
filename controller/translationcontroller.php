@@ -318,7 +318,7 @@ class TranslationController extends ApiController {
 			'last.access' => $this->trans->t('Last accessed'),
 			'never' => $this->trans->t('Never'),
 			'no.vaults' => $this->trans->t('No vaults found, why not create one?'),
-			'min.vault.key.strength' => $this->trans->t('Password strength must be atleast: {{strength}}'),
+			'min.vault.key.strength' => $this->trans->t('Password strength must be at least: {{strength}}'),
 
 			'new.vault.name' => $this->trans->t('Please give your new vault a name.'),
 			'new.vault.pass' => $this->trans->t('Vault password'),
