@@ -46,7 +46,7 @@ class TranslationController extends ApiController {
 			'error.loading.file' => $this->trans->t('Error loading file'),
 
 			// js/app/controllers/credential.js
-			'error.decrypt' => $this->trans->t('An error happend during decryption'),
+			'error.decrypt' => $this->trans->t('An error happened during decryption'),
 			'credential.created' => $this->trans->t('Credential created!'),
 			'credential.deleted' => $this->trans->t('Credential deleted'),
 			'credential.updated' => $this->trans->t('Credential updated'),
