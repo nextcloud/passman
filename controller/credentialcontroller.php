@@ -192,7 +192,7 @@ class CredentialController extends ApiController {
 
 		try {
 			$acl_list = $this->sharingService->getCredentialAclList($storedCredential->getGuid());
-		} catch (DoesNotExistException $exception) {
+		} catch (\Exception $exception) {
 			// Just check if we have an acl list
 		}
 		if (!empty($acl_list)) {
@@ -270,7 +270,7 @@ class CredentialController extends ApiController {
 	public function getRevision($credential_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($credential_guid);
-		} catch (DoesNotExistException $ex) {
+		} catch (\Exception $ex) {
 			return new NotFoundJSONResponse();
 		}
 
@@ -306,13 +306,13 @@ class CredentialController extends ApiController {
 		$revision = null;
 		try {
 			$this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
-		} catch (DoesNotExistException $e) {
+		} catch (\Exception $e) {
 			return new NotFoundJSONResponse();
 		}
 
 		try {
 			$revision = $this->credentialRevisionService->getRevision($revision_id);
-		} catch (DoesNotExistException $exception) {
+		} catch (\Exception $exception) {
 			return new NotFoundJSONResponse();
 		}
 

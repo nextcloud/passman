@@ -131,7 +131,9 @@ class CredentialMapper extends Mapper {
 		$credential->setCustomFields($raw_credential['custom_fields']);
 		$credential->setOtp($raw_credential['otp']);
 		$credential->setHidden($raw_credential['hidden']);
-		$credential->setSharedKey($raw_credential['shared_key']);
+		if(isset($raw_credential['shared_key'])) {
+			$credential->setSharedKey($raw_credential['shared_key']);
+		}
 		return parent::insert($credential);
 	}
 

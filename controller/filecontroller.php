@@ -62,7 +62,7 @@ class FileController extends ApiController {
 	public function updateFile($file_id, $file_data, $filename, $mimetype, $size){
 		try{
 			$file = $this->fileService->getFile($file_id, $this->userId);
-		} catch (DoesNotExistException $doesNotExistException){
+		} catch (\Exception $doesNotExistException){
 
 		}
 		if($file){
