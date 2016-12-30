@@ -46,14 +46,6 @@ class SettingsService {
 		$this->userId = $UserId;
 		$this->config = $config;
 		$this->appName = $AppName;
-	}
-
-	/**
-	 * Get all app settings
-	 *
-	 * @return array
-	 */
-	public function getAppSettings() {
 		$this->settings = array(
 			'link_sharing_enabled' => intval($this->config->getAppValue('passman', 'link_sharing_enabled', 1)),
 			'user_sharing_enabled' => intval($this->config->getAppValue('passman', 'user_sharing_enabled', 1)),
@@ -63,6 +55,14 @@ class SettingsService {
 			'disable_contextmenu' => intval($this->config->getAppValue('passman', 'disable_contextmenu', 1)),
 			'settings_loaded' => 1
 		);
+	}
+
+	/**
+	 * Get all app settings
+	 *
+	 * @return array
+	 */
+	public function getAppSettings() {
 		return $this->settings;
 	}
 
@@ -74,9 +74,13 @@ class SettingsService {
 	 * @return mixed
 	 */
 	public function getAppSetting($key, $default_value = null) {
-		$value = $this->config->getAppValue('passman', $key, $default_value);
-		if (in_array($key, $this->numeric_settings)) {
-			$value = intval($value);
+		if (isset($this->settings[$key])) {
+			$value = $this->settings[$key];
+			if (in_array($key, $this->numeric_settings)) {
+				$value = intval($value);
+			}
+		} else {
+			$value = $this->config->getAppValue('passman', $key, $default_value);
 		}
 		return $value;
 	}
@@ -88,6 +92,7 @@ class SettingsService {
 	 * @param $value mixed Value of the setting
 	 */
 	public function setAppSetting($key, $value) {
+		$this->settings[$key] = $value;
 		$this->config->setAppValue('passman', $key, $value);
 	}
 
@@ -98,7 +103,7 @@ class SettingsService {
 	 * @param $value mixed Value of the setting
 	 */
 
-	public function setUserSetting($key, $value){
+	public function setUserSetting($key, $value) {
 		return $this->config->setUserValue($this->userId, $this->appName, $key, $value);
 	}
 
@@ -108,8 +113,8 @@ class SettingsService {
 	 * @param $setting
 	 * @return bool
 	 */
-	public function isEnabled($setting){
-		$value = intval($this->config->getAppValue('passman', $setting, false));
+	public function isEnabled($setting) {
+		$value = intval($this->getAppSetting($setting, false));
 		return ($value === 1);
 	}
 }
