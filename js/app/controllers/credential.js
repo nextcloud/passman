@@ -198,7 +198,7 @@
 					$scope.settings = SettingsService.getSettings();
 				};
 
-				if(!SettingsService.getSetting('user_sharing_enabled')){
+				if(!SettingsService.getSetting('settings_loaded')){
 					$rootScope.$on('settings_loaded', function () {
 						settingsLoaded();
 					});
