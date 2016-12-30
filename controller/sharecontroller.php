@@ -20,9 +20,7 @@ use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCA\Passman\Utility\Utils;
-use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\NotFoundResponse;
-use OCP\IConfig;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -87,11 +85,6 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
-
-		if (!$this->settings->isEnabled('link_sharing_enabled')) {
-			return new JSONResponse(array());
-		}
-
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
 		} catch (\Exception $exception) {
@@ -128,9 +121,6 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions) {
-		if (!$this->settings->isEnabled('user_sharing_enabled')) {
-			return new JSONResponse(array());
-		}
 		/**
 		 * Assemble notification
 		 */
@@ -223,9 +213,6 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function unshareCredential($item_guid) {
-		if (!$this->settings->isEnabled('user_sharing_enabled')) {
-			return new JSONResponse(array());
-		}
 		$acl_list = $this->shareService->getCredentialAclList($item_guid);
 		$request_list = $this->shareService->getShareRequestsByGuid($item_guid);
 		foreach ($acl_list as $ACL) {
@@ -340,9 +327,6 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getPendingRequests() {
-		if (!$this->settings->isEnabled('user_sharing_enabled')) {
-			return new JSONResponse(array());
-		}
 		try {
 			$requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
 			$results = array();
@@ -379,10 +363,6 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getVaultItems($vault_guid) {
-		if (!$this->settings->isEnabled('user_sharing_enabled')) {
-			return new JSONResponse(array());
-		}
-
 		try {
 			return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
 		} catch (\Exception $ex) {
@@ -433,9 +413,6 @@ class ShareController extends ApiController {
 	 * @PublicPage
 	 */
 	public function getPublicCredentialData($credential_guid) {
-		if (!$this->settings->isEnabled('user_sharing_enabled')) {
-			return new JSONResponse(array());
-		}
 		//@TODO Check expire date
 		$acl = $this->shareService->getACL(null, $credential_guid);
 
