@@ -38,7 +38,7 @@
 				defaultVaultPass: null
 			};
 
-			$http.get(OC.generateUrl('apps/passman/api/internal/settings')).then(function (response) {
+			$http.get(OC.generateUrl('apps/passman/api/v2/settings')).then(function (response) {
 				if (response.data) {
 					settings = angular.merge(settings, response.data);
 					$rootScope.$broadcast('settings_loaded');

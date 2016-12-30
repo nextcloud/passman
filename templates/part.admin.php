@@ -25,7 +25,7 @@ if ($checkVersion) {
 }
 ?>
 
-<div id="passwordSharingSettings" class="followupsection">
+<div id="passwordSharingSettings" class="followup section">
 	<form name="passman_settings">
 		<h2><?php p($l->t('Passman Settings')); ?></h2>
 		<?php

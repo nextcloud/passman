@@ -60,7 +60,7 @@ $(document).ready(function () {
 
 		setAdminKey: function (key, value) {
 			var request = $.ajax({
-				url: this._baseUrl + '/' + key + '/' + value,
+				url: this._baseUrl + '/' + key + '/' + value +'/admin1/admin2',
 				method: 'POST'
 			});
 			request.done(function () {
@@ -84,7 +84,7 @@ $(document).ready(function () {
 	};
 
 
-	var settings = new Settings(OC.generateUrl('apps/passman/api/internal/settings'));
+	var settings = new Settings(OC.generateUrl('apps/passman/api/v2/settings'));
 	settings.load();
 
 	// ADMIN SETTINGS
@@ -120,5 +120,9 @@ $(document).ready(function () {
 	$('#vault_key_strength').change(function () {
 		settings.setAdminKey('vault_key_strength', $(this).val());
 	});
+
+	if($('form[name="passman_settings"]').length === 2){
+		$('form[name="passman_settings"]')[1].remove();
+	}
 
 });

@@ -11,13 +11,11 @@
 
 namespace OCA\Passman\Controller;
 
-use OCA\Files_External\NotFoundException;
 use OCA\Passman\Db\SharingACL;
+use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
-use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\IConfig;
 use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
@@ -26,7 +24,7 @@ use OCA\Passman\Activity;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialRevisionService;
 use OCA\Passman\Service\ShareService;
-use OCP\IUser;
+
 
 class CredentialController extends ApiController {
 	private $userId;
@@ -34,7 +32,7 @@ class CredentialController extends ApiController {
 	private $activityService;
 	private $credentialRevisionService;
 	private $sharingService;
-	private $config;
+	private $settings;
 
 	public function __construct($AppName,
 								IRequest $request,
@@ -43,7 +41,7 @@ class CredentialController extends ApiController {
 								ActivityService $activityService,
 								CredentialRevisionService $credentialRevisionService,
 								ShareService $sharingService,
-								IConfig $config
+								SettingsService $settings
 	) {
 		parent::__construct($AppName, $request);
 		$this->userId = $userId;
@@ -51,7 +49,7 @@ class CredentialController extends ApiController {
 		$this->activityService = $activityService;
 		$this->credentialRevisionService = $credentialRevisionService;
 		$this->sharingService = $sharingService;
-		$this->config = $config;
+		$this->settings = $settings;
 	}
 
 
@@ -151,7 +149,7 @@ class CredentialController extends ApiController {
 			} else {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
-			if ($this->config->getAppValue('passman', 'user_sharing_enabled', 1) === 0 || $this->config->getAppValue('passman', 'user_sharing_enabled', 1) === '0') {
+			if ($this->settings->isEnabled('user_sharing_enabled')) {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
 		}

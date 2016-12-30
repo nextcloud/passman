@@ -40,8 +40,9 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         <database>sqlite</database>
         <database min-version="5.5">mysql</database>
     </dependencies>
+
     <settings>
-        <admin>OCA\Passman\Settings\Admin</admin>
+        <admin>OCA\Passman\Controller\SettingsController</admin>
     </settings>
 
     <background-jobs>
