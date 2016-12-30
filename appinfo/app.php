@@ -14,6 +14,7 @@ namespace OCA\Passman\AppInfo;
 
 use OCP\Util;
 use OCP\BackgroundJob;
+use OCP\App;
 use OCA\Passman\Notifier;
 use OCA\Passman\Activity;
 require_once __DIR__ . '/autoload.php';
@@ -49,3 +50,4 @@ $manager->registerExtension(function() {
  * The string has to match the app's folder name
  */
 Util::addTranslations('passman');
+\OCP\App::registerAdmin('passman', 'templates/admin.settings');

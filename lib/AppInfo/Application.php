@@ -36,6 +36,7 @@ use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCA\Passman\Service\NotificationService;
+Use OCA\Passman\Service\SettingsService;
 use OCP\IConfig;
 use OCP\IDBConnection;
 
@@ -72,7 +73,7 @@ class Application extends App {
                 $c->query('CredentialService'),
                 $c->query('NotificationService'),
                 $c->query('FileService'),
-                $c->query('IConfig')
+                $c->query('SettingsService')
 			);
 		});
 
@@ -112,6 +113,7 @@ class Application extends App {
 		$container->registerAlias('Utils', Utils::class);
 		$container->registerAlias('IDBConnection', IDBConnection::class);
 		$container->registerAlias('IConfig', IConfig::class);
+		$container->registerAlias('SettingsService', SettingsService::class);
 	}
 
 	/**
