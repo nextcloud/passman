@@ -10,7 +10,6 @@ OC.L10N.register(
     "Please fill in a label!" : "Preencha o rótulo!",
     "Please fill in a value!" : "Preencha um valor!",
     "Error loading file" : "Erro ao carregar o arquivo",
-    "An error happend during decryption" : "Ocorreu um erro durante a descriptografia",
     "Credential created!" : "Credencial criada!",
     "Credential deleted" : "Credential excluída",
     "Credential updated" : "Credencial atualizada",
