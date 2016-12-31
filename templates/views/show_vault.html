@@ -45,7 +45,7 @@
 			   ng-if="view_mode === 'list'">
 			<tr ng-repeat="credential in filtered_credentials | orderBy:'label'"
 				ng-if="showCredentialRow(credential)"
-				ng-click="selectCredential(credential)"
+				ng-click="selectCredential(credential)"  ng-dblclick="editCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 				<td>
 					<span class="tags">
