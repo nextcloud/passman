@@ -35,6 +35,7 @@
 		.service('ShareService', ['$http', 'VaultService', 'EncryptService', 'CredentialService', function ($http, VaultService, EncryptService, CredentialService) {
 			// Setup sjcl random engine to max paranoia level and start collecting data
 			var paranoia_level = 10;
+			/** global: sjcl */
 			sjcl.random.setDefaultParanoia(paranoia_level);
 			sjcl.random.startCollectors();
 
@@ -65,6 +66,7 @@
 					return $http.get(queryUrl, {search: userId}).then(function (response) {
 						if (response.data) {
 							for (var i = 0; i < response.data.length; i++) {
+								/** global: forge */
 								response.data[i].public_sharing_key = forge.pki.publicKeyFromPem(response.data[i].public_sharing_key);
 							}
 							return response.data;
@@ -201,10 +203,13 @@
 				},
 
 				generateRSAKeys: function (key_length) {
+					/** global: C_Promise */
 					var p = new C_Promise(function () {
+						/** global: forge */
 						var state = forge.pki.rsa.createKeyPairGenerationState(key_length, 0x10001);
 						var step = function () {
 							// run for 100 ms
+							/** global: forge */
 							if (!forge.pki.rsa.stepKeyPairGenerationState(state, 100)) {
 								if (state.p !== null) {
 									// progress(50);
@@ -227,8 +232,10 @@
 				},
 				generateSharedKey: function (size) {
 					size = size || 20;
+					/** global: C_Promise */
 					return new C_Promise(function () {
 						var t = this;
+						/** global: CRYPTO */
 						CRYPTO.PASSWORD.generate(size,
 							function (pass) {
 								t.call_then(pass);
@@ -253,9 +260,11 @@
 					};
 				},
 				rsaPrivateKeyFromPEM: function (private_pem) {
+					/** global: forge */
 					return forge.pki.privateKeyFromPem(private_pem);
 				},
 				rsaPublicKeyFromPEM: function (public_pem) {
+					/** global: forge */
 					return forge.pki.publicKeyFromPem(public_pem);
 				},
 				/**
@@ -267,6 +276,7 @@
 					var workload = function () {
 						if (this.current_index < this.vaults.length > 0 && this.vaults.length > 0) {
 							var _vault = angular.copy(this.vaults[this.current_index]);
+							/** global: forge */
 							_vault.key = forge.util.encode64(
 								_vault.public_sharing_key.encrypt(this.string)
 							);
@@ -282,6 +292,7 @@
 							this.call_then(this.data);
 						}
 					};
+					/** global: C_Promise */
 					return new C_Promise(function () {
 						this.data = [];
 						this.vaults = vaults;

@@ -21,6 +21,7 @@
  */
 
 // Importers should always start with this
+/** global: PassmanImporter */
 var PassmanImporter = PassmanImporter || {};
 (function(window, $, PassmanImporter) {
 	'use strict';
@@ -33,6 +34,7 @@ var PassmanImporter = PassmanImporter || {};
 	};
 
 	PassmanImporter.clippers.readFile = function (file_data) {
+		/** global: C_Promise */
 		return new C_Promise(function() {
 			var credential_list = [];
 			var re = /<textarea>(.*?)<\/textarea>/gi;

@@ -297,7 +297,7 @@
 							this.plain_credential = master_promise.plain_credential;
 						};
 						this.credential_data = {};
-
+						/** global: C_Promise */
 						(new C_Promise(promise_credential_update, new password_data())).progress(function (data) {
 							master_promise.call_progress(data);
 						}).then(function (data) {
@@ -306,7 +306,7 @@
 							master_promise.promises++;
 
 							master_promise.credential_data = data;
-
+							/** global: C_Promise */
 							(new C_Promise(promise_files_update, new password_data())).progress(function (data) {
 								master_promise.call_progress(data);
 							}).then(function () {
@@ -318,6 +318,7 @@
 							});
 
 							master_promise.promises++;
+							/** global: C_Promise */
 							(new C_Promise(promise_revisions_update, new password_data())).progress(function (data) {
 								master_promise.call_progress(data);
 							}).then(function () {
@@ -329,7 +330,7 @@
 							});
 						});
 					};
-
+					/** global: C_Promise */
 					return new C_Promise(promise_workload);
 				}
 			};

@@ -37,6 +37,7 @@
 					var invoker = $parse(attributes.onRead);
 					scope.imageData = null;
 
+					/** global: qrcode */
 					qrcode.callback = function (result) {
 						//console.log('QR callback:',result);
 						invoker(scope, {
@@ -48,12 +49,14 @@
 						//element.val('');
 					};
 					element.bind("change", function (changeEvent) {
+						/** global: FileReader */
 						var reader = new FileReader(), file = changeEvent.target.files[0];
 						reader.readAsDataURL(file);
 						reader.onload = (function () {
 							return function (e) {
 								//gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
 								scope.imageData = e.target.result;
+								/** global: qrcode */
 								qrcode.decode(e.target.result);
 							};
 						})(file);

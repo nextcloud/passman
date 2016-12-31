@@ -87,6 +87,7 @@
 							var key = base32tohex(scope.secret);
 							var epoch = Math.round(new Date().getTime() / 1000.0);
 							var time = leftpad(dec2hex(Math.floor(epoch / 30)), 16, '0');
+							/** global: jsSHA */
 							var hmacObj = new jsSHA(time, 'HEX');
 							var hmac = hmacObj.getHMAC(key, 'HEX', 'SHA-1', "HEX");
 							var offset = hex2dec(hmac.substring(hmac.length - 1));

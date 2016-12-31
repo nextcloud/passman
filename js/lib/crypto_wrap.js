@@ -42,6 +42,8 @@ var CRYPTO = {    // Global variables of the object:
          * @param progress  The process of the generation, optional, called each 4 characters generated.
          */
         generate : function (length, callback, progress, start_string) {
+			/** global: paranoia_level */
+			/** global: sjcl */
             if (!sjcl.random.isReady(paranoia_level)) {
                 setTimeout(this.generate(length, callback, progress, start_string), 500);
                 return;
@@ -49,6 +51,7 @@ var CRYPTO = {    // Global variables of the object:
 
             if (start_string == null) start_string = "";
             if (start_string.length < length) {
+				/** global: CRYPTO */
                 start_string += CRYPTO.RANDOM.getRandomASCII();
                 if (progress != null) progress(start_string.length / length * 100);
             }
@@ -80,6 +83,8 @@ var CRYPTO = {    // Global variables of the object:
 
             var ret = "";
             while (ret.length < 4) {
+				/** global: paranoia_level */
+				/** global: sjcl */
                 var int = sjcl.random.randomWords(1, paranoia_level);
                 int = int[0];
 
@@ -134,6 +139,7 @@ var CRYPTO = {    // Global variables of the object:
     initEngines : function (default_paranoia) {
         paranoia_level = default_paranoia || 10;
 
+		/** global: sjcl */
         sjcl.random.setDefaultParanoia(this.paranoia_level);
         sjcl.random.startCollectors();
 

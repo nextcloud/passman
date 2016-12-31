@@ -157,6 +157,7 @@
 					var private_key = EncryptService.decryptString(VaultService.getActiveVault().private_sharing_key);
 
 					private_key = ShareService.rsaPrivateKeyFromPEM(private_key);
+					/** global: forge */
 					crypted_shared_key = private_key.decrypt(forge.util.decode64(crypted_shared_key));
 					crypted_shared_key = EncryptService.encryptString(crypted_shared_key);
 

@@ -124,6 +124,7 @@
 
 			var rng_psize, rng_state, rng_pool, rng_pptr, t, z, crypt_obj, num, buf, i
 			if (Arcfour.prototype.init = ARC4init, Arcfour.prototype.next = ARC4next, rng_psize = 256, null == rng_pool) {
+				/** global: navigator */
 				if (rng_pool = [], rng_pptr = 0, "undefined" != typeof navigator && "Netscape" == navigator.appName && navigator.appVersion < "5" && "undefined" != typeof window && window.crypto)for (z = window.crypto.random(32), t = 0; t < z.length; ++t)rng_pool[rng_pptr++] = 255 & z.charCodeAt(t)
 				try {
 					if (crypt_obj = null, "undefined" != typeof window && void 0 !== window.crypto ? crypt_obj = window.crypto : "undefined" != typeof window && void 0 !== window.msCrypto && (crypt_obj = window.msCrypto), void 0 !== crypt_obj && "function" == typeof crypt_obj.getRandomValues && rng_psize > rng_pptr)for (num = Math.floor((rng_psize - rng_pptr) / 2) + 1, buf = new Uint16Array(num), crypt_obj.getRandomValues(buf), i = 0; i < buf.length; i++)t = buf[i], rng_pool[rng_pptr++] = t >>> 8, rng_pool[rng_pptr++] = 255 & t

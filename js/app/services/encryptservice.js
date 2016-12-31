@@ -46,6 +46,7 @@
 						_key = VaultService.getActiveVault().vaultKey;
 					}
 					var rp = {};
+					/** global: sjcl */
 					var ct = sjcl.encrypt(_key, string, encryption_config, rp);
 					return window.btoa(ct);
 				},
@@ -56,6 +57,7 @@
 					ciphertext = window.atob(ciphertext);
 					var rp = {};
 					try {
+						/** global: sjcl */
 						return sjcl.decrypt(_key, ciphertext, encryption_config, rp);
 					} catch (e) {
 						throw e;

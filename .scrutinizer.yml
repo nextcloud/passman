@@ -17,3 +17,9 @@ tools:
     php_code_sniffer: true
     sensiolabs_security_checker: true
     php_code_coverage: true
+
+build_failure_conditions:
+    - 'issues.label("coding-style").new.count > 5'
+    - 'issues.severity(>= MAJOR).new.exists'
+    - 'elements.rating(<= D).new.exists'
+    - 'project.metric("scrutinizer.quality", < 7.5)'
