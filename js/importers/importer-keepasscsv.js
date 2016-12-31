@@ -21,6 +21,7 @@
  */
 
 // Importers should always start with this
+/** global: PassmanImporter */
 var PassmanImporter = PassmanImporter || {};
 (function(window, $, PassmanImporter) {
 	'use strict';
@@ -34,6 +35,7 @@ var PassmanImporter = PassmanImporter || {};
 	};
 
 	PassmanImporter.keepassCsv.readFile = function (file_data) {
+		/** global: C_Promise */
 		var p = new C_Promise(function(){
 			var parsed_csv = PassmanImporter.readCsv(file_data);
 			var credential_list = [];

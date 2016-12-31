@@ -35,6 +35,7 @@
 			'pascalprecht.translate'
 
 		]).config(['$httpProvider', function ($httpProvider) {
+		/** global: oc_requesttoken */
 		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
 	}]).config(function ($translateProvider) {
 		$translateProvider.useUrlLoader(OC.generateUrl('/apps/passman/api/v2/language'));

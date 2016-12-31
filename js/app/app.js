@@ -82,6 +82,7 @@
 					redirectTo: '/'
 				});
 		}).config(['$httpProvider', function ($httpProvider) {
+		/** global: oc_requesttoken */
 		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
 	}]).config(function (localStorageServiceProvider) {
 		localStorageServiceProvider

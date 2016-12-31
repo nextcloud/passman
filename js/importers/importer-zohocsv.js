@@ -21,6 +21,7 @@
  */
 
 // Importers should always start with this
+/** global: PassmanImporter */
 var PassmanImporter = PassmanImporter || {};
 
 (function(window, $, PassmanImporter) {
@@ -36,6 +37,7 @@ var PassmanImporter = PassmanImporter || {};
 	};
 
 	PassmanImporter.zohoCsv.readFile = function (file_data) {
+		/** global: C_Promise */
 		return new C_Promise(function(){
 			var parsed_csv = PassmanImporter.readCsv(file_data, false);
 			var credential_list = [];

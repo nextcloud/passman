@@ -275,6 +275,7 @@
 
 				$scope.parseQR = function (QRCode) {
 					var re = /otpauth:\/\/(totp|hotp)\/(.*)\?(secret|issuer)=(.*)&(issuer|secret)=(.*)/, parsedQR, qrInfo;
+					qrInfo = [];
 					parsedQR = (QRCode.qrData.match(re));
 					if (parsedQR)
 						qrInfo = {

@@ -107,10 +107,12 @@
 					}
 
 					// write the ArrayBuffer to a blob, and you're done
+					/** global: Blob */
 					bb = new Blob([ab], {
 						type: ftype
 					});
 
+					/** global: URL */
 					return URL.createObjectURL(bb);
 				}
 			};
