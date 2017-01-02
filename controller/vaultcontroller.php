@@ -33,8 +33,7 @@ class VaultController extends ApiController {
 								$UserId,
 								VaultService $vaultService,
 								CredentialService $credentialService,
-								SettingsService $settings,
-								EncryptService $encryptService) {
+								SettingsService $settings) {
 		parent::__construct(
 			$AppName,
 			$request,

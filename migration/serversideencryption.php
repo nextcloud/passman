@@ -24,6 +24,7 @@
 namespace OCA\Passman\Migration;
 
 use OCA\Passman\Db\CredentialRevision;
+use OCA\Passman\Db\File;
 use OCA\Passman\Service\CredentialRevisionService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\EncryptService;
@@ -36,7 +37,7 @@ use OCP\Migration\IRepairStep;
 
 class ServerSideEncryption implements IRepairStep {
 
-	/** @var encryptService */
+	/** @var EncryptService */
 	private $encryptService;
 
 	/** @var IDBConnection */
@@ -73,6 +74,8 @@ class ServerSideEncryption implements IRepairStep {
 	}
 
 	public function run(IOutput $output) {
+		$output->info('Enabling Service Side Encryption for passman');
+
 		if (version_compare($this->installedVersion, '2.0.0RC4', '<')) {
 			$this->encryptCredentials();
 			$this->encryptRevisions();
@@ -80,15 +83,19 @@ class ServerSideEncryption implements IRepairStep {
 		}
 	}
 
+	private function fetchAll($sql){
+		return $this->db->executeQuery($sql)->fetchAll();
+	}
+
 	private function encryptCredentials() {
-		$credentials = $this->db->executeQuery('SELECT * FROM `*PREFIX*passman_credentials`')->fetchAll();
+		$credentials = $this->fetchAll('SELECT * FROM `*PREFIX*passman_credentials`');
 		foreach ($credentials as $credential) {
 			$this->credentialService->updateCredential($credential);
 		}
 	}
 
 	private function encryptRevisions() {
-		$revisions = $this->db->executeQuery('SELECT * FROM `*PREFIX*passman_revisions`')->fetchAll();
+		$revisions = $this->fetchAll('SELECT * FROM `*PREFIX*passman_revisions`');
 		foreach ($revisions as $_revision) {
 			$revision = new CredentialRevision();
 			$revision->setId($_revision['id']);
@@ -97,14 +104,23 @@ class ServerSideEncryption implements IRepairStep {
 			$revision->setUserId($_revision['user_id']);
 			$revision->setCreated($_revision['created']);
 			$revision->setEditedBy($_revision['edited_by']);
-			$revision->setCredentialData( $_revision['credential_data']);
+			$revision->setCredentialData($_revision['credential_data']);
 			$this->revisionService->updateRevision($revision);
 		}
 	}
 
 	private function encryptFiles() {
-		$files = $this->db->executeQuery('SELECT * FROM `*PREFIX*passman_files`')->fetchAll();
-		foreach ($files as $file) {
+		$files = $this->fetchAll('SELECT * FROM `*PREFIX*passman_files`');
+		foreach ($files as $_file) {
+			$file = new File();
+			$file->setId($_file['id']);
+			$file->setGuid($_file['guid']);
+			$file->setUserId($_file['user_id']);
+			$file->setMimetype($_file['minetype']);
+			$file->setFilename($_file['filename']);
+			$file->setSize($_file['size']);
+			$file->setCreated($_file['created']);
+			$file->setFileData($_file['file_data']);
 			$this->fileService->updateFile($file);
 		}
 	}

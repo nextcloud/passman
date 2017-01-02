@@ -293,6 +293,23 @@ class EncryptService {
 		return $this->handleCredential($credential, 'encrypt');
 	}
 
+
+
+	private function extractKeysFromCredential($credential){
+		$userKey = '';
+		$userSuppliedKey = '';
+		if ($credential instanceof Credential) {
+			$userSuppliedKey = $credential->getLabel();
+			$sk = $credential->getSharedKey();
+			$userKey = (isset($sk)) ? $sk : $credential->getUserId();
+		}
+		if (is_array($credential)) {
+			$userSuppliedKey = $credential['label'];
+			$userKey = (isset($credential['shared_key'])) ? $credential['shared_key'] : $credential['user_id'];
+		}
+		return array($userKey, $userSuppliedKey);
+	}
+
 	/**
 	 * Handles the encryption / decryption of a credential
 	 *
@@ -302,27 +319,22 @@ class EncryptService {
 	 */
 	private function handleCredential($credential, $op) {
 		$service_function = ($op === 'encrypt') ? 'encrypt' : 'decrypt';
-		if ($credential instanceof Credential) {
-			$userSuppliedKey = $credential->getLabel();
-			$sk = $credential->getSharedKey();
-			$userKey = (isset($sk)) ? $sk : $credential->getUserId();
-		} else {
-			$userSuppliedKey = $credential['label'];
-			$userKey = (isset($credential['shared_key'])) ? $credential['shared_key'] : $credential['user_id'];
-		}
-		$key = EncryptService::makeKey($userKey, $this->server_key, $userSuppliedKey);
 
+		list($userKey, $userSuppliedKey) = $this->extractKeysFromCredential($credential);
+
+		$key = EncryptService::makeKey($userKey, $this->server_key, $userSuppliedKey);
 		foreach ($this->encrypted_credential_fields as $field) {
 			if ($credential instanceof Credential) {
 				$field = str_replace(' ', '', str_replace('_', ' ', ucwords($field, '_')));
 				$set = 'set' . $field;
 				$get = 'get' . $field;
 				$credential->{$set}($this->{$service_function}($credential->{$get}(), $key));
-			} else {
+			}
+
+			if (is_array($credential)) {
 				$credential[$field] = $this->{$service_function}($credential[$field], $key);
 			}
 		}
-
 		return $credential;
 	}
 
@@ -355,12 +367,16 @@ class EncryptService {
 	 * @return File|array
 	 * @throws \Exception
 	 */
-	private function handleFile($file, $op){
+	private function handleFile($file, $op) {
 		$service_function = ($op === 'encrypt') ? 'encrypt' : 'decrypt';
+		$userKey = '';
+		$userSuppliedKey = '';
 		if ($file instanceof File) {
 			$userSuppliedKey = $file->getSize();
 			$userKey = md5($file->getMimetype());
-		} else {
+		}
+
+		if (is_array($file)) {
 			$userSuppliedKey = $file['size'];
 			$userKey = md5($file['mimetype']);
 		}
@@ -371,10 +387,13 @@ class EncryptService {
 		if ($file instanceof File) {
 			$file->setFilename($this->{$service_function}($file->getFilename(), $key));
 			$file->setFileData($this->{$service_function}($file->getFileData(), $key));
-		} else {
+		}
+
+		if (is_array($file)) {
 			$file['filename'] = $this->{$service_function}($file['filename'], $key);
 			$file['file_data'] = $this->{$service_function}($file['file_data'], $key);
 		}
+
 		return $file;
 	}
 }

@@ -50,8 +50,7 @@ class CredentialService {
 	/**
 	 * Create a new credential
 	 *
-	 * @param $user_id
-	 * @param $item_guid
+	 * @param array $credential
 	 * @return Credential
 	 */
 	public function createCredential($credential) {
@@ -152,8 +151,6 @@ class CredentialService {
 			if ($acl->hasPermission(SharingACL::READ)) {
 				return $this->encryptService->decryptCredential($credential);
 			}
-			throw new DoesNotExistException("Did expect one result but found none when executing");
-
 		}
 	}
 

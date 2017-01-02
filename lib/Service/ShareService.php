@@ -42,12 +42,13 @@ class ShareService {
 	private $encryptService;
 
 	private $server_key;
+
 	public function __construct(
 		SharingACLMapper $sharingACL,
 		ShareRequestMapper $shareRequest,
 		CredentialMapper $credentials,
 		CredentialRevisionService $revisions,
-	    EncryptService $encryptService
+		EncryptService $encryptService
 	) {
 		$this->sharingACL = $sharingACL;
 		$this->shareRequest = $shareRequest;
@@ -159,6 +160,7 @@ class ShareService {
 
 	/**
 	 * Gets the acl for a given item guid
+	 *
 	 * @param $user_id
 	 * @param $item_guid
 	 * @return SharingACL
@@ -200,31 +202,33 @@ class ShareService {
 	}
 
 
-    /**
-     * Deletes a share request by the item ID
-     * @param ShareRequest $request
-     * @return \PDOStatement
-     */
+	/**
+	 * Deletes a share request by the item ID
+	 *
+	 * @param ShareRequest $request
+	 * @return \PDOStatement
+	 */
 	public function cleanItemRequestsForUser(ShareRequest $request) {
 		return $this->shareRequest->cleanItemRequestsForUser($request->getItemId(), $request->getTargetUserId());
 	}
 
-    /**
-     * Get an share request by id
-     * @param $id
-     * @return ShareRequest
-     */
+	/**
+	 * Get an share request by id
+	 *
+	 * @param $id
+	 * @return ShareRequest
+	 */
 	public function getShareRequestById($id) {
 		return $this->shareRequest->getShareRequestById($id);
 	}
 
-    /**
-     * Get an share request by $item_guid and $target_vault_guid
-     *
-     * @param $item_guid
-     * @param $target_vault_guid
-     * @return ShareRequest
-     */
+	/**
+	 * Get an share request by $item_guid and $target_vault_guid
+	 *
+	 * @param $item_guid
+	 * @param $target_vault_guid
+	 * @return ShareRequest
+	 */
 	public function getRequestByGuid($item_guid, $target_vault_guid) {
 		return $this->shareRequest->getRequestByItemAndVaultGuid($item_guid, $target_vault_guid);
 	}
@@ -284,11 +288,12 @@ class ShareService {
 		return $this->sharingACL->deleteShareACL($ACL);
 	}
 
-    /**
-     * Updates the given ACL entry
-     * @param SharingACL $sharingACL
-     * @return SharingACL
-     */
+	/**
+	 * Updates the given ACL entry
+	 *
+	 * @param SharingACL $sharingACL
+	 * @return SharingACL
+	 */
 	public function updateCredentialACL(SharingACL $sharingACL) {
 		return $this->sharingACL->updateCredentialACL($sharingACL);
 	}
@@ -309,7 +314,7 @@ class ShareService {
 	}
 
 
-	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions){
-	    return $this->shareRequest->updatePendingRequestPermissions($item_guid, $user_id, $permissions);
-    }
+	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions) {
+		return $this->shareRequest->updatePendingRequestPermissions($item_guid, $user_id, $permissions);
+	}
 }

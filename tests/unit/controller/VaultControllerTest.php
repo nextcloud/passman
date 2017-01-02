@@ -24,6 +24,7 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\VaultService;
 use PHPUnit_Framework_TestCase;
 
@@ -46,9 +47,10 @@ class VaultControllerTest extends PHPUnit_Framework_TestCase {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 		$this->vaultService = $this->createMock(VaultService::class);
 		$this->credentialService = $this->createMock(CredentialService::class);
+		$this->settingsService = $this->createMock(SettingsService::class);
 
 		$this->controller = new VaultController(
-			'passman', $request, $this->userId, $this->vaultService, $this->credentialService
+			'passman', $request, $this->userId, $this->vaultService, $this->credentialService, $this->settingsService
 		);
 	}
 

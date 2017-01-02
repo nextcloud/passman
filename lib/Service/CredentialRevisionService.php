@@ -44,6 +44,7 @@ class CredentialRevisionService {
 
 	/**
 	 * Create a new revision for a credential
+	 *
 	 * @param $credential
 	 * @param $userId
 	 * @param $credential_id
@@ -57,13 +58,14 @@ class CredentialRevisionService {
 
 	/**
 	 * Get revisions of a credential
+	 *
 	 * @param $credential_id
 	 * @param null $user_id
 	 * @return CredentialRevision[]
 	 */
-	public function getRevisions($credential_id, $user_id = null){
+	public function getRevisions($credential_id, $user_id = null) {
 		$result = $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
-		foreach ($result as $index => $revision){
+		foreach ($result as $index => $revision) {
 			$c = json_decode(base64_decode($revision->getCredentialData()), true);
 			$result[$index] = $revision->jsonSerialize();
 			$result[$index]['credential_data'] = $this->encryptService->decryptCredential($c);
@@ -77,7 +79,7 @@ class CredentialRevisionService {
 	 * @param null $user_id
 	 * @return CredentialRevision
 	 */
-	public function getRevision($credential_id, $user_id = null){
+	public function getRevision($credential_id, $user_id = null) {
 		$revision = $this->credentialRevisionMapper->getRevision($credential_id, $user_id);
 		$c = json_decode(base64_decode($revision->getCredentialData()), true);
 		$revision->setCredentialData($this->encryptService->decryptCredential($c));
@@ -86,20 +88,22 @@ class CredentialRevisionService {
 
 	/**
 	 * Delete a revision
+	 *
 	 * @param $revision_id
 	 * @param $user_id
 	 * @return CredentialRevision
 	 */
-	public function deleteRevision($revision_id, $user_id){
+	public function deleteRevision($revision_id, $user_id) {
 		return $this->credentialRevisionMapper->deleteRevision($revision_id, $user_id);
 	}
 
 	/**
 	 * Update revision
+	 *
 	 * @param CredentialRevision $credentialRevision
 	 * @return CredentialRevision
 	 */
-	public function updateRevision(CredentialRevision $credentialRevision){
+	public function updateRevision(CredentialRevision $credentialRevision) {
 		$credential_data = $credentialRevision->getCredentialData();
 		$credential_data = json_decode(base64_decode($credential_data), true);
 		$credential_data = base64_encode(json_encode($this->encryptService->encryptCredential($credential_data)));
