@@ -39,17 +39,22 @@ class ShareService {
 	private $shareRequest;
 	private $credential;
 	private $revisions;
+	private $encryptService;
 
+	private $server_key;
 	public function __construct(
 		SharingACLMapper $sharingACL,
 		ShareRequestMapper $shareRequest,
 		CredentialMapper $credentials,
-		CredentialRevisionService $revisions
+		CredentialRevisionService $revisions,
+	    EncryptService $encryptService
 	) {
 		$this->sharingACL = $sharingACL;
 		$this->shareRequest = $shareRequest;
 		$this->credential = $credentials;
 		$this->revisions = $revisions;
+		$this->encryptService = $encryptService;
+		$this->server_key = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
 	}
 
 	/**
@@ -140,9 +145,10 @@ class ShareService {
 		foreach ($entries as $entry) {
 			// Check if the user can read the credential, probably unnecesary, but just to be sure
 			if (!$entry->hasPermission(SharingACL::READ)) continue;
-
 			$tmp = $entry->jsonSerialize();
-			$tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId())->jsonSerialize();
+			$credential = $this->credential->getCredentialById($entry->getItemId());
+			$credential = $this->encryptService->decryptCredential($credential);
+			$tmp['credential_data'] = $credential->jsonSerialize();
 
 			if (!$entry->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
 			unset($tmp['credential_data']['shared_key']);
@@ -168,7 +174,10 @@ class ShareService {
 		if (!$acl->hasPermission(SharingACL::READ)) throw new DoesNotExistException("Item not found or wrong access level");
 
 		$tmp = $acl->jsonSerialize();
-		$tmp['credential_data'] = $this->credential->getCredentialById($acl->getItemId())->jsonSerialize();
+		$credential = $this->credential->getCredentialById($acl->getItemId());
+		$credential = $this->encryptService->decryptCredential($credential);
+
+		$tmp['credential_data'] = $credential->jsonSerialize();
 
 		if (!$acl->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
 		unset($tmp['credential_data']['shared_key']);

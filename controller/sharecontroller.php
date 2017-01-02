@@ -464,12 +464,12 @@ class ShareController extends ApiController {
 	}
 
 	/**
-	 * @param $credential_guid
+	 * @param $item_guid
 	 * @param $file_guid
 	 * @NoAdminRequired
 	 * @PublicPage
-	 * @return JSONResponse
-	 * @return NotFoundResponse
+	 * @return mixed
+	 * @return NotFoundJSONResponse
 	 */
 	public function getFile($item_guid, $file_guid) {
 		try {

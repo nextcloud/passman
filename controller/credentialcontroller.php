@@ -12,6 +12,7 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Db\SharingACL;
+use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\Http;
@@ -42,6 +43,7 @@ class CredentialController extends ApiController {
 								CredentialRevisionService $credentialRevisionService,
 								ShareService $sharingService,
 								SettingsService $settings
+
 	) {
 		parent::__construct($AppName, $request);
 		$this->userId = $userId;
@@ -86,6 +88,7 @@ class CredentialController extends ApiController {
 			'hidden' => $hidden,
 
 		);
+
 		$credential = $this->credentialService->createCredential($credential);
 		$link = ''; // @TODO create direct link to credential
 		if (!$credential->getHidden()) {
@@ -102,7 +105,8 @@ class CredentialController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getCredential($credential_guid) {
-		return new JSONResponse($this->credentialService->getCredentialByGUID($credential_guid, $this->userId));
+		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		return new JSONResponse($credential);
 	}
 
 	/**
@@ -116,7 +120,7 @@ class CredentialController extends ApiController {
 									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision) {
 
 
-		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid);
 
 		$credential = array(
 			'credential_id' => $credential_id,
@@ -139,6 +143,7 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
+			'user_id' => $storedCredential->getUserId()
 		);
 
 
@@ -149,10 +154,11 @@ class CredentialController extends ApiController {
 			} else {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
-			if ($this->settings->isEnabled('user_sharing_enabled')) {
+			if (!$this->settings->isEnabled('user_sharing_enabled')) {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
 		}
+
 
 		$link = ''; // @TODO create direct link to credential
 		if ($revision_created) {
@@ -237,6 +243,7 @@ class CredentialController extends ApiController {
 		if (!$skip_revision) {
 			$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);
 		}
+
 		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);
@@ -271,7 +278,6 @@ class CredentialController extends ApiController {
 		} catch (\Exception $ex) {
 			return new NotFoundJSONResponse();
 		}
-
 		// If the request was made by the owner of the credential
 		if ($this->userId === $credential->getUserId()) {
 			$result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);

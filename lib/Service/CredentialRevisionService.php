@@ -33,9 +33,13 @@ use OCA\Passman\Db\CredentialRevisionMapper;
 class CredentialRevisionService {
 
 	private $credentialRevisionMapper;
+	private $encryptService;
+	private $server_key;
 
-	public function __construct(CredentialRevisionMapper $credentialRevisionMapper) {
+	public function __construct(CredentialRevisionMapper $credentialRevisionMapper, EncryptService $encryptService) {
 		$this->credentialRevisionMapper = $credentialRevisionMapper;
+		$this->encryptService = $encryptService;
+		$this->server_key = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
 	}
 
 	/**
@@ -47,6 +51,7 @@ class CredentialRevisionService {
 	 * @return CredentialRevision
 	 */
 	public function createRevision($credential, $userId, $credential_id, $edited_by) {
+		$credential = $this->encryptService->encryptCredential($credential);
 		return $this->credentialRevisionMapper->create($credential, $userId, $credential_id, $edited_by);
 	}
 
@@ -57,7 +62,13 @@ class CredentialRevisionService {
 	 * @return CredentialRevision[]
 	 */
 	public function getRevisions($credential_id, $user_id = null){
-		return $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
+		$result = $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
+		foreach ($result as $index => $revision){
+			$c = json_decode(base64_decode($revision->getCredentialData()), true);
+			$result[$index] = $revision->jsonSerialize();
+			$result[$index]['credential_data'] = $this->encryptService->decryptCredential($c);
+		}
+		return $result;
 	}
 
 	/**
@@ -67,7 +78,10 @@ class CredentialRevisionService {
 	 * @return CredentialRevision
 	 */
 	public function getRevision($credential_id, $user_id = null){
-		return $this->credentialRevisionMapper->getRevision($credential_id, $user_id);
+		$revision = $this->credentialRevisionMapper->getRevision($credential_id, $user_id);
+		$c = json_decode(base64_decode($revision->getCredentialData()), true);
+		$revision->setCredentialData($this->encryptService->decryptCredential($c));
+		return $revision;
 	}
 
 	/**
@@ -86,6 +100,10 @@ class CredentialRevisionService {
 	 * @return CredentialRevision
 	 */
 	public function updateRevision(CredentialRevision $credentialRevision){
+		$credential_data = $credentialRevision->getCredentialData();
+		$credential_data = json_decode(base64_decode($credential_data), true);
+		$credential_data = base64_encode(json_encode($this->encryptService->encryptCredential($credential_data)));
+		$credentialRevision->setCredentialData($credential_data);
 		return $this->credentialRevisionMapper->update($credentialRevision);
 	}
 }

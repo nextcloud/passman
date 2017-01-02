@@ -11,6 +11,8 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Service\EncryptService;
+use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\IRequest;
@@ -24,12 +26,15 @@ class VaultController extends ApiController {
 	private $userId;
 	private $vaultService;
 	private $credentialService;
+	private $settings;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
 								VaultService $vaultService,
-								CredentialService $credentialService) {
+								CredentialService $credentialService,
+								SettingsService $settings,
+								EncryptService $encryptService) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -39,6 +44,7 @@ class VaultController extends ApiController {
 		$this->userId = $UserId;
 		$this->vaultService = $vaultService;
 		$this->credentialService = $credentialService;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -61,7 +67,7 @@ class VaultController extends ApiController {
 					'created' => $vault->getCreated(),
 					'public_sharing_key' => $vault->getPublicSharingKey(),
 					'last_access' => $vault->getlastAccess(),
-					'challenge_password' => $credential->{$secret_field}()
+					'challenge_password' => $credential->{$secret_field}(),
 				));
 			}
 		}
@@ -83,7 +89,6 @@ class VaultController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function get($vault_guid) {
-		//$vault_guid
 		$vault = null;
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);

@@ -49,7 +49,7 @@ class CredentialRevision extends Entity implements \JsonSerializable {
 	protected $credentialId;
 	protected $userId;
 	protected $created;
-	protected $credentialData;
+	public $credentialData;
     protected $editedBy;
 
 

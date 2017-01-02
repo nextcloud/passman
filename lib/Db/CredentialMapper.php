@@ -39,7 +39,7 @@ class CredentialMapper extends Mapper {
 	 * Obtains the credentials by vault id (not guid)
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
-	 * @return Vault[]
+	 * @return Credential[]
 	 */
 	public function getCredentialsByVaultId($vault_id, $user_id) {
 		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
@@ -166,7 +166,9 @@ class CredentialMapper extends Mapper {
 		$credential->setOtp($raw_credential['otp']);
 		$credential->setHidden($raw_credential['hidden']);
 		$credential->setDeleteTime($raw_credential['delete_time']);
-		$credential->setSharedKey($raw_credential['shared_key']);
+		if(isset($raw_credential['shared_key'])) {
+			$credential->setSharedKey($raw_credential['shared_key']);
+		}
 		return parent::update($credential);
 	}
 
