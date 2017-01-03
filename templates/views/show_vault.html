@@ -25,9 +25,12 @@
 		>
 
 		</div>
-		<div class="searchboxContainer">
-			<input type="text" ng-model="filterOptions.filterText" class="searchbox"
-				   placeholder="{{'search.credential' | translate}}" select-on-click clear-btn>
+		<div class="searchboxContainer" ng-init="filterOptionShown = false;" off-click="filterOptionShown = false;">
+			<input type="text" ng-model="filterOptions.filterText" class="searchbox" id="searchBox"
+				   placeholder="{{'search.credential' | translate}}" select-on-click clear-btn ng-click="filterOptionShown = true;">
+			<div class="searchOptions" ng-show="filterOptionShown">
+				<input type="checkbox" ng-model="filterOptions.useRegex"> Use regex
+			</div>
 		</div>
 		<div class="viewModes">
 			<div class="view-mode" ng-class="{'active': view_mode === 'list' }"
