@@ -47,10 +47,13 @@
 							var fieldValue = (typeof c[field] === 'string') ? c[field] : JSON.stringify(c[field]);
 
 							if (filter.hasOwnProperty('useRegex') && filter.useRegex === true) {
-								var patt;
-								patt = new RegExp(filter.filterText);
-								if (patt.test(fieldValue)) {
-									return true;
+								try {
+									var patt = new RegExp(filter.filterText);
+									if (patt.test(fieldValue)) {
+										return true;
+									}
+								} catch (e){
+									// Don't catch regex errors.
 								}
 							}
 
