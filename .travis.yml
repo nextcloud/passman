@@ -48,6 +48,8 @@ before_script:
     - cd apps/$APP_NAME/
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit.phar -o build/phpunit.phar
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then composer require codacy/coverage; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install; fi"
 #    - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
 
@@ -60,12 +62,14 @@ script:
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '2' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
     - cd apps/$APP_NAME/
 
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php build/phpunit.phar -v -c phpunit.xml --coverage-clover=coverage.clover; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php build/phpunit.phar -v -c phpunit.xml --coverage-clover=coverage.clover --coverage-php=phpunit; fi"
+
 
     # Create coverage report
-    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php vendor/bin/codacycoverage clover coverage.clover --git-commit="$TRAVIS_COMMIT"; fi"
     - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' != '1' -a '$CODECHECK' != '2' ]; then php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover coverage.clover; fi"
-    #- cd ../
+
+
     -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
     -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt karma; fi"
 
