@@ -35,29 +35,36 @@
 			return function (credentials, filter) {
 				var _credentials = [];
 				if (credentials) {
-					if(!filter){
+					if (!filter) {
 						return credentials;
 					}
 					if (filter.filterText.trim() === "") {
 						return credentials;
 					}
+					var matchedWithFilter = function (c) {
+						for (var f = 0; f < filter.fields.length; f++) {
+							var field = filter.fields[f];
+							var fieldValue = (typeof c[field] === 'string') ? c[field] : JSON.stringify(c[field]);
+
+							if (filter.hasOwnProperty('useRegex') && filter.useRegex === true) {
+								var patt;
+								patt = new RegExp(filter.filterText);
+								if (patt.test(fieldValue)) {
+									return true;
+								}
+							}
+
+							if (fieldValue.toLowerCase().indexOf(filter.filterText.toLowerCase()) >= 0) {
+								return true;
+							}
+						}
+						return false;
+					};
 
 					for (var ci = 0; ci < credentials.length; ci++) {
 						var c = credentials[ci];
-						for (var f = 0; f < filter.fields.length; f++) {
-							var field = filter.fields[f];
-							if (typeof c[field] === 'string') {
-								if (c[field].toLowerCase().indexOf(filter.filterText.toLowerCase()) >= 0) {
-									_credentials.push(c);
-									break;
-								}
-							} else {
-								var t = JSON.stringify(c[field]);
-								if (t.indexOf(filter.filterText) >= 0) {
-									_credentials.push(c);
-									break;
-								}
-							}
+						if (matchedWithFilter(c)) {
+							_credentials.push(c);
 						}
 					}
 					return _credentials;

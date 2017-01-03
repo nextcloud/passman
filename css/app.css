@@ -443,6 +443,18 @@
         right: 10px;
         top: 12px;
         z-index: 99999999; }
+      #app-content #app-content-wrapper .searchboxContainer .searchOptions {
+        position: relative;
+        bottom: 5px;
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 5px;
+        width: calc(100% - 3px);
+        -webkit-border-bottom-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        -webkit-border-bottom-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        background-clip: padding-box; }
     #app-content #app-content-wrapper .credential-table {
       width: 100%;
       margin-top: 44px; }
