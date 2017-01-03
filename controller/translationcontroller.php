@@ -33,7 +33,7 @@ class TranslationController extends ApiController {
 	 * @NoCSRFRequired
 	 * @PublicPage
 	 */
-	public function getLanguageStrings($lang) {
+	public function getLanguageStrings() {
 		$translations = array(
 			// js/app/controllers/bookmarklet.js
 			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %step / 2)'),
