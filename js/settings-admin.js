@@ -90,11 +90,11 @@ $(document).ready(function () {
 	// ADMIN SETTINGS
 
 	// fill the boxes
-	$('#passman_link_sharing_enabled').prop('checked', (settings.getKey('link_sharing_enabled').toString().toLowerCase() == '1'));
-	$('#passman_sharing_enabled').prop('checked', (settings.getKey('user_sharing_enabled').toString().toLowerCase() == '1'));
-	$('#passman_check_version').prop('checked', (settings.getKey('check_version').toString().toLowerCase() == '1'));
-	$('#passman_https_check').prop('checked', (settings.getKey('https_check').toString().toLowerCase() == '1'));
-	$('#passman_disable_contextmenu').prop('checked', (settings.getKey('disable_contextmenu').toString().toLowerCase() == '1'));
+	$('#passman_link_sharing_enabled').prop('checked', (settings.getKey('link_sharing_enabled').toString().toLowerCase() === '1'));
+	$('#passman_sharing_enabled').prop('checked', (settings.getKey('user_sharing_enabled').toString().toLowerCase() === '1'));
+	$('#passman_check_version').prop('checked', (settings.getKey('check_version').toString().toLowerCase() === '1'));
+	$('#passman_https_check').prop('checked', (settings.getKey('https_check').toString().toLowerCase() === '1'));
+	$('#passman_disable_contextmenu').prop('checked', (settings.getKey('disable_contextmenu').toString().toLowerCase() === '1'));
 	$('#vault_key_strength').val(settings.getKey('vault_key_strength'));
 
 

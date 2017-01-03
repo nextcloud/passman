@@ -61,7 +61,7 @@ var PassmanImporter = PassmanImporter || {};
 							{
 								'label': field_data.label,
 								'value': field_data.value,
-								'secret': (field_data.hidden == true)
+								'secret': (field_data.hidden === true)
 							}
 						)
 					}

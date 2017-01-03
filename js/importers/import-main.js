@@ -29,11 +29,11 @@ var PassmanImporter = {};
 		// Strip leading quote.
 		row = row.trim();
 		var isQuoted = false;
-		if (row.charAt(0) == '"') {
+		if (row.charAt(0) === '"') {
 			row = row.substring(1);
 			isQuoted = true;
 		}
-		if (row.charAt(row.length - 2) == '"') {
+		if (row.charAt(row.length - 2) === '"') {
 			row = row.substring(0, row.length - 2);
 			isQuoted = true;
 		}
