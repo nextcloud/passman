@@ -65,10 +65,7 @@ class CronService {
 					'', array(),
 					$link, $credential->getUserId(), Activity::TYPE_ITEM_EXPIRED);
 				$this->notificationService->credentialExpiredNotification($credential);
-			} else {
-				$this->logger->debug($credential->getLabel() .' is expired, already notified!', array('app' => 'passman'));
 			}
-
 		}
 	}
 }

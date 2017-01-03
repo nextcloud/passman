@@ -60,13 +60,11 @@ class SharingACLMapper extends Mapper {
     public function getItemACL($user_id, $item_guid) {
         $q = "SELECT * FROM " . self::TABLE_NAME . " WHERE item_guid = ? AND ";
         $filter = [$item_guid];
-        if ($user_id === null){
-            $q .= 'user_id is null';
+        $q .= ($user_id === null) ? 'user_id is null' : 'user_id = ? ';
+        if ($user_id !== null){
+			$filter[] = $user_id;
         }
-        else {
-            $q .= 'user_id = ? ';
-            $filter[] = $user_id;
-        }
+
         return $this->findEntity($q, $filter);
     }
 

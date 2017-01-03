@@ -42,11 +42,11 @@ var PassmanImporter = PassmanImporter || {};
 			for (var i = 0; i < rows.length; i++) {
 				var row = rows[i];
 				var row_data = row.split('","');
-				if (row_data[0].charAt(0) == '"') {
+				if (row_data[0].charAt(0) === '"') {
 					row_data[0] = row_data[0].substring(1);
 				}
 
-				if (row_data[row_data.length-1].toString().charAt(row_data[row_data.length - 1].length - 1) == '"') {
+				if (row_data[row_data.length-1].toString().charAt(row_data[row_data.length - 1].length - 1) === '"') {
 					row_data[row_data.length - 1] = row_data[row_data.length -1].substring(0, row_data[row_data.length - 1].length - 1);
 				}
 

@@ -149,6 +149,6 @@ class VaultController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function delete($vault_id) {
-		return;
+		return new JSONResponse($vault_id);
 	}
 }

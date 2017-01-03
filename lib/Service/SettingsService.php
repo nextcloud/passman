@@ -39,7 +39,8 @@ class SettingsService {
 		'vault_key_strength',
 		'check_version',
 		'https_check',
-		'disable_contextmenu'
+		'disable_contextmenu',
+		'settings_loaded'
 	);
 
 	public function __construct($UserId, IConfig $config, $AppName) {
@@ -74,14 +75,11 @@ class SettingsService {
 	 * @return mixed
 	 */
 	public function getAppSetting($key, $default_value = null) {
-		if (isset($this->settings[$key])) {
-			$value = $this->settings[$key];
-			if (in_array($key, $this->numeric_settings)) {
-				$value = intval($value);
-			}
-		} else {
-			$value = $this->config->getAppValue('passman', $key, $default_value);
+		$value = ($this->settings[$key]) ? $this->settings[$key] : $this->config->getAppValue('passman', $key, $default_value);
+		if (in_array($key, $this->numeric_settings)) {
+			$value = intval($value);
 		}
+
 		return $value;
 	}
 
