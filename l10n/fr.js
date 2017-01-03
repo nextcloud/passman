@@ -142,6 +142,7 @@ OC.L10N.register(
     "10 / second" : "10 / seconde",
     "10k / second" : "10k / seconde",
     "10B / second" : "10B / seconde",
+    "Pattern" : "Modèle",
     "Dictionary name" : "Nom du dictionnaire",
     "Rank" : "Rang",
     "Reversed" : "Inversé",
