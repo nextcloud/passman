@@ -40,15 +40,17 @@ class InternalController extends ApiController {
 	 */
 	public function remind($credential_id) {
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
-		$credential->setExpireTime(time() + (24 * 60 * 60));
-		$this->credentialService->upd($credential);
+		if($credential) {
+			$credential->setExpireTime(time() + (24 * 60 * 60));
+			$this->credentialService->upd($credential);
 
-		$manager = \OC::$server->getNotificationManager();
-		$notification = $manager->createNotification();
-		$notification->setApp('passman')
-			->setObject('credential', $credential_id)
-			->setUser($this->userId);
-		$manager->markProcessed($notification);
+			$manager = \OC::$server->getNotificationManager();
+			$notification = $manager->createNotification();
+			$notification->setApp('passman')
+				->setObject('credential', $credential_id)
+				->setUser($this->userId);
+			$manager->markProcessed($notification);
+		}
 	}
 
 	/**
@@ -57,15 +59,17 @@ class InternalController extends ApiController {
 	public function read($credential_id) {
 
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
-		$credential->setExpireTime(0);
-		$this->credentialService->upd($credential);
+		if($credential) {
+			$credential->setExpireTime(0);
+			$this->credentialService->upd($credential);
 
-		$manager = \OC::$server->getNotificationManager();
-		$notification = $manager->createNotification();
-		$notification->setApp('passman')
-			->setObject('credential', $credential_id)
-			->setUser($this->userId);
-		$manager->markProcessed($notification);
+			$manager = \OC::$server->getNotificationManager();
+			$notification = $manager->createNotification();
+			$notification->setApp('passman')
+				->setObject('credential', $credential_id)
+				->setUser($this->userId);
+			$manager->markProcessed($notification);
+		}
 	}
 
 	/**
