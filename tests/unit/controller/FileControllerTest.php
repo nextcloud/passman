@@ -23,6 +23,16 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Comments\Activity\Setting;
+use OCA\Passman\Service\ActivityService;
+use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Service\FileService;
+use OCA\Passman\Service\NotificationService;
+use OCA\Passman\Service\SettingsService;
+use OCA\Passman\Service\ShareService;
+use OCA\Passman\Service\VaultService;
+use OCP\IGroupManager;
+use OCP\IUserManager;
 use PHPUnit_Framework_TestCase;
 
 use OCP\AppFramework\Http\JSONResponse;
@@ -31,70 +41,59 @@ use OCP\AppFramework\Http\JSONResponse;
  * Class InternalControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass \OCA\Passman\Controller\InternalController
+ * @coversDefaultClass \OCA\Passman\Controller\ShareController
  */
-class InternalControllerTest extends PHPUnit_Framework_TestCase {
+class FileControllerTest extends PHPUnit_Framework_TestCase {
 
 	private $controller;
-	private $userId = 'john';
+	private $userId = 'example';
 	private $credentialService;
+	private $vaultService;
+	private $groupManager;
+	private $userManager;
+	private $activityService;
+	private $shareService;
+	private $notificationService;
+	private $fileService;
+	private $settings;
 
 	public function setUp() {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
-		$config = $this->getMockBuilder('OCP\IConfig')->getMock();
-		$this->credentialService = $this->getMockBuilder('OCA\Passman\Service\CredentialService')
-			->disableOriginalConstructor()
-			->getMock();
-		$this->controller = new InternalController(
-			'passman', $request, $this->userId, $this->credentialService, $config
+		$this->fileService = $this->createMock(FileService::class);
+		$this->controller = new FileController(
+			'passman', $request, $this->userId, $this->fileService
 		);
 	}
 
 	/**
-	 * @covers ::remind
+	 * @covers ::uploadFile
 	 */
-	public function testRemind() {
-		$this->controller->remind(null);
-		$this->assertTrue(true);
-	}
-	/**
-	 * @covers ::read
-	 */
-	public function testRead() {
-		$this->controller->read(null);
-		$this->assertTrue(true);
-	}
-
-	/**
-	 * @covers ::getAppVersion
-	 */
-	public function testGetAppVersion() {
-		$result = $this->controller->generatePerson();
+	public function testUploadFile() {
+		$result = $this->controller->uploadFile('000', '0.png', 'image/png', 3);
 		$this->assertTrue($result instanceof JSONResponse);
 	}
 
 	/**
-	 * @covers ::generatePerson
+	 * @covers ::getFile
 	 */
-	public function testGeneratePerson() {
-		$result = $this->controller->generatePerson();
+	public function testGetFile() {
+		$result = $this->controller->getFile(null);
 		$this->assertTrue($result instanceof JSONResponse);
 	}
 
 	/**
-	 * @covers ::getSettings
+	 * @covers ::deleteFile
 	 */
-	public function testGetSettings() {
-		$result = $this->controller->getSettings();
+	public function testDeleteFile() {
+		$result = $this->controller->deleteFile(null);
 		$this->assertTrue($result instanceof JSONResponse);
 	}
 
 	/**
-	 * @covers ::saveSettings
+	 * @covers ::updateFile
 	 */
-	public function testSaveSettings() {
-		$result = $this->controller->saveSettings('test', 'test');
+	public function testUpdateFile() {
+		$this->controller->updateFile('6AD30804-BFFC-4EFC-97F8-20A126FA1709', '0' , '0.jpg');
 		$this->assertTrue(true);
 	}
-
 }
