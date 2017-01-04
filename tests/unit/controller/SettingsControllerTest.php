@@ -58,13 +58,20 @@ class SettingsControllerTest extends PHPUnit_Framework_TestCase {
 		$result = $this->controller->getForm();
 		$this->assertTrue($result instanceof TemplateResponse);
 	}
+	/**
+	 * @covers ::getSection
+	 */
+	public function testGetSection() {
+		$result = $this->controller->getSection();
+		$this->assertTrue(is_string($result));
+	}
 
 	/**
 	 * @covers ::getPriority
 	 */
 	public function testGetPriority() {
 		$result = $this->controller->getPriority();
-		$this->assertTrue($result === 0);
+		$this->assertTrue(is_numeric($result));
 	}
 
 	/**
