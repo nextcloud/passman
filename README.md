@@ -23,7 +23,7 @@ Features:
   - Clipperz.is
 
 
-For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
+For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 
 ## Tested on
 - NextCloud 10 / 11
@@ -71,9 +71,9 @@ Example:
 ## Development
 Passman uses a single `.js` file for the templates. This gives the benefit that we don't need to request every template with XHR.   
 For CSS we use SASS so you need ruby and sass installed.  
-`templates.js` and the CSS are build width `grunt`.
+`templates.js` and the CSS are built with `grunt`.
 To watch for changes use `grunt watch`
-To run the unit tests install phpunit globally, and stup the envioronment variables on the `launch_phpunit.sh` script then just run that script any argumetns passed to this script will be forwarded to phpunit.
+To run the unit tests install phpunit globally, and setup the environment variables on the `launch_phpunit.sh` script then just run that script, any arguments passed to this script will be forwarded to phpunit.
 
 ## Main developers
 - Brantje
@@ -86,4 +86,4 @@ Add yours when creating a pull request!
 
 ## FAQ
 **Are you adding something to check if malicious code is executing on the browser?**   
-No, because malitous code could edit the functions that check for malicious code.
+No, because malicious code could edit the functions that check for malicious code.

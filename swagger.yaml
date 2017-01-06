@@ -175,7 +175,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'       
     patch:
-      summary: Update a item
+      summary: Update an item
       tags:
         - Credential      
       parameters:
@@ -199,7 +199,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'  
     delete:
-      summary: Delete a item permanently
+      summary: Delete an item permanently
       description: For a 'soft' delete set delete_time
       tags:
         - Credential      
@@ -350,7 +350,7 @@ definitions:
         description: Name of the item
       description:
         type: string
-        description: Description the user the item has given
+        description: Description the user has given to the item
       created:
         type: string
         format: dateTime
