@@ -46,7 +46,7 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.username = row.username;
 				_credential.password = row.password;
 				_credential.url = row.url;
-				_credential.tags = [{text: row.grouping}];
+				_credential.tags = (row.grouping) ? [{text: row.grouping}] : [];
 				_credential.description = row.extra;
 				if(_credential.label){
 					credential_list.push(_credential);

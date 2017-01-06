@@ -27,6 +27,7 @@ script('passman', 'vendor/llqrcode/llqrcode');
 script('passman', 'vendor/forge.0.6.9.min');
 script('passman', 'vendor/download');
 script('passman', 'vendor/ui-sortable/sortable');
+script('passman', 'vendor/papa-parse/papaparse.min');
 script('passman', 'lib/promise');
 script('passman', 'lib/crypto_wrap');
 

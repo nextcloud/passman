@@ -89,11 +89,11 @@
 					}
 					return;
 				}
-				_log($translate.instant('import.adding').replace('{{credential}}', _credential.label));
+				_log($translate.instant('import.adding', {credential: _credential.label }));
 				_credential.vault_id = $scope.active_vault.vault_id;
 				CredentialService.createCredential(_credential).then(function (result) {
 					if (result.credential_id) {
-						_log($translate.instant('import.added').replace('{{credential}}', _credential.label));
+						_log($translate.instant('import.added', {credential: _credential.label }));
 						if (parsed_data[parsed_data_index + 1]) {
 							$scope.import_progress = {
 								progress: parsed_data_index / parsed_data.length * 100,
