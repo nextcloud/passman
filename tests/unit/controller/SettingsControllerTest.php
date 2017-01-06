@@ -30,7 +30,7 @@ use PHPUnit_Framework_TestCase;
 use OCA\Passman\Service\SettingsService;
 
 /**
- * Class PageControllerTest
+ * Class SettingsControllerTest
  *
  * @package OCA\Passman\Controller
  * @coversDefaultClass  \OCA\Passman\Controller\SettingsController

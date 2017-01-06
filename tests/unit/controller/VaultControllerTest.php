@@ -30,7 +30,7 @@ use PHPUnit_Framework_TestCase;
 use OCP\AppFramework\Http\JSONResponse;
 
 /**
- * Class InternalControllerTest
+ * Class VaultControllerTest
  *
  * @package OCA\Passman\Controller
  * @coversDefaultClass \OCA\Passman\Controller\VaultController
