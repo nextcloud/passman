@@ -450,6 +450,7 @@
         border: 1px solid #ddd;
         padding: 5px;
         width: calc(100% - 3px);
+        box-shadow: 3px 3px 5px #888888;
         -webkit-border-bottom-right-radius: 3px;
         border-bottom-right-radius: 3px;
         -webkit-border-bottom-left-radius: 3px;

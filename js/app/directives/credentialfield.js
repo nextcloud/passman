@@ -42,7 +42,7 @@
 				'<span class="credential_field">' +
 				'<div class="value" ng-class="{\'ellipsis\': isLink}">' +
 				'<span ng-repeat="n in [] | range:value.length" ng-if="!valueVisible">*</span>' +
-				'<span ng-if="valueVisible">{{value}}</span>' +
+				'<span ng-if="valueVisible" ng-bind-html="value"></span>' +
 				'</div>' +
 				'<div class="tools">' +
 				'<div class="cell" ng-if="toggle" tooltip="tggltxt" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': !valueVisible, \'fa-eye-slash\': valueVisible }"></i></div>' +
@@ -62,7 +62,7 @@
 							if (scope.secret) {
 								scope.valueVisible = false;
 							}
-							if (scope.value.match(regex)) {
+							if (regex.test(scope.value)) {
 								scope.isLink = true;
 
 							}
