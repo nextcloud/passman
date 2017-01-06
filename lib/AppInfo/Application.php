@@ -22,12 +22,14 @@
  */
 
 namespace OCA\Passman\AppInfo;
+
 use OC\Files\View;
 
 use OCA\Passman\Controller\CredentialController;
 use OCA\Passman\Controller\PageController;
 use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Controller\VaultController;
+use OCA\Passman\Middleware\ShareMiddleware;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CronService;
 use OCA\Passman\Service\CredentialService;
@@ -36,27 +38,38 @@ use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCA\Passman\Service\NotificationService;
+Use OCA\Passman\Service\SettingsService;
+use OCP\IConfig;
 use OCP\IDBConnection;
 
 use OCP\AppFramework\App;
 use OCP\IL10N;
 use OCP\Util;
+
 class Application extends App {
-	public function __construct () {
+	public function __construct() {
 		parent::__construct('passman');
 		$container = $this->getContainer();
 		// Allow automatic DI for the View, until we migrated to Nodes API
-		$container->registerService(View::class, function() {
+		$container->registerService(View::class, function () {
 			return new View('');
 		}, false);
-		$container->registerService('isCLI', function() {
+		$container->registerService('isCLI', function () {
 			return \OC::$CLI;
 		});
 
 		/**
+		 * Middleware
+		 */
+		$container->registerService('ShareMiddleware', function ($c) {
+			return new ShareMiddleware($c->query('SettingsService'));
+		});
+		$container->registerMiddleware('ShareMiddleware');
+
+		/**
 		 * Controllers
 		 */
-		$container->registerService('ShareController', function($c) {
+		$container->registerService('ShareController', function ($c) {
 			$container = $this->getContainer();
 			$server = $container->getServer();
 			return new ShareController(
@@ -65,15 +78,15 @@ class Application extends App {
 				$server->getUserSession()->getUser(),
 				$server->getGroupManager(),
 				$server->getUserManager(),
- 				$c->query('ActivityService'),
- 				$c->query('VaultService'),
-                $c->query('ShareService'),
-                $c->query('CredentialService'),
-                $c->query('NotificationService'),
-                $c->query('FileService')
+				$c->query('ActivityService'),
+				$c->query('VaultService'),
+				$c->query('ShareService'),
+				$c->query('CredentialService'),
+				$c->query('NotificationService'),
+				$c->query('FileService'),
+				$c->query('SettingsService')
 			);
 		});
-
 
 
 		/** Cron **/
@@ -92,7 +105,7 @@ class Application extends App {
 			return new Db();
 		});
 
-		$container->registerService('Logger', function($c) {
+		$container->registerService('Logger', function ($c) {
 			return $c->query('ServerContainer')->getLogger();
 		});
 
@@ -106,9 +119,11 @@ class Application extends App {
 		$container->registerAlias('ActivityService', ActivityService::class);
 		$container->registerAlias('VaultService', VaultService::class);
 		$container->registerAlias('FileService', FileService::class);
-        $container->registerAlias('ShareService', ShareService::class);
+		$container->registerAlias('ShareService', ShareService::class);
 		$container->registerAlias('Utils', Utils::class);
 		$container->registerAlias('IDBConnection', IDBConnection::class);
+		$container->registerAlias('IConfig', IConfig::class);
+		$container->registerAlias('SettingsService', SettingsService::class);
 	}
 
 	/**

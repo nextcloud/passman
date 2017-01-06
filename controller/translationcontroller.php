@@ -33,7 +33,7 @@ class TranslationController extends ApiController {
 	 * @NoCSRFRequired
 	 * @PublicPage
 	 */
-	public function getLanguageStrings($lang) {
+	public function getLanguageStrings() {
 		$translations = array(
 			// js/app/controllers/bookmarklet.js
 			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %step / 2)'),
@@ -46,12 +46,12 @@ class TranslationController extends ApiController {
 			'error.loading.file' => $this->trans->t('Error loading file'),
 
 			// js/app/controllers/credential.js
-			'error.decrypt' => $this->trans->t('An error happend during decryption'),
+			'error.decrypt' => $this->trans->t('An error happened during decryption'),
 			'credential.created' => $this->trans->t('Credential created!'),
 			'credential.deleted' => $this->trans->t('Credential deleted'),
 			'credential.updated' => $this->trans->t('Credential updated'),
 			'credential.recovered' => $this->trans->t('Credential recovered'),
-			'credential.destroyed' => $this->trans->t('Credential recovered'),
+			'credential.destroyed' => $this->trans->t('Credential destroyed'),
 			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably don\'t have enough permissions'),
 
 			// js/app/controllers/edit_credential.js
@@ -96,6 +96,11 @@ class TranslationController extends ApiController {
 			'credential.shared' => $this->trans->t('Credential shared'),
 			'saved' => $this->trans->t('Saved!'),
 
+			// js/app/controllers/vault.js
+			'password.poor' => $this->trans->t('Poor'),
+			'password.weak' => $this->trans->t('Weak'),
+			'password.good' => $this->trans->t('Good'),
+			'password.strong' => $this->trans->t('Strong'),
 			// js/app/directives/credentialfield.js
 			'toggle.visibility' => $this->trans->t('Toggle visibility'),
 			'copy.field' => $this->trans->t('Copy to clipboard'),
@@ -301,7 +306,7 @@ class TranslationController extends ApiController {
 			'destroy' => $this->trans->t('Destroy'),
 
 			'sharereq.title' => $this->trans->t('You have incoming share requests.'),
-			'sharereq.line1' => $this->trans->t('If you want to the credential in a other vault,'),
+			'sharereq.line1' => $this->trans->t('If you want to put the credential in a other vault,'),
 			'sharereq.line2' => $this->trans->t('logout of this vault and login to the vault you want the shared credential in.'),
 			'permissions' => $this->trans->t('Permissions'),
 			'received.from' => $this->trans->t('Received from'),
@@ -313,6 +318,7 @@ class TranslationController extends ApiController {
 			'last.access' => $this->trans->t('Last accessed'),
 			'never' => $this->trans->t('Never'),
 			'no.vaults' => $this->trans->t('No vaults found, why not create one?'),
+			'min.vault.key.strength' => $this->trans->t('Password strength must be at least: {{strength}}'),
 
 			'new.vault.name' => $this->trans->t('Please give your new vault a name.'),
 			'new.vault.pass' => $this->trans->t('Vault password'),

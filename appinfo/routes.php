@@ -67,6 +67,11 @@ return [
         ['name' => 'share#updateSharedCredentialACL', 'url' => '/api/v2/sharing/credential/{item_guid}/acl', 'verb' => 'PATCH'],
 		['name' => 'internal#getAppVersion', 'url' => '/api/v2/version', 'verb' => 'GET'],
 
+		//Settings
+		['name' => 'settings#getSettings', 'url' => '/api/v2/settings', 'verb' => 'GET'],
+		['name' => 'settings#saveUserSetting', 'url' => '/api/v2/settings/{key}/{value}', 'verb' => 'POST'],
+		['name' => 'settings#saveAdminSetting', 'url' => '/api/v2/settings/{key}/{value}/admin1/admin2', 'verb' => 'POST'],
+
 
 		//Translations
 		['name' => 'translation#getLanguageStrings', 'url' => '/api/v2/language', 'verb' => 'GET'],
@@ -76,6 +81,5 @@ return [
 		['name' => 'internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],
 		['name' => 'internal#getAppVersion', 'url' => '/api/internal/version', 'verb' => 'GET'],
 		['name' => 'internal#generatePerson', 'url' => '/api/internal/generate_person', 'verb' => 'GET'],
-
 	]
 ];

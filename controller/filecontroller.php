@@ -59,10 +59,10 @@ class FileController extends ApiController {
 		return new JSONResponse($this->fileService->deleteFile($file_id, $this->userId));
 	}
 
-	public function updateFile($file_id, $file_data, $filename, $mimetype, $size){
+	public function updateFile($file_id, $file_data, $filename){
 		try{
 			$file = $this->fileService->getFile($file_id, $this->userId);
-		} catch (DoesNotExistException $doesNotExistException){
+		} catch (\Exception $doesNotExistException){
 
 		}
 		if($file){

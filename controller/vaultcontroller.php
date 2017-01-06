@@ -50,19 +50,20 @@ class VaultController extends ApiController {
 		$vaults = $this->vaultService->getByUser($this->userId);
 
 		$protected_credential_fields = array('getDescription', 'getEmail', 'getUsername', 'getPassword');
-
-		foreach ($vaults as $vault) {
-			$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
-			$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
-			array_push($result, array(
-				'vault_id' => $vault->getId(),
-				'guid' => $vault->getGuid(),
-				'name' => $vault->getName(),
-				'created' => $vault->getCreated(),
-				'public_sharing_key' => $vault->getPublicSharingKey(),
-				'last_access' => $vault->getlastAccess(),
-				'challenge_password' => $credential->{$secret_field}()
-			));
+		if ($vaults) {
+			foreach ($vaults as $vault) {
+				$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
+				$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
+				array_push($result, array(
+					'vault_id' => $vault->getId(),
+					'guid' => $vault->getGuid(),
+					'name' => $vault->getName(),
+					'created' => $vault->getCreated(),
+					'public_sharing_key' => $vault->getPublicSharingKey(),
+					'last_access' => $vault->getlastAccess(),
+					'challenge_password' => $credential->{$secret_field}()
+				));
+			}
 		}
 
 		return new JSONResponse($result);
@@ -86,8 +87,8 @@ class VaultController extends ApiController {
 		$vault = null;
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		} catch (DoesNotExistException $e) {
-            return new NotFoundJSONResponse();
+		} catch (\Exception $e) {
+			return new NotFoundJSONResponse();
 		}
 		$result = array();
 		if ($vault) {
@@ -119,10 +120,10 @@ class VaultController extends ApiController {
 	 */
 	public function update($vault_guid, $name, $vault_settings) {
 		$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		if ($name) {
+		if ($name && $vault) {
 			$vault->setName($name);
 		}
-		if ($vault_settings) {
+		if ($vault_settings && $vault) {
 			$vault->setVaultSettings($vault_settings);
 		}
 		$this->vaultService->updateVault($vault);
@@ -136,11 +137,14 @@ class VaultController extends ApiController {
 		$vault = null;
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		} catch (DoesNotExistException $e) {
-
+		} catch (\Exception $e) {
+			// No need to catch the execption
 		}
 
-		$this->vaultService->updateSharingKeys($vault->getId(), $private_sharing_key, $public_sharing_key);
+		if ($vault) {
+			$this->vaultService->updateSharingKeys($vault->getId(), $private_sharing_key, $public_sharing_key);
+		}
+
 		return;
 	}
 
@@ -149,6 +153,6 @@ class VaultController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function delete($vault_id) {
-		return;
+		return new JSONResponse($vault_id);
 	}
 }
