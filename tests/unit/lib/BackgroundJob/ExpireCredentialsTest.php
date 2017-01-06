@@ -28,7 +28,7 @@ use OCA\Passman\BackgroundJob\ExpireCredentials;
 use OCP\IConfig;
 
 /**
- * Class ExpireActivitiesTest
+ * Class ExpireCredentialsTest
  *
  * @group DB
  * @package OCA\Passman\Tests\BackgroundJob
