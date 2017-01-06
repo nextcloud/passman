@@ -22,7 +22,7 @@ describe('BookmarkletCtrl', function() {
 	});
 
 	describe('Vault logout', function() {
-		it('Vault name should match test', function() {
+		it('Vault should not be active test', function() {
 			var controller = $controller('BookmarkletCtrl', { $scope: $scope });
 			$scope.logout();
 			expect($scope.active_vault).toEqual(false);
