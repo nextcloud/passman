@@ -142,7 +142,7 @@ class CredentialController extends ApiController {
 		);
 
 
-		if ($storedCredential->getUserId() !== $this->userId) {
+		if (!hash_equals($storedCredential->getUserId(), $this->userId)) {
 			$acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
 			if ($acl->hasPermission(SharingACL::WRITE)) {
 				$credential['shared_key'] = $storedCredential->getSharedKey();
@@ -219,7 +219,7 @@ class CredentialController extends ApiController {
 					'', array(),
 					$link, $target_user, Activity::TYPE_ITEM_ACTION);
 			}
-			if ($this->userId !== $storedCredential->getUserId()) {
+			if (!hash_equals($this->userId, $storedCredential->getUserId())) {
 				$this->activityService->add(
 					$activity, $params,
 					'', array(),
