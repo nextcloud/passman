@@ -28,7 +28,7 @@ use PHPUnit_Framework_TestCase;
 
 
 /**
- * Class PageControllerTest
+ * Class TranslationControllerTest
  *
  * @package OCA\Passman\Controller
  * @coversDefaultClass  \OCA\Passman\Controller\TranslationController
