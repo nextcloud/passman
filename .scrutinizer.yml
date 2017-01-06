@@ -12,7 +12,7 @@ imports:
 tools:
     external_code_coverage: true
     external_code_coverage:
-        timeout: 600 # Timeout in seconds: 10 min
+        timeout: 7200 # Timeout in seconds: 2 hours
     php_mess_detector: true
     php_code_sniffer: true
     sensiolabs_security_checker: true

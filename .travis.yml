@@ -66,10 +66,8 @@ script:
 
 
     # Create coverage report
-    - sh -c "if [ -z "${CODACY_PROJECT_TOKEN+xxx}" ]; then echo 'Codacy token is not set'; fi"
-    - sh -c "if [ -z "${CODACY_PROJECT_TOKEN}" -a '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then php vendor/bin/codacycoverage -v clover coverage.clover; fi"
-    - sh -c "if [ -z "${SCRUTINIZER_TOKEN+xxx}" ]; then echo 'Scrutinizer token is not set'; fi"
-    - sh -c "if [ -z "${SCRUTINIZER_TOKEN}" -a '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover coverage.clover; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then php vendor/bin/codacycoverage -v clover coverage.clover; fi"
+    - sh -c "if [ '$JSTESTS' != '1' -a '$CODECHECK' = '1' ]; then php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover coverage.clover; fi"
 
 
     -  sh -c "if [ '$JSTESTS' = '1' ]; then grunt jshint; fi"
