@@ -51,7 +51,7 @@ class TranslationController extends ApiController {
 			'credential.deleted' => $this->trans->t('Credential deleted'),
 			'credential.updated' => $this->trans->t('Credential updated'),
 			'credential.recovered' => $this->trans->t('Credential recovered'),
-			'credential.destroyed' => $this->trans->t('Credential recovered'),
+			'credential.destroyed' => $this->trans->t('Credential destroyed'),
 			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably don\'t have enough permissions'),
 
 			// js/app/controllers/edit_credential.js
@@ -306,7 +306,7 @@ class TranslationController extends ApiController {
 			'destroy' => $this->trans->t('Destroy'),
 
 			'sharereq.title' => $this->trans->t('You have incoming share requests.'),
-			'sharereq.line1' => $this->trans->t('If you want to the credential in a other vault,'),
+			'sharereq.line1' => $this->trans->t('If you want to put the credential in a other vault,'),
 			'sharereq.line2' => $this->trans->t('logout of this vault and login to the vault you want the shared credential in.'),
 			'permissions' => $this->trans->t('Permissions'),
 			'received.from' => $this->trans->t('Received from'),
