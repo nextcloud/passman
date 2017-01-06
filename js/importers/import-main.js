@@ -54,11 +54,15 @@ var PassmanImporter = {};
 	PassmanImporter.toObject_ = function(headings, row) {
 		var result = {};
 		for (var i = 0, ii = row.length; i < ii; i++) {
-			headings[i] = headings[i].replace(',','_')
-				.toLowerCase().replace(' ','_')
-				.replace('(','').replace(')','')
-				.replace('"','');
-			result[headings[i]] = row[i];
+			if(headings[i]) {
+				headings[i] = headings[i].replace(',', '_')
+					.toLowerCase().replace(' ', '_')
+					.replace('(', '').replace(')', '')
+					.replace('"', '');
+				result[headings[i]] = row[i];
+			} else {
+				result[ii] = row[i];
+			}
 		}
 		return result;
 	};
@@ -99,23 +103,28 @@ var PassmanImporter = {};
 		return credential;
 	};
 
+	/**
+	 * Read a csv
+	 * @param csv the csv file contents
+	 * @param hasHeadings does csv has headings? (default true)
+	 */
 	PassmanImporter.readCsv = function( csv, hasHeadings ){
 		hasHeadings = (hasHeadings === undefined) ? true : hasHeadings;
-		var i, _row;
 		var lines = [];
-		var rows = csv.split('\n');
-		if(hasHeadings) {
-			var headings = this.parseRow_(rows[0]);
-			for (i = 1; i < rows.length; i++) {
-				_row = this.toObject_(headings, this.parseRow_(rows[i]));
-				lines.push(_row);
+		/** global: Papa */
+		Papa.parse(csv, {
+			complete: function(results) {
+				if(results.data) {
+					var headings = (hasHeadings) ? results.data[0] : null;
+					var start = (hasHeadings) ? 1 : 0;
+					for(var i = start; i < results.data.length; i++){
+						var _row = (hasHeadings) ? PassmanImporter.toObject_(headings, results.data[i]) : results.data[i];
+						lines.push(_row);
+					}
+				}
 			}
-		} else {
-			for (i = 1; i < rows.length; i++) {
-				_row = this.toObject_(null, this.parseRow_(rows[i]));
-				lines.push(_row);
-			}
-		}
+		});
+
 		return lines;
 	};
 

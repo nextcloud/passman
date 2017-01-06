@@ -23,7 +23,7 @@
 // Importers should always start with this
 /** global: PassmanImporter */
 var PassmanImporter = PassmanImporter || {};
-(function(window, $, PassmanImporter) {
+(function (window, $, PassmanImporter) {
 	'use strict';
 	// Define the importer
 	PassmanImporter.keepassCsv = {
@@ -36,7 +36,7 @@ var PassmanImporter = PassmanImporter || {};
 
 	PassmanImporter.keepassCsv.readFile = function (file_data) {
 		/** global: C_Promise */
-		var p = new C_Promise(function(){
+		var p = new C_Promise(function () {
 			var parsed_csv = PassmanImporter.readCsv(file_data);
 			var credential_list = [];
 			for (var i = 0; i < parsed_csv.length; i++) {
@@ -47,21 +47,24 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.password = row.password;
 				_credential.url = row.web_site;
 				if (row.hasOwnProperty('expires')) {
-					row.expires = row.expires.replace('"','');
+					row.expires = row.expires.replace('"', '');
 					_credential.expire_time = new Date(row.expires).getTime() / 1000;
 				}
-				var tags = [{text: row.group}];
+
+				var tags = (row.group) ? [{text: row.group}] : [];
 				if (row.hasOwnProperty('group_tree')) {
 					var exploded_tree = row.group_tree.split('\\\\');
 					for (var t = 0; t < exploded_tree.length; t++) {
-						tags.push({text: exploded_tree[t]});
+						if (exploded_tree[t].trim().length > 0) {
+							tags.push({text: exploded_tree[t].trim()});
+						}
 					}
 				}
 				_credential.tags = tags;
 				credential_list.push(_credential);
 
 				var progress = {
-					percent: i/parsed_csv.length*100,
+					percent: i / parsed_csv.length * 100,
 					loaded: i,
 					total: parsed_csv.length
 				};

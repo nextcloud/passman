@@ -24,7 +24,7 @@
 /** global: PassmanImporter */
 var PassmanImporter = PassmanImporter || {};
 
-(function(window, $, PassmanImporter) {
+(function (window, $, PassmanImporter) {
 	'use strict';
 
 	// Define the importer
@@ -38,23 +38,39 @@ var PassmanImporter = PassmanImporter || {};
 
 	PassmanImporter.zohoCsv.readFile = function (file_data) {
 		/** global: C_Promise */
-		return new C_Promise(function(){
-			var parsed_csv = PassmanImporter.readCsv(file_data, false);
+		return new C_Promise(function () {
+			var parsed_csv = PassmanImporter.readCsv(file_data);
+
 			var credential_list = [];
 			for (var i = 0; i < parsed_csv.length; i++) {
 				var row = parsed_csv[i];
 				var _credential = PassmanImporter.newCredential();
-				_credential.label = row[0];
-				_credential.username = row[3];
-				_credential.password = row[4];
-				_credential.url = row[1];
-				_credential.description = row[2];
-				if(_credential.label){
+				_credential.label = row.secret_name;
+				_credential.url = row.secret_url;
+				_credential.description = row.notes;
+				if (row.hasOwnProperty('secretdata')) {
+					var rows = row.secretdata.split("\n");
+					for (var r = 0; r < rows.length; r++) {
+						var cells = rows[r].split(':');
+						var key = cells[0];
+						var value = cells.slice(1).join(':');
+						if (key && value) {
+							_credential.custom_fields.push(
+								{
+									'label': key,
+									'value': value,
+									'secret': false
+								}
+							);
+						}
+					}
+				}
+				if (_credential.label !== "") {
 					credential_list.push(_credential);
 				}
 
 				var progress = {
-					percent: i/parsed_csv.length*100,
+					percent: i / parsed_csv.length * 100,
 					loaded: i,
 					total: parsed_csv.length
 				};
@@ -62,6 +78,6 @@ var PassmanImporter = PassmanImporter || {};
 				this.call_progress(progress);
 			}
 			this.call_then(credential_list);
-		})
+		});
 	};
 })(window, $, PassmanImporter);
