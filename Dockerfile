@@ -50,6 +50,7 @@ ADD ./js/ /var/www/passman/js/
 ADD ./l10n/ /var/www/passman/l10n/
 ADD ./lib/ /var/www/passman/lib/
 ADD ./sass/ /var/www/passman/sass/
+ADD ./middleware /var/www/passman/middleware
 ADD ./templates/* /var/www/passman/templates/
 COPY ./*.md /var/www/passman/
 COPY ./LICENSE /var/www/passman/
