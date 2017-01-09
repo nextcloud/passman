@@ -67,6 +67,8 @@
 
 			$scope.default_vault = false;
 			$scope.remember_vault_password = false;
+			$scope.auto_logout_timer = false;
+			$scope.logout_timer = '0';
 			$scope.list_selected_vault = false;
 			$scope.minimal_value_key_strength = 3;
 
@@ -96,6 +98,10 @@
 				if ($scope.remember_vault_password !== true) {
 					SettingsService.setSetting('defaultVault', null);
 				}
+			};
+
+			$scope.toggleAutoLogout = function(){
+				$scope.auto_logout_timer = !$scope.auto_logout_timer;
 			};
 
 			$scope.clearState = function () {
@@ -131,8 +137,18 @@
 				var _vault = angular.copy(vault);
 				_vault.vaultKey = angular.copy(vault_key);
 				delete _vault.credentials;
+				var timer =  parseInt($scope.logout_timer);
+				if($scope.auto_logout_timer && timer > 0 ){
+					$rootScope.$broadcast('logout_timer_set', timer*60);
+				}
+
 				VaultService.setActiveVault(_vault);
 				$location.path('/vault/' + vault.guid);
+			};
+
+			$scope.selectLogoutTimer = function (time) {
+				$scope.auto_logout_timer = true;
+				$scope.logout_timer = time;
 			};
 
 			$scope.vaultDecryptionKey = '';

@@ -304,7 +304,7 @@ class TranslationController extends ApiController {
 			'revisions' => $this->trans->t('Revisions'),
 			'recover' => $this->trans->t('Recover'),
 			'destroy' => $this->trans->t('Destroy'),
-
+			'use.regex' => $this->trans->t('Use regex'),
 			'sharereq.title' => $this->trans->t('You have incoming share requests.'),
 			'sharereq.line1' => $this->trans->t('If you want to put the credential in a other vault,'),
 			'sharereq.line2' => $this->trans->t('logout of this vault and login to the vault you want the shared credential in.'),
@@ -313,6 +313,7 @@ class TranslationController extends ApiController {
 			'date' => $this->trans->t('Date'),
 			'accept' => $this->trans->t('Accept'),
 			'decline' => $this->trans->t('Decline'),
+			'session.time.left' => $this->trans->t('You have {{session_time}} left before logout.'),
 
 			// templates/views/vaults.html
 			'last.access' => $this->trans->t('Last accessed'),
@@ -329,6 +330,7 @@ class TranslationController extends ApiController {
 			'input.vault.password' => $this->trans->t('Please input the password for'),
 			'vault.default' => $this->trans->t('Set this vault as default.'),
 			'vault.auto.login' => $this->trans->t('Login automatically to this vault.'),
+			'auto.logout' => $this->trans->t('Logout of this vault automatically after: '),
 			'vault.decrypt' => $this->trans->t('Decrypt vault'),
 
 			// templates/bookmarklet.php

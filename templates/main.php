@@ -51,6 +51,7 @@ script('passman', 'app/filters/byte');
 script('passman', 'app/filters/tagfilter');
 script('passman', 'app/filters/as');
 script('passman', 'app/filters/credentialsearch');
+script('passman', 'app/filters/toHHMMSS');
 script('passman', 'app/services/cacheservice');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
@@ -104,13 +105,13 @@ style('passman', 'app');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
-
+	<div id="logoutTimer"> </div>
 	<div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
 		{{ 'http.warning' | translate }}
 		<i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
 	</div>
 
-	<div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
+	<div id="app-navigation" ng-show="selectedVault" ng-controller="MenuCtrl">
 		<ul>
 			<li class="taginput">
 				<a class="taginput">
@@ -131,6 +132,7 @@ style('passman', 'app');
 				</a>
 			</li>
 		</ul>
+
 		<div id="app-settings" ng-init="settingsShown = false;">
 			<div id="app-settings-header">
 				<button class="settings-button"
@@ -144,6 +146,9 @@ style('passman', 'app');
 					<div><a class="link" ng-href="#/vault/{{active_vault.guid}}/settings">{{ 'settings' | translate }}</a></div>
 					<div><span class="link" ng-click="logout()">{{'logout' | translate }}</span></div>
 					<div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">{{ 'donate' | translate }}</a></div>
+					<div ng-show="session_time_left">
+						<small>{{'session.time.left' | translate:translationData}}</small>
+					</div>
 				</div>
 			</div>
 		</div>
