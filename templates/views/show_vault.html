@@ -29,7 +29,7 @@
 			<input type="text" ng-model="filterOptions.filterText" class="searchbox" id="searchBox"
 				   placeholder="{{'search.credential' | translate}}" select-on-click clear-btn ng-click="filterOptionShown = true;">
 			<div class="searchOptions" ng-show="filterOptionShown">
-				<input type="checkbox" ng-model="filterOptions.useRegex"> Use regex
+				<input type="checkbox" ng-model="filterOptions.useRegex"> {{ 'use.regex' | translate }}
 			</div>
 		</div>
 		<div class="viewModes">

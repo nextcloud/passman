@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('MainCtrl', ['$scope', '$rootScope', '$location', 'SettingsService', function ($scope, $rootScope, $location, SettingsService) {
+		.controller('MainCtrl', ['$scope', '$rootScope', '$location', 'SettingsService', '$window', '$interval', '$filter', function ($scope, $rootScope, $location, SettingsService, $window, $interval, $filter) {
 			$scope.selectedVault = false;
 
 			$scope.http_warning_hidden = true;
@@ -63,6 +63,30 @@
 			$rootScope.$on('logout', function () {
 				$scope.selectedVault = false;
 			});
+
+			var tickSessionTimer = function(){
+				if($scope.session_time_left){
+					$scope.session_time_left--;
+					var session_time_left_formatted = $filter('toHHMMSS')($scope.session_time_left);
+					$scope.translationData = {
+						session_time: session_time_left_formatted
+					};
+					$rootScope.$broadcast('logout_timer_tick_tack', $scope.session_time_left);
+					if($scope.session_time_left === 0){
+						$window.location.reload();
+					}
+				}
+			};
+
+			$scope.session_time_left = false;
+			$scope.$on('logout_timer_set', function(evt, timer){
+				$scope.session_time_left = timer;
+				$scope.translationData = {
+					session_time: timer
+				};
+				$interval(tickSessionTimer, 1000);
+			});
+
 		}]);
 
 }());
