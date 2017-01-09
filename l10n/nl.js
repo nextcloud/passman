@@ -198,7 +198,6 @@ OC.L10N.register(
     "Recover" : "herstellen",
     "Destroy" : "Vernietigen",
     "You have incoming share requests." : "Je hebt binnengekomen deelverzoeken.",
-    "If you want to the credential in a other vault," : "Als je de inloggegevens in een andere kluis wilt,",
     "logout of this vault and login to the vault you want the shared credential in." : "log dan uit van deze kluis en login in de kluis waar je de gedeelde inloggegevens wilt bewaren.",
     "Permissions" : "Permissies",
     "Received from" : "Ontvangen van",

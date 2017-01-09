@@ -196,7 +196,6 @@
     "Recover" : "Восстановить",
     "Destroy" : "Уничтожить",
     "You have incoming share requests." : "У вас входящий запрос на общий доступ.",
-    "If you want to the credential in a other vault," : "Если вы хотите перейти к реквизитам их другого хранилища,",
     "logout of this vault and login to the vault you want the shared credential in." : "выйдите из этого хранилища и войдите в хранилище, которое содержит общие реквизиты.",
     "Permissions" : "Права доступа",
     "Received from" : "Получено от",

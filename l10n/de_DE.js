@@ -198,7 +198,6 @@ OC.L10N.register(
     "Recover" : "Wiederherstellen",
     "Destroy" : "Vernichten",
     "You have incoming share requests." : "Sie haben eingehende Freigabeanforderungen.",
-    "If you want to the credential in a other vault," : "Wenn Sie zu einer anderen Anmeldeinformation in einem anderen Tresor möchten,",
     "logout of this vault and login to the vault you want the shared credential in." : "melden Sie sich bei diesem Tresor ab und melde Sie sich bei dem Tresor, welches die geteilte Anmeldeinformation beinhaltet, wieder an.",
     "Permissions" : "Rechte",
     "Received from" : "Erhalten von",

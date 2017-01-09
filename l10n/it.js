@@ -183,7 +183,6 @@ OC.L10N.register(
     "Recover" : "Ripristina",
     "Destroy" : "Distruggi",
     "You have incoming share requests." : "Hai ricevuto delle richieste di condivisione.",
-    "If you want to the credential in a other vault," : "Se vuoi condividere le credenziali con un'altra cassaforte,",
     "logout of this vault and login to the vault you want the shared credential in." : "esci da questa cassaforte e accedi alla cassaforte con la quale vuoi condividere le credenziali.",
     "Permissions" : "Permessi",
     "Received from" : "Ricevute da",

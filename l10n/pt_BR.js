@@ -198,7 +198,6 @@ OC.L10N.register(
     "Recover" : "Restaurar",
     "Destroy" : "Destruir",
     "You have incoming share requests." : "Você tem solicitações de compartilhamento.",
-    "If you want to the credential in a other vault," : "Se você quiser a credencial em um outro cofre,",
     "logout of this vault and login to the vault you want the shared credential in." : "efetue o logout deste cofre e faça login no cofre ao qual você deseja que a credencial seja compartilhada.",
     "Permissions" : "Permissões",
     "Received from" : "Recebido de",
