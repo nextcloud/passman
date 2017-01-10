@@ -130,7 +130,7 @@
 					if (crypt_obj = null, "undefined" != typeof window && void 0 !== window.crypto ? crypt_obj = window.crypto : "undefined" != typeof window && void 0 !== window.msCrypto && (crypt_obj = window.msCrypto), void 0 !== crypt_obj && "function" == typeof crypt_obj.getRandomValues && rng_psize > rng_pptr)for (num = Math.floor((rng_psize - rng_pptr) / 2) + 1, buf = new Uint16Array(num), crypt_obj.getRandomValues(buf), i = 0; i < buf.length; i++)t = buf[i], rng_pool[rng_pptr++] = t >>> 8, rng_pool[rng_pptr++] = 255 & t
 				} catch (e) {
 				}
-				for (; rng_psize > rng_pptr;)t = Math.floor(65536 * Math.random()), rng_pool[rng_pptr++] = t >>> 8, rng_pool[rng_pptr++] = 255 & t
+				for (; rng_psize > rng_pptr;)t = Math.floor(65536 * sjcl.random.randomWords(1)), rng_pool[rng_pptr++] = t >>> 8, rng_pool[rng_pptr++] = 255 & t
 				rng_pptr = 0, rng_seed_time()
 			}
 			SecureRandom.prototype.nextBytes = rng_get_bytes;
