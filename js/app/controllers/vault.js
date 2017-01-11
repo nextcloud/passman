@@ -72,13 +72,20 @@
 			$scope.list_selected_vault = false;
 			$scope.minimal_value_key_strength = 3;
 
-			$rootScope.$on('settings_loaded', function () {
+			var settingsLoaded = function () {
 				$scope.minimal_value_key_strength = SettingsService.getSetting('vault_key_strength');
 				$translate(key_strengths[SettingsService.getSetting('vault_key_strength')]).then(function(translation){
 					$scope.required_score = {'strength': translation};
 				});
+			};
 
-			});
+			if(!SettingsService.getSetting('settings_loaded')){
+				$rootScope.$on('settings_loaded', function () {
+					settingsLoaded();
+				});
+			} else {
+				settingsLoaded();
+			}
 
 			$scope.toggleDefaultVault = function () {
 				$scope.default_vault = !$scope.default_vault;
