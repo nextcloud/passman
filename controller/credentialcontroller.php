@@ -266,6 +266,10 @@ class CredentialController extends ApiController {
 				'item_destroyed_self', array($credential->getLabel()),
 				'', array(),
 				'', $this->userId, Activity::TYPE_ITEM_ACTION);
+			$this->sharingService->unshareCredential($credential->getGuid());
+			foreach($this->credentialRevisionService->getRevisions($credential->getId()) as $revision){
+				$this->credentialRevisionService->deleteRevision($revision->getId(), $this->userId);
+			}
 		} else {
 			$result = false;
 		}

@@ -315,4 +315,27 @@ class ShareService {
 	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions) {
 		return $this->shareRequest->updatePendingRequestPermissions($item_guid, $user_id, $permissions);
 	}
+
+	/**
+	 * Clean up on credential destroyed.
+	 * This will delete all ACL's and share requests.
+	 * @param string $item_guid
+	 */
+
+	public function unshareCredential($item_guid) {
+		$acl_list = $this->getCredentialAclList($item_guid);
+		$request_list = $this->getShareRequestsByGuid($item_guid);
+		foreach ($acl_list as $ACL) {
+			$this->deleteShareACL($ACL);
+		}
+		foreach ($request_list as $request) {
+			$this->deleteShareRequest($request);
+			$manager = \OC::$server->getNotificationManager();
+			$notification = $manager->createNotification();
+			$notification->setApp('passman')
+				->setObject('passman_share_request', $request->getId())
+				->setUser($request->getTargetUserId());
+			$manager->markProcessed($notification);
+		}
+	}
 }
