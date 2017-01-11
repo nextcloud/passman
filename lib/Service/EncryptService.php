@@ -372,7 +372,7 @@ class EncryptService {
 		$userKey = '';
 		$userSuppliedKey = '';
 		if ($file instanceof File) {
-			$userSuppliedKey = $file->getFilename();
+			$userSuppliedKey = $file->getSize();
 			$userKey = md5($file->getMimetype());
 		}
 
