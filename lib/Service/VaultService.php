@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\Db\Vault;
 use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -103,5 +104,17 @@ class VaultService {
 	 */
 	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
 		return $this->vaultMapper->updateSharingKeys($vault_id, $privateKey, $publicKey);
+	}
+
+	/**
+	 * Delete a vault from user
+	 * @param string $vault_guid
+	 * @param string $user_id
+	 */
+	public function deleteVault($vault_guid, $user_id){
+		$vault = $this->getByGuid($vault_guid, $user_id);
+		if($vault instanceof Vault) {
+			$this->vaultMapper->deleteVault($vault);
+		}
 	}
 }

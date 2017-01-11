@@ -33,6 +33,16 @@
 			<div progress-bar="change_pw.percent" index="change_pw.done" total="change_pw.total"></div>
 		</div>
 
+		<h3>{{'delete.vault' | translate}}</h3>
+		<b>{{ 'vault.remove.notice' | translate }}</b>
+		<label>{{'vault.password' | translate}}</label>
+		<input type="password" ng-model="$parent.delete_vault_password">
+		<input type="checkbox" ng-model="$parent.confirm_vault_delete"> {{'delete.vault.checkbox' | translate}}<br />
+		<button class="btn btn-danger" ng-click="delete_vault()">{{'delete.vault.confirm' | translate}}</button>
+		<div ng-show="remove_pw">
+			{{'deleting.pw' | translate:translationData}}
+		<div progress-bar="remove_pw.percent" index="remove_pw.done" total="remove_pw.total"></div>
+		</div>
 	</div>
 	<div class="col-xs-12 col-md-6">
 		<h3>{{ 'about.passman' | translate}}</h3>

@@ -121,7 +121,7 @@
 					});
 				},
 				deleteVault: function (vault) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.vault_id);
+					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid);
 					return $http.delete(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;

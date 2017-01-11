@@ -55,19 +55,21 @@ class VaultController extends ApiController {
 		$vaults = $this->vaultService->getByUser($this->userId);
 
 		$protected_credential_fields = array('getDescription', 'getEmail', 'getUsername', 'getPassword');
-		if ($vaults) {
+		if (isset($vaults)) {
 			foreach ($vaults as $vault) {
 				$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 				$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
-				array_push($result, array(
-					'vault_id' => $vault->getId(),
-					'guid' => $vault->getGuid(),
-					'name' => $vault->getName(),
-					'created' => $vault->getCreated(),
-					'public_sharing_key' => $vault->getPublicSharingKey(),
-					'last_access' => $vault->getlastAccess(),
-					'challenge_password' => $credential->{$secret_field}(),
-				));
+				if(isset($credential)) {
+					array_push($result, array(
+						'vault_id' => $vault->getId(),
+						'guid' => $vault->getGuid(),
+						'name' => $vault->getName(),
+						'created' => $vault->getCreated(),
+						'public_sharing_key' => $vault->getPublicSharingKey(),
+						'last_access' => $vault->getlastAccess(),
+						'challenge_password' => $credential->{$secret_field}(),
+					));
+				}
 			}
 		}
 
@@ -95,7 +97,7 @@ class VaultController extends ApiController {
 			return new NotFoundJSONResponse();
 		}
 		$result = array();
-		if ($vault) {
+		if (isset($vault)) {
 			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
 
 			$result = array(
@@ -157,6 +159,7 @@ class VaultController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function delete($vault_id) {
-		return new JSONResponse($vault_id);
+		$this->vaultService->deleteVault($vault_id, $this->userId);
+		return new JSONResponse(array('ok' => true));
 	}
 }

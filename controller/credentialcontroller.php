@@ -11,10 +11,12 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IRequest;
@@ -241,7 +243,7 @@ class CredentialController extends ApiController {
 			$credential['shared_key'] = '';
 		}
 
-		if(!isset($credential['shared_key'])){
+		if (!isset($credential['shared_key'])) {
 			$credential['shared_key'] = $storedCredential->getSharedKey();
 		}
 
@@ -259,23 +261,34 @@ class CredentialController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function deleteCredential($credential_guid) {
-		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		try {
+			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		} catch (\Exception $e) {
+			return new NotFoundJSONResponse();
+		}
 		if ($credential) {
 			$result = $this->credentialService->deleteCredential($credential);
-			$this->activityService->add(
-				'item_destroyed_self', array($credential->getLabel()),
-				'', array(),
-				'', $this->userId, Activity::TYPE_ITEM_ACTION);
-			$this->sharingService->unshareCredential($credential->getGuid());
-			foreach($this->credentialRevisionService->getRevisions($credential->getId()) as $revision){
-				$this->credentialRevisionService->deleteRevision($revision->getId(), $this->userId);
-			}
+			$this->deleteCredentialParts($credential);
 		} else {
 			$result = false;
 		}
 		return new JSONResponse($result);
 	}
 
+	/**
+	 * Delete leftovers from a credential
+	 * @param Credential $credential
+	 */
+	private function deleteCredentialParts(Credential $credential) {
+		$this->activityService->add(
+			'item_destroyed_self', array($credential->getLabel()),
+			'', array(),
+			'', $this->userId, Activity::TYPE_ITEM_ACTION);
+		$this->sharingService->unshareCredential($credential->getGuid());
+		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
+			$this->credentialRevisionService->deleteRevision($revision->getId(), $this->userId);
+		}
+	}
 
 	/**
 	 * @NoAdminRequired

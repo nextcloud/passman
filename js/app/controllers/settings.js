@@ -56,7 +56,7 @@
 					delete vault.credentials;
 					VaultService.setActiveVault(vault);
 					$scope.vault_settings = vault.vault_settings;
-					if(!$scope.vault_settings.hasOwnProperty('pwSettings')){
+					if (!$scope.vault_settings.hasOwnProperty('pwSettings')) {
 						$scope.vault_settings.pwSettings = {
 							'length': 12,
 							'useUppercase': true,
@@ -74,7 +74,7 @@
 
 				var btn_txt = $translate.instant('bookmarklet.text');
 				var http = location.protocol, slashes = http.concat("//"), host = slashes.concat(window.location.hostname), complete = host + location.pathname;
-				$scope.bookmarklet = $sce.trustAsHtml("<a class=\"button\" href=\"javascript:(function(){var a=window,b=document,c=encodeURIComponent,e=c(document.title),d=a.open('" + complete + "bookmarklet?url='+c(b.location)+'&title='+e,'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=750px,width=475px,resizable=0,alwaysRaised=1');a.setTimeout(function(){d.focus()},300);})();\">"+ btn_txt +"</a>");
+				$scope.bookmarklet = $sce.trustAsHtml("<a class=\"button\" href=\"javascript:(function(){var a=window,b=document,c=encodeURIComponent,e=c(document.title),d=a.open('" + complete + "bookmarklet?url='+c(b.location)+'&title='+e,'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=750px,width=475px,resizable=0,alwaysRaised=1');a.setTimeout(function(){d.focus()},300);})();\">" + btn_txt + "</a>");
 
 
 				$scope.saveVaultSettings = function () {
@@ -100,7 +100,7 @@
 
 					},
 					{
-						title:$translate.instant('settings.password'),
+						title: $translate.instant('settings.password'),
 						url: 'views/partials/forms/settings/password_settings.html'
 
 					},
@@ -149,8 +149,37 @@
 				$rootScope.$on('logout', function () {
 					$scope.selectedVault = false;
 				});
+
+				var getCurrentVaultCredentials = function (callback) {
+					VaultService.getVault($scope.active_vault).then(callback);
+				};
+
+				var decryptOwnCredentials = function (vault) {
+					var _selected_credentials = [];
+					if (vault.credentials.length === 0) {
+						$location.path('/');
+					}
+					for (var i = 0; i < vault.credentials.length; i++) {
+						var _credential = vault.credentials[i];
+						var isShared = (_credential.shared_key === null || _credential.shared_key === '');
+						if ( isShared || !_credential.hasOwnProperty('acl')) {
+							var _success;
+							try {
+								CredentialService.decryptCredential(_credential, VaultService.getActiveVault().vaultKey);
+								_success = true;
+							} catch (e) {
+								_success = false;
+							}
+							if (_success) {
+								_selected_credentials.push(_credential);
+							}
+						}
+					}
+					return _selected_credentials;
+				};
+
 				$scope.startScan = function (minStrength) {
-					VaultService.getVault($scope.active_vault).then(function (vault) {
+					getCurrentVaultCredentials(function (vault) {
 						var results = [];
 						for (var i = 0; i < vault.credentials.length; i++) {
 							var c = angular.copy(vault.credentials[i]);
@@ -168,7 +197,7 @@
 											});
 										}
 									}
-								} catch (e){
+								} catch (e) {
 									console.warn(e);
 								}
 
@@ -183,10 +212,10 @@
 				$scope.cur_state = {};
 
 
-				$scope.$on("$locationChangeStart", function(event) {
-					if($scope.change_pw){
-						if($scope.change_pw.total > 0 && $scope.change_pw.done < $scope.change_pw.total){
-							if(!confirm($translate.instant('changepw.navigate.away.warning'))){
+				$scope.$on("$locationChangeStart", function (event) {
+					if ($scope.change_pw) {
+						if ($scope.change_pw.total > 0 && $scope.change_pw.done < $scope.change_pw.total) {
+							if (!confirm($translate.instant('changepw.navigate.away.warning'))) {
 								event.preventDefault();
 							}
 						}
@@ -206,25 +235,7 @@
 					SettingsService.setSetting('defaultVault', null);
 					SettingsService.setSetting('defaultVaultPass', null);
 					VaultService.getVault($scope.active_vault).then(function (vault) {
-						var _selected_credentials = [];
-						if (vault.credentials.length === 0) {
-							$location.path('/');
-						}
-						for (var i = 0; i < vault.credentials.length; i++) {
-							var _credential = vault.credentials[i];
-							if (_credential.shared_key === null || _credential.shared_key === '' || !_credential.hasOwnProperty('acl')) {
-								var _success;
-								try{
-									CredentialService.decryptCredential(_credential, VaultService.getActiveVault().vaultKey);
-									_success = true;
-								} catch (e){
-									_success = false;
-								}
-								if(_success) {
-									_selected_credentials.push(_credential);
-								}
-							}
-						}
+						var _selected_credentials = decryptOwnCredentials(vault);
 						$scope.change_pw = {
 							percent: 0,
 							done: 0,
@@ -255,6 +266,46 @@
 						changeCredential(0, VaultService.getActiveVault().vaultKey, newVaultPass);
 
 					});
+				};
+
+				$scope.confirm_vault_delete = false;
+				$scope.delete_vault_password = '';
+				$scope.delete_vault = function () {
+					if ($scope.confirm_vault_delete && $scope.delete_vault_password === VaultService.getActiveVault().vaultKey) {
+						getCurrentVaultCredentials(function (vault) {
+							var credentials = vault.credentials;
+							$scope.remove_pw = {
+								percent: 0,
+								done: 0,
+								total: vault.credentials.length
+							};
+							var deleteCredential = function(index){
+								$scope.translationData = {
+									password:  credentials[index].label
+								};
+								CredentialService.destroyCredential(credentials[index].guid).then(function () {
+									var percent = index / vault.credentials.length * 100;
+									$scope.remove_pw = {
+										percent: percent,
+										done: index,
+										total: vault.credentials.length
+									};
+									if(index === credentials.length-1){
+										VaultService.deleteVault(vault).then(function () {
+											SettingsService.setSetting('defaultVaultPass', false);
+											SettingsService.setSetting('defaultVault', null);
+											$rootScope.$broadcast('logout');
+											$location.path('/');
+										});
+										return;
+									}
+									deleteCredential(index+1);
+								});
+							};
+							deleteCredential(0);
+						});
+					}
+
 				};
 
 				$rootScope.$on('logout', function () {
