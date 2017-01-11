@@ -30,6 +30,21 @@ use Icewind\SMB\Exception\Exception;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\File;
 
+/**
+ * A class to handle secure encryption and decryption of arbitrary data
+ *
+ *  Note that this is not just straight encryption. It also has a few other
+ *  features in it to make the encrypted data far more secure.  Note that any
+ *  other implementations used to decrypt data will have to do the same exact
+ *  operations.
+ *
+ * Security Benefits:
+ *
+ * - Uses Key stretching
+ * - Hides the Initialization Vector
+ * - Does HMAC verification of source data
+ *
+ */
 class EncryptService {
 
 	/**
@@ -39,7 +54,7 @@ class EncryptService {
 	 *
 	 * @var array
 	 */
-	protected $supportedAlgos = array(
+	const SUPPORTED_ALGORITHMS = array(
 		'aes-256-cbc' => array('name' => 'AES-256', 'keySize' => 32, 'blockSize' => 32),
 		'bf' => array('name' => 'BF', 'keySize' => 16, 'blockSize' => 8),
 		'des' => array('name' => 'DES', 'keySize' => 7, 'blockSize' => 8),
@@ -47,37 +62,16 @@ class EncryptService {
 		'cast5' => array('name' => 'CAST5', 'keySize' => 16, 'blockSize' => 8),
 	);
 
-	/**
-	 * Supported encryption modes
-	 *
-	 * @var array
-	 */
-	protected $supportedModes = array(
-		'cbc' => 'CBC',
-	);
+	const OP_ENCRYPT = 'encrypt';
+	const OP_DECRYPT = 'decrypt';
 
+	// The fields of a credential which are encrypted
 	public $encrypted_credential_fields = array(
 		'description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url'
 	);
 
-
+	// Contains the server key
 	private $server_key;
-	/**
-	 * A class to handle secure encryption and decryption of arbitrary data
-	 *
-	 *  Note that this is not just straight encryption. It also has a few other
-	 *  features in it to make the encrypted data far more secure.  Note that any
-	 *  other implementations used to decrypt data will have to do the same exact
-	 *  operations.
-	 *
-	 * Security Benefits:
-	 *
-	 * - Uses Key stretching
-	 * - Hides the Initialization Vector
-	 * - Does HMAC verification of source data
-	 *
-	 */
-
 
 	/**
 	 * @var string $cipher The openssl cipher to use for this instance
@@ -95,9 +89,11 @@ class EncryptService {
 	 * @param SettingsService $settings
 	 */
 	public function __construct(SettingsService $settings) {
-		$this->cipher = $settings->getAppSetting('server_side_encryption');
-		$this->rounds = (int)100;
-		$this->server_key = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
+		$this->cipher = $settings->getAppSetting('server_side_encryption', 'aes-256-cbc');
+		$password_salt = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
+		$secret = \OC::$server->getConfig()->getSystemValue('secret', '');
+		$this->server_key = $password_salt . $secret;
+		$this->rounds = $settings->getAppSetting('rounds_pbkdf2_stretching', 100);
 	}
 
 	/**
@@ -121,7 +117,7 @@ class EncryptService {
 	 * @return int Value is in bytes
 	 */
 	public function getKeySize() {
-		return $this->supportedAlgos[$this->cipher]['keySize'];
+		return EncryptService::SUPPORTED_ALGORITHMS[$this->cipher]['keySize'];
 	}
 
 	/**
@@ -155,7 +151,7 @@ class EncryptService {
 
 		list ($cipherKey, $macKey, $iv) = $this->getKeys($salt, $key);
 
-		if (!EncryptService::hash_equals(hash_hmac('sha512', $enc, $macKey, true), $mac)) {
+		if (!$this->hash_equals(hash_hmac('sha512', $enc, $macKey, true), $mac)) {
 			return false;
 		}
 
@@ -174,9 +170,13 @@ class EncryptService {
 	 * @returns string The encrypted data
 	 */
 	public function encrypt($data, $key) {
-		$salt = openssl_random_pseudo_bytes(128);
-		list ($cipherKey, $macKey, $iv) = EncryptService::getKeys($salt, $key);
-		$data = EncryptService::pad($data);
+		if (function_exists('random_bytes')) {
+			$salt = random_bytes(128);
+		} else {
+			$salt = openssl_random_pseudo_bytes(128);
+		}
+		list ($cipherKey, $macKey, $iv) = $this->getKeys($salt, $key);
+		$data = $this->pad($data);
 		$enc = openssl_encrypt($data, $this->cipher, $cipherKey, true, $iv);
 		$mac = hash_hmac('sha512', $enc, $macKey, true);
 		$data = bin2hex($salt . $enc . $mac);
@@ -197,7 +197,7 @@ class EncryptService {
 		$keySize = openssl_cipher_iv_length($this->cipher);
 		$length = 2 * $keySize + $ivSize;
 
-		$key = EncryptService::pbkdf2('sha512', $key, $salt, $this->rounds, $length);
+		$key = $this->pbkdf2('sha512', $key, $salt, $this->rounds, $length);
 
 		$cipherKey = substr($key, 0, $keySize);
 		$macKey = substr($key, $keySize, $keySize);
@@ -206,7 +206,11 @@ class EncryptService {
 	}
 
 	protected function hash_equals($a, $b) {
-		$key = openssl_random_pseudo_bytes(128);
+		if (function_exists('random_bytes')) {
+			$key = random_bytes(128);
+		} else {
+			$key = openssl_random_pseudo_bytes(128);
+		}
 		return hash_hmac('sha512', $a, $key) === hash_hmac('sha512', $b, $key);
 	}
 
@@ -279,7 +283,7 @@ class EncryptService {
 	 * @return Credential|array
 	 */
 	public function decryptCredential($credential) {
-		return $this->handleCredential($credential, 'decrypt');
+		return $this->handleCredential($credential, EncryptService::OP_DECRYPT);
 	}
 
 	/**
@@ -290,12 +294,11 @@ class EncryptService {
 	 * @throws \Exception
 	 */
 	public function encryptCredential($credential) {
-		return $this->handleCredential($credential, 'encrypt');
+		return $this->handleCredential($credential, EncryptService::OP_ENCRYPT);
 	}
 
 
-
-	private function extractKeysFromCredential($credential){
+	private function extractKeysFromCredential($credential) {
 		$userKey = '';
 		$userSuppliedKey = '';
 		if ($credential instanceof Credential) {
@@ -317,12 +320,10 @@ class EncryptService {
 	 * @return Credential|array
 	 * @throws \Exception
 	 */
-	private function handleCredential($credential, $op) {
-		$service_function = ($op === 'encrypt') ? 'encrypt' : 'decrypt';
-
+	private function handleCredential($credential, $service_function) {
 		list($userKey, $userSuppliedKey) = $this->extractKeysFromCredential($credential);
 
-		$key = EncryptService::makeKey($userKey, $this->server_key, $userSuppliedKey);
+		$key = $this->makeKey($userKey, $this->server_key, $userSuppliedKey);
 		foreach ($this->encrypted_credential_fields as $field) {
 			if ($credential instanceof Credential) {
 				$field = str_replace(' ', '', str_replace('_', ' ', ucwords($field, '_')));
@@ -346,7 +347,7 @@ class EncryptService {
 	 */
 
 	public function encryptFile($file) {
-		return $this->handleFile($file, 'encrypt');
+		return $this->handleFile($file, EncryptService::OP_ENCRYPT);
 	}
 
 	/**
@@ -357,7 +358,7 @@ class EncryptService {
 	 */
 
 	public function decryptFile($file) {
-		return $this->handleFile($file, 'decrypt');
+		return $this->handleFile($file, EncryptService::OP_DECRYPT);
 	}
 
 	/**
@@ -367,12 +368,11 @@ class EncryptService {
 	 * @return File|array
 	 * @throws \Exception
 	 */
-	private function handleFile($file, $op) {
-		$service_function = ($op === 'encrypt') ? 'encrypt' : 'decrypt';
+	private function handleFile($file, $service_function) {
 		$userKey = '';
 		$userSuppliedKey = '';
 		if ($file instanceof File) {
-			$userSuppliedKey = $file->getSize();
+			$userSuppliedKey = $file->getFilename();
 			$userKey = md5($file->getMimetype());
 		}
 
@@ -381,7 +381,7 @@ class EncryptService {
 			$userKey = md5($file['mimetype']);
 		}
 
-		$key = EncryptService::makeKey($userKey, $this->server_key, $userSuppliedKey);
+		$key = $this->makeKey($userKey, $this->server_key, $userSuppliedKey);
 
 
 		if ($file instanceof File) {

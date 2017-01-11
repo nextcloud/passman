@@ -51,6 +51,15 @@ Untested databases:
 
 For more screenshots: [Click here](http://imgur.com/a/giKVt)
 
+## Encryption (server side)
+All passwords are encrypted client side AND server side.
+This means that if you move to another server you have to backup the following from config.php
+- `passwordsalt`
+- `secret`
+
+
+
+
 ## Code reviews
 If you have any improvements regarding our code.
 Please do the following

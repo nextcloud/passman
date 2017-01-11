@@ -41,7 +41,6 @@ class ShareService {
 	private $revisions;
 	private $encryptService;
 
-	private $server_key;
 
 	public function __construct(
 		SharingACLMapper $sharingACL,
@@ -55,7 +54,6 @@ class ShareService {
 		$this->credential = $credentials;
 		$this->revisions = $revisions;
 		$this->encryptService = $encryptService;
-		$this->server_key = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
 	}
 
 	/**

@@ -55,6 +55,7 @@ class SettingsService {
 			'https_check' => intval($this->config->getAppValue('passman', 'https_check', 1)),
 			'disable_contextmenu' => intval($this->config->getAppValue('passman', 'disable_contextmenu', 1)),
 			'server_side_encryption' => $this->config->getAppValue('passman', 'server_side_encryption', 'aes-256-cbc'),
+			'rounds_pbkdf2_stretching' => $this->config->getAppValue('passman', 'rounds_pbkdf2_stretching', 100),
 			'settings_loaded' => 1
 		);
 	}
