@@ -750,6 +750,9 @@
   cursor: pointer;
   /* "hand" cursor */ }
 
+.btn-danger {
+  color: #fff; }
+
 /**
  * Nextcloud - passman
  *
@@ -875,6 +878,9 @@
   .import_log textarea {
     width: 90%;
     height: 200px; }
+
+.tab_container.settings {
+  margin-bottom: 50px; }
 
 #app-settings-content:not(.ng-hide) {
   height: 90px;
