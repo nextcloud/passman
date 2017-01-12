@@ -30,6 +30,11 @@ For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 - NextCloud 10 / 11
 - ownCloud 9.1+
 
+## Browser extensions
+At this moment we don't have any extensions available, sorry!   
+However, if you're interested in helping us (or you want to guide us while building)   
+Check out: https://github.com/nextcloud/passman-chrome-extension
+
 
 ## Supported databases
 - SQL Lite*
@@ -58,7 +63,8 @@ This means that if you move to another server you have to backup the following f
 - `passwordsalt`
 - `secret`
 
-
+## Support Passman
+If you like passman, support us via [patreon](https://www.patreon.com/user?u=4833592) or [paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
 
 
 ## Code reviews
