@@ -23,6 +23,7 @@ if ($checkVersion) {
 		$githubVersion = $version;
 	}
 }
+$ciphers = openssl_get_cipher_methods();
 ?>
 
 <div id="passwordSharingSettings" class="followup section">
@@ -30,7 +31,7 @@ if ($checkVersion) {
 		<h2><?php p($l->t('Passman Settings')); ?></h2>
 		<?php
 		if ($checkVersion) {
-			p($l->t('Github version:'). ' '. $githubVersion);
+			p($l->t('Github version:') . ' ' . $githubVersion);
 			print '<br />';
 		} ?>
 		Local version: <?php p($localVersion); ?><br/>
@@ -52,7 +53,7 @@ if ($checkVersion) {
 		<p>
 			<input type="checkbox" name="passman_sharing_enabled"
 				   id="passman_sharing_enabled" class="checkbox"
-				   value="1" />
+				   value="1"/>
 			<label for="passman_sharing_enabled">
 				<?php p($l->t('Allow users on this server to share passwords with other users')); ?>
 			</label>
@@ -98,6 +99,18 @@ if ($checkVersion) {
 					Strong
 				</option>
 			</select>
+		</p>
+		<p>
+
+			<label for="server_side_encryption">Server side encryption
+				method:</label>
+			<select name="server_side_encryption2" id="server_side_encryption2">
+				<?php
+				foreach ($ciphers as $cipher) {
+					print '<option value="' . $cipher . '">' . $cipher . '</option>';
+				}
+				?>
+			</select> (Not working atm. OpenSSL has no equivalent of <code>mcrypt_get_key_size()</code>)
 		</p>
 	</form>
 </div>

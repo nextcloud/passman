@@ -120,4 +120,12 @@ class VaultMapper extends Mapper {
 		$vault->setSharingKeysGenerated($this->utils->getTime());
 		$this->update($vault);
 	}
+
+	/**
+	 * Delete a vault
+	 * @param Vault $vault
+	 */
+	public function deleteVault(Vault $vault){
+		$this->delete($vault);
+	}
 }

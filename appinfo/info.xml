@@ -17,7 +17,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
 
     <licence>AGPL</licence>
-    <version>2.0.0-RC3</version>
+    <version>2.0.0-RC4</version>
     <author homepage="https://github.com/brantje">Sander Brand</author>
     <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>
     <namespace>Passman</namespace>
@@ -39,7 +39,14 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         <nextcloud min-version="9" max-version="12" />
         <database>sqlite</database>
         <database min-version="5.5">mysql</database>
+        <lib>openssl</lib>
     </dependencies>
+
+    <repair-steps>
+        <post-migration>
+            <step>OCA\Passman\Migration\ServerSideEncryption</step>
+        </post-migration>
+    </repair-steps>
 
     <settings>
         <admin>OCA\Passman\Controller\SettingsController</admin>

@@ -11,9 +11,12 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\SharingACL;
+use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\IRequest;
@@ -42,6 +45,7 @@ class CredentialController extends ApiController {
 								CredentialRevisionService $credentialRevisionService,
 								ShareService $sharingService,
 								SettingsService $settings
+
 	) {
 		parent::__construct($AppName, $request);
 		$this->userId = $userId;
@@ -86,6 +90,7 @@ class CredentialController extends ApiController {
 			'hidden' => $hidden,
 
 		);
+
 		$credential = $this->credentialService->createCredential($credential);
 		$link = ''; // @TODO create direct link to credential
 		if (!$credential->getHidden()) {
@@ -102,7 +107,8 @@ class CredentialController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getCredential($credential_guid) {
-		return new JSONResponse($this->credentialService->getCredentialByGUID($credential_guid, $this->userId));
+		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		return new JSONResponse($credential);
 	}
 
 	/**
@@ -116,7 +122,7 @@ class CredentialController extends ApiController {
 									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision) {
 
 
-		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid);
 
 		$credential = array(
 			'credential_id' => $credential_id,
@@ -139,6 +145,7 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
+			'user_id' => $storedCredential->getUserId()
 		);
 
 
@@ -149,10 +156,11 @@ class CredentialController extends ApiController {
 			} else {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
-			if ($this->settings->isEnabled('user_sharing_enabled')) {
+			if (!$this->settings->isEnabled('user_sharing_enabled')) {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
 		}
+
 
 		$link = ''; // @TODO create direct link to credential
 		if ($revision_created) {
@@ -234,9 +242,15 @@ class CredentialController extends ApiController {
 			$storedCredential->setSharedKey('');
 			$credential['shared_key'] = '';
 		}
+
+		if (!isset($credential['shared_key'])) {
+			$credential['shared_key'] = $storedCredential->getSharedKey();
+		}
+
 		if (!$skip_revision) {
 			$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);
 		}
+
 		$credential = $this->credentialService->updateCredential($credential);
 
 		return new JSONResponse($credential);
@@ -247,19 +261,34 @@ class CredentialController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function deleteCredential($credential_guid) {
-		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		try {
+			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+		} catch (\Exception $e) {
+			return new NotFoundJSONResponse();
+		}
 		if ($credential) {
 			$result = $this->credentialService->deleteCredential($credential);
-			$this->activityService->add(
-				'item_destroyed_self', array($credential->getLabel()),
-				'', array(),
-				'', $this->userId, Activity::TYPE_ITEM_ACTION);
+			$this->deleteCredentialParts($credential);
 		} else {
 			$result = false;
 		}
 		return new JSONResponse($result);
 	}
 
+	/**
+	 * Delete leftovers from a credential
+	 * @param Credential $credential
+	 */
+	private function deleteCredentialParts(Credential $credential) {
+		$this->activityService->add(
+			'item_destroyed_self', array($credential->getLabel()),
+			'', array(),
+			'', $this->userId, Activity::TYPE_ITEM_ACTION);
+		$this->sharingService->unshareCredential($credential->getGuid());
+		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
+			$this->credentialRevisionService->deleteRevision($revision->getId(), $this->userId);
+		}
+	}
 
 	/**
 	 * @NoAdminRequired
@@ -271,7 +300,6 @@ class CredentialController extends ApiController {
 		} catch (\Exception $ex) {
 			return new NotFoundJSONResponse();
 		}
-
 		// If the request was made by the owner of the credential
 		if ($this->userId === $credential->getUserId()) {
 			$result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);

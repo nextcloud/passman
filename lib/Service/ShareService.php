@@ -39,17 +39,21 @@ class ShareService {
 	private $shareRequest;
 	private $credential;
 	private $revisions;
+	private $encryptService;
+
 
 	public function __construct(
 		SharingACLMapper $sharingACL,
 		ShareRequestMapper $shareRequest,
 		CredentialMapper $credentials,
-		CredentialRevisionService $revisions
+		CredentialRevisionService $revisions,
+		EncryptService $encryptService
 	) {
 		$this->sharingACL = $sharingACL;
 		$this->shareRequest = $shareRequest;
 		$this->credential = $credentials;
 		$this->revisions = $revisions;
+		$this->encryptService = $encryptService;
 	}
 
 	/**
@@ -140,9 +144,10 @@ class ShareService {
 		foreach ($entries as $entry) {
 			// Check if the user can read the credential, probably unnecesary, but just to be sure
 			if (!$entry->hasPermission(SharingACL::READ)) continue;
-
 			$tmp = $entry->jsonSerialize();
-			$tmp['credential_data'] = $this->credential->getCredentialById($entry->getItemId())->jsonSerialize();
+			$credential = $this->credential->getCredentialById($entry->getItemId());
+			$credential = $this->encryptService->decryptCredential($credential);
+			$tmp['credential_data'] = $credential->jsonSerialize();
 
 			if (!$entry->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
 			unset($tmp['credential_data']['shared_key']);
@@ -153,6 +158,7 @@ class ShareService {
 
 	/**
 	 * Gets the acl for a given item guid
+	 *
 	 * @param $user_id
 	 * @param $item_guid
 	 * @return SharingACL
@@ -168,7 +174,10 @@ class ShareService {
 		if (!$acl->hasPermission(SharingACL::READ)) throw new DoesNotExistException("Item not found or wrong access level");
 
 		$tmp = $acl->jsonSerialize();
-		$tmp['credential_data'] = $this->credential->getCredentialById($acl->getItemId())->jsonSerialize();
+		$credential = $this->credential->getCredentialById($acl->getItemId());
+		$credential = $this->encryptService->decryptCredential($credential);
+
+		$tmp['credential_data'] = $credential->jsonSerialize();
 
 		if (!$acl->hasPermission(SharingACL::FILES)) unset($tmp['credential_data']['files']);
 		unset($tmp['credential_data']['shared_key']);
@@ -191,31 +200,33 @@ class ShareService {
 	}
 
 
-    /**
-     * Deletes a share request by the item ID
-     * @param ShareRequest $request
-     * @return \PDOStatement
-     */
+	/**
+	 * Deletes a share request by the item ID
+	 *
+	 * @param ShareRequest $request
+	 * @return \PDOStatement
+	 */
 	public function cleanItemRequestsForUser(ShareRequest $request) {
 		return $this->shareRequest->cleanItemRequestsForUser($request->getItemId(), $request->getTargetUserId());
 	}
 
-    /**
-     * Get an share request by id
-     * @param $id
-     * @return ShareRequest
-     */
+	/**
+	 * Get an share request by id
+	 *
+	 * @param $id
+	 * @return ShareRequest
+	 */
 	public function getShareRequestById($id) {
 		return $this->shareRequest->getShareRequestById($id);
 	}
 
-    /**
-     * Get an share request by $item_guid and $target_vault_guid
-     *
-     * @param $item_guid
-     * @param $target_vault_guid
-     * @return ShareRequest
-     */
+	/**
+	 * Get an share request by $item_guid and $target_vault_guid
+	 *
+	 * @param $item_guid
+	 * @param $target_vault_guid
+	 * @return ShareRequest
+	 */
 	public function getRequestByGuid($item_guid, $target_vault_guid) {
 		return $this->shareRequest->getRequestByItemAndVaultGuid($item_guid, $target_vault_guid);
 	}
@@ -275,11 +286,12 @@ class ShareService {
 		return $this->sharingACL->deleteShareACL($ACL);
 	}
 
-    /**
-     * Updates the given ACL entry
-     * @param SharingACL $sharingACL
-     * @return SharingACL
-     */
+	/**
+	 * Updates the given ACL entry
+	 *
+	 * @param SharingACL $sharingACL
+	 * @return SharingACL
+	 */
 	public function updateCredentialACL(SharingACL $sharingACL) {
 		return $this->sharingACL->updateCredentialACL($sharingACL);
 	}
@@ -300,7 +312,30 @@ class ShareService {
 	}
 
 
-	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions){
-	    return $this->shareRequest->updatePendingRequestPermissions($item_guid, $user_id, $permissions);
-    }
+	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions) {
+		return $this->shareRequest->updatePendingRequestPermissions($item_guid, $user_id, $permissions);
+	}
+
+	/**
+	 * Clean up on credential destroyed.
+	 * This will delete all ACL's and share requests.
+	 * @param string $item_guid
+	 */
+
+	public function unshareCredential($item_guid) {
+		$acl_list = $this->getCredentialAclList($item_guid);
+		$request_list = $this->getShareRequestsByGuid($item_guid);
+		foreach ($acl_list as $ACL) {
+			$this->deleteShareACL($ACL);
+		}
+		foreach ($request_list as $request) {
+			$this->deleteShareRequest($request);
+			$manager = \OC::$server->getNotificationManager();
+			$notification = $manager->createNotification();
+			$notification->setApp('passman')
+				->setObject('passman_share_request', $request->getId())
+				->setUser($request->getTargetUserId());
+			$manager->markProcessed($notification);
+		}
+	}
 }

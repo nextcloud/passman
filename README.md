@@ -2,8 +2,9 @@
 #Passman
 
 [![Build Status](https://travis-ci.org/nextcloud/passman.svg?branch=master)](https://travis-ci.org/nextcloud/passman)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nextcloud/passman&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&utm_medium=referral&utm_content=nextcloud/passman&utm_campaign=Badge_Coverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/nextcloud/passman/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
 
 
 Passman is a full featured password manager.
@@ -29,6 +30,11 @@ For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 - NextCloud 10 / 11
 - ownCloud 9.1+
 
+## Browser extensions
+At this moment we don't have any extensions available, sorry!   
+However, if you're interested in helping us (or you want to guide us while building)   
+Check out: https://github.com/nextcloud/passman-chrome-extension
+
 
 ## Supported databases
 - SQL Lite*
@@ -50,6 +56,16 @@ Untested databases:
 ![Password tool](http://i.imgur.com/ZYkN70r.png)
 
 For more screenshots: [Click here](http://imgur.com/a/giKVt)
+
+## Encryption (server side)
+All passwords are encrypted client side AND server side.
+This means that if you move to another server you have to backup the following from config.php
+- `passwordsalt`
+- `secret`
+
+## Support Passman
+If you like passman, support us via [patreon](https://www.patreon.com/user?u=4833592) or [paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
+
 
 ## Code reviews
 If you have any improvements regarding our code.

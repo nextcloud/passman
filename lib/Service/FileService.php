@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\Db\File;
 use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -32,43 +33,55 @@ use OCA\Passman\Db\FileMapper;
 class FileService {
 
 	private $fileMapper;
+	private $encryptService;
+	private $server_key;
 
-	public function __construct(FileMapper $fileMapper) {
+	public function __construct(FileMapper $fileMapper, EncryptService $encryptService) {
 		$this->fileMapper = $fileMapper;
+		$this->encryptService = $encryptService;
+		$this->server_key = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
 	}
 
 	/**
 	 * Get a single file. This function also returns the file content.
+	 *
 	 * @param $fileId
 	 * @param null $userId
 	 * @return \OCA\Passman\Db\File
 	 */
 	public function getFile($fileId, $userId = null) {
-		return $this->fileMapper->getFile($fileId, $userId);
+		$file = $this->fileMapper->getFile($fileId, $userId);
+		return $this->encryptService->decryptFile($file);
 	}
 
 	/**
 	 * Get a single file. This function also returns the file content.
+	 *
 	 * @param $file_guid
 	 * @param null $userId
 	 * @return \OCA\Passman\Db\File
 	 */
 	public function getFileByGuid($file_guid, $userId = null) {
-		return $this->fileMapper->getFileByGuid($file_guid, $userId);
+		$file = $this->fileMapper->getFileByGuid($file_guid, $userId);
+		return $this->encryptService->decryptFile($file);
 	}
 
 	/**
 	 * Upload a new file,
+	 *
 	 * @param $file array
 	 * @param $userId
 	 * @return \OCA\Passman\Db\File
 	 */
 	public function createFile($file, $userId) {
-		return $this->fileMapper->create($file, $userId);
+		$file = $this->encryptService->encryptFile($file);
+		$file = $this->fileMapper->create($file, $userId);
+		return $this->getFile($file->getId());
 	}
 
 	/**
 	 * Delete file
+	 *
 	 * @param $file_id
 	 * @param $userId
 	 * @return \OCA\Passman\Db\File
@@ -79,11 +92,13 @@ class FileService {
 
 	/**
 	 * Update file
-	 * @param $file_id
+	 *
+	 * @param File $file
 	 * @return \OCA\Passman\Db\File
 	 */
-	public function updateFile($file_id) {
-		return $this->fileMapper->updateFile($file_id);
+	public function updateFile($file) {
+		$file = $this->encryptService->encryptFile($file);
+		return $this->fileMapper->updateFile($file);
 	}
 
 }

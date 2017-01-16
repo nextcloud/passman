@@ -213,20 +213,7 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function unshareCredential($item_guid) {
-		$acl_list = $this->shareService->getCredentialAclList($item_guid);
-		$request_list = $this->shareService->getShareRequestsByGuid($item_guid);
-		foreach ($acl_list as $ACL) {
-			$this->shareService->deleteShareACL($ACL);
-		}
-		foreach ($request_list as $request) {
-			$this->shareService->deleteShareRequest($request);
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
-			$notification->setApp('passman')
-				->setObject('passman_share_request', $request->getId())
-				->setUser($request->getTargetUserId());
-			$manager->markProcessed($notification);
-		}
+		$this->shareService->unshareCredential($item_guid);
 		return new JSONResponse(array('result' => true));
 	}
 
@@ -464,12 +451,12 @@ class ShareController extends ApiController {
 	}
 
 	/**
-	 * @param $credential_guid
+	 * @param $item_guid
 	 * @param $file_guid
 	 * @NoAdminRequired
 	 * @PublicPage
-	 * @return JSONResponse
-	 * @return NotFoundResponse
+	 * @return mixed
+	 * @return NotFoundJSONResponse
 	 */
 	public function getFile($item_guid, $file_guid) {
 		try {

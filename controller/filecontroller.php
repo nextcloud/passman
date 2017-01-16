@@ -39,7 +39,8 @@ class FileController extends ApiController {
 			'filename' => $filename,
 			'size' => $size,
 			'mimetype' => $mimetype,
-			'file_data' => $data
+			'file_data' => $data,
+			'user_id' => $this->userId
 		);
 		return new JSONResponse($this->fileService->createFile($file, $this->userId));
 	}
