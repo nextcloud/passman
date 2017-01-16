@@ -12,10 +12,10 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-8 valueInput">
-				<input type="text" ng-model="new_custom_field.value" ng-show="selected_field_type === 'text'">
-				<password-gen ng-model="new_custom_field.value" ng-show="selected_field_type ==='password'"
+				<input type="text" ng-model="new_custom_field.value" ng-show="new_custom_field.field_type === 'text'">
+				<password-gen ng-model="new_custom_field.value" ng-show="new_custom_field.field_type ==='password'"
 							  settings="{generateOnCreate: false }" ></password-gen>
-				<span ng-show="selected_field_type ==='file'">
+				<span ng-show="new_custom_field.field_type ==='file'">
 					<input id="custom_field_file" class="inputfile" type="file" file-select success="addFileToCustomField" error="fileLoadError" progress="fileSelectProgress">
 					<label for="custom_field_file"><i class="fa fa-upload" aria-hidden="true"></i> {{ new_custom_field.value.filename || 'select.file' | translate}}</label>
 				</span>
