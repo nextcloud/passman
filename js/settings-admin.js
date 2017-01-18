@@ -95,6 +95,7 @@ $(document).ready(function () {
 	$('#passman_check_version').prop('checked', (settings.getKey('check_version').toString().toLowerCase() === '1'));
 	$('#passman_https_check').prop('checked', (settings.getKey('https_check').toString().toLowerCase() === '1'));
 	$('#passman_disable_contextmenu').prop('checked', (settings.getKey('disable_contextmenu').toString().toLowerCase() === '1'));
+	$('#passman_disable_debugger').prop('checked', (settings.getKey('disable_debugger').toString().toLowerCase() === '1'));
 	$('#vault_key_strength').val(settings.getKey('vault_key_strength'));
 
 
@@ -108,6 +109,10 @@ $(document).ready(function () {
 
 	$('#passman_disable_contextmenu').change(function () {
 		settings.setAdminKey('disable_contextmenu', ($(this).is(":checked")) ? 1 : 0);
+	});
+
+	$('#passman_disable_debugger').change(function () {
+		settings.setAdminKey('disable_debugger', ($(this).is(":checked")) ? 1 : 0);
 	});
 
 	$('#passman_sharing_enabled').change(function () {

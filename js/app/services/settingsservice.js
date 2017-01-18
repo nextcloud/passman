@@ -57,6 +57,9 @@
 				setSetting: function (name, value) {
 					settings[name] = value;
 					localStorageService.set('settings', settings);
+				},
+				isEnabled: function (name) {
+					return settings[name] === 1 || settings[name] === '1';
 				}
 			};
 		}]);
