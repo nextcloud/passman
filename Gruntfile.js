@@ -257,7 +257,8 @@ module.exports = function (grunt) {
 						'js/exporters/exporter-main.js',
 						'js/exporters/*.js',
 						'js/app/controllers/*.js',
-						'js/templates.js'
+						'js/templates.js',
+						'js/settings-admin.js'
 					]
 				}
 			}
