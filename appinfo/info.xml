@@ -48,10 +48,6 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         </post-migration>
     </repair-steps>
 
-    <settings>
-        <admin>OCA\Passman\Controller\SettingsController</admin>
-    </settings>
-
     <background-jobs>
         <job>OCA\Passman\BackgroundJob\ExpireCredentials</job>
     </background-jobs>

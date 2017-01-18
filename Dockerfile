@@ -57,9 +57,13 @@ COPY ./LICENSE /var/www/passman/
 
 RUN service mysql restart && \
 		mysql -uroot -pPASS -e "SET PASSWORD = PASSWORD('');" && \
+		sed  -i '0,/.*SSLCertificateChainFile.*/s/.*SSLCertificateChainFile.*/SSLCertificateChainFile \/etc\/ssl\/private\/fullchain.pem/' /etc/apache2/sites-enabled/default-ssl.conf && \
+		sed -i '0,/.*ssl-cert-snakeoil.pem.*/s/.*ssl-cert-snakeoil.pem.*/SSLCertificateFile \/etc\/ssl\/private\/cert.pem/' /etc/apache2/sites-enabled/default-ssl.conf && \
+		sed -i '0,/.*SSLCertificateKeyFile.*/s/.*SSLCertificateKeyFile.*/SSLCertificateKeyFile \/etc\/ssl\/private\/privkey.pem/' /etc/apache2/sites-enabled/default-ssl.conf && \
 		echo "echo hhvm" > /bin/phpenv && chmod +x /bin/phpenv && \
 		cd /var/www/html && \
 		chmod +x before_install.sh && \
+		sleep 1 && \
 		/bin/bash -c "./before_install.sh passman master mysql; exit 0" && \
 		mv /var/www/server/* /var/www/html/ && \
 		cd /var/www/html/ && \
@@ -79,9 +83,8 @@ RUN service mysql restart && \
 		chown -R www-data /var/www
 EXPOSE 80
 EXPOSE 443
-ENTRYPOINT curl -L https://demo.passman.cc/startup.sh | bash && \
-                        service mysql start && \
+ENTRYPOINT              service mysql start && \
 						service apache2 start && \
-						/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin" && \
+						#/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin" && \
 						bash -c "trap 'echo stopping services...; service apache2 stop && service mysql stop && exit 0' SIGTERM SIGKILL; \
 						tail -f /var/www/html/data/nextcloud.log"

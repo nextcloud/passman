@@ -266,8 +266,9 @@ class CredentialController extends ApiController {
 		} catch (\Exception $e) {
 			return new NotFoundJSONResponse();
 		}
-		if ($credential) {
+		if ($credential instanceof Credential) {
 			$result = $this->credentialService->deleteCredential($credential);
+			//print_r($credential);
 			$this->deleteCredentialParts($credential);
 		} else {
 			$result = false;
@@ -286,7 +287,7 @@ class CredentialController extends ApiController {
 			'', $this->userId, Activity::TYPE_ITEM_ACTION);
 		$this->sharingService->unshareCredential($credential->getGuid());
 		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
-			$this->credentialRevisionService->deleteRevision($revision->getId(), $this->userId);
+				$this->credentialRevisionService->deleteRevision($revision['id'], $this->userId);
 		}
 	}
 
