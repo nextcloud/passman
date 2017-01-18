@@ -42,13 +42,32 @@
 			}
 
 			$rootScope.$on('settings_loaded', function(){
-				if (SettingsService.getSetting('disable_contextmenu') === '1' || SettingsService.getSetting('disable_contextmenu') === 1) {
+				if (SettingsService.isEnabled('disable_contextmenu')) {
 					document.addEventListener('contextmenu', function (event) {
 						event.preventDefault();
 					});
 				}
-				if (SettingsService.getSetting('https_check') === '0' || SettingsService.getSetting('https_check') === 0) {
+				if (SettingsService.isEnabled('https_check')) {
 					$scope.http_warning_hidden = true;
+				}
+
+				if(SettingsService.isEnabled('disable_debugger')){
+					(function a() {
+						try {
+							(function b(i) {
+								if (('' + (i / i)).length !== 1 || i % 20 === 0) {
+									(function() {}).constructor('debugger')();
+								} else {
+									// This debugger statement is allowed to block javascript console
+									/*jshint -W087 */
+									debugger;
+								}
+								b(++i);
+							})(0);
+						} catch (e) {
+							setTimeout(a, 5000);
+						}
+					})();
 				}
 			});
 

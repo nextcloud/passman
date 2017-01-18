@@ -84,6 +84,14 @@ $ciphers = openssl_get_cipher_methods();
 			</label>
 		</p>
 		<p>
+			<input type="checkbox" name="passman_disable_debugger"
+				   id="passman_disable_debugger" class="checkbox"
+				   value="0"/>
+			<label for="passman_disable_debugger">
+				<?php p($l->t('Disable javascript debugger')); ?>
+			</label>
+		</p>
+		<p>
 			<label for="vault_key_strength">Minimum vault key strength:</label>
 			<select name="vault_key_strength" id="vault_key_strength">
 				<option value="0">
