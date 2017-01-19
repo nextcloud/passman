@@ -17,9 +17,8 @@ class APIMiddleware extends Middleware {
 
 	public function afterController($controller, $methodName, Response $response) {
 		if($response instanceof JSONResponse){
-			$origin = $this->request->server['HTTP_ORIGIN'];
-			if($origin) {
-				$response->addHeader('Access-Control-Allow-Origin', $origin);
+			if(isset($this->request->server['HTTP_ORIGIN'])) {
+				$response->addHeader('Access-Control-Allow-Origin', $this->request->server['HTTP_ORIGIN']);
 			}
 		}
 		return parent::afterController($controller, $methodName, $response);
