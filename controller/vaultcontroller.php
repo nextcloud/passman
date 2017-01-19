@@ -37,7 +37,7 @@ class VaultController extends ApiController {
 		parent::__construct(
 			$AppName,
 			$request,
-			'GET, POST, DELETE, PUT, PATCH',
+			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;

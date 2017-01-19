@@ -24,7 +24,12 @@ class FileController extends ApiController {
 								IRequest $request,
 								$UserId,
 								FileService $fileService){
-		parent::__construct($AppName, $request);
+		parent::__construct(
+			$AppName,
+			$request,
+			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
+			'Authorization, Content-Type, Accept',
+			86400);
 		$this->userId = $UserId;
 		$this->fileService = $fileService;
 	}

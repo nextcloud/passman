@@ -29,6 +29,7 @@ use OCA\Passman\Controller\CredentialController;
 use OCA\Passman\Controller\PageController;
 use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Controller\VaultController;
+use OCA\Passman\Middleware\APIMiddleware;
 use OCA\Passman\Middleware\ShareMiddleware;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CronService;
@@ -109,6 +110,8 @@ class Application extends App {
 			return $c->query('ServerContainer')->getLogger();
 		});
 
+		$container->registerMiddleware('APIMiddleware');
+
 		// Aliases for the controllers so we can use the automatic DI
 		$container->registerAlias('CredentialController', CredentialController::class);
 		$container->registerAlias('PageController', PageController::class);
@@ -124,6 +127,7 @@ class Application extends App {
 		$container->registerAlias('IDBConnection', IDBConnection::class);
 		$container->registerAlias('IConfig', IConfig::class);
 		$container->registerAlias('SettingsService', SettingsService::class);
+		$container->registerAlias('APIMiddleware', APIMiddleware::class);
 	}
 
 	/**
