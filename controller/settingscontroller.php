@@ -29,7 +29,12 @@ class SettingsController extends ApiController {
 		$userId,
 		SettingsService $settings,
 		IL10N $l) {
-		parent::__construct($AppName, $request);
+		parent::__construct(
+			$AppName,
+			$request,
+			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
+			'Authorization, Content-Type, Accept',
+			86400);
 		$this->settings = $settings;
 		$this->l = $l;
 		$this->userId = $userId;
