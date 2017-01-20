@@ -276,6 +276,7 @@ OC.L10N.register(
     "Check for new versions" : "Проверить наличие новых версий",
     "Enable HTTPS check" : "Включить проверку HTTPS",
     "Disable context menu" : "Отключить контекстное меню",
+    "Disable javascript debugger" : "Отключите отладчик javascript ",
     "Connection to server lost" : "Подключение к серверу потеряно",
     "Problem loading page, reloading in 5 seconds" : "Проблема при загрузке страницы, перезагрузка через 5 сек.",
     "Saving..." : "Сохранение...",

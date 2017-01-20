@@ -274,6 +274,7 @@
     "Check for new versions" : "Verificar novas versões",
     "Enable HTTPS check" : "Ativar verificação HTTPS",
     "Disable context menu" : "Desativar menu de contexto",
+    "Disable javascript debugger" : "Desativar o depurador javascript",
     "Connection to server lost" : "Perdida a conexão com o servidor",
     "Problem loading page, reloading in 5 seconds" : "Problema ao carregar a página, recarregando em 5 segundos",
     "Saving..." : "Pesquisando...",

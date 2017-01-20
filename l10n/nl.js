@@ -276,6 +276,7 @@ OC.L10N.register(
     "Check for new versions" : "Controleren op nieuwe versies",
     "Enable HTTPS check" : "Inschakelen HTTPS controle",
     "Disable context menu" : "Deactiveren contextmenu",
+    "Disable javascript debugger" : "Uitschakelen javascript debugger",
     "Connection to server lost" : "Verbinding met server verloren",
     "Problem loading page, reloading in 5 seconds" : "Probleem met het laden van de pagina, wordt ververst in 5 seconden",
     "Saving..." : "Opslaan...",
