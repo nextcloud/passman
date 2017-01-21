@@ -276,6 +276,7 @@ OC.L10N.register(
     "Check for new versions" : "Vérifier la présence de nouvelles versions",
     "Enable HTTPS check" : "Activer la vérification HTTPS",
     "Disable context menu" : "Désactiver le menu contextuel",
+    "Disable javascript debugger" : "Désactiver le débogueur javascript",
     "Connection to server lost" : "Connexion au serveur perdu",
     "Problem loading page, reloading in 5 seconds" : "Problème de chargement de la page, actualisation dans 5 secondes",
     "Saving..." : "Enregistrement…",
