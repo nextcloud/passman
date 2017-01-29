@@ -274,18 +274,21 @@
 				};
 
 				$scope.parseQR = function (QRCode) {
-					var re = /otpauth:\/\/(totp|hotp)\/(.*)\?(secret|issuer)=(.*)&(issuer|secret)=(.*)/, parsedQR, qrInfo;
-					qrInfo = [];
-					parsedQR = (QRCode.qrData.match(re));
-					if (parsedQR)
-						qrInfo = {
-							type: parsedQR[1],
-							label: decodeURIComponent(parsedQR[2]),
-							qr_uri: QRCode
-						};
-					qrInfo[parsedQR[3]] = parsedQR[4];
-					qrInfo[parsedQR[5]] = parsedQR[6];
-					$scope.storedCredential.otp = qrInfo;
+					if (!QRCode) {
+						NotificationService.showNotification($translate.instant('invalid.qr'), 5000);
+						return;
+					}
+					/** global: URL */
+					var uri = new URL(QRCode.qrData);
+					var type = (uri.href.indexOf('totp/') !== -1) ? 'totp' : 'hotp';
+					var label = uri.pathname.replace('//'+ type +'/', '');
+					$scope.storedCredential.otp = {
+						type: type,
+						label: decodeURIComponent(label),
+						qr_uri: QRCode,
+						issuer: uri.searchParams.get('issuer'),
+						secret: uri.searchParams.get('secret')
+					};
 					$scope.$digest();
 				};
 

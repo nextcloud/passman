@@ -60,7 +60,7 @@ class TranslationController extends ApiController {
 			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably don\'t have enough permissions'),
 
 			// js/app/controllers/edit_credential.js
-
+			'invalid.qr' => $this->trans->t('Invalid QR code'),
 
 			// js/app/controllers/export.js
 			'export.starting' => $this->trans->t('Starting export'),

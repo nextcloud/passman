@@ -2,9 +2,11 @@
 	<div class="col-xs-12 col-md-6">
 		<label><input type="checkbox" ng-model="share_settings.linkSharing.enabled">
 		{{ 'enable.link.sharing' | translate}}.</label><br/>
-		<input type="text" ng-model="share_link" select-on-click placeholder="{{ 'click.share' | translate}}!"
-			   ng-if="share_settings.linkSharing.enabled">
-		<div ng-show="share_settings.linkSharing.enabled">
+		<div class="pull-left col-xs-6 nopadding">
+			<span credential-field value="share_link" secret="false" use-input="true" input-placeholder="'click.share' | translate" ></span>
+		</div>
+
+		<div ng-show="share_settings.linkSharing.enabled" class="clearfix">
 			{{ 'share.until.date' | translate}}
 			<span datetime-picker
 				  ng-model="share_settings.linkSharing.settings.expire_time"
