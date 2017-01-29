@@ -34,15 +34,18 @@
 			return {
 				scope: {
 					value: '=value',
-					secret: '=secret'
+					secret: '=secret',
+					inputField: '=useInput',
+					inputFieldplaceholder: '=inputPlaceholder'
 				},
 				restrict: 'A',
 				replace: 'true',
 				template: "" +
 				'<span class="credential_field">' +
 				'<div class="value" ng-class="{\'ellipsis\': isLink}">' +
-				'<span ng-repeat="n in [] | range:value.length" ng-if="!valueVisible">*</span>' +
-				'<span ng-if="valueVisible" ng-bind-html="value"></span>' +
+				'<span ng-if="secret"><span ng-repeat="n in [] | range:value.length" ng-if="!valueVisible">*</span></span>' +
+				'<span ng-if="valueVisible && !inputField" ng-bind-html="value"></span>' +
+				'<span ng-if="valueVisible && inputField"><input type="text" ng-model="value" select-on-click placeholder="{{ inputFieldplaceholder }}!"</span>' +
 				'</div>' +
 				'<div class="tools">' +
 				'<div class="cell" ng-if="toggle" tooltip="tggltxt" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': !valueVisible, \'fa-eye-slash\': valueVisible }"></i></div>' +
