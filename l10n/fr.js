@@ -135,7 +135,7 @@ OC.L10N.register(
     "Action" : "Action",
     "Search users or groups..." : "Recherche des utilisateurs ou des groupes ...",
     "Cyphering" : "Chiffrement",
-    "Uploading" : "Téléversement",
+    "Uploading" : "Téléversement en cours",
     "User" : "Utilisateur",
     "Crypto time" : "Temps d'encodage",
     "Total time spent cyphering" : "Temps total passé à chiffrer",
