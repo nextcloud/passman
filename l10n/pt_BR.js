@@ -188,7 +188,7 @@ OC.L10N.register(
     "Unshare" : "Descompartilhar",
     "Showing deleted since" : "Mostrar eliminados desde",
     "All time" : "Todo o tempo",
-    "Showing {{number_filtered}} of {{credential_number}} credentials" : "Mostrando {{number_filtered}} de {{credential_number}} credeciais",
+    "Showing {{number_filtered}} of {{credential_number}} credentials" : "Mostrando {{number_filtered}} de {{credential_number}} credenciais",
     "Search credential..." : "Pesquisar credenciais",
     "Account" : "Conta",
     "Password" : "Senha",
