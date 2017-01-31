@@ -15,6 +15,7 @@
     "Credential recovered" : "Credencial recuperada",
     "Credential destroyed" : "Credencial destruida",
     "Error downloading file, you probably don't have enough permissions" : "Erro ao baixar o arquivo, você provavelmente não tem permissões suficientes",
+    "Invalid QR code" : "Código QR inválido",
     "Starting export" : "Iniciando a exportação",
     "Decrypting credentials" : "Credenciais de descriptografia",
     "Done" : "Finalizado",

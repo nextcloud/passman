@@ -17,6 +17,7 @@ OC.L10N.register(
     "Credential recovered" : "Реквизит восстановлен",
     "Credential destroyed" : "Учетные данные уничтожены",
     "Error downloading file, you probably don't have enough permissions" : "Ошибка скачивания файла, возможно у вас не достаточно прав доступа",
+    "Invalid QR code" : "Неверный код QR",
     "Starting export" : "Начинается экспорт",
     "Decrypting credentials" : "Расшифровка реквизитов",
     "Done" : "Готово",
