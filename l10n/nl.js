@@ -17,6 +17,7 @@ OC.L10N.register(
     "Credential recovered" : "Inloggegevens hersteld",
     "Credential destroyed" : "Inloggegevens vernietigd",
     "Error downloading file, you probably don't have enough permissions" : "Fout bij downloaden bestand, je hebt waarschijnlijk niet genoeg rechten",
+    "Invalid QR code" : "Ongeldige QR code",
     "Starting export" : "Starten export",
     "Decrypting credentials" : "Ontsleutelen inloggegevens",
     "Done" : "Gereed",
