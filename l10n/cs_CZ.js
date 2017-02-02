@@ -17,6 +17,7 @@ OC.L10N.register(
     "Credential recovered" : "Pověření obnoveno",
     "Credential destroyed" : "Pověření zničeno",
     "Error downloading file, you probably don't have enough permissions" : "Chyba stahování souboru, pravděpodobně nemáte dostatečná oprávnění",
+    "Invalid QR code" : "Neplatný QR kód",
     "Starting export" : "Začíná export",
     "Decrypting credentials" : "Dešifrování pověření",
     "Done" : "Hotovo",
