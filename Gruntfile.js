@@ -246,6 +246,8 @@ module.exports = function (grunt) {
 						'js/vendor/ng-password-meter/ng-password-meter.js',
 						'js/vendor/sjcl/sjcl.js',
 						'js/vendor/zxcvbn/zxcvbn.js',
+						'js/vendor/forge.0.6.9.min.js',
+						'js/vendor/download.js',
 						'js/vendor/ng-clipboard/clipboard.min.js',
 						'js/vendor/ng-clipboard/ngclipboard.js',
 						'js/vendor/ng-tags-input/ng-tags-input.min.js',
