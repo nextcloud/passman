@@ -154,30 +154,6 @@
 					VaultService.getVault($scope.active_vault).then(callback);
 				};
 
-				var decryptOwnCredentials = function (vault) {
-					var _selected_credentials = [];
-					if (vault.credentials.length === 0) {
-						$location.path('/');
-					}
-					for (var i = 0; i < vault.credentials.length; i++) {
-						var _credential = vault.credentials[i];
-						var isShared = (_credential.shared_key === null || _credential.shared_key === '');
-						if ( isShared || !_credential.hasOwnProperty('acl')) {
-							var _success;
-							try {
-								CredentialService.decryptCredential(_credential, VaultService.getActiveVault().vaultKey);
-								_success = true;
-							} catch (e) {
-								_success = false;
-							}
-							if (_success) {
-								_selected_credentials.push(_credential);
-							}
-						}
-					}
-					return _selected_credentials;
-				};
-
 				$scope.startScan = function (minStrength) {
 					getCurrentVaultCredentials(function (vault) {
 						var results = [];
@@ -224,6 +200,7 @@
 
 
 				$scope.changeVaultPassword = function (oldVaultPass, newVaultPass, newVaultPass2) {
+					$scope.error = '';
 					if (oldVaultPass !== VaultService.getActiveVault().vaultKey) {
 						$scope.error = $translate.instant('incorrect.password');
 						return;
@@ -235,14 +212,24 @@
 					SettingsService.setSetting('defaultVault', null);
 					SettingsService.setSetting('defaultVaultPass', null);
 					VaultService.getVault($scope.active_vault).then(function (vault) {
-						var _selected_credentials = decryptOwnCredentials(vault);
+						jQuery('input').attr('disabled', true);
+						jQuery('button').attr('disabled', true);
+						var _selected_credentials = angular.copy(vault.credentials);
 						$scope.change_pw = {
 							percent: 0,
 							done: 0,
 							total: _selected_credentials.length
 						};
 						var changeCredential = function (index, oldVaultPass, newVaultPass) {
-							CredentialService.reencryptCredential(_selected_credentials[index].guid, oldVaultPass, newVaultPass).progress(function (data) {
+							var usedKey = oldVaultPass;
+
+							if (_selected_credentials[index].hasOwnProperty('shared_key')) {
+								if (_selected_credentials[index].shared_key) {
+									usedKey = EncryptService.decryptString(angular.copy(_selected_credentials[index].shared_key), oldVaultPass);
+								}
+							}
+
+							CredentialService.reencryptCredential(_selected_credentials[index].guid, usedKey, newVaultPass).progress(function (data) {
 								$scope.cur_state = data;
 							}).then(function () {
 								var percent = index / _selected_credentials.length * 100;
