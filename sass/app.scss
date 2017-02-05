@@ -103,3 +103,7 @@
 .clearfix{
   clear: both;
 }
+//Fix NC fucking up our style
+input[type="checkbox"]{
+  min-height: inherit;
+}
