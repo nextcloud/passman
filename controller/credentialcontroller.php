@@ -47,7 +47,12 @@ class CredentialController extends ApiController {
 								SettingsService $settings
 
 	) {
-		parent::__construct($AppName, $request);
+		parent::__construct(
+			$AppName,
+			$request,
+			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
+			'Authorization, Content-Type, Accept',
+			86400);
 		$this->userId = $userId;
 		$this->credentialService = $credentialService;
 		$this->activityService = $activityService;
@@ -266,8 +271,9 @@ class CredentialController extends ApiController {
 		} catch (\Exception $e) {
 			return new NotFoundJSONResponse();
 		}
-		if ($credential) {
+		if ($credential instanceof Credential) {
 			$result = $this->credentialService->deleteCredential($credential);
+			//print_r($credential);
 			$this->deleteCredentialParts($credential);
 		} else {
 			$result = false;
@@ -286,7 +292,7 @@ class CredentialController extends ApiController {
 			'', $this->userId, Activity::TYPE_ITEM_ACTION);
 		$this->sharingService->unshareCredential($credential->getGuid());
 		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
-			$this->credentialRevisionService->deleteRevision($revision->getId(), $this->userId);
+				$this->credentialRevisionService->deleteRevision($revision['id'], $this->userId);
 		}
 	}
 

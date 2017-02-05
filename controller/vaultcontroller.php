@@ -37,7 +37,7 @@ class VaultController extends ApiController {
 		parent::__construct(
 			$AppName,
 			$request,
-			'GET, POST, DELETE, PUT, PATCH',
+			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
@@ -158,8 +158,8 @@ class VaultController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function delete($vault_id) {
-		$this->vaultService->deleteVault($vault_id, $this->userId);
+	public function delete($vault_guid) {
+		$this->vaultService->deleteVault($vault_guid, $this->userId);
 		return new JSONResponse(array('ok' => true));
 	}
 }

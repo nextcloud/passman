@@ -61,7 +61,12 @@ class ShareController extends ApiController {
 								FileService $fileService,
 								SettingsService $config
 	) {
-		parent::__construct($AppName, $request);
+		parent::__construct(
+			$AppName,
+			$request,
+			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
+			'Authorization, Content-Type, Accept',
+			86400);
 
 		$this->userId = $UserId;
 		$this->userManager = $userManager;

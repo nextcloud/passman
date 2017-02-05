@@ -23,7 +23,12 @@ class TranslationController extends ApiController {
 								IRequest $request,
 								IL10N $trans
 	) {
-		parent::__construct($AppName, $request);
+		parent::__construct(
+			$AppName,
+			$request,
+			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
+			'Authorization, Content-Type, Accept',
+			86400);
 		$this->trans = $trans;
 	}
 
@@ -55,7 +60,7 @@ class TranslationController extends ApiController {
 			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably don\'t have enough permissions'),
 
 			// js/app/controllers/edit_credential.js
-
+			'invalid.qr' => $this->trans->t('Invalid QR code'),
 
 			// js/app/controllers/export.js
 			'export.starting' => $this->trans->t('Starting export'),

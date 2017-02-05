@@ -22,7 +22,7 @@ style('passman', 'public-page');
 					it
 				</button>
 				<button class="button-geen" ng-if="loading"><i
-						class="fa fa-spinner fa-spin"></i>Loading...
+							class="fa fa-spinner fa-spin"></i>Loading...
 				</button>
 			</div>
 			<div ng-if="expired">
@@ -89,7 +89,8 @@ style('passman', 'public-page');
 						</td>
 						<td>
 							<div ng-repeat="file in shared_credential.files"
-								 class="link" ng-click="downloadFile(shared_credential, file)">
+								 class="link"
+								 ng-click="downloadFile(shared_credential, file)">
 								{{file.filename}} ({{file.size | bytes}})
 							</div>
 						</td>
@@ -99,8 +100,8 @@ style('passman', 'public-page');
 							{{field.label}}
 						</td>
 						<td>
-					<span credential-field value="field.value"
-						  secret="field.secret"></span>
+							<span credential-field value="field.value" secret="field.secret" ng-if="field.field_type !== 'file' || !field.field_type"></span>
+							<span ng-if="field.field_type === 'file'" class="link" ng-click="downloadFile(shared_credential, field.value)">{{field.value.filename}} ({{field.value.size | bytes}})</span>
 						</td>
 					</tr>
 					<tr ng-show="shared_credential.expire_time > 0">
@@ -139,7 +140,12 @@ style('passman', 'public-page');
 				</div>
 			</div>
 			<div class="footer">
-				<a href="https://github.com/nextcloud/passman" target="_blank" class="link">Github</a> | <a href="https://github.com/nextcloud/passman/wiki" target="_blank" class="link">Wiki</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">Donate</a>
+				<a href="https://github.com/nextcloud/passman" target="_blank"
+				   class="link">Github</a> | <a
+						href="https://github.com/nextcloud/passman/wiki"
+						target="_blank" class="link">Wiki</a> | <a
+						href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2"
+						target="_blank" class="link">Donate</a>
 			</div>
 		</div>
 	</div>
