@@ -170,6 +170,17 @@ module.exports = function (grunt) {
 
 				]
 
+			},
+			settingsJs: {
+				files: [
+					{
+						expand: true,
+						flatten: true,
+						src: ['js/settings-admin.js'],
+						dest: 'dist/js/'
+					}
+
+				]
 			}
 		},
 
@@ -382,6 +393,6 @@ module.exports = function (grunt) {
 	// Default task(s).
 	grunt.registerTask('default', ['html2js', 'sass']);
 	grunt.registerTask('hint', ['jshint']);
-	grunt.registerTask('build', ['sass', 'jshint', 'html2js', 'mkdir:dist', 'copy:dist', 'copy:fonts', 'replace:dist', 'uglify', 'concat:css', 'cssmin', 'clean:css', 'replace:strict']);
+	grunt.registerTask('build', ['sass', 'jshint', 'html2js', 'mkdir:dist', 'copy:dist', 'copy:fonts', 'replace:dist', 'uglify', 'concat:css', 'cssmin', 'clean:css', 'replace:strict', 'copy:settingsJs']);
 
 };
