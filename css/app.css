@@ -940,4 +940,7 @@
 .clearfix {
   clear: both; }
 
+input[type="checkbox"] {
+  min-height: inherit; }
+
 /*# sourceMappingURL=app.css.map */
