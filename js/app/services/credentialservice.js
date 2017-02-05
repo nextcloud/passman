@@ -197,8 +197,17 @@
 						service.getCredential(credential_guid).then((function (credential) {
 							this.parent.plain_credential = service.decryptCredential(credential, this.parent.old_password);
 							var tmp = angular.copy(this.parent.plain_credential);
-							this.parent.new_credential_cryptogram = service.encryptCredential(tmp, this.parent.new_password);
 
+							//@FIXME Your shared credentials are not updated properly
+							if (tmp.hasOwnProperty('shared_key') && tmp.shared_key !== null) {
+								var shared_key = EncryptService.decryptString(angular.copy(tmp.shared_key)).trim();
+								tmp.shared_key = EncryptService.encryptString(angular.copy(shared_key), this.parent.new_password);
+								tmp.set_share_key = true;
+								tmp.skip_revision = true;
+								this.parent.new_password = shared_key;
+							}
+
+							this.parent.new_credential_cryptogram = service.encryptCredential(tmp, this.parent.new_password);
 							this.call_progress(new progress_datatype(1, 2, 'credential'));
 
 							// Save data
