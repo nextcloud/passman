@@ -1,1 +1,56 @@
-header,nav{display:none}#content-wrapper{padding-top:0}#app-content-wrapper{min-height:inherit!important}.warning_bar .fa-times{margin-right:20px}.tab_container{padding-top:10px;margin-bottom:20px}.tab_container div{margin-bottom:5px;overflow:hidden}.vault_wrapper{margin-top:70px}.active_vault{float:right;text-align:right;padding-right:5px;font-size:10px}.tab_header{margin:0}.angularjs-datetime-picker{z-index:9999}
+/**
+ * Nextcloud - passman
+ *
+ * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
+ * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+header, nav {
+  display: none; }
+
+#content-wrapper {
+  padding-top: 0; }
+
+#app-content-wrapper {
+  min-height: inherit !important; }
+
+.warning_bar .fa-times {
+  margin-right: 20px; }
+
+.tab_container {
+  padding-top: 10px;
+  margin-bottom: 20px; }
+  .tab_container div {
+    margin-bottom: 5px;
+    overflow: hidden; }
+
+.vault_wrapper {
+  margin-top: 70px; }
+
+.active_vault {
+  float: right;
+  text-align: right;
+  padding-right: 5px;
+  font-size: 10px; }
+
+.tab_header {
+  margin: 0; }
+
+.angularjs-datetime-picker {
+  z-index: 9999; }
+
+/*# sourceMappingURL=bookmarklet.css.map */

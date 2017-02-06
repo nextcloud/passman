@@ -1,4 +1,3 @@
-#Currently in BETA
 #Passman
 
 [![Build Status](https://travis-ci.org/nextcloud/passman.svg?branch=master)](https://travis-ci.org/nextcloud/passman)
