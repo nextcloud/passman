@@ -292,7 +292,10 @@ class CredentialController extends ApiController {
 			'', $this->userId, Activity::TYPE_ITEM_ACTION);
 		$this->sharingService->unshareCredential($credential->getGuid());
 		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
-				$this->credentialRevisionService->deleteRevision($revision['id'], $this->userId);
+				$id = $revision->getId();
+				if(isset($id)){
+					$this->credentialRevisionService->deleteRevision($id, $this->userId);
+				}
 		}
 	}
 
