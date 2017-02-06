@@ -195,6 +195,7 @@
 				};
 
 
+
 				var settingsLoaded = function () {
 					$scope.settings = SettingsService.getSettings();
 				};
@@ -399,6 +400,9 @@
 
 				});
 
+				$scope.clearState = function () {
+					$scope.delete_time = 0;
+				};
 
 				$scope.downloadFile = function (credential, file) {
 					var callback = function (result) {

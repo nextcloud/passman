@@ -141,7 +141,7 @@
 					});
 				};
 
-				$scope.cancel = function () {
+				$scope.cancelRevision = function () {
 					$location.path('/vault/' + $routeParams.vault_id);
 					$scope.storedCredential = null;
 					SettingsService.setSetting('revision_credential', null);
