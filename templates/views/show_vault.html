@@ -10,21 +10,18 @@
 				</div>
 			</div>
 		</div>
-		<span class="title" ng-if="delete_time">
-			{{ 'deleted.since' | translate }}:
-			<span ng-if="delete_time == 1">All time</span>
-			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 
-	</span>
 		<div class="actions creatable">
 		<span ng-click="addCredential()" class="button new">
 			<span >+</span></span>
 		</div>
-		<div class="title" ng-show="filtered_credentials.length > 0" translate="number.filtered"
-			translate-values="{number_filtered: filtered_credentials.length, credential_number: active_vault.credentials.length - 1}"
-		>
+		<div class="title" credential-counter="filtered_credentials" vault="active_vault" delete-time="delete_time" filters="filterOptions"></div>
+		<!--<span class="title" ng-if="delete_time"><br />
+			{{ 'deleted.since' | translate }}:
+			<span ng-if="delete_time == 1">All time</span>
+			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 
-		</div>
+		</span> -->
 		<div class="searchboxContainer" ng-init="filterOptionShown = false;" off-click="filterOptionShown = false;">
 			<input type="text" ng-model="filterOptions.filterText" class="searchbox" id="searchBox"
 				   placeholder="{{'search.credential' | translate}}" select-on-click clear-btn ng-click="filterOptionShown = true;">

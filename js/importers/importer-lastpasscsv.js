@@ -48,7 +48,7 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.url = row.url;
 				_credential.tags = (row.grouping) ? [{text: row.grouping}] : [];
 				_credential.description = row.extra;
-				if(_credential.label){
+				if(_credential.label && _credential.label !== "undefined"){
 					credential_list.push(_credential);
 				}
 				var progress = {
@@ -58,7 +58,7 @@ var PassmanImporter = PassmanImporter || {};
 				};
 				this.call_progress(progress);
 			}
-			this.call_then(credential_list)
+			this.call_then(credential_list);
 		});
 	};
 })(window, $, PassmanImporter);
