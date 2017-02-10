@@ -237,19 +237,23 @@
 				};
 
 				$scope.unshareCredential = function (credential) {
-					ShareService.unshareCredential(credential);
+
 					var _credential = angular.copy(credential);
 					var old_key = EncryptService.decryptString(angular.copy(_credential.shared_key));
 					var new_key = VaultService.getActiveVault().vaultKey;
 					_credential.shared_key = null;
 					_credential.unshare_action = true;
 					_credential.skip_revision = true;
-
-					_credential = CredentialService.encryptCredential(_credential, old_key);
-					CredentialService.updateCredential(_credential, true).then(function () {
-						NotificationService.showNotification($translate.instant('credential.unshared'), 4000);
-						CredentialService.reencryptCredential(_credential.guid, old_key, new_key).then(function () {
-							getAcl();
+					CredentialService.reencryptCredential(_credential.guid, old_key, new_key, true).then(function (data) {
+						getAcl();
+						var c = data.cryptogram;
+						c.shared_key = null;
+						c.unshare_action = true;
+						c.skip_revision = true;
+						ShareService.unshareCredential(c);
+						CredentialService.updateCredential(c, true).then(function () {
+							NotificationService.showNotification($translate.instant('credential.unshared'), 4000);
+							$scope.sharing_complete = true;
 						});
 					});
 				};

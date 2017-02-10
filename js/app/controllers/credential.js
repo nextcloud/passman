@@ -79,9 +79,6 @@
 								//$location.path('/')
 
 							}
-							if (_credential.tags) {
-								TagService.addTags(_credential.tags);
-							}
 							_credentials[i] = _credential;
 						}
 
@@ -100,14 +97,23 @@
 									_shared_credential_data.acl = _shared_credential;
 									_shared_credential_data.acl.permissions = new SharingACL(_shared_credential_data.acl.permissions);
 									_shared_credential_data.tags_raw = _shared_credential_data.tags;
-									if (_shared_credential_data.tags) {
-										TagService.addTags(_shared_credential_data.tags);
-									}
 									_credentials.push(_shared_credential_data);
 								}
 							}
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
+
+							if(!vault.private_sharing_key){
+								var key_size = 1024;
+								ShareService.generateRSAKeys(key_size).then(function (kp) {
+									var pem = ShareService.rsaKeyPairToPEM(kp);
+									$scope.creating_keys = false;
+									$scope.active_vault.private_sharing_key = pem.privateKey;
+									$scope.active_vault.public_sharing_key = pem.publicKey;
+									$scope.$digest();
+									VaultService.updateSharingKeys($scope.active_vault);
+								});
+							}
 						});
 					});
 				};
@@ -123,6 +129,7 @@
 						}
 					});
 				};
+
 
 
 				var refresh_data_interval = null;
@@ -257,7 +264,8 @@
 					}
 					notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000,
 						function () {
-							CredentialService.updateCredential(_credential).then(function (result) {
+							var key = CredentialService.getSharedKeyFromCredential(_credential);
+							CredentialService.updateCredential(_credential, false, key).then(function (result) {
 								if (result.delete_time > 0) {
 									notification = false;
 
@@ -286,7 +294,8 @@
 					}
 					NotificationService.showNotification($translate.instant('credential.recovered'), 5000,
 						function () {
-							CredentialService.updateCredential(_credential).then(function () {
+							var key = CredentialService.getSharedKeyFromCredential(_credential);
+							CredentialService.updateCredential(_credential, false, key).then(function () {
 								notification = false;
 
 							});
@@ -329,7 +338,15 @@
 						filtered_credentials = $filter('tagFilter')(filtered_credentials, $scope.selectedtags);
 						filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
 						$scope.filtered_credentials = filtered_credentials;
+						$scope.filterOptions.selectedtags = angular.copy($scope.selectedtags);
+						for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+							var _credential = $scope.active_vault.credentials[i];
+							if (_credential.tags) {
+								TagService.addTags(_credential.tags);
+							}
+						}
 					}
+
 				}, true);
 
 				$scope.selectedtags = [];
@@ -406,21 +423,13 @@
 
 				$scope.downloadFile = function (credential, file) {
 					var callback = function (result) {
-						var key = null;
+						var key = EncryptService.getSharedKeyFromCredential(credential);
+
 						if (!result.hasOwnProperty('file_data')) {
 							NotificationService.showNotification($translate.instant('error.loading.file.perm'), 5000);
 							return;
 
 						}
-						if (!credential.hasOwnProperty('acl') && credential.hasOwnProperty('shared_key')) {
-							if (credential.shared_key) {
-								key = EncryptService.decryptString(angular.copy(credential.shared_key));
-							}
-						}
-						if (credential.hasOwnProperty('acl')) {
-							key = EncryptService.decryptString(angular.copy(credential.acl.shared_key));
-						}
-
 						var file_data = EncryptService.decryptString(result.file_data, key);
 						download(file_data, escapeHTML(file.filename), file.mimetype);
 

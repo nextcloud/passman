@@ -82,13 +82,13 @@
 				getEncryptedFields: function () {
 					return _encryptedFields;
 				},
-				updateCredential: function (credential, skipEncyption) {
+				updateCredential: function (credential, skipEncryption, key) {
 					var _credential = angular.copy(credential);
-					if (!skipEncyption) {
+					if (!skipEncryption) {
 						for (var i = 0; i < _encryptedFields.length; i++) {
 							var field = _encryptedFields[i];
 							var fieldValue = angular.copy(credential[field]);
-							_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue));
+							_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue), key);
 						}
 					}
 					_credential.expire_time = new Date(angular.copy(credential.expire_time)).getTime() / 1000;
@@ -150,6 +150,18 @@
 					}
 					return credential;
 				},
+				getSharedKeyFromCredential: function (credential) {
+					var key = null;
+					if (!credential.hasOwnProperty('acl') && credential.hasOwnProperty('shared_key')) {
+						if (credential.shared_key) {
+							key = EncryptService.decryptString(angular.copy(credential.shared_key));
+						}
+					}
+					if (credential.hasOwnProperty('acl')) {
+						key = EncryptService.decryptString(angular.copy(credential.acl.shared_key));
+					}
+					return key;
+				},
 				getRevisions: function (guid) {
 					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + guid + '/revision');
 					return $http.get(queryUrl).then(function (response) {
@@ -182,7 +194,7 @@
 						}
 					});
 				},
-				reencryptCredential: function (credential_guid, old_password, new_password) {
+				reencryptCredential: function (credential_guid, old_password, new_password, skipSharingKey) {
 
 					var service = this;
 
@@ -198,8 +210,7 @@
 							this.parent.plain_credential = service.decryptCredential(credential, this.parent.old_password);
 							var tmp = angular.copy(this.parent.plain_credential);
 
-							//@FIXME Your shared credentials are not updated properly
-							if (tmp.hasOwnProperty('shared_key') && tmp.shared_key !== null) {
+							if (tmp.hasOwnProperty('shared_key') && tmp.shared_key !== null && !skipSharingKey) {
 								var shared_key = EncryptService.decryptString(angular.copy(tmp.shared_key)).trim();
 								tmp.shared_key = EncryptService.encryptString(angular.copy(shared_key), this.parent.new_password);
 								tmp.set_share_key = true;
