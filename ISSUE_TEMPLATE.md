@@ -4,7 +4,12 @@ This is the bug tracker for the Passman. Find passman-webextension at https://gi
 
 
 To make it possible for us to help you please fill out below information carefully.
+
+If you like to make a feature request, please remove the issue template.
+If you want to fill in a issue, remove the feature request template.
 --> 
+##Issue
+
 ### Steps to reproduce
 1.
 2.
@@ -47,3 +52,34 @@ b) The network log
 c) ...
 ```
 </details>   
+
+
+## Feature request
+
+**User type**: Logged-in or public user
+
+**User level**: Beginners, intermediate or advanced
+
+### Description
+<!--
+Please try to give as much information as you can about your request
+-->
+
+### Benefit / value
+<!--
+Please explain how it could benefit users of the app, other apps or 3rd party services
+-->
+
+### Risk / caveats
+<!--
+Please explain the risks and caveats associated with this request
+-->
+
+### Sponsorship
+<!--
+This greatly accelerates the delivery of a feature
+-->
+ 
+**Are you a developer willing to implement this feature?**: yes/no
+
+**Can you sponsor the development of this feature or do you know someone who can?**: yes/no
