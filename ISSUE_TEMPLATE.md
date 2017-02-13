@@ -24,21 +24,25 @@ Tell us what happens instead
 ### Configuration
 **Operating system**:   
 
-   
-**Browser**:   
-   
-   
-**Extensions that might cause interference**:   
-   
-   
-**Passman version**:    
-       
-       
-**Nextcloud version**:
+**Browser**:      
 
-**PHP Version**:
-     
-**Database + version**:  
+**Extensions that might cause interference**:   
+
+**Passman version**:    
+
+**Operating system**:
+
+**Web server:**
+
+**Database:**
+
+**PHP version:**
+      
+**cloud server:** Nextcloud or ownCloud
+
+**cloud version:** (see admin page or version.php)
+
+  
    
           
 #### Browser log
@@ -52,6 +56,20 @@ b) The network log
 c) ...
 ```
 </details>   
+
+
+#### Cloud log
+<!--
+The log has the name owncloud.log or nextcloud.log and is found in the data folder
+-->
+
+<details>
+<summary>Cloud log</summary>
+
+```
+Insert your cloud log here
+```
+</details>
 
 
 ## Feature request
