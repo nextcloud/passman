@@ -30,7 +30,12 @@ Tell us what happens instead
        
        
 **Nextcloud version**:
+
+**PHP Version**:
+     
+**Database + version**:  
    
+          
 #### Browser log
 <details>
 <summary>Browser log</summary>
