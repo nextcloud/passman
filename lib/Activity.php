@@ -23,7 +23,11 @@
 
 namespace OCA\Passman;
 
+use OCP\IURLGenerator;
+
 class Activity implements \OCP\Activity\IExtension {
+	const FILTER_PASSMAN = 'passman';
+	const APP_NAME = 'passman';
 	const TYPE_ITEM_ACTION = 'passman_item_action';
 	const TYPE_ITEM_EXPIRED = 'passman_item_expired';
 	const TYPE_ITEM_SHARED = 'passman_item_shared';
@@ -49,6 +53,13 @@ class Activity implements \OCP\Activity\IExtension {
 	const SUBJECT_ITEM_RENAMED_SELF = 'item_renamed_self';
 
 
+	protected $URLGenerator;
+
+	public function __construct( IURLGenerator $URLGenerator) {
+		$this->URLGenerator = $URLGenerator;
+	}
+
+
 	/**
 	 * The extension can return an array of additional notification types.
 	 * If no additional types are to be added false is to be returned
@@ -57,7 +68,7 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return array|false
 	 */
 	public function getNotificationTypes($languageCode) {
-		$l = \OC::$server->getL10N('passman', $languageCode);
+		$l = \OC::$server->getL10N(self::APP_NAME, $languageCode);
 		return array(
 			self::TYPE_ITEM_ACTION => $l->t('A Passman item has been created, modified or deleted'),
 			self::TYPE_ITEM_EXPIRED => $l->t('A Passman item has expired'),
@@ -75,7 +86,7 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return array|false
 	 */
 	public function filterNotificationTypes($types, $filter) {
-		return $types;
+		return $filter === self::FILTER_PASSMAN ? [self::TYPE_ITEM_ACTION, self::TYPE_ITEM_EXPIRED, self::TYPE_ITEM_SHARED, self::TYPE_ITEM_RENAMED] : $types;
 	}
 
 	/**
@@ -116,8 +127,8 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return string|false
 	 */
 	public function translate($app, $text, $params, $stripPath, $highlightParams, $languageCode) {
-		$l = \OC::$server->getL10NFactory()->get('passman', $languageCode);
-		if ($app === 'passman') {
+		$l = \OC::$server->getL10NFactory()->get(self::APP_NAME, $languageCode);
+		if ($app === self::APP_NAME) {
 			switch ($text) {
 				case self::SUBJECT_ITEM_CREATED:
 					return $l->t('%1$s has been created by %2$s', $params);
@@ -172,7 +183,7 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return array|false
 	 */
 	public function getSpecialParameterList($app, $text) {
-		if ($app === 'passman') {
+		if ($app === self::APP_NAME) {
 			switch ($text) {
 				case self::SUBJECT_ITEM_CREATED:
 				case self::SUBJECT_ITEM_CREATED_SELF:
@@ -247,14 +258,14 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return array|false
 	 */
 	public function getNavigation() {
-		$l = \OC::$server->getL10N('passman');
+		$l = \OC::$server->getL10N(self::APP_NAME);
 		return array(
 			'top' => array(),
-			'apps' => array(
+			'apps' => array( self::FILTER_PASSMAN =>
 				array(
 					'id' => 'passman',
 					'name' => (string) $l->t('Passwords'),
-					'url' => '',//FIXME: Currenlty we cannot link directly to links, so this needs to be fixed... this->URLGenerator->linkToRoute('activity.Activities.showList', array('filter' => 'passman')),
+					'url' => $this->URLGenerator->linkToRoute('activity.Activities.showList', ['filter' => self::FILTER_PASSMAN]),
 				),
 			),
 		);
@@ -267,7 +278,7 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return boolean
 	 */
 	public function isFilterValid($filterValue) {
-		return $filterValue === 'passman';
+		return $filterValue ===  self::FILTER_PASSMAN;
 	}
 
 	/**
@@ -280,9 +291,13 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return array|false
 	 */
 	public function getQueryForFilter($filter) {
-		if ($filter === 'passman') {
-			return array('`app` = ?', array('passman'));
+		if ($filter === self::FILTER_PASSMAN) {
+			return [
+				'(`app` = ?)',
+				[self::APP_NAME],
+			];
 		}
 		return false;
+
 	}
 }
