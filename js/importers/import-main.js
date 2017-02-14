@@ -132,3 +132,19 @@ var PassmanImporter = {};
 		return JSON.parse(string);
 	};
 })(window, $, PassmanImporter);
+
+
+String.prototype.replaceAll = function(search, replacement) {
+	var target = this;
+	return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+Array.prototype.clean = function(deleteValue) {
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == deleteValue) {
+			this.splice(i, 1);
+			i--;
+		}
+	}
+	return this;
+};
