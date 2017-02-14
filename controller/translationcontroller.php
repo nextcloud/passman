@@ -144,7 +144,7 @@ class TranslationController extends ApiController {
 
 
 			// templates/views/partials/edit_credential/otp.html
-			'upload.qr' => $this->trans->t('Upload your OTP qr code'),
+			'upload.qr' => $this->trans->t('Upload or enter your OTP secret'),
 			'current.qr' => $this->trans->t('Current OTP settings'),
 			'issuer' => $this->trans->t('Issuer'),
 			'secret' => $this->trans->t('Secret'),

@@ -637,6 +637,8 @@
           #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .files table tr td {
             height: 50px;
             vertical-align: middle; }
+      #app-content #app-content-wrapper .edit_credential .otpText {
+        padding-right: 10px; }
     #app-content #app-content-wrapper .app_sidebar {
       padding: 10px;
       overflow-y: auto; }
