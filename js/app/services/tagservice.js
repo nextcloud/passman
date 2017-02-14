@@ -47,6 +47,9 @@
 							}
 						}
 					}
+				},
+				resetTags: function () {
+					_tags = [];
 				}
 
 			};
