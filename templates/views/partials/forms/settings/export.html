@@ -10,13 +10,26 @@
 					</option>
 				</select></label>
 			<div><b>{{selectedExporter.description}}</b></div>
-			<button class="button" ng-click="startExport()"
-					ng-if="selectedExporter">{{ 'export' | translate}}
-			</button>
+
+			<div ng-show="selectedExporter" class="col-xs-3 nopadding">
+				<label>{{ 'export.confirm.text' | translate }}</label>
+				<input type="password" ng-model="confirm_key">
+				<br />
+				<div class="alert alert-warning" ng-show="error">
+					{{error}}
+				</div>
+			</div>
+			<div class="clearfix">
+				<button class=" button" ng-click="startExport()"
+						ng-if="selectedExporter">{{ 'export' | translate}}
+				</button>
+			</div>
 		</div>
+
 		<div class="col-xs-6">
 			<div ng-if="log" class="import_log">
-				<textarea id="import_log" auto-scroll="log">{{log.join('\n')}}</textarea>
+				<textarea id="import_log"
+						  auto-scroll="log">{{log.join('\n')}}</textarea>
 			</div>
 		</div>
 	</div>

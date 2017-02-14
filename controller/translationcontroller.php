@@ -173,6 +173,7 @@ class TranslationController extends ApiController {
 			// templates/views/partials/forms/settings/export.html
 			'export.type' => $this->trans->t('Export type'),
 			'export' => $this->trans->t('Export'),
+			'export.confirm.text' => $this->trans->t('Enter vault password to confirm export.'),
 
 			// templates/views/partials/forms/settings/general_settings.html
 			'rename.vault' => $this->trans->t('Rename vault'),
