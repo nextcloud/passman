@@ -9,16 +9,30 @@ $checkVersion = OC::$server->getConfig()->getAppValue('passman', 'check_version'
 $AppInstance = new App();
 $localVersion = $AppInstance->getAppInfo("passman")["version"];
 if ($checkVersion) {
-// get latest master version
-	$doc = new DOMDocument();
-	$doc->load('https://raw.githubusercontent.com/nextcloud/passman/master/appinfo/info.xml');
-	$root = $doc->getElementsByTagName("info");
+	// get latest master version
 	$version = false;
 	$githubVersion = $l->t('Unable to get version info');
-	foreach ($root as $element) {
-		$versions = $element->getElementsByTagName("version");
-		$version = $versions->item(0)->nodeValue;
+
+	$url = 'https://raw.githubusercontent.com/nextcloud/passman/master/appinfo/info.xml';
+	try {
+		$client = OC::$server->getHTTPClientService()->newClient();
+		$response = $client->get($url);
+		$xml = $response->getBody();
+	} catch (\Exception $e) {
+		$xml = false;
 	}
+
+	if ($xml) {
+		$loadEntities = libxml_disable_entity_loader(true);
+		$data = @simplexml_load_string($xml);
+		libxml_disable_entity_loader($loadEntities);
+		if ($data !== false) {
+			$version = (string)$data->version;
+		} else {
+			libxml_clear_errors();
+		}
+	}
+
 	if ($version) {
 		$githubVersion = $version;
 	}
@@ -36,7 +50,7 @@ $ciphers = openssl_get_cipher_methods();
 		} ?>
 		Local version: <?php p($localVersion); ?><br/>
 		<?php
-		if (version_compare($githubVersion, $localVersion) === 1) {
+		if ($checkVersion && version_compare($githubVersion, $localVersion) === 1) {
 			p($l->t('A newer version of passman is available'));
 		}
 		?>
