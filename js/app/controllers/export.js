@@ -59,7 +59,7 @@
 
 			$scope.startExport = function () {
 				$scope.error = false;
-				if(VaultService.getActiveVault().vaultKey != $scope.confirm_key){
+				if(VaultService.getActiveVault().vaultKey !== $scope.confirm_key){
 				var msg = $translate.instant('invalid.vault.key');
 					$scope.error = msg;
 					_log(msg);

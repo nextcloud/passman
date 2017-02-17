@@ -326,6 +326,8 @@
       display: inline-block; }
     .vault_wrapper .login_form .button {
       margin-top: 10px; }
+  .vault_wrapper .login_opts {
+    margin-bottom: 10px; }
 
 @media screen and (max-width: 768px) {
   .vault_wrapper {
@@ -944,5 +946,16 @@
 
 input[type="checkbox"] {
   min-height: inherit; }
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px; }
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1; }
 
 /*# sourceMappingURL=app.css.map */

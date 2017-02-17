@@ -31,7 +31,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', '$location', 'ShareService', 'EncryptService', '$translate', '$rootScope', function ($scope, VaultService, SettingsService, CredentialService, $location, ShareService, EncryptService, $translate, $rootScope) {
+		.controller('VaultCtrl', ['$scope', 'VaultService', 'SettingsService', 'CredentialService', '$location', 'ShareService', 'EncryptService', '$translate', '$rootScope', '$interval',
+			function ($scope, VaultService, SettingsService, CredentialService, $location, ShareService, EncryptService, $translate, $rootScope, $interval) {
 			VaultService.getVaults().then(function (vaults) {
 				$scope.vaults = vaults;
 				if (SettingsService.getSetting('defaultVault') != null) {
@@ -50,6 +51,10 @@
 							if (SettingsService.getSetting('defaultVaultPass')) {
 								$location.path('/vault/' + vault.guid);
 							}
+							$scope.vault_tries[vault.guid] = {
+								tries: 0,
+								timeout: 0
+							};
 							break;
 						}
 					}
@@ -74,12 +79,12 @@
 
 			var settingsLoaded = function () {
 				$scope.minimal_value_key_strength = SettingsService.getSetting('vault_key_strength');
-				$translate(key_strengths[SettingsService.getSetting('vault_key_strength')]).then(function(translation){
+				$translate(key_strengths[SettingsService.getSetting('vault_key_strength')]).then(function (translation) {
 					$scope.required_score = {'strength': translation};
 				});
 			};
 
-			if(!SettingsService.getSetting('settings_loaded')){
+			if (!SettingsService.getSetting('settings_loaded')) {
 				$rootScope.$on('settings_loaded', function () {
 					settingsLoaded();
 				});
@@ -107,7 +112,7 @@
 				}
 			};
 
-			$scope.toggleAutoLogout = function(){
+			$scope.toggleAutoLogout = function () {
 				$scope.auto_logout_timer = !$scope.auto_logout_timer;
 			};
 
@@ -119,6 +124,12 @@
 
 			$scope.selectVault = function (vault) {
 				$scope.list_selected_vault = vault;
+				if(!$scope.vault_tries[vault.guid]) {
+					$scope.vault_tries[vault.guid] = {
+						tries: 0,
+						timeout: 0
+					};
+				}
 			};
 			$scope.sharing_keys = {};
 			$scope.newVault = function () {
@@ -144,9 +155,9 @@
 				var _vault = angular.copy(vault);
 				_vault.vaultKey = angular.copy(vault_key);
 				delete _vault.credentials;
-				var timer =  parseInt($scope.logout_timer);
-				if($scope.auto_logout_timer && timer > 0 ){
-					$rootScope.$broadcast('logout_timer_set', timer*60);
+				var timer = parseInt($scope.logout_timer);
+				if ($scope.auto_logout_timer && timer > 0) {
+					$rootScope.$broadcast('logout_timer_set', timer * 60);
 				}
 
 				VaultService.setActiveVault(_vault);
@@ -157,6 +168,15 @@
 				$scope.auto_logout_timer = true;
 				$scope.logout_timer = time;
 			};
+
+			var tickLockTimer = function (guid) {
+				$scope.vault_tries[guid].timeout = $scope.vault_tries[guid].timeout - 1;
+				if($scope.vault_tries[guid].timeout === 0){
+					$interval.cancel($scope.vault_tries[guid].timer);
+				}
+			};
+
+			$scope.vault_tries = {};
 
 			$scope.vaultDecryptionKey = '';
 			$scope.loginToVault = function (vault, vault_key) {
@@ -174,8 +194,26 @@
 
 				} catch (e) {
 					$scope.error = $translate.instant('invalid.vault.key');
-				}
 
+					$scope.vault_tries[vault.guid].tries = $scope.vault_tries[vault.guid].tries + 1;
+
+					if($scope.vault_tries[vault.guid].tries >= 3){
+						var to = $scope.vault_tries[vault.guid].tries * $scope.vault_tries[vault.guid].tries * 2;
+						if(to < 30){
+							to = 30;
+						}
+						$scope.vault_tries[vault.guid].timeout = to;
+
+						if($scope.vault_tries[vault.guid].hasOwnProperty('timer')){
+							$interval.cancel($scope.vault_tries[vault.guid].timer);
+						}
+
+						$scope.vault_tries[vault.guid].timer = $interval(function () {
+							tickLockTimer(vault.guid);
+						} ,1000);
+					}
+
+				}
 			};
 
 

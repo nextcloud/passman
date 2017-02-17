@@ -327,6 +327,7 @@ class TranslationController extends ApiController {
 			'accept' => $this->trans->t('Accept'),
 			'decline' => $this->trans->t('Decline'),
 			'session.time.left' => $this->trans->t('You have {{session_time}} left before logout.'),
+			'vault.locked' => $this->trans->t('Your vault has been locked for {{time}} because of {{tries}} failed attempts!'),
 
 			// templates/views/vaults.html
 			'last.access' => $this->trans->t('Last accessed'),

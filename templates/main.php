@@ -99,7 +99,7 @@ script('passman', 'exporters/exporter-csv');
 /*build-css-start*/
 style('passman', 'vendor/ng-password-meter/ng-password-meter');
 style('passman', 'vendor/bootstrap/bootstrap.min');
-style('passman', 'vendor/bootstrap/bootstrap-theme.min');
+
 style('passman', 'vendor/font-awesome/font-awesome.min');
 style('passman', 'vendor/angular-xeditable/xeditable.min');
 style('passman', 'vendor/ng-tags-input/ng-tags-input.min');
