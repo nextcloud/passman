@@ -91,12 +91,14 @@ var PassmanImporter = PassmanImporter || {};
 						var prop = mapper[key];
 						new_credential[prop] = enpass_credential[key];
 					} else {
-						var isSecret = (secret_fields.indexOf(key.toLowerCase()) !== -1) ? 1 : 0;
-						new_credential.custom_fields.push({
-							'label': key,
-							'value': enpass_credential[key],
-							'secret': isSecret
-						})
+						if(key !== 'TOTP') {
+							var isSecret = (secret_fields.indexOf(key.toLowerCase()) !== -1) ? 1 : 0;
+							new_credential.custom_fields.push({
+								'label': key,
+								'value': enpass_credential[key],
+								'secret': isSecret
+							})
+						}
 					}
 				}
 
