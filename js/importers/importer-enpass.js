@@ -97,6 +97,10 @@ var PassmanImporter = PassmanImporter || {};
 					}
 				}
 
+				if(enpass_credential.hasOwnProperty('TOTP')){
+					new_credential.otp.secret = enpass_credential['TOTP'];
+				}
+
 				var progress = {
 					percent: i/credentials.length*100,
 					loaded: i,
