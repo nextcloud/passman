@@ -326,6 +326,8 @@
       display: inline-block; }
     .vault_wrapper .login_form .button {
       margin-top: 10px; }
+  .vault_wrapper .login_opts {
+    margin-bottom: 10px; }
 
 @media screen and (max-width: 768px) {
   .vault_wrapper {
@@ -637,6 +639,8 @@
           #app-content #app-content-wrapper .edit_credential .custom_fields table tr td, #app-content #app-content-wrapper .edit_credential .files table tr td {
             height: 50px;
             vertical-align: middle; }
+      #app-content #app-content-wrapper .edit_credential .otpText {
+        padding-right: 10px; }
     #app-content #app-content-wrapper .app_sidebar {
       padding: 10px;
       overflow-y: auto; }
@@ -882,6 +886,12 @@
 .tab_container.settings {
   margin-bottom: 50px; }
 
+.import-steps {
+  padding-left: 16px;
+  margin-bottom: 10px; }
+  .import-steps li {
+    list-style-type: disc; }
+
 #app-settings-content:not(.ng-hide) {
   height: 90px;
   display: inherit !important;
@@ -942,5 +952,16 @@
 
 input[type="checkbox"] {
   min-height: inherit; }
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px; }
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1; }
 
 /*# sourceMappingURL=app.css.map */

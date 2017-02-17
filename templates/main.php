@@ -82,7 +82,10 @@ script('passman', 'importers/importer-lastpasscsv');
 script('passman', 'importers/importer-dashlanecsv');
 script('passman', 'importers/importer-zohocsv');
 script('passman', 'importers/importer-passmanjson');
+script('passman', 'importers/importer-ocpasswords');
 script('passman', 'importers/importer-clipperz');
+script('passman', 'importers/importer-teampass');
+script('passman', 'importers/importer-enpass');
 script('passman', 'importers/importer-passpackcsv');
 script('passman', 'importers/importer-randomdata');
 script('passman', 'exporters/exporter-main');
@@ -96,7 +99,7 @@ script('passman', 'exporters/exporter-csv');
 /*build-css-start*/
 style('passman', 'vendor/ng-password-meter/ng-password-meter');
 style('passman', 'vendor/bootstrap/bootstrap.min');
-style('passman', 'vendor/bootstrap/bootstrap-theme.min');
+
 style('passman', 'vendor/font-awesome/font-awesome.min');
 style('passman', 'vendor/angular-xeditable/xeditable.min');
 style('passman', 'vendor/ng-tags-input/ng-tags-input.min');

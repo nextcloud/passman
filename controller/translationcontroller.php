@@ -69,6 +69,7 @@ class TranslationController extends ApiController {
 
 			// js/app/controllers/import.js
 			'import.file.read' => $this->trans->t('File read successfully!'),
+			'import.steps' => $this->trans->t('Follow the following steps to import your file'),
 
 			'import.no.label' => $this->trans->t('Credential has no label, skipping'),
 			'import.adding' => $this->trans->t('Adding {{credential}}'),
@@ -144,7 +145,7 @@ class TranslationController extends ApiController {
 
 
 			// templates/views/partials/edit_credential/otp.html
-			'upload.qr' => $this->trans->t('Upload your OTP qr code'),
+			'upload.qr' => $this->trans->t('Upload or enter your OTP secret'),
 			'current.qr' => $this->trans->t('Current OTP settings'),
 			'issuer' => $this->trans->t('Issuer'),
 			'secret' => $this->trans->t('Secret'),
@@ -173,6 +174,7 @@ class TranslationController extends ApiController {
 			// templates/views/partials/forms/settings/export.html
 			'export.type' => $this->trans->t('Export type'),
 			'export' => $this->trans->t('Export'),
+			'export.confirm.text' => $this->trans->t('Enter vault password to confirm export.'),
 
 			// templates/views/partials/forms/settings/general_settings.html
 			'rename.vault' => $this->trans->t('Rename vault'),
@@ -226,6 +228,7 @@ class TranslationController extends ApiController {
 
 			// templates/vieuws/partials/forms/share_credential/basics.html
 			'search.u.g' => $this->trans->t('Search users or groups...'),
+			'search.result.missing' => $this->trans->t('Missing users? Only users that have vaults are shown.'),
 			'cyphering' => $this->trans->t('Cyphering'),
 			'uploading' => $this->trans->t('Uploading'),
 			'user' => $this->trans->t('User'),
@@ -325,6 +328,7 @@ class TranslationController extends ApiController {
 			'accept' => $this->trans->t('Accept'),
 			'decline' => $this->trans->t('Decline'),
 			'session.time.left' => $this->trans->t('You have {{session_time}} left before logout.'),
+			'vault.locked' => $this->trans->t('Your vault has been locked for {{time}} because of {{tries}} failed attempts!'),
 
 			// templates/views/vaults.html
 			'last.access' => $this->trans->t('Last accessed'),

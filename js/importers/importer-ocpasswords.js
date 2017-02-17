@@ -23,51 +23,38 @@
 // Importers should always start with this
 /** global: PassmanImporter */
 var PassmanImporter = PassmanImporter || {};
-
 (function (window, $, PassmanImporter) {
 	'use strict';
-
 	// Define the importer
-	PassmanImporter.zohoCsv = {
+	var steps = [
+		'Backups for the Passwords app need to be enabled on the Admin panel (they are disabled by default).',
+		'On the Passwords App, in the bottom left corner, press Settings',
+		'Press "Download Backup"',
+		'Confirm the export and save the file'
+	];
+	PassmanImporter.passwordsApp = {
 		info: {
-			name: 'ZOHO csv',
-			id: 'zohoCsv',
-			exportSteps: ['Create an csv export. Go to Tools ->  Export secrets -> Select "General CSV" and click "Export Secrets"']
+			name: 'Passwords App csv',
+			id: 'passwordsApp',
+			exportSteps: steps
 		}
 	};
 
-	PassmanImporter.zohoCsv.readFile = function (file_data) {
+	PassmanImporter.passwordsApp.readFile = function (file_data) {
 		/** global: C_Promise */
-		return new C_Promise(function () {
+		var p = new C_Promise(function () {
 			var parsed_csv = PassmanImporter.readCsv(file_data);
-
 			var credential_list = [];
 			for (var i = 0; i < parsed_csv.length; i++) {
 				var row = parsed_csv[i];
 				var _credential = PassmanImporter.newCredential();
-				_credential.label = row.secret_name;
-				_credential.url = row.secret_url;
+				_credential.label = row.website + ' - '+ row.username;
+				_credential.username = row.username;
+				_credential.password = row.password;
+				_credential.url = row.fulladdress;
 				_credential.description = row.notes;
-				if (row.hasOwnProperty('secretdata')) {
-					var rows = row.secretdata.split("\n");
-					for (var r = 0; r < rows.length; r++) {
-						var cells = rows[r].split(':');
-						var key = cells[0];
-						var value = cells.slice(1).join(':');
-						if (key && value) {
-							_credential.custom_fields.push(
-								{
-									'label': key,
-									'value': value,
-									'secret': false
-								}
-							);
-						}
-					}
-				}
-				if (_credential.label !== "") {
-					credential_list.push(_credential);
-				}
+
+				credential_list.push(_credential);
 
 				var progress = {
 					percent: i / parsed_csv.length * 100,
@@ -79,5 +66,6 @@ var PassmanImporter = PassmanImporter || {};
 			}
 			this.call_then(credential_list);
 		});
+		return p;
 	};
 })(window, $, PassmanImporter);

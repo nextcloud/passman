@@ -29,7 +29,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'Passman JSON',
 			id: 'passmanJson',
-			description: 'Export the item in passman as passman json, with all fields enabled'
+			exportSteps: ['Export the item in passman as passman json, with all fields enabled']
 		}
 	};
 

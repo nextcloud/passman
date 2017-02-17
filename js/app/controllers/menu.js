@@ -36,6 +36,7 @@
 			function ($scope, VaultService, $location, $rootScope, TagService, SettingsService) {
 				$rootScope.logout = function () {
 					SettingsService.setSetting('defaultVaultPass', false);
+					TagService.resetTags();
 					$rootScope.$broadcast('logout');
 					$location.path('/');
 				};

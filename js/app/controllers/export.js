@@ -34,7 +34,7 @@
 		.controller('ExportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', '$translate', function ($scope, $window, CredentialService, VaultService, $translate) {
 			$scope.available_exporters = [];
 			$scope.active_vault = VaultService.getActiveVault();
-
+			$scope.confirm_key = '';
 
 			$scope.$watch(function () {
 				return $window.PassmanExporter;
@@ -58,6 +58,13 @@
 
 
 			$scope.startExport = function () {
+				$scope.error = false;
+				if(VaultService.getActiveVault().vaultKey !== $scope.confirm_key){
+				var msg = $translate.instant('invalid.vault.key');
+					$scope.error = msg;
+					_log(msg);
+					return;
+				}
 				_log($translate.instant('export.starting'));
 				var _credentials = [];
 				VaultService.getVault(VaultService.getActiveVault()).then(function (vault) {
@@ -67,7 +74,8 @@
 							for (var i = 0; i < vault.credentials.length; i++) {
 								var _credential = angular.copy(vault.credentials[i]);
 								if (_credential.hidden === 0) {
-									_credential = CredentialService.decryptCredential(_credential);
+									var key = CredentialService.getSharedKeyFromCredential(_credential);
+									_credential = CredentialService.decryptCredential(_credential, key);
 									_credentials.push(_credential);
 								}
 							}

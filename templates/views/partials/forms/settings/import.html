@@ -9,7 +9,12 @@
 						{{importer.name}}
 					</option>
 				</select></label>
-			<div><b>{{selectedImporter.description}}</b></div>
+			<div ng-show="selectedImporter">
+				<b>{{ 'import.steps' | translate }}</b>
+				<ul class="import-steps">
+					<li ng-repeat="step in selectedImporter.exportSteps">{{step}}</li>
+				</ul>
+			</div>
 			<input ng-if="selectedImporter" type="file" file-select
 				   success="fileLoaded" error="fileLoadError"
 				   progress="fileSelectProgress"><br/>

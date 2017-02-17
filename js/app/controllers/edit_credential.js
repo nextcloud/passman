@@ -72,7 +72,7 @@
 					url: 'views/partials/forms/edit_credential/basics.html',
 					color: 'blue'
 				};
-
+				$scope.otpType = 'qrcode';
 				$translate(['general', 'password', 'custom.fields','files','otp']).then(function (translations) {
 					$scope.tabs = [{
 						title: translations.general,

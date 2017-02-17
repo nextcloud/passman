@@ -95,7 +95,7 @@
 					<span ng-if="list_selected_vault.last_access === 0">Never</span>
 				</small>
 			</div>
-			<div>
+			<div class="login_opts">
 				<div>
 					<label>
 						<input type="checkbox" ng-checked="default_vault"
@@ -128,10 +128,12 @@
 					</select>
 				</div>
 			</div>
-			<div class="button button-geen"
-				 ng-click="loginToVault(list_selected_vault, vault_key)">
+
+			<div class="alert alert-danger" ng-show="vault_tries[list_selected_vault.guid].timeout !== 0" translate="vault.locked" translate-value-tries="{{ vault_tries[list_selected_vault.guid].tries }}" translate-value-time="{{ vault_tries[list_selected_vault.guid].timeout  | toHHMMSS }}"></div>
+			<button class="button button-geen"
+				 ng-click="loginToVault(list_selected_vault, vault_key)" ng-disabled="vault_tries[list_selected_vault.guid].timeout !== 0">
 				{{ 'vault.decrypt' | translate}}
-			</div>
+			</button>
 		</div>
 	</div>
 

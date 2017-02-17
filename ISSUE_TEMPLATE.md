@@ -8,7 +8,7 @@ To make it possible for us to help you please fill out below information careful
 If you like to make a feature request, please remove the issue template.
 If you want to fill in a issue, remove the feature request template.
 --> 
-##Issue
+## Bug report
 
 ### Steps to reproduce
 1.
@@ -41,10 +41,8 @@ Tell us what happens instead
 **cloud server:** Nextcloud or ownCloud
 
 **cloud version:** (see admin page or version.php)
-
   
    
-          
 #### Browser log
 <details>
 <summary>Browser log</summary>

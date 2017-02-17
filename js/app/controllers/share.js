@@ -254,6 +254,8 @@
 						CredentialService.updateCredential(c, true).then(function () {
 							NotificationService.showNotification($translate.instant('credential.unshared'), 4000);
 							$scope.sharing_complete = true;
+							$scope.storedCredential.shared_key = null;
+							$scope.share_settings.credentialSharedWithUserAndGroup = [];
 						});
 					});
 				};
@@ -365,6 +367,7 @@
 								_credential.skip_revision = true;
 								_credential.shared_key = EncryptService.encryptString(key);
 								CredentialService.updateCredential(_credential, true).then(function () {
+									$scope.storedCredential.shared_key = _credential.shared_key;
 									NotificationService.showNotification($translate.instant('credential.shared'), 4000);
 									$scope.sharing_complete = true;
 								});
