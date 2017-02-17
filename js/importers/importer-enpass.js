@@ -35,7 +35,7 @@ var PassmanImporter = PassmanImporter || {};
 	};
 
 	function parseEnpass(fileData){
-		var lastProperty, matches,loginBlocks;
+		var lastProperty, matches, loginBlocks, property;
 		loginBlocks = fileData.replaceAll("Title :","<~passman~>\nTitle :").split('<~passman~>\n').clean("");
 		var regex = /(.*) : (.*)/;
 		var results = [];
@@ -47,7 +47,7 @@ var PassmanImporter = PassmanImporter || {};
 				var row = lrow[r];
 				matches = regex.exec(row);
 				if(matches){
-					var property = matches[1];
+					property = matches[1];
 					result[property] = matches[2];
 				} else {
 					if(lastProperty){
@@ -73,6 +73,7 @@ var PassmanImporter = PassmanImporter || {};
 
 		var secret_fields = ['cvc', 'pin', 'security answer'];
 
+		/** global: C_Promise */
 		return new C_Promise(function(){
 			var credential_list = [];
 			var credentials = parseEnpass(file_data);

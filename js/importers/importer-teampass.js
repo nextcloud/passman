@@ -57,6 +57,6 @@ var PassmanImporter = PassmanImporter || {};
 				this.call_progress(progress);
 			}
 			this.call_then(credential_list);
-		})
+		});
 	};
 })(window, $, PassmanImporter);

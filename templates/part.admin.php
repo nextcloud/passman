@@ -33,7 +33,7 @@ if ($checkVersion) {
 		}
 	}
 
-	if ($version) {
+	if ($version !== false) {
 		$githubVersion = $version;
 	}
 }
