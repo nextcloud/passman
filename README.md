@@ -21,6 +21,7 @@ Features:
   - DashLane
   - ZOHO
   - Clipperz.is
+  - EnPass
 
 
 For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
