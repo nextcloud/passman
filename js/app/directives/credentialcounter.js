@@ -35,7 +35,7 @@
 				replace: false,
 				restrict: 'A',
 				scope: {
-					credentials: '=credentialCounter',
+					filteredCredentials: '=credentialCounter',
 					deleteTime: '=',
 					vault: '=',
 					filters: '='
@@ -45,16 +45,24 @@
 					function countCredentials() {
 						var countedCredentials = 0;
 						var total = 0;
-						angular.forEach(scope.credentials, function (credential) {
-							total = (credential.hidden !== 1) ? total + 1 : total;
-							if(credential.delete_time >= scope.deleteTime && credential.hidden === 0){
-								countedCredentials = countedCredentials+1;
+						angular.forEach(scope.vault.credentials, function (credential) {
+							var pos = scope.filteredCredentials.map(function(c) { return c.guid; }).indexOf(credential.guid);
+
+							if (scope.deleteTime === 0 && credential.hidden === 0 && credential.delete_time === 0) {
+								total = total + 1;
+								countedCredentials = (pos !== -1) ? countedCredentials + 1 : countedCredentials;
 							}
+
+							if (scope.deleteTime > 0 && credential.hidden === 0 && credential.delete_time > 0) {
+								total = total + 1;
+								countedCredentials = (pos !== -1) ? countedCredentials + 1 : countedCredentials;
+							}
+
 						});
 						scope.counter = countedCredentials;
 						scope.total = total;
 					}
-					scope.$watch('[credentials, deleteTime, filters]', function () {
+					scope.$watch('[filteredCredentials, deleteTime, filters]', function () {
 						countCredentials();
 					}, true);
 				}
