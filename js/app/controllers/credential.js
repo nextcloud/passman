@@ -262,17 +262,10 @@
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000,
-						function () {
-							var key = CredentialService.getSharedKeyFromCredential(_credential);
-							CredentialService.updateCredential(_credential, false, key).then(function (result) {
-								if (result.delete_time > 0) {
-									notification = false;
-
-								}
-							});
-						});
-
+					var key = CredentialService.getSharedKeyFromCredential(_credential);
+					CredentialService.updateCredential(_credential, false, key).then(function (result) {
+						notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000);
+					});
 				};
 
 				$scope.recoverCredential = function (credential) {
@@ -292,15 +285,10 @@
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					NotificationService.showNotification($translate.instant('credential.recovered'), 5000,
-						function () {
-							var key = CredentialService.getSharedKeyFromCredential(_credential);
-							CredentialService.updateCredential(_credential, false, key).then(function () {
-								notification = false;
-
-							});
-						});
-
+					var key = CredentialService.getSharedKeyFromCredential(_credential);
+					CredentialService.updateCredential(_credential, false, key).then(function () {
+						NotificationService.showNotification($translate.instant('credential.recovered'), 5000);
+					});
 				};
 
 				$scope.destroyCredential = function (credential) {
