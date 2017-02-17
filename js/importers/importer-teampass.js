@@ -30,7 +30,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'TeamPass csv',
 			id: 'teamPassCsv',
-			description: 'Go to Tools -> Export. Select Comma Separated Values, All entries then continue.'
+			exportSteps: ['Go to Tools -> Export. Select Comma Separated Values, All entries then continue.']
 		}
 	};
 

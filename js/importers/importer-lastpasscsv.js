@@ -30,7 +30,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'LastPass csv',
 			id: 'lastpassCsv',
-			description: 'Create an csv export. Go to More options -> Advanced -> Export -> Last Pass CSV File'
+			exportSteps: ['Create an csv export. Go to More options -> Advanced -> Export -> Last Pass CSV File']
 		}
 	};
 

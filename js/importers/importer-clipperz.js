@@ -29,7 +29,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'Clipperz.is',
 			id: 'clippers',
-			description: 'Go to menu -> Export -> Download HTML + JSON. Fields will be imported as custom fields.'
+			exportSteps: ['Go to menu -> Export -> Download HTML + JSON. Fields will be imported as custom fields.']
 		}
 	};
 

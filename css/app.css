@@ -886,6 +886,12 @@
 .tab_container.settings {
   margin-bottom: 50px; }
 
+.import-steps {
+  padding-left: 16px;
+  margin-bottom: 10px; }
+  .import-steps li {
+    list-style-type: disc; }
+
 #app-settings-content:not(.ng-hide) {
   height: 90px;
   display: inherit !important;

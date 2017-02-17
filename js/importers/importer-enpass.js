@@ -30,7 +30,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'EnPass text file',
 			id: 'EnPassTXT',
-			description: 'Access your Enpass Database. Select "File" > "Export" > "As Text"'
+			exportSteps: ['Access your Enpass Database. Select "File" > "Export" > "As Text"']
 		}
 	};
 

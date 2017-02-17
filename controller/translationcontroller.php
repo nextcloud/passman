@@ -69,6 +69,7 @@ class TranslationController extends ApiController {
 
 			// js/app/controllers/import.js
 			'import.file.read' => $this->trans->t('File read successfully!'),
+			'import.steps' => $this->trans->t('Follow the following steps to import your file'),
 
 			'import.no.label' => $this->trans->t('Credential has no label, skipping'),
 			'import.adding' => $this->trans->t('Adding {{credential}}'),

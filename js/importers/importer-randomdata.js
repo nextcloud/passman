@@ -32,7 +32,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'Random data',
 			id: 'randomData',
-			description: 'Create\'s 50 random credentials for testing purposes.'
+			exportSteps: ['Create\'s 50 random credentials for testing purposes.']
 		}
 	};
 

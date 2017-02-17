@@ -30,7 +30,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'Dashlane 4 csv',
 			id: 'dashLaneCsv',
-			description: 'Create an csv export. Go to File -> export -> Unsecured archive (readable) in CSV format'
+			exportSteps: ['Create an csv export. Go to File -> export -> Unsecured archive (readable) in CSV format']
 		}
 	};
 

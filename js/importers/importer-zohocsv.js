@@ -32,7 +32,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'ZOHO csv',
 			id: 'zohoCsv',
-			description: 'Create an csv export. Go to Tools ->  Export secrets -> Select "General CSV" and click "Export Secrets"'
+			exportSteps: ['Create an csv export. Go to Tools ->  Export secrets -> Select "General CSV" and click "Export Secrets"']
 		}
 	};
 

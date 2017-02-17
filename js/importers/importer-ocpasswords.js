@@ -26,11 +26,17 @@ var PassmanImporter = PassmanImporter || {};
 (function (window, $, PassmanImporter) {
 	'use strict';
 	// Define the importer
+	var steps = [
+		'Backups for the Passwords app need to be enabled on the Admin panel (they are disabled by default).',
+		'On the Passwords App, in the bottom left corner, press Settings',
+		'Press "Download Backup"',
+		'Confirm the export and save the file'
+	];
 	PassmanImporter.passwordsApp = {
 		info: {
 			name: 'Passwords App csv',
 			id: 'passwordsApp',
-			description: 'Create an csv export with the following options enabled: http://i.imgur.com/CaeTA4d.png'
+			exportSteps: steps
 		}
 	};
 
