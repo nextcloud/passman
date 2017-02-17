@@ -54,7 +54,9 @@ var PassmanImporter = PassmanImporter || {};
 						result[lastProperty] += "\n" + row;
 					}
 				}
-				lastProperty = property;
+				if(property) {
+					lastProperty = property;
+				}
 			}
 			results.push(result)
 		}
