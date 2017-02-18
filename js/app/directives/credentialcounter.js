@@ -45,6 +45,10 @@
 					function countCredentials() {
 						var countedCredentials = 0;
 						var total = 0;
+						if(!scope.vault.hasOwnProperty('credentials')){
+							return;
+						}
+						
 						angular.forEach(scope.vault.credentials, function (credential) {
 							var pos = scope.filteredCredentials.map(function(c) { return c.guid; }).indexOf(credential.guid);
 
