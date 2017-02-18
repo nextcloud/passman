@@ -102,7 +102,7 @@
 							}
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
-
+							$rootScope.$broadcast('credentials_loaded');
 							if(!vault.private_sharing_key){
 								var key_size = 1024;
 								ShareService.generateRSAKeys(key_size).then(function (kp) {
