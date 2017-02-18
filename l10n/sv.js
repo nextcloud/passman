@@ -72,7 +72,6 @@ OC.L10N.register(
     "Filename" : "Filnamn",
     "Upload date" : "Uppladdningsdatum",
     "Size" : "Storlek",
-    "Upload your OTP qr code" : "Ladda upp din OTP QR-kod",
     "Current OTP settings" : "Nuvarande OTP-inställningar",
     "Issuer" : "Utfärdare",
     "Secret" : "Hemlighet",

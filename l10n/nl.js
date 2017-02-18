@@ -73,7 +73,6 @@ OC.L10N.register(
     "Filename" : "Bestandsnaam",
     "Upload date" : "Uploaddatum",
     "Size" : "Grootte",
-    "Upload your OTP qr code" : "Upload je OTP qr code",
     "Current OTP settings" : "Huidige OTP instellingen",
     "Issuer" : "Uitgever",
     "Secret" : "Geheim",

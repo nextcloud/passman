@@ -73,7 +73,6 @@ OC.L10N.register(
     "Filename" : "文件名",
     "Upload date" : "上传日期",
     "Size" : "大小",
-    "Upload your OTP qr code" : "上传您的OTP的QR码 ",
     "Current OTP settings" : "目前OTP设置 ",
     "Issuer" : "发行者 ",
     "Secret" : "密钥",

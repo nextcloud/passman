@@ -73,7 +73,6 @@ OC.L10N.register(
     "Filename" : "Nombre de archivo",
     "Upload date" : "Fecha de subida",
     "Size" : "Tamaño",
-    "Upload your OTP qr code" : "Suba su código QR OTP",
     "Current OTP settings" : "Ajustes OTP actuales",
     "Issuer" : "Editor",
     "Secret" : "Secreto",

@@ -73,7 +73,6 @@ OC.L10N.register(
     "Filename" : "Jméno souboru",
     "Upload date" : "Datum nahrání",
     "Size" : "Velikost",
-    "Upload your OTP qr code" : "Nahrajte váš OTP qr kód",
     "Current OTP settings" : "Aktuální nastavení OTP",
     "Issuer" : "Vydavatel",
     "Secret" : "Tajemství",
