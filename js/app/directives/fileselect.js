@@ -53,11 +53,13 @@
 
 					fileReader.onprogress = function (event) {
 						var percent = (event.loaded / event.total * 100);
-						scope.$apply(scope.progress({
-							file_total: event.total,
-							file_loaded: event.loaded,
-							file_percent: percent
-						}));
+						if(scope.progress) {
+							scope.$apply(scope.progress({
+								file_total: event.total,
+								file_loaded: event.loaded,
+								file_percent: percent
+							}));
+						}
 					};
 
 					fileReader.onerror = function () {

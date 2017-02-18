@@ -36,6 +36,8 @@
 			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService, $sce, $translate) {
 				$scope.vault_settings = {};
 				$scope.new_vault_name = '';
+				$scope.showGenericImport = false;
+
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {

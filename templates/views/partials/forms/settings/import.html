@@ -1,4 +1,11 @@
-<div ng-controller="ImportCtrl">
+<div>
+	<div ng-click="showGenericImport = !showGenericImport;" class="link">
+		<span ng-show="!showGenericImport">{{'missing.importer' | translate}}</span>
+		<span ng-show="showGenericImport">{{'missing.importer.back' | translate}}</span>
+	</div>
+</div>
+
+<div ng-controller="ImportCtrl" ng-show="!showGenericImport">
 	<div class="row">
 		<div class="col-xs-6">
 			<label>{{ 'import.type' | translate}}
@@ -8,7 +15,9 @@
 							value="{{importer}}">
 						{{importer.name}}
 					</option>
-				</select></label>
+				</select>
+			</label>
+
 			<div ng-show="selectedImporter">
 				<b>{{ 'import.steps' | translate }}</b>
 				<ul class="import-steps">
@@ -38,3 +47,4 @@
 		</div>
 	</div>
 </div>
+<div ng-include="'views/partials/forms/settings/generic_csv_import.html'" ng-show="showGenericImport"></div>

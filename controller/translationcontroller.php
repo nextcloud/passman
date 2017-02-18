@@ -74,7 +74,21 @@ class TranslationController extends ApiController {
 			'import.no.label' => $this->trans->t('Credential has no label, skipping'),
 			'import.adding' => $this->trans->t('Adding {{credential}}'),
 			'import.added' => $this->trans->t('Added {{credential}}'),
+			'import.skipping' => $this->trans->t('Skipping credential, missing label on line {{line}}'),
 			'import.loaded' => $this->trans->t('Parsed {{num}} credentials, starting to import'),
+			'import.importing' => $this->trans->t('Importing'),
+			'import.start' => $this->trans->t('Start import'),
+
+			'select.csv' => $this->trans->t('Select csv file'),
+			'parsed.csv.rows' => $this->trans->t('Parsed {{rows}} lines from csv file'),
+			'skip.first.row' => $this->trans->t('Skip first row'),
+			'import.csv.label.req' => $this->trans->t('You need to assign the label field before you can start the import.'),
+			'first.five.lines' => $this->trans->t('First 5 lines of the csv are shown.'),
+			'assign.column' => $this->trans->t('Assign the proper fields to each column.'),
+			'example.credential' => $this->trans->t('Example imported credential'),
+			'missing.importer' => $this->trans->t('Missing an importer? Try it with the generic csv importer.'),
+			'missing.importer.back' => $this->trans->t('Go back to importers.'),
+
 
 			// js/app/controllers/revision.js
 			'revision.deleted' => $this->trans->t('Revision deleted'),

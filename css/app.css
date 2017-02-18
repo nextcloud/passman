@@ -892,6 +892,19 @@
   .import-steps li {
     list-style-type: disc; }
 
+.import-table-outter {
+  overflow-x: scroll; }
+
+.import-table {
+  padding-right: 15px; }
+  .import-table .inspect {
+    text-align: center;
+    width: 25px;
+    cursor: pointer; }
+  .import-table th, .import-table td {
+    text-align: left;
+    padding: 3px 5px; }
+
 #app-settings-content:not(.ng-hide) {
   height: 90px;
   display: inherit !important;

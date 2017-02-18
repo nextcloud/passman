@@ -24,23 +24,24 @@
 	'use strict';
 	/**
 	 * @ngdoc directive
-	 * @name passmanApp.directive:autoScroll
+	 * @name passmanApp.directive:passwordGen
 	 * @description
-	 * # autoScroll
+	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('autoScroll', function () {
+		.directive('credentialTemplate', [function () {
 			return {
+				templateUrl: 'views/partials/credential_template.html',
+				replace: true,
 				restrict: 'A',
 				scope: {
-					autoScroll: '='
+					credential: '=credentialTemplate'
 				},
-				link: function postLink (scope, el) {
-					scope.$watch('autoScroll', function () {
-						$(el).scrollTop($(el)[0].scrollHeight);
-					}, true);
+
+				link: function (scope, element, attrs) {
+					console.log(attrs.showLabel)
+					scope.showLabel = (attrs.hasOwnProperty('showLabel'));
 				}
 			};
-		});
-
+		}]);
 }());
