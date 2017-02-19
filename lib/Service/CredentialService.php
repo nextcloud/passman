@@ -61,12 +61,13 @@ class CredentialService {
 	/**
 	 * Update credential
 	 *
-	 * @param $credential array
+	 * @param $credential array | Credential
+	 * @param $useRawUser bool
 	 * @return Credential
 	 */
-	public function updateCredential($credential) {
+	public function updateCredential($credential, $useRawUser = false) {
 		$credential = $this->encryptService->encryptCredential($credential);
-		return $this->credentialMapper->updateCredential($credential);
+		return $this->credentialMapper->updateCredential($credential, $useRawUser);
 	}
 
 	/**

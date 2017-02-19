@@ -75,6 +75,13 @@ module.exports = function (grunt) {
 						src: ["**/public-page.scss"],
 						dest: "css",
 						ext: ".css"
+					},
+					{
+						expand: true,
+						cwd: "sass",
+						src: ["**/admin.scss"],
+						dest: "css",
+						ext: ".css"
 					}
 				]
 			}
@@ -132,6 +139,7 @@ module.exports = function (grunt) {
 							'!css/app.*',
 							'css/bookmarklet.css',
 							'css/public-page.css',
+							'css/admin.css',
 							'!dist/*',
 							'!dist/*/**',
 							'!dist',
