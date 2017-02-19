@@ -39,7 +39,6 @@
 				},
 
 				link: function (scope, element, attrs) {
-					console.log(attrs.showLabel)
 					scope.showLabel = (attrs.hasOwnProperty('showLabel'));
 				}
 			};

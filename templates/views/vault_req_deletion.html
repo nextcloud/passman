@@ -1,0 +1,30 @@
+<div class="vault_wrapper">
+	<div class="reset_form" ng-show="!pending_deletion">
+		{{ 'req.intro1' | translate }}<br/>
+		{{ 'req.intro2' | translate }}<br/>
+		{{ 'req.intro3' | translate }}<br/>
+		<br/>
+
+		<b>{{ 'request.deletion.warning' | translate}}</b>
+
+		<label>{{ 'request.deletion.reason' | translate }}</label>
+		<input type="text" ng-model="reason" class="form-control">
+		<button class="button button-red"
+				ng-click="requestDeletion()">
+			{{ 'request.deletion.accept' | translate }}
+		</button>
+		<a class="pull-right button button-geen" ng-href="#/">
+			{{ 'cancel' | translate}}
+		</a>
+	</div>
+
+	<div class="reset_form"  ng-show="pending_deletion">
+		<button class="button button-red"
+				ng-click="removeRequestDeletion()">
+			Cancel destruction request
+		</button>
+		<a class="pull-right button button-geen" ng-href="#/">
+			Cancel
+		</a>
+	</div>
+</div>

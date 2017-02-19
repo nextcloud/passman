@@ -46,6 +46,7 @@ script('passman', 'app/controllers/settings');
 script('passman', 'app/controllers/import');
 script('passman', 'app/controllers/export');
 script('passman', 'app/controllers/generic-csv-importer');
+script('passman', 'app/controllers/vaultreqdeletion');
 script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');

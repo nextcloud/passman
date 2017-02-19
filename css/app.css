@@ -326,6 +326,13 @@
       display: inline-block; }
     .vault_wrapper .login_form .button {
       margin-top: 10px; }
+  .vault_wrapper .reset_form {
+    padding: 16px; }
+    .vault_wrapper .reset_form label {
+      margin-top: 20px;
+      display: block; }
+    .vault_wrapper .reset_form input[type="text"] {
+      width: 100%; }
   .vault_wrapper .login_opts {
     margin-bottom: 10px; }
 

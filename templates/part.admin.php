@@ -11,10 +11,10 @@ style('passman', 'vendor/font-awesome/font-awesome.min');
 $checkVersion = OC::$server->getConfig()->getAppValue('passman', 'check_version', '1') === '1';
 $AppInstance = new App();
 $localVersion = $AppInstance->getAppInfo("passman")["version"];
+$githubVersion = $l->t('Unable to get version info');
 if ($checkVersion) {
 	// get latest master version
 	$version = false;
-	$githubVersion = $l->t('Unable to get version info');
 
 	$url = 'https://raw.githubusercontent.com/nextcloud/passman/master/appinfo/info.xml';
 	try {
@@ -68,7 +68,7 @@ $ciphers = openssl_get_cipher_methods();
 				<a href="#mover"><?php p($l->t('Credential mover')); ?></a>
 			</li>
 			<li>
-				<a href="#tabs-3"><?php p($l->t('Vault delete requests')); ?></a>
+				<a href="#tabs-3"><?php p($l->t('Vault destruction requests')); ?></a>
 			</li>
 		</ul>
 		<div id="general">
@@ -162,7 +162,21 @@ $ciphers = openssl_get_cipher_methods();
 
 		</div>
 		<div id="tabs-3">
-			Requests to delete vault
+			<?php p($l->t('Requests to destroy vault')); ?>
+			<table id="requests-table">
+				<thead>
+				<tr>
+					<th><?php p($l->t('Request ID')); ?></th>
+					<th><?php p($l->t('Requested by')); ?></th>
+					<th><?php p($l->t('Reason')); ?></th>
+					<th><?php p($l->t('Created')); ?></th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
 		</div>
 
 	</div>

@@ -9,4 +9,16 @@
       width: 350px;
     }
   }
+  #requests-table{
+    width: 100%;
+  }
+
+
+  .link{
+    color: rgb(0, 102, 255) !important;
+    cursor: pointer;
+  }
+  .link:hover{
+    text-decoration: underline;
+  }
 }

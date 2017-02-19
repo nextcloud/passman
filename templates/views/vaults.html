@@ -9,7 +9,7 @@
 					ng-click="selectVault(vault)">
 					<div>
 						<span class="ui-select-choices-row-inner">
-							<div class="ng-binding ng-scope">{{vault.name}}</div>
+							<div class="ng-binding ng-scope">{{vault.name}} <span class="pull-right" style="color: #ce3702;" ng-show="vault.delete_request_pending">{{ 'delete.request.pending' | translate}}</span></div>
 							<small class="ng-binding ng-scope">
 
 								{{ 'created' | translate}}: {{vault.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
@@ -133,6 +133,11 @@
 			<button class="button button-geen"
 				 ng-click="loginToVault(list_selected_vault, vault_key)" ng-disabled="vault_tries[list_selected_vault.guid].timeout !== 0">
 				{{ 'vault.decrypt' | translate}}
+			</button>
+			<span ng-click="forgottenPassword = true;" style="margin-top: 10px; padding: 6px 12px;" class="link pull-right" ng-show="!forgottenPassword">Forgot password?</span>
+			<button ng-show="forgottenPassword" class="pull-right button button-red" ng-click="requestDeletion(list_selected_vault)">
+				<span ng-show="list_selected_vault.delete_request_pending">{{ 'cancel.request.deletion' | translate }}</span>
+				<span ng-show="!list_selected_vault.delete_request_pending">{{ 'request.deletion' | translate }}</span>
 			</button>
 		</div>
 	</div>

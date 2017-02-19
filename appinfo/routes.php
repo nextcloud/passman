@@ -88,5 +88,9 @@ return [
 		//Admin routes
 		['name' => 'admin#searchUser', 'url' => '/admin/search', 'verb' => 'GET'],
 		['name' => 'admin#moveCredentials', 'url' => '/admin/move', 'verb' => 'POST'],
+		['name' => 'admin#requestDeletion', 'url' => '/admin/request-deletion/{vault_guid}', 'verb' => 'POST'],
+		['name' => 'admin#deleteRequestDeletion', 'url' => '/admin/request-deletion/{vault_guid}', 'verb' => 'DELETE'],
+		['name' => 'admin#listRequests', 'url' => '/admin/delete-requests', 'verb' => 'GET'],
+		['name' => 'admin#acceptRequestDeletion', 'url' => '/admin/accept-delete-request', 'verb' => 'POST'],
 	]
 ];

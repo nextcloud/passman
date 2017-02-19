@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Service\DeleteVaultRequestService;
 use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
@@ -27,12 +28,14 @@ class VaultController extends ApiController {
 	private $vaultService;
 	private $credentialService;
 	private $settings;
+	private $deleteVaultRequestService;
 
 	public function __construct($AppName,
 								IRequest $request,
 								$UserId,
 								VaultService $vaultService,
 								CredentialService $credentialService,
+								DeleteVaultRequestService $deleteVaultRequestService,
 								SettingsService $settings) {
 		parent::__construct(
 			$AppName,
@@ -43,6 +46,7 @@ class VaultController extends ApiController {
 		$this->userId = $UserId;
 		$this->vaultService = $vaultService;
 		$this->credentialService = $credentialService;
+		$this->deleteVaultRequestService = $deleteVaultRequestService;
 		$this->settings = $settings;
 	}
 
@@ -68,6 +72,7 @@ class VaultController extends ApiController {
 						'public_sharing_key' => $vault->getPublicSharingKey(),
 						'last_access' => $vault->getlastAccess(),
 						'challenge_password' => $credential->{$secret_field}(),
+						'delete_request_pending' => ($this->deleteVaultRequestService->getDeleteRequestForVault($vault->getGuid())) ? true : false
 					));
 				}
 			}
@@ -109,7 +114,8 @@ class VaultController extends ApiController {
 				'public_sharing_key' => $vault->getPublicSharingKey(),
 				'sharing_keys_generated' => $vault->getSharingKeysGenerated(),
 				'vault_settings' => $vault->getVaultSettings(),
-				'last_access' => $vault->getlastAccess()
+				'last_access' => $vault->getlastAccess(),
+				'delete_request_pending' => ($this->deleteVaultRequestService->getDeleteRequestForVault($vault->getGuid())) ? true : false
 			);
 			$result['credentials'] = $credentials;
 

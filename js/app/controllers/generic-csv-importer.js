@@ -85,37 +85,36 @@
 						prop: null
 					}
 				];
-
+				var tagMapper = function (t) {
+					return {text: t};
+				};
 				var rowToCredential = function (row) {
 					var _credential = PassmanImporter.newCredential();
 					for(var k = 0; k < $scope.import_fields.length; k++){
 						var field = $scope.import_fields[k];
 						if(field){
 							if(field === 'otp'){
-								_credential.otp.secret = row[k]
+								_credential.otp.secret = row[k];
 							} else if(field === 'custom_field'){
 								var key = ($scope.matched) ? $scope.parsed_csv[0][k] : 'Custom field '+ k;
 								_credential.custom_fields.push({
 									'label': key,
 									'value': row[k],
 									'secret': 0
-								})
+								});
 							} else if(field === 'tags'){
 								if( row[k]) {
 									console.log(row, k);
 									var tags = row[k].split(',');
 									console.log();
-									_credential.tags = tags.map(function (t) {
-										console.log(t);
-										return {text: t}
-									});
+									_credential.tags = tags.map(tagMapper);
 								}
 							} else{
 								_credential[field] = row[k];
 							}
 						}
 					}
-					return _credential
+					return _credential;
 				};
 
 
@@ -204,6 +203,6 @@
 				$scope.updateExample = function () {
 					var start = ($scope.skipFirstRow) ? 1 : 0;
 					$scope.inspectCredential($scope.parsed_csv[start]);
-				}
+				};
 			}]);
 }());
