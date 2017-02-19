@@ -148,15 +148,18 @@ class CredentialMapper extends Mapper {
 	 * Update a credential
 	 *
 	 * @param $raw_credential array An array containing all the credential fields
+	 * @param $useRawUser bool
 	 * @return Credential The updated credential
 	 */
-	public function updateCredential($raw_credential) {
+	public function updateCredential($raw_credential, $useRawUser) {
 		$original = $this->getCredentialByGUID($raw_credential['guid']);
+		$uid = ($useRawUser) ? $raw_credential['user_id'] : $original->getUserId();
+
 		$credential = new Credential();
 		$credential->setId($original->getId());
 		$credential->setGuid($original->getGuid());
 		$credential->setVaultId($original->getVaultId());
-		$credential->setUserId($original->getUserId());
+		$credential->setUserId($uid);
 		$credential->setLabel($raw_credential['label']);
 		$credential->setDescription($raw_credential['description']);
 		$credential->setCreated($original->getCreated());
@@ -174,6 +177,7 @@ class CredentialMapper extends Mapper {
 		$credential->setOtp($raw_credential['otp']);
 		$credential->setHidden($raw_credential['hidden']);
 		$credential->setDeleteTime($raw_credential['delete_time']);
+
 		if (isset($raw_credential['shared_key'])) {
 			$credential->setSharedKey($raw_credential['shared_key']);
 		}
