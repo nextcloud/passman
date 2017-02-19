@@ -21,7 +21,6 @@
  */
 
 $(document).ready(function () {
-
 	var Settings = function (baseUrl) {
 		this._baseUrl = baseUrl;
 		this._settings = [];
@@ -86,7 +85,6 @@ $(document).ready(function () {
 
 	var settings = new Settings(OC.generateUrl('apps/passman/api/v2/settings'));
 	settings.load();
-
 	// ADMIN SETTINGS
 
 	// fill the boxes
@@ -130,4 +128,27 @@ $(document).ready(function () {
 		$('form[name="passman_settings"]')[1].remove();
 	}
 
+	var accountMover = {
+		'source_account': '',
+		'destination_account': ''
+	};
+	$( ".username-autocomplete" ).autocomplete({
+		source: OC.generateUrl('apps/passman/admin/search'),
+		minLength: 1,
+		select: function( event, ui ) {
+			accountMover[$(this).attr('id')] = ui.item.value;
+		}
+	});
+
+	$('#move_credentials').click(function () {
+		var self = this;
+		$(self).attr('disabled', 'disabled');
+		if(accountMover.source_account && accountMover.destination_account){
+			$.post(OC.generateUrl('apps/passman/admin/move'), accountMover, function (data) {
+				$(self).removeAttr('disabled');
+			});
+		}
+	});
+
+	$('#passman-tabs').tabs();
 });

@@ -84,5 +84,9 @@ return [
 		['name' => 'internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],
 		['name' => 'internal#getAppVersion', 'url' => '/api/internal/version', 'verb' => 'GET'],
 		['name' => 'internal#generatePerson', 'url' => '/api/internal/generate_person', 'verb' => 'GET'],
+
+		//Admin routes
+		['name' => 'admin#searchUser', 'url' => '/admin/search', 'verb' => 'GET'],
+		['name' => 'admin#moveCredentials', 'url' => '/admin/move', 'verb' => 'POST'],
 	]
 ];

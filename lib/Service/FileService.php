@@ -101,4 +101,18 @@ class FileService {
 		return $this->fileMapper->updateFile($file);
 	}
 
+	/**
+	 * Update file
+	 *
+	 * @param string $userId
+	 * @return File[]
+	 */
+	public function getFilesFromUser($userId){
+		$files = $this->fileMapper->getFilesFromUser($userId);
+		$results = array();
+		foreach ($files as $file){
+			array_push($results, $this->encryptService->decryptFile($file));
+		}
+		return $results;
+	}
 }
