@@ -67,7 +67,9 @@
 							}
 							if (regex.test(scope.value)) {
 								scope.isLink = true;
-
+								if(scope.value.substr(0,4) !== 'http'){
+									scope.value = 'http://'+scope.value;
+								}
 							}
 						}
 					});
