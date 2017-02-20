@@ -74,6 +74,7 @@ OC.L10N.register(
     "Filename" : "Nom de fichier",
     "Upload date" : "Date du téléversement",
     "Size" : "Taille",
+    "Upload or enter your OTP secret" : "Téléversez ou entrez votre secret OTP",
     "Current OTP settings" : "Paramètres du mot de passe OTP actuel",
     "Issuer" : "Émetteur",
     "Secret" : "Secret",
