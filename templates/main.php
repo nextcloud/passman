@@ -79,6 +79,7 @@ script('passman', 'app/directives/colorfromstring');
 script('passman', 'app/directives/credentialcounter');
 script('passman', 'app/directives/clearbutton2');
 script('passman', 'app/directives/credentialtemplate');
+script('passman', 'app/directives/clickdisable');
 script('passman', 'importers/import-main');
 script('passman', 'importers/importer-keepasscsv');
 script('passman', 'importers/importer-lastpasscsv');

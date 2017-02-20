@@ -54,11 +54,11 @@
 				</small>
 			</div>
 			<div class="button_wrapper">
-				<button class="button button-geen" ng-if="!creating_keys"
+				<button class="button button-geen" ng-if="!creating_keys" click-disable
 					 ng-click="createVault(vault_name, vault_key, vault_key2)" ng-disabled="vault_key_score.score < minimal_value_key_strength || vault_key !== vault_key2 || vault_key === ''">
 					{{ 'new.vault.create' | translate }}
 				</button>
-				<div class="button" ng-if="creating_keys">
+				<div class="button" ng-if="creating_keys" >
 					<span>
 						<i class="fa fa-spinner fa-spin"></i>
 						{{creating_keys}}
@@ -130,7 +130,7 @@
 			</div>
 
 			<div class="alert alert-danger" ng-show="vault_tries[list_selected_vault.guid].timeout !== 0" translate="vault.locked" translate-value-tries="{{ vault_tries[list_selected_vault.guid].tries }}" translate-value-time="{{ vault_tries[list_selected_vault.guid].timeout  | toHHMMSS }}"></div>
-			<button class="button button-geen"
+			<button class="button button-geen" click-disable
 				 ng-click="loginToVault(list_selected_vault, vault_key)" ng-disabled="vault_tries[list_selected_vault.guid].timeout !== 0">
 				{{ 'vault.decrypt' | translate}}
 			</button>
