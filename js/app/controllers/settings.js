@@ -180,7 +180,7 @@
 										var zxcvbn_result = zxcvbn(c.password);
 										if (zxcvbn_result.score <= minStrength) {
 											results.push({
-												credential_id: c.credential_id,
+												guid: c.guid,
 												label: c.label,
 												password: c.password,
 												password_zxcvbn_result: zxcvbn_result
