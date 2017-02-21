@@ -41,9 +41,7 @@
 
 				link: function (scope, element, attrs) {
 					scope.downloadFile = function (credential, file) {
-						console.log('hi')
 						var callback = function (result) {
-							console.log(EncryptService);
 							var key = CredentialService.getSharedKeyFromCredential(credential);
 							if (!result.hasOwnProperty('file_data')) {
 								NotificationService.showNotification($translate.instant('error.loading.file.perm'), 5000);
