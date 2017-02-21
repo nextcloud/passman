@@ -337,18 +337,12 @@ class CredentialController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function updateRevision($credential_guid, $revision_id, $credential_data) {
+	public function updateRevision($revision_id, $credential_data) {
 		$revision = null;
-		try {
-			$this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
-		} catch (\Exception $e) {
-			return new NotFoundJSONResponse();
-		}
-
 		try {
 			$revision = $this->credentialRevisionService->getRevision($revision_id);
 		} catch (\Exception $exception) {
-			return new NotFoundJSONResponse();
+			return new JSONResponse(array());
 		}
 
 		$revision->setCredentialData($credential_data);

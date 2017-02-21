@@ -130,7 +130,7 @@
 			</div>
 
 			<div class="alert alert-danger" ng-show="vault_tries[list_selected_vault.guid].timeout !== 0" translate="vault.locked" translate-value-tries="{{ vault_tries[list_selected_vault.guid].tries }}" translate-value-time="{{ vault_tries[list_selected_vault.guid].timeout  | toHHMMSS }}"></div>
-			<button class="button button-geen" click-disable
+			<button class="button button-geen"
 				 ng-click="loginToVault(list_selected_vault, vault_key)" ng-disabled="vault_tries[list_selected_vault.guid].timeout !== 0">
 				{{ 'vault.decrypt' | translate}}
 			</button>
