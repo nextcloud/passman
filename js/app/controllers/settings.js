@@ -73,6 +73,18 @@
 					}
 				});
 
+				var key_strengths = [
+					'password.poor',
+					'password.poor',
+					'password.weak',
+					'password.good',
+					'password.strong'
+				];
+
+				$scope.minimal_value_key_strength = SettingsService.getSetting('vault_key_strength');
+				$translate(key_strengths[SettingsService.getSetting('vault_key_strength')]).then(function (translation) {
+					$scope.required_score = {'strength': translation};
+				});
 
 				var btn_txt = $translate.instant('bookmarklet.text');
 				var http = location.protocol, slashes = http.concat("//"), host = slashes.concat(window.location.hostname), complete = host + location.pathname;
