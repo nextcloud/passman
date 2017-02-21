@@ -104,9 +104,7 @@
 								});
 							} else if(field === 'tags'){
 								if( row[k]) {
-									console.log(row, k);
 									var tags = row[k].split(',');
-									console.log();
 									_credential.tags = tags.map(tagMapper);
 								}
 							} else{
@@ -129,6 +127,7 @@
 					$scope.skipFirstRow = false;
 					var file_data = file.data.split(',');
 					file_data = decodeURIComponent(escape(window.atob(file_data[1])));
+					/** global: Papa */
 					Papa.parse(file_data, {
 						complete: function(results) {
 							if(results.data) {

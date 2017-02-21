@@ -153,7 +153,7 @@ $(document).ready(function () {
 					$('#moveStatus').fadeIn();
 					setTimeout(function () {
 						$('#moveStatus').fadeOut();
-					}, 3500)
+					}, 3500);
 				}
 			});
 		}
@@ -191,17 +191,16 @@ $(document).ready(function () {
 		if (!confirm(OC.L10N.translate('passman', "Are you really sure?\nThis will delete the vault and all credentials in it!"))) {
 			return;
 		}
-		$.post(OC.generateUrl('apps/passman/admin/accept-delete-request'), req, function (result) {
-			console.log(result);
+		$.post(OC.generateUrl('apps/passman/admin/accept-delete-request'), req, function () {
 			$(el).parent().parent().remove();
-		})
+		});
 	}
 
 	function ignoreDeleteRequest (el, req) {
 		$.ajax({
 			url: OC.generateUrl('apps/passman/admin/request-deletion/' + req.vault_guid),
 			type: 'DELETE',
-			success: function (result) {
+			success: function () {
 				$(el).parent().parent().remove();
 			}
 		});
@@ -225,7 +224,7 @@ $(document).ready(function () {
 			var cols = $('<td>' + request.id + '</td><td>' + request.displayName + '</td><td>' + request.reason + '</td><td>' + format_date(request.created * 1000 )+ '</td>');
 			var actions = $('<td></td>').append(accept).append(ignore);
 			table.append($('<tr></tr>').append(cols).append(actions));
-		})
+		});
 	});
 
 	$('#passman-tabs').tabs();

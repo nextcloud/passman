@@ -44,7 +44,7 @@
 						reason: $scope.reason
 					};
 
-					$http.post(queryUrl, params).then(function (response) {
+					$http.post(queryUrl, params).then(function () {
 						NotificationService.showNotification($translate.instant('deletion.requested'), 5000);
 						$location.path('#/');
 					});
@@ -52,7 +52,7 @@
 
 				$scope.removeRequestDeletion = function () {
 					var queryUrl = OC.generateUrl('apps/passman/admin/request-deletion/' + $routeParams.vault_id);
-					$http.delete(queryUrl).then(function (response) {
+					$http.delete(queryUrl).then(function () {
 						NotificationService.showNotification($translate.instant('deletion.removed'), 5000);
 						$location.path('#/');
 					});

@@ -67,7 +67,7 @@ class DeleteVaultRequestMapper extends Mapper {
 
 	/**
 	 * Deletes the given delete request
-	 * @param DeleteVaultRequest $shareRequest    Request to delete
+	 * @param DeleteVaultRequest $request    Request to delete
 	 * @return DeleteVaultRequest                 The deleted request
 	 */
 	public function removeDeleteVaultRequest(DeleteVaultRequest $request){

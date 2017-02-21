@@ -248,7 +248,7 @@
 				$scope.deleteCredential = function (credential) {
 					var _credential = angular.copy(credential);
 					try {
-						_credential = CredentialService.decryptCredential(angular.copy(credential));
+						_credential = CredentialService.decryptCredential(_credential);
 					} catch (e) {
 
 					}
@@ -263,7 +263,7 @@
 						NotificationService.hideNotification(notification);
 					}
 					var key = CredentialService.getSharedKeyFromCredential(_credential);
-					CredentialService.updateCredential(_credential, false, key).then(function (result) {
+					CredentialService.updateCredential(_credential, false, key).then(function () {
 						notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000);
 					});
 				};
@@ -271,7 +271,7 @@
 				$scope.recoverCredential = function (credential) {
 					var _credential = angular.copy(credential);
 					try {
-						_credential = CredentialService.decryptCredential(angular.copy(credential));
+						_credential = CredentialService.decryptCredential(_credential);
 					} catch (e) {
 
 					}

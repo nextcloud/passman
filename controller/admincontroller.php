@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\DeleteVaultRequest;
 use OCA\Passman\Service\CredentialRevisionService;
@@ -23,8 +24,7 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
-use \OCP\App;
-use OCP\JSON;
+
 
 class AdminController extends ApiController {
 	private $userId;
@@ -130,17 +130,20 @@ class AdminController extends ApiController {
 
 		if(isset($vault)){
 			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $requested_by);
-
 			foreach($credentials as $credential){
 				$revisions = $this->revisionService->getRevisions($credential->getId());
 				foreach($revisions as $revision){
 					$this->revisionService->deleteRevision($revision['revision_id'], $requested_by);
 				}
-				$this->credentialService->deleteCredential($credential);
+				if($credential instanceof Credential){
+					$this->credentialService->deleteCredential($credential);
+				}
 			}
 			$this->vaultService->deleteVault($vault_guid, $requested_by);
 		}
-		$this->deleteVaultRequestService->removeDeleteRequestForVault($req);
+		if($req instanceof DeleteVaultRequest) {
+			$this->deleteVaultRequestService->removeDeleteRequestForVault($req);
+		}
 
 		return new JSONResponse(array('result' => true));
 	}
@@ -179,7 +182,7 @@ class AdminController extends ApiController {
 			// Ignore it
 		}
 
-		if ($delete_request) {
+		if ($delete_request instanceof DeleteVaultRequest) {
 			$this->deleteVaultRequestService->removeDeleteRequestForVault($delete_request);
 			$result = true;
 		}

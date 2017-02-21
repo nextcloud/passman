@@ -31,8 +31,8 @@
 	 */
 	angular.module('passmanApp')
 		.directive('clickDisable', function () {
-			return function (scope, element, attrs) {
-				element.bind("click", function (event) {
+			return function (scope, element) {
+				element.bind("click", function () {
 					element.prepend('<i class="fa fa-spin fa-spinner"></i>&nbsp;');
 					element.attr('disabled','disabled');
 				});
