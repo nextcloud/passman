@@ -45,7 +45,7 @@
 					function countCredentials() {
 						var countedCredentials = 0;
 						var total = 0;
-						if(!scope.vault.hasOwnProperty('credentials')){
+						if(!scope.vault || !scope.vault.hasOwnProperty('credentials')){
 							return;
 						}
 

@@ -29,7 +29,8 @@
 	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('credentialTemplate', [function () {
+		.directive('credentialTemplate', ['EncryptService', '$translate', 'FileService', 'ShareService', 'NotificationService', 'CredentialService',
+			function (EncryptService, $translate, FileService, ShareService, NotificationService, CredentialService) {
 			return {
 				templateUrl: 'views/partials/credential_template.html',
 				replace: true,
@@ -39,6 +40,29 @@
 				},
 
 				link: function (scope, element, attrs) {
+					scope.downloadFile = function (credential, file) {
+						console.log('hi')
+						var callback = function (result) {
+							console.log(EncryptService);
+							var key = CredentialService.getSharedKeyFromCredential(credential);
+							if (!result.hasOwnProperty('file_data')) {
+								NotificationService.showNotification($translate.instant('error.loading.file.perm'), 5000);
+								return;
+
+							}
+							var file_data = EncryptService.decryptString(result.file_data, key);
+							download(file_data, escapeHTML(file.filename), file.mimetype);
+
+						};
+
+						if (!credential.hasOwnProperty('acl')) {
+							FileService.getFile(file).then(callback);
+						} else {
+							ShareService.downloadSharedFile(credential, file).then(callback);
+						}
+
+					};
+
 					scope.showLabel = (attrs.hasOwnProperty('showLabel'));
 				}
 			};

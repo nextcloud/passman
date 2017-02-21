@@ -409,27 +409,5 @@
 					$scope.delete_time = 0;
 				};
 
-				$scope.downloadFile = function (credential, file) {
-					var callback = function (result) {
-						var key = EncryptService.getSharedKeyFromCredential(credential);
-
-						if (!result.hasOwnProperty('file_data')) {
-							NotificationService.showNotification($translate.instant('error.loading.file.perm'), 5000);
-							return;
-
-						}
-						var file_data = EncryptService.decryptString(result.file_data, key);
-						download(file_data, escapeHTML(file.filename), file.mimetype);
-
-					};
-
-					if (!credential.hasOwnProperty('acl')) {
-						FileService.getFile(file).then(callback);
-					} else {
-						ShareService.downloadSharedFile(credential, file).then(callback);
-					}
-
-				};
-
 			}]);
 }());
