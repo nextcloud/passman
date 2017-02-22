@@ -245,7 +245,7 @@ class CredentialMapperTest extends DatabaseHelperTest {
 			'shared_key'		=> $original_row['shared_key'] . "asdf"
 		];
 
-		$updated = $this->mapper->updateCredential($raw_credential);
+		$updated = $this->mapper->updateCredential($raw_credential, false);
 		foreach ($raw_credential as $key => $value) {
 			if ($key === 'guid') continue;
 			$method = 'get' . str_replace('_', '', ucwords($key, '_'));
