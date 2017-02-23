@@ -24,7 +24,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <namespace>Passman</namespace>
     <documentation>
         <admin>https://github.com/nextcloud/passman#readme</admin>
-        <developer>https://github.com/nextcloud/passman/tree/master/docs</developer>
+        <developer>https://github.com/nextcloud/passman/wiki</developer>
     </documentation>
     <category>tools</category>
     <website>https://demo.passman.cc</website>
