@@ -67,13 +67,19 @@
 				.when('/vault/:vault_id/edit/:credential_id', {
 					templateUrl: 'views/edit_credential.html',
 					controller: 'CredentialEditCtrl'
-				}).when('/vault/:vault_id/:credential_id/share', {
-				templateUrl: 'views/share_credential.html',
-				controller: 'ShareCtrl'
-			}).when('/vault/:vault_id/:credential_id/revisions', {
-				templateUrl: 'views/credential_revisions.html',
-				controller: 'RevisionCtrl'
-			})
+				})
+				.when('/vault/:vault_id/:credential_id/share', {
+					templateUrl: 'views/share_credential.html',
+					controller: 'ShareCtrl'
+				})
+				.when('/vault/:vault_id/:credential_id/revisions', {
+					templateUrl: 'views/credential_revisions.html',
+					controller: 'RevisionCtrl'
+				})
+				.when('/vault/:vault_id/request-deletion', {
+					templateUrl: 'views/vault_req_deletion.html',
+					controller: 'RequestDeleteCtrl'
+				})
 				.when('/vault/:vault_id/settings', {
 					templateUrl: 'views/settings.html',
 					controller: 'SettingsCtrl'

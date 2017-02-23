@@ -36,6 +36,8 @@
 			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService, $sce, $translate) {
 				$scope.vault_settings = {};
 				$scope.new_vault_name = '';
+				$scope.showGenericImport = false;
+
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -71,6 +73,18 @@
 					}
 				});
 
+				var key_strengths = [
+					'password.poor',
+					'password.poor',
+					'password.weak',
+					'password.good',
+					'password.strong'
+				];
+
+				$scope.minimal_value_key_strength = SettingsService.getSetting('vault_key_strength');
+				$translate(key_strengths[SettingsService.getSetting('vault_key_strength')]).then(function (translation) {
+					$scope.required_score = {'strength': translation};
+				});
 
 				var btn_txt = $translate.instant('bookmarklet.text');
 				var http = location.protocol, slashes = http.concat("//"), host = slashes.concat(window.location.hostname), complete = host + location.pathname;
@@ -166,7 +180,7 @@
 										var zxcvbn_result = zxcvbn(c.password);
 										if (zxcvbn_result.score <= minStrength) {
 											results.push({
-												credential_id: c.credential_id,
+												guid: c.guid,
 												label: c.label,
 												password: c.password,
 												password_zxcvbn_result: zxcvbn_result

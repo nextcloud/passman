@@ -90,8 +90,20 @@
       margin-top: 10px;
     }
   }
+  .reset_form {
+    padding: 16px;
+    label{
+      margin-top: 20px;
+      display: block;
+    }
+    input[type="text"]{
+      width: 100%;
+
+    }
+  }
   .login_opts{
     margin-bottom: 10px;
+
   }
 }
 

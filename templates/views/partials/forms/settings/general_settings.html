@@ -14,15 +14,16 @@
 		<label>{{ 'new.vault.password' | translate}}</label>
 		<password-gen ng-model="newVaultPass"
 		></password-gen>
-		<ng-password-meter password="newVaultPass"></ng-password-meter>
+		<ng-password-meter password="newVaultPass" score="vault_key_score"></ng-password-meter>
 		<label>{{ 'new.vault.pw.r' | translate}}</label>
 		<input type="password" ng-model="newVaultPass2">
-		<div ng-show="error" class="error">
+		<div ng-show="error || vault_key_score.score < minimal_value_key_strength" class="error">
 			<ul>
 				<li>{{error}}</li>
+				<li ng-show="vault_key_score.score < minimal_value_key_strength">{{'min.vault.key.strength' | translate:required_score}}</li>
 			</ul>
 		</div>
-		<button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)"
+		<button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)" ng-disabled="vault_key_score.score < minimal_value_key_strength"
 				>{{ 'change' | translate}}
 		</button>
 		<div ng-show="change_pw.total > 0">

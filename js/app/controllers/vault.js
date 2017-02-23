@@ -151,6 +151,10 @@
 
 			};
 
+			$scope.requestDeletion = function (vault) {
+				$location.path('/vault/' + vault.guid +'/request-deletion');
+			};
+
 			var _loginToVault = function (vault, vault_key) {
 				var _vault = angular.copy(vault);
 				_vault.vaultKey = angular.copy(vault_key);

@@ -29,6 +29,7 @@ module.exports = function (grunt) {
 		},
 		jshint: {
 			options: {
+				reporter: require('jshint-stylish'),
 				curly: false,
 				eqeqeq: true,
 				eqnull: true,
@@ -73,6 +74,13 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: "sass",
 						src: ["**/public-page.scss"],
+						dest: "css",
+						ext: ".css"
+					},
+					{
+						expand: true,
+						cwd: "sass",
+						src: ["**/admin.scss"],
 						dest: "css",
 						ext: ".css"
 					}
@@ -132,6 +140,7 @@ module.exports = function (grunt) {
 							'!css/app.*',
 							'css/bookmarklet.css',
 							'css/public-page.css',
+							'css/admin.css',
 							'!dist/*',
 							'!dist/*/**',
 							'!dist',

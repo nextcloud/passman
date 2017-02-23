@@ -81,6 +81,10 @@
 					$scope.selectedTags.push(tag);
 				};
 
+				$rootScope.$on('credentials_loaded', function () {
+					$rootScope.$broadcast('selected_tags_updated', $scope.selectedTags);
+				});
+
 				$scope.available_tags = TagService.getTags();
 
 				$scope.$watch(function () {

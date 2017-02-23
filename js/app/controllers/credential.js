@@ -102,7 +102,7 @@
 							}
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
-
+							$rootScope.$broadcast('credentials_loaded');
 							if(!vault.private_sharing_key){
 								var key_size = 1024;
 								ShareService.generateRSAKeys(key_size).then(function (kp) {
@@ -248,7 +248,7 @@
 				$scope.deleteCredential = function (credential) {
 					var _credential = angular.copy(credential);
 					try {
-						_credential = CredentialService.decryptCredential(angular.copy(credential));
+						_credential = CredentialService.decryptCredential(_credential);
 					} catch (e) {
 
 					}
@@ -262,23 +262,16 @@
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000,
-						function () {
-							var key = CredentialService.getSharedKeyFromCredential(_credential);
-							CredentialService.updateCredential(_credential, false, key).then(function (result) {
-								if (result.delete_time > 0) {
-									notification = false;
-
-								}
-							});
-						});
-
+					var key = CredentialService.getSharedKeyFromCredential(_credential);
+					CredentialService.updateCredential(_credential, false, key).then(function () {
+						notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000);
+					});
 				};
 
 				$scope.recoverCredential = function (credential) {
 					var _credential = angular.copy(credential);
 					try {
-						_credential = CredentialService.decryptCredential(angular.copy(credential));
+						_credential = CredentialService.decryptCredential(_credential);
 					} catch (e) {
 
 					}
@@ -292,15 +285,10 @@
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					NotificationService.showNotification($translate.instant('credential.recovered'), 5000,
-						function () {
-							var key = CredentialService.getSharedKeyFromCredential(_credential);
-							CredentialService.updateCredential(_credential, false, key).then(function () {
-								notification = false;
-
-							});
-						});
-
+					var key = CredentialService.getSharedKeyFromCredential(_credential);
+					CredentialService.updateCredential(_credential, false, key).then(function () {
+						NotificationService.showNotification($translate.instant('credential.recovered'), 5000);
+					});
 				};
 
 				$scope.destroyCredential = function (credential) {
@@ -419,28 +407,6 @@
 
 				$scope.clearState = function () {
 					$scope.delete_time = 0;
-				};
-
-				$scope.downloadFile = function (credential, file) {
-					var callback = function (result) {
-						var key = EncryptService.getSharedKeyFromCredential(credential);
-
-						if (!result.hasOwnProperty('file_data')) {
-							NotificationService.showNotification($translate.instant('error.loading.file.perm'), 5000);
-							return;
-
-						}
-						var file_data = EncryptService.decryptString(result.file_data, key);
-						download(file_data, escapeHTML(file.filename), file.mimetype);
-
-					};
-
-					if (!credential.hasOwnProperty('acl')) {
-						FileService.getFile(file).then(callback);
-					} else {
-						ShareService.downloadSharedFile(credential, file).then(callback);
-					}
-
 				};
 
 			}]);

@@ -22,25 +22,20 @@
 
 (function () {
 	'use strict';
+
 	/**
 	 * @ngdoc directive
-	 * @name passmanApp.directive:autoScroll
+	 * @name passmanApp.directive:passwordGen
 	 * @description
-	 * # autoScroll
+	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('autoScroll', function () {
-			return {
-				restrict: 'A',
-				scope: {
-					autoScroll: '='
-				},
-				link: function postLink (scope, el) {
-					scope.$watch('autoScroll', function () {
-						$(el).scrollTop($(el)[0].scrollHeight);
-					}, true);
-				}
+		.directive('clickDisable', function () {
+			return function (scope, element) {
+				element.bind("click", function () {
+					element.prepend('<i class="fa fa-spin fa-spinner"></i>&nbsp;');
+					element.attr('disabled','disabled');
+				});
 			};
 		});
-
 }());
