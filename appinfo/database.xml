@@ -548,4 +548,44 @@
 			</field>
 		</declaration>
 	</table>
+	<table>
+		<name>*dbprefix*passman_delete_vault_request</name>
+		<declaration>
+			<field>
+				<name>id</name>
+				<type>integer</type>
+				<notnull>true</notnull>
+				<autoincrement>true</autoincrement>
+				<unsigned>true</unsigned>
+				<primary>true</primary>
+				<length>8</length>
+			</field>
+			<field>
+				<name>vault_guid</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>64</length>
+			</field>
+			<field>
+				<name>reason</name>
+				<type>text</type>
+				<notnull>true</notnull>
+				<length>64</length>
+			</field>
+			<field>
+				<name>requested_by</name>
+				<type>text</type>
+				<notnull>false</notnull>
+				<length>64</length>
+			</field>
+			<field>
+				<name>created</name>
+				<type>integer</type>
+				<length>64</length>
+				<default>0</default>
+				<notnull>false</notnull>
+				<unsigned>true</unsigned>
+			</field>
+		</declaration>
+	</table>
 </database>

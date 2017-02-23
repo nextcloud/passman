@@ -50,4 +50,14 @@ class Utils {
 
 		return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
 	}
+
+	/**
+	 * @param $uid
+	 * @return string
+	 */
+	public static function getNameByUid($uid){
+		$um = \OC::$server->getUserManager();
+		$u = $um->get($uid);
+		return $u->getDisplayName();
+	}
 }

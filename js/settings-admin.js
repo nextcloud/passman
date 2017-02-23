@@ -21,7 +21,6 @@
  */
 
 $(document).ready(function () {
-
 	var Settings = function (baseUrl) {
 		this._baseUrl = baseUrl;
 		this._settings = [];
@@ -60,7 +59,7 @@ $(document).ready(function () {
 
 		setAdminKey: function (key, value) {
 			var request = $.ajax({
-				url: this._baseUrl + '/' + key + '/' + value +'/admin1/admin2',
+				url: this._baseUrl + '/' + key + '/' + value + '/admin1/admin2',
 				method: 'POST'
 			});
 			request.done(function () {
@@ -73,7 +72,7 @@ $(document).ready(function () {
 			});
 		},
 		getKey: function (key) {
-			if(this._settings.hasOwnProperty(key)){
+			if (this._settings.hasOwnProperty(key)) {
 				return this._settings[key];
 			}
 			return false;
@@ -86,7 +85,6 @@ $(document).ready(function () {
 
 	var settings = new Settings(OC.generateUrl('apps/passman/api/v2/settings'));
 	settings.load();
-
 	// ADMIN SETTINGS
 
 	// fill the boxes
@@ -126,8 +124,108 @@ $(document).ready(function () {
 		settings.setAdminKey('vault_key_strength', $(this).val());
 	});
 
-	if($('form[name="passman_settings"]').length === 2){
+	if ($('form[name="passman_settings"]').length === 2) {
 		$('form[name="passman_settings"]')[1].remove();
 	}
 
+	var accountMover = {
+		'source_account': '',
+		'destination_account': ''
+	};
+	$(".username-autocomplete").autocomplete({
+		source: OC.generateUrl('apps/passman/admin/search'),
+		minLength: 1,
+		select: function (event, ui) {
+			accountMover[$(this).attr('id')] = ui.item.value;
+		}
+	});
+
+	$('#move_credentials').click(function () {
+		var self = this;
+		$('#moveStatus').hide();
+		$(self).attr('disabled', 'disabled');
+		$(self).html('<i class="fa fa-spinner fa-spin"></i> ' + OC.L10N.translate('passman', 'Moving') + '...');
+		if (accountMover.source_account && accountMover.destination_account) {
+			$.post(OC.generateUrl('apps/passman/admin/move'), accountMover, function (data) {
+				if (data.success) {
+					$(self).removeAttr('disabled');
+					$(self).html('Move');
+					$('#moveStatus').fadeIn();
+					setTimeout(function () {
+						$('#moveStatus').fadeOut();
+					}, 3500);
+				}
+			});
+		}
+	});
+
+	function format_date(date) {
+		date = new Date(date);
+		var month=date.getMonth();
+		var year=date.getFullYear();
+		var day=date.getDate();
+		var hour=date.getHours();
+		var minutes=date.getMinutes();
+		var seconds=date.getSeconds();
+
+		month=month+1; //javascript date goes from 0 to 11
+		if (month<10){
+			month="0"+month; //adding the prefix
+		}
+		if (hour<10){
+			hour="0"+hour; //adding the prefix
+		}
+		if (minutes<10){
+			minutes="0"+minutes; //adding the prefix
+		}
+		if (seconds<10){
+			seconds="0"+seconds; //adding the prefix
+		}
+
+
+
+		return day+"-"+month+"-"+year+" "+hour+":"+minutes+":"+seconds;
+	}
+
+	function acceptDeleteRequest (el, req) {
+		if (!confirm(OC.L10N.translate('passman', "Are you really sure?\nThis will delete the vault and all credentials in it!"))) {
+			return;
+		}
+		$.post(OC.generateUrl('apps/passman/admin/accept-delete-request'), req, function () {
+			$(el).parent().parent().remove();
+		});
+	}
+
+	function ignoreDeleteRequest (el, req) {
+		$.ajax({
+			url: OC.generateUrl('apps/passman/admin/request-deletion/' + req.vault_guid),
+			type: 'DELETE',
+			success: function () {
+				$(el).parent().parent().remove();
+			}
+		});
+	}
+
+	$.get(OC.generateUrl('apps/passman/admin/delete-requests'), function (requests) {
+		var table = $('#requests-table tbody');
+		$.each(requests, function (k, request) {
+			var accept = $('<span class="link">[Accept]&nbsp;</span>');
+			accept.click(function () {
+				var _self = this;
+				acceptDeleteRequest(_self, request);
+			});
+
+			var ignore = $('<span class="link">[Ignore]</span>');
+			ignore.click(function () {
+				var _self = this;
+				ignoreDeleteRequest(_self, request);
+			});
+
+			var cols = $('<td>' + request.id + '</td><td>' + request.displayName + '</td><td>' + request.reason + '</td><td>' + format_date(request.created * 1000 )+ '</td>');
+			var actions = $('<td></td>').append(accept).append(ignore);
+			table.append($('<tr></tr>').append(cols).append(actions));
+		});
+	});
+
+	$('#passman-tabs').tabs();
 });

@@ -112,4 +112,19 @@ class FileMapper extends Mapper {
 	public function updateFile(File $file) {
 		return $this->update($file);
 	}
+
+
+	/**
+	 * @param $user_id
+	 * @return File[]
+	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
+	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 */
+	public function getFilesFromUser($user_id) {
+		$sql = 'SELECT * FROM `*PREFIX*passman_files` ' .
+			'WHERE `user_id` = ?';
+		$params = [$user_id];
+
+		return $this->findEntities($sql, $params);
+	}
 }
