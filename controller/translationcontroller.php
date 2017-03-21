@@ -233,7 +233,7 @@ class TranslationController extends ApiController {
 			'generating.keys' => $this->trans->t('Generating sharing keys'),
 
 			// templates/views/partials/forms/settings/tool.html
-			'tool.intro' => $this->trans->t('The password tool will scan your password, calculate the avarage crack time and, if below the threshold, show them'),
+			'tool.intro' => $this->trans->t('The password tool will scan your password and calculate average crack time. If it is below the threshold it will be shown.'),
 			'min.strength' => $this->trans->t('Minimum password stength'),
 			'scan.result.msg' => $this->trans->t('Passman scanned your passwords, and here is the result.'),
 			'scan.result' => $this->trans->t('A total of {{scan_result}} weak credentials.'),
