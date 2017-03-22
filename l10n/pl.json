@@ -143,7 +143,7 @@
     "The password tool will scan your password, calculate the avarage crack time and, if below the threshold, show them" : "Narzędzie do haseł zeskanuje twoje hasło, obliczy średni czas potrzebny do złamania i, jeśli będzie poniżej progu, pokaże im",
     "Minimum password stength" : "Minimalna siła hasła",
     "Passman scanned your passwords, and here is the result." : "Passman zeskanował twoje hasła i oto wynik:",
-    "A total of {{scan_result}} weak credentials." : "Wszystkie {{scan_result}} słabe poświadczenia",
+    "A total of {{scan_result}} weak credentials." : "W sumie {{scan_result}} mają słabe poświadczenia",
     "Score" : "Punktacja",
     "Action" : "Akcja",
     "Search users or groups..." : "Szukaj użytkowników lub grup...",
