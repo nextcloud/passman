@@ -86,6 +86,7 @@ OC.L10N.register(
     "Filename" : "Jméno souboru",
     "Upload date" : "Datum nahrání",
     "Size" : "Velikost",
+    "Upload or enter your OTP secret" : "Nahrajte nebo zadejte váše OTP tajemství",
     "Current OTP settings" : "Aktuální nastavení OTP",
     "Issuer" : "Vydavatel",
     "Secret" : "Tajemství",
