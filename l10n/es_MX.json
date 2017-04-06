@@ -34,6 +34,7 @@
     "First 5 lines of the csv are shown." : "Se muestran las primeras 5 líneas del archivo csv.",
     "Assign the proper fields to each column." : "Asigne el campo correspondiente a cada columna. ",
     "Example imported credential" : "Ejemplo de credenciales importadas",
+    "Missing an importer? Try it with the generic csv importer." : "¿Necesita un importador? Pruebe el importador genérico de csv. ",
     "Go back to importers." : "Regresar a importadores.",
     "Revision deleted" : "Revisión borrada",
     "Revision restored" : "Revisión restaurada",
