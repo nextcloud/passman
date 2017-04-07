@@ -16,6 +16,7 @@ OC.L10N.register(
     "File read successfully!" : "Lectura de l'arxiu correcta",
     "Adding {{credential}}" : "Afegint {{credential}}",
     "Added {{credential}}" : "Afegida {{credential}}",
+    "Importing" : "Important",
     "Revision deleted" : "Revisió detectada",
     "Revision restored" : "Revisió restaurada",
     "Settings saved" : "Paràmetres desats",

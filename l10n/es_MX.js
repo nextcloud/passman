@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Contraseñas",
+    "Generating sharing keys ( %step / 2)" : "Generando llaves para compartir (%s tep  /2)",
     "Incorrect vault password!" : "¡Bóveda de contraseñas incorrecta!",
     "Passwords do not match" : "Las contraseñas no coinciden",
     "General" : "General",
@@ -87,6 +88,7 @@ OC.L10N.register(
     "Size" : "Tamaño",
     "Upload or enter your OTP secret" : "Carge o ingrese su secreto de OTP",
     "Current OTP settings" : "Ajustes actuales de OTP",
+    "Issuer" : "Quien levanta",
     "Secret" : "Secreto",
     "Expire date" : "Fecha de expiración",
     "No expire date set" : "No se ha establecido la fecha de expiración ",
