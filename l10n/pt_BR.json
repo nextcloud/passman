@@ -140,7 +140,7 @@
     "Save keys" : "Salvar chaves",
     "Generate sharing keys" : "Gerar compartilhamento de chaves",
     "Generating sharing keys" : "Gerando compartilhamento de chaves",
-    "The password tool will scan your password, calculate the avarage crack time and, if below the threshold, show them" : "A ferramenta de senha digitalizará sua senha, calculará o tempo médio de crack e, se estiver abaixo do limite, mostre-os",
+    "The password tool will scan your password, calculate the avarage crack time and, if below the threshold, show them" : "A ferramenta de senha digitalizará sua senha, calculará o tempo médio de crack e, se estiver abaixo do limite, a mostrará",
     "Minimum password stength" : "Força mínima da senha",
     "Passman scanned your passwords, and here is the result." : "O Passman digitalizou suas senhas, e aqui está o resultado.",
     "A total of {{scan_result}} weak credentials." : "Um total de {{scan_result}} credenciais fracas.",

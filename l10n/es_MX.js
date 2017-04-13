@@ -124,6 +124,7 @@ OC.L10N.register(
     "Version" : "Versión",
     "Donate to support development" : "Donar en apoyo al desarrollo",
     "Save your passwords with 1 click!" : "¡Guarde sus contraseñas con 1 sólo click!",
+    "Drag below button to your bookmark toolbar." : "Arrastre el botón de abajo hasta su barra de herramientas de marcadores. ",
     "Delete vault" : "Borrar bóveda",
     "Vault password" : "Bóveda de contraseñas",
     "This process is irreversible" : "Este proceso es irreversible",
