@@ -122,7 +122,7 @@ OC.L10N.register(
     "All time" : "Alle tider",
     "Account" : "Konto",
     "Password" : "Passord",
-    "OTP" : "En gangs passord (OTP)",
+    "OTP" : "Éngangspassord (OTP)",
     "E-mail" : "E-post",
     "URL" : "URL",
     "Notes" : "Notater",
