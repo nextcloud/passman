@@ -50,7 +50,7 @@ class EncryptServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @covers ::testMakeKey
+	 * @covers ::makeKey
 	 */
 	public function testMakeKey() {
 		$this->testKey = $this->service->makeKey('userKey', 'serverKey', 'userSuppliedKey');
