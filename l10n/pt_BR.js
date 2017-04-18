@@ -242,7 +242,7 @@ OC.L10N.register(
     "Go back to vaults" : "Voltar para os cofres",
     "Please input the password for" : "Por favor entre uma senha para",
     "Set this vault as default." : "Configure esse cofre como padrão.",
-    "Login automatically to this vault." : "Entrar automaticamente para este cofre.",
+    "Login automatically to this vault." : "Entrar automaticamente neste cofre.",
     "Logout of this vault automatically after: " : "Efetue o logout desta solicitação logo após:",
     "Decrypt vault" : "Descriptografar o cofre",
     "Seems you lost the vault password and you're unable to login." : "Parece que você perdeu a senha do cofre e não consegue fazer login.",
