@@ -5,7 +5,7 @@
 	<div class="col-xs-12" ng-init="minStrength = 3;">
 		{{ 'min.strength' | translate}} <input type="number" min="1" max="4" value="3"
 										ng-model="minStrength">
-		<button ng-click="startScan(minStrength)">Start scan</button>
+		<button ng-click="startScan(minStrength)">{{ 'scan.start' | translate}}</button>
 	</div>
 </div>
 <div class="row" ng-show="scan_result">
@@ -36,7 +36,7 @@
 						  secret="'true'"></span>
 				</td>
 				<td>
-					<a class="link" ng-href="#/vault/{{active_vault.guid}}/edit/{{result.guid}}" tooltip="'Edit credential'"><i  class="fa fa-edit"></i></a>
+					<a class="link" ng-href="#/vault/{{active_vault.guid}}/edit/{{result.guid}}" tooltip="{{ 'edit.credential' | translate}}"><i  class="fa fa-edit"></i></a>
 				</td>
 			</tr>
 			</tbody>
