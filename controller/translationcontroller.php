@@ -79,14 +79,14 @@ class TranslationController extends ApiController {
 			'import.importing' => $this->trans->t('Importing'),
 			'import.start' => $this->trans->t('Start import'),
 
-			'select.csv' => $this->trans->t('Select csv file'),
-			'parsed.csv.rows' => $this->trans->t('Parsed {{rows}} lines from csv file'),
+			'select.csv' => $this->trans->t('Select CSV file'),
+			'parsed.csv.rows' => $this->trans->t('Parsed {{rows}} lines from CSV file'),
 			'skip.first.row' => $this->trans->t('Skip first row'),
 			'import.csv.label.req' => $this->trans->t('You need to assign the label field before you can start the import.'),
-			'first.five.lines' => $this->trans->t('First 5 lines of the csv are shown.'),
+			'first.five.lines' => $this->trans->t('First 5 lines of the CSV are shown.'),
 			'assign.column' => $this->trans->t('Assign the proper fields to each column.'),
 			'example.credential' => $this->trans->t('Example imported credential'),
-			'missing.importer' => $this->trans->t('Missing an importer? Try it with the generic csv importer.'),
+			'missing.importer' => $this->trans->t('Missing an importer? Try it with the generic CSV importer.'),
 			'missing.importer.back' => $this->trans->t('Go back to importers.'),
 
 
@@ -233,10 +233,11 @@ class TranslationController extends ApiController {
 			'generating.keys' => $this->trans->t('Generating sharing keys'),
 
 			// templates/views/partials/forms/settings/tool.html
-			'tool.intro' => $this->trans->t('The password tool will scan your password and calculate average crack time. If it is below the threshold it will be shown.'),
+			'tool.intro' => $this->trans->t('The password tool will scan your password, calculate the average crack time and list those which are below the threshold'),
 			'min.strength' => $this->trans->t('Minimum password stength'),
-			'scan.result.msg' => $this->trans->t('Passman scanned your passwords, and here is the result.'),
-			'scan.result' => $this->trans->t('A total of {{scan_result}} weak credentials.'),
+			'scan.start' => $this->trans->t('Start scan'),
+			'scan.result.msg' => $this->trans->t('Result'),
+			'scan.result' => $this->trans->t('A total of {{scan_result}} weak credentials were found.'),
 			'score' => $this->trans->t('Score'),
 			'action' => $this->trans->t('Action'),
 
@@ -334,7 +335,8 @@ class TranslationController extends ApiController {
 			'destroy' => $this->trans->t('Destroy'),
 			'use.regex' => $this->trans->t('Use regex'),
 			'sharereq.title' => $this->trans->t('You have incoming share requests.'),
-			'sharereq.line1' => $this->trans->t('If you want to put the credential in a other vault, logout of this vault and login to the vault you want the shared credential in.'),
+			'sharereq.line1' => $this->trans->t('If you want to put the credential in a other vault,'),
+			'sharereq.line2' => $this->trans->t('logout of this vault and login to the vault you want the shared credential in.'),
 			'permissions' => $this->trans->t('Permissions'),
 			'received.from' => $this->trans->t('Received from'),
 			'date' => $this->trans->t('Date'),
@@ -359,15 +361,15 @@ class TranslationController extends ApiController {
 			'go.back.vaults' => $this->trans->t('Go back to vaults'),
 			'input.vault.password' => $this->trans->t('Please input the password for'),
 			'vault.default' => $this->trans->t('Set this vault as default.'),
-			'vault.auto.login' => $this->trans->t('Login automatically to this vault.'),
+			'vault.auto.login' => $this->trans->t('Log into this vault automatically.'),
 			'auto.logout' => $this->trans->t('Logout of this vault automatically after: '),
 			'vault.decrypt' => $this->trans->t('Decrypt vault'),
 
 			'req.intro1' => $this->trans->t('Seems you lost the vault password and you\'re unable to login.'),
-			'req.intro2' => $this->trans->t('If you want this vault removed you can request removal of the vault here.'),
-			'req.intro3' => $this->trans->t('An admin then accept to the request (or not)'),
+			'req.intro2' => $this->trans->t('If you want this vault to be removed you can request that here.'),
+			'req.intro3' => $this->trans->t('An admin then accepts to the request (or not)'),
 
-			'request.deletion.warning' => $this->trans->t('After an admin destroy\'s this vault, all credentials will be lost'),
+			'request.deletion.warning' => $this->trans->t('After an admin destroys this vault, all credentials inside will be lost'),
 			'request.deletion.reason' => $this->trans->t('Reason to request deletion (optional):'),
 			'request.deletion' => $this->trans->t('Request vault destruction'),
 			'request.deletion.accept' => $this->trans->t('Yes, request an admin to destroy this vault'),

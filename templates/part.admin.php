@@ -53,7 +53,7 @@ $ciphers = openssl_get_cipher_methods();
 	Local version: <?php p($localVersion); ?><br/>
 	<?php
 	if ($checkVersion && version_compare($githubVersion, $localVersion) === 1) {
-		p($l->t('A newer version of passman is available'));
+		p($l->t('A newer version of Passman is available'));
 	}
 	?>
 	<div id="passman-tabs">
@@ -102,7 +102,7 @@ $ciphers = openssl_get_cipher_methods();
 						   id="passman_disable_debugger" class="checkbox"
 						   value="0"/>
 					<label for="passman_disable_debugger">
-						<?php p($l->t('Disable javascript debugger')); ?>
+						<?php p($l->t('Disable JavaScript debugger')); ?>
 					</label>
 				</p>
 				<p>
