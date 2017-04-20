@@ -299,8 +299,8 @@
 						$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
 					}
 
-
-					if ($scope.storedCredential.password !== storedCredential.password_repeat){
+					console.log($scope.storedCredential.password, $scope.storedCredential.password_repeat)
+					if ($scope.storedCredential.password !== $scope.storedCredential.password_repeat){
 						NotificationService.showNotification($translate.instant('password.do.not.match'), 5000);
 						return;
 					}
