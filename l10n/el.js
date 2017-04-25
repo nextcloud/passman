@@ -19,6 +19,8 @@ OC.L10N.register(
     "Decrypting credentials" : "Αποκρυπτογράφηση διαπιστευτηρίων",
     "Done" : "Ολοκληρώθηκε",
     "File read successfully!" : "Επιτυχημένη ανάγνωση αρχείου!",
+    "Importing" : "Γίνεται εισαγωγή",
+    "Select csv file" : "Επιλογή αρχείου csv",
     "Revision deleted" : "Διαγράφηκε η αναθεώρηση",
     "Save in passman" : "Αποθήκευση στο passman",
     "Settings saved" : "Οι ρυθμίσεις αποθηκεύτηκαν",
