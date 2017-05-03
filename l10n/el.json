@@ -86,6 +86,8 @@
     "Show files" : "Εμφάνιση αρχείων",
     "Details" : "Λεπτομέρειες",
     "Hide details" : "Απόκρυψη λεπτομερειών",
+    "10 / second" : "10 / δευτερόλεπτο",
+    "10k / second" : "10k / δευτερόλεπτο",
     "10B / second" : "10B / δευτερόλεπτο",
     "Dictionary name" : "Όνομα λεξικου",
     "by" : "από",
@@ -104,6 +106,7 @@
     "E-mail" : "Ηλεκτρονική αλληλογραφία",
     "URL" : "URL",
     "Notes" : "Σημειώσεις",
+    "Created" : "Δημιουργήθηκε",
     "Edit" : "Επεξεργασία",
     "Delete" : "Διαγραφή",
     "Share" : "Διαμοιρασμός",
@@ -123,6 +126,8 @@
     "Github version:" : "Έκδοση Github:",
     "A newer version of passman is available" : "Είναι διαθέσιμη νεότερη έκδοση passman",
     "Check for new versions" : "Έλεγχος για νέες εκδόσεις",
+    "Enable HTTPS check" : "Ενεργοποίηση ελέγχου HTTPS",
+    "Connection to server lost" : "Η σύνδεση στον διακομιστή διακόπηκε",
     "Saving..." : "Γίνεται αποθήκευση...",
     "seconds ago" : "δευτερόλεπτα πριν"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
