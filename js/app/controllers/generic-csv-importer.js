@@ -192,7 +192,7 @@
 				};
 
 				$scope.importing = false;
-				$scope.startImport = function () {
+				$scope.startCSVImport = function () {
 					$scope.importing = true;
 					$scope.log = [];
 					var start = ($scope.skipFirstRow) ? 1 : 0;

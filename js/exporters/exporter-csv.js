@@ -34,7 +34,7 @@ PassmanExporter.csv.export = function (credentials) {
 	/** global: C_Promise */
 	return new C_Promise(function () {
 		var _this = this;
-		var headers = ['label', 'username', 'password', 'email', 'description', 'tags'];
+		var headers = ['label', 'username', 'password', 'email', 'description', 'tags', 'url'];
 		var file_data = '"' + headers.join('","') + '"\n';
 		for (var i = 0; i < credentials.length; i++) {
 			var _credential = credentials[i];

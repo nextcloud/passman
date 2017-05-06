@@ -55,7 +55,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 
 	public function setUp() {
 		$server = new \OC\Server(getenv('SERVER_BASE_DIR'), new \OC\Config(getenv('SERVER_CONFIG_DIR'), getenv('SERVER_CONFIG_FILE')));
-		$this->app_container = $server->getAppContainer('passman');
+		$this->app_container = $server->query('passman');
 
 		$this->db = $this->app_container->getServer()->getDatabaseConnection();
 
