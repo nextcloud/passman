@@ -2,7 +2,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>./tests/unit</directory>
-            <exclude>./tests/unit/lib/Db</exclude>
+            <!--<exclude>./tests/unit/lib/Db</exclude>-->
         </testsuite>
     </testsuites>
     <filter>

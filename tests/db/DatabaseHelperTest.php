@@ -48,16 +48,21 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 	 * @var PHPUnit_Extensions_Database_DataSet_MysqlXmlDataSet[]
 	 */
 	protected $datasets;
+	
+	/**
+	 *
+	 * @var \OC\Server
+	 */
+	static protected $server = NULL;
 
 	public function __construct() {
 		parent::__construct();
 	}
 
 	public function setUp() {
-		$server = new \OC\Server(getenv('SERVER_BASE_DIR'), new \OC\Config(getenv('SERVER_CONFIG_DIR'), getenv('SERVER_CONFIG_FILE')));
-		$this->app_container = $server->query('passman');
+		if (self::$server === NULL) self::$server = new \OC\Server(getenv('SERVER_BASE_DIR'), new \OC\Config(getenv('SERVER_CONFIG_DIR'), getenv('SERVER_CONFIG_FILE')));
 
-		$this->db = $this->app_container->getServer()->getDatabaseConnection();
+		$this->db = self::$server->getDatabaseConnection();
 
 		$this->datasets = [];
 		$tables = $this->getTablesNames();

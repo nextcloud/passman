@@ -43,7 +43,11 @@ class ExpireCredentialsTest extends PHPUnit_Framework_TestCase {
 		$jobList = $this->getMockBuilder('\OCP\BackgroundJob\IJobList')->getMock();
 
 		/** @var \OC\BackgroundJob\JobList $jobList */
-		$backgroundJob->execute($jobList);
-		$this->assertTrue(true);
+		try {
+		    $backgroundJob->execute($jobList);
+		}
+		catch (Exception $ex) {
+		    $this->assertTrue(false);
+		}
 	}
 }
