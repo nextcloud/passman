@@ -296,6 +296,7 @@ OC.L10N.register(
     "%s shared \"%s\" with you. Click here to accept" : "%s sizinle \"%s\" ögesini paylaştı. Onaylamak için buraya tıklayın",
     "%s has declined your share request for \"%s\"." : "%s, \"%s\" ögesini paylaşma isteğinizi reddetti.",
     "%s has accepted your share request for \"%s\"." : "%s, \"%s\" ögesini paylaşma isteğinizi onayladı.",
+    "Passman" : "Passman",
     "Unable to get version info" : "Sürüm bilgileri alınamadı",
     "Passman Settings" : "Passman Ayarları",
     "Github version:" : "Github sürümü:",

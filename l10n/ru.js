@@ -296,6 +296,7 @@ OC.L10N.register(
     "%s shared \"%s\" with you. Click here to accept" : "%s предоставил вам доступ к «%s». Нажмите здесь что бы принять.",
     "%s has declined your share request for \"%s\"." : "%s отклонил ваш запрос на предоставление общего доступа к «%s».",
     "%s has accepted your share request for \"%s\"." : "%s принял ваш запрос на предоставление общего доступа к «%s».",
+    "Passman" : "Passman",
     "Unable to get version info" : "Невозможно получить информацию о версии",
     "Passman Settings" : "Настройки Passman",
     "Github version:" : "Версия github:",

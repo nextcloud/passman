@@ -296,6 +296,7 @@ OC.L10N.register(
     "%s shared \"%s\" with you. Click here to accept" : "%s compartilhou \"%s\" com você. Clique aqui para aceitar",
     "%s has declined your share request for \"%s\"." : "%s recusou sua solicitação de compartilhamento de \"%s\".",
     "%s has accepted your share request for \"%s\"." : "%s aceitou sua solicitação de compartilhamento para \"%s\".",
+    "Passman" : "Passman",
     "Unable to get version info" : "Não foi possível obter informações sobre a versão",
     "Passman Settings" : "Configurações do Passman",
     "Github version:" : "Versão Github:",
