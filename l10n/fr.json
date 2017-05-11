@@ -294,6 +294,7 @@
     "%s shared \"%s\" with you. Click here to accept" : "%s a partagé \"%s\" avec vous. Cliquez ici pour accepter",
     "%s has declined your share request for \"%s\"." : "%s a refusé votre demande de partage pour \"%s\"",
     "%s has accepted your share request for \"%s\"." : "%s a accepté votre demande de partage pour \"%s\"",
+    "Passman" : "Passman",
     "Unable to get version info" : "Impossible d'obtenir l'information de la version",
     "Passman Settings" : "Paramètres de Passman",
     "Github version:" : "Version Github :",
