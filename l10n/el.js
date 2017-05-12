@@ -32,6 +32,7 @@ OC.L10N.register(
     "New passwords do not match!" : "Τα νέα συνθηματικά δεν ταιριάζουν!",
     "Share link" : "Διαμοιρασμός συνδέσμου",
     "Saved!" : "Αποθηκεύτηκαν!",
+    "Weak" : "Ασθενές",
     "Copy to clipboard" : "Αντιγραφή στο πρόχειρο",
     "Copied to clipboard!" : "Αντιγράφηκε στο πρόχειρο!",
     "Generate password" : "Δημιουργία συνθηματικού",
