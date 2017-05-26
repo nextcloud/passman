@@ -155,7 +155,7 @@ OC.L10N.register(
     "Enable link sharing" : "Skru på deling av lenker",
     "Share until date" : "Del til dato",
     "Expire after views" : "Utløper etter antall visninger",
-    "Click share first" : "Klikk \"del\" først",
+    "Click share first" : "Klikk \"Del\" først",
     "Show files" : "Vis filer",
     "Details" : "Detaljer",
     "Hide details" : "Skjul detaljer",
