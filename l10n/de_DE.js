@@ -246,7 +246,7 @@ OC.L10N.register(
     "Log into this vault automatically." : "In diesen Tresor automatisch anmelden.",
     "Logout of this vault automatically after: " : "Von diesem Tresor automatisch abmelden nach:",
     "Decrypt vault" : "Tresor entschlüsseln",
-    "Seems you lost the vault password and you're unable to login." : "Es scheint, als hätten Sie das Passwort für den Tresor verloren und könnten sich nicht mehr einloggen.",
+    "Seems you lost the vault password and you're unable to login." : "Es scheint, als hätten Sie das Passwort für den Tresor verloren und könnten sich nicht mehr anmelden.",
     "If you want this vault to be removed you can request that here." : "Wenn Sie möchten, dass dieser Tresor gelöscht wird, dann können Sie dies hier anfordern.",
     "An admin then accepts to the request (or not)" : "Ein Admin akzeptiert dann diese Anfrage (oder nicht)",
     "After an admin destroys this vault, all credentials inside will be lost" : "Wenn ein Administrator diesen Tresor löscht, gehen alle enthaltenen Anmeldeinformationen verloren",
