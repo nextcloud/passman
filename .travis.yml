@@ -58,8 +58,8 @@ script:
     # Test the app
     - sh -c "if [ '$JSTESTS' != '1' ]; then find . -name \*.php -exec php -l \"{}\" \;; fi"
     - cd ../../
-    - sh -c "if [ '$JSTESTS' != '1' ]; then ./occ app:check-code $APP_NAME -c private -c strong-comparison; fi"
-    - sh -c "if [ '$JSTESTS' != '1' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
+    # - sh -c "if [ '$JSTESTS' != '1' ]; then ./occ app:check-code $APP_NAME -c private -c strong-comparison; fi"
+    # - sh -c "if [ '$JSTESTS' != '1' ]; then ./occ app:check-code $APP_NAME -c deprecation; fi"
     - cd apps/$APP_NAME/
 
     - sh -c "if [ '$JSTESTS' != '1' ]; then php build/phpunit.phar -v -c phpunit.xml --coverage-clover=coverage.clover --coverage-php=phpunit; fi"

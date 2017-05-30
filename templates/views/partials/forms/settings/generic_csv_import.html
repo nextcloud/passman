@@ -17,7 +17,7 @@
 				<b>{{ 'import.csv.label.req' | translate}}</b>
 			</div>
 			<div ng-show="import_fields.indexOf('label') !== -1 && parsed_csv">
-				<button class="btn btn-success" ng-disabled="importing" ng-click="startImport()"><i class="fa fa-spinner fa-spin" ng-show="importing"></i> {{ (importing) ? ('import.importing' | translate) : ('import.start' | translate) }}</button>
+				<button class="btn btn-success" ng-disabled="importing" ng-click="startCSVImport()"><i class="fa fa-spinner fa-spin" ng-show="importing"></i> {{ (importing) ? ('import.importing' | translate) : ('import.start' | translate) }}</button>
 			</div>
 			<div>
 				<div ng-if="import_progress.progress > 0">

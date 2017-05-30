@@ -300,6 +300,11 @@
 					}
 
 
+					if ($scope.storedCredential.password !== $scope.storedCredential.password_repeat){
+						NotificationService.showNotification($translate.instant('password.do.not.match'), 5000);
+						return;
+					}
+
 					//@TODO  validation
 					//@TODO When credential is expired and has renew interval set, calc new expire time.
 					delete $scope.storedCredential.password_repeat;
