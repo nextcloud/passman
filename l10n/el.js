@@ -23,6 +23,7 @@ OC.L10N.register(
     "Done" : "Ολοκληρώθηκε",
     "File read successfully!" : "Επιτυχημένη ανάγνωση αρχείου!",
     "Importing" : "Γίνεται εισαγωγή",
+    "Start import" : "Έναρξη εισαγωγής",
     "Revision deleted" : "Διαγράφηκε η αναθεώρηση",
     "Save in passman" : "Αποθήκευση στο passman",
     "Settings saved" : "Οι ρυθμίσεις αποθηκεύτηκαν",
