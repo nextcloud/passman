@@ -22,6 +22,83 @@
 
 // Importers should always start with this
 if (!window['PassmanExporter']) {
-	var PassmanExporter = {}
-}
+	var PassmanExporter = {
+	    getCredentialsWithFiles: function(credentials, FileService, EncryptService) {
+		var t = {
+		    cred: credentials,
+		    FS: FileService,
+		    ES: EncryptService
+		}
 
+		return new C_Promise(function() {
+		    _this = this.parent;
+		    var credentials = _this.cred;
+		    this.parent.total = 0;
+		    this.parent.finished = 0;
+		    this.parent.fileGUID_cred = [];
+		    this.parent.files = [];
+		    this.parent.step = (function(file) {
+			this.parent.finished ++;
+			this.call_progress({
+			    total: this.parent.total,
+			    finished: this.parent.finished
+			});
+			
+			var dta = this.parent.fileGUID_cred[file.guid];
+			
+			file.filename = this.parent.ES.decryptString(file.filename, this.parent.cred[dta.cred_pos].vault_key);
+			file.file_data = this.parent.ES.decryptString(file.file_data, this.parent.cred[dta.cred_pos].vault_key);
+			
+			// Files and custom_fields have different field structure
+			if (dta.on === 'files') {
+			    this.parent.cred[dta.cred_pos][dta.on][dta.at] = file;
+			}
+			else {
+			    this.parent.cred[dta.cred_pos][dta.on][dta.at].value = file;
+			}
+			
+			// We have finished downloading everything, so let's hand over job to somewhere else!
+			if (this.parent.total === this.parent.finished) {
+			    this.call_then(this.parent.cred);
+			}
+		    }).bind(this);
+
+		    for (var i = 0; i < credentials.length; i++) {
+			
+			var item = credentials[i];
+			
+			// Custom fields
+			for (var c = 0; c < item.custom_fields.length; c++) {
+			    var cf = item.custom_fields[c];
+			    if (cf.field_type === 'file') {
+				this.parent.total ++;
+				this.parent.fileGUID_cred[cf.value.guid] = {
+				    cred_pos: i,
+				    on: 'custom_fields',
+				    at: c
+				};
+
+				this.parent.FS.getFile(cf.value).then((function(data){
+				    this.parent.step(data);
+				}).bind(this));
+			    }
+			}
+			
+			// Also get all files
+			for (var c = 0; c < item.files.length; c++) {
+			    this.parent.total ++;
+			    this.parent.fileGUID_cred[item.files[c].guid] = {
+				cred_pos: i,
+				on: 'files',
+				at: c
+			    };
+
+			    this.parent.FS.getFile(item.files[c]).then((function(data){
+				this.parent.step(data);
+			    }).bind(this));
+			}
+		    }
+		}, t);
+	    }
+	}
+}
