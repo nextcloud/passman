@@ -7,6 +7,7 @@ OC.L10N.register(
     "Error downloading file, you probably don't have enough permissions" : "Klaida, atsisiunčiant failą. Jūs, tikriausiai, neturite pakankamai leidimų",
     "Invalid QR code" : "Neteisingas QR kodas",
     "Done" : "Atlikta",
+    "File read successfully!" : "Failas sėkmingai perskaitytas!",
     "Settings saved" : "Nustatymai įrašyti",
     "General settings" : "Bendri nustatymai",
     "Password settings" : "Slaptažodžio nustatymai",

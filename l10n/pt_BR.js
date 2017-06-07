@@ -71,7 +71,7 @@ OC.L10N.register(
     "Password copied to clipboard!" : "Senha copiada para a área de transferência!",
     "Complete" : "Completo",
     "Username" : "Nome do usuário",
-    "Repeat password" : "Repita a senha",
+    "Repeat password" : "Repetir a senha",
     "Add Tag" : "Adicionar etiqueta",
     "Field label" : "Campo etiqueta",
     "Field value" : "Campo valor",
