@@ -55,7 +55,7 @@ OC.L10N.register(
     "Please login with your new vault password" : "Favor de iniciar sesión con su nueva contraseña de bóveda",
     "Share with users and groups" : "Compartir con otros usuarios y grupos",
     "Share link" : "Compartir liga",
-    "Are you sure you want to leave? This will corrupt this credential" : "¿Está seguro que desea salir? Esto va a corrpomer estas credenciales",
+    "Are you sure you want to leave? This will corrupt this credential" : "¿Está seguro que desea salir? Esto va a corromper estas credenciales",
     "Credential unshared" : "Credenciales no compartidas",
     "Credential shared" : "Credenciales compartidas",
     "Saved!" : "¡Guardado!",
