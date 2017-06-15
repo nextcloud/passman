@@ -7,7 +7,7 @@ OC.L10N.register(
     "Passwords do not match" : "As senhas não coincidem",
     "General" : "Geral",
     "Custom Fields" : "Campos personalizados",
-    "Please fill in a label!" : "Preencha a etiqueta!",
+    "Please fill in a label!" : "por favor preencher a etiqueta!",
     "Please fill in a value!" : "Preencha o valor!",
     "Error loading file" : "Erro ao carregar o arquivo",
     "An error happened during decryption" : "Ocorreu um erro durante a descriptografia",

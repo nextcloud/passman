@@ -48,6 +48,7 @@ OC.L10N.register(
     "Import credentials" : "Importer legitimasjon",
     "Export credentials" : "Eksporter påloggingsdetaljer",
     "Sharing" : "Deling",
+    "Are you sure you want to leave? This WILL corrupt all your credentials" : "Er du sikker på at du ønsker å forlate? Dette vil skade alle dine påloggingsdetaljer",
     "Your old password is incorrect!" : "Ditt gamle passord er feil!",
     "New passwords do not match!" : "De nye passordene er ikke like!",
     "Please login with your new vault password" : "Logg inn med ditt nye hvelv-passord",
