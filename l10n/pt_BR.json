@@ -24,7 +24,7 @@
     "Credential has no label, skipping" : "Credencial não tem etiqueta, ignorando",
     "Adding {{credential}}" : "Adicionando {{credential}}",
     "Added {{credential}}" : "Adicionada {{credential}} ",
-    "Skipping credential, missing label on line {{line}}" : "Ignorando credencial, falta rótulo online {{line}}",
+    "Skipping credential, missing label on line {{line}}" : "Ignorando credencial, falta etiqueta online {{line}}",
     "Parsed {{num}} credentials, starting to import" : "Credenciais {{num}} analisadas, começando a importar",
     "Importing" : "Importando",
     "Start import" : "Iniciar importação",
