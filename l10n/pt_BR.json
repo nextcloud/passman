@@ -179,7 +179,7 @@
     "Match sequence" : "Sequência de correspondência",
     "See match sequence" : "Ver sequência de correspondência",
     "Pattern" : "Padrão",
-    "Matched word" : "Palavra combinada",
+    "Matched word" : "Palavra correspondente",
     "Dictionary name" : "Nome do dicionário",
     "Rank" : "Classificação",
     "Reversed" : "Invertido",
@@ -242,7 +242,7 @@
     "Please input the password for" : "Por favor entre uma senha para",
     "Set this vault as default." : "Configure esse cofre como padrão.",
     "Log into this vault automatically." : "Entre neste cofre automaticamente.",
-    "Logout of this vault automatically after: " : "Efetue o logout desta solicitação logo após:",
+    "Logout of this vault automatically after: " : "Efetue o logout deste cofre automaticamente após:",
     "Decrypt vault" : "Descriptografar o cofre",
     "Seems you lost the vault password and you're unable to login." : "Parece que você perdeu a senha do cofre e não consegue fazer login.",
     "If you want this vault to be removed you can request that here." : "Se quiser que este cofre seja excluído, pode solicitar isso aqui.",
@@ -318,7 +318,7 @@
     "Reason" : "Razão",
     "Connection to server lost" : "Conexão perdida com o servidor",
     "Problem loading page, reloading in 5 seconds" : "Problema ao carregar a página, recarregando em 5 segundos",
-    "Saving..." : "Pesquisando...",
+    "Saving..." : "Salvando...",
     "Dismiss" : "Descartar",
     "seconds ago" : "segundos atras"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
