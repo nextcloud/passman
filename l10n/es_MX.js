@@ -299,7 +299,7 @@ OC.L10N.register(
     "Passman" : "Passman",
     "Unable to get version info" : "No fue posible obtener la información de la versión",
     "Passman Settings" : "Configuraciones de Passman",
-    "Github version:" : "Versión de Github:",
+    "Github version:" : "Versión de GitHub:",
     "A newer version of Passman is available" : "Una nueva versión de Passman se encuentra disponible",
     "Password sharing" : "Compartir contraseña",
     "Credential mover" : "Mover credenciales",
