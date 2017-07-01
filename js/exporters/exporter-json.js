@@ -33,7 +33,7 @@ PassmanExporter.json = {
 PassmanExporter.json.export = function (credentials, FileService, EncryptService) {
 	/** global: C_Promise */
 	return new C_Promise(function () {
-		PassmanExporter.getCredentialsWithFiles(credentials, FileService, EncryptService).then((function(data){
+		PassmanExporter.getCredentialsWithFiles(credentials, FileService, EncryptService).then((function(){
 		    var _output = [];
 		    for (var i = 0; i < credentials.length; i++) {
 			    var _credential = angular.copy(credentials[i]);
@@ -42,7 +42,6 @@ PassmanExporter.json.export = function (credentials, FileService, EncryptService
 			    delete _credential.vault_id;
 			    delete _credential.shared_key;
 			    
-			    console.log(_credential);
 			    _output.push(_credential);
 
 			    var progress = {
@@ -55,8 +54,8 @@ PassmanExporter.json.export = function (credentials, FileService, EncryptService
 		    var file_data = JSON.stringify(_output);
 		    this.call_then();
 		    download(file_data, 'passman-export.json');
-		}).bind(this)).progress(function(progress) {
-		    console.log(progress);
+		}).bind(this)).progress(function() {
+
 		});
 		
 		

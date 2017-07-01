@@ -28,10 +28,10 @@ if (!window['PassmanExporter']) {
 		    cred: credentials,
 		    FS: FileService,
 		    ES: EncryptService
-		}
-
+		};
+		/** global: C_Promise */
 		return new C_Promise(function() {
-		    _this = this.parent;
+		    var _this = this.parent;
 		    var credentials = _this.cred;
 		    this.parent.total = 0;
 		    this.parent.finished = 0;
@@ -68,7 +68,7 @@ if (!window['PassmanExporter']) {
 			var item = credentials[i];
 			
 			// Custom fields
-			for (var c = 0; c < item.custom_fields.length; c++) {
+			for (c = 0; c < item.custom_fields.length; c++) {
 			    var cf = item.custom_fields[c];
 			    if (cf.field_type === 'file') {
 				this.parent.total ++;
@@ -100,5 +100,5 @@ if (!window['PassmanExporter']) {
 		    }
 		}, t);
 	    }
-	}
+	};
 }

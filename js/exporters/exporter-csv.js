@@ -46,8 +46,8 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 					    for (var t = 0; t < _credential[field].length; t++) {
 						    _tags.push(_credential[field][t].text);
 					    }
-					    var data = '[' + _tags.join(",") + ']';
-					    row_data.push('"' + data + '"');
+					    var tag_data = '[' + _tags.join(",") + ']';
+					    row_data.push('"' + tag_data + '"');
 				    } 
 				    else if (field == 'custom_fields' || field == 'files') {
 					var _fields = JSON.stringify(_credential[field]);
@@ -68,7 +68,7 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 		    }
 		    this.call_then();
 		    download(file_data, 'passman-export.csv');
-		}).bind(this)).progress(function(progress) {
+		}).bind(this)).progress(function() {
 		    
 		});
 		
