@@ -9,14 +9,8 @@
  * @copyright Sander Brand 2016
  */
 
-$nc_require_base = getenv('SERVER_BASE_DIR');
 
-if ($nc_require_base) {
-    require_once $nc_require_base . '/tests/bootstrap.php';
-}
-else{
-    require_once __DIR__ . '/../../../tests/bootstrap.php';
-}
+require_once __DIR__ . '/../../../tests/bootstrap.php';
 
 require_once __DIR__ . '/../appinfo/autoload.php';
 require_once __DIR__ . '/db/DatabaseHelperTest.php';

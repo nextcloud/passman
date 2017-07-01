@@ -2,7 +2,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>./tests/unit</directory>
-            <!--<exclude>./tests/unit/lib/Db</exclude>-->
+            <exclude>./tests/unit/lib/Db</exclude>
         </testsuite>
     </testsuites>
     <filter>
@@ -13,8 +13,8 @@
 
             <!--<file>/path/to/file</file>-->
             <!--<exclude>-->
-                <!--<directory suffix=".php">/path/to/dir</directory>-->
-                <!--<file>/path/to/file</file>-->
+            <!--<directory suffix=".php">/path/to/dir</directory>-->
+            <!--<file>/path/to/file</file>-->
             <!--</exclude>-->
         </whitelist>
 
