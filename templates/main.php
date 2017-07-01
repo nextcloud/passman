@@ -94,6 +94,7 @@ script('passman', 'importers/importer-passpackcsv');
 script('passman', 'importers/importer-randomdata');
 script('passman', 'exporters/exporter-main');
 script('passman', 'exporters/exporter-csv');
+script('passman', 'exporters/exporter-json');
 /*build-js-end*/
 
 

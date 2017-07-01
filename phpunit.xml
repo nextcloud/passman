@@ -13,8 +13,8 @@
 
             <!--<file>/path/to/file</file>-->
             <!--<exclude>-->
-                <!--<directory suffix=".php">/path/to/dir</directory>-->
-                <!--<file>/path/to/file</file>-->
+            <!--<directory suffix=".php">/path/to/dir</directory>-->
+            <!--<file>/path/to/file</file>-->
             <!--</exclude>-->
         </whitelist>
 

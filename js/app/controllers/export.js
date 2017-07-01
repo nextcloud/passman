@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('ExportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', '$translate', function ($scope, $window, CredentialService, VaultService, $translate) {
+		.controller('ExportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', 'FileService', 'EncryptService', '$translate', function ($scope, $window, CredentialService, VaultService, FileService, EncryptService, $translate) {
 			$scope.available_exporters = [];
 			$scope.active_vault = VaultService.getActiveVault();
 			$scope.confirm_key = '';
@@ -76,10 +76,11 @@
 								if (_credential.hidden === 0) {
 									var key = CredentialService.getSharedKeyFromCredential(_credential);
 									_credential = CredentialService.decryptCredential(_credential, key);
+									_credential.vault_key = key;
 									_credentials.push(_credential);
 								}
 							}
-							$window.PassmanExporter[$scope.selectedExporter.id].export(_credentials).then(function () {
+							$window.PassmanExporter[$scope.selectedExporter.id].export(_credentials, FileService, EncryptService).then(function () {
 								_log($translate.instant('done'));
 							});
 						}

@@ -22,54 +22,40 @@
 
 
 /** global: PassmanExporter */
-PassmanExporter.csv = {
+PassmanExporter.json = {
 	info: {
-		name: 'CSV',
-		id: 'csv',
-		description: 'Export credentials as a csv file.'
+		name: 'JSON',
+		id: 'json',
+		description: 'Export credentials as a JSON file.'
 	}
 };
 
-PassmanExporter.csv.export = function (credentials, FileService, EncryptService) {
+PassmanExporter.json.export = function (credentials, FileService, EncryptService) {
 	/** global: C_Promise */
 	return new C_Promise(function () {
 		PassmanExporter.getCredentialsWithFiles(credentials, FileService, EncryptService).then((function(){
-		    var headers = ['label', 'username', 'password', 'email', 'description', 'tags', 'url', 'custom_fields', 'files'];
-		    var file_data = '"' + headers.join('","') + '"\n';
+		    var _output = [];
 		    for (var i = 0; i < credentials.length; i++) {
-			    var _credential = credentials[i];
-			    var row_data = [];
-			    for (var h = 0; h < headers.length; h++) {
-				    var field = headers[h];
-				    if (field === 'tags') {
-					    var _tags = [];
-					    for (var t = 0; t < _credential[field].length; t++) {
-						    _tags.push(_credential[field][t].text);
-					    }
-					    var tag_data = '[' + _tags.join(",") + ']';
-					    row_data.push('"' + tag_data + '"');
-				    } 
-				    else if (field == 'custom_fields' || field == 'files') {
-					var _fields = JSON.stringify(_credential[field]);
-					_fields = _fields.replaceAll('"', '""');
-					row_data.push('"' + _fields + '"');
-				    }
-				    else {
-					    row_data.push('"' + _credential[field] + '"');
-				    }
-			    }
+			    var _credential = angular.copy(credentials[i]);
+			    
+			    delete _credential.vault_key;
+			    delete _credential.vault_id;
+			    delete _credential.shared_key;
+			    
+			    _output.push(_credential);
+
 			    var progress = {
 				    percent: i / credentials.length * 100,
 				    loaded: i,
 				    total: credentials.length
 			    };
 			    this.call_progress(progress);
-			    file_data += row_data.join(',') + "\n";
 		    }
+		    var file_data = JSON.stringify(_output);
 		    this.call_then();
-		    download(file_data, 'passman-export.csv');
+		    download(file_data, 'passman-export.json');
 		}).bind(this)).progress(function() {
-		    
+
 		});
 		
 		

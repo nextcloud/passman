@@ -9,9 +9,11 @@
  * @copyright Sander Brand 2016
  */
 
+
 require_once __DIR__ . '/../../../tests/bootstrap.php';
+
 require_once __DIR__ . '/../appinfo/autoload.php';
-#require_once __DIR__ . '/db/DatabaseHelperTest.php';
+require_once __DIR__ . '/db/DatabaseHelperTest.php';
 
 
 // Fix for "Autoload path not allowed: .../tests/lib/testcase.php"
