@@ -6,6 +6,7 @@ OC.L10N.register(
     "Passwords do not match" : "Salasanat eivät täsmää",
     "General" : "Yleiset",
     "Custom Fields" : "Omavalintaiset kentät",
+    "Please fill in a label!" : "Täytäthän kohdan!",
     "Please fill in a value!" : "Anna arvo!",
     "Error loading file" : "Virhe tiedostoa ladatessa",
     "An error happened during decryption" : "Salauksen avaamisessa tapahtui virhe",
