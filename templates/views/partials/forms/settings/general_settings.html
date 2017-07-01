@@ -12,8 +12,7 @@
 		<label>{{ 'old.vault.password' | translate}}</label>
 		<input type="password" ng-model="oldVaultPass">
 		<label>{{ 'new.vault.password' | translate}}</label>
-		<password-gen ng-model="newVaultPass"
-		></password-gen>
+		<input type="password" ng-model="newVaultPass" />
 		<ng-password-meter password="newVaultPass" score="vault_key_score"></ng-password-meter>
 		<label>{{ 'new.vault.pw.r' | translate}}</label>
 		<input type="password" ng-model="newVaultPass2">
