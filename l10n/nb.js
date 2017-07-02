@@ -7,7 +7,7 @@ OC.L10N.register(
     "Passwords do not match" : "Passordene samsvarer ikke",
     "General" : "Generelt",
     "Custom Fields" : "Brukervalgte felter",
-    "Please fill in a label!" : "Fyll inn en merkelapp!",
+    "Please fill in a label!" : "Fyll inn en etikett!",
     "Please fill in a value!" : "Oppgi en verdi!",
     "Error loading file" : "Feil ved lasting av fil",
     "An error happened during decryption" : "En feil oppstod under dekryptering",
