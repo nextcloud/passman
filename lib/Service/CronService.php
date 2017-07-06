@@ -48,7 +48,6 @@ class CronService {
 
 
 	public function expireCredentials() {
-		$this->logger->info('Passman cron test', array('app' => 'passman'));
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
 		foreach($expired_credentials as $credential){
 			$link = ''; // @TODO create direct link to credential
