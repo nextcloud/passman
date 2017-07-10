@@ -104,14 +104,14 @@ Passman allows users to share passwords (this can be turned off by an administra
 
 
 ## API 
-For developers passman offers an [api](https://github.com/nextcloud/passman/wiki/API).
+For developers Passman offers an [api](https://github.com/nextcloud/passman/wiki/API).
 
 ## Support Passman
-Passman is open source, but we would gladly accept a beer (or pizza!)   
-Please consider donating via
-- [Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
+Passman is open source, and we would gladly accept a beer (or pizza!)   
+Please consider donating
+- [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
 - [Patreon](https://www.patreon.com/user?u=4833592)
-- Bitcoin: 1H2c5tkGX54n48yEtM4Wm4UrAGTW85jQpe
+- bitcoin: 1H2c5tkGX54n48yEtM4Wm4UrAGTW85jQpe
 
 ## Code reviews
 If you have any improvements regarding our code.
@@ -119,13 +119,13 @@ Please do the following
 - Clone us
 - Make your edits
 - Add your name to the contributors 
-- Send a PR   
+- Send a [PR](https://github.com/nextcloud/passman/pulls)
 
 Or if you're feeling lazy, create an issue, and we'll think about it.
 
 ## Docker
-To run passman with docker you can use `docker run  -p 8080:80 -p 8443:443 brantje/passman`   
-You have to supply your own ssl certs.   
+To run Passman with [Docker](https://www.docker.com/) you can use `docker run  -p 8080:80 -p 8443:443 brantje/passman`   
+You have to supply your own SSL certs.   
 Example:   
 `docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /directory/cert.key:/data/ssl/cert.key brantje/passman`
 
@@ -142,7 +142,7 @@ To run the unit tests install phpunit globally, and setup the environment variab
 - Animalillo
 
 ## Contributors
-Add yours when creating a pull request!
+Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
 - None
 
 
