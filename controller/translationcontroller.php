@@ -166,8 +166,8 @@ class TranslationController extends ApiController {
 
 
 			// templates/views/partials/edit_credential/password.html
-			'expire.date' => $this->trans->t('Expiry date'),
-			'no.expire.date' => $this->trans->t('No expiry date set'),
+			'expire.date' => $this->trans->t('Expiration date'),
+			'no.expire.date' => $this->trans->t('No expiration date set'),
 			'renew.interval' => $this->trans->t('Renew interval'),
 			'disabled' => $this->trans->t('Disabled'),
 			'days' => $this->trans->t('Day(s)'),
@@ -204,7 +204,7 @@ class TranslationController extends ApiController {
 			'about.passman' => $this->trans->t('About Passman'),
 			'version' => $this->trans->t('Version'),
 			'donate.support' => $this->trans->t('Donate to support development'),
-			'bookmarklet' => $this->trans->t('A JavaScript bookmark'),
+			'bookmarklet' => $this->trans->t('Bookmarklet'),
 			'bookmarklet.info1' => $this->trans->t('Save your passwords with 1 click!'),
 			'bookmarklet.info2' => $this->trans->t('Drag below button to your bookmark toolbar.'),
 			'delete.vault' => $this->trans->t('Delete vault'),
