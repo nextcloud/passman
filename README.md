@@ -1,4 +1,4 @@
-#Passman
+# Passman
 Passman is a full featured password manager.
 
 [![Build Status](https://travis-ci.org/nextcloud/passman.svg?branch=master)](https://travis-ci.org/nextcloud/passman)
@@ -22,7 +22,7 @@ Passman is a full featured password manager.
 
 
 
-##Screenshots
+## Screenshots
 ![Logged in to vault](http://i.imgur.com/ciShQZg.png)   
 
 ![Credential selected](http://i.imgur.com/3tENldT.png)   
