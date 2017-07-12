@@ -45,7 +45,7 @@ class TranslationController extends ApiController {
 			'invalid.vault.key' => $this->trans->t('Incorrect vault password!'),
 			'password.do.not.match' => $this->trans->t('Passwords do not match'),
 			'general' => $this->trans->t('General'),
-			'custom.fields' => $this->trans->t('Custom Fields'),
+			'custom.fields' => $this->trans->t('Custom fields'),
 			'error.no.label' => $this->trans->t('Please fill in a label!'),
 			'error.no.value' => $this->trans->t('Please fill in a value!'),
 			'error.loading.file' => $this->trans->t('Error loading file'),
@@ -83,9 +83,9 @@ class TranslationController extends ApiController {
 			'parsed.csv.rows' => $this->trans->t('Parsed {{rows}} lines from CSV file'),
 			'skip.first.row' => $this->trans->t('Skip first row'),
 			'import.csv.label.req' => $this->trans->t('You need to assign the label field before you can start the import.'),
-			'first.five.lines' => $this->trans->t('First 5 lines of the CSV are shown.'),
+			'first.five.lines' => $this->trans->t('First 5 lines of the CSV shown.'),
 			'assign.column' => $this->trans->t('Assign the proper fields to each column.'),
-			'example.credential' => $this->trans->t('Example imported credential'),
+			'example.credential' => $this->trans->t('Example of imported credential'),
 			'missing.importer' => $this->trans->t('Missing an importer? Try it with the generic CSV importer.'),
 			'missing.importer.back' => $this->trans->t('Go back to importers.'),
 
@@ -95,7 +95,7 @@ class TranslationController extends ApiController {
 			'revision.restored' => $this->trans->t('Revision restored'),
 
 			// js/app/controllers/settings.js
-			'bookmarklet.text' => $this->trans->t('Save in passman'),
+			'bookmarklet.text' => $this->trans->t('Save in Passman'),
 			'settings.saved' => $this->trans->t('Settings saved'),
 			'settings.general' => $this->trans->t('General settings'),
 			'settings.audit' => $this->trans->t('Password Audit'),
@@ -105,8 +105,8 @@ class TranslationController extends ApiController {
 			'settings.sharing' => $this->trans->t('Sharing'),
 			'changepw.navigate.away.warning' => $this->trans->t('Are you sure you want to leave? This WILL corrupt all your credentials'),
 			'incorrect.password' => $this->trans->t('Your old password is incorrect!'),
-			'password.no.match' => $this->trans->t('New passwords do not match!'),
-			'login.new.pass' => $this->trans->t('Please login with your new vault password'),
+			'password.no.match' => $this->trans->t('New password does not match!'),
+			'login.new.pass' => $this->trans->t('Please log in with your new vault password'),
 
 			// js/app/controllers/share.js
 			'share.u.g' => $this->trans->t('Share with users and groups'),
@@ -197,21 +197,21 @@ class TranslationController extends ApiController {
 			'change.vault.key' => $this->trans->t('Change vault key'),
 			'old.vault.password' => $this->trans->t('Old vault password'),
 			'new.vault.password' => $this->trans->t('New vault password'),
-			'new.vault.pw.r' => $this->trans->t('New vault password repeat'),
-			'warning.leave' => $this->trans->t('Please wait your vault is being updated, do not leave this page.'),
+			'new.vault.pw.r' => $this->trans->t('Repeat new vault password'),
+			'warning.leave' => $this->trans->t('Please wait while your vault is being updated, do not leave this page.'),
 			'processing' => $this->trans->t('Processing'),
 			'total.progress' => $this->trans->t('Total progress'),
 			'about.passman' => $this->trans->t('About Passman'),
 			'version' => $this->trans->t('Version'),
 			'donate.support' => $this->trans->t('Donate to support development'),
 			'bookmarklet' => $this->trans->t('Bookmarklet'),
-			'bookmarklet.info1' => $this->trans->t('Save your passwords with 1 click!'),
-			'bookmarklet.info2' => $this->trans->t('Drag below button to your bookmark toolbar.'),
+			'bookmarklet.info1' => $this->trans->t('Save your passwords with one click!'),
+			'bookmarklet.info2' => $this->trans->t('Drag the button below to your bookmark toolbar.'),
 			'delete.vault' => $this->trans->t('Delete vault'),
 			'vault.password' => $this->trans->t('Vault password'),
 			'vault.remove.notice' => $this->trans->t('This process is irreversible'),
 			'delete.vault.checkbox' => $this->trans->t('Delete my precious passwords'),
-			'deleting.pw' => $this->trans->t('Deleting {{password}}...'),
+			'deleting.pw' => $this->trans->t('Deleting {{password}}…'),
 			'delete.vault.confirm' => $this->trans->t('Yes, delete my precious passwords'),
 
 
@@ -242,7 +242,7 @@ class TranslationController extends ApiController {
 			'action' => $this->trans->t('Action'),
 
 			// templates/vieuws/partials/forms/share_credential/basics.html
-			'search.u.g' => $this->trans->t('Search users or groups...'),
+			'search.u.g' => $this->trans->t('Search for users or groups…'),
 			'search.result.missing' => $this->trans->t('Missing users? Only users that have vaults are shown.'),
 			'cyphering' => $this->trans->t('Cyphering'),
 			'uploading' => $this->trans->t('Uploading'),
@@ -316,7 +316,7 @@ class TranslationController extends ApiController {
 			'deleted.since' => $this->trans->t('Showing deleted since'),
 			'alltime' => $this->trans->t('All time'),
 			'number.filtered' => $this->trans->t('Showing {{number_filtered}} of {{credential_number}} credentials'),
-			'search.credential' => $this->trans->t('Search credential...'),
+			'search.credential' => $this->trans->t('Search for credential…'),
 			'account' => $this->trans->t('Account'),
 			'password' => $this->trans->t('Password'),
 			'otp' => $this->trans->t('OTP'),
@@ -356,20 +356,20 @@ class TranslationController extends ApiController {
 			'new.vault.name' => $this->trans->t('Please give your new vault a name.'),
 			'new.vault.pass' => $this->trans->t('Vault password'),
 			'new.vault.passr' => $this->trans->t('Repeat vault password'),
-			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing key\'s will have a strength of 1024 bit, which you can change later in settings.'),
+			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing key\'s will have a strength of 1024 bit, which you can change later in "Settings".'),
 			'new.vault.create' => $this->trans->t('Create vault'),
 			'go.back.vaults' => $this->trans->t('Go back to vaults'),
 			'input.vault.password' => $this->trans->t('Please input the password for'),
 			'vault.default' => $this->trans->t('Set this vault as default.'),
 			'vault.auto.login' => $this->trans->t('Log into this vault automatically.'),
-			'auto.logout' => $this->trans->t('Logout of this vault automatically after: '),
+			'auto.logout' => $this->trans->t('Log out of this vault automatically after: '),
 			'vault.decrypt' => $this->trans->t('Decrypt vault'),
 
-			'req.intro1' => $this->trans->t('Seems you lost the vault password and you\'re unable to login.'),
+			'req.intro1' => $this->trans->t('Seems you lost the vault password and thus unable to log in.'),
 			'req.intro2' => $this->trans->t('If you want this vault to be removed you can request that here.'),
-			'req.intro3' => $this->trans->t('An admin then accepts to the request (or not)'),
+			'req.intro3' => $this->trans->t('An admin then accepts or declines the request.'),
 
-			'request.deletion.warning' => $this->trans->t('After an admin destroys this vault, all credentials inside will be lost'),
+			'request.deletion.warning' => $this->trans->t('After an admin destroys this vault, all credentials inside it will be lost'),
 			'request.deletion.reason' => $this->trans->t('Reason to request deletion (optional):'),
 			'request.deletion' => $this->trans->t('Request vault destruction'),
 			'request.deletion.accept' => $this->trans->t('Yes, request an admin to destroy this vault'),
@@ -380,7 +380,7 @@ class TranslationController extends ApiController {
 
 
 			// templates/bookmarklet.php
-			'http.warning' => $this->trans->t('Warning! Adding credentials over http can be insecure!'),
+			'http.warning' => $this->trans->t('Warning! Adding credentials over HTTP is insecure!'),
 			'bm.active.vault' => $this->trans->t('Logged in to {{vault_name}}'),
 			'change.vault' => $this->trans->t('Change vault'),
 
@@ -390,10 +390,10 @@ class TranslationController extends ApiController {
 			'donate' => $this->trans->t('Donate'),
 
 			// templates/public_share.php
-			'share.page.text' => $this->trans->t('Someone has shared a credential with you.'),
+			'share.page.text' => $this->trans->t('Someone shared a credential with you.'),
 			'share.page.link' => $this->trans->t('Click here to request it'),
-			'share.page.link_loading' => $this->trans->t('Loading...'),
-			'expired.share' => $this->trans->t('Awwhh.... credential not found. Maybe it expired'),
+			'share.page.link_loading' => $this->trans->t('Loading…'),
+			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
 		);
 		return new JSONResponse($translations);
