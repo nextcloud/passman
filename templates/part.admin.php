@@ -47,7 +47,7 @@ $ciphers = openssl_get_cipher_methods();
 	<h2><?php p($l->t('Passman Settings')); ?></h2>
 	<?php
 	if ($checkVersion) {
-		p($l->t('Github version:') . ' ' . $githubVersion);
+		p($l->t('GitHub version:') . ' ' . $githubVersion);
 		print '<br />';
 	} ?>
 	Local version: <?php p($localVersion); ?><br/>
