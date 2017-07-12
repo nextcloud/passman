@@ -210,9 +210,9 @@ class TranslationController extends ApiController {
 			'delete.vault' => $this->trans->t('Delete vault'),
 			'vault.password' => $this->trans->t('Vault password'),
 			'vault.remove.notice' => $this->trans->t('This process is irreversible'),
-			'delete.vault.checkbox' => $this->trans->t('Delete my precious passwords'),
+			'delete.vault.checkbox' => $this->trans->t('Delete my valuable passwords'),
 			'deleting.pw' => $this->trans->t('Deleting {{password}}...'),
-			'delete.vault.confirm' => $this->trans->t('Yes, delete my precious passwords'),
+			'delete.vault.confirm' => $this->trans->t('Yes, delete my valuable passwords'),
 
 
 			// templates/views/partials/forms/settings/import.html
