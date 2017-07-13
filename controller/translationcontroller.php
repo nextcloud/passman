@@ -68,7 +68,7 @@ class TranslationController extends ApiController {
 			'done' => $this->trans->t('Done'),
 
 			// js/app/controllers/import.js
-			'import.file.read' => $this->trans->t('File read successfully.'),
+			'import.file.read' => $this->trans->t('File read.'),
 			'import.steps' => $this->trans->t('Proceed with the following steps to import your file'),
 
 			'import.no.label' => $this->trans->t('Credential has no label, skipping'),
@@ -324,7 +324,7 @@ class TranslationController extends ApiController {
 			'url' => $this->trans->t('URL'),
 			'notes' => $this->trans->t('Notes'),
 			'files' => $this->trans->t('Files'),
-			'expire.time' => $this->trans->t('Expiry time'),
+			'expire.time' => $this->trans->t('Expiration time'),
 			'changed' => $this->trans->t('Changed'),
 			'created' => $this->trans->t('Created'),
 			'edit' => $this->trans->t('Edit'),
@@ -356,7 +356,7 @@ class TranslationController extends ApiController {
 			'new.vault.name' => $this->trans->t('Please give your new vault a name.'),
 			'new.vault.pass' => $this->trans->t('Vault password'),
 			'new.vault.passr' => $this->trans->t('Repeat vault password'),
-			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing key\'s will have a strength of 1024 bit, which you can change in Settings later .'),
+			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing key will have a strength of 1024 bit, which you can change in Settings later.'),
 			'new.vault.create' => $this->trans->t('Create vault'),
 			'go.back.vaults' => $this->trans->t('Go back to vaults'),
 			'input.vault.password' => $this->trans->t('Please input the password for'),
@@ -365,7 +365,7 @@ class TranslationController extends ApiController {
 			'auto.logout' => $this->trans->t('Log out of this vault automatically after: '),
 			'vault.decrypt' => $this->trans->t('Decrypt vault'),
 
-			'req.intro1' => $this->trans->t('Seems you lost the vault password and you\'re unable to log in.'),
+			'req.intro1' => $this->trans->t('Seems you lost the vault password and thus unable to log in.'),
 			'req.intro2' => $this->trans->t('If you want this vault to be removed you can request that here.'),
 			'req.intro3' => $this->trans->t('An admin then accepts or declines the request'),
 
