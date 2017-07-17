@@ -164,6 +164,7 @@ OC.L10N.register(
     "Enable link sharing" : "Activer le partage par lien",
     "Share until date" : "Partage jusqu'à la date",
     "Expire after views" : "Expire après plusieurs visualisations",
+    "Click Share first" : "Cliquer d'abord sur Partager",
     "Show files" : "Afficher les fichiers",
     "Details" : "Détails",
     "Hide details" : "Masquer les détails",
