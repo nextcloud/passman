@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Passwords" : "Συνθηματικά",
     "Generating sharing keys ( %step / 2)" : "Δημιουργία κλειδιών διαμοιρασμού ( %step / 2)",
-    "Incorrect vault password!" : "Εσφαλμένος κωδικός κρύπτη ",
+    "Incorrect vault password!" : "Εσφαλμένος κωδικός θαλάμου!",
     "Passwords do not match" : "Δεν ταιριάζουν τα συθηματικά",
     "General" : "Γενικά",
     "Custom Fields" : "Προσαρμοσμένα πεδία",
