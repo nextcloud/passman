@@ -39,6 +39,7 @@ OC.L10N.register(
     "Password copied to clipboard!" : "Το συνθηματικό αντιγράφτηκε στο πρόχειρο.",
     "Username" : "Όνομα χρήστη",
     "Repeat password" : "Επανάληψη συνθηματικού",
+    "Add tag" : "Πρόσθεσε ετικέτα",
     "Field label" : "Ετικέτα πεδίου",
     "Field value" : "Τιμή πεδίου",
     "Choose a file" : "Επιλογή αρχείου",
