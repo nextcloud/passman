@@ -47,8 +47,9 @@ var PassmanImporter = PassmanImporter || {};
 				var _credential = PassmanImporter.newCredential();
 				var j = 0;
 				for (var k in row) {
-					if (!row[k])
+					if (!row[k]) {
 						continue;
+					}
 					if (k == 'name') {
 						_credential.label = row.name;
 						continue;
@@ -65,8 +66,8 @@ var PassmanImporter = PassmanImporter || {};
 						_credential.url = row[k];
 						continue;
 					}
-					if (k.toLowerCase() == 'e-mail'
-					    || k.toLowerCase() == 'email') {
+					if (k.toLowerCase() == 'e-mail' ||
+					    k.toLowerCase() == 'email') {
 						_credential.email = row[k];
 						continue;
 					}
