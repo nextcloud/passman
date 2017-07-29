@@ -92,6 +92,7 @@ script('passman', 'importers/importer-teampass');
 script('passman', 'importers/importer-enpass');
 script('passman', 'importers/importer-passpackcsv');
 script('passman', 'importers/importer-randomdata');
+script('passman', 'importers/importer-padlock');
 script('passman', 'exporters/exporter-main');
 script('passman', 'exporters/exporter-csv');
 script('passman', 'exporters/exporter-json');
