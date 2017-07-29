@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<info>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>passman</id>
     <name>Passman</name>
     <summary>Passman is a full featured password manager.</summary>
@@ -16,9 +17,8 @@ Features:
 - Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )
 For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
-
-    <licence>AGPL</licence>
     <version>2.1.3</version>
+    <licence>agpl</licence>
     <author homepage="https://github.com/brantje">Sander Brand</author>
     <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>
     <namespace>Passman</namespace>
@@ -36,21 +36,22 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/password_audit.png">https://img.passman.cc/password_audit.png</screenshot>
     <dependencies>
         <php min-version="5.6"/>
+        <database>sqlite</database>
+        <database>pgsql</database>
+        <database min-version="5.5">mysql</database>
+        <lib>openssl</lib>
         <owncloud min-version="9" max-version="11" />
         <nextcloud min-version="9" max-version="13" />
-        <database>sqlite</database>
-        <database min-version="5.5">mysql</database>
-        <database>pgsql</database>
-        <lib>openssl</lib>
     </dependencies>
 
+    <background-jobs>
+        <job>OCA\Passman\BackgroundJob\ExpireCredentials</job>
+    </background-jobs>
+    
     <repair-steps>
         <post-migration>
             <step>OCA\Passman\Migration\ServerSideEncryption</step>
         </post-migration>
     </repair-steps>
 
-    <background-jobs>
-        <job>OCA\Passman\BackgroundJob\ExpireCredentials</job>
-    </background-jobs>
 </info>
