@@ -40,6 +40,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         <nextcloud min-version="9" max-version="13" />
         <database>sqlite</database>
         <database min-version="5.5">mysql</database>
+        <database>pgsql</database>
         <lib>openssl</lib>
     </dependencies>
 
