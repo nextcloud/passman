@@ -11,25 +11,25 @@
 			<field>
 				<name>id</name>
 				<type>integer</type>
+				<length>8</length>
+				<unsigned>true</unsigned>
 				<notnull>true</notnull>
 				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
 				<primary>true</primary>
-				<length>8</length>
 			</field>
 			<field>
 				<name>guid</name>
 				<type>text</type>
-				<default>0</default>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>user_id</name>
 				<type>text</type>
-				<default>0</default>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>name</name>
@@ -46,17 +46,17 @@
 				<name>created</name>
 				<type>integer</type>
 				<length>8</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>last_access</name>
 				<type>integer</type>
-				<default>0</default>
 				<length>8</length>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>public_sharing_key</name>
@@ -108,30 +108,30 @@
 			<field>
 				<name>id</name>
 				<type>integer</type>
+				<length>8</length>
+				<unsigned>true</unsigned>
 				<notnull>true</notnull>
 				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
 				<primary>true</primary>
-				<length>8</length>
 			</field>
 			<field>
 				<name>guid</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 
 			<field>
 				<name>user_id</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>vault_id</name>
 				<type>integer</type>
-				<notnull>true</notnull>
 				<length>8</length>
+				<notnull>true</notnull>
 			</field>
 
 			<field>
@@ -149,17 +149,17 @@
 				<name>created</name>
 				<type>integer</type>
 				<length>8</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>changed</name>
 				<type>integer</type>
-				<default>0</default>
 				<length>8</length>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>tags</name>
@@ -194,24 +194,24 @@
 			<field>
 				<name>renew_interval</name>
 				<type>bigint</type>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>expire_time</name>
 				<type>bigint</type>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>delete_time</name>
 				<type>bigint</type>
-				<default>0</default>
 				<length>8</length>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>files</name>
@@ -264,24 +264,24 @@
 			<field>
 				<name>id</name>
 				<type>integer</type>
+				<length>8</length>
+				<unsigned>true</unsigned>
 				<notnull>true</notnull>
 				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
 				<primary>true</primary>
-				<length>8</length>
 			</field>
 			<field>
 				<name>guid</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 
 			<field>
 				<name>user_id</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>mimetype</name>
@@ -330,37 +330,37 @@
 			<field>
 				<name>id</name>
 				<type>integer</type>
+				<length>8</length>
+				<unsigned>true</unsigned>
 				<notnull>true</notnull>
 				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
 				<primary>true</primary>
-				<length>8</length>
 			</field>
 			<field>
 				<name>guid</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>credential_id</name>
 				<type>integer</type>
-				<notnull>true</notnull>
 				<length>8</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>user_id</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>created</name>
 				<type>integer</type>
 				<length>8</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>credential_data</name>
@@ -370,8 +370,8 @@
 			<field>
 				<name>edited_by</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<index>
 				<name>passman_revision_id_index</name>
@@ -399,74 +399,74 @@
 			<field>
 				<name>id</name>
 				<type>integer</type>
+				<length>8</length>
+				<unsigned>true</unsigned>
 				<notnull>true</notnull>
 				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
 				<primary>true</primary>
-				<length>8</length>
 			</field>
 			<field>
 				<name>item_id</name>
 				<type>integer</type>
-				<notnull>true</notnull>
 				<length>8</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>item_guid</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>vault_id</name>
 				<type>integer</type>
-				<notnull>false</notnull>
-				<unsigned>true</unsigned>
 				<length>8</length>
+				<unsigned>true</unsigned>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>vault_guid</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>user_id</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>created</name>
 				<type>integer</type>
 				<length>64</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>expire</name>
 				<type>integer</type>
 				<length>64</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>expire_views</name>
 				<type>integer</type>
 				<length>64</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>permissions</name>
 				<type>integer</type>
 				<length>3</length>
-				<default>0</default>
-				<notnull>true</notnull>
 				<unsigned>true</unsigned>
+				<notnull>true</notnull>
+				<default>0</default>
 			</field>
 			<field>
 				<name>shared_key</name>
@@ -481,50 +481,48 @@
 			<field>
 				<name>id</name>
 				<type>integer</type>
+				<length>8</length>
+				<unsigned>true</unsigned>
 				<notnull>true</notnull>
 				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
 				<primary>true</primary>
-				<length>8</length>
 			</field>
 			<field>
 				<name>item_id</name>
 				<type>integer</type>
-				<notnull>true</notnull>
-				<type>clob</type>
-				<notnull>true</notnull>
 				<length>8</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>item_guid</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>target_user_id</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>from_user_id</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>target_vault_id</name>
 				<type>integer</type>
-				<notnull>true</notnull>
-				<unsigned>true</unsigned>
 				<length>8</length>
+				<unsigned>true</unsigned>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>target_vault_guid</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>shared_key</name>
@@ -534,18 +532,18 @@
 			<field>
 				<name>permissions</name>
 				<type>integer</type>
-				<notnull>true</notnull>
-				<unsigned>true</unsigned>
 				<length>3</length>
+				<unsigned>true</unsigned>
+				<notnull>true</notnull>
 				<default>0</default>
 			</field>
 			<field>
 				<name>created</name>
 				<type>integer</type>
 				<length>64</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 		</declaration>
 	</table>
@@ -555,37 +553,37 @@
 			<field>
 				<name>id</name>
 				<type>integer</type>
+				<length>8</length>
+				<unsigned>true</unsigned>
 				<notnull>true</notnull>
 				<autoincrement>true</autoincrement>
-				<unsigned>true</unsigned>
 				<primary>true</primary>
-				<length>8</length>
 			</field>
 			<field>
 				<name>vault_guid</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>reason</name>
 				<type>text</type>
-				<notnull>true</notnull>
 				<length>64</length>
+				<notnull>true</notnull>
 			</field>
 			<field>
 				<name>requested_by</name>
 				<type>text</type>
-				<notnull>false</notnull>
 				<length>64</length>
+				<notnull>false</notnull>
 			</field>
 			<field>
 				<name>created</name>
 				<type>integer</type>
 				<length>64</length>
-				<default>0</default>
-				<notnull>false</notnull>
 				<unsigned>true</unsigned>
+				<notnull>false</notnull>
+				<default>0</default>
 			</field>
 		</declaration>
 	</table>
