@@ -1,4 +1,6 @@
-<database>
+<?xml version="1.0" encoding="UTF-8"?>
+<database xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/nextcloud/appstore/master/nextcloudappstore/api/v1/release/database.xsd">
 	<name>*dbname*</name>
 	<create>true</create>
 	<overwrite>false</overwrite>
@@ -18,15 +20,14 @@
 			<field>
 				<name>guid</name>
 				<type>text</type>
-				<default></default>
+				<default>0</default>
 				<notnull>true</notnull>
 				<length>64</length>
 			</field>
-
 			<field>
 				<name>user_id</name>
 				<type>text</type>
-				<default></default>
+				<default>0</default>
 				<notnull>true</notnull>
 				<length>64</length>
 			</field>
