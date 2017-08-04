@@ -22,6 +22,7 @@ OC.L10N.register(
     "Parsed {{num}} credentials, starting to import" : "Αναλυτικά αναγνωριστικά {{num}}, άρχισαν να εισάγουν",
     "Importing" : "Γίνεται εισαγωγή",
     "Start import" : "Έναρξη εισαγωγής",
+    "Select CSV file" : "Επιλέξτε αρχείο CSV",
     "Revision deleted" : "Διαγράφηκε η αναθεώρηση",
     "Settings saved" : "Οι ρυθμίσεις αποθηκεύτηκαν",
     "General settings" : "Γενικές ρυθμίσεις",
