@@ -58,7 +58,7 @@ module.exports = function (config) {
 		// enable / disable colors in the output (reporters and logs)
 		colors: true,
 
-
+    browserNoActivityTimeout : 60000,//by default 10000
 		// level of logging
 		// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
 		logLevel: config.LOG_INFO,
