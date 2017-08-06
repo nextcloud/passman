@@ -8,6 +8,8 @@
 Features:
 - Vaults
 - Vault key is never sent to the server
+- Browser extension for easy access to passwords
+- Android app for on the road access
 - Credentials are client side encrypted with 256bit AES
 - Credentials are server side encrypted with 256bit AES
 - Ability to add custom fields to credentials
