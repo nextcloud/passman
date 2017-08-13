@@ -1,0 +1,22 @@
+<div>
+	<div class="cell">
+		<credential-icon credential="credential"></credential-icon>
+	</div>
+	<div style="display: none" id="iconPicker" title="{{ 'pick.icon' | translate }}">
+		<div class="iconList">
+			<div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)">
+				<img ng-src="{{icon.url}}" height="32">
+			</div>
+		</div>
+		<div class="iconModifier">
+			Showing {{ icons.length }} icons
+			<div ng-if="selectedIcon">
+					{{ 'selected.icon' | translate}}: <br />
+
+				<img ng-src="{{selectedIcon.url}}" height="32">
+				<br />
+				<button ng-click="useIcon()" ng-if="selectedIcon">{{ 'use.icon' | translate}}</button>
+			</div>
+		</div>
+	</div>
+</div>

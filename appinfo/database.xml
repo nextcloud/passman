@@ -187,11 +187,6 @@
 				<notnull>false</notnull>
 			</field>
 			<field>
-				<name>favicon</name>
-				<type>clob</type>
-				<notnull>false</notnull>
-			</field>
-			<field>
 				<name>renew_interval</name>
 				<type>bigint</type>
 				<unsigned>true</unsigned>
@@ -236,6 +231,10 @@
 			</field>
 			<field>
 				<name>shared_key</name>
+				<type>clob</type>
+			</field>
+			<field>
+				<name>icon</name>
 				<type>clob</type>
 			</field>
 			<index>
