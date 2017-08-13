@@ -122,7 +122,7 @@ class CredentialController extends ApiController {
 	 */
 	public function updateCredential($changed, $created,
 									 $credential_id, $custom_fields, $delete_time, $credential_guid,
-									 $description, $email, $expire_time, $favicon, $files, $guid,
+									 $description, $email, $expire_time, $icon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
 									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision) {
 
@@ -142,7 +142,7 @@ class CredentialController extends ApiController {
 			'username' => $username,
 			'password' => $password,
 			'url' => $url,
-			'favicon' => $favicon,
+			'icon' => json_encode($icon),
 			'renew_interval' => $renew_interval,
 			'expire_time' => $expire_time,
 			'files' => $files,

@@ -60,4 +60,19 @@ class Utils {
 		$u = $um->get($uid);
 		return $u->getDisplayName();
 	}
+
+	public static function getDirContents($dir, &$results = array()){
+		$files = scandir($dir);
+
+		foreach($files as $value){
+			$path = realpath($dir.DIRECTORY_SEPARATOR.$value);
+			if(!is_dir($path)) {
+				$results[] = $path;
+			} else if($value != "." && $value != "..") {
+				Utils::getDirContents($path, $results);
+				$results[] = $path;
+			}
+		}
+		return $results;
+	}
 }

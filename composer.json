@@ -1,0 +1,10 @@
+{
+    "name": "nextcloud/passman",
+    "authors": [
+        {
+            "name": "brantje",
+            "email": "brantje@gmail.com"
+        }
+    ],
+    "require": {}
+}

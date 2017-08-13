@@ -41,6 +41,10 @@
 				'changed': null,
 				'tags': [],
 				'email': null,
+				'icon':{
+					'type': false,
+					'content': ''
+				},
 				'username': null,
 				'password': null,
 				'url': null,
