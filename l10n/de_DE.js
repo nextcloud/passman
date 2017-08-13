@@ -322,6 +322,6 @@ OC.L10N.register(
     "Problem loading page, reloading in 5 seconds" : "Problem beim Laden der Seite, Seite wird in 5 Sekunden erneut geladen",
     "Saving..." : "Speichere …",
     "Dismiss" : "Ausblenden",
-    "seconds ago" : "Gerade ebene"
+    "seconds ago" : "Gerade eben"
 },
 "nplurals=2; plural=(n != 1);");
