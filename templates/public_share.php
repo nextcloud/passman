@@ -71,23 +71,23 @@ style('passman', 'public-page');
 		<div class="col-xs-8 col-xs-push-2 col-xs-pull-2 credential_container">
 			<h2>Passman</h2>
 			<div ng-if="!shared_credential && !expired">
-				<span class="text">Someone has shared a credential with you.</span>
+				<span class="text"><?php p($l->t("Someone has shared a credential with you.")); ?></span>
 				<button class="button-geen" ng-if="!loading"
-						ng-click="loadSharedCredential()">Click here to request
-					it
+						ng-click="loadSharedCredential()"><?php p($l->t("Click here to request
+					it")); ?>
 				</button>
 				<button class="button-geen" ng-if="loading"><i
-							class="fa fa-spinner fa-spin"></i>Loading...
+							class="fa fa-spinner fa-spin"></i><?php p($l->t("Loading...")); ?>
 				</button>
 			</div>
 			<div ng-if="expired">
-				Awwhh.... credential not found. Maybe it expired
+				<?php p($l->t("Awwhh.... credential not found. Maybe it expired")); ?>
 			</div>
 			<div ng-if="shared_credential">
 				<table class="table">
 					<tr ng-show="shared_credential.label">
 						<td>
-							Label
+							<?php p($l->t("Label")); ?>
 						</td>
 						<td>
 							{{shared_credential.label}}
@@ -95,7 +95,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.username">
 						<td>
-							Account
+							<?php p($l->t("Account")); ?>
 						</td>
 						<td>
 					<span credential-field
@@ -104,7 +104,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.password">
 						<td>
-							Password
+							<?php p($l->t("Password")); ?>
 						</td>
 						<td>
 					<span credential-field value="shared_credential.password"
@@ -113,7 +113,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.otp.secret">
 						<td>
-							OTP
+							<?php p($l->t("OTP")); ?>
 						</td>
 						<td>
 					<span otp-generator
@@ -122,7 +122,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.email">
 						<td>
-							E-mail
+							<?php p($l->t("E-mail")); ?>
 						</td>
 						<td>
 					<span credential-field
@@ -131,7 +131,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.url">
 						<td>
-							URL
+							<?php p($l->t("URL")); ?>
 						</td>
 						<td>
 					<span credential-field
@@ -140,7 +140,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.files.length > 0">
 						<td>
-							Files
+							<?php p($l->t("Files")); ?>
 						</td>
 						<td>
 							<div ng-repeat="file in shared_credential.files"
@@ -161,7 +161,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.expire_time > 0">
 						<td>
-							Expire time
+							<?php p($l->t("Expire time")); ?>
 						</td>
 						<td>
 							{{shared_credential.expire_time * 1000 |
@@ -170,7 +170,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.changed">
 						<td>
-							Changed
+							<?php p($l->t("Changed")); ?>
 						</td>
 						<td>
 							{{shared_credential.changed * 1000 |
@@ -179,7 +179,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.created">
 						<td>
-							Created
+							<?php p($l->t("Created")); ?>
 						</td>
 						<td>
 							{{shared_credential.created * 1000 |
