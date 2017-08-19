@@ -152,7 +152,7 @@ OC.L10N.register(
     "Search users or groups…" : "Recherche des utilisateurs ou des groupes...",
     "Missing users? Only users that have vaults are shown." : "Il manque des utilisateurs ? Uniquement les utilisateurs qui ont un coffre-fort sont montrés.",
     "Cyphering" : "Chiffrement",
-    "Uploading" : "Téléversement en cours",
+    "Uploading" : "Envoi en cours",
     "User" : "Utilisateur",
     "Crypto time" : "Temps d'encodage",
     "Total time spent cyphering" : "Temps total passé à chiffrer",
