@@ -14,7 +14,7 @@ OC.L10N.register(
     "Credential created!" : "Uppgifter skapade!",
     "Credential deleted" : "Uppgifterna borttagna",
     "Credential updated" : "Uppgifterna uppdaterade",
-    "Credential recovered" : "Uppgifterna åtställda",
+    "Credential recovered" : "Uppgifterna återställda",
     "Credential destroyed" : "Uppgifterna förstörda",
     "Error downloading file, you probably don't have sufficient permissions" : "Fel vid nedladdning av fil, troligtvis på grund av otillräckliga rättigheter",
     "Invalid QR code" : "Ogiltig QR-kod",
