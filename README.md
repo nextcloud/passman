@@ -111,6 +111,7 @@ Passman is open source, and we would gladly accept a beer (or pizza!)
 Please consider donating
 - [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
 - [Patreon](https://www.patreon.com/user?u=4833592)
+- [Flattr](https://flattr.com/profile/passman)
 - bitcoin: 1H2c5tkGX54n48yEtM4Wm4UrAGTW85jQpe
 
 ## Code reviews
