@@ -7,6 +7,7 @@ OC.L10N.register(
     "Passwords do not match" : "密码不匹配",
     "General" : "一般",
     "Custom Fields" : "自定义字段",
+    "Please fill in a value." : "请填写一个值",
     "Error loading file" : "加载文件错误 ",
     "Credential created!" : "创建凭证",
     "Credential deleted" : "凭证删除",
