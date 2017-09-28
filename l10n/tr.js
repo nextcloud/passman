@@ -326,6 +326,6 @@ OC.L10N.register(
     "Problem loading page, reloading in 5 seconds" : "Sayfa yüklenirken sorun çıktı, 5 saniye içinde yeniden yüklenecek",
     "Saving..." : "Kaydediliyor...",
     "Dismiss" : "Yeniden Hatırlatma",
-    "seconds ago" : "saniye önce"
+    "seconds ago" : "saniyeler önce"
 },
 "nplurals=2; plural=(n > 1);");
