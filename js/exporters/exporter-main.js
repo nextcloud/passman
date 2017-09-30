@@ -98,6 +98,11 @@ if (!window['PassmanExporter']) {
 			    }).bind(this));
 			}
 		    }
+		    
+		    // We have finished downloading everything, so let's hand over job to somewhere else!
+		    if (this.parent.total === 0) {
+			this.call_then(this.parent.cred);
+		    }
 		}, t);
 	    }
 	};
