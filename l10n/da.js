@@ -145,6 +145,7 @@ OC.L10N.register(
     "Search users or groups…" : "Søg brugere og grupper...",
     "Uploading" : "Uploader",
     "User" : "Bruger",
+    "Crypto time" : "Kryptotid ",
     "Read" : "Læs",
     "Write" : "Skriv",
     "Files" : "Filer",
