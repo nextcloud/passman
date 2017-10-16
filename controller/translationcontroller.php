@@ -41,7 +41,7 @@ class TranslationController extends ApiController {
 	public function getLanguageStrings() {
 		$translations = array(
 			// js/app/controllers/bookmarklet.js
-			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %step / 2)'),
+			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %s / 2)','%step'),
 			'invalid.vault.key' => $this->trans->t('Incorrect vault password!'),
 			'password.do.not.match' => $this->trans->t('Passwords do not match'),
 			'general' => $this->trans->t('General'),
