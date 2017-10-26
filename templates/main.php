@@ -135,7 +135,7 @@ style('passman', 'app');
 			</li>
 
 			<li ng-repeat="tag in available_tags | orderBy:'text'" ng-if="selectedTags.indexOf(tag) == -1">
-				<a ng-click="tagClicked(tag)">{{tag.text}}</a>
+				<a  class="nav-icon-systemtagsfilter svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
 			</li>
 			<li data-id="trashbin" class="nav-trashbin">
 				<a ng-click="toggleDeleteTime()"
