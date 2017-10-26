@@ -50,7 +50,7 @@
 				'<div class="tools">' +
 				'<div class="cell" ng-if="toggle" tooltip="tggltxt" ng-click="toggleVisibility()"><i class="fa" ng-class="{\'fa-eye\': !valueVisible, \'fa-eye-slash\': valueVisible }"></i></div>' +
 				'<div class="cell" ng-if="isLink"><a ng-href="{{value}}" target="_blank" rel="nofollow noopener noreferrer"><i tooltip="\'Open in new window\'" class="link fa fa-external-link"></i></a></div>' +
-				'<div class="cell" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{value}}"><i  tooltip="copy_msg" class="fa fa-clipboard"></i></div>' +
+				'<div class="cell" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{value}}"><i  tooltip="copy_msg" class="fa fa-files-o"></i></div>' +
 				'</div></span>',
 				link: function (scope) {
 					var expression = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi;
