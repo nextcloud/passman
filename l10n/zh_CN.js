@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "密码",
-    "Generating sharing keys ( %step / 2)" : "生成共享秘钥 ( %step / 2)",
     "Incorrect vault password!" : "错误的密码！",
     "Passwords do not match" : "密码不匹配",
     "General" : "一般",

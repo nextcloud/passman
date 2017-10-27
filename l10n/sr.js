@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Лозинке",
-    "Generating sharing keys ( %step / 2)" : "Генеришим кључеве за дељење (корак %s/2)",
     "Incorrect vault password!" : "Неисправна лозинка за сеф!",
     "Passwords do not match" : "Лозинке се не поклапају",
     "General" : "Опште",

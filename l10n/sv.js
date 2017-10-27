@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Lösenord",
-    "Generating sharing keys ( %step / 2)" : "Genererar delningsnycklar ( %step / 2)",
     "Incorrect vault password!" : "Felaktigt valvlösenord!",
     "Passwords do not match" : "Lösenorden matchar inte",
     "General" : "Allmänt",

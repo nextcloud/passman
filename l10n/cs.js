@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Hesla",
-    "Generating sharing keys ( %step / 2)" : "Generování sdílecích klíčů  ( %step / 2)",
     "Incorrect vault password!" : "Neplatné heslo trezoru!",
     "Passwords do not match" : "Hesla se neshodují",
     "General" : "Obecné",

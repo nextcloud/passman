@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Jelszavak",
-    "Generating sharing keys ( %step / 2)" : "Megosztási kulcsok generálása ( %step / 2)",
     "Incorrect vault password!" : "Érvénytelen széf jelszó!",
     "Passwords do not match" : "A jelszavak nem egyeznek",
     "General" : "Általános",

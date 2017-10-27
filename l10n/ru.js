@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Пароли",
-    "Generating sharing keys ( %step / 2)" : "Создаются ключи общего доступа ( %step / 2)",
     "Incorrect vault password!" : "Неверный пароль хранилища!",
     "Passwords do not match" : "Пароли не совпадают",
     "General" : "Основные",

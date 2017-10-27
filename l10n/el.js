@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Συνθηματικά",
-    "Generating sharing keys ( %step / 2)" : "Δημιουργία κλειδιών διαμοιρασμού ( %step / 2)",
     "Incorrect vault password!" : "Εσφαλμένος κωδικός θαλάμου!",
     "Passwords do not match" : "Δεν ταιριάζουν τα συθηματικά",
     "General" : "Γενικά",

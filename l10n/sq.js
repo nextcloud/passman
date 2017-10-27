@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Fjalëkalimet",
-    "Generating sharing keys ( %step / 2)" : "Gjenerimi ndarjes çelësat ( %step / 2)",
     "Incorrect vault password!" : "Fjalëkalimi i kasafortës është i pasakt!",
     "Passwords do not match" : "Fjalëkalimet nuk përputhen",
     "General" : "I Përgjithshëm",

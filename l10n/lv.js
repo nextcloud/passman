@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Paroles",
-    "Generating sharing keys ( %step / 2)" : "Radīt koplietošanas atslēgas ( %solis / 2)",
     "Incorrect vault password!" : "Nepareiza akreditācijas datu parole!",
     "Passwords do not match" : "Paroles nesakrīt",
     "General" : "Vispārīgi",

@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Contrasenyes",
-    "Generating sharing keys ( %step / 2)" : "Generant les claus compartides ( %spas / 2)",
     "Incorrect vault password!" : "Contrasenya de la cripta incorrecta!",
     "Passwords do not match" : "Password did not match",
     "General" : "General",

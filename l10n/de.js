@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Passwörter",
-    "Generating sharing keys ( %step / 2)" : "Generiere Freigabe-Schlüssel ( %step / 2)",
     "Incorrect vault password!" : "falsches Tresor-Passwort",
     "Passwords do not match" : "Passwörter stimmen nicht überein",
     "General" : "Allgemein",

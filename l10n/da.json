@@ -1,6 +1,5 @@
 { "translations": {
     "Passwords" : "Adgangskoder",
-    "Generating sharing keys ( %step / 2)" : "Genererer dele nøgler (%step / 2)",
     "Incorrect vault password!" : "Ukorrekt boks adgangskode",
     "Passwords do not match" : "Kodeord matchede ikke",
     "General" : "Generel",

@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Lykilorð",
-    "Generating sharing keys ( %step / 2)" : "Útbý deilingarlykla ( %step / 2)",
     "Incorrect vault password!" : "Rangt lykilorð fyrir lykilorðageymslu!",
     "Passwords do not match" : "Lykilorðin stemma ekki",
     "General" : "Almennt",

@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Senhas",
-    "Generating sharing keys ( %step / 2)" : "Gerando chave de compartilhamento ( %step / 2)",
     "Incorrect vault password!" : "Senha do cofre incorreta",
     "Passwords do not match" : "As senhas não coincidem",
     "General" : "Geral",

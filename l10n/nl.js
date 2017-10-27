@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Wachtwoorden",
-    "Generating sharing keys ( %step / 2)" : "Genereren share sleutels ( %step / 2)",
     "Incorrect vault password!" : "Onjuist kluiswachtwoord",
     "Passwords do not match" : "Wachtwoorden komen niet overeen.",
     "General" : "Algemeen",
