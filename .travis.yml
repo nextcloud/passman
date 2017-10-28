@@ -36,7 +36,6 @@ before_install:
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
 
-
 #
 before_script:
 #    - if [[ "$DB" == 'pgsql' ]]; then createuser -U travis -s oc_autotest; fi
@@ -46,6 +45,7 @@ before_script:
 
     - php -S localhost:8080 &
     - cd apps/$APP_NAME/
+    - cp /home/travis/build/nextcloud/server/composer.json .
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit-5.7.phar -o build/phpunit.phar
     - sh -c "if [ '$JSTESTS' != '1' ]; then composer require codacy/coverage; fi"

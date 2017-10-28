@@ -139,6 +139,9 @@ class TranslationController extends ApiController {
 			'username' => $this->trans->t('Username'),
 			'password.r' => $this->trans->t('Repeat password'),
 			'add.tag' => $this->trans->t('Add tag'),
+			'pick.icon' => $this->trans->t('Pick an icon'),
+			'use.icon' => $this->trans->t('Use this icon'),
+			'selected.icon' => $this->trans->t('Selected icon'),
 
 			// templates/views/partials/edit_credential/custom_fields.html
 			'field.label' => $this->trans->t('Field label'),

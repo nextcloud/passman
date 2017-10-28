@@ -19,7 +19,7 @@ Features:
 - Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )
 For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
-    <version>2.1.4</version>
+    <version>2.1.5</version>
     <licence>agpl</licence>
     <author homepage="https://github.com/brantje">Sander Brand</author>
     <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>

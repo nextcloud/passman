@@ -118,3 +118,7 @@ input[type="checkbox"]{
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+
+.ui-button.ui-widget{
+  min-height: unset !important;
+}

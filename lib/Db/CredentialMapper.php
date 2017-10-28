@@ -169,7 +169,7 @@ class CredentialMapper extends Mapper {
 		$credential->setUsername($raw_credential['username']);
 		$credential->setPassword($raw_credential['password']);
 		$credential->setUrl($raw_credential['url']);
-		$credential->setFavicon($raw_credential['favicon']);
+		$credential->setIcon($raw_credential['icon']);
 		$credential->setRenewInterval($raw_credential['renew_interval']);
 		$credential->setExpireTime($raw_credential['expire_time']);
 		$credential->setFiles($raw_credential['files']);

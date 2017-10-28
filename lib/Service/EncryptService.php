@@ -67,7 +67,7 @@ class EncryptService {
 
 	// The fields of a credential which are encrypted
 	public $encrypted_credential_fields = array(
-		'description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url'
+		'description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url', 'icon'
 	);
 
 	// Contains the server key

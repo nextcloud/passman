@@ -328,7 +328,7 @@ class IconService {
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 20); 
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0');
-
+		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
 		// Don't check SSL certificate to allow autosigned certificate
 		if ($this->sslVerify === false) {
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
