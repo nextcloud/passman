@@ -34,7 +34,6 @@ before_install:
     - ./occ app:enable $APP_NAME
     - nvm install 5.9
     - npm install -g npm@latest
-    - composer require codacy/coverage
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
 
 #
@@ -48,6 +47,7 @@ before_script:
     - cd apps/$APP_NAME/
     - cp /home/travis/build/nextcloud/server/composer.json .
     - mkdir -p build
+    - composer require codacy/coverage
     - curl -sSL https://phar.phpunit.de/phpunit-5.7.phar -o build/phpunit.phar
     - sh -c "if [ '$JSTESTS' != '1' ]; then composer require codacy/coverage; fi"
     - sh -c "if [ '$JSTESTS' != '1' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
