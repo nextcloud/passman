@@ -34,7 +34,7 @@ before_install:
     - ./occ app:enable $APP_NAME
     - nvm install 5.9
     - npm install -g npm@latest
-    - composer install codacy/coverage
+    - composer require codacy/coverage
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
 
 #
