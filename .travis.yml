@@ -48,6 +48,8 @@ before_script:
     - cp /home/travis/build/nextcloud/server/composer.json .
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit-5.7.phar -o build/phpunit.phar
+    - ls vendor
+    - ls vendor/bin
     - sh -c "if [ '$JSTESTS' != '1' ]; then composer require codacy/coverage -v; fi"
     - sh -c "if [ '$JSTESTS' != '1' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install; fi"
