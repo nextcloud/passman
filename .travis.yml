@@ -49,9 +49,8 @@ before_script:
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit-5.7.phar -o build/phpunit.phar
 
-    - sh -c "if [ '$JSTESTS' != '1' ]; then composer require codacy/coverage -v; fi"
-    - ls vendor
-    - ls vendor/bin
+    - sh -c "if [ '$JSTESTS' != '1' ]; then composer require codacy/coverage -vvv; fi"
+    - ls 
     - sh -c "if [ '$JSTESTS' != '1' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install; fi"
 #    - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
