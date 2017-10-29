@@ -45,7 +45,7 @@ before_script:
 
     - php -S localhost:8080 &
     - cd apps/$APP_NAME/
-    - cp /home/travis/build/nextcloud/server/composer.json .
+    - cp /home/travis/build/$CLOUD/server/composer.json .
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit-5.7.phar -o build/phpunit.phar
 
