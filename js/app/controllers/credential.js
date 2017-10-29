@@ -58,6 +58,9 @@
 						vault.credentials = [];
 						$scope.active_vault = vault;
 						$scope.active_vault.vaultKey = vaultKey;
+						if(!$rootScope.vaultCache){
+              $rootScope.vaultCache = [];
+						}
 						VaultService.setActiveVault($scope.active_vault);
 						for (var i = 0; i < _credentials.length; i++) {
 							var _credential = _credentials[i];
@@ -103,6 +106,7 @@
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
 							$rootScope.$broadcast('credentials_loaded');
+							$rootScope.vaultCache[$scope.active_vault.guid] = angular.copy($scope.active_vault);
 							if(!vault.private_sharing_key){
 								var key_size = 1024;
 								ShareService.generateRSAKeys(key_size).then(function (kp) {
@@ -135,13 +139,20 @@
 				var refresh_data_interval = null;
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
-					fetchCredentials();
+					if($rootScope.vaultCache && $rootScope.vaultCache[$scope.active_vault.guid]){
+            $scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
+            $rootScope.$broadcast('credentials_loaded');
+            $scope.show_spinner = false;
+          } else {
+            fetchCredentials();
+          }
 					getPendingShareRequests();
 					refresh_data_interval = $interval(function () {
 						fetchCredentials();
 						getPendingShareRequests();
 					}, 60000 * 5);
 				}
+				
 				$scope.$on('$destroy', function () {
 					$interval.cancel(refresh_data_interval);
 				});
@@ -399,6 +410,9 @@
 				};
 
 				$rootScope.$on('logout', function () {
+					if($scope.active_vault) {
+            $rootScope.vaultCache[$scope.active_vault.guid] = null;
+          }
 					$scope.active_vault = null;
 					$scope.credentials = [];
 //				$scope.$parent.selectedVault = false;
