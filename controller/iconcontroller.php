@@ -82,15 +82,16 @@ class IconController extends ApiController {
 			$data = $icon->icoData;
 			$type = $icon->icoType;
 		}
-
 		if (isset($credential) && $credential['user_id'] == $this->userId) {
 			$iconData = [
-				'type' => $type,
+				'type' => ($type) ? $type : 'x-icon',
 				'content' => base64_encode($data)
 			];
 			$credential['icon'] = json_encode($iconData);
 			try {
-				$this->credentialService->updateCredential($credential);
+				if($credential) {
+					$this->credentialService->updateCredential($credential);
+				}
 			} catch (DriverException $exception) {
 				/**
 				 * @FIXME Syntax error or access violation: 1118 Row size too large
@@ -110,7 +111,7 @@ class IconController extends ApiController {
 		$response->addHeader('Expires: ', gmdate("D, d M Y H:i:s", time() + $offset) . " GMT");
 		$response->setETag($base64Url);
 		$response->cacheFor($offset);
-		//echo $data;
+
 		return $response;
 	}
 
