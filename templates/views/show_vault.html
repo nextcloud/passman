@@ -52,7 +52,10 @@
 					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 
 					</span>
-					<span class="icon">
+					<span class="icon" ng-if="credential.url">
+						<credential-icon credential="credential"></credential-icon>
+					</span>
+					<span class="icon" ng-if="!credential.url">
 						<i class="fa fa-lock" ng-if="!credential.acl && !credential.shared_key"></i>
 						<i class="fa fa-share-alt" ng-if="credential.acl"></i>
 						<i class="fa fa-share-alt-square" ng-if="credential.shared_key"> </i>

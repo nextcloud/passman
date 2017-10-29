@@ -76,9 +76,14 @@ return [
 		//Translations
 		['name' => 'translation#getLanguageStrings', 'url' => '/api/v2/language', 'verb' => 'GET'],
 
+
+		#Icons
+		['name' => 'icon#getIcon', 'url' => '/api/v2/icon/{base64Url}', 'verb' => 'GET'],
+		['name' => 'icon#getIcon', 'url' => '/api/v2/icon/{base64Url}/{credentialId}', 'verb' => 'GET'],
+		['name' => 'icon#getLocalIconList', 'url' => '/api/v2/icon/list', 'verb' => 'GET'],
+
 		//
 		['name' => 'vault#preflighted_cors', 'url' => '/api/v2/{path}', 'verb' => 'OPTIONS', 'requirements' => array('path' => '.+')],
-
 		//Internal API
 		['name' => 'internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],
 		['name' => 'internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],

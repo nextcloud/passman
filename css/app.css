@@ -764,6 +764,68 @@
 .btn-danger {
   color: #fff; }
 
+.icon-label {
+  overflow: hidden; }
+  .icon-label input {
+    width: calc(100% - 45px) !important;
+    float: left;
+    background: #fff;
+    color: #555;
+    cursor: text;
+    font-family: inherit;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 3px;
+    margin: 3px 3px 3px 0;
+    padding: 7px 6px 5px;
+    font-size: 13px;
+    -webkit-border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+    -webkit-border-top-left-radius: 0;
+    border-top-left-radius: 0;
+    background-clip: padding-box; }
+  .icon-label .icon-picker {
+    float: left;
+    margin-top: 3px;
+    margin-left: -3px;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    background-clip: padding-box; }
+    .icon-label .icon-picker .cell {
+      padding: 7px 12px 2px 12px;
+      display: inline-block;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      background-color: #eaeaea;
+      cursor: pointer;
+      -webkit-border-bottom-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      -webkit-border-top-left-radius: 6px;
+      border-top-left-radius: 6px;
+      background-clip: padding-box; }
+      .icon-label .icon-picker .cell img {
+        height: 16px; }
+    .icon-label .icon-picker .cell:hover {
+      color: #0066ff; }
+
+#iconPicker .iconList {
+  float: left;
+  width: 60%;
+  max-height: 310px;
+  overflow: auto; }
+  #iconPicker .iconList .icon {
+    padding: 10px;
+    cursor: pointer;
+    float: left; }
+    #iconPicker .iconList .icon img {
+      cursor: pointer; }
+#iconPicker .iconModifier {
+  margin-left: 10px;
+  float: right;
+  width: calc(40% - 10px); }
+
 /**
  * Nextcloud - passman
  *
@@ -788,14 +850,24 @@
 .settings-container div {
   padding-left: 15px; }
 
+#app-navigation > ul {
+  padding-bottom: 80px; }
+  #app-navigation > ul > li > a {
+    padding-left: 12px !important;
+    z-index: auto; }
+
 .nav-trashbin {
   position: fixed !important;
   bottom: 44px;
   width: inherit !important;
-  background-color: #fff;
   border-right: 1px solid #eee; }
   .nav-trashbin a {
+    background-color: #fff !important;
+    opacity: 1 !important;
+    z-index: 140;
     padding: 0 20px; }
+    .nav-trashbin a.active {
+      border-left: 3px solid #0082c9; }
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
@@ -983,5 +1055,8 @@ input[type="checkbox"] {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1; }
+
+.ui-button.ui-widget {
+  min-height: unset !important; }
 
 /*# sourceMappingURL=app.css.map */

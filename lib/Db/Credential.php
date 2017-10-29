@@ -52,8 +52,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getPassword()
  * @method void setUrl(string $value)
  * @method string getUrl()
- * @method void setFavicon(string $value)
- * @method string getFavicon()
+ * @method void setIcon(string $value)
+ * @method string getIcon()
  * @method void setRenewInterval(integer $value)
  * @method integer getRenewInterval()
  * @method void setExpireTime(integer $value)
@@ -92,7 +92,7 @@ class Credential extends Entity implements  \JsonSerializable{
 	protected $username;
 	protected $password;
 	protected $url;
-	protected $favicon;
+	protected $icon;
 	protected $renewInterval;
 	protected $expireTime;
 	protected $deleteTime;
@@ -133,7 +133,7 @@ class Credential extends Entity implements  \JsonSerializable{
 			'username' => $this->getUsername(),
 			'password' => $this->getPassword(),
 			'url' => $this->getUrl(),
-			'favicon' => $this->getFavicon(),
+			'icon' => json_decode($this->getIcon()),
 			'renew_interval' => $this->getRenewInterval(),
 			'expire_time' => $this->getExpireTime(),
 			'delete_time' => $this->getDeleteTime(),
