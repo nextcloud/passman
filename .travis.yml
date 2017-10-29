@@ -32,10 +32,9 @@ before_install:
     - ./occ status
     - ./occ app:list
     - ./occ app:enable $APP_NAME
-    - nvm install 5.9
+    - nvm install 7.0
     - npm install -g npm@latest
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install grunt-cli -g; fi"
-
 
 #
 before_script:
@@ -46,9 +45,11 @@ before_script:
 
     - php -S localhost:8080 &
     - cd apps/$APP_NAME/
+    - sh -c "if [ '$CLOUD' = 'nextcloud' ]; then cp /home/travis/build/nextcloud/server/composer.json .; fi;"
     - mkdir -p build
     - curl -sSL https://phar.phpunit.de/phpunit-5.7.phar -o build/phpunit.phar
-    - sh -c "if [ '$JSTESTS' != '1' ]; then composer require codacy/coverage; fi"
+
+    #- sh -c "if [ '$JSTESTS' != '1' ]; then composer require codacy/coverage -vvv; fi"
     - sh -c "if [ '$JSTESTS' != '1' ]; then wget https://scrutinizer-ci.com/ocular.phar; fi"
     - sh -c "if [ '$JSTESTS' = '1' ]; then npm install; fi"
 #    - ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database $DB --database-pass=''
@@ -66,7 +67,7 @@ script:
 
 
     # Create coverage report
-    - sh -c "if [ '$JSTESTS' != '1' ]; then php vendor/bin/codacycoverage -v clover coverage.clover; fi"
+    #- sh -c "if [ '$JSTESTS' != '1' ]; then php vendor/bin/codacycoverage -v clover coverage.clover; fi"
     - sh -c "if [ '$JSTESTS' != '1' ]; then php ocular.phar code-coverage:upload --access-token="$SCRUTINIZER_TOKEN" --format=php-clover coverage.clover; fi"
 
 
@@ -86,8 +87,6 @@ matrix:
       env: DB=sqlite;CLOUD=owncloud;SERVER_FOLDER=core
     - php: 5.6
       env: DB=mysql;CLOUD=owncloud;SERVER_FOLDER=core
-    - php: 5.6
-      env: DB=mysql;
     - php: 5.6
       env: DB=mysql;JSTESTS=1;
     - php: 7.0
