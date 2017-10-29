@@ -107,7 +107,7 @@ angular.module('views/partials/forms/share_credential/link_sharing.html', []).ru
 angular.module('views/partials/icon-picker.html', []).run(['$templateCache', function ($templateCache) {
   'use strict';
   $templateCache.put('views/partials/icon-picker.html',
-    '<div><div class="cell"><credential-icon credential="credential"></credential-icon></div><div style="display: none" id="iconPicker" title="{{ \'pick.icon\' | translate }}"><div class="iconList"><div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)"><img ng-src="{{icon.url}}" height="32"></div></div><div class="iconModifier">Showing {{ icons.length }} icons<div ng-if="selectedIcon">{{ \'selected.icon\' | translate}}:<br><img ng-src="{{selectedIcon.url}}" height="32"><br><button ng-click="useIcon()" ng-if="selectedIcon">{{ \'use.icon\' | translate}}</button></div></div></div></div>');
+    '<div><div class="cell"><credential-icon credential="credential"></credential-icon></div><div style="display: none" id="iconPicker" title="{{ \'pick.icon\' | translate }}"><div class="iconList"><div ng-repeat="(groupName, icons) in iconGroups"><h2 style="clear: both" id="{{groupName}}">{{groupName}}</h2><div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)"><img ng-src="{{icon.url}}" height="32"></div></div></div><div class="iconModifier"><div ng-if="selectedIcon">{{ \'selected.icon\' | translate}}:<br><img ng-src="{{selectedIcon.url}}" height="32"><br><button ng-click="useIcon()" ng-if="selectedIcon">{{ \'use.icon\' | translate}}</button></div></div></div></div>');
 }]);
 
 angular.module('views/partials/password-meter.html', []).run(['$templateCache', function ($templateCache) {

@@ -45,8 +45,11 @@
             if(scope.credential.icon && scope.credential.icon.type){
               scope.iconUrl = 'data:image/'+ scope.credential.icon.type +';base64,' + scope.credential.icon.content;
             } else {
-              var url = window.btoa(angular.copy(scope.credential.url)).replace('/','_');
-              scope.iconUrl = OC.generateUrl('apps/passman/api/v2/icon/') + url + '/'+ scope.credential.credential_id;
+              if(scope.credential.url) {
+                var url = window.btoa(angular.copy(scope.credential.url)).replace('/', '_');
+                scope.iconUrl = OC.generateUrl('apps/passman/api/v2/icon/') + url + '/' +
+                    scope.credential.credential_id;
+              }
             }
           }, true);
         }

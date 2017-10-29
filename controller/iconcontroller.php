@@ -126,13 +126,18 @@ class IconController extends ApiController {
 		foreach ($result as $icon) {
 			$iconPath = $icon;
 			$path = explode('passman/', $iconPath);
+			$pack = explode('/', $path[1])[2];
 			$mime = mime_content_type($iconPath);
 			//print_r($path);
 			if($mime !== 'directory') {
 				$icon = [];
 				$icon['mimetype'] = mime_content_type($iconPath);
 				$icon['url'] = $this->urlGenerator->linkTo('passman', $path[1]);
-				$icons[] = $icon;
+				$icon['pack'] = $pack;
+				if(!isset($icons[$pack])){
+					$icons[$pack] = [];
+				}
+				$icons[$pack][] = $icon;
 			}
 		}
 		return new JSONResponse($icons);

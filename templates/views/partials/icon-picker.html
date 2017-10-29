@@ -4,12 +4,18 @@
 	</div>
 	<div style="display: none" id="iconPicker" title="{{ 'pick.icon' | translate }}">
 		<div class="iconList">
-			<div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)">
-				<img ng-src="{{icon.url}}" height="32">
+			<div ng-repeat="(groupName, icons) in iconGroups">
+				<h2 style="clear: both" id="{{groupName}}">{{groupName}}</h2>
+				<div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)">
+					<img ng-src="{{icon.url}}" height="32">
+				</div>
 			</div>
 		</div>
 		<div class="iconModifier">
-			Showing {{ icons.length }} icons
+			<!--
+			<div ng-repeat="(groupName, icons) in iconGroups">
+				<a ng-click="jumpToGroup(groupName)">{{groupName}}</a>
+			</div>-->
 			<div ng-if="selectedIcon">
 					{{ 'selected.icon' | translate}}: <br />
 

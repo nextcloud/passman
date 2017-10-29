@@ -40,11 +40,16 @@
         link: function(scope, element) {
 
           IconService.getIcons().then(function(icons) {
-            scope.icons = icons;
+            scope.iconGroups = icons;
           });
 
           scope.selectIcon = function(icon) {
             scope.selectedIcon = icon;
+          };
+
+          scope.jumpToGroup = function(groupName) {
+              var offset = $('#'+groupName).position();
+              $('.iconList').scrollTop(offset.top);
           };
 
           scope.useIcon = function() {
