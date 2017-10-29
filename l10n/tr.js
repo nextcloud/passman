@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Parolalar",
+    "Generating sharing keys ( %s / 2)" : "Paylaşım anahtarları üretiliyor ( %s / 2)",
     "Incorrect vault password!" : "Kasa parolası yanlış!",
     "Passwords do not match" : "Parola ile onayı aynı değil",
     "General" : "Genel",
