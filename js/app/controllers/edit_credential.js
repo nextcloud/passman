@@ -186,13 +186,12 @@
 				};
 
 				$scope.addFileToCustomField = function (file) {
-					var _file = {
-						filename: file.name,
-						size: file.size,
-						mimetype: file.type,
-						data: file.data
-					};
-					$scope.new_custom_field.value = _file;
+          $scope.new_custom_field.value = {
+            filename: file.name,
+            size: file.size,
+            mimetype: file.type,
+            data: file.data
+          };
 					$scope.$digest();
 				};
 
@@ -291,8 +290,9 @@
 					};
 					$scope.$digest();
 				};
-
+				$scope.saving = false;
 				$scope.saveCredential = function () {
+          $scope.saving = true;
 
 
 					if ($scope.new_custom_field.label && $scope.new_custom_field.value) {
@@ -301,7 +301,8 @@
 
 
 					if ($scope.storedCredential.password !== $scope.storedCredential.password_repeat){
-						NotificationService.showNotification($translate.instant('password.do.not.match'), 5000);
+            $scope.saving = false;
+            NotificationService.showNotification($translate.instant('password.do.not.match'), 5000);
 						return;
 					}
 
@@ -312,8 +313,10 @@
 					if (!$scope.storedCredential.credential_id) {
 						$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
 						CredentialService.createCredential($scope.storedCredential).then(function () {
+              $scope.saving = false;
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification($translate.instant('credential.created'), 5000);
+
 						});
 					} else {
 
@@ -342,6 +345,7 @@
 							_credential.description = _credential.description.replace(regex, "");
 						}
 						CredentialService.updateCredential(_credential, _useKey).then(function () {
+              $scope.saving = false;
 							SettingsService.setSetting('edit_credential', null);
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification($translate.instant('credential.updated'), 5000);
