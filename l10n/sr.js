@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Лозинке",
+    "Generating sharing keys ( %s / 2)" : "Генеришем дељене кључеве (%s/2)",
     "Incorrect vault password!" : "Неисправна лозинка за сеф!",
     "Passwords do not match" : "Лозинке се не поклапају",
     "General" : "Опште",
@@ -72,6 +73,9 @@ OC.L10N.register(
     "Username" : "Корисничко име",
     "Repeat password" : "Поновите лозинку",
     "Add tag" : "Додајте ознаку",
+    "Pick an icon" : "Одаберите икону",
+    "Use this icon" : "Користи ову икону",
+    "Selected icon" : "Одабрана икона",
     "Field label" : "Поље ознаке",
     "Field value" : "Поље вредности",
     "Choose a file" : "Одаберите фајл",

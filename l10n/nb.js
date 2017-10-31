@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Passord",
+    "Generating sharing keys ( %s / 2)" : "Oppretter delingsnøkler ( %step / 2)",
     "Incorrect vault password!" : "Feil hvelv-passord!",
     "Passwords do not match" : "Passordene samsvarer ikke",
     "General" : "Generelt",
@@ -72,6 +73,8 @@ OC.L10N.register(
     "Username" : "Brukernavn",
     "Repeat password" : "Gjenta passord",
     "Add tag" : "Legg til merkelapp",
+    "Pick an icon" : "Velg et ikon",
+    "Selected icon" : "Valgt ikon",
     "Field label" : "Feltetikett",
     "Field value" : "Feltverdi",
     "Choose a file" : "Velg fil",

@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Passwords",
+    "Generating sharing keys ( %s / 2)" : "Generating sharing keys ( %s / 2)",
     "Incorrect vault password!" : "Incorrect vault password!",
     "Passwords do not match" : "Passwords do not match",
     "General" : "General",
@@ -72,6 +73,9 @@ OC.L10N.register(
     "Username" : "Username",
     "Repeat password" : "Repeat password",
     "Add tag" : "Add tag",
+    "Pick an icon" : "Pick an icon",
+    "Use this icon" : "Use this icon",
+    "Selected icon" : "Selected icon",
     "Field label" : "Field label",
     "Field value" : "Field value",
     "Choose a file" : "Choose a file",
