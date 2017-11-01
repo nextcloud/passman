@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Contraseñas",
+    "Generating sharing keys ( %s / 2)" : "Generando llaves de compartición (%s / 2)",
     "Incorrect vault password!" : "¡Contraseña de bóveda incorrecta!",
     "Passwords do not match" : "Contraseñas no coinciden",
     "General" : "General",
@@ -72,6 +73,9 @@ OC.L10N.register(
     "Username" : "Nombre de usuario",
     "Repeat password" : "Repite la constraseña",
     "Add tag" : "Añadir etiqueta",
+    "Pick an icon" : "Escoger un icono",
+    "Use this icon" : "Usar este icono",
+    "Selected icon" : "Icono seleccionado",
     "Field label" : "Llene etiqueta",
     "Field value" : "Llene valor",
     "Choose a file" : "Elija un archivo",

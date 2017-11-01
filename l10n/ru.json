@@ -1,5 +1,6 @@
 { "translations": {
     "Passwords" : "Пароли",
+    "Generating sharing keys ( %s / 2)" : "Создаются ключи общего доступа (%s/ 2)",
     "Incorrect vault password!" : "Неверный пароль хранилища!",
     "Passwords do not match" : "Пароли не совпадают",
     "General" : "Основные",
@@ -70,6 +71,9 @@
     "Username" : "Имя пользователя",
     "Repeat password" : "Повторите пароль",
     "Add tag" : "Добавить метку",
+    "Pick an icon" : "Выбрать значок",
+    "Use this icon" : "Использовать этот значок",
+    "Selected icon" : "Выбранный значок",
     "Field label" : "Название поля",
     "Field value" : "Значение поля",
     "Choose a file" : "Выберите файл",
