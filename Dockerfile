@@ -63,6 +63,7 @@ RUN service mysql restart && \
 		echo "echo hhvm" > /bin/phpenv && chmod +x /bin/phpenv && \
 		cd /var/www/html && \
 		chmod +x before_install.sh && \
+		ln -s /var/www/passman /var/www/html/passman && \
 		sleep 1 && \
 		/bin/bash -c "./before_install.sh passman master mysql; exit 0" && \
 		mv /var/www/server/* /var/www/html/ && \
@@ -85,6 +86,7 @@ EXPOSE 80
 EXPOSE 443
 ENTRYPOINT              service mysql start && \
 						service apache2 start && \
-						#/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin" && \
 						bash -c "trap 'echo stopping services...; service apache2 stop && service mysql stop && exit 0' SIGTERM SIGKILL; \
 						tail -f /var/www/html/data/nextcloud.log"
+
+#/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin" && \
