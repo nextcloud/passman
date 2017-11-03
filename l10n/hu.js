@@ -193,6 +193,7 @@ OC.L10N.register(
     "Password sharing" : "Jelszómegosztás",
     "Enable HTTPS check" : "HTTPS ellenőrzés engedélyezése",
     "Reason" : "Indok",
+    "Loading..." : "Betöltés...",
     "Connection to server lost" : "Megszakadt a kapcsolat a szerverrel",
     "Problem loading page, reloading in 5 seconds" : "Probléma adódott az oldal betöltése közben, újratöltés 5 másodpercen belül",
     "Saving..." : "Mentés...",
