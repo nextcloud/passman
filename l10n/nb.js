@@ -74,6 +74,7 @@ OC.L10N.register(
     "Repeat password" : "Gjenta passord",
     "Add tag" : "Legg til merkelapp",
     "Pick an icon" : "Velg et ikon",
+    "Use this icon" : "Bruk dette ikonet",
     "Selected icon" : "Valgt ikon",
     "Field label" : "Feltetikett",
     "Field value" : "Feltverdi",

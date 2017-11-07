@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Lykilorð",
+    "Generating sharing keys ( %s / 2)" : "Útbý deilingarlykla ( %s / 2)",
     "Incorrect vault password!" : "Rangt lykilorð fyrir lykilorðageymslu!",
     "Passwords do not match" : "Lykilorðin stemma ekki",
     "General" : "Almennt",
@@ -72,6 +73,9 @@ OC.L10N.register(
     "Username" : "Notandanafn",
     "Repeat password" : "Endurtaktu lykilorð",
     "Add tag" : "Bæta við merki",
+    "Pick an icon" : "Veldu táknmynd",
+    "Use this icon" : "Nota þessa táknmynd",
+    "Selected icon" : "Valin táknmynd",
     "Field label" : "Skýring gagnasviðs",
     "Field value" : "Gildi gagnasviðs",
     "Choose a file" : "Veldu skrá",
