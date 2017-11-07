@@ -2,6 +2,7 @@
 Passman is a full featured password manager.
 
 [![Build Status](https://travis-ci.org/nextcloud/passman.svg?branch=master)](https://travis-ci.org/nextcloud/passman)
+[![Docker Automated buid](https://img.shields.io/docker/build/brantje/passman.svg)](hub.docker.com/r/brantje/passman/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nextcloud/passman&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&utm_medium=referral&utm_content=nextcloud/passman&utm_campaign=Badge_Coverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
@@ -14,6 +15,7 @@ Passman is a full featured password manager.
 * [Security](https://github.com/nextcloud/passman#security)
   * [Password generation](https://github.com/nextcloud/passman#password-generation)
   * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
+* [Support passman](https://github.com/nextcloud/passman#support-passman)
 * [API](https://github.com/nextcloud/passman#api)
 * [Docker](https://github.com/nextcloud/passman#docker)
 * [Maintainers](https://github.com/nextcloud/passman#main-developers)
@@ -125,10 +127,24 @@ Please do the following
 Or if you're feeling lazy, create an issue, and we'll think about it.
 
 ## Docker
-To run Passman with [Docker](https://www.docker.com/) you can use `docker run  -p 8080:80 -p 8443:443 brantje/passman`   
-You have to supply your own SSL certs.   
+To run Passman with [Docker](https://www.docker.com/) you can use our test docker image.
+You have to supply your own SSL certs, self signed or Let's encrypt it doesn't matter.      
+Please note that the docker is only for testing purposes, as database user / password are hardcoded.   
+    
+If you like to spiece up our docker image and make it a full fledged secure, production ready install, you're welcome to do so.   
+Please note that:
+- Port 80 and 443 are used
+- SSL is enabled (or disabled if certs not found)
+- Startup time of container must be less than 15 seconds
+
 Example:   
-`docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /directory/cert.key:/data/ssl/cert.key brantje/passman`
+```
+docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /directory/cert.key:/data/ssl/cert.key brantje/passman
+```
+        
+If you want a production ready container you can use the [Nextcloud docker](https://hub.docker.com/_/nextcloud/), and install passman as an app.
+
+
 
 
 ## Development
