@@ -131,7 +131,7 @@ To run Passman with [Docker](https://www.docker.com/) you can use our test docke
 You have to supply your own SSL certs, self signed or Let's encrypt it doesn't matter.      
 Please note that the docker is only for testing purposes, as database user / password are hardcoded.   
     
-waiIf you like to spiece up our docker image and make it a full fledged secure, production ready install, you're welcome to do so.   
+If you like to spiece up our docker image and make it a full fledged secure, production ready install, you're welcome to do so.   
 Please note that:
 - Port 80 and 443 are used
 - SSL is enabled (or disabled if certs not found)
