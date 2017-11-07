@@ -245,7 +245,7 @@ class TranslationController extends ApiController {
 			'action' => $this->trans->t('Action'),
 
 			// templates/vieuws/partials/forms/share_credential/basics.html
-			'search.u.g' => $this->trans->t('Search users or groups…'),
+			'search.u.g' => $this->trans->t('Search users…'),
 			'search.result.missing' => $this->trans->t('Missing users? Only users that have vaults are shown.'),
 			'cyphering' => $this->trans->t('Cyphering'),
 			'uploading' => $this->trans->t('Uploading'),
