@@ -146,7 +146,6 @@
     "A total of {{scan_result}} weak credentials were found." : "Një total i {{scan_result}} kredencialeve të dobët u gjet.",
     "Score" : "Rezultat",
     "Action" : "Veprim",
-    "Search users or groups…" : "Kërko përdorues ose grup...",
     "Missing users? Only users that have vaults are shown." : "Po mungojnë përdorues? Vetëm përdorues që kanë kasafortë janë shfaqur.",
     "Cyphering" : "Duke u shifruar",
     "Uploading" : "Duke u ngarkuar",

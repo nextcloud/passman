@@ -148,7 +148,6 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Totalt {{scan_result}} svaga lösenord hittades.",
     "Score" : "Poäng",
     "Action" : "Action",
-    "Search users or groups…" : "Sök användare eller grupper...",
     "Missing users? Only users that have vaults are shown." : "Saknas användare? Endast användare med valv visas.",
     "Cyphering" : "Cyphering",
     "Uploading" : "Laddar upp",

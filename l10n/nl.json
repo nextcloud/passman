@@ -146,7 +146,6 @@
     "A total of {{scan_result}} weak credentials were found." : "Totaal {{scan_result}} zwakke wachtwoorden gevonden.",
     "Score" : "Score",
     "Action" : "Actie",
-    "Search users or groups…" : "Zoek gebruikers of groepen...",
     "Missing users? Only users that have vaults are shown." : "Mis je gebruikers? Alleen gebruikers in de kluis worden getoond.",
     "Cyphering" : "Versleutelen",
     "Uploading" : "Uploaden",

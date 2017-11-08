@@ -150,7 +150,6 @@
     "A total of {{scan_result}} weak credentials were found." : "Toplam {{scan_result}} zayıf parola bulundu.",
     "Score" : "Değerlendirme",
     "Action" : "İşlem",
-    "Search users or groups…" : "Kullanıcı ya da grup ara...",
     "Missing users? Only users that have vaults are shown." : "Kullanıcılar eksik mi? Yalnız kasası olan kullanıcılar görüntüleniyor.",
     "Cyphering" : "Şifreleme",
     "Uploading" : "Yükleniyor",

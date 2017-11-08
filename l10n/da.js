@@ -141,7 +141,6 @@ OC.L10N.register(
     "Result" : "Resultat",
     "Score" : "Score",
     "Action" : "Handling",
-    "Search users or groups…" : "Søg brugere og grupper...",
     "Uploading" : "Uploader",
     "User" : "Bruger",
     "Crypto time" : "Kryptotid ",

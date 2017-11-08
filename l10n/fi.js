@@ -109,7 +109,6 @@ OC.L10N.register(
     "Start scan" : "Aloita skannaus",
     "Result" : "Tulos",
     "Action" : "Toiminto",
-    "Search users or groups…" : "Etsi käyttäjiä tai ryhmiä…",
     "Missing users? Only users that have vaults are shown." : "Etkö löydä käyttäjää? Vain holvin omaavat käyttäjät näytetään.",
     "Uploading" : "Lähetetään",
     "User" : "Käyttäjä",

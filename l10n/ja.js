@@ -148,7 +148,6 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "合計 {{scan_result}} の脆弱な証明書が見つかりました。",
     "Score" : "スコア",
     "Action" : "アクション",
-    "Search users or groups…" : "ユーザーとグループを検索...",
     "Missing users? Only users that have vaults are shown." : "ユーザーが見つかりませんか？保管庫をもつユーザーのみが表示されます。",
     "Cyphering" : "暗号化",
     "Uploading" : "アップロード中",

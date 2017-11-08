@@ -148,7 +148,6 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "共发现{{scan_result}}弱凭证。",
     "Score" : "评分",
     "Action" : "操作",
-    "Search users or groups…" : "搜索用户或者分组",
     "Missing users? Only users that have vaults are shown." : "缺少用户？ 只显示具有保管库的用户。",
     "Cyphering" : "计算中",
     "Uploading" : "正在上传...",

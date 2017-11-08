@@ -149,7 +149,6 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Znaleziono {{scan_result}} słabych uprawnień.",
     "Score" : "Punktacja",
     "Action" : "Akcja",
-    "Search users or groups…" : "Szukaj użytkowników lub grupy",
     "Missing users? Only users that have vaults are shown." : "Brakuje użytkowników? Zostali pokazani tylko użytkownicy posiadający sejfy.",
     "Cyphering" : "Szyfrowanie",
     "Uploading" : "Wysyłanie",

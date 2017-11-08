@@ -152,7 +152,6 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Найдено записей со слабым паролем: {{scan_result}} .",
     "Score" : "Баллов",
     "Action" : "Действие",
-    "Search users or groups…" : "Поиск пользователя или групп...",
     "Missing users? Only users that have vaults are shown." : "Пользователи отсутствуют? Показаны только имеющие хранилища.",
     "Cyphering" : "Вычисление",
     "Uploading" : "Загрузка",
