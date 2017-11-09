@@ -152,6 +152,7 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Es wurden insgesamt {{scan_result}} schwache Anmeldeinformationen wurden gefunden.",
     "Score" : "Bewertung",
     "Action" : "Aktion",
+    "Search users…" : "Suche Nutzer...",
     "Missing users? Only users that have vaults are shown." : "Nutzer gesucht? Es werden nur Nutzer mit einem Tresor angezeigt.",
     "Cyphering" : "Verschlüsselung",
     "Uploading" : "Lade hoch",

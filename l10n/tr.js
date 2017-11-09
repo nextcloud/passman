@@ -152,6 +152,7 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Toplam {{scan_result}} zayıf parola bulundu.",
     "Score" : "Değerlendirme",
     "Action" : "İşlem",
+    "Search users…" : "Kullanıcı arama…",
     "Missing users? Only users that have vaults are shown." : "Kullanıcılar eksik mi? Yalnız kasası olan kullanıcılar görüntüleniyor.",
     "Cyphering" : "Şifreleme",
     "Uploading" : "Yükleniyor",

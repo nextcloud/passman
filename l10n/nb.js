@@ -152,6 +152,7 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Fant {{scan_result}} svake identitetsdetaljer.",
     "Score" : "Poengsum",
     "Action" : "Handling",
+    "Search users…" : "Søk etter brukere…",
     "Missing users? Only users that have vaults are shown." : "Manglende brukere? Bare brukere som har hvelv blir vist.",
     "Cyphering" : "Chiffrerer",
     "Uploading" : "Laster opp",

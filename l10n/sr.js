@@ -152,6 +152,7 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Укупно {{scan_result}} слабих акредитива нађено.",
     "Score" : "Резултат",
     "Action" : "Радња",
+    "Search users…" : "Претражи кориснике…",
     "Missing users? Only users that have vaults are shown." : "Недостаје неки корисник? Само корисници који имају сефове су приказани.",
     "Cyphering" : "Шифрујем",
     "Uploading" : "Отпремам",
