@@ -152,6 +152,7 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Alls fundust {{scan_result}} veik auðkenni.",
     "Score" : "Einkunn",
     "Action" : "Aðgerð",
+    "Search users…" : "Leita að notendum…",
     "Missing users? Only users that have vaults are shown." : "Vantar notendur? Aðeins eru birtir notendur sem hafa lykilorðageymslur.",
     "Cyphering" : "Dulkóðun",
     "Uploading" : "Sendi inn ",
