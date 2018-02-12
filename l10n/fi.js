@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Salasanat",
+    "Generating sharing keys ( %s / 2)" : "Luodaan jakamisavaimia ( %s / 2)",
     "Incorrect vault password!" : "Virheellinen holvin salasana!",
     "Passwords do not match" : "Salasanat eivät täsmää",
     "General" : "Yleiset",
