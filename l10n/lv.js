@@ -6,7 +6,7 @@ OC.L10N.register(
     "Passwords do not match" : "Paroles nesakrīt",
     "General" : "Vispārīgi",
     "Custom Fields" : "Pielāgotie lauki",
-    "Error loading file" : "Kļūda, ielādējot failu",
+    "Error loading file" : "Kļūda, ielādējot datni",
     "Credential created!" : "Akreditācijas izveidota!",
     "Credential deleted" : "Akreditācijas dati izdzēsti",
     "Credential updated" : "Akreditācijas dati atjaunināti",
