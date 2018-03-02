@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Contraseñes",
+    "Generating sharing keys ( %s / 2)" : "Xenerando claves de compartición ( %s / 2)",
     "Passwords do not match" : "Les contraseñes nun concasen",
     "General" : "Xeneral",
     "Error loading file" : "Fallu cargando'l ficheru",
