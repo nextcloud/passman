@@ -325,7 +325,7 @@ OC.L10N.register(
     "Loading..." : "Cargando...",
     "Awwhh.... credential not found. Maybe it expired" : "Ooooh... credencial no encontrada. Quizás haya expirado",
     "Expire time" : "Tiempo de expiración",
-    "Connection to server lost" : "Perdida la conexión al server",
+    "Connection to server lost" : "Se ha perdido la conexión al servidor",
     "Problem loading page, reloading in 5 seconds" : "Problema al cargar la página, recargando en 5 segundos",
     "Saving..." : "Guardando...",
     "Dismiss" : "Descartar",
