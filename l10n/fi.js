@@ -76,6 +76,7 @@ OC.L10N.register(
     "No expiration date set" : "Vanhenemispäivää ei ole asetettu",
     "Renew interval" : "Uusimisväli",
     "Disabled" : "Poistettu käytöstä",
+    "Day(s)" : "Päiv(i)ä",
     "Week(s)" : "Viikko(a)",
     "Month(s)" : "Kuukausi(a)",
     "Year(s)" : "Vuosi(a)",
