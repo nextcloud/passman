@@ -320,8 +320,6 @@
     "Requested by" : "Umbeðið af",
     "Reason" : "Ástæða",
     "Click here to request\n\t\t\t\t\tit" : "Smelltu hér til að biðja um\n\t\t\t\t\tþað",
-    "Loading..." : "Hleð...",
-    "Awwhh.... credential not found. Maybe it expired" : "Æjæjæ... auðkenni fundust ekki. Kannski þau séu útrunnin",
     "Expire time" : "Tími þegar rennur út",
     "Connection to server lost" : "Tenging við þjón rofnaði",
     "Problem loading page, reloading in 5 seconds" : "Vandamál við að hlaða inn síðu, endurhleð eftir 5 sekúndur",

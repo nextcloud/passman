@@ -322,8 +322,6 @@ OC.L10N.register(
     "Requested by" : "被要求",
     "Reason" : "原因",
     "Click here to request\n\t\t\t\t\tit" : "点击这里请求\n\t\t\t\t\t",
-    "Loading..." : "载入中...",
-    "Awwhh.... credential not found. Maybe it expired" : "唉....没有找到证书。 也许它过期了",
     "Expire time" : "到期时间",
     "Connection to server lost" : "与服务器的连接断开",
     "Problem loading page, reloading in 5 seconds" : "加载页面出现问题, 在 5 秒内重新加载",

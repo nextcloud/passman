@@ -320,8 +320,6 @@
     "Requested by" : "Kérvényező:",
     "Reason" : "Indok",
     "Click here to request\n\t\t\t\t\tit" : "Kattints ide a kérvényezéshez\n\t\t\t\t\t",
-    "Loading..." : "Betöltés...",
-    "Awwhh.... credential not found. Maybe it expired" : "Awwhh… nincs hitelesítőadat. Talán lejárt",
     "Expire time" : "Lejárati idő",
     "Connection to server lost" : "Megszakadt a kapcsolat a szerverrel",
     "Problem loading page, reloading in 5 seconds" : "Probléma adódott az oldal betöltése közben, újratöltés 5 másodpercen belül",

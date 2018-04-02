@@ -177,7 +177,6 @@ OC.L10N.register(
     "A newer version of Passman is available" : "Yra prieinama naujesnė Passman versija",
     "Disable JavaScript debugger" : "Išjungti JavaScript derintuvę",
     "Reason" : "Priežastis",
-    "Loading..." : "Įkeliama...",
     "Connection to server lost" : "Ryšys su serveriu nutrūko",
     "Problem loading page, reloading in 5 seconds" : "Problemos, įkeliant puslapį, po 5 sekundžių įkeliama iš naujo",
     "Saving..." : "Įrašoma...",

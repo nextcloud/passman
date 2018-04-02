@@ -322,8 +322,6 @@ OC.L10N.register(
     "Requested by" : "Requested by",
     "Reason" : "Reason",
     "Click here to request\n\t\t\t\t\tit" : "Click here to request\n\t\t\t\t\tit",
-    "Loading..." : "Loading...",
-    "Awwhh.... credential not found. Maybe it expired" : "Awwhh.... credential not found. Maybe it expired",
     "Expire time" : "Expire time",
     "Connection to server lost" : "Connection to server lost",
     "Problem loading page, reloading in 5 seconds" : "Problem loading page, reloading in 5 seconds",

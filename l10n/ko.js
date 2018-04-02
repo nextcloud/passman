@@ -322,8 +322,6 @@ OC.L10N.register(
     "Requested by" : "요청한 사용자",
     "Reason" : "이유",
     "Click here to request\n\t\t\t\t\tit" : "여기를 누르면 요청할 수\n\t\t\t\t\t있습니다",
-    "Loading..." : "불러오는 중...",
-    "Awwhh.... credential not found. Maybe it expired" : "어... 인증 정보를 찾을 수 없습니다. 만료되었을 수도 있습니다",
     "Expire time" : "만료 시간",
     "Connection to server lost" : "서버와의 연결이 끊어짐",
     "Problem loading page, reloading in 5 seconds" : "페이지 불러오기 오류, 5초 후 새로 고침",

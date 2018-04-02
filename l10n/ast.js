@@ -132,7 +132,6 @@ OC.L10N.register(
     "Destination account" : "Cuenta destín",
     "Credentials moved!" : "¡Moviéronse les credenciales!",
     "Reason" : "Razón",
-    "Loading..." : "Cargando...",
     "Connection to server lost" : "Perdióse la conexón col sirvidor",
     "Problem loading page, reloading in 5 seconds" : "Problema cargando la páxina, recargando en 5 segundos",
     "Saving..." : "Guardando...",

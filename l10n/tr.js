@@ -322,8 +322,6 @@ OC.L10N.register(
     "Requested by" : "İsteyen",
     "Reason" : "Neden",
     "Click here to request\n\t\t\t\t\tit" : "Buraya tıklayarak \n\t\t\t\t\tisteyin",
-    "Loading..." : "Yükleniyor...",
-    "Awwhh.... credential not found. Maybe it expired" : "Kimlik doğrulama bilgileri bulunamadı. Süresi geçmiş olabilir",
     "Expire time" : "Son kullanma zamanı",
     "Connection to server lost" : "Sunucu bağlantısı kesildi",
     "Problem loading page, reloading in 5 seconds" : "Sayfa yüklenirken sorun çıktı, 5 saniye içinde yeniden yüklenecek",

@@ -322,8 +322,6 @@ OC.L10N.register(
     "Requested by" : "Forespurt av",
     "Reason" : "Grunn",
     "Click here to request\n\t\t\t\t\tit" : "Klikk her for å forespørre\n\t\t\t\t\tdet",
-    "Loading..." : "Laster…",
-    "Awwhh.... credential not found. Maybe it expired" : "Oida… kunne ikke finne identitetsdetaljen. Kanskje den har utløpt",
     "Expire time" : "Utløpstid",
     "Connection to server lost" : "Mistet tilkobling til tjeneren",
     "Problem loading page, reloading in 5 seconds" : "Problem ved lasting av side, laster på nytt om 5 sekunder",

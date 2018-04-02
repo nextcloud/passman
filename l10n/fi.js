@@ -205,7 +205,6 @@ OC.L10N.register(
     "Destination account" : "Kohdetili",
     "Credentials moved!" : "Tilitiedot siirretty!",
     "Reason" : "Syy",
-    "Loading..." : "Ladataan...",
     "Connection to server lost" : "Yhteys palvelimelle menetetty",
     "Problem loading page, reloading in 5 seconds" : "Ongelma sivun lataamisessa, päivitetään 5 sekunnin kuluttua",
     "Saving..." : "Tallennetaan...",

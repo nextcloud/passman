@@ -318,8 +318,6 @@ OC.L10N.register(
     "Requested by" : "Sol · licitada per",
     "Reason" : "Raó",
     "Click here to request\n\t\t\t\t\tit" : "Feu clic aquí per sol·licitar-ho\n\t\t\t\t\t",
-    "Loading..." : "Carregant...",
-    "Awwhh.... credential not found. Maybe it expired" : "No s'ha trobat cap credencial ... Potser ha caducat",
     "Expire time" : "Temps d'expiració",
     "Connection to server lost" : "S'ha perdut la connexió amb el servidor",
     "Problem loading page, reloading in 5 seconds" : "Problemes carregant la pagina, recarregant en 5 segons",

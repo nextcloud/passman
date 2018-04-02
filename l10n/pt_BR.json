@@ -320,8 +320,6 @@
     "Requested by" : "Requerido por",
     "Reason" : "Razão",
     "Click here to request\n\t\t\t\t\tit" : "Clique aqui para\n\t\t\t\t\trequisitá-lo",
-    "Loading..." : "Carregando...",
-    "Awwhh.... credential not found. Maybe it expired" : "Hummm.... credencial não encontrada. Talvez tenha expirada",
     "Expire time" : "Tempo de expiração",
     "Connection to server lost" : "Conexão perdida com o servidor",
     "Problem loading page, reloading in 5 seconds" : "Problema ao carregar a página, recarregando em 5 segundos",
