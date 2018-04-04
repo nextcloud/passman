@@ -322,6 +322,8 @@ OC.L10N.register(
     "Requested by" : "Захтевао",
     "Reason" : "Разлог",
     "Click here to request\n\t\t\t\t\tit" : "Кликните овде да их\n\t\t\t\t\tзахтевате",
+    "Loading&hellip;" : "Учитавам&hellip;",
+    "Awwhh&hellip; credential not found. Maybe it expired" : "Аргхх&hellip; акредитиви нису нађени. Можда су истекли",
     "Expire time" : "Време истека",
     "Connection to server lost" : "Веза са сервером изгубљена",
     "Problem loading page, reloading in 5 seconds" : "Грешка приликом учитавања стране, покушавам поново за 5 секунди",
