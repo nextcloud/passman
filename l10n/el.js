@@ -176,6 +176,7 @@ OC.L10N.register(
     "Check for new versions" : "Έλεγχος για νέες εκδόσεις",
     "Enable HTTPS check" : "Ενεργοποίηση ελέγχου HTTPS",
     "Source account" : "Πηγαίος λογαριασμός",
+    "Destination account" : "Λογαριασμός προορισμού",
     "Request ID" : "Αίτημα ID",
     "Requested by" : "Αιτήθηκε από",
     "Reason" : "Λόγος",
