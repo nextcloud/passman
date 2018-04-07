@@ -161,7 +161,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.expire_time > 0">
 						<td>
-							<?php p($l->t("Expiration time")); ?>
+							<?php p($l->t("Expires:")); ?>
 						</td>
 						<td>
 							{{shared_credential.expire_time * 1000 |
