@@ -47,7 +47,7 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 						    _tags.push(_credential[field][t].text);
 					    }
 					    var tag_data = '[' + _tags.join(",") + ']';
-					    row_data.push('"' + tag_data + '"');
+					    row_data.push('"' + tag_data.replaceAll('"', '""') + '"');
 				    } 
 				    else if (field == 'custom_fields' || field == 'files') {
 					var _fields = JSON.stringify(_credential[field]);
@@ -55,7 +55,7 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 					row_data.push('"' + _fields + '"');
 				    }
 				    else {
-					    row_data.push('"' + _credential[field] + '"');
+					    row_data.push('"' + _credential[field].replaceAll('"', '""') + '"');
 				    }
 			    }
 			    var progress = {
