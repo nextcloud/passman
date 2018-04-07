@@ -22,7 +22,7 @@ OC.L10N.register(
     "Decrypting credentials" : "Dekrypterer Påloggingsdetaljer",
     "Done" : "Ferdig",
     "File read successfully." : "Fil lest.",
-    "Proceed with the following steps to import your file" : "Fortsett med følgende steg for å importere fila di",
+    "Proceed with the following steps to import your file" : "Fortsett med følgende steg for å importere filen din",
     "Credential has no label, skipping" : "Påloggingsdetaljer mangler etikett, hopper over",
     "Adding {{credential}}" : "Legger til {{credential}}",
     "Added {{credential}}" : "{{credential}} lagt til",
