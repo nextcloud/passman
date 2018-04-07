@@ -96,17 +96,17 @@
 		function saver(url, winMode){
 
 			if ('download' in anchor) { //html5 A[download]
-				anchor.href = url;
-				anchor.setAttribute("download", fileName);
-				anchor.className = "download-js-link";
-				anchor.innerHTML = "downloading...";
-				anchor.style.display = "none";
-				jQuery('.detailsView').append(anchor);
-				setTimeout(function() {
-					anchor.click();
-					jQuery('.download-js-link').remove();
-					if(winMode===true){setTimeout(function(){ self.URL.revokeObjectURL(anchor.href);}, 250 );}
-				}, 66);
+				var element = document.createElement('a');
+
+                element.setAttribute('href', url);
+                element.setAttribute('download', fileName);
+                element.style.display = 'none';
+
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+                if(winMode===true){setTimeout(function(){ self.URL.revokeObjectURL(element.href);}, 250 );}
+
 				return true;
 			}
 

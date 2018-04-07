@@ -67,7 +67,7 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 			    file_data += row_data.join(',') + "\n";
 		    }
 		    this.call_then();
-		    download(file_data, 'passman-export.csv');
+		    download(file_data, 'passman-export.csv', 'text/csv');
 		}).bind(this)).progress(function() {
 		    
 		});
