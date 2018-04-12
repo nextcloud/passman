@@ -322,6 +322,8 @@ OC.L10N.register(
     "Requested by" : "Запрошено",
     "Reason" : "Причина",
     "Click here to request\n\t\t\t\t\tit" : "Нажмите здесь для их получения.",
+    "Loading&hellip;" : "Загрузка&hellip;",
+    "Awwhh&hellip; credential not found. Maybe it expired" : "Ой&hellip; Запись не найдена. Возможно, закончился срок её действия.",
     "Expire time" : "Срок действия",
     "Connection to server lost" : "Подключение к серверу потеряно",
     "Problem loading page, reloading in 5 seconds" : "Проблема при загрузке страницы, перезагрузка через 5 сек.",
