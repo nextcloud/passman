@@ -151,6 +151,7 @@ OC.L10N.register(
     "Donate" : "Δωρεά",
     "Someone has shared a credential with you." : "Κάποιος διαμοιράστηκε τα διαπιστευτήρια μαζί σας.",
     "Click here to request it" : "Κάντε κλικ εδώ για να το αιτηθείτε",
+    "Loading…" : "Γίνεται φόρτωση...",
     "Error while saving field" : "Σφάλμα κατά την αποθήκευση πεδίου",
     "A Passman item has been created, modified or deleted" : "Ένα αντικείμενο Passman δημιουργήθηκε, τροποποιήθηκε ή διαγράφηκε",
     "A Passman item has expired" : "Έληξε ένα αντικείμενο Passman",
