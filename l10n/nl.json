@@ -320,6 +320,8 @@
     "Requested by" : "Aangevraagd door",
     "Reason" : "Reden",
     "Click here to request\n\t\t\t\t\tit" : "Klik hier om aan te vragen",
+    "Loading&hellip;" : "Laden&hellip;",
+    "Awwhh&hellip; credential not found. Maybe it expired" : "Awwhh&hellip… inloggegevens niet gevonden. Misschien verliepen ze.",
     "Expire time" : "verstreken termijn",
     "Connection to server lost" : "Verbinding met server verloren",
     "Problem loading page, reloading in 5 seconds" : "Probleem met het laden van de pagina, wordt ververst in 5 seconden",
