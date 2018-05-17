@@ -329,4 +329,4 @@ OC.L10N.register(
     "Dismiss" : "დათხოვნა",
     "seconds ago" : "წამის წინ"
 },
-"nplurals=1; plural=0;");
+"nplurals=2; plural=(n==1);");

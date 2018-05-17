@@ -206,4 +206,4 @@ OC.L10N.register(
     "Connection to server lost" : "Stratené spojenie so serverom",
     "Saving..." : "Ukladám..."
 },
-"nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;");
+"nplurals=4; plural=(n % 1 == 0 ? 4: n==1 ? 1: n % 1 == 0 && n>=2 && n<=4 ? 3);");
