@@ -298,6 +298,7 @@
     "%s has declined your share request for \"%s\"." : "%s ha rifiutato la tua richiesta di condivisione per \"%s\".",
     "%s has accepted your share request for \"%s\"." : "%s ha accettato la tua richiesta di condivisione per \"%s\".",
     "Passman" : "Passman",
+    "Passman is a full featured password manager." : "Passman è un gestore delle password pieno di funzionalità.",
     "Unable to get version info" : "Impossibile ottenere le informazioni di versione",
     "Passman Settings" : "Impostazioni di Passman",
     "GitHub version:" : "Versione di Github:",

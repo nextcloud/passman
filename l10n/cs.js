@@ -300,6 +300,7 @@ OC.L10N.register(
     "%s has declined your share request for \"%s\"." : "%s zamítl(a) tvůj požadavek na sdílení \"%s\".",
     "%s has accepted your share request for \"%s\"." : "%s přijal(a) tvůj požadavek na sdílení \"%s\".",
     "Passman" : "Passman",
+    "Passman is a full featured password manager." : "Passman je správce hesel s mnoha funkcemi.",
     "Unable to get version info" : "Nepodařilo se získat informace o verzi",
     "Passman Settings" : "Nastavení passmanu",
     "GitHub version:" : "GitHub verze:",
