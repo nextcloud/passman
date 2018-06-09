@@ -42,6 +42,16 @@
 				return color;
 			}
 
+			function whenRgbToHex(input) {
+				var re = /rgb\((\d+),\s*(\d+),\s*(\d+)\)/i;
+				var match = input.match(re);
+				if (match) {
+					var rgb = match[1] | (match[2] << 8) | (match[3] << 16);
+					return '#' + (0x1000000 + rgb).toString(16).slice(1);
+				}
+				return input;
+			}
+
 			return {
 				restrict: 'A',
 				scope: {
@@ -50,7 +60,8 @@
 					negative: '='
 				},
 				link: function (scope, el) {
-					var _color = jQuery('#header').css('background-color');
+					var _color = whenRgbToHex(
+						jQuery('#header').css('background-color'));
 					var _bg = _color;
 					if (scope.negative) {
 						_bg = invertColor(_bg);
