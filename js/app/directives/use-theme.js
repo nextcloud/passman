@@ -47,7 +47,7 @@
 				var match = input.match(re);
 				if (match) {
 					var color = match[1] | (match[2] << 8) | (match[3] << 16);
-					return '#' + color.toString(16);
+					return '#' + (0x1000000 + color).toString(16).slice(1);
 				}
 				return input;
 			}
