@@ -52,7 +52,7 @@
     "New password does not match!" : "¡La nueva contraseña no coincide!",
     "Please log in with your new vault password" : "Por favor, identifícate con tu nueva contraseña de la caja fuerte",
     "Share with users and groups" : "Comparte con usuarios y grupos",
-    "Share link" : "Comparte el enlace",
+    "Share link" : "Compartir enlace",
     "Are you sure you want to leave? This will corrupt this credential" : "¿Estás seguro de que deseas salir? Esto corromperá esta credencial",
     "Credential unshared" : "Dejo de compartir esta credencial",
     "Credential shared" : "Ha compartido esta credencial",
