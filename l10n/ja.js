@@ -270,7 +270,7 @@ OC.L10N.register(
     "Click here to request it" : "リクエストするにはここをクリックしてください",
     "Loading…" : "読み込み中...",
     "Awwhh… credential not found. Maybe it expired" : "資格情報が見つかりません。期限切れの可能性があります",
-    "Error while saving field" : "フィールドを保存中にエラーが発生しました",
+    "Error while saving field" : "フィールドの保存中にエラーが発生しました",
     "A Passman item has been created, modified or deleted" : "Passman のアイテムが作成、変更、または削除されました",
     "A Passman item has expired" : "Pasman アイテムが期限切れ",
     "A Passman item has been shared" : "Passman アイテムが共有されました",
