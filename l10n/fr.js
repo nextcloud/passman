@@ -300,6 +300,7 @@ OC.L10N.register(
     "%s has declined your share request for \"%s\"." : "%s a refusé votre demande de partage pour \"%s\"",
     "%s has accepted your share request for \"%s\"." : "%s a accepté votre demande de partage pour \"%s\"",
     "Passman" : "Passman",
+    "Passman is a full featured password manager." : "Passman est un gestionnaire de mot de passe complet.",
     "Unable to get version info" : "Impossible d'obtenir l'information de la version",
     "Passman Settings" : "Paramètres de Passman",
     "GitHub version:" : "Version GitHub :",
