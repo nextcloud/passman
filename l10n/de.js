@@ -301,7 +301,6 @@ OC.L10N.register(
     "%s has accepted your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Dir akzeptiert.",
     "Passman" : "Passman",
     "Passman is a full featured password manager." : "Passman ist ein vollständiger Passwortmanager",
-    "Passman is a full featured password manager.\nFeatures:\n- Vaults\n- Vault key is never sent to the server\n- Browser extension for easy access to passwords\n- Android app for on the road access\n- Credentials are client side encrypted with 256bit AES\n- Credentials are server side encrypted with 256bit AES\n- Ability to add custom fields to credentials\n- Built-in OTP (One Time Password) generator\n- Password analyzer\n- Share passwords internally and via link in a secure manner.\n- Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )\nFor an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)" : "Dateiverwaltung",
     "Unable to get version info" : "Versionsinfo konnte nicht ermittelt werden",
     "Passman Settings" : "Passman-Einstellungen",
     "GitHub version:" : "Github-Version: ",
