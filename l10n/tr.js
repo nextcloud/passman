@@ -200,7 +200,7 @@ OC.L10N.register(
     "Restore revision" : "Sürümü geri yükle",
     "Delete revision" : "Sürümü sil",
     "Edit credential" : "Kimlik doğrulama bilgilerini düzenle",
-    "Create new credential" : "Yeni kimlik doğrulama bilgileri ekle",
+    "Create new credential" : "Kimlik doğrulama bilgileri ekle",
     "Save" : "Kaydet",
     "Cancel" : "İptal",
     "Settings" : "Ayarlar",

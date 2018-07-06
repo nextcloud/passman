@@ -150,7 +150,7 @@
     "A total of {{scan_result}} weak credentials were found." : "Znaleziono {{scan_result}} słabych uprawnień.",
     "Score" : "Punktacja",
     "Action" : "Akcja",
-    "Search users…" : "Wyszukaj użytkowników...",
+    "Search users…" : "Wyszukaj użytkowników…",
     "Missing users? Only users that have vaults are shown." : "Brakuje użytkowników? Zostali pokazani tylko użytkownicy posiadający sejfy.",
     "Cyphering" : "Szyfrowanie",
     "Uploading" : "Wysyłanie",
@@ -266,8 +266,8 @@
     "Donate" : "Dotuj",
     "Someone has shared a credential with you." : "Ktoś udostępnił ci poświadczenia",
     "Click here to request it" : "Kliknij to, aby zażądać tego",
-    "Loading…" : "Ładowanie...",
-    "Awwhh… credential not found. Maybe it expired" : "Ups... poświadczenie nie znalezione. Może wygasło.",
+    "Loading…" : "Ładowanie…",
+    "Awwhh… credential not found. Maybe it expired" : "Ups… poświadczenie nie znalezione. Może wygasło.",
     "Error while saving field" : "Błąd podczas zapisywania pola",
     "A Passman item has been created, modified or deleted" : "Pozycja Passmana została utworzona, zmodyfikowana lub skasowana",
     "A Passman item has expired" : "Pozycja Passmana wygasła",
@@ -327,7 +327,7 @@
     "Expire time" : "Czas wygaśnięcia",
     "Connection to server lost" : "Utracono połączenie z serwerem",
     "Problem loading page, reloading in 5 seconds" : "Problem z załadowaniem strony, przeładuję za 5 sekund",
-    "Saving..." : "Zapisywanie...",
+    "Saving..." : "Zapisywanie…",
     "Dismiss" : "Odrzuć",
     "seconds ago" : "sekund temu"
 },"pluralForm" :"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);"
