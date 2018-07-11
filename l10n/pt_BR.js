@@ -213,7 +213,7 @@ OC.L10N.register(
     "Account" : "Conta",
     "Password" : "Senha",
     "OTP" : "OTP",
-    "E-mail" : "Email",
+    "E-mail" : "E-mail",
     "URL" : "URL",
     "Notes" : "Anotações",
     "Expiry time" : "Tempo para expiração",
