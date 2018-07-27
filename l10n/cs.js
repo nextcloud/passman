@@ -323,6 +323,7 @@ OC.L10N.register(
     "Requested by" : "Požadavek od",
     "Reason" : "Důvod",
     "Click here to request\n\t\t\t\t\tit" : "Klikněte sem pro žádost",
+    "Loading&hellip;" : "Načítání&hellip;",
     "Expire time" : "Čas vypršení",
     "Connection to server lost" : "Připojení k serveru ztraceno",
     "Problem loading page, reloading in 5 seconds" : "Problém s načítáním stránky, obnovení za 5 sekund",
