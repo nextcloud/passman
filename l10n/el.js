@@ -85,6 +85,7 @@ OC.L10N.register(
     "Donate to support development" : "Κάντε μια δωρεά για να υποστηρίξετε την ανάπτυξη",
     "Save your passwords with 1 click!" : "Αποθηκεύστε το συνθηματικό σας με 1 κλικ!",
     "Delete my precious passwords" : "Διαγραφή των πολύτιμων συνθηματικών μου",
+    "Deleting {{password}}…" : "Γίνεται διαγραφή {{password}}…",
     "Import type" : "Τύπος εισαγωγής",
     "Import" : "Εισαγωγή",
     "Read progress" : "Πρόοδος ανάγνωσης",
