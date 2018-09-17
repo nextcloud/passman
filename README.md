@@ -6,6 +6,8 @@ Passman is a full featured password manager.
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nextcloud/passman&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&utm_medium=referral&utm_content=nextcloud/passman&utm_campaign=Badge_Coverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
+[![Code Quality: Javascript](https://img.shields.io/lgtm/grade/javascript/g/nextcloud/passman.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nextcloud/passman/context:javascript)
+[![Total Alerts](https://img.shields.io/lgtm/alerts/g/nextcloud/passman.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nextcloud/passman/alerts)
 
 
 ## Contents
