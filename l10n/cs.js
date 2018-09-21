@@ -2,7 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Hesla",
-    "Generating sharing keys ( %s / 2)" : "Vytváření sdílených klíčů ( %s / 2)",
+    "Generating sharing keys ( %s / 2)" : "Vytváření klíčů pro sdílení ( %s / 2)",
     "Incorrect vault password!" : "Neplatné heslo trezoru!",
     "Passwords do not match" : "Zadání hesla se neshodují",
     "General" : "Obecné",
@@ -325,6 +325,7 @@ OC.L10N.register(
     "Reason" : "Důvod",
     "Click here to request\n\t\t\t\t\tit" : "Klikněte sem pro žádost",
     "Loading&hellip;" : "Načítání&hellip;",
+    "Awwhh&hellip; credential not found. Maybe it expired" : "Awwhh&hellip; přihlašovací údaje nenalezeny. Může být, že jejich platnost skončila",
     "Expire time" : "Čas vypršení",
     "Connection to server lost" : "Připojení k serveru ztraceno",
     "Problem loading page, reloading in 5 seconds" : "Problém s načítáním stránky, obnovení za 5 sekund",
