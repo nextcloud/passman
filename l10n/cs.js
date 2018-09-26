@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Passwords" : "Hesla",
     "Generating sharing keys ( %s / 2)" : "Vytváření klíčů pro sdílení ( %s / 2)",
-    "Incorrect vault password!" : "Neplatné heslo trezoru!",
+    "Incorrect vault password!" : "Neplatné heslo k trezoru!",
     "Passwords do not match" : "Zadání hesla se neshodují",
     "General" : "Obecné",
     "Custom Fields" : "Uživatelsky určené kolonky",
