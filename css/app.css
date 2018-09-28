@@ -275,7 +275,8 @@
   padding: 12px;
   font-weight: bold;
   text-align: center;
-  z-index: 800;
+  z-index: 18000;
+  visibility: hidden; /* TODO remove */
   background-color: red;
   color: white; }
   .warning_bar .fa-times {
@@ -386,8 +387,11 @@
       @media screen and (min-width: 769px) and (max-width: 820px) {
         #app-content #app-content-wrapper .title {
           display: none; } }
-    #app-content #app-content-wrapper .actions.creatable {
+    #app-content #app-content-wrapper .breadcrumb {
       float: left;
+    }
+    #app-content #app-content-wrapper .actions.creatable {
+      float: right;
       overflow: hidden; }
       #app-content #app-content-wrapper .actions.creatable .bubble {
         position: relative;
@@ -665,7 +669,7 @@
         cursor: pointer; }
       #app-content #app-content-wrapper .app_sidebar.item_selected {
         height: 25%;
-        display: inline-block; }
+        display: inline-block;  }
       #app-content #app-content-wrapper .app_sidebar .credential-data .row {
         margin-bottom: 11px; }
       #app-content #app-content-wrapper .app_sidebar .credential-data .tags {
@@ -1004,7 +1008,9 @@
   margin-right: 0 !important; }
 
 #app-content #app-content-wrapper #passman-controls {
-  border-bottom: 1px solid #c9c9c9; }
+  margin-top: 5px;
+  border-bottom: 1px solid #c9c9c9;
+}
 
 #passman-controls {
   box-sizing: border-box;
@@ -1027,8 +1033,12 @@
     width: 100%; } }
 @media only screen and (min-width: 768px) {
   #app-navigation + #app-content #passman-controls {
-    left: 250px;
-    width: calc( 100% - 250px ) !important; } }
+    left: 300px;
+    width: calc( 100% - 300px ) !important; }
+  #passman-controls {
+    right: 0px;
+    width: 50%;}
+}
 #passman-controls .button, #passman-controls, #passman-controls input[type='submit'], #passman-controls input[type='text'], #passman-controls input[type='password'], #passman-controls select {
   box-sizing: border-box;
   display: inline-block;
