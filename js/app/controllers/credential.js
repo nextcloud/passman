@@ -329,6 +329,12 @@
 
 				//searchboxfix
                 var native_search = document.getElementById("searchbox");
+                native_search.nextElementSibling.addEventListener('click', function (e) {
+                    $scope.$apply(function () {
+                        $scope.filterOptions.filterText="";
+                    });
+                });
+
                 native_search.classList.remove('hidden');
                 native_search.addEventListener('keypress', function (e) {
                     if(e.keyCode == 13){
