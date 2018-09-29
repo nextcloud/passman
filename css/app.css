@@ -484,7 +484,8 @@
           font-size: 19px;
           float: left;
           margin-right: 5px;
-          margin-left: 3px; }
+          margin-left: 3px;
+        }
         #app-content #app-content-wrapper .credential-table tr td .icon-more {
           display: inline-block;
           float: right;
@@ -764,6 +765,7 @@
 .inputfile + label {
   cursor: pointer;
   /* "hand" cursor */ }
+
 
 .btn-danger {
   color: #fff; }

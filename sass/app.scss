@@ -58,6 +58,7 @@
 //
 #app-content #app-content-wrapper #passman-controls {
   border-bottom: 1px solid #c9c9c9;
+  margin-top: 5px;
 }
 
 
@@ -86,8 +87,8 @@
 }
 @media only screen and (min-width: 768px){
   #app-navigation+#app-content #passman-controls {
-    left: 250px;
-    width: calc( 100% - 250px ) !important;
+    left: 300px;
+    width: calc( 100% - 300px ) !important;
   }
 }
 #passman-controls .button,  #passman-controls, #passman-controls input[type='submit'],  #passman-controls input[type='text'],  #passman-controls input[type='password'],  #passman-controls select {

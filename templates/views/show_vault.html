@@ -16,8 +16,8 @@
 			{{ 'deleted.since' | translate }}:
 			<span ng-if="delete_time == 1">All time</span>
 			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
-
 		</span> -->
+
 		<div class="searchboxContainer" ng-init="filterOptionShown = false;" off-click="filterOptionShown = false;">
 			<input type="text" ng-model="filterOptions.filterText" class="searchbox" id="searchBox"
 				   placeholder="{{'search.credential' | translate}}" select-on-click clear-btn ng-click="filterOptionShown = true;">
@@ -86,58 +86,61 @@
 			</li>
 		</ul>
 	</div>
-	<div id="app-sidebar" class="app-sidebar"
-		 ng-show="selectedCredential">
-		<h2>{{selectedCredential.label}}</h2>
-		<span class="close icon-close" ng-click="closeSelected()"
-			  alt="Close"></span>
 
-		<div credential-template="selectedCredential">
-
-		</div>
-
-
-
-		<div ng-show="selectedCredential">
-			<div>
-				<button class="button"
-						ng-click="editCredential(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-					<span class="fa fa-edit"></span> {{ 'edit' | translate}}
-				</button>
-				<button class="button"
-						ng-click="deleteCredential(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-					<span class="fa fa-trash"></span> {{ 'delete' | translate}}
-				</button>
-				<button class="button"
-						ng-click="shareCredential(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined &&
-						(settings.user_sharing_enabled === 1 || settings.user_sharing_enabled === '1' || settings.link_sharing_enabled === 1 || settings.link_sharing_enabled === '1')">
-					<span class="fa fa-share"></span> {{ 'share' | translate}}
-				</button>
-
-				<button class="button"
-						ng-click="getRevisions(selectedCredential)"
-						ng-if="selectedCredential.delete_time == 0  && hasPermission(selectedCredential.acl.permissions, permissions.permissions.HISTORY)">
-					<span class="fa fa-undo"></span> {{ 'revisions' | translate}}
-				</button>
-
-				<button class="button"
-						ng-if="selectedCredential.delete_time > 0"
-						ng-click="recoverCredential(selectedCredential) && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-					<span class="fa fa-recycle"></span> {{'recover' | translate}}
-				</button>
-				<button class="button"
-						ng-if="selectedCredential.delete_time > 0"
-						ng-click="destroyCredential(selectedCredential)">
-					<span class="fa fa-bomb"></span> {{'destroy' | translate}}
-				</button>
-			</div>
-		</div>
-	</div>
 
 </div>
+
+<div id="app-sidebar" class="app-sidebar"
+     ng-show="selectedCredential">
+    <h2>{{selectedCredential.label}}</h2>
+    <span class="close icon-close" ng-click="closeSelected()"
+          alt="Close"></span>
+
+    <div credential-template="selectedCredential">
+
+    </div>
+
+
+
+    <div ng-show="selectedCredential">
+        <div>
+            <button class="button"
+                    ng-click="editCredential(selectedCredential)"
+                    ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+                <span class="fa fa-edit"></span> {{ 'edit' | translate}}
+            </button>
+            <button class="button"
+                    ng-click="deleteCredential(selectedCredential)"
+                    ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+                <span class="fa fa-trash"></span> {{ 'delete' | translate}}
+            </button>
+            <button class="button"
+                    ng-click="shareCredential(selectedCredential)"
+                    ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined &&
+						(settings.user_sharing_enabled === 1 || settings.user_sharing_enabled === '1' || settings.link_sharing_enabled === 1 || settings.link_sharing_enabled === '1')">
+                <span class="fa fa-share"></span> {{ 'share' | translate}}
+            </button>
+
+            <button class="button"
+                    ng-click="getRevisions(selectedCredential)"
+                    ng-if="selectedCredential.delete_time == 0  && hasPermission(selectedCredential.acl.permissions, permissions.permissions.HISTORY)">
+                <span class="fa fa-undo"></span> {{ 'revisions' | translate}}
+            </button>
+
+            <button class="button"
+                    ng-if="selectedCredential.delete_time > 0"
+                    ng-click="recoverCredential(selectedCredential) && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+                <span class="fa fa-recycle"></span> {{'recover' | translate}}
+            </button>
+            <button class="button"
+                    ng-if="selectedCredential.delete_time > 0"
+                    ng-click="destroyCredential(selectedCredential)">
+                <span class="fa fa-bomb"></span> {{'destroy' | translate}}
+            </button>
+        </div>
+    </div>
+</div>
+
 
 <div class="share_popup" style="display: none">
 	{{ 'sharereq.title' | translate}}<br/>
