@@ -177,9 +177,9 @@ style('passman', 'app');
 		</div>
 	</div>
 
-	<div id="app-content" class="testwithborder1">
-		<div id="app-content-wrapper" class="testwithborder2">
-			<div id="content" ng-view="" class="testwithborder3">
+	<div id="app-content">
+		<div id="app-content-wrapper">
+			<div id="content" ng-view="">
 
 			</div>
 		</div>
