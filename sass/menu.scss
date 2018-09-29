@@ -23,41 +23,51 @@
 .settings-container {
   div {
     padding-left: 15px;
-
+  }
+  button {
+    width: 80%;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
 
 #app-navigation > ul{
-  padding-bottom: 80px;
   > li > a{
-    padding-left: 12px !important;
     z-index: auto;
   }
 }
 
 .nav-trashbin {
-  position: fixed !important;
-  bottom: 44px;
+  //position: fixed !important;
+  //bottom: 44px;
   width: inherit !important;
 
   border-right: 1px solid #eee;
   a {
     &.active{
-      border-left: 3px solid #0082c9;
+      #border-left: 3px solid #0082c9;
     }
     background-color: #fff !important;
     opacity: 1 !important;
     z-index: 140;
-    padding: 0 20px;
+    //padding: 0 20px;
     .fa {
       margin-right: 15px;
     }
   }
 }
 
+//to remove old entry
+#taginput{
+  visibility: hidden;
+  display: none;
+}
+
 #app-navigation {
   li{
     a.taginput{
+      visibility: hidden;
+      display: none;
       opacity: 1;
     }
     a{
