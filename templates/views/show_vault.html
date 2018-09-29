@@ -45,7 +45,7 @@
 	<div class="loaderContainer" ng-if="show_spinner">
 		<div class="loader" use-theme type="'border-bottom-color'"></div>
 	</div>
-	<div ng-init="menuOpen = false;">
+	<div class="testwithborder" ng-init="menuOpen = false;">
 		<table class="credential-table"
 			   ng-if="view_mode === 'list'">
 			<tr ng-repeat="credential in filtered_credentials | orderBy:'label'"
