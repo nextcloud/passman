@@ -33,8 +33,8 @@
 	 */
 	angular.module('passmanApp')
 		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate',
-			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate) {
+			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate','$compile',
+			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate, $compile) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -325,6 +325,23 @@
 					fields: ['label', 'username', 'email', 'custom_fields']
 				};
 
+
+
+				//searchboxfix
+                var native_search = document.getElementById("searchbox");
+                native_search.classList.remove('hidden');
+                native_search.addEventListener('keypress', function (e) {
+                    if(e.keyCode == 13){
+                        e.preventDefault();
+                    }
+                });
+
+                native_search.addEventListener('keyup', function (e) {
+                    console.log("keyup");
+                    $scope.$apply(function () {
+                        $scope.filterOptions.filterText=native_search.value;
+                    });
+                });
 
 				$scope.filtered_credentials = [];
 				$scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function () {
