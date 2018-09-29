@@ -24,7 +24,6 @@
 				<li ng-if="vaults.length === 0">{{ 'no.vaults' | translate}}
 				</li>
 			</ul>
-
 		</div>
 	</div>
 
@@ -58,7 +57,7 @@
 					 ng-click="createVault(vault_name, vault_key, vault_key2)" ng-disabled="vault_key_score.score < minimal_value_key_strength || vault_key !== vault_key2 || vault_key === ''">
 					{{ 'new.vault.create' | translate }}
 				</button>
-				<div class="button" ng-if="creating_keys" >
+				<div class="button" ng-if="creating_keys">
 					<span>
 						<i class="fa fa-spinner fa-spin"></i>
 						{{creating_keys}}
