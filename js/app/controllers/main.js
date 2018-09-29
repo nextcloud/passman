@@ -31,20 +31,10 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
+
+
 		.controller('MainCtrl', ['$scope', '$rootScope', '$location', 'SettingsService', '$window', '$interval', '$filter', function ($scope, $rootScope, $location, SettingsService, $window, $interval, $filter) {
 			$scope.selectedVault = false;
-
-
-			var native_search = document.getElementById("searchbox");
-            var old_search    = document.getElementById("searchBox");
-
-            native_search.classList.remove('hidden');
-            native_search.classList.add('searchbox','ng-valid','ng-touched','ng-dirty','ng-valid-parse','ng-empty');
-            native_search.setAttribute("ng-model","filterOptions.filterText");
-
-            native_search.addEventListener("change", function(){
-                old_search.value=native_search.innerText;
-            });
 
 			$scope.http_warning_hidden = true;
 			if ($location.$$protocol === 'http' && $location.$$host !== 'localhost' && $location.$host !== '127.0.0.1') {
