@@ -77,8 +77,38 @@
 					$rootScope.$broadcast('selected_tags_updated', $scope.selectedTags);
 				}, true);
 
+                $scope.tagSelected = function (tag) {
+                    for (var i = 0; i < $scope.selectedTags.length; i++) {
+                        if($scope.selectedTags[i].text === tag.text){
+                            return true;
+                        }
+                    }
+                    return false;
+				};
+
+                $scope.removeTagFromSelected = function (tag) {
+                	var where =-1;
+                    for (var i = 0; i < $scope.selectedTags.length; i++) {
+                        if($scope.selectedTags[i].text === tag.text){
+                            where=i;
+                        }
+                    }
+                    if(where === -1){
+                        console.log("Cant remove selected Tag, Tag not present!");
+					}else{
+
+					}
+                    $scope.selectedTags.splice(where, 1);
+                };
+
 				$scope.tagClicked = function (tag) {
-					$scope.selectedTags.push(tag);
+					//check if tag already selected
+                    if(!$scope.tagSelected(tag)){
+                        $scope.selectedTags.push(tag);
+                    }else{
+                        //console.log("Already selected Tag!");
+                        $scope.removeTagFromSelected(tag);
+                    }
 				};
 
 				$rootScope.$on('credentials_loaded', function () {
@@ -91,10 +121,14 @@
 					if ($scope.selectedTags.length === 0) {
 						return TagService.getTags();
 					} else {
-						return $scope.filtered_tags;
+                        return TagService.getTags();
+                        //Always show all tags
+						//return $scope.filtered_tags;
 					}
 				}, function (tags) {
-					$scope.available_tags = tags;
+                    //Always show all tags
+					//$scope.available_tags = tags;
+					$scope.available_tags = TagService.getTags();
 				}, true);
 
 				$scope.toggleDeleteTime = function () {

@@ -33,7 +33,6 @@
 @import 'settings';
 
 #app-settings-content:not(.ng-hide) {
-  height: 90px;
   display: inherit !important;
   padding: 0;
   transition: height 0.15s ease-out;

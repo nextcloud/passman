@@ -125,7 +125,7 @@ style('passman', 'app');
 	</div>
 
 	<div id="app-navigation" ng-show="selectedVault" ng-controller="MenuCtrl">
-		<ul>
+		<ul class="with-icon">
 			<li class="taginput">
 				<a class="taginput">
 					<tags-input ng-model="selectedTags" replace-spaces-with-dashes="false">
@@ -134,16 +134,20 @@ style('passman', 'app');
 				</a>
 			</li>
 
-			<li ng-repeat="tag in available_tags | orderBy:'text'" ng-if="selectedTags.indexOf(tag) == -1">
-				<a  class="nav-icon-systemtagsfilter svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
+
+
+			<li ng-repeat="tag in available_tags | orderBy:'text'" ng-class="{'active': tagSelected(tag)}">
+				<a  class="icon-tag svg" ng-click="tagClicked(tag)" ng-class="{'icon-toggle': tagSelected(tag)}">{{tag.text}}</a>
 			</li>
-			<li data-id="trashbin" class="nav-trashbin">
-				<a ng-click="toggleDeleteTime()"
-				   ng-class="{'active': delete_time > 0}">
-					<i href="#" class="fa fa-trash"></i>
+			<li data-id="trashbin" class="nav-trashbin pinned first-pinned">
+				<a href="#" ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
 					{{ 'deleted.credentials' | translate }}
 				</a>
+
 			</li>
+
+
+
 		</ul>
 
 		<div id="app-settings" ng-init="settingsShown = false;">
@@ -154,15 +158,21 @@ style('passman', 'app');
 				</button>
 			</div>
 			<div id="app-settings-content" ng-show="settingsShown">
-				<!-- Your settings in here -->
+
 				<div class="settings-container">
-					<div><a class="link" ng-href="#/vault/{{active_vault.guid}}/settings">{{ 'settings' | translate }}</a></div>
-					<div><span class="link" ng-click="logout()">{{'logout' | translate }}</span></div>
-					<div><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">{{ 'donate' | translate }}</a></div>
-					<div ng-show="session_time_left">
-						<small>{{'session.time.left' | translate:translationData}}</small>
-					</div>
+					<button ng-href="#/vault/{{active_vault.guid}}/settings"><a class="link" >{{ 'settings' | translate }}</a></button>
 				</div>
+                <div class="settings-container">
+                    <button ng-click="logout()"><span class="link" >{{'logout' | translate }}</span></button>
+                </div>
+                <div class="donation-container settings-container">
+                    <button class="donation-container"> <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">{{ 'donate' | translate }}</a></button>
+                </div>
+                <div class="settings-container">
+                    <div ng-show="session_time_left">
+                        <small>{{'session.time.left' | translate:translationData}}</small>
+                    </div>
+                </div>
 			</div>
 		</div>
 	</div>
