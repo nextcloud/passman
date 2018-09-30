@@ -1,10 +1,5 @@
-<div>
-	<div class="cell">
-		<span >
-			<span class="icon icon-category-auth"></span>
-		</span>
-	</div>
-	<div style="display: none" id="iconPicker" title="{{ 'pick.icon' | translate }}">
+<div class="cell icon-category-auth"></div>
+<div style="display: none" id="iconPicker" title="{{ 'pick.icon' | translate }}">
 		<div class="iconList">
 			<div ng-repeat="(groupName, icons) in iconGroups">
 				<h2 style="clear: both" id="{{groupName}}">{{groupName}}</h2>
@@ -27,4 +22,3 @@
 			</div>
 		</div>
 	</div>
-</div>
