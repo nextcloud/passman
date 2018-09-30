@@ -42,8 +42,8 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         <database>pgsql</database>
         <database min-version="5.5">mysql</database>
         <lib>openssl</lib>
-        <owncloud min-version="14" max-version="14" />
-        <nextcloud min-version="14" max-version="14" />
+        <owncloud min-version="9" max-version="14" />
+        <nextcloud min-version="9" max-version="14" />
     </dependencies>
 
     <background-jobs>
