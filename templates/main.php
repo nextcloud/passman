@@ -137,7 +137,7 @@ style('passman', 'app');
 				<a  class="icon-tag svg" ng-click="tagClicked(tag)" ng-class="{'icon-toggle': tagSelected(tag)}">{{tag.text}}</a>
 			</li>
 			<li data-id="trashbin" class="nav-trashbin pinned first-pinned">
-				<a href="#" ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
+				<a ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
 					{{ 'deleted.credentials' | translate }}
 				</a>
 			</li>
