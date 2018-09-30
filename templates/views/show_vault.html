@@ -5,8 +5,11 @@
 				<div class="crumb svg ui-droppable" data-dir="/">
 					<a ng-click="logout()"><i class="fa fa-home"></i></a>
 				</div>
-				<div class="crumb svg last" ng-click="clearState()">
+				<div class="crumb svg" ng-click="clearState()">
 					<span>{{active_vault.name}}</span>
+				</div>
+				<div class="crumb svg last">
+					<span ng-click="addCredential()">{{ 'New' | translate}}</span>
 				</div>
 			</div>
 		</div>
@@ -26,13 +29,12 @@
 			</div>
 		</div>
 
-		<div class="actions creatable">
+		<!--<div class="actions creatable">
 		<span ng-click="addCredential()" class="button new">
-
-			<!--normal nc add-->
+			&lt;!&ndash;normal nc add&ndash;&gt;
 			<span class="icon icon-add"></span>
 		</span>
-		</div>
+		</div>-->
 
 		<div class="viewModes">
 			<div class="view-mode" ng-class="{'active': view_mode === 'list' }"
