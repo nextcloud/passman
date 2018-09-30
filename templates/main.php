@@ -133,9 +133,6 @@ style('passman', 'app');
 					</tags-input>
 				</a>
 			</li>
-
-
-
 			<li ng-repeat="tag in available_tags | orderBy:'text'" ng-class="{'active': tagSelected(tag)}">
 				<a  class="icon-tag svg" ng-click="tagClicked(tag)" ng-class="{'icon-toggle': tagSelected(tag)}">{{tag.text}}</a>
 			</li>
@@ -143,11 +140,7 @@ style('passman', 'app');
 				<a href="#" ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
 					{{ 'deleted.credentials' | translate }}
 				</a>
-
 			</li>
-
-
-
 		</ul>
 
 		<div id="app-settings" ng-init="settingsShown = false;">
@@ -160,7 +153,7 @@ style('passman', 'app');
 			<div id="app-settings-content" ng-show="settingsShown">
 
 				<div class="settings-container">
-					<button ng-href="#/vault/{{active_vault.guid}}/settings"><a class="link" >{{ 'settings' | translate }}</a></button>
+					<a ng-href="#/vault/{{active_vault.guid}}/settings" class="link" ><button>{{ 'settings' | translate }}</button></a>
 				</div>
                 <div class="settings-container">
                     <button ng-click="logout()"><span class="link" >{{'logout' | translate }}</span></button>
