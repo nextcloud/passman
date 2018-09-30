@@ -470,8 +470,8 @@
         border-bottom-left-radius: 3px;
         background-clip: padding-box; }
     #app-content #app-content-wrapper .credential-table {
-      width: 100%;
-      margin-top: 44px; }
+        width: 100vh;
+        }
       #app-content #app-content-wrapper .credential-table tr:hover {
         background-color: whitesmoke; }
       #app-content #app-content-wrapper .credential-table tr.selected {
