@@ -21,7 +21,9 @@
  */
 
 .tab_header {
-  margin: 44px 0 0;
+  width: calc(100vw - 300px);
+ // margin: 44px 0 0;
+  margin: 0 0 0;
   list-style: none;
   padding: 0;
   li.tab:first-child {
@@ -45,9 +47,15 @@
       display: none;
     }
   }
+
+  li.inactive {
+    background-color: #fff !important;
+    color: unset !important;
+  }
+
   li.active {
-    color: #fff;
-    position: relative;
+
+    //position: relative;
     .indicator {
       display: inline-block;
       position: absolute;
@@ -60,10 +68,9 @@
 }
 
 .tab_container {
-  border: 1px solid;
-  border-color: #eee;
+  border: 1px solid #eee;
   border-top-color: #0082c9;
-  border-bottom: 0;
+  border-bottom-width: 0;
   clear: both;
   padding: 0 1em;
 }
