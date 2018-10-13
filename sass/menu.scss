@@ -65,6 +65,9 @@
 
 #app-navigation {
   li{
+    .highlight-selected{
+        background-color: var(--color-primary);
+    }
     a.taginput{
       visibility: hidden;
       display: none;
