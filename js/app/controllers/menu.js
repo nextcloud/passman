@@ -23,7 +23,6 @@
 (function () {
 	'use strict';
 
-
 	/**
 	 * @ngdoc function
 	 * @name passmanApp.controller:MenuCtrl
