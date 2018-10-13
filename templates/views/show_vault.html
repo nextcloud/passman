@@ -83,17 +83,21 @@
 
 </div>
 
-<div id="app-sidebar" class="app_sidebar"
-     ng-show="selectedCredential">
-    <h2>{{selectedCredential.label}}</h2>
-    <span class="close icon-close" ng-click="closeSelected()"
-          alt="Close"></span>
+<div id="app-sidebar" class="app_sidebar" ng-show="selectedCredential">
 
-    <div credential-template="selectedCredential">
+	<span class="close icon-close" ng-click="closeSelected()" alt="Close"></span>
 
-    </div>
+	<div class="sidebar">
+		<span class="icon sidebar-icon" ng-if="selectedCredential.url">
+			<credential-icon credential="selectedCredential"></credential-icon>
+		</span>
+		<span class="icon sidebar-icon" ng-if="!selectedCredential.url">
+			<credential-icon credential="selectedCredential"></credential-icon>
+		</span>
+		<h2 class="sidebar-label">{{selectedCredential.label}}</h2>
+	</div>
 
-
+    <div credential-template="selectedCredential"></div>
 
     <div ng-show="selectedCredential">
         <div>
