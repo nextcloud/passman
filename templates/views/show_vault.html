@@ -6,10 +6,10 @@
 					<a ng-click="logout()"><i class="fa fa-home"></i></a>
 				</div>
 				<div class="crumb svg" ng-click="clearState()">
-					<span>{{active_vault.name}}</span>
+					<a>{{active_vault.name}}</a>
 				</div>
 				<div class="crumb svg last" ng-hide="delete_time>0">
-					<span ng-click="addCredential()">{{ 'New' | translate}}</span>
+					<a ng-click="addCredential()">{{ 'New' | translate}}</a>
 				</div>
 			</div>
 		</div>
