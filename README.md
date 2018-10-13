@@ -7,6 +7,13 @@ Passman is a full featured password manager.
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&utm_medium=referral&utm_content=nextcloud/passman&utm_campaign=Badge_Coverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
 
+## Join us!
+There are Telegram-Groups:
+* [Passman General](https://t.me/passman_general)
+* [Passman Development](https://t.me/passman_dev)
+
+Those are mainly used to discuss all sorts of topics for Passman and it's apps!
+
 
 ## Contents
 * [Screenshots](https://github.com/nextcloud/passman#Screenshots) 
@@ -160,7 +167,7 @@ To run the unit tests install phpunit globally, and setup the environment variab
 
 ## Contributors
 Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
-- None
+- Newhinton
 
 
 ## FAQ
