@@ -69,7 +69,17 @@
 				ng-click="selectCredential(credential)"
 				use-theme type="'border-color'">
 				<div class="credential_content">
-					<div class="label">{{ ::credential.label}}</div>
+					<div>
+						<span class="icon" ng-if="credential.url">
+							<credential-icon credential="credential"></credential-icon>
+						</span>
+						<span class="icon" ng-if="!credential.url">
+							<i class="fa fa-lock" ng-if="!credential.acl && !credential.shared_key"></i>
+							<i class="fa fa-share-alt" ng-if="credential.acl"></i>
+							<i class="fa fa-share-alt-square" ng-if="credential.shared_key"> </i>
+						</span>
+						<div class="label">{{ ::credential.label}}</div>
+					</div>
 					<div class="tags">
 						<div class="tag" ng-repeat="tag in credential.tags_raw">
 							{{ ::tag.text}}
