@@ -31,8 +31,6 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-
-
 		.controller('MainCtrl', ['$scope', '$rootScope', '$location', 'SettingsService', '$window', '$interval', '$filter', function ($scope, $rootScope, $location, SettingsService, $window, $interval, $filter) {
 			$scope.selectedVault = false;
 

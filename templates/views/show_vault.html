@@ -15,11 +15,6 @@
 		</div>
 
 		<div class="title" credential-counter="filtered_credentials" vault="active_vault" delete-time="delete_time" filters="filterOptions"></div>
-		<!--<span class="title" ng-if="delete_time"><br />
-			{{ 'deleted.since' | translate }}:
-			<span ng-if="delete_time == 1">All time</span>
-			<span ng-if="delete_time > 1">{{delete_time | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
-		</span> -->
 
 		<div class="searchboxContainer" ng-init="filterOptionShown = false;" off-click="filterOptionShown = false;">
 			<input type="text" ng-model="filterOptions.filterText" class="searchbox" id="searchBox"
@@ -28,13 +23,6 @@
 				<input type="checkbox" ng-model="filterOptions.useRegex"> {{ 'use.regex' | translate }}
 			</div>
 		</div>
-
-		<!--<div class="actions creatable">
-		<span ng-click="addCredential()" class="button new">
-			&lt;!&ndash;normal nc add&ndash;&gt;
-			<span class="icon icon-add"></span>
-		</span>
-		</div>-->
 
 		<div class="viewModes">
 			<div class="view-mode" ng-class="{'active': view_mode === 'list' }"
