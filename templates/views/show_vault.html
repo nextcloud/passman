@@ -8,6 +8,12 @@
 				<div class="crumb svg" ng-click="clearState()">
 					<a>{{active_vault.name}}</a>
 				</div>
+
+				<div class="crumb svg" ng-repeat="path in BreadcrumbList"  ng-click="setCurrentFolderFromBreadcrumb(path.fullPath)" >
+					<a>{{::path.name}}</a>
+				</div>
+
+
 				<div class="crumb svg last" ng-hide="delete_time>0">
 					<a ng-click="addCredential()">{{ 'New' | translate}}</a>
 				</div>
@@ -38,11 +44,22 @@
 	<div ng-init="menuOpen = false;">
 		<table class="credential-table"
 			   ng-if="view_mode === 'list'">
+
+			<tr ng-repeat="folder in TempFolderList" ng-if="folder!==''">
+				<td ng-click="setCurrentFolderFromUI(folder)">
+					<span class="icon">
+						<i class="fa fa-folder"></i>
+					</span>
+					<a class="label">{{folder}}</a>
+				</td>
+			</tr>
+
+
 			<tr ng-repeat="credential in filtered_credentials | orderBy:'label'"
 				ng-if="showCredentialRow(credential)"
 				ng-click="selectCredential(credential)"  ng-dblclick="editCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
-				<td>
+				<td ng-if="checkIfCurrentFolderIsSelected(credential.fpath)">
 					<span class="tags">
 					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 
@@ -104,7 +121,7 @@
 		<span class="icon sidebar-icon" ng-if="!selectedCredential.url">
 			<credential-icon credential="selectedCredential"></credential-icon>
 		</span>
-		<h2 class="sidebar-label">{{selectedCredential.label}}</h2>
+		<h2 class="sidebar-label">{{selectedCredential.label}} || {{selectedCredential.fpath}}</h2>
 	</div>
 
     <div credential-template="selectedCredential"></div>
