@@ -452,7 +452,7 @@
                 };
 
                 $scope.setCurrentFolderFromBreadcrumb = function (folder) {
-                    $scope.currentFolder=folder;
+                    $scope.currentFolder=folder+"/";
                     $scope.createBreadCrumbList();
                     $scope.getCurrentFolderList();
                 };
