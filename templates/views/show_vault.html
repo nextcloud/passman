@@ -8,9 +8,10 @@
 				<div class="crumb svg" ng-click="clearState()">
 					<a>{{active_vault.name}}</a>
 				</div>
-				<div class="crumb svg last" ng-hide="delete_time>0">
-					<a ng-click="addCredential()">{{ 'New' | translate}}</a>
-				</div>
+
+			</div>
+			<div class="" ng-hide="delete_time>0">
+				<button ng-click="addCredential()">+</button>
 			</div>
 		</div>
 
