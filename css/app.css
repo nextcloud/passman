@@ -98,13 +98,6 @@
   background: #d83a02;
   color: #fff; }
 
-.link {
-  color: #0066ff !important;
-  cursor: pointer; }
-
-.link:hover {
-  text-decoration: underline; }
-
 /**
  * Nextcloud - passman
  *
@@ -148,7 +141,8 @@
  *
  */
 .tab_header {
-  margin: 44px 0 0;
+  width: calc(100vw - 300px);
+  margin: 0 0 0;
   list-style: none;
   padding: 0; }
   .tab_header li.tab:first-child {
@@ -168,22 +162,21 @@
     transition: background-color 250ms linear; }
     .tab_header li.tab .indicator {
       display: none; }
-  .tab_header li.active {
-    color: #fff;
-    position: relative; }
-    .tab_header li.active .indicator {
-      display: inline-block;
-      position: absolute;
-      height: 7px;
-      left: 0;
-      right: 0;
-      bottom: -1px; }
+  .tab_header li.inactive {
+    background-color: #fff !important;
+    color: unset !important; }
+  .tab_header li.active .indicator {
+    display: inline-block;
+    position: absolute;
+    height: 7px;
+    left: 0;
+    right: 0;
+    bottom: -1px; }
 
 .tab_container {
-  border: 1px solid;
-  border-color: #eee;
+  border: 1px solid #eee;
   border-top-color: #0082c9;
-  border-bottom: 0;
+  border-bottom-width: 0;
   clear: both;
   padding: 0 1em; }
 
@@ -231,7 +224,8 @@
   .pw-gen .generate_pw {
     float: left;
     margin-top: 3px;
-    margin-left: -3px; }
+    margin-left: -3px;
+    padding-bottom: 1px; }
     .pw-gen .generate_pw .cell {
       padding: 5px;
       display: inline-block;
@@ -275,7 +269,7 @@
   padding: 12px;
   font-weight: bold;
   text-align: center;
-  z-index: 18000;
+  z-index: 1800;
   background-color: red;
   color: white; }
   .warning_bar .fa-times {
@@ -284,9 +278,8 @@
     cursor: pointer; }
 
 .vault_wrapper {
-  margin: 0 auto;
-  margin-top: 20px;
-  width: 100%;
+  margin: 0 auto auto auto;
+  transform: translate(-150px);
   max-width: 420px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -360,21 +353,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+#content {
+  padding-top: 47px !important;
+  height: 100%;
+  width: 100%; }
+
+.icon-image {
+  width: 16px; }
+
+#app-sidebar {
+  height: auto; }
+  #app-sidebar .sidebar {
+    display: inline-block; }
+    #app-sidebar .sidebar .sidebar-icon {
+      margin-right: 15px; }
+      #app-sidebar .sidebar .sidebar-icon .icon-image {
+        width: 44px; }
+      #app-sidebar .sidebar .sidebar-icon i {
+        width: 44px; }
+    #app-sidebar .sidebar .sidebar-label {
+      float: right;
+      line-height: 44px; }
+
 #app-content {
+  margin-left: 300px;
+  width: calc(100vw - 300px);
   overflow-x: hidden; }
   #app-content #app-content-wrapper {
-    min-height: 95%; }
+    min-height: 95%;
+    display: flex;
+    height: calc(100vh - 49px); }
     #app-content #app-content-wrapper #passman-controls {
       text-align: center;
       border-bottom: 1px solid #c9c9c9; }
-      #app-content #app-content-wrapper #passman-controls.sidebar-shown {
-        padding-right: 27% !important; }
-        @media screen and (max-width: 765px) {
-          #app-content #app-content-wrapper #passman-controls.sidebar-shown .title {
-            display: none; } }
-        @media screen and (min-width: 769px) and (max-width: 1120px) {
-          #app-content #app-content-wrapper #passman-controls.sidebar-shown .title {
-            display: none; } }
+      @media screen and (max-width: 765px) {
+        #app-content #app-content-wrapper #passman-controls.sidebar-shown .title {
+          display: none; } }
+      @media screen and (min-width: 769px) and (max-width: 1120px) {
+        #app-content #app-content-wrapper #passman-controls.sidebar-shown .title {
+          display: none; } }
     #app-content #app-content-wrapper .title {
       text-align: center;
       display: inline-block;
@@ -387,10 +404,9 @@
         #app-content #app-content-wrapper .title {
           display: none; } }
     #app-content #app-content-wrapper .breadcrumb {
-      float: left;
-    }
+      float: left; }
     #app-content #app-content-wrapper .actions.creatable {
-      float: right;
+      float: left;
       overflow: hidden; }
       #app-content #app-content-wrapper .actions.creatable .bubble {
         position: relative;
@@ -440,7 +456,9 @@
         display: inline-block;
         padding: 7px; }
     #app-content #app-content-wrapper .searchboxContainer {
-      display: inline-block;
+      /*display: inline-block;*/
+      visibility: hidden;
+      display: none;
       margin-right: 14px;
       float: right; }
       #app-content #app-content-wrapper .searchboxContainer .searchbox {
@@ -469,8 +487,7 @@
         border-bottom-left-radius: 3px;
         background-clip: padding-box; }
     #app-content #app-content-wrapper .credential-table {
-        width: 100vh;
-        }
+      width: 100%; }
       #app-content #app-content-wrapper .credential-table tr:hover {
         background-color: whitesmoke; }
       #app-content #app-content-wrapper .credential-table tr.selected {
@@ -483,8 +500,7 @@
           font-size: 19px;
           float: left;
           margin-right: 5px;
-          margin-left: 3px;
-        }
+          margin-left: 3px; }
         #app-content #app-content-wrapper .credential-table tr td .icon-more {
           display: inline-block;
           float: right;
@@ -528,7 +544,8 @@
       #app-content #app-content-wrapper .tags .tag:last-child {
         margin-right: 8px; }
     #app-content #app-content-wrapper .grid-view {
-      margin-top: 44px;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-wrap: wrap; }
       #app-content #app-content-wrapper .grid-view .credential {
@@ -546,20 +563,21 @@
           flex-direction: column;
           width: 100%;
           cursor: pointer;
-          font-size: 1.75em;
-          text-align: center; }
+          font-size: 1.75em; }
           #app-content #app-content-wrapper .grid-view .credential .credential_content .label {
             padding-top: 0.5em;
-            padding-left: 1em;
             padding-right: 1em;
             line-height: 1.3em;
-            word-wrap: break-word; }
+            word-wrap: break-word;
+            float: right; }
           #app-content #app-content-wrapper .grid-view .credential .credential_content .tags {
-            margin-bottom: 0.5em; }
+            margin: 0 0 auto;
+            text-align: right; }
             #app-content #app-content-wrapper .grid-view .credential .credential_content .tags .tag {
               color: #000 !important;
               margin-top: 5px;
-              display: inline-block; }
+              display: inline-block;
+              left: 0; }
       @media all and (min-width: 40em) {
         #app-content #app-content-wrapper .grid-view .credential {
           width: 40%; } }
@@ -652,7 +670,14 @@
             vertical-align: middle; }
       #app-content #app-content-wrapper .edit_credential .otpText {
         padding-right: 10px; }
+    #app-content #app-content-wrapper .main_list {
+      flex: 1;
+      float: left;
+      height: auto;
+      overflow: auto;
+      width: 100%; }
     #app-content #app-content-wrapper .app_sidebar {
+      float: right;
       padding: 10px;
       overflow-y: auto; }
       #app-content #app-content-wrapper .app_sidebar h2 {
@@ -669,7 +694,7 @@
         cursor: pointer; }
       #app-content #app-content-wrapper .app_sidebar.item_selected {
         height: 25%;
-        display: inline-block;  }
+        display: inline-block; }
       #app-content #app-content-wrapper .app_sidebar .credential-data .row {
         margin-bottom: 11px; }
       #app-content #app-content-wrapper .app_sidebar .credential-data .tags {
@@ -765,9 +790,9 @@
   cursor: pointer;
   /* "hand" cursor */ }
 
-
 .btn-danger {
-  color: #fff; }
+  color: #000000;
+  background-color: #ff0000; }
 
 .icon-label {
   overflow: hidden; }
@@ -792,15 +817,12 @@
   .icon-label .icon-picker {
     float: left;
     margin-top: 3px;
-    margin-left: -3px;
-    -webkit-border-bottom-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    -webkit-border-top-left-radius: 3px;
-    border-top-left-radius: 3px;
-    background-clip: padding-box; }
+    padding-top: 7px; }
     .icon-label .icon-picker .cell {
+      margin-top: 0px;
+      margin-left: -0px;
       padding: 7px 12px 2px 12px;
-      display: inline-block;
+      display: inline;
       font-size: 14px;
       border: 1px solid #ddd;
       background-color: #eaeaea;
@@ -810,8 +832,6 @@
       -webkit-border-top-left-radius: 6px;
       border-top-left-radius: 6px;
       background-clip: padding-box; }
-      .icon-label .icon-picker .cell img {
-        height: 16px; }
     .icon-label .icon-picker .cell:hover {
       color: #0066ff; }
 
@@ -854,29 +874,35 @@
  */
 .settings-container div {
   padding-left: 15px; }
+.settings-container button {
+  width: 80%;
+  margin-left: 15px;
+  margin-right: 15px; }
 
-#app-navigation > ul {
-  padding-bottom: 80px; }
-  #app-navigation > ul > li > a {
-    padding-left: 12px !important;
-    z-index: auto; }
+#app-navigation > ul > li > a {
+  z-index: auto; }
 
 .nav-trashbin {
-  position: fixed !important;
-  bottom: 44px;
   width: inherit !important;
   border-right: 1px solid #eee; }
   .nav-trashbin a {
     background-color: #fff !important;
     opacity: 1 !important;
-    z-index: 140;
-    padding: 0 20px; }
+    z-index: 140; }
     .nav-trashbin a.active {
-      border-left: 3px solid #0082c9; }
+      #border-left: 3px solid #0082c9; }
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
+#taginput {
+  visibility: hidden;
+  display: none; }
+
+#app-navigation li .highlight-selected {
+  background-color: var(--color-primary); }
 #app-navigation li a.taginput {
+  visibility: hidden;
+  display: none;
   opacity: 1; }
 #app-navigation li a {
   overflow: visible; }
@@ -990,7 +1016,6 @@
     padding: 3px 5px; }
 
 #app-settings-content:not(.ng-hide) {
-  height: 90px;
   display: inherit !important;
   padding: 0;
   transition: height 0.15s ease-out; }
@@ -1009,9 +1034,8 @@
   margin-right: 0 !important; }
 
 #app-content #app-content-wrapper #passman-controls {
-  margin-top: 5px;
   border-bottom: 1px solid #c9c9c9;
-}
+  margin-top: 5px; }
 
 #passman-controls {
   box-sizing: border-box;
@@ -1019,6 +1043,7 @@
   top: 45px;
   right: 0;
   left: 0;
+  border-bottom: 1px solid #c9c9c9;
   padding: 0 !important;
   margin: 0;
   background-color: rgba(255, 255, 255, 0.95);
@@ -1035,11 +1060,7 @@
 @media only screen and (min-width: 768px) {
   #app-navigation + #app-content #passman-controls {
     left: 300px;
-    width: calc( 100% - 300px ) !important; }
-  #passman-controls {
-    right: 0px;
-    width: 50%;}
-}
+    width: calc( 100% - 300px ) !important; } }
 #passman-controls .button, #passman-controls, #passman-controls input[type='submit'], #passman-controls input[type='text'], #passman-controls input[type='password'], #passman-controls select {
   box-sizing: border-box;
   display: inline-block;
