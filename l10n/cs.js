@@ -126,6 +126,7 @@ OC.L10N.register(
     "About Passman" : "O Passman",
     "Version" : "Verze",
     "Donate to support development" : "Přispějte na podporu vývoje",
+    "Bookmarklet" : "Záložky",
     "Save your passwords with 1 click!" : "Ukládejte vaše hesla jedním kliknutím!",
     "Drag below button to your bookmark toolbar." : "Přetáhněte tlačítko níže do své lišty záložek.",
     "Delete vault" : "Smazat trezor",
