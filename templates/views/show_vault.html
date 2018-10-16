@@ -1,4 +1,4 @@
-<div class="main_list" off-click="closeSelected()" off-click-filter="'.download-js-link, .sidebar-shown'">
+<div class="main_list" off-click-filter="'.download-js-link, .sidebar-shown, #app-sidebar'">
 	<div id="passman-controls" ng-class="{ 'sidebar-shown': selectedCredential }">
 		<div class="breadcrumb">
 			<div class="breadcrumb">
@@ -92,7 +92,7 @@
 	</div>
 </div>
 
-<div id="app-sidebar" class="app_sidebar" ng-show="selectedCredential">
+<div id="app-sidebar" class="app_sidebar #fuckthis" ng-show="selectedCredential" off-click="closeSelected()" >
 
 	<span class="close icon-close" ng-click="closeSelected()" alt="Close"></span>
 
