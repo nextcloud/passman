@@ -251,7 +251,7 @@ OC.L10N.register(
     "Decrypt vault" : "Széf viszafejtése",
     "Seems you lost the vault password and you're unable to log in." : "Úgy tűnik elvesztetted a széfjelszavad így nem tudsz bejelentkezni.",
     "If you want this vault to be removed you can request that here." : "Ha el akarod távolítani ezt a széfet később kérvényezheted.",
-    "An admin then accepts or declines the request" : "Egy admin aki elfogadhatja vagy elutasíthatja a kérést",
+    "An admin then accepts or declines the request" : "Egy rendszergazda aki elfogadhatja vagy elutasíthatja a kérést",
     "After an admin destroys this vault, all credentials in it will be lost" : "Ha egy rendszergazda törli ezt a széfet minden hitelesítőadat megsemmisül benne",
     "Reason for requesting deletion (optional):" : "Törlési kérvény oka (nem kötelező):",
     "Request vault destruction" : "Széftörlés kérése",
