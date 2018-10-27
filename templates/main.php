@@ -134,6 +134,10 @@ style('passman', 'app');
 				</a>
 			</li>-->
 
+            <li>
+                <a class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'Show All' | translate }}</a>
+            </li>
+
             <li class="collapsible open" ng-class="{'open':tagCollapsibleState()}">
                 <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
 
@@ -144,6 +148,25 @@ style('passman', 'app');
                         <a class="icon-tag svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
                     </li>
                 </ul>
+            </li>
+
+            <li>
+                <div class="app-navigation-entry-bullet bullet-color-red"></div>
+                <a ng-click="filterCredentialBySpecial('strength_low')">{{ 'Bad Strength' | translate }}</a>
+            </li>
+
+            <li>
+                <div class="app-navigation-entry-bullet bullet-color-yellow"></div>
+                <a ng-click="filterCredentialBySpecial('strength_medium')">{{ 'Medium Strength' | translate }}</a>
+            </li>
+
+            <li>
+                <div class="app-navigation-entry-bullet bullet-color-green"></div>
+                <a ng-click="filterCredentialBySpecial('strength_good')">{{ 'Good Strength' | translate }}</a>
+            </li>
+
+            <li>
+                <a class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate }}</a>
             </li>
 
 
