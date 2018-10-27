@@ -140,67 +140,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-.tab_header {
-  width: calc(100vw - 300px);
-  margin: 0 0 0;
-  list-style: none;
-  padding: 0; }
-  .tab_header li.tab:first-child {
-    margin-left: 0; }
-  .tab_header li.tab {
-    /*@include border-top-radius(2px);*/
-    float: left;
-    border-bottom-width: 0;
-    margin: 0;
-    padding: 10px 10px 10px 10px;
-    cursor: pointer;
-    border-right: 1px solid #eee;
-    -webkit-transition: background-color 250ms linear;
-    -moz-transition: background-color 250ms linear;
-    -o-transition: background-color 250ms linear;
-    -ms-transition: background-color 250ms linear;
-    transition: background-color 250ms linear; }
-    .tab_header li.tab .indicator {
-      display: none; }
-  .tab_header li.inactive {
-    background-color: #fff !important;
-    color: unset !important; }
-  .tab_header li.active .indicator {
-    display: inline-block;
-    position: absolute;
-    height: 7px;
-    left: 0;
-    right: 0;
-    bottom: -1px; }
-
-.tab_container {
-  border: 1px solid #eee;
-  border-top-color: #0082c9;
-  border-bottom-width: 0;
-  clear: both;
-  padding: 0 1em; }
-
-/**
- * Nextcloud - passman
- *
- * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
- * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
- * @license GNU AGPL version 3 or any later version
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
 .pw-gen {
   overflow: hidden; }
   .pw-gen input {
@@ -676,6 +615,8 @@
       height: auto;
       overflow: auto;
       width: 100%; }
+      #app-content #app-content-wrapper .main_list .share {
+        overflow: hidden; }
     #app-content #app-content-wrapper .app_sidebar {
       float: right;
       padding: 10px;
@@ -889,9 +830,6 @@
     background-color: #fff !important;
     opacity: 1 !important;
     z-index: 140; }
-    .nav-trashbin a.active {
-      #border-left: 3px solid #0082c9;
-    }
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
@@ -899,6 +837,11 @@
   visibility: hidden;
   display: none; }
 
+#app-navigation .collapsible:hover .app-navigation-entry-bullet {
+  background: var(--color-primary) !important; }
+
+#app-navigation li .app-navigation-entry-bullet-color {
+  background-color: var(--color-primary); }
 #app-navigation li .highlight-selected {
   background-color: var(--color-primary); }
 #app-navigation li a.taginput {
