@@ -133,8 +133,9 @@ style('passman', 'app');
 					</tags-input>
 				</a>
 			</li>
-			<li ng-repeat="tag in available_tags | orderBy:'text'" ng-class="{'active': tagSelected(tag)}">
-				<a  class="icon-tag svg" ng-click="tagClicked(tag)" ng-class="{'icon-toggle highlight-selected': tagSelected(tag)}">{{tag.text}}</a>
+			<li ng-repeat="tag in available_tags | orderBy:'text'">
+                <div ng-if="tagSelected(tag)" class="app-navigation-entry-bullet app-navigation-entry-bullet-color"></div>
+				<a class="icon-tag svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
 			</li>
 			<li data-id="trashbin" class="nav-trashbin pinned first-pinned">
 				<a ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
