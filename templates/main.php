@@ -124,7 +124,7 @@ style('passman', 'app');
 		<i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
 	</div>
 
-	<div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl"  style="background-color: yellow;">
+	<div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
 		<ul class="with-icon">
 			<!--<li class="taginput">
 				<a class="taginput">
