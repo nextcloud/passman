@@ -63,8 +63,19 @@
   display: none;
 }
 
+//Overrides transparent entry bullet on hover from server
+#app-navigation .collapsible:hover .app-navigation-entry-bullet{
+  background: var(--color-primary) !important;
+}
+
 #app-navigation {
+
   li{
+    .app-navigation-entry-bullet-color {
+      background-color: var(--color-primary);
+    }
+
+
     .highlight-selected{
         background-color: var(--color-primary);
     }

@@ -126,17 +126,27 @@ style('passman', 'app');
 
 	<div id="app-navigation" ng-show="selectedVault" ng-controller="MenuCtrl">
 		<ul class="with-icon">
-			<li class="taginput">
+			<!--<li class="taginput">
 				<a class="taginput">
 					<tags-input ng-model="selectedTags" replace-spaces-with-dashes="false">
 						<auto-complete source="getTags($query)" min-length="0"></auto-complete>
 					</tags-input>
 				</a>
-			</li>
-			<li ng-repeat="tag in available_tags | orderBy:'text'">
-                <div ng-if="tagSelected(tag)" class="app-navigation-entry-bullet app-navigation-entry-bullet-color"></div>
-				<a class="icon-tag svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
-			</li>
+			</li>-->
+
+            <li class="collapsible open" ng-class="{'open':tagCollapsibleState()}">
+                <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
+
+                <a href="" class="icon-tag" ng-click="tagCollapsibleClicked()">{{ 'Tags' | translate }}</a>
+                <ul>
+                    <li ng-repeat="tag in available_tags | orderBy:'text'">
+                        <div ng-if="tagSelected(tag)" class="app-navigation-entry-bullet app-navigation-entry-bullet-color"></div>
+                        <a class="icon-tag svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
+                    </li>
+                </ul>
+            </li>
+
+
 			<li data-id="trashbin" class="nav-trashbin pinned first-pinned">
 				<a ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
 					{{ 'deleted.credentials' | translate }}

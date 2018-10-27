@@ -110,6 +110,18 @@
                     }
 				};
 
+                $scope.tagCollapsibleClicked = function () {
+                    if ($scope.tagCollapsibleOpen === true)
+                        $scope.tagCollapsibleOpen = false;
+                    else
+                        $scope.tagCollapsibleOpen = true;
+                };
+
+                $scope.tagCollapsibleState = function () {
+                    return $scope.tagCollapsibleOpen !== false;
+
+                };
+
 				$rootScope.$on('credentials_loaded', function () {
 					$rootScope.$broadcast('selected_tags_updated', $scope.selectedTags);
 				});

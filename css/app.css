@@ -890,7 +890,8 @@
     opacity: 1 !important;
     z-index: 140; }
     .nav-trashbin a.active {
-      #border-left: 3px solid #0082c9; }
+      #border-left: 3px solid #0082c9;
+    }
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
