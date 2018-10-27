@@ -34,7 +34,11 @@
 					<span credential-field value="result.password" secret="'true'"></span>
 				</td>
 				<td>
-					<a class="link" href="#/vault/{{active_vault.guid}}/edit/{{result.guid}}" tooltip="{{ 'Edit credential' | translate}}"><i class="fa fa-edit"></i></a>
+					<div>
+						<a href="#/vault/{{ active_vault.guid }}/edit/{{result.guid}}" class="link">
+							<i class="fa fa-edit"></i>
+						</a>
+					</div>
 				</td>
 			</tr>
 			</tbody>
