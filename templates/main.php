@@ -164,13 +164,15 @@ style('passman', 'app');
 			<div id="app-settings-content" ng-show="settingsShown">
 
 				<div class="settings-container">
-					<a ng-href="#/vault/{{active_vault.guid}}/settings" class="link" ><button>{{ 'settings' | translate }}</button></a>
+					<a ng-href="#/vault/{{active_vault.guid}}/settings" class="link" ng-click="settingsShown = false;">
+                        <button>{{ 'settings' | translate }}</button>
+                    </a>
 				</div>
                 <div class="settings-container">
                     <button ng-click="logout()"><span class="link" >{{'logout' | translate }}</span></button>
                 </div>
                 <div class="donation-container settings-container">
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link">
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link" ng-click="settingsShown = false;">
                         <button class="donation-container">{{ 'donate' | translate }}</button>
                     </a>
                 </div>
