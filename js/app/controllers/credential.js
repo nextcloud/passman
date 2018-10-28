@@ -375,7 +375,6 @@
 
                 //watch for special tags
                 $scope.$on('filterSpecial', function(event, args) {
-                    console.log("strength: "+args);
                     switch (args) {
                         case "strength_good": $scope.filterStrength(3,1000); break;
                         case "strength_medium": $scope.filterStrength(2,3); break;
@@ -410,7 +409,6 @@
                 $scope.filterExpired = function(){
                     var initialCredentials=$scope.active_vault.credentials;
                     var now = Date.now();
-                    console.log(now);
                     var postFiltered=[];
 
                     for (var i = 0; i < initialCredentials.length; i++) {
