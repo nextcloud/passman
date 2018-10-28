@@ -118,33 +118,32 @@ style('passman', 'app');
 ?>
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
-	<div id="logoutTimer"> </div>
-	<div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
-		{{ 'http.warning' | translate }}
-		<i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
-	</div>
+    <div id="logoutTimer"></div>
+    <div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
+        {{ 'http.warning' | translate }}
+        <i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
+    </div>
 
-	<div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
-		<ul class="with-icon">
-			<!--<li class="taginput">
-				<a class="taginput">
-					<tags-input ng-model="selectedTags" replace-spaces-with-dashes="false">
-						<auto-complete source="getTags($query)" min-length="0"></auto-complete>
-					</tags-input>
-				</a>
-			</li>-->
-
+    <div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
+        <ul class="with-icon">
+            <!--<li class="taginput">
+                <a class="taginput">
+                    <tags-input ng-model="selectedTags" replace-spaces-with-dashes="false">
+                        <auto-complete source="getTags($query)" min-length="0"></auto-complete>
+                    </tags-input>
+                </a>
+            </li>-->
             <li>
                 <a class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'Show All' | translate }}</a>
             </li>
 
             <li class="collapsible open" ng-class="{'open':tagCollapsibleState()}">
                 <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
-
                 <a href="" class="icon-tag" ng-click="tagCollapsibleClicked()">{{ 'Tags' | translate }}</a>
                 <ul>
                     <li ng-repeat="tag in available_tags | orderBy:'text'">
-                        <div ng-if="tagSelected(tag)" class="app-navigation-entry-bullet app-navigation-entry-bullet-color"></div>
+                        <div ng-if="tagSelected(tag)"
+                             class="app-navigation-entry-bullet app-navigation-entry-bullet-color"></div>
                         <a class="icon-tag svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
                     </li>
                 </ul>
@@ -166,36 +165,38 @@ style('passman', 'app');
             </li>
 
             <li>
-                <a class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate }}</a>
+                <a class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate
+                    }}</a>
             </li>
 
 
-			<li data-id="trashbin" class="nav-trashbin pinned first-pinned">
-				<a ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
-					{{ 'deleted.credentials' | translate }}
-				</a>
-			</li>
-		</ul>
+            <li data-id="trashbin" class="nav-trashbin pinned first-pinned">
+                <a ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
+                    {{ 'deleted.credentials' | translate }}
+                </a>
+            </li>
+        </ul>
 
-		<div id="app-settings" ng-init="settingsShown = false;">
-			<div id="app-settings-header">
-				<button class="settings-button"
-						ng-click="settingsShown = !settingsShown"
-				>{{ 'settings' | translate }}
-				</button>
-			</div>
-			<div id="app-settings-content" ng-show="settingsShown">
+        <div id="app-settings" ng-init="settingsShown = false;">
+            <div id="app-settings-header">
+                <button class="settings-button"
+                        ng-click="settingsShown = !settingsShown"
+                >{{ 'settings' | translate }}
+                </button>
+            </div>
+            <div id="app-settings-content" ng-show="settingsShown">
 
-				<div class="settings-container">
-					<a ng-href="#/vault/{{active_vault.guid}}/settings" class="link" ng-click="settingsShown = false;">
+                <div class="settings-container">
+                    <a ng-href="#/vault/{{active_vault.guid}}/settings" class="link" ng-click="settingsShown = false;">
                         <button>{{ 'settings' | translate }}</button>
                     </a>
-				</div>
+                </div>
                 <div class="settings-container">
-                    <button ng-click="logout()"><span class="link" >{{'logout' | translate }}</span></button>
+                    <button ng-click="logout()"><span class="link">{{'logout' | translate }}</span></button>
                 </div>
                 <div class="donation-container settings-container">
-                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2" target="_blank" class="link" ng-click="settingsShown = false;">
+                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2"
+                       target="_blank" class="link" ng-click="settingsShown = false;">
                         <button class="donation-container">{{ 'donate' | translate }}</button>
                     </a>
                 </div>
@@ -204,15 +205,15 @@ style('passman', 'app');
                         <small>{{'session.time.left' | translate:translationData}}</small>
                     </div>
                 </div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 
-	<div id="app-content" ng-class="{'vaultlist_sidebar_hidden': !selectedVault}">
-		<div id="app-content-wrapper">
-			<div id="content" ng-view="">
+    <div id="app-content" ng-class="{'vaultlist_sidebar_hidden': !selectedVault}">
+        <div id="app-content-wrapper">
+            <div id="content" ng-view="">
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 </div>

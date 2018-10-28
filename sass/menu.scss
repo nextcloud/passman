@@ -35,6 +35,9 @@
   > li > a{
     z-index: auto;
   }
+  > li {
+    display: block;
+  }
 }
 
 .nav-trashbin {
