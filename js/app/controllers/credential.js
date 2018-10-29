@@ -388,7 +388,7 @@
                 $scope.filterAll = function(){
                     $scope.selectedtags=[];
                     $scope.filterOptions.filterText="";
-                    $scope.filtered_credentials=$scope.active_vault.credentials;
+                    $scope.filtered_credentials=$scope.filterHidden($scope.active_vault.credentials);
                 };
 
                 $scope.filterStrength = function(strength_min, strength_max){
@@ -402,7 +402,7 @@
                             postFiltered.push(initialCredentials[i]);
                         }
                     }
-                    $scope.filtered_credentials=postFiltered;
+                    $scope.filtered_credentials=$scope.filterHidden(postFiltered);
                 };
 
                 $scope.filterExpired = function(){
@@ -417,8 +417,19 @@
                             postFiltered.push(initialCredentials[i]);
                         }
                     }
-                    $scope.filtered_credentials=postFiltered;
+                    $scope.filtered_credentials=$scope.filterHidden(postFiltered);
                 };
+
+                $scope.filterHidden = function(list){
+                    var list_without_hidden=[];
+                    for (var i = 0; i < list.length; i++) {
+                        if(list[i].hidden!==1){
+                            list_without_hidden.push(list[i]);
+                        }
+                    }
+                    return list_without_hidden;
+                };
+
 
 
                 $scope.selectedtags = [];
@@ -488,7 +499,7 @@
                     }
                     $scope.active_vault = null;
                     $scope.credentials = [];
-//				$scope.$parent.selectedVault = false;
+                    //$scope.$parent.selectedVault = false;
 
 				});
 
