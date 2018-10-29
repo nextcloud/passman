@@ -70,7 +70,7 @@ OC.L10N.register(
     "Copy password to clipboard" : "Passwort in die Zwischenablage kopieren",
     "Password copied to clipboard!" : "Passwort in die Zwischenablage kopiert!",
     "Complete" : "Fertigstellen",
-    "Username" : "Benutzer",
+    "Username" : "Benutzername",
     "Repeat password" : "Passwort wiederholen",
     "Add tag" : "Schlagwort hinzufügen",
     "Pick an icon" : "Icon auswählen",
