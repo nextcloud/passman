@@ -344,7 +344,6 @@
                 	});
 
                 	native_search.addEventListener('keyup', function (e) {
-                	    console.log("keyup");
                 	    $scope.$apply(function () {
                 	        $scope.filterOptions.filterText=native_search.value;
                 	    });
