@@ -89,6 +89,13 @@
 				</div>
 			</li>
 		</ul>
+		<div ng-if="getListSize()==0" class="nopasswords">
+			<b>{{'Hello there!' | translate}}</b><br>
+			<div>{{'It does not seem that you have any passwords. Do you want to add one?' | translate}}</div>
+			<div class="">
+				<button ng-click="addCredential()">+</button>
+			</div>
+		</div>
 	</div>
 </div>
 

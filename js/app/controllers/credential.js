@@ -385,6 +385,13 @@
 
                 });
 
+
+                $scope.getListSize = function(){
+                	var l = $scope.filtered_credentials;//$scope.active_vault.credentials.length
+                	console.log(l.length);
+                	return l.length;
+				};
+
                 $scope.filterAll = function(){
                     $scope.selectedtags=[];
                     $scope.filterOptions.filterText="";
