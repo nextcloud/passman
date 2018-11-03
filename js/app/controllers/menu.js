@@ -114,17 +114,22 @@
                     $rootScope.$broadcast('filterSpecial',string);
                 };
 
-                $scope.tagCollapsibleOpen=true;
+                $scope.collapsedDefaultValue=false;
+                $scope.tagCollapsibleOpen=VaultService.getVaultSetting('vaultTagCollapsedState',$scope.collapsedDefaultValue);
+
                 $scope.tagCollapsibleClicked = function () {
-                    if ($scope.tagCollapsibleOpen === true)
-                        $scope.tagCollapsibleOpen = false;
-                    else
-                        $scope.tagCollapsibleOpen = true;
+                	if (VaultService.getVaultSetting('vaultTagCollapsedState',$scope.collapsedDefaultValue) === true) {
+                        VaultService.setVaultSetting('vaultTagCollapsedState',false);
+                    } else {
+                        VaultService.setVaultSetting('vaultTagCollapsedState',true);
+                	}
                 };
 
                 $scope.tagCollapsibleState = function () {
-                    return $scope.tagCollapsibleOpen !== false;
-
+                	if(VaultService.getVaultSetting('vaultTagCollapsedState',$scope.collapsedDefaultValue)){
+                		return '';
+					}
+                    return 'open';
                 };
 
 				$rootScope.$on('credentials_loaded', function () {

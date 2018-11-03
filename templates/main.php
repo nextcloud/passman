@@ -137,7 +137,7 @@ style('passman', 'app');
                 <a class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'Show All' | translate }}</a>
             </li>
 
-            <li class="collapsible open" ng-class="{'open':tagCollapsibleState()}">
+            <li class="collapsible" ng-class="tagCollapsibleState()">
                 <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
                 <a href="" class="icon-tag" ng-click="tagCollapsibleClicked()">{{ 'Tags' | translate }}</a>
                 <ul>
