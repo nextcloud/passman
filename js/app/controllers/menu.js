@@ -114,6 +114,7 @@
                     $rootScope.$broadcast('filterSpecial',string);
                 };
 
+                $scope.tagCollapsibleOpen=true;
                 $scope.tagCollapsibleClicked = function () {
                     if ($scope.tagCollapsibleOpen === true)
                         $scope.tagCollapsibleOpen = false;
