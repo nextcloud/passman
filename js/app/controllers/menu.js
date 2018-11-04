@@ -115,6 +115,9 @@
                         $scope.delete_time=0;
                         $rootScope.$broadcast('set_delete_time', $scope.delete_time);
 					}
+					if(string === "all"){
+                        $scope.selectedTags =[];
+					}
                     $rootScope.$broadcast('filterSpecial',string);
 
                 	//close settings when item is selected
