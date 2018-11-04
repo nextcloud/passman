@@ -37,7 +37,7 @@
 
 .hide-animation {
   display: inherit !important;
-  transition: ease-in-out .5s;
+  transition: ease-in-out .15s;
 }
 .hide-animation.ng-hide {
   opacity: 0;
