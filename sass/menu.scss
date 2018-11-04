@@ -68,11 +68,21 @@
 }
 
 //Overrides transparent entry bullet on hover from server
-#app-navigation .collapsible:hover .app-navigation-entry-bullet{
-  background: var(--color-primary) !important;
+#app-navigation{
+  .collapsible:hover .app-navigation-entry-bullet{
+    background: var(--color-primary) !important;
+  }
 }
 
+
 #app-navigation {
+
+  a{
+    .selected{
+      opacity: 1!important;
+      box-shadow: inset 4px 0 var(--color-primary)!important;
+    }
+  }
 
   li{
     .app-navigation-entry-bullet-color {
@@ -90,7 +100,6 @@
     .bullet-color-green {
       background-color: #4db728;
     }
-
 
     .highlight-selected{
         background-color: var(--color-primary);

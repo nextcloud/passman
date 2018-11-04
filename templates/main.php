@@ -134,7 +134,7 @@ style('passman', 'app');
                 </a>
             </li>-->
             <li>
-                <a class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'Show All' | translate }}</a>
+                <a ng-class="{selected: clickedNavigationItem=='all'}" class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'Show All' | translate }}</a>
             </li>
 
             <li class="collapsible" ng-class="tagCollapsibleState()">
@@ -151,21 +151,21 @@ style('passman', 'app');
 
             <li>
                 <div class="app-navigation-entry-bullet bullet-color-red"></div>
-                <a ng-click="filterCredentialBySpecial('strength_low')">{{ 'Bad Strength' | translate }}</a>
+                <a ng-class="{selected: clickedNavigationItem=='strength_low'}" ng-click="filterCredentialBySpecial('strength_low')">{{ 'Bad Strength' | translate }}</a>
             </li>
 
             <li>
                 <div class="app-navigation-entry-bullet bullet-color-yellow"></div>
-                <a ng-click="filterCredentialBySpecial('strength_medium')">{{ 'Medium Strength' | translate }}</a>
+                <a ng-class="{selected: clickedNavigationItem=='strength_medium'}" ng-click="filterCredentialBySpecial('strength_medium')">{{ 'Medium Strength' | translate }}</a>
             </li>
 
             <li>
                 <div class="app-navigation-entry-bullet bullet-color-green"></div>
-                <a ng-click="filterCredentialBySpecial('strength_good')">{{ 'Good Strength' | translate }}</a>
+                <a ng-class="{selected: clickedNavigationItem=='strength_good'}" ng-click="filterCredentialBySpecial('strength_good')">{{ 'Good Strength' | translate }}</a>
             </li>
 
             <li>
-                <a class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate
+                <a ng-class="{selected: clickedNavigationItem=='expired'}" class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate
                     }}</a>
             </li>
 

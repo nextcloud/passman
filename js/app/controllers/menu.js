@@ -110,7 +110,9 @@
                     }
 				};
 
+				$scope.clickedNavigationItem='all';
                 $scope.filterCredentialBySpecial = function (string) {
+                    $scope.clickedNavigationItem=string;
                 	if(string !== 'nav_trashbin'){
                         $scope.delete_time=0;
                         $rootScope.$broadcast('set_delete_time', $scope.delete_time);
