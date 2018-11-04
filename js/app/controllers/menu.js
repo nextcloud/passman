@@ -152,6 +152,10 @@
 					$scope.available_tags = TagService.getTags();
 				}, true);
 
+                $scope.$on('release_trashbin', function(event, args) {
+                    $scope.delete_time=args;
+				});
+
 				$scope.toggleDeleteTime = function () {
 					if ($scope.delete_time > 0) {
 						$scope.delete_time = 0;

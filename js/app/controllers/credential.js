@@ -380,8 +380,10 @@
                         case "strength_low": $scope.filterStrength(0,1); break;
                         case "expired": $scope.filterExpired(); break;
                         case "all": $scope.filterAll(); break;
-
                     }
+
+                    $scope.delete_time=0;
+                    $rootScope.$broadcast('release_trashbin', $scope.delete_time);
 
                 });
 
@@ -403,7 +405,15 @@
                 $scope.filterAll = function(){
                     $scope.selectedtags=[];
                     $scope.filterOptions.filterText="";
-                    $scope.filtered_credentials=$scope.filterHidden($scope.active_vault.credentials);
+                    var creds_filtered=[];
+
+                    for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+                        if($scope.active_vault.credentials[i].delete_time>0){
+                            creds_filtered.push($scope.active_vault.credentials[i]);
+                        }
+                    }
+
+					$scope.filtered_credentials=$scope.filterHidden(creds_filtered);
                 };
 
                 $scope.filterStrength = function(strength_min, strength_max){
