@@ -126,13 +126,7 @@ style('passman', 'app');
 
     <div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
         <ul class="with-icon">
-            <!--<li class="taginput">
-                <a class="taginput">
-                    <tags-input ng-model="selectedTags" replace-spaces-with-dashes="false">
-                        <auto-complete source="getTags($query)" min-length="0"></auto-complete>
-                    </tags-input>
-                </a>
-            </li>-->
+
             <li>
                 <a ng-class="{selected: clickedNavigationItem=='all'}" class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'Show All' | translate }}</a>
             </li>
@@ -141,6 +135,26 @@ style('passman', 'app');
                 <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
                 <a href="" class="icon-tag" ng-click="tagCollapsibleClicked()">{{ 'Tags' | translate }}</a>
                 <ul>
+                    <li class="taginput">
+                        <a class="icon-search taginput">
+                            <tags-input ng-model="selectedTags" replace-spaces-with-dashes="false" placeholder="{{ 'Search Tags' | translate }}">
+                                <auto-complete source="getTags($query)" min-length="0"></auto-complete>
+                            </tags-input>
+                        </a>
+                    </li>
+                    <!--
+                                        <li class="taginput">
+                                            <a class="icon-search taginput">
+                                                <form ng-submit="tagClickedString(taginput); clearForm();">
+                                                    <input id="tagsearch" list="tags" ng-model="taginput" placeholder="{{ 'Search Tags' | translate }}" />
+                                                    <datalist id="tags">
+                                                        <option ng-repeat="qtag in getTags($query)" value="{{qtag.text}}">
+                                                    </datalist>
+                                                </form>
+                                            </a>
+                                        </li>
+                    -->
+
                     <li ng-repeat="tag in available_tags | orderBy:'text'">
                         <div ng-if="tagSelected(tag)"
                              class="app-navigation-entry-bullet app-navigation-entry-bullet-color"></div>
@@ -168,7 +182,6 @@ style('passman', 'app');
                 <a ng-class="{selected: clickedNavigationItem=='expired'}" class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate
                     }}</a>
             </li>
-
 
             <li data-id="trashbin" class="nav-trashbin pinned first-pinned">
                 <a ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">

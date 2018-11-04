@@ -61,12 +61,6 @@
   }
 }
 
-//to remove old entry
-#taginput{
-  visibility: hidden;
-  display: none;
-}
-
 //Overrides transparent entry bullet on hover from server
 #app-navigation{
   .collapsible:hover .app-navigation-entry-bullet{
@@ -104,9 +98,12 @@
     .highlight-selected{
         background-color: var(--color-primary);
     }
+
+    .autocomplete{
+      position: relative;
+    }
+
     a.taginput{
-      visibility: hidden;
-      display: none;
       opacity: 1;
     }
     a{

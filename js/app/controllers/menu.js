@@ -98,7 +98,17 @@
                     $scope.selectedTags.splice(where, 1);
                 };
 
-				$scope.tagClicked = function (tag) {
+                $scope.clearForm = function () {
+                    document.getElementById('tagsearch').value="";
+                };
+
+                $scope.tagClickedString = function (tagtext) {
+                    var tag=[];
+                    tag.text=tagtext;
+                    $scope.tagClicked(tag);
+                };
+
+                $scope.tagClicked = function (tag) {
 					//check if tag already selected
                     if(!$scope.tagSelected(tag)){
                         $scope.selectedTags.push(tag);
