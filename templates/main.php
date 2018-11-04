@@ -199,7 +199,7 @@ style('passman', 'app');
                 >{{ 'settings' | translate }}
                 </button>
             </div>
-            <div id="app-settings-content" ng-show="settingsShown">
+            <div id="app-settings-content" class="hide-animation" ng-hide="!settingsShown">
 
                 <div class="settings-container-label">
                     <input class="checkbox" id="navbarLegacyMode" type="checkbox" ng-model="legacyNavbar" ng-change="legacyNavbarChecked()">

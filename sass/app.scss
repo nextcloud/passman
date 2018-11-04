@@ -32,17 +32,18 @@
 @import 'share_credential';
 @import 'settings';
 
-#app-settings-content:not(.ng-hide) {
+
+
+
+.hide-animation {
   display: inherit !important;
-  padding: 0;
-  transition: height 0.15s ease-out;
+  transition: ease-in-out .5s;
 }
-#app-settings-content.ng-hide{
-  //display: inherit !important;
-  height: 0;
-  padding: 0;
-  transition: height 0.15s ease-in;
+.hide-animation.ng-hide {
+  opacity: 0;
 }
+
+
 .ui-dialog{
   z-index: 9999;
 }
