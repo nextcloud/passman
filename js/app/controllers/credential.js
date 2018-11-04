@@ -389,7 +389,15 @@
                 $scope.getListSize = function(){
                 	var l = $scope.filtered_credentials;//$scope.active_vault.credentials.length
                 	console.log(l.length);
-                	return l.length;
+
+                	var deleted=0;
+                    for (var i = 0; i < l.length; i++) {
+						if(l[i].delete_time>0){
+							deleted++;
+						}
+                    }
+
+                	return l.length-deleted;
 				};
 
                 $scope.filterAll = function(){
