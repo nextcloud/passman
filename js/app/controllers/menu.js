@@ -93,9 +93,7 @@
                         }
                     }
                     if(where === -1){
-                        console.log("Cant remove selected Tag, Tag not present!");
-					}else{
-
+                        //console.log("Cant remove selected Tag, Tag not present!");
 					}
                     $scope.selectedTags.splice(where, 1);
                 };
@@ -110,10 +108,10 @@
                     }
 				};
 
-				$scope.clickedNavigationItem='all';
+				$scope.clickedNavigationItem="all";
                 $scope.filterCredentialBySpecial = function (string) {
                     $scope.clickedNavigationItem=string;
-                	if(string !== 'nav_trashbin'){
+                	if(string !== "nav_trashbin"){
                         $scope.delete_time=0;
                         $rootScope.$broadcast('set_delete_time', $scope.delete_time);
 					}
@@ -124,21 +122,21 @@
                 };
 
                 $scope.collapsedDefaultValue=false;
-                $scope.tagCollapsibleOpen=VaultService.getVaultSetting('vaultTagCollapsedState',$scope.collapsedDefaultValue);
+                $scope.tagCollapsibleOpen=VaultService.getVaultSetting("vaultTagCollapsedState",$scope.collapsedDefaultValue);
 
                 $scope.tagCollapsibleClicked = function () {
-                	if (VaultService.getVaultSetting('vaultTagCollapsedState',$scope.collapsedDefaultValue) === true) {
-                        VaultService.setVaultSetting('vaultTagCollapsedState',false);
+                	if (VaultService.getVaultSetting("vaultTagCollapsedState",$scope.collapsedDefaultValue) === true) {
+                        VaultService.setVaultSetting("vaultTagCollapsedState",false);
                     } else {
-                        VaultService.setVaultSetting('vaultTagCollapsedState',true);
+                        VaultService.setVaultSetting("vaultTagCollapsedState",true);
                 	}
                 };
 
                 $scope.tagCollapsibleState = function () {
                 	if(VaultService.getVaultSetting('vaultTagCollapsedState',$scope.collapsedDefaultValue)){
-                		return '';
+                       return "";
 					}
-                    return 'open';
+                    return "open";
                 };
 
 				$rootScope.$on('credentials_loaded', function () {
