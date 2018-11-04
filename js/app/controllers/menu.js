@@ -111,6 +111,10 @@
 				};
 
                 $scope.filterCredentialBySpecial = function (string) {
+                	if(string !== 'nav_trashbin'){
+                        $scope.delete_time=0;
+                        $rootScope.$broadcast('set_delete_time', $scope.delete_time);
+					}
                     $rootScope.$broadcast('filterSpecial',string);
                 };
 
@@ -152,15 +156,12 @@
 					$scope.available_tags = TagService.getTags();
 				}, true);
 
-                $scope.$on('release_trashbin', function(event, args) {
-                    $scope.delete_time=args;
-				});
-
 				$scope.toggleDeleteTime = function () {
 					if ($scope.delete_time > 0) {
 						$scope.delete_time = 0;
 					} else {
 						$scope.delete_time = 1;
+                        this.filterCredentialBySpecial('nav_trashbin');
 					}
 					$rootScope.$broadcast('set_delete_time', $scope.delete_time);
 				};

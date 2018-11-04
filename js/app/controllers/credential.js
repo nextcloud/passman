@@ -372,25 +372,51 @@
 
                 }, true);
 
+                $scope.no_credentials_label=[];
+                $scope.no_credentials_label.all=true;
+                $scope.no_credentials_label.s_good=false;
+                $scope.no_credentials_label.s_medium=false;
+                $scope.no_credentials_label.s_low=false;
+                $scope.no_credentials_label.expired=false;
+
+                $scope.disableAllLabels = function(){
+                    $scope.no_credentials_label.all=false;
+                    $scope.no_credentials_label.s_good=false;
+                    $scope.no_credentials_label.s_medium=false;
+                    $scope.no_credentials_label.s_low=false;
+                    $scope.no_credentials_label.expired=false;
+				};
+
                 //watch for special tags
                 $scope.$on('filterSpecial', function(event, args) {
+
+                    $scope.disableAllLabels();
                     switch (args) {
-                        case "strength_good": $scope.filterStrength(3,1000); break;
-                        case "strength_medium": $scope.filterStrength(2,3); break;
-                        case "strength_low": $scope.filterStrength(0,1); break;
-                        case "expired": $scope.filterExpired(); break;
-                        case "all": $scope.filterAll(); break;
+                        case "strength_good":
+                        	$scope.filterStrength(3,1000);
+                            $scope.no_credentials_label.s_good=true;
+                        	break;
+                        case "strength_medium":
+                        	$scope.filterStrength(2,3);
+                            $scope.no_credentials_label.s_medium=true;
+                        	break;
+                        case "strength_low":
+                        	$scope.filterStrength(0,1);
+                            $scope.no_credentials_label.s_low=true;
+                        	break;
+                        case "expired":
+                        	$scope.filterExpired();
+                            $scope.no_credentials_label.expired=true;
+                        	break;
+                        case "all":
+                        	$scope.filterAll();
+                            $scope.no_credentials_label.all=true;
+                        	break;
                     }
-
-                    $scope.delete_time=0;
-                    $rootScope.$broadcast('release_trashbin', $scope.delete_time);
-
                 });
 
-
-                $scope.getListSize = function(){
-                	var l = $scope.filtered_credentials;//$scope.active_vault.credentials.length
-                	console.log(l.length);
+                $scope.getListSizes = function(){
+                	var l = $scope.filtered_credentials;
 
                 	var deleted=0;
                     for (var i = 0; i < l.length; i++) {
@@ -399,7 +425,12 @@
 						}
                     }
 
-                	return l.length-deleted;
+                    var result=[];
+                    result.listsize=l.length;
+                    result.listsize_wout_deleted=l.length-deleted;
+                    result.listsize_deleted=deleted;
+
+                	return result;
 				};
 
                 $scope.filterAll = function(){
