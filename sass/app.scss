@@ -38,7 +38,7 @@
   transition: height 0.15s ease-out;
 }
 #app-settings-content.ng-hide{
-  display: inherit !important;
+  //display: inherit !important;
   height: 0;
   padding: 0;
   transition: height 0.15s ease-in;

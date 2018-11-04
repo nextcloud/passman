@@ -136,7 +136,6 @@
 
                 $scope.collapsedDefaultValue=false;
                 $scope.tagCollapsibleOpen=VaultService.getVaultSetting("vaultTagCollapsedState",$scope.collapsedDefaultValue);
-
                 $scope.tagCollapsibleClicked = function () {
                 	if (VaultService.getVaultSetting("vaultTagCollapsedState",$scope.collapsedDefaultValue) === true) {
                         VaultService.setVaultSetting("vaultTagCollapsedState",false);
@@ -151,6 +150,27 @@
 					}
                     return "open";
                 };
+
+
+
+                $scope.legacyNavbar = VaultService.getVaultSetting("vaultTagCollapsedState",false);
+                $scope.legacyNavbarChecked = function () {
+                    if (VaultService.getVaultSetting("vaultNavBarLegacy",false)) {
+                        VaultService.setVaultSetting("vaultNavBarLegacy",false);
+                    } else {
+                        VaultService.setVaultSetting("vaultNavBarLegacy",true);
+                    }
+                    $scope.legacyNavbar=VaultService.getVaultSetting("vaultNavBarLegacy",false);
+                };
+
+                $scope.legacyNavbarCheckedState = function () {
+                    $scope.legacyNavbar=VaultService.getVaultSetting("vaultNavBarLegacy",false);
+                    if($scope.legacyNavbar){
+                        return true;
+                    }
+                    return false;
+                };
+
 
 				$rootScope.$on('credentials_loaded', function () {
 					$rootScope.$broadcast('selected_tags_updated', $scope.selectedTags);
