@@ -89,7 +89,7 @@
 				</div>
 			</li>
 		</ul>
-		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all" class="nopasswords" ng-hide="delete_time>0">
+		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner" class="nopasswords" ng-hide="delete_time>0">
 			<b>{{'Hello there!' | translate}}</b><br>
 			<div>{{'It does not seem that you have any passwords. Do you want to add one?' | translate}}</div>
 			<div class="">
