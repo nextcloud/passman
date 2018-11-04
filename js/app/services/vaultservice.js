@@ -66,7 +66,7 @@
 						return false;
 					} else {
 						_activeVault.vault_settings[key] = value;
-						this.updateVault(_activeVault);
+                        _this.updateVault(_activeVault);
 					}
 
 				},
