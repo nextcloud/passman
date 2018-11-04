@@ -116,6 +116,9 @@
                         $rootScope.$broadcast('set_delete_time', $scope.delete_time);
 					}
                     $rootScope.$broadcast('filterSpecial',string);
+
+                	//close settings when item is selected
+                	$scope.settingsShown=false;
                 };
 
                 $scope.collapsedDefaultValue=false;
