@@ -17,6 +17,7 @@ env:
 branches:
   only:
     - master
+    - fix_layout_for_14
 
 
 before_install:
