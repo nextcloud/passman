@@ -203,7 +203,7 @@ style('passman', 'app');
 
                 <div class="settings-container-label">
                     <input class="checkbox" id="navbarLegacyMode" type="checkbox" ng-model="legacyNavbar" ng-change="legacyNavbarChecked()">
-                    <label for="navbarLegacyMode">{{'Use Legacy Navigationbar' | translate }}</label>
+                    <label for="navbarLegacyMode">{{'Simple Navigation' | translate }}</label>
                 </div>
 
                 <div class="settings-container">
