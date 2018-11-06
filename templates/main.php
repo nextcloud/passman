@@ -165,8 +165,7 @@ style('passman', 'app');
                 <a ng-class="{selected: clickedNavigationItem=='strength_good'}" ng-click="filterCredentialBySpecial('strength_good')">{{ 'Good Strength' | translate }}</a>
             </li>
             <li>
-                <a ng-class="{selected: clickedNavigationItem=='expired'}" class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate
-                    }}</a>
+                <a ng-class="{selected: clickedNavigationItem=='expired'}" class="icon-expired svg" ng-click="filterCredentialBySpecial('expired')">{{ 'Expired' | translate }}</a>
             </li>
             <li data-id="trashbin" class="nav-trashbin pinned first-pinned">
                 <a ng-click="toggleDeleteTime()" ng-class="{'active': delete_time > 0}" class="icon-delete svg">
