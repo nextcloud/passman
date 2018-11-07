@@ -59,6 +59,11 @@
   margin-top: 5px;
 }
 
+//moves the burgermenu down to level it with passman-controls
+#app-navigation-toggle{
+  padding-top: 50px;
+}
+
 #passman-controls {
   box-sizing: border-box;
   position: fixed;
@@ -76,6 +81,12 @@
   user-select: none;
 
   height: 44px !important;
+  .breadcrumb{
+    //Move Homeicon to the right to prevent overlap with burgermenu
+    @media only screen and (max-width: 769px) {
+      padding-left: 15px;
+    }
+  }
 }
 @media only screen and (max-width: 768px){
   #passman-controls{
