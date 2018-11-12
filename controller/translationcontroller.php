@@ -347,6 +347,14 @@ class TranslationController extends ApiController {
 			'decline' => $this->trans->t('Decline'),
 			'session.time.left' => $this->trans->t('You have {{session_time}} left before logout.'),
 			'vault.locked' => $this->trans->t('Your vault has been locked for {{time}} because of {{tries}} failed attempts!'),
+            'vault.hint.hello' => $this->trans->t('Hello there!'),
+            'vault.hint.hello.add' => $this->trans->t('It does not seem that you have any passwords. Do you want to add one?'),
+            'vault.hint.list.nogood' => $this->trans->t('You don\'t have good credentials'),
+            'vault.hint.list.nomedium' => $this->trans->t('You don\'t have medium credentials'),
+            'vault.hint.list.nobad' => $this->trans->t('You don\'t have bad credentials'),
+            'vault.hint.list.noexpired' => $this->trans->t('You don\'t have expired credentials'),
+            'vault.hint.list.nodeleted' => $this->trans->t('You don\'t have deleted credentials'),
+
 
 			// templates/views/vaults.html
 			'last.access' => $this->trans->t('Last accessed'),
@@ -391,6 +399,16 @@ class TranslationController extends ApiController {
 			'deleted.credentials' => $this->trans->t('Deleted credentials'),
 			'logout' => $this->trans->t('Logout'),
 			'donate' => $this->trans->t('Donate'),
+            'navigation.show.all' => $this->trans->t('Show All'),
+            'navigation.tags' => $this->trans->t('Tags'),
+            'navigation.tags.search' => $this->trans->t('Search Tags'),
+            'navigation.strength.good' => $this->trans->t('Good Strength'),
+            'navigation.strength.medium' => $this->trans->t('Medium Strength'),
+            'navigation.strength.bad' => $this->trans->t('Bad Strength'),
+            'navigation.expired' => $this->trans->t('Expired'),
+            'navigation.advanced.filter' => $this->trans->t('Filter Tags'),
+            'navigation.advanced.checkbox' => $this->trans->t('Simple Navigation'),
+
 
 			// templates/public_share.php
 			'share.page.text' => $this->trans->t('Someone has shared a credential with you.'),

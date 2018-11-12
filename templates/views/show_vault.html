@@ -90,8 +90,8 @@
 			</li>
 		</ul>
 		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner" class="nopasswords" ng-hide="delete_time>0">
-			<b>{{'Hello there!' | translate}}</b><br>
-			<div>{{'It does not seem that you have any passwords. Do you want to add one?' | translate}}</div>
+			<b>{{'vault.hint.hello' | translate}}</b><br>
+			<div>{{'vault.hint.hello.add' | translate}}</div>
 			<div class="">
 				<button ng-click="addCredential()">+</button>
 			</div>
@@ -99,27 +99,27 @@
 
 		<!--nopassword-hint for good strength -->
 		<div  class="belowList" ng-if="no_credentials_label.s_good" ng-hide="getListSizes().listsize_wout_deleted>0">
-			<div>{{ 'You don\'t have good credentials' | translate}}</div>
+			<div>{{ 'vault.hint.list.nogood' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for medium strength -->
 		<div  class="belowList" ng-if="no_credentials_label.s_medium" ng-hide="getListSizes().listsize_wout_deleted>0">
-			<div>{{ 'You don\'t have medium credentials' | translate}}</div>
+			<div>{{ 'vault.hint.list.nomedium' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for bad strength -->
 		<div  class="belowList" ng-if="no_credentials_label.s_low" ng-hide="getListSizes().listsize_wout_deleted>0">
-			<div>{{ 'You don\'t have bad credentials' | translate}}</div>
+			<div>{{ 'vault.hint.list.nobad' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for expired -->
 		<div  class="belowList" ng-if="no_credentials_label.expired" ng-hide="getListSizes().listsize_wout_deleted>0">
-			<div>{{ 'You don\'t have expired credentials' | translate}}</div>
+			<div>{{ 'vault.hint.list.noexpired' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for deleted -->
 		<div  class="belowList" ng-if="getListSizes().listsize_deleted==0" ng-hide="delete_time==0">
-			<div>{{ 'You don\'t have deleted credentials' | translate}}</div>
+			<div>{{ 'vault.hint.list.nodeleted' | translate}}</div>
 		</div>
 
 	</div>
