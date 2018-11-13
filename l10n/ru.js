@@ -93,7 +93,7 @@ OC.L10N.register(
     "Current OTP settings" : "Текущие настройки OPT",
     "Issuer" : "Выпустил",
     "Secret" : "Секрет",
-    "Expiration date" : "Дата истечения",
+    "Expiration date" : "Срок действия",
     "No expiration date set" : "Дата истечения не установлена",
     "Renew interval" : "Интервал обновления",
     "Disabled" : "Отключено",
