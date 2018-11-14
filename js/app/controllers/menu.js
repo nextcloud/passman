@@ -118,6 +118,30 @@
                     }
 				};
 
+                //searchboxfix
+                var native_search = document.getElementById("searchbox");
+                if(native_search !== null){
+                    native_search.nextElementSibling.addEventListener('click', function (e) {
+                        $scope.$apply(function () {
+                            $rootScope.$broadcast('nc_searchbox',"");
+                        });
+                    });
+
+                    native_search.classList.remove('hidden');
+                    native_search.addEventListener('keypress', function (e) {
+                        if(e.keyCode === 13){
+                            e.preventDefault();
+                        }
+                    });
+
+                    native_search.addEventListener('keyup', function (e) {
+                        $scope.$apply(function () {
+                            $rootScope.$broadcast('nc_searchbox',native_search.value);
+                        });
+                    });
+                }
+
+
 				$scope.clickedNavigationItem="all";
                 $scope.filterCredentialBySpecial = function (string) {
                     $scope.clickedNavigationItem=string;

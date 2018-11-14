@@ -325,30 +325,11 @@
 					fields: ['label', 'username', 'email', 'custom_fields']
 				};
 
+                //searchboxfix
+                $scope.$on('nc_searchbox', function(event, args) {
+                    $scope.filterOptions.filterText=args;
+				});
 
-
-				//searchboxfix
-                var native_search = document.getElementById("searchbox");
-                if(native_search !== null){
-                	native_search.nextElementSibling.addEventListener('click', function (e) {
-                	    $scope.$apply(function () {
-                	        $scope.filterOptions.filterText="";
-                	    });
-                	});
-
-                	native_search.classList.remove('hidden');
-                	native_search.addEventListener('keypress', function (e) {
-                	    if(e.keyCode === 13){
-                	        e.preventDefault();
-                	    }
-                	});
-
-                	native_search.addEventListener('keyup', function (e) {
-                	    $scope.$apply(function () {
-                	        $scope.filterOptions.filterText=native_search.value;
-                	    });
-                	});
-                }
 
                 $scope.filtered_credentials = [];
                 $scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function () {
