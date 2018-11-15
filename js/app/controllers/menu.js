@@ -176,28 +176,19 @@
                 };
 
 
+                $scope.legacyNavbarDefault=true;
+                $scope.legacyNavbar = $scope.legacyNavbarDefault;
+                $scope.$watch('legacyNavbar', function(newValue, oldValue) {
+                    VaultService.setVaultSetting("vaultNavBarLegacy",newValue);
+                });
 
-                $scope.legacyNavbar = VaultService.getVaultSetting("vaultTagCollapsedState",false);
-                $scope.legacyNavbarChecked = function () {
-                    if (VaultService.getVaultSetting("vaultNavBarLegacy",false)) {
-                        VaultService.setVaultSetting("vaultNavBarLegacy",false);
-                    } else {
-                        VaultService.setVaultSetting("vaultNavBarLegacy",true);
-                    }
-                    $scope.legacyNavbar=VaultService.getVaultSetting("vaultNavBarLegacy",false);
+                $scope.initializeNavbar = function () {
+                    $scope.legacyNavbar = VaultService.getVaultSetting('vaultNavBarLegacy',$scope.legacyNavbarDefault);
                 };
-
-                $scope.legacyNavbarCheckedState = function () {
-                    $scope.legacyNavbar=VaultService.getVaultSetting("vaultNavBarLegacy",false);
-                    if($scope.legacyNavbar){
-                        return true;
-                    }
-                    return false;
-                };
-
 
 				$rootScope.$on('credentials_loaded', function () {
 					$rootScope.$broadcast('selected_tags_updated', $scope.selectedTags);
+                    $scope.initializeNavbar();
 				});
 
 				$scope.available_tags = TagService.getTags();

@@ -125,7 +125,7 @@ style('passman', 'app');
     </div>
 
     <div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
-        <ul class="with-icon" ng-hide="legacyNavbarCheckedState()">
+        <ul class="with-icon" ng-class="{ 'hidden-list': !legacyNavbar }" >
 
             <li>
                 <a ng-class="{selected: clickedNavigationItem=='all'}" class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'navigation.show.all' | translate }}</a>
@@ -173,7 +173,7 @@ style('passman', 'app');
                 </a>
             </li>
         </ul >
-        <ul class="with-icon" ng-hide="!legacyNavbarCheckedState()">
+        <ul class="with-icon hidden-list" ng-class="{ 'hidden-list': legacyNavbar }">
             <li class="taginput">
                 <a class="taginput icon-search">
                     <tags-input ng-model="selectedTags" replace-spaces-with-dashes="false" placeholder="{{ 'navigation.advanced.filter' | translate }}">
@@ -201,7 +201,7 @@ style('passman', 'app');
             <div id="app-settings-content" class="hide-animation" ng-hide="!settingsShown">
 
                 <div class="settings-container-label">
-                    <input class="checkbox" id="navbarLegacyMode" type="checkbox" ng-model="legacyNavbar" ng-change="legacyNavbarChecked()">
+                    <input class="checkbox" id="navbarLegacyMode" type="checkbox" ng-model="legacyNavbar">
                     <label for="navbarLegacyMode">{{'navigation.advanced.checkbox' | translate }}</label>
                 </div>
 
