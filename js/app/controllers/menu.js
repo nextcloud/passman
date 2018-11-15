@@ -31,8 +31,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('MenuCtrl', ['$scope', 'VaultService', '$location', '$rootScope', 'TagService','SettingsService',
-			function ($scope, VaultService, $location, $rootScope, TagService, SettingsService) {
+		.controller('MenuCtrl', ['$scope', 'VaultService', '$location', '$rootScope', 'TagService','SettingsService', '$translate',
+			function ($scope, VaultService, $location, $rootScope, TagService, SettingsService, $translate) {
 				$rootScope.logout = function () {
 					SettingsService.setSetting('defaultVaultPass', false);
 					TagService.resetTags();
@@ -174,6 +174,20 @@
 					}
                     return "open";
                 };
+
+
+
+                //this is needed, because the translation is not ready when the dom loads and the translation only returns the key.
+                //then the key is set, and the taginput is collapsed by angular. If the correct translation loads, the collapsed dom element does not update itself.
+                //here we set the value manually
+                $scope.initPlaceholder = function () {
+                    $translate.onReady().then(function(){
+                        var string=$translate.instant('navigation.advanced.filter');
+                        document.getElementById("tags-input-outer").setAttribute("placeholder", string);
+                        document.getElementById("tags-input-outer").firstChild.firstChild.childNodes[1].setAttribute("placeholder", string);
+                    });
+                };
+
 
 
                 $scope.legacyNavbarDefault=true;

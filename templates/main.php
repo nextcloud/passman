@@ -176,7 +176,7 @@ style('passman', 'app');
         <ul class="with-icon hidden-list" ng-class="{ 'hidden-list': legacyNavbar }">
             <li class="taginput">
                 <a class="taginput icon-search">
-                    <tags-input ng-model="selectedTags" replace-spaces-with-dashes="false" placeholder="{{ 'navigation.advanced.filter' | translate }}">
+                    <tags-input id="tags-input-outer" ng-model="selectedTags" replace-spaces-with-dashes="false" ng-init="initPlaceholder()">
                         <auto-complete source="getTags($query)" min-length="0"></auto-complete>
                     </tags-input>
                 </a>
