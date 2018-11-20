@@ -110,27 +110,28 @@
 
 
 		<!--nopassword-hint for good strength -->
-		<div  class="belowList" ng-if="no_credentials_label.s_good" ng-hide="getListSizes().listsize_wout_deleted>0">
+		<div  class="nopasswords" ng-if="no_credentials_label.s_good" ng-hide="getListSizes().listsize_wout_deleted>0">
 			<div>{{ 'vault.hint.list.nogood' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for medium strength -->
-		<div  class="belowList" ng-if="no_credentials_label.s_medium" ng-hide="getListSizes().listsize_wout_deleted>0">
+		<div  class="nopasswords" ng-if="no_credentials_label.s_medium" ng-hide="getListSizes().listsize_wout_deleted>0">
 			<div>{{ 'vault.hint.list.nomedium' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for bad strength -->
-		<div  class="belowList" ng-if="no_credentials_label.s_low" ng-hide="getListSizes().listsize_wout_deleted>0">
+
+		<div  class="nopasswords" ng-if="no_credentials_label.s_low" ng-hide="getListSizes().listsize_wout_deleted>0">
 			<div>{{ 'vault.hint.list.nobad' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for expired -->
-		<div  class="belowList" ng-if="no_credentials_label.expired" ng-hide="getListSizes().listsize_wout_deleted>0">
+		<div  class="nopasswords" ng-if="no_credentials_label.expired" ng-hide="getListSizes().listsize_wout_deleted>0">
 			<div>{{ 'vault.hint.list.noexpired' | translate}}</div>
 		</div>
 
 		<!--nopassword-hint for deleted -->
-		<div  class="belowList" ng-if="getListSizes().listsize_deleted==0" ng-hide="delete_time==0">
+		<div  class="nopasswords" ng-if="getListSizes().listsize_deleted==0" ng-hide="delete_time==0">
 			<div>{{ 'vault.hint.list.nodeleted' | translate}}</div>
 		</div>
 
