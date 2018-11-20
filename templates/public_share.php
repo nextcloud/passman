@@ -81,7 +81,7 @@ style('passman', 'public-page');
 				</button>
 			</div>
 			<div ng-if="expired">
-				<?php p($l->t("Awwhh&hellip; credential not found. Maybe it expired")); ?>
+				<?php p($l->t("Awwhh… could not find the credential. Maybe it expired?")); ?>
 			</div>
 			<div ng-if="shared_credential">
 				<table class="table">
@@ -161,7 +161,7 @@ style('passman', 'public-page');
 					</tr>
 					<tr ng-show="shared_credential.expire_time > 0">
 						<td>
-							<?php p($l->t("Expire time")); ?>
+							<?php p($l->t("Expires:")); ?>
 						</td>
 						<td>
 							{{shared_credential.expire_time * 1000 |
@@ -196,7 +196,7 @@ style('passman', 'public-page');
 			</div>
 			<div class="footer">
 				<a href="https://github.com/nextcloud/passman" target="_blank"
-				   class="link">Github</a> | <a
+				   class="link">GitHub</a> | <a
 						href="https://github.com/nextcloud/passman/wiki"
 						target="_blank" class="link">Wiki</a> | <a
 						href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2"
