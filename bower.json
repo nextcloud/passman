@@ -1,0 +1,43 @@
+{
+  "name": "Passman",
+  "description": "Passman is a fully featured password manager",
+  "main": "",
+  "authors": [
+    "Sander Brand <brantje(AT)gmail.com>"
+  ],
+  "license": "AGPLv3",
+  "homepage": "passman.cc",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "core/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-animate": "1.5.8",
+    "angular-cookies": "1.5.8",
+    "angular-local-storage": "0.4.0",
+    "angular-mocks": "1.5.8",
+    "angular-off-click": "1.0.6",
+    "angular-resource": "1.5.8",
+    "angular-route": "1.5.8",
+    "angular-sanitize": "1.5.8",
+    "angular-touch": "1.5.8",
+    "angular-translate": "2.9.0",
+    "angular-xeditable": "0.3.0",
+    "angular-datetime-picker": "",
+    "ng-clipboard": "1.5.10",
+    "ng-password-meter": "0.4.0",
+    "ng-tags-input": "3.1.1",
+    "papa-parse": "4.1.2",
+    "llqrcode": "0.0.2",
+    "sha": " 2.0.1",
+    "sjcl": " 1.0.8",
+    "ui-sortable": "0.19.0",
+    "zxcvbn": "4.4.2"
+  }
+}
