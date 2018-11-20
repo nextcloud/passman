@@ -34,6 +34,8 @@
 		.controller('MenuCtrl', ['$scope', 'VaultService', '$location', '$rootScope', 'TagService','SettingsService', '$translate',
 			function ($scope, VaultService, $location, $rootScope, TagService, SettingsService, $translate) {
 				$rootScope.logout = function () {
+				    //see vault.js:54
+                    $rootScope.override_default_vault=true;
 					SettingsService.setSetting('defaultVaultPass', false);
 					TagService.resetTags();
 					$rootScope.$broadcast('logout');
