@@ -77,7 +77,7 @@ style('passman', 'public-page');
 					it")); ?>
 				</button>
 				<button class="button-geen" ng-if="loading"><i
-							class="fa fa-spinner fa-spin"></i><?php p($l->t("Loading...")); ?>
+							class="fa fa-spinner fa-spin"></i><?php p($l->t("Loading&hellip;")); ?>
 				</button>
 			</div>
 			<div ng-if="expired">

@@ -322,8 +322,6 @@ OC.L10N.register(
     "Requested by" : "მომთხოვნელი",
     "Reason" : "მიზეზი",
     "Click here to request\n\t\t\t\t\tit" : "დააჭირეთ რომ მოითხოვოთ\n\t\t\t\t\tის",
-    "Loading..." : "იტვირთება…",
-    "Awwhh.... credential not found. Maybe it expired" : "უფლებამოსილების პოვნა ვერ მოხერხდა. შესაძლოა მას გაუვიდა ვადა",
     "Expire time" : "გაუქმების დრო",
     "Connection to server lost" : "სერვერთან კავშირი გაწყდა",
     "Problem loading page, reloading in 5 seconds" : "გვერდის ჩატვირთვის შეცდომა, გადაიტვირთება 5 წამში",
@@ -331,4 +329,4 @@ OC.L10N.register(
     "Dismiss" : "დათხოვნა",
     "seconds ago" : "წამის წინ"
 },
-"nplurals=1; plural=0;");
+"nplurals=2; plural=(n!=1);");

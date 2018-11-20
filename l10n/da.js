@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Adgangskoder",
+    "Generating sharing keys ( %s / 2)" : "Genererer delte nøgler (%s / 2)",
     "Incorrect vault password!" : "Ukorrekt boks adgangskode",
     "Passwords do not match" : "Kodeord matchede ikke",
     "General" : "Generel",
@@ -244,7 +245,6 @@ OC.L10N.register(
     "Passman Settings" : "Passman indstillinger",
     "Password sharing" : "Password deling",
     "Reason" : "Grund",
-    "Loading..." : "Indlæser...",
     "Expire time" : "Udløbstid",
     "Connection to server lost" : "Mistede forbindelsen til serveren",
     "Problem loading page, reloading in 5 seconds" : "Problem med indlæsning af side, genindlæser om 5 sekunder",

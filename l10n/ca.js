@@ -277,7 +277,7 @@ OC.L10N.register(
     "You updated %1$s" : "Has actualitzat%1$s",
     "%2$s has revised %1$s to the revision of %3$s" : "%2$sS'ha revisat%1$s a la revisió de%3$s",
     "You reverted %1$s back to the revision of %3$s" : "torna a la %1$sevisió de%3$s",
-    "%3$s has renamed %1$s to %2$s" : "%3$sha tornat a anomenar%1$s%2$s",
+    "%3$s has renamed %1$s to %2$s" : "%3$sha tornat a nomenar%1$s%2$s",
     "You renamed %1$s to %2$s" : "Has canviat de nom%1$s%2$s",
     "%1$s has been deleted by %2$s" : "%1$sha estat eliminat per%2$s",
     "You deleted %1$s" : "Has esborrat %1$s",
@@ -318,13 +318,11 @@ OC.L10N.register(
     "Requested by" : "Sol · licitada per",
     "Reason" : "Raó",
     "Click here to request\n\t\t\t\t\tit" : "Feu clic aquí per sol·licitar-ho\n\t\t\t\t\t",
-    "Loading..." : "Carregant...",
-    "Awwhh.... credential not found. Maybe it expired" : "No s'ha trobat cap credencial ... Potser ha caducat",
     "Expire time" : "Temps d'expiració",
     "Connection to server lost" : "S'ha perdut la connexió amb el servidor",
     "Problem loading page, reloading in 5 seconds" : "Problemes carregant la pagina, recarregant en 5 segons",
     "Saving..." : "Desant...",
     "Dismiss" : "Rebutja",
-    "seconds ago" : "Segons enrere"
+    "seconds ago" : "fa uns segons"
 },
 "nplurals=2; plural=(n != 1);");

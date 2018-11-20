@@ -322,8 +322,6 @@ OC.L10N.register(
     "Requested by" : "Begärd av",
     "Reason" : "Anledning",
     "Click here to request\n\t\t\t\t\tit" : "Klicka här för att efterfråga\n\t\t\t\t\tit",
-    "Loading..." : "Laddar...",
-    "Awwhh.... credential not found. Maybe it expired" : "Oops... uppgifter hittades inte. Kanske har de gått ut",
     "Expire time" : "Utgångstid",
     "Connection to server lost" : "Anslutning till servern förlorad",
     "Problem loading page, reloading in 5 seconds" : "Problem att ladda sidan, provar igen om 5 sekunder",
