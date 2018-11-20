@@ -354,6 +354,7 @@ class TranslationController extends ApiController {
             'vault.hint.list.nobad' => $this->trans->t('You don\'t have bad credentials'),
             'vault.hint.list.noexpired' => $this->trans->t('You don\'t have expired credentials'),
             'vault.hint.list.nodeleted' => $this->trans->t('You don\'t have deleted credentials'),
+            'vault.hint.list.notags' => $this->trans->t('There are no credentials with your selected tags'),
 
 
 			// templates/views/vaults.html

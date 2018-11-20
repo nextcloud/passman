@@ -89,13 +89,18 @@
 				</div>
 			</li>
 		</ul>
-		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner" class="nopasswords" ng-hide="delete_time>0">
+		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner && selectedtags.length==0" class="nopasswords" ng-hide="delete_time>0">
 			<b>{{'vault.hint.hello' | translate}}</b><br>
 			<div>{{'vault.hint.hello.add' | translate}}</div>
 			<div class="">
 				<button ng-click="addCredential()">+</button>
 			</div>
 		</div>
+		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner && selectedtags.length>0" class="nopasswords" ng-hide="delete_time>0">
+			<div>{{ 'vault.hint.list.notags' | translate}}</div>
+		</div>
+
+
 
 		<!--nopassword-hint for good strength -->
 		<div  class="belowList" ng-if="no_credentials_label.s_good" ng-hide="getListSizes().listsize_wout_deleted>0">
