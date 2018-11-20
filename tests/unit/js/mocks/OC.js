@@ -730,9 +730,11 @@ var OC={
 	 * After 7sec the first notification is gone, then we can show another one
 	 * if necessary.
 	 */
-	_ajaxConnectionLostHandler: _.throttle(function() {
-		OC.Notification.showTemporary(t('core', 'Connection to server lost'));
-	}, 7 * 1000, {trailing: false}),
+	_ajaxConnectionLostHandler: function(underscore){
+        underscore.throttle(function() {
+            OC.Notification.showTemporary(t('core', 'Connection to server lost'));
+        }, 7 * 1000, {trailing: false});
+	},
 
 	/**
 	 * Process ajax error, redirects to main page
@@ -761,7 +763,7 @@ var OC={
 			// Connection lost (e.g. WiFi disconnected or server is down)
 			setTimeout(function() {
 				if (!self._userIsNavigatingAway && !self._reloadCalled) {
-					self._ajaxConnectionLostHandler();
+					self._ajaxConnectionLostHandler(_);
 				}
 			}, 100);
 		}
