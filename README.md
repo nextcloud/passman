@@ -23,6 +23,7 @@ Those are mainly used to discuss all sorts of topics for Passman and it's apps!
   * [Password generation](https://github.com/nextcloud/passman#password-generation)
   * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
 * [Support passman](https://github.com/nextcloud/passman#support-passman)
+* [Development](https://github.com/nextcloud/passman#development)
 * [API](https://github.com/nextcloud/passman#api)
 * [Docker](https://github.com/nextcloud/passman#docker)
 * [Maintainers](https://github.com/nextcloud/passman#main-developers)
@@ -64,8 +65,9 @@ For more screenshots: [Click here](http://imgur.com/a/giKVt)
 For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 
 ## Tested on
-- NextCloud 10 / 11
-- ownCloud 9.1+
+- Nextcloud 14
+
+For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/releases)
 
 
 ## External apps
@@ -109,8 +111,6 @@ This time using the following routine:
 
 ### Sharing credentials.
 Passman allows users to share passwords (this can be turned off by an administrator). 
-
-
 
 ## API 
 For developers Passman offers an [api](https://github.com/nextcloud/passman/wiki/API).
