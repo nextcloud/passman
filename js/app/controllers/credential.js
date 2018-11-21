@@ -59,7 +59,7 @@
 						$scope.active_vault = vault;
 						$scope.active_vault.vaultKey = vaultKey;
 						if(!$rootScope.vaultCache){
-              $rootScope.vaultCache = [];
+              				$rootScope.vaultCache = [];
 						}
 						VaultService.setActiveVault($scope.active_vault);
 						for (var i = 0; i < _credentials.length; i++) {
