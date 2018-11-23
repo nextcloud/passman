@@ -59,7 +59,7 @@
 						$scope.active_vault = vault;
 						$scope.active_vault.vaultKey = vaultKey;
 						if(!$rootScope.vaultCache){
-              $rootScope.vaultCache = [];
+              				$rootScope.vaultCache = [];
 						}
 						VaultService.setActiveVault($scope.active_vault);
 						for (var i = 0; i < _credentials.length; i++) {
@@ -136,16 +136,27 @@
 
 
 
+                $rootScope.$on('push_decrypted_credential_to_list', function (event, args) {
+                	console.log("Update List with:");
+                	console.log(args);
+                    //$rootScope.active_vault.credentials.push(args);
+                    updateList(args);
+                });
+
+                var updateList = function (args) {
+                    $scope.credentials.push(args);
+                };
+
 				var refresh_data_interval = null;
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
 					if($rootScope.vaultCache && $rootScope.vaultCache[$scope.active_vault.guid]){
-            $scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
-            $rootScope.$broadcast('credentials_loaded');
-            $scope.show_spinner = false;
-          } else {
-            fetchCredentials();
-          }
+            			$scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
+            			$rootScope.$broadcast('credentials_loaded');
+            			$scope.show_spinner = false;
+          			} else {
+            			fetchCredentials();
+          			}
 					getPendingShareRequests();
 					refresh_data_interval = $interval(function () {
 						fetchCredentials();
@@ -411,11 +422,11 @@
 
 				$rootScope.$on('logout', function () {
 					if($scope.active_vault) {
-            $rootScope.vaultCache[$scope.active_vault.guid] = null;
-          }
+            			$rootScope.vaultCache[$scope.active_vault.guid] = null;
+          			}
 					$scope.active_vault = null;
 					$scope.credentials = [];
-//				$scope.$parent.selectedVault = false;
+					//$scope.$parent.selectedVault = false;
 
 				});
 
