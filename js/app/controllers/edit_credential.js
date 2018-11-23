@@ -368,7 +368,10 @@
                             credential = ShareService.decryptSharedCredential(credential, enc_key);
                         }
                         credential.tags_raw = credential.tags;
+
+                        $rootScope.vaultCache[$scope.active_vault.guid].credentials.push(credential);
                         $rootScope.$broadcast('push_decrypted_credential_to_list', credential);
+
                     } catch (e) {
                         NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
                         console.log(e);

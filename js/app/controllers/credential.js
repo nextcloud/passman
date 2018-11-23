@@ -134,19 +134,6 @@
 					});
 				};
 
-
-
-                $rootScope.$on('push_decrypted_credential_to_list', function (event, args) {
-                	console.log("Update List with:");
-                	console.log(args);
-                    //$rootScope.active_vault.credentials.push(args);
-                    updateList(args);
-                });
-
-                var updateList = function (args) {
-                    $scope.credentials.push(args);
-                };
-
 				var refresh_data_interval = null;
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
@@ -331,32 +318,35 @@
 					$scope.view_mode = viewMode;
 				};
 
+                $rootScope.$on('push_decrypted_credential_to_list', function () {
+                    $scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
+                    $rootScope.$broadcast('credentials_loaded');
+                });
+
 				$scope.filterOptions = {
 					filterText: '',
 					fields: ['label', 'username', 'email', 'custom_fields']
 				};
 
-
 				$scope.filtered_credentials = [];
 				$scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function () {
-					if (!$scope.active_vault) {
-						return;
-					}
-					if ($scope.active_vault.credentials) {
-						var credentials = angular.copy($scope.active_vault.credentials);
-						var filtered_credentials = $filter('credentialSearch')(credentials, $scope.filterOptions);
-						filtered_credentials = $filter('tagFilter')(filtered_credentials, $scope.selectedtags);
-						filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
-						$scope.filtered_credentials = filtered_credentials;
-						$scope.filterOptions.selectedtags = angular.copy($scope.selectedtags);
-						for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
-							var _credential = $scope.active_vault.credentials[i];
-							if (_credential.tags) {
-								TagService.addTags(_credential.tags);
-							}
-						}
-					}
-
+                    if (!$scope.active_vault) {
+                        return;
+                    }
+                    if ($scope.active_vault.credentials) {
+                        var credentials = angular.copy($scope.active_vault.credentials);
+                        var filtered_credentials = $filter('credentialSearch')(credentials, $scope.filterOptions);
+                        filtered_credentials = $filter('tagFilter')(filtered_credentials, $scope.selectedtags);
+                        filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
+                        $scope.filtered_credentials = filtered_credentials;
+                        $scope.filterOptions.selectedtags = angular.copy($scope.selectedtags);
+                        for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+                            var _credential = $scope.active_vault.credentials[i];
+                            if (_credential.tags) {
+                                TagService.addTags(_credential.tags);
+                            }
+                        }
+                    }
 				}, true);
 
 				$scope.selectedtags = [];
