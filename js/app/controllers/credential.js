@@ -319,7 +319,6 @@
 				};
 
                 $rootScope.$on('push_decrypted_credential_to_list', function () {
-                    $scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
                     $rootScope.$broadcast('credentials_loaded');
                 });
 

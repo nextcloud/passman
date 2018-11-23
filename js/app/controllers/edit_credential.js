@@ -317,8 +317,6 @@
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification($translate.instant('credential.created'), 5000);
 
-                            console.log("new cred");
-                            console.log(new_cred);
                             $scope.updateExistingListWithCredential(new_cred);
 						});
 
@@ -349,11 +347,13 @@
 						if(_credential.description && _credential.description !== "") {
 							_credential.description = _credential.description.replace(regex, "");
 						}
-						CredentialService.updateCredential(_credential, _useKey).then(function () {
+						CredentialService.updateCredential(_credential, _useKey).then(function (updated_cred) {
               				$scope.saving = false;
 							SettingsService.setSetting('edit_credential', null);
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification($translate.instant('credential.updated'), 5000);
+
+                            $scope.updateExistingListWithCredential(updated_cred);
 						});
 					}
 
@@ -369,7 +369,19 @@
                         }
                         credential.tags_raw = credential.tags;
 
-                        $rootScope.vaultCache[$scope.active_vault.guid].credentials.push(credential);
+
+                        var found=false;
+                        var credList=$rootScope.vaultCache[$scope.active_vault.guid].credentials;
+                        for (var i = 0; i < credList.length; i++) {
+							if(credList[i].credential_id==credential.credential_id){
+                                $rootScope.vaultCache[$scope.active_vault.guid].credentials[i]=credential;
+                                found=true;
+							}
+                        }
+
+                        if(!found){
+                            $rootScope.vaultCache[$scope.active_vault.guid].credentials.push(credential);
+						}
                         $rootScope.$broadcast('push_decrypted_credential_to_list', credential);
 
                     } catch (e) {
