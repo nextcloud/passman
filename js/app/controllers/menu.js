@@ -42,6 +42,10 @@
 					$location.path('/');
 				};
 
+                $scope.removeHiddenStyles = function(){
+                    document.getElementById('app-navigation').classList.remove('hidden');
+                };
+
 				$scope.selectedTags = [];
 				$scope.getTags = function ($query) {
 					return TagService.searchTag($query);

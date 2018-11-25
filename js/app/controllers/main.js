@@ -41,6 +41,10 @@
 
 			}
 
+            $scope.removeHiddenStyles = function(){
+				document.getElementById('warning_bar').classList.remove('hidden');
+			};
+
 			$rootScope.$on('settings_loaded', function(){
 				if (SettingsService.isEnabled('disable_contextmenu')) {
 					document.addEventListener('contextmenu', function (event) {

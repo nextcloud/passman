@@ -119,12 +119,12 @@ style('passman', 'app');
 
 <div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
     <div id="logoutTimer"></div>
-    <div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
+    <div id="warning_bar" class="warning_bar hidden" ng-if="using_http && http_warning_hidden == false" ng-init="removeHiddenStyles()">
         {{ 'http.warning' | translate }}
         <i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
     </div>
 
-    <div id="app-navigation" ng-if="selectedVault" ng-controller="MenuCtrl">
+    <div id="app-navigation" class="hidden" ng-if="selectedVault" ng-controller="MenuCtrl" ng-init="removeHiddenStyles()">
         <ul class="with-icon" ng-class="{ 'hidden-list': !legacyNavbar }" >
 
             <li>

@@ -33,7 +33,9 @@
 @import 'settings';
 
 
-
+.hidden{
+  display: none;
+}
 
 .hide-animation {
   display: inherit !important;
