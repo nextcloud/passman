@@ -42,7 +42,7 @@
 			}
 
             $scope.removeHiddenStyles = function(){
-				document.getElementById('warning_bar').classList.remove('hidden');
+				document.getElementById('warning_bar').classList.remove('template-hidden');
 			};
 
 			$rootScope.$on('settings_loaded', function(){

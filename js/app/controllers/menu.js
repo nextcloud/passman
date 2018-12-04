@@ -43,7 +43,7 @@
 				};
 
                 $scope.removeHiddenStyles = function(){
-                    document.getElementById('app-navigation').classList.remove('hidden');
+                    document.getElementById('app-navigation').classList.remove('template-hidden');
                 };
 
 				$scope.selectedTags = [];
