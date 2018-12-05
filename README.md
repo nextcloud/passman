@@ -8,9 +8,8 @@ Passman is a full featured password manager.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
 
 ## Join us!
-There are Telegram-Groups:
+There is a Telegram-Group:
 * [Passman General](https://t.me/passman_general)
-* [Passman Development](https://t.me/passman_dev)
 
 Those are mainly used to discuss all sorts of topics for Passman and it's apps!
 
