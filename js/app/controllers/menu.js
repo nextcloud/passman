@@ -193,18 +193,23 @@
                     });
                 };
 
-
-
                 $scope.legacyNavbarDefault=true;
+                $scope.legacyNavbarAlreadyInitialized=false;
+
                 if (typeof $scope.legacyNavbar === 'undefined') {
                     $scope.legacyNavbar = $scope.legacyNavbarDefault;
                 }
+
                 $scope.$watch('legacyNavbar', function(newValue, oldValue) {
                     VaultService.setVaultSetting("vaultNavBarLegacy",newValue);
                 });
 
                 $scope.initializeNavbar = function () {
+                    if($scope.legacyNavbarAlreadyInitialized){
+                        return;
+                    }
                     $scope.legacyNavbar = VaultService.getVaultSetting('vaultNavBarLegacy',$scope.legacyNavbarDefault);
+                    $scope.legacyNavbarAlreadyInitialized=true;
                 };
 
 				$rootScope.$on('credentials_loaded', function () {
