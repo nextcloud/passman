@@ -196,7 +196,9 @@
 
 
                 $scope.legacyNavbarDefault=true;
-                $scope.legacyNavbar = $scope.legacyNavbarDefault;
+                if (typeof $scope.legacyNavbar === 'undefined') {
+                    $scope.legacyNavbar = $scope.legacyNavbarDefault;
+                }
                 $scope.$watch('legacyNavbar', function(newValue, oldValue) {
                     VaultService.setVaultSetting("vaultNavBarLegacy",newValue);
                 });
