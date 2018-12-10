@@ -163,7 +163,7 @@
                 	$scope.settingsShown=false;
                 };
 
-                $scope.collapsedDefaultValue=false;
+                $scope.collapsedDefaultValue=true;
                 $scope.tagCollapsibleOpen=VaultService.getVaultSetting("vaultTagCollapsedState",$scope.collapsedDefaultValue);
                 $scope.tagCollapsibleClicked = function () {
                 	if (VaultService.getVaultSetting("vaultTagCollapsedState",$scope.collapsedDefaultValue) === true) {
