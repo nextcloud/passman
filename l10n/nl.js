@@ -241,7 +241,6 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "Wachtwoordsterkte minimale waarde: {{strength}}",
     "Please give your new vault a name." : "Voer de naam van je nieuwe kluis in.",
     "Repeat vault password" : "Herhaal kluiswachtwoord",
-    "Your sharing key's will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "De deelsleutels zullen een sterkte van 1024 bit hebben. Dit is later in  \\\"Instellingen\\\" aan te passen.",
     "Create vault" : "Creëren kluis",
     "Go back to vaults" : "Terug naar kluizen",
     "Please input the password for" : "Voer het wachtwoord in voor",
