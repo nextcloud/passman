@@ -241,6 +241,7 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "Mindest erforderliche Passwortstärke: {{strength}}",
     "Please give your new vault a name." : "Bitte einen Namen für den neuen Tresor eingeben.",
     "Repeat vault password" : "Tresor-Passwort wiederholen",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Ihre Freigabeschlüssel werden 1024 bit stark sein. Sie können dies auch später noch in den \\\"Einstellungen\\\" ändern.",
     "Create vault" : "Erstelle Tresor",
     "Go back to vaults" : "Zurück zu den Tresoren",
     "Please input the password for" : "Passwort eingeben für",

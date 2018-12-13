@@ -241,6 +241,7 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "A força da senha deve ser pelo menos: {{strength}}",
     "Please give your new vault a name." : "Por favor, dê um nome ao seu novo cofre.",
     "Repeat vault password" : "Repita a senha do cofre",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Suas chaves de compartilhamento serão de 1024 bits, alteráveis em \\\"Configurações\\\" mais tarde.",
     "Create vault" : "Criar cofre",
     "Go back to vaults" : "Voltar para os cofres",
     "Please input the password for" : "Por favor entre uma senha para",
