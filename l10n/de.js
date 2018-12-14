@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Passwords" : "Passwörter",
     "Generating sharing keys ( %s / 2)" : "Generiere Freigabe-Schlüssel (%s / 2)",
-    "Incorrect vault password!" : "falsches Tresor-Passwort",
+    "Incorrect vault password!" : "Falsches Tresor-Passwort",
     "Passwords do not match" : "Passwörter stimmen nicht überein",
     "General" : "Allgemein",
     "Custom Fields" : "Benutzerdefinierte Felder",
