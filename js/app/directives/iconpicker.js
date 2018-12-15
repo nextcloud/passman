@@ -93,7 +93,32 @@
                 return false;
             };
 
-          scope.useIcon = function() {
+            $('#iconPicker-CustomIcon').on('change', function(ev) {
+
+                console.log("upload");
+                scope.customIcon = {};
+
+                var f = ev.target.files[0];
+                var fr = new FileReader();
+
+                fr.onload = function(ev2) {
+                    scope.customIcon.data=ev2.target.result;
+                    scope.$apply();
+                };
+
+                fr.readAsDataURL(f);
+            });
+
+            scope.useIcon = function() {
+
+                if(scope.customIcon){
+                    var data = scope.customIcon.data;
+                    scope.credential.icon.type = data.substring(data.lastIndexOf(":")+1,data.lastIndexOf(";"));
+                    scope.credential.icon.content = data.substring(data.lastIndexOf(",")+1, data.length);
+                    $('#iconPicker').dialog('close');
+                    return;
+                }
+
             $http.get(scope.selectedIcon.url).then(function(result) {
               var base64Data = window.btoa(result.data);
               var mimeType = 'svg+xml';
