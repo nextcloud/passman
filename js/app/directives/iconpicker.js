@@ -40,6 +40,7 @@
         link: function(scope, element) {
 
           IconService.getIcons().then(function(icons) {
+            scope.iconGroupsAll = icons;
             scope.iconGroups = icons;
           });
 
