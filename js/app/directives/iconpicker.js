@@ -52,6 +52,47 @@
               $('.iconList').scrollTop(offset.top);
           };
 
+          var search = document.getElementById("iconPicker-Search");
+          search.addEventListener('keypress', function (e) {
+              if(e.keyCode === 13){
+                  e.preventDefault();
+              }
+          });
+
+          search.addEventListener('keyup', function (e) {
+              var g={};
+              g.Numix=[];
+              scope.iconGroupsAll.Numix.forEach(function(element) {
+                  if(scope.isAllowedIcon(element))
+                      g.Numix.push(element);
+              });
+
+              g["essential-collection"]=[];
+              scope.iconGroupsAll["essential-collection"].forEach(function(element) {
+                  if(scope.isAllowedIcon(element))
+                      g["essential-collection"].push(element);
+              });
+
+              g["font-awesome"]=[];
+              scope.iconGroupsAll["font-awesome"].forEach(function(element) {
+              if(scope.isAllowedIcon(element))
+                  g["font-awesome"].push(element);
+              });
+
+              scope.iconGroups=g;
+              scope.$apply();
+            });
+
+            scope.isAllowedIcon = function(IconElement) {
+                var searchval=search.value.toLowerCase();
+                var urlCropped = IconElement.url.substring(IconElement.url.lastIndexOf("/")+1, IconElement.url.length);
+
+                if(urlCropped.includes(searchval) || IconElement.pack.toLowerCase() ===searchval){
+                    return true;
+                }
+                return false;
+            };
+
           scope.useIcon = function() {
             $http.get(scope.selectedIcon.url).then(function(result) {
               var base64Data = window.btoa(result.data);
