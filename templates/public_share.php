@@ -66,8 +66,9 @@ style('passman', 'app');
 style('passman', 'public-page');
 
 ?>
-<div ng-app="passmanApp" ng-controller="PublicSharedCredential">
-	<div class="row">
+<div class="share-controller" ng-app="passmanApp" ng-controller="PublicSharedCredential">
+	<div class="share-container">
+        <div class="row">
 		<div class="col-xs-8 col-xs-push-2 col-xs-pull-2 credential_container">
 			<h2>Passman</h2>
 			<div ng-if="!shared_credential && !expired">
@@ -204,4 +205,5 @@ style('passman', 'public-page');
 			</div>
 		</div>
 	</div>
+    </div>
 </div>

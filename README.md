@@ -7,6 +7,12 @@ Passman is a full featured password manager.
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&utm_medium=referral&utm_content=nextcloud/passman&utm_campaign=Badge_Coverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
 
+## Join us!
+There is a Telegram-Group:
+* [Passman General](https://t.me/passman_general)
+
+Those are mainly used to discuss all sorts of topics for Passman and it's apps!
+
 
 ## Contents
 * [Screenshots](https://github.com/nextcloud/passman#Screenshots) 
@@ -16,6 +22,7 @@ Passman is a full featured password manager.
   * [Password generation](https://github.com/nextcloud/passman#password-generation)
   * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
 * [Support passman](https://github.com/nextcloud/passman#support-passman)
+* [Development](https://github.com/nextcloud/passman#development)
 * [API](https://github.com/nextcloud/passman#api)
 * [Docker](https://github.com/nextcloud/passman#docker)
 * [Maintainers](https://github.com/nextcloud/passman#main-developers)
@@ -57,8 +64,9 @@ For more screenshots: [Click here](http://imgur.com/a/giKVt)
 For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 
 ## Tested on
-- NextCloud 10 / 11
-- ownCloud 9.1+
+- Nextcloud 14
+
+For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/releases)
 
 
 ## External apps
@@ -102,8 +110,6 @@ This time using the following routine:
 
 ### Sharing credentials.
 Passman allows users to share passwords (this can be turned off by an administrator). 
-
-
 
 ## API 
 For developers Passman offers an [api](https://github.com/nextcloud/passman/wiki/API).
@@ -160,7 +166,7 @@ To run the unit tests install phpunit globally, and setup the environment variab
 
 ## Contributors
 Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
-- None
+- Newhinton
 
 
 ## FAQ

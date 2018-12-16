@@ -44,6 +44,8 @@
 				}
 
 				$scope.logout = function () {
+                    //see vault.js:54
+                    $rootScope.override_default_vault=true;
 					$scope.active_vault = false;
 				};
 				if (SettingsService.getSetting('defaultVault') && SettingsService.getSetting('defaultVaultPass')) {

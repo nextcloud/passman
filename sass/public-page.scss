@@ -30,6 +30,16 @@ header {
   padding-top: 0;
 }
 
+.share-controller{
+  width: 100%;
+  .share-container{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
+}
+
 .credential_container{
   margin-top: 20px;
   margin-bottom: 20px;
@@ -45,6 +55,7 @@ header {
   }
   button, .text{
     margin: 0 auto;
+    margin-bottom: 25px;
     display: block;
     i{
       margin-right: 5px;
