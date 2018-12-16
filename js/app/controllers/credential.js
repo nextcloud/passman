@@ -134,18 +134,16 @@
 					});
 				};
 
-
-
 				var refresh_data_interval = null;
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
 					if($rootScope.vaultCache && $rootScope.vaultCache[$scope.active_vault.guid]){
-            $scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
-            $rootScope.$broadcast('credentials_loaded');
-            $scope.show_spinner = false;
-          } else {
-            fetchCredentials();
-          }
+            			$scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
+            			$rootScope.$broadcast('credentials_loaded');
+            			$scope.show_spinner = false;
+          			} else {
+            			fetchCredentials();
+          			}
 					getPendingShareRequests();
 					refresh_data_interval = $interval(function () {
 						fetchCredentials();
@@ -320,6 +318,10 @@
 					$scope.view_mode = viewMode;
 				};
 
+                $rootScope.$on('push_decrypted_credential_to_list', function () {
+                    $rootScope.$broadcast('credentials_loaded');
+                });
+
 				$scope.filterOptions = {
 					filterText: '',
 					fields: ['label', 'username', 'email', 'custom_fields']
@@ -329,7 +331,6 @@
                 $scope.$on('nc_searchbox', function(event, args) {
                     $scope.filterOptions.filterText=args;
 				});
-
 
                 $scope.filtered_credentials = [];
                 $scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function () {
@@ -350,7 +351,6 @@
                             }
                         }
                     }
-
                 }, true);
 
                 $scope.no_credentials_label=[];
@@ -536,7 +536,7 @@
                     }
                     $scope.active_vault = null;
                     $scope.credentials = [];
-                    //$scope.$parent.selectedVault = false;
+//				$scope.$parent.selectedVault = false;
 
 				});
 
