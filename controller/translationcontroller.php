@@ -141,6 +141,7 @@ class TranslationController extends ApiController {
 			'add.tag' => $this->trans->t('Add tag'),
 			'pick.icon' => $this->trans->t('Pick an icon'),
             'pick.icon.search' => $this->trans->t('Search icons'),
+            'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),
 			'use.icon' => $this->trans->t('Use this icon'),
 			'selected.icon' => $this->trans->t('Selected icon'),
 

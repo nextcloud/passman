@@ -1,6 +1,7 @@
 <div>
 	<div class="cell">
 		<credential-icon credential="credential"></credential-icon>
+		<div ng-if="credential.icon.content" style="width: 16px;"></div>
 	</div>
 	<div style="display: none" id="iconPicker" title="{{ 'pick.icon' | translate }}">
 		<div class="iconList">
@@ -13,6 +14,7 @@
 		</div>
 		<div class="iconModifier">
 			<input id="iconPicker-Search" class="iconSearch" type="text" placeholder="{{ 'pick.icon.search' | translate }}">
+			<label for="iconPicker-CustomIcon">{{ 'pick.icon.custom.label' | translate }}<label>
             <input id="iconPicker-CustomIcon" class="iconSearch"  type="file"/>
 			<!--
 			<div ng-repeat="(groupName, icons) in iconGroups">
