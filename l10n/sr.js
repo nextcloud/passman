@@ -241,6 +241,7 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "Јачина лозинке мора бити бар: {{strength}}",
     "Please give your new vault a name." : "Дајте Вашем новом сефу име.",
     "Repeat vault password" : "Поновите лозинку за сеф",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Ваши дељени кључеви ће имати јачину од 1024 бита, што можете променити касније у „Поставкама“.",
     "Create vault" : "Направи сеф",
     "Go back to vaults" : "Назад на сефове",
     "Please input the password for" : "Унесите лозинку за",
