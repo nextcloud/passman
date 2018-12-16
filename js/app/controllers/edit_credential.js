@@ -385,10 +385,10 @@
                         var found=false;
                         var credList=$rootScope.vaultCache[$scope.active_vault.guid].credentials;
                         for (var i = 0; i < credList.length; i++) {
-							if(credList[i].credential_id==credential.credential_id){
+			    if (credList[i].credential_id === credential.credential_id) {
                                 $rootScope.vaultCache[$scope.active_vault.guid].credentials[i]=credential;
                                 found=true;
-							}
+			    }
                         }
 
                         if(!found){
