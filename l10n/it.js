@@ -241,7 +241,7 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "La robustezza della password deve essere almeno: {{strength}}",
     "Please give your new vault a name." : "Dai un nome alla tua nuova cassaforte.",
     "Repeat vault password" : "Ripeti la password della cassaforte",
-    "Your sharing key's will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "La tua chiave di condivisione avrà una lunghezza di 1024 bit, che potrai modificare successivamente in \\\"Impostazioni\\\".",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Le tue chiavi di condivisione avranno una lunghezza di 1024 bit, che puoii modificare successivamente in \\\"Impostazioni\\\".",
     "Create vault" : "Crea cassaforte",
     "Go back to vaults" : "Torna alle casseforti",
     "Please input the password for" : "Digita la password per",

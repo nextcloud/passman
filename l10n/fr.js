@@ -241,7 +241,7 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "La force du mot de passe doit être au moins : {{strength}}",
     "Please give your new vault a name." : "Veuillez donner un nom à votre nouveau coffre-fort.",
     "Repeat vault password" : "Confirmer le mot de passe du coffre-fort",
-    "Your sharing key's will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Votre clé de partage aura une robustesse de 1024 bits, que vous pourrez modifier dans  \\\"Paramètres\\\" ultérieurement.",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Votre clé de partage aura une robustesse de 1 024 bits. Vous pouvez modifier cette propriété dans  \\\"Paramètres\\\".",
     "Create vault" : "Créer un coffre-fort",
     "Go back to vaults" : "Retourner aux coffres-forts",
     "Please input the password for" : "Veuillez entrer le mot de passe pour",

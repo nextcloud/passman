@@ -239,7 +239,6 @@
     "Password strength must be at least: {{strength}}" : "Je třeba, aby odolnost hesla byla přinejmenším: {{strength}}",
     "Please give your new vault a name." : "Nazvěte nějak svůj nový trezor.",
     "Repeat vault password" : "Zopakujte heslo trezoru",
-    "Your sharing key's will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Vaše sdílecí klíče budou mít sílu 1024 bitů, což pak můžete změnit v „Nastavení“.",
     "Create vault" : "Vytvořit trezor",
     "Go back to vaults" : "Jít zpět k trezorům",
     "Please input the password for" : "Zadejte heslo pro",

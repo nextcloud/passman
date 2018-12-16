@@ -241,7 +241,7 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "Parola gücü en az {{strength}} olmalıdır",
     "Please give your new vault a name." : "Lütfen yeni kasanıza bir ad verin.",
     "Repeat vault password" : "Kasa parolası onayı",
-    "Your sharing key's will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Paylaşım anahtarlarınız 1024 bit gücünde olacak. Bu değeri daha sonra \\\"Ayarlar\\\" bölümünden değiştirebilirsiniz.",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Paylaşılan anahtarlar 1024 bit gücünde olur. Bu değer daha sonra \\\"Ayarlar\\\" bölümünden değiştirilebilir.",
     "Create vault" : "Kasa oluştur",
     "Go back to vaults" : "Kasalara geri dön",
     "Please input the password for" : "Lütfen şu kasanın parolasını yazın",

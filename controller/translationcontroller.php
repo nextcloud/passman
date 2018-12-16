@@ -361,7 +361,7 @@ class TranslationController extends ApiController {
 			'new.vault.name' => $this->trans->t('Please give your new vault a name.'),
 			'new.vault.pass' => $this->trans->t('Vault password'),
 			'new.vault.passr' => $this->trans->t('Repeat vault password'),
-			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing key\'s will have a strength of 1024 bit, which you can change in \"Settings\" later .'),
+			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing keys will have a strength of 1024 bit, which you can change in \"Settings\" later .'),
 			'new.vault.create' => $this->trans->t('Create vault'),
 			'go.back.vaults' => $this->trans->t('Go back to vaults'),
 			'input.vault.password' => $this->trans->t('Please input the password for'),
