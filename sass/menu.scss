@@ -23,40 +23,90 @@
 .settings-container {
   div {
     padding-left: 15px;
-
+  }
+  button {
+    width: 80%;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
 
+.settings-container-label {
+  padding-left: 15px;
+}
+
 #app-navigation > ul{
-  padding-bottom: 80px;
   > li > a{
-    padding-left: 12px !important;
     z-index: auto;
+  }
+  > li {
+    display: block;
   }
 }
 
 .nav-trashbin {
-  position: fixed !important;
-  bottom: 44px;
+  //position: fixed !important;
+  //bottom: 44px;
   width: inherit !important;
 
   border-right: 1px solid #eee;
   a {
     &.active{
-      border-left: 3px solid #0082c9;
+      //border-left: 3px solid #0082c9;
+      background-image: var(--icon-delete-e9322d);
     }
     background-color: #fff !important;
     opacity: 1 !important;
     z-index: 140;
-    padding: 0 20px;
+    //padding: 0 20px;
     .fa {
       margin-right: 15px;
     }
   }
 }
 
+//Overrides transparent entry bullet on hover from server
+#app-navigation{
+  .collapsible:hover .app-navigation-entry-bullet{
+    background: var(--color-primary) !important;
+  }
+}
+
+
 #app-navigation {
+
+  a{
+    .selected{
+      opacity: 1!important;
+      box-shadow: inset 4px 0 var(--color-primary)!important;
+    }
+  }
+
   li{
+    .app-navigation-entry-bullet-color {
+      background-color: var(--color-primary);
+    }
+
+    .bullet-color-red {
+      background-color: #ff0000;
+    }
+
+    .bullet-color-yellow {
+      background-color: #ebbb00;
+    }
+
+    .bullet-color-green {
+      background-color: #4db728;
+    }
+
+    .highlight-selected{
+        background-color: var(--color-primary);
+    }
+
+    .autocomplete{
+      position: relative;
+    }
+
     a.taginput{
       opacity: 1;
     }
@@ -73,4 +123,13 @@
   > ul ul {
     display: inherit !important;
   }
+}
+
+.hidden-list{
+  display: none !important;
+}
+
+//source https://material.io/tools/icons/?icon=restore&style=baseline
+.icon-expired{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M0 0h24v24H0z' fill='none'/><path d='M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z'/></svg>");
 }

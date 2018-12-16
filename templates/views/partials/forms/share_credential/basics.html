@@ -78,7 +78,7 @@
 					<i class="fa fa-user" ng-if="user.pending === false"></i>
 					<i class="fa fa-user-times" ng-if="user.pending === true"></i>
 					{{user.userId}}
-					<small ng-if="user.pending === true" class="pull-right col-xs-4">{{ 'pending' | translate}}</small>
+					<small ng-if="user.pending === true" class="pull-right pending">{{ 'pending' | translate}}</small>
 				</td>
 				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.READ)" ng-checked="hasPermission(user.acl, default_permissions.permissions.READ)"> </td>
 				<td><input type="checkbox" ng-click="setPermission(user.acl, default_permissions.permissions.WRITE)" ng-checked="hasPermission(user.acl, default_permissions.permissions.WRITE)"></td>
