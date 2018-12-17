@@ -26,7 +26,7 @@
   padding: 12px;
   font-weight: bold;
   text-align: center;
-  z-index: 800;
+  z-index: 1800;
   background-color: red;
   color: white;
   .fa-times{
@@ -36,9 +36,8 @@
   }
 }
 .vault_wrapper{
-  margin: 0 auto;
-  margin-top: 20px;
-  width: 100%;
+  margin:0 auto auto auto;
+
   max-width: 420px;
   @include border-radius(5px);
   box-shadow: 0 1px 1px #777;

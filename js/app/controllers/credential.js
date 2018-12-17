@@ -59,7 +59,7 @@
 						$scope.active_vault = vault;
 						$scope.active_vault.vaultKey = vaultKey;
 						if(!$rootScope.vaultCache){
-              $rootScope.vaultCache = [];
+              				$rootScope.vaultCache = [];
 						}
 						VaultService.setActiveVault($scope.active_vault);
 						for (var i = 0; i < _credentials.length; i++) {
@@ -134,18 +134,16 @@
 					});
 				};
 
-
-
 				var refresh_data_interval = null;
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
 					if($rootScope.vaultCache && $rootScope.vaultCache[$scope.active_vault.guid]){
-            $scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
-            $rootScope.$broadcast('credentials_loaded');
-            $scope.show_spinner = false;
-          } else {
-            fetchCredentials();
-          }
+            			$scope.active_vault = $rootScope.vaultCache[$scope.active_vault.guid];
+            			$rootScope.$broadcast('credentials_loaded');
+            			$scope.show_spinner = false;
+          			} else {
+            			fetchCredentials();
+          			}
 					getPendingShareRequests();
 					refresh_data_interval = $interval(function () {
 						fetchCredentials();
@@ -320,101 +318,224 @@
 					$scope.view_mode = viewMode;
 				};
 
+                $rootScope.$on('push_decrypted_credential_to_list', function () {
+                    $rootScope.$broadcast('credentials_loaded');
+                });
+
 				$scope.filterOptions = {
 					filterText: '',
 					fields: ['label', 'username', 'email', 'custom_fields']
 				};
 
+                //searchboxfix
+                $scope.$on('nc_searchbox', function(event, args) {
+                    $scope.filterOptions.filterText=args;
+				});
 
-				$scope.filtered_credentials = [];
-				$scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function () {
-					if (!$scope.active_vault) {
-						return;
-					}
-					if ($scope.active_vault.credentials) {
-						var credentials = angular.copy($scope.active_vault.credentials);
-						var filtered_credentials = $filter('credentialSearch')(credentials, $scope.filterOptions);
-						filtered_credentials = $filter('tagFilter')(filtered_credentials, $scope.selectedtags);
-						filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
-						$scope.filtered_credentials = filtered_credentials;
-						$scope.filterOptions.selectedtags = angular.copy($scope.selectedtags);
-						for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
-							var _credential = $scope.active_vault.credentials[i];
-							if (_credential.tags) {
-								TagService.addTags(_credential.tags);
-							}
+                $scope.filtered_credentials = [];
+                $scope.$watch('[selectedtags, filterOptions, delete_time, active_vault.credentials]', function () {
+                    if (!$scope.active_vault) {
+                        return;
+                    }
+                    if ($scope.active_vault.credentials) {
+                        var credentials = angular.copy($scope.active_vault.credentials);
+                        var filtered_credentials = $filter('credentialSearch')(credentials, $scope.filterOptions);
+                        filtered_credentials = $filter('tagFilter')(filtered_credentials, $scope.selectedtags);
+                        filtered_credentials = $filter('filter')(filtered_credentials, {hidden: 0});
+                        $scope.filtered_credentials = filtered_credentials;
+                        $scope.filterOptions.selectedtags = angular.copy($scope.selectedtags);
+                        for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+                            var _credential = $scope.active_vault.credentials[i];
+                            if (_credential.tags) {
+                                TagService.addTags(_credential.tags);
+                            }
+                        }
+                    }
+                }, true);
+
+                $scope.no_credentials_label=[];
+                $scope.no_credentials_label.all=true;
+                $scope.no_credentials_label.s_good=false;
+                $scope.no_credentials_label.s_medium=false;
+                $scope.no_credentials_label.s_low=false;
+                $scope.no_credentials_label.expired=false;
+
+                $scope.disableAllLabels = function(){
+                    $scope.no_credentials_label.all=false;
+                    $scope.no_credentials_label.s_good=false;
+                    $scope.no_credentials_label.s_medium=false;
+                    $scope.no_credentials_label.s_low=false;
+                    $scope.no_credentials_label.expired=false;
+				};
+
+                //watch for special tags
+                $scope.$on('filterSpecial', function(event, args) {
+
+                    $scope.disableAllLabels();
+                    switch (args) {
+                        case "strength_good":
+                        	$scope.filterStrength(3,1000);
+                            $scope.no_credentials_label.s_good=true;
+                        	break;
+                        case "strength_medium":
+                        	$scope.filterStrength(2,3);
+                            $scope.no_credentials_label.s_medium=true;
+                        	break;
+                        case "strength_low":
+                        	$scope.filterStrength(0,1);
+                            $scope.no_credentials_label.s_low=true;
+                        	break;
+                        case "expired":
+                        	$scope.filterExpired();
+                            $scope.no_credentials_label.expired=true;
+                        	break;
+                        case "all":
+                        	$scope.filterAll();
+                            $scope.no_credentials_label.all=true;
+                        	break;
+                    }
+                });
+
+                $scope.getListSizes = function(){
+                	var l = $scope.filtered_credentials;
+
+                	var deleted=0;
+                    for (var i = 0; i < l.length; i++) {
+						if(l[i].delete_time>0){
+							deleted++;
 						}
-					}
+                    }
 
-				}, true);
+                    var result=[];
+                    result.listsize=l.length;
+                    result.listsize_wout_deleted=l.length-deleted;
+                    result.listsize_deleted=deleted;
 
-				$scope.selectedtags = [];
-				var to;
-				$rootScope.$on('selected_tags_updated', function (evt, _sTags) {
-					var _selectedTags = [];
-					for (var x = 0; x < _sTags.length; x++) {
-						_selectedTags.push(_sTags[x].text);
-					}
-					$scope.selectedtags = _selectedTags;
-					$timeout.cancel(to);
-					if (_selectedTags.length > 0) {
-						to = $timeout(function () {
-							if ($scope.filtered_credentials) {
-								var _filtered_tags = [];
-								for (var i = 0; i < $scope.filtered_credentials.length; i++) {
-									var tags = $scope.filtered_credentials[i].tags_raw;
-									for (var x = 0; x < tags.length; x++) {
-										var tag = tags[x].text;
-										if (_filtered_tags.indexOf(tag) === -1) {
-											_filtered_tags.push(tag);
-										}
-									}
-								}
-
-								$rootScope.$emit('limit_tags_in_list', _filtered_tags);
-							}
-						}, 50);
-					}
-				});
-
-				$scope.delete_time = 0;
-				$scope.showCredentialRow = function (credential) {
-					if ($scope.delete_time === 0) {
-						return credential.delete_time === 0;
-					} else {
-						return credential.delete_time > $scope.delete_time;
-					}
-
+                	return result;
 				};
 
-				$rootScope.$on('set_delete_time', function (event, time) {
-					$scope.delete_time = time;
-				});
+                $scope.filterAll = function(){
+                    $scope.selectedtags=[];
+                    $scope.filterOptions.filterText="";
+                    var creds_filtered=[];
 
-				$scope.setDeleteTime = function (delete_time) {
-					$scope.delete_time = delete_time;
-				};
+                    for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+                        if($scope.active_vault.credentials[i].delete_time===0){
+                            creds_filtered.push($scope.active_vault.credentials[i]);
+                        }
+                    }
 
-				$scope.selectedCredential = false;
-				$scope.selectCredential = function (credential) {
-					if(credential.description) {
-						credential.description_html = $sce.trustAsHtml(angular.copy(credential.description).replace("\n", '<br />'));
-					}
-					$scope.selectedCredential = angular.copy(credential);
-					$rootScope.$emit('app_menu', true);
-				};
+					$scope.filtered_credentials=$scope.filterHidden(creds_filtered);
+                };
 
-				$scope.closeSelected = function () {
-					$rootScope.$emit('app_menu', false);
-					$scope.selectedCredential = false;
-				};
+                $scope.filterStrength = function(strength_min, strength_max){
+                    var initialCredentials=$scope.active_vault.credentials;
+                    var postFiltered=[];
+                    for (var i = 0; i < initialCredentials.length; i++) {
+                        var _credential = initialCredentials[i];
+                        var zxcvbn_result = zxcvbn(_credential.password);
 
-				$rootScope.$on('logout', function () {
-					if($scope.active_vault) {
-            $rootScope.vaultCache[$scope.active_vault.guid] = null;
-          }
-					$scope.active_vault = null;
-					$scope.credentials = [];
+                        if(zxcvbn_result.score>=strength_min && zxcvbn_result.score<=strength_max){
+                            postFiltered.push(initialCredentials[i]);
+                        }
+                    }
+                    $scope.filtered_credentials=$scope.filterHidden(postFiltered);
+                };
+
+                $scope.filterExpired = function(){
+                    var initialCredentials=$scope.active_vault.credentials;
+                    var now = Date.now();
+                    var postFiltered=[];
+
+                    for (var i = 0; i < initialCredentials.length; i++) {
+                        var _credential = initialCredentials[i];
+
+                        if(_credential.expire_time!==0 && _credential.expire_time <= now){
+                            postFiltered.push(initialCredentials[i]);
+                        }
+                    }
+                    $scope.filtered_credentials=$scope.filterHidden(postFiltered);
+                };
+
+                $scope.filterHidden = function(list){
+                    var list_without_hidden=[];
+                    for (var i = 0; i < list.length; i++) {
+                        if(list[i].hidden!==1){
+                            list_without_hidden.push(list[i]);
+                        }
+                    }
+                    return list_without_hidden;
+                };
+
+
+
+                $scope.selectedtags = [];
+                var to;
+                $rootScope.$on('selected_tags_updated', function (evt, _sTags) {
+                    var _selectedTags = [];
+                    for (var x = 0; x < _sTags.length; x++) {
+                        _selectedTags.push(_sTags[x].text);
+                    }
+                    $scope.selectedtags = _selectedTags;
+                    $timeout.cancel(to);
+                    if (_selectedTags.length > 0) {
+                        to = $timeout(function () {
+                            if ($scope.filtered_credentials) {
+                                var _filtered_tags = [];
+                                for (var i = 0; i < $scope.filtered_credentials.length; i++) {
+                                    var tags = $scope.filtered_credentials[i].tags_raw;
+                                    for (var x = 0; x < tags.length; x++) {
+                                        var tag = tags[x].text;
+                                        if (_filtered_tags.indexOf(tag) === -1) {
+                                            _filtered_tags.push(tag);
+                                        }
+                                    }
+                                }
+
+                                $rootScope.$emit('limit_tags_in_list', _filtered_tags);
+                            }
+                        }, 50);
+                    }
+                });
+
+                $scope.delete_time = 0;
+                $scope.showCredentialRow = function (credential) {
+                    if ($scope.delete_time === 0) {
+                        return credential.delete_time === 0;
+                    } else {
+                        return credential.delete_time > $scope.delete_time;
+                    }
+
+                };
+
+                $rootScope.$on('set_delete_time', function (event, time) {
+                    $scope.delete_time = time;
+                });
+
+                $scope.setDeleteTime = function (delete_time) {
+                    $scope.delete_time = delete_time;
+                };
+
+                $scope.selectedCredential = false;
+                $scope.selectCredential = function (credential) {
+                    if (credential.description) {
+                        credential.description_html = $sce.trustAsHtml(angular.copy(credential.description).replace("\n", '<br />'));
+                    }
+                    $scope.selectedCredential = angular.copy(credential);
+                    $rootScope.$emit('app_menu', true);
+                };
+
+                $scope.closeSelected = function () {
+                    $rootScope.$emit('app_menu', false);
+                    $scope.selectedCredential = false;
+                };
+
+                $rootScope.$on('logout', function () {
+                    if ($scope.active_vault) {
+                        $rootScope.vaultCache[$scope.active_vault.guid] = null;
+                    }
+                    $scope.active_vault = null;
+                    $scope.credentials = [];
 //				$scope.$parent.selectedVault = false;
 
 				});

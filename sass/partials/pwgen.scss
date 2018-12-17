@@ -23,7 +23,7 @@
 .pw-gen{
   overflow:hidden;
   input{
-    width: calc(100% - 80px) !important;
+    width: calc(100% - 76px) !important;
     float: left;
     background: #fff;
     color: #555;
@@ -41,6 +41,7 @@
     float: left;
     margin-top: 3px;
     margin-left: -3px;
+    padding-bottom:1px;
     .cell{
       padding: 5px;
       display: inline-block;

@@ -1,12 +1,14 @@
 describe('MenuCtrl', function() {
 	beforeEach(module('passmanApp'));
 	beforeEach(module('LocalStorageModule'));
+    beforeEach(module('mock.vaultService'));
 
 	var $controller;
 	var $scope;
-	beforeEach(inject(function(_$controller_){
+	beforeEach(inject(function(_$controller_, _VaultService_){
 		// The injector unwraps the underscores (_) from around the parameter names when matching
 		$controller = _$controller_;
+        //$controller.VaultService= _VaultService_;
 	}));
 	beforeEach(inject(function($rootScope) {
 		$scope = $rootScope.$new();

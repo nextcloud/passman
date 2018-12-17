@@ -28,15 +28,17 @@
 			<tr ng-repeat="result in scan_result | orderBy:'password_zxcvbn_result.score'">
 				<td>{{result.label}}</td>
 				<td class="score">
-					<ng-password-meter
-							password="result.password"></ng-password-meter>
+					<ng-password-meter password="result.password"></ng-password-meter>
 				</td>
 				<td>
-					<span credential-field value="result.password"
-						  secret="'true'"></span>
+					<span credential-field value="result.password" secret="'true'"></span>
 				</td>
 				<td>
-					<a class="link" ng-href="#/vault/{{active_vault.guid}}/edit/{{result.guid}}" tooltip="{{ 'edit.credential' | translate}}"><i  class="fa fa-edit"></i></a>
+					<div>
+						<a href="#/vault/{{ active_vault.guid }}/edit/{{result.guid}}" class="link">
+							<i class="fa fa-edit"></i>
+						</a>
+					</div>
 				</td>
 			</tr>
 			</tbody>

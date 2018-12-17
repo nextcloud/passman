@@ -46,7 +46,11 @@
 						var vault = vaults[i];
 						if (vault.guid === default_vault.guid) {
 							$scope.default_vault = true;
-							$scope.list_selected_vault = vault;
+							//This prevents the opening of the default vault if the user logs out
+							if(!$rootScope.override_default_vault){
+                                $scope.list_selected_vault = vault;
+                                $rootScope.override_default_vault=false;
+							}
 							SettingsService.setSetting('defaultVault', vault);
 							if (SettingsService.getSetting('defaultVaultPass')) {
 								$location.path('/vault/' + vault.guid);
@@ -219,7 +223,8 @@
 			};
 
 
-			$scope.createVault = function (vault_name, vault_key, vault_key2) {
+
+                $scope.createVault = function (vault_name, vault_key, vault_key2) {
 				if (vault_key !== vault_key2) {
 					$scope.error = $translate.instant('password.do.not.match');
 					return;
