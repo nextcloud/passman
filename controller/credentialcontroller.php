@@ -105,17 +105,7 @@ class CredentialController extends ApiController {
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 
-
-		//fetch the proper credentialelement, the returned element from createCredential is not usable in the frontend.
-        $credentials = $this->credentialService->getCredentialsByVaultId($vault_id, $this->userId);
-        foreach ($credentials as &$value) {
-            if($value->getGuid() == $credential->getGuid()){
-                return new JSONResponse($value);
-            }
-        }
-
-        //return old value as fallback
-        return new JSONResponse($credentials);
+        return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
 	/**
@@ -269,17 +259,7 @@ class CredentialController extends ApiController {
 
 		$credential = $this->credentialService->updateCredential($credential);
 
-
-        //fetch the proper credentialelement, the returned element from createCredential is not usable in the frontend.
-        $credentials = $this->credentialService->getCredentialsByVaultId($vault_id, $this->userId);
-        foreach ($credentials as &$value) {
-            if($value->getGuid() == $credential->getGuid()){
-                return new JSONResponse($value);
-            }
-        }
-
-        //return old value as fallback
-		return new JSONResponse($credential);
+        return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
 	/**
