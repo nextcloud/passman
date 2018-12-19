@@ -1,1 +1,1 @@
-<!-- Placeholder file -->
+<?php

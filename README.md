@@ -2,9 +2,16 @@
 Passman is a full featured password manager.
 
 [![Build Status](https://travis-ci.org/nextcloud/passman.svg?branch=master)](https://travis-ci.org/nextcloud/passman)
+[![Docker Automated buid](https://img.shields.io/docker/build/brantje/passman.svg)](hub.docker.com/r/brantje/passman/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nextcloud/passman&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&utm_medium=referral&utm_content=nextcloud/passman&utm_campaign=Badge_Coverage)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
+
+## Join us!
+There is a Telegram-Group:
+* [Passman General](https://t.me/passman_general)
+
+Those are mainly used to discuss all sorts of topics for Passman and it's apps!
 
 
 ## Contents
@@ -14,6 +21,8 @@ Passman is a full featured password manager.
 * [Security](https://github.com/nextcloud/passman#security)
   * [Password generation](https://github.com/nextcloud/passman#password-generation)
   * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
+* [Support passman](https://github.com/nextcloud/passman#support-passman)
+* [Development](https://github.com/nextcloud/passman#development)
 * [API](https://github.com/nextcloud/passman#api)
 * [Docker](https://github.com/nextcloud/passman#docker)
 * [Maintainers](https://github.com/nextcloud/passman#main-developers)
@@ -55,8 +64,9 @@ For more screenshots: [Click here](http://imgur.com/a/giKVt)
 For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 
 ## Tested on
-- NextCloud 10 / 11
-- ownCloud 9.1+
+- Nextcloud 14
+
+For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/releases)
 
 
 ## External apps
@@ -101,8 +111,6 @@ This time using the following routine:
 ### Sharing credentials.
 Passman allows users to share passwords (this can be turned off by an administrator). 
 
-
-
 ## API 
 For developers Passman offers an [api](https://github.com/nextcloud/passman/wiki/API).
 
@@ -111,6 +119,7 @@ Passman is open source, and we would gladly accept a beer (or pizza!)
 Please consider donating
 - [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
 - [Patreon](https://www.patreon.com/user?u=4833592)
+- [Flattr](https://flattr.com/@passman)
 - bitcoin: 1H2c5tkGX54n48yEtM4Wm4UrAGTW85jQpe
 
 ## Code reviews
@@ -124,10 +133,24 @@ Please do the following
 Or if you're feeling lazy, create an issue, and we'll think about it.
 
 ## Docker
-To run Passman with [Docker](https://www.docker.com/) you can use `docker run  -p 8080:80 -p 8443:443 brantje/passman`   
-You have to supply your own SSL certs.   
+To run Passman with [Docker](https://www.docker.com/) you can use our test docker image.
+You have to supply your own SSL certs, self signed or Let's encrypt it doesn't matter.      
+Please note that the docker is only for testing purposes, as database user / password are hardcoded.   
+    
+If you like to spiece up our docker image and make it a full fledged secure, production ready install, you're welcome to do so.   
+Please note that:
+- Port 80 and 443 are used
+- SSL is enabled (or disabled if certs not found)
+- Startup time of container must be less than 15 seconds
+
 Example:   
-`docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /directory/cert.key:/data/ssl/cert.key brantje/passman`
+```
+docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /directory/cert.key:/data/ssl/cert.key brantje/passman
+```
+        
+If you want a production ready container you can use the [Nextcloud docker](https://hub.docker.com/_/nextcloud/), and install passman as an app.
+
+
 
 
 ## Development
@@ -143,7 +166,7 @@ To run the unit tests install phpunit globally, and setup the environment variab
 
 ## Contributors
 Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
-- None
+- Newhinton
 
 
 ## FAQ

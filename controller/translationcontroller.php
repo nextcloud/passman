@@ -41,7 +41,7 @@ class TranslationController extends ApiController {
 	public function getLanguageStrings() {
 		$translations = array(
 			// js/app/controllers/bookmarklet.js
-			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %step / 2)'),
+			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %s / 2)','%step'),
 			'invalid.vault.key' => $this->trans->t('Incorrect vault password!'),
 			'password.do.not.match' => $this->trans->t('Passwords do not match'),
 			'general' => $this->trans->t('General'),
@@ -57,7 +57,7 @@ class TranslationController extends ApiController {
 			'credential.updated' => $this->trans->t('Credential updated'),
 			'credential.recovered' => $this->trans->t('Credential recovered'),
 			'credential.destroyed' => $this->trans->t('Credential destroyed'),
-			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably don\'t have sufficient permissions'),
+			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably have insufficient permissions'),
 
 			// js/app/controllers/edit_credential.js
 			'invalid.qr' => $this->trans->t('Invalid QR code'),
@@ -68,10 +68,10 @@ class TranslationController extends ApiController {
 			'done' => $this->trans->t('Done'),
 
 			// js/app/controllers/import.js
-			'import.file.read' => $this->trans->t('File read successfully.'),
+			'import.file.read' => $this->trans->t('File read.'),
 			'import.steps' => $this->trans->t('Proceed with the following steps to import your file'),
 
-			'import.no.label' => $this->trans->t('Credential has no label, skipping'),
+			'import.no.label' => $this->trans->t('Skipping unlabeled credential'),
 			'import.adding' => $this->trans->t('Adding {{credential}}'),
 			'import.added' => $this->trans->t('Added {{credential}}'),
 			'import.skipping' => $this->trans->t('Skipping credential, missing label on line {{line}}'),
@@ -104,7 +104,7 @@ class TranslationController extends ApiController {
 			'settings.export' => $this->trans->t('Export credentials'),
 			'settings.sharing' => $this->trans->t('Sharing'),
 			'changepw.navigate.away.warning' => $this->trans->t('Are you sure you want to leave? This will destroy all your credentials'),
-			'incorrect.password' => $this->trans->t('Your old password is incorrect!'),
+			'incorrect.password' => $this->trans->t('Old password field incorrect!'),
 			'password.no.match' => $this->trans->t('New password does not match!'),
 			'login.new.pass' => $this->trans->t('Please log in with your new vault password'),
 
@@ -139,6 +139,11 @@ class TranslationController extends ApiController {
 			'username' => $this->trans->t('Username'),
 			'password.r' => $this->trans->t('Repeat password'),
 			'add.tag' => $this->trans->t('Add tag'),
+			'pick.icon' => $this->trans->t('Pick an icon'),
+            'pick.icon.search' => $this->trans->t('Search icons'),
+            'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),
+			'use.icon' => $this->trans->t('Use this icon'),
+			'selected.icon' => $this->trans->t('Selected icon'),
 
 			// templates/views/partials/edit_credential/custom_fields.html
 			'field.label' => $this->trans->t('Field label'),
@@ -205,7 +210,7 @@ class TranslationController extends ApiController {
 			'version' => $this->trans->t('Version'),
 			'donate.support' => $this->trans->t('Donate to support development'),
 			'bookmarklet' => $this->trans->t('Bookmarklet'),
-			'bookmarklet.info1' => $this->trans->t('Save your passwords with 1 click!'),
+			'bookmarklet.info1' => $this->trans->t('Save your passwords with one click.'),
 			'bookmarklet.info2' => $this->trans->t('Drag below button to your bookmark toolbar.'),
 			'delete.vault' => $this->trans->t('Delete vault'),
 			'vault.password' => $this->trans->t('Vault password'),
@@ -233,7 +238,7 @@ class TranslationController extends ApiController {
 			'generating.keys' => $this->trans->t('Generating sharing keys'),
 
 			// templates/views/partials/forms/settings/tool.html
-			'tool.intro' => $this->trans->t('The password tool will scan your password, calculate the average crack time and list those which are below the threshold'),
+			'tool.intro' => $this->trans->t('The password tool scans your password, calculates average cracking time, listing those below the threshold'),
 			'min.strength' => $this->trans->t('Minimum password stength'),
 			'scan.start' => $this->trans->t('Start scan'),
 			'scan.result.msg' => $this->trans->t('Result'),
@@ -242,13 +247,13 @@ class TranslationController extends ApiController {
 			'action' => $this->trans->t('Action'),
 
 			// templates/vieuws/partials/forms/share_credential/basics.html
-			'search.u.g' => $this->trans->t('Search users or groups…'),
+			'search.u.g' => $this->trans->t('Search users…'),
 			'search.result.missing' => $this->trans->t('Missing users? Only users that have vaults are shown.'),
 			'cyphering' => $this->trans->t('Cyphering'),
 			'uploading' => $this->trans->t('Uploading'),
 			'user' => $this->trans->t('User'),
 			'crypto.time' => $this->trans->t('Crypto time'),
-			'crypto.total.time' => $this->trans->t('Total time spent cyphering'),
+			'crypto.total.time' => $this->trans->t('Total time spent encrypting'),
 			'perm.read' => $this->trans->t('Read'),
 			'perm.write' => $this->trans->t('Write'),
 			'perm.files' => $this->trans->t('Files'),
@@ -260,7 +265,7 @@ class TranslationController extends ApiController {
 			'enable.link.sharing' => $this->trans->t('Enable link sharing'),
 			'share.until.date' => $this->trans->t('Share until date'),
 			'expire.views' => $this->trans->t('Expire after views'),
-			'click.share' => $this->trans->t('Click Share first'),
+			'click.share' => $this->trans->t('Click \"Share\" first'),
 			'show.files' => $this->trans->t('Show files'),
 
 
@@ -336,7 +341,7 @@ class TranslationController extends ApiController {
 			'use.regex' => $this->trans->t('Use regex'),
 			'sharereq.title' => $this->trans->t('You have incoming share requests.'),
 			'sharereq.line1' => $this->trans->t('If you want to put the credential in another vault,'),
-			'sharereq.line2' => $this->trans->t('log out of this vault and log in to the vault you want the shared credential in.'),
+			'sharereq.line2' => $this->trans->t('log out of this vault and log into the vault you want the shared credential in.'),
 			'permissions' => $this->trans->t('Permissions'),
 			'received.from' => $this->trans->t('Received from'),
 			'date' => $this->trans->t('Date'),
@@ -344,6 +349,16 @@ class TranslationController extends ApiController {
 			'decline' => $this->trans->t('Decline'),
 			'session.time.left' => $this->trans->t('You have {{session_time}} left before logout.'),
 			'vault.locked' => $this->trans->t('Your vault has been locked for {{time}} because of {{tries}} failed attempts!'),
+            'vault.hint.hello' => $this->trans->t('Hello there!'),
+            'vault.hint.hello.add' => $this->trans->t('It does not seem that you have any passwords. Do you want to add one?'),
+            'vault.hint.list.nogood' => $this->trans->t('You don\'t have good credentials'),
+            'vault.hint.list.nomedium' => $this->trans->t('You don\'t have medium credentials'),
+            'vault.hint.list.nobad' => $this->trans->t('You don\'t have bad credentials'),
+            'vault.hint.list.noexpired' => $this->trans->t('You don\'t have expired credentials'),
+            'vault.hint.list.nodeleted' => $this->trans->t('You don\'t have deleted credentials'),
+            'vault.hint.list.notags' => $this->trans->t('There are no credentials with your selected tags'),
+            'vault.hint.list.nosearch' => $this->trans->t('There are no credentials matching'),
+
 
 			// templates/views/vaults.html
 			'last.access' => $this->trans->t('Last accessed'),
@@ -356,7 +371,7 @@ class TranslationController extends ApiController {
 			'new.vault.name' => $this->trans->t('Please give your new vault a name.'),
 			'new.vault.pass' => $this->trans->t('Vault password'),
 			'new.vault.passr' => $this->trans->t('Repeat vault password'),
-			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing key\'s will have a strength of 1024 bit, which you can change in Settings later .'),
+			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing keys will have a strength of 1024 bit, which you can change in \"Settings\" later .'),
 			'new.vault.create' => $this->trans->t('Create vault'),
 			'go.back.vaults' => $this->trans->t('Go back to vaults'),
 			'input.vault.password' => $this->trans->t('Please input the password for'),
@@ -381,13 +396,23 @@ class TranslationController extends ApiController {
 
 			// templates/bookmarklet.php
 			'http.warning' => $this->trans->t('Warning! Adding credentials over HTTP is insecure!'),
-			'bm.active.vault' => $this->trans->t('Logged in to {{vault_name}}'),
+			'bm.active.vault' => $this->trans->t('Logged into {{vault_name}}'),
 			'change.vault' => $this->trans->t('Change vault'),
 
 			// templates/main.php
 			'deleted.credentials' => $this->trans->t('Deleted credentials'),
 			'logout' => $this->trans->t('Logout'),
 			'donate' => $this->trans->t('Donate'),
+            'navigation.show.all' => $this->trans->t('Show All'),
+            'navigation.tags' => $this->trans->t('Tags'),
+            'navigation.tags.search' => $this->trans->t('Search Tags'),
+            'navigation.strength.good' => $this->trans->t('Good Strength'),
+            'navigation.strength.medium' => $this->trans->t('Medium Strength'),
+            'navigation.strength.bad' => $this->trans->t('Bad Strength'),
+            'navigation.expired' => $this->trans->t('Expired'),
+            'navigation.advanced.filter' => $this->trans->t('Filter Tags'),
+            'navigation.advanced.checkbox' => $this->trans->t('Simple Navigation'),
+
 
 			// templates/public_share.php
 			'share.page.text' => $this->trans->t('Someone has shared a credential with you.'),
