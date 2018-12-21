@@ -74,6 +74,8 @@ OC.L10N.register(
     "Repeat password" : "Parola Onayı",
     "Add tag" : "Etiket ekle",
     "Pick an icon" : "Bir simge seçin",
+    "Search icons" : "Arama Simgeleri",
+    "Upload a custom icon:" : "Özel bir simge yükleyin:",
     "Use this icon" : "Bu simge kullanılsın",
     "Selected icon" : "Seçilmiş simge",
     "Field label" : "Alan Etiketi",
