@@ -20,12 +20,26 @@
  *
  */
 
+.spacer-top-30{
+  margin-top: 30px;
+}
 .scan-result-table {
-  margin-top: 10px;
+  td {
+    vertical-align: top !important;
+  }
   .score {
+    width: 55%;
     padding-left: 0px;
     padding-right: 15px;
   }
+  .label-audit{
+    width: 15%;
+  }
+}
+.detail_box{
+  border: 1px solid var(--color-border-dark);
+  margin-top: 25px;
+  padding: 5px;
 }
 
 .error {

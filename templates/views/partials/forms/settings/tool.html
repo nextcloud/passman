@@ -10,23 +10,23 @@
 </div>
 <div class="row" ng-show="scan_result">
 	<div class="col-xs-12">
-		<p>{{ 'scan.result.msg' | translate}}<br/>
+		<p class="spacer-top-30"><b>{{ 'scan.result.msg' | translate}}</b><br/>
 			<span translate="scan.result"
 				 translate-values='{ scan_result: scan_result.length}'></span>
 			<br/>
 		</p>
-		<table class="table scan-result-table">
+		<table class="table scan-result-table spacer-top-30">
 			<thead>
 			<tr>
-				<td>{{ 'label' | translate}}</td>
-				<td>{{ 'score' | translate}}</td>
-				<td>{{ 'password' | translate}}</td>
-				<td>{{ 'action' | translate}}</td>
+				<td><b>{{ 'label' | translate}}</b></td>
+				<td><b>{{ 'score' | translate}}</b></td>
+				<td><b>{{ 'password' | translate}}</b></td>
+				<td><b>{{ 'action' | translate}}</b></td>
 			</tr>
 			</thead>
 			<tbody>
 			<tr ng-repeat="result in scan_result | orderBy:'password_zxcvbn_result.score'">
-				<td>{{result.label}}</td>
+				<td class="label-audit">{{result.label}}</td>
 				<td class="score">
 					<ng-password-meter password="result.password"></ng-password-meter>
 				</td>
