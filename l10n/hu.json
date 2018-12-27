@@ -287,6 +287,7 @@
     "%s has declined your share request for \"%s\"." : "%s elutasította \"%s\" megosztási kérésedet.",
     "%s has accepted your share request for \"%s\"." : "%s elfogadta \"%s\" megosztási kérésedet.",
     "Passman" : "Passman",
+    "Passman is a full featured password manager." : "A Passman egy komplett szolgáltatásokkal felszerelt jelszó kezelő.",
     "Unable to get version info" : "Verzióinformáció nem elérhető",
     "Passman Settings" : "Passman beállítások",
     "GitHub version:" : "GitHub verzió:",
