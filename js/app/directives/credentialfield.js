@@ -68,15 +68,15 @@
 							}
 							if (regex.test(scope.value)) {
 								scope.isLink = true;
-								if(scope.value.substr(0,4) !== 'http'){
-									var val = scope.value;
-									scope.value =val.substr(val.indexOf("://")+3,val.length);
-								}
 							} else if (regex.test('http://'+scope.value) && scope.isURL){
                                 				//This part is added to check if the user did not add http or https to the url and match it nonetheless
                                 				scope.isLink = true;
 							} else {
                                 				scope.isLink = false;
+							}
+							if(scope.value.substr(0,4) !== 'http'){
+								var val = scope.value;
+								scope.value =val.substr(val.indexOf("://")+3,val.length);
 							}
 						}
 					});
