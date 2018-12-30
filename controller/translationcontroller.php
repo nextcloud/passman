@@ -145,6 +145,7 @@ class TranslationController extends ApiController {
 			'use.icon' => $this->trans->t('Use this icon'),
 			'use.icon.delete' => $this->trans->t('Delete current icon'),
 			'use.icon.refresh' => $this->trans->t('Get icon from page'),
+			'use.icon.refresh.trying' => $this->trans->t('This may take a few seconds...'),
 			'use.icon.refresh.error' => $this->trans->t('There was an error fetching the icon!'),
 			'selected.icon' => $this->trans->t('Selected icon'),
 
