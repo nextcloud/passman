@@ -9,6 +9,9 @@
 					<a>{{active_vault.name}}</a>
 				</div>
 
+				<div class="crumb svg" ng-repeat="path in BreadcrumbList"  ng-click="setCurrentFolderFromBreadcrumb(path.fullPath)" >
+					<a>{{::path.name}}</a>
+				</div>
 			</div>
 			<div class="addCredential" ng-hide="delete_time>0">
 				<button ng-click="addCredential()">+</button>
@@ -39,11 +42,19 @@
 	<div ng-init="menuOpen = false;">
 		<table class="credential-table"
 			   ng-if="view_mode === 'list'">
+			<tr ng-repeat="folder in TempFolderList" ng-if="folder!=='' && folder!=='/'">
+				<td ng-click="setCurrentFolderFromUI(folder)">
+ 					<span class="icon">
+ 						<i class="fa fa-folder"></i>
+ 					</span>
+					<a class="label">{{folder}}</a>
+				</td>
+			</tr>
 			<tr ng-repeat="credential in filtered_credentials | orderBy:'label'"
 				ng-if="showCredentialRow(credential)"
 				ng-click="selectCredential(credential)"  ng-dblclick="editCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
-				<td>
+				<td ng-if="checkIfCurrentFolderIsSelected(credential.folderpath)">
 					<span class="tags">
 					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 

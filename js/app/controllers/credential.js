@@ -50,6 +50,11 @@
 					}
 				}
 
+				$scope.currentFolder="/";
+				$scope.FolderList=["/"];
+				$scope.TempFolderList=[];
+				$scope.BreadcrumbList=[];
+
 				$scope.show_spinner = true;
 				var fetchCredentials = function () {
 					VaultService.getVault({guid: $routeParams.vault_id}).then(function (vault) {
@@ -64,6 +69,20 @@
 						VaultService.setActiveVault($scope.active_vault);
 						for (var i = 0; i < _credentials.length; i++) {
 							var _credential = _credentials[i];
+
+
+							if(_credential.folderpath === null){
+								_credential.folderpath='/';
+							}
+							if(_credential.folderpath.startsWith($scope.currentFolder)){
+
+								if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
+									$scope.FolderList.push(_credential.folderpath);
+								}
+							}else{
+								_credential.folderpath="/";
+							}
+
 							try {
 								if (!_credential.shared_key) {
 									_credential = CredentialService.decryptCredential(angular.copy(_credential));
@@ -103,6 +122,11 @@
 									_credentials.push(_shared_credential_data);
 								}
 							}
+
+							//create all folders after fetching credentials
+							$scope.getCurrentFolderList();
+
+
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
 							$rootScope.$broadcast('credentials_loaded');
@@ -119,8 +143,6 @@
 								});
 							}
 						});
-						console.log("creds");
-						console.log(_credentials);
 					});
 				};
 
@@ -469,7 +491,72 @@
                     return list_without_hidden;
                 };
 
+				$scope.createBreadCrumbList = function () {
+					var array= $scope.currentFolder.split("/").filter(Boolean);
+					var res=[];
+					var fullPath="";
+					array.forEach(function (element) {
+						fullPath="/"+element;
+						res.push({fullPath:fullPath, name:element});
+					});
+					$scope.BreadcrumbList=res;
+				};
 
+				$scope.setCurrentFolder = function (folder) {
+					$scope.currentFolder=folder;
+					$scope.createBreadCrumbList();
+				};
+
+				$scope.setCurrentFolderFromBreadcrumb = function (folder) {
+					$scope.currentFolder=folder;
+					$scope.createBreadCrumbList();
+					$scope.getCurrentFolderList();
+				};
+
+				$scope.setCurrentFolderFromUI = function (folder) {
+					var c= $scope.currentFolder+folder+"/";//$scope.cutScopeFolderFromFoldername(folder);
+					$scope.setCurrentFolder(c);
+					$scope.getCurrentFolderList();
+				};
+
+				$scope.checkIfCurrentFolderIsSelected = function (folder) {
+					if($scope.currentFolder === "/" && "/" === folder){
+						return true;
+					}
+					return $scope.currentFolder.substring(0,$scope.currentFolder.length-1) === folder;
+				};
+
+				$scope.checkIfFolderIsSubfolder = function (folder) {
+					return folder.startsWith($scope.currentFolder);
+				};
+
+				$scope.cutScopeFolderFromFoldername = function (folder) {
+					var withoutParent=folder.replace($scope.currentFolder, "")+"/";
+					var withoutRest="";
+					var temp="";
+					if(withoutParent.startsWith("/")){
+						temp=withoutParent.substring(1,withoutParent.length);
+						withoutRest=temp.substring(0,temp.indexOf("/"));
+					}else{
+						withoutRest=withoutParent.substring(0,withoutParent.indexOf("/"));
+					}
+
+					return withoutRest;
+				};
+
+				$scope.getCurrentFolderList = function () {
+					var Temp=[];
+					for (var i=0; i<$scope.FolderList.length; i++) {
+						//console.log("test: "+$scope.FolderList[i]);
+						if($scope.FolderList[i].startsWith($scope.currentFolder) && $scope.checkIfFolderIsSubfolder($scope.FolderList[i])){
+							var reducedFoldername=$scope.cutScopeFolderFromFoldername($scope.FolderList[i]);
+							if(Temp.indexOf(reducedFoldername) <= -1){
+								Temp.push(reducedFoldername);
+							}
+						}
+					}
+					$scope.TempFolderList=Temp;
+				};
 
                 $scope.selectedtags = [];
                 var to;
@@ -544,6 +631,7 @@
 
 				$scope.clearState = function () {
 					$scope.delete_time = 0;
+					$scope.setCurrentFolderFromBreadcrumb("/");
 				};
 
 			}]);
