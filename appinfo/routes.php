@@ -78,6 +78,7 @@ return [
 
 
 		#Icons
+		['name' => 'icon#getSingleIcon', 'url' => '/api/v2/geticon/{base64Url}', 'verb' => 'GET'],
 		['name' => 'icon#getIcon', 'url' => '/api/v2/icon/{base64Url}', 'verb' => 'GET'],
 		['name' => 'icon#getIcon', 'url' => '/api/v2/icon/{base64Url}/{credentialId}', 'verb' => 'GET'],
 		['name' => 'icon#getLocalIconList', 'url' => '/api/v2/icon/list', 'verb' => 'GET'],

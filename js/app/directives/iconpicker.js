@@ -115,26 +115,40 @@
 				$('#iconPicker').dialog('close');
 			};
 
+            scope.refreshUrlIcon = function(){
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/geticon/'+btoa(scope.credential.url));
+				$http.get(queryUrl).then(function (response) {
+
+					scope.customIcon = {};
+					scope.customIcon.data='data:image/'+response.data.type+';base64,'+response.data.content;
+					console.log(scope.customIcon.data);
+
+					if (response.data) {
+						return response.data;
+					} else {
+						return response;
+					}
+				});
+            };
+
             scope.useIcon = function() {
 
                 if(scope.customIcon){
                     var data = scope.customIcon.data;
                     scope.credential.icon.type = data.substring(data.lastIndexOf(":")+1,data.lastIndexOf(";"));
                     scope.credential.icon.content = data.substring(data.lastIndexOf(",")+1, data.length);
-                    $('#iconPicker').dialog('close');
-                    return;
+                }else{
+					$http.get(scope.selectedIcon.url).then(function(result) {
+						var base64Data = window.btoa(result.data);
+						var mimeType = 'svg+xml';
+						if(!scope.credential.icon){
+							scope.credential.icon = {};
+						}
+						scope.credential.icon.type = mimeType;
+						scope.credential.icon.content = base64Data;
+					});
                 }
-
-            $http.get(scope.selectedIcon.url).then(function(result) {
-              var base64Data = window.btoa(result.data);
-              var mimeType = 'svg+xml';
-              if(!scope.credential.icon){
-                scope.credential.icon = {};
-              }
-              scope.credential.icon.type = mimeType;
-              scope.credential.icon.content = base64Data;
-              $('#iconPicker').dialog('close');
-            });
+				$('#iconPicker').dialog('close');
           };
 
           $(element).click(function() {
