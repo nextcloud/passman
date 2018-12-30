@@ -139,6 +139,7 @@ class TranslationController extends ApiController {
 			'username' => $this->trans->t('Username'),
 			'password.r' => $this->trans->t('Repeat password'),
 			'add.tag' => $this->trans->t('Add tag'),
+			'folderpath' => $this->trans->t('Folderpath'),
 			'pick.icon' => $this->trans->t('Pick an icon'),
             'pick.icon.search' => $this->trans->t('Search icons'),
             'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),

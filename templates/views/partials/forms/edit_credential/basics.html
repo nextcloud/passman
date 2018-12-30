@@ -33,6 +33,10 @@
 		<div>
 			<textarea class="credential_textarea" ng-model="storedCredential.description"></textarea>
 		</div>
+		<label>{{ 'folderpath' | translate}}</label>
+		<div>
+			<input type="text" ng-model="storedCredential.folderpath">
+		</div>
 		<label>{{ 'add.tag' | translate}}</label>
 		<div class="tags_input">
 			<tags-input ng-model="storedCredential.tags" replace-spaces-with-dashes="false">
