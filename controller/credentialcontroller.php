@@ -70,7 +70,7 @@ class CredentialController extends ApiController {
 									 $credential_id, $custom_fields, $delete_time,
 									 $description, $email, $expire_time, $favicon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id) {
+									 $tags, $url, $username, $vault_id, $folderpath) {
 		$credential = array(
 			'credential_id' => $credential_id,
 			'guid' => $guid,
@@ -93,6 +93,7 @@ class CredentialController extends ApiController {
 			'custom_fields' => $custom_fields,
 			'otp' => $otp,
 			'hidden' => $hidden,
+			'folderpath' => $folderpath,
 
 		);
 
@@ -125,7 +126,7 @@ class CredentialController extends ApiController {
 									 $credential_id, $custom_fields, $delete_time, $credential_guid,
 									 $description, $email, $expire_time, $icon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision) {
+									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision, $folderpath) {
 
 
 		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid);
@@ -150,6 +151,7 @@ class CredentialController extends ApiController {
 			'custom_fields' => $custom_fields,
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
+			'folderpath' => $folderpath,
 			'otp' => $otp,
 			'user_id' => $storedCredential->getUserId()
 		);

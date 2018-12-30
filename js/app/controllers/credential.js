@@ -119,6 +119,8 @@
 								});
 							}
 						});
+						console.log("creds");
+						console.log(_credentials);
 					});
 				};
 
