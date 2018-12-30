@@ -143,6 +143,7 @@ class TranslationController extends ApiController {
             'pick.icon.search' => $this->trans->t('Search icons'),
             'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),
 			'use.icon' => $this->trans->t('Use this icon'),
+			'use.icon.delete' => $this->trans->t('Delete current icon'),
 			'selected.icon' => $this->trans->t('Selected icon'),
 
 			// templates/views/partials/edit_credential/custom_fields.html

@@ -108,6 +108,13 @@
                 fr.readAsDataURL(f);
             });
 
+            scope.deleteIcon = function() {
+				delete  scope.credential.icon.type;
+				delete  scope.credential.icon.content;
+				delete  scope.credential.icon;
+				$('#iconPicker').dialog('close');
+			};
+
             scope.useIcon = function() {
 
                 if(scope.customIcon){
