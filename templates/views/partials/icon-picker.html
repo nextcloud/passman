@@ -36,8 +36,9 @@
 			<br />
 			<button ng-click="useIcon()">{{ 'use.icon' | translate}}</button>
 		</div>
-		<div ng-if="credential.icon">
-			<button ng-click="deleteIcon()">{{ 'use.icon.delete' | translate}}</button>
+		<div >
+			<button ng-click="deleteIcon()" ng-if="credential.icon">{{ 'use.icon.delete' | translate}}</button>
+			<button ng-click="refreshUrlIcon()">{{ 'use.icon.refresh' | translate}}</button>
 		</div>
 	</div>
 </div>
