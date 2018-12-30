@@ -116,6 +116,7 @@
 			};
 
             scope.refreshUrlIcon = function(){
+				NotificationService.showNotification($translate.instant('use.icon.refresh.trying'), 5000);
 				var queryUrl = OC.generateUrl('apps/passman/api/v2/geticon/'+btoa(scope.credential.url));
 				$http.get(queryUrl).then(function (response) {
 				    if(typeof response.data.content !== 'undefined'){
