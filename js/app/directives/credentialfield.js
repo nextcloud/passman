@@ -37,7 +37,6 @@
 					secret: '=secret',
 					inputField: '=useInput',
 					inputFieldplaceholder: '=inputPlaceholder',
-					isURL: '=isurl'
 				},
 				restrict: 'A',
 				replace: 'true',
