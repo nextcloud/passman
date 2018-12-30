@@ -70,30 +70,15 @@
 						for (var i = 0; i < _credentials.length; i++) {
 							var _credential = _credentials[i];
 
-
-							if(_credential.folderpath === null){
-								_credential.folderpath='/';
-							}
-							if(_credential.folderpath.startsWith($scope.currentFolder)){
-
-								if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
-									$scope.FolderList.push(_credential.folderpath);
-								}
-							}else{
-								_credential.folderpath="/";
-							}
-
 							try {
 								if (!_credential.shared_key) {
 									_credential = CredentialService.decryptCredential(angular.copy(_credential));
-
 								} else {
 									var enc_key = EncryptService.decryptString(_credential.shared_key);
 									_credential = ShareService.decryptSharedCredential(angular.copy(_credential), enc_key);
 								}
 								_credential.tags_raw = _credential.tags;
 							} catch (e) {
-
 								NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
 								//$rootScope.$broadcast('logout');
 								//SettingsService.setSetting('defaultVaultPass', null);
@@ -101,6 +86,19 @@
 								//$location.path('/')
 
 							}
+
+							if(_credential.folderpath !== null){
+								if(_credential.folderpath.startsWith($scope.currentFolder)){
+									if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
+										$scope.FolderList.push(_credential.folderpath);
+									}
+								}else{
+									_credential.folderpath="/";
+								}
+							}else{
+								_credential.folderpath="/";
+							}
+
 							_credentials[i] = _credential;
 						}
 
