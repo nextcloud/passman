@@ -95,8 +95,6 @@
             };
 
             $('#iconPicker-CustomIcon').on('change', function(ev) {
-
-                console.log("upload");
                 scope.customIcon = {};
 
                 var f = ev.target.files[0];
