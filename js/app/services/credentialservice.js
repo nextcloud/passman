@@ -145,9 +145,8 @@
 							if(fieldValue!==null){
 								field_decrypted_value = EncryptService.decryptString(fieldValue, key);
 							}else{
-								field_decrypted_value="";
+								field_decrypted_value=null;
 							}
-							//field_decrypted_value = EncryptService.decryptString(fieldValue, key);
 						} catch (e) {
 							throw e;
 						}

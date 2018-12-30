@@ -492,12 +492,13 @@
 				$scope.createBreadCrumbList = function () {
 					var array= $scope.currentFolder.split("/").filter(Boolean);
 					var res=[];
-					var fullPath="";
+					var fullPath="/";
 					array.forEach(function (element) {
-						fullPath="/"+element;
+						fullPath+=element+"/";
 						res.push({fullPath:fullPath, name:element});
 					});
 					$scope.BreadcrumbList=res;
+
 				};
 
 				$scope.setCurrentFolder = function (folder) {
