@@ -121,8 +121,6 @@
 
 					scope.customIcon = {};
 					scope.customIcon.data='data:image/'+response.data.type+';base64,'+response.data.content;
-					console.log(scope.customIcon.data);
-
 					if (response.data) {
 						return response.data;
 					} else {
