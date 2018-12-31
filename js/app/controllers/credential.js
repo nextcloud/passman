@@ -557,6 +557,17 @@
 					$scope.TempFolderList=Temp;
 				};
 
+				$scope.moveFolder = function (evt, cred_guid) {
+					alert("test");
+					alert(cred_guid);
+					var credential = credentials.forEach(function (e) {
+						if(e.guid===cred_guid){
+							alert(e.label);
+						}
+					});
+
+				};
+
                 $scope.selectedtags = [];
                 var to;
                 $rootScope.$on('selected_tags_updated', function (evt, _sTags) {

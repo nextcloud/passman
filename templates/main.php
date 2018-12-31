@@ -83,6 +83,7 @@ script('passman', 'app/directives/credentialtemplate');
 script('passman', 'app/directives/clickdisable');
 script('passman', 'app/directives/icon');
 script('passman', 'app/directives/iconpicker');
+script('passman', 'app/directives/folderpicker');
 script('passman', 'importers/import-main');
 script('passman', 'importers/importer-keepasscsv');
 script('passman', 'importers/importer-lastpasscsv');

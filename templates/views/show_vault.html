@@ -55,10 +55,6 @@
 				ng-click="selectCredential(credential)"  ng-dblclick="editCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
 				<td ng-if="checkIfCurrentFolderIsSelected(credential.folderpath)">
-					<span class="tags">
-					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
-
-					</span>
 					<span class="icon" ng-if="credential.url">
 						<credential-icon credential="credential"></credential-icon>
 					</span>
@@ -68,8 +64,19 @@
 						<i class="fa fa-share-alt-square" ng-if="credential.shared_key"> </i>
 					</span>
 					<a class="label">{{ ::credential.label}}</a>
+					<div class="right-container">
+						<span class="tags">
+							<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
+							</span>
 
-
+						<div class="icon-settings cog" folder-picker="credential"></div>
+						<a class="icon-settings cog"
+						   ng-class="{'icon-settings-dark':hovering}"
+						   ng-mouseenter="hovering=true"
+						   ng-mouseleave="hovering=false"
+						   ng-click="moveFolder($event, credential.guid);">
+						</a>
+					</div>
 				</td>
 			</tr>
 		</table>
