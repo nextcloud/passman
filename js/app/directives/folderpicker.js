@@ -41,7 +41,7 @@
 			  scope.save = function() {
 				  CredentialService.updateCredential(scope.credential).then(function (updated_cred) {
 					  NotificationService.showNotification($translate.instant('folderpath.moved'), 5000);
-					  $rootScope.$broadcast('updateFolderInMainList');
+					  $rootScope.$broadcast('updateFolderInMainList', updated_cred);
 					  $('#folderPicker').dialog('close');
 				  });
 			  };

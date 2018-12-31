@@ -540,17 +540,24 @@
 					$scope.TempFolderList=Temp;
 				};
 
-				$rootScope.$on('updateFolderInMainList', function () {
-					$scope.buildFolderList(true);
+				$rootScope.$on('updateFolderInMainList', function (updated_credential) {
+					$scope.buildFolderList(updated_credential);
+					$scope.getCurrentFolderList();
+					$scope.createBreadCrumbList();
 				});
 
 				$rootScope.$on('credentials_loaded', function () {
 					//create all folders after fetching credentials
 					$scope.buildFolderList();
-					$scope.getCurrentFolderList(false);
+					$scope.getCurrentFolderList();
 				});
 
-				$scope.buildFolderList = function (ignoreCurrentActiveFolder) {
+				$scope.buildFolderList = function (updated_credential) {
+
+					var update=false;
+					if(typeof updated_credential !== 'undefined'){
+						update=true;
+					}
 
 					$scope.FolderList=["/"];
 					$scope.TempFolderList=[];
@@ -559,9 +566,8 @@
 					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 						var _credential = $scope.active_vault.credentials[i];
 
-
 						if(_credential.folderpath !== null){
-							if(_credential.folderpath.startsWith($scope.currentFolder) || ignoreCurrentActiveFolder){
+							if(_credential.folderpath.startsWith($scope.currentFolder) || update){
 								if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
 									$scope.FolderList.push(_credential.folderpath);
 								}
@@ -573,6 +579,13 @@
 						}
 						$scope.active_vault.credentials[i]=_credential;
 					}
+
+					if(update){
+						if(!$scope.FolderList.includes(updated_credential.folderpath)){
+							$scope.FolderList.push(updated_credential.folderpath);
+						}
+					}
+
 
 					if(!$scope.FolderList.includes($scope.currentFolder)){
 						$scope.currentFolder="/";
