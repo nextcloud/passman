@@ -1,8 +1,41 @@
-<div style="display: none" id="folderPicker" title="{{ 'folderpath.select' | translate }}">
-	<label>{{ 'folderpath' | translate}}</label>
+<div style="display: none" id="folderPicker" title="{{ 'folderpath.credential' | translate }}: {{credential.label}}">
 	<div>
-		<input id="folderpicker-input" type="text" ng-model="credential.folderpath">
-		<button ng-click="save()">{{ 'use.icon' | translate}}</button>
+		<input id="folderpicker-input" type="text" ng-model="currentFolder" readonly style="display: none;">
+	</div>
+
+	<div id="breadcrumb"></div>
+	<div class="breadcrumb">
+		<div class="breadcrumb">
+			<div class="crumb svg ui-droppable" data-dir="/">
+				<a ng-click="setCurrentFolderFromBreadcrumb('/')"><i class="fa fa-home"></i></a>
+			</div>
+			<div class="crumb svg" ng-repeat="path in BreadcrumbList"  ng-click="setCurrentFolderFromBreadcrumb(path.fullPath)" >
+				<a>{{::path.name}}</a>
+			</div>
+		</div>
+	</div>
+	<div id="folder-list">
+		<table class="folder-list">
+			<tr class="folder-row" ng-repeat="entry in tempFolderList" ng-click="currentPathAdd(entry);">
+				<td class="icon icon-folder"></td>
+				<td class="name">{{entry}}</td>
+				<td class="space"></td>
+			</tr>
+			<tr class="folder-row">
+				<td class="icon icon-folder"></td>
+				<td class="name" ng-if="!enableInput" ng-click="toggleInput()">New...</td>
+				<td class="input" ng-if="enableInput">
+					<form ng-submit="currentPathAddNew(newfolderinput);">
+						<input type="text" value="{{ 'folderpath.newfolder' | translate}}" ng-model="newfolderinput">
+						<button>{{ 'folderpath.createfolder' | translate}}</button>
+					</form>
+				</td>
+				<td class="space"></td>
+			</tr>
+		</table>
+	</div>
+	<div id="controls">
+		<button ng-click="close()">{{ 'folderpath.cancel' | translate}}</button>
+		<button class="primary" ng-click="save()">{{ 'folderpath.move' | translate}}</button>
 	</div>
 </div>
-

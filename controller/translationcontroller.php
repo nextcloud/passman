@@ -423,8 +423,11 @@ class TranslationController extends ApiController {
 
 
 			//template/views/partials/folder-picker
-			'folderpath.select' => $this->trans->t('Move to:'),
-			'folderpath.moved' => $this->trans->t('Moved successfullly!'),
+			'folderpath.credential' => $this->trans->t('Credential to move'),
+			'folderpath.move' => $this->trans->t('Move'),
+			'folderpath.cancel' => $this->trans->t('Cancel'),
+			'folderpath.newfolder' => $this->trans->t('New Folder'),
+			'folderpath.createfolder' => $this->trans->t('Create'),
 		);
 		return new JSONResponse($translations);
 	}

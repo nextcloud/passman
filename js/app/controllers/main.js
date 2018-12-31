@@ -55,6 +55,8 @@
 					$scope.http_warning_hidden = true;
 				}
 
+                $scope.http_warning_hidden = true;
+
 				if(SettingsService.isEnabled('disable_debugger')){
 					(function a() {
 						try {

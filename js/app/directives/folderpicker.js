@@ -34,29 +34,110 @@
           templateUrl: 'views/partials/folder-picker.html',
           restrict: 'A',
           scope: {
-              credential: '=folderPicker'
+              credential: '=folderPicker',
+              folder: '=folder'
           },
           link: function(scope, element) {
 
+              scope.currentFolder = scope.credential.folderpath;
+              scope.tempFolderList = [];
+              scope.BreadcrumbList = ["test","1"];
+              scope.enableInput = false;
+
+              scope.toggleInput = function() {
+                  scope.enableInput = !scope.enableInput;
+              };
+
 			  scope.save = function() {
-				  CredentialService.updateCredential(scope.credential).then(function () {
+				  CredentialService.updateCredential(scope.credential).then(function (updated_credential) {
 					  NotificationService.showNotification($translate.instant('folderpath.moved'), 5000);
-					  $rootScope.$broadcast('updateFolderInMainList', scope.credential);
-					  $('#folderPicker').dialog('close');
+					  $rootScope.$broadcast('updateFolderInMainList', updated_credential);
+					  //$('#folderPicker').dialog('close');
 				  });
 			  };
 
-
-
-          $(element).click(function() {
-              $('#folderPicker').dialog({
-                  width: 400,
-                  height: 140,
-                  close: function() {
-                      $(this).dialog('destroy');
+              scope.currentPathAddNew = function (nextFolder) {
+                  if(typeof nextFolder === 'undefined'){
+                      nextFolder=$translate.instant('folderpath.newfolder');
                   }
+                  scope.currentPathAdd(nextFolder);
+                  scope.enableInput=false;
+              };
+
+              scope.currentPathAdd = function (nextFolder) {
+                  console.log(scope.tempFolderList)
+                  scope.currentFolder+='/'+nextFolder;
+                  scope.getCurrentFolderList();
+                  scope.setCurrentFolderFromBreadcrumb(scope.currentFolder);
+              };
+
+              scope.getCurrentFolderList = function () {
+                  var Temp=[];
+                  for (var i=0; i<scope.folder.length; i++) {
+                      if(scope.folder[i].startsWith(scope.currentFolder) && scope.checkIfFolderIsSubfolder(scope.folder[i])){
+                          var reducedFoldername=scope.cutScopeFolderFromFoldername(scope.folder[i]);
+                          if(Temp.indexOf(reducedFoldername) <= -1){
+                              Temp.push(reducedFoldername);
+                          }
+                      }
+                  }
+                  Temp.splice( Temp.indexOf(""), 1 );
+                  scope.tempFolderList=Temp;
+              };
+
+              scope.checkIfFolderIsSubfolder = function (folder) {
+                  return folder.startsWith(scope.currentFolder);
+              };
+
+              scope.cutScopeFolderFromFoldername = function (folder) {
+                  var withoutParent=folder.replace(scope.currentFolder, "")+"/";
+                  var withoutRest="";
+                  var temp="";
+                  if(withoutParent.startsWith("/")){
+                      temp=withoutParent.substring(1,withoutParent.length);
+                      withoutRest=temp.substring(0,temp.indexOf("/"));
+                  }else{
+                      withoutRest=withoutParent.substring(0,withoutParent.indexOf("/"));
+                  }
+
+                  return withoutRest;
+              };
+
+              scope.createBreadCrumbList = function () {
+                  var array= scope.currentFolder.split("/").filter(Boolean);
+                  var res=[];
+                  var fullPath="/";
+                  array.forEach(function (element) {
+                      fullPath+=element+"/";
+                      res.push({fullPath:fullPath, name:element});
+                  });
+                  scope.BreadcrumbList=res;
+
+              };
+
+              scope.setCurrentFolderFromBreadcrumb = function (folder) {
+                  scope.currentFolder=folder;
+                  scope.createBreadCrumbList();
+                  scope.getCurrentFolderList();
+              };
+
+              scope.createBreadCrumbList();
+              scope.getCurrentFolderList();
+
+              scope.close = function() {
+
+              };
+
+              $(element).click(function() {
+                  $('#folderPicker').dialog({
+                      width: 400,
+                      //height: 140,
+                      height: 340,
+                      close: function() {
+                          $(this).dialog('destroy');
+                      }
+                  });
               });
-          });
           }
       };
   }]);
