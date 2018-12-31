@@ -540,24 +540,26 @@
 					$scope.TempFolderList=Temp;
 				};
 
-				$rootScope.$on('updateFolderInMainList', function (updated_credential) {
-					$scope.buildFolderList(updated_credential);
+				$rootScope.$on('updateFolderInMainList', function (evt, updated_credential) {
+
+                    for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+                    	if($scope.active_vault.credentials[i].guid === updated_credential.guid){
+                            $scope.active_vault.credentials[i]=updated_credential;
+						}
+					}
+
+                    $scope.buildFolderList(true);
 					$scope.getCurrentFolderList();
 					$scope.createBreadCrumbList();
 				});
 
 				$rootScope.$on('credentials_loaded', function () {
 					//create all folders after fetching credentials
-					$scope.buildFolderList();
+					$scope.buildFolderList(false);
 					$scope.getCurrentFolderList();
 				});
 
-				$scope.buildFolderList = function (updated_credential) {
-
-					var update=false;
-					if(typeof updated_credential !== 'undefined'){
-						update=true;
-					}
+				$scope.buildFolderList = function (update) {
 
 					$scope.FolderList=["/"];
 					$scope.TempFolderList=[];
@@ -567,7 +569,7 @@
 						var _credential = $scope.active_vault.credentials[i];
 
 						if(_credential.folderpath !== null){
-							if(_credential.folderpath.startsWith($scope.currentFolder) || update){
+							if(String(_credential.folderpath).startsWith(String($scope.currentFolder)) || update){
 								if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
 									$scope.FolderList.push(_credential.folderpath);
 								}
@@ -580,19 +582,10 @@
 						$scope.active_vault.credentials[i]=_credential;
 					}
 
-					if(update){
-						if(!$scope.FolderList.includes(updated_credential.folderpath)){
-							$scope.FolderList.push(updated_credential.folderpath);
-						}
-					}
-
-
 					if(!$scope.FolderList.includes($scope.currentFolder)){
 						$scope.currentFolder="/";
 					}
 
-					console.log($scope.FolderList);
-					console.log($scope.TempFolderList);
 				};
 
                 $scope.selectedtags = [];

@@ -39,9 +39,9 @@
           link: function(scope, element) {
 
 			  scope.save = function() {
-				  CredentialService.updateCredential(scope.credential).then(function (updated_cred) {
+				  CredentialService.updateCredential(scope.credential).then(function () {
 					  NotificationService.showNotification($translate.instant('folderpath.moved'), 5000);
-					  $rootScope.$broadcast('updateFolderInMainList', updated_cred);
+					  $rootScope.$broadcast('updateFolderInMainList', scope.credential);
 					  $('#folderPicker').dialog('close');
 				  });
 			  };
