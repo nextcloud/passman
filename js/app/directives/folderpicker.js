@@ -130,9 +130,9 @@
 
               $(element).click(function() {
                   $('#folderPicker').dialog({
-                      width: 400,
+                      width: 570,
                       //height: 140,
-                      height: 340,
+                      height: 470,
                       close: function() {
                           $(this).dialog('destroy');
                       }

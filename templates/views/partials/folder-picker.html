@@ -23,7 +23,7 @@
 			</tr>
 			<tr class="folder-row">
 				<td class="icon icon-folder"></td>
-				<td class="name" ng-if="!enableInput" ng-click="toggleInput()">New...</td>
+				<td class="name name-light" ng-if="!enableInput" ng-click="toggleInput()">{{ 'folderpath.createnewhint' | translate}}</td>
 				<td class="input" ng-if="enableInput">
 					<form ng-submit="currentPathAddNew(newfolderinput);">
 						<input type="text" value="{{ 'folderpath.newfolder' | translate}}" ng-model="newfolderinput">

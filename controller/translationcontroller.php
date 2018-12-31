@@ -427,6 +427,7 @@ class TranslationController extends ApiController {
 			'folderpath.move' => $this->trans->t('Move'),
 			'folderpath.cancel' => $this->trans->t('Cancel'),
 			'folderpath.newfolder' => $this->trans->t('New Folder'),
+			'folderpath.createnewhint' => $this->trans->t('New...'),
 			'folderpath.createfolder' => $this->trans->t('Create'),
 		);
 		return new JSONResponse($translations);

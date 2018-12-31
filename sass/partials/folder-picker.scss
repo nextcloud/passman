@@ -22,6 +22,8 @@
 $folderrowheight: 35px;
 
 #folder-list{
+  overflow-y: auto;
+  height: calc(100% - 100px);
   table{
     width: 100%;
     td{
@@ -46,6 +48,11 @@ $folderrowheight: 35px;
     cursor: pointer;
   }
 
+  .name-light{
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+
   .input{
     height: $folderrowheight;
     width: calc(100% - 30px);
@@ -55,4 +62,7 @@ $folderrowheight: 35px;
     cursor: pointer;
   }
 
+}
+#controls{
+  float: right;
 }
