@@ -69,13 +69,11 @@
 							<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 							</span>
 
-						<div class="icon-settings cog" folder-picker="credential"></div>
-						<a class="icon-settings cog"
-						   ng-class="{'icon-settings-dark':hovering}"
-						   ng-mouseenter="hovering=true"
-						   ng-mouseleave="hovering=false"
-						   ng-click="moveFolder($event, credential.guid);">
-						</a>
+						<div folder-picker="credential"
+							 class="icon-settings cog"
+							 ng-class="{'icon-settings-dark':hovering}"
+							 ng-mouseenter="hovering=true"
+							 ng-mouseleave="hovering=false"></div>
 					</div>
 				</td>
 			</tr>

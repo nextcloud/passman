@@ -1,29 +1,8 @@
-<div class="cell icon-category-auth"></div>
-<div style="display: none" id="iconPicker" title="{{ 'pick.icon' | translate }}">
-		<div class="iconList">
-			<div ng-repeat="(groupName, icons) in iconGroups">
-				<h2 style="clear: both" id="{{groupName}}">{{groupName}}</h2>
-				<div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)">
-					<img ng-src="{{icon.url}}" height="32">
-				</div>
-			</div>
-		</div>
-		<div class="iconModifier">
-			<input id="iconPicker-Search" class="iconSearch" type="text" placeholder="{{ 'pick.icon.search' | translate }}">
-			<label for="iconPicker-CustomIcon">{{ 'pick.icon.custom.label' | translate }}<label>
-            <input id="iconPicker-CustomIcon" class="iconSearch"  type="file"/>
-			<!--
-			<div ng-repeat="(groupName, icons) in iconGroups">
-				<a ng-click="jumpToGroup(groupName)">{{groupName}}</a>
-			</div>-->
-            <div ng-if="selectedIcon || customIcon">
-                {{ 'selected.icon' | translate}}: <br />
-
-                <img ng-src="{{selectedIcon.url}}" height="32" ng-if="!customIcon">
-                <img src="{{customIcon.data}}" height="32" ng-if="customIcon">
-                <br />
-                <button ng-click="useIcon()">{{ 'use.icon' | translate}}</button>
-            </div>
-		</div>
+<div style="display: none" id="folderPicker" title="{{ 'folderpath.select' | translate }}">
+	<label>{{ 'folderpath' | translate}}</label>
+	<div>
+		<input id="folderpicker-input" type="text" ng-model="credential.folderpath">
+		<button ng-click="save()">{{ 'use.icon' | translate}}</button>
 	</div>
+</div>
 

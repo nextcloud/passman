@@ -421,6 +421,10 @@ class TranslationController extends ApiController {
 			'share.page.link_loading' => $this->trans->t('Loading…'),
 			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
+
+			//template/views/partials/folder-picker
+			'folderpath.select' => $this->trans->t('Move to:'),
+			'folderpath.moved' => $this->trans->t('Moved successfullly!'),
 		);
 		return new JSONResponse($translations);
 	}

@@ -29,118 +29,35 @@
    * # folderpicker
    */
   angular.module('passmanApp').directive('folderPicker', [
-	  '$window', 'IconService', '$http', function($window, IconService, $http) {
+	  '$window', '$http', 'CredentialService', 'NotificationService', '$translate', '$rootScope', function($window, $http, CredentialService, NotificationService, $translate, $rootScope) {
       return {
-        templateUrl: 'views/partials/folder-picker.html',
-        restrict: 'A',
-        scope: {
-          credential: '=folderPicker'
-        },
-        link: function(scope, element) {
+          templateUrl: 'views/partials/folder-picker.html',
+          restrict: 'A',
+          scope: {
+              credential: '=folderPicker'
+          },
+          link: function(scope, element) {
 
-          IconService.getIcons().then(function(icons) {
-            scope.iconGroupsAll = icons;
-            scope.iconGroups = icons;
-          });
+			  scope.save = function() {
+				  CredentialService.updateCredential(scope.credential).then(function (updated_cred) {
+					  NotificationService.showNotification($translate.instant('folderpath.moved'), 5000);
+					  $rootScope.$broadcast('updateFolderInMainList');
+					  $('#folderPicker').dialog('close');
+				  });
+			  };
 
-          scope.selectIcon = function(icon) {
-            scope.selectedIcon = icon;
-          };
 
-          scope.jumpToGroup = function(groupName) {
-              var offset = $('#'+groupName).position();
-              $('.iconList').scrollTop(offset.top);
-          };
-
-          var search = document.getElementById("iconPicker-Search");
-          search.addEventListener('keypress', function (e) {
-              if(e.keyCode === 13){
-                  e.preventDefault();
-              }
-          });
-
-          search.addEventListener('keyup', function (e) {
-              var g={};
-              g.Numix=[];
-              scope.iconGroupsAll.Numix.forEach(function(element) {
-                  if(scope.isAllowedIcon(element))
-                      g.Numix.push(element);
-              });
-
-              g["essential-collection"]=[];
-              scope.iconGroupsAll["essential-collection"].forEach(function(element) {
-                  if(scope.isAllowedIcon(element))
-                      g["essential-collection"].push(element);
-              });
-
-              g["font-awesome"]=[];
-              scope.iconGroupsAll["font-awesome"].forEach(function(element) {
-              if(scope.isAllowedIcon(element))
-                  g["font-awesome"].push(element);
-              });
-
-              scope.iconGroups=g;
-              scope.$apply();
-            });
-
-            scope.isAllowedIcon = function(IconElement) {
-                var searchval=search.value.toLowerCase();
-                var urlCropped = IconElement.url.substring(IconElement.url.lastIndexOf("/")+1, IconElement.url.length);
-
-                if(urlCropped.includes(searchval) || IconElement.pack.toLowerCase() ===searchval){
-                    return true;
-                }
-                return false;
-            };
-
-            $('#iconPicker-CustomIcon').on('change', function(ev) {
-
-                console.log("upload");
-                scope.customIcon = {};
-
-                var f = ev.target.files[0];
-                var fr = new FileReader();
-
-                fr.onload = function(ev2) {
-                    scope.customIcon.data=ev2.target.result;
-                    scope.$apply();
-                };
-
-                fr.readAsDataURL(f);
-            });
-
-            scope.useIcon = function() {
-
-                if(scope.customIcon){
-                    var data = scope.customIcon.data;
-                    scope.credential.icon.type = data.substring(data.lastIndexOf(":")+1,data.lastIndexOf(";"));
-                    scope.credential.icon.content = data.substring(data.lastIndexOf(",")+1, data.length);
-                    $('#iconPicker').dialog('close');
-                    return;
-                }
-
-            $http.get(scope.selectedIcon.url).then(function(result) {
-              var base64Data = window.btoa(result.data);
-              var mimeType = 'svg+xml';
-              if(!scope.credential.icon){
-                scope.credential.icon = {};
-              }
-              scope.credential.icon.type = mimeType;
-              scope.credential.icon.content = base64Data;
-              $('#iconPicker').dialog('close');
-            });
-          };
 
           $(element).click(function() {
-            $('#iconPicker').dialog({
-              width: 800,
-              height: 380,
-              close: function() {
-                $(this).dialog('destroy');
-              }
-            });
+              $('#folderPicker').dialog({
+                  width: 400,
+                  height: 140,
+                  close: function() {
+                      $(this).dialog('destroy');
+                  }
+              });
           });
-        }
+          }
       };
-    }]);
+  }]);
 }());

@@ -86,19 +86,6 @@
 								//$location.path('/')
 
 							}
-
-							if(_credential.folderpath !== null){
-								if(_credential.folderpath.startsWith($scope.currentFolder)){
-									if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
-										$scope.FolderList.push(_credential.folderpath);
-									}
-								}else{
-									_credential.folderpath="/";
-								}
-							}else{
-								_credential.folderpath="/";
-							}
-
 							_credentials[i] = _credential;
 						}
 
@@ -120,10 +107,6 @@
 									_credentials.push(_shared_credential_data);
 								}
 							}
-
-							//create all folders after fetching credentials
-							$scope.getCurrentFolderList();
-
 
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
@@ -557,15 +540,46 @@
 					$scope.TempFolderList=Temp;
 				};
 
-				$scope.moveFolder = function (evt, cred_guid) {
-					alert("test");
-					alert(cred_guid);
-					var credential = credentials.forEach(function (e) {
-						if(e.guid===cred_guid){
-							alert(e.label);
-						}
-					});
+				$rootScope.$on('updateFolderInMainList', function () {
+					$scope.buildFolderList(true);
+				});
 
+				$rootScope.$on('credentials_loaded', function () {
+					//create all folders after fetching credentials
+					$scope.buildFolderList();
+					$scope.getCurrentFolderList(false);
+				});
+
+				$scope.buildFolderList = function (ignoreCurrentActiveFolder) {
+
+					$scope.FolderList=["/"];
+					$scope.TempFolderList=[];
+					$scope.BreadcrumbList=[];
+
+					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+						var _credential = $scope.active_vault.credentials[i];
+
+
+						if(_credential.folderpath !== null){
+							if(_credential.folderpath.startsWith($scope.currentFolder) || ignoreCurrentActiveFolder){
+								if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
+									$scope.FolderList.push(_credential.folderpath);
+								}
+							}else{
+								_credential.folderpath="/";
+							}
+						}else{
+							_credential.folderpath="/";
+						}
+						$scope.active_vault.credentials[i]=_credential;
+					}
+
+					if(!$scope.FolderList.includes($scope.currentFolder)){
+						$scope.currentFolder="/";
+					}
+
+					console.log($scope.FolderList);
+					console.log($scope.TempFolderList);
 				};
 
                 $scope.selectedtags = [];
