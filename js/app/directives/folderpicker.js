@@ -35,7 +35,7 @@
           restrict: 'A',
           scope: {
               credential: '=folderPicker',
-              folder: '=folder'
+              folder: '=folder',
           },
           link: function(scope, element) {
 

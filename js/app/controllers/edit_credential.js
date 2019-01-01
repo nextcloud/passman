@@ -32,9 +32,13 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate','$rootScope',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope) {
-				$scope.active_vault = VaultService.getActiveVault();
+		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate', '$rootScope', 'FolderService',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope, FolderService) {
+
+
+			$scope.FolderList=[];
+
+			$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
 						$location.path('/');
@@ -66,6 +70,15 @@
 							'generateOnCreate': true
 						});
 				});
+
+				VaultService.getVault($scope.active_vault).then(function (vault) {
+					console.log(vault.credentials)
+					FolderService.expandWithFolder($scope, vault.credentials);
+					$scope.buildFolderList(true);
+					$scope.getCurrentFolderList();
+					$scope.createBreadCrumbList();
+				});
+
 
 				$scope.currentTab = {
 					title: $translate.instant('general'),

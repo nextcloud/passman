@@ -32,9 +32,9 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate',
-			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate) {
+		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate', 'FolderService',
+			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate, FolderService) {
+
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -49,12 +49,6 @@
 						//@TODO check if vault exists
 					}
 				}
-
-				$scope.currentFolder="/";
-				$scope.FolderList=["/"];
-				$scope.TempFolderList=[];
-				$scope.BreadcrumbList=[];
-
 				$scope.show_spinner = true;
 				var fetchCredentials = function () {
 					VaultService.getVault({guid: $routeParams.vault_id}).then(function (vault) {
@@ -110,6 +104,7 @@
 
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
+							FolderService.expandWithFolder($scope, $scope.active_vault.credentials);
 							$rootScope.$broadcast('credentials_loaded');
 							$rootScope.vaultCache[$scope.active_vault.guid] = angular.copy($scope.active_vault);
 							if(!vault.private_sharing_key){
@@ -472,74 +467,6 @@
                     return list_without_hidden;
                 };
 
-				$scope.createBreadCrumbList = function () {
-					var array= $scope.currentFolder.split("/").filter(Boolean);
-					var res=[];
-					var fullPath="/";
-					array.forEach(function (element) {
-						fullPath+=element+"/";
-						res.push({fullPath:fullPath, name:element});
-					});
-					$scope.BreadcrumbList=res;
-
-				};
-
-				$scope.setCurrentFolder = function (folder) {
-					$scope.currentFolder=folder;
-					$scope.createBreadCrumbList();
-				};
-
-				$scope.setCurrentFolderFromBreadcrumb = function (folder) {
-					$scope.currentFolder=folder;
-					$scope.createBreadCrumbList();
-					$scope.getCurrentFolderList();
-				};
-
-				$scope.setCurrentFolderFromUI = function (folder) {
-					var c= $scope.currentFolder+folder+"/";//$scope.cutScopeFolderFromFoldername(folder);
-					$scope.setCurrentFolder(c);
-					$scope.getCurrentFolderList();
-				};
-
-				$scope.checkIfCurrentFolderIsSelected = function (folder) {
-					if($scope.currentFolder === "/" && "/" === folder){
-						return true;
-					}
-					return $scope.currentFolder.substring(0,$scope.currentFolder.length-1) === folder;
-				};
-
-				$scope.checkIfFolderIsSubfolder = function (folder) {
-					return folder.startsWith($scope.currentFolder);
-				};
-
-				$scope.cutScopeFolderFromFoldername = function (folder) {
-					var withoutParent=folder.replace($scope.currentFolder, "")+"/";
-					var withoutRest="";
-					var temp="";
-					if(withoutParent.startsWith("/")){
-						temp=withoutParent.substring(1,withoutParent.length);
-						withoutRest=temp.substring(0,temp.indexOf("/"));
-					}else{
-						withoutRest=withoutParent.substring(0,withoutParent.indexOf("/"));
-					}
-
-					return withoutRest;
-				};
-
-				$scope.getCurrentFolderList = function () {
-					var Temp=[];
-					for (var i=0; i<$scope.FolderList.length; i++) {
-						//console.log("test: "+$scope.FolderList[i]);
-						if($scope.FolderList[i].startsWith($scope.currentFolder) && $scope.checkIfFolderIsSubfolder($scope.FolderList[i])){
-							var reducedFoldername=$scope.cutScopeFolderFromFoldername($scope.FolderList[i]);
-							if(Temp.indexOf(reducedFoldername) <= -1){
-								Temp.push(reducedFoldername);
-							}
-						}
-					}
-					$scope.TempFolderList=Temp;
-				};
-
 				$rootScope.$on('updateFolderInMainList', function (evt, updated_credential) {
 
                     for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
@@ -559,34 +486,7 @@
 					$scope.getCurrentFolderList();
 				});
 
-				$scope.buildFolderList = function (update) {
 
-					$scope.FolderList=["/"];
-					$scope.TempFolderList=[];
-					$scope.BreadcrumbList=[];
-
-					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
-						var _credential = $scope.active_vault.credentials[i];
-
-						if(_credential.folderpath !== null){
-							if(String(_credential.folderpath).startsWith(String($scope.currentFolder)) || update){
-								if($scope.FolderList.indexOf(_credential.folderpath) <= -1){
-									$scope.FolderList.push(_credential.folderpath);
-								}
-							}else{
-								_credential.folderpath="/";
-							}
-						}else{
-							_credential.folderpath="/";
-						}
-						$scope.active_vault.credentials[i]=_credential;
-					}
-
-					if(!$scope.FolderList.includes($scope.currentFolder)){
-						$scope.currentFolder="/";
-					}
-
-				};
 
                 $scope.selectedtags = [];
                 var to;

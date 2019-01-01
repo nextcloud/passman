@@ -64,6 +64,7 @@ script('passman', 'app/services/iconservice');
 script('passman', 'app/services/tagservice');
 script('passman', 'app/services/notificationservice');
 script('passman', 'app/services/shareservice');
+script('passman', 'app/services/folderservice');
 script('passman', 'app/factory/sharingacl');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');
