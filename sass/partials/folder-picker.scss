@@ -77,4 +77,21 @@ $folderrowheight: 35px;
   .ui-widget-header {
     background: none;
   }
+
+  .ui-icon-closethick {
+    background-position: inherit;
+  }
+
+  .ui-button .ui-icon {
+    background-image: var(--icon-close-000);
+  }
+
+  .ui-button-icon {border: none !important;}
+  .ui-icon {border: none !important;}
+  .ui-icon-closethick {border: none !important;}
+  .ui-corner-all {border: none !important;}
+  .ui-state-default {background: white !important;}
+  .ui-button {background: white !important;}
+
+
 }

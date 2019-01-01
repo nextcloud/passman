@@ -133,6 +133,9 @@
                       width: 570,
                       //height: 140,
                       height: 470,
+					  classes: {
+						  "ui-dialog": "ui-dialog folderpicker-dialog"
+					  },
                       close: function() {
                           $(this).dialog('destroy');
                       }
