@@ -49,6 +49,10 @@ angular.module('passmanApp')
 					var _credential = CredentialList[i];
 
 					if (_credential.folderpath !== null) {
+						while(_credential.folderpath.includes('//')){
+							_credential.folderpath=_credential.folderpath.replace("//", "/");
+						}
+						console.log(_credential.folderpath);
 						if (String(_credential.folderpath).startsWith(String($scope.currentFolder)) || update) {
 							if ($scope.FolderList.indexOf(_credential.folderpath) <= -1) {
 								$scope.FolderList.push(_credential.folderpath);

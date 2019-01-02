@@ -468,7 +468,7 @@
                 };
 
 				$rootScope.$on('updateFolderInMainList', function (evt, updated_credential) {
-
+					CredentialService.decryptCredential(updated_credential);
                     for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
                     	if($scope.active_vault.credentials[i].guid === updated_credential.guid){
                             $scope.active_vault.credentials[i]=updated_credential;

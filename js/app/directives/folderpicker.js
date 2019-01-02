@@ -49,6 +49,11 @@
               };
 
 			  scope.save = function() {
+				  while(scope.currentFolder.includes('//')){
+					  _credential.folderpath=_credential.folderpath.replace("//", "/");
+				  }
+				  scope.credential.folderpath = scope.currentFolder;
+
 				  CredentialService.updateCredential(scope.credential).then(function (updated_credential) {
 					  NotificationService.showNotification($translate.instant('folderpath.moved'), 5000);
 					  $rootScope.$broadcast('updateFolderInMainList', updated_credential);
