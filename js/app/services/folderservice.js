@@ -52,7 +52,6 @@ angular.module('passmanApp')
 						while(_credential.folderpath.includes('//')){
 							_credential.folderpath=_credential.folderpath.replace("//", "/");
 						}
-						console.log(_credential.folderpath);
 						if (String(_credential.folderpath).startsWith(String($scope.currentFolder)) || update) {
 							if ($scope.FolderList.indexOf(_credential.folderpath) <= -1) {
 								$scope.FolderList.push(_credential.folderpath);
@@ -127,6 +126,7 @@ angular.module('passmanApp')
 			};
 
 			$scope.getCurrentFolderList = function () {
+
 				var Temp = [];
 				for (var i = 0; i < $scope.FolderList.length; i++) {
 					//console.log("test: "+$scope.FolderList[i]);
@@ -137,6 +137,7 @@ angular.module('passmanApp')
 						}
 					}
 				}
+				Temp = Temp.filter(Boolean);
 				$scope.TempFolderList = Temp;
 			};
 

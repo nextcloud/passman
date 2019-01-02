@@ -29,19 +29,18 @@
    * # folderpicker
    */
   angular.module('passmanApp').directive('folderPicker', [
-	  '$window', '$http', 'CredentialService', 'NotificationService', '$translate', '$rootScope', function($window, $http, CredentialService, NotificationService, $translate, $rootScope) {
+	  '$window', '$http', 'CredentialService', 'NotificationService', '$translate', '$rootScope', 'FolderService', function($window, $http, CredentialService, NotificationService, $translate, $rootScope, FolderService) {
       return {
           templateUrl: 'views/partials/folder-picker.html',
           restrict: 'A',
           scope: {
               credential: '=folderPicker',
-              folder: '=folder',
+              list: '=credentiallist',
           },
           link: function(scope, element) {
 
+			  FolderService.expandWithFolder(scope, scope.list);
               scope.currentFolder = scope.credential.folderpath;
-              scope.tempFolderList = [];
-              scope.BreadcrumbList = ["test","1"];
               scope.enableInput = false;
 
               scope.toggleInput = function() {
@@ -50,14 +49,15 @@
 
 			  scope.save = function() {
 				  while(scope.currentFolder.includes('//')){
-					  _credential.folderpath=_credential.folderpath.replace("//", "/");
+					  scope.currentFolder=scope.currentFolder.replace("//", "/");
 				  }
 				  scope.credential.folderpath = scope.currentFolder;
 
 				  CredentialService.updateCredential(scope.credential).then(function (updated_credential) {
 					  NotificationService.showNotification($translate.instant('folderpath.moved'), 5000);
+					  scope.close();
 					  $rootScope.$broadcast('updateFolderInMainList', updated_credential);
-					  //$('#folderPicker').dialog('close');
+
 				  });
 			  };
 
@@ -70,43 +70,15 @@
               };
 
               scope.currentPathAdd = function (nextFolder) {
-                  console.log(scope.tempFolderList)
                   scope.currentFolder+='/'+nextFolder;
-                  scope.getCurrentFolderList();
+                  //removes possible duplicates of //
+				  while(scope.currentFolder.includes('//')){
+					  scope.currentFolder=scope.currentFolder.replace("//", "/");
+				  }
+				  scope.getCurrentFolderList();
                   scope.setCurrentFolderFromBreadcrumb(scope.currentFolder);
               };
 
-              scope.getCurrentFolderList = function () {
-                  var Temp=[];
-                  for (var i=0; i<scope.folder.length; i++) {
-                      if(scope.folder[i].startsWith(scope.currentFolder) && scope.checkIfFolderIsSubfolder(scope.folder[i])){
-                          var reducedFoldername=scope.cutScopeFolderFromFoldername(scope.folder[i]);
-                          if(Temp.indexOf(reducedFoldername) <= -1){
-                              Temp.push(reducedFoldername);
-                          }
-                      }
-                  }
-                  Temp.splice( Temp.indexOf(""), 1 );
-                  scope.tempFolderList=Temp;
-              };
-
-              scope.checkIfFolderIsSubfolder = function (folder) {
-                  return folder.startsWith(scope.currentFolder);
-              };
-
-              scope.cutScopeFolderFromFoldername = function (folder) {
-                  var withoutParent=folder.replace(scope.currentFolder, "")+"/";
-                  var withoutRest="";
-                  var temp="";
-                  if(withoutParent.startsWith("/")){
-                      temp=withoutParent.substring(1,withoutParent.length);
-                      withoutRest=temp.substring(0,temp.indexOf("/"));
-                  }else{
-                      withoutRest=withoutParent.substring(0,withoutParent.indexOf("/"));
-                  }
-
-                  return withoutRest;
-              };
 
               scope.createBreadCrumbList = function () {
                   var array= scope.currentFolder.split("/").filter(Boolean);
@@ -126,11 +98,15 @@
                   scope.getCurrentFolderList();
               };
 
-              scope.createBreadCrumbList();
-              scope.getCurrentFolderList();
+			  scope.buildFolderList(false);
+			  scope.getCurrentFolderList();
+			  scope.createBreadCrumbList();
 
-              scope.close = function() {
 
+
+
+			  scope.close = function() {
+				  $('#folderPicker').dialog('close');
               };
 
               $(element).click(function() {
