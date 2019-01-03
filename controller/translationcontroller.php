@@ -425,6 +425,7 @@ class TranslationController extends ApiController {
 			//template/views/partials/folder-picker
 			'folderpath.credential' => $this->trans->t('Credential to move'),
 			'folderpath.move' => $this->trans->t('Move'),
+			'folderpath.moved' => $this->trans->t('Moved credential!'),
 			'folderpath.cancel' => $this->trans->t('Cancel'),
 			'folderpath.newfolder' => $this->trans->t('New Folder'),
 			'folderpath.createnewhint' => $this->trans->t('New...'),

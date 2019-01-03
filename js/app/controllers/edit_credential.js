@@ -36,9 +36,23 @@
 			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope, FolderService) {
 
 
-			$scope.FolderList=[];
+			//folderhandling
+				$scope.FolderList=[];
+				$scope.FullCredentialList=FolderService.getList();
 
-			$scope.active_vault = VaultService.getActiveVault();
+				FolderService.expandWithFolder($scope, $scope.FullCredentialList);
+				console.log("edit_cred.js");
+				console.log(FolderService.getList());
+				$scope.buildFolderList(true);
+				$scope.getCurrentFolderList();
+				$scope.createBreadCrumbList();
+
+				$scope.openFolderPicker = function () {
+					$( '#folderPicker-ButtonDiv' ).click();
+				};
+
+				$scope.active_vault = VaultService.getActiveVault();
+
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
 						$location.path('/');
@@ -50,6 +64,7 @@
 						_vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
 						VaultService.setActiveVault(_vault);
 						$scope.active_vault = _vault;
+						FolderService.isInitialized($scope);
 					}
 				}
 
@@ -70,15 +85,6 @@
 							'generateOnCreate': true
 						});
 				});
-
-				VaultService.getVault($scope.active_vault).then(function (vault) {
-					console.log(vault.credentials)
-					FolderService.expandWithFolder($scope, vault.credentials);
-					$scope.buildFolderList(true);
-					$scope.getCurrentFolderList();
-					$scope.createBreadCrumbList();
-				});
-
 
 				$scope.currentTab = {
 					title: $translate.instant('general'),

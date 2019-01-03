@@ -105,6 +105,7 @@
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
 							FolderService.expandWithFolder($scope, $scope.active_vault.credentials);
+							FolderService.initializeInCredentialJs();
 							$rootScope.$broadcast('credentials_loaded');
 							$rootScope.vaultCache[$scope.active_vault.guid] = angular.copy($scope.active_vault);
 							if(!vault.private_sharing_key){
@@ -236,6 +237,8 @@
 					var _credential = angular.copy(credential);
 					$rootScope.$emit('app_menu', false);
 					SettingsService.setSetting('edit_credential', CredentialService.encryptCredential(_credential));
+
+					FolderService.setList($scope.active_vault.credentials);
 					$location.path('/vault/' + $scope.active_vault.guid + '/edit/' + _credential.guid);
 				};
 

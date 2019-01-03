@@ -30,8 +30,29 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('FolderService', [function () {
+	.service('FolderService', ['$location', function ($location) {
+
+		//takes load of edit_credentials, because the list is not available there
+		var decrypted_credential_list = {};
+		var initializedByCredentialjs = false;
+
 		return {
+
+			initializeInCredentialJs: function () {
+				initializedByCredentialjs=true;
+			},
+			isInitialized: function (scope) {
+				if(!initializedByCredentialjs){
+					$location.path('/vault/' + scope.active_vault.guid + '/');
+				}
+			},
+			setList: function (list) {
+				decrypted_credential_list=list;
+			},
+			getList: function () {
+				return decrypted_credential_list;
+			},
+
 			expandWithFolder: function ($scope, CredentialList) {
 
 			$scope.currentFolder = "/";
@@ -48,7 +69,7 @@ angular.module('passmanApp')
 				for (var i = 0; i < CredentialList.length; i++) {
 					var _credential = CredentialList[i];
 
-					if (_credential.folderpath !== null) {
+					if (_credential.folderpath !== null && typeof _credential.folderpath !== 'undefined') {
 						while(_credential.folderpath.includes('//')){
 							_credential.folderpath=_credential.folderpath.replace("//", "/");
 						}
