@@ -293,6 +293,11 @@
 
 				$scope.saving = false;
 
+				$scope.compromise = function () {
+					console.log("This password was compromised");
+					$scope.storedCredential.compromised=true;
+				};
+
 				$scope.saveCredential = function () {
 					$scope.saving = true;
 

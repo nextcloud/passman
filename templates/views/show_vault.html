@@ -43,7 +43,7 @@
 				ng-if="showCredentialRow(credential)"
 				ng-click="selectCredential(credential)" ng-dblclick="editCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
-				<td ng-class="{'compromised': !selectedCredential.compromised }">
+				<td ng-class="{'compromised': credential.compromised }">
 					<span class="tags">
 					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 
@@ -57,7 +57,9 @@
 						<i class="fa fa-share-alt-square" ng-if="credential.shared_key"> </i>
 					</span>
 					<a class="label">{{ ::credential.label}}</a>
-
+					<span ng-if="credential.compromised" class="compromised-list">
+						{{ 'compromised.warning.list' | translate}}
+					</span>
 
 				</td>
 			</tr>
