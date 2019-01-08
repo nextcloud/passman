@@ -40,6 +40,10 @@
 			</tags-input>
 		</div>
 	</div>
+	<div class="col-xs-12 col-md-6">
+		<button ng-click="compromise()">{{ 'compromised.label' | translate}}</button>
+		<div ng-if="storedCredential.compromised">{{ 'compromised.warning' | translate}}</div>
+	</div>
 </div>
 
 

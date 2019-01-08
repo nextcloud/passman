@@ -420,6 +420,13 @@ class TranslationController extends ApiController {
 			'share.page.link_loading' => $this->trans->t('Loading…'),
 			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
+
+			//compromised credentials
+			'compromised.label' => $this->trans->t('Compromise!'),
+			'compromised.warning.list' => $this->trans->t('Compromised!'),
+			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning with changing the password.'),
+
+
 		);
 		return new JSONResponse($translations);
 	}
