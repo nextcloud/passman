@@ -41,9 +41,9 @@
 			   ng-if="view_mode === 'list'">
 			<tr ng-repeat="credential in filtered_credentials | orderBy:'label'"
 				ng-if="showCredentialRow(credential)"
-				ng-click="selectCredential(credential)"  ng-dblclick="editCredential(credential)"
+				ng-click="selectCredential(credential)" ng-dblclick="editCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
-				<td>
+				<td ng-class="{'compromised': !selectedCredential.compromised }">
 					<span class="tags">
 					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 
