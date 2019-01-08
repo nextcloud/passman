@@ -105,9 +105,6 @@
 							}
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
-
-							console.log($scope.active_vault.credentials)
-
 							$rootScope.$broadcast('credentials_loaded');
 							$rootScope.vaultCache[$scope.active_vault.guid] = angular.copy($scope.active_vault);
 							if(!vault.private_sharing_key){
