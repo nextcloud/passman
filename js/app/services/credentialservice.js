@@ -147,8 +147,6 @@
 								field_decrypted_value=null;
 							}
 						} catch (e) {
-							console.log(fieldValue)
-							console.log(e)
 							throw e;
 						}
 						try {
