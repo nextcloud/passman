@@ -58,9 +58,9 @@
 					</span>
 					<a class="label">{{ ::credential.label}}</a>
 					<span ng-if="credential.compromised" class="compromised-list">
-						{{ 'compromised.warning.list' | translate}}
+						<i class="icon-error icon"></i>
+						<span class="text">{{ 'compromised.warning.list' | translate}}</span>
 					</span>
-
 				</td>
 			</tr>
 		</table>
