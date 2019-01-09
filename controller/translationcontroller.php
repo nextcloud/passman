@@ -140,8 +140,8 @@ class TranslationController extends ApiController {
 			'password.r' => $this->trans->t('Repeat password'),
 			'add.tag' => $this->trans->t('Add tag'),
 			'pick.icon' => $this->trans->t('Pick an icon'),
-            'pick.icon.search' => $this->trans->t('Search icons'),
-            'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),
+	            'pick.icon.search' => $this->trans->t('Search icons'),
+        	    'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),
 			'use.icon' => $this->trans->t('Use this icon'),
 			'selected.icon' => $this->trans->t('Selected icon'),
 
@@ -403,15 +403,15 @@ class TranslationController extends ApiController {
 			'deleted.credentials' => $this->trans->t('Deleted credentials'),
 			'logout' => $this->trans->t('Logout'),
 			'donate' => $this->trans->t('Donate'),
-            'navigation.show.all' => $this->trans->t('Show All'),
-            'navigation.tags' => $this->trans->t('Tags'),
-            'navigation.tags.search' => $this->trans->t('Search Tags'),
-            'navigation.strength.good' => $this->trans->t('Good Strength'),
-            'navigation.strength.medium' => $this->trans->t('Medium Strength'),
-            'navigation.strength.bad' => $this->trans->t('Bad Strength'),
-            'navigation.expired' => $this->trans->t('Expired'),
-            'navigation.advanced.filter' => $this->trans->t('Filter Tags'),
-            'navigation.advanced.checkbox' => $this->trans->t('Simple Navigation'),
+	            'navigation.show.all' => $this->trans->t('Show All'),
+        	    'navigation.tags' => $this->trans->t('Tags'),
+	            'navigation.tags.search' => $this->trans->t('Search Tags'),
+	            'navigation.strength.good' => $this->trans->t('Good Strength'),
+	            'navigation.strength.medium' => $this->trans->t('Medium Strength'),
+	            'navigation.strength.bad' => $this->trans->t('Bad Strength'),
+	            'navigation.expired' => $this->trans->t('Expired'),
+	            'navigation.advanced.filter' => $this->trans->t('Filter Tags'),
+	            'navigation.advanced.checkbox' => $this->trans->t('Simple Navigation'),
 
 
 			// templates/public_share.php
@@ -425,6 +425,18 @@ class TranslationController extends ApiController {
 			'compromised.label' => $this->trans->t('Compromise!'),
 			'compromised.warning.list' => $this->trans->t('Compromised!'),
 			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning with changing the password.'),
+
+			//searchboxexpanderservice
+			'search.settings.input.label' => $this->trans->t('Label'),
+			'search.settings.input.username' => $this->trans->t('Username'),
+			'search.settings.input.email' => $this->trans->t('email'),
+			'search.settings.input.custom_fields' => $this->trans->t('Custom Fields'),
+			'search.settings.input.password' => $this->trans->t('Password'),
+			'search.settings.input.description' => $this->trans->t('Description'),
+			'search.settings.input.url' => $this->trans->t('Url'),
+
+			'search.settings.title' => $this->trans->t('Custom Search:'),
+			'search.settings.defaults_button' => $this->trans->t('Revert to defaults'),
 
 
 		);

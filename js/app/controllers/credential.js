@@ -328,8 +328,11 @@
 				};
 
                 //searchboxfix
-                $scope.$on('nc_searchbox', function(event, args) {
+                $scope.$on('nc_searchbox', function(event, args, fields) {
                     $scope.filterOptions.filterText=args;
+                    if(fields){
+						$scope.filterOptions.fields=fields;
+					}
 				});
 
                 $scope.filtered_credentials = [];
