@@ -31,8 +31,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('MenuCtrl', ['$scope', 'VaultService', '$location', '$rootScope', 'TagService','SettingsService', '$translate',
-			function ($scope, VaultService, $location, $rootScope, TagService, SettingsService, $translate) {
+		.controller('MenuCtrl', ['$scope', 'VaultService', '$location', '$rootScope', 'TagService','SettingsService', '$translate', 'SearchboxexpanderService',
+			function ($scope, VaultService, $location, $rootScope, TagService, SettingsService, $translate, SearchboxexpanderService) {
 				$rootScope.logout = function () {
 				    //see vault.js:54
                     $rootScope.override_default_vault=true;
@@ -124,28 +124,8 @@
                     }
 				};
 
-                //searchboxfix
-                var native_search = document.getElementById("searchbox");
-                if(native_search !== null){
-                    native_search.nextElementSibling.addEventListener('click', function (e) {
-                        $scope.$apply(function () {
-                            $rootScope.$broadcast('nc_searchbox',"");
-                        });
-                    });
 
-                    native_search.classList.remove('hidden');
-                    native_search.addEventListener('keypress', function (e) {
-                        if(e.keyCode === 13){
-                            e.preventDefault();
-                        }
-                    });
-
-                    native_search.addEventListener('keyup', function (e) {
-                        $scope.$apply(function () {
-                            $rootScope.$broadcast('nc_searchbox',native_search.value);
-                        });
-                    });
-                }
+				SearchboxexpanderService.expandSearch($rootScope, $scope);
 
 
 				$scope.clickedNavigationItem="all";
