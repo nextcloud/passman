@@ -51,7 +51,14 @@
 			function getSearchFieldArraySettings(){
 
 				var res = SettingsService.getSetting('searchbox_settings');
-				searchfields = JSON.parse(res);
+
+				if(res!== ""){
+					searchfields = JSON.parse(res);
+				}else{
+					searchfields=defaults;
+				}
+
+
 			}
 
 			function getSearchFieldArrayForFiltering(){
