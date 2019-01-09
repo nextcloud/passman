@@ -22,7 +22,12 @@
 .searchbox-settings{
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+  opacity: 0.6;
+
+}
+.searchbox-settings:hover{
+  opacity: 1;
+  cursor: pointer;
 }
 
 .custom-search-dialog{
