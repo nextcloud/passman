@@ -32,9 +32,11 @@
 		.service('SearchboxexpanderService', ['SettingsService', '$translate', function (SettingsService, $translate) {
 
 			var defaults = {'label':true, 'username':true, 'email':true, 'custom_fields':true, 'password':false, 'description':false, 'url':false};
+			var searchfields = {'label':true, 'username':true, 'email':true, 'custom_fields':true, 'password':false, 'description':false, 'url':false};
 			var native_search = document.getElementById("searchbox");
 
-
+			var title="Loading...";
+			var defaults_button="Loading...";
 			var translations ={};
 
 			$translate.onReady(function() {
@@ -42,19 +44,24 @@
 					translations[key]=$translate.instant('search.settings.input.'+key);
 				}
 
-				var title=$translate.instant('search.settings.title');
-				var defaults_button=$translate.instant('search.settings.defaults_button');
-				buildPopup(title, defaults_button);
+				title=$translate.instant('search.settings.title');
+				defaults_button=$translate.instant('search.settings.defaults_button');
 			});
 
+			function getSearchFieldArraySettings(){
 
-			function getSearchFieldArray(){
+				var res = SettingsService.getSetting('searchbox_settings');
+				searchfields = JSON.parse(res);
+			}
+
+			function getSearchFieldArrayForFiltering(){
 				var fields=[];
-				for (var key in defaults) {
-					if(defaults[key]){
+				for (var key in searchfields) {
+					if(searchfields[key]){
 						fields.push(key);
 					}
 				}
+				return fields;
 			}
 
 			//searchboxfix
@@ -77,7 +84,7 @@
 
 				native_search.addEventListener('keyup', function (e) {
 					scope.$apply(function () {
-						rootScope.$broadcast('nc_searchbox', native_search.value, getSearchFieldArray());
+						rootScope.$broadcast('nc_searchbox', native_search.value, getSearchFieldArrayForFiltering());
 					});
 				});
 
@@ -91,10 +98,10 @@
 				var parent = document.createElement("div");
 				parent.classList.add("notifications");
 				parent.id = "searchbox-settings";
-				//parent.classList.add("hidden");
+				parent.classList.add("hidden");
 
 				var node = document.createElement("div");
-				node.classList.add("icon-category-tools");
+				node.classList.add("icon-settings-white");
 				node.classList.add("searchbox-settings");
 				node.id = "searchbox-settings-icon";
 
@@ -108,13 +115,15 @@
 				}
 
 				$('#searchbox').on("focus", function (evt) {
-					//$('#searchbox-settings').removeClass("hidden");
+					$('#searchbox-settings').removeClass("hidden");
 
 				});
 
 				$('#searchbox').on("blur", function (evt) {
 					if (!native_search.value) {
-						//$('#searchbox-settings').addClass("hidden");
+						setTimeout(function() {
+								$('#searchbox-settings').addClass("hidden");
+							}, 150);
 					}
 				});
 			}
@@ -124,8 +133,10 @@
 					return;
 				}
 
+				buildPopup(title, defaults_button);
+
 				$(function () {
-					$("#dialog").dialog({
+					$("#dialog-searchboxsettings").dialog({
 						width: 280,
 						height: 280,
 						dialogClass: 'custom-search-dialog',
@@ -139,59 +150,87 @@
 
 			function buildPopup(title) {
 
+				if ( $("#dialog-searchboxsettings").length ) {
+					$( "#dialog-searchboxsettings" ).remove();
+				}
+
 				var dialogdiv = document.createElement("div");
-				dialogdiv.id = "dialog";
+				dialogdiv.id = "dialog-searchboxsettings";
 				dialogdiv.title = title;
 				dialogdiv.classList.add("hidden");
+
 				native_search.after(dialogdiv);
 
-				for (var key in defaults) {
+				getSearchFieldArraySettings();
+				for (var key in searchfields) {
+
 					var div_inner=document.createElement("div");
+					div_inner.id=key+"_div";
 
 					var input = document.createElement("input");
 					input.id=key+"_input";
+					input.classList.add("searchbox_settings_input");
+					input.setAttribute('key', key);
 					input.type="checkbox";
-					if(defaults[key]){
+					if(searchfields[key]){
 						input.checked="true";
 					}
 					input.innerText=key;
 
 					var label = document.createElement("label");
-					label.htmlFor=key+"_input";
+					label.classList.add("searchbox_settings_label");
+					//label.htmlFor=key+"_input";
 					label.innerHTML=translations[key];
+					label.setAttribute('key', key);
 
 					div_inner.appendChild(input);
 					div_inner.appendChild(label);
+
 					dialogdiv.appendChild(div_inner);
 
 
 
 				}
+				attachListener();
 
 			}
 
+			function attachListener(){
 
-			function addListenerToDefault(rootScope, scope) {
-				if (native_search === null) {
+				$('.searchbox_settings_input').on("change", function(evt) {
+
+					var key = $(this).attr('key');
+					searchfields[key]=$("#"+key+"_input").prop('checked');
+					var string = JSON.stringify(searchfields);
+					SettingsService.setSetting('searchbox_settings', string);
+
+				});
+
+				$('.searchbox_settings_label').on("click", function(evt) {
+
 					return;
-				}
+					var key = $(this).attr("key");
+
+					var checkBoxes = $("#"+key+"_input");
+					checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+
+					//todo add functionality here
+
+				});
 			}
+
 
 			return {
 				expandSearch: function ($rootScope, $scope, translation) {
 
+					getSearchFieldArraySettings();
 					buildDefaultFix($rootScope, $scope);
 					buildCog();
 					addListenerToCog();
-					buildPopup(translation);
-
-
 
 					$('#searchbox-settings-icon').on("click", function (evt) {
-						console.log("click?");
 						openPopup();
 					});
-
 
 				},
 			};
