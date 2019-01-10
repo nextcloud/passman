@@ -51,7 +51,7 @@ OC.L10N.register(
     "Sharing" : "Sdílení",
     "Are you sure you want to leave? This will destroy all your credentials" : "Opravdu chcete odejít? Všechna vaše pověření budou ztracena",
     "Old password field incorrect!" : "Kolonka původní heslo není vyplněná správně!",
-    "New password does not match!" : "Nová hesla se neshodují!",
+    "New password does not match!" : "Zadání nového hesla se neshodují!",
     "Please log in with your new vault password" : "Přihlaste se svým novým heslem trezoru",
     "Share with users and groups" : "Sdílet s uživateli a skupinami",
     "Share link" : "Sdílet odkaz",
