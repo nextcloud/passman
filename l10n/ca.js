@@ -189,7 +189,7 @@ OC.L10N.register(
     "Delete revision" : "Suprimeix la revisió",
     "Edit credential" : "Editar credencial",
     "Create new credential" : "Crear nova credencial",
-    "Save" : "Guarda",
+    "Save" : "Desa",
     "Cancel" : "Cancel·la",
     "Settings" : "Paràmetres",
     "Share credential {{credential}}" : "Comparteix credencial {{credential}}",
