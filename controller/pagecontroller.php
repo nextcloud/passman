@@ -39,14 +39,14 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		$params = ['user' => $this->userId];
-        $response = new TemplateResponse('passman', 'main', $params);  // templates/main.php
+		$response = new TemplateResponse('passman', 'main', $params);  // templates/main.php
 
-        $csp        = new StrictContentSecurityPolicy();
-        $csp->allowEvalScript();
+		$csp = new StrictContentSecurityPolicy();
+		$csp->allowEvalScript();
 
-        $response->setContentSecurityPolicy($csp);
+		$response->setContentSecurityPolicy($csp);
 
-        return $response;
+		return $response;
 	}
 
 
