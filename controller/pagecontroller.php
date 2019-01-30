@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCP\AppFramework\Http\StrictContentSecurityPolicy;
 use OCP\IRequest;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\DataResponse;
@@ -38,7 +39,14 @@ class PageController extends Controller {
 	 */
 	public function index() {
 		$params = ['user' => $this->userId];
-		return new TemplateResponse('passman', 'main', $params);  // templates/main.php
+        $response = new TemplateResponse('passman', 'main', $params);  // templates/main.php
+
+        $csp        = new StrictContentSecurityPolicy();
+        $csp->allowEvalScript();
+
+        $response->setContentSecurityPolicy($csp);
+
+        return $response;
 	}
 
 
