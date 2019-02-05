@@ -86,8 +86,8 @@ Untested databases:
 ## Security
 
 ### Password generation
-Passman features a build in password generator.
-Not it only generates passwords, but it also measures their strength using [zxcvbn](https://github.com/dropbox/zxcvbn).   
+Passman features a built in password generator.
+It not only generates passwords, it also measures their strength using [zxcvbn](https://github.com/dropbox/zxcvbn).   
 ![](http://i.imgur.com/2qVBUfM.png)   
 
 Generate passwords as you like   
