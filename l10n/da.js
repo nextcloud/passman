@@ -163,6 +163,7 @@ OC.L10N.register(
     "Pattern" : "Mønster",
     "Dictionary name" : "Ordbogs navn",
     "Rank" : "Rangering",
+    "Guesses" : "Gæt",
     "Showing revisions of" : "Viser revision af",
     "Revision of" : "Revision af",
     "by" : "af",
