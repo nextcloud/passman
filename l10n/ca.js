@@ -73,7 +73,7 @@ OC.L10N.register(
     "Choose a file" : "Escollir un arxiu",
     "Text" : "Text",
     "File" : "Arxiu",
-    "Add" : "Afegir",
+    "Add" : "Afegeix",
     "Value" : "Valor",
     "Type" : "Tipus",
     "Actions" : "Accions",
