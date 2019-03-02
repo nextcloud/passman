@@ -197,7 +197,7 @@ OC.L10N.register(
     "Cancel" : "Avbryt",
     "Settings" : "Innstillinger",
     "Share credential {{credential}}" : "Del legitimasjon {{credential}}",
-    "Unshare" : "Avslutt deling",
+    "Unshare" : "Opphev deling",
     "Showing deleted since" : "Viser slettede siden",
     "Beginning" : "Begynnelsen",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "Viser {{number_filtered}} av {{credential_number}} identitetsdetaljer",
