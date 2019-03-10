@@ -150,7 +150,7 @@ OC.L10N.register(
     "Crypto time" : "Cripto el temps",
     "Read" : "Llegir",
     "Write" : "Escriure",
-    "Files" : "Arxius",
+    "Files" : "Fitxers",
     "Revisions" : "Revisions",
     "Pending" : "Pendent",
     "Enable link sharing" : "Activa l'intercanvi d'enllaços",
