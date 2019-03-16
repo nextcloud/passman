@@ -97,8 +97,8 @@ Passwords are generated using the random functions from `sjcl`.
 
 ### Storing credentials
 All passwords are encrypted client side using [sjcl](https://github.com/bitwiseshiftleft/sjcl) which uses AES-256 bit.
-Users supply a vault key which is fed into sjcl as an encryption key.
-After the credentials are encrypted they are sent to the server, there they will be encrypted again.
+Users supply a vault key which is feed into sjcl as encryption key.
+After the credentials are encrypted they are send to the server, there they will be encrypted again.
 This time using the following routine:
 - A key is generated using `passwordsalt` and `secret` from config.php *so back those up*
 - Then the key is [stretched](http://en.wikipedia.org/wiki/Key_stretching) using [Password-Based Key Derivation Function 2](http://en.wikipedia.org/wiki/PBKDF2) (PBKDF2).
