@@ -240,7 +240,7 @@ OC.L10N.register(
     "Hello there!" : "Hallo!",
     "It does not seem that you have any passwords. Do you want to add one?" : "Anscheinend haben Sie noch keine Passwörter. Soll eins hinzugefügt werden?",
     "You don't have good credentials" : "Sie haben keine guten Anmeldedaten",
-    "You don't have medium credentials" : "Du hast keine mittlere Anmeldedaten",
+    "You don't have medium credentials" : "Sie haben keine mittlere Anmeldedaten",
     "You don't have bad credentials" : "Sie haben keine ungültigen Anmeldedaten",
     "You don't have expired credentials" : "Sie haben keine abgelaufenen Anmeldedaten",
     "You don't have deleted credentials" : "Sie haben keine gelöschten Anmeldedaten",
