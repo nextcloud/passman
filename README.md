@@ -12,18 +12,18 @@ Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_gener
 
 
 ## Contents
-* [Screenshots](https://github.com/nextcloud/passman#Screenshots) 
-* [Features](https://github.com/nextcloud/passman#features) 
-* [External apps](https://github.com/nextcloud/passman#external-apps)
-* [Security](https://github.com/nextcloud/passman#security)
-  * [Password generation](https://github.com/nextcloud/passman#password-generation)
-  * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
-* [Support passman](https://github.com/nextcloud/passman#support-passman)
-* [Development](https://github.com/nextcloud/passman#development)
-* [API](https://github.com/nextcloud/passman#api)
-* [Docker](https://github.com/nextcloud/passman#docker)
-* [Maintainers](https://github.com/nextcloud/passman#main-developers)
-* [Contributors](https://github.com/nextcloud/passman#contributors)
+  * [Screenshots](https://github.com/nextcloud/passman#Screenshots) 
+  * [Features](https://github.com/nextcloud/passman#features) 
+  * [External apps](https://github.com/nextcloud/passman#external-apps)
+  * [Security](https://github.com/nextcloud/passman#security)
+    * [Password generation](https://github.com/nextcloud/passman#password-generation)
+    * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
+  * [Support passman](https://github.com/nextcloud/passman#support-passman)
+  * [Development](https://github.com/nextcloud/passman#development)
+  * [API](https://github.com/nextcloud/passman#api)
+  * [Docker](https://github.com/nextcloud/passman#docker)
+  * [Maintainers](https://github.com/nextcloud/passman#main-developers)
+  * [Contributors](https://github.com/nextcloud/passman#contributors)
 
 
 
@@ -41,24 +41,24 @@ For more screenshots: [Click here](http://imgur.com/a/giKVt)
 
 
 ## Features:
-- Multiple vaults
-- Vault keys are never sent to the server
-- 256-bit AES-encrypted credentials (see [security](https://github.com/nextcloud/passman#security))
-- User-defined custom credentials fields
-- Built-in OTP (One Time Password) generator
-- Password analyzer
-- Securely share passwords internally and via link
-- Import from various password managers:
-  - KeePass
-  - LastPass
-  - DashLane
-  - ZOHO
-  - Clipperz.is
-  - EnPass
-  - [ocPasswords](https://github.com/fcturner/passwords)
+  * Multiple vaults
+  * Vault keys are never sent to the server
+  * 256-bit AES-encrypted credentials (see [security](https://github.com/nextcloud/passman#security))
+  * User-defined custom credentials fields
+  * Built-in OTP (One Time Password) generator
+  * Password analyzer
+  * Securely share passwords internally and via link
+  * Import from various password managers:
+    - KeePass
+    - LastPass
+    - DashLane
+    - ZOHO
+    - Clipperz.is
+    - EnPass
+    - [ocPasswords](https://github.com/fcturner/passwords)
   
 
-For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
+Try a Passman demo [here](https://demo.passman.cc).
 
 ## Tested on
 - Nextcloud 14
@@ -67,18 +67,19 @@ For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/r
 
 
 ## External apps
-- [Firefox / chrome extension](https://github.com/nextcloud/passman-webextension)
-- [Android app](https://github.com/nextcloud/passman-android)
+  * [Firefox / chrome extension](https://github.com/nextcloud/passman-webextension)
+  * [Android app](https://github.com/nextcloud/passman-android)
 
 
-## Supported databases
-- SQL Lite*
-- MySQL / MariaDB*
+## Database Compatibility
 
-*Tested on travis
+|   | Supported | Tested on | Untested |
+| :--- | :---: | :---: | :---: |
+| SQL Lite | • |   |   |
+| MySQL / MariaDB | • |   |   |
+| travis |   | • |   |
+| pgsql |   |   | • |
 
-Untested databases:
-- pgsql
 
 ## Security
 
@@ -94,33 +95,33 @@ Passwords are generated using `sjcl` randomization.
 ### Storing credentials
 All passwords are encrypted client side with [sjcl](https://github.com/bitwiseshiftleft/sjcl) using 256-bit AES.
 You supply a vault key which sjcl uses to encrypt your credentials. Your encrypted credentials are then sent to the server and encrypted yet again using the following routine:
-- A key is generated using `passwordsalt` and `secret` from config.php *(so back those up)*.
-- The key is [stretched](http://en.wikipedia.org/wiki/Key_stretching) using [Password-Based Key Derivation Function 2](http://en.wikipedia.org/wiki/PBKDF2) (PBKDF2).
-- [Encrypt-then-MAC](http://en.wikipedia.org/wiki/Authenticated_encryption#Approaches_to_Authenticated_Encryption) (EtM) is used to ensure encrypted data authenticity.
-- Uses openssl with the `aes-256-cbc` cipher.
-- [Initialization vector](http://en.wikipedia.org/wiki/Initialization_vector) (IV) is hidden.
-- [Double Hash-based Message Authentication Code](http://en.wikipedia.org/wiki/Hash-based_message_authentication_code) (HMAC) is applied for source data verification.
+  * A key is generated using `passwordsalt` and `secret` from config.php *(so back those up)*.
+  * The key is [stretched](http://en.wikipedia.org/wiki/Key_stretching) using [Password-Based Key Derivation Function 2](http://en.wikipedia.org/wiki/PBKDF2) (PBKDF2).
+  * [Encrypt-then-MAC](http://en.wikipedia.org/wiki/Authenticated_encryption#Approaches_to_Authenticated_Encryption) (EtM) is used to ensure encrypted data authenticity.
+  * Uses openssl with the `aes-256-cbc` cipher.
+  * [Initialization vector](http://en.wikipedia.org/wiki/Initialization_vector) (IV) is hidden.
+  * [Double Hash-based Message Authentication Code](http://en.wikipedia.org/wiki/Hash-based_message_authentication_code) (HMAC) is applied for source data verification.
 
 
 ### Sharing credentials
 Passman allows users to share passwords. *(Administrators may disable this feature.)*
 
 ## API 
-Passman offers a developer API [api](https://github.com/nextcloud/passman/wiki/API).
+Passman offers a [developer API](https://github.com/nextcloud/passman/wiki/API).
 
 ## Support Passman
 Passman is open source but we’ll gladly accept a beer *or pizza!* Please consider donating:
-- [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
-- [Patreon](https://www.patreon.com/user?u=4833592)
-- [Flattr](https://flattr.com/@passman)
-- bitcoin: 1H2c5tkGX54n48yEtM4Wm4UrAGTW85jQpe
+  * [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
+  * [Patreon](https://www.patreon.com/user?u=4833592)
+  * [Flattr](https://flattr.com/@passman)
+  * bitcoin: 1H2c5tkGX54n48yEtM4Wm4UrAGTW85jQpe
 
 ## Code reviews
 If you have any code improvements:
-- Clone us
-- Make your edits
-- Add your name to the contributors
-- Send a [PR](https://github.com/nextcloud/passman/pulls)
+  * Clone us
+  * Make your edits
+  * Add your name to the contributors
+  * Send a [PR](https://github.com/nextcloud/passman/pulls)
 
 Or, if you’re feeling lazy, create an issue and we’ll think about it.
 
@@ -128,9 +129,9 @@ Or, if you’re feeling lazy, create an issue and we’ll think about it.
 To run Passman with [Docker](https://www.docker.com/), use our test Docker image. Supply your own self-signed SSL certs or use [Let’s Encrypt](https://letsencrypt.org/). Please note: The Docker image is for _testing *only*_ as database user / password are hardcoded.   
     
 If you’d like to *spice up* our Passman Docker image into a full-fledged, production-ready install, you’re welcome to do so. Please note:
-- Port 80 and 443 are used
-- SSL is enabled (or disabled if no certs are found)
-- Container startup time must be less than 15 seconds
+  * Port 80 and 443 are used
+  * SSL is enabled (or disabled if no certs are found)
+  * Container startup time must be less than 15 seconds
 
 Example:   
 ```
@@ -142,19 +143,19 @@ If you want a production-ready container, use the [Nextcloud Docker](https://hub
 
 
 ## Development
-- Passman uses a single `.js` file for templates which minimizes XHR template requests.   
-- CSS uses SASS, so Ruby and SASS must be installed.
-- `templates.js` and the CSS are built with `grunt`.
-- Watch for changes using `grunt watch`.
-- Run unit tests — Install phpunit globally, setup environment variables in the `launch_phpunit.sh` script, and run the script. All arguments passed to `launch_phpunit.sh` are forwarded to phpunit.
+  * Passman uses a single `.js` file for templates which minimizes XHR template requests.   
+  * CSS uses SASS, so Ruby and SASS must be installed.
+  * `templates.js` and the CSS are built with `grunt`.
+  * Watch for changes using `grunt watch`.
+  * Run unit tests — Install phpunit globally, setup environment variables in the `launch_phpunit.sh` script, and run the script. All arguments passed to `launch_phpunit.sh` are forwarded to phpunit.
 
 ## Main developers
-- Brantje
-- Animalillo
+  * Brantje
+  * Animalillo
 
 ## Contributors
 Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
-- Newhinton
+  * Newhinton
 
 
 ## FAQ
