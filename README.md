@@ -10,7 +10,6 @@ Passman is a full featured password manager.
 ## Join us!
 Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_general) to participate in all sorts of topical discussions about Passman and its apps!
 
-
 ## Contents
   * [Screenshots](https://github.com/nextcloud/passman#Screenshots) 
   * [Features](https://github.com/nextcloud/passman#features) 
@@ -25,9 +24,6 @@ Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_gener
   * [Maintainers](https://github.com/nextcloud/passman#main-developers)
   * [Contributors](https://github.com/nextcloud/passman#contributors)
 
-
-
-
 ## Screenshots
 ![Logged in to vault](http://i.imgur.com/ciShQZg.png)   
 
@@ -38,7 +34,6 @@ Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_gener
 ![Password tool](http://i.imgur.com/ZYkN70r.png)
 
 For more screenshots: [Click here](http://imgur.com/a/giKVt)
-
 
 ## Features:
   * Multiple vaults
@@ -57,7 +52,6 @@ For more screenshots: [Click here](http://imgur.com/a/giKVt)
     - EnPass
     - [ocPasswords](https://github.com/fcturner/passwords)
   
-
 Try a Passman demo [here](https://demo.passman.cc).
 
 ## Tested on
@@ -65,11 +59,9 @@ Try a Passman demo [here](https://demo.passman.cc).
 
 For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/releases)
 
-
 ## External apps
   * [Firefox / chrome extension](https://github.com/nextcloud/passman-webextension)
   * [Android app](https://github.com/nextcloud/passman-android)
-
 
 ## Database Compatibility
 
@@ -79,7 +71,6 @@ For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/r
 | MySQL / MariaDB | • |   |   |
 | travis |   | • |   |
 | pgsql |   |   | • |
-
 
 ## Security
 
@@ -91,7 +82,6 @@ Generate passwords as you like
 ![](http://i.imgur.com/jcRicOV.png)   
 Passwords are generated using `sjcl` randomization.
 
-
 ### Storing credentials
 All passwords are encrypted client side with [sjcl](https://github.com/bitwiseshiftleft/sjcl) using 256-bit AES.
 You supply a vault key which sjcl uses to encrypt your credentials. Your encrypted credentials are then sent to the server and encrypted yet again using the following routine:
@@ -101,7 +91,6 @@ You supply a vault key which sjcl uses to encrypt your credentials. Your encrypt
   * Uses openssl with the `aes-256-cbc` cipher.
   * [Initialization vector](http://en.wikipedia.org/wiki/Initialization_vector) (IV) is hidden.
   * [Double Hash-based Message Authentication Code](http://en.wikipedia.org/wiki/Hash-based_message_authentication_code) (HMAC) is applied for source data verification.
-
 
 ### Sharing credentials
 Passman allows users to share passwords. *(Administrators may disable this feature.)*
@@ -140,8 +129,6 @@ docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /
         
 If you want a production-ready container, use the [Nextcloud Docker](https://hub.docker.com/_/nextcloud/) and install Passman as an app.
 
-
-
 ## Development
   * Passman uses a single `.js` file for templates which minimizes XHR template requests.   
   * CSS uses SASS, so Ruby and SASS must be installed.
@@ -156,7 +143,6 @@ If you want a production-ready container, use the [Nextcloud Docker](https://hub
 ## Contributors
 Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
   * Newhinton
-
 
 ## FAQ
 **Are you adding something to check if malicious code is executing on the browser?**   
