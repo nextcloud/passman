@@ -73,8 +73,8 @@ For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/r
 
 ## Database Compatibility
 
-|   | Supported | Tested on | Untested |
-| :--- | :---: | :---: | :---: |
+|   | Supported | Tested | Untested |
+| :--- | :---: | :---: | :---: |ˇˇ
 | SQL Lite | • |   |   |
 | MySQL / MariaDB | • |   |   |
 | travis |   | • |   |
