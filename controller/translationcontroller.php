@@ -139,6 +139,7 @@ class TranslationController extends ApiController {
 			'username' => $this->trans->t('Username'),
 			'password.r' => $this->trans->t('Repeat password'),
 			'add.tag' => $this->trans->t('Add tag'),
+			'folderpath' => $this->trans->t('Folderpath'),
 			'pick.icon' => $this->trans->t('Pick an icon'),
             'pick.icon.search' => $this->trans->t('Search icons'),
             'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),
@@ -420,6 +421,15 @@ class TranslationController extends ApiController {
 			'share.page.link_loading' => $this->trans->t('Loading…'),
 			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
+
+			//template/views/partials/folder-picker
+			'folderpath.credential' => $this->trans->t('Credential to move'),
+			'folderpath.move' => $this->trans->t('Move'),
+			'folderpath.moved' => $this->trans->t('Moved credential!'),
+			'folderpath.cancel' => $this->trans->t('Cancel'),
+			'folderpath.newfolder' => $this->trans->t('New Folder'),
+			'folderpath.createnewhint' => $this->trans->t('New...'),
+			'folderpath.createfolder' => $this->trans->t('Create'),
 		);
 		return new JSONResponse($translations);
 	}

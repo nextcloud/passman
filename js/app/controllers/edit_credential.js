@@ -32,9 +32,27 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate','$rootScope',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope) {
+		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate', '$rootScope', 'FolderService',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope, FolderService) {
+
+
+			//folderhandling
+				$scope.FolderList=[];
+				$scope.FullCredentialList=FolderService.getList();
+
+				FolderService.expandWithFolder($scope, $scope.FullCredentialList);
+				console.log("edit_cred.js");
+				console.log(FolderService.getList());
+				$scope.buildFolderList(true);
+				$scope.getCurrentFolderList();
+				$scope.createBreadCrumbList();
+
+				$scope.openFolderPicker = function () {
+					$( '#folderPicker-ButtonDiv' ).click();
+				};
+
 				$scope.active_vault = VaultService.getActiveVault();
+
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
 						$location.path('/');
@@ -46,6 +64,7 @@
 						_vault.vaultKey = SettingsService.getSetting('defaultVaultPass');
 						VaultService.setActiveVault(_vault);
 						$scope.active_vault = _vault;
+						FolderService.isInitialized($scope);
 					}
 				}
 

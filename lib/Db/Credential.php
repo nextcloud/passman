@@ -68,6 +68,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getOtp()
  * @method void setHidden(bool $value)
  * @method string getHidden()
+ * @method void setFolderpath(string $value)
+ * @method string getFolderpath()
  * @method void setSharedKey(string $value)
  * @method string getSharedKey()
 
@@ -101,6 +103,7 @@ class Credential extends Entity implements  \JsonSerializable{
 	protected $otp;
 	protected $hidden;
 	protected $sharedKey;
+	protected $folderpath;
 
 	public function __construct() {
 		// add types in constructor
@@ -141,6 +144,7 @@ class Credential extends Entity implements  \JsonSerializable{
 			'custom_fields' => $this->getCustomFields(),
 			'otp' => $this->getOtp(),
 			'hidden' => $this->getHidden(),
+			'folderpath' => $this->getFolderpath(),
 			'shared_key' => $this->getSharedKey(),
 		];
 	}

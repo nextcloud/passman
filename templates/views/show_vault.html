@@ -9,6 +9,9 @@
 					<a>{{active_vault.name}}</a>
 				</div>
 
+				<div class="crumb svg" ng-repeat="path in BreadcrumbList"  ng-click="setCurrentFolderFromBreadcrumb(path.fullPath)" >
+					<a>{{::path.name}}</a>
+				</div>
 			</div>
 			<div class="addCredential" ng-hide="delete_time>0">
 				<button ng-click="addCredential()">+</button>
@@ -39,15 +42,19 @@
 	<div ng-init="menuOpen = false;">
 		<table class="credential-table"
 			   ng-if="view_mode === 'list'">
+			<tr ng-repeat="folder in TempFolderList" ng-if="folder!=='' && folder!=='/'">
+				<td ng-click="setCurrentFolderFromUI(folder)">
+ 					<span class="icon">
+ 						<i class="fa fa-folder"></i>
+ 					</span>
+					<a class="label">{{folder}}</a>
+				</td>
+			</tr>
 			<tr ng-repeat="credential in filtered_credentials | orderBy:'label'"
 				ng-if="showCredentialRow(credential)"
 				ng-click="selectCredential(credential)"  ng-dblclick="editCredential(credential)"
 				ng-class="{'selected': selectedCredential.credential_id == credential.credential_id}">
-				<td>
-					<span class="tags">
-					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
-
-					</span>
+				<td ng-if="checkIfCurrentFolderIsSelected(credential.folderpath)">
 					<span class="icon" ng-if="credential.url">
 						<credential-icon credential="credential"></credential-icon>
 					</span>
@@ -57,8 +64,18 @@
 						<i class="fa fa-share-alt-square" ng-if="credential.shared_key"> </i>
 					</span>
 					<a class="label">{{ ::credential.label}}</a>
+					<div class="right-container">
+						<span class="tags">
+							<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
+							</span>
 
-
+						<div folder-picker="credential"
+							 credentiallist="active_vault.credentials"
+							 class="icon-settings cog"
+							 ng-class="{'icon-settings-dark':hovering}"
+							 ng-mouseenter="hovering=true"
+							 ng-mouseleave="hovering=false"></div>
+					</div>
 				</td>
 			</tr>
 		</table>

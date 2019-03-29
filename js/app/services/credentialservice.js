@@ -55,9 +55,10 @@
 				'files': [],
 				'custom_fields': [],
 				'otp': {},
-				'hidden': false
+				'hidden': false,
+				'folderpath': [],
 			};
-			var _encryptedFields = ['description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url'];
+			var _encryptedFields = ['description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url', 'folderpath'];
 
 
 			return {
@@ -140,7 +141,12 @@
 						var fieldValue = angular.copy(credential[field]);
 						var field_decrypted_value;
 						try {
-							field_decrypted_value = EncryptService.decryptString(fieldValue, key);
+
+							if(fieldValue!==null){
+								field_decrypted_value = EncryptService.decryptString(fieldValue, key);
+							}else{
+								field_decrypted_value=null;
+							}
 						} catch (e) {
 							throw e;
 						}
@@ -148,9 +154,7 @@
 							credential[field] = JSON.parse(field_decrypted_value);
 						} catch (e) {
 							console.warn('Field' + field + ' in ' + credential.label + ' could not be parsed! Value:' + fieldValue);
-
 						}
-
 					}
 					return credential;
 				},

@@ -167,6 +167,11 @@
 				<notnull>false</notnull>
 			</field>
 			<field>
+				<name>folderpath</name>
+				<type>clob</type>
+				<notnull>false</notnull>
+			</field>
+			<field>
 				<name>email</name>
 				<type>clob</type>
 				<notnull>false</notnull>

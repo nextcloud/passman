@@ -32,9 +32,9 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate',
-			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate) {
+		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService', '$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate', 'FolderService',
+			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate, FolderService) {
+
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -49,7 +49,6 @@
 						//@TODO check if vault exists
 					}
 				}
-
 				$scope.show_spinner = true;
 				var fetchCredentials = function () {
 					VaultService.getVault({guid: $routeParams.vault_id}).then(function (vault) {
@@ -64,17 +63,16 @@
 						VaultService.setActiveVault($scope.active_vault);
 						for (var i = 0; i < _credentials.length; i++) {
 							var _credential = _credentials[i];
+
 							try {
 								if (!_credential.shared_key) {
 									_credential = CredentialService.decryptCredential(angular.copy(_credential));
-
 								} else {
 									var enc_key = EncryptService.decryptString(_credential.shared_key);
 									_credential = ShareService.decryptSharedCredential(angular.copy(_credential), enc_key);
 								}
 								_credential.tags_raw = _credential.tags;
 							} catch (e) {
-
 								NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
 								//$rootScope.$broadcast('logout');
 								//SettingsService.setSetting('defaultVaultPass', null);
@@ -103,8 +101,11 @@
 									_credentials.push(_shared_credential_data);
 								}
 							}
+
 							angular.merge($scope.active_vault.credentials, _credentials);
 							$scope.show_spinner = false;
+							FolderService.expandWithFolder($scope, $scope.active_vault.credentials);
+							FolderService.initializeInCredentialJs();
 							$rootScope.$broadcast('credentials_loaded');
 							$rootScope.vaultCache[$scope.active_vault.guid] = angular.copy($scope.active_vault);
 							if(!vault.private_sharing_key){
@@ -236,6 +237,8 @@
 					var _credential = angular.copy(credential);
 					$rootScope.$emit('app_menu', false);
 					SettingsService.setSetting('edit_credential', CredentialService.encryptCredential(_credential));
+
+					FolderService.setList($scope.active_vault.credentials);
 					$location.path('/vault/' + $scope.active_vault.guid + '/edit/' + _credential.guid);
 				};
 
@@ -467,6 +470,25 @@
                     return list_without_hidden;
                 };
 
+				$rootScope.$on('updateFolderInMainList', function (evt, updated_credential) {
+					CredentialService.decryptCredential(updated_credential);
+                    for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+                    	if($scope.active_vault.credentials[i].guid === updated_credential.guid){
+                            $scope.active_vault.credentials[i]=updated_credential;
+						}
+					}
+
+                    $scope.buildFolderList(true);
+					$scope.getCurrentFolderList();
+					$scope.createBreadCrumbList();
+				});
+
+				$rootScope.$on('credentials_loaded', function () {
+					//create all folders after fetching credentials
+					$scope.buildFolderList(false);
+					$scope.getCurrentFolderList();
+				});
+
 
 
                 $scope.selectedtags = [];
@@ -542,6 +564,7 @@
 
 				$scope.clearState = function () {
 					$scope.delete_time = 0;
+					$scope.setCurrentFolderFromBreadcrumb("/");
 				};
 
 			}]);
