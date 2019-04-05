@@ -42,7 +42,7 @@ OC.L10N.register(
     "Revision deleted" : "Wersja skasowana",
     "Revision restored" : "Wersja przywrócona",
     "Save in Passman" : "Zapisz w Passman",
-    "Settings saved" : "Ustawienia zapisano",
+    "Settings saved" : "Zapisano ustawienia",
     "General settings" : "Ustawienia główne",
     "Password audit" : "Audyt hasła",
     "Password settings" : "Ustawienia hasła",
