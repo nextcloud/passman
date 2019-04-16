@@ -318,6 +318,7 @@ OC.L10N.register(
     "Requested by" : "Kérvényező:",
     "Reason" : "Indok",
     "Click here to request\n\t\t\t\t\tit" : "Kattints ide a kérvényezéshez\n\t\t\t\t\t",
+    "Loading&hellip;" : "Betöltés&hellip;",
     "Awwhh… could not find the credential. Maybe it expired?" : "Ajaj… hitelesítő adat nem található. Talán lejárt?",
     "Expires:" : "Lejárat:",
     "Connection to server lost" : "Megszakadt a kapcsolat a szerverrel",
