@@ -70,6 +70,8 @@ use \OCP\AppFramework\Db\Entity;
  * @method string getHidden()
  * @method void setSharedKey(string $value)
  * @method string getSharedKey()
+ * @method void setCompromised(bool $value)
+ * @method bool getCompromised()
 
 
 
@@ -101,6 +103,7 @@ class Credential extends Entity implements  \JsonSerializable{
 	protected $otp;
 	protected $hidden;
 	protected $sharedKey;
+	protected $compromised;
 
 	public function __construct() {
 		// add types in constructor
@@ -142,6 +145,7 @@ class Credential extends Entity implements  \JsonSerializable{
 			'otp' => $this->getOtp(),
 			'hidden' => $this->getHidden(),
 			'shared_key' => $this->getSharedKey(),
+			'compromised' => $this->getCompromised()
 		];
 	}
 }

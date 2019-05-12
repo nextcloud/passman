@@ -420,6 +420,24 @@ class TranslationController extends ApiController {
 			'share.page.link_loading' => $this->trans->t('Loading…'),
 			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
+			//compromised credentials
+			'compromised.label' => $this->trans->t('Compromise!'),
+			'compromised.warning.list' => $this->trans->t('Compromised!'),
+			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning with changing the password.'),
+
+			//searchboxexpanderservice
+			'search.settings.input.label' => $this->trans->t('Label'),
+			'search.settings.input.username' => $this->trans->t('Username'),
+			'search.settings.input.email' => $this->trans->t('email'),
+			'search.settings.input.custom_fields' => $this->trans->t('Custom Fields'),
+			'search.settings.input.password' => $this->trans->t('Password'),
+			'search.settings.input.description' => $this->trans->t('Description'),
+			'search.settings.input.url' => $this->trans->t('Url'),
+
+			'search.settings.title' => $this->trans->t('Custom Search:'),
+			'search.settings.defaults_button' => $this->trans->t('Revert to defaults'),
+
+
 		);
 		return new JSONResponse($translations);
 	}
