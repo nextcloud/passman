@@ -69,3 +69,8 @@
   }
   //bottom line end
 }
+
+//This moves the modal from tbe background to the foreground so that it is actually visible
+.ui-front{
+  z-index: 9999 !important;
+}
