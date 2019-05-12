@@ -420,6 +420,11 @@ class TranslationController extends ApiController {
 			'share.page.link_loading' => $this->trans->t('Loading…'),
 			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
+			//compromised credentials
+			'compromised.label' => $this->trans->t('Compromise!'),
+			'compromised.warning.list' => $this->trans->t('Compromised!'),
+			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning with changing the password.'),
+
 			//searchboxexpanderservice
 			'search.settings.input.label' => $this->trans->t('Label'),
 			'search.settings.input.username' => $this->trans->t('Username'),

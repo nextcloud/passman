@@ -113,6 +113,9 @@
 					$scope.storedCredential.expire_time = $scope.storedCredential.expire_time * 1000;
 				}
 
+				//store password to check if it was changed if this credential has been compromised
+				$scope.oldPassword=$scope.storedCredential.password;
+
 				$scope.getTags = function ($query) {
 					return TagService.searchTag($query);
 				};
@@ -293,8 +296,19 @@
 
 				$scope.saving = false;
 
+				$scope.compromise = function () {
+					console.log("This password was compromised");
+					$scope.storedCredential.compromised=true;
+				};
+
 				$scope.saveCredential = function () {
 					$scope.saving = true;
+
+					if($scope.storedCredential.compromised){
+						if($scope.oldPassword !== $scope.storedCredential.password){
+							$scope.storedCredential.compromised=false;
+						}
+					}
 
 					if ($scope.new_custom_field.label && $scope.new_custom_field.value) {
 						$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
