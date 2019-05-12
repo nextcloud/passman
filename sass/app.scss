@@ -33,6 +33,9 @@
 @import 'share_credential';
 @import 'settings';
 
+.app-passman{
+  overflow-x: hidden;
+}
 
 .template-hidden{
   display: none !important;
