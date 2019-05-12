@@ -216,13 +216,13 @@
 				$('.searchbox_settings_label').on("click", function(evt) {
 
 					return;
-					var key = $(this).attr("key");
+					/*var key = $(this).attr("key");
 
 					var checkBoxes = $("#"+key+"_input");
 					checkBoxes.prop("checked", !checkBoxes.prop("checked"));
 
 					//todo add functionality here
-
+*/
 				});
 			}
 
