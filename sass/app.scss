@@ -26,12 +26,17 @@
 @import 'partials/popovermenu';
 @import 'partials/tabs';
 @import 'partials/pwgen';
+@import 'partials/icon-picker';
 @import 'vaults';
 @import 'credentials';
 @import 'menu';
 @import 'share_credential';
 @import 'settings';
+@import 'searchboxexpander';
 
+.app-passman{
+  overflow-x: hidden;
+}
 
 .template-hidden{
   display: none !important;

@@ -2,9 +2,14 @@
 <div style="display: none" id="iconPicker" title="{{ 'pick.icon' | translate }}">
 		<div class="iconList">
 			<div ng-repeat="(groupName, icons) in iconGroups">
-				<h2 style="clear: both" id="{{groupName}}">{{groupName}}</h2>
-				<div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)">
-					<img ng-src="{{icon.url}}" height="32">
+				<div ng-click="expanded = !expanded" ng-init="expanded=true">
+					<div class="icon-triangle-s arrow" ng-class="{ 'icon-triangle-e': !expanded , 'icon-triangle-s': expanded }"></div>
+					<div class="collapsible" id="{{groupName}}">{{groupName}}</div>
+				</div>
+				<div ng-class="{ 'content_show': expanded , 'content': !expanded }">
+					<div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)">
+						<img ng-src="{{icon.url}}" height="32">
+					</div>
 				</div>
 			</div>
 		</div>

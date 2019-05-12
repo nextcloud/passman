@@ -53,9 +53,11 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 					var _fields = JSON.stringify(_credential[field]);
 					_fields = _fields.replaceAll('"', '""');
 					row_data.push('"' + _fields + '"');
-				    }
+					}
 				    else {
-					    row_data.push('"' + _credential[field].replaceAll('"', '""') + '"');
+						  var data = _credential[field],
+						  value = data === null ? '':data.replaceAll('"', '""');
+						  row_data.push('"' + value + '"');
 				    }
 			    }
 			    var progress = {
