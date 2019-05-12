@@ -370,19 +370,6 @@
                             $scope.updateExistingListWithCredential(updated_cred);
 						});
 					}
-                    $scope.refreshListWithSaved();
-                };
-
-                $scope.refreshListWithSaved = function () {
-                    var current_vault = $rootScope.vaultCache[$scope.active_vault.guid];
-                    var cv_credentials = current_vault.credentials;
-                    for (var i = 0; i < cv_credentials.length; i++) {
-                        if (cv_credentials[i].credential_id === $scope.storedCredential.credential_id) {
-                            cv_credentials[i] = $scope.storedCredential;
-                        }
-                    }
-                    current_vault.credentials=cv_credentials;
-                    $rootScope.vaultCache[$scope.active_vault.guid] = current_vault;
                 };
 
                 $scope.updateExistingListWithCredential = function (credential) {
@@ -395,14 +382,13 @@
                         }
                         credential.tags_raw = credential.tags;
 
-
                         var found=false;
                         var credList=$rootScope.vaultCache[$scope.active_vault.guid].credentials;
                         for (var i = 0; i < credList.length; i++) {
-			    if (credList[i].credential_id === credential.credential_id) {
+			    			if (credList[i].credential_id === credential.credential_id) {
                                 $rootScope.vaultCache[$scope.active_vault.guid].credentials[i]=credential;
                                 found=true;
-			    }
+			    			}
                         }
 
                         if(!found){

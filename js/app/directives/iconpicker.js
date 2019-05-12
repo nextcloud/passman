@@ -30,7 +30,7 @@
    * # passwordGen
    */
   angular.module('passmanApp').directive('iconPicker', [
-    '$window', 'IconService', '$http', function($window, IconService, $http) {
+    '$window', 'IconService', '$http', 'NotificationService','$translate', function($window, IconService, $http, NotificationService, $translate) {
       return {
         templateUrl: 'views/partials/icon-picker.html',
         restrict: 'A',
@@ -95,8 +95,6 @@
             };
 
             $('#iconPicker-CustomIcon').on('change', function(ev) {
-
-                console.log("upload");
                 scope.customIcon = {};
 
                 var f = ev.target.files[0];
@@ -110,26 +108,44 @@
                 fr.readAsDataURL(f);
             });
 
+            scope.deleteIcon = function() {
+				delete  scope.credential.icon.type;
+				delete  scope.credential.icon.content;
+				delete  scope.credential.icon;
+				$('#iconPicker').dialog('close');
+			};
+
+            scope.refreshUrlIcon = function(){
+				NotificationService.showNotification($translate.instant('use.icon.refresh.trying'), 5000);
+				var queryUrl = OC.generateUrl('apps/passman/api/v2/geticon/'+btoa(scope.credential.url));
+				$http.get(queryUrl).then(function (response) {
+				    if(typeof response.data.content !== 'undefined'){
+					    scope.customIcon = {};
+					    scope.customIcon.data='data:image/'+response.data.type+';base64,'+response.data.content;
+					}else{
+						NotificationService.showNotification($translate.instant('use.icon.refresh.error'), 5000);
+                    }
+				});
+            };
+
             scope.useIcon = function() {
 
                 if(scope.customIcon){
                     var data = scope.customIcon.data;
                     scope.credential.icon.type = data.substring(data.lastIndexOf(":")+1,data.lastIndexOf(";"));
                     scope.credential.icon.content = data.substring(data.lastIndexOf(",")+1, data.length);
-                    $('#iconPicker').dialog('close');
-                    return;
+                }else{
+					$http.get(scope.selectedIcon.url).then(function(result) {
+						var base64Data = window.btoa(result.data);
+						var mimeType = 'svg+xml';
+						if(!scope.credential.icon){
+							scope.credential.icon = {};
+						}
+						scope.credential.icon.type = mimeType;
+						scope.credential.icon.content = base64Data;
+					});
                 }
-
-            $http.get(scope.selectedIcon.url).then(function(result) {
-              var base64Data = window.btoa(result.data);
-              var mimeType = 'svg+xml';
-              if(!scope.credential.icon){
-                scope.credential.icon = {};
-              }
-              scope.credential.icon.type = mimeType;
-              scope.credential.icon.content = base64Data;
-              $('#iconPicker').dialog('close');
-            });
+				$('#iconPicker').dialog('close');
           };
 
           $(element).click(function() {
