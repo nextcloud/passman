@@ -37,6 +37,13 @@ $manager->registerNotifier(function() {
 	];
 });
 
+$manager = \OC::$server->getActivityManager();
+$manager->registerExtension(function() {
+	return new Activity(
+		\OC::$server->getURLGenerator()
+	);
+});
+
 /**
  * Loading translations
  *
