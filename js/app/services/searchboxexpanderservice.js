@@ -52,7 +52,7 @@
 
 				var res = SettingsService.getSetting('searchbox_settings');
 
-				if(res!== ""){
+				if(typeof(res) !== "undefined" && res !== null && res!== ""){
 					searchfields = JSON.parse(res);
 				}else{
 					searchfields=defaults;
