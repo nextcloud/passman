@@ -53,8 +53,15 @@
 				var res = SettingsService.getSetting('searchbox_settings');
 
 				if(res!== ""){
-					searchfields = JSON.parse(res);
-				}else{
+					//if this fails, the full controller crashes, resulting in the sidebar beeing disabled. If the res string is not valid, just fall back to the defaults.
+                    try {
+                        searchfields = JSON.parse(res);
+                    } catch(e) {
+                        //Fall back to default
+                        searchfields=defaults;
+                    }
+
+                }else{
 					searchfields=defaults;
 				}
 
