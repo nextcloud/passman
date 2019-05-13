@@ -49,24 +49,15 @@
 			});
 
 			function getSearchFieldArraySettings(){
-
 				var res = SettingsService.getSetting('searchbox_settings');
 
-				if(res!== ""){
-					//if this fails, the full controller crashes, resulting in the sidebar beeing disabled. If the res string is not valid, just fall back to the defaults.
-                    try {
-                        searchfields = JSON.parse(res);
-                    } catch(e) {
-                        //Fall back to default
-                        searchfields=defaults;
-                    }
-
-                }else{
+				if(typeof(res) !== "undefined" && res !== null && res!== ""){
+					searchfields = JSON.parse(res);
+				}else{
 					searchfields=defaults;
 				}
-
-
 			}
+
 
 			function getSearchFieldArrayForFiltering(){
 				var fields=[];
