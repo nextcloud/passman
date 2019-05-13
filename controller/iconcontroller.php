@@ -56,6 +56,28 @@ class IconController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
+	public function getSingleIcon($base64Url) {
+		$url = base64_decode(str_replace('_','/', $base64Url));
+		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+			$url = "http://" . $url;
+		}
+
+
+		$icon = new IconService($url);
+
+		if ($icon->icoExists) {
+			$icon_json['type']= $icon->icoType;
+			$icon_json['content']= base64_encode($icon->icoData);
+			return new JSONResponse($icon_json);
+		}
+
+		return new JSONResponse();
+	}
+
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
 	public function getIcon($base64Url, $credentialId) {
 		$url = base64_decode(str_replace('_','/', $base64Url));
 

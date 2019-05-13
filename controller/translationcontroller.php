@@ -143,6 +143,10 @@ class TranslationController extends ApiController {
             'pick.icon.search' => $this->trans->t('Search icons'),
             'pick.icon.custom.label' => $this->trans->t('Upload a custom icon:'),
 			'use.icon' => $this->trans->t('Use this icon'),
+			'use.icon.delete' => $this->trans->t('Delete current icon'),
+			'use.icon.refresh' => $this->trans->t('Get icon from page'),
+			'use.icon.refresh.trying' => $this->trans->t('This may take a few seconds...'),
+			'use.icon.refresh.error' => $this->trans->t('There was an error fetching the icon!'),
 			'selected.icon' => $this->trans->t('Selected icon'),
 
 			// templates/views/partials/edit_credential/custom_fields.html
