@@ -191,7 +191,7 @@
 							try {
 								field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
 							} catch (e) {
-								if(field === 'compromised'){
+								if(field === 'compromised' && fieldValue === null){
 									//old shares do not have compromised set, so we need to make sure that it will be set for version 2.3.0
 									//credentials from 2.3.0 onwards have compromised already set, and don't need to worry about that.
 									//if compromised is not the issue, break and throw an error
