@@ -19,57 +19,39 @@
  *
  */
 
-.searchbox-settings{
-  position: relative;
-  top: 50%;
-  opacity: 0.6;
-
-}
-.searchbox-settings:hover{
-  opacity: 1;
-  cursor: pointer;
-}
-
-.custom-search-dialog{
+.shareincoming-dialog{
   border-radius: var(--border-radius-large) !important;
   box-shadow: 0 0 30px var(--color-box-shadow);
-  .ui-dialog {
+
+  .ui-dialog{
     border-radius: var(--border-radius-large);
     box-shadow: 0 0 30px var(--color-box-shadow);
   }
   .ui-widget-header {
-    background: none;
+    background: none !important;
   }
 
-  //This moves the modal from tbe background to the foreground so that it is actually visible
-  z-index: 9999 !important;
-
-
-  //closebutton top right
   .ui-icon-closethick {
     background-position: inherit;
-  }
-
-  .ui-button-icon {
-    border: none !important;
-  }
-  .ui-icon {
-    border: none !important;
   }
 
   .ui-button .ui-icon {
     background-image: var(--icon-close-000);
   }
 
-  .ui-icon-closethick {
-    border: none !important;
+  .ui-button:hover .ui-icon {
+    background-image: var(--icon-close-000);
+    cursor: pointer !important;
   }
 
-  //closebutton top right end
+  .ui-button-icon {border: none !important;}
+  .ui-icon {border: none !important;}
+  .ui-icon-closethick {border: none !important;}
+  .ui-corner-all {border: none !important;}
+  .ui-state-default {background: white !important;}
+  .ui-button {background: white !important;}
 
-  //bottom line removal
-  .ui-dialog-buttonpane.ui-helper-clearfix{
-    display: none;
-  }
-  //bottom line end
+
+  //This moves the modal from tbe background to the foreground so that it is actually visible
+  z-index: 9999 !important;
 }
