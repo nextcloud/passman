@@ -176,7 +176,7 @@ OC.L10N.register(
     "Click \\\"Share\\\" first" : "Primeiro prema en «Compartir»",
     "Show files" : "Amosar os ficheiros",
     "Details" : "Detalles",
-    "Hide details" : "Agachar os detalles",
+    "Hide details" : "Agochar os detalles",
     "Password score" : "Puntuación do contrasinal",
     "Cracking times" : "Tempos para crebar o contrasinal",
     "100 / hour" : "100 / hora",
