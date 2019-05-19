@@ -179,9 +179,11 @@
 					return _credential;
 				},
 				decryptSharedCredential: function (credential, sharedKey) {
+
 					var _credential = angular.copy(credential);
 					var encrypted_fields = CredentialService.getEncryptedFields();
 					for (var i = 0; i < encrypted_fields.length; i++) {
+
 						var field = encrypted_fields[i];
 						var fieldValue = angular.copy(_credential[field]);
 						var field_decrypted_value;
@@ -189,7 +191,14 @@
 							try {
 								field_decrypted_value = EncryptService.decryptString(fieldValue, sharedKey);
 							} catch (e) {
-								throw e;
+								if(field === 'compromised' && fieldValue === null){
+									//old shares do not have compromised set, so we need to make sure that it will be set for version 2.3.0
+									//credentials from 2.3.0 onwards have compromised already set, and don't need to worry about that.
+									//if compromised is not the issue, break and throw an error
+									field_decrypted_value=0;
+								}else{
+									throw e;
+								}
 							}
 							try {
 								_credential[field] = JSON.parse(field_decrypted_value);

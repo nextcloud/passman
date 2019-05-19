@@ -195,17 +195,16 @@
     </div>
 </div>
 
-<div class="share_popup" style="display: none">
-	{{ 'sharereq.title' | translate}}<br/>
-	<p>{{ 'sharereq.line1' | translate}}</p>
-	{{active_vault.vault_id}}
+<div class="share_popup" style="display: none" title="{{ 'sharereq.title' | translate }}">
+	<p>{{ 'sharereq.line1' | translate}} {{ 'sharereq.line2' | translate}}</p>
+	<br>
 	<table class="table">
 		<thead>
 		<tr>
-			<td>{{ 'label' | translate}}</td>
-			<td>{{ 'permissions' | translate}}</td>
-			<td>{{ 'received.from' | translate}}</td>
-			<td>{{ 'date' | translate}}</td>
+			<td><b>{{ 'label' | translate}}</b></td>
+			<td><b>{{ 'permissions' | translate}}</b></td>
+			<td><b>{{ 'received.from' | translate}}</b></td>
+			<td><b>{{ 'date' | translate}}</b></td>
 		</tr>
 		</thead>
 		<tr ng-repeat="share_request in incoming_share_requests"
@@ -223,7 +222,7 @@
 				{{share_request.created * 1000 | date:'dd-MM-yyyy @	HH:mm:ss'}}
 			</td>
 			<td>
-				<span class="link" ng-click="acceptShareRequest(share_request)">{{ 'accept' | translate}}</span>
+				<span class="link" ng-click="acceptShareRequest(share_request)"><b>{{ 'accept' | translate}}</b></span>
 				| <span class="link" ng-click="declineShareRequest(share_request)">{{ 'decline' | translate}}</span>
 			</td>
 		</tr>

@@ -152,6 +152,7 @@
             $('#iconPicker').dialog({
               width: 800,
               height: 380,
+			  modal: true,
               dialogClass: 'iconpicker-dialog',
               close: function() {
                 $(this).dialog('destroy');

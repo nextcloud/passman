@@ -127,8 +127,9 @@
 						if (shareRequests.length > 0) {
 							$scope.incoming_share_requests = shareRequests;
 							jQuery('.share_popup').dialog({
-								width: 600,
-								position: ['center', 90]
+								width: 800,
+								modal: true,
+								dialogClass: 'shareincoming-dialog'
 							});
 						}
 					});
