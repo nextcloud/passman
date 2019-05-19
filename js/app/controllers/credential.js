@@ -540,13 +540,12 @@
                     }
                     $scope.active_vault = null;
                     $scope.credentials = [];
-					VaultService.clearVaultService();
+                    VaultService.clearVaultService();
+                });
 
-				});
+		$scope.clearState = function () {
+			$scope.delete_time = 0;
+		};
 
-				$scope.clearState = function () {
-					$scope.delete_time = 0;
-				};
-
-			}]);
+	}]);
 }());
