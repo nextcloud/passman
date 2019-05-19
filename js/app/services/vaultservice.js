@@ -131,6 +131,9 @@
 							return response;
 						}
 					});
+				},
+				clearVaultService: function () {
+					_activeVault=null;
 				}
 			};
 
