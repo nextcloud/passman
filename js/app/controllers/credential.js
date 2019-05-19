@@ -541,6 +541,7 @@
                     $scope.active_vault = null;
                     $scope.credentials = [];
 //				$scope.$parent.selectedVault = false;
+					window.location.reload();
 
 				});
 
