@@ -540,14 +540,13 @@
                     }
                     $scope.active_vault = null;
                     $scope.credentials = [];
-//				$scope.$parent.selectedVault = false;
-					window.location.reload();
+                    //$scope.$parent.selectedVault = false;
+                    window.location.reload();
+		});
 
-				});
+		$scope.clearState = function () {
+			$scope.delete_time = 0;
+		};
 
-				$scope.clearState = function () {
-					$scope.delete_time = 0;
-				};
-
-			}]);
+	}]);
 }());
