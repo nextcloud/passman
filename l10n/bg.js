@@ -190,6 +190,8 @@ OC.L10N.register(
     "Bad Strength" : "Слаби  пароли",
     "Simple Navigation" : "Лесно навигиране",
     "Loading…" : "Зарежда…",
+    "email" : "имейл",
+    "Description" : "Описание",
     "A Passman item has been created, modified or deleted" : "Създаване, промяна или изтриване на елемент от Passman",
     "A Passman item has expired" : "Изтичане валидността на елемент от Passman",
     "A Passman item has been shared" : "Споделяне на елемент от Passman",
