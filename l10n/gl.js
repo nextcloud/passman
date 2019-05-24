@@ -161,7 +161,7 @@ OC.L10N.register(
     "Search users…" : "Buscar usuarios…",
     "Missing users? Only users that have vaults are shown." : "Faltan usuarios? Só se amosan os usuarios que teñan bóvedas",
     "Cyphering" : "Cifrado",
-    "Uploading" : "Enviando…",
+    "Uploading" : "Enviando",
     "User" : "Usuario",
     "Crypto time" : "Tempo de cifrado",
     "Total time spent encrypting" : "Tempo total usado no cifrado",
