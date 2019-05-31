@@ -214,7 +214,7 @@ OC.L10N.register(
     "Unshare" : "Freigabe aufheben",
     "Showing deleted since" : "Anzeigen gelöscht seit",
     "Beginning" : "Beginn",
-    "Showing {{number_filtered}} of {{credential_number}} credentials" : "{{number_filtered}} of {{credential_number}} Anmeldeinformationen anzeigen",
+    "Showing {{number_filtered}} of {{credential_number}} credentials" : "{{number_filtered}} von {{credential_number}} Anmeldeinformationen anzeigen",
     "Search for credential…" : "Zugangsdaten suchen…",
     "Account" : "Konto",
     "Password" : "Passwort",

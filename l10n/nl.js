@@ -290,6 +290,8 @@ OC.L10N.register(
     "Click here to request it" : "Klik hier om het aan te vragen",
     "Loading…" : "Laden...",
     "Awwhh… credential not found. Maybe it expired" : "Awwhh… inloggegevens niet gevonden. Misschien verliepen ze.",
+    "email" : "e-mailadres",
+    "Url" : "Url",
     "Error while saving field" : "Fout bij opslaan veld",
     "A Passman item has been created, modified or deleted" : "Er is een Passman object gemaakt, gewijzigd of verwijderd",
     "A Passman item has expired" : "Er is een Passman object vervallen",
