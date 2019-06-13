@@ -55,7 +55,7 @@
 				'<div class="cell" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);" ngclipboard data-clipboard-text="{{value}}"><i tooltip="copy_msg" class="fa fa-files-o"></i></div>' +
 				'</div></span>',
 				link: function (scope) {
-					var expression = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/gi;
+					var expression = /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/i;
 					var regex = new RegExp(expression);
 					$translate(['toggle.visibility','copy.field', 'copy', 'copied']).then(function (translations) {
 						scope.tggltxt = translations['toggle.visibility'];
@@ -69,6 +69,7 @@
 							}
 							if (regex.test(scope.value)) {
 								scope.isLink = true;
+								scope.isPartialLink = true;
 							} else {
 								scope.isLink = false;
 								if(regex.test('https://'+scope.value)){
