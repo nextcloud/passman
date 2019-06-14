@@ -52,6 +52,8 @@
   textarea {
     width: 90%;
     height: 200px;
+    resize: none;
+    overflow: scroll;
   }
 }
 

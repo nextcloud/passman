@@ -198,6 +198,7 @@ class TranslationController extends ApiController {
 			'export.type' => $this->trans->t('Export type'),
 			'export' => $this->trans->t('Export'),
 			'export.confirm.text' => $this->trans->t('Enter vault password to confirm export.'),
+			'export.select.exporter' => $this->trans->t('Select an exporter'),
 
 			// templates/views/partials/forms/settings/general_settings.html
 			'rename.vault' => $this->trans->t('Rename vault'),
@@ -222,11 +223,13 @@ class TranslationController extends ApiController {
 			'delete.vault.checkbox' => $this->trans->t('Delete my precious passwords'),
 			'deleting.pw' => $this->trans->t('Deleting {{password}}…'),
 			'delete.vault.confirm' => $this->trans->t('Yes, delete my precious passwords'),
+			'settings.backtovault' => $this->trans->t('Back to my vault'),
 
 
 			// templates/views/partials/forms/settings/import.html
 			'import.type' => $this->trans->t('Import type'),
 			'import' => $this->trans->t('Import'),
+			'import.select.importer' => $this->trans->t('Select an importer'),
 			'read.progress' => $this->trans->t('Read progress'),
 			'upload.progress' => $this->trans->t('Upload progress'),
 

@@ -12,6 +12,7 @@
 				<label>{{ 'import.type' | translate}}
 				<select ng-init="importerType" ng-model="importerType"
 						ng-change="setImporter(importerType)">
+					<option value="" disabled selected>{{ 'import.select.importer' | translate }}</option>
 					<option ng-repeat="importer in available_importers"
 							value="{{importer}}">
 						{{importer.name}}
@@ -42,7 +43,7 @@
 		</div>
 		<div class="col-xs-6">
 			<div ng-if="log" class="import_log">
-				<textarea id="import_log" auto-scroll="log">{{log.join('\n')}}</textarea>
+				<textarea id="import_log" auto-scroll="log" readonly>{{log.join('\n')}}</textarea>
 			</div>
 		</div>
 	</div>

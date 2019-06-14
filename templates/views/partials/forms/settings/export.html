@@ -1,14 +1,17 @@
 <div ng-controller="ExportCtrl">
 	<div class="row">
 		<div class="col-xs-6">
-			<label>{{ 'export.type' | translate}}
+			<div class="export-selection">
+				<label>{{ 'export.type' | translate}}
 				<select ng-init="raw" ng-model="raw"
 						ng-change="setExporter(raw)">
+					<option value="" disabled selected>{{ 'export.select.exporter' | translate }}</option>
 					<option ng-repeat="exporter in available_exporters"
 							value="{{exporter}}">
 						{{exporter.name}}
 					</option>
 				</select></label>
+			</div>
 			<div><b>{{selectedExporter.description}}</b></div>
 
 			<div ng-show="selectedExporter" class="nopadding">
@@ -28,8 +31,7 @@
 
 		<div class="col-xs-6">
 			<div ng-if="log" class="import_log">
-				<textarea id="import_log"
-						  auto-scroll="log">{{log.join('\n')}}</textarea>
+				<textarea id="import_log" auto-scroll="log" readonly>{{log.join('\n')}}</textarea>
 			</div>
 		</div>
 	</div>
