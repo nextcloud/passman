@@ -203,6 +203,17 @@ style('passman', 'app');
 				<a ng-click="cancel()" class="icon-category-auth svg">{{ 'settings.backtovault' | translate }}</a>
 			</li>
 		</ul>
+		<ul class="with-icon" ng-if="menulocation === 'CredentialEditCtrl'" ng-controller="CredentialEditCtrl">
+			<li ng-repeat="tab in tabs track by $index"
+				ng-class="isActiveTab(tab)? 'active' : 'inactive'"
+				ng-click="onClickTab(tab)">
+				<a class="{{tab.icon}}" ng-click="onClickTab(tab)">{{tab.title | translate}}</a>
+			</li>
+			<li data-id="backToVault" class="pinned first-pinned">
+				<a ng-click="cancel()" class="icon-category-auth svg">{{ 'settings.backtovault' | translate }}</a>
+			</li>
+		</ul>
+
 
         <div id="app-settings" ng-init="settingsShown = false;">
             <div id="app-settings-header">

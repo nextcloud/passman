@@ -32,8 +32,12 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate','$rootScope',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope) {
+		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate','$rootScope', 'MenuChangeService',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope, MenuChangeService) {
+
+				MenuChangeService.returnToVaultIfNotReady($location, VaultService.getActiveVault());
+				MenuChangeService.initChangeListener($rootScope, "CredentialEditCtrl");
+
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -77,23 +81,23 @@
 					$scope.tabs = [{
 						title: translations.general,
 						url: 'views/partials/forms/edit_credential/basics.html',
-						color: 'blue'
+						icon: 'icon-category-customization svg'
 					}, {
 						title: translations.password,
 						url: 'views/partials/forms/edit_credential/password.html',
-						color: 'green'
+						icon: 'icon-category-security svg'
 					}, {
 						title:translations['custom.fields'],
 						url: 'views/partials/forms/edit_credential/custom_fields.html',
-						color: 'orange'
+						icon: 'icon-toggle-filelist svg'
 					}, {
 						title: translations.files,
 						url: 'views/partials/forms/edit_credential/files.html',
-						color: 'yellow'
+						icon: 'icon-edit svg'
 					}, {
 						title: translations.otp,
 						url: 'views/partials/forms/edit_credential/otp.html',
-						color: 'purple'
+						icon: 'icon-quota svg'
 					}];
 					$scope.currentTab = $scope.tabs[0];
 				});
@@ -121,9 +125,13 @@
 				};
 
 
+				//every settingscontroller needs to know the active tab. Because the sidebar and the main view do not share the same controllerinstance, we need to broadcast that change
 				$scope.onClickTab = function (tab) {
-					$scope.currentTab = tab;
+					$rootScope.$emit("EditCredentialsTabClicked", tab);
 				};
+				$rootScope.$on('EditCredentialsTabClicked', function (evt, tabClicked) {
+					$scope.currentTab = tabClicked;
+				});
 
 				$scope.isActiveTab = function (tab) {
 					return tab.url === $scope.currentTab.url;

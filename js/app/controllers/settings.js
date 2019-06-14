@@ -38,6 +38,7 @@
 				$scope.new_vault_name = '';
 				$scope.showGenericImport = false;
 
+				MenuChangeService.returnToVaultIfNotReady($location, VaultService.getActiveVault());
 				MenuChangeService.initChangeListener($rootScope, "SettingsCtrl");
 
 				$scope.active_vault = VaultService.getActiveVault();
@@ -150,7 +151,6 @@
 				};
 				$rootScope.$on('SettingsTabClicked', function (evt, tabClicked) {
 					$scope.currentTab = tabClicked;
-					console.log(tabClicked.title);
 				});
 
 

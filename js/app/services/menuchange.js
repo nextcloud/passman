@@ -38,22 +38,30 @@
 					var rs=$rootScope;
 					$rootScope.$on('$locationChangeStart', function(event, next, current) {
 						var regex_uuid="[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}";
+						var edit_regex=new RegExp("(.*)apps/passman/#/vault/"+regex_uuid+"/edit");
 						var settings_regex=new RegExp("(.*)apps/passman/#/vault/"+regex_uuid+"/settings");
 						var vault_regex=new RegExp("(.*)apps/passman/#/vault/"+regex_uuid);
 
 						if(vault_regex.test(next)){
-							console.log("vault_regex!");
 							rs.menulocation="CredentialCtrl";
 						}
 
 						if(settings_regex.test(next)){
-							console.log("Settings!");
 							rs.menulocation="SettingsCtrl";
-							rs.settingsShown = false;
 						}
+
+						if(edit_regex.test(next)){
+							rs.menulocation="CredentialEditCtrl";
+						}
+
 
 					});
 					rs.menulocation=defaultView;
+				},
+				returnToVaultIfNotReady:function ($location, vault) {
+					if(typeof vault === 'undefined'){
+						$location.path('/vault/');
+					}
 				},
 			};
 			}]);
