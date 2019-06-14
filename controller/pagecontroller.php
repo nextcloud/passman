@@ -43,7 +43,7 @@ class PageController extends Controller {
 
 		$csp = new StrictContentSecurityPolicy();
 		$csp->allowEvalScript();
-        $csp->allowInlineStyle();
+		$csp->allowInlineStyle();
 
 		$response->setContentSecurityPolicy($csp);
 
