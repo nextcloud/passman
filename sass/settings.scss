@@ -55,7 +55,12 @@
   }
 }
 
-.tab_container.settings {
+.view_container{
+  width: 100%;
+  padding-left: 20px;
+}
+
+.view_container.edit_credential {
   textarea{
     height: 300px;
   }

@@ -32,11 +32,13 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService', 'NotificationService', '$sce', '$translate',
-			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService, $sce, $translate) {
+		.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService', 'NotificationService', '$sce', '$translate', 'MenuChangeService',
+			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService, $sce, $translate, MenuChangeService) {
 				$scope.vault_settings = {};
 				$scope.new_vault_name = '';
 				$scope.showGenericImport = false;
+
+				MenuChangeService.initChangeListener($rootScope, "SettingsCtrl");
 
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
@@ -106,39 +108,52 @@
 				$scope.tabs = [
 					{
 						title: $translate.instant('settings.general'),
-						url: 'views/partials/forms/settings/general_settings.html'
+						url: 'views/partials/forms/settings/general_settings.html',
+						icon: 'icon-category-customization svg'
 					},
 					{
 						title: $translate.instant('settings.audit'),
-						url: 'views/partials/forms/settings/tool.html'
+						url: 'views/partials/forms/settings/tool.html',
+						icon: 'icon-category-search svg'
 
 					},
 					{
 						title: $translate.instant('settings.password'),
-						url: 'views/partials/forms/settings/password_settings.html'
+						url: 'views/partials/forms/settings/password_settings.html',
+						icon: 'icon-toggle svg'
 
 					},
 					{
 						title: $translate.instant('settings.import'),
-						url: 'views/partials/forms/settings/import.html'
+						url: 'views/partials/forms/settings/import.html',
+						icon: 'icon-upload svg'
 
 					},
 					{
 						title: $translate.instant('settings.export'),
-						url: 'views/partials/forms/settings/export.html'
+						url: 'views/partials/forms/settings/export.html',
+						icon: 'icon-download svg'
 
 					},
 					{
 						title: $translate.instant('settings.sharing'),
-						url: 'views/partials/forms/settings/sharing.html'
+						url: 'views/partials/forms/settings/sharing.html',
+						icon: 'icon-shared svg'
 					}
 				];
 
 				$scope.currentTab = $scope.tabs[0];
 
+				//every settingscontroller needs to know the active tab. Because the sidebar and the main view do not share the same controllerinstance, we need to broadcast that change
 				$scope.onClickTab = function (tab) {
-					$scope.currentTab = tab;
+					$rootScope.$emit("SettingsTabClicked", tab);
 				};
+				$rootScope.$on('SettingsTabClicked', function (evt, tabClicked) {
+					$scope.currentTab = tabClicked;
+					console.log(tabClicked.title);
+				});
+
+
 
 				$scope.isActiveTab = function (tab) {
 					return tab.url === $scope.currentTab.url;

@@ -65,6 +65,7 @@ script('passman', 'app/services/tagservice');
 script('passman', 'app/services/notificationservice');
 script('passman', 'app/services/shareservice');
 script('passman', 'app/services/searchboxexpanderservice');
+script('passman', 'app/services/menuchange');
 script('passman', 'app/factory/sharingacl');
 script('passman', 'app/directives/passwordgen');
 script('passman', 'app/directives/fileselect');
@@ -126,7 +127,7 @@ style('passman', 'app');
     </div>
 
     <div id="app-navigation" class="template-hidden" ng-if="selectedVault" ng-controller="MenuCtrl" ng-init="removeHiddenStyles()">
-        <ul class="with-icon" ng-class="{ 'hidden-list': !legacyNavbar }" >
+        <ul class="with-icon" ng-if="menulocation === 'CredentialCtrl'" ng-class="{ 'hidden-list': !legacyNavbar }" >
 
             <li>
                 <a ng-class="{selected: clickedNavigationItem=='all'}" class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'navigation.show.all' | translate }}</a>
@@ -174,7 +175,7 @@ style('passman', 'app');
                 </a>
             </li>
         </ul >
-        <ul class="with-icon hidden-list" ng-class="{ 'hidden-list': legacyNavbar }">
+        <ul class="with-icon hidden-list" ng-if="menulocation === 'CredentialCtrl'" ng-class="{ 'hidden-list': legacyNavbar }">
             <li class="taginput">
                 <a class="taginput icon-search">
                     <tags-input id="tags-input-outer" ng-model="selectedTags" replace-spaces-with-dashes="false" ng-init="initPlaceholder()">
@@ -192,6 +193,17 @@ style('passman', 'app');
             </li>
         </ul>
 
+		<ul class="with-icon" ng-if="menulocation === 'SettingsCtrl'" ng-controller="SettingsCtrl">
+			<li ng-repeat="tab in tabs track by $index"
+				ng-class="isActiveTab(tab)? 'active' : 'inactive'"
+				ng-click="onClickTab(tab)">
+				<a class="{{tab.icon}}" ng-click="onClickTab(tab)">{{tab.title | translate}}</a>
+			</li>
+			<li data-id="backToVault" class="pinned first-pinned">
+				<a ng-click="cancel()" class="icon-category-auth svg">{{ 'settings.backtovault' | translate }}</a>
+			</li>
+		</ul>
+
         <div id="app-settings" ng-init="settingsShown = false;">
             <div id="app-settings-header">
                 <button class="settings-button"
@@ -201,12 +213,12 @@ style('passman', 'app');
             </div>
             <div id="app-settings-content" class="hide-animation" ng-hide="!settingsShown">
 
-                <div class="settings-container-label">
+                <div class="settings-container-label" ng-hide="menulocation === 'SettingsCtrl'">
                     <input class="checkbox" id="navbarLegacyMode" type="checkbox" ng-model="legacyNavbar">
                     <label for="navbarLegacyMode">{{'navigation.advanced.checkbox' | translate }}</label>
                 </div>
 
-                <div class="settings-container">
+                <div class="settings-container" ng-hide="menulocation === 'SettingsCtrl'">
                     <a ng-href="#/vault/{{active_vault.guid}}/settings" class="link" ng-click="settingsShown = false;">
                         <button>{{ 'settings' | translate }}</button>
                     </a>
