@@ -30,7 +30,7 @@ var PassmanImporter = PassmanImporter || {};
 		info: {
 			name: 'KeePass csv',
 			id: 'keepassCsv',
-			exportSteps: ['Create an csv export with the following options enabled: http://i.imgur.com/CaeTA4d.png']
+			exportSteps: ['If using Keepass V1: Create an csv export with the following options enabled: http://i.imgur.com/CaeTA4d.png', 'With Keepass V2 or Keepass XC no configuration is needed']
 		}
 	};
 
