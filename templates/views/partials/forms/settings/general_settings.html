@@ -46,8 +46,23 @@
 	</div>
 	<div class="col-xs-12 col-md-6">
 		<h3>{{ 'about.passman' | translate}}</h3>
+		<div id="version">
+			{{ 'version' | translate}}: <b>{{passman_version}} - {{versionname[passman_version]}}</b>
+			<div id="versionnametooltip" class="popup-settings">
+				<p>{{ 'versions.old' | translate}}</p>
+				<br>
+				<table class="popuptable">
+					<tr ng-repeat="(version,name) in versionname">
+						<td>{{version}}</td>
+						<td class="popuptable-center">-</td>
+						<td>{{name}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 		<p>
-			{{ 'version' | translate}}: <b>{{passman_version}}</b><br/>
+
+			<br/>
 			<br/>
 			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2"
 			   target="_blank" class="link">{{ 'donate.support' | translate}}</a><br/>

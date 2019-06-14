@@ -55,6 +55,29 @@
   }
 }
 
+.popup-settings{
+  background: var(--color-main-background) none;
+  color: var(--color-main-text);
+  box-shadow: 0 0 30px var(--color-box-shadow);
+  border-radius: var(--border-radius-large) !important;
+  display: none;
+  position: absolute;
+  cursor: pointer;
+  border: 1px solid #c5c5c5;
+  padding: 7px;
+  margin: 5px;
+
+  width: 50%;
+  z-index: 9999;
+
+  .popuptable{
+    width: 100%;
+  }
+  .popuptable-center{
+    width: 15px;
+  }
+}
+
 .tab_container.settings {
   textarea{
     height: 300px;

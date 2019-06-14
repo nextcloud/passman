@@ -144,6 +144,27 @@
 					return tab.url === $scope.currentTab.url;
 				};
 
+
+				$scope.versionname={};
+				$scope.versionname['2.4.0']="Elan";
+				$scope.versionname['2.3.1']="New California";
+				$scope.versionname['2.3.0']="Oaktier";
+				$scope.versionname['2.2.24']="Wessex";
+				$scope.versionname['2.2.1']="Alderaan";
+				$scope.versionname['2.1.4']="Far Away";
+
+
+				$(document).ready(function(){
+					$('#version').hover(function(){
+						// on mouseenter
+						$('#versionnametooltip').css('display', 'block');
+					}, function(){
+						// on mouseleave
+						$('#versionnametooltip').css('display', 'none');
+					});
+				});
+
+
 				var getPassmanVersion = function () {
 					var url = OC.generateUrl('apps/passman/api/internal/version');
 					$http.get(url).then(function (result) {

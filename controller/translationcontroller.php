@@ -212,6 +212,7 @@ class TranslationController extends ApiController {
 			'total.progress' => $this->trans->t('Total progress'),
 			'about.passman' => $this->trans->t('About Passman'),
 			'version' => $this->trans->t('Version'),
+			'versions.old' => $this->trans->t('Old Versions'),
 			'donate.support' => $this->trans->t('Donate to support development'),
 			'bookmarklet' => $this->trans->t('Bookmarklet'),
 			'bookmarklet.info1' => $this->trans->t('Save your passwords with one click.'),
