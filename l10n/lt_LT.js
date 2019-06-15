@@ -67,7 +67,6 @@ OC.L10N.register(
     "Repeat password" : "Pakartoti slaptažodį",
     "Add tag" : "Pridėti žymę",
     "Use this icon" : "Naudoti šią piktogramą",
-    "This may take a few seconds..." : "Tai gali šiek tiek užtrukti...",
     "Field label" : "Laukelio pavadinimas",
     "Field value" : "Laukelio vertė",
     "Choose a file" : "Pasirinkti failą",

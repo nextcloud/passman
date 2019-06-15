@@ -79,7 +79,6 @@ OC.L10N.register(
     "Use this icon" : "Użyj tej ikony",
     "Delete current icon" : "Usuń aktualną ikonę",
     "Get icon from page" : "Pobierz ikonę ze strony",
-    "This may take a few seconds..." : "Może to potrwać kilka sekund...",
     "There was an error fetching the icon!" : "Podczas pobierania ikony wystąpił błąd!",
     "Selected icon" : "Wybierz ikonę",
     "Field label" : "Pole etykiety",

@@ -79,7 +79,6 @@ OC.L10N.register(
     "Use this icon" : "Dieses Icon verwenden",
     "Delete current icon" : "Das aktuelle Symbol löschen",
     "Get icon from page" : "Symbol von der Seite nutzen",
-    "This may take a few seconds..." : "Dies kann ein paar Sekunden dauern…",
     "There was an error fetching the icon!" : "Fehler beim Laden desy Symbols!",
     "Selected icon" : "Icon auswählen",
     "Field label" : "Beschriftung des Feldes",

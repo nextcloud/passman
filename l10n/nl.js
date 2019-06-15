@@ -79,7 +79,6 @@ OC.L10N.register(
     "Use this icon" : "gebruik dit pictogram",
     "Delete current icon" : "Verwijder huidige pictogram",
     "Get icon from page" : "Gebruik pictogram van pagina",
-    "This may take a few seconds..." : "Dit kan een paar seconden duren...",
     "There was an error fetching the icon!" : "Er is een fout opgetreden tijdens het ophalen van het pictogram!",
     "Selected icon" : "Geselecteerde pictogram",
     "Field label" : "Veldlabel",
