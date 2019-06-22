@@ -427,7 +427,7 @@ class TranslationController extends ApiController {
 			//compromised credentials
 			'compromised.label' => $this->trans->t('Compromise!'),
 			'compromised.warning.list' => $this->trans->t('Compromised!'),
-			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning with changing the password.'),
+			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning by changing the password.'),
 
 			//searchboxexpanderservice
 			'search.settings.input.label' => $this->trans->t('Label'),
