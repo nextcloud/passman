@@ -130,6 +130,7 @@ OC.L10N.register(
     "Logout" : "Atteikties",
     "Donate" : "Ziedot",
     "Click here to request it" : "Noklikšķiniet šeit, lai pieprasītu",
+    "Description" : "Apraksts",
     "Error while saving field" : "Kļūda, saglabājot lauku",
     "You created %1$s" : "Tu izveidoji %1$s",
     "You updated %1$s" : "Tu atjaunināji %1$s",
