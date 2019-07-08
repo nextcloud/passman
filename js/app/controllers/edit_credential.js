@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate) {
+		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate','$rootScope',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -113,6 +113,9 @@
 					$scope.storedCredential.expire_time = $scope.storedCredential.expire_time * 1000;
 				}
 
+				//store password to check if it was changed if this credential has been compromised
+				$scope.oldPassword=$scope.storedCredential.password;
+
 				$scope.getTags = function ($query) {
 					return TagService.searchTag($query);
 				};
@@ -186,12 +189,12 @@
 				};
 
 				$scope.addFileToCustomField = function (file) {
-          $scope.new_custom_field.value = {
-            filename: file.name,
-            size: file.size,
-            mimetype: file.type,
-            data: file.data
-          };
+         			 $scope.new_custom_field.value = {
+            			filename: file.name,
+            			size: file.size,
+            			mimetype: file.type,
+            			data: file.data
+          			};
 					$scope.$digest();
 				};
 
@@ -290,19 +293,30 @@
 					};
 					$scope.$digest();
 				};
-				$scope.saving = false;
-				$scope.saveCredential = function () {
-          $scope.saving = true;
 
+				$scope.saving = false;
+
+				$scope.compromise = function () {
+					console.log("This password was compromised");
+					$scope.storedCredential.compromised=true;
+				};
+
+				$scope.saveCredential = function () {
+					$scope.saving = true;
+
+					if($scope.storedCredential.compromised){
+						if($scope.oldPassword !== $scope.storedCredential.password){
+							$scope.storedCredential.compromised=false;
+						}
+					}
 
 					if ($scope.new_custom_field.label && $scope.new_custom_field.value) {
 						$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
 					}
 
-
 					if ($scope.storedCredential.password !== $scope.storedCredential.password_repeat){
-            $scope.saving = false;
-            NotificationService.showNotification($translate.instant('password.do.not.match'), 5000);
+						$scope.saving = false;
+						NotificationService.showNotification($translate.instant('password.do.not.match'), 5000);
 						return;
 					}
 
@@ -312,12 +326,15 @@
 					
 					if (!$scope.storedCredential.credential_id) {
 						$scope.storedCredential.vault_id = $scope.active_vault.vault_id;
-						CredentialService.createCredential($scope.storedCredential).then(function () {
-              $scope.saving = false;
+						CredentialService.createCredential($scope.storedCredential).then(function (new_cred) {
+							$scope.saving = false;
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification($translate.instant('credential.created'), 5000);
 
+                            $scope.updateExistingListWithCredential(new_cred);
 						});
+
+
 					} else {
 
 						var key, _credential;
@@ -344,15 +361,46 @@
 						if(_credential.description && _credential.description !== "") {
 							_credential.description = _credential.description.replace(regex, "");
 						}
-						CredentialService.updateCredential(_credential, _useKey).then(function () {
-              $scope.saving = false;
+						CredentialService.updateCredential(_credential, _useKey).then(function (updated_cred) {
+							$scope.saving = false;
 							SettingsService.setSetting('edit_credential', null);
 							$location.path('/vault/' + $routeParams.vault_id);
 							NotificationService.showNotification($translate.instant('credential.updated'), 5000);
+
+                            $scope.updateExistingListWithCredential(updated_cred);
 						});
 					}
+                };
 
-				};
+                $scope.updateExistingListWithCredential = function (credential) {
+                    try {
+                        if (!credential.shared_key) {
+                            credential = CredentialService.decryptCredential(credential);
+                        } else {
+                            var enc_key = EncryptService.decryptString(credential.shared_key);
+                            credential = ShareService.decryptSharedCredential(credential, enc_key);
+                        }
+                        credential.tags_raw = credential.tags;
+
+                        var found=false;
+                        var credList=$rootScope.vaultCache[$scope.active_vault.guid].credentials;
+                        for (var i = 0; i < credList.length; i++) {
+			    			if (credList[i].credential_id === credential.credential_id) {
+                                $rootScope.vaultCache[$scope.active_vault.guid].credentials[i]=credential;
+                                found=true;
+			    			}
+                        }
+
+                        if(!found){
+                            $rootScope.vaultCache[$scope.active_vault.guid].credentials.push(credential);
+						}
+                        $rootScope.$broadcast('push_decrypted_credential_to_list', credential);
+
+                    } catch (e) {
+                        NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
+                        console.log(e);
+                    }
+                };
 
 				$scope.cancel = function () {
 					$location.path('/vault/' + $routeParams.vault_id);

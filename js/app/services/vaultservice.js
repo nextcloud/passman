@@ -66,7 +66,7 @@
 						return false;
 					} else {
 						_activeVault.vault_settings[key] = value;
-						_this.updateVault(_activeVault);
+                        this.updateVault(_activeVault);
 					}
 
 				},
@@ -131,6 +131,9 @@
 							return response;
 						}
 					});
+				},
+				clearVaultService: function () {
+					_activeVault=null;
 				}
 			};
 

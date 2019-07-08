@@ -4,10 +4,5 @@
   width: 350px; }
 #passwordSharingSettings #requests-table {
   width: 100%; }
-#passwordSharingSettings .link {
-  color: #0066ff !important;
-  cursor: pointer; }
-#passwordSharingSettings .link:hover {
-  text-decoration: underline; }
 
 /*# sourceMappingURL=admin.css.map */

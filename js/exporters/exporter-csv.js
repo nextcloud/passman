@@ -47,15 +47,17 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 						    _tags.push(_credential[field][t].text);
 					    }
 					    var tag_data = '[' + _tags.join(",") + ']';
-					    row_data.push('"' + tag_data + '"');
+					    row_data.push('"' + tag_data.replaceAll('"', '""') + '"');
 				    } 
 				    else if (field == 'custom_fields' || field == 'files') {
 					var _fields = JSON.stringify(_credential[field]);
 					_fields = _fields.replaceAll('"', '""');
 					row_data.push('"' + _fields + '"');
-				    }
+					}
 				    else {
-					    row_data.push('"' + _credential[field] + '"');
+						  var data = _credential[field],
+						  value = data === null ? '':data.replaceAll('"', '""');
+						  row_data.push('"' + value + '"');
 				    }
 			    }
 			    var progress = {
@@ -67,7 +69,7 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService)
 			    file_data += row_data.join(',') + "\n";
 		    }
 		    this.call_then();
-		    download(file_data, 'passman-export.csv');
+		    download(file_data, 'passman-export.csv', 'text/csv');
 		}).bind(this)).progress(function() {
 		    
 		});

@@ -42,7 +42,7 @@ var PassmanImporter = PassmanImporter || {};
 				var item = parsed_json[i];
 				var _credential = PassmanImporter.newCredential();
 				_credential.label = item.label;
-				_credential.username = item.account;
+				_credential.username = item.username;
 				_credential.password = item.password;
 				_credential.email = item.email;
 				_credential.url = item.url;
@@ -50,7 +50,6 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.description = item.description;
 				//Check for custom fields
 				if (item.hasOwnProperty('customFields')) {
-					//Check for otp
 					if (item.customFields.length > 0) {
 						for (var cf = 0; cf < item.customFields.length; cf++) {
 							_credential.custom_fields.push(
@@ -63,17 +62,18 @@ var PassmanImporter = PassmanImporter || {};
 						}
 					}
 				}
-				if (item.hasOwnProperty('otpsecret')) {
-					if (item.otpsecret) {
+				// Check for otp
+				if (item.hasOwnProperty('otp')) {
+					if (item.otp) {
 						_credential.otp = {
-							'issuer': item.otpsecret.issuer,
-							'label': item.otpsecret.label,
+							'issuer': item.otp.issuer,
+							'label': item.otp.label,
 							'qr_uri': {
-								'image': item.otpsecret.qrCode,
+								'image': item.otp.qrCode,
 								'qrData': ''
 							},
-							'secret': item.otpsecret.secret,
-							'type': item.otpsecret.type
+							'secret': item.otp.secret,
+							'type': item.otp.type
 						}
 					}
 				}

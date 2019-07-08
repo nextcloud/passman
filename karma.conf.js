@@ -20,7 +20,7 @@ module.exports = function (config) {
 		// list of files / patterns to load in the browser
 		files: [
 			'../../core/vendor/jquery/dist/jquery.js',
-			'../../core/vendor/underscore/underscore.js',
+			'../../core/vendor/underscore/underscore-min.js',
 			'js/vendor/angular/angular.min.js',
 			'tests/unit/js/mocks/*.js',
 			'js/vendor/angular-mocks/angular-mocks.js',

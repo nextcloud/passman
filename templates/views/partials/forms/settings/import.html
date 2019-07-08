@@ -8,16 +8,16 @@
 <div ng-controller="ImportCtrl" ng-show="!showGenericImport">
 	<div class="row">
 		<div class="col-xs-6">
-			<label>{{ 'import.type' | translate}}
+			<div class="import-selection">
+				<label>{{ 'import.type' | translate}}
 				<select ng-init="importerType" ng-model="importerType"
 						ng-change="setImporter(importerType)">
 					<option ng-repeat="importer in available_importers"
 							value="{{importer}}">
 						{{importer.name}}
 					</option>
-				</select>
-			</label>
-
+				</select></label>
+			</div>
 			<div ng-show="selectedImporter">
 				<b>{{ 'import.steps' | translate }}</b>
 				<ul class="import-steps">
