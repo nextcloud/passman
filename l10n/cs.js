@@ -79,7 +79,7 @@ OC.L10N.register(
     "Use this icon" : "Použít tuto ikonu",
     "Delete current icon" : "Smazat stávající ikonu",
     "Get icon from page" : "Získat ikonu ze stránky",
-    "This may take a few seconds..." : "Může to pár sekund trvat…",
+    "This may take a few seconds…" : "Může to pár sekund trvat…",
     "There was an error fetching the icon!" : "Při stahování ikony došlo k chybě!",
     "Selected icon" : "Vybraná ikona",
     "Field label" : "Popisek pole",

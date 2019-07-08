@@ -145,7 +145,7 @@ class TranslationController extends ApiController {
 			'use.icon' => $this->trans->t('Use this icon'),
 			'use.icon.delete' => $this->trans->t('Delete current icon'),
 			'use.icon.refresh' => $this->trans->t('Get icon from page'),
-			'use.icon.refresh.trying' => $this->trans->t('This may take a few seconds...'),
+			'use.icon.refresh.trying' => $this->trans->t('This may take a few seconds…'),
 			'use.icon.refresh.error' => $this->trans->t('There was an error fetching the icon!'),
 			'selected.icon' => $this->trans->t('Selected icon'),
 
@@ -427,7 +427,7 @@ class TranslationController extends ApiController {
 			//compromised credentials
 			'compromised.label' => $this->trans->t('Compromise!'),
 			'compromised.warning.list' => $this->trans->t('Compromised!'),
-			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning with changing the password.'),
+			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning by changing the password.'),
 
 			//searchboxexpanderservice
 			'search.settings.input.label' => $this->trans->t('Label'),
