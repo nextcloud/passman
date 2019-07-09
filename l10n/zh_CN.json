@@ -294,7 +294,6 @@
     "Awwhh… credential not found. Maybe it expired" : "哎呀... 没有找到证书。也许它过期了",
     "Compromise!" : "密码泄露！",
     "Compromised!" : "已被泄露！",
-    "This password is compromised. You can only remove this warning with changing the password." : "此密码已被泄露。您可以通过修改密码来清除此告警。",
     "email" : "电子邮件",
     "Description" : "描述",
     "Url" : "Url",

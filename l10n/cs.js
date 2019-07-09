@@ -296,7 +296,6 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Hmmmm… pověření nenalezeno. Možná jeho platnost skončila",
     "Compromise!" : "Kompromitovat!",
     "Compromised!" : "Kompromitováno!",
-    "This password is compromised. You can only remove this warning with changing the password." : "Toto heslo je kompromitováno. Toto varování je možné zrušit pouze změnou hesla.",
     "email" : "e-mail",
     "Description" : "Popis",
     "Url" : "URL adresa",

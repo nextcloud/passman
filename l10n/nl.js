@@ -296,7 +296,6 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Awwhh… inloggegevens niet gevonden. Misschien verliepen ze.",
     "Compromise!" : "Datalek!",
     "Compromised!" : "Uitgelekt!",
-    "This password is compromised. You can only remove this warning with changing the password." : "Dit wachtwoord is uitgelekt. Je kunt deze melding alleen verwijderen door je wachtwoord te wijzigen.",
     "email" : "e-mailadres",
     "Description" : "Beschrijving",
     "Url" : "Url",

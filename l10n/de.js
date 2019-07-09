@@ -296,7 +296,6 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Oh… Zugangsdaten nicht gefunden. Vielleicht sind sie abgelaufen ",
     "Compromise!" : "Kompromittieren!",
     "Compromised!" : "Kompromittiert!",
-    "This password is compromised. You can only remove this warning with changing the password." : "Dieses Passwort wurde kompromittiert. Die Warnung kann nur durch eine Änderung des Passwortes entfernt werden.",
     "email" : "E-Mail",
     "Description" : "Beschreibung",
     "Url" : "URL",
