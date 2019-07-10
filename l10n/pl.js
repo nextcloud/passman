@@ -296,6 +296,7 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Ups… poświadczenie nie znalezione. Może wygasło.",
     "Compromise!" : "Kompromis!",
     "Compromised!" : "Zagrożone!",
+    "This password is compromised. You can only remove this warning by changing the password." : "To hasło jest zagrożone. Możesz usunąć to ostrzeżenie, zmieniając hasło.",
     "email" : "e-mail",
     "Description" : "Opis",
     "Url" : "URL",
