@@ -38,6 +38,7 @@ OC.L10N.register(
     "Ignore" : "Prezri",
     "Passman Settings" : "Nastavitve Passman",
     "GitHub version:" : "Različica GitHub:",
+    "A newer version of Passman is available" : "Na voljo je nova različica programa Passman",
     "Password sharing" : "Souporaba gesla",
     "Source account" : "Izvorni račun",
     "Destination account" : "Ciljni račun",
