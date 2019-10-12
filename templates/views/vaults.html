@@ -1,7 +1,11 @@
 <div class="vault_wrapper">
 
 	<div ng-if="!initialized">
-		test
+		<p class="introduction-title">{{'vaultlist.introduction.title' | translate}}</p>
+		<br>
+		{{'vaultlist.introduction.content.line1' | translate}}
+		<br>
+		{{'vaultlist.introduction.content.line2' | translate}}
 	</div>
 
 	<div ng-if="creating_vault">

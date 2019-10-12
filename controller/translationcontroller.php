@@ -444,6 +444,9 @@ class TranslationController extends ApiController {
             //Vaultlist
             'vaultlist.create.new' => $this->trans->t('Create a new vault'),
             'vaultlist.list.title' => $this->trans->t('Vaults:'),
+            'vaultlist.introduction.title' => $this->trans->t('Welcome to Passman!'),
+            'vaultlist.introduction.content.line1' => $this->trans->t('Please select a vault or create a new one.'),
+            'vaultlist.introduction.content.line2' => $this->trans->t('You can also select a default Vault.'),
             'new.vault.examplename' => $this->trans->t('Vault'),
 
 		);

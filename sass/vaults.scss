@@ -36,6 +36,9 @@
   }
 }
 
+.introduction-title{
+  font-size: x-large;
+}
 .appnavigationNoHover{
   pointer-events: none;
 }
@@ -50,6 +53,8 @@
   padding: 30px;
 
   @include border-radius(5px);
+
+  //https://www.cssmatic.com/box-shadow
   -webkit-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.13);
   -moz-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.13);
   box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.13);
