@@ -40,15 +40,31 @@
 				 * Set up modern vaultlist:
 				 */
 
-				var list = document.getElementById("app-navigation-vaultlist");
-				for (var j = 0; j < vaults.length; j++){
-					var li = document.createElement("li");
-					var a = document.createElement("a");
-					a.classList="icon-category-security svg";
-					a.textContent = vaults[j].name;
-					li.appendChild(a);
-					list.appendChild(li);
-				}
+				$rootScope.$broadcast('menu_buildVaultList', vaults);
+				$scope.clearState();
+
+
+                $rootScope.$on("vault_new_clicked", function(){
+                    $scope.clearState();
+                    $scope.initialized = true;
+                    $scope.newVault();
+                });
+
+                $rootScope.$on("vault_listelement_clicked", function(event, guid){
+                    $scope.clearState();
+                    $scope.newVault();
+                    $scope.initialized = true;
+                    $scope.creating_vault = false;
+                    $scope.vault_selected = true;
+
+                    for (var i = 0; i < vaults.length; i++) {
+                        if(vaults[i].guid === guid){
+                            $scope.selectVault(vaults[i]);
+                            console.log("show vault "+guid);
+                        }
+                    }
+                });
+
 
 				if (SettingsService.getSetting('defaultVault') != null) {
 					var default_vault = SettingsService.getSetting('defaultVault');
@@ -89,6 +105,7 @@
 				'password.strong'
 			];
 
+			$scope.initialized = false;
 			$scope.default_vault = false;
 			$scope.remember_vault_password = false;
 			$scope.auto_logout_timer = false;
@@ -138,6 +155,7 @@
 			$scope.clearState = function () {
 				$scope.list_selected_vault = false;
 				$scope.creating_vault = false;
+				$scope.vault_selected = false;
 				$scope.error = false;
 			};
 

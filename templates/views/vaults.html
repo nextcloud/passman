@@ -1,37 +1,14 @@
 <div class="vault_wrapper">
-	<div class="vaults"
-		 ng-if="!list_selected_vault && !creating_vault">
-		<div class="ui-select-container ui-select-bootstrap vaultlist">
-			<ul>
-				<li ng-click="newVault()">+ Create a new vault</li>
-				<li ng-repeat="vault in vaults"
-					ng-class="{'selected': vault == list_selected_vault }"
-					ng-click="selectVault(vault)">
-					<div>
-						<span class="ui-select-choices-row-inner">
-							<div class="ng-binding ng-scope">{{vault.name}} <span class="pull-right" style="color: #ce3702;" ng-show="vault.delete_request_pending">{{ 'delete.request.pending' | translate}}</span></div>
-							<small class="ng-binding ng-scope">
 
-								{{ 'created' | translate}}: {{vault.created * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}
-								|
-								{{ 'last.access' | translate}}:
-								<span ng-if="vault.last_access > 0">{{vault.last_access * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
-								<span ng-if="vault.last_access === 0">{{'never' | translate}}</span>
-							</small>
-						</span>
-					</div>
-				</li>
-				<li ng-if="vaults.length === 0">{{ 'no.vaults' | translate}}
-				</li>
-			</ul>
-		</div>
+	<div ng-if="!initialized">
+		test
 	</div>
 
 	<div ng-if="creating_vault">
 		<div class="login_form" ng-init="vault_name = ''; vault_key=''; ">
 			{{'new.vault.name' | translate}}
 			<div>
-				<input type="text" ng-model="vault_name" required>
+				<input type="text" ng-model="vault_name" required value="{{'new.vault.examplename' | translate}}">
 			</div>
 			<div>
 				{{ 'new.vault.pass' | translate}}
@@ -73,12 +50,7 @@
 		</div>
 	</div>
 
-	<div ng-if="list_selected_vault != false">
-		<div class="vaultlist">
-			<ul>
-				<li ng-click="clearState()">{{ 'go.back.vaults' | translate }}</li>
-			</ul>
-		</div>
+	<div ng-if="vault_selected">
 		<div class="login_form">
 			<div ng-show="error" class="error">
 				<ul>

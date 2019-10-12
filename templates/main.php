@@ -127,12 +127,12 @@ style('passman', 'app');
 
     <div id="app-navigation" ng-controller="MenuCtrl">
 
-        <ul class="with-icon" ng-if="!selectedVault" id="app-navigation-vaultlist">
-            <li>
+        <ul id="app-navigation-vaultlist" class="with-icon" ng-if="!selectedVault">
+            <li id="app-navigation-vaultlist-new">
                 <a class="icon-add svg">{{ 'vaultlist.create.new' | translate}}</a>
             </li>
 
-            <li>
+            <li class="appnavigationNoHover">
                 <a>{{ 'vaultlist.list.title' | translate}}</a>
             </li>
             <!-- This will be populated by vault.js-->

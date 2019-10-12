@@ -220,5 +220,41 @@
 					}
 					$rootScope.$broadcast('set_delete_time', $scope.delete_time);
 				};
+
+
+                $rootScope.$on("menu_buildVaultList", function(event, args){
+                    $scope.buildVaultList(args);
+                });
+
+                $scope.buildVaultList = function (vaults) {
+                    var list = document.getElementById("app-navigation-vaultlist");
+
+                    for (var j = 0; j < vaults.length; j++){
+                        var li = document.createElement("li");
+
+                        li.setAttribute("ng-click", "selectVault(vaults[j])");
+
+                        var guid = vaults[j].guid;
+                        li.onclick =  function(){
+                            $rootScope.$broadcast('vault_listelement_clicked', guid);
+                        };
+
+                        var a = document.createElement("a");
+                        a.classList="icon-category-security svg";
+                        a.textContent = vaults[j].name;
+                        li.appendChild(a);
+                        list.appendChild(li);
+
+                        //a.onclick = $scope.selectVault(vaults[j]);
+                    }
+
+                    var newVault = document.getElementById("app-navigation-vaultlist-new");
+                    newVault.onclick =  function(){
+                        $rootScope.$broadcast('vault_new_clicked');
+                    };
+
+                };
+
+
 			}]);
 }());
