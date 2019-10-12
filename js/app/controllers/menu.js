@@ -226,26 +226,26 @@
                     $scope.buildVaultList(args);
                 });
 
+                $scope.informVaultJs = function (event) {
+                    var caller = event.target || event.srcElement;
+                    console.log( caller );
+                    $rootScope.$broadcast('vault_listelement_clicked', caller.getAttribute("guid"));
+                };
+
                 $scope.buildVaultList = function (vaults) {
                     var list = document.getElementById("app-navigation-vaultlist");
 
                     for (var j = 0; j < vaults.length; j++){
                         var li = document.createElement("li");
-
-                        li.setAttribute("ng-click", "selectVault(vaults[j])");
-
-                        var guid = vaults[j].guid;
-                        li.onclick =  function(){
-                            $rootScope.$broadcast('vault_listelement_clicked', guid);
-                        };
+                        li.onclick =  $scope.informVaultJs;
 
                         var a = document.createElement("a");
+                        a.setAttribute("guid", vaults[j].guid);
                         a.classList="icon-category-security svg";
                         a.textContent = vaults[j].name;
+
                         li.appendChild(a);
                         list.appendChild(li);
-
-                        //a.onclick = $scope.selectVault(vaults[j]);
                     }
 
                     var newVault = document.getElementById("app-navigation-vaultlist-new");

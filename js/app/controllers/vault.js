@@ -57,10 +57,11 @@
                     $scope.creating_vault = false;
                     $scope.vault_selected = true;
 
+                    console.log("show vault "+guid);
                     for (var i = 0; i < vaults.length; i++) {
                         if(vaults[i].guid === guid){
                             $scope.selectVault(vaults[i]);
-                            console.log("show vault "+guid);
+                            console.log("found vault "+guid);
                         }
                     }
                 });
