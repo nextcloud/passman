@@ -42,17 +42,15 @@
 					$location.path('/');
 				};
 
-                $scope.removeHiddenStyles = function(){
-                    document.getElementById('app-navigation').classList.remove('template-hidden');
-                };
-
 				$scope.selectedTags = [];
 				$scope.getTags = function ($query) {
 					return TagService.searchTag($query);
 				};
 
 				$scope.$watch(function () {
-					return VaultService.getActiveVault();
+					//return VaultService.getActiveVault();
+
+					return null;
 				}, function (vault) {
 					$scope.active_vault = vault;
 				});

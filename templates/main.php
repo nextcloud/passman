@@ -125,8 +125,20 @@ style('passman', 'app');
         <i class="fa fa-times fa-2x" alt="Close" ng-click="setHttpWarning(true);"></i>
     </div>
 
-    <div id="app-navigation" class="template-hidden" ng-if="selectedVault" ng-controller="MenuCtrl" ng-init="removeHiddenStyles()">
-        <ul class="with-icon" ng-class="{ 'hidden-list': !legacyNavbar }" >
+    <div id="app-navigation" ng-controller="MenuCtrl">
+
+        <ul class="with-icon" ng-if="!selectedVault" id="app-navigation-vaultlist">
+            <li>
+                <a class="icon-add svg">{{ 'vaultlist.create.new' | translate}}</a>
+            </li>
+
+            <li>
+                <a>{{ 'vaultlist.list.title' | translate}}</a>
+            </li>
+            <!-- This will be populated by vault.js-->
+        </ul>
+
+        <ul class="with-icon" ng-class="{ 'hidden-list': !legacyNavbar }" ng-if="selectedVault">
 
             <li>
                 <a ng-class="{selected: clickedNavigationItem=='all'}" class="icon-toggle svg" ng-click="filterCredentialBySpecial('all')">{{ 'navigation.show.all' | translate }}</a>
@@ -135,7 +147,7 @@ style('passman', 'app');
                 <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
                 <a href="" class="icon-tag" ng-click="tagCollapsibleClicked()">{{ 'navigation.tags' | translate }}</a>
                 <ul>
-                   <li class="taginput">
+                    <li class="taginput">
                         <a class="icon-search taginput">
                             <form ng-submit="tagClickedString(taginput); clearForm();">
                                 <input id="tagsearch" list="tags" ng-model="taginput" placeholder="{{ 'navigation.tags.search' | translate }}" />
@@ -174,7 +186,7 @@ style('passman', 'app');
                 </a>
             </li>
         </ul >
-        <ul class="with-icon hidden-list" ng-class="{ 'hidden-list': legacyNavbar }">
+        <ul class="with-icon hidden-list" ng-class="{ 'hidden-list': legacyNavbar }" ng-if="selectedVault">
             <li class="taginput">
                 <a class="taginput icon-search">
                     <tags-input id="tags-input-outer" ng-model="selectedTags" replace-spaces-with-dashes="false" ng-init="initPlaceholder()">
@@ -191,8 +203,7 @@ style('passman', 'app');
                 </a>
             </li>
         </ul>
-
-        <div id="app-settings" ng-init="settingsShown = false;">
+        <div id="app-settings" ng-init="settingsShown = false;" ng-if="selectedVault">
             <div id="app-settings-header">
                 <button class="settings-button"
                         ng-click="settingsShown = !settingsShown"
@@ -227,9 +238,10 @@ style('passman', 'app');
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div id="app-content" ng-class="{'vaultlist_sidebar_hidden': !selectedVault}">
+    <div id="app-content">
         <div id="app-content-wrapper">
             <div id="content" ng-view="">
 

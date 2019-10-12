@@ -35,6 +35,21 @@
 			function ($scope, VaultService, SettingsService, CredentialService, $location, ShareService, EncryptService, $translate, $rootScope, $interval) {
 			VaultService.getVaults().then(function (vaults) {
 				$scope.vaults = vaults;
+
+				/**
+				 * Set up modern vaultlist:
+				 */
+
+				var list = document.getElementById("app-navigation-vaultlist");
+				for (var j = 0; j < vaults.length; j++){
+					var li = document.createElement("li");
+					var a = document.createElement("a");
+					a.classList="icon-category-security svg";
+					a.textContent = vaults[j].name;
+					li.appendChild(a);
+					list.appendChild(li);
+				}
+
 				if (SettingsService.getSetting('defaultVault') != null) {
 					var default_vault = SettingsService.getSetting('defaultVault');
 

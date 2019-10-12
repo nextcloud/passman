@@ -54,6 +54,9 @@
 					return _activeVault;
 				},
 				getVaultSetting: function (key, default_value) {
+					if(typeof _activeVault === 'undefined'){
+						return default_value;
+					}
 					if (!_activeVault.vault_settings) {
 						return default_value;
 					} else {
