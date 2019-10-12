@@ -35,13 +35,25 @@
     cursor: pointer;
   }
 }
+
+.appnavigationNoHover{
+  pointer-events: none;
+}
+
 .vault_wrapper{
   margin:0 auto auto auto;
 
-  max-width: 420px;
+  //max-width: 420px;
+
+  width: 60%;
+  height: 40%;
+  padding: 30px;
+
   @include border-radius(5px);
-  box-shadow: 0 1px 1px #777;
-  background: #eee;
+  -webkit-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.13);
+  -moz-box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.13);
+  box-shadow: 0px 0px 10px 4px rgba(0,0,0,0.13);
+  //background: #eee;
   display: block;
   .vaultlist{
 
@@ -65,7 +77,6 @@
     }
   }
   .login_form{
-    padding: 16px;
     .error{
       color: #ce3702;
     }
@@ -90,7 +101,6 @@
     }
   }
   .reset_form {
-    padding: 16px;
     label{
       margin-top: 20px;
       display: block;
