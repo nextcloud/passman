@@ -375,7 +375,7 @@ class TranslationController extends ApiController {
 			'new.vault.name' => $this->trans->t('Please give your new vault a name.'),
 			'new.vault.pass' => $this->trans->t('Vault password'),
 			'new.vault.passr' => $this->trans->t('Repeat vault password'),
-			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing keys will have a strength of 1024 bit, which you can change in \"Settings\" later .'),
+			'new.vault.sharing_key_notice' => $this->trans->t('Your sharing keys will have a strength of 1024 bit, which you can change later in your Vault\'s settings.'),
 			'new.vault.create' => $this->trans->t('Create vault'),
 			'go.back.vaults' => $this->trans->t('Go back to vaults'),
 			'input.vault.password' => $this->trans->t('Please input the password for'),
@@ -441,6 +441,10 @@ class TranslationController extends ApiController {
 			'search.settings.title' => $this->trans->t('Custom Search:'),
 			'search.settings.defaults_button' => $this->trans->t('Revert to defaults'),
 
+            //Vaultlist
+            'vaultlist.create.new' => $this->trans->t('Create a new vault'),
+            'vaultlist.list.title' => $this->trans->t('Vaults:'),
+            'new.vault.examplename' => $this->trans->t('Vault'),
 
 		);
 		return new JSONResponse($translations);
