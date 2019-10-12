@@ -12,6 +12,9 @@ env:
         - DB=mysql SERVER=nextcloud/travis_ci/master
         - DB=sqlite SERVER=nextcloud/travis_ci/master
 
+#fixes mysqlerrors
+dist: precise
+
 branches:
   only:
     - master
