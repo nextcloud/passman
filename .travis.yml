@@ -8,9 +8,10 @@ env:
         - APP_NAME=passman
         - SERVER_FOLDER=server
         - CLOUD=nextcloud
+        - SERVER=nextcloud/travis_ci/master
     matrix:
-        - DB=mysql SERVER=nextcloud/travis_ci/master
-        - DB=sqlite SERVER=nextcloud/travis_ci/master
+        - DB=mysql
+        - DB=sqlite
 
 #fixes mysqlerrors
 dist: precise
