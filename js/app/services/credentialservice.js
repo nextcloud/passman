@@ -55,9 +55,10 @@
 				'files': [],
 				'custom_fields': [],
 				'otp': {},
+				'compromised': false,
 				'hidden': false
 			};
-			var _encryptedFields = ['description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url'];
+			var _encryptedFields = ['description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url', 'compromised'];
 
 
 			return {
@@ -140,7 +141,11 @@
 						var fieldValue = angular.copy(credential[field]);
 						var field_decrypted_value;
 						try {
-							field_decrypted_value = EncryptService.decryptString(fieldValue, key);
+							if(fieldValue!==null){
+								field_decrypted_value = EncryptService.decryptString(fieldValue, key);
+							}else{
+								field_decrypted_value=null;
+							}
 						} catch (e) {
 							throw e;
 						}

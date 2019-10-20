@@ -70,7 +70,7 @@ class CredentialController extends ApiController {
 									 $credential_id, $custom_fields, $delete_time,
 									 $description, $email, $expire_time, $favicon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id) {
+									 $tags, $url, $username, $vault_id, $compromised) {
 		$credential = array(
 			'credential_id' => $credential_id,
 			'guid' => $guid,
@@ -93,6 +93,7 @@ class CredentialController extends ApiController {
 			'custom_fields' => $custom_fields,
 			'otp' => $otp,
 			'hidden' => $hidden,
+			'compromised' => $compromised
 
 		);
 
@@ -104,7 +105,8 @@ class CredentialController extends ApiController {
 				'', array(),
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
-		return new JSONResponse($credential);
+
+        return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
 	/**
@@ -124,7 +126,7 @@ class CredentialController extends ApiController {
 									 $credential_id, $custom_fields, $delete_time, $credential_guid,
 									 $description, $email, $expire_time, $icon, $files, $guid,
 									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision) {
+									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision, $compromised) {
 
 
 		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid);
@@ -150,7 +152,8 @@ class CredentialController extends ApiController {
 			'delete_time' => $delete_time,
 			'hidden' => $hidden,
 			'otp' => $otp,
-			'user_id' => $storedCredential->getUserId()
+			'user_id' => $storedCredential->getUserId(),
+			'compromised' => $compromised
 		);
 
 
@@ -258,7 +261,7 @@ class CredentialController extends ApiController {
 
 		$credential = $this->credentialService->updateCredential($credential);
 
-		return new JSONResponse($credential);
+        return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
 	/**

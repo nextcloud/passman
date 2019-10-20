@@ -109,7 +109,7 @@ var OC={
 	 * @return {string} the url
 	 */
 	linkToRemoteBase:function(service) {
-		return OC.webroot + '/remote.php/' + service;
+		return OC.getRootPath() + '/remote.php/' + service;
 	},
 
 	/**
@@ -129,7 +129,7 @@ var OC={
 	 */
 	linkToOCS: function(service, version) {
 		version = (version !== 2) ? 1 : 2;
-		return window.location.protocol + '//' + window.location.host + OC.webroot + '/ocs/v' + version + '.php/' + service + '/';
+		return window.location.protocol + '//' + window.location.host + OC.getRootPath() + '/ocs/v' + version + '.php/' + service + '/';
 	},
 
 	/**
@@ -167,10 +167,10 @@ var OC={
 		}
 
 		if(oc_config.modRewriteWorking == true) {
-			return OC.webroot + _build(url, params);
+			return OC.getRootPath() + _build(url, params);
 		}
 
-		return OC.webroot + '/index.php' + _build(url, params);
+		return OC.getRootPath() + '/index.php' + _build(url, params);
 	},
 
 	/**
@@ -182,7 +182,7 @@ var OC={
 	 */
 	filePath:function(app,type,file){
 		var isCore=OC.coreApps.indexOf(app)!==-1,
-			link=OC.webroot;
+			link=OC.getRootPath();
 		if(file.substring(file.length-3) === 'php' && !isCore){
 			link+='/index.php/apps/' + app;
 			if (file != 'index.php') {
@@ -295,7 +295,7 @@ var OC={
 	 * @since 8.2
 	 */
 	getRootPath: function() {
-		return OC.webroot;
+		return OC.getRootPath();
 	},
 
 	/**
@@ -730,9 +730,11 @@ var OC={
 	 * After 7sec the first notification is gone, then we can show another one
 	 * if necessary.
 	 */
-	_ajaxConnectionLostHandler: _.throttle(function() {
-		OC.Notification.showTemporary(t('core', 'Connection to server lost'));
-	}, 7 * 1000, {trailing: false}),
+	_ajaxConnectionLostHandler: function(underscore){
+        underscore.throttle(function() {
+            OC.Notification.showTemporary(t('core', 'Connection to server lost'));
+        }, 7 * 1000, {trailing: false});
+	},
 
 	/**
 	 * Process ajax error, redirects to main page
@@ -761,7 +763,7 @@ var OC={
 			// Connection lost (e.g. WiFi disconnected or server is down)
 			setTimeout(function() {
 				if (!self._userIsNavigatingAway && !self._reloadCalled) {
-					self._ajaxConnectionLostHandler();
+					self._ajaxConnectionLostHandler(_);
 				}
 			}, 100);
 		}
@@ -1305,7 +1307,7 @@ if(typeof localStorage !=='undefined' && localStorage !== null){
 	 * @namespace
 	 */
 	OC.localStorage={
-		namespace:'oc_'+OC.currentUser+'_'+OC.webroot+'_',
+		namespace:'oc_'+OC.currentUser+'_'+OC.getRootPath()+'_',
 
 		/**
 		 * Whether the storage contains items

@@ -98,7 +98,8 @@ var PassmanImporter = {};
 			'files': [],
 			'custom_fields': [],
 			'otp': {},
-			'hidden': false
+			'hidden': false,
+			'compromised': false,
 		};
 		return credential;
 	};

@@ -133,13 +133,46 @@
 
 					//Used in activity
 					_credential.revision_created = $filter('date')(_revision.created * 1000, "dd-MM-yyyy @ HH:mm:ss");
-					CredentialService.updateCredential(_credential, (key)).then(function () {
+					CredentialService.updateCredential(_credential, (key)).then(function (restored_cred) {
 						SettingsService.setSetting('revision_credential', null);
 						$rootScope.$emit('app_menu', false);
 						$location.path('/vault/' + $routeParams.vault_id);
 						NotificationService.showNotification($translate.instant('revision.restored'), 5000);
+
+                        $scope.updateExistingListWithCredential(restored_cred);
 					});
 				};
+
+                $scope.updateExistingListWithCredential = function (credential) {
+                    try {
+                        if (!credential.shared_key) {
+                            credential = CredentialService.decryptCredential(credential);
+                        } else {
+                            var enc_key = EncryptService.decryptString(credential.shared_key);
+                            credential = ShareService.decryptSharedCredential(credential, enc_key);
+                        }
+                        credential.tags_raw = credential.tags;
+
+
+                        var found=false;
+                        var credList=$rootScope.vaultCache[$scope.active_vault.guid].credentials;
+                        for (var i = 0; i < credList.length; i++) {
+                            if (credList[i].credential_id === credential.credential_id) {
+                                $rootScope.vaultCache[$scope.active_vault.guid].credentials[i]=credential;
+                                found=true;
+                            }
+                        }
+
+                        if(!found){
+                            $rootScope.vaultCache[$scope.active_vault.guid].credentials.push(credential);
+                        }
+                        $rootScope.$broadcast('push_decrypted_credential_to_list', credential);
+
+                    } catch (e) {
+                        NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
+                        console.log(e);
+                    }
+                };
 
 				$scope.cancelRevision = function () {
 					$location.path('/vault/' + $routeParams.vault_id);

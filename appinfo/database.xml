@@ -230,6 +230,10 @@
 				<default>false</default>
 			</field>
 			<field>
+				<name>compromised</name>
+				<type>clob</type>
+			</field>
+			<field>
 				<name>shared_key</name>
 				<type>clob</type>
 			</field>

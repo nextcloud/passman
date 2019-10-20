@@ -1,0 +1,96 @@
+/**
+ * Nextcloud - passman
+ *
+ * @copyright Copyright (c) 2016, Felix Nüsse (felix.nuesse@t-online.de)
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+.iconpicker-dialog{
+  border-radius: var(--border-radius-large) !important;
+  box-shadow: 0 0 30px var(--color-box-shadow);
+  .ui-dialog{
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 0 30px var(--color-box-shadow);
+  }
+  .ui-widget-header {
+    background: none;
+  }
+
+  .ui-icon-closethick {
+    background-position: inherit;
+  }
+
+  .ui-button .ui-icon {
+    background-image: var(--icon-close-000);
+  }
+
+  .ui-button-icon {border: none !important;}
+  .ui-icon {border: none !important;}
+  .ui-icon-closethick {border: none !important;}
+  .ui-corner-all {border: none !important;}
+  .ui-state-default {background: white !important;}
+  .ui-button {background: white !important;}
+
+
+  //This moves the modal from tbe background to the foreground so that it is actually visible
+  z-index: 9999 !important;
+}
+
+#iconPicker {
+  .iconList {
+    float: left;
+    width: 60%;
+    max-height: 310px;
+    overflow: auto;
+    .icon{
+      img{
+        cursor: pointer;
+      }
+      padding: 10px;
+      cursor: pointer;
+      float: left;
+    }
+  }
+  .iconModifier {
+    margin-left: 10px;
+    float: right;
+    width: calc(40% - 10px);
+  }
+  .iconSearch {
+    width: 100%;
+  }
+
+  .arrow {
+    cursor: pointer;
+    padding-left: 10px;
+    width: 10px;
+    float: left;
+  }
+
+  .collapsible {
+    cursor: pointer;
+    padding-left: 10px;
+    text-align: left;
+    font-size: 15px;
+  }
+  .content {
+    display: none;
+  }
+  .content_show {
+    display: block;
+  }
+}
