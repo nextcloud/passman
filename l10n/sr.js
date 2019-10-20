@@ -296,7 +296,7 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Аргхх… акредитиви нису нађени. Можда су истекли",
     "Compromise!" : "Компромитована!",
     "Compromised!" : "Компромитована!",
-    "This password is compromised. You can only remove this warning with changing the password." : "Ова лозинка је компромитована. Можете уклонити ово упозорење једино променом лозинке.",
+    "This password is compromised. You can only remove this warning by changing the password." : "Ова лозинка је компромитована. Можете уклонити ово упозорење једино променом лозинке.",
     "email" : "е-пошта",
     "Description" : "Опис",
     "Url" : "Адреса",

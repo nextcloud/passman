@@ -293,7 +293,6 @@
     "Awwhh… credential not found. Maybe it expired" : "Æjæjæ... auðkenni fundust ekki. Kannski þau séu útrunnin",
     "Compromise!" : "Berskjaldað!",
     "Compromised!" : "Berskjaldað!",
-    "This password is compromised. You can only remove this warning with changing the password." : "Þetta lykilorð er berskjaldað, og því ekki nothæft lengur. Þú getur aðeins losnað við þessa aðvörun með því að skipta um lykilorð.",
     "email" : "tölvupóstur",
     "Description" : "Lýsing",
     "Url" : "Slóð (URL)",

@@ -296,7 +296,7 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Ops... credenziali non trovate. Potrebbero essere scadute",
     "Compromise!" : "Compromessa!",
     "Compromised!" : "Compromessa!",
-    "This password is compromised. You can only remove this warning with changing the password." : "Questa password è compromessa. Puoi rimuovere questo avviso solo cambiando la password.",
+    "This password is compromised. You can only remove this warning by changing the password." : "Questa password è compromessa. Puoi rimuovere questo avviso solo cambiando la password.",
     "email" : "email",
     "Description" : "Descrizione",
     "Url" : "Url",

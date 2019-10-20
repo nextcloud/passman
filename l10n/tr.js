@@ -296,7 +296,7 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Kimlik doğrulama bilgileri bulunamadı. Süresi geçmiş olabilir",
     "Compromise!" : "Tehlikeli!",
     "Compromised!" : "Tehlikeye atılmış!",
-    "This password is compromised. You can only remove this warning with changing the password." : "Bu parolayı kullanmak tehlikeli. Bu uyarı yalnız parolayı değiştirerek kaldırabilirsiniz.",
+    "This password is compromised. You can only remove this warning by changing the password." : "Bu parolayı kullanmak tehlikeli. Bu uyarı yalnız parolayı değiştirerek kaldırabilirsiniz.",
     "email" : "e-posta",
     "Description" : "Açıklama",
     "Url" : "Adres",
