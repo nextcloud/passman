@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "密码",
     "Generating sharing keys ( %s / 2)" : "生成共享秘钥（%s / 2）",
     "Incorrect vault password!" : "错误的保险箱密码！",
     "Passwords do not match" : "密码不匹配",
@@ -325,6 +324,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s 已经共享被 %2$s",
     "You received a share request for %1$s from %2$s" : "您收到  %2$s 的共享 %1$s 请求 ",
     "%s has been shared with a link" : "%s 已被共享通过链接",
+    "Passwords" : "密码",
     "Your credential \"%s\" expired, click here to update the credential." : "您的凭据%s已过期，请点击此处更新凭证。",
     "Remind me later" : "以后提醒我 ",
     "Ignore" : "忽略",

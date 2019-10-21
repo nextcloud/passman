@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "ססמאות",
     "Generating sharing keys ( %s / 2)" : "מפתחות השיתוף נוצרים ( %s / 2)",
     "Incorrect vault password!" : "ססמת הכספת שגויה!",
     "Passwords do not match" : "הססמאות אינן תואמות",
@@ -202,6 +201,7 @@ OC.L10N.register(
     "Click here to request it" : "יש ללחוץ כאן כדי לבקש זאת",
     "Loading…" : "בטעינה…",
     "Error while saving field" : "אירעה שגיאה במהלך שמירת השדה",
+    "Passwords" : "ססמאות",
     "Remind me later" : "להזכיר לי מאוחר יותר",
     "Ignore" : "להתעלם",
     "Passman Settings" : "הגדרות Passman",

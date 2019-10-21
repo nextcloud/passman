@@ -1,5 +1,4 @@
 { "translations": {
-    "Passwords" : "Heslá",
     "Generating sharing keys ( %s / 2)" : "Generovanie kľúčov pre sprístupnenie ( %s / 2)",
     "Incorrect vault password!" : "Nesprávne heslo trezora!",
     "Passwords do not match" : "Heslá sa nezhodujú",
@@ -269,6 +268,7 @@
     "%1$s has been shared with %2$s" : "%1$s bol sprístupnený %2$s",
     "You received a share request for %1$s from %2$s" : "Obdržali ste požiadavku na sprístupnenie %1$s od %2$s",
     "%s has been shared with a link" : "%s bol sprístupnený prostredníctvom odkazu",
+    "Passwords" : "Heslá",
     "Your credential \"%s\" expired, click here to update the credential." : "Vášmu prístupovému údaju \"%s\" skončila platnosť, kliknite sem pre aktualizáciu.",
     "Remind me later" : "Pripomenúť neskôr",
     "Ignore" : "Ignorovať",

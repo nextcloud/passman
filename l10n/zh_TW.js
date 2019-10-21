@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "密碼",
     "General" : "一般",
     "Custom Fields" : "自定義欄位",
     "Error loading file" : "載入檔案錯誤",
@@ -70,6 +69,7 @@ OC.L10N.register(
     "URL" : "URL",
     "Created" : "已新增",
     "Decline" : "拒絕",
+    "Passwords" : "密碼",
     "Remind me later" : "稍後提醒我",
     "Ignore" : "忽略",
     "Connection to server lost" : "伺服器斷線了"
