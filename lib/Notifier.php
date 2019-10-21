@@ -37,7 +37,7 @@ class Notifier implements INotifier {
 	 * @param INotification $notification
 	 * @param string $languageCode The code of the language that should be used to prepare the notification
 	 */
-	public function prepare(INotification $notification, string $languageCode): INotification {
+	public function prepare(INotification $notification, $languageCode) {
 		if ($notification->getApp() !== 'passman') {
 			// Not my app => throw
 			throw new \InvalidArgumentException();
@@ -108,23 +108,5 @@ class Notifier implements INotifier {
 				// Unknown subject => Unknown notification => throw
 				throw new \InvalidArgumentException();
 		}
-	}
-
-	/**
-	 * Identifier of the notifier
-	 *
-	 * @return string
-	 */
-	public function getID(): string {
-		return 'passman';
-	}
-
-	/**
-	 * Human readable name describing the notifier
-	 *
-	 * @return string
-	 */
-	public function getName(): string {
-		return $this->factory->get('passman')->t('Passwords');
 	}
 }
