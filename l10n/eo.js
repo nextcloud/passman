@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Pasvortoj",
     "Done" : "Farita",
     "File read." : "Dosiero legita.",
     "Adding {{credential}}" : "Aldonado {{credential}}",
@@ -26,6 +25,7 @@ OC.L10N.register(
     "Day(s)" : "Tago(j)",
     "Week(s)" : "Semajno(j)",
     "Month(s)" : "Monato(j)",
-    "Year(s)" : "Jaro(j)"
+    "Year(s)" : "Jaro(j)",
+    "Passwords" : "Pasvortoj"
 },
 "nplurals=2; plural=(n != 1);");

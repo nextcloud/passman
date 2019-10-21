@@ -1,5 +1,4 @@
 { "translations": {
-    "Passwords" : "Pasvortoj",
     "Done" : "Farita",
     "File read." : "Dosiero legita.",
     "Adding {{credential}}" : "Aldonado {{credential}}",
@@ -24,6 +23,7 @@
     "Day(s)" : "Tago(j)",
     "Week(s)" : "Semajno(j)",
     "Month(s)" : "Monato(j)",
-    "Year(s)" : "Jaro(j)"
+    "Year(s)" : "Jaro(j)",
+    "Passwords" : "Pasvortoj"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

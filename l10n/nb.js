@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Passord",
     "Generating sharing keys ( %s / 2)" : "Oppretter delingsnøkler ( %s / 2)",
     "Incorrect vault password!" : "Feil hvelv-passord!",
     "Passwords do not match" : "Passordene samsvarer ikke",
@@ -282,6 +281,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s er delt med %2$s",
     "You received a share request for %1$s from %2$s" : "Du mottok et delingsønske fra %1$s til %2$s",
     "%s has been shared with a link" : "%s er delt med en lenke",
+    "Passwords" : "Passord",
     "Your credential \"%s\" expired, click here to update the credential." : "Identiteten \"%s\" er utløpt, klikk her for å oppdatere.",
     "Remind me later" : "Påminnn meg senere",
     "Ignore" : "Ignorer",

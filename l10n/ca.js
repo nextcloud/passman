@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Contrasenyes",
     "Generating sharing keys ( %s / 2)" : "S'estan generant claus d'ús compartit ( %s / 2)",
     "Incorrect vault password!" : "Contrasenya de la cripta incorrecta!",
     "Passwords do not match" : "Les contrasenyes no coincideixen",
@@ -325,6 +324,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s s'ha compartit amb %2$s",
     "You received a share request for %1$s from %2$s" : "Heu rebut una sol·licitud de compartició de %1$s des de %2$s",
     "%s has been shared with a link" : "%s ha estat compartit amb un enllaç",
+    "Passwords" : "Contrasenyes",
     "Your credential \"%s\" expired, click here to update the credential." : "La vostra credencial \"%s\" ha caducat, feu clic aquí per actualitzar la credencial.",
     "Remind me later" : "Recorda-m'ho més tard",
     "Ignore" : "Ignora",

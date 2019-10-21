@@ -1,5 +1,4 @@
 { "translations": {
-    "Passwords" : "პაროლები",
     "Generating sharing keys ( %s / 2)" : "გაზიარების გასაღებების გენერირება (%s / 2)",
     "Incorrect vault password!" : "სეიფის არასწორი პაროლი",
     "Passwords do not match" : "პაროლები ერთმანეთს არ ემთხვევა",
@@ -280,6 +279,7 @@
     "%1$s has been shared with %2$s" : "%1$s გაზიარდა მომხმარებელთან %2$s",
     "You received a share request for %1$s from %2$s" : "%2$s მომხმარებლისგან მოგივიდათ გაზიარების მოთხოვნა %1$s-ზე",
     "%s has been shared with a link" : "%s გაზიარდა ბმულით",
+    "Passwords" : "პაროლები",
     "Your credential \"%s\" expired, click here to update the credential." : "თქვენს უფლებამოსილებას \"%s\"-ს გაუვიდა ვადა, გასანახლებლად დააწკაპუნეთ აქ.",
     "Remind me later" : "გამახსენეთ მოგვიანებით",
     "Ignore" : "იგნორი",

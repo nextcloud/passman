@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Salasanat",
     "Generating sharing keys ( %s / 2)" : "Luodaan jakamisavaimia ( %s / 2)",
     "Incorrect vault password!" : "Virheellinen holvin salasana!",
     "Passwords do not match" : "Salasanat eivät täsmää",
@@ -191,6 +190,7 @@ OC.L10N.register(
     "Someone has shared a credential with you." : "Joku on jakanut tilitiedot kanssasi.",
     "Loading…" : "Ladataan…",
     "Awwhh… credential not found. Maybe it expired" : "Voi ei… tilitietoa ei löytynyt. Kenties se vanheni",
+    "Description" : "Kuvaus",
     "Error while saving field" : "Virhe kenttää tallentaessa",
     "A Passman item has been created, modified or deleted" : "Passman-tietu on luotu, sitä on muokattu tai se on poistettu",
     "A Passman item has expired" : "Passman-tietue on vanhentunut",
@@ -199,6 +199,7 @@ OC.L10N.register(
     "You created %1$s" : "Loit %1$s",
     "You updated %1$s" : "Päivitit %1$s",
     "You deleted %1$s" : "Poistit %1$s",
+    "Passwords" : "Salasanat",
     "Remind me later" : "Muistuta myöhemmin",
     "Ignore" : "Ohita",
     "Passman" : "Passman",
