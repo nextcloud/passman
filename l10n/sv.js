@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Lösenord",
     "Generating sharing keys ( %s / 2)" : "Genererar delningsnycklar ( %s / 2)",
     "Incorrect vault password!" : "Felaktigt valvlösenord!",
     "Passwords do not match" : "Lösenorden matchar inte",
@@ -287,7 +288,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s har delats med %2$s",
     "You received a share request for %1$s from %2$s" : "Du har mottagit en delningsförfrågan av %1$s från %2$s",
     "%s has been shared with a link" : "%s har delats som en länk",
-    "Passwords" : "Lösenord",
     "Your credential \"%s\" expired, click here to update the credential." : "Dina uppgifter \"%s\" har utgått, klicka här för att nya dessa.",
     "Remind me later" : "Påminn mig senare",
     "Ignore" : "Ignorera",

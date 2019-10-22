@@ -1,4 +1,5 @@
 { "translations": {
+    "Passwords" : "Gesla",
     "Incorrect vault password!" : "Napačno geslo trezorja!",
     "Passwords do not match" : "Gesli se ne skladata",
     "General" : "Splošno",
@@ -73,7 +74,6 @@
     "URL" : "Naslov URL",
     "Decline" : "Zavrni",
     "Logout" : "Odjava",
-    "Passwords" : "Gesla",
     "Ignore" : "Prezri",
     "Passman Settings" : "Nastavitve Passman",
     "GitHub version:" : "Različica GitHub:",

@@ -1,4 +1,5 @@
 { "translations": {
+    "Passwords" : "Contrasinais",
     "Generating sharing keys ( %s / 2)" : "Xerando chaves de compartición ( %s / 2)",
     "Incorrect vault password!" : "Contrasinal da bóveda incorrecta!",
     "Passwords do not match" : "Os contrasinais non coinciden",
@@ -322,7 +323,6 @@
     "%1$s has been shared with %2$s" : "%1$s foi compartido con %2$s",
     "You received a share request for %1$s from %2$s" : "Vostede recibiu unha solicitude para compartir %1$s dende %2$s",
     "%s has been shared with a link" : "%s foi compartido cunha ligazón",
-    "Passwords" : "Contrasinais",
     "Your credential \"%s\" expired, click here to update the credential." : "A sua credencial «%s» caducou, prema aquí para actualizar a credencial.",
     "Remind me later" : "Lembrarmo más adiante",
     "Ignore" : "Ignorar",

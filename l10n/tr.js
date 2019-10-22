@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Parolalar",
     "Generating sharing keys ( %s / 2)" : "Paylaşım anahtarları üretiliyor ( %s / 2)",
     "Incorrect vault password!" : "Kasa parolası yanlış!",
     "Passwords do not match" : "Parola ile onayı aynı değil",
@@ -324,7 +325,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s %2$s üzerinden paylaşıldı",
     "You received a share request for %1$s from %2$s" : "%1$s için %2$s üzerinden bir paylaşım isteği aldınız",
     "%s has been shared with a link" : "%s bağlantı ile paylaşıldı",
-    "Passwords" : "Parolalar",
     "Your credential \"%s\" expired, click here to update the credential." : "\"%s\" kimlik doğrulama bilgilerinizin süresi geçmiş, güncellemek için buraya tıklayın.",
     "Remind me later" : "Sonra hatırlat",
     "Ignore" : "Yoksay",

@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Zaporke",
     "Generating sharing keys ( %s / 2)" : "Generiranje ključeva za dijeljenje (%s / 2)",
     "Incorrect vault password!" : "Netočna zaporka trezora!",
     "Passwords do not match" : "Zaporke se ne podudaraju",
@@ -324,7 +325,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s je podijeljeno s %2$s",
     "You received a share request for %1$s from %2$s" : "Primili ste zahtjev za dijeljenje za %1$s od %2$s",
     "%s has been shared with a link" : "%s je podijeljeno putem poveznice",
-    "Passwords" : "Zaporke",
     "Your credential \"%s\" expired, click here to update the credential." : "Vaša je vjerodajnica „%s” istekla, kliknite ovdje kako biste ažurirali vjerodajnicu.",
     "Remind me later" : "Podsjeti me kasnije",
     "Ignore" : "Zanemari",

@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Fjalëkalimet",
     "Incorrect vault password!" : "Fjalëkalimi i kasafortës është i pasakt!",
     "Passwords do not match" : "Fjalëkalimet nuk përputhen",
     "General" : "I Përgjithshëm",
@@ -276,7 +277,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$sështë ndar me %2$s",
     "You received a share request for %1$s from %2$s" : "Ju morët një kërkesë për ndarje për %1$snga %2$s",
     "%s has been shared with a link" : "%sështë ndar me një link",
-    "Passwords" : "Fjalëkalimet",
     "Your credential \"%s\" expired, click here to update the credential." : "Kredenciali juaj \"%s\" skadoi, klikoni këtu për të përditësuar kredencialin.",
     "Remind me later" : "Më kujto më vonë",
     "Ignore" : "Injoro",

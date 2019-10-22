@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Пароли",
     "Generating sharing keys ( %s / 2)" : "Генериране на ключове ( %s / 2)",
     "Incorrect vault password!" : "Паролата за хранилището е грешна!",
     "Passwords do not match" : "Паролите не съвпадат",
@@ -208,7 +209,6 @@ OC.L10N.register(
     "You permanently deleted %1$s" : "Изтрихте необратимо %1$s",
     "%1$s has been shared with %2$s" : "%1$s бе споделено с %2$s",
     "%s has been shared with a link" : "%s бе споделено с връзка",
-    "Passwords" : "Пароли",
     "Remind me later" : "Напомни ми по-късно",
     "Ignore" : "Игнорирай",
     "%s shared \"%s\" with you. Click here to accept" : "%s сподели с вас \"%s\". Кликнете тук, за да приемете",

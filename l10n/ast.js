@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Contraseñes",
     "Generating sharing keys ( %s / 2)" : "Xenerando claves de compartición ( %s / 2)",
     "Passwords do not match" : "Les contraseñes nun concasen",
     "General" : "Xeneral",
@@ -110,7 +111,6 @@ OC.L10N.register(
     "You deleted %1$s" : "Desaniciesti %1$s",
     "You recovered %1$s" : "Recuperesti %1$s",
     "%s has been shared with a link" : "%s compartióse con un enllaz",
-    "Passwords" : "Contraseñes",
     "Ignore" : "Inorar",
     "%s shared \"%s\" with you. Click here to accept" : "%s compartió «%s» contigo. Primi equí p'aceutar",
     "%s has declined your share request for \"%s\"." : "%s refugó la to solicitú de compartición pa «%s».",

@@ -1,4 +1,5 @@
 { "translations": {
+    "Passwords" : "Пароли",
     "Generating sharing keys ( %s / 2)" : "Создаются ключи общего доступа (%s/ 2)",
     "Incorrect vault password!" : "Неверный пароль хранилища!",
     "Passwords do not match" : "Пароли не совпадают",
@@ -279,7 +280,6 @@
     "%1$s has been shared with %2$s" : "%1$s поделились с %2$s",
     "You received a share request for %1$s from %2$s" : "Вы получили запрос на предоставление общего доступа к %1$s  от %2$s",
     "%s has been shared with a link" : "к %s был предоставлен общий доступ ссылкой",
-    "Passwords" : "Пароли",
     "Your credential \"%s\" expired, click here to update the credential." : "Истёк срок действия записи «%s», нажмите здесь для обновления.",
     "Remind me later" : "Напомнить позже",
     "Ignore" : "Пропустить",

@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Salasanat",
     "Generating sharing keys ( %s / 2)" : "Luodaan jakamisavaimia ( %s / 2)",
     "Incorrect vault password!" : "Virheellinen holvin salasana!",
     "Passwords do not match" : "Salasanat eivät täsmää",
@@ -199,7 +200,6 @@ OC.L10N.register(
     "You created %1$s" : "Loit %1$s",
     "You updated %1$s" : "Päivitit %1$s",
     "You deleted %1$s" : "Poistit %1$s",
-    "Passwords" : "Salasanat",
     "Remind me later" : "Muistuta myöhemmin",
     "Ignore" : "Ohita",
     "Passman" : "Passman",
