@@ -358,7 +358,7 @@ OC.L10N.register(
     "Click here to request\n\t\t\t\t\tit" : "Cliquez ici\n\t\t\t\t\tpour le demander ",
     "Loading&hellip;" : "Chargement&hellip;",
     "Awwhh… could not find the credential. Maybe it expired?" : "Awwhh… n'a pas pu trouver le justificatif d'identité. Peut-être a t-il expiré ?",
-    "Expires:" : "Expire le:",
+    "Expires:" : "Expire le :",
     "Connection to server lost" : "Connexion au serveur perdue",
     "Problem loading page, reloading in 5 seconds" : "Problème de chargement de la page, actualisation dans 5 secondes",
     "Saving..." : "Enregistrement…",
