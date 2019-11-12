@@ -219,7 +219,7 @@ OC.L10N.register(
     "Account" : "Účet",
     "Password" : "Heslo",
     "OTP" : "OTP",
-    "E-mail" : "Email",
+    "E-mail" : "E-mail",
     "URL" : "URL adresa",
     "Notes" : "Poznámky",
     "Expiry time" : "Okamžik skončení platnosti",
