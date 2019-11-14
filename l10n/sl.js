@@ -75,6 +75,7 @@ OC.L10N.register(
     "Account" : "Račun",
     "URL" : "Naslov URL",
     "Decline" : "Zavrni",
+    "Cancel destruction request" : "Prkliči zahtevo po uničenju",
     "Logout" : "Odjava",
     "Ignore" : "Prezri",
     "Passman Settings" : "Nastavitve Passman",
