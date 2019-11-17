@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Jelszavak",
     "Generating sharing keys ( %s / 2)" : "Megosztási kulcsok generálása ( %s / 2)",
     "Incorrect vault password!" : "Érvénytelen széf jelszó!",
     "Passwords do not match" : "A jelszavak nem egyeznek",
@@ -287,7 +288,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s megosztva vele: %2$s",
     "You received a share request for %1$s from %2$s" : "Megosztási kérést érkezett ehhez: %1$s tőle: %2$s",
     "%s has been shared with a link" : "%s megosztva hivatkozással",
-    "Passwords" : "Jelszavak",
     "Your credential \"%s\" expired, click here to update the credential." : "A hitelesítésed lejárt, kattints ide a frissítéshez: \"%s\"",
     "Remind me later" : "Emlékeztess később",
     "Ignore" : "Mellőz",

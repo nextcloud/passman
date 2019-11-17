@@ -1,4 +1,5 @@
 { "translations": {
+    "Passwords" : "Adgangskoder",
     "Generating sharing keys ( %s / 2)" : "Genererer delte nøgler (%s / 2)",
     "Incorrect vault password!" : "Ukorrekt boks adgangskode",
     "Passwords do not match" : "Kodeord matchede ikke",
@@ -246,7 +247,6 @@
     "%1$s has been recovered by %2$s" : "%1$s er blevet gendannet af %2$s",
     "You recovered %1$s" : "Du gendannede %1$s",
     "%1$s has been permanently deleted by %2$s" : "%1$s er blevet slettet permanent af %2$s",
-    "Passwords" : "Adgangskoder",
     "Remind me later" : "Påmind mig senere",
     "Ignore" : "Ignorér",
     "Passman Settings" : "Passman indstillinger",

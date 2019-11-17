@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Slaptažodžiai",
     "Incorrect vault password!" : "Neteisingas slėptuvės slaptažodis!",
     "Passwords do not match" : "Slaptažodžiai nesutampa",
     "General" : "Bendras",
@@ -197,7 +198,6 @@ OC.L10N.register(
     "You recovered %1$s" : "Jūs atkūrėte %1$s",
     "%1$s has been permanently deleted by %2$s" : "%2$s visiems laikams ištrynė %1$s",
     "You permanently deleted %1$s" : "Jūs visiems laikams ištrynėte %1$s",
-    "Passwords" : "Slaptažodžiai",
     "Remind me later" : "Priminti vėliau",
     "Ignore" : "Nepaisyti",
     "Passman" : "Passman",

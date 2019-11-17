@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "암호",
     "Generating sharing keys ( %s / 2)" : "공유 키 생성 중 (%s/2)",
     "Incorrect vault password!" : "비밀 저장소 암호가 잘못되었습니다!",
     "Passwords do not match" : "암호가 일치하지 않습니다",
@@ -281,7 +282,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s이(가) %2$s 님과 공유됨",
     "You received a share request for %1$s from %2$s" : "%2$s 님의 %1$s 공유 요청을 받음",
     "%s has been shared with a link" : "%s이(가) 링크로 공유됨",
-    "Passwords" : "암호",
     "Your credential \"%s\" expired, click here to update the credential." : "\"%s\" 인증 정보가 만료되었습니다. 여기를 눌러서 업데이트하십시오.",
     "Remind me later" : "나중에 다시 알림",
     "Ignore" : "무시",

@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Hasła",
     "Generating sharing keys ( %s / 2)" : "Tworzenie kluczy współdzielonych ( %s / 2)",
     "Incorrect vault password!" : "Nieprawidłowe hasło sejfu!",
     "Passwords do not match" : "Hasła nie są jednakowe",
@@ -63,7 +64,7 @@ OC.L10N.register(
     "Good" : "Dobre",
     "Strong" : "Silne",
     "Toggle visibility" : "Pokaż hasło",
-    "Copy to clipboard" : "Skopiuj do schowka",
+    "Copy to clipboard" : "Kopiuj do schowka",
     "Copied to clipboard!" : "Skopiowano do schowka!",
     "Generate password" : "Wygeneruj hasło",
     "Copy password to clipboard" : "Skopiuj hasło do schowka",
@@ -210,7 +211,7 @@ OC.L10N.register(
     "Cancel" : "Anuluj",
     "Settings" : "Ustawienia",
     "Share credential {{credential}}" : "Udostępnij poświadczenie {{credential}}",
-    "Unshare" : "Cofnij udostępnienie",
+    "Unshare" : "Zatrzymaj udostępnienie",
     "Showing deleted since" : "Pokazuję skasowane od",
     "Beginning" : "Początek",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "Pokazuję {{number_filtered}} z {{credential_number}} poświadczeń",
@@ -324,7 +325,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s udostępniono dla %2$s",
     "You received a share request for %1$s from %2$s" : "Użytkownik %2$s poprosił Cię o udstępnienie %1$s",
     "%s has been shared with a link" : "%s został udostępniony łączem",
-    "Passwords" : "Hasła",
     "Your credential \"%s\" expired, click here to update the credential." : "Twoje poświadczenie \"%s\" wygasła, kliknij tu, aby je zaktualizować.",
     "Remind me later" : "Przypomnij mi później",
     "Ignore" : "Ignoruj",

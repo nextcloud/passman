@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Gesla",
     "Incorrect vault password!" : "Napačno geslo trezorja!",
     "Passwords do not match" : "Gesli se ne skladata",
     "General" : "Splošno",
@@ -74,8 +75,8 @@ OC.L10N.register(
     "Account" : "Račun",
     "URL" : "Naslov URL",
     "Decline" : "Zavrni",
+    "Cancel destruction request" : "Prkliči zahtevo po uničenju",
     "Logout" : "Odjava",
-    "Passwords" : "Gesla",
     "Ignore" : "Prezri",
     "Passman Settings" : "Nastavitve Passman",
     "GitHub version:" : "Različica GitHub:",

@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Συνθηματικά",
     "Generating sharing keys ( %s / 2)" : "Δημιουργία κλειδιών διαμοιρασμού (Βήμα %s / 2)",
     "Incorrect vault password!" : "Εσφαλμένος κωδικός θαλάμου!",
     "Passwords do not match" : "Δεν ταιριάζουν τα συθηματικά",
@@ -169,7 +170,6 @@ OC.L10N.register(
     "The password of %1$s has expired, renew it now." : "Εληξε το συνθηματικό του %1$s, να ανανεωθεί τώρα.",
     "You received a share request for %1$s from %2$s" : "Λάβατε αίτημα διαμοιρασμού για %1$s από τον %2$s",
     "%s has been shared with a link" : "%s διαμοιράστηκε με σύνδεσμο",
-    "Passwords" : "Συνθηματικά",
     "Remind me later" : "Θύμισέ μου αργότερα",
     "Ignore" : "Αγνόηση",
     "%s shared \"%s\" with you. Click here to accept" : "%s διαμοιράστηκε \"%s\" μαζί σας. Κάντε κλίκ για αποδοχή",

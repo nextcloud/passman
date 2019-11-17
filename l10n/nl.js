@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Wachtwoorden",
     "Generating sharing keys ( %s / 2)" : "Genereren share sleutels ( %s / 2)",
     "Incorrect vault password!" : "Onjuist kluiswachtwoord",
     "Passwords do not match" : "Wachtwoorden komen niet overeen.",
@@ -324,7 +325,6 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s is gedeeld met %2$s",
     "You received a share request for %1$s from %2$s" : "Je ontving een verzoek om %1$s te delen met %2$s",
     "%s has been shared with a link" : "%s is gedeeld met een link",
-    "Passwords" : "Wachtwoorden",
     "Your credential \"%s\" expired, click here to update the credential." : "Je inloggegevens \"%s\" zijn vervallen, klik hier om ze te vernieuwen.",
     "Remind me later" : "Herinner me later",
     "Ignore" : "Negeren",
