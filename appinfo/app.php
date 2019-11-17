@@ -26,17 +26,7 @@ $app->registerPersonalPage();
 
 $l = \OC::$server->getL10N('passman');
 $manager = \OC::$server->getNotificationManager();
-$manager->registerNotifier(function() {
-	return new Notifier(
-		\OC::$server->getL10NFactory()
-	);
-}, function() use ($l) {
-	return [
-		'id' => 'passman',
-		'name' => $l->t('Passwords'),
-	];
-});
-
+$manager->registerNotifierService(Notifier::class);
 /**
  * Loading translations
  *
