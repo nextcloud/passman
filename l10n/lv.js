@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Paroles",
     "Incorrect vault password!" : "Nepareiza akreditācijas datu parole!",
     "Passwords do not match" : "Paroles nesakrīt",
     "General" : "Vispārīgi",
@@ -143,6 +142,7 @@ OC.L10N.register(
     "%1$s has been permanently deleted by %2$s" : "%1$s neatgriezeniski izdzēsa %2$s",
     "You permanently deleted %1$s" : "Jūs neatgriezeniski izdzēsāt %1$s",
     "%s has been shared with a link" : "%s koplietots izmantojot saiti",
+    "Passwords" : "Paroles",
     "Your credential \"%s\" expired, click here to update the credential." : "Jūsu akreditācijai \"%s\" beidzies derīgums. noklikšķiniet šeit, lai atjauninātu akreditācijas datus.",
     "Remind me later" : "Atgādināt vēlāk",
     "Ignore" : "Ignorēt",

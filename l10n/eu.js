@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Pasahitzak",
     "Passwords do not match" : "Pasahitzak ez datoz bat",
     "General" : "Orokorra",
     "Done" : "Egina",
@@ -107,6 +106,7 @@ OC.L10N.register(
     "Simple Navigation" : "Nabigazio sinplea",
     "You updated %1$s" : "%1$s eguneratu duzu",
     "You permanently deleted %1$s" : "%1$s behin betiko ezabatu duzu",
+    "Passwords" : "Pasahitzak",
     "Remind me later" : "Gogoratu geroago",
     "Ignore" : "Ezikusi",
     "Reason" : "Arrazoia",

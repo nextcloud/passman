@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Lykilorð",
     "Generating sharing keys ( %s / 2)" : "Útbý deilingarlykla ( %s / 2)",
     "Incorrect vault password!" : "Rangt lykilorð fyrir lykilorðageymslu!",
     "Passwords do not match" : "Lykilorðin stemma ekki",
@@ -323,6 +322,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s hefur verið deilt með %2$s",
     "You received a share request for %1$s from %2$s" : "Þú fékkst beiðni um deilingu á %1$s frá %2$s",
     "%s has been shared with a link" : "%s hefur verið deilt með tengli",
+    "Passwords" : "Lykilorð",
     "Your credential \"%s\" expired, click here to update the credential." : "Auðkennin \"%s\" eru útrunninn, smelltu hér til að uppfæra auðkennin.",
     "Remind me later" : "Áminna mig síðar",
     "Ignore" : "Hunsa",

@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Passwörter",
     "Generating sharing keys ( %s / 2)" : "Generiere Freigabe-Schlüssel ( %s / 2)",
     "Incorrect vault password!" : "Tresor-Passwort nicht korrekt",
     "Passwords do not match" : "Passwörter stimmen nicht überein",
@@ -325,6 +324,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s wurde mit %2$s geteilt",
     "You received a share request for %1$s from %2$s" : "Sie haben eine Anfrage zum Teilen von %1$s von %2$s erhalten",
     "%s has been shared with a link" : "%s wurde über einen Link geteilt",
+    "Passwords" : "Passwörter",
     "Your credential \"%s\" expired, click here to update the credential." : "Ihre Anmeldedaten \"%s\" sind abgelaufen, klicken Sie zur Aktualisierung ihrer Anmeldedaten hier.",
     "Remind me later" : "Erinnern Sie mich später",
     "Ignore" : "Ignorieren",
