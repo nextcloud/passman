@@ -356,7 +356,7 @@ OC.L10N.register(
     "Requested by" : "Angefordert von",
     "Reason" : "Grund",
     "Click here to request\n\t\t\t\t\tit" : "Hier klicken um es\n\t\t\t\t\tanzufordern",
-    "Loading&hellip;" : "Lade&hellip;",
+    "Loading&hellip;" : "Lade &hellip;",
     "Awwhh… could not find the credential. Maybe it expired?" : "Oh… Zugangsdaten nicht gefunden. Vielleicht sind sie abgelaufen?",
     "Expires:" : "Ablaufdatum:",
     "Connection to server lost" : "Verbindung zum Server verloren",
