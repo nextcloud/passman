@@ -26,6 +26,7 @@ OC.L10N.register(
     "Pick an icon" : "Hautatu ikono bat",
     "Search icons" : "Bilatu ikonoak",
     "Use this icon" : "Erabili ikono hau",
+    "Selected icon" : "Hautatutako ikonoa",
     "Field label" : "Eremuaren etiketa",
     "Field value" : "Eremuaren balioa",
     "Choose a file" : "Hautatu fitxategi bat",
