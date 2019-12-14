@@ -105,6 +105,7 @@ OC.L10N.register(
     "Expired" : "Iraungita",
     "Filter Tags" : "Iragazi etiketak",
     "Simple Navigation" : "Nabigazio sinplea",
+    "You created %1$s" : "%1$s zuk sortu duzu",
     "You updated %1$s" : "%1$s eguneratu duzu",
     "You permanently deleted %1$s" : "%1$s behin betiko ezabatu duzu",
     "Passwords" : "Pasahitzak",
