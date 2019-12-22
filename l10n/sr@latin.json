@@ -1,0 +1,27 @@
+{ "translations": {
+    "Done" : "Done",
+    "Share link" : "Veza deljenja",
+    "Username" : "Username",
+    "File" : "File",
+    "Add" : "Dodaj",
+    "Type" : "Type",
+    "Expiration date" : "Datum isteka",
+    "Import" : "Uvezi",
+    "Uploading" : "Uploading",
+    "User" : "User",
+    "Files" : "Fajlovi",
+    "Save" : "Save",
+    "Cancel" : "Cancel",
+    "Settings" : "Postavke",
+    "Unshare" : "Ne deli",
+    "Password" : "Password",
+    "URL" : "Url",
+    "Notes" : "Notes",
+    "Edit" : "Uredi",
+    "Delete" : "Delete",
+    "Share" : "Deljenje",
+    "Date" : "Date",
+    "Loading…" : "Učitavanje...",
+    "Saving..." : "Upisujem..."
+},"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);"
+}
