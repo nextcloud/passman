@@ -88,6 +88,7 @@ OC.L10N.register(
     "E-mail" : "E-maila",
     "URL" : "URLa",
     "Notes" : "Oharrak",
+    "Changed" : "Aldatuta",
     "Created" : "Sortua",
     "Edit" : "Editatu",
     "Delete" : "Ezabatu",
