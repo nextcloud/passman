@@ -51,6 +51,7 @@ OC.L10N.register(
     "Change" : "Aldatu",
     "Processing" : "Prozesatzen",
     "Version" : "Bertsioa",
+    "Bookmarklet" : "applet-marka",
     "Save your passwords with one click." : "Gorde zure pasahitzak klik batekin",
     "Delete my precious passwords" : "Ezabatu nire pasahitz baliotsuak",
     "Yes, delete my precious passwords" : "Bai, ezabatu nire pasahitz baliotsuak",
