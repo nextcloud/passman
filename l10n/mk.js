@@ -4,6 +4,7 @@ OC.L10N.register(
     "General" : "Општо",
     "Done" : "Готово",
     "Settings saved" : "Параматрите се зачувани",
+    "General settings" : "Општи параметри",
     "Sharing" : "Споделување",
     "Share with users and groups" : "Сподели со корисници и групи",
     "Share link" : "Сподели линк",
