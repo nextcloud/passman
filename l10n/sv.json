@@ -343,6 +343,7 @@
     "Reason" : "Anledning",
     "Click here to request\n\t\t\t\t\tit" : "Klicka här för att efterfråga\n\t\t\t\t\tit",
     "Loading&hellip;" : "Läser in&hellip;",
+    "Awwhh… could not find the credential. Maybe it expired?" : "Awwhh... kunde inte hitta uppgiften. Kanske gick den ut?",
     "Expires:" : "Förfaller:",
     "Connection to server lost" : "Anslutning till servern förlorad",
     "Problem loading page, reloading in 5 seconds" : "Problem att ladda sidan, provar igen om 5 sekunder",
