@@ -9,7 +9,7 @@
     "Error loading file" : "加载文件错误 ",
     "An error occurred during decryption" : "解密时发生错误",
     "Credential created!" : "创建凭证",
-    "Credential deleted" : "凭证删除",
+    "Credential deleted" : "凭据已删除",
     "Credential updated" : "凭证更新",
     "Credential recovered" : "凭证回收",
     "Credential destroyed" : "凭证销毁",
