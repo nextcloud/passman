@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "General" : "عمومی",
     "Done" : "انجام شد",
+    "Settings saved" : "تنظیمات ذخیره شد",
     "Sharing" : "اشتراک گذاری",
     "Share link" : "Share link",
     "Username" : "نام کاربری",
@@ -16,6 +17,7 @@ OC.L10N.register(
     "No expiration date set" : "تاریخ انقضا ست نشده است",
     "Disabled" : "غیرفعال شده",
     "Export" : "گرفتن خروجی",
+    "Change" : "تغییر",
     "Version" : "نسخه",
     "Import" : "وارد کردن",
     "Public key" : "کلید عمومی",
