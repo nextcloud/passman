@@ -225,6 +225,7 @@ OC.L10N.register(
     "Disable JavaScript debugger" : "Išjungti JavaScript derintuvę",
     "Source account" : "Šaltinio paskyra",
     "Destination account" : "Paskirties paskyra",
+    "Request ID" : "Užklausos ID",
     "Requested by" : "Užklausė",
     "Reason" : "Priežastis",
     "Loading&hellip;" : "Įkeliama&hellip;",
