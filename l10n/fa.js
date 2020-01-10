@@ -12,6 +12,7 @@ OC.L10N.register(
     "Add" : "افزودن",
     "Type" : "Type",
     "Actions" : "فعالیت ها",
+    "Filename" : "نام فایل",
     "Size" : "اندازه",
     "Expiration date" : "تاریخ انقضا",
     "No expiration date set" : "تاریخ انقضا ست نشده است",
