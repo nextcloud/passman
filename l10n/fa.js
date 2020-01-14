@@ -20,6 +20,7 @@ OC.L10N.register(
     "Export" : "گرفتن خروجی",
     "Change" : "تغییر",
     "Version" : "نسخه",
+    "Bookmarklet" : "نشانک",
     "Import" : "وارد کردن",
     "Public key" : "کلید عمومی",
     "Uploading" : "در حال آپلود",
