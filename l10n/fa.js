@@ -6,6 +6,7 @@ OC.L10N.register(
     "Settings saved" : "تنظیمات ذخیره شد",
     "Sharing" : "اشتراک گذاری",
     "Share link" : "Share link",
+    "Copy to clipboard" : "کپی به کلیپ بورد",
     "Username" : "نام کاربری",
     "Text" : "متن",
     "File" : "File",
