@@ -27,6 +27,7 @@ OC.L10N.register(
     "Uploading" : "در حال آپلود",
     "User" : "User",
     "Read" : "خواندن",
+    "Write" : "نوشتن",
     "Files" : "فایل",
     "Pending" : "در انتظار",
     "Details" : "جزئیات",
