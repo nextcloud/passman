@@ -356,7 +356,7 @@ OC.L10N.register(
     "Requested by" : "被要求",
     "Reason" : "原因",
     "Click here to request\n\t\t\t\t\tit" : "点击这里请求\n\t\t\t\t\t它",
-    "Loading&hellip;" : "加载中&hellip;",
+    "Loading&hellip;" : "正在加载...",
     "Awwhh… could not find the credential. Maybe it expired?" : "哎呀... 没有找到证书。也许它过期了？",
     "Expires:" : "过期:",
     "Connection to server lost" : "与服务器的连接断开",
