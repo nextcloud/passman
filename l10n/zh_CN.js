@@ -291,7 +291,7 @@ OC.L10N.register(
     "Simple Navigation" : "简单导航",
     "Someone has shared a credential with you." : "有人向您共享了一个证书。",
     "Click here to request it" : "点击这里请求",
-    "Loading…" : "加载中...",
+    "Loading…" : "正在加载…",
     "Awwhh… credential not found. Maybe it expired" : "哎呀... 没有找到证书。也许它过期了",
     "Compromise!" : "密码泄露！",
     "Compromised!" : "已被泄露！",
@@ -361,7 +361,7 @@ OC.L10N.register(
     "Expires:" : "过期:",
     "Connection to server lost" : "与服务器的连接断开",
     "Problem loading page, reloading in 5 seconds" : "加载页面出现问题，在 5 秒内重新加载",
-    "Saving..." : "保存中...",
+    "Saving..." : "正在保存…",
     "Dismiss" : "忽略",
     "seconds ago" : "几秒前"
 },

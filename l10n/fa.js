@@ -15,6 +15,7 @@ OC.L10N.register(
     "Actions" : "فعالیت ها",
     "Filename" : "نام فایل",
     "Size" : "اندازه",
+    "Secret" : "راز",
     "Expiration date" : "تاریخ انقضا",
     "No expiration date set" : "تاریخ انقضا ست نشده است",
     "Disabled" : "غیرفعال شده",
