@@ -15,6 +15,7 @@ OC.L10N.register(
     "Adding {{credential}}" : "Dodajanje poverila {{credential}}",
     "Select CSV file" : "Izbor datoteke CSV",
     "Skip first row" : "Preskoči prvo vrstico",
+    "The first 5 lines of the CSV are shown." : "Prikazanih je prvih 5 vrstic datoteke CSV.",
     "Revision restored" : "Predelava je obnovljena",
     "Settings saved" : "Nastavitve so shranjene.",
     "General settings" : "Splošne nastavitve",

@@ -38,6 +38,7 @@ OC.L10N.register(
     "Settings" : "تنظیمات",
     "Unshare" : "لغو اشتراک",
     "Password" : "گذرواژه",
+    "E-mail" : "پست الکترونیک",
     "URL" : "URL",
     "Notes" : "یادداشت ها",
     "Created" : "ایجاد شده",
