@@ -149,6 +149,8 @@
     "GitHub version:" : "Različica GitHub:",
     "A newer version of Passman is available" : "Na voljo je nova različica programa Passman",
     "Password sharing" : "Souporaba gesla",
+    "Allow users on this server to share passwords with a link" : "Dovoli uporabnikom tega strežnika souporabo gesel prek povezave",
+    "Allow users on this server to share passwords with other users" : "Dovoli uporabnikom tega strežnika souporabo gesel z drugimi uporabniki",
     "Source account" : "Izvorni račun",
     "Destination account" : "Ciljni račun",
     "Reason" : "Razlog",
