@@ -147,7 +147,7 @@ OC.L10N.register(
     "Save" : "Įrašyti",
     "Cancel" : "Atsisakyti",
     "Settings" : "Nustatymai",
-    "Unshare" : "Nebesidalinti",
+    "Unshare" : "Nustoti bendrinti",
     "Account" : "Paskyra",
     "Password" : "Slaptažodis",
     "E-mail" : "El. paštas",

@@ -39,6 +39,7 @@ OC.L10N.register(
     "Cancel" : "لغو",
     "Settings" : "تنظیمات",
     "Unshare" : "لغو اشتراک",
+    "Account" : "حساب",
     "Password" : "گذرواژه",
     "E-mail" : "پست الکترونیک",
     "URL" : "URL",
