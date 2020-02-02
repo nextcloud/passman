@@ -5,6 +5,7 @@ OC.L10N.register(
     "Done" : "انجام شد",
     "Settings saved" : "تنظیمات ذخیره شد",
     "Sharing" : "اشتراک گذاری",
+    "Please log in with your new vault password" : "لطفاً با رمز جدید طاق خود وارد شوید",
     "Share with users and groups" : "با کاربران و گروه ها به اشتراک بگذارید",
     "Share link" : "Share link",
     "Good" : "خوب",

@@ -53,7 +53,7 @@ OC.L10N.register(
     "New password does not match!" : "Deine neuen Passwörter stimmen nicht überein!",
     "Please log in with your new vault password" : "Bitte melde Dich mit Deinem neuen Tresor-Passwort an",
     "Share with users and groups" : "Mit Benutzern oder Gruppen teilen",
-    "Share link" : "Link freigeben",
+    "Share link" : "Link teilen",
     "Are you sure you want to leave? This will corrupt this credential" : "Möchtest Du dies wirklich verlassen? Dies wird diese Anmeldeinformation zerstören",
     "Credential unshared" : "Anmeldeinformation wird nicht mehr geteilt",
     "Credential shared" : "Anmeldeinformation wird geteilt",
