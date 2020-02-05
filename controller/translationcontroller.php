@@ -436,7 +436,7 @@ class TranslationController extends ApiController {
 			'search.settings.input.custom_fields' => $this->trans->t('Custom Fields'),
 			'search.settings.input.password' => $this->trans->t('Password'),
 			'search.settings.input.description' => $this->trans->t('Description'),
-			'search.settings.input.url' => $this->trans->t('Url'),
+			'search.settings.input.url' => $this->trans->t('URL'),
 
 			'search.settings.title' => $this->trans->t('Custom Search:'),
 			'search.settings.defaults_button' => $this->trans->t('Revert to defaults'),
