@@ -39,6 +39,7 @@ OC.L10N.register(
     "Cancel" : "Откажи",
     "Settings" : "Параметри",
     "Unshare" : "Несподелувај",
+    "Account" : "Сметка",
     "Password" : "Лозинка",
     "E-mail" : "е-пошта",
     "URL" : "Адреса",
