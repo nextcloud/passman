@@ -101,6 +101,7 @@ OC.L10N.register(
     "Never" : "絕不",
     "Donate" : "斗內",
     "Tags" : "標籤",
+    "Expired" : "已過期",
     "Loading…" : "載入中…",
     "email" : "電子郵件",
     "Description" : "描述",
