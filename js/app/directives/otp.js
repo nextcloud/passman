@@ -52,6 +52,10 @@
 						var val = base32chars.indexOf(base32.charAt(i).toUpperCase());
 						bits += leftpad(val.toString(2), 5, '0');
 					}
+					
+					for (i = i % 8; i > 0; i--) {
+						bits += leftpad('0', 5, '0');
+					}
 
 					for (i = 0; i + 4 <= bits.length; i += 4) {
 						var chunk = bits.substr(i, 4);
