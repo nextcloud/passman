@@ -210,7 +210,7 @@ OC.L10N.register(
     "Cancel" : "Одустани",
     "Settings" : "Поставке",
     "Share credential {{credential}}" : "Подели акредитив {{credential}}",
-    "Unshare" : "Склони дељење",
+    "Unshare" : "Не дели",
     "Showing deleted since" : "Приказујем обрисане од",
     "Beginning" : "Почетка",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "Приказујем {{number_filtered}} од {{credential_number}} акредитива",

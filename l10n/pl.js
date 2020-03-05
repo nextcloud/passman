@@ -169,7 +169,7 @@ OC.L10N.register(
     "Files" : "Pliki",
     "Revisions" : "Wersje",
     "Pending" : "Oczekuje",
-    "Enable link sharing" : "Włącz link udostępniania",
+    "Enable link sharing" : "Włącz udostępnianie linkiem",
     "Share until date" : "Udostępniaj do daty",
     "Expire after views" : "Wygaś po oglądaniu",
     "Click \\\"Share\\\" first" : "Najpierw zaznacz \"Włącz link...\"",
