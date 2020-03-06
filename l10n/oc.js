@@ -9,6 +9,8 @@ OC.L10N.register(
     "File" : "File",
     "Add" : "Apondre",
     "Type" : "Tipe",
+    "Actions" : "Accions",
+    "Size" : "Talha",
     "Expiration date" : "Data d'expiracion",
     "Export" : "Exportar",
     "Import" : "Importar",
