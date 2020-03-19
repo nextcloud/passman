@@ -100,7 +100,7 @@ OC.L10N.register(
     "Secret" : "Secreto",
     "Expiration date" : "Data de caducidade",
     "No expiration date set" : "Non se definiu a data de caducidade",
-    "Renew interval" : "Intervalo de renovación",
+    "Renew interval" : "Renovar o intervalo",
     "Disabled" : "Desactivado",
     "Day(s)" : "Día(s)",
     "Week(s)" : "Semana(s)",
