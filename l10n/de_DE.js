@@ -158,7 +158,7 @@ OC.L10N.register(
     "Score" : "Bewertung",
     "Action" : "Aktion",
     "Search users…" : "Suche Benutzer…",
-    "Missing users? Only users that have vaults are shown." : "Nutzer gesucht? Es werden nur Nutzer mit einem Tresor angezeigt.",
+    "Missing users? Only users that have vaults are shown." : "Benutzer gesucht? Es werden nur Benutzer mit einem Tresor angezeigt.",
     "Cyphering" : "Verschlüsselung",
     "Uploading" : "Lade hoch",
     "User" : "Benutzer",
