@@ -250,7 +250,7 @@ OC.L10N.register(
     "There are no credentials with your selected tags" : "Keine Anmeldedaten mit den ausgewählten Schlagworten vorhanden",
     "There are no credentials matching" : "Keine passenden Anmeldedaten",
     "Last accessed" : "Letzter Zugriff",
-    "Never" : "Nie",
+    "Never" : "Niemals",
     "No vaults found, why not create one?" : "Kein Tresor gefunden, warum kein neues erstellen?",
     "Password strength must be at least: {{strength}}" : "Mindest erforderliche Passwortstärke: {{strength}}",
     "Please give your new vault a name." : "Bitte einen Namen für den neuen Tresor eingeben.",
