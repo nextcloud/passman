@@ -126,6 +126,7 @@ OC.L10N.register(
     "E-mail" : "E-maila",
     "URL" : "URLa",
     "Notes" : "Oharrak",
+    "Expiry time" : "Iraungitze ordua",
     "Changed" : "Aldatuta",
     "Created" : "Sortua",
     "Edit" : "Editatu",
