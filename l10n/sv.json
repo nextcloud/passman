@@ -280,7 +280,7 @@
     "Simple Navigation" : "Enkel navigering",
     "Someone has shared a credential with you." : "Någon delade uppgifter med dig",
     "Click here to request it" : "Klicka här för att begära det",
-    "Loading…" : "Laddar...",
+    "Loading…" : "Läser in...",
     "Awwhh… credential not found. Maybe it expired" : "Oops... uppgifter hittades inte. Kanske har de gått ut",
     "email" : "e-post",
     "Description" : "Beskrivning",
@@ -346,7 +346,7 @@
     "Awwhh… could not find the credential. Maybe it expired?" : "Awwhh... kunde inte hitta uppgiften. Kanske gick den ut?",
     "Expires:" : "Förfaller:",
     "Connection to server lost" : "Anslutning till servern förlorad",
-    "Problem loading page, reloading in 5 seconds" : "Problem att ladda sidan, provar igen om 5 sekunder",
+    "Problem loading page, reloading in 5 seconds" : "Problem att läsa in sidan, provar igen om 5 sekunder",
     "Saving..." : "Sparar...",
     "Dismiss" : "Avfärda",
     "seconds ago" : "sekunder sedan"
