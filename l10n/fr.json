@@ -51,7 +51,7 @@
     "New password does not match!" : "Le nouveau mot de passe ne correspond pas !",
     "Please log in with your new vault password" : "Veuillez vous connecter avec votre nouveau mot de passe du coffre-fort",
     "Share with users and groups" : "Partager avec des utilisateurs et des groupes",
-    "Share link" : "Partager un lien",
+    "Share link" : "Lien de partage",
     "Are you sure you want to leave? This will corrupt this credential" : "Êtes-vous sûr de vouloir quitter ? Cela va corrompre cette information d'identification",
     "Credential unshared" : "Arrêt du partage de l'information d'identification ",
     "Credential shared" : "Information d'identification partagée",
