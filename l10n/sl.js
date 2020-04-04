@@ -292,6 +292,7 @@ OC.L10N.register(
     "Custom Search:" : "Iskane po meri:",
     "Revert to defaults" : "Povrni na privzeto",
     "Error while saving field" : "Napaka med shranjevanjem vpisa polja",
+    "A Passman item has been created, modified or deleted" : "Predmet Passman je bil ustvarjen, spremenjen ali izbrisan",
     "A Passman item has expired" : "Predmet Passman je potekel",
     "A Passman item has been renamed" : "Predmet Passman je preimenovan",
     "You created %1$s" : "Ustvarite %1$s",
