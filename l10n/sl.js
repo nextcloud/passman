@@ -26,7 +26,7 @@ OC.L10N.register(
     "Adding {{credential}}" : "Dodajanje poverila {{credential}}",
     "Added {{credential}}" : "Dodano poverilo {{credential}}",
     "Skipping credential, missing label on line {{line}}" : "Izpuščeno je poverilo, ki nima oznake v vrstici {{line}}",
-    "Parsed {{num}} credentials, starting to import" : "{{num}} poveril je razčlenjenih, pričenjam uvoz",
+    "Parsed {{num}} credentials, starting to import" : "Poverila so razčlenjena {{num}}; začet je postopek uvoza",
     "Importing" : "Poteka uvažanje",
     "Start import" : "Začetek uvoza",
     "Select CSV file" : "Izbor datoteke CSV",
