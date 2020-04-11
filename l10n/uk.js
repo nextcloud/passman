@@ -30,6 +30,7 @@ OC.L10N.register(
     "Expiration date" : "Термін дії",
     "Disabled" : "Вимкнено",
     "Export" : "Експорт",
+    "Change" : "Змінити",
     "Version" : "Версія",
     "Vault password" : "Пароль для сховища",
     "Import" : "Імпорт",
