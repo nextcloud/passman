@@ -40,6 +40,7 @@ OC.L10N.register(
     "Delete" : "Xóa",
     "Share" : "Chia sẻ",
     "Date" : "Date",
+    "Accept" : "Đồng ý",
     "Never" : "Không bao giờ",
     "Tags" : "Thẻ",
     "Loading…" : "Đang tải…",
