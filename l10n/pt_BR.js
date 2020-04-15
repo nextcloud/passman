@@ -133,7 +133,7 @@ OC.L10N.register(
     "Donate to support development" : "Doar para apoiar o desenvolvimento",
     "Bookmarklet" : "Marcado",
     "Save your passwords with one click." : "Salve suas senhas com um clique.",
-    "Drag below button to your bookmark toolbar." : "Arraste o botão abaixo para a barra de ferramentas de marcadores.",
+    "Drag below button to your bookmark toolbar." : "Arraste o botão abaixo para a barra de ferramentas de favoritos.",
     "Delete vault" : "Excluir o cofre",
     "Vault password" : "Senha do cofre",
     "This process is irreversible" : "Este processo é irreversível",
