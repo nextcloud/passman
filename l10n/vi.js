@@ -33,6 +33,7 @@ OC.L10N.register(
     "Cancel" : "Hủy bỏ",
     "Settings" : "Thiết lập",
     "Unshare" : "Bỏ chia sẽ",
+    "Account" : "Tài khoản",
     "Password" : "Mật khẩu",
     "URL" : "URL",
     "Notes" : "Ghi chép",
