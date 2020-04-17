@@ -35,6 +35,7 @@ OC.L10N.register(
     "Unshare" : "Bỏ chia sẽ",
     "Account" : "Tài khoản",
     "Password" : "Mật khẩu",
+    "E-mail" : "Email",
     "URL" : "URL",
     "Notes" : "Ghi chép",
     "Created" : "Đã tạo",

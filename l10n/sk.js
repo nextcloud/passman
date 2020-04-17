@@ -245,6 +245,7 @@ OC.L10N.register(
     "Logout" : "Odhlásiť",
     "Donate" : "Darovať",
     "Tags" : "Štítky",
+    "Expired" : "Platnosť skončila",
     "Someone has shared a credential with you." : "Niekto vám sprístupnil prihlasovací údaj.",
     "Click here to request it" : "Kliknite sem pre vytvorenie požiadavky",
     "Loading…" : "Načítavam...",
