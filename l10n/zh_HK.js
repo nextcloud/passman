@@ -5,6 +5,7 @@ OC.L10N.register(
     "Done" : "Done",
     "Sharing" : "分享",
     "Share link" : "分享連結",
+    "Good" : "好",
     "Username" : "用戶名稱",
     "File" : "File",
     "Add" : "加入",
