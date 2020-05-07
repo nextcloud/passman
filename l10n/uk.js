@@ -41,6 +41,7 @@ OC.L10N.register(
     "Files" : "Файли",
     "Pending" : "Очікування",
     "Details" : "Деталі",
+    "Hide details" : "Приховати деталі",
     "by" : "від",
     "Label" : "Мітка",
     "Save" : "Зберегти",
