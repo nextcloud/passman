@@ -42,6 +42,7 @@ OC.L10N.register(
     "Pending" : "Очікування",
     "Details" : "Деталі",
     "Hide details" : "Приховати деталі",
+    "Pattern" : "Шаблон",
     "by" : "від",
     "Label" : "Мітка",
     "Save" : "Зберегти",
