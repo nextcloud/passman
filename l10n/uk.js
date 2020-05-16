@@ -16,6 +16,7 @@ OC.L10N.register(
     "Done" : "Готово",
     "Settings saved" : "Налаштування збережено",
     "Sharing" : "Поділитись",
+    "Share with users and groups" : "Поділитися з користувачами та групами",
     "Share link" : "Поширити посилання",
     "Saved!" : "Збережено!",
     "Good" : "Добре",
