@@ -15,6 +15,7 @@ OC.L10N.register(
     "Starting export" : "Початок експорту",
     "Done" : "Готово",
     "Settings saved" : "Налаштування збережено",
+    "General settings" : "Загальні налаштування",
     "Sharing" : "Поділитись",
     "Share with users and groups" : "Поділитися з користувачами та групами",
     "Share link" : "Поширити посилання",
