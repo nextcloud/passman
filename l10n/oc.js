@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "General" : "Generals",
     "Done" : "Done",
+    "Settings saved" : "Paramètres enregistrats",
     "Sharing" : "Partiment",
     "Share link" : "Partejar lo ligam",
     "Username" : "Nom d'utilizaire",
