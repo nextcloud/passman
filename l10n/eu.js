@@ -179,6 +179,7 @@ OC.L10N.register(
     "Settings" : "Ezarpenak",
     "Share credential {{credential}}" : "Partekatu {{credential}} kredentziala",
     "Unshare" : "Ez partekatu",
+    "Showing deleted since" : "Egun honetatik ezabatuak erakusten:",
     "Beginning" : "Hasiera",
     "Search for credential…" : "Bilatu kredentziala...",
     "Account" : "Kontua",
