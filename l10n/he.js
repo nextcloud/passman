@@ -165,6 +165,7 @@ OC.L10N.register(
     "Unshare" : "ביטול שיתוף",
     "Account" : "חשבון",
     "Password" : "ססמה",
+    "OTP" : "ססמה חד פעמית (OTP)",
     "E-mail" : "דוא״ל",
     "URL" : "כתובת",
     "Notes" : "הערות",
