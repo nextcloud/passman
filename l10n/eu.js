@@ -72,6 +72,7 @@ OC.L10N.register(
     "Use this icon" : "Erabili ikono hau",
     "Delete current icon" : "Ezabatu uneko ikonoa",
     "Get icon from page" : "Lortu ikonoa orritik",
+    "This may take a few seconds…" : "Segundo batzuk beharko dira...",
     "Selected icon" : "Hautatutako ikonoa",
     "Field label" : "Eremuaren etiketa",
     "Field value" : "Eremuaren balioa",
