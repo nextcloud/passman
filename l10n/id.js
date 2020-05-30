@@ -29,6 +29,7 @@ OC.L10N.register(
     "Files" : "Berkas",
     "Pending" : "Tunggu",
     "Details" : "Detil",
+    "Hide details" : "Sembunyikan detail",
     "by" : "oleh",
     "Save" : "Simpan",
     "Cancel" : "Membatalkan",
