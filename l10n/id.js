@@ -20,6 +20,7 @@ OC.L10N.register(
     "No expiration date set" : "Tanggal kedaluwarsa tidak diatur",
     "Disabled" : "Dinonaktifkan",
     "Export" : "Ekspor",
+    "Change" : "Ubah",
     "Version" : "Versi",
     "Import" : "Impor",
     "Public key" : "Kunci Public",
