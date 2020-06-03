@@ -425,7 +425,7 @@ class TranslationController extends ApiController {
 			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
 			//compromised credentials
-			'compromised.label' => $this->trans->t('Compromise!'),
+			'compromised.label' => $this->trans->t('Mark as Compromised'),
 			'compromised.warning.list' => $this->trans->t('Compromised!'),
 			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning by changing the password.'),
 
