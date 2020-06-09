@@ -33,6 +33,7 @@ OC.L10N.register(
     "Size" : "Розмір",
     "Secret" : "Секретне",
     "Expiration date" : "Термін дії",
+    "No expiration date set" : "Не встановлено терміну дії",
     "Disabled" : "Вимкнено",
     "Export" : "Експорт",
     "Change" : "Змінити",
