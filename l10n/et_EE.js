@@ -12,6 +12,7 @@ OC.L10N.register(
     "Share link" : "Jaga link",
     "Saved!" : "Salvestatud!",
     "Good" : "Hea",
+    "Copy to clipboard" : "Kopeeri lõikepuhvrisse",
     "Username" : "Kasutajanimi",
     "File" : "Fail",
     "Add" : "Lisa",
