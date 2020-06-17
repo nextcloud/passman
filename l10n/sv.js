@@ -284,6 +284,8 @@ OC.L10N.register(
     "Click here to request it" : "Klicka här för att begära det",
     "Loading…" : "Läser in...",
     "Awwhh… credential not found. Maybe it expired" : "Oops... uppgifter hittades inte. Kanske har de gått ut",
+    "Compromise!" : "Komprimera!",
+    "Compromised!" : "Komprimerad!",
     "email" : "e-post",
     "Description" : "Beskrivning",
     "Url" : "Webbadress",
