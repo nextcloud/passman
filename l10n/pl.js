@@ -299,7 +299,7 @@ OC.L10N.register(
     "email" : "e-mail",
     "Description" : "Opis",
     "Url" : "URL",
-    "Custom Search:" : "Niestandardowe wyszukiwanie:",
+    "Custom Search:" : "Nietypowe wyszukiwanie:",
     "Revert to defaults" : "Przywróć ustawienia domyślne",
     "Error while saving field" : "Błąd podczas zapisywania pola",
     "A Passman item has been created, modified or deleted" : "Pozycja Passman została utworzona, zmodyfikowana lub skasowana",
