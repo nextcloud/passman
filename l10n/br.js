@@ -14,10 +14,12 @@ OC.L10N.register(
     "Settings" : "Arventennoù",
     "Unshare" : "Nag eskemm ken",
     "Password" : "Ger-tremen",
+    "Edit" : "Cheñch",
     "Delete" : "Dilemel",
     "Share" : "Rannan",
     "Accept" : "Kadarnaat",
     "Tags" : "Klavioù",
+    "email" : "email",
     "Saving..." : "Oc'h enrolién",
     "seconds ago" : "eilenn zo"
 },
