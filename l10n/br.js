@@ -11,6 +11,8 @@ OC.L10N.register(
     "Files" : "Restroù",
     "Pending" : "O c'hortoz",
     "Details" : "Munudoù",
+    "Hide details" : "Skoachañ ar munudoù",
+    "Cancel" : "Arrest",
     "Settings" : "Arventennoù",
     "Unshare" : "Nag eskemm ken",
     "Password" : "Ger-tremen",
@@ -20,6 +22,7 @@ OC.L10N.register(
     "Accept" : "Kadarnaat",
     "Tags" : "Klavioù",
     "email" : "email",
+    "Connection to server lost" : "Kelet eo bet ar c'henstagañ gant ar servijour",
     "Saving..." : "Oc'h enrolién",
     "seconds ago" : "eilenn zo"
 },
