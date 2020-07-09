@@ -5,6 +5,7 @@ OC.L10N.register(
     "Sharing" : "Rannan",
     "Share link" : "Rannan liamm",
     "Username" : "anv implijer",
+    "File" : "Restr",
     "Add" : "Ouzhpennañ",
     "Actions" : "Oberoù",
     "Size" : "Ment",
@@ -12,6 +13,7 @@ OC.L10N.register(
     "Change" : "Cheñch",
     "Version" : "Stumm",
     "Public key" : "Alc'hwez publik",
+    "User" : "Implijer",
     "Files" : "Restroù",
     "Pending" : "O c'hortoz",
     "Details" : "Munudoù",
@@ -30,10 +32,12 @@ OC.L10N.register(
     "Accept" : "Kadarnaat",
     "Never" : "James",
     "Tags" : "Klavioù",
+    "Loading…" : "O Kargañ",
     "email" : "email",
     "Description" : "Diskrivadur",
     "Connection to server lost" : "Kelet eo bet ar c'henstagañ gant ar servijour",
     "Saving..." : "Oc'h enrolién",
+    "Dismiss" : "Arrest",
     "seconds ago" : "eilenn zo"
 },
 "nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > 19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 && n % 1000000 == 0) ? 3 : 4);");
