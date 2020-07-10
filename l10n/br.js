@@ -8,6 +8,7 @@ OC.L10N.register(
     "File" : "Restr",
     "Add" : "Ouzhpennañ",
     "Actions" : "Oberoù",
+    "Filename" : "Anv restr",
     "Size" : "Ment",
     "Expiration date" : "Deizad termen",
     "Change" : "Cheñch",
