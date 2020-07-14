@@ -257,6 +257,7 @@ OC.L10N.register(
     "Passman Settings" : "Passman indstillinger",
     "Password sharing" : "Password deling",
     "Reason" : "Grund",
+    "Expires:" : "Udløber:",
     "Connection to server lost" : "Mistede forbindelsen til serveren",
     "Problem loading page, reloading in 5 seconds" : "Problem med indlæsning af side, genindlæser om 5 sekunder",
     "Saving..." : "Gemmer...",

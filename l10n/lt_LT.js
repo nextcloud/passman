@@ -133,6 +133,7 @@ OC.L10N.register(
     "Uploading" : "Įkeliama",
     "User" : "Naudotojas",
     "Read" : "Skaityti",
+    "Write" : "Rašyti",
     "Files" : "Failai",
     "Pending" : "Laukiantis",
     "Show files" : "Rodyti failus",

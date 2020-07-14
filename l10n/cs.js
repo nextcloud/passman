@@ -277,7 +277,7 @@ OC.L10N.register(
     "Warning! Adding credentials over HTTP is insecure!" : "Varování! Přidávání pověření přes HTTP může být nebezpečné!",
     "Logged into {{vault_name}}" : "Přihlášeni do {{vault_name}}",
     "Change vault" : "Změnit trezor",
-    "Deleted credentials" : "Smazaná pověření",
+    "Deleted credentials" : "Smazané přihlašovací údaje",
     "Logout" : "Odhlásit se",
     "Donate" : "Přispět",
     "Show All" : "Zobrazit vše",
