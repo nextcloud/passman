@@ -29,7 +29,7 @@ OC.L10N.register(
     "Settings" : "Arventennoù",
     "Unshare" : "Nag eskemm ken",
     "Password" : "Ger-tremen",
-    "E-mail" : "E-mail",
+    "E-mail" : "Postel",
     "URL" : "URL",
     "Edit" : "Cheñch",
     "Delete" : "Dilemel",
