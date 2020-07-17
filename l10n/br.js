@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "General" : "Hollek",
     "Done" : "Graet",
+    "Settings saved" : "Stummoù enrollet",
     "Sharing" : "Rannan",
     "Share with users and groups" : "Ranna gant implijourienn ha strolladoù",
     "Share link" : "Rannan liamm",
@@ -23,6 +24,7 @@ OC.L10N.register(
     "Pending" : "O c'hortoz",
     "Details" : "Munudoù",
     "Hide details" : "Skoachañ ar munudoù",
+    "by" : "gant",
     "Label" : "Tiketenn",
     "Save" : "Entilañ",
     "Cancel" : "Arrest",
