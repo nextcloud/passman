@@ -56,7 +56,7 @@ OC.L10N.register(
     "Loading…" : "Се вчитува…",
     "email" : "е-пошта",
     "Description" : "Опис",
-    "You created %1$s" : "Вие креиравте %1$s",
+    "You created %1$s" : "Креиравте %1$s",
     "You deleted %1$s" : "Вие избришавте %1$s",
     "Connection to server lost" : "Изгубена е врската со серверот",
     "Saving..." : "Зачувува ...",
