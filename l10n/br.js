@@ -29,7 +29,7 @@ OC.L10N.register(
     "Hide details" : "Skoachañ ar munudoù",
     "by" : "gant",
     "Label" : "Tiketenn",
-    "Save" : "Entilañ",
+    "Save" : "Enrollañ",
     "Cancel" : "Arrest",
     "Settings" : "Arventennoù",
     "Unshare" : "Nag eskemm ken",
