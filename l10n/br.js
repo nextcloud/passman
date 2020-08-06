@@ -33,6 +33,7 @@ OC.L10N.register(
     "Cancel" : "Arrest",
     "Settings" : "Arventennoù",
     "Unshare" : "Nag eskemm ken",
+    "Account" : "Kont",
     "Password" : "Ger-tremen",
     "E-mail" : "Postel",
     "URL" : "URL",
