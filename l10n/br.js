@@ -16,6 +16,7 @@ OC.L10N.register(
     "Actions" : "Oberoù",
     "Filename" : "Anv restr",
     "Size" : "Ment",
+    "Secret" : "Sekret",
     "Expiration date" : "Deizad termen",
     "Disabled" : "Disaotreañ",
     "Change" : "Cheñch",
