@@ -28,6 +28,7 @@ OC.L10N.register(
     "Pending" : "O c'hortoz",
     "Details" : "Munudoù",
     "Hide details" : "Skoachañ ar munudoù",
+    "Pattern" : "Pattern",
     "by" : "gant",
     "Label" : "Tiketenn",
     "Save" : "Enrollañ",
