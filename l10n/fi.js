@@ -137,6 +137,7 @@ OC.L10N.register(
     "Password score" : "Salasanan pisteytys",
     "100 / hour" : "100 / tunti",
     "10 / second" : "10 / sekunti",
+    "Pattern" : "Kuvio",
     "by" : " Kirjoittaja:",
     "Edit credential" : "Muokkaa tilitietoa",
     "Create new credential" : "Luo uusi tilitieto",
