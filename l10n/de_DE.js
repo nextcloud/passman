@@ -217,7 +217,7 @@ OC.L10N.register(
     "Search for credential…" : "Suche Anmeldeinformationen…",
     "Account" : "Konto",
     "Password" : "Passwort",
-    "OTP" : "OTP (Einmalpasswort)",
+    "OTP" : "OTP",
     "E-mail" : "E-Mail",
     "URL" : "URL",
     "Notes" : "Notizen",
