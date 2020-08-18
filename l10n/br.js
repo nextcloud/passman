@@ -49,6 +49,7 @@ OC.L10N.register(
     "Loading…" : "O Kargañ",
     "email" : "email",
     "Description" : "Diskrivadur",
+    "Expires:" : "Termenn :",
     "Connection to server lost" : "Kelet eo bet ar c'henstagañ gant ar servijour",
     "Saving..." : "Oc'h enrolién",
     "Dismiss" : "Arrest",

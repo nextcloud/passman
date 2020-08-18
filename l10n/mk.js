@@ -9,6 +9,7 @@ OC.L10N.register(
     "Share with users and groups" : "Сподели со корисници и групи",
     "Share link" : "Сподели линк",
     "Saved!" : "Зачувано!",
+    "Good" : "Добро",
     "Copy to clipboard" : "Копирај во клипборд",
     "Username" : "Корисничко име",
     "File" : "Датотека",
