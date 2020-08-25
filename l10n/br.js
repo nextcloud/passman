@@ -43,6 +43,7 @@ OC.L10N.register(
     "Edit" : "Cheñch",
     "Delete" : "Dilemel",
     "Share" : "Rannan",
+    "Date" : "Deizat",
     "Accept" : "Kadarnaat",
     "Never" : "James",
     "Tags" : "Klavioù",
