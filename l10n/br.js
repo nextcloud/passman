@@ -22,6 +22,7 @@ OC.L10N.register(
     "Change" : "Cheñch",
     "Version" : "Stumm",
     "Vault password" : "Ger-tremen ar c'houfr-houarnet",
+    "Import" : "Emporzhiañ ",
     "Public key" : "Alc'hwez publik",
     "Uploading" : "O pellkasañ",
     "User" : "Implijer",
