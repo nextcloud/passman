@@ -363,6 +363,6 @@ OC.L10N.register(
     "Problem loading page, reloading in 5 seconds" : "Produciuse un problema ao cargar a páxina, volverá cargar en 5 segundos",
     "Saving..." : "Gardando…",
     "Dismiss" : "Rexeitar",
-    "seconds ago" : "segundos atrás"
+    "seconds ago" : "hai uns segundos"
 },
 "nplurals=2; plural=(n != 1);");
