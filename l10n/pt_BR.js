@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Senhas",
     "Generating sharing keys ( %s / 2)" : "Gerando chaves de compartilhamento ( %s / 2)",
     "Incorrect vault password!" : "Senha do cofre incorreta",
     "Passwords do not match" : "As senhas não coincidem",
@@ -134,7 +133,7 @@ OC.L10N.register(
     "Donate to support development" : "Doar para apoiar o desenvolvimento",
     "Bookmarklet" : "Marcado",
     "Save your passwords with one click." : "Salve suas senhas com um clique.",
-    "Drag below button to your bookmark toolbar." : "Arraste o botão abaixo para a barra de ferramentas de marcadores.",
+    "Drag below button to your bookmark toolbar." : "Arraste o botão abaixo para a barra de ferramentas de favoritos.",
     "Delete vault" : "Excluir o cofre",
     "Vault password" : "Senha do cofre",
     "This process is irreversible" : "Este processo é irreversível",
@@ -325,6 +324,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s foi compartilhado com %2$s",
     "You received a share request for %1$s from %2$s" : "Você recebeu uma solicitação de compartilhamento para %1$s de %2$s",
     "%s has been shared with a link" : "%s foi compartilhado com um link",
+    "Passwords" : "Senhas",
     "Your credential \"%s\" expired, click here to update the credential." : "Suas credenciais \"%s\" expiraram. Clique aqui para atualizar a credencial.",
     "Remind me later" : "Lembre-me mais tarde",
     "Ignore" : "Ignorar",

@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Mots de passe",
     "Generating sharing keys ( %s / 2)" : "Génération des clés de partage ( %s/ 2 )",
     "Incorrect vault password!" : "Mot de passe du coffre-fort incorrect",
     "Passwords do not match" : "Les mots de passe ne correspondent pas",
@@ -54,7 +53,7 @@ OC.L10N.register(
     "New password does not match!" : "Le nouveau mot de passe ne correspond pas !",
     "Please log in with your new vault password" : "Veuillez vous connecter avec votre nouveau mot de passe du coffre-fort",
     "Share with users and groups" : "Partager avec des utilisateurs et des groupes",
-    "Share link" : "Partager un lien",
+    "Share link" : "Lien de partage",
     "Are you sure you want to leave? This will corrupt this credential" : "Êtes-vous sûr de vouloir quitter ? Cela va corrompre cette information d'identification",
     "Credential unshared" : "Arrêt du partage de l'information d'identification ",
     "Credential shared" : "Information d'identification partagée",
@@ -325,6 +324,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s a été partagé avec %2$s",
     "You received a share request for %1$s from %2$s" : "Vous avez reçu une demande de partage pour %1$s de %2$s",
     "%s has been shared with a link" : "%s a été partagé avec un lien",
+    "Passwords" : "Mots de passe",
     "Your credential \"%s\" expired, click here to update the credential." : "Votre identifiant \"%s\" a expiré, cliquez ici pour le mettre à jour.",
     "Remind me later" : "Rappelez-moi plus tard",
     "Ignore" : "Ignorer",
@@ -359,7 +359,7 @@ OC.L10N.register(
     "Loading&hellip;" : "Chargement&hellip;",
     "Awwhh… could not find the credential. Maybe it expired?" : "Awwhh… n'a pas pu trouver le justificatif d'identité. Peut-être a t-il expiré ?",
     "Expires:" : "Expire le :",
-    "Connection to server lost" : "Connexion au serveur perdue",
+    "Connection to server lost" : "La connexion au serveur a été perdue",
     "Problem loading page, reloading in 5 seconds" : "Problème de chargement de la page, actualisation dans 5 secondes",
     "Saving..." : "Enregistrement…",
     "Dismiss" : "Ignorer",

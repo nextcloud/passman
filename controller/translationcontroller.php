@@ -425,7 +425,7 @@ class TranslationController extends ApiController {
 			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
 
 			//compromised credentials
-			'compromised.label' => $this->trans->t('Compromise!'),
+			'compromised.label' => $this->trans->t('Mark as Compromised'),
 			'compromised.warning.list' => $this->trans->t('Compromised!'),
 			'compromised.warning' => $this->trans->t('This password is compromised. You can only remove this warning by changing the password.'),
 
@@ -436,7 +436,7 @@ class TranslationController extends ApiController {
 			'search.settings.input.custom_fields' => $this->trans->t('Custom Fields'),
 			'search.settings.input.password' => $this->trans->t('Password'),
 			'search.settings.input.description' => $this->trans->t('Description'),
-			'search.settings.input.url' => $this->trans->t('Url'),
+			'search.settings.input.url' => $this->trans->t('URL'),
 
 			'search.settings.title' => $this->trans->t('Custom Search:'),
 			'search.settings.defaults_button' => $this->trans->t('Revert to defaults'),
