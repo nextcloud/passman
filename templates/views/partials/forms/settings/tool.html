@@ -1,3 +1,7 @@
+
+<div ng-controller="MenuCtrl">
+</div>
+
 <div class="row">
 	<div class="col-xs-12">
 		<p>{{ 'tool.intro' | translate}}</p>
@@ -6,7 +10,8 @@
 		{{ 'min.strength' | translate}} <input type="number" min="1" max="4" value="3"
 										ng-model="minStrength">
 		<button ng-click="startScan(minStrength)">{{ 'scan.start' | translate}}</button>
-	</div>
+
+	</div><button ng-click="startScan(minStrength)">{{ 'scan.start' | translate}}</button>
 </div>
 <div class="row" ng-show="scan_result">
 	<div class="col-xs-12">
