@@ -256,7 +256,6 @@
     "Awwhh… credential not found. Maybe it expired" : "אוףףףףף… לא נמצאו פרטי גישה. אולי תוקפם פג",
     "email" : "דוא״ל",
     "Description" : "תיאור",
-    "Url" : "כתובת",
     "Custom Search:" : "חיפוש מותאם אישית:",
     "Revert to defaults" : "החזרה לבררות מחדל",
     "Error while saving field" : "אירעה שגיאה במהלך שמירת השדה",
@@ -306,7 +305,7 @@
     "Expires:" : "תפוגה:",
     "Connection to server lost" : "החיבור לשרת אבד",
     "Problem loading page, reloading in 5 seconds" : "אירעה שגיאה בעת טעינת העמוד, יתרענן בעוד 5 שניות",
-    "Saving..." : "מתבצעת שמירה…",
+    "Saving …" : "מתבצעת שמירה…",
     "Dismiss" : "התעלמות",
     "seconds ago" : "לפני מספר שניות"
 },"pluralForm" :"nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;"

@@ -80,7 +80,6 @@ OC.L10N.register(
     "You deleted %1$s" : "حذفت %1$s",
     "Passwords" : "الكلمات السرية",
     "Connection to server lost" : "تم فقد الاتصال بالخادم",
-    "Saving..." : "جاري الحفظ...",
     "Dismiss" : "تراجع",
     "seconds ago" : "ثوان مضت"
 },

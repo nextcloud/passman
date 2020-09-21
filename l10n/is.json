@@ -291,12 +291,10 @@
     "Click here to request it" : "Smelltu hér til að biðja um það",
     "Loading…" : "Hleð inn…",
     "Awwhh… credential not found. Maybe it expired" : "Æjæjæ... auðkenni fundust ekki. Kannski þau séu útrunnin",
-    "Compromise!" : "Berskjaldað!",
     "Compromised!" : "Berskjaldað!",
     "This password is compromised. You can only remove this warning by changing the password." : "Þetta lykilorð er berskjaldað, og því ekki nothæft lengur. Þú getur aðeins losnað við þessa aðvörun með því að skipta um lykilorð.",
     "email" : "tölvupóstur",
     "Description" : "Lýsing",
-    "Url" : "Slóð (URL)",
     "Custom Search:" : "Sérsniðin leit:",
     "Revert to defaults" : "Frumstilla á sjálfgefin gildi",
     "Error while saving field" : "Villa kom upp við að vista gagnasvið",
@@ -359,7 +357,7 @@
     "Expires:" : "Gildir til:",
     "Connection to server lost" : "Tenging við þjón rofnaði",
     "Problem loading page, reloading in 5 seconds" : "Vandamál við að hlaða inn síðu, endurhleð eftir 5 sekúndur",
-    "Saving..." : "Er að vista ...",
+    "Saving …" : "Vista …",
     "Dismiss" : "Hafna",
     "seconds ago" : "sekúndum síðan"
 },"pluralForm" :"nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"

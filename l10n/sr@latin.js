@@ -36,7 +36,6 @@ OC.L10N.register(
     "Tags" : "Oznake",
     "Loading…" : "Učitavanje...",
     "Description" : "Opis",
-    "Saving..." : "Upisujem...",
     "Dismiss" : "Odbaci",
     "seconds ago" : "pre par sekundi"
 },

@@ -30,7 +30,6 @@ OC.L10N.register(
     "Date" : "Date",
     "Tags" : "ටැග",
     "Description" : "විස්තරය",
-    "Saving..." : "සුරැකෙමින් පවතී...",
     "seconds ago" : "තත්පරයන්ට පෙර"
 },
 "nplurals=2; plural=(n != 1);");

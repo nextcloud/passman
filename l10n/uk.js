@@ -79,7 +79,7 @@ OC.L10N.register(
     "Expires:" : "Термін дії до:",
     "Connection to server lost" : "З'єднання з сервером втрачено",
     "Problem loading page, reloading in 5 seconds" : "Проблема під час завантаження сторінки, повторне завантаження за 5 сек.",
-    "Saving..." : "Збереження...",
+    "Saving …" : "Збереження ..",
     "Dismiss" : "Припинити",
     "seconds ago" : "секунд назад"
 },

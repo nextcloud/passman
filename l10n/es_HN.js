@@ -316,7 +316,6 @@ OC.L10N.register(
     "Click here to request\n\t\t\t\t\tit" : "Haz click aquí para solicitarlo ",
     "Connection to server lost" : "Se perdió la conexión al servidor",
     "Problem loading page, reloading in 5 seconds" : "Se presentó un problema al cargar la página, recargando en 5 segundos",
-    "Saving..." : "Guardando ...",
     "Dismiss" : "Descartar",
     "seconds ago" : "hace segundos"
 },

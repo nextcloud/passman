@@ -73,7 +73,6 @@ OC.L10N.register(
     "You deleted %1$s" : "Bạn đã xóa %1$s",
     "Connection to server lost" : "Kết nối tới máy chủ bị mất",
     "Problem loading page, reloading in 5 seconds" : "Có vấn đề khi nạp trang, nạp lại trang trong vòng 5 giây",
-    "Saving..." : "Đang lưu...",
     "Dismiss" : "Bỏ qua",
     "seconds ago" : "vài giây trước"
 },

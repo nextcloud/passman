@@ -22,7 +22,6 @@ OC.L10N.register(
     "Share" : "تقسیم",
     "Date" : "Date",
     "Description" : "تصریح",
-    "Saving..." : "محفوظ ھو رہا ہے ...",
     "seconds ago" : "سیکنڈز پہلے"
 },
 "nplurals=2; plural=(n != 1);");

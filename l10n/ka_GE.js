@@ -317,7 +317,6 @@ OC.L10N.register(
     "Click here to request\n\t\t\t\t\tit" : "დააჭირეთ რომ მოითხოვოთ\n\t\t\t\t\tის",
     "Connection to server lost" : "სერვერთან კავშირი გაწყდა",
     "Problem loading page, reloading in 5 seconds" : "გვერდის ჩატვირთვის შეცდომა, გადაიტვირთება 5 წამში",
-    "Saving..." : "მიმდინარეობს შენახვა…",
     "Dismiss" : "დათხოვნა",
     "seconds ago" : "წამის წინ"
 },

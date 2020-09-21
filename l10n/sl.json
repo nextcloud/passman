@@ -281,12 +281,10 @@
     "Click here to request it" : "Kliknite za potrditev",
     "Loading…" : "Poteka nalaganje …",
     "Awwhh… credential not found. Maybe it expired" : "Ojoj ... poverila ni mogoče najti. Ali je morda poteklo?",
-    "Compromise!" : "Označi kot ogroženo!",
     "Compromised!" : "Označeno kot ogroženo!",
     "This password is compromised. You can only remove this warning by changing the password." : "To geslo je ogroženo. Opozorilo je mogoče odstraniti le z zamenjavo gesla.",
     "email" : "elektronska pošta",
     "Description" : "Opis",
-    "Url" : "Naslov URL",
     "Custom Search:" : "Iskane po meri:",
     "Revert to defaults" : "Povrni na privzeto",
     "Error while saving field" : "Napaka med shranjevanjem vpisa polja",
@@ -333,7 +331,7 @@
     "Expires:" : "Poteče:",
     "Connection to server lost" : "Povezava s strežnikom je prekinjena",
     "Problem loading page, reloading in 5 seconds" : "Napaka nalaganja strani! Ponovni poskus bo izveden čez 5 sekund.",
-    "Saving..." : "Poteka shranjevanje ...",
+    "Saving …" : "Poteka shranjevanje ...",
     "Dismiss" : "Opusti",
     "seconds ago" : "pred nekaj sekundami"
 },"pluralForm" :"nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);"

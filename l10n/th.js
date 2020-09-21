@@ -46,7 +46,6 @@ OC.L10N.register(
     "You created %1$s" : "คุณสร้าง %1$s",
     "You deleted %1$s" : "คุณลบ %1$s ออก",
     "Problem loading page, reloading in 5 seconds" : "เกิดปัญหาขณะโหลดหน้าเว็บ จะรีโหลดหน้าเว็บภายใน 5 วินาที",
-    "Saving..." : "กำลังบันทึกข้อมูล...",
     "Dismiss" : "ยกเลิก",
     "seconds ago" : "วินาที ก่อนหน้านี้"
 },

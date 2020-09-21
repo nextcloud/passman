@@ -261,7 +261,6 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "Ooohh... ez da kredentziala aurkitu. Agian iraungitu da ",
     "email" : "posta elektronikoa",
     "Description" : "Deskribapena",
-    "Url" : "Url",
     "Custom Search:" : "Bilaketa pertsonalizatua:",
     "Revert to defaults" : "Berezarri lehenetsitakoak",
     "Error while saving field" : "Errorea eremua gordetzean",
@@ -314,7 +313,7 @@ OC.L10N.register(
     "Expires:" : "Iraungitzea:",
     "Connection to server lost" : "Zerbitzariarekiko konexioa eten da",
     "Problem loading page, reloading in 5 seconds" : "Arazoa orria kargatzerakoan, 5 segundotan birkargatzen",
-    "Saving..." : "Gordetzen...",
+    "Saving …" : "Gordetzen …",
     "Dismiss" : "Baztertu",
     "seconds ago" : "duela segundo batzuk"
 },

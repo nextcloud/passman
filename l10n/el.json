@@ -291,12 +291,10 @@
     "Click here to request it" : "Κάντε κλικ εδώ για να το αιτηθείτε",
     "Loading…" : "Γίνεται φόρτωση...",
     "Awwhh… credential not found. Maybe it expired" : "Awwhh… τα διαπιστευτήρια δεν βρέθηκαν. Ίσως έληξαν",
-    "Compromise!" : "Διακινδυνευμένο!",
     "Compromised!" : "Με κίνδυνο!",
     "This password is compromised. You can only remove this warning by changing the password." : "Ο κωδικός είναι διακινδυνεμένος. Μπορείτε να αφαιρέσετε αυτή την προειδοποίηση αλλάζοντας τον κωδικό.",
     "email" : "ηλεκτρονικό ταχυδρομείο",
     "Description" : "Περιγραφή",
-    "Url" : "Url",
     "Custom Search:" : "Προσαρμοσμένη Αναζήτηση:",
     "Revert to defaults" : "Επαναφορά στις προεπιλογές",
     "Error while saving field" : "Σφάλμα κατά την αποθήκευση πεδίου",
@@ -359,7 +357,7 @@
     "Expires:" : "Ληγμένα:",
     "Connection to server lost" : "Η σύνδεση στον διακομιστή διακόπηκε",
     "Problem loading page, reloading in 5 seconds" : "Πρόβλημα φόρτωσης σελίδας, φόρτωση ξανά σε 5 δευτερόλεπτα",
-    "Saving..." : "Γίνεται αποθήκευση...",
+    "Saving …" : "Αποθηκεύεται ...",
     "Dismiss" : "Αποδέσμευση",
     "seconds ago" : "δευτερόλεπτα πριν"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

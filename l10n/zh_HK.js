@@ -33,7 +33,6 @@ OC.L10N.register(
     "Description" : "描述",
     "You created %1$s" : "你新增了%1$s",
     "You deleted %1$s" : "你刪除了%1$s",
-    "Saving..." : "儲存中...",
     "seconds ago" : "秒前"
 },
 "nplurals=1; plural=0;");

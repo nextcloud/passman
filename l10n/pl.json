@@ -291,12 +291,10 @@
     "Click here to request it" : "Kliknij tutaj, aby o to poprosić",
     "Loading…" : "Ładowanie…",
     "Awwhh… credential not found. Maybe it expired" : "Ups… poświadczenie nie znalezione. Może wygasło.",
-    "Compromise!" : "Kompromis!",
     "Compromised!" : "Zagrożone!",
     "This password is compromised. You can only remove this warning by changing the password." : "To hasło jest zagrożone. Możesz usunąć to ostrzeżenie, zmieniając hasło.",
     "email" : "e-mail",
     "Description" : "Opis",
-    "Url" : "URL",
     "Custom Search:" : "Nietypowe wyszukiwanie:",
     "Revert to defaults" : "Przywróć ustawienia domyślne",
     "Error while saving field" : "Błąd podczas zapisywania pola",
@@ -359,7 +357,7 @@
     "Expires:" : "Wygasa:",
     "Connection to server lost" : "Utracono połączenie z serwerem",
     "Problem loading page, reloading in 5 seconds" : "Problem z załadowaniem strony, przeładuję za 5 sekund",
-    "Saving..." : "Zapisywanie…",
+    "Saving …" : "Zapisywanie...",
     "Dismiss" : "Odrzuć",
     "seconds ago" : "przed chwilą"
 },"pluralForm" :"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);"

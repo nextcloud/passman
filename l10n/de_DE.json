@@ -291,12 +291,10 @@
     "Click here to request it" : "Hier klicken um es anzufordern",
     "Loading…" : "Lade…",
     "Awwhh… credential not found. Maybe it expired" : "Oh… Zugangsdaten nicht gefunden. Vielleicht sind sie abgelaufen ",
-    "Compromise!" : "Kompromittieren!",
     "Compromised!" : "Kompromittiert!",
     "This password is compromised. You can only remove this warning by changing the password." : "Dieses Passwort wurde kompromittiert. Die Warnung kann nur durch eine Änderung des Passwortes entfernt werden.",
     "email" : "E-Mail",
     "Description" : "Beschreibung",
-    "Url" : "URL",
     "Custom Search:" : "Benutzerdefinierte Suche:",
     "Revert to defaults" : "Zurücksetzen auf Standardwerte",
     "Error while saving field" : "Fehler beim Speichern des Feldes",
@@ -359,7 +357,7 @@
     "Expires:" : "Ablaufdatum:",
     "Connection to server lost" : "Verbindung zum Server verloren",
     "Problem loading page, reloading in 5 seconds" : "Problem beim Laden der Seite, Seite wird in 5 Sekunden erneut geladen",
-    "Saving..." : "Speichere…",
+    "Saving …" : "Speichere …",
     "Dismiss" : "Ausblenden",
     "seconds ago" : "Gerade eben"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

@@ -60,7 +60,7 @@ OC.L10N.register(
     "Description" : "Beskrywing",
     "Passman" : "Passman",
     "Connection to server lost" : "Verbinding met bediener verloor",
-    "Saving..." : "Stoor tans…",
+    "Saving …" : "Word gestoor …",
     "Dismiss" : "Ontslaan",
     "seconds ago" : "sekondes gelede"
 },

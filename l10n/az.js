@@ -39,7 +39,6 @@ OC.L10N.register(
     "Description" : "Açıqlanma",
     "You created %1$s" : "Siz yaratdınız %1$s",
     "You deleted %1$s" : "Siz silindiniz %1$s",
-    "Saving..." : "Saxlama...",
     "seconds ago" : "saniyələr öncə"
 },
 "nplurals=2; plural=(n != 1);");

@@ -225,7 +225,7 @@ OC.L10N.register(
     "Expires:" : "Vanhenee:",
     "Connection to server lost" : "Yhteys palvelimelle menetetty",
     "Problem loading page, reloading in 5 seconds" : "Ongelma sivun lataamisessa, päivitetään 5 sekunnin kuluttua",
-    "Saving..." : "Tallennetaan...",
+    "Saving …" : "Tallennetaan…",
     "Dismiss" : "Hylkää",
     "seconds ago" : "sekuntia sitten"
 },

@@ -291,12 +291,10 @@
     "Click here to request it" : "Kliknite sem pre vytvorenie požiadavky",
     "Loading…" : "Načítavam...",
     "Awwhh… credential not found. Maybe it expired" : "Prihlasovací údaj nenájdený.  Je možné že mu skončila platnosť.",
-    "Compromise!" : "Kompromis!",
     "Compromised!" : "Ohrozené!",
     "This password is compromised. You can only remove this warning by changing the password." : "Toto heslo je ohrozené. Toto upozornenie môžete odstrániť iba zmenou hesla.",
     "email" : "E-mail",
     "Description" : "Popis",
-    "Url" : "URL",
     "Custom Search:" : "Vlastné vyhľadávanie:",
     "Revert to defaults" : "Vrátiť sa k predvoleným hodnotám",
     "Error while saving field" : "Chyba počas ukladania poľa",
@@ -359,7 +357,7 @@
     "Expires:" : "Platnosť končí:",
     "Connection to server lost" : "Stratené spojenie so serverom",
     "Problem loading page, reloading in 5 seconds" : "Nastal problém pri načítaní stránky, pokus sa zopakuje o 5 sekúnd",
-    "Saving..." : "Ukladám...",
+    "Saving …" : "Ukladá sa...",
     "Dismiss" : "Odmietnuť",
     "seconds ago" : "pred sekundami"
 },"pluralForm" :"nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);"

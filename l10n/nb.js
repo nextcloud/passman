@@ -320,7 +320,7 @@ OC.L10N.register(
     "Loading&hellip;" : "Laster&hellip;",
     "Connection to server lost" : "Mistet tilkobling til serveren",
     "Problem loading page, reloading in 5 seconds" : "Problem ved lasting av side, laster på nytt om 5 sekunder",
-    "Saving..." : "Lagrer…",
+    "Saving …" : "Lagrer...",
     "Dismiss" : "Forkast",
     "seconds ago" : "sekunder siden"
 },

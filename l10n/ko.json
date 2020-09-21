@@ -315,7 +315,7 @@
     "Click here to request\n\t\t\t\t\tit" : "여기를 누르면 요청할 수\n\t\t\t\t\t있습니다",
     "Connection to server lost" : "서버와의 연결이 끊어짐",
     "Problem loading page, reloading in 5 seconds" : "페이지 불러오기 오류, 5초 후 새로 고침",
-    "Saving..." : "저장 중...",
+    "Saving …" : "저장 중 …",
     "Dismiss" : "끄기",
     "seconds ago" : "초 전"
 },"pluralForm" :"nplurals=1; plural=0;"

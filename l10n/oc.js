@@ -35,7 +35,6 @@ OC.L10N.register(
     "Never" : "Pas jamais",
     "Loading…" : "Cargament...",
     "Description" : "Descripcion",
-    "Saving..." : "Enregistrament...",
     "Dismiss" : "Ignorar",
     "seconds ago" : "i a qualques segondas"
 },

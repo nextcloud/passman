@@ -37,7 +37,6 @@ OC.L10N.register(
     "Loading…" : "Et gëtt gelueden",
     "Description" : "Beschreiwung",
     "Connection to server lost" : "Verbindung zum Server verluer",
-    "Saving..." : "Speicheren...",
     "Dismiss" : "Ofbriechen",
     "seconds ago" : "Sekonnen hier"
 },

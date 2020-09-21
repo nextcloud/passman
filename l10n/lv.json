@@ -169,7 +169,7 @@
     "Reason" : "Iemesls",
     "Connection to server lost" : "Zaudēts savienojums ar serveri",
     "Problem loading page, reloading in 5 seconds" : "Problēma ielādējot lapu, pārlādēšana pēc 5 sekundēm",
-    "Saving..." : "Saglabā...",
+    "Saving …" : "Saglabā ...",
     "Dismiss" : "Atmest",
     "seconds ago" : "pirms dažām sekundēm"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);"

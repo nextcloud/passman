@@ -60,7 +60,7 @@ OC.L10N.register(
     "You created %1$s" : "Креиравте %1$s",
     "You deleted %1$s" : "Избришавте %1$s",
     "Connection to server lost" : "Изгубена е врската со серверот",
-    "Saving..." : "Зачувува ...",
+    "Saving …" : "Зачувува ...",
     "Dismiss" : "Отфрли",
     "seconds ago" : "пред неколку секунди"
 },

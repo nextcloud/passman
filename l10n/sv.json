@@ -282,11 +282,9 @@
     "Click here to request it" : "Klicka här för att begära det",
     "Loading…" : "Läser in...",
     "Awwhh… credential not found. Maybe it expired" : "Oops... uppgifter hittades inte. Kanske har de gått ut",
-    "Compromise!" : "Komprimera!",
     "Compromised!" : "Komprimerad!",
     "email" : "e-post",
     "Description" : "Beskrivning",
-    "Url" : "Webbadress",
     "Custom Search:" : "Anpassad sökning:",
     "Revert to defaults" : "Återgå till standardvärden",
     "Error while saving field" : "Fel vid sparande av fält",
@@ -349,7 +347,7 @@
     "Expires:" : "Förfaller:",
     "Connection to server lost" : "Anslutning till servern förlorad",
     "Problem loading page, reloading in 5 seconds" : "Problem att läsa in sidan, provar igen om 5 sekunder",
-    "Saving..." : "Sparar...",
+    "Saving …" : "Sparar ...",
     "Dismiss" : "Avfärda",
     "seconds ago" : "sekunder sedan"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

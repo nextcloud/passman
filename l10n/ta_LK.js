@@ -32,7 +32,6 @@ OC.L10N.register(
     "Date" : "Date",
     "Tags" : "சீட்டுகள்",
     "Description" : "விவரிப்பு",
-    "Saving..." : "சேமிக்கப்படுகிறது...",
     "seconds ago" : "செக்கன்களுக்கு முன்"
 },
 "nplurals=2; plural=(n != 1);");

@@ -58,7 +58,7 @@
     "You created %1$s" : "Креиравте %1$s",
     "You deleted %1$s" : "Избришавте %1$s",
     "Connection to server lost" : "Изгубена е врската со серверот",
-    "Saving..." : "Зачувува ...",
+    "Saving …" : "Зачувува ...",
     "Dismiss" : "Отфрли",
     "seconds ago" : "пред неколку секунди"
 },"pluralForm" :"nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;"

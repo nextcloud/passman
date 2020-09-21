@@ -239,7 +239,7 @@ OC.L10N.register(
     "Reason" : "Причина",
     "Connection to server lost" : "Връзката със сървъра пропадна",
     "Problem loading page, reloading in 5 seconds" : "Проблем при зареждане на страницата, презареждане след 5 секунди",
-    "Saving..." : "Записване...",
+    "Saving …" : "Записване …",
     "Dismiss" : "Отхвърли",
     "seconds ago" : "преди секунди"
 },
