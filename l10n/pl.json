@@ -291,6 +291,7 @@
     "Click here to request it" : "Kliknij tutaj, aby o to poprosić",
     "Loading…" : "Ładowanie…",
     "Awwhh… credential not found. Maybe it expired" : "Ups… poświadczenie nie znalezione. Może wygasło.",
+    "Mark as Compromised" : "Oznacz jako zagrożone",
     "Compromised!" : "Zagrożone!",
     "This password is compromised. You can only remove this warning by changing the password." : "To hasło jest zagrożone. Możesz usunąć to ostrzeżenie, zmieniając hasło.",
     "email" : "e-mail",

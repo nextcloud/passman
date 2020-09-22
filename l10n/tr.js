@@ -293,6 +293,7 @@ OC.L10N.register(
     "Click here to request it" : "İstekte bulunmak için buraya tıklayın",
     "Loading…" : "Yükleniyor …",
     "Awwhh… credential not found. Maybe it expired" : "Hmm… kimlik doğrulama bilgileri bulunamadı. Süresi geçmiş olabilir",
+    "Mark as Compromised" : "Riskli Olarak İşaretle",
     "Compromised!" : "Tehlikeye atılmış!",
     "This password is compromised. You can only remove this warning by changing the password." : "Bu parolayı kullanmak tehlikeli. Bu uyarı yalnız parolayı değiştirerek kaldırabilirsiniz.",
     "email" : "e-posta",
