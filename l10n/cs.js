@@ -293,6 +293,7 @@ OC.L10N.register(
     "Click here to request it" : "Pro vyžádání klikněte sem",
     "Loading…" : "Načítání…",
     "Awwhh… credential not found. Maybe it expired" : "Hmmmm… přihlašovací údaje nenalezeny. Možná jejich platnost skončila",
+    "Mark as Compromised" : "Označit jako kompromitované",
     "Compromised!" : "Kompromitováno!",
     "This password is compromised. You can only remove this warning by changing the password." : "Toto heslo je kompromitováno. Toto varování je možné zrušit pouze změnou hesla.",
     "email" : "e-mail",
