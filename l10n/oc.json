@@ -33,6 +33,7 @@
     "Never" : "Pas jamais",
     "Loading…" : "Cargament...",
     "Description" : "Descripcion",
+    "You deleted %1$s" : "Avètz suprimit %1$s",
     "Dismiss" : "Ignorar",
     "seconds ago" : "i a qualques segondas"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
