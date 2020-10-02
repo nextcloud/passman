@@ -314,7 +314,7 @@
     "%1$s has been deleted by %2$s" : "%1$s foi eliminado por %2$s",
     "You deleted %1$s" : "Vostede eliminou %1$s",
     "%1$s has been recovered by %2$s" : "%1$s foi recuperado por %2$s",
-    "You recovered %1$s" : "Vostede restaurou %1$s",
+    "You recovered %1$s" : "Vostede recuperou %1$s",
     "%1$s has been permanently deleted by %2$s" : "%1$s foi eliminado de xeito permanente por %2$s",
     "You permanently deleted %1$s" : "Vostede eliminou %1$s de xeito permanente",
     "The password of %1$s has expired, renew it now." : "O contrasinal de %1$s caducou, renóvea agora.",
