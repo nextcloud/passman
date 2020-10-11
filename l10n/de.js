@@ -360,7 +360,7 @@ OC.L10N.register(
     "Expires:" : "Ablaufdatum:",
     "Connection to server lost" : "Verbindung zum Server verloren",
     "Problem loading page, reloading in 5 seconds" : "Problem beim Laden der Seite, Seite wird in 5 Sekunden nochmals geladen",
-    "Saving …" : "Speichern ...",
+    "Saving …" : "Speichern …",
     "Dismiss" : "Ausblenden",
     "seconds ago" : "Gerade eben"
 },
