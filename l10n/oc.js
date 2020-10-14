@@ -35,6 +35,7 @@ OC.L10N.register(
     "Never" : "Pas jamais",
     "Loading…" : "Cargament...",
     "Description" : "Descripcion",
+    "You created %1$s" : "Avètz creat %1$s",
     "You deleted %1$s" : "Avètz suprimit %1$s",
     "Dismiss" : "Ignorar",
     "seconds ago" : "i a qualques segondas"
