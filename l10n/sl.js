@@ -235,7 +235,7 @@ OC.L10N.register(
     "You don't have good credentials" : "Ni nobenega kakovostnega poverila",
     "You don't have medium credentials" : "Ni nobenega zadovoljivega poverila",
     "You don't have bad credentials" : "Ni nobenega slabega poverila",
-    "You don't have expired credentials" : "Ni nobenega potečenega poverila",
+    "You don't have expired credentials" : "Ni nobenega pretečenega poverila",
     "You don't have deleted credentials" : "Ni nobenega izbrisanega poverila",
     "There are no credentials with your selected tags" : "Ni poveril, skladnih z izbrano oznako",
     "There are no credentials matching" : "Ni skladnih poveril",
