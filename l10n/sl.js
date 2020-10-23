@@ -187,7 +187,7 @@ OC.L10N.register(
     "Rank" : "Rang",
     "Reversed" : "Obrnjeno",
     "Guesses" : "Ugibanja",
-    "Base guesses" : "Osnovna ugibanja",
+    "Base guesses" : "Osnovni nabor ugibanj",
     "Uppercase variations" : "Različice z velikimi črkami",
     "l33t-variations" : "Različice uporabe l33t",
     "Showing revisions of" : "Prikaz predelave",

@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "General" : "Општо",
+    "Credential deleted" : "Акредитивите се избришани",
     "Done" : "Готово",
     "Settings saved" : "Параматрите се зачувани",
     "General settings" : "Општи параметри",
@@ -36,6 +37,7 @@ OC.L10N.register(
     "Details" : "Детали",
     "Hide details" : "Сокриј детали",
     "by" : "од",
+    "Label" : "Ознака",
     "Save" : "Зачувај",
     "Cancel" : "Откажи",
     "Settings" : "Параметри",

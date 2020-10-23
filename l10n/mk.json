@@ -1,5 +1,6 @@
 { "translations": {
     "General" : "Општо",
+    "Credential deleted" : "Акредитивите се избришани",
     "Done" : "Готово",
     "Settings saved" : "Параматрите се зачувани",
     "General settings" : "Општи параметри",
@@ -34,6 +35,7 @@
     "Details" : "Детали",
     "Hide details" : "Сокриј детали",
     "by" : "од",
+    "Label" : "Ознака",
     "Save" : "Зачувај",
     "Cancel" : "Откажи",
     "Settings" : "Параметри",
