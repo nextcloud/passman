@@ -170,7 +170,7 @@
     "Enable link sharing" : "Włącz udostępnianie linkiem",
     "Share until date" : "Udostępniaj do daty",
     "Expire after views" : "Wygaś po oglądaniu",
-    "Click \\\"Share\\\" first" : "Najpierw zaznacz \"Włącz link...\"",
+    "Click \\\"Share\\\" first" : "Najpierw kliknij \"Udostępnij\"",
     "Show files" : "Pokaż pliki",
     "Details" : "Szczegóły",
     "Hide details" : "Ukryj szczegóły",
@@ -253,7 +253,7 @@
     "Password strength must be at least: {{strength}}" : "Siła hasła musi być przynajmniej: {{strength}}",
     "Please give your new vault a name." : "Proszę nadaj nazwę nowemu sejfowi.",
     "Repeat vault password" : "Powtórz hasło sejfu",
-    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Twoje klucze udostępniania będą miały długość 1024 bitów. Możesz później zmienić tę wartość w \"Ustawienia \".",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "Twoje klucze udostępniania będą miały długość 1024 bitów. Możesz później zmienić tę wartość w \"Ustawienia\".",
     "Create vault" : "Utwórz nowy sejf",
     "Go back to vaults" : "Wróć do sejfów",
     "Please input the password for" : "Proszę wprowadzić hasło do",
@@ -358,7 +358,7 @@
     "Expires:" : "Wygasa:",
     "Connection to server lost" : "Utracono połączenie z serwerem",
     "Problem loading page, reloading in 5 seconds" : "Problem z załadowaniem strony, przeładuję za 5 sekund",
-    "Saving …" : "Zapisywanie...",
+    "Saving …" : "Zapisywanie…",
     "Dismiss" : "Odrzuć",
     "seconds ago" : "przed chwilą"
 },"pluralForm" :"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);"
