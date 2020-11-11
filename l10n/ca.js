@@ -293,6 +293,7 @@ OC.L10N.register(
     "Click here to request it" : "Feu clic aquí per sol·licitar-lo",
     "Loading…" : "S'està carregant...",
     "Awwhh… credential not found. Maybe it expired" : "Oohh... no s'ha trobat cap credencial ... Potser ha caducat",
+    "Mark as Compromised" : "Marca com a compromès",
     "Compromised!" : "Compromès!",
     "This password is compromised. You can only remove this warning by changing the password." : "Aquesta contrasenya està compromesa. Només podeu suprimir aquest avís canviant la contrasenya.",
     "email" : "correu electrònic",
