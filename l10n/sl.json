@@ -28,7 +28,7 @@
     "Importing" : "Poteka uvažanje",
     "Start import" : "Začetek uvoza",
     "Select CSV file" : "Izbor datoteke CSV",
-    "Parsed {{rows}} lines from CSV file" : "Razčlenjenih je {{rows}} vrstic iz CSV datoteke",
+    "Parsed {{rows}} lines from CSV file" : "Razčlenjenih je {{rows}} vrstic iz datoteke CSV",
     "Skip first row" : "Preskoči prvo vrstico",
     "You need to assign the label field before you can start the import." : "Pred uvozom je treba najprej določiti polje z oznako.",
     "The first 5 lines of the CSV are shown." : "Prikazanih je prvih 5 vrstic datoteke CSV.",
