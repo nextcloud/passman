@@ -287,7 +287,7 @@ OC.L10N.register(
     "Medium Strength" : "Fortalesa Mitjana",
     "Bad Strength" : "Fortalesa Dolenta",
     "Expired" : "Caducat",
-    "Filter Tags" : "Filtre Etiquetes",
+    "Filter Tags" : "Filtra les etiquetes",
     "Simple Navigation" : "Navegació Simple",
     "Someone has shared a credential with you." : "Algú us ha compartit una credencial.",
     "Click here to request it" : "Feu clic aquí per sol·licitar-lo",
