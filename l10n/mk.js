@@ -54,6 +54,7 @@ OC.L10N.register(
     "Unshare" : "Несподелувај",
     "Account" : "Сметка",
     "Password" : "Лозинка",
+    "OTP" : "OTP",
     "E-mail" : "е-пошта",
     "URL" : "Адреса",
     "Notes" : "Белешки",
