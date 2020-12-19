@@ -348,6 +348,7 @@ OC.L10N.register(
     "Request ID" : "ID zahteve",
     "Reason" : "Razlog",
     "Click here to request\n\t\t\t\t\tit" : "Kliknite za oddajo\n\t\tzahteve",
+    "Loading&hellip;" : "Poteka nalaganje &hellip;",
     "Awwhh… could not find the credential. Maybe it expired?" : "Ojoj ... poverila ni mogoče najti. Ali je morda poteklo?",
     "Expires:" : "Poteče:",
     "Connection to server lost" : "Povezava s strežnikom je prekinjena",

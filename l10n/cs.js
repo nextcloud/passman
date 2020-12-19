@@ -125,7 +125,7 @@ OC.L10N.register(
     "Old vault password" : "Původní heslo trezoru",
     "New vault password" : "Nové heslo k trezoru",
     "Repeat new vault password" : "Zopakujte nové heslo trezoru",
-    "Please wait your vault is being updated, do not leave this page." : "Čekejte, váš trezor se aktualizuje, neopouštějte tuto stránku.",
+    "Please wait your vault is being updated, do not leave this page." : "Čekejte, váš trezor se aktualizuje – neopouštějte tuto stránku.",
     "Processing" : "Zpracování",
     "Total progress" : "Celkový průběh",
     "About Passman" : "O Passman",
