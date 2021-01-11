@@ -293,6 +293,7 @@ OC.L10N.register(
     "Click here to request it" : "Κάντε κλικ εδώ για να το αιτηθείτε",
     "Loading…" : "Γίνεται φόρτωση...",
     "Awwhh… credential not found. Maybe it expired" : "Awwhh… τα διαπιστευτήρια δεν βρέθηκαν. Ίσως έληξαν",
+    "Mark as Compromised" : "Επισήμανση ως συμβιβασμένου",
     "Compromised!" : "Με κίνδυνο!",
     "This password is compromised. You can only remove this warning by changing the password." : "Ο κωδικός είναι διακινδυνεμένος. Μπορείτε να αφαιρέσετε αυτή την προειδοποίηση αλλάζοντας τον κωδικό.",
     "email" : "ηλεκτρονικό ταχυδρομείο",
