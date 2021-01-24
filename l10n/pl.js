@@ -354,7 +354,7 @@ OC.L10N.register(
     "Request ID" : "Identyfikator prośby",
     "Requested by" : "Prośba złożona przez",
     "Reason" : "Powód",
-    "Click here to request\n\t\t\t\t\tit" : "Kliknij tutaj aby poprosić o\n\t\t\t\t\t",
+    "Click here to request\n\t\t\t\t\tit" : "Kliknij tutaj, aby poprosić o\n\t\t\t\t\t",
     "Loading&hellip;" : "Ładowanie&hellip;",
     "Awwhh… could not find the credential. Maybe it expired?" : "Oj… nie można znaleźć poświadczeń. Może uległy przedawnieniu?",
     "Expires:" : "Wygasa:",
