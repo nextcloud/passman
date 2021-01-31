@@ -38,6 +38,6 @@ OC.L10N.register(
     "You created %1$s" : "Avètz creat %1$s",
     "You deleted %1$s" : "Avètz suprimit %1$s",
     "Dismiss" : "Ignorar",
-    "seconds ago" : "i a qualques segondas"
+    "seconds ago" : "fa qualques segondas"
 },
 "nplurals=2; plural=(n > 1);");
