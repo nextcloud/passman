@@ -301,6 +301,7 @@ OC.L10N.register(
     "Disable JavaScript debugger" : "Desgaitu JavaScript araztailea",
     "Allow users on this server to share passwords with a link" : "Baimendu zerbitzari honetako erabiltzaileek pasahitzak partekatu dezaten esteka batekin",
     "Allow users on this server to share passwords with other users" : "Baimendu zerbitzari honetako erabiltzaileek beste erabiltzaileekin pasahitzak partekatzea",
+    "Move credentials from one account to another" : "Mugitu kontu baten kredentzialak beste batera",
     "Source account" : "Iturburuko kontua",
     "Destination account" : "Helburuko kontua",
     "Credentials moved!" : "Kredentzialak mugituta!",

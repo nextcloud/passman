@@ -330,7 +330,7 @@
     "Check for new versions" : "Sök efter ny version",
     "Enable HTTPS check" : "Aktivera HTTPS-kontroll",
     "Disable context menu" : "Inaktivera snabbmenyn",
-    "Disable JavaScript debugger" : "Inaktivera JavaScript debugger",
+    "Disable JavaScript debugger" : "Inaktivera JavaScript-felsökare",
     "Allow users on this server to share passwords with a link" : "Tillåt användare på denna server att dela lösenord som en länk",
     "Allow users on this server to share passwords with other users" : "Tillåt användare på denna server att dela lösenord med andra användare",
     "Move credentials from one account to another" : "Flytta uppgifter från ett konto till ett annat",
