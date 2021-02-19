@@ -16,6 +16,7 @@ OC.L10N.register(
     "Uploading" : "Uploading",
     "User" : "User",
     "Files" : "ගොනු",
+    "Details" : "විස්තර",
     "by" : "විසින්",
     "Save" : "සුරකින්න",
     "Cancel" : "අවලංගු කරන්න",
