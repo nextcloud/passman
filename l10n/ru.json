@@ -291,6 +291,7 @@
     "Click here to request it" : "Нажмите здесь для их получения.",
     "Loading…" : "Загрузка…",
     "Awwhh… credential not found. Maybe it expired" : "Запись не найдена. Возможно, закончился срок её действия.",
+    "Mark as Compromised" : "Отметить как скомпрометированный",
     "Compromised!" : "Скомпрометирован!",
     "This password is compromised. You can only remove this warning by changing the password." : "Этот пароль скомпрометирован. Единственный способ скрыть этот предупреждение — сменить пароль.",
     "email" : "эл. почта",

@@ -293,6 +293,7 @@ OC.L10N.register(
     "Click here to request it" : "点击这里请求",
     "Loading…" : "正在加载…",
     "Awwhh… credential not found. Maybe it expired" : "哎呀... 没有找到证书。也许它过期了",
+    "Mark as Compromised" : "标记为已泄露",
     "Compromised!" : "已被泄露！",
     "This password is compromised. You can only remove this warning by changing the password." : "此密码已被泄露。您只能通过修改密码来移除此警告。",
     "email" : "电子邮件",

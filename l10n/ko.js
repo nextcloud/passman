@@ -254,6 +254,7 @@ OC.L10N.register(
     "Deleted credentials" : "삭제된 인증 정보",
     "Logout" : "로그아웃",
     "Donate" : "기부하기",
+    "Show All" : "모두 보기",
     "Tags" : "태그",
     "Expired" : "만료됨",
     "Someone has shared a credential with you." : "누군가가 여러분과 인증 정보를 공유했습니다.",

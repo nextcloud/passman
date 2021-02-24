@@ -293,6 +293,7 @@ OC.L10N.register(
     "Click here to request it" : "Klik hier om het aan te vragen",
     "Loading…" : "Laden...",
     "Awwhh… credential not found. Maybe it expired" : "Awwhh… inloggegevens niet gevonden. Misschien verliepen ze.",
+    "Mark as Compromised" : "Markeren als gecompromitteerd",
     "Compromised!" : "Uitgelekt!",
     "This password is compromised. You can only remove this warning by changing the password." : "Dit wachtwoord is uitgelekt. Je kunt deze melding alleen verwijderen door je wachtwoord te wijzigen.",
     "email" : "e-mailadres",
