@@ -336,7 +336,7 @@ OC.L10N.register(
     "Unable to get version info" : "無法獲取版本信息 ",
     "Passman Settings" : "Passman 設置",
     "GitHub version:" : "GitHub 版本：",
-    "A newer version of Passman is available" : "較新版本的Passman可用",
+    "A newer version of Passman is available" : "有較新版本的 Passman 可用",
     "Password sharing" : "密碼共享中",
     "Credential mover" : "憑證移動者",
     "Vault destruction requests" : "保險箱銷毀請求",
