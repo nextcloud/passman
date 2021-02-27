@@ -213,7 +213,7 @@
     "Beginning" : "開始",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "顯示{{credential_number}}憑據的{{number_filtered}}",
     "Search for credential…" : "搜索憑證...",
-    "Account" : "賬號",
+    "Account" : "帳戶",
     "Password" : "密碼",
     "OTP" : "OTP",
     "E-mail" : "電子郵件",
