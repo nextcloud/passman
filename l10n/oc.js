@@ -33,6 +33,7 @@ OC.L10N.register(
     "Share" : "Partejar",
     "Date" : "Date",
     "Never" : "Pas jamais",
+    "Logout" : "Desconnexion",
     "Loading…" : "Cargament...",
     "Description" : "Descripcion",
     "You created %1$s" : "Avètz creat %1$s",
