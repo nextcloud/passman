@@ -361,7 +361,7 @@ OC.L10N.register(
     "Connection to server lost" : "與伺服器斷線了",
     "Problem loading page, reloading in 5 seconds" : "載入頁面出錯，5秒後重新整理",
     "Saving …" : "儲存中 ...",
-    "Dismiss" : "不予理會",
+    "Dismiss" : "撤銷",
     "seconds ago" : "幾秒前"
 },
 "nplurals=1; plural=0;");
