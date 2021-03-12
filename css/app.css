@@ -538,10 +538,7 @@
       display: inline-block;
       font-weight: bold;
       margin-top: 10px; }
-      @media screen and (max-width: 575px) {
-        #app-content #app-content-wrapper .title {
-          display: none; } }
-      @media screen and (min-width: 769px) and (max-width: 820px) {
+      @media screen and (max-width: 820px) {
         #app-content #app-content-wrapper .title {
           display: none; } }
     #app-content #app-content-wrapper .breadcrumb {
@@ -597,13 +594,12 @@
         display: inline-block;
         padding: 7px; }
     #app-content #app-content-wrapper .searchboxContainer {
-      /*display: inline-block;*/
-      visibility: hidden;
-      display: none;
-      margin-right: 14px;
+      display: inline-block;
+      visibility: visible;
       float: right; }
       #app-content #app-content-wrapper .searchboxContainer .searchbox {
-        display: inline-block; }
+        display: inline-block;
+        width: calc(100% - 3px); }
       #app-content #app-content-wrapper .searchboxContainer .searchclear {
         color: #ccc;
         cursor: pointer;
@@ -620,13 +616,15 @@
         background: #fff;
         border: 1px solid #ddd;
         padding: 5px;
-        width: calc(100% - 3px);
+        /*width: calc(100% - 3px);*/
         box-shadow: 3px 3px 5px #888888;
         -webkit-border-bottom-right-radius: 3px;
         border-bottom-right-radius: 3px;
         -webkit-border-bottom-left-radius: 3px;
         border-bottom-left-radius: 3px;
         background-clip: padding-box; }
+        #app-content #app-content-wrapper .searchboxContainer .searchOptions input {
+          cursor: pointer; }
     #app-content #app-content-wrapper .credential-table {
       width: 100%; }
       #app-content #app-content-wrapper .credential-table tr:hover {
@@ -1328,7 +1326,7 @@
 @media only screen and (max-width: 768px) {
   #passman-controls {
     width: 100%; } }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   #app-navigation + #app-content #passman-controls {
     left: 300px;
     width: calc( 100% - 300px ) !important; } }
