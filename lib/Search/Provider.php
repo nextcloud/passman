@@ -90,10 +90,10 @@ class Provider implements IProvider {
 							$searchResultEntries[] = new SearchResultEntry(
 								$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
 								$Credential->getLabel(),
-								\Safe\sprintf("Part of Passman vault %s", $Vault->getName()),
+								\sprintf("Part of Passman vault %s", $Vault->getName()),
 								$this->urlGenerator->linkToRoute('passman.page.index') . "#/vault/" . $Vault->getGuid() . "?show=" . $Credential->getGuid()
 							);
-						} catch (StringsException $e) {
+						} catch (Exception $e) {
 						}
 					}
 				}
