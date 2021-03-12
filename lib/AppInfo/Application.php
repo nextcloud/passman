@@ -59,7 +59,7 @@ class Application extends App implements IBootstrap {
 
 	public function register(IRegistrationContext $context): void {
 		$this->registerNavigationEntry();
-		$this->registerPersonalPage();
+		// $this->registerPersonalPage();
 
 		$context->registerEventListener(
 			BeforeUserDeletedEvent::class,
