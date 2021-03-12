@@ -24,6 +24,13 @@
 namespace OCA\Passman\Search;
 
 use OCA\Passman\AppInfo\Application;
+use OCA\Passman\Db\CredentialMapper;
+use OCA\Passman\Db\VaultMapper;
+use OCA\Passman\Service\VaultService;
+use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\IDBConnection;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
@@ -31,6 +38,7 @@ use OCP\Search\IProvider;
 use OCP\Search\ISearchQuery;
 use OCP\Search\SearchResult;
 use OCP\Search\SearchResultEntry;
+use Safe\Exceptions\StringsException;
 
 class Provider implements IProvider {
 
@@ -40,9 +48,12 @@ class Provider implements IProvider {
 	/** @var IURLGenerator */
 	private IURLGenerator $urlGenerator;
 
-	public function __construct(IL10N $l10n, IURLGenerator $urlGenerator) {
+	private IDBConnection $db;
+
+	public function __construct(IL10N $l10n, IURLGenerator $urlGenerator, IDBConnection $db) {
 		$this->l10n = $l10n;
 		$this->urlGenerator = $urlGenerator;
+		$this->db = $db;
 	}
 
 	public function getId(): string {
@@ -63,16 +74,37 @@ class Provider implements IProvider {
 	}
 
 	public function search(IUser $user, ISearchQuery $query): SearchResult {
+		$VaultService = new VaultService(new VaultMapper($this->db, new Utils()));
+		$Vaults = $VaultService->getByUser($user->getUID());
+		$CredentialMapper = new CredentialMapper($this->db, new Utils());
+
+		$searchResultEntries = [];
+
+		foreach ($Vaults as $Vault) {
+			try {
+				$Credentials = $CredentialMapper->getCredentialsByVaultId($Vault->getId(), $Vault->getUserId());
+
+				foreach ($Credentials as $Credential) {
+					if (strpos($Credential->getLabel(), $query->getTerm()) !== false) {
+						try {
+							$searchResultEntries[] = new SearchResultEntry(
+								$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
+								$Credential->getLabel(),
+								\Safe\sprintf("Part of Passman vault %s", $Vault->getName()),
+								$this->urlGenerator->linkToRoute('passman.page.index') . "#/vault/" . $Vault->getGuid() . "?show=" . $Credential->getGuid()
+							);
+						} catch (StringsException $e) {
+						}
+					}
+				}
+			} catch (DoesNotExistException $e) {
+			} catch (MultipleObjectsReturnedException $e) {
+			}
+		}
+
 		return SearchResult::complete(
 			$this->l10n->t(Application::APP_ID),
-			[
-				new SearchResultEntry(
-					$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
-					$this->l10n->t('Search in current page'),
-					$this->l10n->t('This requires an already unlocked Passman vault'),
-					'#?search=' . $query->getTerm()
-				)
-			]
+			$searchResultEntries
 		);
 	}
 }
