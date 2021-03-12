@@ -74,7 +74,7 @@ class Provider implements IProvider {
 	public function search(IUser $user, ISearchQuery $query): SearchResult {
 		$searchResultEntries = [];
 
-		if ($this->settings->getAppSetting('disable_global_search_inclusion', 1) === 0) {
+		if ($this->settings->getAppSetting('enable_global_search', 0) === 1) {
 			$VaultService = new VaultService(new VaultMapper($this->db, new Utils()));
 			$Vaults = $VaultService->getByUser($user->getUID());
 			$CredentialMapper = new CredentialMapper($this->db, new Utils());

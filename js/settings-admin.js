@@ -94,7 +94,7 @@ $(document).ready(function () {
 	$('#passman_https_check').prop('checked', (settings.getKey('https_check').toString().toLowerCase() === '1'));
 	$('#passman_disable_contextmenu').prop('checked', (settings.getKey('disable_contextmenu').toString().toLowerCase() === '1'));
 	$('#passman_disable_debugger').prop('checked', (settings.getKey('disable_debugger').toString().toLowerCase() === '1'));
-	$('#passman_disable_global_search_inclusion').prop('checked', (settings.getKey('disable_global_search_inclusion').toString().toLowerCase() === '1'));
+	$('#passman_enable_global_search').prop('checked', (settings.getKey('enable_global_search').toString().toLowerCase() === '1'));
 	$('#vault_key_strength').val(settings.getKey('vault_key_strength'));
 
 
@@ -114,8 +114,8 @@ $(document).ready(function () {
 		settings.setAdminKey('disable_debugger', ($(this).is(":checked")) ? 1 : 0);
 	});
 
-	$('#passman_disable_global_search_inclusion').change(function () {
-		settings.setAdminKey('disable_global_search_inclusion', ($(this).is(":checked")) ? 1 : 0);
+	$('#passman_enable_global_search').change(function () {
+		settings.setAdminKey('enable_global_search', ($(this).is(":checked")) ? 1 : 0);
 	});
 
 	$('#passman_sharing_enabled').change(function () {

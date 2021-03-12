@@ -106,11 +106,11 @@ $ciphers = openssl_get_cipher_methods();
 					</label>
 				</p>
 				<p>
-					<input type="checkbox" name="passman_disable_global_search_inclusion"
-						   id="passman_disable_global_search_inclusion" class="checkbox"
+					<input type="checkbox" name="passman_enable_global_search"
+						   id="passman_enable_global_search" class="checkbox"
 						   value="0"/>
-					<label for="passman_disable_global_search_inclusion">
-						<?php p($l->t('Disable global search inclusion')); ?>
+					<label for="passman_enable_global_search">
+						<?php p($l->t('Enable global search')); ?>
 					</label>
 				</p>
 				<p>

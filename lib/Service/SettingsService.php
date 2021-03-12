@@ -40,7 +40,7 @@ class SettingsService {
 		'check_version',
 		'https_check',
 		'disable_contextmenu',
-		'disable_global_search_inclusion',
+		'enable_global_search',
 		'settings_loaded'
 	);
 
@@ -58,7 +58,7 @@ class SettingsService {
 			'server_side_encryption' => $this->config->getAppValue('passman', 'server_side_encryption', 'aes-256-cbc'),
 			'rounds_pbkdf2_stretching' => $this->config->getAppValue('passman', 'rounds_pbkdf2_stretching', 100),
 			'disable_debugger' => $this->config->getAppValue('passman', 'disable_debugger', 1),
-			'disable_global_search_inclusion' => $this->config->getAppValue('passman', 'disable_global_search_inclusion', 1),
+			'enable_global_search' => $this->config->getAppValue('passman', 'enable_global_search', 0),
 			'settings_loaded' => 1
 		);
 	}
