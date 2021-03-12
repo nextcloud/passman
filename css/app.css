@@ -140,10 +140,71 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+.tab_header {
+  width: calc(100vw - 300px);
+  margin: 0 0 0;
+  list-style: none;
+  padding: 0; }
+  .tab_header li.tab:first-child {
+    margin-left: 0; }
+  .tab_header li.tab {
+    /*@include border-top-radius(2px);*/
+    float: left;
+    border-bottom-width: 0;
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    cursor: pointer;
+    border-right: 1px solid #eee;
+    -webkit-transition: background-color 250ms linear;
+    -moz-transition: background-color 250ms linear;
+    -o-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear; }
+    .tab_header li.tab .indicator {
+      display: none; }
+  .tab_header li.inactive {
+    background-color: #fff !important;
+    color: unset !important; }
+  .tab_header li.active .indicator {
+    display: inline-block;
+    position: absolute;
+    height: 7px;
+    left: 0;
+    right: 0;
+    bottom: -1px; }
+
+.tab_container {
+  border: 1px solid #eee;
+  border-top-color: #0082c9;
+  border-bottom-width: 0;
+  clear: both;
+  padding: 0 1em; }
+
+/**
+ * Nextcloud - passman
+ *
+ * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
+ * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 .pw-gen {
   overflow: hidden; }
   .pw-gen input {
-    width: calc(100% - 80px) !important;
+    width: calc(100% - 76px) !important;
     float: left;
     background: #fff;
     color: #555;
@@ -184,6 +245,133 @@
 /**
  * Nextcloud - passman
  *
+ * @copyright Copyright (c) 2016, Felix Nuesse (felix.nuesse@t-online.de)
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+.iconpicker-dialog {
+  border-radius: var(--border-radius-large) !important;
+  box-shadow: 0 0 30px var(--color-box-shadow);
+  z-index: 9999 !important; }
+  .iconpicker-dialog .ui-dialog {
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 0 30px var(--color-box-shadow); }
+  .iconpicker-dialog .ui-widget-header {
+    background: none; }
+  .iconpicker-dialog .ui-icon-closethick {
+    background-position: inherit; }
+  .iconpicker-dialog .ui-button .ui-icon {
+    background-image: var(--icon-close-000); }
+  .iconpicker-dialog .ui-button-icon {
+    border: none !important; }
+  .iconpicker-dialog .ui-icon {
+    border: none !important; }
+  .iconpicker-dialog .ui-icon-closethick {
+    border: none !important; }
+  .iconpicker-dialog .ui-corner-all {
+    border: none !important; }
+  .iconpicker-dialog .ui-state-default {
+    background: white !important; }
+  .iconpicker-dialog .ui-button {
+    background: white !important; }
+
+#iconPicker .iconList {
+  float: left;
+  width: 60%;
+  max-height: 310px;
+  overflow: auto; }
+  #iconPicker .iconList .icon {
+    padding: 10px;
+    cursor: pointer;
+    float: left; }
+    #iconPicker .iconList .icon img {
+      cursor: pointer; }
+#iconPicker .iconModifier {
+  margin-left: 10px;
+  float: right;
+  width: calc(40% - 10px); }
+#iconPicker .iconSearch {
+  width: 100%; }
+#iconPicker .arrow {
+  cursor: pointer;
+  padding-left: 10px;
+  width: 10px;
+  float: left; }
+#iconPicker .collapsible {
+  cursor: pointer;
+  padding-left: 10px;
+  text-align: left;
+  font-size: 15px; }
+#iconPicker .content {
+  display: none; }
+#iconPicker .content_show {
+  display: block; }
+
+/**
+ * Nextcloud - passman
+ *
+ * @copyright Copyright (c) 2019, Felix Nuesse (felix.nuesse@t-online.de)
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+.shareincoming-dialog {
+  border-radius: var(--border-radius-large) !important;
+  box-shadow: 0 0 30px var(--color-box-shadow);
+  z-index: 9999 !important; }
+  .shareincoming-dialog .ui-dialog {
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 0 30px var(--color-box-shadow); }
+  .shareincoming-dialog .ui-widget-header {
+    background: none !important; }
+  .shareincoming-dialog .ui-icon-closethick {
+    background-position: inherit; }
+  .shareincoming-dialog .ui-button .ui-icon {
+    background-image: var(--icon-close-000); }
+  .shareincoming-dialog .ui-button:hover .ui-icon {
+    background-image: var(--icon-close-000);
+    cursor: pointer !important; }
+  .shareincoming-dialog .ui-button-icon {
+    border: none !important; }
+  .shareincoming-dialog .ui-icon {
+    border: none !important; }
+  .shareincoming-dialog .ui-icon-closethick {
+    border: none !important; }
+  .shareincoming-dialog .ui-corner-all {
+    border: none !important; }
+  .shareincoming-dialog .ui-state-default {
+    background: white !important; }
+  .shareincoming-dialog .ui-button {
+    background: white !important; }
+
+/**
+ * Nextcloud - passman
+ *
  * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
  * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
  * @license GNU AGPL version 3 or any later version
@@ -218,7 +406,6 @@
 
 .vault_wrapper {
   margin: 0 auto auto auto;
-  transform: translate(-150px);
   max-width: 420px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -300,6 +487,12 @@
 .icon-image {
   width: 16px; }
 
+.angularjs-datetime-picker {
+  z-index: 1000; }
+
+.link {
+  color: var(--color-primary); }
+
 #app-sidebar {
   height: auto; }
   #app-sidebar .sidebar {
@@ -314,10 +507,19 @@
       float: right;
       line-height: 44px; }
 
+.vaultlist_sidebar_hidden {
+  width: 100vw !important;
+  margin-left: 0px !important; }
+
 #app-content {
   margin-left: 300px;
-  width: calc(100vw - 300px);
   overflow-x: hidden; }
+  @media only screen and (max-width: 769px) {
+    #app-content {
+      width: 100vw; } }
+  @media only screen and (min-width: 770px) {
+    #app-content {
+      width: calc(100vw - 300px); } }
   #app-content #app-content-wrapper {
     min-height: 95%;
     display: flex;
@@ -431,6 +633,18 @@
         background-color: whitesmoke; }
       #app-content #app-content-wrapper .credential-table tr.selected {
         background-color: #f8f8f8; }
+      #app-content #app-content-wrapper .credential-table tr .compromised {
+        background-color: #f74040; }
+      #app-content #app-content-wrapper .credential-table tr .compromised:hover {
+        background-color: #e10909; }
+      #app-content #app-content-wrapper .credential-table tr .compromised-list {
+        display: inline-block;
+        margin-left: 50px; }
+        #app-content #app-content-wrapper .credential-table tr .compromised-list .icon {
+          height: 18px; }
+        #app-content #app-content-wrapper .credential-table tr .compromised-list .text {
+          font-style: italic;
+          font-weight: bold; }
       #app-content #app-content-wrapper .credential-table tr td {
         cursor: pointer;
         padding: 5px;
@@ -532,6 +746,20 @@
         display: block; }
       #app-content #app-content-wrapper .edit_credential input[type="text"], #app-content #app-content-wrapper .edit_credential input[type="password"] {
         width: 100%; }
+      #app-content #app-content-wrapper .edit_credential .compromised-button {
+        margin-top: 15px;
+        background-color: #e60000;
+        color: black; }
+      #app-content #app-content-wrapper .edit_credential .compromised-details {
+        margin-top: 15px;
+        display: flex; }
+        #app-content #app-content-wrapper .edit_credential .compromised-details .icon {
+          float: left;
+          height: 20px; }
+        #app-content #app-content-wrapper .edit_credential .compromised-details .text {
+          padding-left: 5px;
+          padding-right: 30px;
+          color: #e9322d; }
       #app-content #app-content-wrapper .edit_credential .tags {
         float: left; }
         #app-content #app-content-wrapper .edit_credential .tags .tag {
@@ -552,6 +780,8 @@
           float: left; }
           #app-content #app-content-wrapper .edit_credential .password_settings label .label.sm {
             font-size: 12px; }
+      #app-content #app-content-wrapper .edit_credential .password_settings .password-settings-padding-left-fix {
+        padding-left: 0 !important; }
       #app-content #app-content-wrapper .edit_credential .field-value .valueInput {
         padding-right: 0; }
         #app-content #app-content-wrapper .edit_credential .field-value .valueInput input {
@@ -568,7 +798,7 @@
           background-clip: padding-box; }
       #app-content #app-content-wrapper .edit_credential .field-value .selectType {
         padding-left: 0;
-        margin-left: -4px; }
+        margin-left: 0px; }
         #app-content #app-content-wrapper .edit_credential .field-value .selectType select {
           -webkit-border-bottom-left-radius: 0;
           border-bottom-left-radius: 0;
@@ -609,6 +839,8 @@
             vertical-align: middle; }
       #app-content #app-content-wrapper .edit_credential .otpText {
         padding-right: 10px; }
+      #app-content #app-content-wrapper .edit_credential .import-selection select {
+        margin-left: 15px; }
     #app-content #app-content-wrapper .main_list {
       flex: 1;
       float: left;
@@ -617,6 +849,16 @@
       width: 100%; }
       #app-content #app-content-wrapper .main_list .share {
         overflow: hidden; }
+      #app-content #app-content-wrapper .main_list .nopasswords {
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 10%;
+        text-align: center; }
+      #app-content #app-content-wrapper .main_list .belowList {
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 1%;
+        text-align: center; }
     #app-content #app-content-wrapper .app_sidebar {
       float: right;
       padding: 10px;
@@ -636,6 +878,17 @@
       #app-content #app-content-wrapper .app_sidebar.item_selected {
         height: 25%;
         display: inline-block; }
+      #app-content #app-content-wrapper .app_sidebar .credential-data .compromised-details {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        display: flex; }
+        #app-content #app-content-wrapper .app_sidebar .credential-data .compromised-details .icon {
+          float: left;
+          height: 20px; }
+        #app-content #app-content-wrapper .app_sidebar .credential-data .compromised-details .text {
+          padding-left: 5px;
+          padding-right: 30px;
+          color: #e9322d; }
       #app-content #app-content-wrapper .app_sidebar .credential-data .row {
         margin-bottom: 11px; }
       #app-content #app-content-wrapper .app_sidebar .credential-data .tags {
@@ -653,11 +906,11 @@
     float: left; }
   .credential_field .value {
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 70%; }
+    max-width: 100%; }
   .credential_field .tools {
     margin-left: 10px;
+    margin-top: 8px;
     overflow: hidden;
     float: left; }
     .credential_field .tools .cell {
@@ -684,7 +937,7 @@
   width: 120px;
   margin-top: 30px;
   margin-left: -60px;
-  top: 50%;
+  top: 30%;
   left: 50%;
   position: absolute; }
 
@@ -736,9 +989,9 @@
   background-color: #ff0000; }
 
 .icon-label {
-  overflow: hidden; }
+  overflow: hidden;
+  display: flex; }
   .icon-label input {
-    width: calc(100% - 45px) !important;
     float: left;
     background: #fff;
     color: #555;
@@ -747,7 +1000,7 @@
     border: 1px solid #ddd;
     outline: none;
     border-radius: 3px;
-    margin: 3px 3px 3px 0;
+    margin: 3px 0 3px 0;
     padding: 7px 6px 5px;
     font-size: 13px;
     -webkit-border-bottom-left-radius: 0;
@@ -757,13 +1010,10 @@
     background-clip: padding-box; }
   .icon-label .icon-picker {
     float: left;
-    margin-top: 3px;
-    padding-top: 7px; }
+    margin-top: 3px; }
     .icon-label .icon-picker .cell {
-      margin-top: 0px;
-      margin-left: -0px;
+      height: 32px;
       padding: 7px 12px 2px 12px;
-      display: inline;
       font-size: 14px;
       border: 1px solid #ddd;
       background-color: #eaeaea;
@@ -775,22 +1025,6 @@
       background-clip: padding-box; }
     .icon-label .icon-picker .cell:hover {
       color: #0066ff; }
-
-#iconPicker .iconList {
-  float: left;
-  width: 60%;
-  max-height: 310px;
-  overflow: auto; }
-  #iconPicker .iconList .icon {
-    padding: 10px;
-    cursor: pointer;
-    float: left; }
-    #iconPicker .iconList .icon img {
-      cursor: pointer; }
-#iconPicker .iconModifier {
-  margin-left: 10px;
-  float: right;
-  width: calc(40% - 10px); }
 
 /**
  * Nextcloud - passman
@@ -820,8 +1054,13 @@
   margin-left: 15px;
   margin-right: 15px; }
 
+.settings-container-label {
+  padding-left: 15px; }
+
 #app-navigation > ul > li > a {
   z-index: auto; }
+#app-navigation > ul > li {
+  display: block; }
 
 .nav-trashbin {
   width: inherit !important;
@@ -830,23 +1069,30 @@
     background-color: #fff !important;
     opacity: 1 !important;
     z-index: 140; }
+    .nav-trashbin a.active {
+      background-image: var(--icon-delete-e9322d); }
     .nav-trashbin a .fa {
       margin-right: 15px; }
-
-#taginput {
-  visibility: hidden;
-  display: none; }
 
 #app-navigation .collapsible:hover .app-navigation-entry-bullet {
   background: var(--color-primary) !important; }
 
+#app-navigation a .selected {
+  opacity: 1 !important;
+  box-shadow: inset 4px 0 var(--color-primary) !important; }
 #app-navigation li .app-navigation-entry-bullet-color {
   background-color: var(--color-primary); }
+#app-navigation li .bullet-color-red {
+  background-color: #ff0000; }
+#app-navigation li .bullet-color-yellow {
+  background-color: #ebbb00; }
+#app-navigation li .bullet-color-green {
+  background-color: #4db728; }
 #app-navigation li .highlight-selected {
   background-color: var(--color-primary); }
+#app-navigation li .autocomplete {
+  position: relative; }
 #app-navigation li a.taginput {
-  visibility: hidden;
-  display: none;
   opacity: 1; }
 #app-navigation li a {
   overflow: visible; }
@@ -854,8 +1100,12 @@
     opacity: 1.0; }
     #app-navigation li a tags-input li {
       width: auto !important; }
-#app-navigation > ul ul {
-  display: inherit !important; }
+
+.hidden-list {
+  display: none !important; }
+
+.icon-expired {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M0 0h24v24H0z' fill='none'/><path d='M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z'/></svg>"); }
 
 /**
  * Nextcloud - passman
@@ -878,6 +1128,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+.sharing_table .button {
+  min-height: 42px;
+  margin: 5px 0 0 0; }
 .sharing_table td:first-child {
   width: 55%; }
   .sharing_table td:first-child tags-input .tags {
@@ -895,6 +1148,8 @@
   .share_credential > div {
     margin-bottom: 10px; }
 
+.shared_table .pending {
+  margin-right: 10px; }
 .shared_table .fa-trash {
   cursor: pointer; }
 .shared_table .fa-trash:hover {
@@ -921,11 +1176,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-.scan-result-table {
-  margin-top: 10px; }
-  .scan-result-table .score {
-    padding-left: 0px;
-    padding-right: 15px; }
+.spacer-top-30 {
+  margin-top: 30px; }
+
+.scan-result-table td {
+  vertical-align: top !important; }
+.scan-result-table .score {
+  width: 55%;
+  padding-left: 0px;
+  padding-right: 15px; }
+.scan-result-table .label-audit {
+  width: 15%; }
+
+.detail_box {
+  border: 1px solid var(--color-border-dark);
+  margin-top: 25px;
+  padding: 5px; }
 
 .error {
   color: #ce3702; }
@@ -939,6 +1205,8 @@
 
 .tab_container.settings {
   margin-bottom: 50px; }
+  .tab_container.settings textarea {
+    height: 300px; }
 
 .import-steps {
   padding-left: 16px;
@@ -959,16 +1227,72 @@
     text-align: left;
     padding: 3px 5px; }
 
-#app-settings-content:not(.ng-hide) {
-  display: inherit !important;
-  padding: 0;
-  transition: height 0.15s ease-out; }
+/**
+ * Nextcloud - passman
+ *
+ * @copyright Copyright (c) 2019, Felix Nuesse (felix.nuesse@t-online.de)
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+.searchbox button {
+  position: relative !important; }
 
-#app-settings-content.ng-hide {
+.searchbox-settings {
+  position: relative;
+  top: 50%;
+  opacity: 0.6; }
+
+.searchbox-settings:hover {
+  opacity: 1;
+  cursor: pointer; }
+
+.custom-search-dialog {
+  border-radius: var(--border-radius-large) !important;
+  box-shadow: 0 0 30px var(--color-box-shadow);
+  z-index: 9999 !important; }
+  .custom-search-dialog .ui-dialog {
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 0 30px var(--color-box-shadow); }
+  .custom-search-dialog .ui-widget-header {
+    background: none; }
+  .custom-search-dialog .ui-icon-closethick {
+    background-position: inherit; }
+  .custom-search-dialog .ui-button-icon {
+    border: none !important; }
+  .custom-search-dialog .ui-icon {
+    border: none !important; }
+  .custom-search-dialog .ui-button .ui-icon {
+    background-image: var(--icon-close-000); }
+  .custom-search-dialog .ui-icon-closethick {
+    border: none !important; }
+  .custom-search-dialog .ui-dialog-buttonpane.ui-helper-clearfix {
+    display: none; }
+
+.app-passman {
+  overflow-x: hidden; }
+
+.template-hidden {
+  display: none !important; }
+
+.hide-animation {
   display: inherit !important;
-  height: 0;
-  padding: 0;
-  transition: height 0.15s ease-in; }
+  transition: ease-in-out .15s; }
+
+.hide-animation.ng-hide {
+  opacity: 0; }
 
 .ui-dialog {
   z-index: 9999; }
@@ -978,18 +1302,16 @@
   margin-right: 0 !important; }
 
 #app-content #app-content-wrapper #passman-controls {
-  border-bottom: 1px solid #c9c9c9;
-  margin-top: 5px; }
+  border-bottom: 1px solid #c9c9c9; }
 
 #passman-controls {
   box-sizing: border-box;
   position: fixed;
-  top: 45px;
+  margin: -45px 0 0;
   right: 0;
   left: 0;
   border-bottom: 1px solid #c9c9c9;
   padding: 0 !important;
-  margin: 0;
   background-color: rgba(255, 255, 255, 0.95);
   z-index: 50;
   -webkit-user-select: none;
@@ -997,6 +1319,11 @@
   -ms-user-select: none;
   user-select: none;
   height: 44px !important; }
+  @media only screen and (max-width: 769px) {
+    #passman-controls .breadcrumb {
+      padding-left: 15px; } }
+  #passman-controls .breadcrumb .addCredential {
+    padding-top: 1px; }
 
 @media only screen and (max-width: 768px) {
   #passman-controls {
