@@ -24,110 +24,103 @@
 namespace OCA\Passman\AppInfo;
 
 use OC\Files\View;
-
-use OCA\Passman\Controller\CredentialController;
-use OCA\Passman\Controller\PageController;
+use OC\ServerContainer;
 use OCA\Passman\Controller\ShareController;
-use OCA\Passman\Controller\VaultController;
 use OCA\Passman\Middleware\APIMiddleware;
 use OCA\Passman\Middleware\ShareMiddleware;
+use OCA\Passman\Notifier;
 use OCA\Passman\Service\ActivityService;
-use OCA\Passman\Service\CronService;
 use OCA\Passman\Service\CredentialService;
-use OCA\Passman\Service\ShareService;
+use OCA\Passman\Service\CronService;
 use OCA\Passman\Service\FileService;
+use OCA\Passman\Service\NotificationService;
+use OCA\Passman\Service\SettingsService;
+use OCA\Passman\Service\ShareService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
-use OCA\Passman\Service\NotificationService;
-Use OCA\Passman\Service\SettingsService;
-use OCP\IConfig;
-use OCP\IDBConnection;
-
 use OCP\AppFramework\App;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\IDBConnection;
 use OCP\IL10N;
+use OCP\ILogger;
+use OCP\Notification\IManager;
 use OCP\Util;
+use Psr\Container\ContainerInterface;
 
-class Application extends App {
+class Application extends App implements IBootstrap {
+	public const APP_ID = 'passman';
+
 	public function __construct() {
-		parent::__construct('passman');
-		$container = $this->getContainer();
-		// Allow automatic DI for the View, until we migrated to Nodes API
-		$container->registerService(View::class, function () {
+		parent::__construct(self::APP_ID);
+	}
+
+	public function register(IRegistrationContext $context): void {
+		$this->registerNavigationEntry();
+		$this->registerPersonalPage();
+
+		$context->registerEventListener(
+			BeforeUserDeletedEvent::class,
+			UserDeletedListener::class
+		);
+
+
+		$context->registerService(View::class, function () {
 			return new View('');
 		}, false);
-		$container->registerService('isCLI', function () {
+
+		$context->registerService('isCLI', function () {
 			return \OC::$CLI;
 		});
 
-		/**
-		 * Middleware
-		 */
-		$container->registerService('ShareMiddleware', function ($c) {
-			return new ShareMiddleware($c->query('SettingsService'));
-		});
-		$container->registerMiddleware('ShareMiddleware');
+		$context->registerMiddleware(ShareMiddleware::class);
+		$context->registerMiddleware(APIMiddleware::class);
 
-		/**
-		 * Controllers
-		 */
-		$container->registerService('ShareController', function ($c) {
-			$container = $this->getContainer();
-			$server = $container->getServer();
+		$context->registerService('ShareController', function (ContainerInterface $c) {
+			$server = $this->getContainer()->getServer();
 			return new ShareController(
-				$c->query('AppName'),
-				$c->query('Request'),
+				$c->get('AppName'),
+				$c->get('Request'),
 				$server->getUserSession()->getUser(),
 				$server->getGroupManager(),
 				$server->getUserManager(),
-				$c->query('ActivityService'),
-				$c->query('VaultService'),
-				$c->query('ShareService'),
-				$c->query('CredentialService'),
-				$c->query('NotificationService'),
-				$c->query('FileService'),
-				$c->query('SettingsService')
+				$c->get(ActivityService::class),
+				$c->get(VaultService::class),
+				$c->get(ShareService::class),
+				$c->get(CredentialService::class),
+				$c->get(NotificationService::class),
+				$c->get(FileService::class),
+				$c->get(SettingsService::class)
 			);
 		});
 
 
-		/** Cron **/
-		$container->registerService('CronService', function ($c) {
+		$context->registerService('CronService', function (ContainerInterface $c) {
 			return new CronService(
-				$c->query('CredentialService'),
-				$c->query('Logger'),
-				$c->query('Utils'),
-				$c->query('NotificationService'),
-				$c->query('ActivityService'),
-				$c->query('IDBConnection')
+				$c->get(CredentialService::class),
+				$c->get(ILogger::class),
+				$c->get(Utils::class),
+				$c->get(NotificationService::class),
+				$c->get(ActivityService::class),
+				$c->get(IDBConnection::class)
 			);
 		});
 
-		$container->registerService('Db', function () {
-			return new Db();
+		$context->registerService('Logger', function (ContainerInterface $c) {
+			return $c->get(ServerContainer::class)->getLogger();
 		});
+	}
 
-		$container->registerService('Logger', function ($c) {
-			return $c->query('ServerContainer')->getLogger();
-		});
+	public function boot(IBootContext $context): void {
+		$l = \OC::$server->getL10N(self::APP_ID);
 
-		$container->registerMiddleware('APIMiddleware');
+		/** @var IManager $manager */
+		$manager = $context->getAppContainer()->get(IManager::class);
+		$manager->registerNotifierService(Notifier::class);
 
-		// Aliases for the controllers so we can use the automatic DI
-		$container->registerAlias('CredentialController', CredentialController::class);
-		$container->registerAlias('PageController', PageController::class);
-		$container->registerAlias('VaultController', VaultController::class);
-		$container->registerAlias('VaultController', VaultController::class);
-		$container->registerAlias('CredentialService', CredentialService::class);
-		$container->registerAlias('NotificationService', NotificationService::class);
-		$container->registerAlias('ActivityService', ActivityService::class);
-		$container->registerAlias('VaultService', VaultService::class);
-		$container->registerAlias('FileService', FileService::class);
-		$container->registerAlias('ShareService', ShareService::class);
-		$container->registerAlias('Utils', Utils::class);
-		$container->registerAlias('IDBConnection', IDBConnection::class);
-		$container->registerAlias('IConfig', IConfig::class);
-		$container->registerAlias('SettingsService', SettingsService::class);
-		$container->registerAlias('APIMiddleware', APIMiddleware::class);
+		Util::addTranslations(self::APP_ID);
+		\OCP\App::registerAdmin(self::APP_ID, 'templates/admin.settings');
 	}
 
 	/**
@@ -135,7 +128,6 @@ class Application extends App {
 	 */
 	public function registerNavigationEntry() {
 		$c = $this->getContainer();
-		/** @var \OCP\IServerContainer $server */
 		$server = $c->getServer();
 		$navigationEntry = function () use ($c, $server) {
 			return [
