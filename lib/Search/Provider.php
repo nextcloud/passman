@@ -26,6 +26,7 @@ namespace OCA\Passman\Search;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\VaultMapper;
+use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -38,22 +39,19 @@ use OCP\Search\IProvider;
 use OCP\Search\ISearchQuery;
 use OCP\Search\SearchResult;
 use OCP\Search\SearchResultEntry;
-use Safe\Exceptions\StringsException;
 
 class Provider implements IProvider {
 
-	/** @var IL10N */
 	private IL10N $l10n;
-
-	/** @var IURLGenerator */
 	private IURLGenerator $urlGenerator;
-
 	private IDBConnection $db;
+	private SettingsService $settings;
 
-	public function __construct(IL10N $l10n, IURLGenerator $urlGenerator, IDBConnection $db) {
+	public function __construct(IL10N $l10n, IURLGenerator $urlGenerator, IDBConnection $db, SettingsService $settings) {
 		$this->l10n = $l10n;
 		$this->urlGenerator = $urlGenerator;
 		$this->db = $db;
+		$this->settings = $settings;
 	}
 
 	public function getId(): string {
@@ -74,31 +72,33 @@ class Provider implements IProvider {
 	}
 
 	public function search(IUser $user, ISearchQuery $query): SearchResult {
-		$VaultService = new VaultService(new VaultMapper($this->db, new Utils()));
-		$Vaults = $VaultService->getByUser($user->getUID());
-		$CredentialMapper = new CredentialMapper($this->db, new Utils());
-
 		$searchResultEntries = [];
 
-		foreach ($Vaults as $Vault) {
-			try {
-				$Credentials = $CredentialMapper->getCredentialsByVaultId($Vault->getId(), $Vault->getUserId());
+		if ($this->settings->getAppSetting('disable_global_search_inclusion', 1) === 0) {
+			$VaultService = new VaultService(new VaultMapper($this->db, new Utils()));
+			$Vaults = $VaultService->getByUser($user->getUID());
+			$CredentialMapper = new CredentialMapper($this->db, new Utils());
 
-				foreach ($Credentials as $Credential) {
-					if (strpos($Credential->getLabel(), $query->getTerm()) !== false) {
-						try {
-							$searchResultEntries[] = new SearchResultEntry(
-								$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
-								$Credential->getLabel(),
-								\sprintf("Part of Passman vault %s", $Vault->getName()),
-								$this->urlGenerator->linkToRoute('passman.page.index') . "#/vault/" . $Vault->getGuid() . "?show=" . $Credential->getGuid()
-							);
-						} catch (Exception $e) {
+			foreach ($Vaults as $Vault) {
+				try {
+					$Credentials = $CredentialMapper->getCredentialsByVaultId($Vault->getId(), $Vault->getUserId());
+
+					foreach ($Credentials as $Credential) {
+						if (strpos($Credential->getLabel(), $query->getTerm()) !== false) {
+							try {
+								$searchResultEntries[] = new SearchResultEntry(
+									$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
+									$Credential->getLabel(),
+									\sprintf("Part of Passman vault %s", $Vault->getName()),
+									$this->urlGenerator->linkToRoute('passman.page.index') . "#/vault/" . $Vault->getGuid() . "?show=" . $Credential->getGuid()
+								);
+							} catch (\Exception $e) {
+							}
 						}
 					}
+				} catch (DoesNotExistException $e) {
+				} catch (MultipleObjectsReturnedException $e) {
 				}
-			} catch (DoesNotExistException $e) {
-			} catch (MultipleObjectsReturnedException $e) {
 			}
 		}
 

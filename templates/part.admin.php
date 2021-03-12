@@ -106,6 +106,14 @@ $ciphers = openssl_get_cipher_methods();
 					</label>
 				</p>
 				<p>
+					<input type="checkbox" name="passman_disable_global_search_inclusion"
+						   id="passman_disable_global_search_inclusion" class="checkbox"
+						   value="0"/>
+					<label for="passman_disable_global_search_inclusion">
+						<?php p($l->t('Disable global search inclusion')); ?>
+					</label>
+				</p>
+				<p>
 					<label for="vault_key_strength">Minimum vault key
 						strength:</label>
 					<select name="vault_key_strength" id="vault_key_strength">
