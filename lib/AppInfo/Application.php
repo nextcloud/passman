@@ -29,6 +29,7 @@ use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Middleware\APIMiddleware;
 use OCA\Passman\Middleware\ShareMiddleware;
 use OCA\Passman\Notifier;
+use OCA\Passman\Search\Provider;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\CronService;
@@ -65,6 +66,7 @@ class Application extends App implements IBootstrap {
 			UserDeletedListener::class
 		);
 
+		$context->registerSearchProvider(Provider::class);
 
 		$context->registerService(View::class, function () {
 			return new View('');
