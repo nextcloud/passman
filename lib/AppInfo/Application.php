@@ -115,14 +115,11 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function boot(IBootContext $context): void {
-		$l = \OC::$server->getL10N(self::APP_ID);
-
 		/** @var IManager $manager */
 		$manager = $context->getAppContainer()->get(IManager::class);
 		$manager->registerNotifierService(Notifier::class);
 
 		Util::addTranslations(self::APP_ID);
-		\OCP\App::registerAdmin(self::APP_ID, 'templates/admin.settings');
 	}
 
 	/**
