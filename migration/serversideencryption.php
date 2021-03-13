@@ -30,9 +30,9 @@ use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\FileService;
 use OCP\IDBConnection;
-use OCP\ILogger;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
+use Psr\Log\LoggerInterface;
 
 
 class ServerSideEncryption implements IRepairStep {
@@ -46,7 +46,7 @@ class ServerSideEncryption implements IRepairStep {
 	/** @var string */
 	private $installedVersion;
 
-	/** @var ILogger */
+	/** @var LoggerInterface */
 	private $logger;
 
 	/** @var CredentialService */
@@ -58,8 +58,8 @@ class ServerSideEncryption implements IRepairStep {
 	/** @var FileService */
 	private $fileService;
 
-	public function __construct(EncryptService $encryptService, IDBConnection $db, ILogger $logger, CredentialService $credentialService, CredentialRevisionService $revisionService,
-								FileService $fileService) {
+	public function __construct(EncryptService $encryptService, IDBConnection $db, LoggerInterface $logger, CredentialService $credentialService, CredentialRevisionService $revisionService,
+	                            FileService $fileService) {
 		$this->encryptService = $encryptService;
 		$this->db = $db;
 		$this->logger = $logger;
@@ -83,7 +83,7 @@ class ServerSideEncryption implements IRepairStep {
 		}
 	}
 
-	private function fetchAll($sql){
+	private function fetchAll($sql) {
 		return $this->db->executeQuery($sql)->fetchAll();
 	}
 

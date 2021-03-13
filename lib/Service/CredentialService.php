@@ -78,7 +78,7 @@ class CredentialService {
 	 */
 	public function upd(Credential $credential) {
 		$credential = $this->encryptService->encryptCredential($credential);
-		return $this->credentialMapper->updateCredential($credential);
+		return $this->credentialMapper->updateCredential($credential->jsonSerialize(), false);
 	}
 
 	/**

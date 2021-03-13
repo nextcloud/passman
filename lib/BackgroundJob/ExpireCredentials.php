@@ -24,7 +24,7 @@
 namespace OCA\Passman\BackgroundJob;
 
 use OC\BackgroundJob\TimedJob;
-use \OCA\Passman\AppInfo\Application;
+use OCA\Passman\Service\CronService;
 use OCP\IConfig;
 
 /**
@@ -33,21 +33,23 @@ use OCP\IConfig;
  * @package OCA\Passman\BackgroundJob
  */
 class ExpireCredentials extends TimedJob {
-	/** @var IConfig */
-	protected $config;
+
+	protected IConfig $config;
+	private CronService $cronService;
 
 	/**
+	 * ExpireCredentials constructor.
 	 * @param IConfig $config
+	 * @param CronService $cronService
 	 */
-	public function __construct(IConfig $config) {
+	public function __construct(IConfig $config, CronService $cronService) {
 		// Run once per minute
 		$this->setInterval(60);
 		$this->config = $config;
+		$this->cronService = $cronService;
 	}
 
 	protected function run($argument) {
-		$app = new Application();
-		$container = $app->getContainer();
-		$container->query('CronService')->expireCredentials();
+		$this->cronService->expireCredentials();
 	}
 }

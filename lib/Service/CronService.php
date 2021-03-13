@@ -23,21 +23,22 @@
 
 namespace OCA\Passman\Service;
 
-use OCP\IConfig;
-use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\ILogger;
-use OCA\Passman\Utility\Utils;
 use OCA\Passman\Activity;
+use OCA\Passman\Utility\Utils;
+use OCP\DB\Exception;
 use OCP\IDBConnection;
+use Psr\Log\LoggerInterface;
+
 class CronService {
 
-	private $credentialService;
-	private $logger;
-	private $utils;
-	private $notificationService;
-	private $activityService;
-	private $db;
-	public function __construct(CredentialService $credentialService, ILogger $logger, Utils $utils, NotificationService $notificationService, ActivityService $activityService, IDBConnection $db) {
+	private CredentialService $credentialService;
+	private LoggerInterface $logger;
+	private Utils $utils;
+	private NotificationService $notificationService;
+	private ActivityService $activityService;
+	private IDBConnection $db;
+
+	public function __construct(CredentialService $credentialService, LoggerInterface $logger, Utils $utils, NotificationService $notificationService, ActivityService $activityService, IDBConnection $db) {
 		$this->credentialService = $credentialService;
 		$this->logger = $logger;
 		$this->utils = $utils;
@@ -49,21 +50,25 @@ class CronService {
 
 	public function expireCredentials() {
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
-		foreach($expired_credentials as $credential){
+		foreach ($expired_credentials as $credential) {
 			$link = ''; // @TODO create direct link to credential
-
 			$sql = 'SELECT count(*) as `rows` from `*PREFIX*notifications` WHERE `subject`= \'credential_expired\' AND object_id=?';
 			$id = $credential->getId();
-			$result = $this->db->executeQuery($sql, array($id));
-			$this->logger->debug($credential->getLabel() .' is expired, checking notifications!', array('app' => 'passman'));
-			$notifications = intval($result->fetch()['rows']);
-			if($notifications === 0) {
-				$this->logger->debug($credential->getLabel() .' is expired, adding notification!', array('app' => 'passman'));
-				$this->activityService->add(
-					Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
-					'', array(),
-					$link, $credential->getUserId(), Activity::TYPE_ITEM_EXPIRED);
-				$this->notificationService->credentialExpiredNotification($credential);
+
+			try {
+				$result = $this->db->executeQuery($sql, array($id));
+				$this->logger->debug($credential->getLabel() . ' is expired, checking notifications!', array('app' => 'passman'));
+				$notifications = intval($result->fetch()['rows']);
+				if ($notifications === 0) {
+					$this->logger->debug($credential->getLabel() . ' is expired, adding notification!', array('app' => 'passman'));
+					$this->activityService->add(
+						Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
+						'', array(),
+						$link, $credential->getUserId(), Activity::TYPE_ITEM_EXPIRED);
+					$this->notificationService->credentialExpiredNotification($credential);
+				}
+			} catch (Exception $exception) {
+				$this->logger->error('Error while creating a notification: ' . $exception->getMessage(), array('app' => 'passman'));
 			}
 		}
 	}

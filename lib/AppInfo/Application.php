@@ -45,10 +45,10 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\IDBConnection;
 use OCP\IL10N;
-use OCP\ILogger;
 use OCP\Notification\IManager;
 use OCP\Util;
 use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'passman';
@@ -101,7 +101,7 @@ class Application extends App implements IBootstrap {
 		$context->registerService('CronService', function (ContainerInterface $c) {
 			return new CronService(
 				$c->get(CredentialService::class),
-				$c->get(ILogger::class),
+				$c->get(LoggerInterface::class),
 				$c->get(Utils::class),
 				$c->get(NotificationService::class),
 				$c->get(ActivityService::class),

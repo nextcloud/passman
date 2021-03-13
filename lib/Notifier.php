@@ -22,14 +22,16 @@
  */
 
 namespace OCA\Passman;
+
+use OCP\L10N\IFactory;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
 
 class Notifier implements INotifier {
 
-	protected $factory;
+	protected IFactory $factory;
 
-	public function __construct(\OCP\L10N\IFactory $factory) {
+	public function __construct(IFactory $factory) {
 		$this->factory = $factory;
 	}
 
@@ -37,7 +39,7 @@ class Notifier implements INotifier {
 	 * @param INotification $notification
 	 * @param string $languageCode The code of the language that should be used to prepare the notification
 	 */
-public function prepare(INotification $notification, string $languageCode): INotification {
+	public function prepare(INotification $notification, string $languageCode): INotification {
 		if ($notification->getApp() !== 'passman') {
 			// Not my app => throw
 			throw new \InvalidArgumentException();
@@ -50,7 +52,7 @@ public function prepare(INotification $notification, string $languageCode): INot
 			// Deal with known subjects
 			case 'credential_expired':
 				$notification->setParsedSubject(
-					(string) $l->t('Your credential "%s" expired, click here to update the credential.', $notification->getSubjectParameters())
+					(string)$l->t('Your credential "%s" expired, click here to update the credential.', $notification->getSubjectParameters())
 				);
 
 				// Deal with the actions for a known subject
@@ -58,13 +60,13 @@ public function prepare(INotification $notification, string $languageCode): INot
 					switch ($action->getLabel()) {
 						case 'remind':
 							$action->setParsedLabel(
-								(string) $l->t('Remind me later')
+								(string)$l->t('Remind me later')
 							);
 							break;
 
 						case 'ignore':
 							$action->setParsedLabel(
-								(string) $l->t('Ignore')
+								(string)$l->t('Ignore')
 							);
 							break;
 					}
@@ -76,7 +78,7 @@ public function prepare(INotification $notification, string $languageCode): INot
 
 			case 'credential_shared':
 				$notification->setParsedSubject(
-					(string) $l->t('%s shared "%s" with you. Click here to accept', $notification->getSubjectParameters())
+					(string)$l->t('%s shared "%s" with you. Click here to accept', $notification->getSubjectParameters())
 				);
 
 				// Deal with the actions for a known subject
@@ -84,7 +86,7 @@ public function prepare(INotification $notification, string $languageCode): INot
 					switch ($action->getLabel()) {
 						case 'decline':
 							$action->setParsedLabel(
-								(string) $l->t('Decline')
+								(string)$l->t('Decline')
 							);
 							break;
 					}
@@ -95,13 +97,13 @@ public function prepare(INotification $notification, string $languageCode): INot
 
 			case 'credential_share_denied':
 				$notification->setParsedSubject(
-					(string) $l->t('%s has declined your share request for "%s".', $notification->getSubjectParameters())
+					(string)$l->t('%s has declined your share request for "%s".', $notification->getSubjectParameters())
 				);
 				return $notification;
 
 			case 'credential_share_accepted':
 				$notification->setParsedSubject(
-					(string) $l->t('%s has accepted your share request for "%s".', $notification->getSubjectParameters())
+					(string)$l->t('%s has accepted your share request for "%s".', $notification->getSubjectParameters())
 				);
 				return $notification;
 			default:
@@ -118,6 +120,7 @@ public function prepare(INotification $notification, string $languageCode): INot
 	public function getID(): string {
 		return 'passman';
 	}
+
 	/**
 	 * Human readable name describing the notifier
 	 *

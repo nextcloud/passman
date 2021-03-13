@@ -23,32 +23,29 @@
 
 namespace OCA\Passman\Service;
 
-use OCP\IConfig;
-use OCP\AppFramework\Db\DoesNotExistException;
 
-use OCA\Passman\Db\FileMapper;
-
+use OCP\Notification\IManager;
 
 class NotificationService {
 
-	private $manager;
+	private IManager $manager;
 
 	public function __construct() {
 		$this->manager = \OC::$server->getNotificationManager();
 	}
 
-	function credentialExpiredNotification($credential){
+	function credentialExpiredNotification($credential) {
 		$urlGenerator = \OC::$server->getURLGenerator();
-		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('','index.php/apps/passman/#/vault/'. $credential->getVaultId() .'/edit/'. $credential->getId()));
+		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman/#/vault/' . $credential->getVaultId() . '/edit/' . $credential->getId()));
 		$api = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
 		$remindAction = $notification->createAction();
 		$remindAction->setLabel('remind')
-			->setLink($api. '/api/internal/notifications/remind/'. $credential->getId() , 'POST');
+			->setLink($api . '/api/internal/notifications/remind/' . $credential->getId(), 'POST');
 
 		$declineAction = $notification->createAction();
 		$declineAction->setLabel('ignore')
-			->setLink($api . '/api/internal/notifications/read/'. $credential->getId(), 'DELETE');
+			->setLink($api . '/api/internal/notifications/read/' . $credential->getId(), 'DELETE');
 
 		$notification->setApp('passman')
 			->setUser($credential->getUserId())
@@ -63,15 +60,15 @@ class NotificationService {
 	}
 
 
-	function credentialSharedNotification($data){
+	function credentialSharedNotification($data) {
 		$urlGenerator = \OC::$server->getURLGenerator();
-		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('','index.php/apps/passman/#/'));
+		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman/#/'));
 		$api = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
 
 		$declineAction = $notification->createAction();
 		$declineAction->setLabel('decline')
-			->setLink($api . '/api/v2/sharing/decline/'. $data['req_id'], 'DELETE');
+			->setLink($api . '/api/v2/sharing/decline/' . $data['req_id'], 'DELETE');
 
 		$notification->setApp('passman')
 			->setUser($data['target_user'])
@@ -85,7 +82,7 @@ class NotificationService {
 	}
 
 
-	function credentialDeclinedSharedNotification($data){
+	function credentialDeclinedSharedNotification($data) {
 		$notification = $this->manager->createNotification();
 		$notification->setApp('passman')
 			->setUser($data['target_user'])
@@ -96,7 +93,7 @@ class NotificationService {
 	}
 
 
-	function credentialAcceptedSharedNotification($data){
+	function credentialAcceptedSharedNotification($data) {
 		$notification = $this->manager->createNotification();
 		$notification->setApp('passman')
 			->setUser($data['target_user'])
