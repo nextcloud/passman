@@ -24,22 +24,21 @@
 namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\CredentialRevision;
-use OCP\IConfig;
-use OCP\AppFramework\Db\DoesNotExistException;
-
 use OCA\Passman\Db\CredentialRevisionMapper;
+use OCP\AppFramework\Db\Entity;
+use OCP\IConfig;
 
 
 class CredentialRevisionService {
 
-	private $credentialRevisionMapper;
-	private $encryptService;
+	private CredentialRevisionMapper $credentialRevisionMapper;
+	private EncryptService $encryptService;
 	private $server_key;
 
-	public function __construct(CredentialRevisionMapper $credentialRevisionMapper, EncryptService $encryptService) {
+	public function __construct(CredentialRevisionMapper $credentialRevisionMapper, EncryptService $encryptService, IConfig $config) {
 		$this->credentialRevisionMapper = $credentialRevisionMapper;
 		$this->encryptService = $encryptService;
-		$this->server_key = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
+		$this->server_key = $config->getSystemValue('passwordsalt', '');
 	}
 
 	/**
@@ -50,6 +49,7 @@ class CredentialRevisionService {
 	 * @param $credential_id
 	 * @param $edited_by
 	 * @return CredentialRevision
+	 * @throws \Exception
 	 */
 	public function createRevision($credential, $userId, $credential_id, $edited_by) {
 		$credential = $this->encryptService->encryptCredential($credential);
@@ -59,11 +59,11 @@ class CredentialRevisionService {
 	/**
 	 * Get revisions of a credential
 	 *
-	 * @param $credential_id
-	 * @param null $user_id
+	 * @param int $credential_id
+	 * @param string|null $user_id
 	 * @return CredentialRevision[]
 	 */
-	public function getRevisions($credential_id, $user_id = null) {
+	public function getRevisions(int $credential_id, string $user_id = null) {
 		$result = $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
 		foreach ($result as $index => $revision) {
 			$c = json_decode(base64_decode($revision->getCredentialData()), true);
@@ -74,12 +74,11 @@ class CredentialRevisionService {
 	}
 
 	/**
-	 *
-	 * @param $credential_id
-	 * @param null $user_id
+	 * @param int $credential_id
+	 * @param string|null $user_id
 	 * @return CredentialRevision
 	 */
-	public function getRevision($credential_id, $user_id = null) {
+	public function getRevision(int $credential_id, string $user_id = null) {
 		$revision = $this->credentialRevisionMapper->getRevision($credential_id, $user_id);
 		$c = json_decode(base64_decode($revision->getCredentialData()), true);
 		$revision->setCredentialData($this->encryptService->decryptCredential($c));
@@ -89,11 +88,11 @@ class CredentialRevisionService {
 	/**
 	 * Delete a revision
 	 *
-	 * @param $revision_id
-	 * @param $user_id
+	 * @param int $revision_id
+	 * @param string $user_id
 	 * @return CredentialRevision
 	 */
-	public function deleteRevision($revision_id, $user_id) {
+	public function deleteRevision(int $revision_id, string $user_id) {
 		return $this->credentialRevisionMapper->deleteRevision($revision_id, $user_id);
 	}
 
@@ -101,7 +100,8 @@ class CredentialRevisionService {
 	 * Update revision
 	 *
 	 * @param CredentialRevision $credentialRevision
-	 * @return CredentialRevision
+	 * @return CredentialRevision|Entity
+	 * @throws \Exception
 	 */
 	public function updateRevision(CredentialRevision $credentialRevision) {
 		$credential_data = $credentialRevision->getCredentialData();

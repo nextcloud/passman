@@ -24,7 +24,6 @@
 namespace OCA\Passman\Service;
 
 
-use Icewind\SMB\Share;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
@@ -33,13 +32,19 @@ use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\SharingACLMapper;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\DB\Exception;
+use OCP\DB\IResult;
+use OCP\Notification\IManager;
 
 class ShareService {
-	private $sharingACL;
-	private $shareRequest;
-	private $credential;
-	private $revisions;
-	private $encryptService;
+	private SharingACLMapper $sharingACL;
+	private ShareRequestMapper $shareRequest;
+	private CredentialMapper $credential;
+	private CredentialRevisionService $revisions;
+	private EncryptService $encryptService;
+	private IManager $IManager;
 
 
 	public function __construct(
@@ -47,13 +52,15 @@ class ShareService {
 		ShareRequestMapper $shareRequest,
 		CredentialMapper $credentials,
 		CredentialRevisionService $revisions,
-		EncryptService $encryptService
+		EncryptService $encryptService,
+		IManager $IManager
 	) {
 		$this->sharingACL = $sharingACL;
 		$this->shareRequest = $shareRequest;
 		$this->credential = $credentials;
 		$this->revisions = $revisions;
 		$this->encryptService = $encryptService;
+		$this->IManager = $IManager;
 	}
 
 	/**
@@ -89,6 +96,10 @@ class ShareService {
 		return $requests;
 	}
 
+	/**
+	 * @param SharingACL $acl
+	 * @return Entity
+	 */
 	public function createACLEntry(SharingACL $acl) {
 		if ($acl->getCreated() === null) $acl->setCreated((new \DateTime())->getTimestamp());
 		return $this->sharingACL->createACLEntry($acl);
@@ -97,11 +108,14 @@ class ShareService {
 	/**
 	 * Applies the given share, defaults to no expire
 	 *
-	 * @param $item_guid
-	 * @param $target_vault_guid
-	 * @param $final_shared_key
+	 * @param string $item_guid
+	 * @param string $target_vault_guid
+	 * @param string $final_shared_key
+	 * @throws DoesNotExistException
+	 * @throws Exception
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function applyShare($item_guid, $target_vault_guid, $final_shared_key) {
+	public function applyShare(string $item_guid, string $target_vault_guid, string $final_shared_key) {
 		$request = $this->shareRequest->getRequestByItemAndVaultGuid($item_guid, $target_vault_guid);
 		$permissions = $request->getPermissions();
 
@@ -123,21 +137,23 @@ class ShareService {
 	/**
 	 * Obtains pending requests for the given user ID
 	 *
-	 * @param $user_id
-	 * @return \OCA\Passman\Db\ShareRequest[]
+	 * @param string $user_id
+	 * @return ShareRequest[]
 	 */
-	public function getUserPendingRequests($user_id) {
+	public function getUserPendingRequests(string $user_id) {
 		return $this->shareRequest->getUserPendingRequests($user_id);
 	}
 
 	/**
 	 * Get shared credentials from a user
 	 *
-	 * @param $user_id
-	 * @param $vault_guid
-	 * @return \OCA\Passman\Db\SharingACL[]
+	 * @param string $user_id
+	 * @param string $vault_guid
+	 * @return array
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getSharedItems($user_id, $vault_guid) {
+	public function getSharedItems(string $user_id, string $vault_guid) {
 		$entries = $this->sharingACL->getVaultEntries($user_id, $vault_guid);
 
 		$return = [];
@@ -159,15 +175,22 @@ class ShareService {
 	/**
 	 * Gets the acl for a given item guid
 	 *
-	 * @param $user_id
-	 * @param $item_guid
+	 * @param string $user_id
+	 * @param string $item_guid
 	 * @return SharingACL
 	 */
-	public function getACL($user_id, $item_guid) {
+	public function getACL(string $user_id, string $item_guid) {
 		return $this->sharingACL->getItemACL($user_id, $item_guid);
 	}
 
-	public function getSharedItem($user_id, $item_guid) {
+	/**
+	 * @param string $user_id
+	 * @param string $item_guid
+	 * @return array|mixed
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getSharedItem(string $user_id, string $item_guid) {
 		$acl = $this->sharingACL->getItemACL($user_id, $item_guid);
 
 		// Check if the user can read the credential, probably unnecesary, but just to be sure
@@ -188,11 +211,11 @@ class ShareService {
 	/**
 	 * Gets history from the given item checking the user's permissions to access it
 	 *
-	 * @param $user_id
-	 * @param $item_guid
+	 * @param string $user_id
+	 * @param string $item_guid
 	 * @return CredentialRevision[]
 	 */
-	public function getItemHistory($user_id, $item_guid) {
+	public function getItemHistory(string $user_id, string $item_guid) {
 		$acl = $this->sharingACL->getItemACL($user_id, $item_guid);
 		if (!$acl->hasPermission(SharingACL::READ | SharingACL::HISTORY)) return [];
 
@@ -204,7 +227,8 @@ class ShareService {
 	 * Deletes a share request by the item ID
 	 *
 	 * @param ShareRequest $request
-	 * @return \PDOStatement
+	 * @return int|IResult
+	 * @throws Exception
 	 */
 	public function cleanItemRequestsForUser(ShareRequest $request) {
 		return $this->shareRequest->cleanItemRequestsForUser($request->getItemId(), $request->getTargetUserId());
@@ -213,21 +237,25 @@ class ShareService {
 	/**
 	 * Get an share request by id
 	 *
-	 * @param $id
+	 * @param int $id
 	 * @return ShareRequest
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getShareRequestById($id) {
+	public function getShareRequestById(int $id) {
 		return $this->shareRequest->getShareRequestById($id);
 	}
 
 	/**
 	 * Get an share request by $item_guid and $target_vault_guid
 	 *
-	 * @param $item_guid
-	 * @param $target_vault_guid
+	 * @param string $item_guid
+	 * @param string $target_vault_guid
 	 * @return ShareRequest
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getRequestByGuid($item_guid, $target_vault_guid) {
+	public function getRequestByGuid(string $item_guid, string $target_vault_guid) {
 		return $this->shareRequest->getRequestByItemAndVaultGuid($item_guid, $target_vault_guid);
 	}
 
@@ -235,41 +263,48 @@ class ShareService {
 	 * Get the access control list by item guid
 	 *
 	 * @param string $item_guid
-	 * @return \OCA\Passman\Db\SharingACL[]
+	 * @return SharingACL[]
 	 */
-	public function getCredentialAclList($item_guid) {
+	public function getCredentialAclList(string $item_guid) {
 		return $this->sharingACL->getCredentialAclList($item_guid);
 	}
 
-	public function getCredentialPendingAclList($item_guid) {
+	/**
+	 * @param string $item_guid
+	 * @return ShareRequest[]
+	 * @throws Exception
+	 */
+	public function getCredentialPendingAclList(string $item_guid) {
 		return $this->shareRequest->getRequestsByItemGuidGroupedByUser($item_guid);
 	}
 
 	/**
 	 * Gets the ACL on the credential for the user
 	 *
-	 * @param $user_id
-	 * @param $item_guid
+	 * @param string $user_id
+	 * @param string $item_guid
 	 * @return SharingACL
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialAclForUser($user_id, $item_guid) {
+	public function getCredentialAclForUser(string $user_id, string $item_guid) {
 		return $this->sharingACL->getItemACL($user_id, $item_guid);
 	}
 
 	/**
 	 * Get pending share requests by guid
 	 *
-	 * @param  string $item_guid
-	 * @return \OCA\Passman\Db\ShareRequest[]
+	 * @param string $item_guid
+	 * @return ShareRequest[]
 	 */
-	public function getShareRequestsByGuid($item_guid) {
+	public function getShareRequestsByGuid(string $item_guid) {
 		return $this->shareRequest->getShareRequestsByItemGuid($item_guid);
 	}
 
 	/**
 	 * Get pending share requests by guid
 	 *
-	 * @param  ShareRequest $request
+	 * @param ShareRequest $request
 	 * @return ShareRequest
 	 */
 	public function deleteShareRequest(ShareRequest $request) {
@@ -279,8 +314,8 @@ class ShareService {
 	/**
 	 * Delete ACL
 	 *
-	 * @param  ShareRequest $request
-	 * @return \OCA\Passman\Db\ShareRequest[]
+	 * @param SharingACL $ACL
+	 * @return SharingACL|Entity
 	 */
 	public function deleteShareACL(SharingACL $ACL) {
 		return $this->sharingACL->deleteShareACL($ACL);
@@ -296,6 +331,10 @@ class ShareService {
 		return $this->sharingACL->updateCredentialACL($sharingACL);
 	}
 
+	/**
+	 * @param ShareRequest $shareRequest
+	 * @return ShareRequest
+	 */
 	public function updateCredentialShareRequest(ShareRequest $shareRequest) {
 		return $this->shareRequest->updateShareRequest($shareRequest);
 	}
@@ -304,15 +343,22 @@ class ShareService {
 	/**
 	 * Get pending share requests by guid and uid
 	 *
-	 * @param  ShareRequest $request
-	 * @return \OCA\Passman\Db\ShareRequest[]
+	 * @param string $item_guid
+	 * @param string $user_id
+	 * @return ShareRequest[]
 	 */
-	public function getPendingShareRequestsForCredential($item_guid, $user_id) {
+	public function getPendingShareRequestsForCredential(string $item_guid, string $user_id) {
 		return $this->shareRequest->getPendingShareRequests($item_guid, $user_id);
 	}
 
-
-	public function updatePendingShareRequestsForCredential($item_guid, $user_id, $permissions) {
+	/**
+	 * @param string $item_guid
+	 * @param string $user_id
+	 * @param int $permissions
+	 * @return int|IResult
+	 * @throws Exception
+	 */
+	public function updatePendingShareRequestsForCredential(string $item_guid, string $user_id, int $permissions) {
 		return $this->shareRequest->updatePendingRequestPermissions($item_guid, $user_id, $permissions);
 	}
 
@@ -321,8 +367,7 @@ class ShareService {
 	 * This will delete all ACL's and share requests.
 	 * @param string $item_guid
 	 */
-
-	public function unshareCredential($item_guid) {
+	public function unshareCredential(string $item_guid) {
 		$acl_list = $this->getCredentialAclList($item_guid);
 		$request_list = $this->getShareRequestsByGuid($item_guid);
 		foreach ($acl_list as $ACL) {
@@ -330,12 +375,11 @@ class ShareService {
 		}
 		foreach ($request_list as $request) {
 			$this->deleteShareRequest($request);
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
+			$notification = $this->IManager->createNotification();
 			$notification->setApp('passman')
 				->setObject('passman_share_request', $request->getId())
 				->setUser($request->getTargetUserId());
-			$manager->markProcessed($notification);
+			$this->IManager->markProcessed($notification);
 		}
 	}
 }

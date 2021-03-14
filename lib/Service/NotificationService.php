@@ -24,20 +24,22 @@
 namespace OCA\Passman\Service;
 
 
+use OCP\IURLGenerator;
 use OCP\Notification\IManager;
 
 class NotificationService {
 
 	private IManager $manager;
+	private IURLGenerator $urlGenerator;
 
-	public function __construct() {
-		$this->manager = \OC::$server->getNotificationManager();
+	public function __construct(IManager $IManager, IURLGenerator $urlGenerator) {
+		$this->manager = $IManager;
+		$this->urlGenerator = $urlGenerator;
 	}
 
 	function credentialExpiredNotification($credential) {
-		$urlGenerator = \OC::$server->getURLGenerator();
-		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman/#/vault/' . $credential->getVaultId() . '/edit/' . $credential->getId()));
-		$api = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman'));
+		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman/#/vault/' . $credential->getVaultId() . '/edit/' . $credential->getId()));
+		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
 		$remindAction = $notification->createAction();
 		$remindAction->setLabel('remind')
@@ -61,9 +63,8 @@ class NotificationService {
 
 
 	function credentialSharedNotification($data) {
-		$urlGenerator = \OC::$server->getURLGenerator();
-		$link = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman/#/'));
-		$api = $urlGenerator->getAbsoluteURL($urlGenerator->linkTo('', 'index.php/apps/passman'));
+		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman/#/'));
+		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
 
 		$declineAction = $notification->createAction();

@@ -93,7 +93,8 @@ class Application extends App implements IBootstrap {
 				$c->get(CredentialService::class),
 				$c->get(NotificationService::class),
 				$c->get(FileService::class),
-				$c->get(SettingsService::class)
+				$c->get(SettingsService::class),
+				$c->get(IManager::class)
 			);
 		});
 

@@ -24,14 +24,19 @@
 namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
-use OCP\AppFramework\Db\Mapper;
 
-class CredentialMapper extends Mapper {
-	private $utils;
+class CredentialMapper extends QBMapper {
+	const TABLE_NAME = 'passman_credentials';
+	private Utils $utils;
 
 	public function __construct(IDBConnection $db, Utils $utils) {
-		parent::__construct($db, 'passman_credentials');
+		parent::__construct($db, self::TABLE_NAME);
 		$this->utils = $utils;
 	}
 
@@ -39,74 +44,106 @@ class CredentialMapper extends Mapper {
 	/**
 	 * Obtains the credentials by vault id (not guid)
 	 *
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @param string $vault_id
+	 * @param string $user_id
 	 * @return Credential[]
 	 */
-	public function getCredentialsByVaultId($vault_id, $user_id) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `user_id` = ? and vault_id = ?';
-		return $this->findEntities($sql, [$user_id, $vault_id]);
+	public function getCredentialsByVaultId(string $vault_id, string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->eq('vault_id', $qb->createNamedParameter($vault_id, IQueryBuilder::PARAM_STR)));
+
+		/** @var Credential[] $credentials */
+		$credentials = $this->findEntities($qb);
+		return $credentials;
 	}
 
 	/**
-	 * Get a random credentail from a vault
+	 * Get a random credential from a vault
 	 *
-	 * @param $vault_id
-	 * @param $user_id
-	 * @return Credential
+	 * @param string $vault_id
+	 * @param string $user_id
+	 * @return Credential[]
 	 */
-	public function getRandomCredentialByVaultId($vault_id, $user_id) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `user_id` = ? and vault_id = ? AND shared_key is NULL LIMIT 20';
-		$entities = $this->findEntities($sql, [$user_id, $vault_id]);
+	public function getRandomCredentialByVaultId(string $vault_id, string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->eq('vault_id', $qb->createNamedParameter($vault_id, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->isNull('shared_key'))
+			->setMaxResults(20);
+
+		$entities = $this->findEntities($qb);
 		$count = count($entities) - 1;
-		$entities = array_splice($entities, rand(0, $count), 1);
-		return $entities;
+
+		/** @var Credential[] $entity */
+		$entity = array_splice($entities, rand(0, $count), 1);
+		return $entity;
 	}
 
 	/**
 	 * Get expired credentials
 	 *
-	 * @param $timestamp
+	 * @param int $timestamp
 	 * @return Credential[]
 	 */
-	public function getExpiredCredentials($timestamp) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `expire_time` > 0 AND `expire_time` < ?';
-		return $this->findEntities($sql, [$timestamp]);
+	public function getExpiredCredentials(int $timestamp) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->gt('expire_time',  $qb->createNamedParameter(0, IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->lt('expire_time', $qb->createNamedParameter($timestamp, IQueryBuilder::PARAM_INT)));
+
+		/** @var Credential[] $credentials */
+		$credentials = $this->findEntities($qb);
+		return $credentials;
 	}
 
 	/**
 	 * Get an credential by id.
 	 * Optional user id
 	 *
-	 * @param $credential_id
-	 * @param null $user_id
+	 * @param int $credential_id
+	 * @param string|null $user_id
 	 * @return Credential
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialById($credential_id, $user_id = null) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `id` = ?';
-		// If we want to check the owner, add it to the query
-		$params = [$credential_id];
+	public function getCredentialById(int $credential_id, string $user_id = null) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('id', $qb->createNamedParameter($credential_id, IQueryBuilder::PARAM_INT)));
+
 		if ($user_id !== null) {
-			$sql .= ' and `user_id` = ? ';
-			array_push($params, $user_id);
+			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
-		return $this->findEntity($sql, $params);
+
+		/** @var Credential $credential */
+		$credential = $this->findEntity($qb);
+		return $credential;
 	}
 
 	/**
 	 * Get credential label by id
 	 *
-	 * @param $credential_id
+	 * @param int $credential_id
 	 * @return Credential
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialLabelById($credential_id) {
-		$sql = 'SELECT id, label FROM `*PREFIX*passman_credentials` ' .
-			'WHERE `id` = ? ';
-		return $this->findEntity($sql, [$credential_id]);
+	public function getCredentialLabelById(int $credential_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select(['id', 'label'])
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('id', $qb->createNamedParameter($credential_id, IQueryBuilder::PARAM_INT)));
+
+		/** @var Credential $credential */
+		$credential = $this->findEntity($qb);
+		return $credential;
 	}
 
 	/**
@@ -146,13 +183,13 @@ class CredentialMapper extends Mapper {
 	}
 
 	/**
-	 * Update a credential
-	 *
 	 * @param $raw_credential array An array containing all the credential fields
 	 * @param $useRawUser bool
-	 * @return Credential The updated credential
+	 * @return Credential|Entity The updated credential
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function updateCredential($raw_credential, $useRawUser) {
+	public function updateCredential($raw_credential, bool $useRawUser) {
 		$original = $this->getCredentialByGUID($raw_credential['guid']);
 		$uid = ($useRawUser) ? $raw_credential['user_id'] : $original->getUserId();
 
@@ -197,16 +234,24 @@ class CredentialMapper extends Mapper {
 	/**
 	 * Finds a credential by the given guid
 	 *
-	 * @param $credential_guid
+	 * @param string $credential_guid
+	 * @param string|null $user_id
 	 * @return Credential
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialByGUID($credential_guid, $user_id = null) {
-		$q = 'SELECT * FROM `*PREFIX*passman_credentials` WHERE guid = ? ';
-		$params = [$credential_guid];
+	public function getCredentialByGUID(string $credential_guid, string $user_id = null) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('guid', $qb->createNamedParameter($credential_guid, IQueryBuilder::PARAM_STR)));
+
 		if ($user_id !== null) {
-			$q .= ' and `user_id` = ? ';
-			array_push($params, $user_id);
+			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
-		return $this->findEntity($q, $params);
+
+		/** @var Credential $credential */
+		$credential = $this->findEntity($qb);
+		return $credential;
 	}
 }

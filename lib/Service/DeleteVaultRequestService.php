@@ -26,12 +26,10 @@ namespace OCA\Passman\Service;
 use OCA\Passman\Db\DeleteVaultRequest;
 use OCA\Passman\Db\DeleteVaultRequestMapper;
 
-use OCP\AppFramework\Db\DoesNotExistException;
-
 
 class DeleteVaultRequestService {
 
-	private $deleteVaultRequestMapper;
+	private DeleteVaultRequestMapper $deleteVaultRequestMapper;
 
 	public function __construct(DeleteVaultRequestMapper $deleteVaultRequestMapper) {
 		$this->deleteVaultRequestMapper = $deleteVaultRequestMapper;
@@ -41,7 +39,7 @@ class DeleteVaultRequestService {
 	 *  Create a new DeleteVaultRequest
 	 *
 	 * @param $request DeleteVaultRequest
-	 * @return \OCA\Passman\Db\DeleteVaultRequest
+	 * @return DeleteVaultRequest
 	 */
 	public function createRequest(DeleteVaultRequest $request) {
 		return $this->deleteVaultRequestMapper->insert($request);
@@ -50,20 +48,23 @@ class DeleteVaultRequestService {
 	/**
 	 *  Create a new DeleteVaultRequest
 	 *
-	 * @return \OCA\Passman\Db\DeleteVaultRequest[]
+	 * @return DeleteVaultRequest[]
 	 */
 	public function getDeleteRequests() {
-		return $this->deleteVaultRequestMapper->getDeleteRequests();
+		/** @var DeleteVaultRequest[] $result */
+		$result = $this->deleteVaultRequestMapper->getDeleteRequests();
+		return $result;
 	}
 
 	/**
 	 *  Create a new DeleteVaultRequest
 	 *
-	 * @param $vault_id integer The vault id
+	 * @param $vault_guid string The vault guid
 	 * @return bool | DeleteVaultRequest
 	 */
-	public function getDeleteRequestForVault($vault_guid) {
+	public function getDeleteRequestForVault(string $vault_guid) {
 		try {
+			/** @var DeleteVaultRequest $result */
 			$result = $this->deleteVaultRequestMapper->getDeleteRequestsForVault($vault_guid);
 			return $result;
 		} catch (\Exception $e) {
@@ -75,11 +76,9 @@ class DeleteVaultRequestService {
 	 *  Create a new DeleteVaultRequest
 	 *
 	 * @param $req DeleteVaultRequest
-	 * @return bool | DeleteVaultRequest
 	 */
 	public function removeDeleteRequestForVault(DeleteVaultRequest $req) {
 		$this->deleteVaultRequestMapper->removeDeleteVaultRequest($req);
 	}
-
 
 }

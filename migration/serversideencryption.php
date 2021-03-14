@@ -29,6 +29,7 @@ use OCA\Passman\Service\CredentialRevisionService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\FileService;
+use OCP\IConfig;
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
@@ -59,14 +60,14 @@ class ServerSideEncryption implements IRepairStep {
 	private $fileService;
 
 	public function __construct(EncryptService $encryptService, IDBConnection $db, LoggerInterface $logger, CredentialService $credentialService, CredentialRevisionService $revisionService,
-	                            FileService $fileService) {
+	                            FileService $fileService, IConfig $config) {
 		$this->encryptService = $encryptService;
 		$this->db = $db;
 		$this->logger = $logger;
 		$this->credentialService = $credentialService;
 		$this->revisionService = $revisionService;
 		$this->fileService = $fileService;
-		$this->installedVersion = \OC::$server->getConfig()->getAppValue('passman', 'installed_version');
+		$this->installedVersion = $config->getAppValue('passman', 'installed_version');
 	}
 
 	public function getName() {
@@ -83,19 +84,27 @@ class ServerSideEncryption implements IRepairStep {
 		}
 	}
 
-	private function fetchAll($sql) {
-		return $this->db->executeQuery($sql)->fetchAll();
+	private function fetchAll(string $table) {
+		// restrict access to passman tables
+		if (substr($table, 0, strlen('passman_')) === 'passman_') {
+			$qb = $this->db->getQueryBuilder();
+			$result = $qb->select('*')
+				->from($table)
+				->execute();
+			return $result->fetchAll();
+		}
+		return [];
 	}
 
 	private function encryptCredentials() {
-		$credentials = $this->fetchAll('SELECT * FROM `*PREFIX*passman_credentials`');
+		$credentials = $this->fetchAll('passman_credentials');
 		foreach ($credentials as $credential) {
 			$this->credentialService->updateCredential($credential);
 		}
 	}
 
 	private function encryptRevisions() {
-		$revisions = $this->fetchAll('SELECT * FROM `*PREFIX*passman_revisions`');
+		$revisions = $this->fetchAll('passman_revisions');
 		foreach ($revisions as $_revision) {
 			$revision = new CredentialRevision();
 			$revision->setId($_revision['id']);
@@ -110,7 +119,7 @@ class ServerSideEncryption implements IRepairStep {
 	}
 
 	private function encryptFiles() {
-		$files = $this->fetchAll('SELECT * FROM `*PREFIX*passman_files`');
+		$files = $this->fetchAll('passman_files');
 		foreach ($files as $_file) {
 			$file = new File();
 			$file->setId($_file['id']);

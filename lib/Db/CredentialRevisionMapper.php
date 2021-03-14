@@ -24,49 +24,64 @@
 namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
-use OCP\AppFramework\Db\Mapper;
 
-class CredentialRevisionMapper extends Mapper {
-	private $utils;
+class CredentialRevisionMapper extends QBMapper {
+	const TABLE_NAME = 'passman_revisions';
+	private Utils $utils;
 
 	public function __construct(IDBConnection $db, Utils $utils) {
-		parent::__construct($db, 'passman_revisions');
+		parent::__construct($db, self::TABLE_NAME);
 		$this->utils = $utils;
 	}
 
 
 	/**
 	 * Get revisions from a credential
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 *
+	 * @param int $credential_id
+	 * @param string|null $user_id
 	 * @return CredentialRevision[]
 	 */
-	public function getRevisions($credential_id, $user_id = null) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_revisions` ' .
-			'WHERE `credential_id` = ?';
-        $params = [$credential_id];
-        if ($user_id !== null) {
-            $sql.= ' and `user_id` = ? ';
-            $params[] = $user_id;
-        }
-		return $this->findEntities($sql, $params);
+	public function getRevisions(int $credential_id, string $user_id = null) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('credential_id', $qb->createNamedParameter($credential_id, IQueryBuilder::PARAM_INT)));
+
+		if ($user_id !== null) {
+			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+		}
+
+		/** @var CredentialRevision[] $credentialRevisions */
+		$credentialRevisions = $this->findEntities($qb);
+		return $credentialRevisions;
 	}
 
 	/**
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @param int $revision_id
+	 * @param string|null $user_id
 	 * @return CredentialRevision
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getRevision($revision_id, $user_id = null) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_revisions` ' .
-			'WHERE `id` = ?';
-        $params = [$revision_id];
-        if ($user_id !== null) {
-            $sql.= ' and `user_id` = ? ';
-            $params[] = $user_id;
-        }
-		return $this->findEntity($sql, $params);
+	public function getRevision(int $revision_id, string $user_id = null) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('id', $qb->createNamedParameter($revision_id, IQueryBuilder::PARAM_INT)));
+
+		if ($user_id !== null) {
+			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+		}
+
+		/** @var CredentialRevision $credentialRevision */
+		$credentialRevision = $this->findEntity($qb);
+		return $credentialRevision;
 	}
 
 	/**

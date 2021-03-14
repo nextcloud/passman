@@ -24,13 +24,14 @@
 namespace OCA\Passman\Db;
 
 
-use Icewind\SMB\Share;
-use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Mapper;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
-class DeleteVaultRequestMapper extends Mapper {
+class DeleteVaultRequestMapper extends QBMapper {
 	const TABLE_NAME = 'passman_delete_vault_request';
 
 	public function __construct(IDBConnection $db) {
@@ -40,37 +41,46 @@ class DeleteVaultRequestMapper extends Mapper {
 	/**
 	 * Create a new enty in the db
 	 * @param DeleteVaultRequest $request
-	 * @return \OCP\AppFramework\Db\Entity
+	 * @return Entity
 	 */
-	public function createRequest(DeleteVaultRequest $request){
+	public function createRequest(DeleteVaultRequest $request) {
 		return $this->insert($request);
 	}
 
 	/**
 	 * Get all delete requests
-	 * @return \OCP\AppFramework\Db\Entity
+	 * @return Entity[]
 	 */
-	public function getDeleteRequests(){
-		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME;
-		return $this->findEntities($q);
+	public function getDeleteRequests() {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME);
+
+		return $this->findEntities($qb);
 	}
 
 	/**
-	 * Get request for an vault id
-	 * @param $vault_id integer The vault id
-	 * @return \OCP\AppFramework\Db\Entity
+	 * Get request for a vault guid
+	 * @param string $vault_guid
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getDeleteRequestsForVault($vault_guid){
-		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME .' WHERE `vault_guid` = ?';
-		return $this->findEntity($q, [$vault_guid]);
+	public function getDeleteRequestsForVault(string $vault_guid) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('vault_guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntity($qb);
 	}
 
 	/**
 	 * Deletes the given delete request
-	 * @param DeleteVaultRequest $request    Request to delete
-	 * @return DeleteVaultRequest                 The deleted request
+	 * @param DeleteVaultRequest $request Request to delete
+	 * @return DeleteVaultRequest         The deleted request
 	 */
-	public function removeDeleteVaultRequest(DeleteVaultRequest $request){
+	public function removeDeleteVaultRequest(DeleteVaultRequest $request) {
 		return $this->delete($request);
 	}
 

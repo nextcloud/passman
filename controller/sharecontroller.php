@@ -31,6 +31,7 @@ use OCP\IUserManager;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Activity;
+use OCP\Notification\IManager;
 
 
 class ShareController extends ApiController {
@@ -44,6 +45,7 @@ class ShareController extends ApiController {
 	private $notificationService;
 	private $fileService;
 	private $settings;
+	private $manager;
 
 	private $limit = 50;
 	private $offset = 0;
@@ -59,7 +61,8 @@ class ShareController extends ApiController {
 								CredentialService $credentialService,
 								NotificationService $notificationService,
 								FileService $fileService,
-								SettingsService $config
+								SettingsService $config,
+								IManager $IManager
 	) {
 		parent::__construct(
 			$AppName,
@@ -78,6 +81,7 @@ class ShareController extends ApiController {
 		$this->notificationService = $notificationService;
 		$this->fileService = $fileService;
 		$this->settings = $config;
+		$this->manager = $IManager;
 	}
 
 
@@ -232,19 +236,19 @@ class ShareController extends ApiController {
 
 		}
 		try {
-			$sr = array_pop($this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id));
+			$shareRequests = $this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id);
+			$sr = array_pop($shareRequests);
 		} catch (\Exception $e) {
 			// no need to catch this
 		}
 
 		if ($sr) {
 			$this->shareService->cleanItemRequestsForUser($sr);
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
+			$notification = $this->manager->createNotification();
 			$notification->setApp('passman')
 				->setObject('passman_share_request', $sr->getId())
 				->setUser($user_id);
-			$manager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 		}
 		if ($acl) {
 			$this->shareService->deleteShareACL($acl);
@@ -292,12 +296,11 @@ class ShareController extends ApiController {
 			return new NotFoundResponse();
 		}
 
-		$manager = \OC::$server->getNotificationManager();
-		$notification = $manager->createNotification();
+		$notification = $this->manager->createNotification();
 		$notification->setApp('passman')
 			->setObject('passman_share_request', $sr->getId())
 			->setUser($this->userId->getUID());
-		$manager->markProcessed($notification);
+		$this->manager->markProcessed($notification);
 
 		$notification = array(
 			'from_user' => ucfirst($this->userId->getDisplayName()),
@@ -383,12 +386,11 @@ class ShareController extends ApiController {
 			);
 
 
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
+			$notification = $this->manager->createNotification();
 			$notification->setApp('passman')
 				->setObject('passman_share_request', $share_request_id)
 				->setUser($this->userId->getUID());
-			$manager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 
 			$this->shareService->cleanItemRequestsForUser($sr);
 			return new JSONResponse(array('result' => true));

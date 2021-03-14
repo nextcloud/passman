@@ -25,7 +25,7 @@ namespace OCA\Passman\Settings;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use OCP\App;
+use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
 use OCP\IL10N;
@@ -35,15 +35,18 @@ class Admin implements ISettings {
 
 	protected IConfig $config;
 	private IL10N $l;
+	private IAppManager $appManager;
 
 	/**
 	 * Admin constructor.
 	 * @param IConfig $config
 	 * @param IL10N $l
+	 * @param IAppManager $appManager
 	 */
-	public function __construct(IConfig $config, IL10N $l) {
+	public function __construct(IConfig $config, IL10N $l, IAppManager $appManager) {
 		$this->config = $config;
 		$this->l = $l;
+		$this->appManager = $appManager;
 	}
 
 	/**
@@ -51,8 +54,7 @@ class Admin implements ISettings {
 	 */
 	public function getForm(): TemplateResponse {
 		$checkVersion = $this->config->getAppValue('passman', 'check_version', '1') === '1';
-		$AppInstance = new App();
-		$localVersion = $AppInstance->getAppInfo("passman")["version"];
+		$localVersion = $this->appManager->getAppInfo('passman')["version"];
 		$githubVersion = $this->l->t('Unable to get version info');
 		if ($checkVersion) {
 			// get latest master version

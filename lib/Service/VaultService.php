@@ -24,6 +24,7 @@
 namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\Vault;
+use OCP\AppFramework\Db\Entity;
 use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -82,6 +83,7 @@ class VaultService {
 	/**
 	 * Update vault
 	 * @param $vault
+	 * @return Vault|Entity
 	 */
 	public function updateVault($vault) {
 		return $this->vaultMapper->updateVault($vault);
@@ -91,16 +93,18 @@ class VaultService {
 	 * Update last access time of a vault.
 	 * @param $vault_id
 	 * @param $user_id
+	 * @return Vault|Entity
 	 */
 	public function setLastAccess($vault_id, $user_id){
 		return $this->vaultMapper->setLastAccess($vault_id, $user_id);
 	}
 
 	/**
-	 * Uodate sharing keys of a vault.
+	 * Update sharing keys of a vault.
 	 * @param $vault_id
 	 * @param $privateKey
 	 * @param $publicKey
+	 * @return Vault|Entity
 	 */
 	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
 		return $this->vaultMapper->updateSharingKeys($vault_id, $privateKey, $publicKey);

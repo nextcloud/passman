@@ -29,6 +29,7 @@ namespace OCA\Passman\Service;
 use Icewind\SMB\Exception\Exception;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\File;
+use OCP\IConfig;
 
 /**
  * A class to handle secure encryption and decryption of arbitrary data
@@ -84,14 +85,14 @@ class EncryptService {
 	protected $rounds = 100;
 
 	/**
-	 * Constructor!
-	 *
+	 * EncryptService constructor.
 	 * @param SettingsService $settings
+	 * @param IConfig $config
 	 */
-	public function __construct(SettingsService $settings) {
+	public function __construct(SettingsService $settings, IConfig $config) {
 		$this->cipher = $settings->getAppSetting('server_side_encryption', 'aes-256-cbc');
-		$password_salt = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
-		$secret = \OC::$server->getConfig()->getSystemValue('secret', '');
+		$password_salt = $config->getSystemValue('passwordsalt', '');
+		$secret = $config->getSystemValue('secret', '');
 		$this->server_key = $password_salt . $secret;
 		$this->rounds = $settings->getAppSetting('rounds_pbkdf2_stretching', 100);
 	}
