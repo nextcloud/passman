@@ -49,7 +49,7 @@
 
 							}
 							var file_data = EncryptService.decryptString(result.file_data, key);
-							download(file_data, escapeHTML(file.filename), file.mimetype);
+							download(file_data, ShareService.escapeHTML(file.filename), file.mimetype);
 
 						};
 
