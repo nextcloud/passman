@@ -123,11 +123,11 @@ style('passman', 'vendor/font-awesome/font-awesome.min');
 			<table class="table">
 				<tr>
 					<td><?php p($l->t('Source account')); ?> </td>
-					<td><input class="username-autocomplete" type="text" id="source_account" name="source_account"></td>
+					<td><input type="hidden" class="form-control account_mover_selector" id="source_account"></td>
 				</tr>
 				<tr>
 					<td><?php p($l->t('Destination account')); ?> </td>
-					<td><input class="username-autocomplete" type="text" id="destination_account" name="destination_account"></td>
+					<td><input type="hidden" class="form-control account_mover_selector" id="destination_account"></td>
 				</tr>
 			</table>
 			<button class="success" id="move_credentials">Move</button>

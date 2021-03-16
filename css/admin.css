@@ -2,6 +2,10 @@
   padding: 5px; }
 #passwordSharingSettings #mover input[type="text"] {
   width: 350px; }
+#passwordSharingSettings #mover .account_mover_selector {
+  width: 350px; }
+  #passwordSharingSettings #mover .account_mover_selector .select2-choice {
+    height: 34px; }
 #passwordSharingSettings #requests-table {
   width: 100%; }
 

@@ -98,6 +98,7 @@ class AdminController extends ApiController {
 
 				$c = $credential->jsonSerialize();
 				$c['user_id'] = $destination_account;
+				$c['icon'] = json_encode($c['icon']);
 				$this->credentialService->updateCredential($c, true);
 			}
 			$vault->setUserId($destination_account);
