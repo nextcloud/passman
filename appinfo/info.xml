@@ -37,7 +37,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/share_credential.png">https://img.passman.cc/share_credential.png</screenshot>
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/password_audit.png">https://img.passman.cc/password_audit.png</screenshot>
     <dependencies>
-        <php min-version="7.0"/>
+        <php min-version="7.2"/>
         <database>sqlite</database>
         <database>pgsql</database>
         <database min-version="5.5">mysql</database>
