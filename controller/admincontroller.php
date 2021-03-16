@@ -24,6 +24,7 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
+use OCP\IUserManager;
 
 
 class AdminController extends ApiController {
@@ -34,6 +35,7 @@ class AdminController extends ApiController {
 	private $revisionService;
 	private $deleteVaultRequestService;
 	private $config;
+	private $userManager;
 
 	public function __construct($AppName,
 								IRequest $request,
@@ -43,7 +45,8 @@ class AdminController extends ApiController {
 								FileService $fileService,
 								CredentialRevisionService $revisionService,
 								DeleteVaultRequestService $deleteVaultRequestService,
-								IConfig $config
+								IConfig $config,
+								IUserManager $userManager
 	) {
 		parent::__construct(
 			$AppName,
@@ -59,13 +62,13 @@ class AdminController extends ApiController {
 		$this->deleteVaultRequestService = $deleteVaultRequestService;
 
 		$this->config = $config;
+		$this->userManager = $userManager;
 	}
 
 
 	public function searchUser($term) {
-		$um = \OC::$server->getUserManager();
 		$results = array();
-		$searchResult = $um->search($term);
+		$searchResult = $this->userManager->search($term);
 		foreach ($searchResult as $user) {
 			array_push($results, array(
 				"value" => $user->getUID(),
@@ -114,7 +117,7 @@ class AdminController extends ApiController {
 		$results = array();
 		foreach($requests as $request){
 			$r = $request->jsonSerialize();
-			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy());
+			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy(), $this->userManager);
 			array_push($results, $r);
 		}
 		return new JSONResponse($results);

@@ -39,13 +39,20 @@ use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
+use OCA\UserStatus\Listener\UserDeletedListener;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\IDBConnection;
+use OCP\IGroupManager;
 use OCP\IL10N;
+use OCP\INavigationManager;
+use OCP\IURLGenerator;
+use OCP\IUserManager;
+use OCP\IUserSession;
 use OCP\Notification\IManager;
+use OCP\User\Events\BeforeUserDeletedEvent;
 use OCP\Util;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
@@ -59,7 +66,6 @@ class Application extends App implements IBootstrap {
 
 	public function register(IRegistrationContext $context): void {
 		$this->registerNavigationEntry();
-		// $this->registerPersonalPage();
 
 		$context->registerEventListener(
 			BeforeUserDeletedEvent::class,
@@ -80,13 +86,19 @@ class Application extends App implements IBootstrap {
 		$context->registerMiddleware(APIMiddleware::class);
 
 		$context->registerService('ShareController', function (ContainerInterface $c) {
-			$server = $this->getContainer()->getServer();
+			/** @var IUserManager $userManager */
+			$userManager = $c->get(IUserManager::class);
+			/** @var IGroupManager $groupManager */
+			$groupManager = $c->get(IGroupManager::class);
+			/** @var IUserSession $userSession */
+			$userSession = $c->get(IUserSession::class);
+
 			return new ShareController(
 				$c->get('AppName'),
 				$c->get('Request'),
-				$server->getUserSession()->getUser(),
-				$server->getGroupManager(),
-				$server->getUserManager(),
+				$userSession->getUser(),
+				$groupManager,
+				$userManager,
 				$c->get(ActivityService::class),
 				$c->get(VaultService::class),
 				$c->get(ShareService::class),
@@ -128,23 +140,20 @@ class Application extends App implements IBootstrap {
 	 */
 	public function registerNavigationEntry() {
 		$c = $this->getContainer();
-		$server = $c->getServer();
-		$navigationEntry = function () use ($c, $server) {
+		/** @var INavigationManager $navigationManager */
+		$navigationManager = $c->get(INavigationManager::class);
+
+		$navigationEntry = function () use ($c) {
+			/** @var IURLGenerator $urlGenerator */
+			$urlGenerator = $c->get(IURLGenerator::class);
 			return [
 				'id' => $c->getAppName(),
 				'order' => 10,
-				'name' => $c->query(IL10N::class)->t('Passwords'),
-				'href' => $server->getURLGenerator()->linkToRoute('passman.page.index'),
-				'icon' => $server->getURLGenerator()->imagePath($c->getAppName(), 'app.svg'),
+				'name' => $c->get(IL10N::class)->t('Passwords'),
+				'href' => $urlGenerator->linkToRoute('passman.page.index'),
+				'icon' => $urlGenerator->imagePath($c->getAppName(), 'app.svg'),
 			];
 		};
-		$server->getNavigationManager()->add($navigationEntry);
-	}
-
-	/**
-	 * Register personal settings for notifications and emails
-	 */
-	public function registerPersonalPage() {
-		\OCP\App::registerPersonal($this->getContainer()->getAppName(), 'personal');
+		$navigationManager->add($navigationEntry);
 	}
 }
