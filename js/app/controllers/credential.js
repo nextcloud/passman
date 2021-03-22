@@ -229,7 +229,6 @@
 
 				$scope.addCredential = function () {
 					var new_credential = CredentialService.newCredential();
-					new_credential.icon = null;
 					var enc_c = CredentialService.encryptCredential(new_credential);
 					SettingsService.setSetting('edit_credential', enc_c);
 					$location.path('/vault/' + $scope.active_vault.guid + '/new');
