@@ -310,7 +310,6 @@ OC.L10N.register(
     "Reason" : "Arsyeja",
     "Connection to server lost" : "Lidhja me serverin u shkëput",
     "Problem loading page, reloading in 5 seconds" : "Gabim në ngarkimin e faqes, do të ringarkohet pas 5 sekondash",
-    "Saving..." : "Po ruhet …",
     "Dismiss" : "Mos e merr parasysh",
     "seconds ago" : "sekonda më parë"
 },

@@ -36,7 +36,6 @@ OC.L10N.register(
     "Tags" : "Tagiau",
     "Loading…" : "Yn llwytho…",
     "Description" : "Disgrifiad",
-    "Saving..." : "Yn cadw...",
     "seconds ago" : "eiliad yn ôl"
 },
 "nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;");

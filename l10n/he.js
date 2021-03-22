@@ -258,7 +258,6 @@ OC.L10N.register(
     "Awwhh… credential not found. Maybe it expired" : "אוףףףףף… לא נמצאו פרטי גישה. אולי תוקפם פג",
     "email" : "דוא״ל",
     "Description" : "תיאור",
-    "Url" : "כתובת",
     "Custom Search:" : "חיפוש מותאם אישית:",
     "Revert to defaults" : "החזרה לבררות מחדל",
     "Error while saving field" : "אירעה שגיאה במהלך שמירת השדה",
@@ -308,7 +307,7 @@ OC.L10N.register(
     "Expires:" : "תפוגה:",
     "Connection to server lost" : "החיבור לשרת אבד",
     "Problem loading page, reloading in 5 seconds" : "אירעה שגיאה בעת טעינת העמוד, יתרענן בעוד 5 שניות",
-    "Saving..." : "מתבצעת שמירה…",
+    "Saving …" : "מתבצעת שמירה…",
     "Dismiss" : "התעלמות",
     "seconds ago" : "לפני מספר שניות"
 },

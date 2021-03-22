@@ -28,7 +28,6 @@ OC.L10N.register(
     "Edit" : "ಸಂಪಾದಿಸು",
     "Delete" : "﻿ಅಳಿಸಿ",
     "Share" : "﻿ಹಂಚಿಕೊಳ್ಳಿ",
-    "Date" : "Date",
-    "Saving..." : "﻿ಉಳಿಸಲಾಗುತ್ತಿದೆ ..."
+    "Date" : "Date"
 },
 "nplurals=2; plural=(n > 1);");

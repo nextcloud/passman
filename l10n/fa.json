@@ -291,12 +291,10 @@
     "Click here to request it" : "به درخواست آن را در اینجا کلیک کنید",
     "Loading…" : "بار کردن…",
     "Awwhh… credential not found. Maybe it expired" : "Awwhh ... اعتبار یافت نشد. شاید منقضی شده باشد",
-    "Compromise!" : "به خطر افتادن!",
     "Compromised!" : "در معرض خطر!",
     "This password is compromised. You can only remove this warning by changing the password." : "این رمز عبور به خطر افتاده است. فقط با تغییر رمز عبور می توانید این هشدار را حذف کنید.",
     "email" : "ایمیل",
     "Description" : "توضیحات",
-    "Url" : "آدرس",
     "Custom Search:" : "جستجوی سفارشی:",
     "Revert to defaults" : "به پیش فرض برگردید",
     "Error while saving field" : "هنگام ذخیره فیلد خطایی رخ داد",
@@ -359,7 +357,6 @@
     "Expires:" : "منقضی می شود:",
     "Connection to server lost" : "اتصال به سرور از دست رفته است",
     "Problem loading page, reloading in 5 seconds" : "صفحه بارگیری مشکل ، بارگیری مجدد در 5 ثانیه",
-    "Saving..." : "در حال ذخیره سازی...",
     "Dismiss" : "پنهان کن",
     "seconds ago" : "ثانیه‌هایی پیش"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"

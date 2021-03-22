@@ -327,7 +327,7 @@ OC.L10N.register(
     "Expires:" : "Lejárat:",
     "Connection to server lost" : "Megszakadt a kapcsolat a szerverrel",
     "Problem loading page, reloading in 5 seconds" : "Probléma adódott az oldal betöltése közben, újratöltés 5 másodpercen belül",
-    "Saving..." : "Mentés...",
+    "Saving …" : "Mentés…",
     "Dismiss" : "Elutasít",
     "seconds ago" : "pár másodperce"
 },

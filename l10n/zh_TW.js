@@ -115,7 +115,7 @@ OC.L10N.register(
     "Expires:" : "到期日：",
     "Connection to server lost" : "伺服器斷線了",
     "Problem loading page, reloading in 5 seconds" : "載入頁面出錯，5 秒後重新整理",
-    "Saving..." : "儲存中...",
+    "Saving …" : "儲存中 ...",
     "Dismiss" : "取消",
     "seconds ago" : "幾秒前"
 },

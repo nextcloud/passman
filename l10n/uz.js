@@ -25,7 +25,6 @@ OC.L10N.register(
     "email" : "elektron pochta",
     "Passwords" : "Parollar",
     "Connection to server lost" : "Serverga ulanish yo'qoldi",
-    "Saving..." : "Saqlanmoqda...",
     "Dismiss" : "Tashlab qo'ymang",
     "seconds ago" : "soniya oldin"
 },

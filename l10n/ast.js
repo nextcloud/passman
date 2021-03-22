@@ -150,7 +150,7 @@ OC.L10N.register(
     "Reason" : "Razón",
     "Connection to server lost" : "Perdióse la conexón col sirvidor",
     "Problem loading page, reloading in 5 seconds" : "Problema cargando la páxina, recargando en 5 segundos",
-    "Saving..." : "Guardando...",
+    "Saving …" : "Guardando...",
     "Dismiss" : "Escartar",
     "seconds ago" : "hai segundos"
 },

@@ -54,7 +54,7 @@ OC.L10N.register(
     "Description" : "Diskrivadur",
     "Expires:" : "Termenn :",
     "Connection to server lost" : "Kelet eo bet ar c'henstagañ gant ar servijour",
-    "Saving..." : "Oc'h enrolién",
+    "Saving …" : "Orc'h enrolliñ",
     "Dismiss" : "Arrest",
     "seconds ago" : "eilenn zo"
 },

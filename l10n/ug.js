@@ -31,7 +31,6 @@ OC.L10N.register(
     "Share" : "ھەمبەھىر",
     "Date" : "Date",
     "Tags" : "بەلگەلەر",
-    "Description" : "چۈشەندۈرۈش",
-    "Saving..." : "ساقلاۋاتىدۇ…"
+    "Description" : "چۈشەندۈرۈش"
 },
 "nplurals=2; plural=(n != 1);");

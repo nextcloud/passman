@@ -295,7 +295,6 @@ OC.L10N.register(
     "This password is compromised. You can only remove this warning by changing the password." : "This password is compromised. You can only remove this warning by changing the password.",
     "email" : "email",
     "Description" : "Description",
-    "Url" : "Url",
     "Custom Search:" : "Custom Search:",
     "Revert to defaults" : "Revert to defaults",
     "Error while saving field" : "Error while saving field",
@@ -357,7 +356,6 @@ OC.L10N.register(
     "Expires:" : "Expires:",
     "Connection to server lost" : "Connection to server lost",
     "Problem loading page, reloading in 5 seconds" : "Problem loading page, reloading in 5 seconds",
-    "Saving..." : "Saving...",
     "Dismiss" : "Dismiss",
     "seconds ago" : "seconds ago"
 },

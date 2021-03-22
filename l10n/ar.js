@@ -37,6 +37,7 @@ OC.L10N.register(
     "Disabled" : "معطّل",
     "Password length" : "طول كلمة السر",
     "Export" : "تصدير",
+    "Change" : "تعديل",
     "Version" : "الإصدار",
     "Import" : "استيراد",
     "Public key" : "المفتاح العمومي",
@@ -80,7 +81,6 @@ OC.L10N.register(
     "You deleted %1$s" : "حذفت %1$s",
     "Passwords" : "الكلمات السرية",
     "Connection to server lost" : "تم فقد الاتصال بالخادم",
-    "Saving..." : "جاري الحفظ...",
     "Dismiss" : "تراجع",
     "seconds ago" : "ثوان مضت"
 },

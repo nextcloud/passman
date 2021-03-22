@@ -1,0 +1,26 @@
+{ "translations": {
+    "Sharing" : "Cumpartzidura",
+    "Share link" : "Cumpartzi ligòngiu",
+    "Username" : "Nùmene utente",
+    "Text" : "Testu",
+    "Add" : "Agiunghe",
+    "Size" : "Mannària",
+    "Secret" : "Segretu",
+    "Export" : "Esporta",
+    "Bookmarklet" : "Bookmarklet",
+    "Import" : "Importa",
+    "Details" : "Detàllios",
+    "Save" : "Sarva",
+    "Cancel" : "Annulla",
+    "Settings" : "Impostatziones",
+    "Password" : "Crae",
+    "URL" : "URL",
+    "Notes" : "Notas",
+    "Edit" : "Modìfica ",
+    "Delete" : "Cantzella",
+    "Accept" : "Atzeta",
+    "Tags" : "Etichetas",
+    "Loading…" : "Carrighende...",
+    "Description" : "Descritzione"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

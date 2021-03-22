@@ -254,6 +254,7 @@ OC.L10N.register(
     "Deleted credentials" : "삭제된 인증 정보",
     "Logout" : "로그아웃",
     "Donate" : "기부하기",
+    "Show All" : "모두 보기",
     "Tags" : "태그",
     "Expired" : "만료됨",
     "Someone has shared a credential with you." : "누군가가 여러분과 인증 정보를 공유했습니다.",
@@ -317,7 +318,7 @@ OC.L10N.register(
     "Click here to request\n\t\t\t\t\tit" : "여기를 누르면 요청할 수\n\t\t\t\t\t있습니다",
     "Connection to server lost" : "서버와의 연결이 끊어짐",
     "Problem loading page, reloading in 5 seconds" : "페이지 불러오기 오류, 5초 후 새로 고침",
-    "Saving..." : "저장 중...",
+    "Saving …" : "저장 중 …",
     "Dismiss" : "끄기",
     "seconds ago" : "초 전"
 },

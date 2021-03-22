@@ -79,7 +79,7 @@ OC.L10N.register(
     "You deleted %1$s" : "Vi forigis %1$s",
     "Passwords" : "Pasvortoj",
     "Connection to server lost" : "Konekto al servilo perdita",
-    "Saving..." : "Konservado...",
+    "Saving …" : "Konservado...",
     "Dismiss" : "Preterpasi",
     "seconds ago" : "antaŭ kelkaj sekundoj"
 },

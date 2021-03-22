@@ -171,7 +171,7 @@ OC.L10N.register(
     "Reason" : "Iemesls",
     "Connection to server lost" : "Zaudēts savienojums ar serveri",
     "Problem loading page, reloading in 5 seconds" : "Problēma ielādējot lapu, pārlādēšana pēc 5 sekundēm",
-    "Saving..." : "Saglabā...",
+    "Saving …" : "Saglabā ...",
     "Dismiss" : "Atmest",
     "seconds ago" : "pirms dažām sekundēm"
 },

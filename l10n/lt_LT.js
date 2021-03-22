@@ -193,7 +193,6 @@ OC.L10N.register(
     "Loading…" : "Įkeliama…",
     "email" : "elektroninis paštas",
     "Description" : "Aprašas",
-    "Url" : "Url",
     "Error while saving field" : "Klaida įrašant lauką",
     "A Passman item has been created, modified or deleted" : "Slaptažodžių tvarkyklės elementas buvo sukurtas, pakeistas arba ištrintas",
     "A Passman item has expired" : "Slaptažodžių tvarkyklės elementas nebegalioja",
@@ -233,7 +232,7 @@ OC.L10N.register(
     "Expires:" : "Galioja iki:",
     "Connection to server lost" : "Ryšys su serveriu nutrūko",
     "Problem loading page, reloading in 5 seconds" : "Problemos, įkeliant puslapį, po 5 sekundžių įkeliama iš naujo",
-    "Saving..." : "Įrašoma...",
+    "Saving …" : "Įrašoma …",
     "Dismiss" : "Atmesti",
     "seconds ago" : "prieš keletą sekundžių"
 },

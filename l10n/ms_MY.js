@@ -27,7 +27,6 @@ OC.L10N.register(
     "Share" : "Kongsi",
     "Date" : "Date",
     "Description" : "Keterangan",
-    "You created %1$s" : "Anda telah membina %1$s",
-    "Saving..." : "Sedang menyimpan..."
+    "You created %1$s" : "Anda telah membina %1$s"
 },
 "nplurals=1; plural=0;");

@@ -69,7 +69,6 @@ OC.L10N.register(
     "Allow users on this server to share passwords with a link" : "Permitir que os utilizadores neste servidor partilhem as palavras-passe com uma hiperligação",
     "Connection to server lost" : "Ligação perdida ao servidor",
     "Problem loading page, reloading in 5 seconds" : "Problema a carregar a página, a recarregar em 5 segundos",
-    "Saving..." : "A guardar...",
     "Dismiss" : "Dispensar",
     "seconds ago" : "segundos atrás"
 },

@@ -43,7 +43,6 @@ OC.L10N.register(
     "Description" : "Description",
     "You created %1$s" : "Tu creava %1$s",
     "You deleted %1$s" : "Tu  deleva %1$s",
-    "Saving..." : "Salveguardante...",
     "Dismiss" : "Dimitter",
     "seconds ago" : "secundas passate"
 },

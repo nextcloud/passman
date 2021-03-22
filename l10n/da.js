@@ -229,7 +229,6 @@ OC.L10N.register(
     "Simple Navigation" : "Simpel Navigation",
     "Click here to request it" : "Klik her for at bede om det",
     "Loading…" : "Indlæser…",
-    "Compromise!" : "Marker kompromis!",
     "Compromised!" : "Markeret kompromis!",
     "email" : "e-mail",
     "Description" : "Beskrivelse",
@@ -260,7 +259,7 @@ OC.L10N.register(
     "Expires:" : "Udløber:",
     "Connection to server lost" : "Mistede forbindelsen til serveren",
     "Problem loading page, reloading in 5 seconds" : "Problem med indlæsning af side, genindlæser om 5 sekunder",
-    "Saving..." : "Gemmer...",
+    "Saving …" : "Gemmer…",
     "Dismiss" : "Afvis",
     "seconds ago" : "sekunder siden"
 },

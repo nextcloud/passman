@@ -291,12 +291,11 @@
     "Click here to request it" : "Нажмите здесь для их получения.",
     "Loading…" : "Загрузка…",
     "Awwhh… credential not found. Maybe it expired" : "Запись не найдена. Возможно, закончился срок её действия.",
-    "Compromise!" : "Компрометация",
+    "Mark as Compromised" : "Отметить как скомпрометированный",
     "Compromised!" : "Скомпрометирован!",
     "This password is compromised. You can only remove this warning by changing the password." : "Этот пароль скомпрометирован. Единственный способ скрыть этот предупреждение — сменить пароль.",
     "email" : "эл. почта",
     "Description" : "Описание",
-    "Url" : "URL",
     "Custom Search:" : "Пользовательский поиск",
     "Revert to defaults" : "Сбросить к значениям по умолчанию",
     "Error while saving field" : "Ошибка при сохранении поля",
@@ -359,7 +358,7 @@
     "Expires:" : "Истекает:",
     "Connection to server lost" : "Подключение к серверу потеряно",
     "Problem loading page, reloading in 5 seconds" : "Проблема при загрузке страницы, перезагрузка через 5 сек.",
-    "Saving..." : "Сохранение…",
+    "Saving …" : "Сохранение…",
     "Dismiss" : "Закрыть",
     "seconds ago" : "несколько секунд назад"
 },"pluralForm" :"nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);"

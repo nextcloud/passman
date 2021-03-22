@@ -36,7 +36,6 @@ OC.L10N.register(
     "Description" : "ការ​អធិប្បាយ",
     "You created %1$s" : "អ្នក​បាន​បង្កើត %1$s",
     "You deleted %1$s" : "អ្នក​បាន​លុប %1$s",
-    "Saving..." : "កំពុង​រក្សាទុក",
     "seconds ago" : "វិនាទី​មុន"
 },
 "nplurals=1; plural=0;");

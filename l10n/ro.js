@@ -60,7 +60,7 @@ OC.L10N.register(
     "Passwords" : "Parole",
     "Connection to server lost" : "S-a pierdut conexiunea la server",
     "Problem loading page, reloading in 5 seconds" : "A apărut o problemă la încărcarea paginii, se reîncearcă în 5 secunde",
-    "Saving..." : "Se salvează...",
+    "Saving …" : "Se salvează",
     "Dismiss" : "Elimină",
     "seconds ago" : "secunde în urmă"
 },

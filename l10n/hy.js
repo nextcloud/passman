@@ -32,7 +32,6 @@ OC.L10N.register(
     "Description" : "Նկարագրություն",
     "You created %1$s" : "Դու ստեղծեցիր %1$s",
     "You deleted %1$s" : "Դու ջնջեցիր %1$s",
-    "Saving..." : "Պահում եմ...",
     "seconds ago" : "վրկ. առաջ"
 },
 "nplurals=2; plural=(n != 1);");

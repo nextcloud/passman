@@ -291,12 +291,11 @@
     "Click here to request it" : "Кликните овде да их захтевате",
     "Loading…" : "Учитавање…",
     "Awwhh… credential not found. Maybe it expired" : "Аргхх… акредитиви нису нађени. Можда су истекли",
-    "Compromise!" : "Компромитована!",
+    "Mark as Compromised" : "Обележи као компромитовано",
     "Compromised!" : "Компромитована!",
     "This password is compromised. You can only remove this warning by changing the password." : "Ова лозинка је компромитована. Можете уклонити ово упозорење једино променом лозинке.",
     "email" : "е-пошта",
     "Description" : "Опис",
-    "Url" : "Адреса",
     "Custom Search:" : "Прилагоћена претрага:",
     "Revert to defaults" : "Ресетуј на подразумевано",
     "Error while saving field" : "Грешка приликом чувања поља",
@@ -359,7 +358,7 @@
     "Expires:" : "Истиче:",
     "Connection to server lost" : "Веза са сервером изгубљена",
     "Problem loading page, reloading in 5 seconds" : "Грешка приликом учитавања стране, покушавам поново за 5 секунди",
-    "Saving..." : "Чувам...",
+    "Saving …" : "Чувам…",
     "Dismiss" : "Одбаци",
     "seconds ago" : "пре пар секунди"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);"

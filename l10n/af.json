@@ -58,7 +58,7 @@
     "Description" : "Beskrywing",
     "Passman" : "Passman",
     "Connection to server lost" : "Verbinding met bediener verloor",
-    "Saving..." : "Stoor tans…",
+    "Saving …" : "Word gestoor …",
     "Dismiss" : "Ontslaan",
     "seconds ago" : "sekondes gelede"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
