@@ -52,7 +52,7 @@ class CronService {
 		foreach($expired_credentials as $credential){
 			$link = ''; // @TODO create direct link to credential
 
-			$sql = 'SELECT count(*) as rows from `*PREFIX*notifications` WHERE `subject`= \'credential_expired\' AND object_id=?';
+			$sql = 'SELECT count(*) as `rows` from `*PREFIX*notifications` WHERE `subject`= \'credential_expired\' AND object_id=?';
 			$id = $credential->getId();
 			$result = $this->db->executeQuery($sql, array($id));
 			$this->logger->debug($credential->getLabel() .' is expired, checking notifications!', array('app' => 'passman'));

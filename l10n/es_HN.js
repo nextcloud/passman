@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Contraseñas",
     "Generating sharing keys ( %s / 2)" : "Generando llaves para compartir (%s / 2)",
     "Incorrect vault password!" : "¡Bóveda de contraseñas incorrecta!",
     "Passwords do not match" : "Las contraseñas no coinciden",
@@ -255,10 +254,13 @@ OC.L10N.register(
     "Deleted credentials" : "Credenciales borradas",
     "Logout" : "Salir",
     "Donate" : "Dona",
+    "Tags" : "Etiquetas",
     "Someone has shared a credential with you." : "Alguien ha compartido credenciales contigo. ",
     "Click here to request it" : "Haz click para solicitarlo",
     "Loading…" : "Cargando...",
     "Awwhh… credential not found. Maybe it expired" : "Awwhh... no se encontraron las credenciales. Tal vez expiraron",
+    "email" : "correo electrónico",
+    "Description" : "Descripción",
     "Error while saving field" : "Se presentó un error al guardar el campo",
     "A Passman item has been created, modified or deleted" : "Un elemento de Passman ha sido creado, modificado o borrado",
     "A Passman item has expired" : "El elemento de Passman ha expirado",
@@ -282,6 +284,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s ha sido compartido con %2$s",
     "You received a share request for %1$s from %2$s" : "Recibiste una solicitud para compartir de %1$s desde %2$s",
     "%s has been shared with a link" : "%s ha sido compartido con una liga",
+    "Passwords" : "Contraseñas",
     "Your credential \"%s\" expired, click here to update the credential." : "Tus credenciales \"%s\" han expirado, haz click aquí para actualizarlas.",
     "Remind me later" : "Recuérdame más tarde",
     "Ignore" : "Ignorar",
@@ -313,7 +316,6 @@ OC.L10N.register(
     "Click here to request\n\t\t\t\t\tit" : "Haz click aquí para solicitarlo ",
     "Connection to server lost" : "Se perdió la conexión al servidor",
     "Problem loading page, reloading in 5 seconds" : "Se presentó un problema al cargar la página, recargando en 5 segundos",
-    "Saving..." : "Guardando ...",
     "Dismiss" : "Descartar",
     "seconds ago" : "hace segundos"
 },

@@ -1,7 +1,7 @@
 /**
  * Nextcloud - passman
  *
- * @copyright Copyright (c) 2019, Felix Nüsse (felix.nuesse@t-online.de)
+ * @copyright Copyright (c) 2019, Felix Nuesse (felix.nuesse@t-online.de)
  * @license GNU AGPL version 3 or any later version
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+.searchbox{
+  button{
+    position: relative !important;
+  }
+
+}
 
 .searchbox-settings{
   position: relative;

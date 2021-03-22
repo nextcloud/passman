@@ -118,6 +118,7 @@
 									VaultService.updateSharingKeys($scope.active_vault);
 								});
 							}
+							$scope.checkURLAction();
 						});
 					});
 				};
@@ -543,6 +544,24 @@
                     $scope.credentials = [];
                     VaultService.clearVaultService();
                 });
+
+                $scope.$watch(function(){ return $location.search(); }, function(params){
+                    $scope.checkURLAction();
+                });
+
+                $scope.checkURLAction = function () {
+                    var search = $location.search();
+                    if (search.show !== undefined && $scope.active_vault.credentials !== undefined &&
+						$scope.active_vault.credentials.length > 0) {
+                        $scope.closeSelected();
+                        $scope.active_vault.credentials.forEach(function(credential, index, myArray) {
+                            if (credential.guid === search.show) {
+                                $scope.selectCredential(credential);
+                                return true;
+                            }
+                        });
+                    }
+                };
 
 		$scope.clearState = function () {
 			$scope.delete_time = 0;

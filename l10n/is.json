@@ -1,5 +1,4 @@
 { "translations": {
-    "Passwords" : "Lykilorð",
     "Generating sharing keys ( %s / 2)" : "Útbý deilingarlykla ( %s / 2)",
     "Incorrect vault password!" : "Rangt lykilorð fyrir lykilorðageymslu!",
     "Passwords do not match" : "Lykilorðin stemma ekki",
@@ -77,6 +76,7 @@
     "Use this icon" : "Nota þessa táknmynd",
     "Delete current icon" : "Eyða núverandi táknmynd",
     "Get icon from page" : "Velja táknmynd af síðu",
+    "This may take a few seconds…" : "Þetta gæti tekið örfáar sekúndur…",
     "There was an error fetching the icon!" : "Það kom upp villa við að ná í táknmyndina!",
     "Selected icon" : "Valin táknmynd",
     "Field label" : "Skýring gagnasviðs",
@@ -291,11 +291,10 @@
     "Click here to request it" : "Smelltu hér til að biðja um það",
     "Loading…" : "Hleð inn…",
     "Awwhh… credential not found. Maybe it expired" : "Æjæjæ... auðkenni fundust ekki. Kannski þau séu útrunnin",
-    "Compromise!" : "Berskjaldað!",
     "Compromised!" : "Berskjaldað!",
+    "This password is compromised. You can only remove this warning by changing the password." : "Þetta lykilorð er berskjaldað, og því ekki nothæft lengur. Þú getur aðeins losnað við þessa aðvörun með því að skipta um lykilorð.",
     "email" : "tölvupóstur",
     "Description" : "Lýsing",
-    "Url" : "Slóð (URL)",
     "Custom Search:" : "Sérsniðin leit:",
     "Revert to defaults" : "Frumstilla á sjálfgefin gildi",
     "Error while saving field" : "Villa kom upp við að vista gagnasvið",
@@ -321,6 +320,7 @@
     "%1$s has been shared with %2$s" : "%1$s hefur verið deilt með %2$s",
     "You received a share request for %1$s from %2$s" : "Þú fékkst beiðni um deilingu á %1$s frá %2$s",
     "%s has been shared with a link" : "%s hefur verið deilt með tengli",
+    "Passwords" : "Lykilorð",
     "Your credential \"%s\" expired, click here to update the credential." : "Auðkennin \"%s\" eru útrunninn, smelltu hér til að uppfæra auðkennin.",
     "Remind me later" : "Áminna mig síðar",
     "Ignore" : "Hunsa",
@@ -357,7 +357,7 @@
     "Expires:" : "Gildir til:",
     "Connection to server lost" : "Tenging við þjón rofnaði",
     "Problem loading page, reloading in 5 seconds" : "Vandamál við að hlaða inn síðu, endurhleð eftir 5 sekúndur",
-    "Saving..." : "Er að vista ...",
+    "Saving …" : "Vista …",
     "Dismiss" : "Hafna",
     "seconds ago" : "sekúndum síðan"
 },"pluralForm" :"nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"

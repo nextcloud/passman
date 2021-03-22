@@ -1,5 +1,4 @@
 { "translations": {
-    "Passwords" : "პაროლები",
     "Generating sharing keys ( %s / 2)" : "გაზიარების გასაღებების გენერირება (%s / 2)",
     "Incorrect vault password!" : "სეიფის არასწორი პაროლი",
     "Passwords do not match" : "პაროლები ერთმანეთს არ ემთხვევა",
@@ -253,10 +252,14 @@
     "Deleted credentials" : "წაშლილი უფლებამოსილებები",
     "Logout" : "გასვლა",
     "Donate" : "შემოწირულობა",
+    "Tags" : "ტეგები",
+    "Expired" : "გაუქმდა",
     "Someone has shared a credential with you." : "ვიღაცამ გაგიზიარათ უფლებამოსილება.",
     "Click here to request it" : "მოთხოვნისთვის დააწკაპუნეთ აქ",
     "Loading…" : "იტვირთება…",
     "Awwhh… credential not found. Maybe it expired" : "უფლებამოსილების მოძიება ვერ მოხერხდა. შეიძლება ის გაუქმდა",
+    "email" : "ელ-ფოსტა",
+    "Description" : "აღწერილობა",
     "Error while saving field" : "ველის შენახვისას წარმოიქმნა შეცდომა",
     "A Passman item has been created, modified or deleted" : "Passman-ის ელემენტი შეიქმნა, შეიცვალა ან გაუქმდა",
     "A Passman item has expired" : "Passman-ის ელემენტს გაუვიდა ვადა",
@@ -280,6 +283,7 @@
     "%1$s has been shared with %2$s" : "%1$s გაზიარდა მომხმარებელთან %2$s",
     "You received a share request for %1$s from %2$s" : "%2$s მომხმარებლისგან მოგივიდათ გაზიარების მოთხოვნა %1$s-ზე",
     "%s has been shared with a link" : "%s გაზიარდა ბმულით",
+    "Passwords" : "პაროლები",
     "Your credential \"%s\" expired, click here to update the credential." : "თქვენს უფლებამოსილებას \"%s\"-ს გაუვიდა ვადა, გასანახლებლად დააწკაპუნეთ აქ.",
     "Remind me later" : "გამახსენეთ მოგვიანებით",
     "Ignore" : "იგნორი",
@@ -311,7 +315,6 @@
     "Click here to request\n\t\t\t\t\tit" : "დააჭირეთ რომ მოითხოვოთ\n\t\t\t\t\tის",
     "Connection to server lost" : "სერვერთან კავშირი გაწყდა",
     "Problem loading page, reloading in 5 seconds" : "გვერდის ჩატვირთვის შეცდომა, გადაიტვირთება 5 წამში",
-    "Saving..." : "მიმდინარეობს შენახვა…",
     "Dismiss" : "დათხოვნა",
     "seconds ago" : "წამის წინ"
 },"pluralForm" :"nplurals=2; plural=(n!=1);"

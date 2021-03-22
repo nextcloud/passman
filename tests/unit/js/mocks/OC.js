@@ -54,7 +54,7 @@ function escapeHTML(s) {
  * @deprecated use Files.getDownloadURL() instead
  */
 function fileDownloadPath(dir, file) {
-	return OC.filePath('files', 'ajax', 'download.php')+'?files='+encodeURIComponent(file)+'&dir='+encodeURIComponent(dir);
+	return OCA.Files.Files.getDownloadUrl(file, dir);
 }
 
 /** @namespace */
@@ -920,7 +920,7 @@ OC.msg = {
 	 * @param {Object} selector	Placeholder to display the message in
 	 */
 	startSaving: function(selector) {
-		this.startAction(selector, t('core', 'Saving...'));
+		this.startAction(selector, t('core', 'Saving …'));
 	},
 
 	/**

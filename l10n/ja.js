@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "パスワード",
     "Generating sharing keys ( %s / 2)" : "共有キーを生成しています ( %s / 2)",
     "Incorrect vault password!" : "保管庫パスワードが間違っています！",
     "Passwords do not match" : "パスワードが一致しません",
@@ -294,12 +293,10 @@ OC.L10N.register(
     "Click here to request it" : "リクエストするにはここをクリックしてください",
     "Loading…" : "読み込み中...",
     "Awwhh… credential not found. Maybe it expired" : "資格情報が見つかりません。期限切れの可能性があります",
-    "Compromise!" : "安全性が損なわれています！",
     "Compromised!" : "安全性が損なわれています！",
     "This password is compromised. You can only remove this warning by changing the password." : "このパスワードは危険にさらされています。 この警告を削除するにはパスワードを変更してください。",
     "email" : "メール",
     "Description" : "説明",
-    "Url" : "URL",
     "Custom Search:" : "カスタム検索:",
     "Revert to defaults" : "デフォルトに戻す",
     "Error while saving field" : "フィールドの保存中にエラーが発生しました",
@@ -325,6 +322,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s を %2$s と共有しました",
     "You received a share request for %1$s from %2$s" : "%2$s から %1$s の共有リクエストを受信しました",
     "%s has been shared with a link" : "%s がリンクで共有されました",
+    "Passwords" : "パスワード",
     "Your credential \"%s\" expired, click here to update the credential." : "証明書 ”%s” は期限切れです。証明書を更新するにはここをクリックしてください。",
     "Remind me later" : "後で通知する",
     "Ignore" : "無視する",
@@ -361,7 +359,7 @@ OC.L10N.register(
     "Expires:" : "有効期限:",
     "Connection to server lost" : "サーバーとの接続が切断されました",
     "Problem loading page, reloading in 5 seconds" : "ページのロードに問題があります、5秒以内に再ロードします",
-    "Saving..." : "保存中...",
+    "Saving …" : "保存中...",
     "Dismiss" : "閉じる",
     "seconds ago" : "数秒前"
 },

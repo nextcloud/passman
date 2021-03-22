@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Wachtwoorden",
     "Generating sharing keys ( %s / 2)" : "Genereren share sleutels ( %s / 2)",
     "Incorrect vault password!" : "Onjuist kluiswachtwoord",
     "Passwords do not match" : "Wachtwoorden komen niet overeen.",
@@ -294,12 +293,11 @@ OC.L10N.register(
     "Click here to request it" : "Klik hier om het aan te vragen",
     "Loading…" : "Laden...",
     "Awwhh… credential not found. Maybe it expired" : "Awwhh… inloggegevens niet gevonden. Misschien verliepen ze.",
-    "Compromise!" : "Datalek!",
+    "Mark as Compromised" : "Markeren als gecompromitteerd",
     "Compromised!" : "Uitgelekt!",
     "This password is compromised. You can only remove this warning by changing the password." : "Dit wachtwoord is uitgelekt. Je kunt deze melding alleen verwijderen door je wachtwoord te wijzigen.",
     "email" : "e-mailadres",
     "Description" : "Beschrijving",
-    "Url" : "Url",
     "Custom Search:" : "Maatwerk zoekopdracht:",
     "Revert to defaults" : "Standaard instellingen herstellen",
     "Error while saving field" : "Fout bij opslaan veld",
@@ -325,6 +323,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s is gedeeld met %2$s",
     "You received a share request for %1$s from %2$s" : "Je ontving een verzoek om %1$s te delen met %2$s",
     "%s has been shared with a link" : "%s is gedeeld met een link",
+    "Passwords" : "Wachtwoorden",
     "Your credential \"%s\" expired, click here to update the credential." : "Je inloggegevens \"%s\" zijn vervallen, klik hier om ze te vernieuwen.",
     "Remind me later" : "Herinner me later",
     "Ignore" : "Negeren",
@@ -361,7 +360,7 @@ OC.L10N.register(
     "Expires:" : "Vervalt:",
     "Connection to server lost" : "Verbinding met server verloren",
     "Problem loading page, reloading in 5 seconds" : "Probleem met het laden van de pagina, wordt ververst in 5 seconden",
-    "Saving..." : "Opslaan...",
+    "Saving …" : "Opslaan ...",
     "Dismiss" : "Negeren",
     "seconds ago" : "seconden geleden"
 },

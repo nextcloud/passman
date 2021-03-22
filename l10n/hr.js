@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Zaporke",
     "Generating sharing keys ( %s / 2)" : "Generiranje ključeva za dijeljenje (%s / 2)",
     "Incorrect vault password!" : "Netočna zaporka trezora!",
     "Passwords do not match" : "Zaporke se ne podudaraju",
@@ -294,12 +293,11 @@ OC.L10N.register(
     "Click here to request it" : "Kliknite ovdje kako biste je zatražili",
     "Loading…" : "Učitavanje…",
     "Awwhh… credential not found. Maybe it expired" : "Ah… vjerodajnica nije pronađena. Možda je istekla",
-    "Compromise!" : "Kompromis!",
+    "Mark as Compromised" : "Označi kao ugroženo",
     "Compromised!" : "Ugrožena!",
     "This password is compromised. You can only remove this warning by changing the password." : "Vaša lozinka je ugrožena. Ovo upozorenje možete ukloniti samo promjenom zaporke.",
     "email" : "e-pošta",
     "Description" : "Opis",
-    "Url" : "Url",
     "Custom Search:" : "Prilagođeno pretraživanje:",
     "Revert to defaults" : "Vrati se na zadane vrijednosti",
     "Error while saving field" : "Pogreška prilikom spremanja polja",
@@ -325,6 +323,7 @@ OC.L10N.register(
     "%1$s has been shared with %2$s" : "%1$s je podijeljeno s %2$s",
     "You received a share request for %1$s from %2$s" : "Primili ste zahtjev za dijeljenje za %1$s od %2$s",
     "%s has been shared with a link" : "%s je podijeljeno putem poveznice",
+    "Passwords" : "Zaporke",
     "Your credential \"%s\" expired, click here to update the credential." : "Vaša je vjerodajnica „%s” istekla, kliknite ovdje kako biste ažurirali vjerodajnicu.",
     "Remind me later" : "Podsjeti me kasnije",
     "Ignore" : "Zanemari",
@@ -361,7 +360,7 @@ OC.L10N.register(
     "Expires:" : "Istječe:",
     "Connection to server lost" : "Izgubljena veza s poslužiteljem",
     "Problem loading page, reloading in 5 seconds" : "Problem s učitavanjem stranice, ponovno učitavanje za 5 sekundi",
-    "Saving..." : "Spremanje...",
+    "Saving …" : "Spremanje...",
     "Dismiss" : "Zanemari",
     "seconds ago" : "prije nekoliko sekundi"
 },

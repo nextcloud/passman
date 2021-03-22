@@ -41,7 +41,7 @@
 						if (scope.tooltip) {
 							jQuery(el).attr('title', scope.tooltip);
 							jQuery(el).tooltip();
-							jQuery(el).attr('title', scope.tooltip).tooltip('fixTitle');
+							jQuery(el).attr('data-original-title', scope.tooltip);
 							jQuery('.tooltip-inner').text(scope.tooltip); // Dirty hack
 							if (jQuery(el).is(':visible')) {
 								//$(el).tooltip('show')
