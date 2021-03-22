@@ -29,6 +29,7 @@ use OCA\Passman\Service\CredentialRevisionService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\FileService;
+use OCP\DB\Exception;
 use OCP\IConfig;
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
@@ -84,16 +85,19 @@ class ServerSideEncryption implements IRepairStep {
 		}
 	}
 
+	/**
+	 * KEEP THIS METHOD PRIVATE!!!
+	 *
+	 * @param string $table
+	 * @return mixed[]
+	 * @throws Exception
+	 */
 	private function fetchAll(string $table) {
-		// restrict access to passman tables
-		if (substr($table, 0, strlen('passman_')) === 'passman_') {
-			$qb = $this->db->getQueryBuilder();
-			$result = $qb->select('*')
-				->from($table)
-				->execute();
-			return $result->fetchAll();
-		}
-		return [];
+		$qb = $this->db->getQueryBuilder();
+		$result = $qb->select('*')
+			->from($table)
+			->execute();
+		return $result->fetchAll();
 	}
 
 	private function encryptCredentials() {
