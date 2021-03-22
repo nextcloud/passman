@@ -60,7 +60,7 @@ class Admin implements ISettings {
 			// get latest master version
 			$version = false;
 
-			$url = 'https://raw.githubusercontent.com/nextcloud/passman/master/appinfo/info.xml';
+			$url = 'https://raw.githubusercontent.com/nextcloud/passman/dist/appinfo/info.xml';
 			try {
 				$httpClient = new Client();
 				$response = $httpClient->request('get', $url);
@@ -70,12 +70,12 @@ class Admin implements ISettings {
 			}
 
 			if ($xml) {
-				$data = @simplexml_load_string($xml);
+				$data = simplexml_load_string($xml);
 
 				// libxml_disable_entity_loader is deprecated with php8, the vulnerability is disabled by default by libxml with php8
 				if (\PHP_VERSION_ID < 80000) {
 					$loadEntities = libxml_disable_entity_loader(true);
-					$data = @simplexml_load_string($xml);
+					$data = simplexml_load_string($xml);
 					libxml_disable_entity_loader($loadEntities);
 				}
 
