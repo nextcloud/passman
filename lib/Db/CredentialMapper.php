@@ -46,7 +46,7 @@ class CredentialMapper extends QBMapper {
 	 *
 	 * @param string $vault_id
 	 * @param string $user_id
-	 * @return Credential[]
+	 * @return Entity[]
 	 */
 	public function getCredentialsByVaultId(string $vault_id, string $user_id) {
 		$qb = $this->db->getQueryBuilder();
@@ -55,9 +55,7 @@ class CredentialMapper extends QBMapper {
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)))
 			->andWhere($qb->expr()->eq('vault_id', $qb->createNamedParameter($vault_id, IQueryBuilder::PARAM_STR)));
 
-		/** @var Credential[] $credentials */
-		$credentials = $this->findEntities($qb);
-		return $credentials;
+		return $this->findEntities($qb);
 	}
 
 	/**
@@ -88,18 +86,16 @@ class CredentialMapper extends QBMapper {
 	 * Get expired credentials
 	 *
 	 * @param int $timestamp
-	 * @return Credential[]
+	 * @return Entity[]
 	 */
 	public function getExpiredCredentials(int $timestamp) {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
-			->where($qb->expr()->gt('expire_time',  $qb->createNamedParameter(0, IQueryBuilder::PARAM_INT)))
+			->where($qb->expr()->gt('expire_time', $qb->createNamedParameter(0, IQueryBuilder::PARAM_INT)))
 			->andWhere($qb->expr()->lt('expire_time', $qb->createNamedParameter($timestamp, IQueryBuilder::PARAM_INT)));
 
-		/** @var Credential[] $credentials */
-		$credentials = $this->findEntities($qb);
-		return $credentials;
+		return $this->findEntities($qb);
 	}
 
 	/**
@@ -108,7 +104,7 @@ class CredentialMapper extends QBMapper {
 	 *
 	 * @param int $credential_id
 	 * @param string|null $user_id
-	 * @return Credential
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -122,16 +118,14 @@ class CredentialMapper extends QBMapper {
 			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
 
-		/** @var Credential $credential */
-		$credential = $this->findEntity($qb);
-		return $credential;
+		return $this->findEntity($qb);
 	}
 
 	/**
 	 * Get credential label by id
 	 *
 	 * @param int $credential_id
-	 * @return Credential
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -141,9 +135,7 @@ class CredentialMapper extends QBMapper {
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('id', $qb->createNamedParameter($credential_id, IQueryBuilder::PARAM_INT)));
 
-		/** @var Credential $credential */
-		$credential = $this->findEntity($qb);
-		return $credential;
+		return $this->findEntity($qb);
 	}
 
 	/**
@@ -236,7 +228,7 @@ class CredentialMapper extends QBMapper {
 	 *
 	 * @param string $credential_guid
 	 * @param string|null $user_id
-	 * @return Credential
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -250,8 +242,6 @@ class CredentialMapper extends QBMapper {
 			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
 
-		/** @var Credential $credential */
-		$credential = $this->findEntity($qb);
-		return $credential;
+		return $this->findEntity($qb);
 	}
 }

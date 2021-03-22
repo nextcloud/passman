@@ -24,11 +24,10 @@
 namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\Vault;
-use OCP\AppFramework\Db\Entity;
-use OCP\IConfig;
-use OCP\AppFramework\Db\DoesNotExistException;
-
 use OCA\Passman\Db\VaultMapper;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 
 class VaultService {
@@ -42,7 +41,7 @@ class VaultService {
 	/**
 	 * Get vaults from a user.
 	 * @param $userId
-	 * @return \OCA\Passman\Db\Vault[]
+	 * @return Entity[]
 	 */
 	public function getByUser($userId) {
 		return $this->vaultMapper->findVaultsFromUser($userId);
@@ -52,29 +51,29 @@ class VaultService {
 	 * Get a single vault
 	 * @param $vault_id
 	 * @param $user_id
-	 * @return \OCA\Passman\Db\Vault[]
+	 * @return Entity[]
 	 */
 	public function getById($vault_id, $user_id) {
-		$vault = $this->vaultMapper->find($vault_id, $user_id);
-		return $vault;
+		return $this->vaultMapper->find($vault_id, $user_id);
 	}
 
 	/**
 	 * Get a single vault.
 	 * @param $vault_guid
 	 * @param $user_id
-	 * @return \OCA\Passman\Db\Vault
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
 	public function getByGuid($vault_guid, $user_id) {
-		$vault = $this->vaultMapper->findByGuid($vault_guid, $user_id);
-		return $vault;
+		return $this->vaultMapper->findByGuid($vault_guid, $user_id);
 	}
 
 	/**
 	 * Create a new vault.
 	 * @param $vault_name
 	 * @param $userId
-	 * @return \OCA\Passman\Db\Vault
+	 * @return Vault
 	 */
 	public function createVault($vault_name, $userId) {
 		return $this->vaultMapper->create($vault_name, $userId);
@@ -95,7 +94,7 @@ class VaultService {
 	 * @param $user_id
 	 * @return Vault|Entity
 	 */
-	public function setLastAccess($vault_id, $user_id){
+	public function setLastAccess($vault_id, $user_id) {
 		return $this->vaultMapper->setLastAccess($vault_id, $user_id);
 	}
 
@@ -106,18 +105,20 @@ class VaultService {
 	 * @param $publicKey
 	 * @return Vault|Entity
 	 */
-	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
+	public function updateSharingKeys($vault_id, $privateKey, $publicKey) {
 		return $this->vaultMapper->updateSharingKeys($vault_id, $privateKey, $publicKey);
 	}
 
 	/**
 	 * Delete a vault from user
-	 * @param string $vault_guid
-	 * @param string $user_id
+	 * @param $vault_guid
+	 * @param $user_id
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function deleteVault($vault_guid, $user_id){
+	public function deleteVault($vault_guid, $user_id) {
 		$vault = $this->getByGuid($vault_guid, $user_id);
-		if($vault instanceof Vault) {
+		if ($vault instanceof Vault) {
 			$this->vaultMapper->deleteVault($vault);
 		}
 	}

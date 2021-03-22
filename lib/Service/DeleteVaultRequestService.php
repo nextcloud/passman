@@ -25,6 +25,7 @@ namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\DeleteVaultRequest;
 use OCA\Passman\Db\DeleteVaultRequestMapper;
+use OCP\AppFramework\Db\Entity;
 
 
 class DeleteVaultRequestService {
@@ -46,27 +47,23 @@ class DeleteVaultRequestService {
 	}
 
 	/**
-	 *  Create a new DeleteVaultRequest
+	 * Create a new DeleteVaultRequest
 	 *
-	 * @return DeleteVaultRequest[]
+	 * @return Entity[]
 	 */
 	public function getDeleteRequests() {
-		/** @var DeleteVaultRequest[] $result */
-		$result = $this->deleteVaultRequestMapper->getDeleteRequests();
-		return $result;
+		return $this->deleteVaultRequestMapper->getDeleteRequests();
 	}
 
 	/**
 	 *  Create a new DeleteVaultRequest
 	 *
 	 * @param $vault_guid string The vault guid
-	 * @return bool | DeleteVaultRequest
+	 * @return bool | Entity
 	 */
 	public function getDeleteRequestForVault(string $vault_guid) {
 		try {
-			/** @var DeleteVaultRequest $result */
-			$result = $this->deleteVaultRequestMapper->getDeleteRequestsForVault($vault_guid);
-			return $result;
+			return $this->deleteVaultRequestMapper->getDeleteRequestsForVault($vault_guid);
 		} catch (\Exception $e) {
 			return false;
 		}
@@ -80,5 +77,4 @@ class DeleteVaultRequestService {
 	public function removeDeleteRequestForVault(DeleteVaultRequest $req) {
 		$this->deleteVaultRequestMapper->removeDeleteVaultRequest($req);
 	}
-
 }

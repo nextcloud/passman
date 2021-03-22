@@ -44,7 +44,7 @@ class VaultMapper extends QBMapper {
 	/**
 	 * @param int $vault_id
 	 * @param string $user_id
-	 * @return Vault[]
+	 * @return Entity[]
 	 */
 	public function find(int $vault_id, string $user_id) {
 		$qb = $this->db->getQueryBuilder();
@@ -53,15 +53,13 @@ class VaultMapper extends QBMapper {
 			->where($qb->expr()->eq('id', $qb->createNamedParameter($vault_id, IQueryBuilder::PARAM_INT)))
 			->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		/** @var Vault[] $vaults */
-		$vaults = $this->findEntities($qb);
-		return $vaults;
+		return $this->findEntities($qb);
 	}
 
 	/**
 	 * @param string $vault_guid
 	 * @param string $user_id
-	 * @return Vault
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -72,15 +70,13 @@ class VaultMapper extends QBMapper {
 			->where($qb->expr()->eq('guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)))
 			->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		/** @var Vault $vault */
-		$vault = $this->findEntity($qb);
-		return $vault;
+		return $this->findEntity($qb);
 	}
 
 
 	/**
 	 * @param string $user_id
-	 * @return Vault[]
+	 * @return Entity[]
 	 */
 	public function findVaultsFromUser(string $user_id) {
 		$qb = $this->db->getQueryBuilder();
@@ -88,9 +84,7 @@ class VaultMapper extends QBMapper {
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		/** @var Vault[] $vaults */
-		$vaults = $this->findEntities($qb);
-		return $vaults;
+		return $this->findEntities($qb);
 	}
 
 	/**

@@ -25,7 +25,9 @@ namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\CredentialRevisionMapper;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\IConfig;
 
 
@@ -61,7 +63,8 @@ class CredentialRevisionService {
 	 *
 	 * @param int $credential_id
 	 * @param string|null $user_id
-	 * @return CredentialRevision[]
+	 * @return Entity[]
+	 * @throws \Exception
 	 */
 	public function getRevisions(int $credential_id, string $user_id = null) {
 		$result = $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
@@ -76,7 +79,10 @@ class CredentialRevisionService {
 	/**
 	 * @param int $credential_id
 	 * @param string|null $user_id
-	 * @return CredentialRevision
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 * @throws \Exception
 	 */
 	public function getRevision(int $credential_id, string $user_id = null) {
 		$revision = $this->credentialRevisionMapper->getRevision($credential_id, $user_id);

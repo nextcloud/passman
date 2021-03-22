@@ -45,7 +45,7 @@ class FileMapper extends QBMapper {
 	/**
 	 * @param int $file_id
 	 * @param string|null $user_id
-	 * @return File
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -59,15 +59,13 @@ class FileMapper extends QBMapper {
 			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
 
-		/** @var File $file */
-		$file = $this->findEntity($qb);
-		return $file;
+		return $this->findEntity($qb);
 	}
 
 	/**
 	 * @param string $file_guid
 	 * @param string|null $user_id
-	 * @return File
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -81,9 +79,7 @@ class FileMapper extends QBMapper {
 			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
 
-		/** @var File $file */
-		$file = $this->findEntity($qb);
-		return $file;
+		return $this->findEntity($qb);
 	}
 
 	/**
@@ -130,7 +126,7 @@ class FileMapper extends QBMapper {
 
 	/**
 	 * @param string $user_id
-	 * @return File[]
+	 * @return Entity[]
 	 */
 	public function getFilesFromUser(string $user_id) {
 		$qb = $this->db->getQueryBuilder();
@@ -138,8 +134,6 @@ class FileMapper extends QBMapper {
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		/** @var File[] $files */
-		$files = $this->findEntities($qb);
-		return $files;
+		return $this->findEntities($qb);
 	}
 }

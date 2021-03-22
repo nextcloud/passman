@@ -25,7 +25,6 @@ namespace OCA\Passman\Service;
 
 
 use OCA\Passman\Db\CredentialMapper;
-use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\ShareRequestMapper;
 use OCA\Passman\Db\SharingACL;
@@ -138,7 +137,7 @@ class ShareService {
 	 * Obtains pending requests for the given user ID
 	 *
 	 * @param string $user_id
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 */
 	public function getUserPendingRequests(string $user_id) {
 		return $this->shareRequest->getUserPendingRequests($user_id);
@@ -177,7 +176,9 @@ class ShareService {
 	 *
 	 * @param string $user_id
 	 * @param string $item_guid
-	 * @return SharingACL
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
 	public function getACL(string $user_id, string $item_guid) {
 		return $this->sharingACL->getItemACL($user_id, $item_guid);
@@ -213,7 +214,10 @@ class ShareService {
 	 *
 	 * @param string $user_id
 	 * @param string $item_guid
-	 * @return CredentialRevision[]
+	 * @return array|Entity[]
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 * @throws \Exception
 	 */
 	public function getItemHistory(string $user_id, string $item_guid) {
 		$acl = $this->sharingACL->getItemACL($user_id, $item_guid);
@@ -238,7 +242,7 @@ class ShareService {
 	 * Get an share request by id
 	 *
 	 * @param int $id
-	 * @return ShareRequest
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -251,7 +255,7 @@ class ShareService {
 	 *
 	 * @param string $item_guid
 	 * @param string $target_vault_guid
-	 * @return ShareRequest
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -263,7 +267,7 @@ class ShareService {
 	 * Get the access control list by item guid
 	 *
 	 * @param string $item_guid
-	 * @return SharingACL[]
+	 * @return Entity[]
 	 */
 	public function getCredentialAclList(string $item_guid) {
 		return $this->sharingACL->getCredentialAclList($item_guid);
@@ -271,7 +275,7 @@ class ShareService {
 
 	/**
 	 * @param string $item_guid
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 * @throws Exception
 	 */
 	public function getCredentialPendingAclList(string $item_guid) {
@@ -283,7 +287,7 @@ class ShareService {
 	 *
 	 * @param string $user_id
 	 * @param string $item_guid
-	 * @return SharingACL
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -295,7 +299,7 @@ class ShareService {
 	 * Get pending share requests by guid
 	 *
 	 * @param string $item_guid
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 */
 	public function getShareRequestsByGuid(string $item_guid) {
 		return $this->shareRequest->getShareRequestsByItemGuid($item_guid);
@@ -314,7 +318,7 @@ class ShareService {
 	/**
 	 * Delete ACL
 	 *
-	 * @param SharingACL $ACL
+	 * @param SharingACL|Entity $ACL
 	 * @return SharingACL|Entity
 	 */
 	public function deleteShareACL(SharingACL $ACL) {
@@ -325,7 +329,7 @@ class ShareService {
 	 * Updates the given ACL entry
 	 *
 	 * @param SharingACL $sharingACL
-	 * @return SharingACL
+	 * @return SharingACL|Entity
 	 */
 	public function updateCredentialACL(SharingACL $sharingACL) {
 		return $this->sharingACL->updateCredentialACL($sharingACL);
@@ -345,7 +349,7 @@ class ShareService {
 	 *
 	 * @param string $item_guid
 	 * @param string $user_id
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 */
 	public function getPendingShareRequestsForCredential(string $item_guid, string $user_id) {
 		return $this->shareRequest->getPendingShareRequests($item_guid, $user_id);

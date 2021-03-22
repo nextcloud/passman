@@ -48,9 +48,10 @@ class SharingACLMapper extends QBMapper {
 
 	/**
 	 * Gets the currently accepted share requests from the given user for the given vault guid
-	 * @param $user_id
-	 * @param $vault_guid
-	 * @return SharingACL[]
+	 *
+	 * @param string $user_id
+	 * @param string $vault_guid
+	 * @return Entity[]
 	 */
 	public function getVaultEntries(string $user_id, string $vault_guid) {
 		$qb = $this->db->getQueryBuilder();
@@ -59,9 +60,7 @@ class SharingACLMapper extends QBMapper {
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)))
 			->andWhere($qb->expr()->eq('vault_guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)));
 
-		/** @var SharingACL[] $entities */
-		$entities = $this->findEntities($qb);
-		return $entities;
+		return $this->findEntities($qb);
 	}
 
 	/**
@@ -69,7 +68,7 @@ class SharingACLMapper extends QBMapper {
 	 *
 	 * @param string $user_id
 	 * @param string $item_guid
-	 * @return SharingACL
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -85,9 +84,7 @@ class SharingACLMapper extends QBMapper {
 			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
 
-		/** @var SharingACL $entity */
-		$entity = $this->findEntity($qb);
-		return $entity;
+		return $this->findEntity($qb);
 	}
 
 	/**
@@ -104,7 +101,7 @@ class SharingACLMapper extends QBMapper {
 	 * Gets the currently accepted share requests from the given user for the given vault guid
 	 *
 	 * @param string $item_guid
-	 * @return SharingACL[]
+	 * @return Entity[]
 	 */
 	public function getCredentialAclList(string $item_guid) {
 		$qb = $this->db->getQueryBuilder();
@@ -112,9 +109,7 @@ class SharingACLMapper extends QBMapper {
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)));
 
-		/** @var SharingACL[] $entities */
-		$entities = $this->findEntities($qb);
-		return $entities;
+		return $this->findEntities($qb);
 	}
 
 	/**

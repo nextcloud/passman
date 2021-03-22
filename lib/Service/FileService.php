@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Service;
 
+use Exception;
 use OCA\Passman\Db\File;
 use OCA\Passman\Db\FileMapper;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -51,6 +52,7 @@ class FileService {
 	 * @return array|File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
+	 * @throws Exception
 	 */
 	public function getFile(int $fileId, string $userId = null) {
 		$file = $this->fileMapper->getFile($fileId, $userId);
@@ -65,6 +67,7 @@ class FileService {
 	 * @return array|File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
+	 * @throws Exception
 	 */
 	public function getFileByGuid(string $file_guid, string $userId = null) {
 		$file = $this->fileMapper->getFileByGuid($file_guid, $userId);
@@ -79,6 +82,7 @@ class FileService {
 	 * @return array|File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
+	 * @throws Exception
 	 */
 	public function createFile(array $file, string $userId) {
 		$file = $this->encryptService->encryptFile($file);
@@ -102,6 +106,7 @@ class FileService {
 	 *
 	 * @param File $file
 	 * @return File
+	 * @throws Exception
 	 */
 	public function updateFile(File $file) {
 		$file = $this->encryptService->encryptFile($file);
@@ -113,6 +118,7 @@ class FileService {
 	 *
 	 * @param string $userId
 	 * @return File[]
+	 * @throws Exception
 	 */
 	public function getFilesFromUser(string $userId) {
 		$files = $this->fileMapper->getFilesFromUser($userId);

@@ -104,7 +104,8 @@ class CredentialService {
 	 *
 	 * @param int $vault_id
 	 * @param string $user_id
-	 * @return Credential[]
+	 * @return Entity[]
+	 * @throws \Exception
 	 */
 	public function getCredentialsByVaultId(int $vault_id, string $user_id) {
 		$credentials = $this->credentialMapper->getCredentialsByVaultId($vault_id, $user_id);
@@ -133,7 +134,8 @@ class CredentialService {
 	 * Get expired credentials.
 	 *
 	 * @param int $timestamp
-	 * @return Credential[]
+	 * @return Entity[]
+	 * @throws \Exception
 	 */
 	public function getExpiredCredentials(int $timestamp) {
 		$credentials = $this->credentialMapper->getExpiredCredentials($timestamp);

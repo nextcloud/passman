@@ -25,6 +25,7 @@ namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
@@ -45,7 +46,7 @@ class CredentialRevisionMapper extends QBMapper {
 	 *
 	 * @param int $credential_id
 	 * @param string|null $user_id
-	 * @return CredentialRevision[]
+	 * @return Entity[]
 	 */
 	public function getRevisions(int $credential_id, string $user_id = null) {
 		$qb = $this->db->getQueryBuilder();
@@ -57,15 +58,13 @@ class CredentialRevisionMapper extends QBMapper {
 			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
 
-		/** @var CredentialRevision[] $credentialRevisions */
-		$credentialRevisions = $this->findEntities($qb);
-		return $credentialRevisions;
+		return $this->findEntities($qb);
 	}
 
 	/**
 	 * @param int $revision_id
 	 * @param string|null $user_id
-	 * @return CredentialRevision
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -79,9 +78,7 @@ class CredentialRevisionMapper extends QBMapper {
 			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
 
-		/** @var CredentialRevision $credentialRevision */
-		$credentialRevision = $this->findEntity($qb);
-		return $credentialRevision;
+		return $this->findEntity($qb);
 	}
 
 	/**

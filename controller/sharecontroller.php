@@ -11,26 +11,26 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Activity;
+use OCA\Passman\Db\File;
 use OCA\Passman\Db\SharingACL;
-use OCA\Passman\Db\Vault;
+use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\NotificationService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
+use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCA\Passman\Utility\Utils;
-use OCP\AppFramework\Http\NotFoundResponse;
-use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
-
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IGroupManager;
+use OCP\IRequest;
 use OCP\IUserManager;
-
-use OCA\Passman\Service\VaultService;
-use OCA\Passman\Service\ActivityService;
-use OCA\Passman\Activity;
 use OCP\Notification\IManager;
 
 
@@ -51,18 +51,18 @@ class ShareController extends ApiController {
 	private $offset = 0;
 
 	public function __construct($AppName,
-								IRequest $request,
-								$UserId,
-								IGroupManager $groupManager,
-								IUserManager $userManager,
-								ActivityService $activityService,
-								VaultService $vaultService,
-								ShareService $shareService,
-								CredentialService $credentialService,
-								NotificationService $notificationService,
-								FileService $fileService,
-								SettingsService $config,
-								IManager $IManager
+	                            IRequest $request,
+	                            $UserId,
+	                            IGroupManager $groupManager,
+	                            IUserManager $userManager,
+	                            ActivityService $activityService,
+	                            VaultService $vaultService,
+	                            ShareService $shareService,
+	                            CredentialService $credentialService,
+	                            NotificationService $notificationService,
+	                            FileService $fileService,
+	                            SettingsService $config,
+	                            IManager $IManager
 	) {
 		parent::__construct(
 			$AppName,
@@ -434,9 +434,8 @@ class ShareController extends ApiController {
 
 	/**
 	 * @param $item_guid
-	 * @return JSONResponse
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
+	 * @return JSONResponse|NotFoundResponse
+	 * @throws \OCP\DB\Exception
 	 */
 	public function getItemAcl($item_guid) {
 		$acl = $this->shareService->getCredentialAclList($item_guid);
@@ -460,10 +459,9 @@ class ShareController extends ApiController {
 	/**
 	 * @param $item_guid
 	 * @param $file_guid
-	 * @NoAdminRequired
-	 * @PublicPage
-	 * @return mixed
-	 * @return NotFoundJSONResponse
+	 * @return array|File|NotFoundJSONResponse
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
 	public function getFile($item_guid, $file_guid) {
 		try {

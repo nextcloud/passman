@@ -53,7 +53,7 @@ class ShareRequestMapper extends QBMapper {
 	 *
 	 * @param string $item_guid
 	 * @param string $target_vault_guid
-	 * @return ShareRequest
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -64,16 +64,14 @@ class ShareRequestMapper extends QBMapper {
 			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
 			->andWhere($qb->expr()->eq('target_vault_guid', $qb->createNamedParameter($target_vault_guid, IQueryBuilder::PARAM_STR)));
 
-		/** @var ShareRequest $shareRequest */
-		$shareRequest = $this->findEntity($qb);
-		return $shareRequest;
+		return $this->findEntity($qb);
 	}
 
 	/**
 	 * Get shared items for the given item_guid
 	 *
 	 * @param string $item_guid
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 * @throws Exception
 	 */
 	public function getRequestsByItemGuidGroupedByUser(string $item_guid) {
@@ -86,9 +84,7 @@ class ShareRequestMapper extends QBMapper {
 			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
 			->groupBy('target_user_id');
 
-		/** @var ShareRequest[] $sharedRequests */
-		$sharedRequests = $this->findEntities($qb);
-		return $sharedRequests;
+		return $this->findEntities($qb);
 	}
 
 	/**
@@ -111,7 +107,7 @@ class ShareRequestMapper extends QBMapper {
 	 * Obtains all pending share requests for the given user ID
 	 *
 	 * @param string $user_id
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 */
 	public function getUserPendingRequests(string $user_id) {
 		$qb = $this->db->getQueryBuilder();
@@ -119,9 +115,7 @@ class ShareRequestMapper extends QBMapper {
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('target_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		/** @var ShareRequest[] $shareRequests */
-		$shareRequests = $this->findEntities($qb);
-		return $shareRequests;
+		return $this->findEntities($qb);
 	}
 
 	/**
@@ -137,7 +131,7 @@ class ShareRequestMapper extends QBMapper {
 	 * Gets a share request by it's unique incremental id
 	 *
 	 * @param int $id
-	 * @return ShareRequest
+	 * @return Entity
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
@@ -147,16 +141,14 @@ class ShareRequestMapper extends QBMapper {
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('id', $qb->createNamedParameter($id, IQueryBuilder::PARAM_INT)));
 
-		/** @var ShareRequest $shareRequest */
-		$shareRequest = $this->findEntity($qb);
-		return $shareRequest;
+		return $this->findEntity($qb);
 	}
 
 	/**
 	 * Gets all share requests by a given item GUID
 	 *
 	 * @param string $item_guid
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 */
 	public function getShareRequestsByItemGuid(string $item_guid) {
 		$qb = $this->db->getQueryBuilder();
@@ -164,9 +156,7 @@ class ShareRequestMapper extends QBMapper {
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)));
 
-		/** @var ShareRequest[] $shareRequests */
-		$shareRequests = $this->findEntities($qb);
-		return $shareRequests;
+		return $this->findEntities($qb);
 	}
 
 	/**
@@ -183,7 +173,7 @@ class ShareRequestMapper extends QBMapper {
 	 *
 	 * @param string $item_guid
 	 * @param string $user_id
-	 * @return ShareRequest[]
+	 * @return Entity[]
 	 */
 	public function getPendingShareRequests(string $item_guid, string $user_id) {
 		$qb = $this->db->getQueryBuilder();
@@ -192,9 +182,7 @@ class ShareRequestMapper extends QBMapper {
 			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
 			->andWhere($qb->expr()->eq('target_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		/** @var ShareRequest[] $shareRequests */
-		$shareRequests = $this->findEntities($qb);
-		return $shareRequests;
+		return $this->findEntities($qb);
 	}
 
 	/**

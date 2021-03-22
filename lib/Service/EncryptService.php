@@ -26,9 +26,9 @@ namespace OCA\Passman\Service;
 
 // Class copied from http://stackoverflow.com/questions/5089841/two-way-encryption-i-need-to-store-passwords-that-can-be-retrieved?answertab=votes#tab-top
 // Upgraded to use openssl
-use Icewind\SMB\Exception\Exception;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\File;
+use OCP\AppFramework\Db\Entity;
 use OCP\IConfig;
 
 /**
@@ -280,8 +280,9 @@ class EncryptService {
 	/**
 	 * Encrypt a credential
 	 *
-	 * @param Credential|array $credential the credential to decrypt
+	 * @param Credential|Entity|array $credential the credential to decrypt
 	 * @return Credential|array
+	 * @throws \Exception
 	 */
 	public function decryptCredential($credential) {
 		return $this->handleCredential($credential, EncryptService::OP_DECRYPT);
@@ -343,10 +344,10 @@ class EncryptService {
 	/**
 	 * Encrypt a file
 	 *
-	 * @param  File|array $file
+	 * @param File|array $file
 	 * @return File|array
+	 * @throws \Exception
 	 */
-
 	public function encryptFile($file) {
 		return $this->handleFile($file, EncryptService::OP_ENCRYPT);
 	}
@@ -354,10 +355,10 @@ class EncryptService {
 	/**
 	 * Decrypt a file
 	 *
-	 * @param  File|array $file
-	 * @return File|array
+	 * @param File|Entity|array $file
+	 * @return array|File
+	 * @throws \Exception
 	 */
-
 	public function decryptFile($file) {
 		return $this->handleFile($file, EncryptService::OP_DECRYPT);
 	}
