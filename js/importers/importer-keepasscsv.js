@@ -46,6 +46,7 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.username = row.login_name;
 				_credential.password = row.password;
 				_credential.url = row.web_site;
+				_credential.description = row.comments;
 				if (row.hasOwnProperty('expires')) {
 					row.expires = row.expires.replace('"', '');
 					_credential.expire_time = new Date(row.expires).getTime() / 1000;
