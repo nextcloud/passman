@@ -37,12 +37,14 @@ class CredentialService {
 
 	private CredentialMapper $credentialMapper;
 	private SharingACLMapper $sharingACL;
+	private ShareService $shareService;
 	private EncryptService $encryptService;
 	private $server_key;
 
-	public function __construct(CredentialMapper $credentialMapper, SharingACLMapper $sharingACL, EncryptService $encryptService, IConfig $config) {
+	public function __construct(CredentialMapper $credentialMapper, SharingACLMapper $sharingACL, ShareService $shareService, EncryptService $encryptService, IConfig $config) {
 		$this->credentialMapper = $credentialMapper;
 		$this->sharingACL = $sharingACL;
+		$this->shareService = $shareService;
 		$this->encryptService = $encryptService;
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
 	}
@@ -93,6 +95,7 @@ class CredentialService {
 	 * @return Entity
 	 */
 	public function deleteCredential(Credential $credential) {
+		$this->shareService->unshareCredential($credential->getGuid());
 		return $this->credentialMapper->deleteCredential($credential);
 	}
 
