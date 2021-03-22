@@ -70,7 +70,7 @@ For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/r
 | SQL Lite | • |   |   |
 | MySQL / MariaDB | • |   |   |
 | travis |   | • |   |
-| pgsql |   |   | • |
+| pgsql | • |   |   |
 
 ## Security
 
