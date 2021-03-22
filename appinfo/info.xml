@@ -19,7 +19,7 @@ Features:
 - Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )
 For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
-    <version>2.3.6</version>
+    <version>2.3.7</version>
     <licence>agpl</licence>
     <author homepage="https://github.com/brantje">Sander Brand</author>
     <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>
@@ -37,13 +37,12 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/share_credential.png">https://img.passman.cc/share_credential.png</screenshot>
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/password_audit.png">https://img.passman.cc/password_audit.png</screenshot>
     <dependencies>
-        <php min-version="7.0"/>
+        <php min-version="7.2"/>
         <database>sqlite</database>
         <database>pgsql</database>
         <database min-version="5.5">mysql</database>
         <lib>openssl</lib>
-        <nextcloud min-version="17" max-version="19"/>
-        <owncloud min-version="10" max-version="10"/>
+        <nextcloud min-version="20" max-version="22"/>
     </dependencies>
 
     <background-jobs>

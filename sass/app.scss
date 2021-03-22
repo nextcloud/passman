@@ -97,7 +97,7 @@
     width: 100%;
   }
 }
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 1024px){
   #app-navigation+#app-content #passman-controls {
     left: 300px;
     width: calc( 100% - 300px ) !important;

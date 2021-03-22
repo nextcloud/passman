@@ -67,6 +67,14 @@ header {
 #content-wrapper {
   padding-top: 0; }
 
+.share-controller {
+  width: 100%; }
+  .share-controller .share-container {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%; }
+
 .credential_container {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -83,6 +91,7 @@ header {
     font-weight: bold; }
   .credential_container button, .credential_container .text {
     margin: 0 auto;
+    margin-bottom: 25px;
     display: block; }
     .credential_container button i, .credential_container .text i {
       margin-right: 5px; }
