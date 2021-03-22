@@ -85,6 +85,7 @@ class CredentialController extends ApiController {
 			'username' => $username,
 			'password' => $password,
 			'url' => $url,
+			'icon' => $favicon,
 			'favicon' => $favicon,
 			'renew_interval' => $renew_interval,
 			'expire_time' => $expire_time,
@@ -94,7 +95,6 @@ class CredentialController extends ApiController {
 			'otp' => $otp,
 			'hidden' => $hidden,
 			'compromised' => $compromised
-
 		);
 
 		$credential = $this->credentialService->createCredential($credential);
