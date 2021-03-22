@@ -167,7 +167,7 @@ class CredentialMapper extends QBMapper {
 		$credential->setUsername($raw_credential['username']);
 		$credential->setPassword($raw_credential['password']);
 		$credential->setUrl($raw_credential['url']);
-		$credential->setIcon($raw_credential['favicon']);
+		$credential->setIcon($raw_credential['icon']);
 		$credential->setRenewInterval($raw_credential['renew_interval']);
 		$credential->setExpireTime($raw_credential['expire_time']);
 		$credential->setDeleteTime($raw_credential['delete_time']);

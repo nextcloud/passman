@@ -69,7 +69,7 @@ class CredentialController extends ApiController {
 	public function createCredential($changed, $created,
 									 $credential_id, $custom_fields, $delete_time,
 									 $description, $email, $expire_time, $favicon, $files, $guid,
-									 $hidden, $label, $otp, $password, $renew_interval,
+									 $hidden, $icon, $label, $otp, $password, $renew_interval,
 									 $tags, $url, $username, $vault_id, $compromised) {
 		$credential = array(
 			'credential_id' => $credential_id,
@@ -85,7 +85,7 @@ class CredentialController extends ApiController {
 			'username' => $username,
 			'password' => $password,
 			'url' => $url,
-			'icon' => $favicon,
+			'icon' => json_encode($icon),
 			'favicon' => $favicon,
 			'renew_interval' => $renew_interval,
 			'expire_time' => $expire_time,
