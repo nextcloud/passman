@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('PublicSharedCredential', ['$scope', 'ShareService', '$window', 'EncryptService', 'NotificationService', '$translate', function ($scope, ShareService, $window, EncryptService, NotificationService, $translate) {
+		.controller('PublicSharedCredential', ['$scope', 'ShareService', '$window', 'EncryptService', 'NotificationService', '$translate', 'escapeHTMLFilter', function ($scope, ShareService, $window, EncryptService, NotificationService, $translate, escapeHTMLFilter) {
 			var _key;
 			$scope.loading = false;
 			$scope.loadSharedCredential = function () {
@@ -58,7 +58,7 @@
 						return;
 					}
 					var file_data = EncryptService.decryptString(result.file_data, _key);
-					download(file_data, ShareService.escapeHTML(file.filename), file.mimetype);
+					download(file_data, escapeHTMLFilter(file.filename), file.mimetype);
 				});
 			};
 		}]);

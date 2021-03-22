@@ -310,15 +310,6 @@
 
 						setTimeout(workload.bind(this), 0);
 					});
-				},
-
-				/**
-				 * Sanitizes a HTML string by replacing all potential dangerous characters with HTML entities
-				 * @param {string} s String to sanitize
-				 * @return {string} Sanitized string
-				 */
-				escapeHTML: function (s) {
-					return s.toString().split('&').join('&amp;').split('<').join('&lt;').split('>').join('&gt;').split('"').join('&quot;').split('\'').join('&#039;');
 				}
 			};
 		}]);

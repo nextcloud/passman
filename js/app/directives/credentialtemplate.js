@@ -29,8 +29,8 @@
 	 * # passwordGen
 	 */
 	angular.module('passmanApp')
-		.directive('credentialTemplate', ['EncryptService', '$translate', 'FileService', 'ShareService', 'NotificationService', 'CredentialService',
-			function (EncryptService, $translate, FileService, ShareService, NotificationService, CredentialService) {
+		.directive('credentialTemplate', ['EncryptService', '$translate', 'FileService', 'ShareService', 'NotificationService', 'CredentialService', 'escapeHTMLFilter',
+			function (EncryptService, $translate, FileService, ShareService, NotificationService, CredentialService, escapeHTMLFilter) {
 			return {
 				templateUrl: 'views/partials/credential_template.html',
 				replace: true,
@@ -49,7 +49,7 @@
 
 							}
 							var file_data = EncryptService.decryptString(result.file_data, key);
-							download(file_data, ShareService.escapeHTML(file.filename), file.mimetype);
+							download(file_data, escapeHTMLFilter(file.filename), file.mimetype);
 
 						};
 
