@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('ImportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', '$translate', function ($scope, $window, CredentialService, VaultService, $translate) {
+		.controller('ImportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', 'FileService', 'EncryptService', '$translate', function ($scope, $window, CredentialService, VaultService, FileService, EncryptService, $translate) {
 			$scope.available_importers = [];
 			$scope.active_vault = VaultService.getActiveVault();
 
@@ -124,26 +124,34 @@
 				$scope.import_progress = 0;
 				$scope.file_read_percent = 0;
 				if (file_data) {
-					$window.PassmanImporter[$scope.selectedImporter.id]
-						.readFile(file_data)
-						.then(function (parseddata) {
-							parsed_data = parseddata;
-							$scope.file_read_progress = {
-								percent: 100,
-								loaded: parsed_data.length,
-								total: parsed_data.length
-							};
-							var msg = $translate.instant('import.loaded').replace('{{num}}', parsed_data.length);
-							_log(msg);
-							if (parsed_data.length > 0) {
-								addCredential(0);
-							} else {
-								// @TODO Show message no data found
-							}
-						}).progress(function (progress) {
-						$scope.file_read_progress = progress;
-						$scope.$digest();
+					var process = $window.PassmanImporter[$scope.selectedImporter.id];
+
+					if ($scope.selectedImporter.id === 'passmanJson'){
+						process.setRequiredServices(FileService, EncryptService);
+					}
+
+					process = process.readFile(file_data).then(function (parseddata) {
+						parsed_data = parseddata;
+						$scope.file_read_progress = {
+							percent: 100,
+							loaded: parsed_data.length,
+							total: parsed_data.length
+						};
+						var msg = $translate.instant('import.loaded').replace('{{num}}', parsed_data.length);
+						_log(msg);
+						if (parsed_data.length > 0) {
+							addCredential(0);
+						} else {
+							// @TODO Show message no data found
+						}
 					});
+
+					if ($scope.selectedImporter.id !== 'passmanJson'){
+						process.progress(function (progress) {
+							$scope.file_read_progress = progress;
+							$scope.$digest();
+						});
+					}
 				}
 			};
 

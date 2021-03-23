@@ -33,14 +33,68 @@ var PassmanImporter = PassmanImporter || {};
 		}
 	};
 
-	PassmanImporter.passmanJson.readFile = function (file_data) {
+	var FileService = null;
+	var EncryptService = null;
+
+	PassmanImporter.passmanJson.setRequiredServices = function (FileSvc, EncryptSvc) {
+		FileService = FileSvc;
+		EncryptService = EncryptSvc;
+	};
+
+	PassmanImporter.passmanJson.readFile = async function (file_data) {
 		/** global: C_Promise */
-		return new C_Promise(function(){
+		return new C_Promise(async function(){
+			var parseCustomFields = function (customFields, credential){
+				if (customFields.length > 0) {
+					for (var cf = 0; cf < customFields.length; cf++) {
+						if (customFields[cf].hasOwnProperty('clicktoshow')){
+							/** compatibility mode for the old version of the custom fields import implementation */
+							credential.custom_fields.push(
+								{
+									'label': customFields[cf].label,
+									'value': customFields[cf].value,
+									'secret': (customFields[cf].clicktoshow === '1'),
+									'field_type': customFields[cf].clicktoshow === '1' ? 'password' : 'text'
+								}
+							);
+						} else {
+							credential.custom_fields.push(
+								{
+									'label': customFields[cf].label,
+									'value': customFields[cf].value,
+									'secret': customFields[cf].secret,
+									'field_type': customFields[cf].field_type
+								}
+							);
+						}
+					}
+				}
+				return credential;
+			};
+			var parseFiles = async function (files, credential){
+				if (files.length > 0) {
+					for (var cf = 0; cf < files.length; cf++) {
+						var _file = {
+							filename: files[cf].filename,
+							size: files[cf].size,
+							mimetype: files[cf].mimetype,
+							data: files[cf].file_data
+						};
+						var file_result = await FileService.uploadFile(_file);
+						delete file_result.file_data;
+						file_result.filename = EncryptService.decryptString(file_result.filename);
+						credential.files.push(file_result);
+					}
+				}
+				return credential;
+			};
+
 			var parsed_json = PassmanImporter.readJson(file_data);
 			var credential_list = [];
 			for (var i = 0; i < parsed_json.length; i++) {
 				var item = parsed_json[i];
 				var _credential = PassmanImporter.newCredential();
+				_credential.icon = item.icon;
 				_credential.label = item.label;
 				_credential.username = item.username;
 				_credential.password = item.password;
@@ -50,17 +104,14 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.description = item.description;
 				//Check for custom fields
 				if (item.hasOwnProperty('customFields')) {
-					if (item.customFields.length > 0) {
-						for (var cf = 0; cf < item.customFields.length; cf++) {
-							_credential.custom_fields.push(
-								{
-									'label': item.customFields[cf].label,
-									'value': item.customFields[cf].value,
-									'secret': (item.customFields[cf].clicktoshow === '1')
-								}
-							)
-						}
-					}
+					_credential = parseCustomFields(item.customFields, _credential);
+				}
+				if (item.hasOwnProperty('custom_fields')) {
+					_credential = parseCustomFields(item.custom_fields, _credential);
+				}
+				//Check for files
+				if (item.hasOwnProperty('files')) {
+					_credential = await parseFiles(item.files, _credential);
 				}
 				// Check for otp
 				if (item.hasOwnProperty('otp')) {
@@ -74,7 +125,7 @@ var PassmanImporter = PassmanImporter || {};
 							},
 							'secret': item.otp.secret,
 							'type': item.otp.type
-						}
+						};
 					}
 				}
 				if(_credential.label){
