@@ -1,7 +1,7 @@
 { "translations": {
     "Generating sharing keys ( %s / 2)" : "生成共享秘鑰（%s / 2）",
     "Incorrect vault password!" : "錯誤的保險庫密碼！",
-    "Passwords do not match" : "密碼不匹配",
+    "Passwords do not match" : "密碼不相符",
     "General" : "一般",
     "Custom Fields" : "自定義字段",
     "Please fill in a label." : "請填寫一個標籤。",
