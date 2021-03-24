@@ -492,6 +492,8 @@
 
 .link {
   color: var(--color-primary); }
+  .link span {
+    cursor: pointer; }
 
 #app-sidebar {
   height: auto; }
