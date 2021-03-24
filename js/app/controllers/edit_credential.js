@@ -314,6 +314,12 @@
 						$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
 					}
 
+					if ($scope.storedCredential.label === null || $scope.storedCredential.label.length === 0) {
+						$scope.saving = false;
+						NotificationService.showNotification($translate.instant('error.no.label'), 5000);
+						return;
+					}
+
 					if ($scope.storedCredential.password !== $scope.storedCredential.password_repeat){
 						$scope.saving = false;
 						NotificationService.showNotification($translate.instant('password.do.not.match'), 5000);
