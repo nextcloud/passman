@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('GenericCsvImportCtrl', ['$scope', 'CredentialService', '$translate',
-			function ($scope, CredentialService, $translate) {
+		.controller('GenericCsvImportCtrl', ['$scope', 'CredentialService', 'FileService', 'EncryptService', '$translate', '$q',
+			function ($scope, CredentialService, FileService, EncryptService, $translate, $q) {
 				$scope.hello = 'world';
 
 				$scope.credentialProperties = [
@@ -93,7 +93,7 @@
 				var tagMapper = function (t) {
 					return {text: t};
 				};
-				var rowToCredential = function (row) {
+				var rowToCredential = async function (row) {
 					var _credential = PassmanImporter.newCredential();
 					for(var k = 0; k < $scope.import_fields.length; k++){
 						var field = $scope.import_fields[k];
@@ -124,7 +124,23 @@
 										// console.error(e);
 									}
 								} else {
-									_credential.custom_fields = row[k];
+									for(var j = 0; j < row[k].length; j++){
+										if (row[k][j].field_type === 'file'){
+											var _file = {
+												filename: row[k][j].value.filename,
+												size: row[k][j].value.size,
+												mimetype: row[k][j].value.mimetype,
+												data: row[k][j].value.file_data
+											};
+
+											row[k][j].value = await FileService.uploadFile(_file).then(function (result) {
+												delete result.file_data;
+												result.filename = EncryptService.decryptString(result.filename);
+												return result;
+											});
+										}
+										_credential.custom_fields.push(row[k][j]);
+									}
 								}
 							} else if(field === 'tags'){
 								if( row[k]) {
@@ -183,7 +199,7 @@
 					});
 				};
 
-				var addCredential = function (index) {
+				var addCredential = async function (index) {
 					function handleState (index) {
 						if ($scope.parsed_csv[index + 1]) {
 							$scope.import_progress = {
@@ -204,7 +220,7 @@
 						}
 					}
 
-					var _credential = rowToCredential($scope.parsed_csv[index]);
+					var _credential = await rowToCredential($scope.parsed_csv[index]);
 					_credential.vault_id = $scope.active_vault.vault_id;
 					if (!_credential.label) {
 						$scope.log.push($translate.instant('import.skipping', {line: index}));
