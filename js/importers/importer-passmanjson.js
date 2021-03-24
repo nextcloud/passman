@@ -44,7 +44,7 @@ var PassmanImporter = PassmanImporter || {};
 	PassmanImporter.passmanJson.readFile = async function (file_data) {
 		/** global: C_Promise */
 		return new C_Promise(async function(){
-			var parseCustomFields = function (customFields, credential){
+			var parseCustomFields = async function (customFields, credential){
 				if (customFields.length > 0) {
 					for (var cf = 0; cf < customFields.length; cf++) {
 						if (customFields[cf].hasOwnProperty('clicktoshow')){
@@ -58,6 +58,19 @@ var PassmanImporter = PassmanImporter || {};
 								}
 							);
 						} else {
+							if (customFields[cf].field_type === 'file'){
+								var _file = {
+									filename: customFields[cf].value.filename,
+									size: customFields[cf].value.size,
+									mimetype: customFields[cf].value.mimetype,
+									data: customFields[cf].value.file_data
+								};
+								var file_result = await FileService.uploadFile(_file);
+								delete file_result.file_data;
+								file_result.filename = EncryptService.decryptString(file_result.filename);
+								customFields[cf].value = file_result;
+							}
+
 							credential.custom_fields.push(
 								{
 									'label': customFields[cf].label,
@@ -104,10 +117,10 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.description = item.description;
 				//Check for custom fields
 				if (item.hasOwnProperty('customFields')) {
-					_credential = parseCustomFields(item.customFields, _credential);
+					_credential = await parseCustomFields(item.customFields, _credential);
 				}
 				if (item.hasOwnProperty('custom_fields')) {
-					_credential = parseCustomFields(item.custom_fields, _credential);
+					_credential = await parseCustomFields(item.custom_fields, _credential);
 				}
 				//Check for files
 				if (item.hasOwnProperty('files')) {

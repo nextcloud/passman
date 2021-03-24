@@ -491,7 +491,8 @@
   z-index: 1000; }
 
 .link {
-  color: var(--color-primary); }
+  color: var(--color-primary);
+  cursor: pointer; }
   .link span {
     cursor: pointer; }
 
