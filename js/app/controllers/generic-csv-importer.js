@@ -62,6 +62,11 @@
 						prop: 'custom_field'
 					},
 					{
+						label: 'Custom fields',
+						prop: 'custom_fields',
+						matching: ['custom_fields', 'customFields']
+					},
+					{
 						label: 'Notes',
 						prop: 'description',
 						matching: ['notes', 'description', 'comments']
@@ -102,6 +107,25 @@
 									'value': row[k],
 									'secret': 0
 								});
+							} else if(field === 'custom_fields'){
+								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
+									try {
+										row[k] = JSON.parse(row[k]);
+										for(var i = 0; k < row[k].length; i++){
+											_credential.custom_fields.push({
+												'label': row[k][i].label,
+												'value': row[k][i].value,
+												'secret': row[k][i].secret,
+												'field_type': row[k][i].field_type,
+											});
+										}
+									} catch (e) {
+										// ignore row[k], it contains no valid json data
+										// console.error(e);
+									}
+								} else {
+									_credential.custom_fields = row[k];
+								}
 							} else if(field === 'tags'){
 								if( row[k]) {
 									var tags = row[k].split(',');
@@ -124,7 +148,6 @@
 					$scope.import_fields = [];
 					$scope.inspected_credential = false;
 					$scope.matched = false;
-					$scope.skipFirstRow = false;
 					var file_data = file.data.split(',');
 					file_data = decodeURIComponent(escape(window.atob(file_data[1])));
 					/** global: Papa */
@@ -146,6 +169,12 @@
 								}
 								if($scope.matched){
 									$scope.inspectCredential(results.data[1]);
+								}
+
+								for(var j = 0; j < results.data.length; j++){
+									if (results.data[j].length === 1 && results.data[j][0].length === 0) {
+										results.data.splice(j,j);
+									}
 								}
 								$scope.parsed_csv = results.data;
 								$scope.$apply();
@@ -191,6 +220,7 @@
 					});
 				};
 
+				$scope.skipFirstRow = true;
 				$scope.importing = false;
 				$scope.startCSVImport = function () {
 					$scope.importing = true;

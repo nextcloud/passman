@@ -1347,7 +1347,8 @@
   clear: both; }
 
 input[type="checkbox"] {
-  min-height: inherit; }
+  min-height: inherit;
+  cursor: pointer; }
 
 .alert {
   padding: 15px;
