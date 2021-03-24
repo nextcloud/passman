@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('ImportCtrl', ['$scope', '$window', 'CredentialService', 'VaultService', 'FileService', 'EncryptService', '$translate', function ($scope, $window, CredentialService, VaultService, FileService, EncryptService, $translate) {
+		.controller('ImportCtrl', ['$scope', '$rootScope', '$window', 'CredentialService', 'VaultService', 'FileService', 'EncryptService', '$translate', function ($scope, $rootScope, $window, CredentialService, VaultService, FileService, EncryptService, $translate) {
 			$scope.available_importers = [];
 			$scope.active_vault = VaultService.getActiveVault();
 
@@ -109,6 +109,7 @@
 								total: parsed_data.length
 							};
 							_log($translate.instant('done'));
+							$rootScope.refresh();
 						}
 					}
 				});
@@ -130,7 +131,7 @@
 						process.setRequiredServices(FileService, EncryptService);
 					}
 
-					process = process.readFile(file_data).then(function (parseddata) {
+					process.readFile(file_data).then(function (parseddata) {
 						parsed_data = parseddata;
 						$scope.file_read_progress = {
 							percent: 100,
@@ -144,14 +145,10 @@
 						} else {
 							// @TODO Show message no data found
 						}
+					}).progress(function (progress) {
+						$scope.file_read_progress = progress;
+						$scope.$digest();
 					});
-
-					if ($scope.selectedImporter.id !== 'passmanJson'){
-						process.progress(function (progress) {
-							$scope.file_read_progress = progress;
-							$scope.$digest();
-						});
-					}
 				}
 			};
 

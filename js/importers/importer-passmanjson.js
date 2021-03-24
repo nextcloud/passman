@@ -41,7 +41,7 @@ var PassmanImporter = PassmanImporter || {};
 		EncryptService = EncryptSvc;
 	};
 
-	PassmanImporter.passmanJson.readFile = async function (file_data) {
+	PassmanImporter.passmanJson.readFile = function (file_data) {
 		/** global: C_Promise */
 		return new C_Promise(async function(){
 			var parseCustomFields = async function (customFields, credential){
