@@ -67,6 +67,11 @@
 						matching: ['custom_fields', 'customFields']
 					},
 					{
+						label: 'Files',
+						prop: 'files',
+						matching: ['files']
+					},
+					{
 						label: 'Notes',
 						prop: 'description',
 						matching: ['notes', 'description', 'comments']
@@ -114,7 +119,6 @@
 										for(var i = 0; k < row[k].length; i++){
 											_credential.custom_fields.push({
 												'label': row[k][i].label,
-												'value': row[k][i].value,
 												'secret': row[k][i].secret,
 												'field_type': row[k][i].field_type,
 											});
@@ -140,6 +144,35 @@
 											});
 										}
 										_credential.custom_fields.push(row[k][j]);
+									}
+								}
+							} else if(field === 'files'){
+								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
+									try {
+										row[k] = JSON.parse(row[k]);
+										for(var i = 0; k < row[k].length; i++){
+											_credential.files.push({
+												filename: row[k][i].filename,
+												size: row[k][i].size,
+												mimetype: row[k][i].mimetype
+											});
+										}
+									} catch (e) {
+										// ignore row[k], it contains no valid json data
+										// console.error(e);
+									}
+								} else {
+									for(var j = 0; j < row[k].length; j++){
+										_credential.files.push(await FileService.uploadFile({
+											filename: row[k][j].filename,
+											size: row[k][j].size,
+											mimetype: row[k][j].mimetype,
+											data: row[k][j].file_data
+										}).then(function (result) {
+											delete result.file_data;
+											result.filename = EncryptService.decryptString(result.filename);
+											return result;
+										}));
 									}
 								}
 							} else if(field === 'tags'){
