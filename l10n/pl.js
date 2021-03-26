@@ -181,7 +181,7 @@ OC.L10N.register(
     "100 / hour" : "100/godzinę",
     "Throttled online attack" : "Spowolniony atak online",
     "10 / second" : "10/sekundę",
-    "Unthrottled online attack" : "Nie dławiony atak online",
+    "Unthrottled online attack" : "Nieograniczony atak online",
     "10k / second" : "10k/sekundę",
     "Offline attack, slow hash, many cores" : "Atak offline, wolne hashowanie, dużo rdzeni",
     "10B / second" : "10B/sekundę",
