@@ -226,7 +226,10 @@ class ShareController extends ApiController {
 		return new JSONResponse(array('result' => true));
 	}
 
-
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
 	public function unshareCredentialFromUser($item_guid, $user_id) {
 		$acl = null;
 		$sr = null;
@@ -436,6 +439,8 @@ class ShareController extends ApiController {
 	 * @param $item_guid
 	 * @return JSONResponse|NotFoundResponse
 	 * @throws \OCP\DB\Exception
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getItemAcl($item_guid) {
 		$acl = $this->shareService->getCredentialAclList($item_guid);
@@ -462,6 +467,8 @@ class ShareController extends ApiController {
 	 * @return array|File|NotFoundJSONResponse
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
 	 */
 	public function getFile($item_guid, $file_guid) {
 		try {
