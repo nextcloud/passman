@@ -79,38 +79,43 @@ class AdminController extends ApiController {
 	}
 
 	public function moveCredentials($source_account, $destination_account) {
-		$vaults = $this->vaultService->getByUser($source_account);
-		foreach ($vaults as $vault) {
-			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $source_account);
-			foreach ($credentials as $credential) {
-				$revisions = $this->revisionService->getRevisions($credential->getId());
-				foreach ($revisions as $revision) {
-					$r = new CredentialRevision();
-					$r->setId($revision['revision_id']);
-					$r->setGuid($revision['guid']);
-					$r->setCredentialId($credential->getId());
-					$r->setUserId($destination_account);
-					$r->setCreated($revision['created']);
-					$r->setCredentialData(base64_encode(json_encode($revision['credential_data'])));
-					$r->setEditedBy($revision['edited_by']);
-					$this->revisionService->updateRevision($r);
+		$succeed = false;
+		if ($source_account != $destination_account){
+			$vaults = $this->vaultService->getByUser($source_account);
+			foreach ($vaults as $vault) {
+				$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $source_account);
+				foreach ($credentials as $credential) {
+					$revisions = $this->revisionService->getRevisions($credential->getId());
+					foreach ($revisions as $revision) {
+						$r = new CredentialRevision();
+						$r->setId($revision['revision_id']);
+						$r->setGuid($revision['guid']);
+						$r->setCredentialId($credential->getId());
+						$r->setUserId($destination_account);
+						$r->setCreated($revision['created']);
+						$r->setCredentialData(base64_encode(json_encode($revision['credential_data'])));
+						$r->setEditedBy($revision['edited_by']);
+						$this->revisionService->updateRevision($r);
+					}
+
+					$c = $credential->jsonSerialize();
+					$c['user_id'] = $destination_account;
+					$c['icon'] = json_encode($c['icon']);
+					$this->credentialService->updateCredential($c, true);
 				}
-
-				$c = $credential->jsonSerialize();
-				$c['user_id'] = $destination_account;
-				$c['icon'] = json_encode($c['icon']);
-				$this->credentialService->updateCredential($c, true);
+				$vault->setUserId($destination_account);
+				$this->vaultService->updateVault($vault);
 			}
-			$vault->setUserId($destination_account);
-			$this->vaultService->updateVault($vault);
+
+			$files = $this->fileService->getFilesFromUser($source_account);
+			foreach ($files as $file) {
+				$file->setUserId($destination_account);
+				$this->fileService->updateFile($file);
+			}
+			$succeed = true;
 		}
 
-		$files = $this->fileService->getFilesFromUser($source_account);
-		foreach ($files as $file) {
-			$file->setUserId($destination_account);
-			$this->fileService->updateFile($file);
-		}
-		return new JSONResponse(array('success' => true));
+		return new JSONResponse(array('success' => $succeed));
 	}
 
 	public function listRequests(){

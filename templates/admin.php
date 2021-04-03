@@ -131,7 +131,8 @@ style('passman', 'vendor/font-awesome/font-awesome.min');
 				</tr>
 			</table>
 			<button class="success" id="move_credentials">Move</button>
-			<span id="moveStatus" style="display: none;"><?php p($l->t('Credentials moved!')); ?></span>
+			<span id="moveStatusSucceeded" style="display: none;"><?php p($l->t('Credentials moved!')); ?></span>
+            <span id="moveStatusFailed" style="display: none;"><?php p($l->t('An error occurred!')); ?></span>
 
 		</div>
 		<div id="tabs-3">
