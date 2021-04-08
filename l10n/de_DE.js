@@ -279,7 +279,7 @@ OC.L10N.register(
     "Change vault" : "Wechsle Tresor",
     "Deleted credentials" : "Zugangsdaten gelöscht",
     "Logout" : "Abmelden",
-    "Donate" : "Spende",
+    "Donate" : "Spenden",
     "Show All" : "Alle anzeigen",
     "Tags" : "Schlagworte",
     "Search Tags" : "Schlagworte suchen",
