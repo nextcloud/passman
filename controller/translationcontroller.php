@@ -329,7 +329,7 @@ class TranslationController extends ApiController {
 			'account' => $this->trans->t('Account'),
 			'password' => $this->trans->t('Password'),
 			'otp' => $this->trans->t('OTP'),
-			'email' => $this->trans->t('E-mail'),
+			'email' => $this->trans->t('Email'),
 			'url' => $this->trans->t('URL'),
 			'notes' => $this->trans->t('Notes'),
 			'files' => $this->trans->t('Files'),
