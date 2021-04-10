@@ -210,7 +210,7 @@ OC.L10N.register(
     "Cancel" : "Anuluj",
     "Settings" : "Ustawienia",
     "Share credential {{credential}}" : "Udostępnij poświadczenie {{credential}}",
-    "Unshare" : "Zatrzymaj udostępnienie",
+    "Unshare" : "Zatrzymaj udostępnianie",
     "Showing deleted since" : "Pokazuję skasowane od",
     "Beginning" : "Początek",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "Pokazuję {{number_filtered}} z {{credential_number}} poświadczeń",
