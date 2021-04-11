@@ -172,7 +172,7 @@ OC.L10N.register(
     "Enable link sharing" : "Abilita condivisione tramite collegamento",
     "Share until date" : "Condividi fino alla data",
     "Expire after views" : "Scadenza dopo viste",
-    "Click \"Share\" first" : "Prima clicca \"Condividi\"",
+    "Click \"Share\" first" : "Prima fai clic su \"Condividi\"",
     "Show files" : "Mostra i file",
     "Details" : "Dettagli",
     "Hide details" : "Nascondi dettagli",
