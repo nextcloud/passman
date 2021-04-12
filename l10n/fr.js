@@ -196,7 +196,7 @@ OC.L10N.register(
     "Base guesses" : "Hypothèses fondées",
     "Uppercase variations" : "Variations en majuscules",
     "l33t-variations" : "Variations l33t",
-    "Showing revisions of" : "Montrer les révisions de",
+    "Showing revisions of" : "Afficher les révisions de ",
     "Revision of" : "Révision de",
     "by" : "par",
     "No revisions found." : "Pas de révision trouvée.",
