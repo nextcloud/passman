@@ -21,7 +21,7 @@ OC.L10N.register(
     "Decrypting credentials" : "Anmeldeinformationen werden entschlüsselt",
     "Done" : "Fertig",
     "File read." : "Datei gelesen.",
-    "Proceed with the following steps to import your file" : "Führen Sie folgende Schritte aus, um Ihre Datei zu importieren",
+    "Proceed with the following steps to import your file" : "Führen Sie folgende Schritte aus, um Ihre Datei zu importieren.",
     "Skipping unlabeled credential" : "Überspringe ungekennzeichnete Zugangsdaten ",
     "Adding {{credential}}" : "{{credential}} werden hinzugefügt",
     "Added {{credential}}" : "{{credential}} hinzugefügt",
