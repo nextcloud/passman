@@ -170,6 +170,7 @@
     "100 / hour" : "100 / orduko",
     "10 / second" : "10 / segunduko",
     "10k / second" : "10k / segundoko",
+    "Offline attack, slow hash, many cores" : "Lineaz kanpoko erasoa, hash geldoa, nukleo asko",
     "10B / second" : "10B / segunduko",
     "Offline attack, fast hash, many cores" : "Lineaz kanpoko erasoa, hash azkarra, nukleo asko",
     "Match sequence" : "Sekuentzia baterapena",
