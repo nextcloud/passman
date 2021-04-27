@@ -226,7 +226,7 @@ OC.L10N.register(
     "Created" : "Erstellt",
     "Edit" : "Bearbeiten",
     "Delete" : "Löschen",
-    "Share" : "Share",
+    "Share" : "Freigabe",
     "Recover" : "Wiederherstellen",
     "Destroy" : "Vernichten",
     "Use regex" : "Regex verwenden",
