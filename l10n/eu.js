@@ -245,6 +245,7 @@ OC.L10N.register(
     "Please input the password for" : "Mesedez sartu honetarako pasahitza:",
     "Set this vault as the default." : "Ezarri gordailu hau lehenetsi gisa.",
     "Log into this vault automatically." : "Hasi saioa gordailu honetan automatikoki.",
+    "Log out of this vault automatically after: " : "Itxi saioa automatikoki gordailu honetan denbora honen ostean:",
     "Decrypt vault" : "Dezifratu gordailua",
     "Seems you lost the vault password and you're unable to log in." : "Badirudi gordailuaren pasahitza galdu duzula eta ezin duzula saioa hasi.",
     "If you want this vault to be removed you can request that here." : "Gordailu hau kendu nahi baduzu, hemen eskatu dezakezu norbaitek ken dezala.",
