@@ -292,7 +292,7 @@ OC.L10N.register(
     "Someone has shared a credential with you." : "Jemand hat Zugangsdaten mit Ihnen geteilt.",
     "Click here to request it" : "Hier klicken, um es anzufordern",
     "Loading…" : "Lade …",
-    "Awwhh… credential not found. Maybe it expired" : "Oh… Zugangsdaten nicht gefunden. Vielleicht sind sie abgelaufen ",
+    "Awwhh… credential not found. Maybe it expired" : "Oh… Zugangsdaten nicht gefunden. Vielleicht sind sie abgelaufen",
     "Mark as Compromised" : "Als kompromittiert markieren",
     "Compromised!" : "Kompromittiert!",
     "This password is compromised. You can only remove this warning by changing the password." : "Dieses Passwort wurde kompromittiert. Die Warnung kann nur durch eine Änderung des Passwortes entfernt werden.",
@@ -362,7 +362,7 @@ OC.L10N.register(
     "Connection to server lost" : "Verbindung zum Server verloren",
     "Problem loading page, reloading in 5 seconds" : "Problem beim Laden der Seite, Seite wird in 5 Sekunden erneut geladen",
     "Saving …" : "Speichere…",
-    "Dismiss" : "Ausblenden",
+    "Dismiss" : "Ablehnen",
     "seconds ago" : "Gerade eben"
 },
 "nplurals=2; plural=(n != 1);");

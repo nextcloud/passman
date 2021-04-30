@@ -202,6 +202,7 @@ OC.L10N.register(
     "Unshare" : "Ez partekatu",
     "Showing deleted since" : "Egun honetatik ezabatuak erakusten:",
     "Beginning" : "Hasiera",
+    "Showing {{number_filtered}} of {{credential_number}} credentials" : "{{credential_number}}(e)tik {{number_filtered}} kredentzial erakusten",
     "Search for credential…" : "Bilatu kredentziala...",
     "Account" : "Kontua",
     "Password" : "Pasahitza",
