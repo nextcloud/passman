@@ -71,7 +71,7 @@ OC.L10N.register(
     "Complete" : "Completo",
     "Username" : "Nome do usuário",
     "Repeat password" : "Repetir a senha",
-    "Add tag" : "Adicionar rótulo",
+    "Add tag" : "Adicionar etiqueta",
     "Pick an icon" : "Escolher um ícone",
     "Search icons" : "Procurar ícones",
     "Upload a custom icon:" : "Enviar um ícone personalizado:",
