@@ -325,7 +325,7 @@
     "Your credential \"%s\" expired, click here to update the credential." : "Deine Anmeldedaten \"%s\" sind abgelaufen, klicke zur Aktualisierung Deiner Anmeldedaten hier.",
     "Remind me later" : "Erinnere mich später",
     "Ignore" : "Ignorieren",
-    "%s shared \"%s\" with you. Click here to accept" : "%s teilt \"%s\" mit dir. Um dies zu akzeptieren, klicke hier",
+    "%s shared \"%s\" with you. Click here to accept" : "%s teilt \"%s\" mit Dir. Um dies zu akzeptieren, klicke hier",
     "%s has declined your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Dir abgelehnt.",
     "%s has accepted your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit Dir akzeptiert.",
     "Passman" : "Passman",

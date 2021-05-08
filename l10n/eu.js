@@ -278,6 +278,7 @@ OC.L10N.register(
     "Click here to request it" : "Egin klik hemen hura eskatzeko",
     "Loading…" : "Kargatzen…",
     "Awwhh… credential not found. Maybe it expired" : "Ooohh... ez da kredentziala aurkitu. Agian iraungitu da ",
+    "Mark as Compromised" : "Markatu arriskuan gisa",
     "Compromised!" : "Arriskuan!",
     "email" : "posta elektronikoa",
     "Description" : "Deskribapena",
