@@ -11,22 +11,20 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Activity;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\SharingACL;
-use OCA\Passman\Service\EncryptService;
-use OCA\Passman\Service\SettingsService;
-use OCA\Passman\Utility\NotFoundJSONResponse;
-use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Http;
-use OCP\AppFramework\Http\DataResponse;
-use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\ApiController;
-use OCA\Passman\Service\CredentialService;
-use OCA\Passman\Activity;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialRevisionService;
+use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
+use OCA\Passman\Utility\NotFoundJSONResponse;
+use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\IRequest;
 
 
 class CredentialController extends ApiController {
@@ -38,13 +36,13 @@ class CredentialController extends ApiController {
 	private $settings;
 
 	public function __construct($AppName,
-								IRequest $request,
-								$userId,
-								CredentialService $credentialService,
-								ActivityService $activityService,
-								CredentialRevisionService $credentialRevisionService,
-								ShareService $sharingService,
-								SettingsService $settings
+	                            IRequest $request,
+	                            $userId,
+	                            CredentialService $credentialService,
+	                            ActivityService $activityService,
+	                            CredentialRevisionService $credentialRevisionService,
+	                            ShareService $sharingService,
+	                            SettingsService $settings
 
 	) {
 		parent::__construct(
@@ -67,10 +65,10 @@ class CredentialController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function createCredential($changed, $created,
-									 $credential_id, $custom_fields, $delete_time,
-									 $description, $email, $expire_time, $favicon, $files, $guid,
-									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id, $compromised) {
+	                                 $credential_id, $custom_fields, $delete_time,
+	                                 $description, $email, $expire_time, $favicon, $files, $guid,
+	                                 $hidden, $icon, $label, $otp, $password, $renew_interval,
+	                                 $tags, $url, $username, $vault_id, $compromised) {
 		$credential = array(
 			'credential_id' => $credential_id,
 			'guid' => $guid,
@@ -85,7 +83,7 @@ class CredentialController extends ApiController {
 			'username' => $username,
 			'password' => $password,
 			'url' => $url,
-			'icon' => $favicon,
+			'icon' => json_encode($icon),
 			'favicon' => $favicon,
 			'renew_interval' => $renew_interval,
 			'expire_time' => $expire_time,
@@ -106,7 +104,7 @@ class CredentialController extends ApiController {
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 
-        return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
+		return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
 	/**
@@ -123,10 +121,10 @@ class CredentialController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function updateCredential($changed, $created,
-									 $credential_id, $custom_fields, $delete_time, $credential_guid,
-									 $description, $email, $expire_time, $icon, $files, $guid,
-									 $hidden, $label, $otp, $password, $renew_interval,
-									 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision, $compromised) {
+	                                 $credential_id, $custom_fields, $delete_time, $credential_guid,
+	                                 $description, $email, $expire_time, $icon, $files, $guid,
+	                                 $hidden, $label, $otp, $password, $renew_interval,
+	                                 $tags, $url, $username, $vault_id, $revision_created, $shared_key, $acl, $unshare_action, $set_share_key, $skip_revision, $compromised) {
 
 
 		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid);
@@ -261,7 +259,7 @@ class CredentialController extends ApiController {
 
 		$credential = $this->credentialService->updateCredential($credential);
 
-        return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
+		return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
 	/**
@@ -287,6 +285,7 @@ class CredentialController extends ApiController {
 	/**
 	 * Delete leftovers from a credential
 	 * @param Credential $credential
+	 * @throws \Exception
 	 */
 	private function deleteCredentialParts(Credential $credential) {
 		$this->activityService->add(
@@ -295,16 +294,17 @@ class CredentialController extends ApiController {
 			'', $this->userId, Activity::TYPE_ITEM_ACTION);
 		$this->sharingService->unshareCredential($credential->getGuid());
 		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
-				$id = $revision['revision_id'];
-				if(isset($id)){
-					$this->credentialRevisionService->deleteRevision($id, $this->userId);
-				}
+			$id = $revision['revision_id'];
+			if (isset($id)) {
+				$this->credentialRevisionService->deleteRevision($id, $this->userId);
+			}
 		}
 	}
 
 	/**
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
+	 * @throws \Exception
 	 */
 	public function getRevision($credential_guid) {
 		try {

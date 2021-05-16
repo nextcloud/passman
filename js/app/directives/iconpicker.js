@@ -129,7 +129,9 @@
             };
 
             scope.useIcon = function() {
-
+	            if(!scope.credential.icon){
+		            scope.credential.icon = {};
+	            }
                 if(scope.customIcon){
                     var data = scope.customIcon.data;
                     scope.credential.icon.type = data.substring(data.lastIndexOf(":")+1,data.lastIndexOf(";"));
@@ -138,9 +140,6 @@
 					$http.get(scope.selectedIcon.url).then(function(result) {
 						var base64Data = window.btoa(result.data);
 						var mimeType = 'svg+xml';
-						if(!scope.credential.icon){
-							scope.credential.icon = {};
-						}
 						scope.credential.icon.type = mimeType;
 						scope.credential.icon.content = base64Data;
 					});

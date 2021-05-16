@@ -24,72 +24,99 @@
 namespace OCA\Passman\Db;
 
 
-use OCP\AppFramework\Db\Mapper;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
-use OCP\IUser;
-use OCA\Passman\Utility\Utils;
 
-class SharingACLMapper extends Mapper {
-    const TABLE_NAME = '*PREFIX*passman_sharing_acl';
+class SharingACLMapper extends QBMapper {
+	const TABLE_NAME = 'passman_sharing_acl';
 
-    public function __construct(IDBConnection $db) {
-        parent::__construct($db, 'passman_sharing_acl');
-    }
+	public function __construct(IDBConnection $db) {
+		parent::__construct($db, 'passman_sharing_acl');
+	}
 
-    public function createACLEntry(SharingACL $acl){
-        return $this->insert($acl);
-    }
+	/**
+	 * @param SharingACL $acl
+	 * @return SharingACL|Entity
+	 */
+	public function createACLEntry(SharingACL $acl) {
+		return $this->insert($acl);
+	}
 
-    /**
-     * Gets the currently accepted share requests from the given user for the given vault guid
-     * @param $user_id
-     * @param $vault_guid
-     * @return SharingACL[]
-     */
-    public function getVaultEntries($user_id, $vault_guid) {
-        $q = "SELECT * FROM ". self::TABLE_NAME ." WHERE user_id = ? AND vault_guid = ?";
-        return $this->findEntities($q, [$user_id, $vault_guid]);
-    }
+	/**
+	 * Gets the currently accepted share requests from the given user for the given vault guid
+	 *
+	 * @param string $user_id
+	 * @param string $vault_guid
+	 * @return Entity[]
+	 */
+	public function getVaultEntries(string $user_id, string $vault_guid) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->eq('vault_guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)));
 
-    /**
-     * Gets the acl for a given item guid
-     * @param $user_id
-     * @param $item_guid
-     * @return SharingACL
-     */
-    public function getItemACL($user_id, $item_guid) {
-        $q = "SELECT * FROM " . self::TABLE_NAME . " WHERE item_guid = ? AND ";
-        $filter = [$item_guid];
-        $q .= ($user_id === null) ? 'user_id is null' : 'user_id = ? ';
-        if ($user_id !== null){
-			$filter[] = $user_id;
-        }
+		return $this->findEntities($qb);
+	}
 
-        return $this->findEntity($q, $filter);
-    }
+	/**
+	 * Gets the acl for a given item guid
+	 *
+	 * @param string $user_id
+	 * @param string $item_guid
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getItemACL(string $user_id, string $item_guid) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)));
 
-    /**
-     * Update the acl for a given item guid
-     * @param $user_id
-     * @param $item_guid
-     * @return SharingACL
-     */
-    public function updateCredentialACL(SharingACL $sharingACL) {
-        return $this->update($sharingACL);
-    }
+		if ($user_id === null) {
+			$qb->andWhere($qb->expr()->isNull('user_id'));
+		} else {
+			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+		}
 
-    /**
-     * Gets the currently accepted share requests from the given user for the given vault guid
-     * @param $user_id
-     * @param $vault_id
-     * @return SharingACL[]
-     */
-    public function getCredentialAclList($item_guid) {
-        $q = "SELECT * FROM ". self::TABLE_NAME ." WHERE item_guid = ?";
-        return $this->findEntities($q, [$item_guid]);
-    }
+		return $this->findEntity($qb);
+	}
 
-    public function deleteShareACL(SharingACL $ACL){
-    	return $this->delete($ACL);
+	/**
+	 * Update an acl
+	 *
+	 * @param SharingACL $sharingACL
+	 * @return SharingACL|Entity
+	 */
+	public function updateCredentialACL(SharingACL $sharingACL) {
+		return $this->update($sharingACL);
+	}
+
+	/**
+	 * Gets the currently accepted share requests from the given user for the given vault guid
+	 *
+	 * @param string $item_guid
+	 * @return Entity[]
+	 */
+	public function getCredentialAclList(string $item_guid) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * @param SharingACL $ACL
+	 * @return SharingACL|Entity
+	 */
+	public function deleteShareACL(SharingACL $ACL) {
+		return $this->delete($ACL);
 	}
 }

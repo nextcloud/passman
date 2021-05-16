@@ -11,23 +11,28 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Service\CredentialService;
+use OCP\App\IAppManager;
+use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\ApiController;
-use OCA\Passman\Service\CredentialService;
-use \OCP\App;
+use OCP\Notification\IManager;
 
 class InternalController extends ApiController {
 	private $userId;
 	private $credentialService;
 	private $config;
+	private $manager;
+	private $appManager;
 
 	public function __construct($AppName,
-								IRequest $request,
-								$UserId,
-								CredentialService $credentialService,
-								IConfig $config
+	                            IRequest $request,
+	                            $UserId,
+	                            CredentialService $credentialService,
+	                            IConfig $config,
+	                            IManager $IManager,
+	                            IAppManager $appManager
 	) {
 		parent::__construct(
 			$AppName,
@@ -38,6 +43,8 @@ class InternalController extends ApiController {
 		$this->userId = $UserId;
 		$this->credentialService = $credentialService;
 		$this->config = $config;
+		$this->manager = $IManager;
+		$this->appManager = $appManager;
 	}
 
 	/**
@@ -45,16 +52,15 @@ class InternalController extends ApiController {
 	 */
 	public function remind($credential_id) {
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
-		if($credential) {
+		if ($credential) {
 			$credential->setExpireTime(time() + (24 * 60 * 60));
 			$this->credentialService->upd($credential);
 
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
+			$notification = $this->manager->createNotification();
 			$notification->setApp('passman')
 				->setObject('credential', $credential_id)
 				->setUser($this->userId);
-			$manager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 		}
 	}
 
@@ -62,18 +68,16 @@ class InternalController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function read($credential_id) {
-
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
-		if($credential) {
+		if ($credential) {
 			$credential->setExpireTime(0);
 			$this->credentialService->upd($credential);
 
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
+			$notification = $this->manager->createNotification();
 			$notification->setApp('passman')
 				->setObject('credential', $credential_id)
 				->setUser($this->userId);
-			$manager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 		}
 	}
 
@@ -82,15 +86,14 @@ class InternalController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getAppVersion() {
-		$AppInstance = new App();
-		return new JSONResponse(array('version' => $AppInstance->getAppInfo("passman")["version"]));
+		return new JSONResponse(array('version' => $this->appManager->getAppInfo('passman')["version"]));
 	}
 
 	/**
 	 * @NoAdminRequired
 	 */
 	public function generatePerson() {
-		$context = [ 'http' => [ 'method' => 'GET' ], 'ssl' => [ 'verify_peer' => false, 'allow_self_signed'=> true ] ];
+		$context = ['http' => ['method' => 'GET'], 'ssl' => ['verify_peer' => false, 'allow_self_signed' => true]];
 		$context = stream_context_create($context);
 		$random_person = json_decode(file_get_contents('http://api.namefake.com/', false, $context));
 		return new JSONResponse($random_person);

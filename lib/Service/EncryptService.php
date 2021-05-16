@@ -26,9 +26,10 @@ namespace OCA\Passman\Service;
 
 // Class copied from http://stackoverflow.com/questions/5089841/two-way-encryption-i-need-to-store-passwords-that-can-be-retrieved?answertab=votes#tab-top
 // Upgraded to use openssl
-use Icewind\SMB\Exception\Exception;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\File;
+use OCP\AppFramework\Db\Entity;
+use OCP\IConfig;
 
 /**
  * A class to handle secure encryption and decryption of arbitrary data
@@ -84,14 +85,14 @@ class EncryptService {
 	protected $rounds = 100;
 
 	/**
-	 * Constructor!
-	 *
+	 * EncryptService constructor.
 	 * @param SettingsService $settings
+	 * @param IConfig $config
 	 */
-	public function __construct(SettingsService $settings) {
+	public function __construct(SettingsService $settings, IConfig $config) {
 		$this->cipher = $settings->getAppSetting('server_side_encryption', 'aes-256-cbc');
-		$password_salt = \OC::$server->getConfig()->getSystemValue('passwordsalt', '');
-		$secret = \OC::$server->getConfig()->getSystemValue('secret', '');
+		$password_salt = $config->getSystemValue('passwordsalt', '');
+		$secret = $config->getSystemValue('secret', '');
 		$this->server_key = $password_salt . $secret;
 		$this->rounds = $settings->getAppSetting('rounds_pbkdf2_stretching', 100);
 	}
@@ -279,8 +280,9 @@ class EncryptService {
 	/**
 	 * Encrypt a credential
 	 *
-	 * @param Credential|array $credential the credential to decrypt
+	 * @param Credential|Entity|array $credential the credential to decrypt
 	 * @return Credential|array
+	 * @throws \Exception
 	 */
 	public function decryptCredential($credential) {
 		return $this->handleCredential($credential, EncryptService::OP_DECRYPT);
@@ -342,10 +344,10 @@ class EncryptService {
 	/**
 	 * Encrypt a file
 	 *
-	 * @param  File|array $file
+	 * @param File|array $file
 	 * @return File|array
+	 * @throws \Exception
 	 */
-
 	public function encryptFile($file) {
 		return $this->handleFile($file, EncryptService::OP_ENCRYPT);
 	}
@@ -353,10 +355,10 @@ class EncryptService {
 	/**
 	 * Decrypt a file
 	 *
-	 * @param  File|array $file
-	 * @return File|array
+	 * @param File|Entity|array $file
+	 * @return array|File
+	 * @throws \Exception
 	 */
-
 	public function decryptFile($file) {
 		return $this->handleFile($file, EncryptService::OP_DECRYPT);
 	}
