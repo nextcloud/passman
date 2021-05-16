@@ -24,6 +24,7 @@ use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\CredentialService;
+use OCP\IUserManager;
 
 
 class AdminController extends ApiController {
@@ -34,6 +35,7 @@ class AdminController extends ApiController {
 	private $revisionService;
 	private $deleteVaultRequestService;
 	private $config;
+	private $userManager;
 
 	public function __construct($AppName,
 								IRequest $request,
@@ -43,7 +45,8 @@ class AdminController extends ApiController {
 								FileService $fileService,
 								CredentialRevisionService $revisionService,
 								DeleteVaultRequestService $deleteVaultRequestService,
-								IConfig $config
+								IConfig $config,
+								IUserManager $userManager
 	) {
 		parent::__construct(
 			$AppName,
@@ -59,13 +62,13 @@ class AdminController extends ApiController {
 		$this->deleteVaultRequestService = $deleteVaultRequestService;
 
 		$this->config = $config;
+		$this->userManager = $userManager;
 	}
 
 
 	public function searchUser($term) {
-		$um = \OC::$server->getUserManager();
 		$results = array();
-		$searchResult = $um->search($term);
+		$searchResult = $this->userManager->search($term);
 		foreach ($searchResult as $user) {
 			array_push($results, array(
 				"value" => $user->getUID(),
@@ -76,37 +79,43 @@ class AdminController extends ApiController {
 	}
 
 	public function moveCredentials($source_account, $destination_account) {
-		$vaults = $this->vaultService->getByUser($source_account);
-		foreach ($vaults as $vault) {
-			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $source_account);
-			foreach ($credentials as $credential) {
-				$revisions = $this->revisionService->getRevisions($credential->getId());
-				foreach ($revisions as $revision) {
-					$r = new CredentialRevision();
-					$r->setId($revision['revision_id']);
-					$r->setGuid($revision['guid']);
-					$r->setCredentialId($credential->getId());
-					$r->setUserId($destination_account);
-					$r->setCreated($revision['created']);
-					$r->setCredentialData(base64_encode(json_encode($revision['credential_data'])));
-					$r->setEditedBy($revision['edited_by']);
-					$this->revisionService->updateRevision($r);
+		$succeed = false;
+		if ($source_account != $destination_account){
+			$vaults = $this->vaultService->getByUser($source_account);
+			foreach ($vaults as $vault) {
+				$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $source_account);
+				foreach ($credentials as $credential) {
+					$revisions = $this->revisionService->getRevisions($credential->getId());
+					foreach ($revisions as $revision) {
+						$r = new CredentialRevision();
+						$r->setId($revision['revision_id']);
+						$r->setGuid($revision['guid']);
+						$r->setCredentialId($credential->getId());
+						$r->setUserId($destination_account);
+						$r->setCreated($revision['created']);
+						$r->setCredentialData(base64_encode(json_encode($revision['credential_data'])));
+						$r->setEditedBy($revision['edited_by']);
+						$this->revisionService->updateRevision($r);
+					}
+
+					$c = $credential->jsonSerialize();
+					$c['user_id'] = $destination_account;
+					$c['icon'] = json_encode($c['icon']);
+					$this->credentialService->updateCredential($c, true);
 				}
-
-				$c = $credential->jsonSerialize();
-				$c['user_id'] = $destination_account;
-				$this->credentialService->updateCredential($c, true);
+				$vault->setUserId($destination_account);
+				$this->vaultService->updateVault($vault);
 			}
-			$vault->setUserId($destination_account);
-			$this->vaultService->updateVault($vault);
+
+			$files = $this->fileService->getFilesFromUser($source_account);
+			foreach ($files as $file) {
+				$file->setUserId($destination_account);
+				$this->fileService->updateFile($file);
+			}
+			$succeed = true;
 		}
 
-		$files = $this->fileService->getFilesFromUser($source_account);
-		foreach ($files as $file) {
-			$file->setUserId($destination_account);
-			$this->fileService->updateFile($file);
-		}
-		return new JSONResponse(array('success' => true));
+		return new JSONResponse(array('success' => $succeed));
 	}
 
 	public function listRequests(){
@@ -114,7 +123,7 @@ class AdminController extends ApiController {
 		$results = array();
 		foreach($requests as $request){
 			$r = $request->jsonSerialize();
-			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy());
+			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy(), $this->userManager);
 			array_push($results, $r);
 		}
 		return new JSONResponse($results);

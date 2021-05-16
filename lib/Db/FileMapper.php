@@ -25,51 +25,61 @@
 namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
-use OCP\AppFramework\Db\Mapper;
 
-class FileMapper extends Mapper {
-	private $utils;
+class FileMapper extends QBMapper {
+	const TABLE_NAME = 'passman_files';
+	private Utils $utils;
 
 	public function __construct(IDBConnection $db, Utils $utils) {
-		parent::__construct($db, 'passman_files');
+		parent::__construct($db, self::TABLE_NAME);
 		$this->utils = $utils;
 	}
 
 
 	/**
-	 * @param $file_id
-	 * @param null $user_id
-	 * @return File
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @param int $file_id
+	 * @param string|null $user_id
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getFile($file_id, $user_id = null) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_files` ' .
-			'WHERE `id` = ?';
-		$params = [$file_id];
+	public function getFile(int $file_id, string $user_id = null) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('id', $qb->createNamedParameter($file_id, IQueryBuilder::PARAM_INT)));
+
 		if ($user_id !== null) {
-			$sql .= ' and `user_id` = ? ';
-			array_push($params, $user_id);
+			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
-		return $this->findEntity($sql, $params);
+
+		return $this->findEntity($qb);
 	}
+
 	/**
-	 * @param $file_id
-	 * @param null $user_id
-	 * @return File
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @param string $file_guid
+	 * @param string|null $user_id
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getFileByGuid($file_guid, $user_id = null) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_files` ' .
-			'WHERE `guid` = ?';
-		$params = [$file_guid];
+	public function getFileByGuid(string $file_guid, string $user_id = null) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('guid', $qb->createNamedParameter($file_guid, IQueryBuilder::PARAM_STR)));
+
 		if ($user_id !== null) {
-			$sql .= ' and `user_id` = ? ';
-			array_push($params, $user_id);
+			$qb->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 		}
-		return $this->findEntity($sql, $params);
+
+		return $this->findEntity($qb);
 	}
 
 	/**
@@ -87,21 +97,21 @@ class FileMapper extends Mapper {
 		$file->setFileData($file_raw['file_data']);
 		$file->setMimetype($file_raw['mimetype']);
 
-
 		return $this->insert($file);
 	}
 
 	/**
 	 * Delete a file by file_id and user id
-	 * @param $file_id
-	 * @param $userId
-	 * @return File
+	 *
+	 * @param int $file_id
+	 * @param string $userId
+	 * @return File|Entity
 	 */
-	public function deleteFile($file_id, $userId) {
+	public function deleteFile(int $file_id, string $userId) {
 		$file = new File();
 		$file->setId($file_id);
 		$file->setUserId($userId);
-		$this->delete($file);
+		return $this->delete($file);
 	}
 
 	/**
@@ -115,16 +125,15 @@ class FileMapper extends Mapper {
 
 
 	/**
-	 * @param $user_id
-	 * @return File[]
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
+	 * @param string $user_id
+	 * @return Entity[]
 	 */
-	public function getFilesFromUser($user_id) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_files` ' .
-			'WHERE `user_id` = ?';
-		$params = [$user_id];
+	public function getFilesFromUser(string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		return $this->findEntities($sql, $params);
+		return $this->findEntities($qb);
 	}
 }

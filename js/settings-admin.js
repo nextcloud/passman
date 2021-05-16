@@ -137,27 +137,54 @@ $(document).ready(function () {
 		'source_account': '',
 		'destination_account': ''
 	};
-	$(".username-autocomplete").autocomplete({
-		source: OC.generateUrl('apps/passman/admin/search'),
-		minLength: 1,
-		select: function (event, ui) {
-			accountMover[$(this).attr('id')] = ui.item.value;
-		}
+	$('.account_mover_selector').select2({
+		ajax: {
+			url: OC.generateUrl('apps/passman/admin/search'),
+			dataType: 'json',
+			delay: 50,
+			data: function (param) {
+				return {
+					term: param
+				};
+			},
+			results: function (data) {
+				var res = [];
+				for (var i = 0; i < data.length; i++) {
+					res.push({
+						id: i,
+						text: data[i].value
+					});
+				}
+				return {
+					results: res
+				};
+			},
+			cache: true
+		},
+		placeholder: 'Search for a user',
+		minimumInputLength: 1
 	});
 
 	$('#move_credentials').click(function () {
 		var self = this;
+		accountMover.source_account = $('#s2id_source_account a .select2-chosen').html();
+		accountMover.destination_account = $('#s2id_destination_account a .select2-chosen').html();
 		$('#moveStatus').hide();
 		$(self).attr('disabled', 'disabled');
 		$(self).html('<i class="fa fa-spinner fa-spin"></i> ' + OC.L10N.translate('passman', 'Moving') + '...');
 		if (accountMover.source_account && accountMover.destination_account) {
 			$.post(OC.generateUrl('apps/passman/admin/move'), accountMover, function (data) {
+				$(self).removeAttr('disabled');
+				$(self).html('Move');
 				if (data.success) {
-					$(self).removeAttr('disabled');
-					$(self).html('Move');
-					$('#moveStatus').fadeIn();
+					$('#moveStatusSucceeded').fadeIn();
 					setTimeout(function () {
-						$('#moveStatus').fadeOut();
+						$('#moveStatusSucceeded').fadeOut();
+					}, 3500);
+				} else {
+					$('#moveStatusFailed').fadeIn();
+					setTimeout(function () {
+						$('#moveStatusFailed').fadeOut();
 					}, 3500);
 				}
 			});

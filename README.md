@@ -143,6 +143,7 @@ If you want a production-ready container, use the [Nextcloud Docker](https://hub
 ## Contributors
 Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
   * Newhinton
+  * [binsky](https://github.com/binsky08)
 
 ## FAQ
 **Are you adding something to check if malicious code is executing on the browser?**   

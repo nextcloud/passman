@@ -1,58 +1,23 @@
 <?php
 /** @var \OCP\IL10N $l */
 /** @var array $_ */
-use \OCP\App;
 
 script('passman', 'settings-admin');
 
 style('passman', 'admin');
 style('passman', 'vendor/font-awesome/font-awesome.min');
-
-$checkVersion = OC::$server->getConfig()->getAppValue('passman', 'check_version', '1') === '1';
-$AppInstance = new App();
-$localVersion = $AppInstance->getAppInfo("passman")["version"];
-$githubVersion = $l->t('Unable to get version info');
-if ($checkVersion) {
-	// get latest master version
-	$version = false;
-
-	$url = 'https://raw.githubusercontent.com/nextcloud/passman/master/appinfo/info.xml';
-	try {
-		$client = OC::$server->getHTTPClientService()->newClient();
-		$response = $client->get($url);
-		$xml = $response->getBody();
-	} catch (\Exception $e) {
-		$xml = false;
-	}
-
-	if ($xml) {
-		$loadEntities = libxml_disable_entity_loader(true);
-		$data = @simplexml_load_string($xml);
-		libxml_disable_entity_loader($loadEntities);
-		if ($data !== false) {
-			$version = (string)$data->version;
-		} else {
-			libxml_clear_errors();
-		}
-	}
-
-	if ($version !== false) {
-		$githubVersion = $version;
-	}
-}
-$ciphers = openssl_get_cipher_methods();
 ?>
 
 <div id="passwordSharingSettings" class="followup section">
 	<h2><?php p($l->t('Passman Settings')); ?></h2>
 	<?php
-	if ($checkVersion) {
-		p($l->t('GitHub version:') . ' ' . $githubVersion);
+	if ($_['checkVersion']) {
+		p($l->t('GitHub version:') . ' ' . $_['githubVersion']);
 		print '<br />';
 	} ?>
-	Local version: <?php p($localVersion); ?><br/>
+	Local version: <?php p($_['localVersion']); ?><br/>
 	<?php
-	if ($checkVersion && version_compare($githubVersion, $localVersion) === 1) {
+	if ($_['checkVersion'] && version_compare($_['githubVersion'], $_['localVersion']) === 1) {
 		p($l->t('A newer version of Passman is available'));
 	}
 	?>
@@ -158,15 +123,16 @@ $ciphers = openssl_get_cipher_methods();
 			<table class="table">
 				<tr>
 					<td><?php p($l->t('Source account')); ?> </td>
-					<td><input class="username-autocomplete" type="text" id="source_account" name="source_account"></td>
+					<td><input type="hidden" class="form-control account_mover_selector" id="source_account"></td>
 				</tr>
 				<tr>
 					<td><?php p($l->t('Destination account')); ?> </td>
-					<td><input class="username-autocomplete" type="text" id="destination_account" name="destination_account"></td>
+					<td><input type="hidden" class="form-control account_mover_selector" id="destination_account"></td>
 				</tr>
 			</table>
 			<button class="success" id="move_credentials">Move</button>
-			<span id="moveStatus" style="display: none;"><?php p($l->t('Credentials moved!')); ?></span>
+			<span id="moveStatusSucceeded" style="display: none;"><?php p($l->t('Credentials moved!')); ?></span>
+            <span id="moveStatusFailed" style="display: none;"><?php p($l->t('An error occurred!')); ?></span>
 
 		</div>
 		<div id="tabs-3">
