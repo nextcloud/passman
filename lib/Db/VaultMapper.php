@@ -24,61 +24,80 @@
 namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
-use OCP\AppFramework\Db\Mapper;
 
-class VaultMapper extends Mapper {
-	private $utils;
+class VaultMapper extends QBMapper {
+	const TABLE_NAME = 'passman_vaults';
+	private Utils $utils;
+
 	public function __construct(IDBConnection $db, Utils $utils) {
-		parent::__construct($db, 'passman_vaults');
+		parent::__construct($db, self::TABLE_NAME);
 		$this->utils = $utils;
 	}
 
 
 	/**
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
-	 * @return Vault[]
+	 * @param int $vault_id
+	 * @param string $user_id
+	 * @return Entity[]
 	 */
-	public function find($vault_id, $user_id) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
-			'WHERE `id`= ? and `user_id` = ?';
-		return $this->findEntities($sql, [$vault_id, $user_id]);
+	public function find(int $vault_id, string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('id', $qb->createNamedParameter($vault_id, IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
 	}
+
 	/**
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
-	 * @return Vault
+	 * @param string $vault_guid
+	 * @param string $user_id
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function findByGuid($vault_guid, $user_id) {
-		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
-			'WHERE `guid`= ? and `user_id` = ?';
-		return $this->findEntity($sql, [$vault_guid, $user_id]);
+	public function findByGuid(string $vault_guid, string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntity($qb);
 	}
 
 
 	/**
-	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
-	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
-	 * @return Vault[]
+	 * @param string $user_id
+	 * @return Entity[]
 	 */
-	public function findVaultsFromUser($userId){
-		$sql = 'SELECT * FROM `*PREFIX*passman_vaults` ' .
-			'WHERE `user_id` = ? ';
-		$params = [$userId];
-		return $this->findEntities($sql, $params);
+	public function findVaultsFromUser(string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
 	}
 
 	/**
 	 * Creates a vault
-	 * @param $vault_name
-	 * @param $userId
-	 * @return Vault
+	 *
+	 * @param string $vault_name
+	 * @param string $user_id
+	 * @return Vault|Entity
 	 */
-	public function create($vault_name, $userId){
+	public function create(string $vault_name, string $user_id) {
 		$vault = new Vault();
 		$vault->setName($vault_name);
-		$vault->setUserId($userId);
+		$vault->setUserId($user_id);
 		$vault->setGuid($this->utils->GUID());
 		$vault->setCreated($this->utils->getTime());
 		$vault->setLastAccess(0);
@@ -87,45 +106,52 @@ class VaultMapper extends Mapper {
 
 	/**
 	 * Update last access time of a vault
-	 * @param $vault_id
-	 * @param $user_id
+	 *
+	 * @param int $vault_id
+	 * @param string $user_id
+	 * @return Vault|Entity
 	 */
-	public function setLastAccess($vault_id, $user_id){
+	public function setLastAccess(int $vault_id, string $user_id) {
 		$vault = new Vault();
 		$vault->setId($vault_id);
 		$vault->setUserId($user_id);
 		$vault->setLastAccess(Utils::getTime());
-		$this->update($vault);
+		return $this->update($vault);
 	}
 
 	/**
 	 * Update vault
+	 *
 	 * @param Vault $vault
+	 * @return Vault|Entity
 	 */
-	public function updateVault(Vault $vault){
-		$this->update($vault);
+	public function updateVault(Vault $vault) {
+		return $this->update($vault);
 	}
 
 	/**
 	 * Update the sharing key's
-	 * @param $vault_id
-	 * @param $privateKey
-	 * @param $publicKey
+	 *
+	 * @param int $vault_id
+	 * @param string $privateKey
+	 * @param string $publicKey
+	 * @return Vault|Entity
 	 */
-	public function updateSharingKeys($vault_id, $privateKey, $publicKey){
+	public function updateSharingKeys(int $vault_id, string $privateKey, string $publicKey) {
 		$vault = new Vault();
 		$vault->setId($vault_id);
 		$vault->setPrivateSharingKey($privateKey);
 		$vault->setPublicSharingKey($publicKey);
 		$vault->setSharingKeysGenerated($this->utils->getTime());
-		$this->update($vault);
+		return $this->update($vault);
 	}
 
 	/**
 	 * Delete a vault
+	 *
 	 * @param Vault $vault
 	 */
-	public function deleteVault(Vault $vault){
+	public function deleteVault(Vault $vault) {
 		$this->delete($vault);
 	}
 }

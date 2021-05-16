@@ -24,6 +24,7 @@
 namespace OCA\Passman;
 
 use OCP\IURLGenerator;
+use OCP\L10N\IFactory;
 
 class Activity implements \OCP\Activity\IExtension {
 	const FILTER_PASSMAN = 'passman';
@@ -54,9 +55,11 @@ class Activity implements \OCP\Activity\IExtension {
 
 
 	protected $URLGenerator;
+	protected $factory;
 
-	public function __construct( IURLGenerator $URLGenerator) {
+	public function __construct(IURLGenerator $URLGenerator, IFactory $factory) {
 		$this->URLGenerator = $URLGenerator;
+		$this->factory = $factory;
 	}
 
 
@@ -67,8 +70,8 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @param string $languageCode
 	 * @return array|false
 	 */
-	public function getNotificationTypes($languageCode) {
-		$l = \OC::$server->getL10N(self::APP_NAME, $languageCode);
+	public function getNotificationTypes(string $languageCode) {
+		$l = $this->factory->get(self::APP_NAME, $languageCode);
 		return array(
 			self::TYPE_ITEM_ACTION => $l->t('A Passman item has been created, modified or deleted'),
 			self::TYPE_ITEM_EXPIRED => $l->t('A Passman item has expired'),
@@ -127,7 +130,7 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return string|false
 	 */
 	public function translate($app, $text, $params, $stripPath, $highlightParams, $languageCode) {
-		$l = \OC::$server->getL10NFactory()->get(self::APP_NAME, $languageCode);
+		$l = $this->factory->get(self::APP_NAME, $languageCode);
 		if ($app === self::APP_NAME) {
 			switch ($text) {
 				case self::SUBJECT_ITEM_CREATED:
@@ -258,13 +261,13 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return array|false
 	 */
 	public function getNavigation() {
-		$l = \OC::$server->getL10N(self::APP_NAME);
+		$l = $this->factory->get(self::APP_NAME);
 		return array(
 			'top' => array(),
-			'apps' => array( self::FILTER_PASSMAN =>
+			'apps' => array(self::FILTER_PASSMAN =>
 				array(
 					'id' => 'passman',
-					'name' => (string) $l->t('Passwords'),
+					'name' => (string)$l->t('Passwords'),
 					'url' => $this->URLGenerator->linkToRoute('activity.Activities.showList', ['filter' => self::FILTER_PASSMAN]),
 				),
 			),
@@ -278,7 +281,7 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @return boolean
 	 */
 	public function isFilterValid($filterValue) {
-		return $filterValue ===  self::FILTER_PASSMAN;
+		return $filterValue === self::FILTER_PASSMAN;
 	}
 
 	/**

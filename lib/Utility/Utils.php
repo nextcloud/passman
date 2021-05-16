@@ -23,6 +23,8 @@
 
 namespace OCA\Passman\Utility;
 
+use OCP\IUserManager;
+
 class Utils {
     /**
      * Gets the unix epoch UTC timestamp
@@ -52,16 +54,21 @@ class Utils {
 	}
 
 	/**
-	 * @param $uid
+	 * @param string $uid
+	 * @param IUserManager $userManager
 	 * @return string
 	 */
-	public static function getNameByUid($uid){
-		$um = \OC::$server->getUserManager();
-		$u = $um->get($uid);
+	public static function getNameByUid(string $uid, IUserManager $userManager){
+		$u = $userManager->get($uid);
 		return $u->getDisplayName();
 	}
 
-	public static function getDirContents($dir, &$results = array()){
+	/**
+	 * @param string $dir
+	 * @param array $results
+	 * @return array|mixed
+	 */
+	public static function getDirContents(string $dir, &$results = array()){
 		$files = scandir($dir);
 
 		foreach($files as $value){

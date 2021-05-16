@@ -218,7 +218,6 @@ OC.L10N.register(
     "Password strength must be at least: {{strength}}" : "חוזק הססמה חייב להיות לפחות: {{strength}}",
     "Please give your new vault a name." : "נא להעניק שם לכספת החדשה שלך.",
     "Repeat vault password" : "חזרה על ססמת הכספת",
-    "Your sharing keys will have a strength of 1024 bit, which you can change in \\\"Settings\\\" later ." : "למפתחות השיתוף שלך יהיה חוזק של 1024 סיביות, הגדרה שניתן לשנות ב„הגדרות” בהמשך.",
     "Create vault" : "יצירת כספת",
     "Go back to vaults" : "חזרה לכספות",
     "Please input the password for" : "נא להכניס את הססמה עבור",

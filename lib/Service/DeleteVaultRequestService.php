@@ -25,13 +25,12 @@ namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\DeleteVaultRequest;
 use OCA\Passman\Db\DeleteVaultRequestMapper;
-
-use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
 
 
 class DeleteVaultRequestService {
 
-	private $deleteVaultRequestMapper;
+	private DeleteVaultRequestMapper $deleteVaultRequestMapper;
 
 	public function __construct(DeleteVaultRequestMapper $deleteVaultRequestMapper) {
 		$this->deleteVaultRequestMapper = $deleteVaultRequestMapper;
@@ -41,16 +40,16 @@ class DeleteVaultRequestService {
 	 *  Create a new DeleteVaultRequest
 	 *
 	 * @param $request DeleteVaultRequest
-	 * @return \OCA\Passman\Db\DeleteVaultRequest
+	 * @return DeleteVaultRequest
 	 */
 	public function createRequest(DeleteVaultRequest $request) {
 		return $this->deleteVaultRequestMapper->insert($request);
 	}
 
 	/**
-	 *  Create a new DeleteVaultRequest
+	 * Create a new DeleteVaultRequest
 	 *
-	 * @return \OCA\Passman\Db\DeleteVaultRequest[]
+	 * @return Entity[]
 	 */
 	public function getDeleteRequests() {
 		return $this->deleteVaultRequestMapper->getDeleteRequests();
@@ -59,13 +58,12 @@ class DeleteVaultRequestService {
 	/**
 	 *  Create a new DeleteVaultRequest
 	 *
-	 * @param $vault_id integer The vault id
-	 * @return bool | DeleteVaultRequest
+	 * @param $vault_guid string The vault guid
+	 * @return bool | Entity
 	 */
-	public function getDeleteRequestForVault($vault_guid) {
+	public function getDeleteRequestForVault(string $vault_guid) {
 		try {
-			$result = $this->deleteVaultRequestMapper->getDeleteRequestsForVault($vault_guid);
-			return $result;
+			return $this->deleteVaultRequestMapper->getDeleteRequestsForVault($vault_guid);
 		} catch (\Exception $e) {
 			return false;
 		}
@@ -75,11 +73,8 @@ class DeleteVaultRequestService {
 	 *  Create a new DeleteVaultRequest
 	 *
 	 * @param $req DeleteVaultRequest
-	 * @return bool | DeleteVaultRequest
 	 */
 	public function removeDeleteRequestForVault(DeleteVaultRequest $req) {
 		$this->deleteVaultRequestMapper->removeDeleteVaultRequest($req);
 	}
-
-
 }

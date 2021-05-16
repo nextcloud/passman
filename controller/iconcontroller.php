@@ -13,17 +13,14 @@ namespace OCA\Passman\Controller;
 
 use Doctrine\DBAL\Exception\DriverException;
 use OC\App\AppManager;
+use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\IconService;
 use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\DataDownloadResponse;
-use OCP\AppFramework\Http\Response;
-use OCP\IConfig;
-use OCP\IRequest;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\ApiController;
-use OCA\Passman\Service\CredentialService;
-use \OCP\App;
+use OCP\IRequest;
 use OCP\IURLGenerator;
 
 class IconController extends ApiController {
@@ -33,11 +30,11 @@ class IconController extends ApiController {
 	private $urlGenerator;
 
 	public function __construct($AppName,
-								IRequest $request,
-								$UserId,
-								CredentialService $credentialService,
-								AppManager $am,
-								IURLGenerator $urlGenerator
+	                            IRequest $request,
+	                            $UserId,
+	                            CredentialService $credentialService,
+	                            AppManager $am,
+	                            IURLGenerator $urlGenerator
 	) {
 		parent::__construct(
 			$AppName,
@@ -57,7 +54,7 @@ class IconController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getSingleIcon($base64Url) {
-		$url = base64_decode(str_replace('_','/', $base64Url));
+		$url = base64_decode(str_replace('_', '/', $base64Url));
 		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
 			$url = "http://" . $url;
 		}
@@ -66,8 +63,8 @@ class IconController extends ApiController {
 		$icon = new IconService($url);
 
 		if ($icon->icoExists) {
-			$icon_json['type']= $icon->icoType;
-			$icon_json['content']= base64_encode($icon->icoData);
+			$icon_json['type'] = $icon->icoType;
+			$icon_json['content'] = base64_encode($icon->icoData);
 			return new JSONResponse($icon_json);
 		}
 
@@ -79,13 +76,13 @@ class IconController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getIcon($base64Url, $credentialId) {
-		$url = base64_decode(str_replace('_','/', $base64Url));
+		$url = base64_decode(str_replace('_', '/', $base64Url));
 
-		if($credentialId) {
+		if ($credentialId && $credentialId != "null") {
 			try {
 				$credential = $this->credentialService->getCredentialById($credentialId, $this->userId);
 				$credential = $credential->jsonSerialize();
-			} catch (DoesNotExistException $e){
+			} catch (DoesNotExistException $e) {
 				// Credential is not found, continue
 				$credential = false;
 			}
@@ -95,15 +92,20 @@ class IconController extends ApiController {
 			$url = "http://" . $url;
 		}
 
-		$icon = new IconService($url);
-
 		$data = base64_decode("iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABHVBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADF3oJhAAAAXnRSTlMAAQIDBAUGBwgJCwwOEBITFBUWFxgaHB4hJCUnKissMDI0ODs9PkFCQ0RNUVJWV1lbXF1hY2Zna2xtcXh7f4KDhYmUm52lq62vsLW3ucHFyszO0dPV197i7/H3+fv9358zuQAAAWdJREFUWMPtldlWwjAURdPWogyKOKM4z0NRQRRHnAdE0QoI1eb/P8OnmzYlSZs+unIes+/ZbdOuFCFuBmc2Dk+qpe18EsVIptTGJJ3jrGR99B4H8jQlUTfOMSM3ZtT+SAsz8z0ZrZ//wZy4S1H6C1iQtfD+tCsS4EJYP9kV9rGTCRE0fMOfxZypITO7++5b/NCE/S3fx7PsLc9/eeuWqK/3vA9ngAJ3BPwmBIIdMnYbvNNLgo4Egg4MvelBpD0D6/F3YYJcJd0PEw7AWa6gCCNnLLoPtMoVPMJIikVNoE2uAN6BzcZ1MPA2wRA+AUIHwHkn1BAM7LH5OvBhjiAFA6tsXgCe4wjSMLDC5nPAx5Xg3wrGylfk1GlcM/MC/KFW6fvRVbBkLuj+omwf401KUJcXtCiBIy+gT4UYfawrgRIogRIogRLwBG4MAfVnsuX7XX8fWfKCU0qgvcr2mwaiDZYtsw/tMtnCP4F4Y01BhTeiAAAAAElFTkSuQmCC");
 		$type = 'png';
-		
-		if ($icon->icoExists) {
-			$data = $icon->icoData;
-			$type = $icon->icoType;
+
+		try {
+			$icon = new IconService($url);
+			if ($icon->icoExists) {
+				$data = $icon->icoData;
+				$type = $icon->icoType;
+			}
+		} catch (\InvalidArgumentException $e) {
+			//no need to do stuff in catch
+			//if IconService fails the predefined $data and $type are used
 		}
+
 		if (isset($credential) && $credential['user_id'] == $this->userId) {
 			$iconData = [
 				'type' => ($type) ? $type : 'x-icon',
@@ -111,7 +113,7 @@ class IconController extends ApiController {
 			];
 			$credential['icon'] = json_encode($iconData);
 			try {
-				if($credential) {
+				if ($credential) {
 					$this->credentialService->updateCredential($credential);
 				}
 			} catch (DriverException $exception) {
@@ -152,12 +154,12 @@ class IconController extends ApiController {
 			$pack = explode('/', $path[1])[2];
 			$mime = mime_content_type($iconPath);
 			//print_r($path);
-			if($mime !== 'directory') {
+			if ($mime !== 'directory') {
 				$icon = [];
 				$icon['mimetype'] = mime_content_type($iconPath);
 				$icon['url'] = $this->urlGenerator->linkTo('passman', $path[1]);
 				$icon['pack'] = $pack;
-				if(!isset($icons[$pack])){
+				if (!isset($icons[$pack])) {
 					$icons[$pack] = [];
 				}
 				$icons[$pack][] = $icon;
