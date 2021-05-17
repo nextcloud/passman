@@ -174,12 +174,17 @@ $(document).ready(function () {
 		$(self).html('<i class="fa fa-spinner fa-spin"></i> ' + OC.L10N.translate('passman', 'Moving') + '...');
 		if (accountMover.source_account && accountMover.destination_account) {
 			$.post(OC.generateUrl('apps/passman/admin/move'), accountMover, function (data) {
+				$(self).removeAttr('disabled');
+				$(self).html('Move');
 				if (data.success) {
-					$(self).removeAttr('disabled');
-					$(self).html('Move');
-					$('#moveStatus').fadeIn();
+					$('#moveStatusSucceeded').fadeIn();
 					setTimeout(function () {
-						$('#moveStatus').fadeOut();
+						$('#moveStatusSucceeded').fadeOut();
+					}, 3500);
+				} else {
+					$('#moveStatusFailed').fadeIn();
+					setTimeout(function () {
+						$('#moveStatusFailed').fadeOut();
 					}, 3500);
 				}
 			});
