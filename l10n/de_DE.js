@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Ursprungskonto",
     "Destination account" : "Zielkonto",
     "Credentials moved!" : "Zugangsdaten entfernt!",
+    "An error occurred!" : "Es ist ein Fehler aufgetreten!",
     "Requests to destroy vault" : "Anfragen zur Zerstörung eines Tresors",
     "Request ID" : "ID anfragen",
     "Requested by" : "Angefordert von",

@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Zdrojový účet",
     "Destination account" : "Cílový účet",
     "Credentials moved!" : "Přihlašovací údaje přesunuty!",
+    "An error occurred!" : "Došlo k chybě!",
     "Requests to destroy vault" : "Požadavky na likvidaci trezoru",
     "Request ID" : "Identifikátor požadavku",
     "Requested by" : "Požadavek od",

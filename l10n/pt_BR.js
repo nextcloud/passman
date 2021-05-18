@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Conta de origem",
     "Destination account" : "Conta de destino",
     "Credentials moved!" : "Credenciais movidas!",
+    "An error occurred!" : "Ocorreu um erro!",
     "Requests to destroy vault" : "Pedidos para destruir cofre",
     "Request ID" : "Solicitar ID",
     "Requested by" : "Requerido por",

@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "来源账号",
     "Destination account" : "目标账号",
     "Credentials moved!" : "证书已移动了！",
+    "An error occurred!" : "出错了！",
     "Requests to destroy vault" : "要求销毁保险箱",
     "Request ID" : "请求 ID",
     "Requested by" : "被要求",

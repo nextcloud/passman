@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Konto źródłowe",
     "Destination account" : "Konto docelowe",
     "Credentials moved!" : "Poświadczenia przeniesiono!",
+    "An error occurred!" : "Wystąpił błąd!",
     "Requests to destroy vault" : "Prośby o zniszczenie sejfu",
     "Request ID" : "Identyfikator prośby",
     "Requested by" : "Prośba złożona przez",
