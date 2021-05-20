@@ -349,6 +349,7 @@
     "Source account" : "來源賬號",
     "Destination account" : "目標賬號",
     "Credentials moved!" : "身分驗證已移動了！",
+    "An error occurred!" : "發生錯誤！",
     "Requests to destroy vault" : "要求銷毀保險庫",
     "Request ID" : "請求 ID",
     "Requested by" : "請求者",

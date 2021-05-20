@@ -353,7 +353,7 @@ OC.L10N.register(
     "Credentials moved!" : "Poświadczenia przeniesiono!",
     "An error occurred!" : "Wystąpił błąd!",
     "Requests to destroy vault" : "Prośby o zniszczenie sejfu",
-    "Request ID" : "Identyfikator prośby",
+    "Request ID" : "ID prośby",
     "Requested by" : "Prośba złożona przez",
     "Reason" : "Powód",
     "Click here to request\n\t\t\t\t\tit" : "Kliknij tutaj, aby poprosić o\n\t\t\t\t\t",
