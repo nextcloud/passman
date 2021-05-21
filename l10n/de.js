@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Quell-Konto",
     "Destination account" : "Ziel-Konto",
     "Credentials moved!" : "Anmeldeinformationen verschoben!",
+    "An error occurred!" : "Ein Fehler ist aufgetreten!",
     "Requests to destroy vault" : "Anfrage zur Tresor-Löschung",
     "Request ID" : "Anfrage-ID",
     "Requested by" : "Angefordert von",

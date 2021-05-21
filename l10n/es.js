@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Cuenta de origen",
     "Destination account" : "Cuenta destino",
     "Credentials moved!" : "¡Contraseñas trasladadas!",
+    "An error occurred!" : "¡Ocurrió un error!",
     "Requests to destroy vault" : "Solicitudes para eliminar cajas fuertes",
     "Request ID" : "ID de solicitud",
     "Requested by" : "Solicitado por",

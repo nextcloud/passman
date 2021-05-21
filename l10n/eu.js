@@ -334,6 +334,7 @@ OC.L10N.register(
     "Source account" : "Iturburuko kontua",
     "Destination account" : "Helburuko kontua",
     "Credentials moved!" : "Kredentzialak mugituta!",
+    "An error occurred!" : "Errore bat gertatu!",
     "Requests to destroy vault" : "Gordailua suntsitzeko eskariak",
     "Request ID" : "Eskariaren IDa",
     "Requested by" : "Honek eskatuta:",
