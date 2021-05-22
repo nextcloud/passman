@@ -1,7 +1,7 @@
 OC.L10N.register(
     "passman",
     {
-    "Generating sharing keys ( %s / 2)" : "Tworzenie kluczy współdzielonych ( %s / 2)",
+    "Generating sharing keys ( %s / 2)" : "Generowanie kluczy udostępniania (%s/2)",
     "Incorrect vault password!" : "Nieprawidłowe hasło sejfu!",
     "Passwords do not match" : "Hasła nie są jednakowe",
     "General" : "Ogólne",
@@ -148,8 +148,8 @@ OC.L10N.register(
     "Public key" : "Klucz publiczny",
     "Key size" : "Wielkość klucza",
     "Save keys" : "Zapisz klucze",
-    "Generate sharing keys" : "Generuj klucze współdzielone",
-    "Generating sharing keys" : "Generowanie klucze współdzielone",
+    "Generate sharing keys" : "Wygeneruj klucze udostępniania",
+    "Generating sharing keys" : "Generowanie kluczy udostępniania",
     "The password tool scans your password, calculates average cracking time, listing those below the threshold" : "To narzędzie skanuje Twoje hasło, oblicza średni czas złamania go, wylicza wartości poniżej progu",
     "Minimum password stength" : "Minimalna siła hasła",
     "Start scan" : "Rozpocznij skanowanie",
@@ -337,7 +337,7 @@ OC.L10N.register(
     "Passman Settings" : "Ustawienia Passmana",
     "GitHub version:" : "Wersja GitHub: ",
     "A newer version of Passman is available" : "Nowsza wersja aplikacji Passman jest dostępna",
-    "Password sharing" : "Współdzielenie hasła",
+    "Password sharing" : "Udostępnianie hasła",
     "Credential mover" : "Przenoszenie poświadczeń",
     "Vault destruction requests" : "Prośby o zniszczenie sejfu",
     "Check for new versions" : "Sprawdzaj czy jest nowsza wersja",
