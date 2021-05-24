@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Kaynak hesap",
     "Destination account" : "Hedef hesap",
     "Credentials moved!" : "Kimlik doğrulama bilgileri aktarıldı!",
+    "An error occurred!" : "Bir sorun çıktı!",
     "Requests to destroy vault" : "Kasa silme istekleri",
     "Request ID" : "İstek kodu",
     "Requested by" : "İsteyen",
