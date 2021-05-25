@@ -350,6 +350,7 @@ OC.L10N.register(
     "Source account" : "Izvorni račun",
     "Destination account" : "Ciljni račun",
     "Credentials moved!" : "Poverila so premaknjena!",
+    "An error occurred!" : "Prišlo je do napake!",
     "Requests to destroy vault" : "Zahteve za uničenje zbirnika",
     "Request ID" : "ID zahteve",
     "Requested by" : "Zahteva",
