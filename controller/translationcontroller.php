@@ -422,7 +422,7 @@ class TranslationController extends ApiController {
 			'share.page.text' => $this->trans->t('Someone has shared a credential with you.'),
 			'share.page.link' => $this->trans->t('Click here to request it'),
 			'share.page.link_loading' => $this->trans->t('Loading …'),
-			'expired.share' => $this->trans->t('Oops! Credential not found. Maybe it expired'),
+			'expired.share' => $this->trans->t('Oops! Credential not found. Maybe it expired.'),
 
 			//compromised credentials
 			'compromised.label' => $this->trans->t('Mark as Compromised'),
