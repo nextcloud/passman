@@ -82,7 +82,7 @@ style('passman', 'public-page');
 				</button>
 			</div>
 			<div ng-if="expired">
-				<?php p($l->t("Oops! could not find the credential. Maybe it expired?")); ?>
+				<?php p($l->t("Oops! Could not find the credential. Maybe it expired?")); ?>
 			</div>
 			<div ng-if="shared_credential">
 				<table class="table">
