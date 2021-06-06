@@ -51,6 +51,7 @@ script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');
 script('passman', 'app/filters/tagfilter');
+script('passman', 'app/filters/escapeHTML');
 script('passman', 'app/filters/as');
 script('passman', 'app/filters/credentialsearch');
 script('passman', 'app/filters/toHHMMSS');

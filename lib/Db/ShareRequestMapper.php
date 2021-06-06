@@ -24,129 +24,182 @@
 namespace OCA\Passman\Db;
 
 
-use Icewind\SMB\Share;
-use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Mapper;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\Exception;
+use OCP\DB\IResult;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
-class ShareRequestMapper extends Mapper {
-    const TABLE_NAME = 'passman_share_request';
+class ShareRequestMapper extends QBMapper {
+	const TABLE_NAME = 'passman_share_request';
 
-    public function __construct(IDBConnection $db) {
-        parent::__construct($db, self::TABLE_NAME);
-    }
-
-    public function createRequest(ShareRequest $request){
-        return $this->insert($request);
-    }
-
-    /**
-     * Obtains a request by the given item and vault GUID pair
-     * @param $item_guid
-     * @param $target_vault_guid
-     * @return ShareRequest
-     */
-    public function getRequestByItemAndVaultGuid($item_guid, $target_vault_guid){
-        $q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? AND target_vault_guid = ?";
-        return $this->findEntity($q, [$item_guid, $target_vault_guid]);
-    }
-
-    /**
-     * Get shared items for the given item_guid
-     * @param $item_guid
-     * @return ShareRequest[]
-     */
-    public function getRequestsByItemGuidGroupedByUser($item_guid){
-    	if (strtolower($this->db->getDatabasePlatform()->getName()) === 'mysql'){
-    		$this->db->executeQuery("SET sql_mode = '';");
-		}
-        $q = "SELECT *, target_user_id FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_guid = ? GROUP BY target_user_id;";
-        return $this->findEntities($q, [$item_guid]);
-    }
-
-    /**
-     * Deletes all pending requests for the given user to the given item
-     * @param $item_id          The item ID
-     * @param $target_user_id   The target user
-     * @return \PDOStatement    The result of running the db query
-     */
-    public function cleanItemRequestsForUser($item_id, $target_user_id){
-		$q = "DELETE FROM *PREFIX*" . self::TABLE_NAME . " WHERE item_id = ? AND target_user_id = ?";
-		$this->execute($q, [$item_id, $target_user_id]);
-        return $this->execute($q, [$item_id, $target_user_id]);
-    }
-
-    /**
-     * Obtains all pending share requests for the given user ID
-     * @param $user_id
-     * @return ShareRequest[]
-     */
-    public function getUserPendingRequests($user_id){
-        $q = "SELECT * FROM *PREFIX*". self::TABLE_NAME ." WHERE target_user_id = ?";
-        return $this->findEntities($q, [$user_id]);
-    }
-
-    /**
-     * Deletes the given share request
-     * @param ShareRequest $shareRequest    Request to delete
-     * @return ShareRequest                 The deleted request
-     */
-    public function deleteShareRequest(ShareRequest $shareRequest){
-    	return $this->delete($shareRequest);
+	public function __construct(IDBConnection $db) {
+		parent::__construct($db, self::TABLE_NAME);
 	}
 
-    /**
-     * Gets a share request by it's unique incremental id
-     * @param $id
-     * @return ShareRequest
+	/**
+	 * @param ShareRequest $request
+	 * @return ShareRequest|Entity
+	 */
+	public function createRequest(ShareRequest $request) {
+		return $this->insert($request);
+	}
+
+	/**
+	 * Obtains a request by the given item and vault GUID pair
+	 *
+	 * @param string $item_guid
+	 * @param string $target_vault_guid
+	 * @return Entity
 	 * @throws DoesNotExistException
-     */
-	public function getShareRequestById($id){
-		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE id = ?";
-		return $this->findEntity($q, [$id]);
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getRequestByItemAndVaultGuid(string $item_guid, string $target_vault_guid) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->eq('target_vault_guid', $qb->createNamedParameter($target_vault_guid, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntity($qb);
 	}
 
-    /**
-     * Gets all share requests by a given item GUID
-     * @param $item_guid
-     * @return ShareRequest[]
-     */
-	public function getShareRequestsByItemGuid($item_guid){
-		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE 	item_guid = ?";
-		return $this->findEntities($q, [$item_guid]);
+	/**
+	 * Get shared items for the given item_guid
+	 *
+	 * @param string $item_guid
+	 * @return Entity[]
+	 * @throws Exception
+	 */
+	public function getRequestsByItemGuidGroupedByUser(string $item_guid) {
+		if (strtolower($this->db->getDatabasePlatform()->getName()) === 'mysql') {
+			$this->db->executeQuery("SET sql_mode = '';");
+		}
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
+			->groupBy('target_user_id');
+
+		return $this->findEntities($qb);
 	}
 
-    /**
-     * Updates the given share request,
-     * @param ShareRequest $shareRequest
-     * @return ShareRequest
-     */
-	public function updateShareRequest(ShareRequest $shareRequest){
+	/**
+	 * Deletes all pending requests for the given user to the given item
+	 *
+	 * @param int $item_id
+	 * @param string $target_user_id
+	 * @return int|IResult
+	 * @throws Exception
+	 */
+	public function cleanItemRequestsForUser(int $item_id, string $target_user_id) {
+		$qb = $this->db->getQueryBuilder();
+		return $qb->delete(self::TABLE_NAME)
+			->where($qb->expr()->eq('item_id', $qb->createNamedParameter($item_id, IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->eq('target_user_id', $qb->createNamedParameter($target_user_id, IQueryBuilder::PARAM_STR)))
+			->execute();
+	}
+
+	/**
+	 * Obtains all pending share requests for the given user ID
+	 *
+	 * @param string $user_id
+	 * @return Entity[]
+	 */
+	public function getUserPendingRequests(string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('target_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Deletes the given share request
+	 * @param ShareRequest $shareRequest Request to delete
+	 * @return ShareRequest                 The deleted request
+	 */
+	public function deleteShareRequest(ShareRequest $shareRequest) {
+		return $this->delete($shareRequest);
+	}
+
+	/**
+	 * Gets a share request by it's unique incremental id
+	 *
+	 * @param int $id
+	 * @return Entity
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getShareRequestById(int $id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('id', $qb->createNamedParameter($id, IQueryBuilder::PARAM_INT)));
+
+		return $this->findEntity($qb);
+	}
+
+	/**
+	 * Gets all share requests by a given item GUID
+	 *
+	 * @param string $item_guid
+	 * @return Entity[]
+	 */
+	public function getShareRequestsByItemGuid(string $item_guid) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Updates the given share request,
+	 * @param ShareRequest $shareRequest
+	 * @return ShareRequest
+	 */
+	public function updateShareRequest(ShareRequest $shareRequest) {
 		return $this->update($shareRequest);
 	}
 
-    /**
-     * Finds pending requests sent to the given user to the given item.
-     * @param $item_guid
-     * @param $user_id
-     * @return ShareRequest[]
-     */
-	public function getPendingShareRequests($item_guid, $user_id){
-		$q = "SELECT * FROM *PREFIX*" . self::TABLE_NAME . " WHERE 	item_guid = ? and target_user_id= ?";
-		return $this->findEntities($q, [$item_guid, $user_id]);
+	/**
+	 * Finds pending requests sent to the given user to the given item.
+	 *
+	 * @param string $item_guid
+	 * @param string $user_id
+	 * @return Entity[]
+	 */
+	public function getPendingShareRequests(string $item_guid, string $user_id) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->eq('target_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
 	}
 
-    /**
-     * Updates all pending requests with the given permissions
-     * @param $item_guid        The item for which to update the requests
-     * @param $user_id          The user for which to update the requests
-     * @param $permissions      The new permissions to apply
-     * @return \PDOStatement    The result of the operation
-     */
-	public function updatePendingRequestPermissions($item_guid, $user_id, $permissions){
-	    $q = "UPDATE *PREFIX*" . self::TABLE_NAME . " SET permissions = ? WHERE item_guid = ? AND target_user_id = ?";
-        return $this->execute($q, [$permissions, $item_guid, $user_id]);
-    }
-
+	/**
+	 * Updates all pending requests with the given permissions
+	 *
+	 * @param string $item_guid The item for which to update the requests
+	 * @param string $user_id The user for which to update the requests
+	 * @param int $permissions The new permissions to apply
+	 * @return int|IResult
+	 * @throws Exception
+	 */
+	public function updatePendingRequestPermissions(string $item_guid, string $user_id, int $permissions) {
+		$qb = $this->db->getQueryBuilder();
+		return $qb->update(self::TABLE_NAME)
+			->set('permissions', $qb->createNamedParameter($permissions, IQueryBuilder::PARAM_INT))
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
+			->andWhere($qb->expr()->eq('target_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)))
+			->execute();
+	}
 }

@@ -1,4 +1,3 @@
-<?php
 /**
  * Nextcloud - passman
  *
@@ -21,35 +20,19 @@
  *
  */
 
-namespace OCA\Passman\BackgroundJob;
-
-use OC\BackgroundJob\TimedJob;
-use OCA\Passman\Service\CronService;
-use OCP\IConfig;
-
-/**
- * Class ExpireCredentials
- *
- * @package OCA\Passman\BackgroundJob
- */
-class ExpireCredentials extends TimedJob {
-
-	protected IConfig $config;
-	private CronService $cronService;
+(function () {
+	'use strict';
 
 	/**
-	 * ExpireCredentials constructor.
-	 * @param IConfig $config
-	 * @param CronService $cronService
+	 * @ngdoc filter
+	 * @name passmanApp.filter:escapeHTML
+	 * @function
+	 * @description Sanitizes a HTML string by replacing all potential dangerous characters with HTML entities
 	 */
-	public function __construct(IConfig $config, CronService $cronService) {
-		// Run once per minute
-		$this->setInterval(60);
-		$this->config = $config;
-		$this->cronService = $cronService;
-	}
-
-	protected function run($argument) {
-		$this->cronService->expireCredentials();
-	}
-}
+	angular.module('passmanApp')
+		.filter('escapeHTML', function () {
+			return function (s) {
+				return s.toString().split('&').join('&amp;').split('<').join('&lt;').split('>').join('&gt;').split('"').join('&quot;').split('\'').join('&#039;');
+			};
+		});
+}());

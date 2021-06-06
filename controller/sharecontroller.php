@@ -11,26 +11,27 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Activity;
+use OCA\Passman\Db\File;
 use OCA\Passman\Db\SharingACL;
-use OCA\Passman\Db\Vault;
+use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\NotificationService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
+use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCA\Passman\Utility\Utils;
-use OCP\AppFramework\Http\NotFoundResponse;
-use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
-
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IGroupManager;
+use OCP\IRequest;
 use OCP\IUserManager;
-
-use OCA\Passman\Service\VaultService;
-use OCA\Passman\Service\ActivityService;
-use OCA\Passman\Activity;
+use OCP\Notification\IManager;
 
 
 class ShareController extends ApiController {
@@ -44,22 +45,24 @@ class ShareController extends ApiController {
 	private $notificationService;
 	private $fileService;
 	private $settings;
+	private $manager;
 
 	private $limit = 50;
 	private $offset = 0;
 
 	public function __construct($AppName,
-								IRequest $request,
-								$UserId,
-								IGroupManager $groupManager,
-								IUserManager $userManager,
-								ActivityService $activityService,
-								VaultService $vaultService,
-								ShareService $shareService,
-								CredentialService $credentialService,
-								NotificationService $notificationService,
-								FileService $fileService,
-								SettingsService $config
+	                            IRequest $request,
+	                            $UserId,
+	                            IGroupManager $groupManager,
+	                            IUserManager $userManager,
+	                            ActivityService $activityService,
+	                            VaultService $vaultService,
+	                            ShareService $shareService,
+	                            CredentialService $credentialService,
+	                            NotificationService $notificationService,
+	                            FileService $fileService,
+	                            SettingsService $config,
+	                            IManager $IManager
 	) {
 		parent::__construct(
 			$AppName,
@@ -78,6 +81,7 @@ class ShareController extends ApiController {
 		$this->notificationService = $notificationService;
 		$this->fileService = $fileService;
 		$this->settings = $config;
+		$this->manager = $IManager;
 	}
 
 
@@ -222,7 +226,10 @@ class ShareController extends ApiController {
 		return new JSONResponse(array('result' => true));
 	}
 
-
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
 	public function unshareCredentialFromUser($item_guid, $user_id) {
 		$acl = null;
 		$sr = null;
@@ -232,19 +239,19 @@ class ShareController extends ApiController {
 
 		}
 		try {
-			$sr = array_pop($this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id));
+			$shareRequests = $this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id);
+			$sr = array_pop($shareRequests);
 		} catch (\Exception $e) {
 			// no need to catch this
 		}
 
 		if ($sr) {
 			$this->shareService->cleanItemRequestsForUser($sr);
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
+			$notification = $this->manager->createNotification();
 			$notification->setApp('passman')
 				->setObject('passman_share_request', $sr->getId())
 				->setUser($user_id);
-			$manager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 		}
 		if ($acl) {
 			$this->shareService->deleteShareACL($acl);
@@ -292,12 +299,11 @@ class ShareController extends ApiController {
 			return new NotFoundResponse();
 		}
 
-		$manager = \OC::$server->getNotificationManager();
-		$notification = $manager->createNotification();
+		$notification = $this->manager->createNotification();
 		$notification->setApp('passman')
 			->setObject('passman_share_request', $sr->getId())
 			->setUser($this->userId->getUID());
-		$manager->markProcessed($notification);
+		$this->manager->markProcessed($notification);
 
 		$notification = array(
 			'from_user' => ucfirst($this->userId->getDisplayName()),
@@ -383,12 +389,11 @@ class ShareController extends ApiController {
 			);
 
 
-			$manager = \OC::$server->getNotificationManager();
-			$notification = $manager->createNotification();
+			$notification = $this->manager->createNotification();
 			$notification->setApp('passman')
 				->setObject('passman_share_request', $share_request_id)
 				->setUser($this->userId->getUID());
-			$manager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 
 			$this->shareService->cleanItemRequestsForUser($sr);
 			return new JSONResponse(array('result' => true));
@@ -432,7 +437,8 @@ class ShareController extends ApiController {
 
 	/**
 	 * @param $item_guid
-	 * @return JSONResponse
+	 * @return JSONResponse|NotFoundResponse
+	 * @throws \OCP\DB\Exception
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
@@ -458,10 +464,11 @@ class ShareController extends ApiController {
 	/**
 	 * @param $item_guid
 	 * @param $file_guid
+	 * @return array|File|NotFoundJSONResponse
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
 	 * @NoAdminRequired
-	 * @PublicPage
-	 * @return mixed
-	 * @return NotFoundJSONResponse
+	 * @NoCSRFRequired
 	 */
 	public function getFile($item_guid, $file_guid) {
 		try {
