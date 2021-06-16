@@ -57,7 +57,7 @@ OC.L10N.register(
     "Are you sure you want to leave? This will corrupt this credential" : "您確認要離開嗎？這將銷毀此身分驗證",
     "Credential unshared" : "取消了身分驗證分享",
     "Credential shared" : "身分驗證已分享",
-    "Saved!" : "保存了！",
+    "Saved!" : "已保存！",
     "Poor" : "差 ",
     "Weak" : "弱",
     "Good" : "好 ",
