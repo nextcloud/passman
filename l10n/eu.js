@@ -121,6 +121,7 @@ OC.L10N.register(
     "Old vault password" : "Gordailu zaharraren pasahitza",
     "New vault password" : "Gordailu berriaren pasahitza",
     "Repeat new vault password" : "Errepikatu gordailuaren pasahitz berria",
+    "Please wait your vault is being updated, do not leave this page." : "Mesedez, itxaron, zure gordailua eguneratzen ari da, ez utzi orri hau.",
     "Processing" : "Prozesatzen",
     "Total progress" : "Aurrerapen totala",
     "About Passman" : "Passman aplikazioari buruz",
