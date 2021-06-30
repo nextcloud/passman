@@ -168,7 +168,7 @@ OC.L10N.register(
     "Write" : "寫入",
     "Files" : "檔案",
     "Revisions" : "修訂",
-    "Pending" : "等待",
+    "Pending" : "待定的",
     "Enable link sharing" : "啟用連結分享",
     "Share until date" : "分享到期日",
     "Expire after views" : "分享將在以下瀏覽次數後失效",
