@@ -43,6 +43,7 @@ OC.L10N.register(
     "You created %1$s" : "Avètz creat %1$s",
     "You deleted %1$s" : "Avètz suprimit %1$s",
     "Passwords" : "Senhals",
+    "Loading&hellip;" : "Cargament&hellip;",
     "Dismiss" : "Ignorar",
     "seconds ago" : "fa qualques segondas"
 },
