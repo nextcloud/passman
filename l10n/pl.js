@@ -47,7 +47,7 @@ OC.L10N.register(
     "Password settings" : "Ustawienia hasła",
     "Import credentials" : "Import poświadczeń",
     "Export credentials" : "Eksport poświadczeń",
-    "Sharing" : "Współdzielenie",
+    "Sharing" : "Udostępnianie",
     "Are you sure you want to leave? This will destroy all your credentials" : "Na pewno chcesz wyjść? To skasuje wszystkie twoje poświadczenia",
     "Old password field incorrect!" : "Stare hasło jest nieprawidłowe!",
     "New password does not match!" : "Nowe hasła nie pasują do siebie",
