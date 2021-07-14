@@ -65,8 +65,6 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function register(IRegistrationContext $context): void {
-		$this->registerNavigationEntry();
-
 		$context->registerEventListener(
 			BeforeUserDeletedEvent::class,
 			UserDeletedListener::class
@@ -133,6 +131,7 @@ class Application extends App implements IBootstrap {
 		$manager->registerNotifierService(Notifier::class);
 
 		Util::addTranslations(self::APP_ID);
+		$this->registerNavigationEntry();
 	}
 
 	/**
