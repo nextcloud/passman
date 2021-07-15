@@ -89,7 +89,7 @@ OC.L10N.register(
     "Add" : "Dodaj",
     "Value" : "Wartość",
     "Type" : "Typ",
-    "Actions" : "Akcja",
+    "Actions" : "Akcje",
     "Empty" : "Pusto",
     "Filename" : "Nazwa pliku",
     "Upload date" : "Data wysłania",
