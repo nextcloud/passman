@@ -50,6 +50,11 @@
 					}
 				}
 
+				$rootScope.refresh = function () {
+					fetchCredentials();
+					getPendingShareRequests();
+				};
+
 				$scope.show_spinner = true;
 				var fetchCredentials = function () {
 					VaultService.getVault({guid: $routeParams.vault_id}).then(function (vault) {

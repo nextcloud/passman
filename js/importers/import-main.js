@@ -92,6 +92,7 @@ var PassmanImporter = {};
 			'password': null,
 			'url': null,
 			'favicon': null,
+			'icon': null,
 			'renew_interval': null,
 			'expire_time': 0,
 			'delete_time': 0,

@@ -11,8 +11,11 @@
 
 			</div>
 			<div class="addCredential" ng-hide="delete_time>0">
-				<button ng-click="addCredential()">+</button>
+				<button ng-click="addCredential()"><i class="fa fa-plus"></i></button>
 			</div>
+            <div class="addCredential" ng-hide="delete_time>0">
+                <button ng-click="refresh()"><i class="fa fa-refresh"></i></button>
+            </div>
 		</div>
 
 		<div class="title" credential-counter="filtered_credentials" vault="active_vault" delete-time="delete_time" filters="filterOptions"></div>

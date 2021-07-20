@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('GenericCsvImportCtrl', ['$scope', 'CredentialService', '$translate',
-			function ($scope, CredentialService, $translate) {
+		.controller('GenericCsvImportCtrl', ['$scope', 'CredentialService', 'FileService', 'EncryptService', '$translate', '$q',
+			function ($scope, CredentialService, FileService, EncryptService, $translate, $q) {
 				$scope.hello = 'world';
 
 				$scope.credentialProperties = [
@@ -62,6 +62,16 @@
 						prop: 'custom_field'
 					},
 					{
+						label: 'Custom fields',
+						prop: 'custom_fields',
+						matching: ['custom_fields', 'customFields']
+					},
+					{
+						label: 'Files',
+						prop: 'files',
+						matching: ['files']
+					},
+					{
 						label: 'Notes',
 						prop: 'description',
 						matching: ['notes', 'description', 'comments']
@@ -88,7 +98,7 @@
 				var tagMapper = function (t) {
 					return {text: t};
 				};
-				var rowToCredential = function (row) {
+				var rowToCredential = async function (row) {
 					var _credential = PassmanImporter.newCredential();
 					for(var k = 0; k < $scope.import_fields.length; k++){
 						var field = $scope.import_fields[k];
@@ -102,6 +112,69 @@
 									'value': row[k],
 									'secret': 0
 								});
+							} else if(field === 'custom_fields'){
+								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
+									try {
+										row[k] = JSON.parse(row[k]);
+										for(var i = 0; k < row[k].length; i++){
+											_credential.custom_fields.push({
+												'label': row[k][i].label,
+												'secret': row[k][i].secret,
+												'field_type': row[k][i].field_type,
+											});
+										}
+									} catch (e) {
+										// ignore row[k], it contains no valid json data
+										// console.error(e);
+									}
+								} else {
+									for(var j = 0; j < row[k].length; j++){
+										if (row[k][j].field_type === 'file'){
+											var _file = {
+												filename: row[k][j].value.filename,
+												size: row[k][j].value.size,
+												mimetype: row[k][j].value.mimetype,
+												data: row[k][j].value.file_data
+											};
+
+											row[k][j].value = await FileService.uploadFile(_file).then(function (result) {
+												delete result.file_data;
+												result.filename = EncryptService.decryptString(result.filename);
+												return result;
+											});
+										}
+										_credential.custom_fields.push(row[k][j]);
+									}
+								}
+							} else if(field === 'files'){
+								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
+									try {
+										row[k] = JSON.parse(row[k]);
+										for(var i = 0; k < row[k].length; i++){
+											_credential.files.push({
+												filename: row[k][i].filename,
+												size: row[k][i].size,
+												mimetype: row[k][i].mimetype
+											});
+										}
+									} catch (e) {
+										// ignore row[k], it contains no valid json data
+										// console.error(e);
+									}
+								} else {
+									for(var j = 0; j < row[k].length; j++){
+										_credential.files.push(await FileService.uploadFile({
+											filename: row[k][j].filename,
+											size: row[k][j].size,
+											mimetype: row[k][j].mimetype,
+											data: row[k][j].file_data
+										}).then(function (result) {
+											delete result.file_data;
+											result.filename = EncryptService.decryptString(result.filename);
+											return result;
+										}));
+									}
+								}
 							} else if(field === 'tags'){
 								if( row[k]) {
 									var tags = row[k].split(',');
@@ -124,7 +197,6 @@
 					$scope.import_fields = [];
 					$scope.inspected_credential = false;
 					$scope.matched = false;
-					$scope.skipFirstRow = false;
 					var file_data = file.data.split(',');
 					file_data = decodeURIComponent(escape(window.atob(file_data[1])));
 					/** global: Papa */
@@ -147,6 +219,12 @@
 								if($scope.matched){
 									$scope.inspectCredential(results.data[1]);
 								}
+
+								for(var j = 0; j < results.data.length; j++){
+									if (results.data[j].length === 1 && results.data[j][0].length === 0) {
+										results.data.splice(j,j);
+									}
+								}
 								$scope.parsed_csv = results.data;
 								$scope.$apply();
 							}
@@ -154,7 +232,7 @@
 					});
 				};
 
-				var addCredential = function (index) {
+				var addCredential = async function (index) {
 					function handleState (index) {
 						if ($scope.parsed_csv[index + 1]) {
 							$scope.import_progress = {
@@ -175,7 +253,7 @@
 						}
 					}
 
-					var _credential = rowToCredential($scope.parsed_csv[index]);
+					var _credential = await rowToCredential($scope.parsed_csv[index]);
 					_credential.vault_id = $scope.active_vault.vault_id;
 					if (!_credential.label) {
 						$scope.log.push($translate.instant('import.skipping', {line: index}));
@@ -191,6 +269,7 @@
 					});
 				};
 
+				$scope.skipFirstRow = true;
 				$scope.importing = false;
 				$scope.startCSVImport = function () {
 					$scope.importing = true;

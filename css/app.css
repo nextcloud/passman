@@ -491,7 +491,10 @@
   z-index: 1000; }
 
 .link {
-  color: var(--color-primary); }
+  color: var(--color-primary);
+  cursor: pointer; }
+  .link span {
+    cursor: pointer; }
 
 #app-sidebar {
   height: auto; }
@@ -1344,7 +1347,8 @@
   clear: both; }
 
 input[type="checkbox"] {
-  min-height: inherit; }
+  min-height: inherit;
+  cursor: pointer; }
 
 .alert {
   padding: 15px;

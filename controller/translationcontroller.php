@@ -86,7 +86,7 @@ class TranslationController extends ApiController {
 			'first.five.lines' => $this->trans->t('The first 5 lines of the CSV are shown.'),
 			'assign.column' => $this->trans->t('Assign the proper fields to each column.'),
 			'example.credential' => $this->trans->t('Example of imported credential'),
-			'missing.importer' => $this->trans->t('Missing an importer? Try it with the generic CSV importer.'),
+			'missing.importer' => $this->trans->t('Missing an importer? Click here to try it with the generic CSV importer.'),
 			'missing.importer.back' => $this->trans->t('Go back to importers.'),
 
 

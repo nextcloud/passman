@@ -11,7 +11,7 @@
 				</span>
 			</div>
 			<div ng-show="parsed_csv">
-				<input type="checkbox" ng-model="skipFirstRow" ng-checked="matched"> {{ 'skip.first.row' | translate}}
+				<input type="checkbox" ng-model="skipFirstRow"> {{ 'skip.first.row' | translate}}
 			</div>
 			<div ng-show="import_fields.indexOf('label') === -1 && parsed_csv">
 				<b>{{ 'import.csv.label.req' | translate}}</b>
