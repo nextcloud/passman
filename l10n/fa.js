@@ -53,7 +53,7 @@ OC.L10N.register(
     "New password does not match!" : "رمز عبور جدید مطابقت ندارد!",
     "Please log in with your new vault password" : "لطفاً با رمز جدید طاق خود وارد شوید",
     "Share with users and groups" : "با کاربران و گروه ها به اشتراک بگذارید",
-    "Share link" : "Share link",
+    "Share link" : "لینک را به اشتراک بگذارید",
     "Are you sure you want to leave? This will corrupt this credential" : "آیا مطمئن هستی که می خواهی ترک کنی؟ این اعتبار را خراب می کند",
     "Credential unshared" : "اعتبار نامشخص",
     "Credential shared" : "اعتبار به اشتراک گذاشته شد",
