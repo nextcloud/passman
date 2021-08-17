@@ -140,38 +140,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-.tab_header {
-  width: calc(100vw - 300px);
-  margin: 0 0 0;
-  list-style: none;
-  padding: 0; }
-  .tab_header li.tab:first-child {
-    margin-left: 0; }
-  .tab_header li.tab {
-    /*@include border-top-radius(2px);*/
-    float: left;
-    border-bottom-width: 0;
-    margin: 0;
-    padding: 10px 10px 10px 10px;
-    cursor: pointer;
-    border-right: 1px solid #eee;
-    -webkit-transition: background-color 250ms linear;
-    -moz-transition: background-color 250ms linear;
-    -o-transition: background-color 250ms linear;
-    -ms-transition: background-color 250ms linear;
-    transition: background-color 250ms linear; }
-    .tab_header li.tab .indicator {
-      display: none; }
-  .tab_header li.inactive {
-    background-color: #fff !important;
-    color: unset !important; }
-  .tab_header li.active .indicator {
-    display: inline-block;
-    position: absolute;
-    height: 7px;
-    left: 0;
-    right: 0;
-    bottom: -1px; }
+.app-sidebar-tabs {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 100%; }
+
+.app-sidebar-tabs__nav ul {
+  display: flex;
+  justify-content: stretch; }
+
+.app-sidebar-tabs__tab.active {
+  color: var(--color-text-light);
+  border-bottom-color: var(--color-primary-element);
+  box-shadow: inset 0 -1px 0 var(--color-primary-element);
+  font-weight: bold; }
+
+.app-sidebar-tabs__tab:not(.active):hover, .app-sidebar-tabs__tab:not(.active):focus {
+  border-bottom-color: var(--color-background-darker);
+  box-shadow: inset 0 -1px 0 var(--color-background-darker); }
+
+.app-sidebar-tabs__tab:hover, .app-sidebar-tabs__tab:focus, .app-sidebar-tabs__tab:active, .app-sidebar-tabs__tab.active {
+  opacity: 1;
+  cursor: pointer; }
+
+.app-sidebar-tabs__tab {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 10px 10px 10px 10px;
+  transition: color var(--animation-quick), opacity var(--animation-quick), border-color var(--animation-quick);
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: .7;
+  color: var(--color-main-text);
+  border-bottom: 1px solid var(--color-border); }
 
 .tab_container {
   border: 1px solid #eee;
