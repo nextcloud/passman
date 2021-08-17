@@ -1064,7 +1064,6 @@
   width: inherit !important;
   border-right: 1px solid #eee; }
   .nav-trashbin a {
-    background-color: #fff !important;
     opacity: 1 !important;
     z-index: 140; }
     .nav-trashbin a.active {
@@ -1072,8 +1071,21 @@
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
-#app-navigation .collapsible:hover .app-navigation-entry-bullet {
-  background: var(--color-primary) !important; }
+#app-navigation {
+  /* Custom bullet icon */ }
+  #app-navigation .collapsible:hover .app-navigation-entry-bullet {
+    background: var(--color-primary) !important; }
+  #app-navigation .app-navigation-entry-bullet-with-hover {
+    position: absolute;
+    display: block;
+    margin: 16px;
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 100ms ease-in-out;
+    z-index: 101; }
 
 #app-navigation a .selected {
   opacity: 1 !important;
