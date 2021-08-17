@@ -72,15 +72,19 @@
 					if (vault.hasOwnProperty('credentials')) {
 						if (vault.credentials.length > 0) {
 							for (var i = 0; i < vault.credentials.length; i++) {
-								var _credential = angular.copy(vault.credentials[i]);
-								if (_credential.hidden === 0) {
-									var key = CredentialService.getSharedKeyFromCredential(_credential);
-									_credential = CredentialService.decryptCredential(_credential, key);
-									_credential.vault_key = key;
-									_credentials.push(_credential);
+								try {
+									var _credential = angular.copy(vault.credentials[i]);
+									if (_credential.hidden === 0) {
+										var key = CredentialService.getSharedKeyFromCredential(_credential);
+										_credential = CredentialService.decryptCredential(_credential, key);
+										_credential.vault_key = key;
+										_credentials.push(_credential);
+									}
+								} catch (e) {
+									_log($translate.instant('export.decrypt.error', {credential: (vault.credentials[i].label !== undefined) ? vault.credentials[i].label : i}));
 								}
 							}
-							$window.PassmanExporter[$scope.selectedExporter.id].export(_credentials, FileService, EncryptService).then(function () {
+							$window.PassmanExporter[$scope.selectedExporter.id].export(_credentials, FileService, EncryptService, $scope.log, $translate).then(function () {
 								_log($translate.instant('done'));
 							});
 						}

@@ -30,10 +30,10 @@ PassmanExporter.json = {
 	}
 };
 
-PassmanExporter.json.export = function (credentials, FileService, EncryptService) {
+PassmanExporter.json.export = function (credentials, FileService, EncryptService, _log, $translate) {
 	/** global: C_Promise */
 	return new C_Promise(function () {
-		PassmanExporter.getCredentialsWithFiles(credentials, FileService, EncryptService).then((function(){
+		PassmanExporter.getCredentialsWithFiles(credentials, FileService, EncryptService, _log, $translate).then((function(){
 		    var _output = [];
 		    for (var i = 0; i < credentials.length; i++) {
 			    var _credential = angular.copy(credentials[i]);
