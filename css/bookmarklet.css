@@ -19,17 +19,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-header, nav {
+header {
   display: none; }
 
 #content-wrapper {
   padding-top: 0; }
+
+#app-content {
+  margin-left: 0;
+  overflow-x: auto; }
 
 #app-content-wrapper {
   min-height: inherit !important; }
 
 .warning_bar .fa-times {
   margin-right: 20px; }
+
+#passman-controls .breadcrumb {
+  padding-left: 0; }
+  #passman-controls .breadcrumb a, #passman-controls .breadcrumb a i {
+    cursor: default; }
 
 .tab_container {
   padding-top: 10px;
@@ -52,5 +61,8 @@ header, nav {
 
 .angularjs-datetime-picker {
   z-index: 9999; }
+
+.icon-picker {
+  display: none; }
 
 /*# sourceMappingURL=bookmarklet.css.map */
