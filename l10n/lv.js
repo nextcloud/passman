@@ -103,7 +103,7 @@ OC.L10N.register(
     "Reversed" : "Apvērsta",
     "l33t-variations" : "l33t-variācijas",
     "by" : "līdz",
-    "Label" : "Apzīmējums",
+    "Label" : "Etiķete",
     "Restore revision" : "Atjaunot revīziju",
     "Save" : "Saglabāt",
     "Cancel" : "Atcelt",
