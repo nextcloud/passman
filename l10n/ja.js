@@ -316,7 +316,7 @@ OC.L10N.register(
     "You recovered %1$s" : "%1$s を復旧しました",
     "%1$s has been permanently deleted by %2$s" : "%1$s は %2$sにより完全に削除されました",
     "You permanently deleted %1$s" : "%1$s を完全に削除しました",
-    "The password of %1$s has expired, renew it now." : "%1$s のパスワードは期限切れです。新しくしてください。",
+    "The password of %1$s has expired, renew it now." : "%1$s のパスワードは期限切れになりました。更新してください。",
     "%1$s has been shared with %2$s" : "%1$s を %2$s と共有しました",
     "You received a share request for %1$s from %2$s" : "%2$s から %1$s の共有リクエストを受信しました",
     "%s has been shared with a link" : "%s がリンクで共有されました",
