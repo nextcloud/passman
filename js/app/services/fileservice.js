@@ -114,6 +114,11 @@
 
 					/** global: URL */
 					return URL.createObjectURL(bb);
+				},
+				getEmptyFileWithDecryptedFilename: function (file) {
+					delete file.file_data;
+					file.filename = EncryptService.decryptString(file.filename);
+					return file;
 				}
 			};
 		}]);

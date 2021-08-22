@@ -43,7 +43,8 @@ var PassmanImporter = PassmanImporter || {};
 
 	PassmanImporter.passmanJson.readFile = function (file_data) {
 		/** global: C_Promise */
-		return new C_Promise(async function(){
+		return new C_Promise(
+			async function(){
 			var parseCustomFields = async function (customFields, credential){
 				if (customFields.length > 0) {
 					for (var cf = 0; cf < customFields.length; cf++) {
@@ -93,10 +94,14 @@ var PassmanImporter = PassmanImporter || {};
 							mimetype: files[cf].mimetype,
 							data: files[cf].file_data
 						};
-						var file_result = await FileService.uploadFile(_file);
-						delete file_result.file_data;
-						file_result.filename = EncryptService.decryptString(file_result.filename);
-						credential.files.push(file_result);
+						try {
+							var file_result = await FileService.uploadFile(_file);
+							delete file_result.file_data;
+							file_result.filename = EncryptService.decryptString(file_result.filename);
+							credential.files.push(file_result);
+						} catch (e) {
+							console.error("failed processing file: " + _file.filename);
+						}
 					}
 				}
 				return credential;
