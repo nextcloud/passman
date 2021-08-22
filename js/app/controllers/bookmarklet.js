@@ -411,8 +411,12 @@
 							NotificationService.showNotification($translate.instant('credential.created'), 5000);
 						});
 					}
+					setTimeout(() => window.close(), 3000);
 				};
 
+				$scope.cancel = function () {
+					window.close();
+				};
 			}
 		]);
 

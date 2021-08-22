@@ -5,24 +5,24 @@
                 <a ng-click="logout()"><i class="fa fa-home"></i></a>
             </div>
             <div class="crumb svg">
-                <a ng-click="cancel()">{{active_vault.name}}</a>
+                <a ng-click="cancel()">{{ active_vault.name }}</a>
             </div>
             <div class="crumb svg last">
-                <a>{{ 'settings' | translate}}</a>
+                <a>{{ 'settings' | translate }}</a>
             </div>
         </div>
     </div>
 </div>
 
-<div>
-    <ul class="tab_header">
-        <li ng-repeat="tab in tabs track by $index" class="tab"
-            ng-class="isActiveTab(tab)? 'active' : 'inactive'"
-            ng-click="onClickTab(tab)" use-theme color="'true'">{{tab.title | translate}}
-            <div class="indicator" use-theme negative="'true'"></div>
-        </li>
-
-    </ul>
+<div class="app-sidebar-tabs">
+    <nav class="app-sidebar-tabs__nav">
+        <ul>
+            <li ng-repeat="tab in tabs track by $index" class="app-sidebar-tabs__tab"
+                ng-class="isActiveTab(tab)? 'active' : 'inactive'"
+                ng-click="onClickTab(tab)">{{ tab.title | translate }}
+            </li>
+        </ul>
+    </nav>
 
     <div class="tab_container settings edit_credential" use-theme type="'border-top-color'">
         <div ng-include="currentTab.url"></div>

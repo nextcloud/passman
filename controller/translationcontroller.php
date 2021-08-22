@@ -65,6 +65,7 @@ class TranslationController extends ApiController {
 			// js/app/controllers/export.js
 			'export.starting' => $this->trans->t('Starting export'),
 			'export.decrypt' => $this->trans->t('Decrypting credentials'),
+			'export.decrypt.error' => $this->trans->t('Failed to decrypt {{credential}}'),
 			'done' => $this->trans->t('Done'),
 
 			// js/app/controllers/import.js

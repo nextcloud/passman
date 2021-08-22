@@ -55,7 +55,7 @@
       //border-left: 3px solid #0082c9;
       background-image: var(--icon-delete-e9322d);
     }
-    background-color: #fff !important;
+    //background-color: #fff !important;
     opacity: 1 !important;
     z-index: 140;
     //padding: 0 20px;
@@ -70,6 +70,19 @@
   .collapsible:hover .app-navigation-entry-bullet{
     background: var(--color-primary) !important;
   }
+  /* Custom bullet icon */
+  .app-navigation-entry-bullet-with-hover {
+    position: absolute;
+    display: block;
+    margin: 16px;
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 100ms ease-in-out;
+    z-index: 101;
+  }
 }
 
 
@@ -82,7 +95,7 @@
     }
   }
 
-  li{
+  li {
     .app-navigation-entry-bullet-color {
       background-color: var(--color-primary);
     }
@@ -99,22 +112,22 @@
       background-color: #4db728;
     }
 
-    .highlight-selected{
-        background-color: var(--color-primary);
+    .highlight-selected {
+      background-color: var(--color-primary);
     }
 
-    .autocomplete{
+    .autocomplete {
       position: relative;
     }
 
-    a.taginput{
+    a.taginput {
       opacity: 1;
     }
-    a{
+    a {
       overflow: visible;
-      tags-input{
+      tags-input {
         opacity: 1.0;
-        li{
+        li {
           width: auto !important;
         }
       }
