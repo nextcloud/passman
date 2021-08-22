@@ -11,8 +11,11 @@
 
 			</div>
 			<div class="addCredential" ng-hide="delete_time>0">
-				<button ng-click="addCredential()">+</button>
+				<button ng-click="addCredential()"><i class="fa fa-plus"></i></button>
 			</div>
+            <div class="addCredential" ng-hide="delete_time>0">
+                <button ng-click="refresh()"><i class="fa fa-refresh"></i></button>
+            </div>
 		</div>
 
 		<div class="title" credential-counter="filtered_credentials" vault="active_vault" delete-time="delete_time" filters="filterOptions"></div>
@@ -48,10 +51,10 @@
 					<span class="tag" ng-repeat="tag in credential.tags_raw">{{ ::tag.text}}</span>
 
 					</span>
-					<span class="icon" ng-if="credential.url || credential.icon">
+					<span class="icon" ng-if="credential.url || (credential.icon && credential.icon.type !== false)">
 						<credential-icon credential="credential"></credential-icon>
 					</span>
-					<span class="icon" ng-if="!credential.url && !credential.icon">
+					<span class="icon" ng-if="!credential.url && (!credential.icon || (credential.icon && !credential.icon.type))">
 						<i class="fa fa-lock" ng-if="!credential.acl && !credential.shared_key"></i>
 						<i class="fa fa-share-alt" ng-if="credential.acl"></i>
 						<i class="fa fa-share-alt-square" ng-if="credential.shared_key"> </i>
@@ -145,10 +148,10 @@
 	<span class="close icon-close" ng-click="closeSelected()" alt="Close"></span>
 
 	<div class="sidebar">
-		<span class="icon sidebar-icon" ng-if="selectedCredential.url || selectedCredential.icon">
+		<span class="icon sidebar-icon" ng-if="selectedCredential.url || (selectedCredential.icon && selectedCredential.icon.type !== false)">
 			<credential-icon credential="selectedCredential"></credential-icon>
 		</span>
-		<span class="icon sidebar-icon" ng-if="!selectedCredential.url && !selectedCredential.icon">
+		<span class="icon sidebar-icon" ng-if="!selectedCredential.url && (!selectedCredential.icon || (selectedCredential.icon && !selectedCredential.icon.type))">
             <i class="fa fa-lock fa-3x icon-image"></i>
 		</span>
 		<h2 class="sidebar-label">{{selectedCredential.label}}</h2>

@@ -1,6 +1,7 @@
 {
   "maxerr"        : 50,
   "jquery"        : true,    // jQuery
+  "esversion"     : 8,
   "globals"       : {
     "angular": true,
     "PassmanImporter": true,

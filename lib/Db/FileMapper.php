@@ -123,14 +123,13 @@ class FileMapper extends QBMapper {
 		return $this->update($file);
 	}
 
-
 	/**
 	 * @param string $user_id
 	 * @return Entity[]
 	 */
-	public function getFilesFromUser(string $user_id) {
+	public function getFileGuidsFromUser(string $user_id) {
 		$qb = $this->db->getQueryBuilder();
-		$qb->select('*')
+		$qb->select('guid')
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 

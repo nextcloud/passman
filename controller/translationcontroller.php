@@ -41,7 +41,7 @@ class TranslationController extends ApiController {
 	public function getLanguageStrings() {
 		$translations = array(
 			// js/app/controllers/bookmarklet.js
-			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys ( %s / 2)','%step'),
+			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys (%s/2)','%step'),
 			'invalid.vault.key' => $this->trans->t('Incorrect vault password!'),
 			'password.do.not.match' => $this->trans->t('Passwords do not match'),
 			'general' => $this->trans->t('General'),
@@ -65,6 +65,7 @@ class TranslationController extends ApiController {
 			// js/app/controllers/export.js
 			'export.starting' => $this->trans->t('Starting export'),
 			'export.decrypt' => $this->trans->t('Decrypting credentials'),
+			'export.decrypt.error' => $this->trans->t('Failed to decrypt {{credential}}'),
 			'done' => $this->trans->t('Done'),
 
 			// js/app/controllers/import.js
@@ -86,7 +87,7 @@ class TranslationController extends ApiController {
 			'first.five.lines' => $this->trans->t('The first 5 lines of the CSV are shown.'),
 			'assign.column' => $this->trans->t('Assign the proper fields to each column.'),
 			'example.credential' => $this->trans->t('Example of imported credential'),
-			'missing.importer' => $this->trans->t('Missing an importer? Try it with the generic CSV importer.'),
+			'missing.importer' => $this->trans->t('Missing an importer? Click here to try it with the generic CSV importer.'),
 			'missing.importer.back' => $this->trans->t('Go back to importers.'),
 
 
@@ -145,7 +146,7 @@ class TranslationController extends ApiController {
 			'use.icon' => $this->trans->t('Use this icon'),
 			'use.icon.delete' => $this->trans->t('Delete current icon'),
 			'use.icon.refresh' => $this->trans->t('Get icon from page'),
-			'use.icon.refresh.trying' => $this->trans->t('This may take a few seconds…'),
+			'use.icon.refresh.trying' => $this->trans->t('This may take a few seconds …'),
 			'use.icon.refresh.error' => $this->trans->t('There was an error fetching the icon!'),
 			'selected.icon' => $this->trans->t('Selected icon'),
 
@@ -220,7 +221,7 @@ class TranslationController extends ApiController {
 			'vault.password' => $this->trans->t('Vault password'),
 			'vault.remove.notice' => $this->trans->t('This process is irreversible'),
 			'delete.vault.checkbox' => $this->trans->t('Delete my precious passwords'),
-			'deleting.pw' => $this->trans->t('Deleting {{password}}…'),
+			'deleting.pw' => $this->trans->t('Deleting {{password}} …'),
 			'delete.vault.confirm' => $this->trans->t('Yes, delete my precious passwords'),
 
 
@@ -251,7 +252,7 @@ class TranslationController extends ApiController {
 			'action' => $this->trans->t('Action'),
 
 			// templates/vieuws/partials/forms/share_credential/basics.html
-			'search.u.g' => $this->trans->t('Search users…'),
+			'search.u.g' => $this->trans->t('Search users …'),
 			'search.result.missing' => $this->trans->t('Missing users? Only users that have vaults are shown.'),
 			'cyphering' => $this->trans->t('Cyphering'),
 			'uploading' => $this->trans->t('Uploading'),
@@ -278,13 +279,13 @@ class TranslationController extends ApiController {
 			'hide.details' => $this->trans->t('Hide details'),
 			'password.score' => $this->trans->t('Password score'),
 			'cracking.times' => $this->trans->t('Cracking times'),
-			'cracking.time.100h' => $this->trans->t('100 / hour'),
+			'cracking.time.100h' => $this->trans->t('100/hour'),
 			'cracking.time.100h.desc' => $this->trans->t('Throttled online attack'),
-			'cracking.time.10s' => $this->trans->t('10 / second'),
+			'cracking.time.10s' => $this->trans->t('10/second'),
 			'cracking.time.10s.desc' => $this->trans->t('Unthrottled online attack'),
-			'cracking.time.10ks' => $this->trans->t('10k / second'),
+			'cracking.time.10ks' => $this->trans->t('10k/second'),
 			'cracking.time.10ks.desc' => $this->trans->t('Offline attack, slow hash, many cores'),
-			'cracking.time.10Bs' => $this->trans->t('10B / second'),
+			'cracking.time.10Bs' => $this->trans->t('10B/second'),
 			'cracking.time.10Bs.desc' => $this->trans->t('Offline attack, fast hash, many cores'),
 			'match.sequence' => $this->trans->t('Match sequence'),
 			'match.sequence.link' => $this->trans->t('See match sequence'),
@@ -325,11 +326,11 @@ class TranslationController extends ApiController {
 			'deleted.since' => $this->trans->t('Showing deleted since'),
 			'alltime' => $this->trans->t('Beginning'),
 			'number.filtered' => $this->trans->t('Showing {{number_filtered}} of {{credential_number}} credentials'),
-			'search.credential' => $this->trans->t('Search for credential…'),
+			'search.credential' => $this->trans->t('Search for credential …'),
 			'account' => $this->trans->t('Account'),
 			'password' => $this->trans->t('Password'),
 			'otp' => $this->trans->t('OTP'),
-			'email' => $this->trans->t('E-mail'),
+			'email' => $this->trans->t('Email'),
 			'url' => $this->trans->t('URL'),
 			'notes' => $this->trans->t('Notes'),
 			'files' => $this->trans->t('Files'),
@@ -381,7 +382,7 @@ class TranslationController extends ApiController {
 			'input.vault.password' => $this->trans->t('Please input the password for'),
 			'vault.default' => $this->trans->t('Set this vault as the default.'),
 			'vault.auto.login' => $this->trans->t('Log into this vault automatically.'),
-			'auto.logout' => $this->trans->t('Log out of this vault automatically after: '),
+			'auto.logout' => $this->trans->t('Log out of this vault automatically after:'),
 			'vault.decrypt' => $this->trans->t('Decrypt vault'),
 
 			'req.intro1' => $this->trans->t('Seems you lost the vault password and you\'re unable to log in.'),
@@ -421,8 +422,8 @@ class TranslationController extends ApiController {
 			// templates/public_share.php
 			'share.page.text' => $this->trans->t('Someone has shared a credential with you.'),
 			'share.page.link' => $this->trans->t('Click here to request it'),
-			'share.page.link_loading' => $this->trans->t('Loading…'),
-			'expired.share' => $this->trans->t('Awwhh… credential not found. Maybe it expired'),
+			'share.page.link_loading' => $this->trans->t('Loading …'),
+			'expired.share' => $this->trans->t('Oops! Credential not found. Maybe it expired.'),
 
 			//compromised credentials
 			'compromised.label' => $this->trans->t('Mark as Compromised'),
