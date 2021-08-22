@@ -107,8 +107,9 @@ class AdminController extends ApiController {
 				$this->vaultService->updateVault($vault);
 			}
 
-			$files = $this->fileService->getFilesFromUser($source_account);
-			foreach ($files as $file) {
+			$fileGuids = $this->fileService->getFileGuidsFromUser($source_account);
+			foreach ($fileGuids as $fileGuid) {
+				$file = $this->fileService->getFileByGuid($fileGuid, $source_account);
 				$file->setUserId($destination_account);
 				$this->fileService->updateFile($file);
 			}
