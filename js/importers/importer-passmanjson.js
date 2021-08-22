@@ -66,10 +66,14 @@ var PassmanImporter = PassmanImporter || {};
 									mimetype: customFields[cf].value.mimetype,
 									data: customFields[cf].value.file_data
 								};
-								var file_result = await FileService.uploadFile(_file);
-								delete file_result.file_data;
-								file_result.filename = EncryptService.decryptString(file_result.filename);
-								customFields[cf].value = file_result;
+								try {
+									var file_result = await FileService.uploadFile(_file);
+									delete file_result.file_data;
+									file_result.filename = EncryptService.decryptString(file_result.filename);
+									customFields[cf].value = file_result;
+								} catch (e) {
+									console.error("failed processing custom field file: " + _file.filename);
+								}
 							}
 
 							credential.custom_fields.push(
