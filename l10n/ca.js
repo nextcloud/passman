@@ -349,7 +349,7 @@ OC.L10N.register(
     "Destination account" : "Compte de destinació",
     "Credentials moved!" : "S'han mogut les credencials!",
     "Requests to destroy vault" : "Peticions per destruir la cripta",
-    "Request ID" : "Sol·licitud ID: ",
+    "Request ID" : "ID de la sol·licitud",
     "Requested by" : "Sol·licitat per",
     "Reason" : "Motiu",
     "Click here to request\n\t\t\t\t\tit" : "Feu clic aquí per sol·licitar-ho\n\t\t\t\t\t",

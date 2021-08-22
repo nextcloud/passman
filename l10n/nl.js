@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Bron-account",
     "Destination account" : "Doel-account",
     "Credentials moved!" : "Inloggegevens verplaatst!",
+    "An error occurred!" : "Er trad een fout op!",
     "Requests to destroy vault" : "Aanvraag om vernietiging kluis",
     "Request ID" : "Aanvraag ID",
     "Requested by" : "Aangevraagd door",
