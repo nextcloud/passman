@@ -34,6 +34,7 @@ module.exports = function (grunt) {
 				eqeqeq: true,
 				eqnull: true,
 				browser: true,
+				esversion: 8,
 				globals: {
 					"angular": true,
 					"PassmanImporter": true,

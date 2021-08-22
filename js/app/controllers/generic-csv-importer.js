@@ -116,7 +116,7 @@
 								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
 									try {
 										row[k] = JSON.parse(row[k]);
-										for(var i = 0; k < row[k].length; i++){
+										for(let i = 0; k < row[k].length; i++){
 											_credential.custom_fields.push({
 												'label': row[k][i].label,
 												'secret': row[k][i].secret,
@@ -128,7 +128,7 @@
 										// console.error(e);
 									}
 								} else {
-									for(var j = 0; j < row[k].length; j++){
+									for(let j = 0; j < row[k].length; j++){
 										if (row[k][j].field_type === 'file'){
 											var _file = {
 												filename: row[k][j].value.filename,
@@ -137,11 +137,7 @@
 												data: row[k][j].value.file_data
 											};
 
-											row[k][j].value = await FileService.uploadFile(_file).then(function (result) {
-												delete result.file_data;
-												result.filename = EncryptService.decryptString(result.filename);
-												return result;
-											});
+											row[k][j].value = await FileService.uploadFile(_file).then(FileService.getEmptyFileWithDecryptedFilename);
 										}
 										_credential.custom_fields.push(row[k][j]);
 									}
@@ -150,7 +146,7 @@
 								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
 									try {
 										row[k] = JSON.parse(row[k]);
-										for(var i = 0; k < row[k].length; i++){
+										for(let i = 0; k < row[k].length; i++){
 											_credential.files.push({
 												filename: row[k][i].filename,
 												size: row[k][i].size,
@@ -162,17 +158,13 @@
 										// console.error(e);
 									}
 								} else {
-									for(var j = 0; j < row[k].length; j++){
+									for(let j = 0; j < row[k].length; j++){
 										_credential.files.push(await FileService.uploadFile({
 											filename: row[k][j].filename,
 											size: row[k][j].size,
 											mimetype: row[k][j].mimetype,
 											data: row[k][j].file_data
-										}).then(function (result) {
-											delete result.file_data;
-											result.filename = EncryptService.decryptString(result.filename);
-											return result;
-										}));
+										}).then(FileService.getEmptyFileWithDecryptedFilename));
 									}
 								}
 							} else if(field === 'tags'){
