@@ -114,17 +114,17 @@ class FileService {
 	}
 
 	/**
-	 * Update file
+	 * Get array of all file guids
 	 *
 	 * @param string $userId
-	 * @return File[]
+	 * @return string[]
 	 * @throws Exception
 	 */
-	public function getFilesFromUser(string $userId) {
-		$files = $this->fileMapper->getFilesFromUser($userId);
+	public function getFileGuidsFromUser(string $userId) {
+		$files = $this->fileMapper->getFileGuidsFromUser($userId);
 		$results = array();
-		foreach ($files as $file) {
-			array_push($results, $this->encryptService->decryptFile($file));
+		foreach ($files as $fileGuid) {
+			array_push($results, $fileGuid->getGuid());
 		}
 		return $results;
 	}
