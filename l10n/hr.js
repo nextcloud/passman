@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Izvorni račun",
     "Destination account" : "Odredišni račun",
     "Credentials moved!" : "Vjerodajnica je premještena!",
+    "An error occurred!" : "Došlo je do pogreške!",
     "Requests to destroy vault" : "Zahtjevi za uništavanjem trezora",
     "Request ID" : "ID zahtjeva",
     "Requested by" : "Zatražio",

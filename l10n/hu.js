@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Forrás fiók",
     "Destination account" : "Cél fiók",
     "Credentials moved!" : "Hitelesítőadatok átmozgatva!",
+    "An error occurred!" : "Hiba történt!",
     "Requests to destroy vault" : "Széftörlés kérvényezések",
     "Request ID" : "Kérvény azonosító",
     "Requested by" : "Kérvényező:",

@@ -351,6 +351,7 @@ OC.L10N.register(
     "Source account" : "Исходный аккаунт",
     "Destination account" : "Аккаунт получателя",
     "Credentials moved!" : "Записи перемещены!",
+    "An error occurred!" : "Произошла ошибка!",
     "Requests to destroy vault" : "Запрос на уничтожение хранилища",
     "Request ID" : "ID запроса",
     "Requested by" : "Запрошено",

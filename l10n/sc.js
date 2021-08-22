@@ -68,7 +68,7 @@ OC.L10N.register(
     "Generate password" : "Gènera crae",
     "Copy password to clipboard" : "Còpia crae in punta de billete",
     "Password copied to clipboard!" : "Crae copiada in punta de billete!",
-    "Complete" : "Fatu",
+    "Complete" : "Cumpletadu",
     "Username" : "Nùmene utente",
     "Repeat password" : "Torra a pònnere sa crae",
     "Add tag" : "Agiunghe eticheta",
