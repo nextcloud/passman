@@ -119,6 +119,7 @@
 //Fix NC fucking up our style
 input[type="checkbox"]{
   min-height: inherit;
+  cursor: pointer;
 }
 .alert {
   padding: 15px;
