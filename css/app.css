@@ -144,11 +144,18 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
-  flex: 1 1 100%; }
+  flex: 1 1 100%;
+  z-index: 51;
+  background: var(--color-main-background); }
 
-.app-sidebar-tabs__nav ul {
-  display: flex;
-  justify-content: stretch; }
+.app-sidebar-tabs__nav {
+  background: var(--color-background-hover); }
+  .app-sidebar-tabs__nav ul {
+    display: flex;
+    justify-content: stretch; }
+
+.theme--dark .app-sidebar-tabs__nav {
+  background: var(--color-background-darker); }
 
 .app-sidebar-tabs__tab.active {
   color: var(--color-text-light);
@@ -488,7 +495,7 @@
   height: 100%;
   width: 100%; }
 
-.icon-image {
+.icon-image-size {
   width: 16px; }
 
 .angularjs-datetime-picker {
@@ -506,7 +513,7 @@
     display: inline-block; }
     #app-sidebar .sidebar .sidebar-icon {
       margin-right: 15px; }
-      #app-sidebar .sidebar .sidebar-icon .icon-image {
+      #app-sidebar .sidebar .sidebar-icon .icon-image-size {
         width: 44px; }
       #app-sidebar .sidebar .sidebar-icon i {
         width: 44px; }
@@ -1112,7 +1119,8 @@
 #app-navigation li a.taginput {
   opacity: 1; }
 #app-navigation li a {
-  overflow: visible; }
+  overflow: visible;
+  padding-left: 44px !important; }
   #app-navigation li a tags-input {
     opacity: 1.0; }
     #app-navigation li a tags-input li {
@@ -1297,6 +1305,82 @@
     border: none !important; }
   .custom-search-dialog .ui-dialog-buttonpane.ui-helper-clearfix {
     display: none; }
+
+/**
+ * Replace productive toastify lib for Nextcloud github installations
+ */
+.toastify.dialogs {
+  min-width: 200px;
+  background: none;
+  background-color: var(--color-main-background);
+  color: var(--color-main-text);
+  box-shadow: 0 0 6px 0 var(--color-box-shadow);
+  padding: 12px;
+  padding-right: 34px;
+  margin-top: 45px;
+  position: fixed;
+  z-index: 10100;
+  border-radius: var(--border-radius); }
+
+.toastify.dialogs .toast-undo-button,
+.toastify.dialogs .toast-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 44px;
+  height: 100%;
+  padding: 12px;
+  white-space: nowrap;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  min-height: 0; }
+
+.toastify.dialogs .toast-undo-button.toast-close,
+.toastify.dialogs .toast-close.toast-close {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTYiIHdpZHRoPSIxNiI+CiAgPHBhdGggZD0iTTE0IDEyLjNMMTIuMyAxNCA4IDkuNyAzLjcgMTQgMiAxMi4zIDYuMyA4IDIgMy43IDMuNyAyIDggNi4zIDEyLjMgMiAxNCAzLjcgOS43IDh6Ii8+Cjwvc3ZnPgo=);
+  text-indent: 200%;
+  opacity: 0.4; }
+
+.toastify.dialogs .toast-undo-button.toast-undo-button,
+.toastify.dialogs .toast-close.toast-undo-button {
+  margin: 3px;
+  height: calc(100% - 2 * 3px); }
+
+.toastify.dialogs .toast-undo-button:hover,
+.toastify.dialogs .toast-undo-button:focus,
+.toastify.dialogs .toast-undo-button:active,
+.toastify.dialogs .toast-close:hover,
+.toastify.dialogs .toast-close:focus,
+.toastify.dialogs .toast-close:active {
+  cursor: pointer;
+  opacity: 1; }
+
+.toastify.dialogs.toastify-top {
+  right: 10px; }
+
+.toastify.dialogs.toast-with-click {
+  cursor: pointer; }
+
+.toastify.dialogs.toast-error {
+  border-left: 3px solid var(--color-error); }
+
+.toastify.dialogs.toast-info {
+  border-left: 3px solid var(--color-primary); }
+
+.toastify.dialogs.toast-warning {
+  border-left: 3px solid var(--color-warning); }
+
+.toastify.dialogs.toast-success {
+  border-left: 3px solid var(--color-success); }
+
+.toastify.dialogs.toast-undo {
+  border-left: 3px solid var(--color-success); }
+
+.theme--dark .toastify.dialogs .toast-close.toast-close {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTYiIHdpZHRoPSIxNiI+CiAgPHBhdGggZD0iTTE0IDEyLjNMMTIuMyAxNCA4IDkuNyAzLjcgMTQgMiAxMi4zIDYuMyA4IDIgMy43IDMuNyAyIDggNi4zIDEyLjMgMiAxNCAzLjcgOS43IDh6IiBzdHlsZT0iZmlsbC1vcGFjaXR5OjE7ZmlsbDojZmZmZmZmIi8+Cjwvc3ZnPgo=); }
 
 .app-passman {
   overflow-x: hidden; }
