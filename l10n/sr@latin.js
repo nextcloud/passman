@@ -25,7 +25,6 @@ OC.L10N.register(
     "Settings" : "Postavke",
     "Unshare" : "Ne deli",
     "Password" : "Password",
-    "E-mail" : "Adresa e-pošte",
     "URL" : "Url",
     "Notes" : "Notes",
     "Edit" : "Uredi",
@@ -34,8 +33,8 @@ OC.L10N.register(
     "Date" : "Date",
     "Never" : "Nikad",
     "Tags" : "Oznake",
-    "Loading…" : "Učitavanje...",
     "Description" : "Opis",
+    "E-mail" : "Adresa e-pošte",
     "Dismiss" : "Odbaci",
     "seconds ago" : "pre par sekundi"
 },

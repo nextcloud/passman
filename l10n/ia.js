@@ -39,7 +39,6 @@ OC.L10N.register(
     "Decline" : "Refusar",
     "Never" : "Nunquam",
     "Tags" : "Etiquettas",
-    "Loading…" : "Cargante...",
     "Description" : "Description",
     "You created %1$s" : "Tu creava %1$s",
     "You deleted %1$s" : "Tu  deleva %1$s",

@@ -34,7 +34,6 @@ OC.L10N.register(
     "Share" : "Deelen",
     "Date" : "Date",
     "Tags" : "Tags",
-    "Loading…" : "Et gëtt gelueden",
     "Description" : "Beschreiwung",
     "Connection to server lost" : "Verbindung zum Server verluer",
     "Dismiss" : "Ofbriechen",

@@ -38,7 +38,6 @@ OC.L10N.register(
     "Never" : "Pas jamais",
     "Cancel destruction request" : "Anullar requèsta de destruccion",
     "Logout" : "Desconnexion",
-    "Loading…" : "Cargament…",
     "Description" : "Descripcion",
     "You created %1$s" : "Avètz creat %1$s",
     "You deleted %1$s" : "Avètz suprimit %1$s",

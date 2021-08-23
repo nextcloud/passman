@@ -27,7 +27,6 @@ OC.L10N.register(
     "Settings" : "Instillingar",
     "Unshare" : "Fjern deling",
     "Password" : "Passord",
-    "E-mail" : "E-post",
     "URL" : "URL",
     "Notes" : "Notat",
     "Created" : "Lagd",
@@ -41,6 +40,7 @@ OC.L10N.register(
     "Description" : "Skildring",
     "You created %1$s" : "Du oppretta %1$s",
     "You deleted %1$s" : "Du sletta %1$s",
+    "E-mail" : "E-post",
     "Dismiss" : "Forkast",
     "seconds ago" : "sekund sidan"
 },

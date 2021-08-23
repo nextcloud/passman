@@ -32,7 +32,6 @@
     "Unshare" : "Түгээлтийг зогсоох",
     "Account" : "аккаунт",
     "Password" : "Нууц үг",
-    "E-mail" : "И-мэйл",
     "URL" : "URL",
     "Notes" : "Шинэ ",
     "Changed" : "Өөрчилсөн",
@@ -45,12 +44,12 @@
     "Decline" : "Зөвшөөрөхгүй",
     "Never" : "хэзээч",
     "Tags" : "Tag-үүд",
-    "Loading…" : "уншиж байна",
     "email" : "цахим шуудан",
     "Description" : "Тодорхойлолт",
     "You created %1$s" : "Та %1$s үүсгэлээ",
     "You deleted %1$s" : "Та %1$s-ийг устгалаа",
     "Ignore" : "Үл  тоох",
+    "E-mail" : "И-мэйл",
     "Dismiss" : "Арилгах",
     "seconds ago" : "хоёрдахь өмнө"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

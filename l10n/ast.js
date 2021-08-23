@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Generating sharing keys ( %s / 2)" : "Xenerando claves de compartición ( %s / 2)",
     "Passwords do not match" : "Les contraseñes nun concasen",
     "General" : "Xeneral",
     "Error loading file" : "Fallu cargando'l ficheru",
@@ -98,7 +97,6 @@ OC.L10N.register(
     "Account" : "Cuenta",
     "Password" : "Contraseña",
     "OTP" : "OTP",
-    "E-mail" : "Corréu",
     "URL" : "URL",
     "Notes" : "Notes",
     "Created" : "Creóse",
@@ -117,7 +115,6 @@ OC.L10N.register(
     "Donate" : "Donar",
     "Tags" : "Etiquetes",
     "Someone has shared a credential with you." : "Daquién compartió una credencial contigo.",
-    "Loading…" : "Cargando...",
     "email" : "corréu",
     "Description" : "Descripción",
     "Error while saving field" : "Fallu entrín se guardaba'l campu",
@@ -148,6 +145,7 @@ OC.L10N.register(
     "Destination account" : "Cuenta destín",
     "Credentials moved!" : "¡Moviéronse les credenciales!",
     "Reason" : "Razón",
+    "E-mail" : "Corréu",
     "Connection to server lost" : "Perdióse la conexón col sirvidor",
     "Problem loading page, reloading in 5 seconds" : "Problema cargando la páxina, recargando en 5 segundos",
     "Saving …" : "Guardando...",

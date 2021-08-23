@@ -34,7 +34,6 @@ OC.L10N.register(
     "Share" : "Rhannu",
     "Date" : "Date",
     "Tags" : "Tagiau",
-    "Loading…" : "Yn llwytho…",
     "Description" : "Disgrifiad",
     "seconds ago" : "eiliad yn ôl"
 },

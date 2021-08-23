@@ -23,7 +23,6 @@
     "Settings" : "Postavke",
     "Unshare" : "Ne deli",
     "Password" : "Password",
-    "E-mail" : "Adresa e-pošte",
     "URL" : "Url",
     "Notes" : "Notes",
     "Edit" : "Uredi",
@@ -32,8 +31,8 @@
     "Date" : "Date",
     "Never" : "Nikad",
     "Tags" : "Oznake",
-    "Loading…" : "Učitavanje...",
     "Description" : "Opis",
+    "E-mail" : "Adresa e-pošte",
     "Dismiss" : "Odbaci",
     "seconds ago" : "pre par sekundi"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);"

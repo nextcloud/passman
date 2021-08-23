@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Generating sharing keys ( %s / 2)" : "Đang tạo các khóa chia sẽ ( %s / 2)",
     "Incorrect vault password!" : "Mật khẩu hòm khóa không đúng!",
     "Passwords do not match" : "Mật khẩu không khớp",
     "General" : "Tổng hợp",
@@ -55,7 +54,6 @@ OC.L10N.register(
     "Unshare" : "Bỏ chia sẽ",
     "Account" : "Tài khoản",
     "Password" : "Mật khẩu",
-    "E-mail" : "Email",
     "URL" : "URL",
     "Notes" : "Ghi chép",
     "Created" : "Đã tạo",
@@ -66,11 +64,11 @@ OC.L10N.register(
     "Accept" : "Đồng ý",
     "Never" : "Không bao giờ",
     "Tags" : "Thẻ",
-    "Loading…" : "Đang tải…",
     "email" : "Thư điện tử",
     "Description" : "Mô tả",
     "You created %1$s" : "Bạn đã tạo %1$s",
     "You deleted %1$s" : "Bạn đã xóa %1$s",
+    "E-mail" : "Email",
     "Connection to server lost" : "Kết nối tới máy chủ bị mất",
     "Problem loading page, reloading in 5 seconds" : "Có vấn đề khi nạp trang, nạp lại trang trong vòng 5 giây",
     "Dismiss" : "Bỏ qua",

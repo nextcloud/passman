@@ -41,7 +41,6 @@ OC.L10N.register(
     "Never" : "ไม่เคย",
     "Donate" : "บริจาค/สนับสนุน",
     "Tags" : "ป้ายกำกับ",
-    "Loading…" : "กำลังโหลด...",
     "Description" : "รายละเอียด",
     "You created %1$s" : "คุณสร้าง %1$s",
     "You deleted %1$s" : "คุณลบ %1$s ออก",
