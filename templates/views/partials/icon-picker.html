@@ -1,6 +1,6 @@
-<div class="cell fa fa-lock" ng-if="!credential.url && !credential.icon"></div>
+<div class="cell fa fa-lock" ng-if="!credential.url && (!credential.icon || (credential.icon && !credential.icon.type))"></div>
 
-<div class="cell" ng-if="credential.url || credential.icon">
+<div class="cell" ng-if="credential.url || (credential.icon && credential.icon.type !== false)">
 	<span class="icon">
 		<credential-icon credential="credential"></credential-icon>
 	</span>
