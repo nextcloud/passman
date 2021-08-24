@@ -275,6 +275,7 @@
     "Simple Navigation" : "シンプルナビゲーション",
     "Someone has shared a credential with you." : "誰かがあなたと資格情報を共有しました。",
     "Click here to request it" : "リクエストするにはここをクリックしてください",
+    "Oops! Credential not found. Maybe it expired." : "証明書が見つかりません。もしかしたら期限切れかもしれません。",
     "Compromised!" : "安全性が損なわれています！",
     "This password is compromised. You can only remove this warning by changing the password." : "このパスワードは危険にさらされています。 この警告を削除するにはパスワードを変更してください。",
     "email" : "メール",
