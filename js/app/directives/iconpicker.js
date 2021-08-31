@@ -137,12 +137,8 @@
                     scope.credential.icon.type = data.substring(data.lastIndexOf(":")+1,data.lastIndexOf(";"));
                     scope.credential.icon.content = data.substring(data.lastIndexOf(",")+1, data.length);
                 }else{
-					$http.get(scope.selectedIcon.url).then(function(result) {
-						var base64Data = window.btoa(result.data);
-						var mimeType = 'svg+xml';
-						scope.credential.icon.type = mimeType;
-						scope.credential.icon.content = base64Data;
-					});
+	                scope.credential.icon.type = 'svg+xml';
+	                scope.credential.icon.content = scope.selectedIcon.data;
                 }
 				$('#iconPicker').dialog('close');
           };

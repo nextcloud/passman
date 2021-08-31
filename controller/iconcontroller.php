@@ -159,12 +159,19 @@ class IconController extends ApiController {
 				$icon['mimetype'] = mime_content_type($iconPath);
 				$icon['url'] = $this->urlGenerator->linkTo('passman', $path[1]);
 				$icon['pack'] = $pack;
+				$icon['data'] = base64_encode(file_get_contents($iconPath));
 				if (!isset($icons[$pack])) {
 					$icons[$pack] = [];
 				}
 				$icons[$pack][] = $icon;
 			}
 		}
-		return new JSONResponse($icons);
+
+		$offset = 3600 * 24 * 30;
+		$response = new JSONResponse($icons);
+		$response->addHeader('Expires: ', gmdate("D, d M Y H:i:s", time() + $offset) . " GMT");
+		$response->cacheFor($offset);
+
+		return $response;
 	}
 }
