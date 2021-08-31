@@ -322,7 +322,7 @@ OC.L10N.register(
     "You permanently deleted %1$s" : "Trwale usunąłeś %1$s",
     "The password of %1$s has expired, renew it now." : "Hasło %1$s wygasło, odnów je teraz.",
     "%1$s has been shared with %2$s" : "%1$s udostępniono dla %2$s",
-    "You received a share request for %1$s from %2$s" : "Użytkownik %2$s poprosił Cię o udostępnienie %1$s",
+    "You received a share request for %1$s from %2$s" : "Użytkownik %2$s poprosił Ciebie o udostępnienie %1$s",
     "%s has been shared with a link" : "%s został udostępniony łączem",
     "Passwords" : "Hasła",
     "Your credential \"%s\" expired, click here to update the credential." : "Twoje poświadczenie \"%s\" wygasło, kliknij tutaj, aby je zaktualizować.",
