@@ -447,7 +447,7 @@
                     var creds_filtered=[];
 
                     for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
-                        if($scope.active_vault.credentials[i].delete_time===0){
+                        if($scope.active_vault.credentials[i].delete_time===0 || $scope.delete_time > 0){
                             creds_filtered.push($scope.active_vault.credentials[i]);
                         }
                     }
