@@ -35,6 +35,7 @@ script('passman', 'app/controllers/public_shared_credential');
 script('passman', 'app/filters/range');
 script('passman', 'app/filters/propsfilter');
 script('passman', 'app/filters/byte');
+script('passman', 'app/filters/escapeHTML');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
 script('passman', 'app/services/settingsservice');
