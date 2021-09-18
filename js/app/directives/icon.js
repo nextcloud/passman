@@ -32,7 +32,7 @@
   angular.module('passmanApp').directive('credentialIcon', [
     '$window', function($window) {
       return {
-        template: '<img ng-src="{{ iconUrl }}" class="icon-image">',
+        template: '<img ng-src="{{ iconUrl }}" class="icon-image-size">',
         restrict: 'E',
         scope: {
           credential: '=',

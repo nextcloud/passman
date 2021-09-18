@@ -25,11 +25,23 @@
   flex-direction: column;
   min-height: 0;
   flex: 1 1 100%;
+  z-index: 51;
+  background: var(--color-main-background);
 }
 
-.app-sidebar-tabs__nav ul {
-  display: flex;
-  justify-content: stretch;
+.app-sidebar-tabs__nav {
+  background: var(--color-background-hover);
+
+  ul {
+    display: flex;
+    justify-content: stretch;
+  }
+}
+
+.theme--dark {
+  .app-sidebar-tabs__nav {
+    background: var(--color-background-darker);
+  }
 }
 
 .app-sidebar-tabs__tab.active {
