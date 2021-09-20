@@ -32,7 +32,7 @@
 			{{ 'selected.icon' | translate}}: <br />
 
 			<img ng-src="data:{{selectedIcon.mimetype}};base64,{{selectedIcon.data}}" height="32" ng-if="!customIcon">
-			<img src="{{customIcon.data}}" height="32" ng-if="customIcon">
+			<img ng-src="{{customIcon.data}}" height="32" ng-if="customIcon">
 			<br />
 			<button ng-click="useIcon()">{{ 'use.icon' | translate}}</button>
 		</div>
