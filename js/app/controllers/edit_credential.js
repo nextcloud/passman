@@ -311,7 +311,7 @@
 					}
 
 					if ($scope.new_custom_field.label && $scope.new_custom_field.value) {
-						$scope.storedCredential.custom_fields.push(angular.copy($scope.new_custom_field));
+						$scope.addCustomField();
 					}
 
 					if ($scope.storedCredential.label === null || $scope.storedCredential.label.length === 0) {
