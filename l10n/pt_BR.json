@@ -263,7 +263,7 @@
     "Log out of this vault automatically after:" : "Desconectar deste cofre automaticamente após:",
     "Decrypt vault" : "Descriptografar o cofre",
     "Seems you lost the vault password and you're unable to log in." : "Parece que você perdeu a senha do cofre e não consegue fazer login.",
-    "If you want this vault to be removed you can request that here." : "Se quiser que este cofre seja excluído, pode solicitar isso aqui.",
+    "If you want this vault to be removed you can request that here." : "Se quiser que este cofre seja removido, pode solicitar isto aqui.",
     "An admin then accepts or declines the request" : "Um administrador então aceita ou declina o pedido",
     "After an admin destroys this vault, all credentials in it will be lost" : "Depois que um administrador destruir este cofre, todas as credenciais dele serão perdidas",
     "Reason for requesting deletion (optional):" : "Razão para solicitar a exclusão (opcional):",
