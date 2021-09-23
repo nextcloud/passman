@@ -146,6 +146,7 @@ class IconController extends ApiController {
 	public function getLocalIconList() {
 		$dir = $this->am->getAppPath('passman');
 		$result = Utils::getDirContents($dir . '/img/icons');
+		$isLowerThanPhp8 = version_compare(phpversion(), '8.0', '<');
 
 		$icons = [];
 		foreach ($result as $icon) {
@@ -153,10 +154,12 @@ class IconController extends ApiController {
 			$path = explode('passman/', $iconPath);
 			$pack = explode('/', $path[1])[2];
 			$mime = mime_content_type($iconPath);
-			//print_r($path);
 			if ($mime !== 'directory') {
+				if ($isLowerThanPhp8 && $mime == 'image/svg') {
+					$mime = 'image/svg+xml';
+				}
 				$icon = [];
-				$icon['mimetype'] = mime_content_type($iconPath);
+				$icon['mimetype'] = $mime;
 				$icon['url'] = $this->urlGenerator->linkTo('passman', $path[1]);
 				$icon['pack'] = $pack;
 				$icon['data'] = base64_encode(file_get_contents($iconPath));
