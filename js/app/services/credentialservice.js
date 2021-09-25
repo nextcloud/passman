@@ -138,12 +138,13 @@
 						var fieldValue = angular.copy(credential[field]);
 						var field_decrypted_value;
 						try {
-							if(fieldValue!==null){
+							if(fieldValue!==null && fieldValue!=="null" && fieldValue!==""){
 								field_decrypted_value = EncryptService.decryptString(fieldValue, key);
 							}else{
 								field_decrypted_value=null;
 							}
 						} catch (e) {
+							console.error('Error decrypting credential:', credential);
 							throw e;
 						}
 						try {
@@ -216,7 +217,7 @@
 							this.parent.plain_credential = service.decryptCredential(credential, this.parent.old_password);
 							var tmp = angular.copy(this.parent.plain_credential);
 
-							if (tmp.hasOwnProperty('shared_key') && tmp.shared_key !== null && !skipSharingKey) {
+							if (tmp.hasOwnProperty('shared_key') && tmp.shared_key !== null && tmp.shared_key !== '' && !skipSharingKey) {
 								var shared_key = EncryptService.decryptString(angular.copy(tmp.shared_key)).trim();
 								tmp.shared_key = EncryptService.encryptString(angular.copy(shared_key), this.parent.new_password);
 								tmp.set_share_key = true;

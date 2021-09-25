@@ -28,6 +28,7 @@ class IconController extends ApiController {
 	private $credentialService;
 	private $am;
 	private $urlGenerator;
+	const ICON_CACHE_OFFSET = 2592000;  // 3600 * 24 * 30
 
 	public function __construct($AppName,
 	                            IRequest $request,
@@ -126,15 +127,14 @@ class IconController extends ApiController {
 		}
 
 
-		$offset = 3600 * 24 * 30;
 		$contentType = 'image/png';
 		$response = new DataDownloadResponse($data, 'icon', $contentType);
 
 		$response->addHeader('Content-Type', $contentType);
 		$response->addHeader('Content-Length:', mb_strlen($data));
-		$response->addHeader('Expires: ', gmdate("D, d M Y H:i:s", time() + $offset) . " GMT");
+		$response->addHeader('Expires: ', gmdate("D, d M Y H:i:s", time() + self::ICON_CACHE_OFFSET) . " GMT");
 		$response->setETag($base64Url);
-		$response->cacheFor($offset);
+		$response->cacheFor(self::ICON_CACHE_OFFSET);
 
 		return $response;
 	}
@@ -159,12 +159,18 @@ class IconController extends ApiController {
 				$icon['mimetype'] = mime_content_type($iconPath);
 				$icon['url'] = $this->urlGenerator->linkTo('passman', $path[1]);
 				$icon['pack'] = $pack;
+				$icon['data'] = base64_encode(file_get_contents($iconPath));
 				if (!isset($icons[$pack])) {
 					$icons[$pack] = [];
 				}
 				$icons[$pack][] = $icon;
 			}
 		}
-		return new JSONResponse($icons);
+
+		$response = new JSONResponse($icons);
+		$response->addHeader('Expires: ', gmdate("D, d M Y H:i:s", time() + self::ICON_CACHE_OFFSET) . " GMT");
+		$response->cacheFor(self::ICON_CACHE_OFFSET);
+
+		return $response;
 	}
 }

@@ -154,7 +154,7 @@ class CredentialService {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialById(int $credential_id, string $user_id) {
+	public function getCredentialById(int $credential_id, ?string $user_id) {
 		$credential = $this->credentialMapper->getCredentialById($credential_id);
 		if ($credential->getUserId() === $user_id) {
 			return $this->encryptService->decryptCredential($credential);

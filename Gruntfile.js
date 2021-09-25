@@ -173,9 +173,9 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						flatten: false,
+						flatten: true,
 						src: ['css/vendor/font-awesome/*'],
-						dest: 'dist/'
+						dest: 'dist/css/'
 					}
 
 				]

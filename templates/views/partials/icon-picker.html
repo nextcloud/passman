@@ -1,6 +1,6 @@
-<div class="cell fa fa-lock" ng-if="!credential.url && !credential.icon"></div>
+<div class="cell fa fa-lock" ng-if="!credential.url && (!credential.icon || (credential.icon && !credential.icon.type))"></div>
 
-<div class="cell" ng-if="credential.url || credential.icon">
+<div class="cell" ng-if="credential.url || (credential.icon && credential.icon.type !== false)">
 	<span class="icon">
 		<credential-icon credential="credential"></credential-icon>
 	</span>
@@ -15,7 +15,7 @@
 				</div>
 				<div ng-class="{ 'content_show': expanded , 'content': !expanded }">
 					<div class="icon" ng-repeat="icon in icons" ng-click="selectIcon(icon)">
-						<img ng-src="{{icon.url}}" height="32">
+						<img ng-src="data:{{icon.mimetype}};base64,{{icon.data}}" height="32">
 					</div>
 				</div>
 			</div>
@@ -31,8 +31,8 @@
 		<div ng-if="selectedIcon || customIcon">
 			{{ 'selected.icon' | translate}}: <br />
 
-			<img ng-src="{{selectedIcon.url}}" height="32" ng-if="!customIcon">
-			<img src="{{customIcon.data}}" height="32" ng-if="customIcon">
+			<img ng-src="data:{{selectedIcon.mimetype}};base64,{{selectedIcon.data}}" height="32" ng-if="!customIcon">
+			<img ng-src="{{customIcon.data}}" height="32" ng-if="customIcon">
 			<br />
 			<button ng-click="useIcon()">{{ 'use.icon' | translate}}</button>
 		</div>

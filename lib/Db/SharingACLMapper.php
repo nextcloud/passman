@@ -72,7 +72,7 @@ class SharingACLMapper extends QBMapper {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getItemACL(string $user_id, string $item_guid) {
+	public function getItemACL(?string $user_id, string $item_guid) {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)

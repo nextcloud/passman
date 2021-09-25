@@ -180,7 +180,7 @@ class ShareService {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getACL(string $user_id, string $item_guid) {
+	public function getACL(?string $user_id, string $item_guid) {
 		return $this->sharingACL->getItemACL($user_id, $item_guid);
 	}
 
@@ -191,7 +191,7 @@ class ShareService {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getSharedItem(string $user_id, string $item_guid) {
+	public function getSharedItem(?string $user_id, string $item_guid) {
 		$acl = $this->sharingACL->getItemACL($user_id, $item_guid);
 
 		// Check if the user can read the credential, probably unnecesary, but just to be sure
@@ -219,7 +219,7 @@ class ShareService {
 	 * @throws MultipleObjectsReturnedException
 	 * @throws \Exception
 	 */
-	public function getItemHistory(string $user_id, string $item_guid) {
+	public function getItemHistory(?string $user_id, string $item_guid) {
 		$acl = $this->sharingACL->getItemACL($user_id, $item_guid);
 		if (!$acl->hasPermission(SharingACL::READ | SharingACL::HISTORY)) return [];
 
@@ -291,7 +291,7 @@ class ShareService {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialAclForUser(string $user_id, string $item_guid) {
+	public function getCredentialAclForUser(?string $user_id, string $item_guid) {
 		return $this->sharingACL->getItemACL($user_id, $item_guid);
 	}
 
