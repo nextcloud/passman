@@ -11,9 +11,9 @@ use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
 /**
- * Auto-generated migration step: Please modify to your needs!
+ * fix failed label column index generation
  */
-class Version020308Date20210805164128 extends SimpleMigrationStep {
+class Version02031334Date20210926234011 extends SimpleMigrationStep {
 
 	/**
 	 * @param IOutput $output
@@ -35,12 +35,15 @@ class Version020308Date20210805164128 extends SimpleMigrationStep {
 
 		if ($schema->hasTable('passman_credentials')) {
 			$table = $schema->getTable('passman_credentials');
-			if (!$table->hasIndex('passman_credential_label_index')) {
+			if ($table->hasIndex('passman_credential_label_index')) {
+				$table->dropIndex('passman_credential_label_index');
+			}
+			$labelColumn = $table->getColumn('label');
+			if ($labelColumn->getLength() < 2048 || $labelColumn->getType() !== Type::getType('string')) {
 				$table->changeColumn('label', [
 					'type' => Type::getType('string'),
 					'length' => 2048
 				]);
-				$table->addIndex(['label'], 'passman_credential_label_index');
 			}
 		}
 
