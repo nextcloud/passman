@@ -114,7 +114,7 @@ OC.L10N.register(
     "Use lowercase letters" : "Użyj małych liter",
     "Use numbers" : "Użyj cyfr",
     "Use special characters" : "Użyj znaków specjalnych",
-    "Avoid ambiguous characters" : "Unikaj znaków wieloznacznych",
+    "Avoid ambiguous characters" : "Pomijaj znaki wieloznaczne",
     "Require every character type" : "Wymagaj każdego typu znaku",
     "Export type" : "Typ eksportu",
     "Export" : "Eksport",
