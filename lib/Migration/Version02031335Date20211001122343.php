@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OCA\Passman\Migration;
 
 use Closure;
+use Doctrine\DBAL\Exception;
 use OCP\DB\ISchemaWrapper;
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
@@ -68,21 +69,29 @@ class Version02031335Date20211001122343 extends SimpleMigrationStep {
 	public function postSchemaChange(IOutput $output, Closure $schemaClosure, array $options): void {
 		if ($this->dataMigrationRequired) {
 			$updateQuery = $this->connection->getQueryBuilder();
-			$updateQuery->update('passman_credentials')
-				->set($this->newColumn, $this->oldColumn)
-				->where($this->newColumn . ' IS NULL')
-				->andWhere($this->oldColumn . ' IS NOT NULL')
-				->executeStatement();
+			try {
+				$updateQuery->update('passman_credentials')
+					->set($this->newColumn, $this->oldColumn)
+					->where($this->newColumn . ' IS NULL')
+					->andWhere($this->oldColumn . ' IS NOT NULL')
+					->executeStatement();
 
-			/** @var ISchemaWrapper $schema */
-			$schema = $schemaClosure();
+				/** @var ISchemaWrapper $schema */
+				$schema = $schemaClosure();
 
-			if ($schema->hasTable('passman_credentials')) {
-				$table = $schema->getTable('passman_credentials');
-				if ($table->hasColumn($this->oldColumn) && $table->hasColumn($this->newColumn)) {
-					$dropColumnStatement = $this->connection->prepare('ALTER TABLE ' . $table->getName() . ' DROP COLUMN ' . $this->oldColumn . ';');
-					$dropColumnStatement->execute();
+				if ($schema->hasTable('passman_credentials')) {
+					$table = $schema->getTable('passman_credentials');
+					if ($table->hasColumn($this->oldColumn) && $table->hasColumn($this->newColumn)) {
+						$dropColumnStatement = $this->connection->prepare('ALTER TABLE ' . $table->getName() . ' DROP COLUMN ' . $this->oldColumn . ';');
+						try {
+							$dropColumnStatement->execute();
+						} catch (Exception $e) {
+							echo "Migration was not able to drop the old " . $this->oldColumn . "column" . PHP_EOL;
+						}
+					}
 				}
+			} catch (\OCP\DB\Exception $e) {
+				echo "Migration was not able to copy data from " . $this->oldColumn . " to " . $this->newColumn . PHP_EOL;
 			}
 		}
 	}
