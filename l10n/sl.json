@@ -251,7 +251,7 @@
     "Decrypt vault" : "Odšifriraj zbirnik",
     "Seems you lost the vault password and you're unable to log in." : "Kaže, da ste pozabili geslo zbirnika in se ne uspete prijaviti.",
     "If you want this vault to be removed you can request that here." : "Če želite ta zbirnik odstraniti, lahko pošljete zahtevo.",
-    "An admin then accepts or declines the request" : "Skrbnik nato sprejme ali pa zavrne zahtevo.",
+    "An admin then accepts or declines the request" : "Skrbnik nato sprejme ali zavrne zahtevo.",
     "After an admin destroys this vault, all credentials in it will be lost" : "Ko skrbnik uniči zbirnik gesel, so vsa poverila trajno izbrisana.",
     "Reason for requesting deletion (optional):" : "Kakšen je razlog za izbris (izbirno):",
     "Request vault destruction" : "Zahtevaj uničenje zbirnika",
