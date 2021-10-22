@@ -11,16 +11,17 @@
 
 namespace OCA\Passman\Controller;
 
-use OCA\Passman\Service\DeleteVaultRequestService;
-use OCA\Passman\Service\EncryptService;
-use OCA\Passman\Service\SettingsService;
-use OCA\Passman\Utility\NotFoundJSONResponse;
-use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\ApiController;
-use OCA\Passman\Service\VaultService;
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Service\DeleteVaultRequestService;
+use OCA\Passman\Service\FileService;
+use OCA\Passman\Service\SettingsService;
+use OCA\Passman\Service\VaultService;
+use OCA\Passman\Utility\NotFoundJSONResponse;
+use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\IRequest;
 
 
 class VaultController extends ApiController {
@@ -28,15 +29,17 @@ class VaultController extends ApiController {
 	private $vaultService;
 	private $credentialService;
 	private $settings;
+	private $fileService;
 	private $deleteVaultRequestService;
 
 	public function __construct($AppName,
-								IRequest $request,
-								$UserId,
-								VaultService $vaultService,
-								CredentialService $credentialService,
-								DeleteVaultRequestService $deleteVaultRequestService,
-								SettingsService $settings) {
+	                            IRequest $request,
+		$UserId,
+		                        VaultService $vaultService,
+		                        CredentialService $credentialService,
+		                        DeleteVaultRequestService $deleteVaultRequestService,
+		                        SettingsService $settings,
+		                        FileService $fileService) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -48,6 +51,7 @@ class VaultController extends ApiController {
 		$this->credentialService = $credentialService;
 		$this->deleteVaultRequestService = $deleteVaultRequestService;
 		$this->settings = $settings;
+		$this->fileService = $fileService;
 	}
 
 	/**
@@ -63,7 +67,7 @@ class VaultController extends ApiController {
 			foreach ($vaults as $vault) {
 				$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 				$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
-				if(isset($credential)) {
+				if (isset($credential)) {
 					array_push($result, array(
 						'vault_id' => $vault->getId(),
 						'guid' => $vault->getGuid(),
@@ -164,7 +168,35 @@ class VaultController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function delete($vault_guid) {
+	public function delete($vault_guid, $credential_guids, $file_ids) {
+		try {
+			$this->vaultService->getByGuid($vault_guid, $this->userId);
+		} catch (\Exception $e) {
+			return new NotFoundJSONResponse();
+		}
+
+		if ($credential_guids != null && !empty($credential_guids)) {
+			foreach ($credential_guids as $credential_guid) {
+				try {
+					$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+				} catch (\Exception $e) {
+					continue;
+				}
+				if ($credential instanceof Credential) {
+					$this->credentialService->deleteCredential($credential);
+					$this->credentialService->deleteCredentialParts($credential, $this->userId);
+				}
+			}
+		}
+		if ($file_ids != null && !empty($file_ids)) {
+			foreach ($file_ids as $file_id) {
+				try {
+					$this->fileService->deleteFile($file_id, $this->userId);
+				} catch (\Exception $e) {
+					continue;
+				}
+			}
+		}
 		$this->vaultService->deleteVault($vault_guid, $this->userId);
 		return new JSONResponse(array('ok' => true));
 	}

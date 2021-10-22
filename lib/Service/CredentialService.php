@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\Activity;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\SharingACL;
@@ -37,15 +38,25 @@ class CredentialService {
 
 	private CredentialMapper $credentialMapper;
 	private SharingACLMapper $sharingACL;
+	private ActivityService $activityService;
 	private ShareService $shareService;
 	private EncryptService $encryptService;
+	private CredentialRevisionService $credentialRevisionService;
 	private $server_key;
 
-	public function __construct(CredentialMapper $credentialMapper, SharingACLMapper $sharingACL, ShareService $shareService, EncryptService $encryptService, IConfig $config) {
+	public function __construct(CredentialMapper          $credentialMapper,
+	                            SharingACLMapper          $sharingACL,
+	                            ActivityService           $activityService,
+	                            ShareService              $shareService,
+	                            EncryptService            $encryptService,
+	                            CredentialRevisionService $credentialRevisionService,
+	                            IConfig                   $config) {
 		$this->credentialMapper = $credentialMapper;
 		$this->sharingACL = $sharingACL;
+		$this->activityService = $activityService;
 		$this->shareService = $shareService;
 		$this->encryptService = $encryptService;
+		$this->credentialRevisionService = $credentialRevisionService;
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
 	}
 
@@ -97,6 +108,25 @@ class CredentialService {
 	public function deleteCredential(Credential $credential) {
 		$this->shareService->unshareCredential($credential->getGuid());
 		return $this->credentialMapper->deleteCredential($credential);
+	}
+
+	/**
+	 * Delete leftovers from a credential
+	 * @param Credential $credential
+	 * @throws \Exception
+	 */
+	public function deleteCredentialParts(Credential $credential, $userId) {
+		$this->activityService->add(
+			'item_destroyed_self', array($credential->getLabel()),
+			'', array(),
+			'', $userId, Activity::TYPE_ITEM_ACTION);
+		$this->shareService->unshareCredential($credential->getGuid());
+		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
+			$id = $revision['revision_id'];
+			if (isset($id)) {
+				$this->credentialRevisionService->deleteRevision($id, $userId);
+			}
+		}
 	}
 
 	/**
