@@ -28,6 +28,7 @@ return [
 		['name' => 'vault#create', 'url' => '/api/v2/vaults', 'verb' => 'POST'],
 		['name' => 'vault#get', 'url' => '/api/v2/vaults/{vault_guid}', 'verb' => 'GET'],
 		['name' => 'vault#update', 'url' => '/api/v2/vaults/{vault_guid}', 'verb' => 'PATCH'],
+		['name' => 'vault#deleteVaultContent', 'url' => '/api/v2/vaults/delete-vault-content', 'verb' => 'POST'],
 		['name' => 'vault#delete', 'url' => '/api/v2/vaults/{vault_guid}', 'verb' => 'DELETE'],
 		//@TODO make frontend use PATCH
 		['name' => 'vault#updateSharingKeys', 'url' => '/api/v2/vaults/{vault_guid}/sharing-keys', 'verb' => 'POST'],

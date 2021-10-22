@@ -87,7 +87,9 @@
 				});
 
 				var btn_txt = $translate.instant('bookmarklet.text');
-				var http = location.protocol, slashes = http.concat("//"), host = slashes.concat(window.location.hostname + ":" + window.location.port), complete = host + location.pathname;
+				var http = location.protocol, slashes = http.concat("//"),
+					host = slashes.concat(window.location.hostname + ":" + window.location.port),
+					complete = host + location.pathname;
 				$scope.bookmarklet = $sce.trustAsHtml("<a class=\"button\" href=\"javascript:(function(){var a=window,b=document,c=encodeURIComponent,e=c(document.title),d=a.open('" + complete + "/bookmarklet?url='+c(b.location)+'&title='+e,'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=750px,width=475px,resizable=0,alwaysRaised=1');a.setTimeout(function(){d.focus()},300);})();\">" + btn_txt + "</a>");
 
 
@@ -271,43 +273,36 @@
 
 				$scope.confirm_vault_delete = false;
 				$scope.delete_vault_password = '';
-        $scope.delete_vault = function() {
-          if ($scope.confirm_vault_delete && $scope.delete_vault_password === VaultService.getActiveVault().vaultKey) {
-            getCurrentVaultCredentials(function(vault) {
-              var credentials = vault.credentials;
-              $scope.remove_pw = {
-                percent: 0,
-                done: 0,
-                total: vault.credentials.length,
-              };
-              var deleteCredential = function(index) {
-                $scope.translationData = {
-                  password: credentials[index].label,
-                };
-                CredentialService.destroyCredential(credentials[index].guid).then(function() {
-                  var percent = index / vault.credentials.length * 100;
-                  $scope.remove_pw = {
-                    percent: percent,
-                    done: index,
-                    total: vault.credentials.length,
-                  };
-                  if (index === credentials.length - 1) {
-                    VaultService.deleteVault(vault).then(function() {
-                      SettingsService.setSetting('defaultVaultPass', false);
-                      SettingsService.setSetting('defaultVault', null);
-                      $rootScope.$broadcast('logout');
-                      $location.path('/');
-                    });
-                    return;
-                  }
-                  deleteCredential(index + 1);
-                });
-              };
-              deleteCredential(0);
-            });
-          }
+				$scope.delete_vault = function () {
+					if ($scope.confirm_vault_delete && $scope.delete_vault_password === VaultService.getActiveVault().vaultKey) {
+						getCurrentVaultCredentials(function (vault) {
+							var credentials = vault.credentials;
+							$scope.remove_pw = {
+								percent: 0,
+								done: 0,
+								total: vault.credentials.length,
+							};
 
-        };
+							var credential_guids = [];
+							var file_ids = [];
+							for (const credential of credentials) {
+								credential_guids.push(credential.guid);
+								var decryptedFiles = JSON.parse(EncryptService.decryptString(angular.copy(credential.files), VaultService.getActiveVault().vaultKey));
+								for (const file of decryptedFiles) {
+									file_ids.push(file.file_id);
+								}
+							}
+
+							VaultService.deleteVault(vault, credential_guids, file_ids).then(function () {
+								SettingsService.setSetting('defaultVaultPass', false);
+								SettingsService.setSetting('defaultVault', null);
+								$rootScope.$broadcast('logout');
+								$location.path('/');
+							});
+						});
+					}
+
+				};
 
 				$rootScope.$on('logout', function () {
 					$scope.active_vault = null;

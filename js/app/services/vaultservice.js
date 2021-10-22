@@ -66,7 +66,7 @@
 						return false;
 					} else {
 						_activeVault.vault_settings[key] = value;
-                        this.updateVault(_activeVault);
+						this.updateVault(_activeVault);
 					}
 
 				},
@@ -122,18 +122,25 @@
 						}
 					});
 				},
-				deleteVault: function (vault) {
+				deleteVault: function (vault, credential_guids, file_ids) {
 					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid);
-					return $http.delete(queryUrl).then(function (response) {
-						if (response.data) {
-							return response.data;
-						} else {
-							return response;
-						}
+					var deleteContentUrl = OC.generateUrl('apps/passman/api/v2/vaults/delete-vault-content');
+					var data = {
+						"credential_guids": JSON.stringify(credential_guids),
+						"file_ids": JSON.stringify(file_ids)
+					};
+					return $http.post(deleteContentUrl, data).then(function () {
+						return $http.delete(queryUrl).then(function (response) {
+							if (response.data) {
+								return response.data;
+							} else {
+								return response;
+							}
+						});
 					});
 				},
 				clearVaultService: function () {
-					_activeVault=null;
+					_activeVault = null;
 				}
 			};
 
