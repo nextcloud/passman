@@ -191,7 +191,7 @@ class VaultController extends ApiController {
 				}
 			}
 		}
-		return new JSONResponse(array('ok' => true, 'guids' => $credential_guids));
+		return new JSONResponse(array('ok' => true));
 	}
 
 	/**
