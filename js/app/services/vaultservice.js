@@ -122,14 +122,13 @@
 						}
 					});
 				},
-				deleteVault: function (vault, credential_guids, file_ids) {
+				deleteVault: function (vault, file_ids) {
 					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid);
-					var deleteContentUrl = OC.generateUrl('apps/passman/api/v2/vaults/delete-vault-content');
-					var data = {
-						"credential_guids": JSON.stringify(credential_guids),
+					var deleteFilesUrl = OC.generateUrl('apps/passman/api/v2/files/delete');
+					var filesData = {
 						"file_ids": JSON.stringify(file_ids)
 					};
-					return $http.post(deleteContentUrl, data).then(function () {
+					return $http.post(deleteFilesUrl, filesData).then(function () {
 						return $http.delete(queryUrl).then(function (response) {
 							if (response.data) {
 								return response.data;

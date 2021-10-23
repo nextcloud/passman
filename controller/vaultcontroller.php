@@ -168,11 +168,14 @@ class VaultController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function deleteVaultContent($credential_guids, $file_ids) {
-		if ($credential_guids != null && !empty($credential_guids)) {
-			foreach (json_decode($credential_guids) as $credential_guid) {
+	public function delete($vault_guid) {
+		try {
+			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
+			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
+
+			foreach ($credentials as $credential) {
 				try {
-					$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+					// $credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 					if ($credential instanceof Credential) {
 						$this->credentialService->deleteCredentiaL($credential);
 						$this->credentialService->deleteCredentialParts($credential, $this->userId);
@@ -181,24 +184,10 @@ class VaultController extends ApiController {
 					continue;
 				}
 			}
+		} catch (\Exception $e) {
+			return new NotFoundJSONResponse();
 		}
-		if ($file_ids != null && !empty($file_ids)) {
-			foreach (json_decode($file_ids) as $file_id) {
-				try {
-					$this->fileService->deleteFile($file_id, $this->userId);
-				} catch (\Exception $e) {
-					continue;
-				}
-			}
-		}
-		return new JSONResponse(array('ok' => true));
-	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
-	public function delete($vault_guid) {
 		$this->vaultService->deleteVault($vault_guid, $this->userId);
 		return new JSONResponse(array('ok' => true));
 	}

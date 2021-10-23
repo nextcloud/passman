@@ -283,17 +283,15 @@
 								total: vault.credentials.length,
 							};
 
-							var credential_guids = [];
 							var file_ids = [];
 							for (const credential of credentials) {
-								credential_guids.push(credential.guid);
 								var decryptedFiles = JSON.parse(EncryptService.decryptString(angular.copy(credential.files), VaultService.getActiveVault().vaultKey));
 								for (const file of decryptedFiles) {
 									file_ids.push(file.file_id);
 								}
 							}
 
-							VaultService.deleteVault(vault, credential_guids, file_ids).then(function () {
+							VaultService.deleteVault(vault, file_ids).then(function () {
 								SettingsService.setSetting('defaultVaultPass', false);
 								SettingsService.setSetting('defaultVault', null);
 								$rootScope.$broadcast('logout');
