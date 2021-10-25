@@ -77,6 +77,8 @@ class FileController extends ApiController {
 				try {
 					$this->fileService->deleteFile($file_id, $this->userId);
 				} catch (\Exception $e) {
+					$this->logger->error('Error deleting file (' . $file_id . ') in filecontroller:deleteFiles()',
+						['exception' => $e->getTrace(), 'message' => $e->getMessage()]);
 					continue;
 				}
 			}

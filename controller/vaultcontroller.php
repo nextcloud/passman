@@ -30,6 +30,7 @@ class VaultController extends ApiController {
 	private $credentialService;
 	private $settings;
 	private $fileService;
+	private $logger;
 	private $deleteVaultRequestService;
 
 	public function __construct($AppName,
@@ -39,7 +40,8 @@ class VaultController extends ApiController {
 		                        CredentialService $credentialService,
 		                        DeleteVaultRequestService $deleteVaultRequestService,
 		                        SettingsService $settings,
-		                        FileService $fileService) {
+		                        FileService $fileService,
+		                        LoggerInterface $logger) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -52,6 +54,7 @@ class VaultController extends ApiController {
 		$this->deleteVaultRequestService = $deleteVaultRequestService;
 		$this->settings = $settings;
 		$this->fileService = $fileService;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -174,14 +177,16 @@ class VaultController extends ApiController {
 			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
 
 			foreach ($credentials as $credential) {
-				try {
-					// $credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
-					if ($credential instanceof Credential) {
+				if ($credential instanceof Credential) {
+					try {
+						// $credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 						$this->credentialService->deleteCredentiaL($credential);
 						$this->credentialService->deleteCredentialParts($credential, $this->userId);
+					} catch (\Exception $e) {
+						$this->logger->error('Error deleting credential (' . $credential->getId() . ') in vaultcontroller:delete()',
+							['exception' => $e->getTrace(), 'message' => $e->getMessage()]);
+						continue;
 					}
-				} catch (\Exception $e) {
-					continue;
 				}
 			}
 		} catch (\Exception $e) {
