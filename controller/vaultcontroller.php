@@ -172,6 +172,7 @@ class VaultController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function delete($vault_guid) {
+		$failed_credential_guids = [];
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
 			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
@@ -185,6 +186,7 @@ class VaultController extends ApiController {
 					} catch (\Exception $e) {
 						$this->logger->error('Error deleting credential (' . $credential->getId() . ') in vaultcontroller:delete()',
 							['exception' => $e->getTrace(), 'message' => $e->getMessage()]);
+						$failed_credential_guids[] = $credential->getGuid();
 						continue;
 					}
 				}
@@ -194,6 +196,6 @@ class VaultController extends ApiController {
 		}
 
 		$this->vaultService->deleteVault($vault_guid, $this->userId);
-		return new JSONResponse(array('ok' => true));
+		return new JSONResponse(array('ok' => empty($failed_credential_guids), 'failed' => $failed_credential_guids));
 	}
 }

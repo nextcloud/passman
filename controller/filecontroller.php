@@ -72,18 +72,21 @@ class FileController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function deleteFiles($file_ids) {
+		$failed_file_ids = [];
 		if ($file_ids != null && !empty($file_ids)) {
-			foreach (json_decode($file_ids) as $file_id) {
+			$decoded_file_ids = json_decode($file_ids);
+			foreach ($decoded_file_ids as $file_id) {
 				try {
 					$this->fileService->deleteFile($file_id, $this->userId);
 				} catch (\Exception $e) {
 					$this->logger->error('Error deleting file (' . $file_id . ') in filecontroller:deleteFiles()',
 						['exception' => $e->getTrace(), 'message' => $e->getMessage()]);
+					$failed_file_ids[] = $file_id;
 					continue;
 				}
 			}
 		}
-		return new JSONResponse(array('ok' => true));
+		return new JSONResponse(array('ok' => empty($failed_file_ids), 'failed' => $failed_file_ids));
 	}
 
 	public function updateFile($file_id, $file_data, $filename) {
