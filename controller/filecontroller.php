@@ -16,15 +16,18 @@ use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use Psr\Log\LoggerInterface;
 
 class FileController extends ApiController {
 	private $userId;
 	private $fileService;
+	private $logger;
 
 	public function __construct($AppName,
 	                            IRequest $request,
 		$UserId,
-		                        FileService $fileService) {
+		                        FileService $fileService,
+		                        LoggerInterface $logger) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -33,6 +36,7 @@ class FileController extends ApiController {
 			86400);
 		$this->userId = $UserId;
 		$this->fileService = $fileService;
+		$this->logger = $logger;
 	}
 
 
