@@ -317,7 +317,7 @@ OC.L10N.register(
     "You permanently deleted %1$s" : "Trajno izbrišete %1$s",
     "The password of %1$s has expired, renew it now." : "Geslo za %1$s je preteklo in jo je treba obnoviti.",
     "You received a share request for %1$s from %2$s" : " %2$s vam pošilja prošnjo za souporabo %1$s.",
-    "%s has been shared with a link" : "Datoteka »%s« je  v souporabi prek povezave",
+    "%s has been shared with a link" : "Datoteka »%s« je  v souporabi s povezavo",
     "Passwords" : "Gesla",
     "Your credential \"%s\" expired, click here to update the credential." : "Poverilo »%s« je preteklo. S klikom ga lahko obnovite.",
     "Remind me later" : "Opomni me kasneje",
