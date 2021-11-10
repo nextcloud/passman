@@ -201,7 +201,7 @@ OC.L10N.register(
     "Settings" : "Paramètres",
     "Share credential {{credential}}" : "Partage l'information d'identification {{credential}}",
     "Unshare" : "Ne plus partager",
-    "Showing deleted since" : "Montrer ceux supprimés depuis",
+    "Showing deleted since" : "Afficher les éléments supprimés depuis",
     "Beginning" : "Début",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "Affiche {{number_filtered}} sur {{credential_number}} informations d'identification",
     "Account" : "Compte",
