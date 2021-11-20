@@ -4,6 +4,7 @@ OC.L10N.register(
     "General" : "Generals",
     "Done" : "Done",
     "Settings saved" : "Paramètres enregistrats",
+    "General settings" : "Paramètres generals",
     "Password settings" : "Paramètres de senhal",
     "Sharing" : "Partiment",
     "Share link" : "Partejar lo ligam",
