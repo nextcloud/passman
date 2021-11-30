@@ -289,6 +289,7 @@ OC.L10N.register(
     "Someone has shared a credential with you." : "Nekdo vam je omogočil souporabo poverila.",
     "Click here to request it" : "Kliknite za potrditev",
     "Loading …" : "Poteka nalaganje …",
+    "Oops! Credential not found. Maybe it expired." : "Ojoj! Poverila ni mogoče najti. Ali je morda poteklo?",
     "Mark as Compromised" : "Označi kot ogroženo",
     "Compromised!" : "Označeno kot ogroženo!",
     "This password is compromised. You can only remove this warning by changing the password." : "To geslo je ogroženo. Opozorilo je mogoče odstraniti le z zamenjavo gesla.",
