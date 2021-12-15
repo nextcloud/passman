@@ -25,7 +25,7 @@ class FileController extends ApiController {
 
 	public function __construct($AppName,
 	                            IRequest $request,
-		$UserId,
+								$UserId,
 		                        FileService $fileService,
 		                        LoggerInterface $logger) {
 		parent::__construct(

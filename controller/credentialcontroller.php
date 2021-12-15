@@ -37,7 +37,7 @@ class CredentialController extends ApiController {
 
 	public function __construct($AppName,
 	                            IRequest $request,
-		$userId,
+								$userId,
 		                        CredentialService $credentialService,
 		                        ActivityService $activityService,
 		                        CredentialRevisionService $credentialRevisionService,

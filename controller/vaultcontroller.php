@@ -36,7 +36,7 @@ class VaultController extends ApiController {
 
 	public function __construct($AppName,
 	                            IRequest $request,
-		$UserId,
+								$UserId,
 		                        VaultService $vaultService,
 		                        CredentialService $credentialService,
 		                        DeleteVaultRequestService $deleteVaultRequestService,
