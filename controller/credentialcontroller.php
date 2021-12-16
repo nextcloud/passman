@@ -37,12 +37,12 @@ class CredentialController extends ApiController {
 
 	public function __construct($AppName,
 	                            IRequest $request,
-	                            $userId,
-	                            CredentialService $credentialService,
-	                            ActivityService $activityService,
-	                            CredentialRevisionService $credentialRevisionService,
-	                            ShareService $sharingService,
-	                            SettingsService $settings
+								$userId,
+		                        CredentialService $credentialService,
+		                        ActivityService $activityService,
+		                        CredentialRevisionService $credentialRevisionService,
+		                        ShareService $sharingService,
+		                        SettingsService $settings
 
 	) {
 		parent::__construct(
@@ -275,30 +275,11 @@ class CredentialController extends ApiController {
 		if ($credential instanceof Credential) {
 			$result = $this->credentialService->deleteCredential($credential);
 			//print_r($credential);
-			$this->deleteCredentialParts($credential);
+			$this->credentialService->deleteCredentialParts($credential, $this->userId);
 		} else {
 			$result = false;
 		}
 		return new JSONResponse($result);
-	}
-
-	/**
-	 * Delete leftovers from a credential
-	 * @param Credential $credential
-	 * @throws \Exception
-	 */
-	private function deleteCredentialParts(Credential $credential) {
-		$this->activityService->add(
-			'item_destroyed_self', array($credential->getLabel()),
-			'', array(),
-			'', $this->userId, Activity::TYPE_ITEM_ACTION);
-		$this->sharingService->unshareCredential($credential->getGuid());
-		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
-			$id = $revision['revision_id'];
-			if (isset($id)) {
-				$this->credentialRevisionService->deleteRevision($id, $this->userId);
-			}
-		}
 	}
 
 	/**

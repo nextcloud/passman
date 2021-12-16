@@ -47,6 +47,7 @@ return [
 		['name' => 'file#uploadFile', 'url' => '/api/v2/file', 'verb' => 'POST'],
 		['name' => 'file#getFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'GET'],
 		['name' => 'file#deleteFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'DELETE'],
+		['name' => 'file#deleteFiles', 'url' => '/api/v2/files/delete', 'verb' => 'POST'],
 		['name' => 'file#updateFile', 'url' => '/api/v2/file/{file_id}', 'verb' => 'PATCH'],
 
 		//Sharing stuff

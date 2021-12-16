@@ -11,19 +11,23 @@
 
 namespace OCA\Passman\Controller;
 
-use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\ApiController;
 use OCA\Passman\Service\FileService;
+use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\IRequest;
+use Psr\Log\LoggerInterface;
 
 class FileController extends ApiController {
 	private $userId;
 	private $fileService;
+	private $logger;
+
 	public function __construct($AppName,
-								IRequest $request,
+	                            IRequest $request,
 								$UserId,
-								FileService $fileService){
+		                        FileService $fileService,
+		                        LoggerInterface $logger) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -32,6 +36,7 @@ class FileController extends ApiController {
 			86400);
 		$this->userId = $UserId;
 		$this->fileService = $fileService;
+		$this->logger = $logger;
 	}
 
 
@@ -57,6 +62,7 @@ class FileController extends ApiController {
 	public function getFile($file_id) {
 		return new JSONResponse($this->fileService->getFile($file_id, $this->userId));
 	}
+
 	/**
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
@@ -65,20 +71,42 @@ class FileController extends ApiController {
 		return new JSONResponse($this->fileService->deleteFile($file_id, $this->userId));
 	}
 
-	public function updateFile($file_id, $file_data, $filename){
-		try{
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function deleteFiles($file_ids) {
+		$failed_file_ids = [];
+		if ($file_ids != null && !empty($file_ids)) {
+			$decoded_file_ids = json_decode($file_ids);
+			foreach ($decoded_file_ids as $file_id) {
+				try {
+					$this->fileService->deleteFile($file_id, $this->userId);
+				} catch (\Exception $e) {
+					$this->logger->error('Error deleting file (' . $file_id . ') in filecontroller:deleteFiles()',
+						['exception' => $e->getTrace(), 'message' => $e->getMessage()]);
+					$failed_file_ids[] = $file_id;
+					continue;
+				}
+			}
+		}
+		return new JSONResponse(array('ok' => empty($failed_file_ids), 'failed' => $failed_file_ids));
+	}
+
+	public function updateFile($file_id, $file_data, $filename) {
+		try {
 			$file = $this->fileService->getFile($file_id, $this->userId);
-		} catch (\Exception $doesNotExistException){
+		} catch (\Exception $doesNotExistException) {
 
 		}
-		if($file){
-			if($file_data) {
+		if ($file) {
+			if ($file_data) {
 				$file->setFileData($file_data);
 			}
-			if($filename) {
+			if ($filename) {
 				$file->setFilename($filename);
 			}
-			if($filename || $file_data){
+			if ($filename || $file_data) {
 				new JSONResponse($this->fileService->updateFile($file));
 			}
 		}
