@@ -358,11 +358,11 @@ OC.L10N.register(
     "Requested by" : "Prośba złożona przez",
     "Reason" : "Powód",
     "Click here to request\n\t\t\t\t\tit" : "Kliknij tutaj, aby poprosić o\n\t\t\t\t\t",
-    "Loading&hellip;" : "Ładowanie&hellip;",
+    "Loading&hellip;" : "Wczytywanie&hellip;",
     "E-mail" : "E-mail",
     "Expires:" : "Wygasa:",
     "Connection to server lost" : "Utracono połączenie z serwerem",
-    "Problem loading page, reloading in 5 seconds" : "Problem z załadowaniem strony, przeładuję za 5 sekund",
+    "Problem loading page, reloading in 5 seconds" : "Problem z wczytaniem strony, ponowne wczytanie za 5 sekund",
     "Saving …" : "Zapisywanie…",
     "Dismiss" : "Odrzuć",
     "seconds ago" : "przed chwilą"
