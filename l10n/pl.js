@@ -122,7 +122,7 @@ OC.L10N.register(
     "Rename vault" : "Zmień nazwę sejfu",
     "New vault name" : "Nowa nazwa sejfu",
     "Change" : "Zmień",
-    "Change vault key" : "Zmień wartość klucza",
+    "Change vault key" : "Zmień klucz sejfu",
     "Old vault password" : "Stare hasło sejfu",
     "New vault password" : "Nowe hasło sejfu",
     "Repeat new vault password" : "Powtórz nowe hasło sejfu",
