@@ -133,6 +133,7 @@
     "Vault password" : "保管庫パスワード",
     "This process is irreversible" : "この手順は取り消せません",
     "Delete my precious passwords" : "貴重なパスワードを削除する",
+    "Deleting {{password}} …" : "{{password}} を削除しています …",
     "Yes, delete my precious passwords" : "はい、貴重なパスワードを削除します",
     "Import type" : "インポートタイプ",
     "Import" : "インポート",
