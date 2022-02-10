@@ -285,6 +285,7 @@ OC.L10N.register(
     "Simple Navigation" : "Navigation simple",
     "Someone has shared a credential with you." : "Quelqu'un a partagé une information d'identification avec vous.",
     "Click here to request it" : "Cliquez ici pour le demander",
+    "Loading …" : "Chargement ...",
     "Mark as Compromised" : "Marquer comme compromis",
     "Compromised!" : "Compromis !",
     "This password is compromised. You can only remove this warning by changing the password." : "Ce mot de passe est compromis. Vous ne pouvez supprimer cet avertissement qu'en modifiant votre mot de passe.",
