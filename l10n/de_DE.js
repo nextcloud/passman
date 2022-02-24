@@ -9,7 +9,7 @@ OC.L10N.register(
     "Please fill in a label." : "Bitte eine Beschriftung hinzufügen.",
     "Please fill in a value." : "Bitte einen Wert eingeben.",
     "Error loading file" : "Fehler beim Laden der Datei",
-    "An error occurred during decryption" : "Ein Fehler ist beim Entschlüsseln aufgetreten",
+    "An error occurred during decryption" : "Es ist ein Fehler beim Entschlüsseln aufgetreten",
     "Credential created!" : "Anmeldeinformation erstellt!",
     "Credential deleted" : "Anmeldeinformation gelöscht",
     "Credential updated" : "Anmeldeinformation aktualisiert",
