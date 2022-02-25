@@ -98,7 +98,7 @@ OC.L10N.register(
     "Expiration date" : "Data de caducitat",
     "No expiration date set" : "No s'ha establert cap data de caducitat",
     "Renew interval" : "Renova l'interval",
-    "Disabled" : "Desactivat",
+    "Disabled" : "Inhabilitat",
     "Day(s)" : "Dia(es)",
     "Week(s)" : "Setmana(es)",
     "Month(s)" : "Mes(os)",
