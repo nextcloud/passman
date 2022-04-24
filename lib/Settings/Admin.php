@@ -58,6 +58,8 @@ class Admin implements ISettings {
 		$checkVersion = $this->config->getAppValue('passman', 'check_version', '1') === '1';
 		$localVersion = $this->appManager->getAppInfo('passman')["version"];
 		$githubVersion = $this->l->t('Unable to get version info');
+		$githubReleaseUrl = null;
+
 		if ($checkVersion) {
 			// get latest GitHub release version
 
@@ -71,6 +73,10 @@ class Admin implements ISettings {
 					$data = json_decode($json);
 					if (isset($data->tag_name) && is_string($data->tag_name)) {
 						$githubVersion = $data->tag_name;
+
+						if (isset($data->html_url) && is_string($data->html_url)) {
+							$githubReleaseUrl = $data->html_url;
+						}
 					}
 				}
 			} catch (\Exception $e) {
@@ -82,6 +88,7 @@ class Admin implements ISettings {
 		return new TemplateResponse('passman', 'admin', [
 			'localVersion' => $localVersion,
 			'githubVersion' => $githubVersion,
+			'githubReleaseUrl' => $githubReleaseUrl,
 			'checkVersion' => $checkVersion,
 		], 'blank');
 	}
