@@ -26,6 +26,7 @@ OC.L10N.register(
     "Settings" : "ការកំណត់",
     "Unshare" : "លែង​ចែក​រំលែក",
     "Password" : "ពាក្យសម្ងាត់",
+    "Email" : "អ៊ីមែល",
     "URL" : "URL",
     "Notes" : "កំណត់​ចំណាំ",
     "Edit" : "កែប្រែ",
@@ -36,6 +37,7 @@ OC.L10N.register(
     "Description" : "ការ​អធិប្បាយ",
     "You created %1$s" : "អ្នក​បាន​បង្កើត %1$s",
     "You deleted %1$s" : "អ្នក​បាន​លុប %1$s",
+    "An error occurred!" : "មានបញ្ហា​មួយ​កើតឡើង!",
     "seconds ago" : "វិនាទី​មុន"
 },
 "nplurals=1; plural=0;");

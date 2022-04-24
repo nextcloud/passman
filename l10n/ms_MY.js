@@ -20,6 +20,7 @@ OC.L10N.register(
     "Cancel" : "Batal",
     "Settings" : "Tetapan",
     "Password" : "Kata laluan",
+    "Email" : "Email",
     "URL" : "URL",
     "Notes" : "Nota",
     "Edit" : "Sunting",
@@ -27,6 +28,7 @@ OC.L10N.register(
     "Share" : "Kongsi",
     "Date" : "Date",
     "Description" : "Keterangan",
-    "You created %1$s" : "Anda telah membina %1$s"
+    "You created %1$s" : "Anda telah membina %1$s",
+    "An error occurred!" : "Ralat berlaku!"
 },
 "nplurals=1; plural=0;");

@@ -22,6 +22,7 @@ OC.L10N.register(
     "Settings" : "կարգավորումներ",
     "Unshare" : "Չկիսվել",
     "Password" : "Գաղտնաբառ",
+    "Email" : "Էլ․փոստ",
     "URL" : "URL",
     "Notes" : "Notes",
     "Edit" : "մշակել",
@@ -32,6 +33,7 @@ OC.L10N.register(
     "Description" : "Նկարագրություն",
     "You created %1$s" : "Դու ստեղծեցիր %1$s",
     "You deleted %1$s" : "Դու ջնջեցիր %1$s",
+    "An error occurred!" : "Սխալ պատահեց",
     "seconds ago" : "վրկ. առաջ"
 },
 "nplurals=2; plural=(n != 1);");

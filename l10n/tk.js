@@ -1,0 +1,28 @@
+OC.L10N.register(
+    "passman",
+    {
+    "General" : "Esasy",
+    "Sharing" : "Paýlaşmak",
+    "Share link" : "Baglanyşyk paýlaş",
+    "Username" : "Ulanyjy ady",
+    "File" : "Faýl",
+    "Type" : "Görnüşi",
+    "Filename" : "Faýlyň ady",
+    "User" : "Ulanyjy",
+    "Files" : "Faýllar",
+    "Pending" : "Garaşylýar",
+    "Details" : "Jikme-jiklikler",
+    "Save" : "Saklamak",
+    "Cancel" : "ýatyrmak",
+    "Settings" : "Sazlamalar",
+    "Unshare" : "Paýlaşma",
+    "Password" : "Açarsöz",
+    "Edit" : "Redaktirläň",
+    "Delete" : "Pozmak",
+    "Share" : "Paýlaş",
+    "Tags" : "Bellikler",
+    "E-mail" : "E-mail",
+    "Dismiss" : "Ýapmak.",
+    "seconds ago" : "Sekunt öň"
+},
+"nplurals=2; plural=(n != 1);");

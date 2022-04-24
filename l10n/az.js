@@ -28,6 +28,7 @@ OC.L10N.register(
     "Settings" : "Quraşdırmalar",
     "Unshare" : "Paylaşımı durdur",
     "Password" : "Şifrə",
+    "Email" : "Email",
     "URL" : "URL",
     "Notes" : "Qeydlər",
     "Edit" : "Dəyişiklik et",
@@ -39,6 +40,7 @@ OC.L10N.register(
     "Description" : "Açıqlanma",
     "You created %1$s" : "Siz yaratdınız %1$s",
     "You deleted %1$s" : "Siz silindiniz %1$s",
+    "An error occurred!" : "Səhv baş verdi!",
     "seconds ago" : "saniyələr öncə"
 },
 "nplurals=2; plural=(n != 1);");

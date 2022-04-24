@@ -29,6 +29,7 @@ OC.L10N.register(
     "Settings" : "Configurationes",
     "Unshare" : "Cessa de compartir",
     "Password" : "Contrasigno",
+    "Email" : "E-posta",
     "URL" : "URL",
     "Notes" : "Notas",
     "Edit" : "Modificar",
@@ -42,6 +43,7 @@ OC.L10N.register(
     "Description" : "Description",
     "You created %1$s" : "Tu creava %1$s",
     "You deleted %1$s" : "Tu  deleva %1$s",
+    "An error occurred!" : "Il occurreva un error!",
     "Dismiss" : "Dimitter",
     "seconds ago" : "secundas passate"
 },

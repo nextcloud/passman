@@ -22,6 +22,7 @@
     "Settings" : "تەڭشەكلەر",
     "Unshare" : "ھەمبەھىرلىمە",
     "Password" : "ئىم",
+    "Email" : "تورخەت",
     "URL" : "URL",
     "Notes" : "ئىزاھاتلار",
     "Edit" : "تەھرىر",
@@ -29,6 +30,7 @@
     "Share" : "ھەمبەھىر",
     "Date" : "Date",
     "Tags" : "بەلگەلەر",
-    "Description" : "چۈشەندۈرۈش"
+    "Description" : "چۈشەندۈرۈش",
+    "An error occurred!" : "خاتالىق كۆرۈلدى!"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

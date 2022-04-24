@@ -13,6 +13,7 @@
     "Settings" : "سیٹینگز",
     "Unshare" : "شئیرنگ ختم کریں",
     "Password" : "پاسورڈ",
+    "Email" : "email",
     "URL" : "یو ار ایل",
     "Notes" : "Notes",
     "Edit" : "تدوین کریں",
@@ -20,6 +21,7 @@
     "Share" : "تقسیم",
     "Date" : "Date",
     "Description" : "تصریح",
+    "An error occurred!" : "ایک خرابی واقع ہوئی!",
     "seconds ago" : "سیکنڈز پہلے"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

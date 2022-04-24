@@ -24,6 +24,7 @@ OC.L10N.register(
     "Settings" : "تەڭشەكلەر",
     "Unshare" : "ھەمبەھىرلىمە",
     "Password" : "ئىم",
+    "Email" : "تورخەت",
     "URL" : "URL",
     "Notes" : "ئىزاھاتلار",
     "Edit" : "تەھرىر",
@@ -31,6 +32,7 @@ OC.L10N.register(
     "Share" : "ھەمبەھىر",
     "Date" : "Date",
     "Tags" : "بەلگەلەر",
-    "Description" : "چۈشەندۈرۈش"
+    "Description" : "چۈشەندۈرۈش",
+    "An error occurred!" : "خاتالىق كۆرۈلدى!"
 },
 "nplurals=2; plural=(n != 1);");

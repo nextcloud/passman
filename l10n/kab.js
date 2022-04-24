@@ -1,0 +1,28 @@
+OC.L10N.register(
+    "passman",
+    {
+    "General" : "Amatu",
+    "Sharing" : "Beṭṭu",
+    "Share link" : "Fren aseɣwen",
+    "Username" : "Isem n useqdac",
+    "File" : "Afaylu",
+    "Add" : "Rnu",
+    "Type" : "Anaw",
+    "Filename" : "Isem n ufaylu",
+    "Expiration date" : "Azemz n tagara",
+    "User" : "Aseqdac",
+    "Files" : "Ifuyla",
+    "Pending" : "Yegguni",
+    "Details" : "Talqayt",
+    "Save" : "Sekles",
+    "Cancel" : "Sefsex",
+    "Settings" : "Iɣewwaṛen",
+    "Password" : "Awal uffir",
+    "Email" : "Imayl",
+    "Edit" : "Ẓreg",
+    "Delete" : "Kkes",
+    "Share" : "Bḍu",
+    "Tags" : "Tibzimin",
+    "Dismiss" : "Agi"
+},
+"nplurals=2; plural=(n != 1);");

@@ -23,11 +23,13 @@ OC.L10N.register(
     "Settings" : "ಆಯ್ಕೆ",
     "Unshare" : "ಹಂಚಿಕೆಯನ್ನು ಹಿಂತೆಗೆ",
     "Password" : "ಗುಪ್ತ ಪದ",
+    "Email" : "﻿ಇ-ಅಂಚೆ",
     "URL" : "ಜಾಲದ ಕೊಂಡಿ",
     "Notes" : "Notes",
     "Edit" : "ಸಂಪಾದಿಸು",
     "Delete" : "﻿ಅಳಿಸಿ",
     "Share" : "﻿ಹಂಚಿಕೊಳ್ಳಿ",
-    "Date" : "Date"
+    "Date" : "Date",
+    "An error occurred!" : "ದೋಷ ಕಂಡುಬಂದಿದೆ!"
 },
 "nplurals=2; plural=(n > 1);");

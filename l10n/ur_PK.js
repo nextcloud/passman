@@ -15,6 +15,7 @@ OC.L10N.register(
     "Settings" : "سیٹینگز",
     "Unshare" : "شئیرنگ ختم کریں",
     "Password" : "پاسورڈ",
+    "Email" : "email",
     "URL" : "یو ار ایل",
     "Notes" : "Notes",
     "Edit" : "تدوین کریں",
@@ -22,6 +23,7 @@ OC.L10N.register(
     "Share" : "تقسیم",
     "Date" : "Date",
     "Description" : "تصریح",
+    "An error occurred!" : "ایک خرابی واقع ہوئی!",
     "seconds ago" : "سیکنڈز پہلے"
 },
 "nplurals=2; plural=(n != 1);");

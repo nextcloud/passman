@@ -25,6 +25,7 @@ OC.L10N.register(
     "Settings" : "Postavke",
     "Unshare" : "Ne deli",
     "Password" : "Password",
+    "Email" : "email",
     "URL" : "Url",
     "Notes" : "Notes",
     "Edit" : "Uredi",

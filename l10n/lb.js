@@ -27,6 +27,7 @@ OC.L10N.register(
     "Settings" : "Astellungen",
     "Unshare" : "Net méi deelen",
     "Password" : "Passwuert",
+    "Email" : "Email",
     "URL" : "URL",
     "Notes" : "Notizen",
     "Edit" : "Änneren",

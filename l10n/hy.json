@@ -20,6 +20,7 @@
     "Settings" : "կարգավորումներ",
     "Unshare" : "Չկիսվել",
     "Password" : "Գաղտնաբառ",
+    "Email" : "Էլ․փոստ",
     "URL" : "URL",
     "Notes" : "Notes",
     "Edit" : "մշակել",
@@ -30,6 +31,7 @@
     "Description" : "Նկարագրություն",
     "You created %1$s" : "Դու ստեղծեցիր %1$s",
     "You deleted %1$s" : "Դու ջնջեցիր %1$s",
+    "An error occurred!" : "Սխալ պատահեց",
     "seconds ago" : "վրկ. առաջ"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -28,6 +28,7 @@ OC.L10N.register(
     "Settings" : "সেটিংস",
     "Unshare" : "ভাগাভাগি বাতিল ",
     "Password" : "কূটশব্দ",
+    "Email" : "ইমেইল",
     "URL" : "URL",
     "Notes" : "নোট",
     "Edit" : "সম্পাদনা",
@@ -38,6 +39,7 @@ OC.L10N.register(
     "Description" : "বিবরণ",
     "You created %1$s" : "আপনি তৈরি করেছেন %1$s",
     "You deleted %1$s" : "আপনি ডিলিট করেছেন %1$s",
+    "An error occurred!" : "সমস্যা দেখা দিয়েছে !",
     "seconds ago" : "সেকেন্ড পূর্বে"
 },
 "nplurals=2; plural=(n != 1);");

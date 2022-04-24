@@ -27,6 +27,7 @@ OC.L10N.register(
     "Unshare" : "Dad-rannu",
     "Account" : "Cyfrif",
     "Password" : "Cyfrinair",
+    "Email" : "E-bost",
     "URL" : "URL",
     "Notes" : "Nodiadau",
     "Edit" : "Golygu",
@@ -34,7 +35,9 @@ OC.L10N.register(
     "Share" : "Rhannu",
     "Date" : "Date",
     "Tags" : "Tagiau",
+    "Loading …" : "Yn llwytho …",
     "Description" : "Disgrifiad",
+    "An error occurred!" : "Digwyddodd gwall!",
     "seconds ago" : "eiliad yn ôl"
 },
 "nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;");
