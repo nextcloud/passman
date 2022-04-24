@@ -24,18 +24,19 @@
 namespace OCA\Passman\Settings;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\Settings\ISettings;
+use Psr\Log\LoggerInterface;
 
 class Admin implements ISettings {
 
 	protected IConfig $config;
 	private IL10N $l;
 	private IAppManager $appManager;
+	private LoggerInterface $logger;
 
 	/**
 	 * Admin constructor.
@@ -43,10 +44,11 @@ class Admin implements ISettings {
 	 * @param IL10N $l
 	 * @param IAppManager $appManager
 	 */
-	public function __construct(IConfig $config, IL10N $l, IAppManager $appManager) {
+	public function __construct(IConfig $config, IL10N $l, IAppManager $appManager, LoggerInterface $logger) {
 		$this->config = $config;
 		$this->l = $l;
 		$this->appManager = $appManager;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -57,40 +59,25 @@ class Admin implements ISettings {
 		$localVersion = $this->appManager->getAppInfo('passman')["version"];
 		$githubVersion = $this->l->t('Unable to get version info');
 		if ($checkVersion) {
-			// get latest master version
-			$version = false;
+			// get latest GitHub release version
 
-			$url = 'https://raw.githubusercontent.com/nextcloud/passman/dist/appinfo/info.xml';
+			$url = 'https://api.github.com/repos/nextcloud/passman/releases/latest';
 			try {
 				$httpClient = new Client();
 				$response = $httpClient->request('get', $url);
-				$xml = $response->getBody()->getContents();
-			} catch (GuzzleException $e) {
-				$xml = false;
-			}
+				$json = $response->getBody()->getContents();
 
-			if ($xml) {
-				$data = simplexml_load_string($xml);
-
-				// libxml_disable_entity_loader is deprecated with php8, the vulnerability is disabled by default by libxml with php8
-				if (\PHP_VERSION_ID < 80000) {
-					$loadEntities = libxml_disable_entity_loader(true);
-					$data = simplexml_load_string($xml);
-					libxml_disable_entity_loader($loadEntities);
+				if ($json) {
+					$data = json_decode($json);
+					if (isset($data->tag_name) && is_string($data->tag_name)) {
+						$githubVersion = $data->tag_name;
+					}
 				}
-
-				if ($data !== false) {
-					$version = (string)$data->version;
-				} else {
-					libxml_clear_errors();
-				}
-			}
-
-			if ($version !== false) {
-				$githubVersion = $version;
+			} catch (\Exception $e) {
+				$this->logger->error('Error fetching latest GitHub release version in lib/Admin:getForm()',
+					['exception' => $e->getTrace(), 'message' => $e->getMessage()]);
 			}
 		}
-		// $ciphers = openssl_get_cipher_methods();
 
 		return new TemplateResponse('passman', 'admin', [
 			'localVersion' => $localVersion,
