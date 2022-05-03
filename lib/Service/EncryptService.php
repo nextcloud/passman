@@ -152,14 +152,14 @@ class EncryptService {
 
 		list ($cipherKey, $macKey, $iv) = $this->getKeys($salt, $key);
 
-		if (!$this->hash_equals(hash_hmac('sha512', $enc, $macKey, true), $mac)) {
-			return false;
+		if (hash_equals(hash_hmac('sha512', $enc, $macKey, true), $mac)) {
+			$dec = openssl_decrypt($enc, $this->cipher, $cipherKey, true, $iv);
+			$data = $this->unpad($dec);
+
+			return $data;
 		}
 
-		$dec = openssl_decrypt($enc, $this->cipher, $cipherKey, true, $iv);
-		$data = $this->unpad($dec);
-
-		return $data;
+		return false;
 	}
 
 	/**
@@ -204,26 +204,6 @@ class EncryptService {
 		$macKey = substr($key, $keySize, $keySize);
 		$iv = substr($key, 2 * $keySize);
 		return array($cipherKey, $macKey, $iv);
-	}
-
-    /**
-     * Use Double HMAC Comparison with a random key to truly blind the comparison operation.
-     * It is not strictly required by using hash_equals (https://www.php.net/manual/en/function.hash-equals.php),
-     * but it is a second layer of security to prevent timing attacks.
-     *
-     * @param string $a
-     * @param string $b
-     *
-     * @return bool
-     * @throws \Exception
-     */
-	protected function hash_equals($a, $b) {
-		if (function_exists('random_bytes')) {
-			$key = random_bytes(128);
-		} else {
-			$key = openssl_random_pseudo_bytes(128);
-		}
-		return hash_equals(hash_hmac('sha512', $a, $key), hash_hmac('sha512', $b, $key));
 	}
 
 	/**
