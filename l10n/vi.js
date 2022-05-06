@@ -70,6 +70,7 @@ OC.L10N.register(
     "Date" : "Date",
     "Accept" : "Đồng ý",
     "Never" : "Không bao giờ",
+    "Logout" : "đăng xuất",
     "Tags" : "Thẻ",
     "Expired" : "Đã hết hạn",
     "Loading …" : "Đang tải...",
