@@ -152,14 +152,14 @@ class EncryptService {
 
 		list ($cipherKey, $macKey, $iv) = $this->getKeys($salt, $key);
 
-		if (!$this->hash_equals(hash_hmac('sha512', $enc, $macKey, true), $mac)) {
-			return false;
+		if (hash_equals(hash_hmac('sha512', $enc, $macKey, true), $mac)) {
+			$dec = openssl_decrypt($enc, $this->cipher, $cipherKey, true, $iv);
+			$data = $this->unpad($dec);
+
+			return $data;
 		}
 
-		$dec = openssl_decrypt($enc, $this->cipher, $cipherKey, true, $iv);
-		$data = $this->unpad($dec);
-
-		return $data;
+		return false;
 	}
 
 	/**
@@ -204,15 +204,6 @@ class EncryptService {
 		$macKey = substr($key, $keySize, $keySize);
 		$iv = substr($key, 2 * $keySize);
 		return array($cipherKey, $macKey, $iv);
-	}
-
-	protected function hash_equals($a, $b) {
-		if (function_exists('random_bytes')) {
-			$key = random_bytes(128);
-		} else {
-			$key = openssl_random_pseudo_bytes(128);
-		}
-		return hash_hmac('sha512', $a, $key) === hash_hmac('sha512', $b, $key);
 	}
 
 	/**
