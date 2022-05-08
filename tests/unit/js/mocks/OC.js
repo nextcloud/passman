@@ -20,10 +20,10 @@ if (typeof oc_webroot === "undefined") {
 	oc_webroot = location.pathname;
 	var pos = oc_webroot.indexOf('/index.php/');
 	if (pos !== -1) {
-		oc_webroot = oc_webroot.substr(0, pos);
+		oc_webroot = oc_webroot.slice(0, pos);
 	}
 	else {
-		oc_webroot = oc_webroot.substr(0, oc_webroot.lastIndexOf('/'));
+		oc_webroot = oc_webroot.substring(0, oc_webroot.lastIndexOf('/'));
 	}
 }
 if (typeof console === "undefined" || typeof console.log === "undefined") {
@@ -498,7 +498,7 @@ var OC={
 		}
 		pos = queryString.indexOf('?');
 		if (pos >= 0){
-			queryString = queryString.substr(pos + 1);
+			queryString = queryString.slice(pos + 1);
 		}
 		parts = queryString.replace(/\+/g, '%20').split('&');
 		for (var i = 0; i < parts.length; i++){
@@ -507,8 +507,8 @@ var OC={
 			pos = part.indexOf('=');
 			if (pos >= 0) {
 				components = [
-					part.substr(0, pos),
-					part.substr(pos + 1)
+					part.slice(0, pos),
+					part.slice(pos + 1)
 				];
 			}
 			else {
@@ -1432,8 +1432,8 @@ function humanFileSize(size, skipSmallSizes) {
 	if(order < 2){
 		relativeSize = parseFloat(relativeSize).toFixed(0);
 	}
-	else if(relativeSize.substr(relativeSize.length-2,2)==='.0'){
-		relativeSize=relativeSize.substr(0,relativeSize.length-2);
+	else if(relativeSize.slice(-2)==='.0'){
+		relativeSize=relativeSize.slice(0,-2);
 	}
 	return relativeSize + ' ' + readableFormat;
 }
@@ -1780,11 +1780,11 @@ OC.Util.History = {
 		var hash = window.location.hash,
 			pos = hash.indexOf('?');
 		if (pos >= 0) {
-			return hash.substr(pos + 1);
+			return hash.slice(pos + 1);
 		}
 		if (hash.length) {
 			// remove hash sign
-			return hash.substr(1);
+			return hash.slice(1);
 		}
 		return '';
 	},
