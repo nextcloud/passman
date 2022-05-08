@@ -12,7 +12,14 @@ style('passman', 'vendor/font-awesome/font-awesome.min');
 	<h2><?php p($l->t('Passman Settings')); ?></h2>
 	<?php
 	if ($_['checkVersion']) {
-		p($l->t('GitHub version:') . ' ' . $_['githubVersion']);
+		if ($_['githubReleaseUrl']) {
+			p($l->t('GitHub version:'));
+			?>
+			<a target="_blank" rel="noreferrer noopener" class="external" href="<?php p($_['githubReleaseUrl']); ?>"><?php p($_['githubVersion']); ?> ↗</a>
+			<?php
+		} else {
+			p($l->t('GitHub version:') . ' ' . $_['githubVersion']);
+		}
 		print '<br />';
 	} ?>
 	Local version: <?php p($_['localVersion']); ?><br/>
