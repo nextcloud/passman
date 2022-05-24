@@ -31,6 +31,7 @@ OC.L10N.register(
     "Pending" : "Tunggu",
     "Details" : "Detil",
     "Hide details" : "Sembunyikan detail",
+    "100/hour" : "100/jam",
     "by" : "oleh",
     "Save" : "Simpan",
     "Cancel" : "Membatalkan",
