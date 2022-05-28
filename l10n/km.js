@@ -8,6 +8,7 @@ OC.L10N.register(
     "Username" : "ឈ្មោះ​អ្នកប្រើ",
     "File" : "File",
     "Add" : "បញ្ចូល",
+    "Value" : "តម្លៃ",
     "Type" : "Type",
     "Size" : "ទំហំ",
     "Expiration date" : "ពេល​ផុត​កំណត់",
