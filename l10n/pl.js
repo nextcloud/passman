@@ -312,7 +312,7 @@ OC.L10N.register(
     "You updated %1$s" : "Zaktualizowałeś %1$s",
     "%2$s has revised %1$s to the revision of %3$s" : "%2$s przywrócił %1$s do wersji z %3$s",
     "You reverted %1$s back to the revision of %3$s" : "Cofnąłeś %1$s do wersji z %3$s",
-    "%3$s has renamed %1$s to %2$s" : "%3$s zmienił(-ła) %1$s na %2$s",
+    "%3$s has renamed %1$s to %2$s" : "%3$s zmienił %1$s na %2$s",
     "You renamed %1$s to %2$s" : "Zmieniłeś nazwę %1$s na %2$s",
     "%1$s has been deleted by %2$s" : "%1$s został usunięty przez %2$s",
     "You deleted %1$s" : "Usunąłeś %1$s",
