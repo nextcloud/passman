@@ -3,6 +3,8 @@ OC.L10N.register(
     {
     "Done" : "Done",
     "Share link" : "Share link",
+    "Copy to clipboard" : "Капіяваць у буфер абмену",
+    "Copy password to clipboard" : "Капіяваць пароль у буфер абмену",
     "Username" : "Username",
     "File" : "File",
     "Add" : "Add",
