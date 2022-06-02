@@ -11,6 +11,7 @@ OC.L10N.register(
     "Share link" : "Partejar lo ligam",
     "Saved!" : "Enregistrat !",
     "Good" : "Bon",
+    "Copy to clipboard" : "Copiar dins lo quichapapièrs",
     "Generate password" : "Generar senhal",
     "Username" : "Nom d'utilizaire",
     "Text" : "Tèxt",
