@@ -23,6 +23,7 @@ OC.L10N.register(
     "No expiration date set" : "Data expirării nu e setată",
     "Disabled" : "Dezactivați",
     "Export" : "Exportă",
+    "Change" : "Modificare",
     "Version" : "Versiune",
     "Vault password" : "Parolă seif",
     "Import" : "Importă",
