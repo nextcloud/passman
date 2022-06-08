@@ -213,6 +213,7 @@ OC.L10N.register(
     "Showing deleted since" : "Pokaži izbrisane od",
     "Beginning" : "Začetka",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "Prikazanih je {{number_filtered}} od {{credential_number}} poveril",
+    "Search for credential …" : "Iskanje poveril ...",
     "Account" : "Račun",
     "Password" : "Geslo",
     "OTP" : "OTP",
