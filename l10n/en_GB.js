@@ -277,6 +277,7 @@ OC.L10N.register(
     "Simple Navigation" : "Simple Navigation",
     "Someone has shared a credential with you." : "Someone has shared a credential with you.",
     "Click here to request it" : "Click here to request it",
+    "Loading …" : "Loading …",
     "This password is compromised. You can only remove this warning by changing the password." : "This password is compromised. You can only remove this warning by changing the password.",
     "email" : "email",
     "Description" : "Description",
