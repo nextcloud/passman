@@ -53,6 +53,7 @@ OC.L10N.register(
     "Share" : "Partejar",
     "Date" : "Date",
     "Accept" : "Acceptar",
+    "Decline" : "Declinar",
     "Never" : "Pas jamais",
     "Cancel destruction request" : "Anullar requèsta de destruccion",
     "Logout" : "Desconnexion",
