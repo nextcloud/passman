@@ -217,7 +217,6 @@
   .pw-gen input {
     width: calc(100% - 76px) !important;
     float: left;
-    background: #fff;
     color: #555;
     cursor: text;
     font-family: inherit;
@@ -242,7 +241,6 @@
       display: inline-block;
       font-size: 14px;
       border: 1px solid #ddd;
-      background-color: #eaeaea;
       cursor: pointer; }
     .pw-gen .generate_pw .cell:hover {
       color: #0066ff; }
@@ -598,11 +596,12 @@
       #app-content #app-content-wrapper .viewModes .view-mode {
         display: inline-block;
         padding: 7px;
-        background-color: rgba(240, 240, 240, 0.9); }
+        background-color: var(--color-main-background); }
       #app-content #app-content-wrapper .viewModes .view-mode.active {
         display: inline-block;
         padding: 7px;
-        background-color: rgba(226, 226, 226, 0.9); }
+        background-color: var(--color-main-background);
+        filter: brightness(80%); }
       #app-content #app-content-wrapper .viewModes .view-mode {
         cursor: pointer;
         display: inline-block;
@@ -642,9 +641,9 @@
     #app-content #app-content-wrapper .credential-table {
       width: 100%; }
       #app-content #app-content-wrapper .credential-table tr:hover {
-        background-color: whitesmoke; }
+        filter: brightness(80%); }
       #app-content #app-content-wrapper .credential-table tr.selected {
-        background-color: #f8f8f8; }
+        filter: brightness(70%); }
       #app-content #app-content-wrapper .credential-table tr .compromised {
         background-color: #f74040; }
       #app-content #app-content-wrapper .credential-table tr .compromised:hover {
@@ -982,11 +981,9 @@
 
 .inputfile + label {
   font-size: 1.25em;
-  background-color: rgba(240, 240, 240, 0.9);
   margin-top: 4px;
   padding: 5px;
-  margin-right: 4px;
-  border-right: 1px solid #c9c9c9; }
+  margin-right: 4px; }
 
 .inputfile:focus + label,
 .inputfile + label:hover {
@@ -1005,7 +1002,6 @@
   display: flex; }
   .icon-label input {
     float: left;
-    background: #fff;
     color: #555;
     cursor: text;
     font-family: inherit;
@@ -1028,7 +1024,6 @@
       padding: 7px 12px 2px 12px;
       font-size: 14px;
       border: 1px solid #ddd;
-      background-color: #eaeaea;
       cursor: pointer;
       -webkit-border-bottom-left-radius: 6px;
       border-bottom-left-radius: 6px;
@@ -1468,3 +1463,6 @@ input[type="checkbox"] {
   min-height: unset !important; }
 
 /*# sourceMappingURL=app.css.map */
+select > option {
+  background: var(--color-main-background);
+}
