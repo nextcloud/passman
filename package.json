@@ -30,5 +30,9 @@
     "karma-requirejs": "^1.1.0",
     "karma-verbose-reporter": "0.0.3",
     "requirejs": "^2.3.2"
+  },
+  "engines": {
+    "node": "^16.0.0",
+    "npm": "^7.0.0 || ^8.0.0"
   }
 }
