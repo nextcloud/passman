@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Generating sharing keys (%s/2)" : "Génération de clés de partages(%s/2)",
     "Incorrect vault password!" : "Mot de passe du coffre-fort incorrect",
     "Passwords do not match" : "Les mots de passe ne correspondent pas",
     "General" : "Général",
@@ -214,6 +215,7 @@ OC.L10N.register(
     "Showing deleted since" : "Afficher les éléments supprimés depuis",
     "Beginning" : "Début",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "Affiche {{number_filtered}} sur {{credential_number}} informations d'identification",
+    "Search for credential …" : "En recherche d'identifiants...",
     "Account" : "Compte",
     "Password" : "Mot de passe",
     "OTP" : "OTP",
@@ -260,6 +262,7 @@ OC.L10N.register(
     "Please input the password for" : "Veuillez entrer le mot de passe pour",
     "Set this vault as the default." : "Choisir ce coffre-fort par défaut.",
     "Log into this vault automatically." : "Se connecter à ce coffre-fort automatiquement.",
+    "Log out of this vault automatically after:" : "Se déconnecter automatiquement de cet emplacement après :",
     "Decrypt vault" : "Déchiffrer le coffre-fort",
     "Seems you lost the vault password and you're unable to log in." : "Il semblerait que vous avez perdu le mot de passe du coffre-fort et que vous êtes incapable de vous connecter.",
     "If you want this vault to be removed you can request that here." : "Si vous souhaitez supprimer ce coffre-fort, vous pouvez demander la suppression de ce coffre-fort ici.",
@@ -290,6 +293,7 @@ OC.L10N.register(
     "Someone has shared a credential with you." : "Quelqu'un a partagé une information d'identification avec vous.",
     "Click here to request it" : "Cliquez ici pour le demander",
     "Loading …" : "Chargement ...",
+    "Oops! Credential not found. Maybe it expired." : "Oups ! Les identifiants n'ont pas été trouvés. Ils sont peut-être expirés.",
     "Mark as Compromised" : "Marquer comme compromis",
     "Compromised!" : "Compromis !",
     "This password is compromised. You can only remove this warning by changing the password." : "Ce mot de passe est compromis. Vous ne pouvez supprimer cet avertissement qu'en modifiant votre mot de passe.",
