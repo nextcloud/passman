@@ -241,7 +241,7 @@ OC.L10N.register(
     "Decline" : "Zamítnout",
     "You have {{session_time}} left before logout." : "Do odhlášení vám zbývá {{session_time}}.",
     "Your vault has been locked for {{time}} because of {{tries}} failed attempts!" : "Váš trezor byl uzamčen na {{time}} z důvodu {{tries}} chybných pokusů o zadání hesla k němu!",
-    "Hello there!" : "Zdravíme",
+    "Hello there!" : "Dobrý den",
     "It does not seem that you have any passwords. Do you want to add one?" : "Nezdá se, že byste měli nějaká hesla. Chcete nějaké přidat?",
     "You don't have good credentials" : "Nemáte dobré přihlašovací údaje",
     "You don't have medium credentials" : "Nemáte žádné středně bezpečné přihlašovací údaje",
