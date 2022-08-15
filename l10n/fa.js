@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Generating sharing keys (%s/2)" : "ایجاد کلیدهای اشتراک ( %s / 2)",
     "Incorrect vault password!" : "گذرواژه نادرست!",
     "Passwords do not match" : "رمزهای ورود مطابقت ندارند",
     "General" : "عمومی",
