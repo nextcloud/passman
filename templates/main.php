@@ -30,6 +30,7 @@ script('passman', 'vendor/ui-sortable/sortable');
 script('passman', 'vendor/papa-parse/papaparse.min');
 script('passman', 'lib/promise');
 script('passman', 'lib/crypto_wrap');
+script('passman', 'lib/otpauth.umd');
 
 
 script('passman', 'app/app');

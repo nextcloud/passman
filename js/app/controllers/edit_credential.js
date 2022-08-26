@@ -289,7 +289,10 @@
 						label: decodeURIComponent(label),
 						qr_uri: QRCode,
 						issuer: uri.searchParams.get('issuer'),
-						secret: uri.searchParams.get('secret')
+						secret: uri.searchParams.get('secret'),
+						algorithm: uri.searchParams.get('algorithm') ? uri.searchParams.get('algorithm') : "SHA1",
+						period: uri.searchParams.get('period') ? parseInt(uri.searchParams.get('period')) : 30,
+						digits: uri.searchParams.get('digits') ? parseInt(uri.searchParams.get('digits')) : 6,
 					};
 					$scope.$digest();
 				};

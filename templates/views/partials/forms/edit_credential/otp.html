@@ -8,8 +8,7 @@
 			</select>
 		</div>
 		<div class="col-xs-6 nopadding">
-			<input type="file" qrread on-read="parseQR(qrdata)"
-				   class="input_secret"
+			<input type="file" qrread class="input_secret"
 				   on-read="parseQR(qrdata)" ng-show="otpType === 'qrcode'"/>
 			<input type="text" ng-model="storedCredential.otp.secret" ng-show="otpType === 'secret'">
 		</div>
@@ -39,6 +38,18 @@
 				<td>{{ 'issuer' | translate}}: </td>
 				<td>{{storedCredential.otp.issuer}}</td>
 			</tr>
+			<tr ng-show="storedCredential.otp.digits && storedCredential.otp.secret">
+				<td>{{ 'digits' | translate}}: </td>
+				<td>
+					<input type="number" ng-model="storedCredential.otp.digits" min="6" style="-moz-appearance: initial; -webkit-appearance: initial;">
+				</td>
+			</tr>
+			<tr ng-show="storedCredential.otp.digits && storedCredential.otp.secret">
+				<td>{{ 'period' | translate}}: </td>
+				<td>
+					<input type="number" ng-model="storedCredential.otp.period" min="30" style="-moz-appearance: initial; -webkit-appearance: initial;">
+				</td>
+			</tr>
 			<tr ng-show="storedCredential.otp.secret">
 				<td>{{ 'secret' | translate}}: </td>
 				<td>{{storedCredential.otp.secret}}</td>
@@ -46,7 +57,7 @@
 			<tr ng-show="storedCredential.otp.secret">
 				<td>{{ 'otp' | translate}}: </td>
 				<td><span otp-generator
-						  secret="storedCredential.otp.secret"></span>
+						  otp="storedCredential.otp"></span>
 				</td>
 			</tr>
 		</table>

@@ -173,6 +173,8 @@ class TranslationController extends ApiController {
 			'current.qr' => $this->trans->t('Current OTP settings'),
 			'issuer' => $this->trans->t('Issuer'),
 			'secret' => $this->trans->t('Secret'),
+			'digits' => $this->trans->t('Digits'),
+			'period' => $this->trans->t('Period'),
 
 
 			// templates/views/partials/edit_credential/password.html
