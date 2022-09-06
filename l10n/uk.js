@@ -25,6 +25,7 @@ OC.L10N.register(
     "Text" : "Текст",
     "File" : "Файл",
     "Add" : "Додати",
+    "Value" : "Значення",
     "Type" : "Тип",
     "Actions" : "Дії",
     "Empty" : "Порожньо",
