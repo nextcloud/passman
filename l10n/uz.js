@@ -5,6 +5,7 @@ OC.L10N.register(
     "Error loading file" : "Error loading file",
     "Done" : "Done",
     "Settings saved" : "Settings saved",
+    "Sharing" : "Ulashish",
     "Share link" : "Share link",
     "Saved!" : "Saved!",
     "Username" : "Username",
