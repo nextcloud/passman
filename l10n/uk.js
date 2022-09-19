@@ -77,6 +77,7 @@ OC.L10N.register(
     "You created %1$s" : "Вами створено %1$s",
     "You deleted %1$s" : "Ви вилучили %1$s",
     "Passwords" : "Паролі",
+    "Ignore" : "Ігнорувати",
     "An error occurred!" : "Сталася помилка!",
     "E-mail" : "Електронна пошта",
     "Expires:" : "Термін дії до:",
