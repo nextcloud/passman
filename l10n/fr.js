@@ -297,7 +297,7 @@ OC.L10N.register(
     "Mark as Compromised" : "Marquer comme compromis",
     "Compromised!" : "Compromis !",
     "This password is compromised. You can only remove this warning by changing the password." : "Ce mot de passe est compromis. Vous ne pouvez supprimer cet avertissement qu'en modifiant votre mot de passe.",
-    "email" : "email",
+    "email" : "e-mail",
     "Description" : "Description",
     "Custom Search:" : "Recherche personnalisée",
     "Revert to defaults" : "Restaurer les valeurs par défaut",
