@@ -104,6 +104,7 @@ OC.L10N.register(
     "Accept" : "接受",
     "Decline" : "拒絕",
     "Never" : "絕不",
+    "Logout" : "登出",
     "Donate" : "斗內",
     "Tags" : "標籤",
     "Expired" : "已過期",
