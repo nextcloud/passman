@@ -295,7 +295,7 @@
     "Mark as Compromised" : "Als kompromittiert markieren",
     "Compromised!" : "Kompromittiert!",
     "This password is compromised. You can only remove this warning by changing the password." : "Dieses Passwort wurde kompromittiert. Die Warnung kann nur durch eine Änderung des Passwortes entfernt werden.",
-    "email" : "E-Mail",
+    "email" : "E-Mail-Adresse",
     "Description" : "Beschreibung",
     "Custom Search:" : "Benutzerdefinierte Suche:",
     "Revert to defaults" : "Zurücksetzen auf Standardwerte",
