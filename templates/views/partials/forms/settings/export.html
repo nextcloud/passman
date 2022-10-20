@@ -1,4 +1,4 @@
-<div ng-controller="ExportCtrl">
+<div class="tab-margin-top" ng-controller="ExportCtrl">
 	<div class="row">
 		<div class="col-xs-6">
 			<label>{{ 'export.type' | translate}}
@@ -11,7 +11,7 @@
 				</select></label>
 			<div><b>{{selectedExporter.description}}</b></div>
 
-			<div ng-show="selectedExporter" class="nopadding">
+			<div ng-show="selectedExporter" class="nopadding setting-group">
 				<label>{{ 'export.confirm.text' | translate }}</label>
 				<input type="password" ng-model="confirm_key">
 				<br />

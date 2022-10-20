@@ -131,6 +131,9 @@ input[type="checkbox"]{
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+.btn-danger {
+  background-color: var(--color-error) !important;
+}
 
 .ui-button.ui-widget{
   min-height: unset !important;

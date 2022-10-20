@@ -1065,7 +1065,7 @@
     opacity: 1 !important;
     z-index: 140; }
     .nav-trashbin a.active {
-      background-image: var(--icon-delete-e9322d); }
+      background-image: var(--icon-delete-color-red); }
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
@@ -1216,6 +1216,8 @@
   margin-bottom: 50px; }
   .tab_container.settings textarea {
     height: 300px; }
+  .tab_container.settings .tab-margin-top {
+    margin-top: 12px; }
 
 .import-steps {
   padding-left: 16px;
@@ -1238,6 +1240,17 @@
 
 h3 {
   font-weight: bold; }
+
+.setting-group label, .setting-group input {
+  display: block; }
+.setting-group input[type="text"], .setting-group input[type="password"] {
+  width: 100%; }
+
+.display-grid {
+  display: grid; }
+
+.password-settings-padding-left-fix {
+  padding-left: 0 !important; }
 
 /**
  * Nextcloud - passman
@@ -1441,6 +1454,9 @@ input[type="checkbox"] {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1; }
+
+.btn-danger {
+  background-color: var(--color-error) !important; }
 
 .ui-button.ui-widget {
   min-height: unset !important; }
