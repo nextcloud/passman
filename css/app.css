@@ -511,7 +511,7 @@
 #app-sidebar {
   height: auto; }
   #app-sidebar .sidebar {
-    display: inline-block; }
+    display: flex; }
     #app-sidebar .sidebar .sidebar-icon {
       margin-right: 15px; }
       #app-sidebar .sidebar .sidebar-icon .icon-image-size {
@@ -519,8 +519,7 @@
       #app-sidebar .sidebar .sidebar-icon i {
         width: 44px; }
     #app-sidebar .sidebar .sidebar-label {
-      float: right;
-      line-height: 44px; }
+      float: right; }
 
 .vaultlist_sidebar_hidden {
   width: 100vw !important;
@@ -882,7 +881,6 @@
       #app-content #app-content-wrapper .app_sidebar h2 {
         margin-bottom: 10px;
         font-weight: 400;
-        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 90%; }

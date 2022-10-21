@@ -55,13 +55,13 @@ header {
 
 .tab_container {
   padding-top: 10px;
+  margin-bottom: 60px;
+  overflow: scroll;
 
   div {
     margin-bottom: 5px;
     overflow: hidden;
   }
-
-  margin-bottom: 20px;
 }
 
 .vault_wrapper {
