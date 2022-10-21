@@ -738,7 +738,8 @@
       float: left;
       height: auto;
       overflow: auto;
-      width: 100%; }
+      width: 100%;
+      margin-top: 55px; }
     #app-content .main_list .credential-table {
       width: 100%; }
       #app-content .main_list .credential-table tr:hover {
@@ -867,21 +868,11 @@
       margin-top: 1%;
       text-align: center; }
   #app-content .app_sidebar {
-    height: auto;
+    height: fit-content;
+    top: 55px;
     float: right;
     padding: 10px;
     overflow-y: auto; }
-    #app-content .app_sidebar .sidebar {
-      display: inline-block; }
-      #app-content .app_sidebar .sidebar .sidebar-icon {
-        margin-right: 15px; }
-        #app-content .app_sidebar .sidebar .sidebar-icon .icon-image-size {
-          width: 44px; }
-        #app-content .app_sidebar .sidebar .sidebar-icon i {
-          width: 44px; }
-      #app-content .app_sidebar .sidebar .sidebar-label {
-        float: right;
-        line-height: 44px; }
     #app-content .app_sidebar h2 {
       margin-bottom: 10px;
       font-weight: 400;
@@ -1442,8 +1433,8 @@ h3 {
 
 #passman-controls {
   display: flow-root;
-  position: sticky;
-  width: 100%;
+  position: absolute;
+  width: calc(100vw - 300px);
   box-sizing: border-box;
   border-bottom: 1px solid #c9c9c9;
   background-color: rgba(255, 255, 255, 0.95);
