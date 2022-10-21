@@ -191,9 +191,6 @@
   clear: both;
   padding: 0 1em; }
 
-.tab-margin-top {
-  margin-top: 12px; }
-
 /**
  * Nextcloud - passman
  *
@@ -1211,6 +1208,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+.ng-app-frame {
+  display: block !important; }
+
 .spacer-top-30 {
   margin-top: 30px; }
 
