@@ -96,27 +96,20 @@
 			</div>
 			<div class="login_opts">
 				<div>
-					<label>
-						<input type="checkbox" ng-checked="default_vault"
-							   ng-click="toggleDefaultVault()">
-						{{ 'vault.default' | translate}}
-					</label>
+					<input id="selectVaultAsDefault" class="checkbox" type="checkbox"
+						   ng-checked="default_vault" ng-click="toggleDefaultVault()">
+					<label for="selectVaultAsDefault">{{ 'vault.default' | translate}}</label>
 				</div>
 				<div>
-					<label>
-						<input type="checkbox"
-							   ng-checked="remember_vault_password"
-							   ng-click="toggleRememberPassword()">
-						{{ 'vault.auto.login' | translate}}
-					</label>
+					<input id="rememberVaultPassword" class="checkbox" type="checkbox"
+						   ng-checked="remember_vault_password" ng-click="toggleRememberPassword()">
+					<label for="rememberVaultPassword">{{ 'vault.auto.login' | translate}}</label>
 				</div>
 				<div>
-					<label>
-						<input type="checkbox"
-							   ng-checked="auto_logout_timer"
-							   ng-click="toggleAutoLogout()">
-						{{ 'auto.logout' | translate}}
-					</label>
+					<input id="enableAutoLogoutTimer" class="checkbox" type="checkbox"
+						   ng-checked="auto_logout_timer" ng-click="toggleAutoLogout()">
+					<label for="enableAutoLogoutTimer">{{ 'auto.logout' | translate}}</label>
+
 					<select ng-model="logout_timer" ng-change="selectLogoutTimer(logout_timer)">
 						<option value="0">Never</option>
 						<option value="30">30 minutes</option>
