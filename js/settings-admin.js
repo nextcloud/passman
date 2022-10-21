@@ -241,13 +241,13 @@ $(document).ready(function () {
 	$.get(OC.generateUrl('apps/passman/admin/delete-requests'), function (requests) {
 		var table = $('#requests-table tbody');
 		$.each(requests, function (k, request) {
-			var accept = $('<span class="link">[Accept]&nbsp;</span>');
+			var accept = $('<span class="link accept">[Accept]&nbsp;</span>');
 			accept.click(function () {
 				var _self = this;
 				acceptDeleteRequest(_self, request);
 			});
 
-			var ignore = $('<span class="link">[Ignore]</span>');
+			var ignore = $('<span class="link ignore">[Ignore]</span>');
 			ignore.click(function () {
 				var _self = this;
 				ignoreDeleteRequest(_self, request);
