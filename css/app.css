@@ -502,410 +502,396 @@
   .link span {
     cursor: pointer; }
 
+#app-sidebar {
+  height: auto; }
+  #app-sidebar .sidebar {
+    display: inline-block; }
+    #app-sidebar .sidebar .sidebar-icon {
+      margin-right: 15px; }
+      #app-sidebar .sidebar .sidebar-icon .icon-image-size {
+        width: 44px; }
+      #app-sidebar .sidebar .sidebar-icon i {
+        width: 44px; }
+    #app-sidebar .sidebar .sidebar-label {
+      float: right;
+      line-height: 44px; }
+
 .vaultlist_sidebar_hidden {
   width: 100vw !important;
   margin-left: 0px !important; }
 
 #app-content {
   overflow-x: hidden; }
-  #app-content .ng-app-frame {
-    min-height: 100%;
-    display: flex; }
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: 769px) {
     #app-content {
       width: 100vw; } }
-  @media only screen and (min-width: 1025px) {
+  @media only screen and (min-width: 770px) {
     #app-content {
       width: calc(100vw - 300px); } }
-  #app-content .edit_credential {
+  #app-content .main_list #passman-controls {
+    text-align: center;
+    border-bottom: 1px solid #c9c9c9; }
+    @media screen and (max-width: 765px) {
+      #app-content .main_list #passman-controls.sidebar-shown .title {
+        display: none; } }
+    @media screen and (min-width: 769px) and (max-width: 1120px) {
+      #app-content .main_list #passman-controls.sidebar-shown .title {
+        display: none; } }
+  #app-content .main_list .title {
+    text-align: center;
+    display: inline-flex;
+    font-weight: bold;
+    margin-top: 10px; }
+    @media screen and (max-width: 820px) {
+      #app-content .main_list .title {
+        display: none; } }
+  #app-content .main_list .breadcrumb {
+    float: left; }
+  #app-content .main_list .actions.creatable {
+    float: left;
+    overflow: hidden; }
+    #app-content .main_list .actions.creatable .bubble {
+      position: relative;
+      width: 185px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      background-clip: padding-box;
+      /* stops bg color from leaking outside the border: */
+      box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+      #app-content .main_list .actions.creatable .bubble ul li {
+        padding-left: 10px; }
+      #app-content .main_list .actions.creatable .bubble ul .menuitem {
+        font-size: 12px;
+        display: inline; }
+    #app-content .main_list .actions.creatable .bubble:after {
+      right: inherit;
+      left: 10px;
+      top: -19px; }
+  #app-content .main_list .viewModes {
+    float: right;
+    margin-right: 5px;
+    margin-top: 3px; }
+    #app-content .main_list .viewModes .view-mode:first-child {
+      -webkit-border-bottom-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      -webkit-border-top-left-radius: 5px;
+      border-top-left-radius: 5px;
+      background-clip: padding-box;
+      border: 1px solid rgba(240, 240, 240, 0.9); }
+    #app-content .main_list .viewModes .view-mode:last-child {
+      -webkit-border-bottom-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      -webkit-border-top-right-radius: 5px;
+      border-top-right-radius: 5px;
+      background-clip: padding-box;
+      border: 1px solid rgba(240, 240, 240, 0.9); }
+    #app-content .main_list .viewModes .view-mode {
+      display: inline-block;
+      padding: 7px;
+      background-color: rgba(240, 240, 240, 0.9); }
+    #app-content .main_list .viewModes .view-mode.active {
+      display: inline-block;
+      padding: 7px;
+      background-color: rgba(226, 226, 226, 0.9); }
+    #app-content .main_list .viewModes .view-mode {
+      cursor: pointer;
+      display: inline-block;
+      padding: 7px; }
+  #app-content .main_list .searchboxContainer {
+    display: inline-block;
+    visibility: visible;
+    float: right; }
+    #app-content .main_list .searchboxContainer .searchbox {
+      display: inline-block;
+      width: calc(100% - 3px); }
+    #app-content .main_list .searchboxContainer .searchclear {
+      color: #ccc;
+      cursor: pointer;
+      font-size: 18px;
+      height: 14px;
+      margin: auto;
+      position: absolute !important;
+      right: 10px;
+      top: 12px;
+      z-index: 99999999; }
+    #app-content .main_list .searchboxContainer .searchOptions {
+      position: relative;
+      bottom: 5px;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 5px;
+      /*width: calc(100% - 3px);*/
+      box-shadow: 3px 3px 5px #888888;
+      -webkit-border-bottom-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      -webkit-border-bottom-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      background-clip: padding-box; }
+      #app-content .main_list .searchboxContainer .searchOptions input {
+        cursor: pointer; }
+  #app-content .main_list .credential-table {
+    width: 100%; }
+    #app-content .main_list .credential-table tr:hover {
+      background-color: whitesmoke; }
+    #app-content .main_list .credential-table tr.selected {
+      background-color: #f8f8f8; }
+    #app-content .main_list .credential-table tr .compromised {
+      background-color: #f74040; }
+    #app-content .main_list .credential-table tr .compromised:hover {
+      background-color: #e10909; }
+    #app-content .main_list .credential-table tr .compromised-list {
+      display: inline-block;
+      margin-left: 50px; }
+      #app-content .main_list .credential-table tr .compromised-list .icon {
+        height: 18px; }
+      #app-content .main_list .credential-table tr .compromised-list .text {
+        font-style: italic;
+        font-weight: bold; }
+    #app-content .main_list .credential-table tr td {
+      cursor: pointer;
+      padding: 5px;
+      border-bottom: 1px solid #eeeeee; }
+      #app-content .main_list .credential-table tr td .icon {
+        font-size: 19px;
+        float: left;
+        margin-right: 5px;
+        margin-left: 3px; }
+      #app-content .main_list .credential-table tr td .icon-more {
+        display: inline-block;
+        float: right;
+        margin-left: 5px;
+        margin-top: 1px;
+        opacity: 0.4;
+        height: 20px;
+        width: 32px;
+        cursor: pointer; }
+      #app-content .main_list .credential-table tr td .icon-more:hover {
+        opacity: 1; }
+      #app-content .main_list .credential-table tr td .popovermenu {
+        margin-top: 25px;
+        height: 100px;
+        width: 100px;
+        right: -2px !important;
+        box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+        #app-content .main_list .credential-table tr td .popovermenu ul {
+          display: block;
+          width: 100px;
+          height: 75px; }
+          #app-content .main_list .credential-table tr td .popovermenu ul li {
+            padding: 0px; }
+          #app-content .main_list .credential-table tr td .popovermenu ul .menuitem {
+            font-size: 12px;
+            display: inline; }
+        #app-content .main_list .credential-table tr td .popovermenu .action {
+          padding: 10px;
+          margin: -10px; }
+  #app-content .main_list .tags {
+    float: right; }
+    #app-content .main_list .tags .tag {
+      background-color: rgba(240, 240, 240, 0.9);
+      padding: 4px;
+      font-size: 12px;
+      margin-right: 3px;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      background-clip: padding-box;
+      /* stops bg color from leaking outside the border: */ }
+    #app-content .main_list .tags .tag:last-child {
+      margin-right: 8px; }
+  #app-content .main_list .grid-view {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap; }
+    #app-content .main_list .grid-view .credential {
+      display: flex;
+      width: 100%;
+      border: 2px solid rgba(240, 240, 240, 0.9);
+      margin: 25px;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background-clip: padding-box;
+      /* stops bg color from leaking outside the border: */ }
+      #app-content .main_list .grid-view .credential .credential_content {
+        display: flex;
+        padding: 2px;
+        flex-direction: column;
+        width: 100%;
+        cursor: pointer;
+        font-size: 1.75em; }
+        #app-content .main_list .grid-view .credential .credential_content .label {
+          padding-top: 0.5em;
+          padding-right: 1em;
+          line-height: 1.3em;
+          word-wrap: break-word;
+          float: right; }
+        #app-content .main_list .grid-view .credential .credential_content .tags {
+          margin: 0 0 auto;
+          text-align: right; }
+          #app-content .main_list .grid-view .credential .credential_content .tags .tag {
+            color: #000 !important;
+            margin-top: 5px;
+            display: inline-block;
+            left: 0; }
+    @media all and (min-width: 40em) {
+      #app-content .main_list .grid-view .credential {
+        width: 40%; } }
+    @media all and (min-width: 58em) {
+      #app-content .main_list .grid-view .credential {
+        width: 26%; } }
+    @media all and (min-width: 78em) {
+      #app-content .main_list .grid-view .credential {
+        width: 20%; } }
+  #app-content .main_list .edit_credential {
     padding-top: 10px; }
-    #app-content .edit_credential label {
+    #app-content .main_list .edit_credential label {
       display: block; }
-    #app-content .edit_credential input[type="text"], #app-content .edit_credential input[type="password"] {
+    #app-content .main_list .edit_credential input[type="text"], #app-content .main_list .edit_credential input[type="password"] {
       width: 100%; }
-    #app-content .edit_credential .compromised-button {
+    #app-content .main_list .edit_credential .compromised-button {
       margin-top: 15px;
       background-color: #e60000;
       color: black; }
-    #app-content .edit_credential .compromised-details {
+    #app-content .main_list .edit_credential .compromised-details {
       margin-top: 15px;
       display: flex; }
-      #app-content .edit_credential .compromised-details .icon {
+      #app-content .main_list .edit_credential .compromised-details .icon {
         float: left;
         height: 20px; }
-      #app-content .edit_credential .compromised-details .text {
+      #app-content .main_list .edit_credential .compromised-details .text {
         padding-left: 5px;
         padding-right: 30px;
         color: #e9322d; }
-    #app-content .edit_credential .tags {
+    #app-content .main_list .edit_credential .tags {
       float: left; }
-      #app-content .edit_credential .tags .tag {
+      #app-content .main_list .edit_credential .tags .tag {
         background-color: rgba(240, 240, 240, 0.9);
         padding: 4px;
         font-size: 11px; }
-    #app-content .edit_credential tags-input .tags {
+    #app-content .main_list .edit_credential tags-input .tags {
       width: 100%; }
-      #app-content .edit_credential tags-input .tags .input {
-        width: auto !important; }
-      #app-content .edit_credential tags-input .tags .tag-item {
-        color: var(--color-text-lighter); }
-    #app-content .edit_credential .credential_textarea {
+    #app-content .main_list .edit_credential .credential_textarea {
       width: 100%;
       height: 100px; }
-    #app-content .edit_credential .password_settings label {
+    #app-content .main_list .edit_credential .password_settings label {
       overflow: hidden; }
-      #app-content .edit_credential .password_settings label input[type="checkbox"] {
+      #app-content .main_list .edit_credential .password_settings label input[type="checkbox"] {
         width: auto !important;
         float: left; }
-      #app-content .edit_credential .password_settings label .label {
+      #app-content .main_list .edit_credential .password_settings label .label {
         float: left; }
-        #app-content .edit_credential .password_settings label .label.sm {
+        #app-content .main_list .edit_credential .password_settings label .label.sm {
           font-size: 12px; }
-    #app-content .edit_credential .password_settings .password-settings-padding-left-fix {
+    #app-content .main_list .edit_credential .password_settings .password-settings-padding-left-fix {
       padding-left: 0 !important; }
-    #app-content .edit_credential .field-value .valueInput {
+    #app-content .main_list .edit_credential .field-value .valueInput {
       padding-right: 0; }
-      #app-content .edit_credential .field-value .valueInput input {
+      #app-content .main_list .edit_credential .field-value .valueInput input {
         -webkit-border-bottom-right-radius: 0;
         border-bottom-right-radius: 0;
         -webkit-border-top-right-radius: 0;
         border-top-right-radius: 0;
         background-clip: padding-box; }
-      #app-content .edit_credential .field-value .valueInput .pw-gen .generate_pw .cell:last-child {
+      #app-content .main_list .edit_credential .field-value .valueInput .pw-gen .generate_pw .cell:last-child {
         -webkit-border-bottom-right-radius: 0;
         border-bottom-right-radius: 0;
         -webkit-border-top-right-radius: 0;
         border-top-right-radius: 0;
         background-clip: padding-box; }
-    #app-content .edit_credential .field-value .selectType {
+    #app-content .main_list .edit_credential .field-value .selectType {
       padding-left: 0;
       margin-left: 0px; }
-      #app-content .edit_credential .field-value .selectType select {
+      #app-content .main_list .edit_credential .field-value .selectType select {
         -webkit-border-bottom-left-radius: 0;
         border-bottom-left-radius: 0;
         -webkit-border-top-left-radius: 0;
         border-top-left-radius: 0;
         background-clip: padding-box; }
-    #app-content .edit_credential .custom_fields, #app-content .edit_credential .files {
+    #app-content .main_list .edit_credential .custom_fields, #app-content .main_list .edit_credential .files {
       margin-top: 10px; }
-      #app-content .edit_credential .custom_fields table, #app-content .edit_credential .files table {
+      #app-content .main_list .edit_credential .custom_fields table, #app-content .main_list .edit_credential .files table {
         width: 100%; }
-        #app-content .edit_credential .custom_fields table thead, #app-content .edit_credential .files table thead {
-          background-color: var(--color-background-plain);
-          color: var(--color-primary-text); }
-          #app-content .edit_credential .custom_fields table thead th.dragger, #app-content .edit_credential .files table thead th.dragger {
-            width: 3%; }
-          #app-content .edit_credential .custom_fields table thead th, #app-content .edit_credential .files table thead th {
-            color: #fff; }
-          #app-content .edit_credential .custom_fields table thead th.field_actions, #app-content .edit_credential .files table thead th.field_actions {
-            width: 15%; }
-        #app-content .edit_credential .custom_fields table tr:hover, #app-content .edit_credential .files table tr:hover {
+        #app-content .main_list .edit_credential .custom_fields table thead th.dragger, #app-content .main_list .edit_credential .files table thead th.dragger {
+          width: 3%; }
+        #app-content .main_list .edit_credential .custom_fields table thead th, #app-content .main_list .edit_credential .files table thead th {
+          color: #fff; }
+        #app-content .main_list .edit_credential .custom_fields table thead th.field_actions, #app-content .main_list .edit_credential .files table thead th.field_actions {
+          width: 15%; }
+        #app-content .main_list .edit_credential .custom_fields table tr:hover, #app-content .main_list .edit_credential .files table tr:hover {
           background-color: transparent; }
-        #app-content .edit_credential .custom_fields table tr td.dragger, #app-content .edit_credential .files table tr td.dragger {
+        #app-content .main_list .edit_credential .custom_fields table tr td.dragger, #app-content .main_list .edit_credential .files table tr td.dragger {
           width: 3%;
           text-align: center;
           cursor: move;
           cursor: -webkit-grab;
           cursor: -moz-grab;
           cursor: grab; }
-        #app-content .edit_credential .custom_fields table tr td.field_actions, #app-content .edit_credential .files table tr td.field_actions {
+        #app-content .main_list .edit_credential .custom_fields table tr td.field_actions, #app-content .main_list .edit_credential .files table tr td.field_actions {
           font-size: 13px;
           width: 15%; }
-          #app-content .edit_credential .custom_fields table tr td.field_actions i, #app-content .edit_credential .files table tr td.field_actions i {
+          #app-content .main_list .edit_credential .custom_fields table tr td.field_actions i, #app-content .main_list .edit_credential .files table tr td.field_actions i {
             cursor: pointer; }
-        #app-content .edit_credential .custom_fields table tr td, #app-content .edit_credential .custom_fields table tr th, #app-content .edit_credential .files table tr td, #app-content .edit_credential .files table tr th {
+        #app-content .main_list .edit_credential .custom_fields table tr td, #app-content .main_list .edit_credential .custom_fields table tr th, #app-content .main_list .edit_credential .files table tr td, #app-content .main_list .edit_credential .files table tr th {
           width: 20%;
           padding: 5px; }
-          #app-content .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, #app-content .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, #app-content .edit_credential .files table tr td .editable-has-buttons.editable-input, #app-content .edit_credential .files table tr th .editable-has-buttons.editable-input {
+          #app-content .main_list .edit_credential .custom_fields table tr td .editable-has-buttons.editable-input, #app-content .main_list .edit_credential .custom_fields table tr th .editable-has-buttons.editable-input, #app-content .main_list .edit_credential .files table tr td .editable-has-buttons.editable-input, #app-content .main_list .edit_credential .files table tr th .editable-has-buttons.editable-input {
             width: 55%; }
-        #app-content .edit_credential .custom_fields table tr td, #app-content .edit_credential .files table tr td {
+        #app-content .main_list .edit_credential .custom_fields table tr td, #app-content .main_list .edit_credential .files table tr td {
           height: 50px;
           vertical-align: middle; }
-    #app-content .edit_credential .otpText {
+    #app-content .main_list .edit_credential .otpText {
       padding-right: 10px; }
-    #app-content .edit_credential .import-selection select {
+    #app-content .main_list .edit_credential .import-selection select {
       margin-left: 15px; }
-  #app-content .main_list {
-    width: 100%;
-    display: flow-root;
-    padding-right: 15px; }
-    #app-content .main_list #passman-controls {
-      text-align: center;
-      border-bottom: 1px solid #c9c9c9; }
-      @media screen and (max-width: 765px) {
-        #app-content .main_list #passman-controls.sidebar-shown .title {
-          display: none; } }
-      @media screen and (min-width: 769px) and (max-width: 1120px) {
-        #app-content .main_list #passman-controls.sidebar-shown .title {
-          display: none; } }
-    #app-content .main_list .title {
-      text-align: center;
-      display: inline-flex;
-      font-weight: bold;
-      margin-top: 10px; }
-      @media screen and (max-width: 820px) {
-        #app-content .main_list .title {
-          display: none; } }
-    #app-content .main_list .breadcrumb {
-      float: left; }
-    #app-content .main_list .actions.creatable {
-      float: left;
-      overflow: hidden; }
-      #app-content .main_list .actions.creatable .bubble {
-        position: relative;
-        width: 185px;
-        -webkit-border-radius: 5px;
-        border-radius: 5px;
-        background-clip: padding-box;
-        /* stops bg color from leaking outside the border: */
-        box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
-        #app-content .main_list .actions.creatable .bubble ul li {
-          padding-left: 10px; }
-        #app-content .main_list .actions.creatable .bubble ul .menuitem {
-          font-size: 12px;
-          display: inline; }
-      #app-content .main_list .actions.creatable .bubble:after {
-        right: inherit;
-        left: 10px;
-        top: -19px; }
-    #app-content .main_list .viewModes {
-      float: right;
-      margin-right: 5px;
-      margin-top: 3px; }
-      #app-content .main_list .viewModes .view-mode:first-child {
-        -webkit-border-bottom-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        -webkit-border-top-left-radius: 5px;
-        border-top-left-radius: 5px;
-        background-clip: padding-box;
-        border: 1px solid rgba(240, 240, 240, 0.9); }
-      #app-content .main_list .viewModes .view-mode:last-child {
-        -webkit-border-bottom-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        -webkit-border-top-right-radius: 5px;
-        border-top-right-radius: 5px;
-        background-clip: padding-box;
-        border: 1px solid rgba(240, 240, 240, 0.9); }
-      #app-content .main_list .viewModes .view-mode {
-        display: inline-block;
-        padding: 7px;
-        background-color: rgba(240, 240, 240, 0.9); }
-      #app-content .main_list .viewModes .view-mode.active {
-        display: inline-block;
-        padding: 7px;
-        background-color: rgba(226, 226, 226, 0.9); }
-      #app-content .main_list .viewModes .view-mode {
-        cursor: pointer;
-        display: inline-block;
-        padding: 7px; }
-    #app-content .main_list .searchboxContainer {
-      display: inline-block;
-      visibility: visible;
-      float: right; }
-      #app-content .main_list .searchboxContainer .searchbox {
-        display: inline-block;
-        width: calc(100% - 3px); }
-      #app-content .main_list .searchboxContainer .searchclear {
-        color: #ccc;
-        cursor: pointer;
-        font-size: 18px;
-        height: 14px;
-        margin: auto;
-        position: absolute !important;
-        right: 10px;
-        top: 12px;
-        z-index: 99999999; }
-      #app-content .main_list .searchboxContainer .searchOptions {
-        position: relative;
-        bottom: 5px;
-        background: #fff;
-        border: 1px solid #ddd;
-        padding: 5px;
-        /*width: calc(100% - 3px);*/
-        box-shadow: 3px 3px 5px #888888;
-        -webkit-border-bottom-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-        -webkit-border-bottom-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-        background-clip: padding-box; }
-        #app-content .main_list .searchboxContainer .searchOptions input {
-          cursor: pointer; }
-    #app-content .main_list .credential-list {
-      display: flex;
-      height: 100%; }
-    #app-content .main_list .credential-table-wrapper {
-      flex: 1;
-      float: left;
-      height: auto;
-      overflow: auto;
-      width: 100%;
-      margin-top: 55px; }
-    #app-content .main_list .credential-table {
-      width: 100%; }
-      #app-content .main_list .credential-table tr:hover {
-        background-color: whitesmoke; }
-      #app-content .main_list .credential-table tr.selected {
-        background-color: #f8f8f8; }
-      #app-content .main_list .credential-table tr .compromised {
-        background-color: #f74040; }
-      #app-content .main_list .credential-table tr .compromised:hover {
-        background-color: #e10909; }
-      #app-content .main_list .credential-table tr .compromised-list {
-        display: inline-block;
-        margin-left: 50px; }
-        #app-content .main_list .credential-table tr .compromised-list .icon {
-          height: 18px; }
-        #app-content .main_list .credential-table tr .compromised-list .text {
-          font-style: italic;
-          font-weight: bold; }
-      #app-content .main_list .credential-table tr td {
-        cursor: pointer;
-        padding: 5px;
-        border-bottom: 1px solid #eeeeee; }
-        #app-content .main_list .credential-table tr td .icon {
-          font-size: 19px;
-          float: left;
-          margin-right: 5px;
-          margin-left: 3px; }
-        #app-content .main_list .credential-table tr td .icon-more {
-          display: inline-block;
-          float: right;
-          margin-left: 5px;
-          margin-top: 1px;
-          opacity: 0.4;
-          height: 20px;
-          width: 32px;
-          cursor: pointer; }
-        #app-content .main_list .credential-table tr td .icon-more:hover {
-          opacity: 1; }
-        #app-content .main_list .credential-table tr td .popovermenu {
-          margin-top: 25px;
-          height: 100px;
-          width: 100px;
-          right: -2px !important;
-          box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
-          #app-content .main_list .credential-table tr td .popovermenu ul {
-            display: block;
-            width: 100px;
-            height: 75px; }
-            #app-content .main_list .credential-table tr td .popovermenu ul li {
-              padding: 0px; }
-            #app-content .main_list .credential-table tr td .popovermenu ul .menuitem {
-              font-size: 12px;
-              display: inline; }
-          #app-content .main_list .credential-table tr td .popovermenu .action {
-            padding: 10px;
-            margin: -10px; }
-    #app-content .main_list .tags {
-      float: right; }
-      #app-content .main_list .tags .tag {
-        background-color: rgba(240, 240, 240, 0.9);
-        padding: 4px;
-        font-size: 12px;
-        margin-right: 3px;
-        -webkit-border-radius: 5px;
-        border-radius: 5px;
-        background-clip: padding-box;
-        /* stops bg color from leaking outside the border: */ }
-      #app-content .main_list .tags .tag:last-child {
-        margin-right: 8px; }
-    #app-content .main_list .grid-view {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-wrap: wrap; }
-      #app-content .main_list .grid-view li {
-        height: fit-content; }
-      #app-content .main_list .grid-view .credential {
-        display: flex;
-        width: 100%;
-        border: 2px solid var(--color-primary);
-        margin: 25px;
-        -webkit-border-radius: 10px;
-        border-radius: 10px;
-        background-clip: padding-box;
-        /* stops bg color from leaking outside the border: */ }
-        #app-content .main_list .grid-view .credential .credential_content {
-          display: flex;
-          padding: 2px;
-          flex-direction: column;
-          width: 100%;
-          cursor: pointer;
-          font-size: 1.75em; }
-          #app-content .main_list .grid-view .credential .credential_content .label {
-            padding-top: 0.5em;
-            padding-right: 1em;
-            line-height: 1.3em;
-            word-wrap: break-word;
-            float: right; }
-          #app-content .main_list .grid-view .credential .credential_content .tags {
-            margin: 0 0 auto;
-            text-align: right; }
-            #app-content .main_list .grid-view .credential .credential_content .tags .tag {
-              color: #000 !important;
-              margin-top: 5px;
-              display: inline-block;
-              left: 0; }
-      @media all and (min-width: 40em) {
-        #app-content .main_list .grid-view .credential {
-          width: 40%; } }
-      @media all and (min-width: 58em) {
-        #app-content .main_list .grid-view .credential {
-          width: 26%; } }
-      @media all and (min-width: 78em) {
-        #app-content .main_list .grid-view .credential {
-          width: 20%; } }
-    #app-content .main_list .share {
-      overflow: hidden; }
-    #app-content .main_list .nopasswords {
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 10%;
-      text-align: center; }
-    #app-content .main_list .belowList {
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 1%;
-      text-align: center; }
-  #app-content .app_sidebar {
-    height: fit-content;
-    top: 55px;
+  #app-content .main_list .share {
+    overflow: hidden; }
+  #app-content .main_list .nopasswords {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+    text-align: center; }
+  #app-content .main_list .belowList {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1%;
+    text-align: center; }
+  #app-content .main_list .app_sidebar {
     float: right;
     padding: 10px;
     overflow-y: auto; }
-    #app-content .app_sidebar h2 {
+    #app-content .main_list .app_sidebar h2 {
       margin-bottom: 10px;
       font-weight: 400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 90%; }
-    #app-content .app_sidebar .close.icon-close {
+    #app-content .main_list .app_sidebar .close.icon-close {
       position: absolute;
       top: 10px;
       right: 10px;
       cursor: pointer; }
-    #app-content .app_sidebar.item_selected {
+    #app-content .main_list .app_sidebar.item_selected {
       height: 25%;
       display: inline-block; }
-    #app-content .app_sidebar .credential-data .compromised-details {
+    #app-content .main_list .app_sidebar .credential-data .compromised-details {
       margin-top: 15px;
       margin-bottom: 15px;
       display: flex; }
-      #app-content .app_sidebar .credential-data .compromised-details .icon {
+      #app-content .main_list .app_sidebar .credential-data .compromised-details .icon {
         float: left;
         height: 20px; }
-      #app-content .app_sidebar .credential-data .compromised-details .text {
+      #app-content .main_list .app_sidebar .credential-data .compromised-details .text {
         padding-left: 5px;
         padding-right: 30px;
         color: #e9322d; }
-    #app-content .app_sidebar .credential-data .row {
+    #app-content .main_list .app_sidebar .credential-data .row {
       margin-bottom: 11px; }
-    #app-content .app_sidebar .credential-data .tags {
+    #app-content .main_list .app_sidebar .credential-data .tags {
       margin-top: 15px;
       margin-bottom: 15px;
       float: none; }
-      #app-content .app_sidebar .credential-data .tags .tag {
+      #app-content .main_list .app_sidebar .credential-data .tags .tag {
         background-color: rgba(240, 240, 240, 0.9);
         padding: 4px;
         margin-right: 3px; }
@@ -1079,7 +1065,7 @@
     opacity: 1 !important;
     z-index: 140; }
     .nav-trashbin a.active {
-      background-image: var(--icon-delete-color-red); }
+      background-image: var(--icon-delete-e9322d); }
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
@@ -1178,20 +1164,6 @@
 .shared_table .fa-trash:hover {
   color: #ce3702; }
 
-.tags {
-  float: left; }
-  .tags .tag {
-    background-color: rgba(240, 240, 240, 0.9);
-    padding: 4px;
-    font-size: 11px; }
-
-tags-input .tags {
-  width: 100%; }
-  tags-input .tags .input {
-    width: auto !important; }
-  tags-input .tags .tag-item {
-    color: var(--color-text-lighter); }
-
 /**
  * Nextcloud - passman
  *
@@ -1213,9 +1185,6 @@ tags-input .tags {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-.ng-app-frame {
-  display: block !important; }
-
 .spacer-top-30 {
   margin-top: 30px; }
 
@@ -1269,17 +1238,6 @@ tags-input .tags {
 
 h3 {
   font-weight: bold; }
-
-.setting-group label, .setting-group input {
-  display: block; }
-.setting-group input[type="text"], .setting-group input[type="password"], .setting-group textarea {
-  width: 100%; }
-
-.display-grid {
-  display: grid; }
-
-.password-settings-padding-left-fix {
-  padding-left: 0 !important; }
 
 /**
  * Nextcloud - passman
@@ -1431,10 +1389,13 @@ h3 {
   margin-left: 0 !important;
   margin-right: 0 !important; }
 
+#app-content #app-content-wrapper #passman-controls {
+  border-bottom: 1px solid #c9c9c9; }
+
 #passman-controls {
   display: flow-root;
-  position: absolute;
-  width: calc(100vw - 300px);
+  position: sticky;
+  width: 100%;
   box-sizing: border-box;
   border-bottom: 1px solid #c9c9c9;
   background-color: rgba(255, 255, 255, 0.95);
@@ -1443,8 +1404,7 @@ h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  min-height: 54px !important;
-  height: auto !important;
+  height: 54px !important;
   padding-right: 20px !important; }
   @media only screen and (max-width: 769px) {
     #passman-controls .breadcrumb {
@@ -1481,9 +1441,6 @@ input[type="checkbox"] {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1; }
-
-.btn-danger {
-  background-color: var(--color-error) !important; }
 
 .ui-button.ui-widget {
   min-height: unset !important; }

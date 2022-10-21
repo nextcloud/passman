@@ -2,9 +2,8 @@
 	<div id="passman-controls" ng-class="{ 'sidebar-shown': selectedCredential }">
 		<div class="breadcrumb">
 			<div class="breadcrumb">
-				<div class="crumb svg crumbhome">
-					<a ng-click="logout()" class="icon-home">Home</a>
-					<span style="display: none;"></span>
+				<div class="crumb svg ui-droppable" data-dir="/">
+					<a ng-click="logout()"><i class="fa fa-home"></i></a>
 				</div>
 				<div class="crumb svg" ng-click="clearState()">
 					<a>{{active_vault.name}}</a>
