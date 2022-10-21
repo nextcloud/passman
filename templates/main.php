@@ -231,6 +231,6 @@ style('passman', 'app');
     </div>
 
     <div id="app-content" ng-class="{'vaultlist_sidebar_hidden': !selectedVault}">
-        <div ng-view=""></div>
+        <div ng-view="" class="ng-app-frame"></div>
     </div>
 </div>

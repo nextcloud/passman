@@ -75,7 +75,8 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  height: 54px !important;
+  min-height: 54px !important;
+  height: auto!important;
   padding-right: 20px !important;
 
   .breadcrumb{
@@ -93,11 +94,7 @@
     width: 100%;
   }
 }
-@media only screen and (min-width: 1024px){
-  #app-navigation+#app-content #passman-controls {
 
-  }
-}
 #passman-controls .button,  #passman-controls, #passman-controls input[type='submit'],  #passman-controls input[type='text'],  #passman-controls input[type='password'],  #passman-controls select {
   box-sizing: border-box;
   //display: inline-block;

@@ -505,30 +505,19 @@
   .link span {
     cursor: pointer; }
 
-#app-sidebar {
-  height: auto; }
-  #app-sidebar .sidebar {
-    display: inline-block; }
-    #app-sidebar .sidebar .sidebar-icon {
-      margin-right: 15px; }
-      #app-sidebar .sidebar .sidebar-icon .icon-image-size {
-        width: 44px; }
-      #app-sidebar .sidebar .sidebar-icon i {
-        width: 44px; }
-    #app-sidebar .sidebar .sidebar-label {
-      float: right;
-      line-height: 44px; }
-
 .vaultlist_sidebar_hidden {
   width: 100vw !important;
   margin-left: 0px !important; }
 
 #app-content {
   overflow-x: hidden; }
-  @media only screen and (max-width: 769px) {
+  #app-content .ng-app-frame {
+    min-height: 100%;
+    display: flex; }
+  @media only screen and (max-width: 1024px) {
     #app-content {
       width: 100vw; } }
-  @media only screen and (min-width: 770px) {
+  @media only screen and (min-width: 1025px) {
     #app-content {
       width: calc(100vw - 300px); } }
   #app-content .edit_credential {
@@ -639,269 +628,296 @@
       padding-right: 10px; }
     #app-content .edit_credential .import-selection select {
       margin-left: 15px; }
-  #app-content .main_list #passman-controls {
-    text-align: center;
-    border-bottom: 1px solid #c9c9c9; }
-    @media screen and (max-width: 765px) {
-      #app-content .main_list #passman-controls.sidebar-shown .title {
-        display: none; } }
-    @media screen and (min-width: 769px) and (max-width: 1120px) {
-      #app-content .main_list #passman-controls.sidebar-shown .title {
-        display: none; } }
-  #app-content .main_list .title {
-    text-align: center;
-    display: inline-flex;
-    font-weight: bold;
-    margin-top: 10px; }
-    @media screen and (max-width: 820px) {
-      #app-content .main_list .title {
-        display: none; } }
-  #app-content .main_list .breadcrumb {
-    float: left; }
-  #app-content .main_list .actions.creatable {
-    float: left;
-    overflow: hidden; }
-    #app-content .main_list .actions.creatable .bubble {
-      position: relative;
-      width: 185px;
-      -webkit-border-radius: 5px;
-      border-radius: 5px;
-      background-clip: padding-box;
-      /* stops bg color from leaking outside the border: */
-      box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
-      #app-content .main_list .actions.creatable .bubble ul li {
-        padding-left: 10px; }
-      #app-content .main_list .actions.creatable .bubble ul .menuitem {
-        font-size: 12px;
-        display: inline; }
-    #app-content .main_list .actions.creatable .bubble:after {
-      right: inherit;
-      left: 10px;
-      top: -19px; }
-  #app-content .main_list .viewModes {
-    float: right;
-    margin-right: 5px;
-    margin-top: 3px; }
-    #app-content .main_list .viewModes .view-mode:first-child {
-      -webkit-border-bottom-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      -webkit-border-top-left-radius: 5px;
-      border-top-left-radius: 5px;
-      background-clip: padding-box;
-      border: 1px solid rgba(240, 240, 240, 0.9); }
-    #app-content .main_list .viewModes .view-mode:last-child {
-      -webkit-border-bottom-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      -webkit-border-top-right-radius: 5px;
-      border-top-right-radius: 5px;
-      background-clip: padding-box;
-      border: 1px solid rgba(240, 240, 240, 0.9); }
-    #app-content .main_list .viewModes .view-mode {
-      display: inline-block;
-      padding: 7px;
-      background-color: rgba(240, 240, 240, 0.9); }
-    #app-content .main_list .viewModes .view-mode.active {
-      display: inline-block;
-      padding: 7px;
-      background-color: rgba(226, 226, 226, 0.9); }
-    #app-content .main_list .viewModes .view-mode {
-      cursor: pointer;
-      display: inline-block;
-      padding: 7px; }
-  #app-content .main_list .searchboxContainer {
-    display: inline-block;
-    visibility: visible;
-    float: right; }
-    #app-content .main_list .searchboxContainer .searchbox {
-      display: inline-block;
-      width: calc(100% - 3px); }
-    #app-content .main_list .searchboxContainer .searchclear {
-      color: #ccc;
-      cursor: pointer;
-      font-size: 18px;
-      height: 14px;
-      margin: auto;
-      position: absolute !important;
-      right: 10px;
-      top: 12px;
-      z-index: 99999999; }
-    #app-content .main_list .searchboxContainer .searchOptions {
-      position: relative;
-      bottom: 5px;
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 5px;
-      /*width: calc(100% - 3px);*/
-      box-shadow: 3px 3px 5px #888888;
-      -webkit-border-bottom-right-radius: 3px;
-      border-bottom-right-radius: 3px;
-      -webkit-border-bottom-left-radius: 3px;
-      border-bottom-left-radius: 3px;
-      background-clip: padding-box; }
-      #app-content .main_list .searchboxContainer .searchOptions input {
-        cursor: pointer; }
-  #app-content .main_list .credential-table {
-    width: 100%; }
-    #app-content .main_list .credential-table tr:hover {
-      background-color: whitesmoke; }
-    #app-content .main_list .credential-table tr.selected {
-      background-color: #f8f8f8; }
-    #app-content .main_list .credential-table tr .compromised {
-      background-color: #f74040; }
-    #app-content .main_list .credential-table tr .compromised:hover {
-      background-color: #e10909; }
-    #app-content .main_list .credential-table tr .compromised-list {
-      display: inline-block;
-      margin-left: 50px; }
-      #app-content .main_list .credential-table tr .compromised-list .icon {
-        height: 18px; }
-      #app-content .main_list .credential-table tr .compromised-list .text {
-        font-style: italic;
-        font-weight: bold; }
-    #app-content .main_list .credential-table tr td {
-      cursor: pointer;
-      padding: 5px;
-      border-bottom: 1px solid #eeeeee; }
-      #app-content .main_list .credential-table tr td .icon {
-        font-size: 19px;
-        float: left;
-        margin-right: 5px;
-        margin-left: 3px; }
-      #app-content .main_list .credential-table tr td .icon-more {
-        display: inline-block;
-        float: right;
-        margin-left: 5px;
-        margin-top: 1px;
-        opacity: 0.4;
-        height: 20px;
-        width: 32px;
-        cursor: pointer; }
-      #app-content .main_list .credential-table tr td .icon-more:hover {
-        opacity: 1; }
-      #app-content .main_list .credential-table tr td .popovermenu {
-        margin-top: 25px;
-        height: 100px;
-        width: 100px;
-        right: -2px !important;
-        box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
-        #app-content .main_list .credential-table tr td .popovermenu ul {
-          display: block;
-          width: 100px;
-          height: 75px; }
-          #app-content .main_list .credential-table tr td .popovermenu ul li {
-            padding: 0px; }
-          #app-content .main_list .credential-table tr td .popovermenu ul .menuitem {
-            font-size: 12px;
-            display: inline; }
-        #app-content .main_list .credential-table tr td .popovermenu .action {
-          padding: 10px;
-          margin: -10px; }
-  #app-content .main_list .tags {
-    float: right; }
-    #app-content .main_list .tags .tag {
-      background-color: rgba(240, 240, 240, 0.9);
-      padding: 4px;
-      font-size: 12px;
-      margin-right: 3px;
-      -webkit-border-radius: 5px;
-      border-radius: 5px;
-      background-clip: padding-box;
-      /* stops bg color from leaking outside the border: */ }
-    #app-content .main_list .tags .tag:last-child {
-      margin-right: 8px; }
-  #app-content .main_list .grid-view {
+  #app-content .main_list {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap; }
-    #app-content .main_list .grid-view .credential {
-      display: flex;
-      width: 100%;
-      border: 2px solid rgba(240, 240, 240, 0.9);
-      margin: 25px;
-      -webkit-border-radius: 10px;
-      border-radius: 10px;
-      background-clip: padding-box;
-      /* stops bg color from leaking outside the border: */ }
-      #app-content .main_list .grid-view .credential .credential_content {
-        display: flex;
-        padding: 2px;
-        flex-direction: column;
-        width: 100%;
+    display: flow-root;
+    padding-right: 15px; }
+    #app-content .main_list #passman-controls {
+      text-align: center;
+      border-bottom: 1px solid #c9c9c9; }
+      @media screen and (max-width: 765px) {
+        #app-content .main_list #passman-controls.sidebar-shown .title {
+          display: none; } }
+      @media screen and (min-width: 769px) and (max-width: 1120px) {
+        #app-content .main_list #passman-controls.sidebar-shown .title {
+          display: none; } }
+    #app-content .main_list .title {
+      text-align: center;
+      display: inline-flex;
+      font-weight: bold;
+      margin-top: 10px; }
+      @media screen and (max-width: 820px) {
+        #app-content .main_list .title {
+          display: none; } }
+    #app-content .main_list .breadcrumb {
+      float: left; }
+    #app-content .main_list .actions.creatable {
+      float: left;
+      overflow: hidden; }
+      #app-content .main_list .actions.creatable .bubble {
+        position: relative;
+        width: 185px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-clip: padding-box;
+        /* stops bg color from leaking outside the border: */
+        box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+        #app-content .main_list .actions.creatable .bubble ul li {
+          padding-left: 10px; }
+        #app-content .main_list .actions.creatable .bubble ul .menuitem {
+          font-size: 12px;
+          display: inline; }
+      #app-content .main_list .actions.creatable .bubble:after {
+        right: inherit;
+        left: 10px;
+        top: -19px; }
+    #app-content .main_list .viewModes {
+      float: right;
+      margin-right: 5px;
+      margin-top: 3px; }
+      #app-content .main_list .viewModes .view-mode:first-child {
+        -webkit-border-bottom-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        -webkit-border-top-left-radius: 5px;
+        border-top-left-radius: 5px;
+        background-clip: padding-box;
+        border: 1px solid rgba(240, 240, 240, 0.9); }
+      #app-content .main_list .viewModes .view-mode:last-child {
+        -webkit-border-bottom-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        border-top-right-radius: 5px;
+        background-clip: padding-box;
+        border: 1px solid rgba(240, 240, 240, 0.9); }
+      #app-content .main_list .viewModes .view-mode {
+        display: inline-block;
+        padding: 7px;
+        background-color: rgba(240, 240, 240, 0.9); }
+      #app-content .main_list .viewModes .view-mode.active {
+        display: inline-block;
+        padding: 7px;
+        background-color: rgba(226, 226, 226, 0.9); }
+      #app-content .main_list .viewModes .view-mode {
         cursor: pointer;
-        font-size: 1.75em; }
-        #app-content .main_list .grid-view .credential .credential_content .label {
-          padding-top: 0.5em;
-          padding-right: 1em;
-          line-height: 1.3em;
-          word-wrap: break-word;
-          float: right; }
-        #app-content .main_list .grid-view .credential .credential_content .tags {
-          margin: 0 0 auto;
-          text-align: right; }
-          #app-content .main_list .grid-view .credential .credential_content .tags .tag {
-            color: #000 !important;
-            margin-top: 5px;
-            display: inline-block;
-            left: 0; }
-    @media all and (min-width: 40em) {
+        display: inline-block;
+        padding: 7px; }
+    #app-content .main_list .searchboxContainer {
+      display: inline-block;
+      visibility: visible;
+      float: right; }
+      #app-content .main_list .searchboxContainer .searchbox {
+        display: inline-block;
+        width: calc(100% - 3px); }
+      #app-content .main_list .searchboxContainer .searchclear {
+        color: #ccc;
+        cursor: pointer;
+        font-size: 18px;
+        height: 14px;
+        margin: auto;
+        position: absolute !important;
+        right: 10px;
+        top: 12px;
+        z-index: 99999999; }
+      #app-content .main_list .searchboxContainer .searchOptions {
+        position: relative;
+        bottom: 5px;
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 5px;
+        /*width: calc(100% - 3px);*/
+        box-shadow: 3px 3px 5px #888888;
+        -webkit-border-bottom-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        -webkit-border-bottom-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        background-clip: padding-box; }
+        #app-content .main_list .searchboxContainer .searchOptions input {
+          cursor: pointer; }
+    #app-content .main_list .credential-list {
+      display: flex;
+      height: 100%; }
+    #app-content .main_list .credential-table-wrapper {
+      flex: 1;
+      float: left;
+      height: auto;
+      overflow: auto;
+      width: 100%; }
+    #app-content .main_list .credential-table {
+      width: 100%; }
+      #app-content .main_list .credential-table tr:hover {
+        background-color: whitesmoke; }
+      #app-content .main_list .credential-table tr.selected {
+        background-color: #f8f8f8; }
+      #app-content .main_list .credential-table tr .compromised {
+        background-color: #f74040; }
+      #app-content .main_list .credential-table tr .compromised:hover {
+        background-color: #e10909; }
+      #app-content .main_list .credential-table tr .compromised-list {
+        display: inline-block;
+        margin-left: 50px; }
+        #app-content .main_list .credential-table tr .compromised-list .icon {
+          height: 18px; }
+        #app-content .main_list .credential-table tr .compromised-list .text {
+          font-style: italic;
+          font-weight: bold; }
+      #app-content .main_list .credential-table tr td {
+        cursor: pointer;
+        padding: 5px;
+        border-bottom: 1px solid #eeeeee; }
+        #app-content .main_list .credential-table tr td .icon {
+          font-size: 19px;
+          float: left;
+          margin-right: 5px;
+          margin-left: 3px; }
+        #app-content .main_list .credential-table tr td .icon-more {
+          display: inline-block;
+          float: right;
+          margin-left: 5px;
+          margin-top: 1px;
+          opacity: 0.4;
+          height: 20px;
+          width: 32px;
+          cursor: pointer; }
+        #app-content .main_list .credential-table tr td .icon-more:hover {
+          opacity: 1; }
+        #app-content .main_list .credential-table tr td .popovermenu {
+          margin-top: 25px;
+          height: 100px;
+          width: 100px;
+          right: -2px !important;
+          box-shadow: 0 1px 10px rgba(50, 50, 50, 0.7); }
+          #app-content .main_list .credential-table tr td .popovermenu ul {
+            display: block;
+            width: 100px;
+            height: 75px; }
+            #app-content .main_list .credential-table tr td .popovermenu ul li {
+              padding: 0px; }
+            #app-content .main_list .credential-table tr td .popovermenu ul .menuitem {
+              font-size: 12px;
+              display: inline; }
+          #app-content .main_list .credential-table tr td .popovermenu .action {
+            padding: 10px;
+            margin: -10px; }
+    #app-content .main_list .tags {
+      float: right; }
+      #app-content .main_list .tags .tag {
+        background-color: rgba(240, 240, 240, 0.9);
+        padding: 4px;
+        font-size: 12px;
+        margin-right: 3px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        background-clip: padding-box;
+        /* stops bg color from leaking outside the border: */ }
+      #app-content .main_list .tags .tag:last-child {
+        margin-right: 8px; }
+    #app-content .main_list .grid-view {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap; }
+      #app-content .main_list .grid-view li {
+        height: fit-content; }
       #app-content .main_list .grid-view .credential {
-        width: 40%; } }
-    @media all and (min-width: 58em) {
-      #app-content .main_list .grid-view .credential {
-        width: 26%; } }
-    @media all and (min-width: 78em) {
-      #app-content .main_list .grid-view .credential {
-        width: 20%; } }
-  #app-content .main_list .share {
-    overflow: hidden; }
-  #app-content .main_list .nopasswords {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 10%;
-    text-align: center; }
-  #app-content .main_list .belowList {
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 1%;
-    text-align: center; }
-  #app-content .main_list .app_sidebar {
+        display: flex;
+        width: 100%;
+        border: 2px solid var(--color-primary);
+        margin: 25px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background-clip: padding-box;
+        /* stops bg color from leaking outside the border: */ }
+        #app-content .main_list .grid-view .credential .credential_content {
+          display: flex;
+          padding: 2px;
+          flex-direction: column;
+          width: 100%;
+          cursor: pointer;
+          font-size: 1.75em; }
+          #app-content .main_list .grid-view .credential .credential_content .label {
+            padding-top: 0.5em;
+            padding-right: 1em;
+            line-height: 1.3em;
+            word-wrap: break-word;
+            float: right; }
+          #app-content .main_list .grid-view .credential .credential_content .tags {
+            margin: 0 0 auto;
+            text-align: right; }
+            #app-content .main_list .grid-view .credential .credential_content .tags .tag {
+              color: #000 !important;
+              margin-top: 5px;
+              display: inline-block;
+              left: 0; }
+      @media all and (min-width: 40em) {
+        #app-content .main_list .grid-view .credential {
+          width: 40%; } }
+      @media all and (min-width: 58em) {
+        #app-content .main_list .grid-view .credential {
+          width: 26%; } }
+      @media all and (min-width: 78em) {
+        #app-content .main_list .grid-view .credential {
+          width: 20%; } }
+    #app-content .main_list .share {
+      overflow: hidden; }
+    #app-content .main_list .nopasswords {
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: 10%;
+      text-align: center; }
+    #app-content .main_list .belowList {
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: 1%;
+      text-align: center; }
+  #app-content .app_sidebar {
+    height: auto;
     float: right;
     padding: 10px;
     overflow-y: auto; }
-    #app-content .main_list .app_sidebar h2 {
+    #app-content .app_sidebar .sidebar {
+      display: inline-block; }
+      #app-content .app_sidebar .sidebar .sidebar-icon {
+        margin-right: 15px; }
+        #app-content .app_sidebar .sidebar .sidebar-icon .icon-image-size {
+          width: 44px; }
+        #app-content .app_sidebar .sidebar .sidebar-icon i {
+          width: 44px; }
+      #app-content .app_sidebar .sidebar .sidebar-label {
+        float: right;
+        line-height: 44px; }
+    #app-content .app_sidebar h2 {
       margin-bottom: 10px;
       font-weight: 400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       max-width: 90%; }
-    #app-content .main_list .app_sidebar .close.icon-close {
+    #app-content .app_sidebar .close.icon-close {
       position: absolute;
       top: 10px;
       right: 10px;
       cursor: pointer; }
-    #app-content .main_list .app_sidebar.item_selected {
+    #app-content .app_sidebar.item_selected {
       height: 25%;
       display: inline-block; }
-    #app-content .main_list .app_sidebar .credential-data .compromised-details {
+    #app-content .app_sidebar .credential-data .compromised-details {
       margin-top: 15px;
       margin-bottom: 15px;
       display: flex; }
-      #app-content .main_list .app_sidebar .credential-data .compromised-details .icon {
+      #app-content .app_sidebar .credential-data .compromised-details .icon {
         float: left;
         height: 20px; }
-      #app-content .main_list .app_sidebar .credential-data .compromised-details .text {
+      #app-content .app_sidebar .credential-data .compromised-details .text {
         padding-left: 5px;
         padding-right: 30px;
         color: #e9322d; }
-    #app-content .main_list .app_sidebar .credential-data .row {
+    #app-content .app_sidebar .credential-data .row {
       margin-bottom: 11px; }
-    #app-content .main_list .app_sidebar .credential-data .tags {
+    #app-content .app_sidebar .credential-data .tags {
       margin-top: 15px;
       margin-bottom: 15px;
       float: none; }
-      #app-content .main_list .app_sidebar .credential-data .tags .tag {
+      #app-content .app_sidebar .credential-data .tags .tag {
         background-color: rgba(240, 240, 240, 0.9);
         padding: 4px;
         margin-right: 3px; }
@@ -1422,7 +1438,8 @@ h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  height: 54px !important;
+  min-height: 54px !important;
+  height: auto !important;
   padding-right: 20px !important; }
   @media only screen and (max-width: 769px) {
     #passman-controls .breadcrumb {
