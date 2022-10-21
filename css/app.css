@@ -1187,6 +1187,20 @@
 .shared_table .fa-trash:hover {
   color: #ce3702; }
 
+.tags {
+  float: left; }
+  .tags .tag {
+    background-color: rgba(240, 240, 240, 0.9);
+    padding: 4px;
+    font-size: 11px; }
+
+tags-input .tags {
+  width: 100%; }
+  tags-input .tags .input {
+    width: auto !important; }
+  tags-input .tags .tag-item {
+    color: var(--color-text-lighter); }
+
 /**
  * Nextcloud - passman
  *

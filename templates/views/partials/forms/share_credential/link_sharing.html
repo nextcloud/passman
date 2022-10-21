@@ -1,7 +1,9 @@
 <div class="row">
 	<div class="col-xs-12 col-md-6">
-		<label><input type="checkbox" ng-model="share_settings.linkSharing.enabled">
-		{{ 'enable.link.sharing' | translate}}.</label><br/>
+		<input id="linkSharing.enabled" class="checkbox" type="checkbox"
+			   ng-model="share_settings.linkSharing.enabled">
+		<label for="linkSharing.enabled">{{'enable.link.sharing' | translate}}</label><br>
+
 		<div class="pull-left col-xs-6 nopadding">
 			<span credential-field value="share_link" secret="false" use-input="true" input-placeholder="'click.share' | translate" ></span>
 		</div>
