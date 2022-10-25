@@ -70,19 +70,20 @@
 #passman-controls {
   box-sizing: border-box;
   position: fixed;
-  margin: -45px 0 0;
+  margin: -58px 8px 0 0;
   right: 0;
   left: 0;
   border-bottom: 1px solid #c9c9c9;
-  padding: 0 !important;
-  background-color: rgba(255, 255, 255, .95);
+  //background-color: rgba(255, 255, 255, .95);
   z-index: 50;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  min-height: 58px !important;
+  //height: auto!important;
+  padding-right: 20px !important;
 
-  height: 44px !important;
   .breadcrumb{
     //Move Homeicon to the right to prevent overlap with burgermenu
     @media only screen and (max-width: 769px) {
@@ -100,8 +101,8 @@
 }
 @media only screen and (min-width: 1024px){
   #app-navigation+#app-content #passman-controls {
-    left: 300px;
-    width: calc( 100% - 300px ) !important;
+    left: 308px;
+    //width: calc( 100% - 300px ) !important;
   }
 }
 #passman-controls .button,  #passman-controls, #passman-controls input[type='submit'],  #passman-controls input[type='text'],  #passman-controls input[type='password'],  #passman-controls select {

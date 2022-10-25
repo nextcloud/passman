@@ -8,5 +8,11 @@
     height: 34px; }
 #passwordSharingSettings #requests-table {
   width: 100%; }
+#passwordSharingSettings .link {
+  cursor: pointer; }
+#passwordSharingSettings .link.accept:hover {
+  color: var(--color-error); }
+#passwordSharingSettings .link.ignore:hover {
+  color: var(--color-primary); }
 
 /*# sourceMappingURL=admin.css.map */
