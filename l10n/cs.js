@@ -110,6 +110,7 @@ OC.L10N.register(
     "Password generation settings" : "Nastavení vytváření hesel",
     "Password length" : "Délka hesla",
     "Minimum amount of digits" : "Nejmenší počet číslic",
+    "Generate password on creation" : "Při vytvoření vytvořit heslo",
     "Use uppercase letters" : "Použít velká písmena",
     "Use lowercase letters" : "Použít malá písmena",
     "Use numbers" : "Použít čísla",

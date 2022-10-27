@@ -18,7 +18,7 @@ OC.L10N.register(
     "Settings saved" : "Налаштування збережено",
     "General settings" : "Загальні налаштування",
     "Password settings" : "Параметри пароля",
-    "Sharing" : "Поділитись",
+    "Sharing" : "Поділитися",
     "Share with users and groups" : "Поділитися з користувачами та групами",
     "Share link" : "Поділитися посиланням",
     "Saved!" : "Збережено!",
