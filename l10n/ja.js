@@ -110,6 +110,7 @@ OC.L10N.register(
     "Password generation settings" : "パスワード生成設定",
     "Password length" : "パスワード長",
     "Minimum amount of digits" : "最小の桁数",
+    "Generate password on creation" : "作成時にパスワードを生成",
     "Use uppercase letters" : "大文字を使用する",
     "Use lowercase letters" : "小文字を使用する",
     "Use numbers" : "数字を使用する",
