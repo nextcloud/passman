@@ -108,6 +108,7 @@
     "Password generation settings" : "生成密碼設置",
     "Password length" : "密碼長度",
     "Minimum amount of digits" : "最小數字位數",
+    "Generate password on creation" : "創建時産生密碼",
     "Use uppercase letters" : "使用大寫字母 ",
     "Use lowercase letters" : "使用小寫字母",
     "Use numbers" : "使用數字",
