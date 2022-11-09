@@ -108,6 +108,7 @@
     "Password generation settings" : "Nastavenia vytvorenia hesla",
     "Password length" : "Dĺžka hesla",
     "Minimum amount of digits" : "Minimálny počet číselných znakov",
+    "Generate password on creation" : "Generovať heslo pri vytváraní",
     "Use uppercase letters" : "Použiť veľké znaky",
     "Use lowercase letters" : "Použiť malé znaky",
     "Use numbers" : "Použiť číselné znaky",
