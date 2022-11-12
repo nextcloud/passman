@@ -110,6 +110,7 @@ OC.L10N.register(
     "Password generation settings" : "Jelszó-előállítási beállítások",
     "Password length" : "Jelszóhossz",
     "Minimum amount of digits" : "Számjegyek legkisebb száma",
+    "Generate password on creation" : "Jelszó előállítása létrehozáskor",
     "Use uppercase letters" : "Nagybetűk használata",
     "Use lowercase letters" : "Kisbetűk használata",
     "Use numbers" : "Számok használata",
