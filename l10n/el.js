@@ -37,6 +37,7 @@ OC.L10N.register(
     "The first 5 lines of the CSV are shown." : "Προβάλλονται οι πρώτες 5 γραμμές του CSV.",
     "Assign the proper fields to each column." : "Καθορίστε τα κατάλληλα πεδία σε κάθε στήλη.",
     "Example of imported credential" : "Παράδειγμα εισαχθέντος διαπιστευτηρίου",
+    "Missing an importer? Click here to try it with the generic CSV importer." : "Λείπει ενα στοιχείο; Κάντε εδώ κλικ για να το δοκιμάσετε με τη γενική εισαγωγή CSV.",
     "Go back to importers." : "Επιστροφή στους εισαγωγείς.",
     "Revision deleted" : "Διαγράφηκε η αναθεώρηση",
     "Revision restored" : "Η αναθεώρηση επαναφέρθηκε",
