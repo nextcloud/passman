@@ -68,6 +68,7 @@ OC.L10N.register(
     "Add tag" : "태그 추가",
     "Pick an icon" : "아이콘 선택",
     "Use this icon" : "이 아이콘 사용",
+    "This may take a few seconds …" : "이 작업은 몇 초 정도 소요됩니다 ...",
     "Selected icon" : "선택한 아이콘",
     "Field label" : "필드 레이블",
     "Field value" : "필드 값",
