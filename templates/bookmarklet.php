@@ -42,6 +42,7 @@ script('passman', 'app/filters/byte');
 script('passman', 'app/filters/tagfilter');
 script('passman', 'app/filters/escapeHTML');
 script('passman', 'app/filters/as');
+script('passman', 'app/filters/toHHMMSS');
 script('passman', 'app/services/vaultservice');
 script('passman', 'app/services/credentialservice');
 script('passman', 'app/services/settingsservice');

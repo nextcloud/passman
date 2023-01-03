@@ -109,6 +109,12 @@
 
 				$scope.selectVault = function (vault) {
 					$scope.list_selected_vault = vault;
+					if(!$scope.vault_tries[vault.guid]) {
+						$scope.vault_tries[vault.guid] = {
+							tries: 0,
+							timeout: 0
+						};
+					}
 				};
 				$scope.sharing_keys = {};
 				$scope.newVault = function () {
@@ -138,6 +144,16 @@
 
 				};
 
+				var tickLockTimer = function (guid) {
+					$scope.vault_tries[guid].timeout = $scope.vault_tries[guid].timeout - 1;
+					if($scope.vault_tries[guid].timeout <= 0){
+						$interval.cancel($scope.vault_tries[guid].timer);
+						$scope.vault_tries[guid].timeout = 0;
+					}
+				};
+
+				$scope.vault_tries = {};
+
 				$scope.vaultDecryptionKey = '';
 				$scope.loginToVault = function (vault, vault_key) {
 					$scope.error = false;
@@ -154,6 +170,21 @@
 
 					} catch (e) {
 						$scope.error = $translate.instant('invalid.vault.key');
+
+						$scope.vault_tries[vault.guid].tries = $scope.vault_tries[vault.guid].tries + 1;
+
+						if($scope.vault_tries[vault.guid].tries >= 3){
+							var duration = (Math.pow(2, 1 / 7) * Math.pow(15, 4 / 7)) * Math.pow((Math.pow(2, 2 / 7) * Math.pow(15, 1 / 7)), $scope.vault_tries[vault.guid].tries);
+							$scope.vault_tries[vault.guid].timeout = duration;
+
+							if($scope.vault_tries[vault.guid].hasOwnProperty('timer')){
+								$interval.cancel($scope.vault_tries[vault.guid].timer);
+							}
+
+							$scope.vault_tries[vault.guid].timer = $interval(function () {
+								tickLockTimer(vault.guid);
+							} ,1000);
+						}
 					}
 
 				};
