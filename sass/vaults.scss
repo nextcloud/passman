@@ -40,7 +40,6 @@
 
   max-width: 450px;
   @include border-radius(5px);
-  //box-shadow: 0 1px 1px #777;
   filter: drop-shadow(0 1px 3px var(--color-box-shadow));
   background: var(--color-main-background);
   display: block;
