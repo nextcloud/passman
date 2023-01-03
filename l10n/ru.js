@@ -110,6 +110,7 @@ OC.L10N.register(
     "Password generation settings" : "Настройки создания пароля",
     "Password length" : "Длина пароля",
     "Minimum amount of digits" : "Минимальное число цифр",
+    "Generate password on creation" : "Генерировать пароль при создании",
     "Use uppercase letters" : "Использовать верхний регистр",
     "Use lowercase letters" : "Использовать нижний регистр",
     "Use numbers" : "Использовать числа",

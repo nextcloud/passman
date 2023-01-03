@@ -189,6 +189,7 @@ class TranslationController extends ApiController {
 			'generation.settings' => $this->trans->t('Password generation settings'),
 			'password.generation.length' => $this->trans->t('Password length'),
 			'password.generation.min_digits' => $this->trans->t('Minimum amount of digits'),
+			'password.generation.on_create' => $this->trans->t('Generate password on creation'),
 			'password.generation.uppercase' => $this->trans->t('Use uppercase letters'),
 			'password.generation.lowercase' => $this->trans->t('Use lowercase letters'),
 			'password.generation.digits' => $this->trans->t('Use numbers'),

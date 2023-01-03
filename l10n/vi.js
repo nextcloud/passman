@@ -52,6 +52,7 @@ OC.L10N.register(
     "Files" : "Tệp tin",
     "Pending" : "Đang dừng",
     "Details" : "Thông tin",
+    "Hide details" : "Ẩn chi tiết",
     "by" : "bởi",
     "Label" : "Nhãn",
     "Save" : "Lưu",

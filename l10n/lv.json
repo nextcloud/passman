@@ -136,6 +136,7 @@
     "Description" : "Apraksts",
     "Error while saving field" : "Kļūda, saglabājot lauku",
     "You created %1$s" : "Jūs izveidojāt %1$s",
+    "%1$s has been updated by %2$s" : "%1$s ir atjauninājis %2$s",
     "You updated %1$s" : "Tu atjaunināji %1$s",
     "%3$s has renamed %1$s to %2$s" : "%3$s pārsauca %1$s uz %2$s",
     "You renamed %1$s to %2$s" : "Tu pārdēvēji %1$s uz %2$s",

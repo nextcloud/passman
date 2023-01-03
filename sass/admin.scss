@@ -18,4 +18,13 @@
   #requests-table{
     width: 100%;
   }
+  .link {
+    cursor: pointer;
+  }
+  .link.accept:hover {
+    color: var(--color-error);
+  }
+  .link.ignore:hover {
+    color: var(--color-primary);
+  }
 }

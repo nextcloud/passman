@@ -11,6 +11,7 @@ OC.L10N.register(
     "Username" : "Nama pengguna",
     "File" : "Berkas",
     "Add" : "Masukkan",
+    "Value" : "Nilari",
     "Type" : "tipe",
     "Actions" : "Tindakan",
     "Filename" : "Nama berkas",

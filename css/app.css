@@ -417,7 +417,7 @@
 
 .vault_wrapper {
   margin: 0 auto auto auto;
-  max-width: 420px;
+  max-width: 450px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   background-clip: padding-box;
@@ -490,10 +490,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#content {
-  padding-top: 47px !important;
+#inner-app-content {
+  padding-top: 58px !important;
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  display: flex; }
 
 .icon-image-size {
   width: 16px; }
@@ -510,7 +511,7 @@
 #app-sidebar {
   height: auto; }
   #app-sidebar .sidebar {
-    display: inline-block; }
+    display: flex; }
     #app-sidebar .sidebar .sidebar-icon {
       margin-right: 15px; }
       #app-sidebar .sidebar .sidebar-icon .icon-image-size {
@@ -518,26 +519,26 @@
       #app-sidebar .sidebar .sidebar-icon i {
         width: 44px; }
     #app-sidebar .sidebar .sidebar-label {
-      float: right;
-      line-height: 44px; }
+      float: right; }
 
 .vaultlist_sidebar_hidden {
   width: 100vw !important;
   margin-left: 0px !important; }
 
 #app-content {
-  margin-left: 300px;
+  position: sticky;
   overflow-x: hidden; }
-  @media only screen and (max-width: 769px) {
+  @media only screen and (max-width: 1024px) {
     #app-content {
       width: 100vw; } }
-  @media only screen and (min-width: 770px) {
+  @media only screen and (min-width: 1025px) {
     #app-content {
       width: calc(100vw - 300px); } }
   #app-content #app-content-wrapper {
-    min-height: 95%;
+    height: 100%;
     display: flex;
-    height: calc(100vh - 49px); }
+    width: 100%;
+    padding-right: 15px; }
     #app-content #app-content-wrapper #passman-controls {
       text-align: center;
       border-bottom: 1px solid #c9c9c9; }
@@ -853,6 +854,8 @@
         padding-right: 10px; }
       #app-content #app-content-wrapper .edit_credential .import-selection select {
         margin-left: 15px; }
+    #app-content #app-content-wrapper .credential-revisions div.crumb > a {
+      max-width: initial !important; }
     #app-content #app-content-wrapper .main_list {
       flex: 1;
       float: left;
@@ -878,7 +881,6 @@
       #app-content #app-content-wrapper .app_sidebar h2 {
         margin-bottom: 10px;
         font-weight: 400;
-        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 90%; }
@@ -1081,7 +1083,7 @@
     opacity: 1 !important;
     z-index: 140; }
     .nav-trashbin a.active {
-      background-image: var(--icon-delete-e9322d); }
+      background-image: var(--icon-delete-color-red); }
     .nav-trashbin a .fa {
       margin-right: 15px; }
 
@@ -1180,6 +1182,20 @@
 .shared_table .fa-trash:hover {
   color: #ce3702; }
 
+.tags {
+  float: left; }
+  .tags .tag {
+    background-color: rgba(240, 240, 240, 0.9);
+    padding: 4px;
+    font-size: 11px; }
+
+tags-input .tags {
+  width: 100%; }
+  tags-input .tags .input {
+    width: auto !important; }
+  tags-input .tags .tag-item {
+    color: var(--color-text-lighter); }
+
 /**
  * Nextcloud - passman
  *
@@ -1201,6 +1217,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+.ng-app-frame {
+  display: block !important; }
+
 .spacer-top-30 {
   margin-top: 30px; }
 
@@ -1254,6 +1273,23 @@
 
 h3 {
   font-weight: bold; }
+
+.setting-group label, .setting-group input {
+  display: block; }
+.setting-group input[type="text"], .setting-group input[type="password"], .setting-group textarea {
+  width: 100%; }
+
+.setting-group.margin-bottom-25 {
+  margin-bottom: 25px; }
+
+.setting-group.margin-bottom-10 {
+  margin-bottom: 10px; }
+
+.display-grid {
+  display: grid; }
+
+.password-settings-padding-left-fix {
+  padding-left: 0 !important; }
 
 /**
  * Nextcloud - passman
@@ -1411,18 +1447,17 @@ h3 {
 #passman-controls {
   box-sizing: border-box;
   position: fixed;
-  margin: -45px 0 0;
+  margin: -58px 8px 0 0;
   right: 0;
   left: 0;
   border-bottom: 1px solid #c9c9c9;
-  padding: 0 !important;
-  background-color: rgba(255, 255, 255, 0.95);
   z-index: 50;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  height: 44px !important; }
+  min-height: 58px !important;
+  padding-right: 20px !important; }
   @media only screen and (max-width: 769px) {
     #passman-controls .breadcrumb {
       padding-left: 15px; } }
@@ -1434,8 +1469,7 @@ h3 {
     width: 100%; } }
 @media only screen and (min-width: 1024px) {
   #app-navigation + #app-content #passman-controls {
-    left: 300px;
-    width: calc( 100% - 300px ) !important; } }
+    left: 308px; } }
 #passman-controls .button, #passman-controls, #passman-controls input[type='submit'], #passman-controls input[type='text'], #passman-controls input[type='password'], #passman-controls select {
   box-sizing: border-box;
   display: inline-block;

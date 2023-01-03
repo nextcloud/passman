@@ -42,7 +42,8 @@ header {
 
 .tab_container {
   padding-top: 10px;
-  margin-bottom: 20px; }
+  margin-bottom: 60px;
+  overflow: scroll; }
   .tab_container div {
     margin-bottom: 5px;
     overflow: hidden; }

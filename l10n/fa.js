@@ -46,7 +46,7 @@ OC.L10N.register(
     "Password settings" : "تنظیمات گذرواژه",
     "Import credentials" : "اعتبار واردات",
     "Export credentials" : "اعتبارنامه صادرات",
-    "Sharing" : "اشتراک گذاری",
+    "Sharing" : "هم‌رسانی",
     "Are you sure you want to leave? This will destroy all your credentials" : "آیا مطمئن هستی که می خواهی ترک کنی؟ این اعتبار همه اعتبارات شما را از بین می برد",
     "Old password field incorrect!" : "فیلد رمز عبور قدیمی نادرست است!",
     "New password does not match!" : "رمز عبور جدید مطابقت ندارد!",

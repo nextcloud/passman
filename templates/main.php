@@ -120,7 +120,7 @@ style('passman', 'app');
 /*build-css-end*/
 ?>
 
-<div id="app" ng-app="passmanApp" ng-controller="MainCtrl">
+<div id="app" ng-app="passmanApp" ng-controller="MainCtrl" style="display: flex;">
     <div id="logoutTimer"></div>
     <div id="warning_bar" class="warning_bar template-hidden" ng-if="using_http && http_warning_hidden == false" ng-init="removeHiddenStyles()">
         {{ 'http.warning' | translate }}
@@ -233,7 +233,7 @@ style('passman', 'app');
 
     <div id="app-content" ng-class="{'vaultlist_sidebar_hidden': !selectedVault}">
         <div id="app-content-wrapper">
-            <div id="content" ng-view="">
+            <div id="inner-app-content" ng-view="">
 
             </div>
         </div>

@@ -20,6 +20,9 @@
  *
  */
 
+.ng-app-frame {
+  display: block!important;
+}
 .spacer-top-30{
   margin-top: 30px;
 }
@@ -86,4 +89,24 @@
 }
 h3 {
   font-weight: bold;
+}
+.setting-group {
+  label, input {
+    display: block;
+  }
+  input[type="text"], input[type="password"], textarea {
+    width: 100%;
+  }
+}
+.setting-group.margin-bottom-25 {
+  margin-bottom: 25px;
+}
+.setting-group.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.display-grid {
+  display: grid;
+}
+.password-settings-padding-left-fix{
+  padding-left: 0 !important;
 }

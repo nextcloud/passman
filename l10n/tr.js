@@ -110,6 +110,7 @@ OC.L10N.register(
     "Password generation settings" : "Parola üretme ayarları",
     "Password length" : "Parola uzunluğu",
     "Minimum amount of digits" : "En az rakam sayısı",
+    "Generate password on creation" : "Eklenirken parola oluşturulsun",
     "Use uppercase letters" : "Büyük harfler kullanılsın",
     "Use lowercase letters" : "Küçük harfler kullanılsın",
     "Use numbers" : "Rakamlar kullanılsın",

@@ -2,20 +2,20 @@
 	<div id="passman-controls" ng-class="{ 'sidebar-shown': selectedCredential }">
 		<div class="breadcrumb">
 			<div class="breadcrumb">
-				<div class="crumb svg ui-droppable" data-dir="/">
-					<a ng-click="logout()"><i class="fa fa-home"></i></a>
+				<div class="crumb svg crumbhome">
+					<a ng-click="logout()" class="icon-home">Home</a>
+					<span style="display: none;"></span>
 				</div>
 				<div class="crumb svg" ng-click="clearState()">
 					<a>{{active_vault.name}}</a>
 				</div>
-
 			</div>
 			<div class="addCredential" ng-hide="delete_time>0">
 				<button ng-click="addCredential()"><i class="fa fa-plus"></i></button>
 			</div>
-            <div class="addCredential" ng-hide="delete_time>0">
-                <button ng-click="refresh()"><i class="fa fa-refresh"></i></button>
-            </div>
+			<div class="addCredential" ng-hide="delete_time>0">
+				<button ng-click="refresh()"><i class="fa fa-refresh"></i></button>
+			</div>
 		</div>
 
 		<div class="title" credential-counter="filtered_credentials" vault="active_vault" delete-time="delete_time" filters="filterOptions"></div>
@@ -23,8 +23,10 @@
 		<div class="searchboxContainer" ng-init="filterOptionShown = false;" off-click="filterOptionShown = false;">
 			<input type="text" ng-model="filterOptions.filterText" class="searchbox" id="searchBox"
 				   placeholder="{{'search.credential' | translate}}" select-on-click clear-btn ng-click="filterOptionShown = true;">
+
 			<div class="searchOptions" ng-show="filterOptionShown">
-				<input type="checkbox" ng-model="filterOptions.useRegex"> {{ 'use.regex' | translate }}
+				<input id="filterOptions.useRegex" class="checkbox" type="checkbox" ng-model="filterOptions.useRegex">
+				<label for="filterOptions.useRegex">{{'use.regex' | translate}}</label>
 			</div>
 		</div>
 
@@ -39,7 +41,7 @@
 	<div class="loaderContainer" ng-if="show_spinner">
 		<div class="loader" use-theme type="'border-bottom-color'"></div>
 	</div>
-	<div ng-init="menuOpen = false;">
+	<div class="credential-table-wrapper" ng-init="menuOpen = false;">
 		<table class="credential-table"
 			   ng-if="view_mode === 'list'">
 			<tr ng-repeat="credential in filtered_credentials | orderBy:'label'"
@@ -72,8 +74,7 @@
 			<li class="credential"
 				ng-repeat="credential in filtered_credentials | orderBy:'label'"
 				ng-if="credential.hidden == 0 && showCredentialRow(credential)"
-				ng-click="selectCredential(credential)"
-				use-theme type="'border-color'">
+				ng-click="selectCredential(credential)">
 				<div class="credential_content">
 					<div>
 						<span class="icon" ng-if="credential.url">
@@ -102,15 +103,15 @@
 			</div>
 		</div>
 
-        <!--nopassword-hint for missing tagresults -->
+		<!--nopassword-hint for missing tagresults -->
 		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner && selectedtags.length>0" class="nopasswords" ng-hide="delete_time>0">
 			<div>{{ 'vault.hint.list.notags' | translate}}</div>
 		</div>
 
-        <!--nopassword-hint for missing searchresults -->
-        <div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner && selectedtags.length==0 && filterOptions.filterText!=''" class="nopasswords" ng-hide="delete_time>0">
-            <div>{{ 'vault.hint.list.nosearch' | translate}} <b>'{{filterOptions.filterText}}'</b></div>
-        </div>
+		<!--nopassword-hint for missing searchresults -->
+		<div ng-if="getListSizes().listsize_wout_deleted==0 && no_credentials_label.all && !show_spinner && selectedtags.length==0 && filterOptions.filterText!=''" class="nopasswords" ng-hide="delete_time>0">
+			<div>{{ 'vault.hint.list.nosearch' | translate}} <b>'{{filterOptions.filterText}}'</b></div>
+		</div>
 
 
 
@@ -157,45 +158,45 @@
 		<h2 class="sidebar-label">{{selectedCredential.label}}</h2>
 	</div>
 
-    <div credential-template="selectedCredential"></div>
+	<div credential-template="selectedCredential"></div>
 
-    <div ng-show="selectedCredential">
-        <div>
-            <button class="button"
-                    ng-click="editCredential(selectedCredential)"
-                    ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-                <span class="fa fa-edit"></span> {{ 'edit' | translate}}
-            </button>
-            <button class="button"
-                    ng-click="deleteCredential(selectedCredential)"
-                    ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-                <span class="fa fa-trash"></span> {{ 'delete' | translate}}
-            </button>
-            <button class="button"
-                    ng-click="shareCredential(selectedCredential)"
-                    ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined &&
+	<div ng-show="selectedCredential">
+		<div>
+			<button class="button"
+					ng-click="editCredential(selectedCredential)"
+					ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+				<span class="fa fa-edit"></span> {{ 'edit' | translate}}
+			</button>
+			<button class="button"
+					ng-click="deleteCredential(selectedCredential)"
+					ng-if="selectedCredential.delete_time == 0 && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+				<span class="fa fa-trash"></span> {{ 'delete' | translate}}
+			</button>
+			<button class="button"
+					ng-click="shareCredential(selectedCredential)"
+					ng-if="selectedCredential.delete_time == 0 && selectedCredential.acl === undefined &&
 						(settings.user_sharing_enabled === 1 || settings.user_sharing_enabled === '1' || settings.link_sharing_enabled === 1 || settings.link_sharing_enabled === '1')">
-                <span class="fa fa-share"></span> {{ 'share' | translate}}
-            </button>
+				<span class="fa fa-share"></span> {{ 'share' | translate}}
+			</button>
 
-            <button class="button"
-                    ng-click="getRevisions(selectedCredential)"
-                    ng-if="selectedCredential.delete_time == 0  && hasPermission(selectedCredential.acl.permissions, permissions.permissions.HISTORY)">
-                <span class="fa fa-undo"></span> {{ 'revisions' | translate}}
-            </button>
+			<button class="button"
+					ng-click="getRevisions(selectedCredential)"
+					ng-if="selectedCredential.delete_time == 0  && hasPermission(selectedCredential.acl.permissions, permissions.permissions.HISTORY)">
+				<span class="fa fa-undo"></span> {{ 'revisions' | translate}}
+			</button>
 
-            <button class="button"
-                    ng-if="selectedCredential.delete_time > 0"
-                    ng-click="recoverCredential(selectedCredential) && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
-                <span class="fa fa-recycle"></span> {{'recover' | translate}}
-            </button>
-            <button class="button"
-                    ng-if="selectedCredential.delete_time > 0"
-                    ng-click="destroyCredential(selectedCredential)">
-                <span class="fa fa-bomb"></span> {{'destroy' | translate}}
-            </button>
-        </div>
-    </div>
+			<button class="button"
+					ng-if="selectedCredential.delete_time > 0"
+					ng-click="recoverCredential(selectedCredential) && hasPermission(selectedCredential.acl.permissions, permissions.permissions.WRITE)">
+				<span class="fa fa-recycle"></span> {{'recover' | translate}}
+			</button>
+			<button class="button"
+					ng-if="selectedCredential.delete_time > 0"
+					ng-click="destroyCredential(selectedCredential)">
+				<span class="fa fa-bomb"></span> {{'destroy' | translate}}
+			</button>
+		</div>
+	</div>
 </div>
 
 <div class="share_popup" style="display: none" title="{{ 'sharereq.title' | translate }}">
