@@ -587,23 +587,21 @@
         border-bottom-left-radius: 5px;
         -webkit-border-top-left-radius: 5px;
         border-top-left-radius: 5px;
-        background-clip: padding-box;
-        border: 1px solid rgba(240, 240, 240, 0.9); }
+        background-clip: padding-box; }
       #app-content #app-content-wrapper .viewModes .view-mode:last-child {
         -webkit-border-bottom-right-radius: 5px;
         border-bottom-right-radius: 5px;
         -webkit-border-top-right-radius: 5px;
         border-top-right-radius: 5px;
-        background-clip: padding-box;
-        border: 1px solid rgba(240, 240, 240, 0.9); }
+        background-clip: padding-box; }
       #app-content #app-content-wrapper .viewModes .view-mode {
         display: inline-block;
         padding: 7px;
-        background-color: rgba(240, 240, 240, 0.9); }
+        background-color: var(--color-background-dark); }
       #app-content #app-content-wrapper .viewModes .view-mode.active {
         display: inline-block;
         padding: 7px;
-        background-color: rgba(226, 226, 226, 0.9); }
+        background-color: var(--color-background-darker); }
       #app-content #app-content-wrapper .viewModes .view-mode {
         cursor: pointer;
         display: inline-block;
@@ -628,11 +626,10 @@
       #app-content #app-content-wrapper .searchboxContainer .searchOptions {
         position: relative;
         bottom: 5px;
-        background: #fff;
-        border: 1px solid #ddd;
+        background-color: var(--color-background-dark);
+        filter: drop-shadow(0 1px 3px var(--color-box-shadow));
         padding: 5px;
         /*width: calc(100% - 3px);*/
-        box-shadow: 3px 3px 5px #888888;
         -webkit-border-bottom-right-radius: 3px;
         border-bottom-right-radius: 3px;
         -webkit-border-bottom-left-radius: 3px;
@@ -643,9 +640,9 @@
     #app-content #app-content-wrapper .credential-table {
       width: 100%; }
       #app-content #app-content-wrapper .credential-table tr:hover {
-        background-color: whitesmoke; }
+        background-color: var(--color-background-hover); }
       #app-content #app-content-wrapper .credential-table tr.selected {
-        background-color: #f8f8f8; }
+        background-color: var(--color-background-hover); }
       #app-content #app-content-wrapper .credential-table tr .compromised {
         background-color: #f74040; }
       #app-content #app-content-wrapper .credential-table tr .compromised:hover {
@@ -661,7 +658,7 @@
       #app-content #app-content-wrapper .credential-table tr td {
         cursor: pointer;
         padding: 5px;
-        border-bottom: 1px solid #eeeeee; }
+        border-bottom: 1px solid var(--color-border); }
         #app-content #app-content-wrapper .credential-table tr td .icon {
           font-size: 19px;
           float: left;
@@ -1077,8 +1074,7 @@
   display: block; }
 
 .nav-trashbin {
-  width: inherit !important;
-  border-right: 1px solid #eee; }
+  width: inherit !important; }
   .nav-trashbin a {
     opacity: 1 !important;
     z-index: 140; }
