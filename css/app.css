@@ -1181,9 +1181,15 @@
     font-size: 11px; }
 
 tags-input .tags {
-  width: 100%; }
+  width: 100%;
+  background-color: var(--color-main-background);
+  border: 2px solid var(--color-border-maxcontrast);
+  border-radius: var(--border-radius-large);
+  box-shadow: unset; }
   tags-input .tags .input {
-    width: auto !important; }
+    width: auto !important;
+    background-color: var(--color-background-darker);
+    font-size: var(--default-font-size); }
   tags-input .tags .tag-item {
     color: var(--color-text-lighter); }
 
