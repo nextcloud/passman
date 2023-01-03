@@ -422,8 +422,8 @@
   border-radius: 5px;
   background-clip: padding-box;
   /* stops bg color from leaking outside the border: */
-  box-shadow: 0 1px 1px #777;
-  background: #eee;
+  filter: drop-shadow(0 1px 3px var(--color-box-shadow));
+  background: var(--color-main-background);
   display: block; }
   .vault_wrapper .vaultlist {
     z-index: 500; }
@@ -438,7 +438,7 @@
       border-bottom: 1px solid #8e8e8e;
       padding: 16px; }
     .vault_wrapper .vaultlist li:hover {
-      background-color: #f7f7f7; }
+      background-color: var(--color-background-hover); }
   .vault_wrapper .login_form {
     padding: 16px; }
     .vault_wrapper .login_form .error {
