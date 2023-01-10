@@ -188,7 +188,7 @@ OC.L10N.register(
     "Offline attack, slow hash, many cores" : "Offline Angriff, langsamer Hash, viele Kerne",
     "10B/second" : "10 Milliarden/Sekunde",
     "Offline attack, fast hash, many cores" : "Offline Angriff, schneller Hash, viele Kerne",
-    "Match sequence" : "Sequenz um Passendes zu finden",
+    "Match sequence" : "Sequenz, um Passendes zu finden",
     "See match sequence" : "Zeige Sequenz, um Passendes zu finden",
     "Pattern" : "Muster",
     "Matched word" : "Gefundenes Wort",
