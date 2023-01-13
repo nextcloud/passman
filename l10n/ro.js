@@ -9,6 +9,7 @@ OC.L10N.register(
     "Share link" : "Partajează link-ul",
     "Saved!" : "Salvat!",
     "Good" : "Bun",
+    "Copy to clipboard" : "Copiază în clipboard",
     "Username" : "Nume utilizator",
     "Add tag" : "Adaugă etichetă",
     "Text" : "Text",
