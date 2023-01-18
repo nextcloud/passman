@@ -119,7 +119,7 @@ style('passman', 'public-page');
 						</td>
 						<td>
 					<span otp-generator
-						  secret="shared_credential.otp.secret"></span>
+						  otp="shared_credential.otp"></span>
 						</td>
 					</tr>
 					<tr ng-show="shared_credential.email">
