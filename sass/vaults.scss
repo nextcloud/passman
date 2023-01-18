@@ -40,8 +40,8 @@
 
   max-width: 450px;
   @include border-radius(5px);
-  box-shadow: 0 1px 1px #777;
-  background: #eee;
+  filter: drop-shadow(0 1px 3px var(--color-box-shadow));
+  background: var(--color-main-background);
   display: block;
   .vaultlist{
 
@@ -61,7 +61,7 @@
       padding: 16px;
     }
     li:hover{
-      background-color: #f7f7f7;
+      background-color: var(--color-background-hover);
     }
   }
   .login_form{

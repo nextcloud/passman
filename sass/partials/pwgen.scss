@@ -25,16 +25,10 @@
   input{
     width: calc(100% - 76px) !important;
     float: left;
-    background: #fff;
-    color: #555;
     cursor: text;
     font-family: inherit;
-    border: 1px solid #ddd;
     outline: none;
-    border-radius: 3px;
     margin: 3px 3px 3px 0;
-    padding: 7px 6px 5px;
-    font-size: 13px;
     @include border-right-radius(0)
   }
   .generate_pw{
@@ -46,8 +40,7 @@
       padding: 5px;
       display: inline-block;
       font-size: 14px;
-      border: 1px solid #ddd;
-      background-color: lighten(#ddd, 5%);
+      border: 1px solid var(--color-border-maxcontrast);
       cursor: pointer;
     }
     .cell:hover{

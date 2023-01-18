@@ -217,16 +217,10 @@
   .pw-gen input {
     width: calc(100% - 76px) !important;
     float: left;
-    background: #fff;
-    color: #555;
     cursor: text;
     font-family: inherit;
-    border: 1px solid #ddd;
     outline: none;
-    border-radius: 3px;
     margin: 3px 3px 3px 0;
-    padding: 7px 6px 5px;
-    font-size: 13px;
     -webkit-border-bottom-right-radius: 0;
     border-bottom-right-radius: 0;
     -webkit-border-top-right-radius: 0;
@@ -241,8 +235,7 @@
       padding: 5px;
       display: inline-block;
       font-size: 14px;
-      border: 1px solid #ddd;
-      background-color: #eaeaea;
+      border: 1px solid var(--color-border-maxcontrast);
       cursor: pointer; }
     .pw-gen .generate_pw .cell:hover {
       color: #0066ff; }
@@ -422,8 +415,8 @@
   border-radius: 5px;
   background-clip: padding-box;
   /* stops bg color from leaking outside the border: */
-  box-shadow: 0 1px 1px #777;
-  background: #eee;
+  filter: drop-shadow(0 1px 3px var(--color-box-shadow));
+  background: var(--color-main-background);
   display: block; }
   .vault_wrapper .vaultlist {
     z-index: 500; }
@@ -438,7 +431,7 @@
       border-bottom: 1px solid #8e8e8e;
       padding: 16px; }
     .vault_wrapper .vaultlist li:hover {
-      background-color: #f7f7f7; }
+      background-color: var(--color-background-hover); }
   .vault_wrapper .login_form {
     padding: 16px; }
     .vault_wrapper .login_form .error {
@@ -587,23 +580,21 @@
         border-bottom-left-radius: 5px;
         -webkit-border-top-left-radius: 5px;
         border-top-left-radius: 5px;
-        background-clip: padding-box;
-        border: 1px solid rgba(240, 240, 240, 0.9); }
+        background-clip: padding-box; }
       #app-content #app-content-wrapper .viewModes .view-mode:last-child {
         -webkit-border-bottom-right-radius: 5px;
         border-bottom-right-radius: 5px;
         -webkit-border-top-right-radius: 5px;
         border-top-right-radius: 5px;
-        background-clip: padding-box;
-        border: 1px solid rgba(240, 240, 240, 0.9); }
+        background-clip: padding-box; }
       #app-content #app-content-wrapper .viewModes .view-mode {
         display: inline-block;
         padding: 7px;
-        background-color: rgba(240, 240, 240, 0.9); }
+        background-color: var(--color-background-dark); }
       #app-content #app-content-wrapper .viewModes .view-mode.active {
         display: inline-block;
         padding: 7px;
-        background-color: rgba(226, 226, 226, 0.9); }
+        background-color: var(--color-background-darker); }
       #app-content #app-content-wrapper .viewModes .view-mode {
         cursor: pointer;
         display: inline-block;
@@ -628,11 +619,10 @@
       #app-content #app-content-wrapper .searchboxContainer .searchOptions {
         position: relative;
         bottom: 5px;
-        background: #fff;
-        border: 1px solid #ddd;
+        background-color: var(--color-background-dark);
+        filter: drop-shadow(0 1px 3px var(--color-box-shadow));
         padding: 5px;
         /*width: calc(100% - 3px);*/
-        box-shadow: 3px 3px 5px #888888;
         -webkit-border-bottom-right-radius: 3px;
         border-bottom-right-radius: 3px;
         -webkit-border-bottom-left-radius: 3px;
@@ -643,9 +633,9 @@
     #app-content #app-content-wrapper .credential-table {
       width: 100%; }
       #app-content #app-content-wrapper .credential-table tr:hover {
-        background-color: whitesmoke; }
+        background-color: var(--color-background-hover); }
       #app-content #app-content-wrapper .credential-table tr.selected {
-        background-color: #f8f8f8; }
+        background-color: var(--color-background-hover); }
       #app-content #app-content-wrapper .credential-table tr .compromised {
         background-color: #f74040; }
       #app-content #app-content-wrapper .credential-table tr .compromised:hover {
@@ -661,7 +651,7 @@
       #app-content #app-content-wrapper .credential-table tr td {
         cursor: pointer;
         padding: 5px;
-        border-bottom: 1px solid #eeeeee; }
+        border-bottom: 1px solid var(--color-border); }
         #app-content #app-content-wrapper .credential-table tr td .icon {
           font-size: 19px;
           float: left;
@@ -699,7 +689,7 @@
     #app-content #app-content-wrapper .tags {
       float: right; }
       #app-content #app-content-wrapper .tags .tag {
-        background-color: rgba(240, 240, 240, 0.9);
+        background-color: var(--color-placeholder-dark);
         padding: 4px;
         font-size: 12px;
         margin-right: 3px;
@@ -780,7 +770,14 @@
           padding: 4px;
           font-size: 11px; }
       #app-content #app-content-wrapper .edit_credential tags-input .tags {
-        width: 100%; }
+        width: 100%;
+        background-color: var(--color-main-background);
+        border: 2px solid var(--color-border-maxcontrast);
+        border-radius: var(--border-radius-large);
+        box-shadow: unset; }
+        #app-content #app-content-wrapper .edit_credential tags-input .tags .input {
+          background-color: var(--color-background-darker);
+          font-size: var(--default-font-size); }
       #app-content #app-content-wrapper .edit_credential .credential_textarea {
         width: 100%;
         height: 100px; }
@@ -910,7 +907,7 @@
         margin-bottom: 15px;
         float: none; }
         #app-content #app-content-wrapper .app_sidebar .credential-data .tags .tag {
-          background-color: rgba(240, 240, 240, 0.9);
+          background-color: var(--color-placeholder-dark);
           padding: 4px;
           margin-right: 3px; }
 
@@ -984,7 +981,7 @@
 
 .inputfile + label {
   font-size: 1.25em;
-  background-color: rgba(240, 240, 240, 0.9);
+  background-color: var(--color-background-darker);
   margin-top: 4px;
   padding: 5px;
   margin-right: 4px;
@@ -992,7 +989,7 @@
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-  background-color: #c9c9c9; }
+  background-color: var(--color-background-dark); }
 
 .inputfile + label {
   cursor: pointer;
@@ -1007,16 +1004,11 @@
   display: flex; }
   .icon-label input {
     float: left;
-    background: #fff;
-    color: #555;
     cursor: text;
     font-family: inherit;
-    border: 1px solid #ddd;
     outline: none;
-    border-radius: 3px;
     margin: 3px 0 3px 0;
     padding: 7px 6px 5px;
-    font-size: 13px;
     -webkit-border-bottom-left-radius: 0;
     border-bottom-left-radius: 0;
     -webkit-border-top-left-radius: 0;
@@ -1026,11 +1018,11 @@
     float: left;
     margin-top: 3px; }
     .icon-label .icon-picker .cell {
-      height: 32px;
+      height: 92%;
       padding: 7px 12px 2px 12px;
       font-size: 14px;
-      border: 1px solid #ddd;
-      background-color: #eaeaea;
+      border: 2px solid var(--color-border-maxcontrast);
+      background-color: var(--color-background-dark);
       cursor: pointer;
       -webkit-border-bottom-left-radius: 6px;
       border-bottom-left-radius: 6px;
@@ -1077,8 +1069,7 @@
   display: block; }
 
 .nav-trashbin {
-  width: inherit !important;
-  border-right: 1px solid #eee; }
+  width: inherit !important; }
   .nav-trashbin a {
     opacity: 1 !important;
     z-index: 140; }
@@ -1190,9 +1181,15 @@
     font-size: 11px; }
 
 tags-input .tags {
-  width: 100%; }
+  width: 100%;
+  background-color: var(--color-main-background);
+  border: 2px solid var(--color-border-maxcontrast);
+  border-radius: var(--border-radius-large);
+  box-shadow: unset; }
   tags-input .tags .input {
-    width: auto !important; }
+    width: auto !important;
+    background-color: var(--color-background-darker);
+    font-size: var(--default-font-size); }
   tags-input .tags .tag-item {
     color: var(--color-text-lighter); }
 
