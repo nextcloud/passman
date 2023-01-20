@@ -97,6 +97,8 @@
     "Current OTP settings" : "Uneko OTP ezarpenak",
     "Issuer" : "Jaulkitzailea",
     "Secret" : "Sekretua",
+    "Digits" : "Digituak",
+    "Period" : "Aldia",
     "Expiration date" : "Iraungitze-data",
     "No expiration date set" : "Ez da iraungitze-datarik ezarri",
     "Renew interval" : "Berritze bitartea",

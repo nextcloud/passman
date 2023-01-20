@@ -97,6 +97,8 @@
     "Current OTP settings" : "Stávající nastavení OTP",
     "Issuer" : "Vydavatel",
     "Secret" : "Tajemství",
+    "Digits" : "Číslic",
+    "Period" : "Období",
     "Expiration date" : "Datum skončení platnosti",
     "No expiration date set" : "Není nastaveno datum skončení platnosti",
     "Renew interval" : "Interval obnovy",

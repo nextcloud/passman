@@ -99,6 +99,8 @@ OC.L10N.register(
     "Current OTP settings" : "Jelenlegi OTP beállítások",
     "Issuer" : "Kibocsátó",
     "Secret" : "Titok",
+    "Digits" : "Számjegyek",
+    "Period" : "Pont",
     "Expiration date" : "Lejárati idő",
     "No expiration date set" : "Nincs lejárat beállítva",
     "Renew interval" : "Megújítási időköz",

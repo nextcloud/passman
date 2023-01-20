@@ -97,6 +97,8 @@
     "Current OTP settings" : "當前的 OTP 設置 ",
     "Issuer" : "發行者",
     "Secret" : "密鑰",
+    "Digits" : "數字",
+    "Period" : "時段",
     "Expiration date" : "失效日期",
     "No expiration date set" : "未設置失效日期",
     "Renew interval" : "更新間距",

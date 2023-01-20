@@ -99,6 +99,8 @@ OC.L10N.register(
     "Current OTP settings" : "Geçerli OTP ayarları",
     "Issuer" : "Yayınlayan",
     "Secret" : "Parola",
+    "Digits" : "Rakamlar",
+    "Period" : "Aralık",
     "Expiration date" : "Son kullanma tarihi",
     "No expiration date set" : "Son kullanma tarihi belirtilmemiş",
     "Renew interval" : "Yenileme sıklığı",

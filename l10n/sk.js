@@ -99,6 +99,8 @@ OC.L10N.register(
     "Current OTP settings" : "Aktuálne OTP nastavenia",
     "Issuer" : "Vydavateľ",
     "Secret" : "Tajný kľúč",
+    "Digits" : "Číslic",
+    "Period" : "Obdobie",
     "Expiration date" : "Dátum expirácie",
     "No expiration date set" : "Nezadaný dátum expirácie",
     "Renew interval" : "Interval obnovenia",

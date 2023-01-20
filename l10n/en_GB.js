@@ -99,6 +99,8 @@ OC.L10N.register(
     "Current OTP settings" : "Current OTP settings",
     "Issuer" : "Issuer",
     "Secret" : "Secret",
+    "Digits" : "Digits",
+    "Period" : "Period",
     "Expiration date" : "Expiration date",
     "No expiration date set" : "No expiration date set",
     "Renew interval" : "Renew interval",

@@ -99,6 +99,8 @@ OC.L10N.register(
     "Current OTP settings" : "Текущи OTP настройки",
     "Issuer" : "Издател",
     "Secret" : "Тайна",
+    "Digits" : "Цифри",
+    "Period" : "Период",
     "Expiration date" : "Валидност",
     "No expiration date set" : "Не е зададен срок на валидност",
     "Renew interval" : "Интервал на подновяване",
