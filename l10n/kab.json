@@ -1,5 +1,6 @@
 { "translations": {
     "General" : "Amatu",
+    "Done" : "Immed",
     "Sharing" : "Beṭṭu",
     "Share link" : "Fren aseɣwen",
     "Username" : "Isem n useqdac",
@@ -9,6 +10,7 @@
     "Filename" : "Isem n ufaylu",
     "Size" : "Teɣzi",
     "Expiration date" : "Azemz n tagara",
+    "Uploading" : "Tuzzna n ifuyla",
     "User" : "Aseqdac",
     "Files" : "Ifuyla",
     "Pending" : "Yegguni",

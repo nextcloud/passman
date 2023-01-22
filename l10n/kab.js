@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "General" : "Amatu",
+    "Done" : "Immed",
     "Sharing" : "Beṭṭu",
     "Share link" : "Fren aseɣwen",
     "Username" : "Isem n useqdac",
@@ -11,6 +12,7 @@ OC.L10N.register(
     "Filename" : "Isem n ufaylu",
     "Size" : "Teɣzi",
     "Expiration date" : "Azemz n tagara",
+    "Uploading" : "Tuzzna n ifuyla",
     "User" : "Aseqdac",
     "Files" : "Ifuyla",
     "Pending" : "Yegguni",
