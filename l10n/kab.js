@@ -12,6 +12,7 @@ OC.L10N.register(
     "Filename" : "Isem n ufaylu",
     "Size" : "Teɣzi",
     "Expiration date" : "Azemz n tagara",
+    "Disabled" : "Ittwarermed",
     "Uploading" : "Tuzzna n ifuyla",
     "User" : "Aseqdac",
     "Files" : "Ifuyla",
