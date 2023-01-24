@@ -49,7 +49,7 @@ OC.L10N.register(
     "Decline" : "ปฏิเสธ",
     "Never" : "ไม่เคย",
     "Donate" : "บริจาค",
-    "Tags" : "ป้ายกำกับ",
+    "Tags" : "แท็ก",
     "Description" : "รายละเอียด",
     "You created %1$s" : "คุณสร้าง %1$s",
     "You deleted %1$s" : "คุณลบ %1$s",
