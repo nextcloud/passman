@@ -112,6 +112,7 @@ OC.L10N.register(
     "Password generation settings" : "Pasahitz sorreraren ezarpenak",
     "Password length" : "Pasahitzaren luzera",
     "Minimum amount of digits" : "Gutxieneko digitu kopurua",
+    "Generate password on creation" : "Egin pasahitza sortzerakoan",
     "Use uppercase letters" : "Erabili maiuskulak",
     "Use lowercase letters" : "Erabili letra minuskulak",
     "Use numbers" : "Erabili zenbakiak",
