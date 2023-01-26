@@ -53,7 +53,7 @@ OC.L10N.register(
     "Description" : "รายละเอียด",
     "You created %1$s" : "คุณสร้าง %1$s",
     "You deleted %1$s" : "คุณลบ %1$s",
-    "An error occurred!" : "เกิดข้อผิดพลาดบางประการ!",
+    "An error occurred!" : "เกิดข้อผิดพลาด!",
     "Connection to server lost" : "การเชื่อมต่อไปยังเซิร์ฟเวอร์ขาดหาย",
     "Problem loading page, reloading in 5 seconds" : "เกิดปัญหาขณะโหลดหน้าเว็บ กำลังรีโหลดใน 5 วินาที",
     "Saving …" : "กำลังบันทึก …",
