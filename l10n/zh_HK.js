@@ -81,7 +81,7 @@ OC.L10N.register(
     "Get icon from page" : "從頁面獲取圖標",
     "This may take a few seconds …" : "此操作可能需要花幾秒鐘 ...",
     "There was an error fetching the icon!" : "擷取圖標出錯",
-    "Selected icon" : "所選的圖標",
+    "Selected icon" : "已選的圖標",
     "Field label" : "字段標籤",
     "Field value" : "字段值",
     "Choose a file" : "選擇一個檔案",
