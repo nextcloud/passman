@@ -37,6 +37,7 @@ OC.L10N.register(
     "Cancel" : "ยกเลิก",
     "Settings" : "การตั้งค่า",
     "Unshare" : "ยกเลิกการแชร์",
+    "Account" : "บัญชี",
     "Password" : "รหัสผ่าน",
     "Email" : "อีเมล",
     "URL" : "URL",
