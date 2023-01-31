@@ -54,7 +54,7 @@ OC.L10N.register(
     "New password does not match!" : "Nieuwe wachtwoord komt niet overeen!",
     "Please log in with your new vault password" : "Login met je nieuwe kluiswachtwoord",
     "Share with users and groups" : "Delen met gebruikers en groepen",
-    "Share link" : "Delen link",
+    "Share link" : "Deel link",
     "Are you sure you want to leave? This will corrupt this credential" : "Weet je zeker dat je wilt stoppen? Dit zal het inloggegeven kapot maken",
     "Credential unshared" : "Delen inloggegevens gestopt",
     "Credential shared" : "Inloggegevens gedeeld",
