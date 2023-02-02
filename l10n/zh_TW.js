@@ -100,6 +100,7 @@ OC.L10N.register(
     "Edit" : "退出",
     "Delete" : "刪除",
     "Share" : "分享",
+    "Permissions" : "權限",
     "Date" : "日期",
     "Accept" : "接受",
     "Decline" : "拒絕",
