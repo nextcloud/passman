@@ -304,7 +304,7 @@ OC.L10N.register(
     "Description" : "Description",
     "Custom Search:" : "Recherche personnalisée",
     "Revert to defaults" : "Restaurer les valeurs par défaut",
-    "Error while saving field" : "Erreur lors de la sauvegarde du champ",
+    "Error while saving field" : "Erreur lors de l'enregistrement du champ",
     "A Passman item has been created, modified or deleted" : "Un élément Passman a été créé, modifié ou supprimé",
     "A Passman item has expired" : "Un élément Passman a expiré",
     "A Passman item has been shared" : "Un élément Passman a été partagé",
