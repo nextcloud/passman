@@ -153,6 +153,7 @@ OC.L10N.register(
     "Pattern" : "Kuvio",
     "Guesses" : "Arvaukset",
     "by" : " Kirjoittaja:",
+    "Label" : "Nimike",
     "Edit credential" : "Muokkaa tilitietoa",
     "Create new credential" : "Luo uusi tilitieto",
     "Save" : "Tallenna",
