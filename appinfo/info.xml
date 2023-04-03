@@ -42,7 +42,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         <database>pgsql</database>
         <database min-version="5.5">mysql</database>
         <lib>openssl</lib>
-        <nextcloud min-version="20" max-version="25"/>
+        <nextcloud min-version="20" max-version="26"/>
     </dependencies>
 
     <background-jobs>
