@@ -28,6 +28,7 @@ OC.L10N.register(
     "No expiration date set" : "Data de expiração não definida",
     "Disabled" : "Desactivado",
     "Export" : "Exportar",
+    "Change" : "Mudar",
     "Version" : "Versão",
     "Vault password" : "Senha do cofre",
     "Import" : "Importar",

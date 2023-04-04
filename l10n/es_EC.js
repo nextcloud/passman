@@ -248,6 +248,7 @@ OC.L10N.register(
     "Expired" : "Expirado",
     "Someone has shared a credential with you." : "Alguien ha compartido credenciales contigo. ",
     "Click here to request it" : "Haz click para solicitarlo",
+    "Loading …" : "Loading …",
     "email" : "correo electrónico",
     "Description" : "Descripción",
     "Error while saving field" : "Se presentó un error al guardar el campo",
@@ -308,6 +309,7 @@ OC.L10N.register(
     "E-mail" : "Correo electrónico",
     "Connection to server lost" : "Se perdió la conexión al servidor",
     "Problem loading page, reloading in 5 seconds" : "Se presentó un problema al cargar la página, recargando en 5 segundos",
+    "Saving …" : "Saving …",
     "Dismiss" : "Descartar",
     "seconds ago" : "hace segundos"
 },
