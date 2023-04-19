@@ -216,7 +216,7 @@
     "Showing deleted since" : "Şu tarihten sonra silinenler görüntüleniyor",
     "Beginning" : "Başlangıç",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "{{number_filtered}} / {{credential_number}} kimlik doğrulama bilgisi görüntüleniyor",
-    "Search for credential …" : "Kimlik doğrulama bilgisi arama …",
+    "Search for credential …" : "Kimlik doğrulama bilgisi ara…",
     "Account" : "Hesap",
     "Password" : "Parola",
     "OTP" : "OTP",
