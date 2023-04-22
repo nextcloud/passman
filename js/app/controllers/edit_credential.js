@@ -342,31 +342,17 @@
 
                             $scope.updateExistingListWithCredential(new_cred);
 						});
-
-
 					} else {
-
-						var key, _credential;
-						if (!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')) {
-
-							if ($scope.storedCredential.shared_key) {
-								key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
-							}
-						}
-
-						if ($scope.storedCredential.hasOwnProperty('acl')) {
-							key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
-						}
+						let _credential = angular.copy($scope.storedCredential);
+						const key = CredentialService.getSharedKeyFromCredential($scope.storedCredential);
 
 						if (key) {
 							_credential = ShareService.encryptSharedCredential($scope.storedCredential, key);
-						} else {
-							_credential = angular.copy($scope.storedCredential);
 						}
 
 						delete _credential.shared_key;
-						var _useKey = (key != null);
-						var regex = /(<([^>]+)>)/ig;
+						const _useKey = (key != null);
+						const regex = /(<([^>]+)>)/ig;
 						if(_credential.description && _credential.description !== "") {
 							_credential.description = _credential.description.replace(regex, "");
 						}
@@ -386,17 +372,17 @@
                         if (!credential.shared_key) {
                             credential = CredentialService.decryptCredential(credential);
                         } else {
-                            var enc_key = EncryptService.decryptString(credential.shared_key);
+							const enc_key = CredentialService.getSharedKeyFromCredential($scope.storedCredential);
                             credential = ShareService.decryptSharedCredential(credential, enc_key);
                         }
                         credential.tags_raw = credential.tags;
 
-                        var found=false;
-                        var credList=$rootScope.vaultCache[$scope.active_vault.guid].credentials;
-                        for (var i = 0; i < credList.length; i++) {
+                        let found = false;
+                        let credList = $rootScope.vaultCache[$scope.active_vault.guid].credentials;
+                        for (let i = 0; i < credList.length; i++) {
 			    			if (credList[i].credential_id === credential.credential_id) {
-                                $rootScope.vaultCache[$scope.active_vault.guid].credentials[i]=credential;
-                                found=true;
+                                $rootScope.vaultCache[$scope.active_vault.guid].credentials[i] = credential;
+                                found = true;
 			    			}
                         }
 
@@ -404,7 +390,6 @@
                             $rootScope.vaultCache[$scope.active_vault.guid].credentials.push(credential);
 						}
                         $rootScope.$broadcast('push_decrypted_credential_to_list', credential);
-
                     } catch (e) {
                         NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
                         console.log(e);
