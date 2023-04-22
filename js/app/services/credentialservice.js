@@ -85,17 +85,13 @@
 					return _encryptedFields;
 				},
 				updateCredential: function (credential, skipEncryption, key) {
-					var _credential = angular.copy(credential);
+					let _credential = angular.copy(credential);
 					if (!skipEncryption) {
-						for (var i = 0; i < _encryptedFields.length; i++) {
-							var field = _encryptedFields[i];
-							var fieldValue = angular.copy(credential[field]);
-							_credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue), key);
-						}
+						_credential = this.encryptCredential(credential, key);
 					}
 					_credential.expire_time = new Date(angular.copy(credential.expire_time)).getTime() / 1000;
 
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential.guid);
+					const queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential.guid);
 					return $http.patch(queryUrl, _credential).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -215,23 +211,39 @@
 					var promise_credential_update = function () {
 						service.getCredential(credential_guid).then((function (credential) {
 							this.parent.plain_credential = service.decryptCredential(credential, this.parent.old_password);
-							var tmp = angular.copy(this.parent.plain_credential);
+							var plain_credential = angular.copy(this.parent.plain_credential);
 
-							if (tmp.hasOwnProperty('shared_key') && tmp.shared_key !== null && tmp.shared_key !== '' && !skipSharingKey) {
-								var shared_key = EncryptService.decryptString(angular.copy(tmp.shared_key)).trim();
-								tmp.shared_key = EncryptService.encryptString(angular.copy(shared_key), this.parent.new_password);
-								tmp.set_share_key = true;
-								tmp.skip_revision = true;
-								this.parent.new_password = shared_key;
+							if (
+								plain_credential.hasOwnProperty('shared_key') &&
+								plain_credential.shared_key !== null &&
+								plain_credential.shared_key !== '' &&
+								!skipSharingKey
+							) {
+								// re-encrypt the credential.shared_key with the new password
+								// (e.g. re-encrypt from vault_key to generated_shared_key)
+								const decrypted_credential_shared_key = EncryptService.decryptString(angular.copy(plain_credential.shared_key)).trim();
+								plain_credential.shared_key = EncryptService.encryptString(
+									angular.copy(decrypted_credential_shared_key),
+									this.parent.new_password
+								);
+								plain_credential.set_share_key = true;
+								plain_credential.skip_revision = true;
+
+								// todo: temporary comment out this Brantje code line as is looks pointless to set the
+								// new encryption key to the decrypted_credential_shared_key
+								// this.parent.new_password = decrypted_credential_shared_key;
 							}
 
-							this.parent.new_credential_cryptogram = service.encryptCredential(tmp, this.parent.new_password);
+							// before: re-encryption with the now out-commented decrypted_credential_shared_key if the credential has one
+							// now: re-encryption with the original parent.new_password (e.g. generated_shared_key)
+							this.parent.new_credential_cryptogram = service.encryptCredential(plain_credential, this.parent.new_password);
 							this.call_progress(new progress_datatype(1, 2, 'credential'));
 
 							// Save data
 							this.parent.new_credential_cryptogram.skip_revision = true;
 							service.updateCredential(this.parent.new_credential_cryptogram, true).then((function () {
 								this.call_progress(new progress_datatype(2, 2, 'credential'));
+								// transfer plain and encrypted credential to the next promise in the complete re-encryption task
 								this.call_then({
 									plain_text: this.parent.plain_credential,
 									cryptogram: this.parent.new_credential_cryptogram
@@ -241,35 +253,43 @@
 					};
 
 					var promise_files_update = function () {
-						// Add the double of the files so we take encryption phase and upload to the server into the math
-						this.total = this.parent.plain_credential.files.length * 2;	 // Binded on credential finish upload
-						this.current = 0;
-
-						for (var i = 0; i < this.parent.plain_credential.files.length; i++) {
-							var _file = this.parent.plain_credential.files[i];
-							/* jshint ignore:start */
-							FileService.getFile(_file).then((function (fileData) {
-								//Decrypt with old key
-								fileData.filename = EncryptService.decryptString(fileData.filename, this.parent.old_password);
-								fileData.file_data = EncryptService.decryptString(fileData.file_data, this.parent.old_password);
-
-								this.current++;
-
-								this.call_progress(new progress_datatype(this.current, this.total, 'files'));
-
-								FileService.updateFile(fileData, this.parent.new_password).then((function () {
-									this.current++;
-									this.call_progress(new progress_datatype(this.current, this.total, 'files'));
-									if (this.current === this.total) {
-										this.call_then('All files has been updated');
-									}
-								}).bind(this));
-							}).bind(this));
-							/* jshint ignore:end */
-						}
 						if (this.parent.plain_credential.files.length === 0) {
 							this.call_progress(new progress_datatype(0, 0, 'files'));
 							this.call_then("No files to update");
+							return;
+						}
+
+						// add the double total progress value of the files count to be able to separate the decryption step and the re-encryption / update / upload phase
+						this.total = this.parent.plain_credential.files.length * 2;
+						this.current = 0;
+
+						for (let i = 0; i < this.parent.plain_credential.files.length; i++) {
+							const _file = this.parent.plain_credential.files[i];
+							/* jshint ignore:start */
+							FileService.getFile(_file).then((function (fileData) {
+								try {
+									//Decrypt with old key
+									fileData.filename = EncryptService.decryptString(fileData.filename, this.parent.old_password);
+									fileData.file_data = EncryptService.decryptString(fileData.file_data, this.parent.old_password);
+
+									// increase due to successful decryption
+									this.current++;
+									this.call_progress(new progress_datatype(this.current, this.total, 'files'));
+
+									FileService.updateFile(fileData, this.parent.new_password).then((function () {
+										// increase due to successful  re-encryption / update / upload
+										this.current++;
+										this.call_progress(new progress_datatype(this.current, this.total, 'files'));
+										if (this.current === this.total) {
+											this.call_then('All files has been updated');
+										}
+									}).bind(this));
+								} catch (e) {
+									console.error(e);
+									console.error('Failed to re-encrypt fle. It seems to be corrupt.', _file);
+								}
+							}).bind(this));
+							/* jshint ignore:end */
 						}
 					};
 
@@ -287,12 +307,13 @@
 									this.call_then("No history to update");
 									return;
 								}
-								var _revision = revisions[this.current];
-								//Decrypt!
-								_revision.credential_data = service.decryptCredential(_revision.credential_data, this.parent.old_password);
-								_revision.credential_data = service.encryptCredential(_revision.credential_data, this.parent.new_password);
-								this.current++;
 
+								var _revision = revisions[this.current];
+
+								const decrypted_revision_credential_data = service.decryptCredential(_revision.credential_data, this.parent.old_password);
+								_revision.credential_data = service.encryptCredential(decrypted_revision_credential_data, this.parent.new_password);
+
+								this.current++;
 								this.call_progress(new progress_datatype(this.current + this.upload, this.total, 'revisions'));
 
 								service.updateRevision(_revision).then((function () {

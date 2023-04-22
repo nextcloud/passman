@@ -181,10 +181,10 @@
 
 					private_key = ShareService.rsaPrivateKeyFromPEM(private_key);
 					/** global: forge */
-					crypted_shared_key = private_key.decrypt(forge.util.decode64(crypted_shared_key));
-					crypted_shared_key = EncryptService.encryptString(crypted_shared_key);
+					const decrypted_shared_key = private_key.decrypt(forge.util.decode64(crypted_shared_key));
+					const vault_key_encrypted_shared_key = EncryptService.encryptString(decrypted_shared_key);
 
-					ShareService.saveSharingRequest(share_request, crypted_shared_key).then(function () {
+					ShareService.saveSharingRequest(share_request, vault_key_encrypted_shared_key).then(function () {
 						var idx = $scope.incoming_share_requests.indexOf(share_request);
 						$scope.incoming_share_requests.splice(idx, 1);
 						var active_share_requests = false;
