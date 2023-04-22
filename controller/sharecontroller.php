@@ -476,13 +476,17 @@ class ShareController extends ApiController {
 		} catch (\Exception $e) {
 			return new NotFoundJSONResponse();
 		}
+
+		// $this->userId does not exist for anonymous share link downloads
 		$userId = ($this->userId) ? $this->userId->getUID() : null;
 		$acl = $this->shareService->getACL($userId, $credential->getGuid());
-		if (!$acl->hasPermission(SharingACL::FILES)) {
-			return new NotFoundJSONResponse();
-		} else {
-			return $this->fileService->getFileByGuid($file_guid);
+
+		if ($acl->hasPermission(SharingACL::FILES)) {
+		    // get file by guid and check if it is owned by the owner of the shared credential
+			return $this->fileService->getFileByGuid($file_guid, $credential->getUserId());
 		}
+
+		return new NotFoundJSONResponse();
 	}
 
 	/**
