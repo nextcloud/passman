@@ -160,10 +160,24 @@
 					});
 				},
 				downloadSharedFile: function (credential, file) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/file/' + file.guid);
+					const queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/file/' + file.guid);
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
+						}
+					});
+				},
+				uploadSharedFile: function (credential, file, key) {
+					const queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/file');
+					let _file = angular.copy(file);
+					_file.filename = EncryptService.encryptString(_file.filename, key);
+					const data = EncryptService.encryptString(angular.copy(file.data), key);
+					_file.data = data;
+					return $http.post(queryUrl, _file).then(function (response) {
+						if (response.data) {
+							return response.data;
+						} else {
+							return response;
 						}
 					});
 				},

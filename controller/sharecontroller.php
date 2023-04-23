@@ -491,6 +491,40 @@ class ShareController extends ApiController {
 
 	/**
 	 * @param $item_guid
+	 * @param $data
+	 * @param $filename
+	 * @param $mimetype
+	 * @param $size
+	 * @return DataResponse|NotFoundJSONResponse|JSONResponse
+	 * @throws \Exception
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function uploadFile($item_guid, $data, $filename, $mimetype, $size) {
+		try {
+			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+		} catch (\Exception $e) {
+			return new NotFoundJSONResponse();
+		}
+
+		$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+		if ($acl->hasPermission(SharingACL::FILES)) {
+			$file = array(
+				'filename' => $filename,
+				'size' => $size,
+				'mimetype' => $mimetype,
+				'file_data' => $data,
+				'user_id' => $credential->getUserId()
+			);
+			// save the file with the id of the user that owns the credential
+			return new JSONResponse($this->fileService->createFile($file, $credential->getUserId()));
+		}
+
+		return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+	}
+
+	/**
+	 * @param $item_guid
 	 * @param  $user_id
 	 * @param $permission
 	 * @return JSONResponse
