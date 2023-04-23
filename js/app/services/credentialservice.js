@@ -141,13 +141,13 @@
 							}
 						} catch (e) {
 							console.error('Error decrypting credential:', credential);
+							console.error('Error decrypting credential field:', field);
 							throw e;
 						}
 						try {
 							credential[field] = JSON.parse(field_decrypted_value);
 						} catch (e) {
 							console.warn('Field' + field + ' in ' + credential.label + ' could not be parsed! Value:' + fieldValue);
-
 						}
 
 					}

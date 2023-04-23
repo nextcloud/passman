@@ -250,8 +250,10 @@
 									vault.private_sharing_key = EncryptService.decryptString(angular.copy(vault.private_sharing_key), oldVaultPass);
 									vault.private_sharing_key = EncryptService.encryptString(vault.private_sharing_key, newVaultPass);
 									VaultService.updateSharingKeys(vault).then(function () {
-										$rootScope.$broadcast('logout');
-										NotificationService.showNotification($translate.instant('login.new.pass'), 5000);
+										VaultService.reEncryptACLSharingKeys(vault, oldVaultPass, newVaultPass, EncryptService).then(function () {
+											$rootScope.$broadcast('logout');
+											NotificationService.showNotification($translate.instant('login.new.pass'), 5000);
+										});
 									});
 								}
 							};
@@ -259,11 +261,12 @@
 							if (_selected_credentials[index].shared_key) {
 								// only re-encrypt the shared key, if the credential is shared and not encrypted with the vault key like default credentials
 								CredentialService.getCredential(_selected_credentials[index].guid).then((function (credential) {
-									let decrypted_shared_key = EncryptService.decryptString(angular.copy(credential.shared_key), oldVaultPass);
-									credential.set_share_key = true;
-									credential.skip_revision = true;
-									credential.shared_key = EncryptService.encryptString(decrypted_shared_key, newVaultPass);
-									CredentialService.updateCredential(credential, true).then(next_credential_callback);
+									const decrypted_shared_key = EncryptService.decryptString(angular.copy(credential.shared_key), oldVaultPass);
+									let _credential = angular.copy(credential);
+									_credential.set_share_key = true;
+									_credential.skip_revision = true;
+									_credential.shared_key = EncryptService.encryptString(decrypted_shared_key, newVaultPass);
+									CredentialService.updateCredential(_credential, true).then(next_credential_callback);
 								}));
 							} else {
 								CredentialService.reencryptCredential(_selected_credentials[index].guid, oldVaultPass, newVaultPass).progress(function (data) {

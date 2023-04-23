@@ -78,13 +78,12 @@
 								}
 								_credential.tags_raw = _credential.tags;
 							} catch (e) {
-
 								NotificationService.showNotification($translate.instant('error.decrypt'), 5000);
+								console.error(e);
 								//$rootScope.$broadcast('logout');
 								//SettingsService.setSetting('defaultVaultPass', null);
 								//.setSetting('defaultVault', null);
 								//$location.path('/')
-
 							}
 							_credentials[i] = _credential;
 						}

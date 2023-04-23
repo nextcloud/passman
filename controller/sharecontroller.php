@@ -369,6 +369,20 @@ class ShareController extends ApiController {
 	}
 
 	/**
+	 * Obtains the list of acl entries for credentials shared with this vault
+	 *
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function getVaultAclEntries($vault_guid) {
+		try {
+			return new JSONResponse($this->shareService->getVaultAclList($this->userId->getUID(), $vault_guid));
+		} catch (\Exception $ex) {
+			return new NotFoundResponse();
+		}
+	}
+
+	/**
 	 * @param $share_request_id
 	 * @return JSONResponse
 	 * @NoAdminRequired
@@ -556,5 +570,19 @@ class ShareController extends ApiController {
 			}
 
 		}
+	}
+
+	/**
+	 * @param $item_guid
+	 * @param $shared_key
+	 * @return JSONResponse
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function updateSharedCredentialACLSharedKey($item_guid, $shared_key) {
+		/** @var SharingACL $acl */
+		$acl = $this->shareService->getACL($this->userId->getUID(), $item_guid);
+		$acl->setSharedKey($shared_key);
+		return new JSONResponse($this->shareService->updateCredentialACL($acl)->jsonSerialize());
 	}
 }
