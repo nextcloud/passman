@@ -259,12 +259,22 @@
 							return;
 						}
 
-						// add the double total progress value of the files count to be able to separate the decryption step and the re-encryption / update / upload phase
-						this.total = this.parent.plain_credential.files.length * 2;
+						this.total = this.parent.plain_credential.files.length;
 						this.current = 0;
 
-						for (let i = 0; i < this.parent.plain_credential.files.length; i++) {
-							const _file = this.parent.plain_credential.files[i];
+						const files_workload = function () {
+							const check_next_callback = function () {
+								this.current++;
+								this.call_progress(new progress_datatype(this.current, this.total, 'files'));
+
+								if (this.current === this.total) {
+									this.call_then('All files has been updated');
+								} else {
+									setTimeout(files_workload.bind(this), 1);
+								}
+							};
+
+							const _file = this.parent.plain_credential.files[this.current];
 							/* jshint ignore:start */
 							FileService.getFile(_file).then((function (fileData) {
 								try {
@@ -272,25 +282,18 @@
 									fileData.filename = EncryptService.decryptString(fileData.filename, this.parent.old_password);
 									fileData.file_data = EncryptService.decryptString(fileData.file_data, this.parent.old_password);
 
-									// increase due to successful decryption
-									this.current++;
-									this.call_progress(new progress_datatype(this.current, this.total, 'files'));
-
 									FileService.updateFile(fileData, this.parent.new_password).then((function () {
-										// increase due to successful re-encryption / update / upload
-										this.current++;
-										this.call_progress(new progress_datatype(this.current, this.total, 'files'));
-										if (this.current === this.total) {
-											this.call_then('All files has been updated');
-										}
+										check_next_callback.bind(this)();
 									}).bind(this));
 								} catch (e) {
 									console.error(e);
 									console.error('Failed to re-encrypt file. It seems to be corrupt.', _file);
+									check_next_callback.bind(this)();
 								}
 							}).bind(this));
 							/* jshint ignore:end */
-						}
+						};
+						setTimeout(files_workload.bind(this), 1);
 					};
 
 					var promise_custom_field_files_update = function () {
@@ -300,17 +303,28 @@
 							return;
 						}
 
-						// add the double total progress value of the custom fields count to be able to separate the decryption step and the re-encryption / update / upload phase
-						this.total = this.parent.plain_credential.custom_fields.length * 2;
+						this.total = this.parent.plain_credential.custom_fields.length;
+						console.log("total custom_field_files_update = " + this.total);
 						this.current = 0;
 
-						for (let i = 0; i < this.parent.plain_credential.custom_fields.length; i++) {
-							const custom_field = this.parent.plain_credential.custom_fields[i];
-							if (custom_field.field_type !== 'file') {
-								continue;
+						const custom_field_workload = function () {
+							const check_next_callback = function () {
+								this.current++;
+								this.call_progress(new progress_datatype(this.current, this.total, 'custom_field_files'));
+
+								if (this.current === this.total) {
+									this.call_then('All custom field files has been updated');
+								} else {
+									setTimeout(custom_field_workload.bind(this), 1);
+								}
+							};
+
+							if (this.parent.plain_credential.custom_fields[this.current].field_type !== 'file') {
+								check_next_callback.bind(this)();
+								return;
 							}
 
-							const _file = custom_field.value;
+							const _file = this.parent.plain_credential.custom_fields[this.current].value;
 							/* jshint ignore:start */
 							FileService.getFile(_file).then((function (fileData) {
 								try {
@@ -318,25 +332,18 @@
 									fileData.filename = EncryptService.decryptString(fileData.filename, this.parent.old_password);
 									fileData.file_data = EncryptService.decryptString(fileData.file_data, this.parent.old_password);
 
-									// increase due to successful decryption
-									this.current++;
-									this.call_progress(new progress_datatype(this.current, this.total, 'custom_field_files'));
-
 									FileService.updateFile(fileData, this.parent.new_password).then((function () {
-										// increase due to successful re-encryption / update / upload
-										this.current++;
-										this.call_progress(new progress_datatype(this.current, this.total, 'custom_field_files'));
-										if (this.current === this.total) {
-											this.call_then('All files has been updated');
-										}
+										check_next_callback.bind(this)();
 									}).bind(this));
 								} catch (e) {
 									console.error(e);
 									console.error('Failed to re-encrypt custom field file. It seems to be corrupt.', _file);
+									check_next_callback.bind(this)();
 								}
 							}).bind(this));
 							/* jshint ignore:end */
-						}
+						};
+						setTimeout(custom_field_workload.bind(this), 1);
 					};
 
 					var promise_revisions_update = function () {
