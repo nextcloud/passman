@@ -507,20 +507,24 @@ class ShareController extends ApiController {
 			return new NotFoundJSONResponse();
 		}
 
-		$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
-		if ($acl->hasPermission(SharingACL::FILES)) {
-			$file = array(
-				'filename' => $filename,
-				'size' => $size,
-				'mimetype' => $mimetype,
-				'file_data' => $data,
-				'user_id' => $credential->getUserId()
-			);
-			// save the file with the id of the user that owns the credential
-			return new JSONResponse($this->fileService->createFile($file, $credential->getUserId()));
+		// only check acl, if the uploading user is not the credential owner
+		if ($credential->getUserId() != $this->userId->getUID()) {
+			$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+			if (!$acl->hasPermission(SharingACL::FILES)) {
+				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+			}
 		}
 
-		return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+		$file = array(
+			'filename' => $filename,
+			'size' => $size,
+			'mimetype' => $mimetype,
+			'file_data' => $data,
+			'user_id' => $credential->getUserId()
+		);
+
+		// save the file with the id of the user that owns the credential
+		return new JSONResponse($this->fileService->createFile($file, $credential->getUserId()));
 	}
 
 	/**
