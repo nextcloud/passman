@@ -237,18 +237,8 @@
 							total: _selected_credentials.length
 						};
 						const changeCredential = function (index, oldVaultPass, newVaultPass) {
-							let usedKey = oldVaultPass;
-
-							if (_selected_credentials[index].hasOwnProperty('shared_key')) {
-								if (_selected_credentials[index].shared_key) {
-									usedKey = EncryptService.decryptString(angular.copy(_selected_credentials[index].shared_key), oldVaultPass);
-								}
-							}
-
-							CredentialService.reencryptCredential(_selected_credentials[index].guid, usedKey, newVaultPass).progress(function (data) {
-								$scope.cur_state = data;
-							}).then(function () {
-								var percent = index / _selected_credentials.length * 100;
+							const next_credential_callback = function () {
+								const percent = index / _selected_credentials.length * 100;
 								$scope.change_pw = {
 									percent: percent,
 									done: index + 1,
@@ -264,7 +254,22 @@
 										NotificationService.showNotification($translate.instant('login.new.pass'), 5000);
 									});
 								}
-							});
+							};
+
+							if (_selected_credentials[index].shared_key) {
+								// only re-encrypt the shared key, if the credential is shared and not encrypted with the vault key like default credentials
+								CredentialService.getCredential(_selected_credentials[index].guid).then((function (credential) {
+									let decrypted_shared_key = EncryptService.decryptString(angular.copy(credential.shared_key), oldVaultPass);
+									credential.set_share_key = true;
+									credential.skip_revision = true;
+									credential.shared_key = EncryptService.encryptString(decrypted_shared_key, newVaultPass);
+									CredentialService.updateCredential(credential, true).then(next_credential_callback);
+								}));
+							} else {
+								CredentialService.reencryptCredential(_selected_credentials[index].guid, oldVaultPass, newVaultPass).progress(function (data) {
+									$scope.cur_state = data;
+								}).then(next_credential_callback);
+							}
 						};
 						changeCredential(0, VaultService.getActiveVault().vaultKey, newVaultPass);
 					});
