@@ -55,12 +55,13 @@ class Admin implements ISettings {
 	 * @return TemplateResponse
 	 */
 	public function getForm(): TemplateResponse {
+		$hasInternetConnection = $this->config->getSystemValue('has_internet_connection', true);
 		$checkVersion = $this->config->getAppValue('passman', 'check_version', '1') === '1';
 		$localVersion = $this->appManager->getAppInfo('passman')["version"];
 		$githubVersion = $this->l->t('Unable to get version info');
 		$githubReleaseUrl = null;
 
-		if ($checkVersion) {
+		if ($checkVersion && $hasInternetConnection) {
 			// get latest GitHub release version
 
 			$url = 'https://api.github.com/repos/nextcloud/passman/releases/latest';
@@ -90,6 +91,7 @@ class Admin implements ISettings {
 			'githubVersion' => $githubVersion,
 			'githubReleaseUrl' => $githubReleaseUrl,
 			'checkVersion' => $checkVersion,
+			'hasInternetConnection' => $hasInternetConnection,
 		], 'blank');
 	}
 
