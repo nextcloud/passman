@@ -58,6 +58,7 @@ class TranslationController extends ApiController {
 			'credential.recovered' => $this->trans->t('Credential recovered'),
 			'credential.destroyed' => $this->trans->t('Credential destroyed'),
 			'error.loading.file.perm' => $this->trans->t('Error downloading file, you probably have insufficient permissions'),
+			'error.general' => $this->trans->t('An error occurred'),
 
 			// js/app/controllers/edit_credential.js
 			'invalid.qr' => $this->trans->t('Invalid QR code'),

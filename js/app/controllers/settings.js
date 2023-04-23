@@ -73,7 +73,7 @@
 					}
 				});
 
-				var key_strengths = [
+				const key_strengths = [
 					'password.poor',
 					'password.poor',
 					'password.weak',
@@ -86,7 +86,7 @@
 					$scope.required_score = {'strength': translation};
 				});
 
-				var btn_txt = $translate.instant('bookmarklet.text');
+				const btn_txt = $translate.instant('bookmarklet.text');
 				var http = location.protocol, slashes = http.concat("//"),
 					host = slashes.concat(window.location.hostname + ":" + window.location.port),
 					complete = host + location.pathname;
@@ -94,7 +94,7 @@
 
 
 				$scope.saveVaultSettings = function () {
-					var _vault = $scope.active_vault;
+					let _vault = $scope.active_vault;
 					_vault.name = $scope.new_vault_name;
 					_vault.vault_settings = angular.copy($scope.vault_settings);
 					VaultService.updateVault(_vault).then(function () {
@@ -236,8 +236,8 @@
 							done: 0,
 							total: _selected_credentials.length
 						};
-						var changeCredential = function (index, oldVaultPass, newVaultPass) {
-							var usedKey = oldVaultPass;
+						const changeCredential = function (index, oldVaultPass, newVaultPass) {
+							let usedKey = oldVaultPass;
 
 							if (_selected_credentials[index].hasOwnProperty('shared_key')) {
 								if (_selected_credentials[index].shared_key) {
@@ -267,7 +267,6 @@
 							});
 						};
 						changeCredential(0, VaultService.getActiveVault().vaultKey, newVaultPass);
-
 					});
 				};
 

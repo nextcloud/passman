@@ -72,7 +72,6 @@
 							try {
 								if (!_credential.shared_key) {
 									_credential = CredentialService.decryptCredential(angular.copy(_credential));
-
 								} else {
 									var enc_key = EncryptService.decryptString(_credential.shared_key);
 									_credential = ShareService.decryptSharedCredential(angular.copy(_credential), enc_key);
@@ -261,54 +260,62 @@
 				};
 
 				var notification;
-				$scope.deleteCredential = function (credential) {
-					var _credential = angular.copy(credential);
-					try {
-						_credential = CredentialService.decryptCredential(_credential);
-					} catch (e) {
-
-					}
+				$scope.deleteCredential = function (decrypted_credential) {
+					let _credential = angular.copy(decrypted_credential);
 					_credential.delete_time = new Date().getTime() / 1000;
-					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
-						if ($scope.active_vault.credentials[i].credential_id === credential.credential_id) {
-							$scope.active_vault.credentials[i].delete_time = _credential.delete_time;
-						}
-					}
+
 					$scope.closeSelected();
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					var key = CredentialService.getSharedKeyFromCredential(_credential);
-					CredentialService.updateCredential(_credential, false, key).then(function () {
+
+					const key = CredentialService.getSharedKeyFromCredential(_credential);
+					CredentialService.updateCredential(_credential, false, key).then(function (response) {
+						decrypted_credential.delete_time = _credential.delete_time;
+						for (let i = 0; i < $scope.active_vault.credentials.length; i++) {
+							if ($scope.active_vault.credentials[i].credential_id === _credential.credential_id) {
+								$scope.active_vault.credentials[i].delete_time = _credential.delete_time;
+							}
+						}
 						notification = NotificationService.showNotification($translate.instant('credential.deleted'), 5000);
+					}, function (error) {
+						if (error.data.msg) {
+							NotificationService.showNotification(error.data.msg, 5000);
+						} else {
+							NotificationService.showNotification($translate.instant('error.general'), 5000);
+						}
 					});
 				};
 
-				$scope.recoverCredential = function (credential) {
-					var _credential = angular.copy(credential);
-					try {
-						_credential = CredentialService.decryptCredential(_credential);
-					} catch (e) {
-
-					}
-					for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
-						if ($scope.active_vault.credentials[i].credential_id === credential.credential_id) {
-							$scope.active_vault.credentials[i].delete_time = 0;
-						}
-					}
+				$scope.recoverCredential = function (decrypted_credential) {
+					let _credential = angular.copy(decrypted_credential);
 					_credential.delete_time = 0;
+
 					$scope.closeSelected();
 					if (notification) {
 						NotificationService.hideNotification(notification);
 					}
-					var key = CredentialService.getSharedKeyFromCredential(_credential);
-					CredentialService.updateCredential(_credential, false, key).then(function () {
+
+					const key = CredentialService.getSharedKeyFromCredential(_credential);
+					CredentialService.updateCredential(_credential, false, key).then(function (response) {
+						decrypted_credential.delete_time = 0;
+						for (let i = 0; i < $scope.active_vault.credentials.length; i++) {
+							if ($scope.active_vault.credentials[i].credential_id === _credential.credential_id) {
+								$scope.active_vault.credentials[i].delete_time = 0;
+							}
+						}
 						NotificationService.showNotification($translate.instant('credential.recovered'), 5000);
+					}, function (error) {
+						if (error.data.msg) {
+							NotificationService.showNotification(error.data.msg, 5000);
+						} else {
+							NotificationService.showNotification($translate.instant('error.general'), 5000);
+						}
 					});
 				};
 
 				$scope.destroyCredential = function (credential) {
-					var _credential = angular.copy(credential);
+					const _credential = angular.copy(credential);
 					CredentialService.destroyCredential(_credential.guid).then(function () {
 						for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
 							if ($scope.active_vault.credentials[i].credential_id === credential.credential_id) {
@@ -316,6 +323,12 @@
 								NotificationService.showNotification($translate.instant('credential.destroyed'), 5000);
 								break;
 							}
+						}
+					}, function (error) {
+						if (error.data.msg) {
+							NotificationService.showNotification(error.data.msg, 5000);
+						} else {
+							NotificationService.showNotification($translate.instant('error.general'), 5000);
 						}
 					});
 				};

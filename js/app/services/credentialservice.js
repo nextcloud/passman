@@ -277,7 +277,7 @@
 									this.call_progress(new progress_datatype(this.current, this.total, 'files'));
 
 									FileService.updateFile(fileData, this.parent.new_password).then((function () {
-										// increase due to successful  re-encryption / update / upload
+										// increase due to successful re-encryption / update / upload
 										this.current++;
 										this.call_progress(new progress_datatype(this.current, this.total, 'files'));
 										if (this.current === this.total) {
