@@ -283,18 +283,23 @@
 				$scope.delete_vault = function () {
 					if ($scope.confirm_vault_delete && $scope.delete_vault_password === VaultService.getActiveVault().vaultKey) {
 						getCurrentVaultCredentials(function (vault) {
-							var credentials = vault.credentials;
+							const credentials = vault.credentials;
 							$scope.remove_pw = {
 								percent: 0,
 								done: 0,
 								total: vault.credentials.length,
 							};
 
-							var file_ids = [];
+							const file_ids = [];
 							for (const credential of credentials) {
-								var decryptedFiles = JSON.parse(EncryptService.decryptString(angular.copy(credential.files), VaultService.getActiveVault().vaultKey));
-								for (const file of decryptedFiles) {
-									file_ids.push(file.file_id);
+								try {
+									const enc_key = CredentialService.getSharedKeyFromCredential(credential);
+									const decryptedFiles = JSON.parse(EncryptService.decryptString(angular.copy(credential.files), enc_key));
+									for (const file of decryptedFiles) {
+										file_ids.push(file.file_id);
+									}
+								} catch (e) {
+									console.error(e);
 								}
 							}
 
