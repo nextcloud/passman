@@ -221,32 +221,19 @@
 				};
 
 				$scope.fileLoaded = function (file) {
-					var key;
-					var _file = {
+					const key = CredentialService.getSharedKeyFromCredential($scope.storedCredential);
+					const _file = {
 						filename: file.name,
 						size: file.size,
 						mimetype: file.type,
 						data: file.data
 					};
 
-					if (!$scope.storedCredential.hasOwnProperty('acl') && $scope.storedCredential.hasOwnProperty('shared_key')) {
-
-						if ($scope.storedCredential.shared_key) {
-							key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
-						}
-					}
-
-					if ($scope.storedCredential.hasOwnProperty('acl')) {
-						key = EncryptService.decryptString(angular.copy($scope.storedCredential.acl.shared_key));
-					}
-
-
 					FileService.uploadFile(_file, key).then(function (result) {
 						delete result.file_data;
 						result.filename = EncryptService.decryptString(result.filename, key);
 						$scope.storedCredential.files.push(result);
 					});
-
 
 					$scope.$digest();
 				};
