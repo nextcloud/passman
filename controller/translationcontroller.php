@@ -104,6 +104,8 @@ class TranslationController extends ApiController {
 			'settings.password' => $this->trans->t('Password settings'),
 			'settings.import' => $this->trans->t('Import credentials'),
 			'settings.export' => $this->trans->t('Export credentials'),
+			'settings.vault.change.password.hint' => $this->trans->t('Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password.'),
+			'settings.vault.change.password.confirm' => $this->trans->t('I understand the risks'),
 			'settings.sharing' => $this->trans->t('Sharing'),
 			'changepw.navigate.away.warning' => $this->trans->t('Are you sure you want to leave? This will destroy all your credentials'),
 			'incorrect.password' => $this->trans->t('Old password field incorrect!'),

@@ -110,3 +110,14 @@ h3 {
 .password-settings-padding-left-fix{
   padding-left: 0 !important;
 }
+.change-password-hint {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+label[for=confirmVaultPWChange] {
+  margin-bottom: 10px;
+}
+label[for=confirmVaultDelete] {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
