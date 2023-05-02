@@ -214,7 +214,7 @@
 					}
 				});
 
-
+				$scope.confirm_vault_pw_change = false;
 				$scope.changeVaultPassword = function (oldVaultPass, newVaultPass, newVaultPass2) {
 					$scope.error = '';
 					if (oldVaultPass !== VaultService.getActiveVault().vaultKey) {

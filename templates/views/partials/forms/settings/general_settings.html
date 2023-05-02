@@ -25,8 +25,13 @@
 					<li ng-show="vault_key_score.score < minimal_value_key_strength">{{'min.vault.key.strength' | translate:required_score}}</li>
 				</ul>
 			</div>
-			<button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)" ng-disabled="vault_key_score.score < minimal_value_key_strength"
-			>{{ 'change' | translate}}
+			<p class="change-password-hint">{{'settings.vault.change.password.hint' | translate}}</p>
+			<input id="confirmVaultPWChange" class="checkbox" type="checkbox"
+				   ng-model="$parent.confirm_vault_pw_change">
+			<label for="confirmVaultPWChange">{{'settings.vault.change.password.confirm' | translate}}</label>
+			<button ng-click="changeVaultPassword(oldVaultPass,newVaultPass,newVaultPass2)"
+					ng-disabled="vault_key_score.score < minimal_value_key_strength || !$parent.confirm_vault_pw_change">
+				{{ 'change' | translate}}
 			</button>
 			<div ng-show="change_pw.total > 0">
 				{{'warning.leave' | translate}}<br />
@@ -47,7 +52,9 @@
 				   ng-model="$parent.confirm_vault_delete">
 			<label for="confirmVaultDelete">{{'delete.vault.checkbox' | translate}}</label>
 
-			<button class="btn btn-danger" ng-click="delete_vault()">{{'delete.vault.confirm' | translate}}</button>
+			<button class="btn btn-danger" ng-click="delete_vault()" ng-disabled="!$parent.confirm_vault_delete">
+				{{'delete.vault.confirm' | translate}}
+			</button>
 			<div ng-show="remove_pw">
 				{{'deleting.pw' | translate:translationData}}
 				<div progress-bar="remove_pw.percent" index="remove_pw.done" total="remove_pw.total"></div>
