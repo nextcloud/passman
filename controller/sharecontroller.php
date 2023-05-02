@@ -369,6 +369,20 @@ class ShareController extends ApiController {
 	}
 
 	/**
+	 * Obtains the list of acl entries for credentials shared with this vault
+	 *
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function getVaultAclEntries($vault_guid) {
+		try {
+			return new JSONResponse($this->shareService->getVaultAclList($this->userId->getUID(), $vault_guid));
+		} catch (\Exception $ex) {
+			return new NotFoundResponse();
+		}
+	}
+
+	/**
 	 * @param $share_request_id
 	 * @return JSONResponse
 	 * @NoAdminRequired
@@ -476,13 +490,55 @@ class ShareController extends ApiController {
 		} catch (\Exception $e) {
 			return new NotFoundJSONResponse();
 		}
+
+		// $this->userId does not exist for anonymous share link downloads
 		$userId = ($this->userId) ? $this->userId->getUID() : null;
 		$acl = $this->shareService->getACL($userId, $credential->getGuid());
-		if (!$acl->hasPermission(SharingACL::FILES)) {
-			return new NotFoundJSONResponse();
-		} else {
-			return $this->fileService->getFileByGuid($file_guid);
+
+		if ($acl->hasPermission(SharingACL::FILES)) {
+		    // get file by guid and check if it is owned by the owner of the shared credential
+			return $this->fileService->getFileByGuid($file_guid, $credential->getUserId());
 		}
+
+		return new NotFoundJSONResponse();
+	}
+
+	/**
+	 * @param $item_guid
+	 * @param $data
+	 * @param $filename
+	 * @param $mimetype
+	 * @param $size
+	 * @return DataResponse|NotFoundJSONResponse|JSONResponse
+	 * @throws \Exception
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function uploadFile($item_guid, $data, $filename, $mimetype, $size) {
+		try {
+			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+		} catch (\Exception $e) {
+			return new NotFoundJSONResponse();
+		}
+
+		// only check acl, if the uploading user is not the credential owner
+		if ($credential->getUserId() != $this->userId->getUID()) {
+			$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+			if (!$acl->hasPermission(SharingACL::FILES)) {
+				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+			}
+		}
+
+		$file = array(
+			'filename' => $filename,
+			'size' => $size,
+			'mimetype' => $mimetype,
+			'file_data' => $data,
+			'user_id' => $credential->getUserId()
+		);
+
+		// save the file with the id of the user that owns the credential
+		return new JSONResponse($this->fileService->createFile($file, $credential->getUserId()));
 	}
 
 	/**
@@ -514,5 +570,19 @@ class ShareController extends ApiController {
 			}
 
 		}
+	}
+
+	/**
+	 * @param $item_guid
+	 * @param $shared_key
+	 * @return JSONResponse
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function updateSharedCredentialACLSharedKey($item_guid, $shared_key) {
+		/** @var SharingACL $acl */
+		$acl = $this->shareService->getACL($this->userId->getUID(), $item_guid);
+		$acl->setSharedKey($shared_key);
+		return new JSONResponse($this->shareService->updateCredentialACL($acl)->jsonSerialize());
 	}
 }

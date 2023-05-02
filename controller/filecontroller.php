@@ -93,6 +93,10 @@ class FileController extends ApiController {
 		return new JSONResponse(array('ok' => empty($failed_file_ids), 'failed' => $failed_file_ids));
 	}
 
+	/**
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
 	public function updateFile($file_id, $file_data, $filename) {
 		try {
 			$file = $this->fileService->getFile($file_id, $this->userId);

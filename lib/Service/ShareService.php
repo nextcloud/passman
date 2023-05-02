@@ -274,6 +274,17 @@ class ShareService {
 	}
 
 	/**
+	 * Get the access control list by vault guid
+	 *
+	 * @param string $user_id
+	 * @param string $vault_guid
+	 * @return Entity[]
+	 */
+	public function getVaultAclList(string $user_id, string $vault_guid) {
+		return $this->sharingACL->getVaultEntries($user_id, $vault_guid);
+	}
+
+	/**
 	 * @param string $item_guid
 	 * @return Entity[]
 	 * @throws Exception
