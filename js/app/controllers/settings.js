@@ -73,7 +73,7 @@
 					}
 				});
 
-				var key_strengths = [
+				const key_strengths = [
 					'password.poor',
 					'password.poor',
 					'password.weak',
@@ -86,7 +86,7 @@
 					$scope.required_score = {'strength': translation};
 				});
 
-				var btn_txt = $translate.instant('bookmarklet.text');
+				const btn_txt = $translate.instant('bookmarklet.text');
 				var http = location.protocol, slashes = http.concat("//"),
 					host = slashes.concat(window.location.hostname + ":" + window.location.port),
 					complete = host + location.pathname;
@@ -94,7 +94,7 @@
 
 
 				$scope.saveVaultSettings = function () {
-					var _vault = $scope.active_vault;
+					let _vault = $scope.active_vault;
 					_vault.name = $scope.new_vault_name;
 					_vault.vault_settings = angular.copy($scope.vault_settings);
 					VaultService.updateVault(_vault).then(function () {
@@ -236,19 +236,9 @@
 							done: 0,
 							total: _selected_credentials.length
 						};
-						var changeCredential = function (index, oldVaultPass, newVaultPass) {
-							var usedKey = oldVaultPass;
-
-							if (_selected_credentials[index].hasOwnProperty('shared_key')) {
-								if (_selected_credentials[index].shared_key) {
-									usedKey = EncryptService.decryptString(angular.copy(_selected_credentials[index].shared_key), oldVaultPass);
-								}
-							}
-
-							CredentialService.reencryptCredential(_selected_credentials[index].guid, usedKey, newVaultPass).progress(function (data) {
-								$scope.cur_state = data;
-							}).then(function () {
-								var percent = index / _selected_credentials.length * 100;
+						const changeCredential = function (index, oldVaultPass, newVaultPass) {
+							const next_credential_callback = function () {
+								const percent = index / _selected_credentials.length * 100;
 								$scope.change_pw = {
 									percent: percent,
 									done: index + 1,
@@ -260,14 +250,31 @@
 									vault.private_sharing_key = EncryptService.decryptString(angular.copy(vault.private_sharing_key), oldVaultPass);
 									vault.private_sharing_key = EncryptService.encryptString(vault.private_sharing_key, newVaultPass);
 									VaultService.updateSharingKeys(vault).then(function () {
-										$rootScope.$broadcast('logout');
-										NotificationService.showNotification($translate.instant('login.new.pass'), 5000);
+										VaultService.reEncryptACLSharingKeys(vault, oldVaultPass, newVaultPass, EncryptService).then(function () {
+											$rootScope.$broadcast('logout');
+											NotificationService.showNotification($translate.instant('login.new.pass'), 5000);
+										});
 									});
 								}
-							});
+							};
+
+							if (_selected_credentials[index].shared_key) {
+								// only re-encrypt the shared key, if the credential is shared and not encrypted with the vault key like default credentials
+								CredentialService.getCredential(_selected_credentials[index].guid).then((function (credential) {
+									const decrypted_shared_key = EncryptService.decryptString(angular.copy(credential.shared_key), oldVaultPass);
+									let _credential = angular.copy(credential);
+									_credential.set_share_key = true;
+									_credential.skip_revision = true;
+									_credential.shared_key = EncryptService.encryptString(decrypted_shared_key, newVaultPass);
+									CredentialService.updateCredential(_credential, true).then(next_credential_callback);
+								}));
+							} else {
+								CredentialService.reencryptCredential(_selected_credentials[index].guid, oldVaultPass, newVaultPass).progress(function (data) {
+									$scope.cur_state = data;
+								}).then(next_credential_callback);
+							}
 						};
 						changeCredential(0, VaultService.getActiveVault().vaultKey, newVaultPass);
-
 					});
 				};
 
@@ -276,18 +283,23 @@
 				$scope.delete_vault = function () {
 					if ($scope.confirm_vault_delete && $scope.delete_vault_password === VaultService.getActiveVault().vaultKey) {
 						getCurrentVaultCredentials(function (vault) {
-							var credentials = vault.credentials;
+							const credentials = vault.credentials;
 							$scope.remove_pw = {
 								percent: 0,
 								done: 0,
 								total: vault.credentials.length,
 							};
 
-							var file_ids = [];
+							const file_ids = [];
 							for (const credential of credentials) {
-								var decryptedFiles = JSON.parse(EncryptService.decryptString(angular.copy(credential.files), VaultService.getActiveVault().vaultKey));
-								for (const file of decryptedFiles) {
-									file_ids.push(file.file_id);
+								try {
+									const enc_key = CredentialService.getSharedKeyFromCredential(credential);
+									const decryptedFiles = JSON.parse(EncryptService.decryptString(angular.copy(credential.files), enc_key));
+									for (const file of decryptedFiles) {
+										file_ids.push(file.file_id);
+									}
+								} catch (e) {
+									console.error(e);
 								}
 							}
 

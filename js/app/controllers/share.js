@@ -278,7 +278,7 @@
 								$scope.$digest();
 							})
 							.then(function (result) {
-																$scope.share_settings.cypher_progress.times.push({
+								$scope.share_settings.cypher_progress.times.push({
 									time: ((new Date().getTime() / 1000) - start),
 									user: data[0].user_id
 								});
@@ -320,7 +320,7 @@
 					$scope.share_settings.upload_progress.total = 0;
 					//Credential is already shared
 					if ($scope.storedCredential.shared_key && $scope.storedCredential.shared_key !== '' && $scope.storedCredential.shared_key !== null) {
-												var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
+						var enc_key = EncryptService.decryptString(angular.copy($scope.storedCredential.shared_key));
 						if ($scope.share_settings.linkSharing.enabled) {
 							var expire_time = new Date(angular.copy($scope.share_settings.linkSharing.settings.expire_time)).getTime() / 1000;
 							var shareObj = {
@@ -355,28 +355,31 @@
 						$scope.sharing_complete = true;
 					} else {
 
-						ShareService.generateSharedKey(20).then(function (key) {
+						ShareService.generateSharedKey(20).then(function (generated_shared_key) {
 
+							// copy complete credential to encryptedSharedCredential where it can be safely re-encrypted
 							var encryptedSharedCredential = angular.copy($scope.storedCredential);
-							var old_key = VaultService.getActiveVault().vaultKey;
+							var vault_key = VaultService.getActiveVault().vaultKey;
 
-							CredentialService.reencryptCredential(encryptedSharedCredential.guid, old_key, key).progress(function () {
-															}).then(function (data) {
-								var _credential = data.cryptogram;
-								_credential.set_share_key = true;
-								_credential.skip_revision = true;
-								_credential.shared_key = EncryptService.encryptString(key);
-								CredentialService.updateCredential(_credential, true).then(function () {
-									$scope.storedCredential.shared_key = _credential.shared_key;
-									NotificationService.showNotification($translate.instant('credential.shared'), 4000);
-									$scope.sharing_complete = true;
-								});
-							});
+							CredentialService
+								.reencryptCredential(encryptedSharedCredential.guid, vault_key, generated_shared_key)
+								.progress(function () {})
+								.then(function (data) {
+									var _credential = data.cryptogram;
+									_credential.set_share_key = true;
+									_credential.skip_revision = true;
+									_credential.shared_key = EncryptService.encryptString(generated_shared_key);
+									CredentialService.updateCredential(_credential, true).then(function () {
+										$scope.storedCredential.shared_key = _credential.shared_key;
+										NotificationService.showNotification($translate.instant('credential.shared'), 4000);
+										$scope.sharing_complete = true;
+									});
+							    });
 
 							var list = $scope.share_settings.credentialSharedWithUserAndGroup;
 							for (var i = 0; i < list.length; i++) {
 								if (list[i].type === "user") {
-									$scope.applyShareToUser(list[i], key);
+									$scope.applyShareToUser(list[i], generated_shared_key);
 								}
 							}
 
@@ -390,7 +393,7 @@
 									expire_views: $scope.share_settings.linkSharing.settings.expire_views
 								};
 								ShareService.createPublicSharedCredential(shareObj).then(function () {
-									var hash = window.btoa($scope.storedCredential.guid + '<::>' + key);
+									var hash = window.btoa($scope.storedCredential.guid + '<::>' + generated_shared_key);
 									$scope.share_link = getShareLink(hash);
 								});
 							}

@@ -122,6 +122,30 @@
 						}
 					});
 				},
+				reEncryptACLSharingKeys: function (vault, oldVaultPass, newVaultPass, EncryptService) {
+					const queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vault/' + vault.guid + '/acl');
+					return $http.get(queryUrl).then(function (response) {
+						if (response.data) {
+							const updateACLSharingKey = function (index) {
+								let acl = response.data[index];
+								const decrypted_shared_key = EncryptService.decryptString(angular.copy(acl.shared_key), oldVaultPass);
+								acl.shared_key = EncryptService.encryptString(decrypted_shared_key, newVaultPass);
+
+								const patchUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + acl.item_guid + '/acl/shared_key');
+								$http.patch(patchUrl, {
+									shared_key: acl.shared_key
+								}).then(function () {
+									if (index < response.data.length - 1) {
+										return updateACLSharingKey(index + 1);
+									}
+								});
+							};
+							if (response.data[0]) {
+								return updateACLSharingKey(0);
+							}
+						}
+					});
+				},
 				deleteVault: function (vault, file_ids) {
 					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid);
 					var deleteFilesUrl = OC.generateUrl('apps/passman/api/v2/files/delete');
