@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Passwords do not match" : "Los senhals correspondon pas",
     "General" : "Generals",
+    "An error occurred" : "Una error s’es producha",
     "Done" : "Done",
     "Settings saved" : "Paramètres enregistrats",
     "General settings" : "Paramètres generals",

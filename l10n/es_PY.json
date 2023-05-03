@@ -12,6 +12,7 @@
     "Credential updated" : "Credenciales actualizadas",
     "Credential recovered" : "Credenciales recuperadas",
     "Credential destroyed" : "Credenciales destruidas",
+    "An error occurred" : "Se presentó un error",
     "Invalid QR code" : "Código QR inválido",
     "Starting export" : "Comenzando exportación",
     "Decrypting credentials" : "Decriptando credenciales",

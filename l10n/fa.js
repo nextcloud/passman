@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "اعتبار بازیابی شد",
     "Credential destroyed" : "اعتبار از بین رفت",
     "Error downloading file, you probably have insufficient permissions" : "هنگام بارگیری در خطا ، احتمالاً مجوزهای کافی ندارید",
+    "An error occurred" : "خطایی روی داد",
     "Invalid QR code" : "کد QR نامعتبر است",
     "Starting export" : "شروع صادرات",
     "Decrypting credentials" : "رمزگشایی اعتبار",

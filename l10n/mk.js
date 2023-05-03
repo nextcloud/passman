@@ -5,6 +5,7 @@ OC.L10N.register(
     "Custom Fields" : "Произволни полиња",
     "Credential deleted" : "Акредитивите се избришани",
     "Credential updated" : "Акредитивите се ажурирани",
+    "An error occurred" : "Настана грешка",
     "Done" : "Готово",
     "Settings saved" : "Параматрите се зачувани",
     "General settings" : "Општи параметри",

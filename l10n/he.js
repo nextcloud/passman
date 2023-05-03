@@ -14,6 +14,7 @@ OC.L10N.register(
     "Credential updated" : "פרטי גישה עודכנו",
     "Credential recovered" : "פרטי גישה שוחזרו",
     "Credential destroyed" : "פרטי גישה הושמדו",
+    "An error occurred" : "אירעה שגיאה",
     "Invalid QR code" : "קוד QR שגוי",
     "Starting export" : "הייצוא מתחיל",
     "Decrypting credentials" : "פרטי הגישה מפוענחים",

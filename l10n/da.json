@@ -12,6 +12,7 @@
     "Credential updated" : "Brugeroplysninger opdateret",
     "Credential recovered" : "Brugeroplysninger genskabt",
     "Credential destroyed" : "Brugeroplysninger ødelagt",
+    "An error occurred" : "Der var en fejl",
     "Invalid QR code" : "Ugyldig QR kode",
     "Starting export" : "Starter eksportering ",
     "Decrypting credentials" : "Dekrypterer brugeroplysninger",

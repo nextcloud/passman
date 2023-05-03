@@ -15,6 +15,7 @@ OC.L10N.register(
     "Credential recovered" : "Tilitieto palautettu",
     "Credential destroyed" : "Tilitieto tuhottu",
     "Error downloading file, you probably have insufficient permissions" : "Virhe tiedostoa ladatessa. Sinulla ei mitä luultavimmin ole riittäviä oikeuksia",
+    "An error occurred" : "Tapahtui virhe",
     "Invalid QR code" : "Virheellinen QR-koodi",
     "Starting export" : "Aloitetaan vienti",
     "Decrypting credentials" : "Puretaan tunnisteiden salausta",

@@ -15,6 +15,7 @@ OC.L10N.register(
     "Credential recovered" : "Prisijungimo duomenys atkurti",
     "Credential destroyed" : "Prisijungimo duomenys sunaikinti",
     "Error downloading file, you probably have insufficient permissions" : "Klaida atsisiunčiant failą. Jūs, tikriausiai, neturite pakankamai leidimų",
+    "An error occurred" : "Įvyko klaida",
     "Invalid QR code" : "Neteisingas QR kodas",
     "Starting export" : "Pradedamas eksportavimas",
     "Decrypting credentials" : "Iššifruojami prisijungimo duomenys",

@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "Hitelesítő adat helyreállítva",
     "Credential destroyed" : "Hitelesítő adat megsemmisítve",
     "Error downloading file, you probably have insufficient permissions" : "Hiba a fájlletöltés során, lehetséges, hogy nincs elég jogosultsága",
+    "An error occurred" : "Hiba történt",
     "Invalid QR code" : "Érvénytelen QR-kód",
     "Starting export" : "Exportálás indítása",
     "Decrypting credentials" : "Hitelesítő adatok visszafejtése",

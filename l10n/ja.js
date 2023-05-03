@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "資格情報を復元しました",
     "Credential destroyed" : "資格情報を破棄しました",
     "Error downloading file, you probably have insufficient permissions" : "ファイルのダウンロード中にエラーが発生しました。権限が不足していると考えられます。",
+    "An error occurred" : "エラーが発生しました",
     "Invalid QR code" : "無効なQRコード",
     "Starting export" : "エクスポートの開始",
     "Decrypting credentials" : "資格情報の復号化をしています",

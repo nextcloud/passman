@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "Възстановени идентификационни данни!",
     "Credential destroyed" : "Унищожени идентификационни данни!",
     "Error downloading file, you probably have insufficient permissions" : "Грешка при изтеглянето на файла, вероятно нямате достатъчно права",
+    "An error occurred" : "Възникна грешка",
     "Invalid QR code" : "Невалиден QR код",
     "Starting export" : "Експортирането започва",
     "Decrypting credentials" : "Дешифриране на идентификационни данни",

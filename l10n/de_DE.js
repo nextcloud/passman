@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "Anmeldeinformation wiederhergestellt",
     "Credential destroyed" : "Anmeldeinformation zerstört",
     "Error downloading file, you probably have insufficient permissions" : "Fehler beim Herunterladen der Datei, Sie haben möglicherweise nicht die erforderlichen Berechtigungen",
+    "An error occurred" : "Es ist ein Fehler aufgetreten",
     "Invalid QR code" : "Fehlerhafter QR-Code",
     "Starting export" : "Export gestartet",
     "Decrypting credentials" : "Anmeldeinformationen werden entschlüsselt",

@@ -14,6 +14,7 @@
     "Credential recovered" : "凭证回收",
     "Credential destroyed" : "凭证销毁",
     "Error downloading file, you probably have insufficient permissions" : "下载文件时发生错误，您可能没有足够的权限",
+    "An error occurred" : "发生了一个错误",
     "Invalid QR code" : "无效的 QR 代码",
     "Starting export" : "正在开始导出",
     "Decrypting credentials" : "凭证解密",

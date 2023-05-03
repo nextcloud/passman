@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "Τα διαπιστευτήρια ανακτήθηκαν",
     "Credential destroyed" : "Τα διαπιστευτήρια καταστράφηκαν",
     "Error downloading file, you probably have insufficient permissions" : "Σφάλμα λήψης αρχείου, μάλλον δεν έχετε αρκετά δικαιώματα",
+    "An error occurred" : "Παρουσιάστηκε σφάλμα",
     "Invalid QR code" : "Με έγκυρος κώδικας QR",
     "Starting export" : "Έναρξη εξαγωγής",
     "Decrypting credentials" : "Αποκρυπτογράφηση διαπιστευτηρίων",

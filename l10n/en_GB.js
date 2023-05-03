@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "Credential recovered",
     "Credential destroyed" : "Credential destroyed",
     "Error downloading file, you probably have insufficient permissions" : "Error downloading file, you probably have insufficient permissions",
+    "An error occurred" : "An error occurred",
     "Invalid QR code" : "Invalid QR code",
     "Starting export" : "Starting export",
     "Decrypting credentials" : "Decrypting credentials",

@@ -15,6 +15,7 @@ OC.L10N.register(
     "Credential recovered" : "Credentziale recuperada",
     "Credential destroyed" : "Credentziale eliminada",
     "Error downloading file, you probably have insufficient permissions" : "Errore in s'iscarrigamentu de s'archìviu, fortzis no tenet permissos sufitzientes",
+    "An error occurred" : "B'at àpidu un'errore",
     "Invalid QR code" : "Còdighe QR non bàlidu",
     "Starting export" : "Aviamentu de s'esportatzione",
     "Decrypting credentials" : "Detzifrende is credentziales",

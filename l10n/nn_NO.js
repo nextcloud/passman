@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "General" : "Generelt",
+    "An error occurred" : "Det oppstod ein feil",
     "Done" : "Ferdig",
     "Sharing" : "Deling",
     "Share link" : "Del lenkje",

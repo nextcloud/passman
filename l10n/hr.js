@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "Vjerodajnica vraćena",
     "Credential destroyed" : "Vjerodajnica uništena",
     "Error downloading file, you probably have insufficient permissions" : "Pogreška pri preuzimanju datoteke, vjerojatno nemate dovoljna dopuštenja",
+    "An error occurred" : "Došlo je do pogreške",
     "Invalid QR code" : "Nevažeći QR kôd",
     "Starting export" : "Pokretanje izvoza",
     "Decrypting credentials" : "Dešifriranje vjerodajnica",

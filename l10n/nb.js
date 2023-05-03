@@ -14,6 +14,7 @@ OC.L10N.register(
     "Credential updated" : "Påloggingsdetalj oppdatert",
     "Credential recovered" : "Påloggingsdetalj gjenopprettet",
     "Credential destroyed" : "Påloggingsdetalj destruert",
+    "An error occurred" : "En feil oppsto",
     "Invalid QR code" : "Ugyldig QR-kode",
     "Starting export" : "Starter eksport",
     "Decrypting credentials" : "Dekrypterer Påloggingsdetaljer",

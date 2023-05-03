@@ -13,6 +13,7 @@ OC.L10N.register(
     "Credential deleted" : "Облікові дані вилучено",
     "Credential updated" : "Дані авторизації оновлено",
     "Credential recovered" : "Дані авторизації відновлено",
+    "An error occurred" : "Виникла помилка",
     "Invalid QR code" : "Недійсний QR-код",
     "Starting export" : "Початок експорту",
     "Done" : "Готово",

@@ -14,6 +14,7 @@ OC.L10N.register(
     "Credential updated" : "Credenciales actualizadas",
     "Credential recovered" : "Credenciales recuperadas",
     "Credential destroyed" : "Credenciales destruidas",
+    "An error occurred" : "Ha ocurrido un error",
     "Invalid QR code" : "Código QR inválido",
     "Starting export" : "Comenzando exportación",
     "Decrypting credentials" : "Decriptando credenciales",

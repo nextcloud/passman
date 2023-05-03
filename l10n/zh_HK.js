@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "身分驗證回收",
     "Credential destroyed" : "身分驗證已銷毀",
     "Error downloading file, you probably have insufficient permissions" : "下載檔案時出錯，您可能沒有足夠的權限進行下載",
+    "An error occurred" : "發生錯誤",
     "Invalid QR code" : "無效的QR代碼",
     "Starting export" : "正在開始導出",
     "Decrypting credentials" : "身分驗證解密中",

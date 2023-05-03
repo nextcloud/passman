@@ -16,6 +16,7 @@ OC.L10N.register(
     "Credential recovered" : "Акредитиви опорављени",
     "Credential destroyed" : "Акредитиви уништени",
     "Error downloading file, you probably have insufficient permissions" : "Грешка приликом скидања фајла, вероватно немате довољно привилегија",
+    "An error occurred" : "Догодила се грешка",
     "Invalid QR code" : "Неисправан QR код",
     "Starting export" : "Почињем извожење",
     "Decrypting credentials" : "Дешифрујем акредитиве",

@@ -7,6 +7,7 @@ OC.L10N.register(
     "Error loading file" : "載入檔案錯誤",
     "An error occurred during decryption" : "解密時發生錯誤",
     "Credential updated" : "憑據已更新",
+    "An error occurred" : "發生錯誤",
     "Invalid QR code" : "無效的QR code",
     "Starting export" : "開始輸出",
     "Decrypting credentials" : "帳號密碼加密中",

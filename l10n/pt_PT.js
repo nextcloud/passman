@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "General" : "Geral",
+    "An error occurred" : "Ocorreu um erro",
     "Done" : "Concluído",
     "Settings saved" : "Definições guardadas",
     "General settings" : "Definições Gerais",

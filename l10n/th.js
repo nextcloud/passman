@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "General" : "ทั่วไป",
+    "An error occurred" : "เกิดข้อผิดพลาด",
     "Done" : "เสร็จสิ้น",
     "Settings saved" : "บันทึกการตั้งค่าแล้ว",
     "Sharing" : "การแชร์",

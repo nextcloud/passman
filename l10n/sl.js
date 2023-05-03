@@ -15,6 +15,7 @@ OC.L10N.register(
     "Credential recovered" : "Poverilo je uspešno obnovljeno",
     "Credential destroyed" : "Poverila so uničena",
     "Error downloading file, you probably have insufficient permissions" : "Napaka med prejemanjem datoteke. Najverjetneje nimate ustreznih dovoljenj za do opravilo",
+    "An error occurred" : "Prišlo je do napake.",
     "Invalid QR code" : "Neveljavna koda QR",
     "Starting export" : "Začenjanje izvoza",
     "Decrypting credentials" : "Poteka odšifriranje poveril",
