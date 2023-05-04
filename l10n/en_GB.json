@@ -47,6 +47,8 @@
     "Password settings" : "Password settings",
     "Import credentials" : "Import credentials",
     "Export credentials" : "Export credentials",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password.",
+    "I understand the risks" : "I understand the risks",
     "Sharing" : "Sharing",
     "Are you sure you want to leave? This will destroy all your credentials" : "Are you sure you want to leave? This will destroy all your credentials",
     "Old password field incorrect!" : "Old password field incorrect!",
