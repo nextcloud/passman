@@ -49,6 +49,8 @@ OC.L10N.register(
     "Password settings" : "Ajustes de contraseña",
     "Import credentials" : "Importar credenciales",
     "Export credentials" : "Exportar contraseñas",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Ya que todos los datos deben ser descargados, re-cifrados y subidos otra vez cuando cambia la contraseña, este proceso está propenso a errores. Se le recomienda encarecidamente que tenga un respaldo actualizado de su caja fuerte antes de cambiar la contraseña.",
+    "I understand the risks" : "Entiendo los riesgos",
     "Sharing" : "Compartir",
     "Are you sure you want to leave? This will destroy all your credentials" : "¿Estás seguro de que quieres salir? Esto destruirá todas tus contraseñas",
     "Old password field incorrect!" : "¡El campo de contraseña anterior es incorrecto!",

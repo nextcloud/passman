@@ -49,6 +49,8 @@ OC.L10N.register(
     "Password settings" : "密碼設定",
     "Import credentials" : "導入身分驗證",
     "Export credentials" : "導出身分驗證",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "由於更改密碼時必須下載所有數據，重新加密並再次上傳，因此這個過程容易出錯。強烈建議在更改密碼之前對保管庫進行更新備份。",
+    "I understand the risks" : "我了解風險",
     "Sharing" : "分享",
     "Are you sure you want to leave? This will destroy all your credentials" : "是否要離開？這將銷毀您所有的身分驗證",
     "Old password field incorrect!" : "舊密碼錯誤！",
