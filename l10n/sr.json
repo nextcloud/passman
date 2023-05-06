@@ -47,6 +47,8 @@
     "Password settings" : "Поставке лозинки",
     "Import credentials" : "Увези акредитиве",
     "Export credentials" : "Извези акредитиве",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Пошто је, када се мења лозинка, потребно да се сви подаци преузму, поново шифрују, па отпреме, овај процес је подложан грешкама. Снажно се препоручује да имате свежу резервну копију свог сефа пре него што промените лозинку.",
+    "I understand the risks" : "Разумем ризике",
     "Sharing" : "Дељење",
     "Are you sure you want to leave? This will destroy all your credentials" : "Да ли ставрно желите да изађете? Овим ћете уништити све Ваше акредитиве",
     "Old password field incorrect!" : "Поље старе лозинке је неисправно!",

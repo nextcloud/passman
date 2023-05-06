@@ -49,6 +49,7 @@ OC.L10N.register(
     "Password settings" : "Lösenordsinställningar",
     "Import credentials" : "Importera uppgifter",
     "Export credentials" : "Exportera uppgifter",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Eftersom all data måste laddas ner, krypteras om och laddas upp igen när lösenordet ändras, är denna process felbenägen. Det rekommenderas starkt att ha en uppdaterad säkerhetskopia av ditt valv innan du ändrar lösenordet.",
     "I understand the risks" : "Jag förstår riskerna",
     "Sharing" : "Delar",
     "Are you sure you want to leave? This will destroy all your credentials" : "Är du säker på att du vill lämna? Detta kommer förstöra alla dina uppgifter",
