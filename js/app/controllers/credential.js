@@ -390,6 +390,7 @@
                 $scope.no_credentials_label.s_medium=false;
                 $scope.no_credentials_label.s_low=false;
                 $scope.no_credentials_label.expired=false;
+                $scope.no_credentials_label.compromised=false;
 
                 $scope.disableAllLabels = function(){
                     $scope.no_credentials_label.all=false;
@@ -397,6 +398,7 @@
                     $scope.no_credentials_label.s_medium=false;
                     $scope.no_credentials_label.s_low=false;
                     $scope.no_credentials_label.expired=false;
+                    $scope.no_credentials_label.compromised=false;
 				};
 
                 $scope.currentSpecialFilter = "all";
@@ -425,6 +427,10 @@
 		                case "expired":
 			                $scope.filterExpired();
 			                $scope.no_credentials_label.expired=true;
+			                break;
+		                case "compromised":
+			                $scope.filterCompromised();
+			                $scope.no_credentials_label.compromised=true;
 			                break;
 		                case "all":
 			                $scope.filterAll(noFilterReset);
@@ -495,6 +501,20 @@
                     }
                     $scope.filtered_credentials=$scope.filterHidden(postFiltered);
                 };
+
+				$scope.filterCompromised = function(){
+					var initialCredentials=$scope.active_vault.credentials;
+					var postFiltered=[];
+
+					for (var i = 0; i < initialCredentials.length; i++) {
+						var _credential = initialCredentials[i];
+
+						if(_credential.compromised !== false){
+							postFiltered.push(initialCredentials[i]);
+						}
+					}
+					$scope.filtered_credentials=$scope.filterHidden(postFiltered);
+				};
 
                 $scope.filterHidden = function(list){
                     var list_without_hidden=[];
