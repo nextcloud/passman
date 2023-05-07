@@ -1,5 +1,5 @@
 <div ng-controller="GenericCsvImportCtrl">
-	<div class="row">
+	<div class="row margin-bottom-25">
 		<div class="col-xs-12 col-md-3">
 			<div>{{ 'select.csv' | translate}}
 				<input type="file" file-select accept=".csv"
@@ -11,7 +11,8 @@
 				</span>
 			</div>
 			<div ng-show="parsed_csv">
-				<input type="checkbox" ng-model="skipFirstRow"> {{ 'skip.first.row' | translate}}
+				<input id="skipFirstRow" class="checkbox" type="checkbox" ng-model="skipFirstRow">
+				<label for="skipFirstRow">{{'skip.first.row' | translate}}</label>
 			</div>
 			<div ng-show="import_fields.indexOf('label') === -1 && parsed_csv">
 				<b>{{ 'import.csv.label.req' | translate}}</b>
@@ -31,7 +32,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-md-9" ng-show="parsed_csv">
+	</div>
+	<div class="row">
+		<div class="col-xs-12 display-grid" ng-show="parsed_csv">
 			<b>{{ 'first.five.lines' | translate }}</b><br />
 			{{ 'assign.column' | translate }}
 			<div class="import-table-outter">
