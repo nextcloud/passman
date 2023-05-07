@@ -181,13 +181,13 @@
 				};
 
 
-				$scope.inspectCredential = function (row) {
-					$scope.inspected_credential = rowToCredential(row);
+				$scope.inspectCredential = async function (row) {
+					$scope.inspected_credential = await rowToCredential(row);
 				};
 
 				$scope.csvLoaded = function (file) {
 					$scope.import_fields = [];
-					$scope.inspected_credential = false;
+					$scope.inspected_credential = {};
 					$scope.matched = false;
 					var file_data = file.data.split(',');
 					file_data = decodeURIComponent(escape(window.atob(file_data[1])));
