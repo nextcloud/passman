@@ -47,6 +47,8 @@
     "Password settings" : "Parola ayarları",
     "Import credentials" : "Kimlik doğrulama bilgilerini içe aktar",
     "Export credentials" : "Kimlik doğrulama bilgilerini dışa aktar",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Parola değiştirilirken tüm verilerin indirilip, yeniden şifrelenmesi ve yüklenmesi gerektiğinden, bu işlem hataya açıktır. Parolayı değiştirmeden önce kasanızın güncellenmiş bir yedeğini almanız önemle önerilir.",
+    "I understand the risks" : "Riskleri anladım",
     "Sharing" : "Paylaşım",
     "Are you sure you want to leave? This will destroy all your credentials" : "Ayrılmak istediğinize emin misiniz? Tüm kimlik doğrulama bilgileriniz bozulacak.",
     "Old password field incorrect!" : "Eski parola alanındaki bilgi doğru değil!",
