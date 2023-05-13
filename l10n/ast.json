@@ -22,6 +22,7 @@
     "Description" : "Descripción",
     "Passwords" : "Contraseñes",
     "An error occurred!" : "¡Prodúxose un error!",
-    "Reason" : "Motivu"
+    "Reason" : "Motivu",
+    "Saving …" : "Guardando…"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

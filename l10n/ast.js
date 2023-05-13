@@ -24,6 +24,7 @@ OC.L10N.register(
     "Description" : "Descripción",
     "Passwords" : "Contraseñes",
     "An error occurred!" : "¡Prodúxose un error!",
-    "Reason" : "Motivu"
+    "Reason" : "Motivu",
+    "Saving …" : "Guardando…"
 },
 "nplurals=2; plural=(n != 1);");
