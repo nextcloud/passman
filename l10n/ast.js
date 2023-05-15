@@ -21,6 +21,7 @@ OC.L10N.register(
     "Notes" : "Notes",
     "Permissions" : "Permisos",
     "Date" : "Data",
+    "Loading …" : "Cargando…",
     "Description" : "Descripción",
     "Passwords" : "Contraseñes",
     "An error occurred!" : "¡Prodúxose un error!",
