@@ -47,6 +47,8 @@
     "Password settings" : "Nastavení hesla",
     "Import credentials" : "Importovat přihlašovací údaje",
     "Export credentials" : "Exportovat přihlašovací údaje",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Protože je při změně hesla třeba znovu stáhnout, znovu zašifrovat a znovu nahrát veškerá data, je tento proces náchylný k chybám. Před změnou hesla je silně doporučováno mít aktuální zálohu vašeho trezoru.",
+    "I understand the risks" : "Rozumím rizikům",
     "Sharing" : "Sdílení",
     "Are you sure you want to leave? This will destroy all your credentials" : "Opravdu chcete odejít? Všechna vaše pověření budou ztracena",
     "Old password field incorrect!" : "Kolonka pro původní heslo není vyplněná správně!",
