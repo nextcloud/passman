@@ -14,6 +14,8 @@ OC.L10N.register(
     "Public key" : "Clave pública",
     "Action" : "Aición",
     "Details" : "Detalles",
+    "100/hour" : "100/hora",
+    "10/second" : "10/segundu",
     "No revisions found." : "Nun s'atopó nenguna revisión.",
     "Settings" : "Configuración",
     "Password" : "Contraseña",

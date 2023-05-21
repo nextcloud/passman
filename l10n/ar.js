@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "General" : "العامة",
+    "An error occurred" : "حدث خطأ",
     "Starting export" : "عملية التصدير جارية",
     "Done" : "تم",
     "Skip first row" : "تجاهل الصف الأول",
@@ -70,7 +71,7 @@ OC.L10N.register(
     "Edit" : "تعديل",
     "Delete" : "حذف",
     "Share" : "شارك",
-    "Permissions" : "التصريحات",
+    "Permissions" : "الصلاحيات",
     "Date" : "التاريخ",
     "Accept" : "قبول",
     "Decline" : "رفض",
