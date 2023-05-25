@@ -47,6 +47,8 @@
     "Password settings" : "Configurações de senha",
     "Import credentials" : "Importar credenciais",
     "Export credentials" : "Exportar credenciais",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Como todos os dados devem ser baixados, criptografados novamente e carregados novamente ao alterar a senha, esse processo está sujeito a erros. É altamente recomendável ter um backup atualizado do seu cofre antes de alterar a senha.",
+    "I understand the risks" : "Eu entendo os riscos",
     "Sharing" : "Compartilhando",
     "Are you sure you want to leave? This will destroy all your credentials" : "Você tem certeza de que quer sair? Isso irá destruir todas as suas credenciais",
     "Old password field incorrect!" : "Senha antiga incorreta!",
