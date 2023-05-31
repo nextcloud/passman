@@ -85,6 +85,7 @@ OC.L10N.register(
     "You created %1$s" : "لقد أنشأت %1$s",
     "You deleted %1$s" : "حذفت %1$s",
     "Passwords" : "الكلمات السرية",
+    "Your credential \"%s\" expired, click here to update the credential." : "انتهت صلاحية معلومات تسجيل الدخول الخاصة بك \"%s\" ، انقر هنا لتحديث معلومات تسجيل الدخول.",
     "An error occurred!" : "حدث خطأ!",
     "E-mail" : "البريد الإلكتروني",
     "Connection to server lost" : "تم فقد الاتصال بالخادم",
