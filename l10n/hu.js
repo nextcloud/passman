@@ -49,6 +49,8 @@ OC.L10N.register(
     "Password settings" : "Jelszóbeállítások",
     "Import credentials" : "Hitelesítő adatok importálása",
     "Export credentials" : "Hitelesítő adatok exportálása",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Mivel jelszóváltoztatáskor az összes adatot újból le kell tölteni, újból kell titkosítani, és megint fel kell tölteni, ezért a folyamat kockázatos. Erősen javasolt, hogy a jelszava módosítása előtt legyen friss biztonsági mentése a széfjéről.",
+    "I understand the risks" : "Megértettem a kockázatokat",
     "Sharing" : "Megosztás",
     "Are you sure you want to leave? This will destroy all your credentials" : "Biztos, hogy kilép? Ez törli az összes hitelesítő adatát.",
     "Old password field incorrect!" : "A régi jelszó mező helytelen.",
