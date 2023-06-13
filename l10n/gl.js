@@ -167,7 +167,7 @@ OC.L10N.register(
     "Pending" : "Pendente",
     "Enable link sharing" : "Activar a compartición de ligazóns",
     "Share until date" : "Compartir ata a data",
-    "Expire after views" : "Caduca despois de vistas",
+    "Expire after views" : "Caduca após as vistas",
     "Click \"Share\" first" : "Primeiro prema en «Compartir»",
     "Show files" : "Amosar os ficheiros",
     "Details" : "Detalles",
