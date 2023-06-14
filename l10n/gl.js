@@ -284,7 +284,7 @@ OC.L10N.register(
     "Loading …" : "Cargando…",
     "Mark as Compromised" : "Marcar como comprometido",
     "Compromised!" : "Comprometido!",
-    "This password is compromised. You can only remove this warning by changing the password." : "Este contrasinal está comprometido. Só pode eliminar este aviso cambiando o contrasinal.",
+    "This password is compromised. You can only remove this warning by changing the password." : "Este contrasinal está comprometido. Só pode retirar este aviso cambiando o contrasinal.",
     "email" : "correo",
     "Description" : "Descrición",
     "Custom Search:" : "Busca personalizada:",
