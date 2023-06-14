@@ -23,25 +23,15 @@
 
 namespace OCA\Passman\Controller;
 
-use OCA\Comments\Activity\Setting;
-use OCA\Passman\Service\ActivityService;
-use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\FileService;
-use OCA\Passman\Service\NotificationService;
-use OCA\Passman\Service\SettingsService;
-use OCA\Passman\Service\ShareService;
-use OCA\Passman\Service\VaultService;
-use OCP\IGroupManager;
-use OCP\IUserManager;
-use PHPUnit_Framework_TestCase;
-
 use OCP\AppFramework\Http\JSONResponse;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class FileControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass \OCA\Passman\Controller\FileController
+ * @coversDefaultClass \OCA\Passman\controller\FileController
  */
 class FileControllerTest extends PHPUnit_Framework_TestCase {
 

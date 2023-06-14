@@ -9,21 +9,16 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman\Controller;
+namespace OCA\Passman\controller;
 
-use OCP\IRequest;
-use OCP\AppFramework\Http\TemplateResponse;
-use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IRequest;
 
 class PageController extends Controller {
 
-
-	private $userId;
-
-	public function __construct($AppName, IRequest $request, $UserId){
+	public function __construct(string $AppName, IRequest $request, private string $userId) {
 		parent::__construct($AppName, $request);
-		$this->userId = $UserId;
 	}
 
 	/**
@@ -46,7 +41,7 @@ class PageController extends Controller {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function bookmarklet($url='',$title='') {
+	public function bookmarklet($url='', $title='') {
 		$params = array('url' => $url, 'title' => $title);
 		return new TemplateResponse('passman', 'bookmarklet', $params);
 	}

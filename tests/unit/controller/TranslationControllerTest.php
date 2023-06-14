@@ -31,7 +31,7 @@ use PHPUnit_Framework_TestCase;
  * Class TranslationControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass  \OCA\Passman\Controller\TranslationController
+ * @coversDefaultClass  \OCA\Passman\controller\TranslationController
  */
 class TranslationControllerTest extends PHPUnit_Framework_TestCase {
 

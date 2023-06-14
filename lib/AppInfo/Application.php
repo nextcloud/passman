@@ -25,7 +25,7 @@ namespace OCA\Passman\AppInfo;
 
 use OC\Files\View;
 use OC\ServerContainer;
-use OCA\Passman\Controller\ShareController;
+use OCA\Passman\controller\ShareController;
 use OCA\Passman\Middleware\APIMiddleware;
 use OCA\Passman\Middleware\ShareMiddleware;
 use OCA\Passman\Notifier;
@@ -149,7 +149,7 @@ class Application extends App implements IBootstrap {
 				'id' => $c->getAppName(),
 				'order' => 10,
 				'name' => $c->get(IL10N::class)->t('Passwords'),
-				'href' => $urlGenerator->linkToRoute('passman.page.index'),
+				'href' => $urlGenerator->linkToRoute('passman.Page.index'),
 				'icon' => $urlGenerator->imagePath($c->getAppName(), 'app.svg'),
 			];
 		};

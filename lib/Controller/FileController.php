@@ -9,11 +9,10 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman\Controller;
+namespace OCA\Passman\controller;
 
 use OCA\Passman\Service\FileService;
 use OCP\AppFramework\ApiController;
-use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use Psr\Log\LoggerInterface;

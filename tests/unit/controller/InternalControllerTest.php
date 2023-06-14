@@ -23,15 +23,14 @@
 
 namespace OCA\Passman\Controller;
 
-use PHPUnit_Framework_TestCase;
-
 use OCP\AppFramework\Http\JSONResponse;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class InternalControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass \OCA\Passman\Controller\InternalController
+ * @coversDefaultClass \OCA\Passman\controller\InternalController
  */
 class InternalControllerTest extends PHPUnit_Framework_TestCase {
 

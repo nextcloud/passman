@@ -9,7 +9,7 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman\Controller;
+namespace OCA\Passman\controller;
 
 use OCA\Passman\Activity;
 use OCA\Passman\Db\Credential;

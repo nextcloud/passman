@@ -9,15 +9,14 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman\Controller;
+namespace OCA\Passman\controller;
 
-use OCP\IL10N;
-use OCP\Settings\ISettings;
-use OCP\AppFramework\Http\TemplateResponse;
-use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\ApiController;
-use OCP\IRequest;
 use OCA\Passman\Service\SettingsService;
+use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IL10N;
+use OCP\IRequest;
 
 class SettingsController extends ApiController {
 	private $userId;

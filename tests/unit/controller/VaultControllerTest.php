@@ -27,15 +27,14 @@ use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\DeleteVaultRequestService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\VaultService;
-use PHPUnit_Framework_TestCase;
-
 use OCP\AppFramework\Http\JSONResponse;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class VaultControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass \OCA\Passman\Controller\VaultController
+ * @coversDefaultClass \OCA\Passman\controller\VaultController
  */
 class VaultControllerTest extends PHPUnit_Framework_TestCase {
 

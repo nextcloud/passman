@@ -23,15 +23,14 @@
 
 namespace OCA\Passman\Controller;
 
-use PHPUnit_Framework_TestCase;
-
 use OCP\AppFramework\Http\TemplateResponse;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class PageControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass  \OCA\Passman\Controller\PageController
+ * @coversDefaultClass  \OCA\Passman\controller\PageController
  */
 class PageControllerTest extends PHPUnit_Framework_TestCase {
 

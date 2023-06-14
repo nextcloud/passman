@@ -2,11 +2,11 @@
 
 namespace OCA\Passman\Middleware;
 
-use OCA\Passman\Controller\ShareController;
+use OCA\Passman\controller\ShareController;
 use OCA\Passman\Service\SettingsService;
-use OCP\AppFramework\Http\JSONResponse;
-use \OCP\AppFramework\Middleware;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\JSONResponse;
+use OCP\AppFramework\Middleware;
 
 class ShareMiddleware extends Middleware {
 

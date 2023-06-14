@@ -9,12 +9,12 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman\Controller;
+namespace OCA\Passman\controller;
 
-use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\IL10N;
+use OCP\IRequest;
 
 class TranslationController extends ApiController {
 	private $trans;

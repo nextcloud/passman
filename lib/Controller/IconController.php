@@ -9,7 +9,7 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman\Controller;
+namespace OCA\Passman\controller;
 
 use Doctrine\DBAL\Exception\DriverException;
 use OC\App\AppManager;
