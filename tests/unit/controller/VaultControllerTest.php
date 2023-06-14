@@ -34,7 +34,7 @@ use PHPUnit_Framework_TestCase;
  * Class VaultControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass \OCA\Passman\controller\VaultController
+ * @coversDefaultClass \OCA\Passman\Controller\VaultController
  */
 class VaultControllerTest extends PHPUnit_Framework_TestCase {
 

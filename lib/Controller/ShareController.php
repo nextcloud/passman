@@ -9,7 +9,7 @@
  * @copyright Sander Brand 2016
  */
 
-namespace OCA\Passman\controller;
+namespace OCA\Passman\Controller;
 
 use OCA\Passman\Activity;
 use OCA\Passman\Db\File;

@@ -31,7 +31,7 @@ use PHPUnit_Framework_TestCase;
  * Class FileControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass \OCA\Passman\controller\FileController
+ * @coversDefaultClass \OCA\Passman\Controller\FileController
  */
 class FileControllerTest extends PHPUnit_Framework_TestCase {
 

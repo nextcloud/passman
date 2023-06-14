@@ -25,7 +25,7 @@ namespace OCA\Passman\AppInfo;
 
 use OC\Files\View;
 use OC\ServerContainer;
-use OCA\Passman\controller\ShareController;
+use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Middleware\APIMiddleware;
 use OCA\Passman\Middleware\ShareMiddleware;
 use OCA\Passman\Notifier;

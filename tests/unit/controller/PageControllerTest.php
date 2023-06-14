@@ -30,7 +30,7 @@ use PHPUnit_Framework_TestCase;
  * Class PageControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass  \OCA\Passman\controller\PageController
+ * @coversDefaultClass  \OCA\Passman\Controller\PageController
  */
 class PageControllerTest extends PHPUnit_Framework_TestCase {
 

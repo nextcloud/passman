@@ -32,7 +32,7 @@ use PHPUnit_Framework_TestCase;
  * Class SettingsControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass  \OCA\Passman\controller\SettingsController
+ * @coversDefaultClass  \OCA\Passman\Controller\SettingsController
  */
 class SettingsControllerTest extends PHPUnit_Framework_TestCase {
 

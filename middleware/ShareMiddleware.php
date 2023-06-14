@@ -2,7 +2,7 @@
 
 namespace OCA\Passman\Middleware;
 
-use OCA\Passman\controller\ShareController;
+use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Service\SettingsService;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;

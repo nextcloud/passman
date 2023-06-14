@@ -30,7 +30,7 @@ use PHPUnit_Framework_TestCase;
  * Class InternalControllerTest
  *
  * @package OCA\Passman\Controller
- * @coversDefaultClass \OCA\Passman\controller\InternalController
+ * @coversDefaultClass \OCA\Passman\Controller\InternalController
  */
 class InternalControllerTest extends PHPUnit_Framework_TestCase {
 
