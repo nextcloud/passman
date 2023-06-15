@@ -46,9 +46,6 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\IDBConnection;
 use OCP\IGroupManager;
-use OCP\IL10N;
-use OCP\INavigationManager;
-use OCP\IURLGenerator;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use OCP\Notification\IManager;
@@ -127,32 +124,9 @@ class Application extends App implements IBootstrap {
 
 	public function boot(IBootContext $context): void {
 		/** @var IManager $manager */
-		$manager = $context->getAppContainer()->get(IManager::class);
+		$manager = $context->getAppContainer()->query(IManager::class);
 		$manager->registerNotifierService(Notifier::class);
 
 		Util::addTranslations(self::APP_ID);
-		$this->registerNavigationEntry();
-	}
-
-	/**
-	 * Register the navigation entry
-	 */
-	public function registerNavigationEntry() {
-		$c = $this->getContainer();
-		/** @var INavigationManager $navigationManager */
-		$navigationManager = $c->get(INavigationManager::class);
-
-		$navigationEntry = function () use ($c) {
-			/** @var IURLGenerator $urlGenerator */
-			$urlGenerator = $c->get(IURLGenerator::class);
-			return [
-				'id' => $c->getAppName(),
-				'order' => 10,
-				'name' => $c->get(IL10N::class)->t('Passwords'),
-				'href' => $urlGenerator->linkToRoute('passman.Page.index'),
-				'icon' => $urlGenerator->imagePath($c->getAppName(), 'app.svg'),
-			];
-		};
-		$navigationManager->add($navigationEntry);
 	}
 }
