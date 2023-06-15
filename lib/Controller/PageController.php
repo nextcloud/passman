@@ -11,15 +11,17 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\AppInfo\Application;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
+use OCP\Util;
 
 class PageController extends Controller {
 
-	public function __construct(string $AppName, IRequest $request, private string $userId) {
-		parent::__construct($AppName, $request);
-	}
+    public function __construct(IRequest $request) {
+        parent::__construct(Application::APP_ID, $request);
+    }
 
 	/**
 	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
@@ -32,8 +34,7 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function index() {
-		$params = ['user' => $this->userId];
-		return new TemplateResponse('passman', 'main', $params);  // templates/main.php
+		return new TemplateResponse($this->appName, 'main');  // templates/main.php
 	}
 
 
@@ -43,7 +44,7 @@ class PageController extends Controller {
 	 */
 	public function bookmarklet($url='', $title='') {
 		$params = array('url' => $url, 'title' => $title);
-		return new TemplateResponse('passman', 'bookmarklet', $params);
+		return new TemplateResponse($this->appName, 'bookmarklet', $params);
 	}
 
 	/**
@@ -52,7 +53,7 @@ class PageController extends Controller {
 	 * @PublicPage
 	 */
 	public function publicSharePage() {
-		return new TemplateResponse('passman', 'public_share');
+		return new TemplateResponse($this->appName, 'public_share');
 	}
 
 }

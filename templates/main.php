@@ -1,122 +1,124 @@
 <?php
+
+use OCP\Util;
+
 /*
  * Javascripts
  */
 /*build-js-start*/
-script('passman', 'vendor/angular/angular.min');
-script('passman', 'vendor/angular-animate/angular-animate.min');
-script('passman', 'vendor/angular-cookies/angular-cookies.min');
-script('passman', 'vendor/angular-resource/angular-resource.min');
-script('passman', 'vendor/angular-route/angular-route.min');
-script('passman', 'vendor/angular-sanitize/angular-sanitize.min');
-script('passman', 'vendor/angular-touch/angular-touch.min');
-script('passman', 'vendor/angular-local-storage/angular-local-storage.min');
-script('passman', 'vendor/angular-off-click/angular-off-click.min');
-script('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker.min');
-script('passman', 'vendor/angular-translate/angular-translate.min');
-script('passman', 'vendor/angular-translate/angular-translate-loader-url.min');
-script('passman', 'vendor/ng-password-meter/ng-password-meter');
-script('passman', 'vendor/sjcl/sjcl');
-script('passman', 'vendor/zxcvbn/zxcvbn');
-script('passman', 'vendor/ng-clipboard/clipboard.min');
-script('passman', 'vendor/ng-clipboard/ngclipboard');
-script('passman', 'vendor/ng-tags-input/ng-tags-input.min');
-script('passman', 'vendor/angular-xeditable/xeditable.min');
-script('passman', 'vendor/sha/sha');
-script('passman', 'vendor/llqrcode/llqrcode');
-script('passman', 'vendor/forge.0.6.9.min');
-script('passman', 'vendor/download');
-script('passman', 'vendor/ui-sortable/sortable');
-script('passman', 'vendor/papa-parse/papaparse.min');
-script('passman', 'lib/promise');
-script('passman', 'lib/crypto_wrap');
-script('passman', 'lib/otpauth.umd');
+Util::addScript('passman', 'vendor/angular/angular.min');
+Util::addScript('passman', 'vendor/angular-animate/angular-animate.min');
+Util::addScript('passman', 'vendor/angular-cookies/angular-cookies.min');
+Util::addScript('passman', 'vendor/angular-resource/angular-resource.min');
+Util::addScript('passman', 'vendor/angular-route/angular-route.min');
+Util::addScript('passman', 'vendor/angular-sanitize/angular-sanitize.min');
+Util::addScript('passman', 'vendor/angular-touch/angular-touch.min');
+Util::addScript('passman', 'vendor/angular-local-storage/angular-local-storage.min');
+Util::addScript('passman', 'vendor/angular-off-click/angular-off-click.min');
+Util::addScript('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker.min');
+Util::addScript('passman', 'vendor/angular-translate/angular-translate.min');
+Util::addScript('passman', 'vendor/angular-translate/angular-translate-loader-url.min');
+Util::addScript('passman', 'vendor/ng-password-meter/ng-password-meter');
+Util::addScript('passman', 'vendor/sjcl/sjcl');
+Util::addScript('passman', 'vendor/zxcvbn/zxcvbn');
+Util::addScript('passman', 'vendor/ng-clipboard/clipboard.min');
+Util::addScript('passman', 'vendor/ng-clipboard/ngclipboard');
+Util::addScript('passman', 'vendor/ng-tags-input/ng-tags-input.min');
+Util::addScript('passman', 'vendor/angular-xeditable/xeditable.min');
+Util::addScript('passman', 'vendor/sha/sha');
+Util::addScript('passman', 'vendor/llqrcode/llqrcode');
+Util::addScript('passman', 'vendor/forge.0.6.9.min');
+Util::addScript('passman', 'vendor/download');
+Util::addScript('passman', 'vendor/ui-sortable/sortable');
+Util::addScript('passman', 'vendor/papa-parse/papaparse.min');
+Util::addScript('passman', 'lib/promise');
+Util::addScript('passman', 'lib/crypto_wrap');
+Util::addScript('passman', 'lib/otpauth.umd');
 
 
-script('passman', 'app/app');
-script('passman', 'templates');
-script('passman', 'app/controllers/main');
-script('passman', 'app/controllers/menu');
-script('passman', 'app/controllers/vault');
-script('passman', 'app/controllers/credential');
-script('passman', 'app/controllers/edit_credential');
-script('passman', 'app/controllers/share');
-script('passman', 'app/controllers/share_settings');
-script('passman', 'app/controllers/revision');
-script('passman', 'app/controllers/settings');
-script('passman', 'app/controllers/import');
-script('passman', 'app/controllers/export');
-script('passman', 'app/controllers/generic-csv-importer');
-script('passman', 'app/controllers/vaultreqdeletion');
-script('passman', 'app/filters/range');
-script('passman', 'app/filters/propsfilter');
-script('passman', 'app/filters/byte');
-script('passman', 'app/filters/tagfilter');
-script('passman', 'app/filters/escapeHTML');
-script('passman', 'app/filters/as');
-script('passman', 'app/filters/credentialsearch');
-script('passman', 'app/filters/toHHMMSS');
-script('passman', 'app/services/cacheservice');
-script('passman', 'app/services/vaultservice');
-script('passman', 'app/services/credentialservice');
-script('passman', 'app/services/settingsservice');
-script('passman', 'app/services/fileservice');
-script('passman', 'app/services/encryptservice');
-script('passman', 'app/services/iconservice');
-script('passman', 'app/services/tagservice');
-script('passman', 'app/services/notificationservice');
-script('passman', 'app/services/shareservice');
-script('passman', 'app/services/searchboxexpanderservice');
-script('passman', 'app/factory/sharingacl');
-script('passman', 'app/directives/passwordgen');
-script('passman', 'app/directives/fileselect');
-script('passman', 'app/directives/progressbar');
-script('passman', 'app/directives/otp');
-script('passman', 'app/directives/qrreader');
-script('passman', 'app/directives/tooltip');
-script('passman', 'app/directives/use-theme');
-script('passman', 'app/directives/credentialfield');
-script('passman', 'app/directives/ngenter');
-script('passman', 'app/directives/autoscroll');
-script('passman', 'app/directives/clickselect');
-script('passman', 'app/directives/colorfromstring');
-script('passman', 'app/directives/credentialcounter');
-script('passman', 'app/directives/clearbutton2');
-script('passman', 'app/directives/credentialtemplate');
-script('passman', 'app/directives/clickdisable');
-script('passman', 'app/directives/icon');
-script('passman', 'app/directives/iconpicker');
-script('passman', 'importers/import-main');
-script('passman', 'importers/importer-keepasscsv');
-script('passman', 'importers/importer-lastpasscsv');
-script('passman', 'importers/importer-dashlanecsv');
-script('passman', 'importers/importer-zohocsv');
-script('passman', 'importers/importer-passmanjson');
-script('passman', 'importers/importer-ocpasswords');
-script('passman', 'importers/importer-clipperz');
-script('passman', 'importers/importer-teampass');
-script('passman', 'importers/importer-enpass');
-script('passman', 'importers/importer-passpackcsv');
-script('passman', 'importers/importer-randomdata');
-script('passman', 'importers/importer-padlock');
-script('passman', 'exporters/exporter-main');
-script('passman', 'exporters/exporter-csv');
-script('passman', 'exporters/exporter-json');
+Util::addScript('passman', 'app/app');
+Util::addScript('passman', 'templates');
+Util::addScript('passman', 'app/controllers/main');
+Util::addScript('passman', 'app/controllers/menu');
+Util::addScript('passman', 'app/controllers/vault');
+Util::addScript('passman', 'app/controllers/credential');
+Util::addScript('passman', 'app/controllers/edit_credential');
+Util::addScript('passman', 'app/controllers/share');
+Util::addScript('passman', 'app/controllers/share_settings');
+Util::addScript('passman', 'app/controllers/revision');
+Util::addScript('passman', 'app/controllers/settings');
+Util::addScript('passman', 'app/controllers/import');
+Util::addScript('passman', 'app/controllers/export');
+Util::addScript('passman', 'app/controllers/generic-csv-importer');
+Util::addScript('passman', 'app/controllers/vaultreqdeletion');
+Util::addScript('passman', 'app/filters/range');
+Util::addScript('passman', 'app/filters/propsfilter');
+Util::addScript('passman', 'app/filters/byte');
+Util::addScript('passman', 'app/filters/tagfilter');
+Util::addScript('passman', 'app/filters/escapeHTML');
+Util::addScript('passman', 'app/filters/as');
+Util::addScript('passman', 'app/filters/credentialsearch');
+Util::addScript('passman', 'app/filters/toHHMMSS');
+Util::addScript('passman', 'app/services/cacheservice');
+Util::addScript('passman', 'app/services/vaultservice');
+Util::addScript('passman', 'app/services/credentialservice');
+Util::addScript('passman', 'app/services/settingsservice');
+Util::addScript('passman', 'app/services/fileservice');
+Util::addScript('passman', 'app/services/encryptservice');
+Util::addScript('passman', 'app/services/iconservice');
+Util::addScript('passman', 'app/services/tagservice');
+Util::addScript('passman', 'app/services/notificationservice');
+Util::addScript('passman', 'app/services/shareservice');
+Util::addScript('passman', 'app/services/searchboxexpanderservice');
+Util::addScript('passman', 'app/factory/sharingacl');
+Util::addScript('passman', 'app/directives/passwordgen');
+Util::addScript('passman', 'app/directives/fileselect');
+Util::addScript('passman', 'app/directives/progressbar');
+Util::addScript('passman', 'app/directives/otp');
+Util::addScript('passman', 'app/directives/qrreader');
+Util::addScript('passman', 'app/directives/tooltip');
+Util::addScript('passman', 'app/directives/use-theme');
+Util::addScript('passman', 'app/directives/credentialfield');
+Util::addScript('passman', 'app/directives/ngenter');
+Util::addScript('passman', 'app/directives/autoscroll');
+Util::addScript('passman', 'app/directives/clickselect');
+Util::addScript('passman', 'app/directives/colorfromstring');
+Util::addScript('passman', 'app/directives/credentialcounter');
+Util::addScript('passman', 'app/directives/clearbutton2');
+Util::addScript('passman', 'app/directives/credentialtemplate');
+Util::addScript('passman', 'app/directives/clickdisable');
+Util::addScript('passman', 'app/directives/icon');
+Util::addScript('passman', 'app/directives/iconpicker');
+Util::addScript('passman', 'importers/import-main');
+Util::addScript('passman', 'importers/importer-keepasscsv');
+Util::addScript('passman', 'importers/importer-lastpasscsv');
+Util::addScript('passman', 'importers/importer-dashlanecsv');
+Util::addScript('passman', 'importers/importer-zohocsv');
+Util::addScript('passman', 'importers/importer-passmanjson');
+Util::addScript('passman', 'importers/importer-ocpasswords');
+Util::addScript('passman', 'importers/importer-clipperz');
+Util::addScript('passman', 'importers/importer-teampass');
+Util::addScript('passman', 'importers/importer-enpass');
+Util::addScript('passman', 'importers/importer-passpackcsv');
+Util::addScript('passman', 'importers/importer-randomdata');
+Util::addScript('passman', 'importers/importer-padlock');
+Util::addScript('passman', 'exporters/exporter-main');
+Util::addScript('passman', 'exporters/exporter-csv');
+Util::addScript('passman', 'exporters/exporter-json');
 /*build-js-end*/
-
 
 /*
  * Styles
  */
 /*build-css-start*/
-style('passman', 'vendor/ng-password-meter/ng-password-meter');
-style('passman', 'vendor/bootstrap/bootstrap.min');
+Util::addStyle('passman', 'vendor/ng-password-meter/ng-password-meter');
+Util::addStyle('passman', 'vendor/bootstrap/bootstrap.min');
 
-style('passman', 'vendor/font-awesome/font-awesome.min');
-style('passman', 'vendor/angular-xeditable/xeditable.min');
-style('passman', 'vendor/ng-tags-input/ng-tags-input.min');
-style('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker');
-style('passman', 'app');
+Util::addStyle('passman', 'vendor/font-awesome/font-awesome.min');
+Util::addStyle('passman', 'vendor/angular-xeditable/xeditable.min');
+Util::addStyle('passman', 'vendor/ng-tags-input/ng-tags-input.min');
+Util::addStyle('passman', 'vendor/angularjs-datetime-picker/angularjs-datetime-picker');
+Util::addStyle('passman', 'app');
 /*build-css-end*/
 ?>
 
@@ -137,7 +139,7 @@ style('passman', 'app');
                 <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
                 <a href="" class="icon-tag" ng-click="tagCollapsibleClicked()">{{ 'navigation.tags' | translate }}</a>
                 <ul>
-                   <li class="taginput">
+                    <li class="taginput">
                         <a class="icon-search taginput">
                             <form ng-submit="tagClickedString(taginput); clearForm();">
                                 <input id="tagsearch" list="tags" ng-model="taginput" placeholder="{{ 'navigation.tags.search' | translate }}" />
