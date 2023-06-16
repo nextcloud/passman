@@ -44,6 +44,7 @@
     "Password settings" : "Axuste de contrasinal",
     "Import credentials" : "Importar credenciais",
     "Export credentials" : "Exportar credenciais",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Xa que todos os datos deben ser descargados, cifrados de novo e voltos a cargar ao cambiar o contrasinal, este proceso é propenso a erros. Recomendámoslle encarecidamente ter unha copia de seguridade actualizada da súa bóveda antes de cambiar o contrasinal.",
     "Sharing" : "Compartindo",
     "Are you sure you want to leave? This will destroy all your credentials" : "Confirma que quere abandonar? Isto destruirá todas as súas credenciais",
     "Old password field incorrect!" : "O campo de contrasinal antigo é incorrecto!",
@@ -244,12 +245,13 @@
     "Password strength must be at least: {{strength}}" : "A fortaleza do contrasinal debe ser cando menos: {{strength}}",
     "Please give your new vault a name." : "Póñalle un nome á súa bóveda",
     "Repeat vault password" : "Repita o contrasinal da bóveda",
-    "Your sharing keys will have a strength of 1024 bit, which you can change in \"Settings\" later." : "A súa clave de compartir terá unha forza de 1024 bits, que pode cambiar máis adiante en «Axustes».",
+    "Your sharing keys will have a strength of 1024 bit, which you can change in \"Settings\" later." : "A súa chave de compartir terá unha forza de 1024 bits, que pode cambiar máis adiante en «Axustes».",
     "Create vault" : "Crear unha bóveda",
     "Go back to vaults" : "Volver ás bóvedas",
     "Please input the password for" : "Introduza o contrasinal para",
     "Set this vault as the default." : "Estabelecer esta bóveda como predeterminada",
     "Log into this vault automatically." : "Acceder a esta bóveda automaticamente",
+    "Log out of this vault automatically after:" : "Saír desta bóveda automaticamente após:",
     "Decrypt vault" : "Descifrar a bóveda",
     "Seems you lost the vault password and you're unable to log in." : "Semella que perdeu o contrasinal da bóveda e que non é quen de acceder á sesión.",
     "If you want this vault to be removed you can request that here." : "Se quere que esta bóveda sexa eliminada, pode solicitalo aquí.",
@@ -351,6 +353,6 @@
     "Problem loading page, reloading in 5 seconds" : "Produciuse un problema ao cargar a páxina, volverá cargar en 5 segundos",
     "Saving …" : "Gardando…",
     "Dismiss" : "Rexeitar",
-    "seconds ago" : "hai uns segundos"
+    "seconds ago" : "segundos atrás"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

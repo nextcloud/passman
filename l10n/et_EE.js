@@ -80,6 +80,7 @@ OC.L10N.register(
     "E-mail" : "E-post",
     "Connection to server lost" : "Ühendus serveriga katkes",
     "Problem loading page, reloading in 5 seconds" : "Tõrge lehe laadimisel, ümberlaadimine 5 sekundi pärast",
+    "Saving …" : "Salvestamine …",
     "Dismiss" : "Jäta vahele",
     "seconds ago" : "sekundit tagasi"
 },
