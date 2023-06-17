@@ -78,7 +78,7 @@
     "Use this icon" : "使用这个图标",
     "Delete current icon" : "删除当前图标",
     "Get icon from page" : "从页面获取图标",
-    "This may take a few seconds …" : "这可能需要几秒钟 …",
+    "This may take a few seconds …" : "这可能需要几秒钟……",
     "There was an error fetching the icon!" : "获取图标出错",
     "Selected icon" : "选定的图标",
     "Field label" : "字段标签",
@@ -361,7 +361,7 @@
     "E-mail" : "电子邮件",
     "Expires:" : "过期:",
     "Connection to server lost" : "与服务器的连接断开",
-    "Problem loading page, reloading in 5 seconds" : "加载页面出现问题，在 5 秒内重新加载",
+    "Problem loading page, reloading in 5 seconds" : "加载页面出现问题，将在5秒后重新加载",
     "Saving …" : "正在保存…",
     "Dismiss" : "忽略",
     "seconds ago" : "几秒前"
