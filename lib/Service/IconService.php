@@ -212,11 +212,15 @@ class IconService {
 						if (isset($base_href)) {
 							$baseHrefType = self::urlType($base_href);
 							if ($baseHrefType != self::URL_TYPE_ABSOLUTE) {
-								throw new \Exception("Base href is not an absolute URL");
+								$this->icoUrl = $pageUrlInfo['scheme'] . '://' . $pageUrlInfo['host'] . $ico_href;
+								$this->findMethod .= ' with page href';
 							}
-							$baseUrlInfo = parse_url($base_href);
-							$this->icoUrl = $baseUrlInfo['scheme'] . '://' . $baseUrlInfo['host'] . $ico_href;
-							$this->findMethod .= ' with base href';
+							else
+							{
+								$baseUrlInfo = parse_url($base_href);
+								$this->icoUrl = $baseUrlInfo['scheme'] . '://' . $baseUrlInfo['host'] . $ico_href;
+								$this->findMethod .= ' with base href';
+							}
 						}
 						$this->icoType = self::getExtension($this->icoUrl);
 						break;
