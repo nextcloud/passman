@@ -24,11 +24,12 @@
 use \OCA\Passman\Db\CredentialMapper;
 use \OCA\Passman\Db\Credential;
 use \OCA\Passman\Utility\Utils;
+use Test\TestCase;
 
 /**
  * @coversDefaultClass \OCA\Passman\Db\CredentialMapper
  */
-class CredentialMapperTest extends DatabaseHelperTest {
+class CredentialMapperTest extends TestCase {
 	CONST TABLES = [
 		'oc_passman_credentials'
 	];
@@ -46,7 +47,8 @@ class CredentialMapperTest extends DatabaseHelperTest {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		parent::setUp();
 		$this->mapper = new CredentialMapper($this->db, new Utils());
 		$this->dataset = $this->getTableDataset(self::TABLES[0]);

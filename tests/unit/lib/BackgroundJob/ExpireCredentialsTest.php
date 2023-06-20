@@ -23,9 +23,9 @@
 
 namespace OCA\Passman\Tests\BackgroundJob;
 
-use PHPUnit_Framework_TestCase;
 use OCA\Passman\BackgroundJob\ExpireCredentials;
 use OCP\IConfig;
+use Test\TestCase;
 
 /**
  * Class ExpireCredentialsTest
@@ -34,7 +34,7 @@ use OCP\IConfig;
  * @package OCA\Passman\Tests\BackgroundJob
  * @covers \OCA\Passman\BackgroundJob\ExpireCredentials
  */
-class ExpireCredentialsTest extends PHPUnit_Framework_TestCase {
+class ExpireCredentialsTest extends TestCase {
 	public function testRun() {
 		$backgroundJob = new ExpireCredentials(
 			$this->getMockBuilder(IConfig::class)->getMock()

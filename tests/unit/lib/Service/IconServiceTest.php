@@ -24,8 +24,8 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Service\IconService;
-use PHPUnit_Framework_TestCase;
 use OCA\Passman\Service\SettingsService;
+use Test\TestCase;
 
 /**
  * Class SettingsServiceTest
@@ -33,12 +33,13 @@ use OCA\Passman\Service\SettingsService;
  * @package OCA\Passman\Controller
  * @coversDefaultClass  \OCA\Passman\Service\EncryptService
  */
-class IconServiceTest extends PHPUnit_Framework_TestCase {
+class IconServiceTest extends TestCase {
 
 	private $service;
 	private $testKey;
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->options = array(
 			'sslVerify' => false,
 		);

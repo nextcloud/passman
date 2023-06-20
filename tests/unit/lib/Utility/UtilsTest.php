@@ -26,7 +26,7 @@ use OCA\Passman\Utility\Utils;
 /**
  * @coversDefaultClass OCA\Passman\Utility\Utils
  */
-class UtilsTest extends PHPUnit_Framework_TestCase {
+class UtilsTest extends \Test\TestCase {
 	/**
 	 * @covers ::GUID
 	 */

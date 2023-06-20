@@ -21,9 +21,12 @@
  *
  */
 
-use \OCA\Passman\AppInfo\Application;
+namespace OCA\Passman\Tests\DB;
 
-abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
+use \OCA\Passman\AppInfo\Application;
+use Test\TestCase;
+
+abstract class DatabaseHelperTest extends TestCase {
 	CONST DUMPS_DIR = __DIR__ . '/dumps/';
 
 	/**
@@ -59,7 +62,8 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 		parent::__construct();
 	}
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		if (self::$server === NULL) self::$server = new \OC\Server(getenv('SERVER_BASE_DIR'), new \OC\Config(getenv('SERVER_CONFIG_DIR'), getenv('SERVER_CONFIG_FILE')));
 
 		$this->db = self::$server->getDatabaseConnection();
@@ -128,9 +132,9 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 	/**
 	 * Finds a subset of rows from the dataset which field name matches
 	 * the specified value
-	 * @param $table_name	The name of the table to search into
-	 * @param $field_name	The field name
-	 * @param $value_match	The value to match data against
+	 * @param $table_name	string The name of the table to search into
+	 * @param $field_name	mixed The field name
+	 * @param $value_match	mixed The value to match data against
 	 * @return array		An array of rows
 	 */
 	public function findInDataset($table_name, $field_name, $value_match) {
@@ -150,9 +154,9 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 
 	/**
 	 * Filters the given array
-	 * @param $dataset		The data to filter
-	 * @param $field_name	The array key to match against
-	 * @param $value_match	The value to compare to
+	 * @param $dataset		array The data to filter
+	 * @param $field_name	mixed The array key to match against
+	 * @param $value_match	mixed The value to compare to
 	 */
 	public function filterDataset($dataset, $field_name, $value_match) {
 		$ret = [];

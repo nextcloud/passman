@@ -26,7 +26,7 @@ use \OCA\Passman\Db\EntityJSONSerializer;
 /**
  * @coversDefaultClass \OCA\Passman\Db\EntityJSONSerializer
  */
-class EntityJSONSerializerTest extends PHPUnit_Framework_TestCase {
+class EntityJSONSerializerTest extends \Test\TestCase {
 	CONST TEST_FIELDS = [
 		'an_string'	=> 'value',
 		'an_int'	=> 1234,
@@ -42,7 +42,8 @@ class EntityJSONSerializerTest extends PHPUnit_Framework_TestCase {
 	 */
 	protected $trait;
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->trait = $this->getObjectForTrait(EntityJSONSerializer::class);
 
 		foreach (self::TEST_FIELDS as $key => $value){

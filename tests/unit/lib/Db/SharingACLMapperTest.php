@@ -23,11 +23,12 @@
 
 use \OCA\Passman\Db\SharingACLMapper;
 use \OCA\Passman\Db\SharingACL;
+use Test\TestCase;
 
 /**
  * @coversDefaultClass \OCA\Passman\Db\SharingACLMapper
  */
-class SharingACLMapperTest extends DatabaseHelperTest {
+class SharingACLMapperTest extends TestCase {
 	CONST TABLES = [
 		'oc_passman_sharing_acl'
 	];
@@ -52,7 +53,8 @@ class SharingACLMapperTest extends DatabaseHelperTest {
 		return self::TABLES;
 	}
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		parent::setUp();
 		$this->mapper = new SharingACLMapper($this->db);
 		$this->dataset = $this->getTableDataset(self::TABLES[0]);

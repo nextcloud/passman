@@ -26,7 +26,7 @@ use \OCA\Passman\Db\CredentialRevision;
 /**
  * @coversDefaultClass \OCA\Passman\Db\CredentialRevision
  */
-class CredentialRevisionTest extends PHPUnit_Framework_TestCase {
+class CredentialRevisionTest extends \Test\TestCase {
 	CONST TEST_DATA = [
 		'id'			=> 30,
 		'guid'			=> 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
@@ -45,7 +45,8 @@ class CredentialRevisionTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->revision = CredentialRevision::fromRow(self::TEST_DATA);
 	}
 

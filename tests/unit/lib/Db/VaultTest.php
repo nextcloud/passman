@@ -26,7 +26,7 @@ use \OCA\Passman\Db\Vault;
 /**
  * @coversDefaultClass  \OCA\Passman\Db\Vault
  */
-class VaultTest extends PHPUnit_Framework_TestCase {
+class VaultTest extends \Test\TestCase {
 	CONST TEST_DATA = [
 		'id'						=> 1,
 		'guid'						=> 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
@@ -54,7 +54,8 @@ pbbPwdc88kGcdqBzWQIDAQAB
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->vault = Vault::fromRow(self::TEST_DATA);
 	}
 

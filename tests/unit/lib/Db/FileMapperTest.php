@@ -23,6 +23,8 @@
 
 use \OCA\Passman\Db\FileMapper;
 use \OCA\Passman\Db\File;
+use OCA\Passman\Tests\DB\DatabaseHelperTest;
+use Test\TestCase;
 
 /**
  * @coversDefaultClass \OCA\Passman\Db\FileMapper
@@ -45,7 +47,8 @@ class FileMapperTest extends DatabaseHelperTest {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		parent::setUp();
 		$this->mapper = new FileMapper($this->db, new \OCA\Passman\Utility\Utils());
 		$this->dataset = $this->getTableDataset(self::TABLES[0]);

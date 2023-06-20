@@ -26,7 +26,7 @@ use \OCA\Passman\Db\File;
 /**
  * @coversDefaultClass  \OCA\Passman\Db\File
  */
-class FileTest extends PHPUnit_Framework_TestCase {
+class FileTest extends \Test\TestCase {
 	CONST TEST_DATA = [
 		'id'		=> 21,
 		'guid'		=> 'FC148F1A-AA67-489E-ABF5-4D7AA525F067',
@@ -46,7 +46,8 @@ class FileTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->file = File::fromRow(self::TEST_DATA);
 	}
 

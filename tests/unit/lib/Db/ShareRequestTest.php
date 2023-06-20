@@ -27,7 +27,7 @@ use \OCA\Passman\Utility\PermissionEntity;
 /**
  * @coversDefaultClass \OCA\Passman\Db\ShareRequest
  */
-class ShareRequestTest extends PHPUnit_Framework_TestCase {
+class ShareRequestTest extends \Test\TestCase {
 	CONST TEST_DATA = [
 		'id'				=> 233,
 		'item_id'			=> 5,
@@ -49,7 +49,8 @@ class ShareRequestTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->request = ShareRequest::fromRow(self::TEST_DATA);
 	}
 

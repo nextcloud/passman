@@ -27,7 +27,7 @@ use \OCA\Passman\Utility\PermissionEntity;
 /**
  * @coversDefaultClass \OCA\Passman\Db\SharingACL
  */
-class SharingACLTest extends PHPUnit_Framework_TestCase {
+class SharingACLTest extends \Test\TestCase {
 	CONST TEST_DATA = [
 		'id'			=> 55,
 		'item_id'		=> 5,
@@ -50,7 +50,8 @@ class SharingACLTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->acl = SharingACL::fromRow(self::TEST_DATA);
 	}
 

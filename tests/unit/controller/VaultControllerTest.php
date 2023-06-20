@@ -28,7 +28,7 @@ use OCA\Passman\Service\DeleteVaultRequestService;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\VaultService;
 use OCP\AppFramework\Http\JSONResponse;
-use PHPUnit_Framework_TestCase;
+use Test\TestCase;
 
 /**
  * Class VaultControllerTest
@@ -36,7 +36,7 @@ use PHPUnit_Framework_TestCase;
  * @package OCA\Passman\Controller
  * @coversDefaultClass \OCA\Passman\Controller\VaultController
  */
-class VaultControllerTest extends PHPUnit_Framework_TestCase {
+class VaultControllerTest extends TestCase {
 
 	private $controller;
 	private $userId = 'example';
@@ -44,7 +44,8 @@ class VaultControllerTest extends PHPUnit_Framework_TestCase {
 	private $vaultService;
 	private $deleteVaultRequestService;
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 		$this->vaultService = $this->createMock(VaultService::class);
 		$this->credentialService = $this->createMock(CredentialService::class);

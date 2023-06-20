@@ -30,7 +30,7 @@ use \OCP\AppFramework\Db\Entity;
  * @uses \OCP\AppFramework\Db\Entity
  * @uses \JsonSerializable
  */
-class CredentialTest extends PHPUnit_Framework_TestCase {
+class CredentialTest extends \Test\TestCase {
 	CONST TEST_DATA = [
 		'id' 		=> 5,
 		'guid' 		=> 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
@@ -64,7 +64,8 @@ class CredentialTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->credential = Credential::fromRow(self::TEST_DATA);
 	}
 

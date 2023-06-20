@@ -23,12 +23,13 @@
 
 use OCA\Passman\Db\ShareRequestMapper;
 use OCA\Passman\Db\ShareRequest;
+use Test\TestCase;
 
 
 /**
  * @coversDefaultClass OCA\Passman\Db\ShareRequestMapper
  */
-class ShareRequestMapperTest extends DatabaseHelperTest {
+class ShareRequestMapperTest extends TestCase {
 	CONST TABLES = [
 		'oc_passman_share_request'
 	];
@@ -46,7 +47,8 @@ class ShareRequestMapperTest extends DatabaseHelperTest {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		parent::setUp();
 		$this->dataset = $this->getTableDataset(self::TABLES[0]);
 		$this->mapper = new ShareRequestMapper($this->db);

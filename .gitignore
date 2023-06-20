@@ -1,6 +1,7 @@
 node_modules
 .idea
 .sass-cache
+.phpunit.result.cache
 npm-debug.log
 
 # Don't mess with other dev's config

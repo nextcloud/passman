@@ -24,12 +24,13 @@
 use \OCA\Passman\Db\VaultMapper;
 use \OCA\Passman\Utility\Utils;
 use \OCA\Passman\Db\Vault;
+use Test\TestCase;
 
 /**
  * Unit tests for VaultMapper
  * @coversDefaultClass \OCA\Passman\Db\VaultMapper
  */
-class VaultMapperTest extends DatabaseHelperTest {
+class VaultMapperTest extends TestCase {
 	CONST TABLES = [
 		'oc_passman_vaults'
 	];
@@ -44,7 +45,8 @@ class VaultMapperTest extends DatabaseHelperTest {
 	 */
 	protected $vaults_dataset;
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		parent::setUp();
 		$this->vault_mapper = new VaultMapper($this->db, new Utils());
 		$this->vaults_dataset = $this->getTableDataset(self::TABLES[0]);

@@ -24,7 +24,7 @@
 namespace OCA\Passman\Controller;
 
 use OCP\AppFramework\Http\JSONResponse;
-use PHPUnit_Framework_TestCase;
+use Test\TestCase;
 
 
 /**
@@ -33,11 +33,12 @@ use PHPUnit_Framework_TestCase;
  * @package OCA\Passman\Controller
  * @coversDefaultClass  \OCA\Passman\Controller\TranslationController
  */
-class TranslationControllerTest extends PHPUnit_Framework_TestCase {
+class TranslationControllerTest extends TestCase {
 
 	private $controller;
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 		$IL10N = $this->getMockBuilder('OCP\IL10N')->getMock();
 

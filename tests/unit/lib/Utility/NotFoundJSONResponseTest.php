@@ -27,7 +27,7 @@ use \OCP\AppFramework\Http;
 /**
  * @coversDefaultClass \OCA\Passman\Utility\NotFoundJSONResponse
  */
-class NotFoundJSONResponseTest extends PHPUnit_Framework_TestCase {
+class NotFoundJSONResponseTest extends \Test\TestCase {
 	/**
 	 * @covers ::__construct
 	 */

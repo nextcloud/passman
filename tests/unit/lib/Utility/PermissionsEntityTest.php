@@ -26,7 +26,7 @@ use \OCA\Passman\Utility\PermissionEntity;
 /**
  * @coversDefaultClass \OCA\Passman\Utility\PermissionEntity
  */
-class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
+class PermissionsEntityTest extends \Test\TestCase {
 	/**
 	 * @var PermissionEntity
 	 */
@@ -35,9 +35,10 @@ class PermissionsEntityTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @after
 	 */
-	public function setUp() {
+	public function setUp(): void
+    {
 		$this->permission = new PermissionEntity();
-		$this->permission->permissions = 0;
+		$this->permission->setPermissions(0);
 	}
 
 	/**

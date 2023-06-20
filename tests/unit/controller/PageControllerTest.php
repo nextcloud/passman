@@ -24,7 +24,7 @@
 namespace OCA\Passman\Controller;
 
 use OCP\AppFramework\Http\TemplateResponse;
-use PHPUnit_Framework_TestCase;
+use Test\TestCase;
 
 /**
  * Class PageControllerTest
@@ -32,12 +32,13 @@ use PHPUnit_Framework_TestCase;
  * @package OCA\Passman\Controller
  * @coversDefaultClass  \OCA\Passman\Controller\PageController
  */
-class PageControllerTest extends PHPUnit_Framework_TestCase {
+class PageControllerTest extends TestCase {
 
 	private $controller;
 	private $userId = 'john';
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 
 		$this->controller = new PageController(

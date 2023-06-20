@@ -24,7 +24,7 @@
 namespace OCA\Passman\Controller;
 
 use OCP\AppFramework\Http\JSONResponse;
-use PHPUnit_Framework_TestCase;
+use Test\TestCase;
 
 /**
  * Class InternalControllerTest
@@ -32,13 +32,14 @@ use PHPUnit_Framework_TestCase;
  * @package OCA\Passman\Controller
  * @coversDefaultClass \OCA\Passman\Controller\InternalController
  */
-class InternalControllerTest extends PHPUnit_Framework_TestCase {
+class InternalControllerTest extends TestCase {
 
 	private $controller;
 	private $userId = 'john';
 	private $credentialService;
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 		$config = $this->getMockBuilder('OCP\IConfig')->getMock();
 		$this->credentialService = $this->getMockBuilder('OCA\Passman\Service\CredentialService')

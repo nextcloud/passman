@@ -27,8 +27,8 @@ use OCA\Passman\Service\EncryptService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
-use PHPUnit_Framework_TestCase;
 use OCA\Passman\Service\SettingsService;
+use Test\TestCase;
 
 /**
  * Class SettingsServiceTest
@@ -36,12 +36,13 @@ use OCA\Passman\Service\SettingsService;
  * @package OCA\Passman\Controller
  * @coversDefaultClass  \OCA\Passman\Service\EncryptService
  */
-class EncryptServiceTest extends PHPUnit_Framework_TestCase {
+class EncryptServiceTest extends TestCase {
 
 	private $service;
 	private $testKey;
 
-	public function setUp() {
+	public function setUp(): void
+    {
 		$config = $this->getMockBuilder('OCP\IConfig')->getMock();
 		$userId = 'admin';
 		$settings_service = new SettingsService($userId, $config, 'passman');
