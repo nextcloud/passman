@@ -24,13 +24,19 @@
 namespace OCA\Passman\Tests\Unit\Controller;
 
 use OCA\Passman\Controller\FileController;
+use OCA\Passman\Db\File;
 use OCA\Passman\Db\FileMapper;
+use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\FileService;
-use OCP\AppFramework\Http;
+use OCA\Passman\Service\SettingsService;
+use OCA\Passman\Tests\PassmanTestCase;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\IConfig;
 use OCP\IRequest;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
-use Test\TestCase;
 
 /**
  * Class FileControllerTest
@@ -38,63 +44,75 @@ use Test\TestCase;
  * @package OCA\Passman\Controller
  * @coversDefaultClass \OCA\Passman\Controller\FileController
  */
-class FileControllerTest extends TestCase
+class FileControllerTest extends PassmanTestCase
 {
 
-	private $controller;
-	private $userId = 'example';
-	private $credentialService;
-	private $vaultService;
-	private $groupManager;
-	private $userManager;
-	private $activityService;
-	private $shareService;
-	private $notificationService;
-	private $fileService;
-	private $fileMapper;
-	private $logger;
-	private $settings;
+    private FileController $controller;
+    private string $userId = 'example';
+    private EncryptService $encryptService;
+    private FileService $fileService;
+    private FileMapper $fileMapper;
+    private LoggerInterface $logger;
+    private SettingsService $settings;
 
-	public function setUp(): void
+
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     */
+    public function setUp(): void
     {
-		$request = $this->getMockBuilder(IRequest::class)->getMock();
-		$this->fileService = $this->getMockBuilder(FileService::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->fileMapper = $this->getMockBuilder(FileMapper::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-		$this->logger = $this->getMockBuilder(LoggerInterface::class)->getMock();
-		$this->controller = new FileController('passman', $request, $this->userId, $this->fileService, $this->logger);
-	}
+        $this->appContainer->registerService('UserId', function ($c) {
+            return $this->userId;
+        });
 
-	/**
-	 * @covers ::uploadFile
-	 */
-	public function testUploadFile() {
-		$result = $this->controller->uploadFile('000', '0.png', 'image/png', 3);
-		$this->assertTrue($result instanceof JSONResponse);
-	}
+        $config = $this->appContainer->get(IConfig::class);
+        $request = $this->appContainer->get(IRequest::class);
 
-	/**
-	 * @covers ::getFile
-	 */
-    public function testGetExistingFile() {
-        $uploadResult = $this->controller->uploadFile('000', '0.png', 'image/png', 3);
-        $this->assertTrue($uploadResult instanceof JSONResponse);
+        $this->fileMapper = $this->appContainer->get(FileMapper::class);
+        $this->settings = new SettingsService($this->userId, $config, self::APP_NAME);
 
-        var_dump($uploadResult->getData());
-        var_dump($this->fileMapper->getFileGuidsFromUser($this->userId));
+        $this->encryptService = new EncryptService($this->settings, $config);
+        $this->fileService = new FileService($this->fileMapper, $this->encryptService, $config);
+        $this->logger = $this->appContainer->get(LoggerInterface::class);
+        $this->controller = new FileController(
+            self::APP_NAME,
+            $request,
+            $this->userId,
+            $this->fileService,
+            $this->logger
+        );
+    }
 
-        $result = $this->controller->getFile(0);
+    /**
+     * @covers ::uploadFile
+     */
+    public function testUploadFile()
+    {
+        $result = $this->controller->uploadFile('000', '0.png', 'image/png', 3);
         $this->assertTrue($result instanceof JSONResponse);
-        $this->assertNull($result->getData());
+        $this->assertNotNull($result->getData());
     }
 
     /**
      * @covers ::getFile
      */
-    public function testGetUnspecifiedFile() {
+    public function testGetExistingFile()
+    {
+        $uploadResult = $this->controller->uploadFile('000', '0.png', 'image/png', 3);
+        $this->assertTrue($uploadResult instanceof JSONResponse);
+        $this->assertNotNull($uploadResult->getData());
+
+        $result = $this->controller->getFile($uploadResult->getData()->id);
+        $this->assertTrue($result instanceof JSONResponse);
+        $this->assertNotNull($result->getData());
+    }
+
+    /**
+     * @covers ::getFile
+     */
+    public function testGetUnspecifiedFile()
+    {
         try {
             $this->controller->getFile(null);
             $this->fail('Getting an unspecified file should ever fail');
@@ -106,24 +124,54 @@ class FileControllerTest extends TestCase
     /**
      * @covers ::getFile
      */
-    public function testGetUnknownFile() {
-        $result = $this->controller->getFile(100000);
-        $this->assertNull($result->getData());
+    public function testGetUnknownFile()
+    {
+        try {
+            $this->controller->getFile(100000);
+            $this->fail('Getting a not existing file should ever fail');
+        } catch (DoesNotExistException $exception) {
+            $this->assertNotNull($exception->getMessage());
+        }
     }
 
     /**
      * @covers ::deleteFile
      */
-    /*public function testDeleteFile() {
-        $result = $this->controller->deleteFile(null);
+    public function testDeleteFile()
+    {
+        $uploadResult = $this->controller->uploadFile('000', '0.png', 'image/png', 3);
+        $this->assertTrue($uploadResult instanceof JSONResponse);
+        $this->assertNotNull($uploadResult->getData());
+
+        $result = $this->controller->deleteFile($uploadResult->getData()->id);
         $this->assertTrue($result instanceof JSONResponse);
-    }*/
+        $this->assertNotNull($result->getData());
+    }
+
+    public function testDeleteUnspecifiedFile()
+    {
+        try {
+            $this->controller->getFile(null);
+            $this->fail('Deleting an unspecified file should ever fail');
+        } catch (\TypeError $exception) {
+            $this->assertStringContainsString('type int', $exception->getMessage());
+        }
+    }
 
     /**
      * @covers ::updateFile
      */
-	/*public function testUpdateFile() {
-		$this->controller->updateFile('6AD30804-BFFC-4EFC-97F8-20A126FA1709', '0' , '0.jpg');
-		$this->assertTrue(true);
-	}*/
+    public function testUpdateFile()
+    {
+        $data = '000111222';
+        $updateData = '111222333444';
+        $uploadResult = $this->controller->uploadFile($data, '0.png', 'image/png', strlen($data));
+        $this->assertTrue($uploadResult instanceof JSONResponse);
+        $this->assertNotNull($uploadResult->getData());
+
+        $this->controller->updateFile($uploadResult->getData()->id, $updateData, '0.jpg');
+        /** @var File $updatedFile */
+        $updatedFile = $this->fileService->getFile($uploadResult->getData()->id, $this->userId);
+        $this->assertTrue($updatedFile->getFileData() === $updateData);
+    }
 }
