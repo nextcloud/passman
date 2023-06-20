@@ -214,9 +214,7 @@ class IconService {
 							if ($baseHrefType != self::URL_TYPE_ABSOLUTE) {
 								$this->icoUrl = $pageUrlInfo['scheme'] . '://' . $pageUrlInfo['host'] . $ico_href;
 								$this->findMethod .= ' with page href';
-							}
-							else
-							{
+							} else {
 								$baseUrlInfo = parse_url($base_href);
 								$this->icoUrl = $baseUrlInfo['scheme'] . '://' . $baseUrlInfo['host'] . $ico_href;
 								$this->findMethod .= ' with base href';
