@@ -48,7 +48,6 @@ class FileControllerTest extends PassmanTestCase
 {
 
     private FileController $controller;
-    private string $userId = 'example';
     private EncryptService $encryptService;
     private FileService $fileService;
     private FileMapper $fileMapper;

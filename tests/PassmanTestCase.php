@@ -9,6 +9,7 @@ use Test\TestCase;
 class PassmanTestCase extends TestCase
 {
     public const APP_NAME = 'passman';
+    public string $userId = 'example';
     public App $app;
     public IAppContainer $appContainer;
 
