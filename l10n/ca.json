@@ -344,7 +344,7 @@
     "E-mail" : "Correu electrònic",
     "Expires:" : "Caduca:",
     "Connection to server lost" : "S'ha perdut la connexió amb el servidor",
-    "Problem loading page, reloading in 5 seconds" : "Problemes carregant la pagina, es recarregarà d'aquí 5 segons",
+    "Problem loading page, reloading in 5 seconds" : "Problemes carregant la pagina, es recarregarà d'aquí a 5 segons",
     "Saving …" : "S'està desant …",
     "Dismiss" : "Rebutja",
     "seconds ago" : "fa uns segons"

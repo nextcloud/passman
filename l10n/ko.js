@@ -285,6 +285,7 @@ OC.L10N.register(
     "%s has accepted your share request for \"%s\"." : "%s 님이 \"%s\" 공유 요청을 수락했습니다.",
     "Passman" : "Passman",
     "Unable to get version info" : "버전 정보를 가져올 수 없음",
+    "Passman is a full featured password manager." : "Passman은 모든 기능을 갖춘 비밀번호 관리자입니다.",
     "Passman Settings" : "Passman 설정",
     "GitHub version:" : "GitHub 버전:",
     "A newer version of Passman is available" : "Passman의 새 버전을 사용할 수 있음",
