@@ -152,8 +152,8 @@ class CredentialMapper extends QBMapper {
 		$credential->setUserId($raw_credential['user_id']);
 		$credential->setLabel($raw_credential['label']);
 		$credential->setDescription($raw_credential['description']);
-		$credential->setCreated($this->utils->getTime());
-		$credential->setChanged($this->utils->getTime());
+		$credential->setCreated($raw_credential['created'] && $raw_credential['created'] != 0 ? $raw_credential['created'] : $this->utils->getTime());
+		$credential->setChanged($raw_credential['changed'] && $raw_credential['changed'] != 0 ? $raw_credential['changed'] : $this->utils->getTime());
 		$credential->setTags($raw_credential['tags']);
 		$credential->setEmail($raw_credential['email']);
 		$credential->setUsername($raw_credential['username']);
