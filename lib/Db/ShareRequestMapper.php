@@ -74,15 +74,14 @@ class ShareRequestMapper extends QBMapper {
 	 * @return Entity[]
 	 * @throws Exception
 	 */
-	public function getRequestsByItemGuidGroupedByUser(string $item_guid) {
+	public function getRequestsByItemGuid(string $item_guid) {
 		if (strtolower($this->db->getDatabasePlatform()->getName()) === 'mysql') {
 			$this->db->executeQuery("SET sql_mode = '';");
 		}
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
-			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
-			->groupBy('target_user_id');
+			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)));
 
 		return $this->findEntities($qb);
 	}

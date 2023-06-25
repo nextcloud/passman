@@ -290,7 +290,7 @@ class ShareService {
 	 * @throws Exception
 	 */
 	public function getCredentialPendingAclList(string $item_guid) {
-		return $this->shareRequest->getRequestsByItemGuidGroupedByUser($item_guid);
+		return $this->shareRequest->getRequestsByItemGuid($item_guid);
 	}
 
 	/**
