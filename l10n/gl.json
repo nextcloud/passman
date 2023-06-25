@@ -313,7 +313,7 @@
     "You received a share request for %1$s from %2$s" : "Vostede recibiu unha solicitude para compartir %1$s dende %2$s",
     "%s has been shared with a link" : "%s foi compartido cunha ligazón",
     "Passwords" : "Contrasinais",
-    "Your credential \"%s\" expired, click here to update the credential." : "A sua credencial «%s» caducou, prema aquí para actualizar a credencial.",
+    "Your credential \"%s\" expired, click here to update the credential." : "A súa credencial «%s» caducou, prema aquí para actualizar a credencial.",
     "Remind me later" : "Lembrarmo más adiante",
     "Ignore" : "Ignorar",
     "%s shared \"%s\" with you. Click here to accept" : "%s compartiu «%s» con vostede. Prema aquí para aceptar",
