@@ -421,6 +421,7 @@ class TranslationController extends ApiController {
             'navigation.strength.medium' => $this->trans->t('Medium Strength'),
             'navigation.strength.bad' => $this->trans->t('Bad Strength'),
             'navigation.expired' => $this->trans->t('Expired'),
+            'navigation.compromised' => $this->trans->t('Compromised'),
             'navigation.advanced.filter' => $this->trans->t('Filter Tags'),
             'navigation.advanced.checkbox' => $this->trans->t('Simple Navigation'),
 

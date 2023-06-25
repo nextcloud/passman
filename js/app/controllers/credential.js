@@ -390,6 +390,7 @@
                 $scope.no_credentials_label.s_medium=false;
                 $scope.no_credentials_label.s_low=false;
                 $scope.no_credentials_label.expired=false;
+                $scope.no_credentials_label.compromised=false;
 
                 $scope.disableAllLabels = function(){
                     $scope.no_credentials_label.all=false;
@@ -397,6 +398,7 @@
                     $scope.no_credentials_label.s_medium=false;
                     $scope.no_credentials_label.s_low=false;
                     $scope.no_credentials_label.expired=false;
+                    $scope.no_credentials_label.compromised=false;
 				};
 
                 $scope.currentSpecialFilter = "all";
@@ -426,6 +428,10 @@
 			                $scope.filterExpired();
 			                $scope.no_credentials_label.expired=true;
 			                break;
+		                case "compromised":
+			                $scope.filterCompromised();
+			                $scope.no_credentials_label.compromised=true;
+			                break;
 		                case "all":
 			                $scope.filterAll(noFilterReset);
 			                $scope.no_credentials_label.all=true;
@@ -434,16 +440,16 @@
                 };
 
                 $scope.getListSizes = function(){
-                	var l = $scope.filtered_credentials;
+                	const l = $scope.filtered_credentials;
+                	let deleted=0;
+	                let result=[];
 
-                	var deleted=0;
-                    for (var i = 0; i < l.length; i++) {
+                    for (let i = 0; i < l.length; i++) {
 						if(l[i].delete_time>0){
 							deleted++;
 						}
                     }
 
-                    var result=[];
                     result.listsize=l.length;
                     result.listsize_wout_deleted=l.length-deleted;
                     result.listsize_deleted=deleted;
@@ -456,9 +462,9 @@
 	                    $scope.filterOptions.filterText="";
 	                    $scope.selectedtags=[];
                     }
-                    var creds_filtered=[];
+                    let creds_filtered=[];
 
-                    for (var i = 0; i < $scope.active_vault.credentials.length; i++) {
+                    for (let i = 0; i < $scope.active_vault.credentials.length; i++) {
                         if($scope.active_vault.credentials[i].delete_time===0 || $scope.delete_time > 0){
                             creds_filtered.push($scope.active_vault.credentials[i]);
                         }
@@ -468,11 +474,12 @@
                 };
 
                 $scope.filterStrength = function(strength_min, strength_max){
-                    var initialCredentials=$scope.active_vault.credentials;
-                    var postFiltered=[];
-                    for (var i = 0; i < initialCredentials.length; i++) {
-                        var _credential = initialCredentials[i];
-                        var zxcvbn_result = zxcvbn(_credential.password);
+                    const initialCredentials=$scope.active_vault.credentials;
+                    let postFiltered=[];
+
+                    for (let i = 0; i < initialCredentials.length; i++) {
+                        const _credential = initialCredentials[i];
+                        const zxcvbn_result = zxcvbn(_credential.password);
 
                         if(zxcvbn_result.score>=strength_min && zxcvbn_result.score<=strength_max){
                             postFiltered.push(initialCredentials[i]);
@@ -482,12 +489,12 @@
                 };
 
                 $scope.filterExpired = function(){
-                    var initialCredentials=$scope.active_vault.credentials;
-                    var now = Date.now();
-                    var postFiltered=[];
+                    const initialCredentials=$scope.active_vault.credentials;
+                    const now = Date.now();
+                    let postFiltered=[];
 
-                    for (var i = 0; i < initialCredentials.length; i++) {
-                        var _credential = initialCredentials[i];
+                    for (let i = 0; i < initialCredentials.length; i++) {
+                        const _credential = initialCredentials[i];
 
                         if(_credential.expire_time!==0 && _credential.expire_time <= now){
                             postFiltered.push(initialCredentials[i]);
@@ -496,9 +503,23 @@
                     $scope.filtered_credentials=$scope.filterHidden(postFiltered);
                 };
 
+				$scope.filterCompromised = function(){
+					const initialCredentials=$scope.active_vault.credentials;
+					let postFiltered=[];
+
+					for (let i = 0; i < initialCredentials.length; i++) {
+						const _credential = initialCredentials[i];
+
+						if(_credential.compromised !== false){
+							postFiltered.push(initialCredentials[i]);
+						}
+					}
+					$scope.filtered_credentials=$scope.filterHidden(postFiltered);
+				};
+
                 $scope.filterHidden = function(list){
-                    var list_without_hidden=[];
-                    for (var i = 0; i < list.length; i++) {
+                    let list_without_hidden=[];
+                    for (let i = 0; i < list.length; i++) {
                         if(list[i].hidden!==1){
                             list_without_hidden.push(list[i]);
                         }

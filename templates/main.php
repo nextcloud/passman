@@ -157,6 +157,10 @@ style('passman', 'app');
             </li>
             <li>
                 <div class="app-navigation-entry-bullet-with-hover bullet-color-red"></div>
+                <a ng-class="{selected: clickedNavigationItem=='compromised'}" ng-click="filterCredentialBySpecial('compromised')">{{ 'navigation.compromised' | translate }}</a>
+            </li>
+            <li>
+                <div class="app-navigation-entry-bullet-with-hover bullet-color-red"></div>
                 <a ng-class="{selected: clickedNavigationItem=='strength_low'}" ng-click="filterCredentialBySpecial('strength_low')">{{ 'navigation.strength.bad' | translate }}</a>
             </li>
             <li>
