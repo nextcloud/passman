@@ -15,15 +15,15 @@ use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\DeleteVaultRequest;
 use OCA\Passman\Service\CredentialRevisionService;
+use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\DeleteVaultRequestService;
 use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
+use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
-use OCP\AppFramework\Http\JSONResponse;
-use OCP\AppFramework\ApiController;
-use OCA\Passman\Service\CredentialService;
 use OCP\IUserManager;
 
 
