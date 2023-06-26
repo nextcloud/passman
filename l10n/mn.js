@@ -1,6 +1,8 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Та %1$s үүсгэлээ",
+    "You deleted %1$s" : "Та %1$s-ийг устгалаа",
     "General" : "Ерөнхий",
     "Done" : "Хийсэн",
     "Settings saved" : "Тохиргоо хадгалагдлаа",
@@ -50,8 +52,6 @@ OC.L10N.register(
     "Loading …" : "Уншиж байна...",
     "email" : "цахим шуудан",
     "Description" : "Тодорхойлолт",
-    "You created %1$s" : "Та %1$s үүсгэлээ",
-    "You deleted %1$s" : "Та %1$s-ийг устгалаа",
     "Ignore" : "Үл  тоох",
     "E-mail" : "И-мэйл",
     "Dismiss" : "Арилгах",

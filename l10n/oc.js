@@ -1,6 +1,9 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Avètz creat %1$s",
+    "You deleted %1$s" : "Avètz suprimit %1$s",
+    "Passwords" : "Senhals",
     "Passwords do not match" : "Los senhals correspondon pas",
     "General" : "Generals",
     "An error occurred" : "Una error s’es producha",
@@ -63,9 +66,6 @@ OC.L10N.register(
     "Expired" : "Expirat",
     "Loading …" : "Cargament…",
     "Description" : "Descripcion",
-    "You created %1$s" : "Avètz creat %1$s",
-    "You deleted %1$s" : "Avètz suprimit %1$s",
-    "Passwords" : "Senhals",
     "An error occurred!" : "Una error s'es produsida !",
     "Loading&hellip;" : "Cargament&hellip;",
     "Connection to server lost" : "Connexion al servidor perduda",

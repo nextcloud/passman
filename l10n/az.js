@@ -1,8 +1,11 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Siz yaratdınız %1$s",
+    "You deleted %1$s" : "Siz silindiniz %1$s",
     "General" : "Ümumi",
     "Done" : "Done",
+    "Settings saved" : "Parametrlər yaddaşa verildi",
     "Sharing" : "Paylaşılır",
     "Share link" : "Linki yayımla",
     "Username" : "İstifadəçi adı",
@@ -13,6 +16,7 @@ OC.L10N.register(
     "Size" : "Həcm",
     "Disabled" : "Dayandırılıb",
     "Export" : "Çıxarış",
+    "Change" : "Dəyiş",
     "Version" : "Versiya",
     "Import" : "Əlavə et",
     "Public key" : "İctimai açar",
@@ -35,11 +39,10 @@ OC.L10N.register(
     "Delete" : "Sil",
     "Share" : "Paylaş",
     "Date" : "Date",
+    "Accept" : "Qəbul et",
     "Never" : "Heç vaxt",
     "Tags" : "Işarələr",
     "Description" : "Açıqlanma",
-    "You created %1$s" : "Siz yaratdınız %1$s",
-    "You deleted %1$s" : "Siz silindiniz %1$s",
     "An error occurred!" : "Səhv baş verdi!",
     "seconds ago" : "saniyələr öncə"
 },

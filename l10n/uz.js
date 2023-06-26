@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "Passwords" : "Passwords",
     "General" : "General",
     "Error loading file" : "Error loading file",
     "Done" : "Done",
@@ -26,7 +27,6 @@ OC.L10N.register(
     "Delete" : "Delete",
     "Tags" : "Tags",
     "email" : "email",
-    "Passwords" : "Passwords",
     "Connection to server lost" : "Connection to server lost",
     "Dismiss" : "Dismiss",
     "seconds ago" : "seconds ago"

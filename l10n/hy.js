@@ -1,6 +1,8 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Դու ստեղծեցիր %1$s",
+    "You deleted %1$s" : "Դու ջնջեցիր %1$s",
     "General" : "Ընդհանուր",
     "Done" : "Done",
     "Share link" : "Կիսվել հղմամբ",
@@ -31,8 +33,6 @@ OC.L10N.register(
     "Date" : "Date",
     "Never" : "Երբեք",
     "Description" : "Նկարագրություն",
-    "You created %1$s" : "Դու ստեղծեցիր %1$s",
-    "You deleted %1$s" : "Դու ջնջեցիր %1$s",
     "An error occurred!" : "Սխալ պատահեց",
     "seconds ago" : "վրկ. առաջ"
 },

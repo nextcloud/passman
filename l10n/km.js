@@ -1,6 +1,8 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "អ្នក​បាន​បង្កើត %1$s",
+    "You deleted %1$s" : "អ្នក​បាន​លុប %1$s",
     "General" : "ទូទៅ",
     "Done" : "Done",
     "Sharing" : "ការ​ចែក​រំលែក",
@@ -36,8 +38,6 @@ OC.L10N.register(
     "Date" : "Date",
     "Tags" : "ស្លាក",
     "Description" : "ការ​អធិប្បាយ",
-    "You created %1$s" : "អ្នក​បាន​បង្កើត %1$s",
-    "You deleted %1$s" : "អ្នក​បាន​លុប %1$s",
     "An error occurred!" : "មានបញ្ហា​មួយ​កើតឡើង!",
     "seconds ago" : "វិនាទី​មុន"
 },

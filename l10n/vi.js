@@ -1,6 +1,9 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Bạn đã tạo %1$s",
+    "You deleted %1$s" : "Bạn đã xóa %1$s",
+    "Passwords" : "Mật khẩu",
     "Incorrect vault password!" : "Mật khẩu hòm khóa không đúng!",
     "Passwords do not match" : "Mật khẩu không khớp",
     "General" : "Tổng hợp",
@@ -79,9 +82,6 @@ OC.L10N.register(
     "Loading …" : "Đang tải...",
     "email" : "Thư điện tử",
     "Description" : "Mô tả",
-    "You created %1$s" : "Bạn đã tạo %1$s",
-    "You deleted %1$s" : "Bạn đã xóa %1$s",
-    "Passwords" : "Mật khẩu",
     "An error occurred!" : "Có một lỗi đã xảy ra!",
     "E-mail" : "Email",
     "Connection to server lost" : "Kết nối tới máy chủ bị mất",
