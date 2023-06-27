@@ -34,7 +34,26 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService,
 	/** global: C_Promise */
 	return new C_Promise(function () {
 		PassmanExporter.getCredentialsWithFiles(credentials, FileService, EncryptService, _log, $translate).then((function(){
-		    const headers = ['label', 'username', 'password', 'email', 'description', 'tags', 'url', 'custom_fields', 'files'];
+		    const headers = [
+				'label',
+				'description',
+				'created',
+				'changed',
+				'tags',
+				'email',
+				'icon',
+				'username',
+				'password',
+				'url',
+				'renew_interval',
+				'expire_time',
+				'delete_time',
+				'files',
+				'custom_fields',
+				'otp',
+				'compromised',
+				'hidden'
+			];
 		    let file_data = '"' + headers.join('","') + '"\n';
 		    for (let i = 0; i < credentials.length; i++) {
 			    const _credential = credentials[i];
@@ -47,13 +66,14 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService,
 					    }
 					    const tag_data = '[' + _tags.join(",") + ']';
 					    row_data.push('"' + tag_data.replaceAll('"', '""') + '"');
-				    } else if (field === 'custom_fields' || field === 'files') {
+				    } else if (field === 'custom_fields' || field === 'files' || field === 'otp') {
 						let _fields = JSON.stringify(_credential[field]);
 						_fields = _fields.replaceAll('"', '""');
 						row_data.push('"' + _fields + '"');
 					} else {
-						const data = _credential[field];
-						const value = data === null ? '' : data.replaceAll('"', '""');
+						let data = _credential[field];
+						data = typeof data === 'number' || typeof data === 'boolean' ? "" + data : data;
+						const value = (data === null || data === undefined) ? '' : data.replaceAll('"', '""');
 						row_data.push('"' + value + '"');
 				    }
 			    }
