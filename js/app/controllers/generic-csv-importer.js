@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('GenericCsvImportCtrl', ['$scope', 'CredentialService', 'FileService', 'EncryptService', '$translate', '$q',
-			function ($scope, CredentialService, FileService, EncryptService, $translate, $q) {
+		.controller('GenericCsvImportCtrl', ['$scope', '$rootScope', 'CredentialService', 'FileService', 'EncryptService', '$translate', '$q',
+			function ($scope, $rootScope, CredentialService, FileService, EncryptService, $translate, $q) {
 				$scope.hello = 'world';
 
 				$scope.credentialProperties = [
@@ -53,9 +53,19 @@
 						matching: ['password', 'pass', 'pw']
 					},
 					{
-						label: 'TOTP Secret',
+						label: 'TOTP Secret or Object',
 						prop: 'otp',
-						matching: ['totp']
+						matching: ['otp', 'otp_object', 'totp']
+					},
+					{
+						label: 'Email',
+						prop: 'email',
+						matching: ['email', 'mail']
+					},
+					{
+						label: 'Notes',
+						prop: 'description',
+						matching: ['notes', 'description', 'comments']
 					},
 					{
 						label: 'Custom field',
@@ -72,23 +82,44 @@
 						matching: ['files']
 					},
 					{
-						label: 'Notes',
-						prop: 'description',
-						matching: ['notes', 'description', 'comments']
-					},
-					{
-						label: 'Email',
-						prop: 'email',
-						matching: ['email', 'mail']
-					},
-					{
 						label: 'URL',
 						prop: 'url',
 						matching: ['website', 'url', 'fulladdress', 'site', 'web site']
 					},
 					{
 						label: 'Tags',
-						prop: 'tags'
+						prop: 'tags',
+						matching: ['tags']
+					},
+					{
+						label: 'Created',
+						prop: 'created',
+						matching: ['created', 'creation']
+					},
+					{
+						label: 'Changed',
+						prop: 'changed',
+						matching: ['changed', 'edited']
+					},
+					{
+						label: 'Expire time',
+						prop: 'expire_time',
+						matching: ['expire_time', 'expire', 'expires', 'expires_at']
+					},
+					{
+						label: 'Delete time',
+						prop: 'delete_time',
+						matching: ['delete_time', 'delete', 'deleted_at']
+					},
+					{
+						label: 'Icon',
+						prop: 'icon',
+						matching: ['icon', 'favicon']
+					},
+					{
+						label: 'Compromised',
+						prop: 'compromised',
+						matching: ['compromised']
 					},
 					{
 						label: 'Ignored',
@@ -99,14 +130,23 @@
 					return {text: t};
 				};
 				var rowToCredential = async function (row) {
-					var _credential = PassmanImporter.newCredential();
-					for(var k = 0; k < $scope.import_fields.length; k++){
-						var field = $scope.import_fields[k];
+					let _credential = PassmanImporter.newCredential();
+					for(let k = 0; k < $scope.import_fields.length; k++){
+						const field = $scope.import_fields[k];
 						if(field){
 							if(field === 'otp'){
-								_credential.otp.secret = row[k];
+								if (typeof row[k] === 'object' || row[k].includes('{"')) {
+									const otpobj = JSON.parse(row[k]);
+									if (typeof otpobj === 'object' && otpobj.secret !== undefined && otpobj.algorithm !== undefined && otpobj.period !== undefined && otpobj.digits !== undefined) {
+										_credential.otp = otpobj;
+									} else if (otpobj.secret !== undefined) {
+										_credential.otp.secret = otpobj.secret;
+									}
+								} else if (row[k] !== '{}') {
+									_credential.otp.secret = row[k];
+								}
 							} else if(field === 'custom_field'){
-								var key = ($scope.matched) ? $scope.parsed_csv[0][k] : 'Custom field '+ k;
+								const key = ($scope.matched) ? $scope.parsed_csv[0][k] : 'Custom field '+ k;
 								_credential.custom_fields.push({
 									'label': key,
 									'value': row[k],
@@ -116,46 +156,40 @@
 								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
 									try {
 										row[k] = JSON.parse(row[k]);
-										for(let i = 0; k < row[k].length; i++){
-											_credential.custom_fields.push({
-												'label': row[k][i].label,
-												'secret': row[k][i].secret,
-												'field_type': row[k][i].field_type,
-											});
-										}
 									} catch (e) {
 										// ignore row[k], it contains no valid json data
-										// console.error(e);
+										console.error(e);
+										continue;
 									}
-								} else {
-									for(let j = 0; j < row[k].length; j++){
-										if (row[k][j].field_type === 'file'){
-											var _file = {
-												filename: row[k][j].value.filename,
-												size: row[k][j].value.size,
-												mimetype: row[k][j].value.mimetype,
-												data: row[k][j].value.file_data
-											};
+								}
+								for(let j = 0; j < row[k].length; j++){
+									if (row[k][j].field_type === 'file'){
+										const _file = {
+											filename: row[k][j].value.filename,
+											size: row[k][j].value.size,
+											mimetype: row[k][j].value.mimetype,
+											data: row[k][j].value.file_data
+										};
 
-											row[k][j].value = await FileService.uploadFile(_file).then(FileService.getEmptyFileWithDecryptedFilename);
-										}
-										_credential.custom_fields.push(row[k][j]);
+										row[k][j].value = await FileService.uploadFile(_file).then(FileService.getEmptyFileWithDecryptedFilename);
 									}
+									_credential.custom_fields.push(row[k][j]);
 								}
 							} else if(field === 'files'){
 								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
 									try {
 										row[k] = JSON.parse(row[k]);
-										for(let i = 0; k < row[k].length; i++){
-											_credential.files.push({
+										for(let i = 0; i < row[k].length; i++){
+											_credential.files.push(await FileService.uploadFile({
 												filename: row[k][i].filename,
 												size: row[k][i].size,
-												mimetype: row[k][i].mimetype
-											});
+												mimetype: row[k][i].mimetype,
+												data: row[k][i].file_data
+											}).then(FileService.getEmptyFileWithDecryptedFilename));
 										}
 									} catch (e) {
 										// ignore row[k], it contains no valid json data
-										// console.error(e);
+										console.error(e);
 									}
 								} else {
 									for(let j = 0; j < row[k].length; j++){
@@ -168,9 +202,19 @@
 									}
 								}
 							} else if(field === 'tags'){
-								if( row[k]) {
-									var tags = row[k].split(',');
+								if(row[k] && row[k] !== '' && row[k] !== '[]') {
+									if (row[k].startsWith('[') && row[k].endsWith(']')) {
+										row[k] = row[k].substring(1, row[k].length - 1);
+									}
+									const tags = row[k].split(',');
 									_credential.tags = tags.map(tagMapper);
+								}
+							} else if(field === 'compromised'){
+								_credential[field] = (row[k] !== 'false');
+							} else if (field === 'created' || field === 'changed' || field === 'expire_time' || field === 'delete_time') {
+								const num = parseInt(row[k]);
+								if (!isNaN(num)) {
+									_credential[field] = num;
 								}
 							} else{
 								_credential[field] = row[k];
@@ -242,6 +286,7 @@
 							};
 							$scope.log.push($translate.instant('done'));
 							$scope.importing = false;
+							$rootScope.refresh();
 						}
 					}
 
