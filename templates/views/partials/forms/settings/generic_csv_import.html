@@ -37,27 +37,27 @@
 		<div class="col-xs-12 display-grid" ng-show="parsed_csv">
 			<b>{{ 'first.five.lines' | translate }}</b><br />
 			{{ 'assign.column' | translate }}
-			<div class="import-table-outter">
-			<table class="import-table">
-				<tr ng-repeat="line in parsed_csv | limitTo:5">
-					<td class="inspect"><i class="fa fa-search"
-										   ng-click="inspectCredential(line)"
-										   ng-if="($index > 0 && matched && import_fields.length > 0) || ($index >= 0 && !matched && import_fields.length > 0)"></i>
-					</td>
-					<td ng-repeat="prop in line track by $index">
-						{{line[$index]}}
-					</td>
-				</tr>
-				<tr ng-repeat="line in parsed_csv | limitTo:1">
-					<td></td>
-					<td ng-repeat="prop in line track by $index">
-						<select ng-model="import_fields[$index]" ng-change="updateExample()"
-								ng-options="property.prop as property.label for property in credentialProperties">
+			<div class="import-table-outter margin-bottom-25">
+                <table class="import-table">
+                    <tr ng-repeat="line in parsed_csv | limitTo:5">
+                        <td class="inspect"><i class="fa fa-search"
+                                               ng-click="inspectCredential(line)"
+                                               ng-if="($index > 0 && matched && import_fields.length > 0) || ($index >= 0 && !matched && import_fields.length > 0)"></i>
+                        </td>
+                        <td ng-repeat="prop in line track by $index">
+                            {{line[$index] | limitTo: 100}}
+                        </td>
+                    </tr>
+                    <tr ng-repeat="line in parsed_csv | limitTo:1">
+                        <td></td>
+                        <td ng-repeat="prop in line track by $index">
+                            <select ng-model="import_fields[$index]" ng-change="updateExample()"
+                                    ng-options="property.prop as property.label for property in credentialProperties">
 
-						</select>
-					</td>
-				</tr>
-			</table>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
 			</div>
 			<div ng-show="inspected_credential && import_fields.length > 0">
 				<b>{{ 'example.credential' | translate}}</b>

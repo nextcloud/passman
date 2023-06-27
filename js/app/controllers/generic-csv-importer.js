@@ -45,17 +45,17 @@
 					{
 						label: 'Username',
 						prop: 'username',
-						matching: ['username', 'user', 'login', 'login name']
+						matching: ['username', 'user', 'login', 'login name', 'login_username']
 					},
 					{
 						label: 'Password',
 						prop: 'password',
-						matching: ['password', 'pass', 'pw']
+						matching: ['password', 'pass', 'pw', 'login_password']
 					},
 					{
 						label: 'TOTP Secret or Object',
 						prop: 'otp',
-						matching: ['otp', 'otp_object', 'totp']
+						matching: ['otp', 'otp_object', 'totp', 'login_totp']
 					},
 					{
 						label: 'Email',
@@ -84,12 +84,12 @@
 					{
 						label: 'URL',
 						prop: 'url',
-						matching: ['website', 'url', 'fulladdress', 'site', 'web site']
+						matching: ['website', 'url', 'fulladdress', 'site', 'web site', 'login_uri']
 					},
 					{
 						label: 'Tags',
 						prop: 'tags',
-						matching: ['tags']
+						matching: ['tags', 'folder']
 					},
 					{
 						label: 'Created',
@@ -232,12 +232,12 @@
 				$scope.csvLoaded = function (file) {
 					$scope.import_fields = [];
 					$scope.inspected_credential = {};
-					$scope.matched = false;
+					$scope.atLeastlabelMatched = false;
 					var file_data = file.data.split(',');
 					file_data = decodeURIComponent(escape(window.atob(file_data[1])));
 					/** global: Papa */
 					Papa.parse(file_data, {
-						complete: function(results) {
+						complete: async function(results) {
 							if(results.data) {
 								for(var i = 0; i < results.data[0].length; i++){
 									var propName = results.data[0][i];
@@ -247,13 +247,15 @@
 										if(credentialProperty.matching){
 											if(credentialProperty.matching.indexOf(propName.toLowerCase()) !== -1){
 												$scope.import_fields[i] = credentialProperty.prop;
-												$scope.matched = true;
+												if (credentialProperty.prop === 'label') {
+													$scope.atLeastlabelMatched = true;
+												}
 											}
 										}
 									}
 								}
-								if($scope.matched){
-									$scope.inspectCredential(results.data[1]);
+								if($scope.atLeastlabelMatched){
+									await $scope.inspectCredential(results.data[1]);
 								}
 
 								for(var j = 0; j < results.data.length; j++){
