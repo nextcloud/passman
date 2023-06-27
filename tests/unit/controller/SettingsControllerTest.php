@@ -23,11 +23,10 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\Service\SettingsService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\IConfig;
 use PHPUnit_Framework_TestCase;
-use OCA\Passman\Service\SettingsService;
 
 /**
  * Class SettingsControllerTest

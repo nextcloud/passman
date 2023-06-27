@@ -1,6 +1,9 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Sa tekitasid %1$s",
+    "You deleted %1$s" : "Sa kustutasid %1$s",
+    "Passwords" : "Paroolid",
     "Passwords do not match" : "Paroolid ei kattu",
     "General" : "Üldine",
     "Custom Fields" : "Kohandatud väljad",
@@ -72,14 +75,12 @@ OC.L10N.register(
     "Expired" : "Aegunud",
     "email" : "e-post",
     "Description" : "Kirjeldus",
-    "You created %1$s" : "Sa tekitasid %1$s",
-    "You deleted %1$s" : "Sa kustutasid %1$s",
-    "Passwords" : "Paroolid",
     "Ignore" : "Ignoreeri",
     "An error occurred!" : "Tekis tõrge!",
     "E-mail" : "E-post",
     "Connection to server lost" : "Ühendus serveriga katkes",
     "Problem loading page, reloading in 5 seconds" : "Tõrge lehe laadimisel, ümberlaadimine 5 sekundi pärast",
+    "Saving …" : "Salvestamine …",
     "Dismiss" : "Jäta vahele",
     "seconds ago" : "sekundit tagasi"
 },

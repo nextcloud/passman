@@ -1,6 +1,9 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "您建立了 %1$s",
+    "You deleted %1$s" : "您刪除了 %1$s",
+    "Passwords" : "密碼",
     "Passwords do not match" : "密碼不相符",
     "General" : "一般",
     "Custom Fields" : "自定義欄位",
@@ -113,9 +116,6 @@ OC.L10N.register(
     "Loading …" : "正在載入……",
     "email" : "電子郵件",
     "Description" : "描述",
-    "You created %1$s" : "您建立了 %1$s",
-    "You deleted %1$s" : "您刪除了 %1$s",
-    "Passwords" : "密碼",
     "Remind me later" : "稍後提醒我",
     "Ignore" : "忽略",
     "Passman" : "Passman",

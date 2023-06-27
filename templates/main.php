@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Javascripts
  */
@@ -104,7 +105,6 @@ script('passman', 'exporters/exporter-csv');
 script('passman', 'exporters/exporter-json');
 /*build-js-end*/
 
-
 /*
  * Styles
  */
@@ -137,7 +137,7 @@ style('passman', 'app');
                 <button class="collapse" ng-click="tagCollapsibleClicked()"></button>
                 <a href="" class="icon-tag" ng-click="tagCollapsibleClicked()">{{ 'navigation.tags' | translate }}</a>
                 <ul>
-                   <li class="taginput">
+                    <li class="taginput">
                         <a class="icon-search taginput">
                             <form ng-submit="tagClickedString(taginput); clearForm();">
                                 <input id="tagsearch" list="tags" ng-model="taginput" placeholder="{{ 'navigation.tags.search' | translate }}" />
@@ -154,6 +154,10 @@ style('passman', 'app');
                         <a class="icon-tag svg" ng-click="tagClicked(tag)">{{tag.text}}</a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <div class="app-navigation-entry-bullet-with-hover bullet-color-red"></div>
+                <a ng-class="{selected: clickedNavigationItem=='compromised'}" ng-click="filterCredentialBySpecial('compromised')">{{ 'navigation.compromised' | translate }}</a>
             </li>
             <li>
                 <div class="app-navigation-entry-bullet-with-hover bullet-color-red"></div>

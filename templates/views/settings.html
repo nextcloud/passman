@@ -1,17 +1,17 @@
 <div id="passman-controls">
     <div class="breadcrumb">
-        <div class="breadcrumb">
-            <div class="crumb svg crumbhome">
+        <ul class="breadcrumb">
+            <li class="crumb svg crumbhome">
                 <a ng-click="logout()" class="icon-home">Home</a>
                 <span style="display: none;"></span>
-            </div>
-            <div class="crumb svg">
+            </li>
+            <li class="crumb svg">
                 <a ng-click="cancel()">{{ active_vault.name }}</a>
-            </div>
-            <div class="crumb svg last">
+            </li>
+            <li class="crumb svg last">
                 <a>{{ 'settings' | translate }}</a>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </div>
 

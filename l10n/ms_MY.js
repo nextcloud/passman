@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Anda telah membina %1$s",
     "General" : "Umum",
     "Done" : "Done",
     "Share link" : "Share link",
@@ -28,7 +29,6 @@ OC.L10N.register(
     "Share" : "Kongsi",
     "Date" : "Date",
     "Description" : "Keterangan",
-    "You created %1$s" : "Anda telah membina %1$s",
     "An error occurred!" : "Ralat berlaku!"
 },
 "nplurals=1; plural=0;");

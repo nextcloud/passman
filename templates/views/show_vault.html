@@ -1,15 +1,15 @@
 <div class="main_list" off-click-filter="'.download-js-link, .sidebar-shown, #app-sidebar'">
 	<div id="passman-controls" ng-class="{ 'sidebar-shown': selectedCredential }">
 		<div class="breadcrumb">
-			<div class="breadcrumb">
-				<div class="crumb svg crumbhome">
+			<ul class="breadcrumb">
+				<li class="crumb svg crumbhome">
 					<a ng-click="logout()" class="icon-home">Home</a>
 					<span style="display: none;"></span>
-				</div>
-				<div class="crumb svg" ng-click="clearState()">
+				</li>
+				<li class="crumb svg" ng-click="clearState()">
 					<a>{{active_vault.name}}</a>
-				</div>
-			</div>
+				</li>
+			</ul>
 			<div class="addCredential" ng-hide="delete_time>0">
 				<button ng-click="addCredential()"><i class="fa fa-plus"></i></button>
 			</div>

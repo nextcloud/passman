@@ -19,7 +19,7 @@ Features:
 - Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )
 For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
-    <version>2.4.5</version>
+    <version>2.4.6</version>
     <licence>agpl</licence>
     <author homepage="https://github.com/brantje">Sander Brand</author>
     <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>
@@ -37,12 +37,12 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/share_credential.png">https://img.passman.cc/share_credential.png</screenshot>
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/password_audit.png">https://img.passman.cc/password_audit.png</screenshot>
     <dependencies>
-        <php min-version="7.4"/>
+        <php min-version="8.0"/>
         <database>sqlite</database>
         <database>pgsql</database>
         <database min-version="5.5">mysql</database>
         <lib>openssl</lib>
-        <nextcloud min-version="20" max-version="26"/>
+        <nextcloud min-version="26" max-version="27"/>
     </dependencies>
 
     <background-jobs>
@@ -54,6 +54,14 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
             <step>OCA\Passman\Migration\ServerSideEncryption</step>
         </post-migration>
     </repair-steps>
+
+    <navigations>
+        <navigation>
+            <name>Passwords</name>
+            <route>passman.Page.index</route>
+            <order>10</order>
+        </navigation>
+    </navigations>
 
     <settings>
         <admin>OCA\Passman\Settings\Admin</admin>

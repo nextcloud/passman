@@ -124,7 +124,18 @@ var PassmanImporter = PassmanImporter || {};
 				_credential.url = item.url;
 				_credential.tags = item.tags;
 				_credential.description = item.description;
-				//Check for custom fields
+
+                _credential.created = item.created;
+				_credential.changed = item.changed;
+				_credential.expire_time = item.expire_time;
+				_credential.delete_time = item.delete_time;
+				_credential.renew_interval = item.renew_interval;
+				_credential.hidden = item.hidden;
+				_credential.compromised = item.compromised;
+
+                // TODO icon import
+
+                //Check for custom fields
 				if (item.hasOwnProperty('customFields')) {
 					_credential = await parseCustomFields(item.customFields, _credential);
 				}

@@ -112,7 +112,7 @@ class ShareRequestMapperTest extends DatabaseHelperTest {
 	}
 
 	/**
-	 * @covers ::getRequestsByItemGuidGroupedByUser
+	 * @covers ::getRequestsByItemGuid
 	 */
 	public function testGetRequestsByItemGuidGroupedByUser() {
 		$dataset = $this->findInDataset(
@@ -121,7 +121,7 @@ class ShareRequestMapperTest extends DatabaseHelperTest {
 			$this->dataset->getRow(0)['item_guid']
 		);
 
-		$result = $this->mapper->getRequestsByItemGuidGroupedByUser($dataset[0]['item_guid']);
+		$result = $this->mapper->getRequestsByItemGuid($dataset[0]['item_guid']);
 
 		$this->assertCount(count($dataset), $result);
 
