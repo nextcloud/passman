@@ -34,33 +34,30 @@ PassmanExporter.csv.export = function (credentials, FileService, EncryptService,
 	/** global: C_Promise */
 	return new C_Promise(function () {
 		PassmanExporter.getCredentialsWithFiles(credentials, FileService, EncryptService, _log, $translate).then((function(){
-		    var headers = ['label', 'username', 'password', 'email', 'description', 'tags', 'url', 'custom_fields', 'files'];
-		    var file_data = '"' + headers.join('","') + '"\n';
-		    for (var i = 0; i < credentials.length; i++) {
-			    var _credential = credentials[i];
-			    var row_data = [];
-			    for (var h = 0; h < headers.length; h++) {
-				    var field = headers[h];
+		    const headers = ['label', 'username', 'password', 'email', 'description', 'tags', 'url', 'custom_fields', 'files'];
+		    let file_data = '"' + headers.join('","') + '"\n';
+		    for (let i = 0; i < credentials.length; i++) {
+			    const _credential = credentials[i];
+			    let row_data = [];
+			    for (const field of headers) {
 				    if (field === 'tags') {
-					    var _tags = [];
-					    for (var t = 0; t < _credential[field].length; t++) {
-						    _tags.push(_credential[field][t].text);
+					    let _tags = [];
+					    for (const tag_field of _credential[field]) {
+							_tags.push(tag_field.text);
 					    }
-					    var tag_data = '[' + _tags.join(",") + ']';
+					    const tag_data = '[' + _tags.join(",") + ']';
 					    row_data.push('"' + tag_data.replaceAll('"', '""') + '"');
-				    } 
-				    else if (field == 'custom_fields' || field == 'files') {
-					var _fields = JSON.stringify(_credential[field]);
-					_fields = _fields.replaceAll('"', '""');
-					row_data.push('"' + _fields + '"');
-					}
-				    else {
-						  var data = _credential[field],
-						  value = data === null ? '':data.replaceAll('"', '""');
-						  row_data.push('"' + value + '"');
+				    } else if (field === 'custom_fields' || field === 'files') {
+						let _fields = JSON.stringify(_credential[field]);
+						_fields = _fields.replaceAll('"', '""');
+						row_data.push('"' + _fields + '"');
+					} else {
+						const data = _credential[field];
+						const value = data === null ? '' : data.replaceAll('"', '""');
+						row_data.push('"' + value + '"');
 				    }
 			    }
-			    var progress = {
+			    let progress = {
 				    percent: i / credentials.length * 100,
 				    loaded: i,
 				    total: credentials.length
