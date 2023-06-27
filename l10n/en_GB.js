@@ -318,6 +318,7 @@ OC.L10N.register(
     "Medium Strength" : "Medium Strength",
     "Bad Strength" : "Bad Strength",
     "Expired" : "Expired",
+    "Compromised" : "Compromised",
     "Filter Tags" : "Filter Tags",
     "Simple Navigation" : "Simple Navigation",
     "Someone has shared a credential with you." : "Someone has shared a credential with you.",

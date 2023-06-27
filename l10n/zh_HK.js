@@ -318,6 +318,7 @@ OC.L10N.register(
     "Medium Strength" : "中等強度",
     "Bad Strength" : "低強度",
     "Expired" : "已過期",
+    "Compromised" : "已被洩露",
     "Filter Tags" : "過濾標籤",
     "Simple Navigation" : "簡單導航",
     "Someone has shared a credential with you." : "有人與您分享了一個身分驗證。",
