@@ -318,6 +318,7 @@ OC.L10N.register(
     "Medium Strength" : "Střední odolnost",
     "Bad Strength" : "Nedostatečná odolnost",
     "Expired" : "Platnost skončila",
+    "Compromised" : "Kompromitováno",
     "Filter Tags" : "Filtrovat štítky",
     "Simple Navigation" : "Jednoduchý navigační panel ",
     "Someone has shared a credential with you." : "Někdo vám nasdílel přihlašovací údaj.",

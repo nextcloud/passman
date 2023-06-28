@@ -318,6 +318,7 @@ OC.L10N.register(
     "Medium Strength" : "Medium styrka",
     "Bad Strength" : "Dålig styrka",
     "Expired" : "Utgånget",
+    "Compromised" : "Kompromissad",
     "Filter Tags" : "Filtertaggar",
     "Simple Navigation" : "Enkel navigering",
     "Someone has shared a credential with you." : "Någon delade uppgifter med dig",

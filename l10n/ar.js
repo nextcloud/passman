@@ -87,6 +87,7 @@ OC.L10N.register(
     "Search Tags" : "البحث في الكلمات الدلالية",
     "Medium Strength" : "متوسطة القوة",
     "Expired" : "منتهي",
+    "Compromised" : "معرض للخطر",
     "Simple Navigation" : "تصفح بسيط",
     "Loading …" : "جاري التحميل …",
     "email" : "البريد الإلكتروني",
