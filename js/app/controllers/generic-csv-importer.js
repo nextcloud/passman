@@ -168,9 +168,13 @@
 											filename: row[k][j].value.filename,
 											size: row[k][j].value.size,
 											mimetype: row[k][j].value.mimetype,
-											data: row[k][j].value.file_data
+											data: row[k][j].value.file_data ? row[k][j].value.file_data : row[k][j].value.data
 										};
-
+										if (_file.data === undefined) {
+											console.error('Unable to parse file data from ', row[k][j]);
+											$scope.log.push('Unable to parse file data from file ' + _file.filename);
+											continue;
+										}
 										row[k][j].value = await FileService.uploadFile(_file).then(FileService.getEmptyFileWithDecryptedFilename);
 									}
 									_credential.custom_fields.push(row[k][j]);
@@ -184,7 +188,7 @@
 												filename: row[k][i].filename,
 												size: row[k][i].size,
 												mimetype: row[k][i].mimetype,
-												data: row[k][i].file_data
+												data: row[k][i].file_data ? row[k][i].file_data : row[k][i].data
 											}).then(FileService.getEmptyFileWithDecryptedFilename));
 										}
 									} catch (e) {
@@ -197,7 +201,7 @@
 											filename: row[k][j].filename,
 											size: row[k][j].size,
 											mimetype: row[k][j].mimetype,
-											data: row[k][j].file_data
+											data: row[k][j].file_data ? row[k][j].file_data : row[k][j].data
 										}).then(FileService.getEmptyFileWithDecryptedFilename));
 									}
 								}
@@ -320,6 +324,13 @@
 				$scope.updateExample = function () {
 					var start = ($scope.skipFirstRow) ? 1 : 0;
 					$scope.inspectCredential($scope.parsed_csv[start]);
+				};
+
+				$scope.fileLoadError = function (file) {
+					console.error($translate.instant('error.loading.file'), file);
+				};
+				$scope.fileSelectProgress = function () {
+
 				};
 			}]);
 }());
