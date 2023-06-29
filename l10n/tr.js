@@ -318,6 +318,7 @@ OC.L10N.register(
     "Medium Strength" : "Orta düzeyde",
     "Bad Strength" : "Kötü düzeyde",
     "Expired" : "Geçerlilik süresi dolmuş",
+    "Compromised" : "Ele geçirilmiş",
     "Filter Tags" : "Etiketleri süz",
     "Simple Navigation" : "Basit gezinme",
     "Someone has shared a credential with you." : "Sizinle bir kimlik doğrulama bilgisi paylaşıldı.",
