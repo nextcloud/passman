@@ -58,6 +58,7 @@ OC.L10N.register(
     "Details" : "التفاصيل",
     "Hide details" : "إخفاء التفاصيل",
     "Password score" : "قوة الكلمة السرية",
+    "Pattern" : "نمط",
     "Dictionary name" : "إسم القاموس",
     "by" : "من قبل",
     "Label" : "تسمية",
