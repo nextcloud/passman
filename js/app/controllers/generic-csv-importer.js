@@ -214,7 +214,7 @@
 									_credential.tags = tags.map(tagMapper);
 								}
 							} else if(field === 'compromised'){
-								_credential[field] = (row[k] !== 'false');
+								_credential[field] = (row[k] === 'true' || row[k] === '1');
 							} else if (field === 'created' || field === 'changed' || field === 'expire_time' || field === 'delete_time') {
 								const num = parseInt(row[k]);
 								if (!isNaN(num)) {
