@@ -130,7 +130,7 @@ OC.L10N.register(
     "Period" : "Punto",
     "Expiration date" : "Data de caducidade",
     "No expiration date set" : "Non se definiu a data de caducidade",
-    "Renew interval" : "Renovar o intervalo",
+    "Renew interval" : "Intervalo de renovación",
     "Disabled" : "Desactivado",
     "Day(s)" : "Día(s)",
     "Week(s)" : "Semana(s)",
