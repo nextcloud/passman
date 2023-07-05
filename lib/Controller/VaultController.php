@@ -52,16 +52,16 @@ class VaultController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function listVaults() {
-		$result = array();
+		$result = [];
 		$vaults = $this->vaultService->getByUser($this->userId);
 
-		$protected_credential_fields = array('getDescription', 'getEmail', 'getUsername', 'getPassword');
+		$protected_credential_fields = ['getDescription', 'getEmail', 'getUsername', 'getPassword'];
 		if (isset($vaults)) {
 			foreach ($vaults as $vault) {
 				$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 				$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
 				if (isset($credential)) {
-					array_push($result, array(
+					array_push($result, [
 						'vault_id' => $vault->getId(),
 						'guid' => $vault->getGuid(),
 						'name' => $vault->getName(),
@@ -70,7 +70,7 @@ class VaultController extends ApiController {
 						'last_access' => $vault->getlastAccess(),
 						'challenge_password' => $credential->{$secret_field}(),
 						'delete_request_pending' => ($this->deleteVaultRequestService->getDeleteRequestForVault($vault->getGuid())) ? true : false
-					));
+					]);
 				}
 			}
 		}
@@ -98,11 +98,11 @@ class VaultController extends ApiController {
 		} catch (\Exception $e) {
 			return new NotFoundJSONResponse();
 		}
-		$result = array();
+		$result = [];
 		if (isset($vault)) {
 			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
 
-			$result = array(
+			$result = [
 				'vault_id' => $vault->getId(),
 				'guid' => $vault->getGuid(),
 				'name' => $vault->getName(),
@@ -113,7 +113,7 @@ class VaultController extends ApiController {
 				'vault_settings' => $vault->getVaultSettings(),
 				'last_access' => $vault->getlastAccess(),
 				'delete_request_pending' => ($this->deleteVaultRequestService->getDeleteRequestForVault($vault->getGuid())) ? true : false
-			);
+			];
 			$result['credentials'] = $credentials;
 
 			$this->vaultService->setLastAccess($vault->getId(), $this->userId);
@@ -186,6 +186,6 @@ class VaultController extends ApiController {
 		}
 
 		$this->vaultService->deleteVault($vault_guid, $this->userId);
-		return new JSONResponse(array('ok' => empty($failed_credential_guids), 'failed' => $failed_credential_guids));
+		return new JSONResponse(['ok' => empty($failed_credential_guids), 'failed' => $failed_credential_guids]);
 	}
 }

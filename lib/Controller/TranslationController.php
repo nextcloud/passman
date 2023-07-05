@@ -38,7 +38,7 @@ class TranslationController extends ApiController {
 	 * @PublicPage
 	 */
 	public function getLanguageStrings() {
-		$translations = array(
+		$translations = [
 			// js/app/controllers/bookmarklet.js
 			'generating.sharing.keys' =>  $this->trans->t('Generating sharing keys (%s/2)','%step'),
 			'invalid.vault.key' => $this->trans->t('Incorrect vault password!'),
@@ -449,7 +449,7 @@ class TranslationController extends ApiController {
 			'search.settings.defaults_button' => $this->trans->t('Revert to defaults'),
 
 
-		);
+		];
 		return new JSONResponse($translations);
 	}
 }

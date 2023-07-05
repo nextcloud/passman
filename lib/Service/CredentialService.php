@@ -107,8 +107,8 @@ class CredentialService {
 	 */
 	public function deleteCredentialParts(Credential $credential, $userId) {
 		$this->activityService->add(
-			'item_destroyed_self', array($credential->getLabel()),
-			'', array(),
+			'item_destroyed_self', [$credential->getLabel()],
+			'', [],
 			'', $userId, Activity::TYPE_ITEM_ACTION);
 		$this->shareService->unshareCredential($credential->getGuid());
 		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {

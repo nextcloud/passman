@@ -20,9 +20,9 @@ class ShareMiddleware extends Middleware {
 	public function beforeController($controller, $methodName) {
 		if ($controller instanceof ShareController) {
 			$http_response_code = Http::STATUS_OK;
-			$result = array();
-			$publicMethods = array('createPublicShare', 'getPublicCredentialData');
-			$user_pub_methods = array('updateSharedCredentialACL', 'getFile', 'getItemAcl');
+			$result = [];
+			$publicMethods = ['createPublicShare', 'getPublicCredentialData'];
+			$user_pub_methods = ['updateSharedCredentialACL', 'getFile', 'getItemAcl'];
 			$setting = (in_array($methodName, $publicMethods)) ? 'link_sharing_enabled' : 'user_sharing_enabled';
 			$sharing_enabled = ($this->settings->isEnabled($setting));
 

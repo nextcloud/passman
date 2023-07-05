@@ -68,7 +68,7 @@ class Utils {
 	 * @param array $results
 	 * @return array|mixed
 	 */
-	public static function getDirContents(string $dir, &$results = array()){
+	public static function getDirContents(string $dir, &$results = []){
 		$files = scandir($dir);
 
 		foreach($files as $value){

@@ -53,18 +53,18 @@ class CronService {
 				->andWhere($qb->expr()->eq('subject', $qb->createNamedParameter('credential_expired', IQueryBuilder::PARAM_STR)));
 
 			try {
-				$this->logger->debug($credential->getLabel() . ' is expired, checking notifications!', array('app' => 'passman'));
+				$this->logger->debug($credential->getLabel() . ' is expired, checking notifications!', ['app' => 'passman']);
 				$notificationCount = $qb->execute()->rowCount();
 				if ($notificationCount === 0) {
-					$this->logger->debug($credential->getLabel() . ' is expired, adding notification!', array('app' => 'passman'));
+					$this->logger->debug($credential->getLabel() . ' is expired, adding notification!', ['app' => 'passman']);
 					$this->activityService->add(
-						Activity::SUBJECT_ITEM_EXPIRED, array($credential->getLabel(), $credential->getUserId()),
-						'', array(),
+						Activity::SUBJECT_ITEM_EXPIRED, [$credential->getLabel(), $credential->getUserId()],
+						'', [],
 						$link, $credential->getUserId(), Activity::TYPE_ITEM_EXPIRED);
 					$this->notificationService->credentialExpiredNotification($credential);
 				}
 			} catch (Exception $exception) {
-				$this->logger->error('Error while creating a notification: ' . $exception->getMessage(), array('app' => 'passman'));
+				$this->logger->error('Error while creating a notification: ' . $exception->getMessage(), ['app' => 'passman']);
 			}
 		}
 	}

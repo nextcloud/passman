@@ -102,7 +102,7 @@ class ShareController extends ApiController {
 
 			$this->activityService->add(
 				'item_shared_publicly', [$credential->getLabel()],
-				'', array(),
+				'', [],
 				'', $this->userId->getUID(), Activity::TYPE_ITEM_SHARED);
 		} else {
 			$this->shareService->updateCredentialACL($acl);
@@ -127,7 +127,7 @@ class ShareController extends ApiController {
 		try {
 			$shareRequests = $this->shareService->getPendingShareRequestsForCredential($item_guid, $first_vault['user_id']);
 			if (count($shareRequests) > 0) {
-				return new JSONResponse(array('error' => 'User got already pending requests'));
+				return new JSONResponse(['error' => 'User got already pending requests']);
 			}
 		} catch (\Exception $exception) {
 			// no need to catch this
@@ -141,23 +141,23 @@ class ShareController extends ApiController {
 		}
 
 		if ($acl) {
-			return new JSONResponse(array('error' => 'User got already this credential'));
+			return new JSONResponse(['error' => 'User got already this credential']);
 		}
 
 		$result = $this->shareService->createBulkRequests($item_id, $item_guid, $vaults, $permissions, $credential_owner);
 		if ($credential) {
-			$processed_users = array();
+			$processed_users = [];
 			foreach ($result as $vault) {
 				if (!in_array($vault->getTargetUserId(), $processed_users)) {
 					$target_user = $vault->getTargetUserId();
-					$notification = array(
+					$notification = [
 						'from_user' => ucfirst($this->userId->getDisplayName()),
 						'credential_label' => $credential->getLabel(),
 						'credential_id' => $credential->getId(),
 						'item_id' => $credential->getId(),
 						'target_user' => $target_user,
 						'req_id' => $vault->getId()
-					);
+					];
 					$this->notificationService->credentialSharedNotification(
 						$notification
 					);
@@ -165,13 +165,13 @@ class ShareController extends ApiController {
 
 					$this->activityService->add(
 						'item_shared', [$credential->getLabel(), $target_user],
-						'', array(),
+						'', [],
 						'', $this->userId->getUID(), Activity::TYPE_ITEM_SHARED);
 
 
 					$this->activityService->add(
 						'item_share_received', [$credential->getLabel(), $this->userId->getUID()],
-						'', array(),
+						'', [],
 						'', $target_user, Activity::TYPE_ITEM_SHARED);
 				}
 			}
@@ -186,16 +186,16 @@ class ShareController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function searchUsers($search) {
-		$users = array();
+		$users = [];
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
 
 		foreach ($usersTmp as $user) {
 			if ($this->userId->getUID() !== $user->getUID() && count($this->vaultService->getByUser($user->getUID())) >= 1) {
-				$users[] = array(
+				$users[] = [
 					'text' => $user->getDisplayName(),
 					'uid' => $user->getUID(),
 					'type' => 'user'
-				);
+				];
 			}
 		}
 		return $users;
@@ -208,7 +208,7 @@ class ShareController extends ApiController {
 	 */
 	public function unshareCredential($item_guid) {
 		$this->shareService->unshareCredential($item_guid);
-		return new JSONResponse(array('result' => true));
+		return new JSONResponse(['result' => true]);
 	}
 
 	/**
@@ -241,7 +241,7 @@ class ShareController extends ApiController {
 		if ($acl) {
 			$this->shareService->deleteShareACL($acl);
 		}
-		return new JSONResponse(array('result' => true));
+		return new JSONResponse(['result' => true]);
 	}
 
 	/**
@@ -260,15 +260,15 @@ class ShareController extends ApiController {
 	 */
 	public function getVaultsByUser($user_id) {
 		$user_vaults = $this->vaultService->getByUser($user_id);
-		$result = array();
+		$result = [];
 		foreach ($user_vaults as $vault) {
 			array_push($result,
-				array(
+				[
 					'vault_id' => $vault->getId(),
 					'guid' => $vault->getGuid(),
 					'public_sharing_key' => $vault->getPublicSharingKey(),
 					'user_id' => $user_id,
-				));
+				]);
 		}
 		return new JSONResponse($result);
 	}
@@ -290,12 +290,12 @@ class ShareController extends ApiController {
 			->setUser($this->userId->getUID());
 		$this->manager->markProcessed($notification);
 
-		$notification = array(
+		$notification = [
 			'from_user' => ucfirst($this->userId->getDisplayName()),
 			'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
 			'target_user' => $sr->getFromUserId(),
 			'req_id' => $sr->getId()
-		);
+		];
 
 		$this->notificationService->credentialAcceptedSharedNotification(
 			$notification
@@ -312,7 +312,7 @@ class ShareController extends ApiController {
 	public function getPendingRequests() {
 		try {
 			$requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
-			$results = array();
+			$results = [];
 			foreach ($requests as $request) {
 				$result = $request->jsonSerialize();
 				$c = $this->credentialService->getCredentialLabelById($request->getItemId());
@@ -377,12 +377,12 @@ class ShareController extends ApiController {
 		try {
 
 			$sr = $this->shareService->getShareRequestById($share_request_id);
-			$notification = array(
+			$notification = [
 				'from_user' => ucfirst($this->userId->getDisplayName()),
 				'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
 				'target_user' => $sr->getFromUserId(),
 				'req_id' => $sr->getId()
-			);
+			];
 			$this->notificationService->credentialDeclinedSharedNotification(
 				$notification
 			);
@@ -395,7 +395,7 @@ class ShareController extends ApiController {
 			$this->manager->markProcessed($notification);
 
 			$this->shareService->cleanItemRequestsForUser($sr);
-			return new JSONResponse(array('result' => true));
+			return new JSONResponse(['result' => true]);
 		} catch (\Exception $ex) {
 			return new NotFoundJSONResponse();
 		}
@@ -456,7 +456,7 @@ class ShareController extends ApiController {
 				return new NotFoundResponse();
 			}
 		} catch (\Exception $ex) {
-			return new JSONResponse(array());
+			return new JSONResponse([]);
 		}
 	}
 
@@ -514,13 +514,13 @@ class ShareController extends ApiController {
 			}
 		}
 
-		$file = array(
+		$file = [
 			'filename' => $filename,
 			'size' => $size,
 			'mimetype' => $mimetype,
 			'file_data' => $data,
 			'user_id' => $credential->getUserId()
-		);
+		];
 
 		// save the file with the id of the user that owns the credential
 		return new JSONResponse($this->fileService->createFile($file, $credential->getUserId()));
