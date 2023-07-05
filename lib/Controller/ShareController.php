@@ -36,8 +36,6 @@ use OCP\Notification\IManager;
 
 class ShareController extends ApiController {
 	private $userId;
-	private $settings;
-	private $manager;
 
 	private $limit = 50;
 	private $offset = 0;
@@ -54,8 +52,8 @@ class ShareController extends ApiController {
 		private CredentialService $credentialService,
 		private NotificationService $notificationService,
 		private FileService $fileService,
-		SettingsService $config,
-		IManager $IManager,
+		private SettingsService $settings,
+		private IManager $manager,
 	) {
 		parent::__construct(
 			$AppName,
@@ -65,8 +63,6 @@ class ShareController extends ApiController {
 			86400);
 
 		$this->userId = $UserId;
-		$this->settings = $config;
-		$this->manager = $IManager;
 	}
 
 

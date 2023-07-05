@@ -48,7 +48,8 @@ class ServerSideEncryption implements IRepairStep {
 		private LoggerInterface $logger,
 		private CredentialService $credentialService,
 		private CredentialRevisionService $revisionService,
-		private FileService    $fileService, IConfig $config,
+		private FileService $fileService,
+		IConfig $config,
 	) {
 		$this->installedVersion = $config->getAppValue('passman', 'installed_version');
 	}

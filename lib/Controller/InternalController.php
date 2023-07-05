@@ -21,7 +21,6 @@ use OCP\Notification\IManager;
 
 class InternalController extends ApiController {
 	private $userId;
-	private $manager;
 
 	public function __construct(
 		$AppName,
@@ -29,7 +28,7 @@ class InternalController extends ApiController {
 		$UserId,
 		private CredentialService $credentialService,
 		private IConfig $config,
-		IManager $IManager,
+		private IManager $manager,
 		private IAppManager $appManager,
 	) {
 		parent::__construct(
@@ -39,7 +38,6 @@ class InternalController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->manager = $IManager;
 	}
 
 	/**

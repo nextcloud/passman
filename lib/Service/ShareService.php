@@ -38,18 +38,14 @@ use OCP\DB\IResult;
 use OCP\Notification\IManager;
 
 class ShareService {
-	private CredentialMapper $credential;
-
-
 	public function __construct(
-		private SharingACLMapper          $sharingACL,
-		private ShareRequestMapper        $shareRequest,
-		CredentialMapper                  $credentials,
+		private SharingACLMapper $sharingACL,
+		private ShareRequestMapper $shareRequest,
+		private CredentialMapper $credential,
 		private CredentialRevisionService $revisions,
-		private EncryptService            $encryptService,
-		private IManager				  $IManager,
+		private EncryptService $encryptService,
+		private IManager $IManager,
 	) {
-		$this->credential = $credentials;
 	}
 
 	/**
