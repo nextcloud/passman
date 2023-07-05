@@ -318,6 +318,7 @@ OC.L10N.register(
     "Medium Strength" : "Средња јачина",
     "Bad Strength" : "Лоша јачина",
     "Expired" : "Истекао",
+    "Compromised" : "Компромитована",
     "Filter Tags" : "Филтрирај ознаке",
     "Simple Navigation" : "Проста навигација",
     "Someone has shared a credential with you." : "Неко је поделио акредитиве са Вама.",
