@@ -48,9 +48,9 @@ class ActivityService {
 	 * @param $type string
 	 * @return array
 	 */
-	public function add($subject,$subjectParams=array(),
-						$message='',$messageParams=array(),
-						$link='',$user=null,$type='') {
+	public function add($subject, $subjectParams = [],
+						$message = '', $messageParams = [],
+						$link = '', $user = null, $type = '') {
 		if($user) {
 			$activity = $this->manager->generateEvent();
 			$activity->setType($type);
@@ -62,6 +62,6 @@ class ActivityService {
 			$activity->setTimestamp(time());
 			$activity->setMessage($message, $messageParams);
 		}
-		return array('success'=>'ok');
+		return ['success'=>'ok'];
 	}
 }

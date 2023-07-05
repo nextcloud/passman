@@ -43,7 +43,7 @@ class PageController extends Controller {
 	 * @NoCSRFRequired
 	 */
 	public function bookmarklet($url='', $title='') {
-		$params = array('url' => $url, 'title' => $title);
+		$params = ['url' => $url, 'title' => $title];
 		return new TemplateResponse($this->appName, 'bookmarklet', $params);
 	}
 

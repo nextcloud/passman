@@ -72,12 +72,12 @@ class Activity implements \OCP\Activity\IExtension {
 	 */
 	public function getNotificationTypes(string $languageCode) {
 		$l = $this->factory->get(self::APP_NAME, $languageCode);
-		return array(
+		return [
 			self::TYPE_ITEM_ACTION => $l->t('A Passman item has been created, modified or deleted'),
 			self::TYPE_ITEM_EXPIRED => $l->t('A Passman item has expired'),
 			self::TYPE_ITEM_SHARED => $l->t('A Passman item has been shared'),
 			self::TYPE_ITEM_RENAMED => $l->t('A Passman item has been renamed')
-		);
+		];
 	}
 
 	/**
@@ -101,18 +101,18 @@ class Activity implements \OCP\Activity\IExtension {
 	 */
 	public function getDefaultTypes($method) {
 		if ($method === 'stream') {
-			return array(
+			return [
 				self::TYPE_ITEM_ACTION,
 				self::TYPE_ITEM_EXPIRED,
 				self::TYPE_ITEM_SHARED,
 				self::TYPE_ITEM_EXPIRED,
 				self::TYPE_ITEM_RENAMED,
-			);
+			];
 		}
 		if ($method === 'email') {
-			return array(
+			return [
 				self::TYPE_ITEM_EXPIRED,
-			);
+			];
 		}
 		return false;
 	}
@@ -198,25 +198,25 @@ class Activity implements \OCP\Activity\IExtension {
 				case self::SUBJECT_ITEM_RECOVERED_SELF:
 				case self::SUBJECT_ITEM_DESTROYED:
 				case self::SUBJECT_ITEM_DESTROYED_SELF:
-					return array(
+					return [
 						0 => 'passman',
 						1 => 'username',
-					);
+					];
 				case self::SUBJECT_APPLY_REV:
 				case self::SUBJECT_APPLY_REV_SELF:
-					return array(
+					return [
 						0 => 'passman',
 						1 => 'username',
 						2 => '', //unknown
-					);
+					];
 				case self::SUBJECT_ITEM_EXPIRED:
 				case self::SUBJECT_ITEM_RENAMED_SELF:
 				case self::SUBJECT_ITEM_RENAMED:
 				case self::SUBJECT_ITEM_SHARED:
 				case self::SUBJECT_ITEM_SHARED_PUBLICLY:
-					return array(
+					return [
 						0 => 'passman',
-					);
+					];
 			}
 		}
 		return false;
@@ -262,16 +262,16 @@ class Activity implements \OCP\Activity\IExtension {
 	 */
 	public function getNavigation() {
 		$l = $this->factory->get(self::APP_NAME);
-		return array(
-			'top' => array(),
-			'apps' => array(self::FILTER_PASSMAN =>
-				array(
+		return [
+			'top' => [],
+			'apps' => [self::FILTER_PASSMAN =>
+				[
 					'id' => 'passman',
 					'name' => (string)$l->t('Passwords'),
 					'url' => $this->URLGenerator->linkToRoute('activity.Activities.showList', ['filter' => self::FILTER_PASSMAN]),
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**

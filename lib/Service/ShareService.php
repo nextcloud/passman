@@ -78,7 +78,7 @@ class ShareService {
 	 */
 	public function createBulkRequests($target_item_id, $target_item_guid, $request_array, $permissions, $credential_owner) {
 		$created = Utils::getTime();
-		$requests = array();
+		$requests = [];
 		foreach ($request_array as $req) {
 			$t = new ShareRequest();
 			$t->setItemId($target_item_id);

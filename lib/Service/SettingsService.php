@@ -33,7 +33,7 @@ class SettingsService {
 	private $appName;
 	public $settings;
 
-	private $numeric_settings = array(
+	private $numeric_settings = [
 		'link_sharing_enabled',
 		'user_sharing_enabled',
 		'vault_key_strength',
@@ -42,13 +42,13 @@ class SettingsService {
 		'disable_contextmenu',
 		'enable_global_search',
 		'settings_loaded'
-	);
+	];
 
 	public function __construct($UserId, IConfig $config, $AppName) {
 		$this->userId = $UserId;
 		$this->config = $config;
 		$this->appName = $AppName;
-		$this->settings = array(
+		$this->settings = [
 			'link_sharing_enabled' => intval($this->config->getAppValue('passman', 'link_sharing_enabled', 1)),
 			'user_sharing_enabled' => intval($this->config->getAppValue('passman', 'user_sharing_enabled', 1)),
 			'vault_key_strength' => intval($this->config->getAppValue('passman', 'vault_key_strength', 3)),
@@ -60,7 +60,7 @@ class SettingsService {
 			'disable_debugger' => $this->config->getAppValue('passman', 'disable_debugger', 1),
 			'enable_global_search' => $this->config->getAppValue('passman', 'enable_global_search', 0),
 			'settings_loaded' => 1
-		);
+		];
 	}
 
 	/**

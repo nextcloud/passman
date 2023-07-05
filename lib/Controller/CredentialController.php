@@ -69,7 +69,7 @@ class CredentialController extends ApiController {
 	                                 $description, $email, $expire_time, $favicon, $files, $guid,
 	                                 $hidden, $icon, $label, $otp, $password, $renew_interval,
 	                                 $tags, $url, $username, $vault_id, $compromised) {
-		$credential = array(
+		$credential = [
 			'credential_id' => $credential_id,
 			'guid' => $guid,
 			'user_id' => $this->userId,
@@ -93,14 +93,14 @@ class CredentialController extends ApiController {
 			'otp' => $otp,
 			'hidden' => $hidden,
 			'compromised' => $compromised
-		);
+		];
 
 		$credential = $this->credentialService->createCredential($credential);
 		$link = ''; // @TODO create direct link to credential
 		if (!$credential->getHidden()) {
 			$this->activityService->add(
-				Activity::SUBJECT_ITEM_CREATED_SELF, array($label, $this->userId),
-				'', array(),
+				Activity::SUBJECT_ITEM_CREATED_SELF, [$label, $this->userId],
+				'', [],
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 
@@ -129,7 +129,7 @@ class CredentialController extends ApiController {
 
 		$storedCredential = $this->credentialService->getCredentialByGUID($credential_guid);
 
-		$credential = array(
+		$credential = [
 			'credential_id' => $credential_id,
 			'guid' => $guid,
 			'label' => $label,
@@ -152,7 +152,7 @@ class CredentialController extends ApiController {
 			'otp' => $otp,
 			'user_id' => $storedCredential->getUserId(),
 			'compromised' => $compromised
-		);
+		];
 
 
 		if (!hash_equals($storedCredential->getUserId(), $this->userId)) {
@@ -172,32 +172,32 @@ class CredentialController extends ApiController {
 		if ($revision_created) {
 			$activity = 'item_apply_revision';
 			$this->activityService->add(
-				$activity . '_self', array($label, $this->userId, $revision_created),
-				'', array(),
+				$activity . '_self', [$label, $this->userId, $revision_created],
+				'', [],
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		} else if (($storedCredential->getDeleteTime() === 0) && (int)$delete_time > 0) {
 			$activity = 'item_deleted';
 			$this->activityService->add(
-				$activity . '_self', array($label, $this->userId),
-				'', array(),
+				$activity . '_self', [$label, $this->userId],
+				'', [],
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		} else if (($storedCredential->getDeleteTime() > 0) && (int)$delete_time === 0) {
 			$activity = 'item_recovered';
 			$this->activityService->add(
-				$activity . '_self', array($label, $this->userId),
-				'', array(),
+				$activity . '_self', [$label, $this->userId],
+				'', [],
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		} else if ($label !== $storedCredential->getLabel()) {
 			$activity = 'item_renamed';
 			$this->activityService->add(
-				$activity . '_self', array($storedCredential->getLabel(), $label, $this->userId),
-				'', array(),
+				$activity . '_self', [$storedCredential->getLabel(), $label, $this->userId],
+				'', [],
 				$link, $this->userId, Activity::TYPE_ITEM_RENAMED);
 		} else {
 			$activity = 'item_edited';
 			$this->activityService->add(
-				$activity . '_self', array($label, $this->userId),
-				'', array(),
+				$activity . '_self', [$label, $this->userId],
+				'', [],
 				$link, $this->userId, Activity::TYPE_ITEM_ACTION);
 		}
 		$acl_list = null;
@@ -208,18 +208,18 @@ class CredentialController extends ApiController {
 			// Just check if we have an acl list
 		}
 		if (!empty($acl_list)) {
-			$params = array();
+			$params = [];
 			switch ($activity) {
 				case 'item_recovered':
 				case 'item_deleted':
 				case 'item_edited':
-					$params = array($credential['label'], $this->userId);
+					$params = [$credential['label'], $this->userId];
 					break;
 				case 'item_apply_revision':
-					$params = array($credential['label'], $this->userId, $revision_created);
+					$params = [$credential['label'], $this->userId, $revision_created];
 					break;
 				case 'item_renamed':
-					$params = array($storedCredential->getLabel(), $label, $this->userId);
+					$params = [$storedCredential->getLabel(), $label, $this->userId];
 					break;
 			}
 
@@ -230,13 +230,13 @@ class CredentialController extends ApiController {
 				}
 				$this->activityService->add(
 					$activity, $params,
-					'', array(),
+					'', [],
 					$link, $target_user, Activity::TYPE_ITEM_ACTION);
 			}
 			if (!hash_equals($this->userId, $storedCredential->getUserId())) {
 				$this->activityService->add(
 					$activity, $params,
-					'', array(),
+					'', [],
 					$link, $storedCredential->getUserId(), Activity::TYPE_ITEM_ACTION);
 			}
 		}
@@ -326,12 +326,12 @@ class CredentialController extends ApiController {
 		try {
 			$revision = $this->credentialRevisionService->getRevision($revision_id);
 		} catch (\Exception $exception) {
-			return new JSONResponse(array());
+			return new JSONResponse([]);
 		}
 
 		$revision->setCredentialData($credential_data);
 
 		$this->credentialRevisionService->updateRevision($revision);
-		return new JSONResponse(array());
+		return new JSONResponse([]);
 	}
 }
