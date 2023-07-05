@@ -36,33 +36,26 @@ use OCP\Notification\IManager;
 
 class ShareController extends ApiController {
 	private $userId;
-	private $activityService;
-	private $groupManager;
-	private $userManager;
-	private $vaultService;
-	private $shareService;
-	private $credentialService;
-	private $notificationService;
-	private $fileService;
 	private $settings;
 	private $manager;
 
 	private $limit = 50;
 	private $offset = 0;
 
-	public function __construct($AppName,
-	                            IRequest $request,
-	                            $UserId,
-	                            IGroupManager $groupManager,
-	                            IUserManager $userManager,
-	                            ActivityService $activityService,
-	                            VaultService $vaultService,
-	                            ShareService $shareService,
-	                            CredentialService $credentialService,
-	                            NotificationService $notificationService,
-	                            FileService $fileService,
-	                            SettingsService $config,
-	                            IManager $IManager
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private IGroupManager $groupManager,
+		private IUserManager $userManager,
+		private ActivityService $activityService,
+		private VaultService $vaultService,
+		private ShareService $shareService,
+		private CredentialService $credentialService,
+		private NotificationService $notificationService,
+		private FileService $fileService,
+		SettingsService $config,
+		IManager $IManager,
 	) {
 		parent::__construct(
 			$AppName,
@@ -72,14 +65,6 @@ class ShareController extends ApiController {
 			86400);
 
 		$this->userId = $UserId;
-		$this->userManager = $userManager;
-		$this->groupManager = $groupManager;
-		$this->activityService = $activityService;
-		$this->vaultService = $vaultService;
-		$this->shareService = $shareService;
-		$this->credentialService = $credentialService;
-		$this->notificationService = $notificationService;
-		$this->fileService = $fileService;
 		$this->settings = $config;
 		$this->manager = $IManager;
 	}

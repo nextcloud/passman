@@ -54,12 +54,10 @@ class Activity implements \OCP\Activity\IExtension {
 	const SUBJECT_ITEM_RENAMED_SELF = 'item_renamed_self';
 
 
-	protected $URLGenerator;
-	protected $factory;
-
-	public function __construct(IURLGenerator $URLGenerator, IFactory $factory) {
-		$this->URLGenerator = $URLGenerator;
-		$this->factory = $factory;
+	public function __construct(
+		protected IURLGenerator $URLGenerator,
+		protected IFactory $factory,
+	) {
 	}
 
 

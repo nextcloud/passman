@@ -39,35 +39,17 @@ use Psr\Log\LoggerInterface;
 
 class ServerSideEncryption implements IRepairStep {
 
-	/** @var EncryptService */
-	private $encryptService;
-
-	/** @var IDBConnection */
-	private $db;
-
 	/** @var string */
 	private $installedVersion;
 
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var CredentialService */
-	private $credentialService;
-
-	/** @var  CredentialRevisionService */
-	private $revisionService;
-
-	/** @var FileService */
-	private $fileService;
-
-	public function __construct(EncryptService $encryptService, IDBConnection $db, LoggerInterface $logger, CredentialService $credentialService, CredentialRevisionService $revisionService,
-	                            FileService $fileService, IConfig $config) {
-		$this->encryptService = $encryptService;
-		$this->db = $db;
-		$this->logger = $logger;
-		$this->credentialService = $credentialService;
-		$this->revisionService = $revisionService;
-		$this->fileService = $fileService;
+	public function __construct(
+		private EncryptService $encryptService,
+		private IDBConnection $db,
+		private LoggerInterface $logger,
+		private CredentialService $credentialService,
+		private CredentialRevisionService $revisionService,
+		private FileService    $fileService, IConfig $config,
+	) {
 		$this->installedVersion = $config->getAppValue('passman', 'installed_version');
 	}
 

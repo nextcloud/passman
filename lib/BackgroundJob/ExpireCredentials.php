@@ -42,7 +42,11 @@ class ExpireCredentials extends TimedJob {
      * @param IConfig $config
      * @param CronService $cronService
      */
-	public function __construct(ITimeFactory $timeFactory, protected IConfig $config, private CronService $cronService) {
+	public function __construct(
+		ITimeFactory $timeFactory,
+		protected IConfig $config,
+		private CronService $cronService,
+	) {
         parent::__construct($timeFactory);
 
 		// Run once per minute

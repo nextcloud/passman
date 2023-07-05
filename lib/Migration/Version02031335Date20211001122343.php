@@ -15,9 +15,6 @@ use OCP\Migration\SimpleMigrationStep;
  */
 class Version02031335Date20211001122343 extends SimpleMigrationStep {
 
-	/** @var IDBConnection */
-	protected $connection;
-
 	protected $oldColumn = 'favicon';
 	protected $newColumn = 'icon';
 	protected $dataMigrationRequired = false;
@@ -25,8 +22,9 @@ class Version02031335Date20211001122343 extends SimpleMigrationStep {
 	/**
 	 * @param IDBConnection $connection
 	 */
-	public function __construct(IDBConnection $connection) {
-		$this->connection = $connection;
+	public function __construct(
+		protected IDBConnection $connection,
+	) {
 	}
 
 	/**

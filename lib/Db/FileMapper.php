@@ -34,11 +34,12 @@ use OCP\IDBConnection;
 
 class FileMapper extends QBMapper {
 	const TABLE_NAME = 'passman_files';
-	private Utils $utils;
 
-	public function __construct(IDBConnection $db, Utils $utils) {
+	public function __construct(
+		IDBConnection $db,
+		private Utils $utils,
+	) {
 		parent::__construct($db, self::TABLE_NAME);
-		$this->utils = $utils;
 	}
 
 
