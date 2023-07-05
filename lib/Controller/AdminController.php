@@ -29,24 +29,18 @@ use OCP\IUserManager;
 
 class AdminController extends ApiController {
 	private $userId;
-	private $vaultService;
-	private $credentialService;
-	private $fileService;
-	private $revisionService;
-	private $deleteVaultRequestService;
-	private $config;
-	private $userManager;
 
-	public function __construct($AppName,
-								IRequest $request,
-								$UserId,
-								VaultService $vaultService,
-								CredentialService $credentialService,
-								FileService $fileService,
-								CredentialRevisionService $revisionService,
-								DeleteVaultRequestService $deleteVaultRequestService,
-								IConfig $config,
-								IUserManager $userManager
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private VaultService $vaultService,
+		private CredentialService $credentialService,
+		private FileService $fileService,
+		private CredentialRevisionService $revisionService,
+		private DeleteVaultRequestService $deleteVaultRequestService,
+		private IConfig $config,
+		private IUserManager $userManager,
 	) {
 		parent::__construct(
 			$AppName,
@@ -55,14 +49,7 @@ class AdminController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->vaultService = $vaultService;
-		$this->credentialService = $credentialService;
-		$this->fileService = $fileService;
-		$this->revisionService = $revisionService;
-		$this->deleteVaultRequestService = $deleteVaultRequestService;
 
-		$this->config = $config;
-		$this->userManager = $userManager;
 	}
 
 

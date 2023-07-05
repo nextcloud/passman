@@ -29,21 +29,16 @@ use OCP\IRequest;
 
 class CredentialController extends ApiController {
 	private $userId;
-	private $credentialService;
-	private $activityService;
-	private $credentialRevisionService;
-	private $sharingService;
-	private $settings;
 
-	public function __construct($AppName,
-	                            IRequest $request,
-								$userId,
-		                        CredentialService $credentialService,
-		                        ActivityService $activityService,
-		                        CredentialRevisionService $credentialRevisionService,
-		                        ShareService $sharingService,
-		                        SettingsService $settings
-
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$userId,
+		private CredentialService $credentialService,
+		private ActivityService $activityService,
+		private CredentialRevisionService $credentialRevisionService,
+		private ShareService $sharingService,
+		private SettingsService $settings,
 	) {
 		parent::__construct(
 			$AppName,
@@ -52,11 +47,6 @@ class CredentialController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $userId;
-		$this->credentialService = $credentialService;
-		$this->activityService = $activityService;
-		$this->credentialRevisionService = $credentialRevisionService;
-		$this->sharingService = $sharingService;
-		$this->settings = $settings;
 	}
 
 

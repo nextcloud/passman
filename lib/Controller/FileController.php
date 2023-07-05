@@ -19,14 +19,14 @@ use Psr\Log\LoggerInterface;
 
 class FileController extends ApiController {
 	private $userId;
-	private $fileService;
-	private $logger;
 
-	public function __construct($AppName,
-	                            IRequest $request,
-								$UserId,
-		                        FileService $fileService,
-		                        LoggerInterface $logger) {
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private FileService $fileService,
+		private LoggerInterface $logger,
+	) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -34,8 +34,6 @@ class FileController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->fileService = $fileService;
-		$this->logger = $logger;
 	}
 
 

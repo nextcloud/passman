@@ -42,16 +42,13 @@ use OCP\Search\SearchResultEntry;
 
 class Provider implements IProvider {
 
-	private IL10N $l10n;
-	private IURLGenerator $urlGenerator;
-	private IDBConnection $db;
-	private SettingsService $settings;
+	public function __construct(
+		private IL10N $l10n,
+		private IURLGenerator $urlGenerator,
+		private IDBConnection $db,
+		private SettingsService $settings,
+	) {
 
-	public function __construct(IL10N $l10n, IURLGenerator $urlGenerator, IDBConnection $db, SettingsService $settings) {
-		$this->l10n = $l10n;
-		$this->urlGenerator = $urlGenerator;
-		$this->db = $db;
-		$this->settings = $settings;
 	}
 
 	public function getId(): string {
