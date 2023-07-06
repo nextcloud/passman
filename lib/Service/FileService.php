@@ -124,7 +124,7 @@ class FileService {
 		$files = $this->fileMapper->getFileGuidsFromUser($userId);
 		$results = array();
 		foreach ($files as $fileGuid) {
-			array_push($results, $fileGuid->getGuid());
+			$results[] = $fileGuid->getGuid();
 		}
 		return $results;
 	}

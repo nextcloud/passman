@@ -90,7 +90,7 @@ class ShareService {
 			$t->setPermissions($permissions);
 			$t->setCreated($created);
 			$t->setFromUserId($credential_owner);
-			array_push($requests, $this->shareRequest->createRequest($t));
+			$requests[] = $this->shareRequest->createRequest($t);
 		}
 		return $requests;
 	}

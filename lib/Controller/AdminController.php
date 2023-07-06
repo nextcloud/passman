@@ -70,10 +70,10 @@ class AdminController extends ApiController {
 		$results = array();
 		$searchResult = $this->userManager->search($term);
 		foreach ($searchResult as $user) {
-			array_push($results, array(
+			$results[] = [
 				"value" => $user->getUID(),
 				"label" => $user->getDisplayName() . ' (' . $user->getBackendClassName() . ')',
-			));
+			];
 		}
 		return new JSONResponse($results);
 	}
@@ -125,7 +125,7 @@ class AdminController extends ApiController {
 		foreach($requests as $request){
 			$r = $request->jsonSerialize();
 			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy(), $this->userManager);
-			array_push($results, $r);
+			$results[] = $r;
 		}
 		return new JSONResponse($results);
 	}
