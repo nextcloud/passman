@@ -61,7 +61,7 @@ class VaultController extends ApiController {
 				$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 				$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
 				if (isset($credential)) {
-					array_push($result, array(
+					$result[] = [
 						'vault_id' => $vault->getId(),
 						'guid' => $vault->getGuid(),
 						'name' => $vault->getName(),
@@ -70,7 +70,7 @@ class VaultController extends ApiController {
 						'last_access' => $vault->getlastAccess(),
 						'challenge_password' => $credential->{$secret_field}(),
 						'delete_request_pending' => ($this->deleteVaultRequestService->getDeleteRequestForVault($vault->getGuid())) ? true : false
-					));
+					];
 				}
 			}
 		}
