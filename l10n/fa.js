@@ -348,6 +348,7 @@ OC.L10N.register(
     "Expires:" : "منقضی می شود:",
     "Connection to server lost" : "اتصال به سرور از دست رفته است",
     "Problem loading page, reloading in 5 seconds" : "صفحه بارگیری مشکل ، بارگیری مجدد در 5 ثانیه",
+    "Saving …" : "ذخیره کردن …",
     "Dismiss" : "پنهان کن",
     "seconds ago" : "ثانیه‌هایی پیش"
 },
