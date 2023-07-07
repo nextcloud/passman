@@ -203,7 +203,7 @@ OC.L10N.register(
     "Enable link sharing" : "Activar a compartición de ligazóns",
     "Share until date" : "Compartir ata a data",
     "Expire after views" : "Caduca após as vistas",
-    "Click \"Share\" first" : "Primeiro prema en «Compartir»",
+    "Click \"Share\" first" : "Antes prema en «Compartir»",
     "Show files" : "Amosar os ficheiros",
     "Details" : "Detalles",
     "Hide details" : "Agochar os detalles",

@@ -305,6 +305,7 @@ OC.L10N.register(
     "Someone has shared a credential with you." : "قام أحدهم بمشاركة بيانات الاعتماد معك.",
     "Click here to request it" : "أنقر هنا لطلبها",
     "Loading …" : "جاري التحميل …",
+    "Mark as Compromised" : "وضع علامة معرض للخطر",
     "Compromised!" : "معرض للخطر!",
     "This password is compromised. You can only remove this warning by changing the password." : "كلمة المرور هذه معرضة للخطر. لا يمكنك إزالة هذا التحذير إلا بتغيير كلمة المرور.",
     "email" : "البريد الإلكتروني",
