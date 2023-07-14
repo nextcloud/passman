@@ -300,7 +300,7 @@ OC.L10N.register(
     "After an admin destroys this vault, all credentials in it will be lost" : "Após que un administrador destrúa esta bóveda, todas as credenciais incluídas nela perderanse",
     "Reason for requesting deletion (optional):" : "Razón para solicitar a eliminación (opcional):",
     "Request vault destruction" : "Solicitar a destrución da bóveda",
-    "Yes, request an admin to destroy this vault" : "Si, solicito que un administrador destrúa esta bóveda",
+    "Yes, request an admin to destroy this vault" : "Si, solicitou que un administrador destrúa esta bóveda",
     "Cancel destruction request" : "Cancelar a solicitude de destrución",
     "Vault destruction requested" : "Solicitada a destrución da bóveda",
     "Request removed" : "Solicitude retirada",
