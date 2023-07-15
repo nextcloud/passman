@@ -145,7 +145,7 @@ OC.L10N.register(
     "Use numbers" : "Use números",
     "Use special characters" : "Use caracteres especiais",
     "Avoid ambiguous characters" : "Evitar caracteres ambiguos",
-    "Require every character type" : "Requirir todos os tipos de caracteres",
+    "Require every character type" : "Obrigar ao uso de todos os tipos de caracteres",
     "Export type" : "Exportar o tipo",
     "Export" : "Exportar",
     "Enter vault password to confirm export." : "Introduza o contrasinal da bóveda para confirmar a exportación.",
