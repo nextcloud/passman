@@ -92,6 +92,50 @@
     .addCredential{
       padding-top: 1px;
     }
+
+    // repeat new breadcrumb style (added with nc27) to support it with older versions like nc26
+    // todo: remove when dropping Passman support for versions <nc27
+    li.crumb:last-child {
+      font-weight:bold;
+      margin-right:10px;
+
+      a~span {
+        padding-left:0
+      }
+    }
+    li.crumb {
+      display:inline-flex;
+      background-image:url("../../../core/img/breadcrumb.svg?v=1");
+      background-repeat:no-repeat;
+      background-position:right center;
+      height:44px;
+      background-size:auto 24px;
+      flex:0 0 auto;
+      order:1;
+      padding-right:7px;
+
+      >a, >span {
+        position:relative;
+        padding:12px;
+        opacity:.5;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
+        flex:0 0 auto;
+        max-width:200px
+      }
+
+      >a.icon-home,
+      >a.icon-delete,
+      >span.icon-home,
+      >span.icon-delete {
+        text-indent:-9999px
+      }
+      >a[class^=icon-] {
+        padding:0;
+        width:44px
+      }
+    }
   }
 }
 @media only screen and (max-width: 768px){
