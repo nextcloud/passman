@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('GenericCsvImportCtrl', ['$scope', 'CredentialService', 'FileService', 'EncryptService', '$translate', '$q',
-			function ($scope, CredentialService, FileService, EncryptService, $translate, $q) {
+		.controller('GenericCsvImportCtrl', ['$scope', '$rootScope', 'CredentialService', 'FileService', 'EncryptService', '$translate', '$q',
+			function ($scope, $rootScope, CredentialService, FileService, EncryptService, $translate, $q) {
 				$scope.hello = 'world';
 
 				$scope.credentialProperties = [
@@ -45,17 +45,27 @@
 					{
 						label: 'Username',
 						prop: 'username',
-						matching: ['username', 'user', 'login', 'login name']
+						matching: ['username', 'user', 'login', 'login name', 'login_username']
 					},
 					{
 						label: 'Password',
 						prop: 'password',
-						matching: ['password', 'pass', 'pw']
+						matching: ['password', 'pass', 'pw', 'login_password']
 					},
 					{
-						label: 'TOTP Secret',
+						label: 'TOTP Secret or Object',
 						prop: 'otp',
-						matching: ['totp']
+						matching: ['otp', 'otp_object', 'totp', 'login_totp']
+					},
+					{
+						label: 'Email',
+						prop: 'email',
+						matching: ['email', 'mail']
+					},
+					{
+						label: 'Notes',
+						prop: 'description',
+						matching: ['notes', 'description', 'comments']
 					},
 					{
 						label: 'Custom field',
@@ -72,23 +82,44 @@
 						matching: ['files']
 					},
 					{
-						label: 'Notes',
-						prop: 'description',
-						matching: ['notes', 'description', 'comments']
-					},
-					{
-						label: 'Email',
-						prop: 'email',
-						matching: ['email', 'mail']
-					},
-					{
 						label: 'URL',
 						prop: 'url',
-						matching: ['website', 'url', 'fulladdress', 'site', 'web site']
+						matching: ['website', 'url', 'fulladdress', 'site', 'web site', 'login_uri']
 					},
 					{
 						label: 'Tags',
-						prop: 'tags'
+						prop: 'tags',
+						matching: ['tags', 'folder']
+					},
+					{
+						label: 'Created',
+						prop: 'created',
+						matching: ['created', 'creation']
+					},
+					{
+						label: 'Changed',
+						prop: 'changed',
+						matching: ['changed', 'edited']
+					},
+					{
+						label: 'Expire time',
+						prop: 'expire_time',
+						matching: ['expire_time', 'expire', 'expires', 'expires_at']
+					},
+					{
+						label: 'Delete time',
+						prop: 'delete_time',
+						matching: ['delete_time', 'delete', 'deleted_at']
+					},
+					{
+						label: 'Icon',
+						prop: 'icon',
+						matching: ['icon', 'favicon']
+					},
+					{
+						label: 'Compromised',
+						prop: 'compromised',
+						matching: ['compromised']
 					},
 					{
 						label: 'Ignored',
@@ -99,14 +130,23 @@
 					return {text: t};
 				};
 				var rowToCredential = async function (row) {
-					var _credential = PassmanImporter.newCredential();
-					for(var k = 0; k < $scope.import_fields.length; k++){
-						var field = $scope.import_fields[k];
+					let _credential = PassmanImporter.newCredential();
+					for(let k = 0; k < $scope.import_fields.length; k++){
+						const field = $scope.import_fields[k];
 						if(field){
 							if(field === 'otp'){
-								_credential.otp.secret = row[k];
+								if (typeof row[k] === 'object' || row[k].includes('{"')) {
+									const otpobj = JSON.parse(row[k]);
+									if (typeof otpobj === 'object' && otpobj.secret !== undefined && otpobj.algorithm !== undefined && otpobj.period !== undefined && otpobj.digits !== undefined) {
+										_credential.otp = otpobj;
+									} else if (otpobj.secret !== undefined) {
+										_credential.otp.secret = otpobj.secret;
+									}
+								} else if (row[k] !== '{}') {
+									_credential.otp.secret = row[k];
+								}
 							} else if(field === 'custom_field'){
-								var key = ($scope.matched) ? $scope.parsed_csv[0][k] : 'Custom field '+ k;
+								const key = ($scope.matched) ? $scope.parsed_csv[0][k] : 'Custom field '+ k;
 								_credential.custom_fields.push({
 									'label': key,
 									'value': row[k],
@@ -116,46 +156,44 @@
 								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
 									try {
 										row[k] = JSON.parse(row[k]);
-										for(let i = 0; k < row[k].length; i++){
-											_credential.custom_fields.push({
-												'label': row[k][i].label,
-												'secret': row[k][i].secret,
-												'field_type': row[k][i].field_type,
-											});
-										}
 									} catch (e) {
 										// ignore row[k], it contains no valid json data
-										// console.error(e);
+										console.error(e);
+										continue;
 									}
-								} else {
-									for(let j = 0; j < row[k].length; j++){
-										if (row[k][j].field_type === 'file'){
-											var _file = {
-												filename: row[k][j].value.filename,
-												size: row[k][j].value.size,
-												mimetype: row[k][j].value.mimetype,
-												data: row[k][j].value.file_data
-											};
-
-											row[k][j].value = await FileService.uploadFile(_file).then(FileService.getEmptyFileWithDecryptedFilename);
+								}
+								for(let j = 0; j < row[k].length; j++){
+									if (row[k][j].field_type === 'file'){
+										const _file = {
+											filename: row[k][j].value.filename,
+											size: row[k][j].value.size,
+											mimetype: row[k][j].value.mimetype,
+											data: row[k][j].value.file_data ? row[k][j].value.file_data : row[k][j].value.data
+										};
+										if (_file.data === undefined) {
+											console.error('Unable to parse file data from ', row[k][j]);
+											$scope.log.push('Unable to parse file data from file ' + _file.filename);
+											continue;
 										}
-										_credential.custom_fields.push(row[k][j]);
+										row[k][j].value = await FileService.uploadFile(_file).then(FileService.getEmptyFileWithDecryptedFilename);
 									}
+									_credential.custom_fields.push(row[k][j]);
 								}
 							} else if(field === 'files'){
 								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
 									try {
 										row[k] = JSON.parse(row[k]);
-										for(let i = 0; k < row[k].length; i++){
-											_credential.files.push({
+										for(let i = 0; i < row[k].length; i++){
+											_credential.files.push(await FileService.uploadFile({
 												filename: row[k][i].filename,
 												size: row[k][i].size,
-												mimetype: row[k][i].mimetype
-											});
+												mimetype: row[k][i].mimetype,
+												data: row[k][i].file_data ? row[k][i].file_data : row[k][i].data
+											}).then(FileService.getEmptyFileWithDecryptedFilename));
 										}
 									} catch (e) {
 										// ignore row[k], it contains no valid json data
-										// console.error(e);
+										console.error(e);
 									}
 								} else {
 									for(let j = 0; j < row[k].length; j++){
@@ -163,14 +201,24 @@
 											filename: row[k][j].filename,
 											size: row[k][j].size,
 											mimetype: row[k][j].mimetype,
-											data: row[k][j].file_data
+											data: row[k][j].file_data ? row[k][j].file_data : row[k][j].data
 										}).then(FileService.getEmptyFileWithDecryptedFilename));
 									}
 								}
 							} else if(field === 'tags'){
-								if( row[k]) {
-									var tags = row[k].split(',');
+								if(row[k] && row[k] !== '' && row[k] !== '[]') {
+									if (row[k].startsWith('[') && row[k].endsWith(']')) {
+										row[k] = row[k].substring(1, row[k].length - 1);
+									}
+									const tags = row[k].split(',');
 									_credential.tags = tags.map(tagMapper);
+								}
+							} else if(field === 'compromised'){
+								_credential[field] = (row[k] === 'true' || row[k] === '1');
+							} else if (field === 'created' || field === 'changed' || field === 'expire_time' || field === 'delete_time') {
+								const num = parseInt(row[k]);
+								if (!isNaN(num)) {
+									_credential[field] = num;
 								}
 							} else{
 								_credential[field] = row[k];
@@ -181,19 +229,19 @@
 				};
 
 
-				$scope.inspectCredential = function (row) {
-					$scope.inspected_credential = rowToCredential(row);
+				$scope.inspectCredential = async function (row) {
+					$scope.inspected_credential = await rowToCredential(row);
 				};
 
 				$scope.csvLoaded = function (file) {
 					$scope.import_fields = [];
-					$scope.inspected_credential = false;
-					$scope.matched = false;
+					$scope.inspected_credential = {};
+					$scope.atLeastlabelMatched = false;
 					var file_data = file.data.split(',');
 					file_data = decodeURIComponent(escape(window.atob(file_data[1])));
 					/** global: Papa */
 					Papa.parse(file_data, {
-						complete: function(results) {
+						complete: async function(results) {
 							if(results.data) {
 								for(var i = 0; i < results.data[0].length; i++){
 									var propName = results.data[0][i];
@@ -203,13 +251,15 @@
 										if(credentialProperty.matching){
 											if(credentialProperty.matching.indexOf(propName.toLowerCase()) !== -1){
 												$scope.import_fields[i] = credentialProperty.prop;
-												$scope.matched = true;
+												if (credentialProperty.prop === 'label') {
+													$scope.atLeastlabelMatched = true;
+												}
 											}
 										}
 									}
 								}
-								if($scope.matched){
-									$scope.inspectCredential(results.data[1]);
+								if($scope.atLeastlabelMatched){
+									await $scope.inspectCredential(results.data[1]);
 								}
 
 								for(var j = 0; j < results.data.length; j++){
@@ -242,6 +292,7 @@
 							};
 							$scope.log.push($translate.instant('done'));
 							$scope.importing = false;
+							$rootScope.refresh();
 						}
 					}
 
@@ -273,6 +324,13 @@
 				$scope.updateExample = function () {
 					var start = ($scope.skipFirstRow) ? 1 : 0;
 					$scope.inspectCredential($scope.parsed_csv[start]);
+				};
+
+				$scope.fileLoadError = function (file) {
+					console.error($translate.instant('error.loading.file'), file);
+				};
+				$scope.fileSelectProgress = function () {
+
 				};
 			}]);
 }());
