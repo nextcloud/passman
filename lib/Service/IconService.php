@@ -301,7 +301,7 @@ class IconService {
 			$this->error = "Empty content";
 			return false;
 		}
-		$textTypes = array('text/html', 'text/plain');
+		$textTypes = ['text/html', 'text/plain'];
 		if (in_array($info['content_type'], $textTypes) || preg_match('#(</html>|</b>)#i', $content)) {
 			$this->error = "Seems to be a text document";
 			return false;
@@ -328,7 +328,7 @@ class IconService {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_MAXREDIRS, 20); 
+		curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0');
 		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
 		// Don't check SSL certificate to allow autosigned certificate
@@ -378,12 +378,12 @@ class IconService {
 	 * @return string
 	 */
 	public static function getExtensionFromMimeType($mimeType) {
-		$typeMapping = array(
+		$typeMapping = [
 			'ico' => '#image/(x-icon|ico)#i',
 			'png' => '#image/png#i',
 			'gif' => '#image/gif#i',
 			'jpg' => '#image/jpe?g#i',
-		);
+		];
 		foreach ($typeMapping as $key => $val) {
 			if (preg_match($val, $mimeType)) {
 				return $key;

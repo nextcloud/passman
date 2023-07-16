@@ -55,21 +55,21 @@ class EncryptService {
 	 *
 	 * @var array
 	 */
-	const SUPPORTED_ALGORITHMS = array(
-		'aes-256-cbc' => array('name' => 'AES-256', 'keySize' => 32, 'blockSize' => 32),
-		'bf' => array('name' => 'BF', 'keySize' => 16, 'blockSize' => 8),
-		'des' => array('name' => 'DES', 'keySize' => 7, 'blockSize' => 8),
-		'des-ede3' => array('name' => 'DES-EDE3', 'keySize' => 21, 'blockSize' => 8), // 3 different 56-bit keys
-		'cast5' => array('name' => 'CAST5', 'keySize' => 16, 'blockSize' => 8),
-	);
+	const SUPPORTED_ALGORITHMS = [
+		'aes-256-cbc' => ['name' => 'AES-256', 'keySize' => 32, 'blockSize' => 32],
+		'bf' => ['name' => 'BF', 'keySize' => 16, 'blockSize' => 8],
+		'des' => ['name' => 'DES', 'keySize' => 7, 'blockSize' => 8],
+		'des-ede3' => ['name' => 'DES-EDE3', 'keySize' => 21, 'blockSize' => 8], // 3 different 56-bit keys
+		'cast5' => ['name' => 'CAST5', 'keySize' => 16, 'blockSize' => 8],
+	];
 
 	const OP_ENCRYPT = 'encrypt';
 	const OP_DECRYPT = 'decrypt';
 
 	// The fields of a credential which are encrypted
-	public $encrypted_credential_fields = array(
+	public $encrypted_credential_fields = [
 		'description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url', 'icon'
-	);
+	];
 
 	// Contains the server key
 	private $server_key;
@@ -203,7 +203,7 @@ class EncryptService {
 		$cipherKey = substr($key, 0, $keySize);
 		$macKey = substr($key, $keySize, $keySize);
 		$iv = substr($key, 2 * $keySize);
-		return array($cipherKey, $macKey, $iv);
+		return [$cipherKey, $macKey, $iv];
 	}
 
 	/**
@@ -303,7 +303,7 @@ class EncryptService {
 			$userSuppliedKey = $credential['label'];
 			$userKey = (isset($credential['shared_key'])) ? $credential['shared_key'] : $credential['user_id'];
 		}
-		return array($userKey, $userSuppliedKey);
+		return [$userKey, $userSuppliedKey];
 	}
 
 	/**

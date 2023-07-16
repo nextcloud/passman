@@ -122,7 +122,7 @@ class FileService {
 	 */
 	public function getFileGuidsFromUser(string $userId) {
 		$files = $this->fileMapper->getFileGuidsFromUser($userId);
-		$results = array();
+		$results = [];
 		foreach ($files as $fileGuid) {
 			$results[] = $fileGuid->getGuid();
 		}
