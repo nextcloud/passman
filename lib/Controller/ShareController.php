@@ -176,7 +176,7 @@ class ShareController extends ApiController {
 					$this->notificationService->credentialSharedNotification(
 						$notification
 					);
-					array_push($processed_users, $target_user);
+					$processed_users[] = $target_user;
 
 					$this->activityService->add(
 						'item_shared', [$credential->getLabel(), $target_user],
@@ -277,13 +277,12 @@ class ShareController extends ApiController {
 		$user_vaults = $this->vaultService->getByUser($user_id);
 		$result = array();
 		foreach ($user_vaults as $vault) {
-			array_push($result,
-				array(
-					'vault_id' => $vault->getId(),
-					'guid' => $vault->getGuid(),
-					'public_sharing_key' => $vault->getPublicSharingKey(),
-					'user_id' => $user_id,
-				));
+			$result[] = [
+				'vault_id' => $vault->getId(),
+				'guid' => $vault->getGuid(),
+				'public_sharing_key' => $vault->getPublicSharingKey(),
+				'user_id' => $user_id,
+			];
 		}
 		return new JSONResponse($result);
 	}
@@ -332,7 +331,7 @@ class ShareController extends ApiController {
 				$result = $request->jsonSerialize();
 				$c = $this->credentialService->getCredentialLabelById($request->getItemId());
 				$result['credential_label'] = $c->getLabel();
-				array_push($results, $result);
+				$results[] = $result;
 			}
 			return new JSONResponse($results);
 		} catch (\Exception $ex) {
