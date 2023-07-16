@@ -9,10 +9,9 @@ use OCP\IRequest;
 
 class APIMiddleware extends Middleware {
 
-	private $request;
-
-	public function __construct(IRequest $request) {
-		$this->request = $request;
+	public function __construct(
+		private IRequest $request,
+	) {
 	}
 
 	public function afterController($controller, $methodName, Response $response) {

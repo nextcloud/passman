@@ -28,13 +28,10 @@ use OCP\IURLGenerator;
 use OCP\Notification\IManager;
 
 class NotificationService {
-
-	private IManager $manager;
-	private IURLGenerator $urlGenerator;
-
-	public function __construct(IManager $IManager, IURLGenerator $urlGenerator) {
-		$this->manager = $IManager;
-		$this->urlGenerator = $urlGenerator;
+	public function __construct(
+		private IManager $manager,
+		private IURLGenerator $urlGenerator,
+	) {
 	}
 
 	function credentialExpiredNotification($credential) {

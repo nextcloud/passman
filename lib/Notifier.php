@@ -29,10 +29,9 @@ use OCP\Notification\INotifier;
 
 class Notifier implements INotifier {
 
-	protected IFactory $factory;
-
-	public function __construct(IFactory $factory) {
-		$this->factory = $factory;
+	public function __construct(
+		protected IFactory $factory,
+	) {
 	}
 
 	/**

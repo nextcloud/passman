@@ -19,24 +19,20 @@ use OCP\IL10N;
 use OCP\IRequest;
 
 class SettingsController extends ApiController {
-	private $userId;
-	private $settings;
 
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		$userId,
-		SettingsService $settings,
-		IL10N $l) {
+		private $userId,
+		private SettingsService $settings,
+		private IL10N $l,
+	) {
 		parent::__construct(
 			$AppName,
 			$request,
 			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
-		$this->settings = $settings;
-		$this->l = $l;
-		$this->userId = $userId;
 	}
 
 	/**

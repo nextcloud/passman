@@ -32,20 +32,14 @@ use Psr\Log\LoggerInterface;
 
 class CronService {
 
-	private CredentialService $credentialService;
-	private LoggerInterface $logger;
-	private Utils $utils;
-	private NotificationService $notificationService;
-	private ActivityService $activityService;
-	private IDBConnection $db;
-
-	public function __construct(CredentialService $credentialService, LoggerInterface $logger, Utils $utils, NotificationService $notificationService, ActivityService $activityService, IDBConnection $db) {
-		$this->credentialService = $credentialService;
-		$this->logger = $logger;
-		$this->utils = $utils;
-		$this->notificationService = $notificationService;
-		$this->activityService = $activityService;
-		$this->db = $db;
+	public function __construct(
+		private CredentialService   $credentialService,
+		private LoggerInterface     $logger,
+		private Utils               $utils,
+		private NotificationService $notificationService,
+		private ActivityService     $activityService,
+		private IDBConnection       $db,
+	) {
 	}
 
 	public function expireCredentials() {

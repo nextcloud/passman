@@ -32,10 +32,10 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 class VaultService {
 
-	private $vaultMapper;
+	public function __construct(
+		private VaultMapper $vaultMapper,
+	) {
 
-	public function __construct(VaultMapper $vaultMapper) {
-		$this->vaultMapper = $vaultMapper;
 	}
 
 	/**

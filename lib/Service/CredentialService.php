@@ -36,27 +36,17 @@ use OCP\IConfig;
 
 class CredentialService {
 
-	private CredentialMapper $credentialMapper;
-	private SharingACLMapper $sharingACL;
-	private ActivityService $activityService;
-	private ShareService $shareService;
-	private EncryptService $encryptService;
-	private CredentialRevisionService $credentialRevisionService;
 	private $server_key;
 
-	public function __construct(CredentialMapper          $credentialMapper,
-	                            SharingACLMapper          $sharingACL,
-	                            ActivityService           $activityService,
-	                            ShareService              $shareService,
-	                            EncryptService            $encryptService,
-	                            CredentialRevisionService $credentialRevisionService,
-	                            IConfig                   $config) {
-		$this->credentialMapper = $credentialMapper;
-		$this->sharingACL = $sharingACL;
-		$this->activityService = $activityService;
-		$this->shareService = $shareService;
-		$this->encryptService = $encryptService;
-		$this->credentialRevisionService = $credentialRevisionService;
+	public function __construct(
+		private CredentialMapper          $credentialMapper,
+		private SharingACLMapper          $sharingACL,
+		private ActivityService           $activityService,
+		private ShareService              $shareService,
+		private EncryptService            $encryptService,
+		private CredentialRevisionService $credentialRevisionService,
+		IConfig                           $config,
+	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
 	}
 

@@ -33,13 +33,13 @@ use OCP\IConfig;
 
 class CredentialRevisionService {
 
-	private CredentialRevisionMapper $credentialRevisionMapper;
-	private EncryptService $encryptService;
 	private $server_key;
 
-	public function __construct(CredentialRevisionMapper $credentialRevisionMapper, EncryptService $encryptService, IConfig $config) {
-		$this->credentialRevisionMapper = $credentialRevisionMapper;
-		$this->encryptService = $encryptService;
+	public function __construct(
+		private CredentialRevisionMapper $credentialRevisionMapper,
+		private EncryptService $encryptService,
+		IConfig $config,
+	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
 	}
 

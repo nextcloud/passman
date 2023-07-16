@@ -17,11 +17,11 @@ use OCP\IL10N;
 use OCP\IRequest;
 
 class TranslationController extends ApiController {
-	private $trans;
 
-	public function __construct($AppName,
-								IRequest $request,
-								IL10N $trans
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		private IL10N $trans,
 	) {
 		parent::__construct(
 			$AppName,
@@ -29,7 +29,6 @@ class TranslationController extends ApiController {
 			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
-		$this->trans = $trans;
 	}
 
 

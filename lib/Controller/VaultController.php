@@ -26,22 +26,18 @@ use Psr\Log\LoggerInterface;
 
 class VaultController extends ApiController {
 	private $userId;
-	private $vaultService;
-	private $credentialService;
-	private $settings;
-	private $fileService;
-	private $logger;
-	private $deleteVaultRequestService;
 
-	public function __construct($AppName,
-	                            IRequest $request,
-								$UserId,
-		                        VaultService $vaultService,
-		                        CredentialService $credentialService,
-		                        DeleteVaultRequestService $deleteVaultRequestService,
-		                        SettingsService $settings,
-		                        FileService $fileService,
-		                        LoggerInterface $logger) {
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private VaultService $vaultService,
+		private CredentialService $credentialService,
+		private DeleteVaultRequestService $deleteVaultRequestService,
+		private SettingsService $settings,
+		private FileService $fileService,
+		private LoggerInterface $logger,
+	) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -49,12 +45,6 @@ class VaultController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->vaultService = $vaultService;
-		$this->credentialService = $credentialService;
-		$this->deleteVaultRequestService = $deleteVaultRequestService;
-		$this->settings = $settings;
-		$this->fileService = $fileService;
-		$this->logger = $logger;
 	}
 
 	/**
