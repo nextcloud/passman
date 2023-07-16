@@ -1,6 +1,8 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "আপনি তৈরি করেছেন %1$s",
+    "You deleted %1$s" : "আপনি ডিলিট করেছেন %1$s",
     "General" : "সাধারণ",
     "Done" : "Done",
     "Sharing" : "ভাগাভাগিরত",
@@ -37,8 +39,6 @@ OC.L10N.register(
     "Date" : "Date",
     "Tags" : "ট্যাগ",
     "Description" : "বিবরণ",
-    "You created %1$s" : "আপনি তৈরি করেছেন %1$s",
-    "You deleted %1$s" : "আপনি ডিলিট করেছেন %1$s",
     "An error occurred!" : "সমস্যা দেখা দিয়েছে !",
     "seconds ago" : "সেকেন্ড পূর্বে"
 },

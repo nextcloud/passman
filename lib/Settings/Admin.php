@@ -33,22 +33,18 @@ use Psr\Log\LoggerInterface;
 
 class Admin implements ISettings {
 
-	protected IConfig $config;
-	private IL10N $l;
-	private IAppManager $appManager;
-	private LoggerInterface $logger;
-
 	/**
 	 * Admin constructor.
 	 * @param IConfig $config
 	 * @param IL10N $l
 	 * @param IAppManager $appManager
 	 */
-	public function __construct(IConfig $config, IL10N $l, IAppManager $appManager, LoggerInterface $logger) {
-		$this->config = $config;
-		$this->l = $l;
-		$this->appManager = $appManager;
-		$this->logger = $logger;
+	public function __construct(
+		protected IConfig $config,
+		private IL10N $l,
+		private IAppManager $appManager,
+		private LoggerInterface $logger,
+	) {
 	}
 
 	/**

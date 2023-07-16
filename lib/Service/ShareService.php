@@ -38,28 +38,14 @@ use OCP\DB\IResult;
 use OCP\Notification\IManager;
 
 class ShareService {
-	private SharingACLMapper $sharingACL;
-	private ShareRequestMapper $shareRequest;
-	private CredentialMapper $credential;
-	private CredentialRevisionService $revisions;
-	private EncryptService $encryptService;
-	private IManager $IManager;
-
-
 	public function __construct(
-		SharingACLMapper $sharingACL,
-		ShareRequestMapper $shareRequest,
-		CredentialMapper $credentials,
-		CredentialRevisionService $revisions,
-		EncryptService $encryptService,
-		IManager $IManager
+		private SharingACLMapper $sharingACL,
+		private ShareRequestMapper $shareRequest,
+		private CredentialMapper $credential,
+		private CredentialRevisionService $revisions,
+		private EncryptService $encryptService,
+		private IManager $IManager,
 	) {
-		$this->sharingACL = $sharingACL;
-		$this->shareRequest = $shareRequest;
-		$this->credential = $credentials;
-		$this->revisions = $revisions;
-		$this->encryptService = $encryptService;
-		$this->IManager = $IManager;
 	}
 
 	/**
@@ -78,7 +64,7 @@ class ShareService {
 	 */
 	public function createBulkRequests($target_item_id, $target_item_guid, $request_array, $permissions, $credential_owner) {
 		$created = Utils::getTime();
-		$requests = array();
+		$requests = [];
 		foreach ($request_array as $req) {
 			$t = new ShareRequest();
 			$t->setItemId($target_item_id);
@@ -90,7 +76,7 @@ class ShareService {
 			$t->setPermissions($permissions);
 			$t->setCreated($created);
 			$t->setFromUserId($credential_owner);
-			array_push($requests, $this->shareRequest->createRequest($t));
+			$requests[] = $this->shareRequest->createRequest($t);
 		}
 		return $requests;
 	}

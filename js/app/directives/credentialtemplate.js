@@ -36,7 +36,7 @@
 				replace: true,
 				restrict: 'A',
 				scope: {
-					credential: '=credentialTemplate'
+					credential: '='
 				},
 
 				link: function (scope, element, attrs) {

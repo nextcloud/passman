@@ -1,6 +1,8 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Tu creava %1$s",
+    "You deleted %1$s" : "Tu  deleva %1$s",
     "General" : "General",
     "Done" : "Preste",
     "Settings saved" : "Configurationes salveguardate",
@@ -41,8 +43,6 @@ OC.L10N.register(
     "Never" : "Nunquam",
     "Tags" : "Etiquettas",
     "Description" : "Description",
-    "You created %1$s" : "Tu creava %1$s",
-    "You deleted %1$s" : "Tu  deleva %1$s",
     "An error occurred!" : "Il occurreva un error!",
     "Dismiss" : "Dimitter",
     "seconds ago" : "secundas passate"

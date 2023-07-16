@@ -30,6 +30,7 @@ OC.L10N.register(
     "Delete" : "Kkes",
     "Share" : "Bḍu",
     "Tags" : "Tibzimin",
+    "Loading …" : "Asali ...",
     "Dismiss" : "Agi"
 },
 "nplurals=2; plural=(n != 1);");

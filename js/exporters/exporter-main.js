@@ -75,43 +75,48 @@ if (!window['PassmanExporter']) {
 					}
 				}).bind(this);
 
-				for (var i = 0; i < credentials.length; i++) {
-
-					var item = credentials[i];
+				for (let i = 0; i < credentials.length; i++) {
+					const credential = credentials[i];
 
 					// Custom fields
-					for (c = 0; c < item.custom_fields.length; c++) {
-						var cf = item.custom_fields[c];
+					for (let c = 0; c < credential.custom_fields.length; c++) {
+						const cf = credential.custom_fields[c];
 						if (cf.field_type === 'file') {
+							const file = cf.value;
+							if (file !== "undefined" && file !== undefined && file !== null && file.file_id !== undefined) {
+								this.parent.total++;
+								this.parent.fileGUID_cred[file.guid] = {
+									cred_pos: i,
+									on: 'custom_fields',
+									at: c
+								};
+
+								this.parent.FS.getFile(file).then((function (data) {
+									this.parent.step(data);
+								}).bind(this), (function (error) {
+									this.parent.stepFailed(error);
+								}).bind(this));
+							}
+						}
+					}
+
+					// Also get all files
+					for (let c = 0; c < credential.files.length; c++) {
+						const file = credential.files[c];
+						if (file !== "undefined" && file !== undefined && file !== null && file.file_id !== undefined) {
 							this.parent.total++;
-							this.parent.fileGUID_cred[cf.value.guid] = {
+							this.parent.fileGUID_cred[file.guid] = {
 								cred_pos: i,
-								on: 'custom_fields',
+								on: 'files',
 								at: c
 							};
 
-							this.parent.FS.getFile(cf.value).then((function (data) {
+							this.parent.FS.getFile(file).then((function (data) {
 								this.parent.step(data);
 							}).bind(this), (function (error) {
 								this.parent.stepFailed(error);
 							}).bind(this));
 						}
-					}
-
-					// Also get all files
-					for (var c = 0; c < item.files.length; c++) {
-						this.parent.total++;
-						this.parent.fileGUID_cred[item.files[c].guid] = {
-							cred_pos: i,
-							on: 'files',
-							at: c
-						};
-
-						this.parent.FS.getFile(item.files[c]).then((function (data) {
-							this.parent.step(data);
-						}).bind(this), (function (error) {
-							this.parent.stepFailed(error);
-						}).bind(this));
 					}
 				}
 

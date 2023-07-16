@@ -29,24 +29,18 @@ use OCP\IUserManager;
 
 class AdminController extends ApiController {
 	private $userId;
-	private $vaultService;
-	private $credentialService;
-	private $fileService;
-	private $revisionService;
-	private $deleteVaultRequestService;
-	private $config;
-	private $userManager;
 
-	public function __construct($AppName,
-								IRequest $request,
-								$UserId,
-								VaultService $vaultService,
-								CredentialService $credentialService,
-								FileService $fileService,
-								CredentialRevisionService $revisionService,
-								DeleteVaultRequestService $deleteVaultRequestService,
-								IConfig $config,
-								IUserManager $userManager
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private VaultService $vaultService,
+		private CredentialService $credentialService,
+		private FileService $fileService,
+		private CredentialRevisionService $revisionService,
+		private DeleteVaultRequestService $deleteVaultRequestService,
+		private IConfig $config,
+		private IUserManager $userManager,
 	) {
 		parent::__construct(
 			$AppName,
@@ -55,25 +49,18 @@ class AdminController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->vaultService = $vaultService;
-		$this->credentialService = $credentialService;
-		$this->fileService = $fileService;
-		$this->revisionService = $revisionService;
-		$this->deleteVaultRequestService = $deleteVaultRequestService;
 
-		$this->config = $config;
-		$this->userManager = $userManager;
 	}
 
 
 	public function searchUser($term) {
-		$results = array();
+		$results = [];
 		$searchResult = $this->userManager->search($term);
 		foreach ($searchResult as $user) {
-			array_push($results, array(
+			$results[] = [
 				"value" => $user->getUID(),
 				"label" => $user->getDisplayName() . ' (' . $user->getBackendClassName() . ')',
-			));
+			];
 		}
 		return new JSONResponse($results);
 	}
@@ -116,16 +103,16 @@ class AdminController extends ApiController {
 			$succeed = true;
 		}
 
-		return new JSONResponse(array('success' => $succeed));
+		return new JSONResponse(['success' => $succeed]);
 	}
 
 	public function listRequests(){
 		$requests = $this->deleteVaultRequestService->getDeleteRequests();
-		$results = array();
+		$results = [];
 		foreach($requests as $request){
 			$r = $request->jsonSerialize();
 			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy(), $this->userManager);
-			array_push($results, $r);
+			$results[] = $r;
 		}
 		return new JSONResponse($results);
 	}
@@ -155,7 +142,7 @@ class AdminController extends ApiController {
 			$this->deleteVaultRequestService->removeDeleteRequestForVault($req);
 		}
 
-		return new JSONResponse(array('result' => true));
+		return new JSONResponse(['result' => true]);
 	}
 
 	/**
@@ -177,7 +164,7 @@ class AdminController extends ApiController {
 			$result = $this->deleteVaultRequestService->createRequest($delete_request);
 
 		}
-		return new JSONResponse(array('result' => $result));
+		return new JSONResponse(['result' => $result]);
 	}
 
 	/**
@@ -196,6 +183,6 @@ class AdminController extends ApiController {
 			$this->deleteVaultRequestService->removeDeleteRequestForVault($delete_request);
 			$result = true;
 		}
-		return new JSONResponse(array('result' => $result));
+		return new JSONResponse(['result' => $result]);
 	}
 }

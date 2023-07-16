@@ -30,10 +30,9 @@ use OCP\AppFramework\Db\Entity;
 
 class DeleteVaultRequestService {
 
-	private DeleteVaultRequestMapper $deleteVaultRequestMapper;
-
-	public function __construct(DeleteVaultRequestMapper $deleteVaultRequestMapper) {
-		$this->deleteVaultRequestMapper = $deleteVaultRequestMapper;
+	public function __construct(
+		private DeleteVaultRequestMapper $deleteVaultRequestMapper,
+	) {
 	}
 
 	/**

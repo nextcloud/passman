@@ -19,14 +19,14 @@ use Psr\Log\LoggerInterface;
 
 class FileController extends ApiController {
 	private $userId;
-	private $fileService;
-	private $logger;
 
-	public function __construct($AppName,
-	                            IRequest $request,
-								$UserId,
-		                        FileService $fileService,
-		                        LoggerInterface $logger) {
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private FileService $fileService,
+		private LoggerInterface $logger,
+	) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -34,8 +34,6 @@ class FileController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->fileService = $fileService;
-		$this->logger = $logger;
 	}
 
 
@@ -44,13 +42,13 @@ class FileController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function uploadFile($data, $filename, $mimetype, $size) {
-		$file = array(
+		$file = [
 			'filename' => $filename,
 			'size' => $size,
 			'mimetype' => $mimetype,
 			'file_data' => $data,
 			'user_id' => $this->userId
-		);
+		];
 		return new JSONResponse($this->fileService->createFile($file, $this->userId));
 	}
 
@@ -89,7 +87,7 @@ class FileController extends ApiController {
 				}
 			}
 		}
-		return new JSONResponse(array('ok' => empty($failed_file_ids), 'failed' => $failed_file_ids));
+		return new JSONResponse(['ok' => empty($failed_file_ids), 'failed' => $failed_file_ids]);
 	}
 
 	/**

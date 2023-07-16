@@ -21,18 +21,15 @@ use OCP\Notification\IManager;
 
 class InternalController extends ApiController {
 	private $userId;
-	private $credentialService;
-	private $config;
-	private $manager;
-	private $appManager;
 
-	public function __construct($AppName,
-	                            IRequest $request,
-	                            $UserId,
-	                            CredentialService $credentialService,
-	                            IConfig $config,
-	                            IManager $IManager,
-	                            IAppManager $appManager
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private CredentialService $credentialService,
+		private IConfig $config,
+		private IManager $manager,
+		private IAppManager $appManager,
 	) {
 		parent::__construct(
 			$AppName,
@@ -41,10 +38,6 @@ class InternalController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->credentialService = $credentialService;
-		$this->config = $config;
-		$this->manager = $IManager;
-		$this->appManager = $appManager;
 	}
 
 	/**
@@ -86,7 +79,7 @@ class InternalController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getAppVersion() {
-		return new JSONResponse(array('version' => $this->appManager->getAppInfo('passman')["version"]));
+		return new JSONResponse(['version' => $this->appManager->getAppInfo('passman')["version"]]);
 	}
 
 	/**
@@ -104,14 +97,14 @@ class InternalController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getSettings() {
-		$settings = array(
+		$settings = [
 			'link_sharing_enabled' => intval($this->config->getAppValue('passman', 'link_sharing_enabled', 1)),
 			'user_sharing_enabled' => intval($this->config->getAppValue('passman', 'user_sharing_enabled', 1)),
 			'vault_key_strength' => intval($this->config->getAppValue('passman', 'vault_key_strength', 3)),
 			'check_version' => intval($this->config->getAppValue('passman', 'check_version', 1)),
 			'https_check' => intval($this->config->getAppValue('passman', 'https_check', 1)),
 			'disable_contextmenu' => intval($this->config->getAppValue('passman', 'disable_contextmenu', 1)),
-		);
+		];
 		return new JSONResponse($settings);
 	}
 

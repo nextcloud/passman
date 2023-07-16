@@ -98,10 +98,10 @@ h3 {
     width: 100%;
   }
 }
-.setting-group.margin-bottom-25 {
+.setting-group.margin-bottom-25, .margin-bottom-25 {
   margin-bottom: 25px;
 }
-.setting-group.margin-bottom-10 {
+.setting-group.margin-bottom-10, .margin-bottom-10 {
   margin-bottom: 10px;
 }
 .display-grid {
@@ -117,7 +117,7 @@ h3 {
 label[for=confirmVaultPWChange] {
   margin-bottom: 10px;
 }
-label[for=confirmVaultDelete] {
+label[for=confirmVaultDelete], label[for=skipFirstRow] {
   margin-top: 10px;
   margin-bottom: 10px;
 }

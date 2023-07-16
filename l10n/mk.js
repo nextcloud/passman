@@ -1,6 +1,8 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Креиравте %1$s",
+    "You deleted %1$s" : "Избришавте %1$s",
     "General" : "Општо",
     "Custom Fields" : "Произволни полиња",
     "Credential deleted" : "Акредитивите се избришани",
@@ -75,8 +77,6 @@ OC.L10N.register(
     "Loading …" : "Се вчитува…",
     "email" : "е-пошта",
     "Description" : "Опис",
-    "You created %1$s" : "Креиравте %1$s",
-    "You deleted %1$s" : "Избришавте %1$s",
     "An error occurred!" : "Се случи грешка",
     "E-mail" : "е-пошта",
     "Expires:" : "Истекува",

@@ -1,6 +1,9 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Ai creat %1$s",
+    "You deleted %1$s" : "Ai şters %1$s",
+    "Passwords" : "Parole",
     "General" : "General",
     "Done" : "Realizat",
     "Settings saved" : "Setările au fost salvate",
@@ -59,9 +62,6 @@ OC.L10N.register(
     "Loading …" : "Se încarcă…",
     "email" : "email",
     "Description" : "Descriere",
-    "You created %1$s" : "Ai creat %1$s",
-    "You deleted %1$s" : "Ai şters %1$s",
-    "Passwords" : "Parole",
     "An error occurred!" : "A apărut o eroare!",
     "E-mail" : "E-mail",
     "Connection to server lost" : "S-a pierdut conexiunea la server",

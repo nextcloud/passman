@@ -34,13 +34,13 @@ use OCP\IConfig;
 
 class FileService {
 
-	private FileMapper $fileMapper;
-	private EncryptService $encryptService;
 	private $server_key;
 
-	public function __construct(FileMapper $fileMapper, EncryptService $encryptService, IConfig $config) {
-		$this->fileMapper = $fileMapper;
-		$this->encryptService = $encryptService;
+	public function __construct(
+		private FileMapper $fileMapper,
+		private EncryptService $encryptService,
+		IConfig $config,
+	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
 	}
 
@@ -122,9 +122,9 @@ class FileService {
 	 */
 	public function getFileGuidsFromUser(string $userId) {
 		$files = $this->fileMapper->getFileGuidsFromUser($userId);
-		$results = array();
+		$results = [];
 		foreach ($files as $fileGuid) {
-			array_push($results, $fileGuid->getGuid());
+			$results[] = $fileGuid->getGuid();
 		}
 		return $results;
 	}

@@ -1,6 +1,8 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Du oppretta %1$s",
+    "You deleted %1$s" : "Du sletta %1$s",
     "General" : "Generelt",
     "An error occurred" : "Det oppstod ein feil",
     "Done" : "Ferdig",
@@ -43,8 +45,6 @@ OC.L10N.register(
     "Donate" : "Donér",
     "Tags" : "Emneord",
     "Description" : "Skildring",
-    "You created %1$s" : "Du oppretta %1$s",
-    "You deleted %1$s" : "Du sletta %1$s",
     "An error occurred!" : "Ein feil oppstod!",
     "E-mail" : "E-post",
     "Dismiss" : "Forkast",

@@ -25,17 +25,15 @@ use OCP\IURLGenerator;
 
 class IconController extends ApiController {
 	private $userId;
-	private $credentialService;
-	private $am;
-	private $urlGenerator;
 	const ICON_CACHE_OFFSET = 2592000;  // 3600 * 24 * 30
 
-	public function __construct($AppName,
-	                            IRequest $request,
-	                            $UserId,
-	                            CredentialService $credentialService,
-	                            AppManager $am,
-	                            IURLGenerator $urlGenerator
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private CredentialService $credentialService,
+		private AppManager $am,
+		private IURLGenerator $urlGenerator,
 	) {
 		parent::__construct(
 			$AppName,
@@ -44,9 +42,6 @@ class IconController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->credentialService = $credentialService;
-		$this->am = $am;
-		$this->urlGenerator = $urlGenerator;
 
 	}
 

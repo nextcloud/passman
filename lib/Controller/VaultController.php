@@ -26,22 +26,18 @@ use Psr\Log\LoggerInterface;
 
 class VaultController extends ApiController {
 	private $userId;
-	private $vaultService;
-	private $credentialService;
-	private $settings;
-	private $fileService;
-	private $logger;
-	private $deleteVaultRequestService;
 
-	public function __construct($AppName,
-	                            IRequest $request,
-								$UserId,
-		                        VaultService $vaultService,
-		                        CredentialService $credentialService,
-		                        DeleteVaultRequestService $deleteVaultRequestService,
-		                        SettingsService $settings,
-		                        FileService $fileService,
-		                        LoggerInterface $logger) {
+	public function __construct(
+		$AppName,
+		IRequest $request,
+		$UserId,
+		private VaultService $vaultService,
+		private CredentialService $credentialService,
+		private DeleteVaultRequestService $deleteVaultRequestService,
+		private SettingsService $settings,
+		private FileService $fileService,
+		private LoggerInterface $logger,
+	) {
 		parent::__construct(
 			$AppName,
 			$request,
@@ -49,12 +45,6 @@ class VaultController extends ApiController {
 			'Authorization, Content-Type, Accept',
 			86400);
 		$this->userId = $UserId;
-		$this->vaultService = $vaultService;
-		$this->credentialService = $credentialService;
-		$this->deleteVaultRequestService = $deleteVaultRequestService;
-		$this->settings = $settings;
-		$this->fileService = $fileService;
-		$this->logger = $logger;
 	}
 
 	/**
@@ -62,16 +52,16 @@ class VaultController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function listVaults() {
-		$result = array();
+		$result = [];
 		$vaults = $this->vaultService->getByUser($this->userId);
 
-		$protected_credential_fields = array('getDescription', 'getEmail', 'getUsername', 'getPassword');
+		$protected_credential_fields = ['getDescription', 'getEmail', 'getUsername', 'getPassword'];
 		if (isset($vaults)) {
 			foreach ($vaults as $vault) {
 				$credential = $this->credentialService->getRandomCredentialByVaultId($vault->getId(), $this->userId);
 				$secret_field = $protected_credential_fields[array_rand($protected_credential_fields)];
 				if (isset($credential)) {
-					array_push($result, array(
+					$result[] = [
 						'vault_id' => $vault->getId(),
 						'guid' => $vault->getGuid(),
 						'name' => $vault->getName(),
@@ -80,7 +70,7 @@ class VaultController extends ApiController {
 						'last_access' => $vault->getlastAccess(),
 						'challenge_password' => $credential->{$secret_field}(),
 						'delete_request_pending' => ($this->deleteVaultRequestService->getDeleteRequestForVault($vault->getGuid())) ? true : false
-					));
+					];
 				}
 			}
 		}
@@ -108,11 +98,11 @@ class VaultController extends ApiController {
 		} catch (\Exception $e) {
 			return new NotFoundJSONResponse();
 		}
-		$result = array();
+		$result = [];
 		if (isset($vault)) {
 			$credentials = $this->credentialService->getCredentialsByVaultId($vault->getId(), $this->userId);
 
-			$result = array(
+			$result = [
 				'vault_id' => $vault->getId(),
 				'guid' => $vault->getGuid(),
 				'name' => $vault->getName(),
@@ -123,7 +113,7 @@ class VaultController extends ApiController {
 				'vault_settings' => $vault->getVaultSettings(),
 				'last_access' => $vault->getlastAccess(),
 				'delete_request_pending' => ($this->deleteVaultRequestService->getDeleteRequestForVault($vault->getGuid())) ? true : false
-			);
+			];
 			$result['credentials'] = $credentials;
 
 			$this->vaultService->setLastAccess($vault->getId(), $this->userId);
@@ -196,6 +186,6 @@ class VaultController extends ApiController {
 		}
 
 		$this->vaultService->deleteVault($vault_guid, $this->userId);
-		return new JSONResponse(array('ok' => empty($failed_credential_guids), 'failed' => $failed_credential_guids));
+		return new JSONResponse(['ok' => empty($failed_credential_guids), 'failed' => $failed_credential_guids]);
 	}
 }

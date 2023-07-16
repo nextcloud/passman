@@ -1276,10 +1276,10 @@ h3 {
 .setting-group input[type="text"], .setting-group input[type="password"], .setting-group textarea {
   width: 100%; }
 
-.setting-group.margin-bottom-25 {
+.setting-group.margin-bottom-25, .margin-bottom-25 {
   margin-bottom: 25px; }
 
-.setting-group.margin-bottom-10 {
+.setting-group.margin-bottom-10, .margin-bottom-10 {
   margin-bottom: 10px; }
 
 .display-grid {
@@ -1295,7 +1295,7 @@ h3 {
 label[for=confirmVaultPWChange] {
   margin-bottom: 10px; }
 
-label[for=confirmVaultDelete] {
+label[for=confirmVaultDelete], label[for=skipFirstRow] {
   margin-top: 10px;
   margin-bottom: 10px; }
 
@@ -1471,6 +1471,38 @@ label[for=confirmVaultDelete] {
       padding-left: 15px; } }
   #passman-controls .breadcrumb .addCredential {
     padding-top: 1px; }
+  #passman-controls .breadcrumb li.crumb:last-child {
+    font-weight: bold;
+    margin-right: 10px; }
+    #passman-controls .breadcrumb li.crumb:last-child a ~ span {
+      padding-left: 0; }
+  #passman-controls .breadcrumb li.crumb {
+    display: inline-flex;
+    background-image: url("../../../core/img/breadcrumb.svg?v=1");
+    background-repeat: no-repeat;
+    background-position: right center;
+    height: 44px;
+    background-size: auto 24px;
+    flex: 0 0 auto;
+    order: 1;
+    padding-right: 7px; }
+    #passman-controls .breadcrumb li.crumb > a, #passman-controls .breadcrumb li.crumb > span {
+      position: relative;
+      padding: 12px;
+      opacity: .5;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      flex: 0 0 auto;
+      max-width: 200px; }
+    #passman-controls .breadcrumb li.crumb > a.icon-home,
+    #passman-controls .breadcrumb li.crumb > a.icon-delete,
+    #passman-controls .breadcrumb li.crumb > span.icon-home,
+    #passman-controls .breadcrumb li.crumb > span.icon-delete {
+      text-indent: -9999px; }
+    #passman-controls .breadcrumb li.crumb > a[class^=icon-] {
+      padding: 0;
+      width: 44px; }
 
 @media only screen and (max-width: 768px) {
   #passman-controls {
