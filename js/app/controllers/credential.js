@@ -478,12 +478,13 @@
                     let postFiltered=[];
 
                     for (let i = 0; i < initialCredentials.length; i++) {
-                        const _credential = initialCredentials[i];
-                        const zxcvbn_result = zxcvbn(_credential.password);
+						if (initialCredentials[i].password !== null) {
+							const zxcvbn_result = zxcvbn(initialCredentials[i].password);
 
-                        if(zxcvbn_result.score>=strength_min && zxcvbn_result.score<=strength_max){
-                            postFiltered.push(initialCredentials[i]);
-                        }
+							if(zxcvbn_result.score>=strength_min && zxcvbn_result.score<=strength_max){
+								postFiltered.push(initialCredentials[i]);
+							}
+						}
                     }
                     $scope.filtered_credentials=$scope.filterHidden(postFiltered);
                 };
@@ -510,7 +511,7 @@
 					for (let i = 0; i < initialCredentials.length; i++) {
 						const _credential = initialCredentials[i];
 
-						if(_credential.compromised !== false){
+						if(_credential.compromised !== false && _credential.compromised !== null){
 							postFiltered.push(initialCredentials[i]);
 						}
 					}
