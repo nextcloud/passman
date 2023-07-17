@@ -316,6 +316,7 @@ OC.L10N.register(
     "Medium Strength" : "Sendotasun ertaina",
     "Bad Strength" : "Sendotasun ahula",
     "Expired" : "Iraungita",
+    "Compromised" : "Arriskuan",
     "Filter Tags" : "Iragazi etiketak",
     "Simple Navigation" : "Nabigazio sinplea",
     "Someone has shared a credential with you." : "Norbaitek kredentzial bat partekatu du zurekin.",
