@@ -111,6 +111,8 @@ OC.L10N.register(
     "Current OTP settings" : "Configuraciones actuales de OTP",
     "Issuer" : "Quien levanta",
     "Secret" : "Secreto",
+    "Digits" : "Dígitos",
+    "Period" : "Período",
     "Expiration date" : "Fecha de expiración",
     "No expiration date set" : "No se ha establecido la fecha de expiración",
     "Renew interval" : "Intervalo de renovación",
