@@ -111,7 +111,7 @@ OC.L10N.register(
     "Selected icon" : "Icona seleccionada",
     "Field label" : "Campo etiqueta",
     "Field value" : "Campo valor",
-    "Choose a file" : "Escolla un ficheiro",
+    "Choose a file" : "Escoller un ficheiro",
     "Text" : "Texto",
     "File" : "Ficheiro",
     "Add" : "Engadir",
