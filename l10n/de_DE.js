@@ -264,7 +264,7 @@ OC.L10N.register(
     "You have incoming share requests." : "Sie haben eingehende Freigabeanforderungen.",
     "If you want to put the credential in another vault," : "Falls Sie die Anmeldeinformation in einen andern Tresor übertragen möchten,",
     "log out of this vault and log into the vault you want the shared credential in." : "Melden Sie sich bei diesem Tresor ab und melden Sie sich bei dem Tresor, der die geteilten Zugangsdaten beinhalten soll, wieder an.",
-    "Permissions" : "Rechte",
+    "Permissions" : "Berechtigungen",
     "Received from" : "Erhalten von",
     "Date" : "Datum",
     "Accept" : "Bestätigen",
