@@ -73,7 +73,7 @@ OC.L10N.register(
     "Password settings" : "Axuste de contrasinal",
     "Import credentials" : "Importar credenciais",
     "Export credentials" : "Exportar credenciais",
-    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Xa que todos os datos deben ser descargados, cifrados de novo e voltos a cargar ao cambiar o contrasinal, este proceso é propenso a erros. Recomendámoslle encarecidamente ter unha copia de seguranza actualizada da súa bóveda antes de cambiar o contrasinal.",
+    "Since all data has to be downloaded, re-encrypted and uploaded again when changing the password, this process is error-prone. It is strongly recommended to have an updated backup of your vault before changing the password." : "Xa que todos os datos deben ser descargados, cifrados de novo e voltos a enviar ao cambiar o contrasinal, este proceso é propenso a erros. Recomendámoslle encarecidamente ter unha copia de seguranza actualizada da súa bóveda antes de cambiar o contrasinal.",
     "I understand the risks" : "Entendo os riscos",
     "Sharing" : "Compartindo",
     "Are you sure you want to leave? This will destroy all your credentials" : "Confirma que quere abandonar? Isto destruirá todas as súas credenciais",
