@@ -129,7 +129,7 @@ OC.L10N.register(
     "Digits" : "Díxitos",
     "Period" : "Punto",
     "Expiration date" : "Data de caducidade",
-    "No expiration date set" : "Non se definiu a data de caducidade",
+    "No expiration date set" : "Non foi estabelecida a data de caducidade",
     "Renew interval" : "Intervalo de renovación",
     "Disabled" : "Desactivado",
     "Day(s)" : "Día(s)",
