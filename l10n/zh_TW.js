@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You created %1$s" : "您建立了 %1$s",
     "You deleted %1$s" : "您刪除了 %1$s",
+    "You recovered %1$s" : "您還原了 %1$s",
     "Passwords" : "密碼",
     "Passwords do not match" : "密碼不相符",
     "General" : "一般",
