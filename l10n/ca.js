@@ -119,6 +119,8 @@ OC.L10N.register(
     "Current OTP settings" : "Paràmetres OTP actuals",
     "Issuer" : "Emissor",
     "Secret" : "Secret",
+    "Digits" : "Dígits",
+    "Period" : "Període",
     "Expiration date" : "Data de caducitat",
     "No expiration date set" : "No s'ha establert cap data de caducitat",
     "Renew interval" : "Renova l'interval",
