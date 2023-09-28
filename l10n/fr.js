@@ -295,7 +295,7 @@ OC.L10N.register(
     "Log out of this vault automatically after:" : "Se déconnecter automatiquement de cet emplacement après :",
     "Decrypt vault" : "Déchiffrer le coffre-fort",
     "Seems you lost the vault password and you're unable to log in." : "Il semblerait que vous avez perdu le mot de passe du coffre-fort et que vous êtes incapable de vous connecter.",
-    "If you want this vault to be removed you can request that here." : "Si vous souhaitez supprimer ce coffre-fort, vous pouvez demander la suppression de ce coffre-fort ici.",
+    "If you want this vault to be removed you can request that here." : "Si vous souhaitez que ce coffre-fort soit retiré, vous pouvez en faire la demande ici.",
     "An admin then accepts or declines the request" : "Un administrateur accepte ou refuse alors la requête",
     "After an admin destroys this vault, all credentials in it will be lost" : "Après qu'un administrateur ait détruit ce coffre-fort, toutes les informations d'identification contenues à l'intérieur seront perdues",
     "Reason for requesting deletion (optional):" : "Motif de la demande de suppression (optionnel) :",
