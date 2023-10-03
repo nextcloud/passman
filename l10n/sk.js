@@ -368,7 +368,7 @@ OC.L10N.register(
     "Connection to server lost" : "Stratené spojenie so serverom",
     "Problem loading page, reloading in 5 seconds" : "Nastal problém pri načítaní stránky, pokus sa zopakuje o 5 sekúnd",
     "Saving …" : "Ukladá sa...",
-    "Dismiss" : "Odmietnuť",
+    "Dismiss" : "Zatvoriť",
     "seconds ago" : "pred sekundami"
 },
 "nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);");
