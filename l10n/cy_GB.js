@@ -4,6 +4,7 @@ OC.L10N.register(
     "General" : "Cyffredinol",
     "Done" : "Done",
     "Share link" : "Rhannu dolen",
+    "Good" : "Da",
     "Username" : "Enw defnyddiwr",
     "File" : "File",
     "Add" : "Ychwanegu",
