@@ -318,6 +318,7 @@ OC.L10N.register(
     "Medium Strength" : "Közepes erősségű",
     "Bad Strength" : "Gyenge erősségű",
     "Expired" : "Lejárt",
+    "Compromised" : "Kompromittált",
     "Filter Tags" : "Címkék szűrése",
     "Simple Navigation" : "Egyszerű navigáció",
     "Someone has shared a credential with you." : "Valaki egy hitelesítő adatot osztott meg Önnel.",

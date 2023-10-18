@@ -14,6 +14,7 @@ OC.L10N.register(
     "An error occurred" : "Prodúxose un error",
     "General settings" : "Configuración xeneral",
     "Sharing" : "Comparticiñon",
+    "Add" : "Amestar",
     "Value" : "Valor",
     "Actions" : "Aiciones",
     "Size" : "Tamañu",
