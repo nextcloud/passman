@@ -32,6 +32,7 @@ OC.L10N.register(
     "Share link" : "Chia sẽ liên kết",
     "Saved!" : "Đã lưu!",
     "Good" : "Tốt",
+    "Copy to clipboard" : "Sao chép vào clipboard",
     "Username" : "Tài khoản",
     "Add tag" : "Thêm nhãn",
     "Text" : "Văn bản",
