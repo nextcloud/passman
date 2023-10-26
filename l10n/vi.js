@@ -46,6 +46,7 @@ OC.L10N.register(
     "Size" : "Kích cỡ",
     "Secret" : "Mật khẩu",
     "Expiration date" : "Ngày kết thúc",
+    "No expiration date set" : "Không có ngày hết hạn được đặt",
     "Disabled" : "Tắt",
     "Export" : "Xuất ra",
     "Change" : "Chỉnh sửa",
