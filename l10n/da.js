@@ -261,6 +261,6 @@ OC.L10N.register(
     "Problem loading page, reloading in 5 seconds" : "Problem med indlæsning af side, genindlæser om 5 sekunder",
     "Saving …" : "Gemmer…",
     "Dismiss" : "Afvis",
-    "seconds ago" : "sekunder siden"
+    "seconds ago" : "få sekunder siden"
 },
 "nplurals=2; plural=(n != 1);");
