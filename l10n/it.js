@@ -124,6 +124,8 @@ OC.L10N.register(
     "Current OTP settings" : "Impostazioni OTP correnti",
     "Issuer" : "Emittente",
     "Secret" : "Segreto",
+    "Digits" : "Cifre",
+    "Period" : "Periodo",
     "Expiration date" : "Data di scadenza",
     "No expiration date set" : "Nessuna data di scadenza impostata",
     "Renew interval" : "Intervallo di aggiornamento",
