@@ -162,7 +162,7 @@ OC.L10N.register(
     "About Passman" : "Sobre Passman",
     "Version" : "Versión",
     "Donate to support development" : "Doar para axudar ao desenvolvemento",
-    "Bookmarklet" : "Marcadores",
+    "Bookmarklet" : "Marcapáxinas",
     "Save your passwords with one click." : "Garde os seus contrasinais cun só clic.",
     "Drag below button to your bookmark toolbar." : "Arrastre o botón inferior cara a barra de ferramentas de marcadores.",
     "Delete vault" : "Eliminar a bóveda",
