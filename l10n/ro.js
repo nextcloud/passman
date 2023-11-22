@@ -53,6 +53,7 @@ OC.L10N.register(
     "Edit" : "Editează",
     "Delete" : "Șterge",
     "Share" : "Partajează",
+    "Permissions" : "Permisiuni",
     "Date" : "Date",
     "Accept" : "Accept",
     "Decline" : "Refuză",
