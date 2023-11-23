@@ -50,6 +50,7 @@ OC.L10N.register(
     "Email" : "E-mail",
     "URL" : "URL",
     "Notes" : "Notițe",
+    "Created" : "A fost creat",
     "Edit" : "Editează",
     "Delete" : "Șterge",
     "Share" : "Partajează",
