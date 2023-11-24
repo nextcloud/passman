@@ -5,6 +5,7 @@ OC.L10N.register(
     "You deleted %1$s" : "Ai şters %1$s",
     "Passwords" : "Parole",
     "General" : "General",
+    "An error occurred" : "A apărut o eraore",
     "Done" : "Realizat",
     "Settings saved" : "Setările au fost salvate",
     "Sharing" : "Partajare",
