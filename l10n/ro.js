@@ -19,6 +19,7 @@ OC.L10N.register(
     "Text" : "Text",
     "File" : "Fișier",
     "Add" : "Adaugă",
+    "Value" : "Valoare",
     "Type" : "Tip",
     "Actions" : "Acțiuni",
     "Filename" : "Nume fișier",
