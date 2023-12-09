@@ -78,6 +78,7 @@ OC.L10N.register(
     "Start scan" : "開始掃描",
     "Result" : "結果",
     "Score" : "分數",
+    "Action" : "動作",
     "Uploading" : "上傳中...",
     "User" : "使用者",
     "Read" : "讀取",
