@@ -158,7 +158,7 @@
   background: var(--color-background-darker); }
 
 .app-sidebar-tabs__tab.active {
-  color: var(--color-text-light);
+  color: var(--color-main-text);
   border-bottom-color: var(--color-primary-element);
   box-shadow: inset 0 -1px 0 var(--color-primary-element);
   font-weight: bold; }
@@ -1191,7 +1191,7 @@ tags-input .tags {
     background-color: var(--color-background-darker);
     font-size: var(--default-font-size); }
   tags-input .tags .tag-item {
-    color: var(--color-text-lighter); }
+    color: var(--color-text-maxcontrast); }
 
 /**
  * Nextcloud - passman
