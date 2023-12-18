@@ -47,7 +47,7 @@ OC.L10N.register(
     "Weak" : "Слабкий",
     "Good" : "Добре",
     "Strong" : "Сильно",
-    "Toggle visibility" : "Змінити подання",
+    "Toggle visibility" : "Змінити видимість",
     "Copy to clipboard" : "Копіювати до буферу обміну",
     "Copied to clipboard!" : "Скопійовано в буфер обміну! ",
     "Generate password" : "Створити пароль",

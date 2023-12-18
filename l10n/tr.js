@@ -361,7 +361,7 @@ OC.L10N.register(
     "Credentials moved!" : "Kimlik doğrulama bilgileri aktarıldı!",
     "An error occurred!" : "Bir sorun çıktı!",
     "Requests to destroy vault" : "Kasa silme istekleri",
-    "Request ID" : "İstek kodu",
+    "Request ID" : "İstek kimliği",
     "Requested by" : "İsteyen",
     "Reason" : "Neden",
     "Click here to request\n\t\t\t\t\tit" : "Buraya tıklayarak \n\t\t\t\t\tisteyin",
