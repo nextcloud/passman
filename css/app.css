@@ -1057,8 +1057,8 @@
   padding-left: 15px; }
 .settings-container button {
   width: 80%;
-  margin-left: 15px;
-  margin-right: 15px; }
+  margin-left: 15px !important;
+  margin-right: 15px !important; }
 
 .settings-container-label {
   padding-left: 15px; }
@@ -1124,6 +1124,156 @@
 
 .icon-expired {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M0 0h24v24H0z' fill='none'/><path d='M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z'/></svg>"); }
+
+#app-navigation:not(.vue) > ul {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--default-grid-baseline)*2);
+  padding-bottom: 0; }
+
+#app-navigation:not(.vue) > ul > li.pinned.first-pinned {
+  margin-top: auto !important; }
+
+#app-navigation:not(.vue) > ul > li.pinned {
+  order: 2; }
+
+#app-navigation:not(.vue) > ul > li, #app-navigation:not(.vue) > ul > li > ul > li {
+  position: relative;
+  box-sizing: border-box; }
+
+#app-navigation:not(.vue) > ul > li {
+  display: inline-flex;
+  flex-wrap: wrap;
+  order: 1;
+  flex-shrink: 0;
+  margin: 0;
+  margin-bottom: 0px;
+  margin-bottom: 3px;
+  width: 100%;
+  border-radius: var(--border-radius-pill); }
+
+#app-navigation:not(.vue) > ul > li > ul {
+  flex: 0 1 auto;
+  width: 100%;
+  position: relative; }
+
+#app-navigation:not(.vue) > ul > li > ul > li {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding-left: 44px;
+  width: 100%;
+  margin-bottom: 3px; }
+
+#app-navigation:not(.vue) {
+  --border-radius-pill: calc(var(--default-clickable-area) / 2); }
+
+#app-navigation:not(.vue) > ul > li > a.svg, #app-navigation:not(.vue) > ul > li > ul > li > a.svg {
+  padding: 0 12px 0 44px;
+  padding-left: 44px; }
+
+#app-navigation:not(.vue) > ul > li.active, #app-navigation:not(.vue) > ul > li.active > a, #app-navigation:not(.vue) > ul > li a:active, #app-navigation:not(.vue) > ul > li a:active > a, #app-navigation:not(.vue) > ul > li a.selected, #app-navigation:not(.vue) > ul > li a.selected > a, #app-navigation:not(.vue) > ul > li a.active, #app-navigation:not(.vue) > ul > li a.active > a {
+  background-color: var(--color-primary-element-light); }
+
+#app-navigation:not(.vue) > ul > li a:hover, #app-navigation:not(.vue) > ul > li a:hover > a, #app-navigation:not(.vue) > ul > li a:focus, #app-navigation:not(.vue) > ul > li a:focus > a {
+  background-color: var(--color-background-hover); }
+
+#app-navigation:not(.vue) > ul > li > a, #app-navigation:not(.vue) > ul > li > ul > li > a {
+  background-size: 16px 16px;
+  background-position: 14px center;
+  background-repeat: no-repeat;
+  display: block;
+  justify-content: space-between;
+  line-height: 44px;
+  min-height: 44px;
+  padding: 0 12px 0 14px;
+  overflow: hidden;
+  box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: var(--border-radius-pill);
+  color: var(--color-main-text);
+  flex: 1 1 0px;
+  z-index: 100; }
+
+#app-navigation:not(.vue) .collapsible .collapse {
+  opacity: 0;
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  z-index: 110;
+  left: 0; }
+
+#app-navigation:not(.vue) .collapsible.open::before {
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0); }
+
+#app-navigation:not(.vue) .collapsible:hover::before, #app-navigation:not(.vue) .collapsible:focus::before {
+  opacity: 1; }
+
+#app-navigation:not(.vue) .collapsible::before {
+  position: absolute;
+  height: 44px;
+  width: 44px;
+  margin: 0;
+  padding: 0;
+  background: none;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-repeat: repeat;
+  background-image: none;
+  background-size: auto;
+  background-image: var(--icon-triangle-s-dark);
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  border-radius: 0;
+  outline: none !important;
+  box-shadow: none;
+  content: " ";
+  opacity: 0;
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  z-index: 105;
+  border-radius: 50%;
+  transition: opacity 100ms ease-in-out; }
+
+#app-navigation:not(.vue) > ul > li.deleted > ul, #app-navigation:not(.vue) > ul > li.collapsible:not(.open) > ul {
+  display: none; }
+
+#app-navigation:not(.vue) > ul > li > .app-navigation-entry-bullet + a, #app-navigation:not(.vue) > ul > li > ul > li > .app-navigation-entry-bullet + a {
+  background: rgba(0, 0, 0, 0) !important; }
+
+#app-navigation:not(.vue) > ul > li > a.svg, #app-navigation:not(.vue) > ul > li > ul > li > a.svg {
+  padding: 0 12px 0 44px;
+  padding-left: 44px; }
+
+#app-navigation:not(.vue) > ul > li > .app-navigation-entry-bullet, #app-navigation:not(.vue) > ul > li > ul > li > .app-navigation-entry-bullet {
+  position: absolute;
+  display: block;
+  margin: 16px;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 100ms ease-in-out; }
+
+#app-navigation:not(.vue) > ul > li > ul > li:hover, #app-navigation:not(.vue) > ul > li > ul > li:hover > a, #app-navigation:not(.vue) > ul > li > ul > li:focus, #app-navigation:not(.vue) > ul > li > ul > li:focus > a {
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-background-hover); }
+
+#app-navigation:not(.vue) .collapsible:hover > a, #app-navigation:not(.vue) .collapsible:focus > a {
+  background-image: none; }
 
 /**
  * Nextcloud - passman
