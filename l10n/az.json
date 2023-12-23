@@ -1,11 +1,13 @@
 { "translations": {
     "You created %1$s" : "Siz yaratdınız %1$s",
     "You deleted %1$s" : "Siz silindiniz %1$s",
+    "Passwords" : "Parollar",
     "General" : "Ümumi",
     "Done" : "Done",
     "Settings saved" : "Parametrlər yaddaşa verildi",
     "Sharing" : "Paylaşılır",
     "Share link" : "Linki yayımla",
+    "Good" : "Yaxşı",
     "Username" : "İstifadəçi adı",
     "File" : "File",
     "Add" : "Əlavə etmək",
@@ -29,6 +31,7 @@
     "Cancel" : "Dayandır",
     "Settings" : "Quraşdırmalar",
     "Unshare" : "Paylaşımı durdur",
+    "Account" : "Hesab",
     "Password" : "Şifrə",
     "Email" : "Email",
     "URL" : "URL",
@@ -38,10 +41,12 @@
     "Share" : "Paylaş",
     "Date" : "Date",
     "Accept" : "Qəbul et",
+    "Decline" : "İmtina",
     "Never" : "Heç vaxt",
     "Tags" : "Işarələr",
     "Description" : "Açıqlanma",
     "An error occurred!" : "Səhv baş verdi!",
+    "Dismiss" : "Rədd et",
     "seconds ago" : "saniyələr öncə"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
