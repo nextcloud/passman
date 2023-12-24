@@ -56,6 +56,7 @@ OC.L10N.register(
     "Edit" : "Modificar",
     "Delete" : "Suprimir",
     "Share" : "Partejar",
+    "Permissions" : "Autorizacions",
     "Date" : "Date",
     "Accept" : "Acceptar",
     "Decline" : "Declinar",

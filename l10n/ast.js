@@ -18,6 +18,7 @@ OC.L10N.register(
     "Value" : "Valor",
     "Actions" : "Aiciones",
     "Size" : "Tamañu",
+    "Export" : "Esportar",
     "Version" : "Versión",
     "Private Key" : "Clave privada",
     "Public key" : "Clave pública",
