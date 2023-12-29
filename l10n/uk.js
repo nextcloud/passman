@@ -175,6 +175,7 @@ OC.L10N.register(
     "Donate" : "Пожертвувати кошти",
     "Tags" : "Мітки",
     "Search Tags" : "Шукати мітки",
+    "Expired" : "Закінчився",
     "Someone has shared a credential with you." : "З вами поділилися даними авторизації.",
     "Loading …" : "Завантаження...",
     "email" : "електронна пошта",
