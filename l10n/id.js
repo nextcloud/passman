@@ -17,6 +17,7 @@ OC.L10N.register(
     "Copy to clipboard" : "Salin ke papan klip",
     "Username" : "Nama pengguna",
     "Add tag" : "Tambahkan tag",
+    "Text" : "Teks",
     "File" : "Berkas",
     "Add" : "Masukkan",
     "Value" : "Nilari",
