@@ -44,11 +44,14 @@ OC.L10N.register(
     "Date" : "Data",
     "Accept" : "Aceptar",
     "Decline" : "Refugar",
+    "Never" : "Enxamás",
     "Tags" : "Etiquetes",
     "Loading …" : "Cargando…",
     "Description" : "Descripción",
     "An error occurred!" : "¡Prodúxose un error!",
     "Reason" : "Motivu",
-    "Saving …" : "Guardando…"
+    "Saving …" : "Guardando…",
+    "Dismiss" : "Escartar",
+    "seconds ago" : "hai segundos"
 },
 "nplurals=2; plural=(n != 1);");
