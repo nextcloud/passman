@@ -155,6 +155,11 @@ class CredentialController extends ApiController {
 			if (!$this->settings->isEnabled('user_sharing_enabled')) {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
+
+			if (!$acl->hasPermission(SharingACL::FILES)) {
+				// what ever the client transmitted, if it has no files permission, the previous files content will be preserved
+				$credential['files'] = $storedCredential->getFiles();
+			}
 		}
 
 
