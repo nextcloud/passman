@@ -52,6 +52,7 @@ OC.L10N.register(
     "Change" : "Chỉnh sửa",
     "Version" : "Phiên bản",
     "Import" : "Nhập vào",
+    "Action" : "Hành động",
     "Uploading" : "Uploading",
     "User" : "Người dùng",
     "Read" : "Đọc",
