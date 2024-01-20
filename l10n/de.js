@@ -299,7 +299,7 @@ OC.L10N.register(
     "An admin then accepts or declines the request" : "Ein Administrator akzeptiert die Anfrage oder lehnt sie ab",
     "After an admin destroys this vault, all credentials in it will be lost" : "Wenn ein Administrator diesen Tresor löscht, gehen alle enthaltenen Anmeldeinformationen verloren",
     "Reason for requesting deletion (optional):" : "Grund die Löschung anzufordern (optional):",
-    "Request vault destruction" : "Fordere Tresor-Löschung an",
+    "Request vault destruction" : "Zerstörung des Tresors anfordern",
     "Yes, request an admin to destroy this vault" : "Ja, bitte einen Administrator diesen Tresor zu löschen",
     "Cancel destruction request" : "Löschanfrage abbrechen",
     "Vault destruction requested" : "Tresor-Löschung angefordert",
