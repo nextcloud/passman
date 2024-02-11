@@ -111,6 +111,8 @@ OC.L10N.register(
     "Current OTP settings" : "Nåværende OTP-innstillinger",
     "Issuer" : "Utsteder",
     "Secret" : "Hemmelighet",
+    "Digits" : "Sifre",
+    "Period" : "Punktum",
     "Expiration date" : "Utløpsdato",
     "No expiration date set" : "Ingen utløpsdato satt",
     "Renew interval" : "Fornyingsinterval",
