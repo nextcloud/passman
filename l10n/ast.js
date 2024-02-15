@@ -12,6 +12,7 @@ OC.L10N.register(
     "Passwords do not match" : "Les contraseñes nun concasen",
     "An error occurred during decryption" : "Prodúxose un error nel descifráu",
     "An error occurred" : "Prodúxose un error",
+    "Settings saved" : "Guardóse la configuración",
     "General settings" : "Configuración xeneral",
     "Sharing" : "Comparticiñon",
     "Good" : "Bien",
