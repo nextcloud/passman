@@ -90,7 +90,7 @@ OC.L10N.register(
     "Weak" : "Zayıf",
     "Good" : "İyi",
     "Strong" : "Çok iyi",
-    "Toggle visibility" : "Görünürlüğü değiştir",
+    "Toggle visibility" : "Görünürlüğü aç/kapat",
     "Copy to clipboard" : "Panoya kopyala",
     "Copied to clipboard!" : "Panoya kopyalandı!",
     "Generate password" : "Parola oluştur",
