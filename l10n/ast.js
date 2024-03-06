@@ -26,6 +26,7 @@ OC.L10N.register(
     "Type" : "Tipu",
     "Actions" : "Aiciones",
     "Size" : "Tamañu",
+    "Secret" : "Secretu",
     "Export" : "Esportar",
     "Change" : "Camudar",
     "Version" : "Versión",
