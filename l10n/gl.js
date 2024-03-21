@@ -95,7 +95,7 @@ OC.L10N.register(
     "Copied to clipboard!" : "Copiado no portapapeis!",
     "Generate password" : "Xerar un contrasinal",
     "Copy password to clipboard" : "Copiar o contrasinal no portapapeis",
-    "Password copied to clipboard!" : "Contrasinal copiado no portapapeis!",
+    "Password copied to clipboard!" : "O contrasinal foi copiado no portapapeis!",
     "Complete" : "Completo",
     "Username" : "Nome de usuario",
     "Repeat password" : "Repita o contrasinal",
