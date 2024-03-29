@@ -97,7 +97,7 @@ OC.L10N.register(
     "Copy password to clipboard" : "Copier le mot de passe dans le presse-papier",
     "Password copied to clipboard!" : "Mot de passe copié dans le presse-papier !",
     "Complete" : "Terminer",
-    "Username" : "Nom d'utilisateur",
+    "Username" : "Nom d’utilisateur",
     "Repeat password" : "Répéter le mot de passe",
     "Add tag" : "Ajouter une étiquette",
     "Pick an icon" : "Choisir une icône",
