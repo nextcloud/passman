@@ -42,6 +42,7 @@ OC.L10N.register(
     "Action" : "Aición",
     "Uploading" : "Xubiendo",
     "User" : "Usuariu",
+    "Read" : "Lleer",
     "Files" : "Ficheros",
     "Pending" : "Pendiente",
     "Details" : "Detalles",

@@ -58,7 +58,7 @@ OC.L10N.register(
     "Username" : "Логін",
     "Repeat password" : "Повторіть пароль",
     "Add tag" : "Додати мітку",
-    "Search icons" : "Шукати піктограми",
+    "Search icons" : "Шукати значки",
     "This may take a few seconds …" : "Може тривати кілька секунд...",
     "Field label" : "Мітка поля",
     "Field value" : "Значення поля",
