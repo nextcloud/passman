@@ -324,7 +324,7 @@
     "email" : "メール",
     "Description" : "説明",
     "Custom Search:" : "カスタム検索:",
-    "Revert to defaults" : "デフォルトに戻す",
+    "Revert to defaults" : "初期値に戻す",
     "Your credential \"%s\" expired, click here to update the credential." : "証明書 ”%s” は期限切れです。証明書を更新するにはここをクリックしてください。",
     "Remind me later" : "後で通知する",
     "Ignore" : "無視する",
