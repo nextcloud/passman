@@ -73,6 +73,16 @@
       .last_access{
         color: #8e8e8e;
       }
+      .input-group{
+        display: flex;
+        align-items: center;
+
+        i{
+          padding-bottom: 3px;
+          margin-left: 10px;
+          cursor: pointer;
+        }
+      }
     }
 
     input[type="password"], input[type="text"]{
