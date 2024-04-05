@@ -194,6 +194,18 @@ class CredentialService {
 	}
 
 	/**
+	 * Check if a credential exists by id.
+	 *
+	 * @param int $credential_id
+	 * @return bool
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function credentialExistsById(int $credential_id): bool {
+		return $this->credentialMapper->getCredentialById($credential_id) !== null;
+	}
+
+	/**
 	 * Get credential label by credential id.
 	 *
 	 * @param int $credential_id

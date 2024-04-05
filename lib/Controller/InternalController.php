@@ -12,12 +12,13 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Service\CredentialService;
+use OCA\Passman\Service\NotificationService;
 use OCP\App\IAppManager;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
-use OCP\Notification\IManager;
 
 class InternalController extends ApiController {
 	private $userId;
@@ -27,8 +28,8 @@ class InternalController extends ApiController {
 		IRequest $request,
 		$UserId,
 		private CredentialService $credentialService,
+		private NotificationService $notificationService,
 		private IConfig $config,
-		private IManager $manager,
 		private IAppManager $appManager,
 	) {
 		parent::__construct(
@@ -49,11 +50,7 @@ class InternalController extends ApiController {
 			$credential->setExpireTime(time() + (24 * 60 * 60));
 			$this->credentialService->upd($credential);
 
-			$notification = $this->manager->createNotification();
-			$notification->setApp('passman')
-				->setObject('credential', $credential_id)
-				->setUser($this->userId);
-			$this->manager->markProcessed($notification);
+			$this->notificationService->markNotificationOfCredentialAsProcessed($credential_id, $this->userId);
 		}
 	}
 
@@ -61,16 +58,23 @@ class InternalController extends ApiController {
 	 * @NoAdminRequired
 	 */
 	public function read($credential_id) {
+		try {
+			// need to check overall credential existence before, since getCredentialById() method call below throws a
+			// DoesNotExistException in two different cases, that we cannot differentiate in retrospect
+			$this->credentialService->credentialExistsById($credential_id);
+		} catch (DoesNotExistException) {
+			// got DoesNotExistException from CredentialMapper, means the credential does not even exist for any user,
+			// so we can also delete or mark the corresponding notification message as processed
+			$this->notificationService->markNotificationOfCredentialAsProcessed($credential_id, $this->userId);
+			return;
+		}
+
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
 		if ($credential) {
 			$credential->setExpireTime(0);
 			$this->credentialService->upd($credential);
 
-			$notification = $this->manager->createNotification();
-			$notification->setApp('passman')
-				->setObject('credential', $credential_id)
-				->setUser($this->userId);
-			$this->manager->markProcessed($notification);
+			$this->notificationService->markNotificationOfCredentialAsProcessed($credential_id, $this->userId);
 		}
 	}
 

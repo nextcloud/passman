@@ -120,4 +120,12 @@ class NotificationService {
 			->andWhere($qb->expr()->eq('object_type', 'credential'));
 		return $qb->execute();
 	}
+
+	function markNotificationOfCredentialAsProcessed(int $credential_id, string $user_id): void {
+		$notification = $this->manager->createNotification();
+		$notification->setApp('passman')
+			->setObject('credential', $credential_id)
+			->setUser($user_id);
+		$this->manager->markProcessed($notification);
+	}
 }
