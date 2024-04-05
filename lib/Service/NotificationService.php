@@ -31,11 +31,13 @@ class NotificationService {
 	public function __construct(
 		private IManager $manager,
 		private IURLGenerator $urlGenerator,
+		private VaultService $vaultService,
 	) {
 	}
 
 	function credentialExpiredNotification($credential) {
-		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman/#/vault/' . $credential->getVaultId() . '/edit/' . $credential->getId()));
+		$vaults = $this->vaultService->getById($credential->getVaultId(), $credential->getUserId());
+		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman/#/vault/' . $vaults[0]->getGuid() . '/edit/' . $credential->getGuid()));
 		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
 		$remindAction = $notification->createAction();
