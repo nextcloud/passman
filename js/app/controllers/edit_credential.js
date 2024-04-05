@@ -104,17 +104,23 @@
 				var storedCredential = SettingsService.getSetting('edit_credential');
 
 				if (!storedCredential) {
+					$scope.storedCredential = {}; // this line is required for reactive model binding to update the value from the async callback
 					CredentialService.getCredential($routeParams.credential_id).then(function (result) {
 						$scope.storedCredential = CredentialService.decryptCredential(angular.copy(result));
+						$scope.storedCredential.password_repeat = angular.copy($scope.storedCredential.password);
+						$scope.storedCredential.expire_time = $scope.storedCredential.expire_time * 1000;
+
+						//store password to check if it was changed if this credential has been compromised
+						$scope.oldPassword = $scope.storedCredential.password;
 					});
 				} else {
 					$scope.storedCredential = CredentialService.decryptCredential(angular.copy(storedCredential));
 					$scope.storedCredential.password_repeat = angular.copy($scope.storedCredential.password);
 					$scope.storedCredential.expire_time = $scope.storedCredential.expire_time * 1000;
-				}
 
-				//store password to check if it was changed if this credential has been compromised
-				$scope.oldPassword=$scope.storedCredential.password;
+					//store password to check if it was changed if this credential has been compromised
+					$scope.oldPassword = $scope.storedCredential.password;
+				}
 
 				$scope.getTags = function ($query) {
 					return TagService.searchTag($query);
