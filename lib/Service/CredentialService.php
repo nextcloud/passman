@@ -48,6 +48,7 @@ class CredentialService {
 		private CredentialRevisionService $credentialRevisionService,
 		private IURLGenerator             $urlGenerator,
 		private VaultService              $vaultService,
+		private NotificationService       $notificationService,
 		IConfig                           $config,
 	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
@@ -120,6 +121,7 @@ class CredentialService {
 				$this->credentialRevisionService->deleteRevision($id, $userId);
 			}
 		}
+		$this->notificationService->deleteNotificationsOfCredential($credential);
 	}
 
 	/**

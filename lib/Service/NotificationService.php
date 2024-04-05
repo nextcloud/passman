@@ -111,4 +111,13 @@ class NotificationService {
 			->andWhere($qb->expr()->eq('subject', $qb->createNamedParameter('credential_expired', IQueryBuilder::PARAM_STR)));
 			return $qb->execute()->rowCount() !== 0;
 	}
+
+	function deleteNotificationsOfCredential($credential) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->delete()
+			->from('notifications')
+			->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->eq('object_type', 'credential'));
+		return $qb->execute();
+	}
 }
