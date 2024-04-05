@@ -24,6 +24,8 @@
 namespace OCA\Passman\Service;
 
 
+use OCP\DB\QueryBuilder\IQueryBuilder;
+use OCP\IDBConnection;
 use OCP\IURLGenerator;
 use OCP\Notification\IManager;
 
@@ -31,6 +33,7 @@ class NotificationService {
 	public function __construct(
 		private IManager $manager,
 		private IURLGenerator $urlGenerator,
+		private IDBConnection $db,
 		private VaultService $vaultService,
 	) {
 	}
@@ -103,4 +106,12 @@ class NotificationService {
 		$this->manager->notify($notification);
 	}
 
+	function hasCredentialExpirationNotification($credential) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from('notifications')
+			->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->eq('subject', $qb->createNamedParameter('credential_expired', IQueryBuilder::PARAM_STR)));
+			return $qb->execute()->rowCount() !== 0;
+	}
 }

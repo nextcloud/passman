@@ -26,8 +26,6 @@ namespace OCA\Passman\Service;
 use OCA\Passman\Activity;
 use OCA\Passman\Utility\Utils;
 use OCP\DB\Exception;
-use OCP\DB\QueryBuilder\IQueryBuilder;
-use OCP\IDBConnection;
 use Psr\Log\LoggerInterface;
 
 class CronService {
@@ -38,7 +36,6 @@ class CronService {
 		private Utils               $utils,
 		private NotificationService $notificationService,
 		private ActivityService     $activityService,
-		private IDBConnection       $db,
 	) {
 	}
 
@@ -46,16 +43,10 @@ class CronService {
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
 		foreach ($expired_credentials as $credential) {
 			$link = ''; // @TODO create direct link to credential
-			$qb = $this->db->getQueryBuilder();
-			$qb->select('*')
-				->from('notifications')
-				->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
-				->andWhere($qb->expr()->eq('subject', $qb->createNamedParameter('credential_expired', IQueryBuilder::PARAM_STR)));
 
 			try {
 				$this->logger->debug($credential->getLabel() . ' is expired, checking notifications!', ['app' => 'passman']);
-				$notificationCount = $qb->execute()->rowCount();
-				if ($notificationCount === 0) {
+				if (!$this->notificationService->hasCredentialExpirationNotification($credential)) {
 					$this->logger->debug($credential->getLabel() . ' is expired, adding notification!', ['app' => 'passman']);
 					$this->activityService->add(
 						Activity::SUBJECT_ITEM_EXPIRED, [$credential->getLabel(), $credential->getUserId()],
