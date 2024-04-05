@@ -34,13 +34,10 @@ class NotificationService {
 		private IManager $manager,
 		private IURLGenerator $urlGenerator,
 		private IDBConnection $db,
-		private VaultService $vaultService,
 	) {
 	}
 
-	function credentialExpiredNotification($credential) {
-		$vaults = $this->vaultService->getById($credential->getVaultId(), $credential->getUserId());
-		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman/#/vault/' . $vaults[0]->getGuid() . '/edit/' . $credential->getGuid()));
+	function credentialExpiredNotification($credential, $link) {
 		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
 		$remindAction = $notification->createAction();
@@ -106,7 +103,7 @@ class NotificationService {
 		$this->manager->notify($notification);
 	}
 
-	function hasCredentialExpirationNotification($credential) {
+	function hasCredentialExpirationNotification($credential): bool {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from('notifications')

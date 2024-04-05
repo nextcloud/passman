@@ -32,6 +32,7 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\IConfig;
+use OCP\IURLGenerator;
 
 
 class CredentialService {
@@ -45,6 +46,8 @@ class CredentialService {
 		private ShareService              $shareService,
 		private EncryptService            $encryptService,
 		private CredentialRevisionService $credentialRevisionService,
+		private IURLGenerator             $urlGenerator,
+		private VaultService              $vaultService,
 		IConfig                           $config,
 	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
@@ -213,5 +216,15 @@ class CredentialService {
 	public function getCredentialByGUID(string $credential_guid, string $user_id = null) {
 		$credential = $this->credentialMapper->getCredentialByGUID($credential_guid, $user_id);
 		return $this->encryptService->decryptCredential($credential);
+	}
+
+	public function getDirectEditLink(Credential $credential): string {
+		$vaults = $this->vaultService->getById($credential->getVaultId(), $credential->getUserId());
+		return $this->urlGenerator->getAbsoluteURL(
+			$this->urlGenerator->linkTo(
+				'',
+				'index.php/apps/passman/#/vault/' . $vaults[0]->getGuid() . '/edit/' . $credential->getGuid()
+			)
+		);
 	}
 }
