@@ -50,6 +50,7 @@ OC.L10N.register(
     "Hide details" : "Anubrir los detalles",
     "100/hour" : "100/hora",
     "10/second" : "10/segundu",
+    "Pattern" : "Patrón",
     "by" : "por",
     "No revisions found." : "Nun s'atopó nenguna revisión.",
     "Save" : "Guardar",
