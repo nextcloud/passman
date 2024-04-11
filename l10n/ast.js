@@ -22,6 +22,7 @@ OC.L10N.register(
     "Saved!" : "¡Guardóse!",
     "Good" : "Bien",
     "Copy to clipboard" : "Copiar nel cartafueyu",
+    "Username" : "Nome d'usuariu",
     "Add tag" : "Amestar la etiqueta",
     "Text" : "Testu",
     "File" : "Ficheru",
