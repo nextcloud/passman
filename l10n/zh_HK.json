@@ -244,7 +244,7 @@
     "Beginning" : "開始",
     "Showing {{number_filtered}} of {{credential_number}} credentials" : "顯示 {{credential_number}} 個身分驗證中的 {{number_filtered}} 個",
     "Search for credential …" : "搜尋身分驗證 ...",
-    "Account" : "賬戶",
+    "Account" : "帳戶",
     "Password" : "密碼",
     "OTP" : "OTP",
     "Email" : "電郵地址",
