@@ -273,6 +273,7 @@ OC.L10N.register(
     "Expired" : "Expirado",
     "Someone has shared a credential with you." : "Alguien ha compartido credenciales contigo. ",
     "Click here to request it" : "Haz click para solicitarlo",
+    "Loading …" : "Cargando …",
     "email" : "correo electrónico",
     "Description" : "Descripción",
     "Your credential \"%s\" expired, click here to update the credential." : "Tus credenciales \"%s\" han expirado, haz click aquí para actualizarlas.",
