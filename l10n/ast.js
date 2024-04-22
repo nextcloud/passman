@@ -33,6 +33,7 @@ OC.L10N.register(
     "Size" : "Tamañu",
     "Secret" : "Secretu",
     "Expiration date" : "Data de caducidá",
+    "No expiration date set" : "Nun se configuró nenguna data de caducidá",
     "Disabled" : "Desactivóse",
     "Export" : "Esportar",
     "Change" : "Camudar",
