@@ -30,6 +30,7 @@ OC.L10N.register(
     "Value" : "Valor",
     "Type" : "Tipu",
     "Actions" : "Aiciones",
+    "Filename" : "Nome del ficheru",
     "Size" : "Tamañu",
     "Secret" : "Secretu",
     "Expiration date" : "Data de caducidá",
