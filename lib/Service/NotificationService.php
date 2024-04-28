@@ -24,6 +24,8 @@
 namespace OCA\Passman\Service;
 
 
+use OCP\DB\QueryBuilder\IQueryBuilder;
+use OCP\IDBConnection;
 use OCP\IURLGenerator;
 use OCP\Notification\IManager;
 
@@ -31,11 +33,11 @@ class NotificationService {
 	public function __construct(
 		private IManager $manager,
 		private IURLGenerator $urlGenerator,
+		private IDBConnection $db,
 	) {
 	}
 
-	function credentialExpiredNotification($credential) {
-		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman/#/vault/' . $credential->getVaultId() . '/edit/' . $credential->getId()));
+	function credentialExpiredNotification($credential, $link) {
 		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman'));
 		$notification = $this->manager->createNotification();
 		$remindAction = $notification->createAction();
@@ -101,4 +103,29 @@ class NotificationService {
 		$this->manager->notify($notification);
 	}
 
+	function hasCredentialExpirationNotification($credential): bool {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from('notifications')
+			->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->eq('subject', $qb->createNamedParameter('credential_expired', IQueryBuilder::PARAM_STR)));
+			return $qb->execute()->rowCount() !== 0;
+	}
+
+	function deleteNotificationsOfCredential($credential) {
+		$qb = $this->db->getQueryBuilder();
+		$qb->delete()
+			->from('notifications')
+			->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
+			->andWhere($qb->expr()->eq('object_type', 'credential'));
+		return $qb->execute();
+	}
+
+	function markNotificationOfCredentialAsProcessed(int $credential_id, string $user_id): void {
+		$notification = $this->manager->createNotification();
+		$notification->setApp('passman')
+			->setObject('credential', $credential_id)
+			->setUser($user_id);
+		$this->manager->markProcessed($notification);
+	}
 }
