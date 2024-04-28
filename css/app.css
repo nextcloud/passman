@@ -438,6 +438,13 @@
       color: #ce3702; }
     .vault_wrapper .login_form .pw-input .last_access {
       color: #8e8e8e; }
+    .vault_wrapper .login_form .pw-input .input-group {
+      display: flex;
+      align-items: center; }
+      .vault_wrapper .login_form .pw-input .input-group i {
+        padding-bottom: 3px;
+        margin-left: 10px;
+        cursor: pointer; }
     .vault_wrapper .login_form input[type="password"], .vault_wrapper .login_form input[type="text"] {
       width: 100%;
       -webkit-border-radius: 5px;

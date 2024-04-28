@@ -33,9 +33,12 @@
 			<div>
 				<input type="text" ng-model="vault_name" required>
 			</div>
-			<div>
+			<div class="pw-input">
 				{{ 'new.vault.pass' | translate}}
-				<input type="password" ng-model="vault_key" required>
+                <div class="input-group">
+                    <input type="password" ng-model="vault_key" required id="new_vault_key">
+                    <i class="fa fa-eye-slash" ng-click="togglePasswordInputVisibility($event, 'new_vault_key')"></i>
+                </div>
 				<ng-password-meter password="vault_key" score="vault_key_score"></ng-password-meter>
 			</div>
 			<div>
@@ -88,7 +91,11 @@
 			{{ 'input.vault.password' | translate}} {{list_selected_vault.name}}
 
 			<div class="pw-input">
-				<input type="password" ng-model="vault_key" ng-enter="loginToVault(list_selected_vault, vault_key)">
+                <div class="input-group">
+                    <input type="password" ng-model="vault_key" ng-enter="loginToVault(list_selected_vault, vault_key)" id="login_vault_key">
+                    <i class="fa fa-eye-slash" ng-click="togglePasswordInputVisibility($event, 'login_vault_key')"></i>
+                </div>
+
 				<small class="last_access">{{'last.access' | translate}}:
 					<span ng-if="list_selected_vault.last_access > 0">{{list_selected_vault.last_access * 1000 | date:'dd-MM-yyyy @ HH:mm:ss'}}</span>
 					<span ng-if="list_selected_vault.last_access === 0">Never</span>

@@ -222,9 +222,7 @@
 				}
 			};
 
-
-
-                $scope.createVault = function (vault_name, vault_key, vault_key2) {
+			$scope.createVault = function (vault_name, vault_key, vault_key2) {
 				if (vault_key !== vault_key2) {
 					$scope.error = $translate.instant('password.do.not.match');
 					return;
@@ -249,6 +247,17 @@
 						});
 					});
 				});
+			};
+
+			$scope.togglePasswordInputVisibility = function ($event, inputElementId) {
+				const inputElement = document.getElementById(inputElementId);
+				if (inputElement.type === "password") {
+					inputElement.type = "text";
+					$event.currentTarget.classList.replace('fa-eye-slash', 'fa-eye');
+				} else {
+					inputElement.type = "password";
+					$event.currentTarget.classList.replace('fa-eye', 'fa-eye-slash');
+				}
 			};
 		}]);
 }());
