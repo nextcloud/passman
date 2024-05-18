@@ -1,0 +1,25 @@
+OC.L10N.register(
+    "passman",
+    {
+    "General" : "Ginearálta",
+    "Username" : "Ainm úsáideora",
+    "Add" : "Cuir",
+    "Type" : "Cineál",
+    "Size" : "Méid",
+    "Secret" : "Rúnda",
+    "Uploading" : "Ag uaslódáil",
+    "Read" : "Léigh",
+    "Label" : "Lipéad",
+    "Save" : "Sábháil",
+    "Cancel" : "Cealaigh",
+    "Settings" : "Socruithe",
+    "Password" : "Pasfhocal",
+    "Edit" : "Cuir in eagar",
+    "Delete" : "Scrios",
+    "Share" : "Comhroinn",
+    "Never" : "Riamh",
+    "Loading …" : "Á lódáil…",
+    "Dismiss" : "Díbhe",
+    "seconds ago" : "soicind ó shin"
+},
+"nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");
