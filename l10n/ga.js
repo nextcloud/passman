@@ -9,6 +9,7 @@ OC.L10N.register(
     "Secret" : "Rúnda",
     "Uploading" : "Ag uaslódáil",
     "Read" : "Léigh",
+    "Write" : "Scríobh",
     "Label" : "Lipéad",
     "Save" : "Sábháil",
     "Cancel" : "Cealaigh",
