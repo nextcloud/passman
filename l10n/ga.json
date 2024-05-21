@@ -8,6 +8,9 @@
     "Uploading" : "Ag uaslódáil",
     "Read" : "Léigh",
     "Write" : "Scríobh",
+    "Files" : "Comhaid",
+    "Pending" : "Ar feitheamh",
+    "Hide details" : "Folaigh sonraí",
     "Label" : "Lipéad",
     "Save" : "Sábháil",
     "Cancel" : "Cealaigh",
@@ -16,8 +19,11 @@
     "Edit" : "Cuir in eagar",
     "Delete" : "Scrios",
     "Share" : "Comhroinn",
+    "Date" : "Dáta",
     "Never" : "Riamh",
     "Loading …" : "Á lódáil…",
+    "Connection to server lost" : "Ceangal leis an bhfreastalaí caillte",
+    "Saving …" : "Shábháil …",
     "Dismiss" : "Díbhe",
     "seconds ago" : "soicind ó shin"
 },"pluralForm" :"nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);"
