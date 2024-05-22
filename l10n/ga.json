@@ -1,10 +1,13 @@
 { "translations": {
     "General" : "Ginearálta",
+    "Settings saved" : "Socruithe sábháilte",
+    "Sharing" : "Roinnt",
     "Username" : "Ainm úsáideora",
     "Add" : "Cuir",
     "Type" : "Cineál",
     "Size" : "Méid",
     "Secret" : "Rúnda",
+    "Disabled" : "Faoi mhíchumas",
     "Uploading" : "Ag uaslódáil",
     "Read" : "Léigh",
     "Write" : "Scríobh",
