@@ -125,7 +125,7 @@ OC.L10N.register(
     "Notes" : "Piezīmes",
     "Changed" : "Mainīts",
     "Created" : "Izveidots",
-    "Edit" : "Rediģēt",
+    "Edit" : "Labot",
     "Delete" : "Dzēst",
     "Share" : "Koplietot",
     "Recover" : "Atgūt",
