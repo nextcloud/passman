@@ -1,5 +1,6 @@
 { "translations": {
     "General" : "Ginearálta",
+    "Done" : "Déanta",
     "Settings saved" : "Socruithe sábháilte",
     "Sharing" : "Roinnt",
     "Username" : "Ainm úsáideora",
@@ -9,6 +10,7 @@
     "Size" : "Méid",
     "Secret" : "Rúnda",
     "Disabled" : "Faoi mhíchumas",
+    "Change" : "Athrú",
     "Version" : "Leagan",
     "Uploading" : "Ag uaslódáil",
     "Read" : "Léigh",
@@ -22,6 +24,7 @@
     "Cancel" : "Cealaigh",
     "Settings" : "Socruithe",
     "Password" : "Pasfhocal",
+    "Email" : "Ríomhphost",
     "Edit" : "Cuir in eagar",
     "Delete" : "Scrios",
     "Share" : "Comhroinn",

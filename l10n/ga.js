@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "General" : "Ginearálta",
+    "Done" : "Déanta",
     "Settings saved" : "Socruithe sábháilte",
     "Sharing" : "Roinnt",
     "Username" : "Ainm úsáideora",
@@ -11,6 +12,7 @@ OC.L10N.register(
     "Size" : "Méid",
     "Secret" : "Rúnda",
     "Disabled" : "Faoi mhíchumas",
+    "Change" : "Athrú",
     "Version" : "Leagan",
     "Uploading" : "Ag uaslódáil",
     "Read" : "Léigh",
@@ -24,6 +26,7 @@ OC.L10N.register(
     "Cancel" : "Cealaigh",
     "Settings" : "Socruithe",
     "Password" : "Pasfhocal",
+    "Email" : "Ríomhphost",
     "Edit" : "Cuir in eagar",
     "Delete" : "Scrios",
     "Share" : "Comhroinn",
