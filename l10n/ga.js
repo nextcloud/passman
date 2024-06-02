@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Passwords" : "Pasfhocail",
     "General" : "Ginearálta",
+    "An error occurred" : "Tharla earráid",
     "Done" : "Déanta",
     "Settings saved" : "Socruithe sábháilte",
     "Sharing" : "Roinnt",
