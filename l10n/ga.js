@@ -27,6 +27,7 @@ OC.L10N.register(
     "Export" : "Easpórtáil",
     "Change" : "Athrú",
     "Version" : "Leagan",
+    "Bookmarklet" : "Leabharmharclann",
     "Public key" : "Eochair phoiblí",
     "Action" : "Gníomh",
     "Uploading" : "Ag uaslódáil",
