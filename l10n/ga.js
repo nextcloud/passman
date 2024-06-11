@@ -66,6 +66,7 @@ OC.L10N.register(
     "Expired" : "Imithe in éag",
     "Loading …" : "Á lódáil…",
     "Description" : "Cur síos",
+    "Remind me later" : "Agus an micreafón díchumasaithe, cliceáil agus coinneáil chun Brúigh chun Caint a úsáid",
     "Connection to server lost" : "Ceangal leis an bhfreastalaí caillte",
     "Saving …" : "Shábháil …",
     "Dismiss" : "Díbhe",
