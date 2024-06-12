@@ -62,6 +62,7 @@ OC.L10N.register(
     "Accept" : "Glac",
     "Decline" : "Meath",
     "Never" : "Riamh",
+    "Logout" : "Logáil Amach",
     "Tags" : "Clibeanna",
     "Expired" : "Imithe in éag",
     "Loading …" : "Á lódáil…",
