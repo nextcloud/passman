@@ -33,6 +33,7 @@ OC.L10N.register(
     "Bookmarklet" : "Leabharmharclann",
     "Import" : "Iompórtáil",
     "Public key" : "Eochair phoiblí",
+    "Result" : "Toradh",
     "Action" : "Gníomh",
     "Uploading" : "Ag uaslódáil",
     "User" : "Úsáideoir",
