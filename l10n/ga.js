@@ -29,6 +29,7 @@ OC.L10N.register(
     "Disabled" : "Faoi mhíchumas",
     "Export" : "Easpórtáil",
     "Change" : "Athrú",
+    "Processing" : "Próiseáil",
     "Version" : "Leagan",
     "Bookmarklet" : "Leabharmharclann",
     "Import" : "Iompórtáil",
