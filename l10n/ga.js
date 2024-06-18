@@ -11,6 +11,7 @@ OC.L10N.register(
     "Share link" : "Comhroinn nasc",
     "Saved!" : "Shábháil!",
     "Good" : "Maith",
+    "Strong" : "Láidir",
     "Copy to clipboard" : "Cóipeáil chuig an ngearrthaisce",
     "Generate password" : "Gin pasfhocal",
     "Username" : "Ainm úsáideora",
