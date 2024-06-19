@@ -15,6 +15,7 @@ OC.L10N.register(
     "Copy to clipboard" : "Cóipeáil chuig an ngearrthaisce",
     "Generate password" : "Gin pasfhocal",
     "Username" : "Ainm úsáideora",
+    "Repeat password" : "athscríobh an Pasfhocal",
     "Add tag" : "Cuir clib leis",
     "Text" : "Téacs",
     "File" : "Comhad",
