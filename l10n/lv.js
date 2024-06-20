@@ -146,6 +146,7 @@ OC.L10N.register(
     "Tags" : "Birkas",
     "Search Tags" : "Meklēt birkas",
     "Click here to request it" : "Noklikšķiniet šeit, lai pieprasītu",
+    "Loading …" : "Ielādē…",
     "email" : "e-pasts",
     "Description" : "Apraksts",
     "Your credential \"%s\" expired, click here to update the credential." : "Jūsu akreditācijai \"%s\" beidzies derīgums. noklikšķiniet šeit, lai atjauninātu akreditācijas datus.",
