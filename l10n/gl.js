@@ -349,7 +349,7 @@ OC.L10N.register(
     "Credential mover" : "Trasladar credenciais",
     "Vault destruction requests" : "Solicitudes para destruír bóvedas",
     "Check for new versions" : "Verificar se hai novas versións",
-    "Enable HTTPS check" : "Activar a verificación HTTPS",
+    "Enable HTTPS check" : "Activar a comprobación HTTPS",
     "Disable context menu" : "Desactivar o menú contextual",
     "Disable JavaScript debugger" : "Desactivar o depurador JavaScript",
     "Enable global search" : "Activar a busca global",
