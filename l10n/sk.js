@@ -15,7 +15,7 @@ OC.L10N.register(
     "%3$s has renamed %1$s to %2$s" : "%3$s premenoval %1$s na %2$s",
     "You renamed %1$s to %2$s" : "Premenovali ste %1$s na %2$s",
     "%1$s has been deleted by %2$s" : "%2$s vymazal %1$s",
-    "You deleted %1$s" : "Zmazali ste %1$s",
+    "You deleted %1$s" : "Odstránili ste %1$s",
     "%1$s has been recovered by %2$s" : "%2$s obnovil %1$s",
     "You recovered %1$s" : "Obnovili ste %1$s",
     "%1$s has been permanently deleted by %2$s" : "%2$s vymazal %1$s natrvalo",
