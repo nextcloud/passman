@@ -41,6 +41,7 @@ OC.L10N.register(
     "Password" : "Ger-tremen",
     "Email" : "Postel",
     "URL" : "URL",
+    "Notes" : "Notennoù",
     "Edit" : "Cheñch",
     "Delete" : "Dilemel",
     "Share" : "Rannan",
