@@ -35,6 +35,7 @@ OC.L10N.register(
     "Username" : "使用者名稱",
     "Repeat password" : "再輸入一次密碼",
     "Add tag" : "加入標籤",
+    "Choose a file" : "選擇檔案",
     "Text" : "文字",
     "File" : "檔案",
     "Add" : "新增",

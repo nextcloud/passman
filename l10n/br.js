@@ -42,6 +42,7 @@ OC.L10N.register(
     "Email" : "Postel",
     "URL" : "URL",
     "Notes" : "Notennoù",
+    "Created" : "Krouet",
     "Edit" : "Cheñch",
     "Delete" : "Dilemel",
     "Share" : "Rannan",
