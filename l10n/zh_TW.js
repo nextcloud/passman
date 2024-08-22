@@ -2,8 +2,12 @@ OC.L10N.register(
     "passman",
     {
     "You created %1$s" : "您建立了 %1$s",
+    "%1$s has been deleted by %2$s" : "%1$s 已被 %2$s 刪除",
     "You deleted %1$s" : "您刪除了 %1$s",
+    "%1$s has been recovered by %2$s" : "%1$s 已被 %2$s 還原",
     "You recovered %1$s" : "您還原了 %1$s",
+    "%1$s has been permanently deleted by %2$s" : "%1$s 已被 %2$s永久刪除",
+    "The password of %1$s has expired, renew it now." : "%1$s 的密碼已過期，請立即更新",
     "Passwords" : "密碼",
     "Passwords do not match" : "密碼不相符",
     "General" : "一般",
