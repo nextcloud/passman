@@ -111,7 +111,7 @@ OC.L10N.register(
     "Revisions" : "Revisiones",
     "Pending" : "Pendiente",
     "Details" : "Detalles",
-    "Hide details" : "Anubrir los detalles",
+    "Hide details" : "Esconder los detalles",
     "100/hour" : "100/hora",
     "10/second" : "10/segundu",
     "Pattern" : "Patrón",
