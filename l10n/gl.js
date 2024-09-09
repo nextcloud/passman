@@ -81,7 +81,7 @@ OC.L10N.register(
     "New password does not match!" : "O novo contrasinal non coincide!",
     "Please log in with your new vault password" : "Acceda co seu novo contrasinal da bóveda",
     "Share with users and groups" : "Compartir con outros usuarios e grupos",
-    "Share link" : "Compartir ligazón",
+    "Share link" : "Ligazón para compartir",
     "Are you sure you want to leave? This will corrupt this credential" : "Confirma que quere saír? Isto estragará esta credencial",
     "Credential unshared" : "Deixar de compartir esta credencial",
     "Credential shared" : "Compartir esta credencial",
