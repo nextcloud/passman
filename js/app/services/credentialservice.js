@@ -123,15 +123,20 @@
 				encryptCredential: function (credential, key) {
 					for (var i = 0; i < _encryptedFields.length; i++) {
 						var field = _encryptedFields[i];
-						var fieldValue = angular.copy(credential[field]);
-						credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue), key);
+						if (credential[field] !== undefined) {
+							var fieldValue = angular.copy(credential[field]);
+							credential[field] = EncryptService.encryptString(JSON.stringify(fieldValue), key);
+						}
 					}
 					return credential;
 				},
 				decryptCredential: function (credential, key) {
 					for (var i = 0; i < _encryptedFields.length; i++) {
 						var field = _encryptedFields[i];
-						var fieldValue = angular.copy(credential[field]);
+						var fieldValue = null;
+						if (credential[field] !== undefined) {
+							fieldValue = angular.copy(credential[field]);
+						}
 						var field_decrypted_value;
 						try {
 							if(fieldValue!==null && fieldValue!=="null" && fieldValue!==""){
