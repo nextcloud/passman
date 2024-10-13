@@ -350,7 +350,7 @@ OC.L10N.register(
     "Vault destruction requests" : "طلبات تدمير الخزينة",
     "Check for new versions" : "التحقق من وجود إصدارات جديدة",
     "Enable HTTPS check" : "تمكين التحقق من بروتوكول HTTPS",
-    "Disable context menu" : "تعطيل قائمة المحتوي",
+    "Disable context menu" : "تعطيل قائمة المحتوى",
     "Disable JavaScript debugger" : "تعطيل مصحح جافا سكريبت",
     "Enable global search" : "تمكين البحث الشامل",
     "Allow users on this server to share passwords with a link" : "تمكين المستخدمين على هذا الخادم من مُشاركة كلمات المرور من خلال رابط",
