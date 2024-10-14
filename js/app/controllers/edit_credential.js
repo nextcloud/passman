@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', '$translate','$rootScope',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, $translate, $rootScope) {
+		.controller('CredentialEditCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'FileService', 'EncryptService', 'TagService', 'NotificationService', 'ShareService', 'SharingACL', '$translate','$rootScope',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, FileService, EncryptService, TagService, NotificationService, ShareService, SharingACL, $translate, $rootScope) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -89,7 +89,8 @@
 					}, {
 						title: translations.files,
 						url: 'views/partials/forms/edit_credential/files.html',
-						color: 'yellow'
+						color: 'yellow',
+						requiredACL: $scope.permissions.permissions.FILES
 					}, {
 						title: translations.otp,
 						url: 'views/partials/forms/edit_credential/otp.html',
@@ -133,6 +134,17 @@
 
 				$scope.isActiveTab = function (tab) {
 					return tab.url === $scope.currentTab.url;
+				};
+
+				$scope.permissions = new SharingACL(0);
+
+				$scope.hasPermission = function (acl, permission) {
+					if (acl) {
+						var tmp = new SharingACL(acl.permission);
+						return tmp.hasPermission(permission);
+					} else {
+						return true;
+					}
 				};
 
 				/**
