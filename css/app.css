@@ -883,6 +883,7 @@
       padding: 10px;
       overflow-y: auto; }
       #app-content #app-content-wrapper .app_sidebar h2 {
+        margin-top: 0;
         margin-bottom: 10px;
         font-weight: 400;
         overflow: hidden;
