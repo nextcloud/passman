@@ -348,7 +348,7 @@
     "Disable context menu" : "禁用上下文菜单 ",
     "Disable JavaScript debugger" : "禁用 JavaScript 调试器",
     "Enable global search" : "启用全局搜素",
-    "Allow users on this server to share passwords with a link" : "允许此服务器上的用户通过链接共享密码 ",
+    "Allow users on this server to share passwords with a link" : "允许此服务器上的用户通过链接共享密码",
     "Allow users on this server to share passwords with other users" : "允许此服务器上的用户与其他用户共享密码 ",
     "Move credentials from one account to another" : "将凭据从一个账号移动到另一个",
     "Source account" : "来源账号",
