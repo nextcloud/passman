@@ -14,6 +14,7 @@
     "grunt-contrib-jshint": "^3.0.0",
     "grunt-contrib-nodeunit": "^5.0.0",
     "grunt-contrib-sass": "^2.0.0",
+    "uglify-js": "3.17.4",
     "grunt-contrib-uglify": "^5.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-html2js": "^0.8.0",
