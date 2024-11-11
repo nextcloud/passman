@@ -122,7 +122,7 @@ OC.L10N.register(
     "Filename" : "إسم الملف",
     "Upload date" : "آخر تحديث",
     "Size" : "الحجم",
-    "Upload or enter your OTP secret" : "قم برفع أو إدخال سر كلمة المرور لمرة واحدة الخاص بك",
+    "Upload or enter your OTP secret" : "ارفع أو أدخل كلمة المرور لمرة واحدة الخاصة بك",
     "Current OTP settings" : "إعدادات كلمة المرور لمرة واحدة \"OTP\" الحالية ",
     "Issuer" : "المُصدِر",
     "Secret" : "السر",
