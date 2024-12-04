@@ -306,7 +306,7 @@ OC.L10N.register(
     "Request removed" : "Solicitude retirada",
     "Destruction request pending" : "Solicitude de destrución pendente",
     "Warning! Adding credentials over HTTP is insecure!" : "Advertencia! Engadir credenciais sobre HTTP non é seguro!",
-    "Logged into {{vault_name}}" : "Sesión iniciada en {{vault_name}}",
+    "Logged into {{vault_name}}" : "Accedeu a {{vault_name}}",
     "Change vault" : "Cambiar da bóveda",
     "Deleted credentials" : "Credenciais eliminadas",
     "Logout" : "Saír",
