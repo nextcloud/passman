@@ -8,6 +8,7 @@ OC.L10N.register(
     "Username" : "Nama pengguna",
     "File" : "File",
     "Add" : "Tambah",
+    "Value" : "Nilai",
     "Type" : "Jenis",
     "Size" : "Saiz",
     "Export" : "Eksport",
