@@ -26,6 +26,7 @@ OC.L10N.register(
     "Settings saved" : "設定已儲存",
     "General settings" : "一般設定",
     "Password settings" : "密碼設定",
+    "I understand the risks" : "我了解風險",
     "Sharing" : "分享",
     "New password does not match!" : "密碼不相符",
     "Share with users and groups" : "分享給其他使用者或群組",
