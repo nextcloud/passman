@@ -65,7 +65,7 @@ OC.L10N.register(
     "New password does not match!" : "Naujieji slaptažodžiai nesutampa!",
     "Please log in with your new vault password" : "Prisijunkite naudodami naują slėptuvės slaptažodį",
     "Share with users and groups" : "Bendrinti su naudotojais ir grupėmis",
-    "Share link" : "Bendrinimo nuoroda",
+    "Share link" : "Viešinio nuoroda",
     "Are you sure you want to leave? This will corrupt this credential" : "Ar tikrai norite išeiti? Tai pakenks jūsų prisijungimo duomenims",
     "Credential unshared" : "Prisijungimo duomenys nebendrinami",
     "Credential shared" : "Prisijungimo duomenys bendrinami",
