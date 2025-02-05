@@ -21,6 +21,7 @@ OC.L10N.register(
     "Delete current icon" : "Kustuta praegune ikoon",
     "File" : "Fail",
     "Add" : "Lisa",
+    "Value" : "Väärtus",
     "Type" : "Tüüp",
     "Actions" : "Tegevused",
     "Empty" : "Tühi",
