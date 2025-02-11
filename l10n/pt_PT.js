@@ -50,7 +50,7 @@ OC.L10N.register(
     "Secret" : "Secreto",
     "Expiration date" : "Data de expiração",
     "No expiration date set" : "Data de expiração não definida",
-    "Disabled" : "Desactivado",
+    "Disabled" : "Desativado",
     "Export" : "Exportar",
     "Change" : "Mudar",
     "Version" : "Versão",
