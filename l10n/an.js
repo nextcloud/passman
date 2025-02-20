@@ -10,7 +10,7 @@ OC.L10N.register(
     "Read" : "Leyer",
     "Write" : "Escribir",
     "Files" : "Archivos",
-    "Pending" : "Pendién",
+    "Pending" : "Pendient",
     "Details" : "Detalles",
     "Cancel" : "Cancelar",
     "Settings" : "Configuración",
