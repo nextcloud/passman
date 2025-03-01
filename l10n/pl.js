@@ -128,7 +128,7 @@ OC.L10N.register(
     "Period" : "Kropka",
     "Expiration date" : "Data wygaśnięcia",
     "No expiration date set" : "Nie ustawiono daty wygaśnięcia",
-    "Renew interval" : "Interwał odnowienia",
+    "Renew interval" : "Częstotliwość odnowienia",
     "Disabled" : "Nieaktywne",
     "Day(s)" : "Dzień(-ni)",
     "Week(s)" : "Tydzień(-dnie)",
