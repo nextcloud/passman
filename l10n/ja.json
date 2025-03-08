@@ -71,6 +71,7 @@
     "Password settings" : "パスワードの設定",
     "Import credentials" : "資格情報のインポート",
     "Export credentials" : "資格情報のエクスポート",
+    "I understand the risks" : "私はリスクを理解しています",
     "Sharing" : "共有",
     "Are you sure you want to leave? This will destroy all your credentials" : "すべての資格情報が破棄されます。本当に終了しますか？",
     "Old password field incorrect!" : "現在の保管庫パスワードが正しくありません！",
