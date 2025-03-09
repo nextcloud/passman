@@ -8,6 +8,7 @@
 						<tags-input ng-model="inputSharedWith"
 									replace-spaces-with-dashes="false"
 									add-from-autocomplete-only="true"
+									min-length="1"
 									placeholder="{{ 'search.u.g' | translate}}">
 							<auto-complete source="searchUsers($query)"
 										   min-length="0"
@@ -15,7 +16,7 @@
 						</tags-input>
 					</td>
 
-					<td>
+					<td style="padding-left: 5px; padding-top: 5px;">
 						<button class="button"
 								ng-click="shareWith(inputSharedWith)">
 							+

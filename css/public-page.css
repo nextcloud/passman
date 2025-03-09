@@ -68,70 +68,102 @@ header {
   padding-top: 0; }
 
 .share-controller {
-  width: 100%; }
+  width: 100%;
+  overflow-y: scroll;
+  align-items: center; }
   .share-controller .share-container {
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%; }
-
-.credential_container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-  filter: drop-shadow(0 1px 3px var(--color-box-shadow));
-  background: var(--color-main-background);
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  background-clip: padding-box;
-  /* stops bg color from leaking outside the border: */ }
-  .credential_container .text {
-    text-align: center; }
-  .credential_container h2 {
-    font-weight: bold; }
-  .credential_container button, .credential_container .text {
-    margin: 0 auto;
-    margin-bottom: 25px;
-    display: block; }
-    .credential_container button i, .credential_container .text i {
-      margin-right: 5px; }
+    width: 100%;
+    padding: 20px; }
+    .share-controller .share-container .credential_container {
+      max-width: 800px;
+      width: 90%;
+      margin: 20px auto;
+      padding: 30px;
+      filter: drop-shadow(0 2px 4px var(--color-box-shadow));
+      background: var(--color-main-background);
+      -webkit-border-radius: 8px;
+      border-radius: 8px;
+      background-clip: padding-box;
+      /* stops bg color from leaking outside the border: */ }
+      .share-controller .share-container .credential_container .text {
+        text-align: center;
+        font-size: 1.1em;
+        margin: 15px 0; }
+      .share-controller .share-container .credential_container h2 {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--color-primary); }
+      .share-controller .share-container .credential_container button {
+        margin: 15px auto;
+        display: block;
+        padding: 8px 20px;
+        font-size: 1.1em; }
+        .share-controller .share-container .credential_container button i {
+          margin-right: 8px; }
+      .share-controller .share-container .credential_container table {
+        width: 100%;
+        margin: 20px 0; }
+        .share-controller .share-container .credential_container table td:first-child {
+          width: 140px;
+          font-weight: 600;
+          padding-right: 15px; }
+        .share-controller .share-container .credential_container table td {
+          padding: 12px 8px;
+          word-break: break-word; }
+        .share-controller .share-container .credential_container table td.whitespace_normal_field > span > div > span {
+          white-space: normal; }
 
 .credential_field {
-  overflow: hidden; }
+  /* overflow: hidden; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; }
   .credential_field .cell, .credential_field .value {
-    float: left; }
+    margin-right: 10px; }
   .credential_field .tools {
-    margin-left: 10px;
-    overflow: hidden;
-    float: left; }
+    display: flex;
+    gap: 8px; }
     .credential_field .tools .cell {
       cursor: pointer;
-      margin-right: 4px; }
+      opacity: 0.8;
+      transition: opacity 0.2s; }
+      .credential_field .tools .cell:hover {
+        opacity: 1; }
 
-table {
-  white-space: normal; }
-  table td:first-child {
-    min-width: 110px; }
-  table td {
-    padding-bottom: 1em;
-    vertical-align: top; }
-
-.tags .tag {
-  background-color: rgba(240, 240, 240, 0.9);
-  padding: 4px;
-  font-size: 12px;
-  margin-right: 3px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  background-clip: padding-box;
-  /* stops bg color from leaking outside the border: */ }
-.tags .tag:last-child {
-  margin-right: 8px; }
+.tags {
+  gap: 6px;
+  display: flex;
+  flex-wrap: wrap; }
+  .tags .tag {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-maxcontrast);
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    display: inline-block;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    background-clip: padding-box;
+    /* stops bg color from leaking outside the border: */ }
 
 .footer {
-  font-size: 10px;
-  position: relative;
-  bottom: -20px;
+  font-size: 0.9em;
+  margin-top: 30px;
   text-align: center; }
+  .footer a.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    margin: 0 8px; }
+    .footer a.link:hover {
+      text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .share-controller .share-container .credential_container {
+    width: 95%;
+    padding: 20px; }
+    .share-controller .share-container .credential_container table td:first-child {
+      width: 100px; } }
 
 /*# sourceMappingURL=public-page.css.map */

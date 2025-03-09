@@ -53,7 +53,7 @@ class PageController extends Controller {
 	 * @PublicPage
 	 */
 	public function publicSharePage() {
-		return new TemplateResponse($this->appName, 'public_share');
+		return new TemplateResponse($this->appName, 'public_share', [], TemplateResponse::RENDER_AS_PUBLIC);
 	}
 
 }
