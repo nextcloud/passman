@@ -103,7 +103,7 @@ OC.L10N.register(
     "Share until date" : "Koplietot līdz datumam",
     "Show files" : "Rādīt datnes",
     "Details" : "Detaļas",
-    "Hide details" : "Slēpt detaļas",
+    "Hide details" : "Pasllēpt detaļas",
     "Password score" : "Paroles punktu skaits",
     "Matched word" : "Atbilstošs vārds",
     "Dictionary name" : "Vārdnīcas nosaukums",
