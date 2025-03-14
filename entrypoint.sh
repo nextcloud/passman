@@ -2,24 +2,42 @@
 
 # SIGTERM-handler
 term_handler() {
-  service apache2 stop
-  service mysql stop
-  exit 0
+    service apache2 stop
+
+    if [ -f /etc/init.d/mariadb ]; then
+        service mariadb stop
+    else
+        service mysql stop
+    fi
+
+    exit 0
 }
 
 set -x
 
 service ssh start
-service mysql start
+
+if [ -f /etc/init.d/mariadb ]; then
+    service mariadb start
+else
+    service mysql start
+fi
+
 service apache2 start
 
+sudo -u www-data php /var/www/html/occ app:disable passman
+sudo -u www-data php /var/www/html/occ app:enable passman
 
 trap 'kill ${!}; term_handler' SIGTERM
-
-/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin"
 
 # wait forever
 while true
 do
-    tail -f /var/www/html/data/nextcloud.log & wait ${!}
+    if [ -f /var/www/html/data/nextcloud.log ]; then
+        tail -f /var/www/html/data/nextcloud.log & wait ${!}
+    fi
+
+    if [ -f /var/www/html/data-autotest/nextcloud.log ]; then
+        tail -f /var/www/html/data-autotest/nextcloud.log & wait ${!}
+    fi
 done
