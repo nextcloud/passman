@@ -18,6 +18,7 @@
     "Files" : "Files",
     "Pending" : "Pending",
     "Details" : "Details",
+    "Hide details" : "Tafsilotlarni yashirish",
     "Save" : "Save",
     "Cancel" : "Cancel",
     "Settings" : "Settings",
@@ -27,6 +28,7 @@
     "Notes" : "Notes",
     "Edit" : "Tahrirlash",
     "Delete" : "Delete",
+    "Date" : "Sana",
     "Accept" : "Qabul qiling",
     "Decline" : "Rad etish",
     "Never" : "Hech qachon",
@@ -34,6 +36,7 @@
     "email" : "email",
     "Description" : "Tavsif",
     "Connection to server lost" : "Connection to server lost",
+    "Saving …" : "Saqlanmoqda...",
     "Dismiss" : "Dismiss",
     "seconds ago" : "seconds ago"
 },"pluralForm" :"nplurals=1; plural=0;"

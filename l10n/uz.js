@@ -20,6 +20,7 @@ OC.L10N.register(
     "Files" : "Files",
     "Pending" : "Pending",
     "Details" : "Details",
+    "Hide details" : "Tafsilotlarni yashirish",
     "Save" : "Save",
     "Cancel" : "Cancel",
     "Settings" : "Settings",
@@ -29,6 +30,7 @@ OC.L10N.register(
     "Notes" : "Notes",
     "Edit" : "Tahrirlash",
     "Delete" : "Delete",
+    "Date" : "Sana",
     "Accept" : "Qabul qiling",
     "Decline" : "Rad etish",
     "Never" : "Hech qachon",
@@ -36,6 +38,7 @@ OC.L10N.register(
     "email" : "email",
     "Description" : "Tavsif",
     "Connection to server lost" : "Connection to server lost",
+    "Saving …" : "Saqlanmoqda...",
     "Dismiss" : "Dismiss",
     "seconds ago" : "seconds ago"
 },
