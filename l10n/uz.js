@@ -19,6 +19,7 @@ OC.L10N.register(
     "Size" : "Size",
     "Export" : "Eksport",
     "Version" : "Versiya",
+    "Import" : "Import",
     "Uploading" : "Uploading",
     "Files" : "Files",
     "Pending" : "Pending",
