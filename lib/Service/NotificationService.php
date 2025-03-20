@@ -109,16 +109,15 @@ class NotificationService {
 			->from('notifications')
 			->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
 			->andWhere($qb->expr()->eq('subject', $qb->createNamedParameter('credential_expired', IQueryBuilder::PARAM_STR)));
-			return $qb->execute()->rowCount() !== 0;
+			return $qb->executeQuery()->rowCount() !== 0;
 	}
 
 	function deleteNotificationsOfCredential($credential) {
 		$qb = $this->db->getQueryBuilder();
-		$qb->delete()
-			->from('notifications')
+		$qb->delete('notifications')
 			->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
-			->andWhere($qb->expr()->eq('object_type', 'credential'));
-		return $qb->execute();
+			->andWhere($qb->expr()->eq('object_type', $qb->createNamedParameter('credential', IQueryBuilder::PARAM_STR)));
+		return $qb->executeStatement();
 	}
 
 	function markNotificationOfCredentialAsProcessed(int $credential_id, string $user_id): void {
