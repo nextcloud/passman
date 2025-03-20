@@ -11,6 +11,7 @@ OC.L10N.register(
     "Done" : "Valmis",
     "Settings saved" : "Seaded salvestatud",
     "Password settings" : "Parooli seaded",
+    "I understand the risks" : "Ma mõistan riske",
     "Sharing" : "Jagamine",
     "Share with users and groups" : "Jaga kasutajate ja gruppidega",
     "Share link" : "Jaga link",
