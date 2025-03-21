@@ -8,6 +8,7 @@ OC.L10N.register(
     "General" : "Üldine",
     "Custom Fields" : "Kohandatud väljad",
     "Please fill in a value." : "Palun sisesta väärtus.",
+    "An error occurred" : "Tekkis viga",
     "Done" : "Valmis",
     "Settings saved" : "Seaded salvestatud",
     "Password settings" : "Parooli seaded",
