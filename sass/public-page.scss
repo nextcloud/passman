@@ -30,81 +30,137 @@ header {
   padding-top: 0;
 }
 
-.share-controller{
+.share-controller {
   width: 100%;
-  .share-container{
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%;
-  }
-}
+  overflow-y: scroll;
+  align-items: center;
+  
+  .share-container {
+    width: 100%;
+    padding: 20px;
+    
+    .credential_container {
+      max-width: 800px;
+      width: 90%;
+      margin: 20px auto;
+      padding: 30px;
+      filter: drop-shadow(0 2px 4px var(--color-box-shadow));
+      background: var(--color-main-background);
+      @include border-radius(8px);
 
-.credential_container{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-  filter: drop-shadow(0 1px 3px var(--color-box-shadow));
-  background: var(--color-main-background);
+      .text {
+        text-align: center;
+        font-size: 1.1em;
+        margin: 15px 0;
+      }
 
-  @include border-radius(5px);
-  .text{
-   text-align: center;
-  }
-  h2{
-    font-weight: bold;
-  }
-  button, .text{
-    margin: 0 auto;
-    margin-bottom: 25px;
-    display: block;
-    i{
-      margin-right: 5px;
+      h2 {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--color-primary);
+      }
+
+      button {
+        margin: 15px auto;
+        display: block;
+        padding: 8px 20px;
+        font-size: 1.1em;
+        
+        i {
+          margin-right: 8px;
+        }
+      }
+
+      table {
+        width: 100%;
+        margin: 20px 0;
+        
+        td:first-child {
+          width: 140px;
+          font-weight: 600;
+          padding-right: 15px;
+        }
+
+        td {
+          padding: 12px 8px;
+          word-break: break-word;
+        }
+        td.whitespace_normal_field > span > div > span {
+          white-space: normal;
+        }
+      }
     }
   }
 }
 
 .credential_field {
-  overflow: hidden;
+  /* overflow: hidden; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  
   .cell, .value {
-    float: left;
+    margin-right: 10px;
   }
+  
   .tools {
-    margin-left: 10px;
-    overflow: hidden;
-    float: left;
+    display: flex;
+    gap: 8px;
+    
     .cell {
       cursor: pointer;
-      margin-right: 4px;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+      
+      &:hover {
+        opacity: 1;
+      }
     }
   }
-}
-table{
-   white-space: normal;
-    td:first-child{
-      min-width: 110px;
-    }
-    td{
-      padding-bottom: 1em;
-      vertical-align: top;
-    }
 }
 
 .tags {
+  gap: 6px;
+  display: flex;
+  flex-wrap: wrap;
+
   .tag {
-    background-color: rgba(240, 240, 240, .9);
-    padding: 4px;
-    font-size: 12px;
-    margin-right: 3px;
-    @include border-radius(5px);
-  }
-  .tag:last-child {
-    margin-right: 8px;
+    background-color: var(--color-background-dark);
+    color: var(--color-text-maxcontrast);
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    display: inline-block;
+    @include border-radius(20px);
   }
 }
-.footer{
-  font-size: 10px;
-  position: relative;
-  bottom: -20px;
+
+.footer {
+  font-size: 0.9em;
+  margin-top: 30px;
   text-align: center;
+  
+  a.link {
+    color: var(--color-primary);
+    text-decoration: none;
+    margin: 0 8px;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Add responsive styles
+@media (max-width: 768px) {
+  .share-controller .share-container .credential_container {
+    width: 95%;
+    padding: 20px;
+    
+    table td:first-child {
+      width: 100px;
+    }
+  }
 }
