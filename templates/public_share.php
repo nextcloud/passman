@@ -70,7 +70,7 @@ style('passman', 'public-page');
 <div class="share-controller" ng-app="passmanApp" ng-controller="PublicSharedCredential">
 	<div class="share-container">
         <div class="row">
-		<div class="col-xs-8 col-xs-push-2 col-xs-pull-2 credential_container">
+		<div class="credential_container">
 			<h2>Passman</h2>
 			<div ng-if="!shared_credential && !expired">
 				<span class="text"><?php p($l->t("Someone has shared a credential with you.")); ?></span>
@@ -135,8 +135,8 @@ style('passman', 'public-page');
 						<td>
 							<?php p($l->t("URL")); ?>
 						</td>
-						<td>
-					<span credential-field
+						<td class="whitespace_normal_field">
+					<span credential-field url="true"
 						  value="shared_credential.url"></span>
 						</td>
 					</tr>
@@ -188,13 +188,15 @@ style('passman', 'public-page');
 							date:'dd-MM-yyyy @ HH:mm:ss'}}
 						</td>
 					</tr>
-
+					<tr ng-show="shared_credential.tags && shared_credential.tags.length > 0">
+						<td>
+							<?php p($l->t("Tags")); ?>
+						</td>
+						<td class="tags">
+							<span class="tag" ng-repeat="tag in shared_credential.tags">{{tag.text}}</span>
+						</td>
+					</tr>
 				</table>
-
-				<div class="tags">
-					<span class="tag" ng-repeat="tag in shared_credential.tags">{{tag.text}}</span>
-
-				</div>
 			</div>
 			<div class="footer">
 				<a href="https://github.com/nextcloud/passman" target="_blank"
