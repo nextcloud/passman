@@ -325,7 +325,7 @@ OC.L10N.register(
     "Click here to request it" : "Clique aqui para solicitá-lo",
     "Loading …" : "Carregando …",
     "Oops! Credential not found. Maybe it expired." : "Ups! Credencial não encontrada. Talvez tenha expirado.",
-    "Mark as Compromised" : "Marcar como comprometido",
+    "Mark as Compromised" : "Marcar como Comprometido",
     "Compromised!" : "Comprometido!",
     "This password is compromised. You can only remove this warning by changing the password." : "Esta senha está comprometida. Você só pode remover esse aviso alterando a senha.",
     "email" : "e-mail",
