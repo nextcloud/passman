@@ -62,6 +62,7 @@ OC.L10N.register(
     "Never" : "Tidak pernah",
     "Logout" : "Keluar",
     "Tags" : "Tag",
+    "Loading …" : "Memuat …",
     "email" : "surel",
     "Description" : "Deskrisi",
     "An error occurred!" : "Terjadi kesalahan!",
