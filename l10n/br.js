@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "You deleted %1$s" : "Dilamet ho peus %1$s",
     "Passwords" : "Gerioù-tremen",
     "General" : "Hollek",
     "Done" : "Graet",
@@ -39,7 +40,7 @@ OC.L10N.register(
     "by" : "gant",
     "Label" : "Tiketenn",
     "Save" : "Enrollañ",
-    "Cancel" : "Arrest",
+    "Cancel" : "Nullañ",
     "Settings" : "Arventennoù",
     "Unshare" : "Nag eskemm ken",
     "Account" : "Kont",
