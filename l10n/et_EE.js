@@ -50,6 +50,7 @@ OC.L10N.register(
     "Version" : "Versioon",
     "Import" : "Impordi",
     "Public key" : "Avalik võti",
+    "Result" : "Tulemus",
     "Uploading" : "Üleslaadimine",
     "User" : "Kasutaja",
     "Read" : "Lugemine",
