@@ -77,6 +77,7 @@ OC.L10N.register(
     "Edit" : "Redigeeri",
     "Delete" : "Kustuta",
     "Share" : "Jaga",
+    "Permissions" : "Õigused",
     "Date" : "Kuupäev",
     "Accept" : "Nõustu",
     "Decline" : "Keeldu",
