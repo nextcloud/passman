@@ -51,6 +51,7 @@ OC.L10N.register(
     "Import" : "Impordi",
     "Public key" : "Avalik võti",
     "Result" : "Tulemus",
+    "Action" : "Tegevus",
     "Uploading" : "Üleslaadimine",
     "User" : "Kasutaja",
     "Read" : "Lugemine",
