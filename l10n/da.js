@@ -306,7 +306,7 @@ OC.L10N.register(
     "Request removed" : "Anmodning fjernet",
     "Destruction request pending" : "Destruktionsanmodning verserende",
     "Warning! Adding credentials over HTTP is insecure!" : "Advarsel! Tilføjelse af legitimationsoplysninger HTTP er usikkert!",
-    "Logged into {{vault_name}}" : "Logget ind {{{vault_name}}}",
+    "Logged into {{vault_name}}" : "Logget ind i {{vault_name}}",
     "Change vault" : "Ændre boks",
     "Deleted credentials" : "Slettede legitimationsoplysninger",
     "Logout" : "Log ud",
