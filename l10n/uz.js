@@ -11,6 +11,7 @@ OC.L10N.register(
     "Saved!" : "Saved!",
     "Username" : "Username",
     "Add tag" : "Teg qo'shing",
+    "Text" : "Matn",
     "File" : "File",
     "Add" : "Add",
     "Value" : "Qiymati",
