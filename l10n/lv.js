@@ -70,7 +70,7 @@ OC.L10N.register(
     "Week(s)" : "Nedēļa(s)",
     "Month(s)" : "Mēnesis(ši)",
     "Year(s)" : "Gads(i)",
-    "Password generation settings" : "Paroles ģenerēšanas iestatījumi",
+    "Password generation settings" : "Paroles veidošanas iestatījumi",
     "Password length" : "Paroles garums",
     "Use uppercase letters" : "Lietot lielos burtus",
     "Use lowercase letters" : "Lietojiet mazos burtus",
