@@ -61,6 +61,7 @@ OC.L10N.register(
     "Decline" : "Tolak",
     "Never" : "Tidak pernah",
     "Logout" : "Keluar",
+    "Donate" : "Sumbang",
     "Tags" : "Tag",
     "Loading …" : "Memuat …",
     "email" : "surel",
