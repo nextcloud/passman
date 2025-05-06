@@ -101,6 +101,7 @@ OC.L10N.register(
     "Loading …" : "Laadimine ...",
     "email" : "e-post",
     "Description" : "Kirjeldus",
+    "Remind me later" : "Tuleta mulle hiljem meelde",
     "Ignore" : "Ignoreeri",
     "An error occurred!" : "Tekis tõrge!",
     "Reason" : "Põhjus",
