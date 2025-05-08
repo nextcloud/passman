@@ -8,7 +8,7 @@
     "You deleted %1$s" : "Jūs izdzētāt %1$s",
     "You recovered %1$s" : "Tu atguvi %1$s",
     "%1$s has been permanently deleted by %2$s" : "%1$s neatgriezeniski izdzēsa %2$s",
-    "You permanently deleted %1$s" : "Jūs neatgriezeniski izdzēsāt %1$s",
+    "You permanently deleted %1$s" : "Tu neatgriezeniski izdzēsi %1$s",
     "%s has been shared with a link" : "%s koplietots izmantojot saiti",
     "Passwords" : "Paroles",
     "Incorrect vault password!" : "Nepareiza akreditācijas datu parole!",
@@ -173,6 +173,6 @@
     "Problem loading page, reloading in 5 seconds" : "Problēma ielādējot lapu, pārlādēšana pēc 5 sekundēm",
     "Saving …" : "Saglabā ...",
     "Dismiss" : "Atmest",
-    "seconds ago" : "pirms dažām sekundēm"
+    "seconds ago" : "pirms vairākām sekundēm"
 },"pluralForm" :"nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);"
 }
