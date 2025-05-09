@@ -21,6 +21,7 @@ OC.L10N.register(
     "Copy to clipboard" : "Kopeeri lõikepuhvrisse",
     "Generate password" : "Loo salasõna",
     "Username" : "Kasutajanimi",
+    "Add tag" : "Lisa silt",
     "Use this icon" : "Kasuta seda ikooni",
     "Delete current icon" : "Kustuta praegune ikoon",
     "Get icon from page" : "Laadi ikoon veebilehelt",
