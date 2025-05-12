@@ -371,7 +371,7 @@ OC.L10N.register(
     "Connection to server lost" : "Conexão perdida com o servidor",
     "Problem loading page, reloading in 5 seconds" : "Problema ao carregar a página, recarregando em 5 segundos",
     "Saving …" : "Salvando...",
-    "Dismiss" : "Descartar",
+    "Dismiss" : "Dispensar",
     "seconds ago" : "segundos atras"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
