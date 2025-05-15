@@ -6,6 +6,7 @@ OC.L10N.register(
     "A Passman item has been shared" : "Passman kirje on jagatud",
     "A Passman item has been renamed" : "Passman kirje nimi on muudetud",
     "You created %1$s" : "Sa tekitasid %1$s",
+    "You renamed %1$s to %2$s" : "Sa muutsid „%1$s“ faili nime, uus nimi on „%2$s“",
     "You deleted %1$s" : "Sa kustutasid %1$s",
     "The password of %1$s has expired, renew it now." : "„%1$s“ salasõna on aegunud  - palun uuenda teda kohe.",
     "Passwords" : "Salasõnad",
@@ -244,7 +245,7 @@ OC.L10N.register(
     "Reason" : "Põhjus",
     "E-mail" : "E-post",
     "Connection to server lost" : "Ühendus serveriga katkes",
-    "Problem loading page, reloading in 5 seconds" : "Tõrge lehe laadimisel, ümberlaadimine 5 sekundi pärast",
+    "Problem loading page, reloading in 5 seconds" : "Viga lehe laadimisel, laadin uuesti 5 sekundi pärast",
     "Saving …" : "Salvestamine …",
     "Dismiss" : "Jäta vahele",
     "seconds ago" : "sekundit tagasi"
