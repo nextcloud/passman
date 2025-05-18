@@ -268,7 +268,7 @@
     "Accept" : "Bestätigen",
     "Decline" : "Ablehnen",
     "You have {{session_time}} left before logout." : "Du wirst in {{session_time}} abgemeldet.",
-    "Your vault has been locked for {{time}} because of {{tries}} failed attempts!" : "Dein Tresor wurde für {{time}} gesperrt, da du dich {{tries}} falsch angemeldet habst!",
+    "Your vault has been locked for {{time}} because of {{tries}} failed attempts!" : "Dein Tresor wurde für {{time}} gesperrt, da du dich {{tries}} mal falsch angemeldet hast!",
     "Hello there!" : "Hallo!",
     "It does not seem that you have any passwords. Do you want to add one?" : "Anscheinend hast du noch keine Passwörter. Soll eins hinzugefügt werden?",
     "You don't have good credentials" : "Du hast keine guten Anmeldedaten",
