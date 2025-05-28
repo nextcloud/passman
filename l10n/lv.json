@@ -1,6 +1,6 @@
 { "translations": {
     "Error while saving field" : "Kļūda, saglabājot lauku",
-    "You created %1$s" : "Jūs izveidojāt %1$s",
+    "You created %1$s" : "Tu izveidoji %1$s",
     "%1$s has been updated by %2$s" : "%1$s ir atjauninājis %2$s",
     "You updated %1$s" : "Tu atjaunināji %1$s",
     "%3$s has renamed %1$s to %2$s" : "%3$s pārsauca %1$s uz %2$s",
@@ -160,8 +160,8 @@
     "Check for new versions" : "Pārbaudīt, vai nav jaunas versijas",
     "Enable HTTPS check" : "Iespējot HTTPS pārbaudi",
     "Disable context menu" : "Atspējot konteksta izvēlni",
-    "Allow users on this server to share passwords with a link" : "Atļaut lietotājiem serverī dalīties ar parolēm, izmantojot saites",
-    "Allow users on this server to share passwords with other users" : "Atļaut lietotājiem serverī dalīties ar parolēm, ar citiem lietotājiem",
+    "Allow users on this server to share passwords with a link" : "Šajā serverī ļaut lietotājiem kopīgot paroles ar saiti",
+    "Allow users on this server to share passwords with other users" : "Šajā serverī ļaut lietotājiem kopīgot paroles ar citiem lietotājiem",
     "Source account" : "Avota konts",
     "Destination account" : "Adresāta konts",
     "An error occurred!" : "Gadījās kļūda!",
