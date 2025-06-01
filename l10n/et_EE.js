@@ -255,7 +255,7 @@ OC.L10N.register(
     "Expiry time" : "Aegumine",
     "Changed" : "Muudetud",
     "Created" : "Loodud",
-    "Edit" : "Redigeeri",
+    "Edit" : "Muuda",
     "Delete" : "Kustuta",
     "Share" : "Jaga",
     "Recover" : "Taasta",
