@@ -1,0 +1,27 @@
+OC.L10N.register(
+    "passman",
+    {
+    "Done" : "Imefanyika",
+    "Sharing" : "inashirikisha",
+    "Share link" : "Shirikisha kiungo",
+    "Add" : "Ongeza",
+    "Actions" : "Utendekaji",
+    "Filename" : "Jina la faili",
+    "Expiration date" : "Tarehe ya kumalizika",
+    "Export" : "Safirisha",
+    "Action" : "Vitendo",
+    "Details" : "Maelezo ya kina",
+    "Save" : "Hifadhi",
+    "Cancel" : "Cancel",
+    "Email" : "Barua pepe",
+    "Created" : "Imetengenezwa",
+    "Edit" : "Hariri",
+    "Delete" : "Futa",
+    "Share" : "Shirikisha",
+    "Accept" : "Kubali",
+    "Decline" : "Kataa",
+    "Tags" : "Maoni",
+    "Description" : "Maelezo",
+    "seconds ago" : "sukunde zilizopita"
+},
+"nplurals=2; plural=(n != 1);");
