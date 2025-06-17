@@ -228,7 +228,7 @@ OC.L10N.register(
     "Base guesses" : "Vermutungsbasis",
     "Uppercase variations" : "Variationen der Großschreibung",
     "l33t-variations" : "l33t-Variationen",
-    "Showing revisions of" : "Revision anzeigen von",
+    "Showing revisions of" : "Revisionen anzeigen von",
     "Revision of" : "Revision von",
     "by" : "von",
     "No revisions found." : "Keine Revisionen gefunden.",
