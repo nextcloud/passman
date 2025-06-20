@@ -23,9 +23,11 @@ OC.L10N.register(
     "Files" : "Mafaili",
     "Pending" : "Inasubiri",
     "Details" : "Maelezo ya kina",
+    "Hide details" : "Ficha maelezo",
     "Save" : "Hifadhi",
     "Cancel" : "Cancel",
     "Settings" : "Mipangilio",
+    "Password" : "Nenosiri",
     "Email" : "Barua pepe",
     "Created" : "Imetengenezwa",
     "Edit" : "Hariri",
@@ -37,6 +39,7 @@ OC.L10N.register(
     "Decline" : "Kataa",
     "Tags" : "Maoni",
     "Description" : "Maelezo",
+    "Saving …" : "Inahifadhi...",
     "seconds ago" : "sukunde zilizopita"
 },
 "nplurals=2; plural=(n != 1);");
