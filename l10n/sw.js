@@ -39,6 +39,7 @@ OC.L10N.register(
     "Decline" : "Kataa",
     "Tags" : "Maoni",
     "Description" : "Maelezo",
+    "Connection to server lost" : "Muunganiko kwenye seva umepotea",
     "Saving …" : "Inahifadhi...",
     "seconds ago" : "sukunde zilizopita"
 },
