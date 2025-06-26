@@ -23,6 +23,7 @@ OC.L10N.register(
     "Change" : "Badili",
     "Version" : "Toleo",
     "Action" : "Vitendo",
+    "User" : "Mtumiaji",
     "Files" : "Mafaili",
     "Pending" : "Inasubiri",
     "Details" : "Maelezo ya kina",
