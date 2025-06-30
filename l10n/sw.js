@@ -19,6 +19,7 @@ OC.L10N.register(
     "Filename" : "Jina la faili",
     "Size" : "Ukubwa",
     "Expiration date" : "Tarehe ya kumalizika",
+    "Disabled" : "Zima",
     "Export" : "Safirisha",
     "Change" : "Badili",
     "Version" : "Toleo",

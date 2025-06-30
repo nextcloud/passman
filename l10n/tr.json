@@ -14,8 +14,8 @@
     "You renamed %1$s to %2$s" : "%1$s ögesini %2$s olarak yeniden adlandırdınız",
     "%1$s has been deleted by %2$s" : "%2$s %1$s ögesini sildi",
     "You deleted %1$s" : "%1$s ögesini sildiniz",
-    "%1$s has been recovered by %2$s" : "%2$s %1$s ögesini geri yükledi",
-    "You recovered %1$s" : "%1$s ögesini geri yüklediniz",
+    "%1$s has been recovered by %2$s" : "%2$s, %1$s ögesini kurtardı",
+    "You recovered %1$s" : "%1$s ögesini kurtardınız",
     "%1$s has been permanently deleted by %2$s" : "%2$s %1$s ögesini kalıcı olarak sildi",
     "You permanently deleted %1$s" : "%1$s ögesini kalıcı olarak sildiniz",
     "The password of %1$s has expired, renew it now." : "%1$s parolasının geçerlilik süresi dolmuş. Şimdi yenileyin.",
@@ -129,7 +129,7 @@
     "Expiration date" : "Geçerlilik sonu tarihi",
     "No expiration date set" : "Geçerlilik sonu tarihi belirtilmemiş",
     "Renew interval" : "Yenileme sıklığı",
-    "Disabled" : "Devre Dışı",
+    "Disabled" : "Kapalı",
     "Day(s)" : "Gün",
     "Week(s)" : "Hafta",
     "Month(s)" : "Ay",
@@ -348,9 +348,9 @@
     "Vault destruction requests" : "Kasa silme istekleri",
     "Check for new versions" : "Yeni sürümler için tıklayın",
     "Enable HTTPS check" : "HTTPS denetimi yapılsın",
-    "Disable context menu" : "Sağ tık menüsü devre dışı bırakılsın",
-    "Disable JavaScript debugger" : "JavaScript hata ayıklaması devre dışı bırakılsın",
-    "Enable global search" : "Genel aramayı etkinnleştir",
+    "Disable context menu" : "Sağ tık menüsü kapatılsın",
+    "Disable JavaScript debugger" : "JavaScript hata ayıklaması kapatılsın",
+    "Enable global search" : "Genel arama açılsın",
     "Allow users on this server to share passwords with a link" : "Bu sunucu üzerindeki kullanıcılar bağlantı ile parola paylaşabilsin",
     "Allow users on this server to share passwords with other users" : "Bu sunucu üzerindeki kullanıcılar diğer kullanıcılar ile parola paylaşabilsin",
     "Move credentials from one account to another" : "Kimlik doğrulama bilgilerini bir hesaptan diğerine aktar",
@@ -370,6 +370,6 @@
     "Problem loading page, reloading in 5 seconds" : "Sayfa yüklenirken sorun çıktı, 5 saniye içinde yeniden yüklenecek",
     "Saving …" : "Kaydediliyor …",
     "Dismiss" : "Yok say",
-    "seconds ago" : "saniyeler önce"
+    "seconds ago" : "saniye önce"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
