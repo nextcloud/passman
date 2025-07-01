@@ -41,7 +41,7 @@ OC.L10N.register(
     "Credential destroyed" : "Kimlik doğrulama bilgileri yok edildi",
     "Error downloading file, you probably have insufficient permissions" : "Dosya indirilirken sorun çıktı. Büyük olasılıkla izinleriniz yeterli değil",
     "An error occurred" : "Bir sorun çıktı",
-    "Invalid QR code" : "QR kodu geçersiz",
+    "Invalid QR code" : "Kare kod geçersiz",
     "Starting export" : "Dışa aktarma işlemi başlatılıyor",
     "Decrypting credentials" : "Kimlik doğrulama bilgilerinin şifresi çözülüyor",
     "Failed to decrypt {{credential}}" : "{{credential}} şifresi çözülemedi",
