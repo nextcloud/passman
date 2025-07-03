@@ -35,6 +35,7 @@ OC.L10N.register(
     "Cancel" : "Cancel",
     "Settings" : "Mipangilio",
     "Unshare" : "Usishirikishe",
+    "Account" : "Akaunti",
     "Password" : "Nenosiri",
     "Email" : "Barua pepe",
     "URL" : "Url",
