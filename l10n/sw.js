@@ -7,6 +7,7 @@ OC.L10N.register(
     "General" : "Kuu",
     "An error occurred" : "Hitilafu imetokea",
     "Done" : "Imefanyika",
+    "I understand the risks" : "I understand the risks",
     "Sharing" : "inashirikisha",
     "Share link" : "Shirikisha kiungo",
     "Good" : "Nzuri",
