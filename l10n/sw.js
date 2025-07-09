@@ -27,6 +27,7 @@ OC.L10N.register(
     "Export" : "Safirisha",
     "Change" : "Badili",
     "Version" : "Toleo",
+    "Public key" : "Public key",
     "Action" : "Vitendo",
     "Uploading" : "Inapakia",
     "User" : "Mtumiaji",
