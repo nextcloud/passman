@@ -31,6 +31,7 @@ OC.L10N.register(
     "Action" : "Vitendo",
     "Uploading" : "Inapakia",
     "User" : "Mtumiaji",
+    "Read" : "Soma",
     "Files" : "Mafaili",
     "Pending" : "Inasubiri",
     "Details" : "Maelezo ya kina",
