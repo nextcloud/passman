@@ -14,6 +14,7 @@ OC.L10N.register(
     "Saved!" : "Imehifadhiwa",
     "Good" : "Nzuri",
     "Copy to clipboard" : "Nakili kwenye ubao wa kunakili",
+    "Username" : "Username",
     "Add tag" : "Add tag",
     "Text" : "Maandishi",
     "File" : "Faili",
