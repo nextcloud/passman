@@ -65,5 +65,6 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 
     <settings>
         <admin>OCA\Passman\Settings\Admin</admin>
+        <admin-section>OCA\Passman\Settings\AdminSection</admin-section>
     </settings>
 </info>

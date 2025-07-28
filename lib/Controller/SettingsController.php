@@ -46,7 +46,7 @@ class SettingsController extends ApiController {
 	 * @return string the section ID, e.g. 'sharing'
 	 */
 	public function getSection() {
-		return 'additional';
+		return 'passman';
 	}
 
 	/**
