@@ -23,6 +23,7 @@
 
 namespace OCA\Passman;
 
+use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
@@ -31,6 +32,7 @@ class Notifier implements INotifier {
 
 	public function __construct(
 		protected IFactory $factory,
+		protected IURLGenerator $url,
 	) {
 	}
 
@@ -46,6 +48,11 @@ class Notifier implements INotifier {
 
 		// Read the language from the notification
 		$l = $this->factory->get('passman', $languageCode);
+
+		// Set the icon for the notification
+		$notification->setIcon(
+			$this->url->getAbsoluteURL($this->url->imagePath('passman', 'app-dark.svg'))
+		);
 
 		switch ($notification->getSubject()) {
 			// Deal with known subjects
