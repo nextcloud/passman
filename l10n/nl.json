@@ -349,7 +349,7 @@
     "Check for new versions" : "Controleren op nieuwe versies",
     "Enable HTTPS check" : "Inschakelen HTTPS controle",
     "Disable context menu" : "Uitschakelen contextmenu",
-    "Disable JavaScript debugger" : "Uitschakelen JavaScript-debugger",
+    "Disable JavaScript debugger" : "JavaScript-debugger uitschakelen",
     "Enable global search" : "Inschakelen globaal zoeken",
     "Allow users on this server to share passwords with a link" : "Toestaan dat gebruikers op deze server wachtwoorden delen via een link",
     "Allow users on this server to share passwords with other users" : "Toestaan dat gebruikers op deze server wachtwoorden met andere gebruikers delen",
