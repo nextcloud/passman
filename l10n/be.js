@@ -21,6 +21,7 @@ OC.L10N.register(
     "Version" : "Версія",
     "Import" : "Імпарт",
     "Result" : "Вынік",
+    "Action" : "Дзеянне",
     "Uploading" : "Запампоўванне",
     "User" : "Карыстальнік",
     "Read" : "Чытаць",
