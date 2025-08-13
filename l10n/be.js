@@ -30,6 +30,7 @@ OC.L10N.register(
     "Save" : "Захаваць",
     "Cancel" : "Скасаваць",
     "Settings" : "Налады",
+    "Account" : "Уліковы запіс",
     "Password" : "Пароль",
     "Email" : "Электронная пошта",
     "URL" : "URL-адрас",
@@ -42,6 +43,8 @@ OC.L10N.register(
     "Decline" : "Адхіліць",
     "Never" : "Ніколі",
     "Tags" : "Тэгі",
+    "Loading …" : "Загрузка …",
+    "Description" : "Апісанне",
     "Saving …" : "Захаванне …",
     "Dismiss" : "Адхіліць",
     "seconds ago" : "с таму"
