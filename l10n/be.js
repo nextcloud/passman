@@ -4,6 +4,7 @@ OC.L10N.register(
     "You created %1$s" : "Вы стварылі %1$s",
     "You renamed %1$s to %2$s" : "Вы перайменавалі %1$s у %2$s",
     "You deleted %1$s" : "Вы выдалілі %1$s",
+    "General" : "Агульныя",
     "An error occurred" : "Узнікла памылка",
     "Done" : "Гатова",
     "Share link" : "Абагуліць спасылку",
