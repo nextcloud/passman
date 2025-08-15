@@ -270,7 +270,7 @@ OC.L10N.register(
     "Accept" : "Bestätigen",
     "Decline" : "Ablehnen",
     "You have {{session_time}} left before logout." : "Sie werden in {{session_time}} abgemeldet.",
-    "Your vault has been locked for {{time}} because of {{tries}} failed attempts!" : "Ihr Tresor wurde für {{time}} gesperrt, da Sie sich {{tries}} falsch angemeldet haben!",
+    "Your vault has been locked for {{time}} because of {{tries}} failed attempts!" : "Ihr Tresor wurde für {{time}} gesperrt, da Sie sich {{tries}} mal falsch angemeldet haben!",
     "Hello there!" : "Hallo!",
     "It does not seem that you have any passwords. Do you want to add one?" : "Anscheinend haben Sie noch keine Passwörter. Soll eins hinzugefügt werden?",
     "You don't have good credentials" : "Sie haben keine starken Anmeldedaten",
