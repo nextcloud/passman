@@ -8,6 +8,7 @@ OC.L10N.register(
     "An error occurred" : "Узнікла памылка",
     "Done" : "Гатова",
     "Settings saved" : "Налады захаваны",
+    "Sharing" : "Абагульванне",
     "Share link" : "Абагуліць спасылку",
     "Copy to clipboard" : "Капіяваць у буфер абмену",
     "Copy password to clipboard" : "Капіяваць пароль у буфер абмену",
