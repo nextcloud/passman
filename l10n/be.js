@@ -32,6 +32,7 @@ OC.L10N.register(
     "Read" : "Чытаць",
     "Files" : "Файлы",
     "Pending" : "У чаканні",
+    "Hide details" : "Схаваць падрабязнасці",
     "Save" : "Захаваць",
     "Cancel" : "Скасаваць",
     "Settings" : "Налады",
