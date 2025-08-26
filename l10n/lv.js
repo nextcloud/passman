@@ -30,7 +30,7 @@ OC.L10N.register(
     "Adding {{credential}}" : "Pievienošana {{credential}}",
     "Added {{credential}}" : "Pievienots {{credential}}",
     "Settings saved" : "Iestatījumi saglabāti",
-    "General settings" : "Vispārīgie iestatījumi",
+    "General settings" : "Vispārīgi iestatījumi",
     "Password settings" : "Paroles iestatījumi",
     "Export credentials" : "Izgūt piekļuves datus",
     "Sharing" : "Koplietošana",

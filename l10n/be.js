@@ -51,6 +51,7 @@ OC.L10N.register(
     "Tags" : "Тэгі",
     "Loading …" : "Загрузка …",
     "Description" : "Апісанне",
+    "Remind me later" : "Нагадаць пазней",
     "Saving …" : "Захаванне …",
     "Dismiss" : "Адхіліць",
     "seconds ago" : "с таму"
