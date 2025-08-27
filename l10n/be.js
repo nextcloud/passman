@@ -17,6 +17,7 @@ OC.L10N.register(
     "Text" : "Тэкст",
     "File" : "Файл",
     "Add" : "Дадаць",
+    "Value" : "Значэнне",
     "Type" : "Тып",
     "Actions" : "Дзеянні",
     "Filename" : "Назва файла",
