@@ -112,7 +112,7 @@ OC.L10N.register(
     "Field label" : "Alan etiketi",
     "Field value" : "Alan değeri",
     "Choose a file" : "Bir dosya seçin",
-    "Text" : "Metin",
+    "Text" : "Yazı",
     "File" : "Dosya",
     "Add" : "Ekle",
     "Value" : "Değer",

@@ -45,6 +45,7 @@ OC.L10N.register(
     "Edit" : "Рэдагаваць",
     "Delete" : "Выдаліць",
     "Share" : "Абагуліць",
+    "Permissions" : "Дазволы",
     "Date" : "Дата",
     "Accept" : "Прыняць",
     "Decline" : "Адхіліць",
