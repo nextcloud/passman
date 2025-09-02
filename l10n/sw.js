@@ -33,6 +33,7 @@ OC.L10N.register(
     "Change" : "Badili",
     "Processing" : "Inachakata",
     "Version" : "Toleo",
+    "Bookmarklet" : "Bookmarklet",
     "Import" : "Import",
     "Public key" : "Public key",
     "Result" : "Result",
