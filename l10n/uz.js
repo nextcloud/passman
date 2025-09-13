@@ -19,6 +19,7 @@ OC.L10N.register(
     "Actions" : "Actions",
     "Filename" : "Fayl nomi",
     "Size" : "Size",
+    "Expiration date" : "Tugash muddati",
     "Export" : "Eksport",
     "Version" : "Versiya",
     "Import" : "Import",
