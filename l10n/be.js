@@ -13,6 +13,7 @@ OC.L10N.register(
     "Sharing" : "Абагульванне",
     "Share link" : "Абагуліць спасылку",
     "Credential unshared" : "Уліковыя даныя не абагульваюцца",
+    "Saved!" : "Захавана!",
     "Copy to clipboard" : "Капіяваць у буфер абмену",
     "Copy password to clipboard" : "Капіяваць пароль у буфер абмену",
     "Username" : "Імя карыстальніка",
@@ -61,6 +62,7 @@ OC.L10N.register(
     "Loading …" : "Загрузка …",
     "Description" : "Апісанне",
     "Remind me later" : "Нагадаць пазней",
+    "Connection to server lost" : "Злучэнне з серверам страчана",
     "Saving …" : "Захаванне …",
     "Dismiss" : "Адхіліць",
     "seconds ago" : "с таму"
