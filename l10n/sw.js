@@ -48,6 +48,7 @@ OC.L10N.register(
     "Details" : "Maelezo ya kina",
     "Hide details" : "Ficha maelezo",
     "Pattern" : "Pattern",
+    "by" : "by",
     "Label" : "Lebo",
     "Save" : "Hifadhi",
     "Cancel" : "Cancel",
