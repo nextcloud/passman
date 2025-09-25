@@ -34,6 +34,7 @@ OC.L10N.register(
     "Date" : "Azemz",
     "Tags" : "Tibzimin",
     "Loading …" : "Asali ...",
+    "Saving …" : "Asekles ...",
     "Dismiss" : "Agi"
 },
 "nplurals=2; plural=(n != 1);");
