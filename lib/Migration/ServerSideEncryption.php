@@ -79,7 +79,7 @@ class ServerSideEncryption implements IRepairStep {
 		$qb = $this->db->getQueryBuilder();
 		$result = $qb->select('*')
 			->from($table)
-			->executeStatement();
+			->executeQuery();
 		return $result->fetchAll();
 	}
 
