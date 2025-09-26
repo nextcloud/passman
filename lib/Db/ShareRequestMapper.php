@@ -99,7 +99,7 @@ class ShareRequestMapper extends QBMapper {
 		return $qb->delete(self::TABLE_NAME)
 			->where($qb->expr()->eq('item_id', $qb->createNamedParameter($item_id, IQueryBuilder::PARAM_INT)))
 			->andWhere($qb->expr()->eq('target_user_id', $qb->createNamedParameter($target_user_id, IQueryBuilder::PARAM_STR)))
-			->execute();
+			->executeStatement();
 	}
 
 	/**
@@ -199,6 +199,6 @@ class ShareRequestMapper extends QBMapper {
 			->set('permissions', $qb->createNamedParameter($permissions, IQueryBuilder::PARAM_INT))
 			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)))
 			->andWhere($qb->expr()->eq('target_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)))
-			->execute();
+			->executeStatement();
 	}
 }
