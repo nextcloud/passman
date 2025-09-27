@@ -75,22 +75,22 @@ class ServerSideEncryption implements IRepairStep {
 	 * @return mixed[]
 	 * @throws Exception
 	 */
-	private function fetchAll(string $table) {
+	private function fetchAll(string $table): array {
 		$qb = $this->db->getQueryBuilder();
 		$result = $qb->select('*')
 			->from($table)
-			->execute();
+			->executeQuery();
 		return $result->fetchAll();
 	}
 
-	private function encryptCredentials() {
+	private function encryptCredentials(): void {
 		$credentials = $this->fetchAll('passman_credentials');
 		foreach ($credentials as $credential) {
 			$this->credentialService->updateCredential($credential);
 		}
 	}
 
-	private function encryptRevisions() {
+	private function encryptRevisions(): void {
 		$revisions = $this->fetchAll('passman_revisions');
 		foreach ($revisions as $_revision) {
 			$revision = new CredentialRevision();

@@ -48,7 +48,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 	 * @var PHPUnit_Extensions_Database_DataSet_MysqlXmlDataSet[]
 	 */
 	protected $datasets;
-	
+
 	/**
 	 *
 	 * @var \OC\Server
@@ -110,7 +110,7 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 				$qb->setValue($key,  $value);
 			}
 
-			$qb->execute();
+			$qb->executeStatement();
 			$this->db->lastInsertId();
 		}
 	}
