@@ -1,4 +1,5 @@
 { "translations": {
+    "You deleted %1$s" : "Tekkseḍ %1$s",
     "General" : "Amatu",
     "Done" : "Immed",
     "Sharing" : "Beṭṭu",
@@ -13,6 +14,7 @@
     "Size" : "Teɣzi",
     "Expiration date" : "Azemz n tagara",
     "Disabled" : "Ittwarermed",
+    "Change" : "Snifel",
     "Uploading" : "Tuzzna n ifuyla",
     "User" : "Aseqdac",
     "Files" : "Ifuyla",

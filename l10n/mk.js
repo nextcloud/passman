@@ -42,6 +42,7 @@ OC.L10N.register(
     "Version" : "Верзија",
     "Import" : "Увези",
     "Public key" : "Јавен клуч",
+    "Action" : "Акција",
     "Uploading" : "Uploading",
     "User" : "Корисник",
     "Read" : "Читај",

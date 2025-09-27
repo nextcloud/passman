@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "You deleted %1$s" : "Tekkseḍ %1$s",
     "General" : "Amatu",
     "Done" : "Immed",
     "Sharing" : "Beṭṭu",
@@ -15,6 +16,7 @@ OC.L10N.register(
     "Size" : "Teɣzi",
     "Expiration date" : "Azemz n tagara",
     "Disabled" : "Ittwarermed",
+    "Change" : "Snifel",
     "Uploading" : "Tuzzna n ifuyla",
     "User" : "Aseqdac",
     "Files" : "Ifuyla",
