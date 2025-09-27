@@ -39,12 +39,12 @@ use OCP\Notification\IManager;
 
 class ShareService {
 	public function __construct(
-		private SharingACLMapper $sharingACL,
-		private ShareRequestMapper $shareRequest,
-		private CredentialMapper $credential,
-		private CredentialRevisionService $revisions,
-		private EncryptService $encryptService,
-		private IManager $IManager,
+		private readonly SharingACLMapper $sharingACL,
+		private readonly ShareRequestMapper $shareRequest,
+		private readonly CredentialMapper $credential,
+		private readonly CredentialRevisionService $revisions,
+		private readonly EncryptService $encryptService,
+		private readonly IManager $IManager,
 	) {
 	}
 

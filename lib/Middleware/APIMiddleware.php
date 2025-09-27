@@ -10,7 +10,7 @@ use OCP\IRequest;
 class APIMiddleware extends Middleware {
 
 	public function __construct(
-		private IRequest $request,
+		private readonly IRequest $request,
 	) {
 	}
 

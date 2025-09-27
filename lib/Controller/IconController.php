@@ -24,16 +24,15 @@ use OCP\IRequest;
 use OCP\IURLGenerator;
 
 class IconController extends ApiController {
-	private $userId;
 	const ICON_CACHE_OFFSET = 2592000;  // 3600 * 24 * 30
 
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		$UserId,
-		private CredentialService $credentialService,
-		private AppManager $am,
-		private IURLGenerator $urlGenerator,
+		private $userId,
+		private readonly CredentialService $credentialService,
+		private readonly AppManager $am,
+		private readonly IURLGenerator $urlGenerator,
 	) {
 		parent::__construct(
 			$AppName,
@@ -41,8 +40,6 @@ class IconController extends ApiController {
 			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
-		$this->userId = $UserId;
-
 	}
 
 	/**
@@ -78,7 +75,7 @@ class IconController extends ApiController {
 			try {
 				$credential = $this->credentialService->getCredentialById($credentialId, $this->userId);
 				$credential = $credential->jsonSerialize();
-			} catch (DoesNotExistException $e) {
+			} catch (DoesNotExistException) {
 				// Credential is not found, continue
 				$credential = false;
 			}
@@ -97,14 +94,14 @@ class IconController extends ApiController {
 				$data = $icon->icoData;
 				$type = $icon->icoType;
 			}
-		} catch (\InvalidArgumentException $e) {
+		} catch (\InvalidArgumentException) {
 			//no need to do stuff in catch
 			//if IconService fails the predefined $data and $type are used
 		}
 
 		if (isset($credential) && $credential['user_id'] == $this->userId) {
 			$iconData = [
-				'type' => ($type) ? $type : 'x-icon',
+				'type' => $type ?: 'x-icon',
 				'content' => base64_encode($data)
 			];
 			$credential['icon'] = json_encode($iconData);
@@ -112,7 +109,7 @@ class IconController extends ApiController {
 				if ($credential) {
 					$this->credentialService->updateCredential($credential);
 				}
-			} catch (DriverException $exception) {
+			} catch (DriverException) {
 				/**
 				 * @FIXME Syntax error or access violation: 1118 Row size too large
 				 * This happens when favicons are quite big.
@@ -146,7 +143,7 @@ class IconController extends ApiController {
 		$icons = [];
 		foreach ($result as $icon) {
 			$iconPath = $icon;
-			$path = explode('passman/', $iconPath);
+			$path = explode('passman/', (string) $iconPath);
 			$pack = explode('/', $path[1])[2];
 			$mime = mime_content_type($iconPath);
 			if ($mime !== 'directory') {

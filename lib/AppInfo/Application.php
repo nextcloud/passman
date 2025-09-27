@@ -69,13 +69,9 @@ class Application extends App implements IBootstrap {
 
 		$context->registerSearchProvider(Provider::class);
 
-		$context->registerService(View::class, function () {
-			return new View('');
-		}, false);
+		$context->registerService(View::class, fn() => new View(''), false);
 
-		$context->registerService('isCLI', function () {
-			return \OC::$CLI;
-		});
+		$context->registerService('isCLI', fn() => \OC::$CLI);
 
 		$context->registerMiddleware(ShareMiddleware::class);
 		$context->registerMiddleware(APIMiddleware::class);
@@ -106,20 +102,16 @@ class Application extends App implements IBootstrap {
 		});
 
 
-		$context->registerService('CronService', function (ContainerInterface $c) {
-			return new CronService(
+		$context->registerService('CronService', fn(ContainerInterface $c) => new CronService(
 				$c->get(CredentialService::class),
 				$c->get(LoggerInterface::class),
 				$c->get(Utils::class),
 				$c->get(NotificationService::class),
 				$c->get(ActivityService::class),
 				$c->get(IDBConnection::class)
-			);
-		});
+			));
 
-		$context->registerService('Logger', function (ContainerInterface $c) {
-			return $c->get(ServerContainer::class)->getLogger();
-		});
+		$context->registerService('Logger', fn(ContainerInterface $c) => $c->get(ServerContainer::class)->getLogger());
 	}
 
 	public function boot(IBootContext $context): void {

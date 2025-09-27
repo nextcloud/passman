@@ -33,11 +33,9 @@ use OCP\IDBConnection;
 
 class CredentialRevisionMapper extends QBMapper {
 	const TABLE_NAME = 'passman_revisions';
-	private Utils $utils;
 
-	public function __construct(IDBConnection $db, Utils $utils) {
+	public function __construct(IDBConnection $db, private readonly Utils $utils) {
 		parent::__construct($db, self::TABLE_NAME);
-		$this->utils = $utils;
 	}
 
 

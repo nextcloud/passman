@@ -33,7 +33,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 class VaultService {
 
 	public function __construct(
-		private VaultMapper $vaultMapper,
+		private readonly VaultMapper $vaultMapper,
 	) {
 
 	}

@@ -21,16 +21,14 @@ use OCP\IConfig;
 use OCP\IRequest;
 
 class InternalController extends ApiController {
-	private $userId;
-
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		$UserId,
-		private CredentialService $credentialService,
-		private NotificationService $notificationService,
-		private IConfig $config,
-		private IAppManager $appManager,
+		private $userId,
+		private readonly CredentialService $credentialService,
+		private readonly NotificationService $notificationService,
+		private readonly IConfig $config,
+		private readonly IAppManager $appManager,
 	) {
 		parent::__construct(
 			$AppName,
@@ -38,7 +36,6 @@ class InternalController extends ApiController {
 			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
-		$this->userId = $UserId;
 	}
 
 	/**

@@ -74,8 +74,8 @@ class ShareRequestMapper extends QBMapper {
 	 * @return Entity[]
 	 * @throws Exception
 	 */
-	public function getRequestsByItemGuid(string $item_guid) {
-		if (strtolower($this->db->getDatabasePlatform()->getName()) === 'mysql') {
+	public function getRequestsByItemGuid(string $item_guid): array {
+		if ($this->db->getDatabaseProvider() === IDBConnection::PLATFORM_MYSQL) {
 			$this->db->executeQuery("SET sql_mode = '';");
 		}
 		$qb = $this->db->getQueryBuilder();

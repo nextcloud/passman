@@ -46,7 +46,7 @@ class ExpireCredentialsTest extends PHPUnit_Framework_TestCase {
 		try {
 		    $backgroundJob->execute($jobList);
 		}
-		catch (Exception $ex) {
+		catch (Exception) {
 		    $this->assertTrue(false);
 		}
 	}

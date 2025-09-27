@@ -40,15 +40,15 @@ class CredentialService {
 	private $server_key;
 
 	public function __construct(
-		private CredentialMapper          $credentialMapper,
-		private SharingACLMapper          $sharingACL,
-		private ActivityService           $activityService,
-		private ShareService              $shareService,
-		private EncryptService            $encryptService,
-		private CredentialRevisionService $credentialRevisionService,
-		private IURLGenerator             $urlGenerator,
-		private VaultService              $vaultService,
-		private NotificationService       $notificationService,
+		private readonly CredentialMapper          $credentialMapper,
+		private readonly SharingACLMapper          $sharingACL,
+		private readonly ActivityService           $activityService,
+		private readonly ShareService              $shareService,
+		private readonly EncryptService            $encryptService,
+		private readonly CredentialRevisionService $credentialRevisionService,
+		private readonly IURLGenerator             $urlGenerator,
+		private readonly VaultService              $vaultService,
+		private readonly NotificationService       $notificationService,
 		IConfig                           $config,
 	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');

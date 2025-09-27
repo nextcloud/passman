@@ -10,11 +10,9 @@ use OCP\AppFramework\Middleware;
 
 class ShareMiddleware extends Middleware {
 
-	private $settings;
-
-	public function __construct(SettingsService $config) {
-		$this->settings = $config;
-	}
+	public function __construct(private readonly SettingsService $settings)
+    {
+    }
 
 
 	public function beforeController($controller, $methodName) {

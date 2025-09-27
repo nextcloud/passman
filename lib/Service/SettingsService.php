@@ -28,8 +28,6 @@ use OCP\IConfig;
 
 class SettingsService {
 
-	private $userId;
-	private $appName;
 	public $settings;
 
 	private $numeric_settings = [
@@ -44,12 +42,10 @@ class SettingsService {
 	];
 
 	public function __construct(
-		$UserId,
-		private IConfig $config,
-		$AppName,
+		private $userId,
+		private readonly IConfig $config,
+		private $appName,
 	) {
-		$this->userId = $UserId;
-		$this->appName = $AppName;
 		$this->settings = [
 			'link_sharing_enabled' => intval($this->config->getAppValue('passman', 'link_sharing_enabled', 1)),
 			'user_sharing_enabled' => intval($this->config->getAppValue('passman', 'user_sharing_enabled', 1)),
@@ -82,7 +78,7 @@ class SettingsService {
 	 * @return mixed
 	 */
 	public function getAppSetting($key, $default_value = null) {
-		$value = ($this->settings[$key]) ? $this->settings[$key] : $this->config->getAppValue('passman', $key, $default_value);
+		$value = $this->settings[$key] ?: $this->config->getAppValue('passman', $key, $default_value);
 		if (in_array($key, $this->numeric_settings)) {
 			$value = intval($value);
 		}

@@ -41,9 +41,9 @@ class Admin implements ISettings {
 	 */
 	public function __construct(
 		protected IConfig $config,
-		private IL10N $l,
-		private IAppManager $appManager,
-		private LoggerInterface $logger,
+		private readonly IL10N $l,
+		private readonly IAppManager $appManager,
+		private readonly LoggerInterface $logger,
 	) {
 	}
 

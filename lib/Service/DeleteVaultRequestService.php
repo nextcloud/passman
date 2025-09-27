@@ -31,7 +31,7 @@ use OCP\AppFramework\Db\Entity;
 class DeleteVaultRequestService {
 
 	public function __construct(
-		private DeleteVaultRequestMapper $deleteVaultRequestMapper,
+		private readonly DeleteVaultRequestMapper $deleteVaultRequestMapper,
 	) {
 	}
 
@@ -63,7 +63,7 @@ class DeleteVaultRequestService {
 	public function getDeleteRequestForVault(string $vault_guid) {
 		try {
 			return $this->deleteVaultRequestMapper->getDeleteRequestsForVault($vault_guid);
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			return false;
 		}
 	}

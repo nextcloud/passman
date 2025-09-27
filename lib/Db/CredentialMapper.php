@@ -36,7 +36,7 @@ class CredentialMapper extends QBMapper {
 
 	public function __construct(
 		IDBConnection $db,
-		private Utils $utils,
+		private readonly Utils $utils,
 	) {
 		parent::__construct($db, self::TABLE_NAME);
 	}
@@ -59,14 +59,14 @@ class CredentialMapper extends QBMapper {
 		return $this->findEntities($qb);
 	}
 
-	/**
-	 * Get a random credential from a vault
-	 *
-	 * @param string $vault_id
-	 * @param string $user_id
-	 * @return Credential[]
-	 */
-	public function getRandomCredentialByVaultId(string $vault_id, string $user_id) {
+    /**
+     * Get a random credential from a vault
+     *
+     * @param string $vault_id
+     * @param string $user_id
+     * @return Credential[]
+     */
+	public function getRandomCredentialByVaultId(string $vault_id, string $user_id): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -78,9 +78,7 @@ class CredentialMapper extends QBMapper {
 		$entities = $this->findEntities($qb);
 		$count = count($entities) - 1;
 
-		/** @var Credential[] $entity */
-		$entity = array_splice($entities, rand(0, $count), 1);
-		return $entity;
+		return array_splice($entities, rand(0, $count), 1);
 	}
 
 	/**

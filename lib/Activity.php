@@ -227,18 +227,15 @@ class Activity implements \OCP\Activity\IExtension {
 	 * @param string $type
 	 * @return string|false
 	 */
-	public function getTypeIcon($type) {
-		switch ($type) {
-			case self::TYPE_ITEM_ACTION:
-			case self::TYPE_ITEM_EXPIRED:
-				return 'icon-password';
-			case self::TYPE_ITEM_SHARED:
-				return 'icon-share';
-			case self::TYPE_ITEM_RENAMED:
-				return 'icon-rename';
-		}
-		return false;
-	}
+	public function getTypeIcon($type)
+    {
+        return match ($type) {
+            self::TYPE_ITEM_ACTION, self::TYPE_ITEM_EXPIRED => 'icon-password',
+            self::TYPE_ITEM_SHARED => 'icon-share',
+            self::TYPE_ITEM_RENAMED => 'icon-rename',
+            default => false,
+        };
+    }
 
 	/**
 	 * The extension can define the parameter grouping by returning the index as integer.

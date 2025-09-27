@@ -43,10 +43,10 @@ use OCP\Search\SearchResultEntry;
 class Provider implements IProvider {
 
 	public function __construct(
-		private IL10N $l10n,
-		private IURLGenerator $urlGenerator,
-		private IDBConnection $db,
-		private SettingsService $settings,
+		private readonly IL10N $l10n,
+		private readonly IURLGenerator $urlGenerator,
+		private readonly IDBConnection $db,
+		private readonly SettingsService $settings,
 	) {
 
 	}
@@ -60,7 +60,7 @@ class Provider implements IProvider {
 	}
 
 	public function getOrder(string $route, array $routeParameters): int {
-		if (strpos($route, Application::APP_ID . '.') === 0) {
+		if (str_starts_with($route, Application::APP_ID . '.')) {
 			// Active app, prefer my results
 			return -1;
 		}
@@ -81,7 +81,7 @@ class Provider implements IProvider {
 					$Credentials = $CredentialMapper->getCredentialsByVaultId($Vault->getId(), $Vault->getUserId());
 
 					foreach ($Credentials as $Credential) {
-						if (strpos($Credential->getLabel(), $query->getTerm()) !== false) {
+						if (str_contains((string) $Credential->getLabel(), $query->getTerm())) {
 							try {
 								$searchResultEntries[] = new SearchResultEntry(
 									$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
@@ -89,12 +89,11 @@ class Provider implements IProvider {
 									\sprintf("Part of Passman vault %s", $Vault->getName()),
 									$this->urlGenerator->linkToRoute('passman.Page.index') . "#/vault/" . $Vault->getGuid() . "?show=" . $Credential->getGuid()
 								);
-							} catch (\Exception $e) {
+							} catch (\Exception) {
 							}
 						}
 					}
-				} catch (DoesNotExistException $e) {
-				} catch (MultipleObjectsReturnedException $e) {
+				} catch (DoesNotExistException|MultipleObjectsReturnedException) {
 				}
 			}
 		}

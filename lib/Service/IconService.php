@@ -35,84 +35,84 @@ class IconService {
 	/**
 	 * @var string Page URL
 	 */
-	public $url;
+	public string $url;
 
 	/**
 	 * @var string Page URL, after prospective redirects
 	 */
-	public $pageUrl;
+	public string $pageUrl;
 
 	/**
 	 * @var string Site root URL (homepage), based on $pageUrl
 	 */
-	public $siteUrl;
+	public string $siteUrl;
 
 	/**
 	 * @var string full URI to favicon
 	 */
-	public $icoUrl;
+	public string $icoUrl;
 
 	/**
 	 * @var string favicon type (file extension, ex: ico|gif|png)
 	 */
-	public $icoType;
+	public string $icoType;
 
 	/**
 	 * @var string favicon url determination method (default /favicon.ico or found in head>link tag)
 	 */
-	public $findMethod;
+	public string $findMethod;
 
 	/**
 	 * @var string details, in case of failure
 	 */
-	public $error;
+	public string $error;
 
 	/**
 	 * @var bool tell if the favicon exists (set after calling IconService)
 	 */
-	public $icoExists;
+	public bool $icoExists;
 
 	/**
 	 * @var string md5 of $icoData
 	 */
-	public $icoMd5;
+	public string $icoMd5;
 
 	/**
 	 * @var string favicon binary data
 	 */
-	public $icoData;
+	public string $icoData;
 
 	/**
 	 * @var array Additional debug info
 	 */
-	public $debugInfo;
+	public array $debugInfo;
 
 	/**
-	 * @var string HTTP proxy (ex: localhost:8888)
+	 * @var string|null HTTP proxy (ex: localhost:8888)
 	 */
-	protected $httpProxy;
+	protected mixed $httpProxy;
 
 	/**
 	 * @var bool SSL verify peer (default: true)
 	 */
-	protected $sslVerify;
+	protected bool $sslVerify;
 
 	/**
 	 * Create a new IconService object, search & download favicon if $auto is true
 	 *
 	 * @param string $url Page URL
-	 * @param array $options Optional settings
+	 * @param array|null $options Optional settings
 	 * @param bool $auto Search & download favicon on instantiation
 	 */
-	public function __construct($url, $options = null, $auto = true) {
-		if (!$url) {
+	public function __construct(string $url, array $options = null, bool $auto = true) {
+		if (empty($url)) {
 			throw new \InvalidArgumentException("url is empty");
 		}
 		if (self::urlType($url) != self::URL_TYPE_ABSOLUTE) {
 			throw new \InvalidArgumentException("'" . $url . "' is not an absolute url");
 		}
 		$this->url = $url;
-		$this->httpProxy = isset($options['httpProxy']) ? $options['httpProxy'] : null;
+		$this->httpProxy = $options['httpProxy'] ?? null;
 		$this->sslVerify = isset($options['sslVerify']) && $options['sslVerify'] === false ? false : true;
 		if ($auto) {
 			$this->getFaviconUrl();
@@ -164,12 +164,12 @@ class IconService {
 		$this->findMethod = 'default';
 
 		// HTML <head> tag extraction
-		preg_match('#^(.*)<\s*body#isU', $html, $matches);
-		$htmlHead = isset($matches[1]) ? $matches[1] : $html;
+		preg_match('#^(.*)<\s*body#isU', (string) $html, $matches);
+		$htmlHead = $matches[1] ?? $html;
 
 		// HTML <base> tag href extraction
 		$base_href = null;
-		if (preg_match('#<base[^>]+href=(["\'])([^>]+)\1#i', $htmlHead, $matches)) {
+		if (preg_match('#<base[^>]+href=(["\'])([^>]+)\1#i', (string) $htmlHead, $matches)) {
 			$base_href = rtrim($matches[2], '/') . '/';
 			$this->debugInfo['base_href'] = $base_href;
 		}
@@ -182,7 +182,7 @@ class IconService {
 
 
 	private function parseLinkElement($htmlHead, $pageUrlInfo, $base_href){
-		if (preg_match('#<\s*link[^>]*(rel=(["\'])[^>\2]*icon[^>\2]*\2)[^>]*>#i', $htmlHead, $matches)) {
+		if (preg_match('#<\s*link[^>]*(rel=(["\'])[^>\2]*icon[^>\2]*\2)[^>]*>#i', (string) $htmlHead, $matches)) {
 			$link_tag = $matches[0];
 			$this->debugInfo['link_tag'] = $link_tag;
 
@@ -224,7 +224,7 @@ class IconService {
 						break;
 					case self::URL_TYPE_RELATIVE:
 						$this->findMethod .= ' relative';
-						$path = preg_replace('#/[^/]+?$#i', '/', $pageUrlInfo['path']);
+						$path = preg_replace('#/[^/]+?$#i', '/', (string) $pageUrlInfo['path']);
 						$this->icoUrl = $pageUrlInfo['scheme'] . '://' . $pageUrlInfo['host'] . $path . $ico_href;
 						$this->findMethod .= ' without base href';
 						if (isset($base_href)) {
@@ -297,19 +297,19 @@ class IconService {
 		}
 
 		// Check favicon content
-		if (strlen($content) == 0) {
+		if (strlen((string) $content) == 0) {
 			$this->error = "Empty content";
 			return false;
 		}
 		$textTypes = ['text/html', 'text/plain'];
-		if (in_array($info['content_type'], $textTypes) || preg_match('#(</html>|</b>)#i', $content)) {
+		if (in_array($info['content_type'], $textTypes) || preg_match('#(</html>|</b>)#i', (string) $content)) {
 			$this->error = "Seems to be a text document";
 			return false;
 		}
 
 		// All right baby !
 		$this->icoData = $content;
-		$this->icoMd5 = md5($content);
+		$this->icoMd5 = md5((string) $content);
 		$this->icoExists = true;
 		return true;
 	}
@@ -350,7 +350,7 @@ class IconService {
 		$info['content_type'] = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
 		curl_close($ch);
 
-		if ($info['curl_errno'] !== CURLE_OK || in_array($info['http_code'], array(403, 404, 500, 503))) {
+		if ($info['curl_errno'] !== CURLE_OK || in_array($info['http_code'], [403, 404, 500, 503])) {
 			return false;
 		}
 		return $content;
@@ -400,9 +400,10 @@ class IconService {
 	 * - URL_TYPE_RELATIVE        ex: ../images/fav.ico
 	 * - URL_TYPE_EMBED_BASE64    ex: data:image/x-icon;base64,AAABAA...
 	 *
-	 * @return int
+	 * @param string $url
+	 * @return false|int
 	 */
-	public static function urlType($url) {
+	public static function urlType(string $url): false|int {
 		if (empty($url)) {
 			return false;
 		}

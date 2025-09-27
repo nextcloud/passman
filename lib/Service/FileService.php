@@ -37,8 +37,8 @@ class FileService {
 	private $server_key;
 
 	public function __construct(
-		private FileMapper $fileMapper,
-		private EncryptService $encryptService,
+		private readonly FileMapper $fileMapper,
+		private readonly EncryptService $encryptService,
 		IConfig $config,
 	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');

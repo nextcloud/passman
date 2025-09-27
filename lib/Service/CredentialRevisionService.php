@@ -36,8 +36,8 @@ class CredentialRevisionService {
 	private $server_key;
 
 	public function __construct(
-		private CredentialRevisionMapper $credentialRevisionMapper,
-		private EncryptService $encryptService,
+		private readonly CredentialRevisionMapper $credentialRevisionMapper,
+		private readonly EncryptService $encryptService,
 		IConfig $config,
 	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');

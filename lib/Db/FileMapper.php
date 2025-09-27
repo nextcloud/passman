@@ -37,7 +37,7 @@ class FileMapper extends QBMapper {
 
 	public function __construct(
 		IDBConnection $db,
-		private Utils $utils,
+		private readonly Utils $utils,
 	) {
 		parent::__construct($db, self::TABLE_NAME);
 	}

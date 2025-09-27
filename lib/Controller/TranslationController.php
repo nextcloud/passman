@@ -21,7 +21,7 @@ class TranslationController extends ApiController {
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		private IL10N $trans,
+		private readonly IL10N $trans,
 	) {
 		parent::__construct(
 			$AppName,
