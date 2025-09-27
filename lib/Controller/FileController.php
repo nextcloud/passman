@@ -69,9 +69,9 @@ class FileController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function deleteFiles($file_ids) {
+	public function deleteFiles(string $file_ids) {
 		$failed_file_ids = [];
-		if ($file_ids != null && !empty($file_ids)) {
+		if (!empty($file_ids)) {
 			$decoded_file_ids = json_decode($file_ids);
 			foreach ($decoded_file_ids as $file_id) {
 				try {

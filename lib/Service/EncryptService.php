@@ -28,7 +28,6 @@ namespace OCA\Passman\Service;
 // Upgraded to use openssl
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\File;
-use OCP\AppFramework\Db\Entity;
 use OCP\IConfig;
 
 /**
@@ -278,24 +277,24 @@ class EncryptService {
 
 
 	/**
-	 * Encrypt a credential
+	 * Decrypt a credential
 	 *
-	 * @param Credential|Entity|array $credential the credential to decrypt
-	 * @return Credential|array
+	 * @param Credential|array $credential the credential to decrypt
+	 * @return Credential|array modified $credential input object of the same type
 	 * @throws \Exception
 	 */
-	public function decryptCredential($credential) {
+	public function decryptCredential(Credential|array $credential): Credential|array {
 		return $this->handleCredential($credential, EncryptService::OP_DECRYPT);
 	}
 
 	/**
 	 * Encrypt a credential
 	 *
-	 * @param Credential|array $credential the credential to encrypt
-	 * @return Credential|array
+	 * @param array|Credential $credential the credential to encrypt
+	 * @return Credential|array modified $credential input object of the same type
 	 * @throws \Exception
 	 */
-	public function encryptCredential($credential) {
+	public function encryptCredential(Credential|array $credential): Credential|array {
 		return $this->handleCredential($credential, EncryptService::OP_ENCRYPT);
 	}
 
@@ -316,13 +315,14 @@ class EncryptService {
 	}
 
 	/**
-	 * Handles the encryption / decryption of a credential
+	 * Handles the encryption / decryption of a credential.
+	 * This modifies the $credential parameter object, slightly different based on the passed parameter type.
 	 *
 	 * @param Credential|array $credential the credential to encrypt
-	 * @return Credential|array
+	 * @return Credential|array modified $credential input object of the same type
 	 * @throws \Exception
 	 */
-	private function handleCredential($credential, $service_function) {
+	private function handleCredential(Credential|array $credential, $service_function): Credential|array {
 		[$userKey, $userSuppliedKey] = $this->extractKeysFromCredential($credential);
 
 		$key = static::makeKey($userKey, $this->server_key, $userSuppliedKey);
@@ -344,33 +344,34 @@ class EncryptService {
 	/**
 	 * Encrypt a file
 	 *
-	 * @param File|array $file
-	 * @return File|array
+	 * @param array|File $file
+	 * @return array|File modified $file input object of the same type
 	 * @throws \Exception
 	 */
-	public function encryptFile($file) {
+	public function encryptFile(array|File $file): array|File {
 		return $this->handleFile($file, EncryptService::OP_ENCRYPT);
 	}
 
 	/**
 	 * Decrypt a file
 	 *
-	 * @param File|Entity|array $file
-	 * @return array|File
+	 * @param array|File $file
+	 * @return array|File modified $file input object of the same type
 	 * @throws \Exception
 	 */
-	public function decryptFile($file) {
+	public function decryptFile(array|File $file): array|File {
 		return $this->handleFile($file, EncryptService::OP_DECRYPT);
 	}
 
 	/**
-	 * Handles the encryption / decryption of a File
+	 * Handles the encryption / decryption of a File.
+	 * This modifies the $file parameter object, slightly different based on the passed parameter type.
 	 *
-	 * @param File|array $file the credential to encrypt
-	 * @return File|array
+	 * @param array|File $file the file to encrypt/decrypt
+	 * @return array|File modified $file input object of the same type
 	 * @throws \Exception
 	 */
-	private function handleFile($file, $service_function) {
+	private function handleFile(array|File $file, $service_function): array|File {
 		$userKey = '';
 		$userSuppliedKey = '';
 		if ($file instanceof File) {

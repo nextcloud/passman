@@ -45,7 +45,7 @@ class InternalController extends ApiController {
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
 		if ($credential) {
 			$credential->setExpireTime(time() + (24 * 60 * 60));
-			$this->credentialService->upd($credential);
+			$this->credentialService->updateCredentialEntity($credential);
 
 			$this->notificationService->markNotificationOfCredentialAsProcessed($credential_id, $this->userId);
 		}
@@ -69,7 +69,7 @@ class InternalController extends ApiController {
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
 		if ($credential) {
 			$credential->setExpireTime(0);
-			$this->credentialService->upd($credential);
+			$this->credentialService->updateCredentialEntity($credential);
 
 			$this->notificationService->markNotificationOfCredentialAsProcessed($credential_id, $this->userId);
 		}

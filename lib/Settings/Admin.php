@@ -24,6 +24,7 @@
 namespace OCA\Passman\Settings;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
@@ -66,8 +67,8 @@ class Admin implements ISettings {
 				$response = $httpClient->request('get', $url);
 				$json = $response->getBody()->getContents();
 
-				if ($json) {
-					$data = json_decode($json);
+				if (!empty($json)) {
+					$data = json_decode((string) $json);
 					if (isset($data->tag_name) && is_string($data->tag_name)) {
 						$githubVersion = $data->tag_name;
 
@@ -76,7 +77,7 @@ class Admin implements ISettings {
 						}
 					}
 				}
-			} catch (\Exception $e) {
+			} catch (\Exception|GuzzleException $e) {
 				$this->logger->error('Error fetching latest GitHub release version in lib/Admin:getForm()',
 					['exception' => $e->getTrace(), 'message' => $e->getMessage()]);
 			}

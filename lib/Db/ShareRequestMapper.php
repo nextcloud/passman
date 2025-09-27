@@ -25,14 +25,15 @@ namespace OCA\Passman\Db;
 
 
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\Exception;
-use OCP\DB\IResult;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
+/**
+ * @template-extends QBMapper<ShareRequest>
+ */
 class ShareRequestMapper extends QBMapper {
 	const TABLE_NAME = 'passman_share_request';
 
@@ -42,9 +43,9 @@ class ShareRequestMapper extends QBMapper {
 
 	/**
 	 * @param ShareRequest $request
-	 * @return ShareRequest|Entity
+	 * @return ShareRequest
 	 */
-	public function createRequest(ShareRequest $request) {
+	public function createRequest(ShareRequest $request): ShareRequest {
 		return $this->insert($request);
 	}
 
@@ -53,11 +54,11 @@ class ShareRequestMapper extends QBMapper {
 	 *
 	 * @param string $item_guid
 	 * @param string $target_vault_guid
-	 * @return Entity
+	 * @return ShareRequest
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getRequestByItemAndVaultGuid(string $item_guid, string $target_vault_guid) {
+	public function getRequestByItemAndVaultGuid(string $item_guid, string $target_vault_guid): ShareRequest {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -71,7 +72,7 @@ class ShareRequestMapper extends QBMapper {
 	 * Get shared items for the given item_guid
 	 *
 	 * @param string $item_guid
-	 * @return Entity[]
+	 * @return ShareRequest[]
 	 * @throws Exception
 	 */
 	public function getRequestsByItemGuid(string $item_guid): array {
@@ -91,10 +92,10 @@ class ShareRequestMapper extends QBMapper {
 	 *
 	 * @param int $item_id
 	 * @param string $target_user_id
-	 * @return int|IResult
+	 * @return int
 	 * @throws Exception
 	 */
-	public function cleanItemRequestsForUser(int $item_id, string $target_user_id) {
+	public function cleanItemRequestsForUser(int $item_id, string $target_user_id): int {
 		$qb = $this->db->getQueryBuilder();
 		return $qb->delete(self::TABLE_NAME)
 			->where($qb->expr()->eq('item_id', $qb->createNamedParameter($item_id, IQueryBuilder::PARAM_INT)))
@@ -106,9 +107,9 @@ class ShareRequestMapper extends QBMapper {
 	 * Obtains all pending share requests for the given user ID
 	 *
 	 * @param string $user_id
-	 * @return Entity[]
+	 * @return ShareRequest[]
 	 */
-	public function getUserPendingRequests(string $user_id) {
+	public function getUserPendingRequests(string $user_id): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -122,19 +123,19 @@ class ShareRequestMapper extends QBMapper {
 	 * @param ShareRequest $shareRequest Request to delete
 	 * @return ShareRequest                 The deleted request
 	 */
-	public function deleteShareRequest(ShareRequest $shareRequest) {
+	public function deleteShareRequest(ShareRequest $shareRequest): ShareRequest {
 		return $this->delete($shareRequest);
 	}
 
 	/**
-	 * Gets a share request by it's unique incremental id
+	 * Gets a share request by its unique incremental id
 	 *
 	 * @param int $id
-	 * @return Entity
+	 * @return ShareRequest
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getShareRequestById(int $id) {
+	public function getShareRequestById(int $id): ShareRequest {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -147,9 +148,9 @@ class ShareRequestMapper extends QBMapper {
 	 * Gets all share requests by a given item GUID
 	 *
 	 * @param string $item_guid
-	 * @return Entity[]
+	 * @return ShareRequest[]
 	 */
-	public function getShareRequestsByItemGuid(string $item_guid) {
+	public function getShareRequestsByItemGuid(string $item_guid): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -163,7 +164,7 @@ class ShareRequestMapper extends QBMapper {
 	 * @param ShareRequest $shareRequest
 	 * @return ShareRequest
 	 */
-	public function updateShareRequest(ShareRequest $shareRequest) {
+	public function updateShareRequest(ShareRequest $shareRequest): ShareRequest {
 		return $this->update($shareRequest);
 	}
 
@@ -172,9 +173,9 @@ class ShareRequestMapper extends QBMapper {
 	 *
 	 * @param string $item_guid
 	 * @param string $user_id
-	 * @return Entity[]
+	 * @return ShareRequest[]
 	 */
-	public function getPendingShareRequests(string $item_guid, string $user_id) {
+	public function getPendingShareRequests(string $item_guid, string $user_id): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -190,10 +191,10 @@ class ShareRequestMapper extends QBMapper {
 	 * @param string $item_guid The item for which to update the requests
 	 * @param string $user_id The user for which to update the requests
 	 * @param int $permissions The new permissions to apply
-	 * @return int|IResult
+	 * @return int
 	 * @throws Exception
 	 */
-	public function updatePendingRequestPermissions(string $item_guid, string $user_id, int $permissions) {
+	public function updatePendingRequestPermissions(string $item_guid, string $user_id, int $permissions): int {
 		$qb = $this->db->getQueryBuilder();
 		return $qb->update(self::TABLE_NAME)
 			->set('permissions', $qb->createNamedParameter($permissions, IQueryBuilder::PARAM_INT))

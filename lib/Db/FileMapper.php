@@ -26,12 +26,14 @@ namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
+/**
+ * @template-extends QBMapper<File>
+ */
 class FileMapper extends QBMapper {
 	const TABLE_NAME = 'passman_files';
 
@@ -46,11 +48,11 @@ class FileMapper extends QBMapper {
 	/**
 	 * @param int $file_id
 	 * @param string|null $user_id
-	 * @return Entity
+	 * @return File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getFile(int $file_id, string $user_id = null) {
+	public function getFile(int $file_id, string $user_id = null): File {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -66,11 +68,11 @@ class FileMapper extends QBMapper {
 	/**
 	 * @param string $file_guid
 	 * @param string|null $user_id
-	 * @return Entity
+	 * @return File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getFileByGuid(string $file_guid, string $user_id = null) {
+	public function getFileByGuid(string $file_guid, string $user_id = null): File {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -84,11 +86,11 @@ class FileMapper extends QBMapper {
 	}
 
 	/**
-	 * @param $file_raw
-	 * @param $userId
+	 * @param array|File $file_raw
+	 * @param string $userId
 	 * @return File
 	 */
-	public function create($file_raw, $userId) {
+	public function create(array|File $file_raw, string $userId): File {
 		$file = new File();
 		$file->setGuid($this->utils->GUID());
 		$file->setUserId($userId);
@@ -106,9 +108,9 @@ class FileMapper extends QBMapper {
 	 *
 	 * @param int $file_id
 	 * @param string $userId
-	 * @return File|Entity
+	 * @return File
 	 */
-	public function deleteFile(int $file_id, string $userId) {
+	public function deleteFile(int $file_id, string $userId): File {
 		$file = new File();
 		$file->setId($file_id);
 		$file->setUserId($userId);
@@ -116,19 +118,19 @@ class FileMapper extends QBMapper {
 	}
 
 	/**
-	 * Uodate file
+	 * Update file
 	 * @param File $file
 	 * @return File
 	 */
-	public function updateFile(File $file) {
+	public function updateFile(File $file): File {
 		return $this->update($file);
 	}
 
 	/**
 	 * @param string $user_id
-	 * @return Entity[]
+	 * @return File[] array of incomplete File objects, containing only the guid
 	 */
-	public function getFileGuidsFromUser(string $user_id) {
+	public function getFileGuidsFromUser(string $user_id): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('guid')
 			->from(self::TABLE_NAME)
