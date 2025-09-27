@@ -104,7 +104,7 @@ class IconService {
 	 * @param array|null $options Optional settings
 	 * @param bool $auto Search & download favicon on instantiation
 	 */
-	public function __construct(string $url, array $options = null, bool $auto = true) {
+	public function __construct(string $url, ?array $options = null, bool $auto = true) {
 		if (empty($url)) {
 			throw new \InvalidArgumentException("url is empty");
 		}

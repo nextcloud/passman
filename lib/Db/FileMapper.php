@@ -52,7 +52,7 @@ class FileMapper extends QBMapper {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getFile(int $file_id, string $user_id = null): File {
+	public function getFile(int $file_id, ?string $user_id = null): File {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -72,7 +72,7 @@ class FileMapper extends QBMapper {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getFileByGuid(string $file_guid, string $user_id = null): File {
+	public function getFileByGuid(string $file_guid, ?string $user_id = null): File {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)

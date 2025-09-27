@@ -53,7 +53,7 @@ class FileService {
 	 * @throws MultipleObjectsReturnedException
 	 * @throws Exception
 	 */
-	public function getFile(int $fileId, string $userId = null): File {
+	public function getFile(int $fileId, ?string $userId = null): File {
 		$file = $this->fileMapper->getFile($fileId, $userId);
 		return $this->encryptService->decryptFile($file);
 	}
@@ -68,7 +68,7 @@ class FileService {
 	 * @throws MultipleObjectsReturnedException
 	 * @throws Exception
 	 */
-	public function getFileByGuid(string $file_guid, string $userId = null): File {
+	public function getFileByGuid(string $file_guid, ?string $userId = null): File {
 		$file = $this->fileMapper->getFileByGuid($file_guid, $userId);
 		return $this->encryptService->decryptFile($file);
 	}

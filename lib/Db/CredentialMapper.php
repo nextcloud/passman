@@ -111,7 +111,7 @@ class CredentialMapper extends QBMapper {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialById(int $credential_id, string $user_id = null): Credential {
+	public function getCredentialById(int $credential_id, ?string $user_id = null): Credential {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -235,7 +235,7 @@ class CredentialMapper extends QBMapper {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialByGUID(string $credential_guid, string $user_id = null): Credential {
+	public function getCredentialByGUID(string $credential_guid, ?string $user_id = null): Credential {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)

@@ -73,7 +73,7 @@ class ShareController extends ApiController {
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
-		} catch (\Exception $exception) {
+		} catch (\Exception) {
 			return new NotFoundResponse();
 		}
 
@@ -121,7 +121,7 @@ class ShareController extends ApiController {
 			if (count($shareRequests) > 0) {
 				return new JSONResponse(['error' => 'User got already pending requests']);
 			}
-		} catch (\Exception $exception) {
+		} catch (\Exception) {
 			// no need to catch this
 		}
 
@@ -212,14 +212,14 @@ class ShareController extends ApiController {
 		$sr = null;
 		try {
 			$acl = $this->shareService->getCredentialAclForUser($user_id, $item_guid);
-		} catch (\Exception $e) {
-
+		} catch (\Exception) {
+			// no need to handle this
 		}
 		try {
 			$shareRequests = $this->shareService->getPendingShareRequestsForCredential($item_guid, $user_id);
 			$sr = array_pop($shareRequests);
 		} catch (\Exception) {
-			// no need to catch this
+			// no need to handle this
 		}
 
 		if ($sr) {

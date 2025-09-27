@@ -228,7 +228,7 @@ class CredentialService {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialByGUID(string $credential_guid, string $user_id = null): Credential {
+	public function getCredentialByGUID(string $credential_guid, ?string $user_id = null): Credential {
 		$credential = $this->credentialMapper->getCredentialByGUID($credential_guid, $user_id);
 		return $this->encryptService->decryptCredential($credential);
 	}

@@ -15,5 +15,14 @@ return RectorConfig::configure()
         __DIR__ . '/templates',
         __DIR__ . '/tests',
     ])
-    ->withPhpSets(php81: true)
-    ->withTypeCoverageLevel(0);
+    ->withPhpSets(php84: true)
+    ->withTypeCoverageLevel(0)
+	->withSkip([
+		// skip rule since it marks code that's intended, as it is
+		\Rector\Php70\Rector\FuncCall\RandomFunctionRector::class,
+
+		// skip rule since it's introduced with php8.4 and not compatible to php8.1
+		\Rector\Php84\Rector\MethodCall\NewMethodCallWithoutParenthesesRector::class,
+		// skip rule since it's introduced with php8.3 and not compatible to php8.1
+		\Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector::class
+	]);

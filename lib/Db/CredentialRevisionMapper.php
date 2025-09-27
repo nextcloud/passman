@@ -48,7 +48,7 @@ class CredentialRevisionMapper extends QBMapper {
 	 * @param string|null $user_id
 	 * @return CredentialRevision[]
 	 */
-	public function getRevisions(int $credential_id, string $user_id = null): array {
+	public function getRevisions(int $credential_id, ?string $user_id = null): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -68,7 +68,7 @@ class CredentialRevisionMapper extends QBMapper {
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getRevision(int $revision_id, string $user_id = null): CredentialRevision {
+	public function getRevision(int $revision_id, ?string $user_id = null): CredentialRevision {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)

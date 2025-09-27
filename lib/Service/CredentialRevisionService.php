@@ -65,7 +65,7 @@ class CredentialRevisionService {
 	 * @return CredentialRevision[] array with the json optimized ("serialized") versions of CredentialRevision
 	 * @throws \Exception
 	 */
-	public function getRevisions(int $credential_id, string $user_id = null): array {
+	public function getRevisions(int $credential_id, ?string $user_id = null): array {
 		$result = [];
 		$revisions = $this->credentialRevisionMapper->getRevisions($credential_id, $user_id);
 		foreach ($revisions as $revision) {
@@ -85,7 +85,7 @@ class CredentialRevisionService {
 	 * @throws MultipleObjectsReturnedException
 	 * @throws \Exception
 	 */
-	public function getRevision(int $credential_id, string $user_id = null): CredentialRevision {
+	public function getRevision(int $credential_id, ?string $user_id = null): CredentialRevision {
 		$revision = $this->credentialRevisionMapper->getRevision($credential_id, $user_id);
 		$c = json_decode(base64_decode($revision->getCredentialData()), true);
 		$revision->setCredentialData($this->encryptService->decryptCredential($c));
