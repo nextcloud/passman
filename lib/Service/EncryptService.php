@@ -132,13 +132,13 @@ class EncryptService {
 	/**
 	 * Decrypt the data with the provided key
 	 *
-	 * @param string $data_hex The encrypted datat to decrypt
+	 * @param string|null $data_hex The encrypted data to decrypt. Accept null for dynamic caller compatibility, but always return false then.
 	 * @param string $key The key to use for decryption
 	 *
 	 * @returns string|false The returned string if decryption is successful
 	 *                           false if it is not
 	 */
-	public function decrypt(string $data_hex, string $key): bool|string {
+	public function decrypt(?string $data_hex, string $key): bool|string {
 		if (!function_exists('hex2bin')) {
 			function hex2bin(string $str): string {
 				$sbin = "";
@@ -149,6 +149,9 @@ class EncryptService {
 
 				return $sbin;
 			}
+		}
+		if ($data_hex === null) {
+			return false;
 		}
 
 		$data = hex2bin($data_hex);
