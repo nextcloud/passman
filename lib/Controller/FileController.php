@@ -18,14 +18,12 @@ use OCP\IRequest;
 use Psr\Log\LoggerInterface;
 
 class FileController extends ApiController {
-	private $userId;
-
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		$UserId,
-		private FileService $fileService,
-		private LoggerInterface $logger,
+		private $userId,
+		private readonly FileService $fileService,
+		private readonly LoggerInterface $logger,
 	) {
 		parent::__construct(
 			$AppName,
@@ -33,7 +31,6 @@ class FileController extends ApiController {
 			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
-		$this->userId = $UserId;
 	}
 
 
@@ -72,9 +69,9 @@ class FileController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function deleteFiles($file_ids) {
+	public function deleteFiles(string $file_ids) {
 		$failed_file_ids = [];
-		if ($file_ids != null && !empty($file_ids)) {
+		if (!empty($file_ids)) {
 			$decoded_file_ids = json_decode($file_ids);
 			foreach ($decoded_file_ids as $file_id) {
 				try {
@@ -97,7 +94,7 @@ class FileController extends ApiController {
 	public function updateFile($file_id, $file_data, $filename) {
 		try {
 			$file = $this->fileService->getFile($file_id, $this->userId);
-		} catch (\Exception $doesNotExistException) {
+		} catch (\Exception) {
 
 		}
 		if ($file) {
