@@ -268,7 +268,7 @@
     "Accept" : "Aceitar",
     "Decline" : "Rejeitar",
     "You have {{session_time}} left before logout." : "Você tem {{session_time}} de espera antes de efetuar logout.",
-    "Your vault has been locked for {{time}} because of {{tries}} failed attempts!" : "Seu cofre foi bloqueado por {{time}} por causa de {{tries}} tentativas que falharam!",
+    "Your vault has been locked for {{time}} because of {{tries}} failed attempts!" : "Seu cofre foi trancado por {{time}} por causa de {{tries}} tentativas que falharam!",
     "Hello there!" : "Olá!",
     "It does not seem that you have any passwords. Do you want to add one?" : "Parece que você não tem nenhuma senha. Quer adicionar uma?",
     "You don't have good credentials" : "Você não tem credenciais boas",
