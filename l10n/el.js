@@ -292,6 +292,7 @@ OC.L10N.register(
     "Please input the password for" : "Παρκαλώ εισάγεται τον κωδικό για",
     "Set this vault as the default." : "Ορισμός κρύπτης ώς προεπιλογής.",
     "Log into this vault automatically." : "Σύνδεση σε αυτή την κρύπτη αυτόματα.",
+    "Log out of this vault automatically after:" : "Αποσύνδεση από αυτό το θησαυροφυλάκιο αυτόματα μετά από:",
     "Decrypt vault" : "Αποκρυπτογράφηση κρύπτης",
     "Seems you lost the vault password and you're unable to log in." : "Φαίνεται πως ξεχάσατε τον κωδικό κρύπτης και δεν μπορείτε να συνδεθείτε.",
     "If you want this vault to be removed you can request that here." : "Εάν επιθυμείτε την κατάργηση της κρύπτης αιτηθείτε το εδώ.",
