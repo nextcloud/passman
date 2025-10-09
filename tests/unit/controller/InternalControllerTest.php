@@ -41,7 +41,7 @@ class InternalControllerTest extends PHPUnit_Framework_TestCase {
 	public function setUp() {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 		$config = $this->getMockBuilder('OCP\IConfig')->getMock();
-		$this->credentialService = $this->getMockBuilder('OCA\Passman\Service\CredentialService')
+		$this->credentialService = $this->getMockBuilder(\OCA\Passman\Service\CredentialService::class)
 			->disableOriginalConstructor()
 			->getMock();
 		$this->controller = new InternalController(

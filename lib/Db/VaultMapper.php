@@ -25,18 +25,20 @@ namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
+/**
+ * @template-extends QBMapper<Vault>
+ */
 class VaultMapper extends QBMapper {
 	const TABLE_NAME = 'passman_vaults';
 
 	public function __construct(
 		IDBConnection $db,
-		private Utils $utils,
+		private readonly Utils $utils,
 	) {
 		parent::__construct($db, self::TABLE_NAME);
 	}
@@ -45,26 +47,26 @@ class VaultMapper extends QBMapper {
 	/**
 	 * @param int $vault_id
 	 * @param string $user_id
-	 * @return Entity[]
+	 * @return Vault
 	 */
-	public function find(int $vault_id, string $user_id) {
+	public function findById(int $vault_id, string $user_id): Vault {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
 			->where($qb->expr()->eq('id', $qb->createNamedParameter($vault_id, IQueryBuilder::PARAM_INT)))
 			->andWhere($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
 
-		return $this->findEntities($qb);
+		return $this->findEntity($qb);
 	}
 
 	/**
 	 * @param string $vault_guid
 	 * @param string $user_id
-	 * @return Entity
+	 * @return Vault
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function findByGuid(string $vault_guid, string $user_id) {
+	public function findByGuid(string $vault_guid, string $user_id): Vault {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -77,9 +79,9 @@ class VaultMapper extends QBMapper {
 
 	/**
 	 * @param string $user_id
-	 * @return Entity[]
+	 * @return Vault[]
 	 */
-	public function findVaultsFromUser(string $user_id) {
+	public function findVaultsFromUser(string $user_id): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -93,9 +95,9 @@ class VaultMapper extends QBMapper {
 	 *
 	 * @param string $vault_name
 	 * @param string $user_id
-	 * @return Vault|Entity
+	 * @return Vault
 	 */
-	public function create(string $vault_name, string $user_id) {
+	public function create(string $vault_name, string $user_id): Vault {
 		$vault = new Vault();
 		$vault->setName($vault_name);
 		$vault->setUserId($user_id);
@@ -110,9 +112,9 @@ class VaultMapper extends QBMapper {
 	 *
 	 * @param int $vault_id
 	 * @param string $user_id
-	 * @return Vault|Entity
+	 * @return Vault
 	 */
-	public function setLastAccess(int $vault_id, string $user_id) {
+	public function setLastAccess(int $vault_id, string $user_id): Vault {
 		$vault = new Vault();
 		$vault->setId($vault_id);
 		$vault->setUserId($user_id);
@@ -124,9 +126,9 @@ class VaultMapper extends QBMapper {
 	 * Update vault
 	 *
 	 * @param Vault $vault
-	 * @return Vault|Entity
+	 * @return Vault
 	 */
-	public function updateVault(Vault $vault) {
+	public function updateVault(Vault $vault): Vault {
 		return $this->update($vault);
 	}
 
@@ -136,9 +138,9 @@ class VaultMapper extends QBMapper {
 	 * @param int $vault_id
 	 * @param string $privateKey
 	 * @param string $publicKey
-	 * @return Vault|Entity
+	 * @return Vault
 	 */
-	public function updateSharingKeys(int $vault_id, string $privateKey, string $publicKey) {
+	public function updateSharingKeys(int $vault_id, string $privateKey, string $publicKey): Vault {
 		$vault = new Vault();
 		$vault->setId($vault_id);
 		$vault->setPrivateSharingKey($privateKey);
@@ -152,7 +154,7 @@ class VaultMapper extends QBMapper {
 	 *
 	 * @param Vault $vault
 	 */
-	public function deleteVault(Vault $vault) {
+	public function deleteVault(Vault $vault): void {
 		$this->delete($vault);
 	}
 }

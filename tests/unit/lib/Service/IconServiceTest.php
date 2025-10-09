@@ -39,9 +39,9 @@ class IconServiceTest extends PHPUnit_Framework_TestCase {
 	private $testKey;
 
 	public function setUp() {
-		$this->options = array(
+		$this->options = [
 			'sslVerify' => false,
-		);
+		];
 
 	}
 

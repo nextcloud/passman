@@ -43,10 +43,10 @@ use OCP\Search\SearchResultEntry;
 class Provider implements IProvider {
 
 	public function __construct(
-		private IL10N $l10n,
-		private IURLGenerator $urlGenerator,
-		private IDBConnection $db,
-		private SettingsService $settings,
+		private readonly IL10N $l10n,
+		private readonly IURLGenerator $urlGenerator,
+		private readonly IDBConnection $db,
+		private readonly SettingsService $settings,
 	) {
 
 	}
@@ -60,7 +60,7 @@ class Provider implements IProvider {
 	}
 
 	public function getOrder(string $route, array $routeParameters): int {
-		if (strpos($route, Application::APP_ID . '.') === 0) {
+		if (str_starts_with($route, Application::APP_ID . '.')) {
 			// Active app, prefer my results
 			return -1;
 		}
@@ -72,29 +72,28 @@ class Provider implements IProvider {
 		$searchResultEntries = [];
 
 		if ($this->settings->getAppSetting('enable_global_search', 0) === 1) {
-			$VaultService = new VaultService(new VaultMapper($this->db, new Utils()));
-			$Vaults = $VaultService->getByUser($user->getUID());
-			$CredentialMapper = new CredentialMapper($this->db, new Utils());
+			$vaultService = new VaultService(new VaultMapper($this->db, new Utils()));
+			$vaults = $vaultService->getByUser($user->getUID());
+			$credentialMapper = new CredentialMapper($this->db, new Utils());
 
-			foreach ($Vaults as $Vault) {
+			foreach ($vaults as $vault) {
 				try {
-					$Credentials = $CredentialMapper->getCredentialsByVaultId($Vault->getId(), $Vault->getUserId());
+					$credentials = $credentialMapper->getCredentialsByVaultId($vault->getId(), $vault->getUserId());
 
-					foreach ($Credentials as $Credential) {
-						if (strpos($Credential->getLabel(), $query->getTerm()) !== false) {
+					foreach ($credentials as $credential) {
+						if (str_contains($credential->getLabel(), $query->getTerm())) {
 							try {
 								$searchResultEntries[] = new SearchResultEntry(
 									$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
-									$Credential->getLabel(),
-									\sprintf("Part of Passman vault %s", $Vault->getName()),
-									$this->urlGenerator->linkToRoute('passman.Page.index') . "#/vault/" . $Vault->getGuid() . "?show=" . $Credential->getGuid()
+									$credential->getLabel(),
+									\sprintf("Part of Passman vault %s", $vault->getName()),
+									$this->urlGenerator->linkToRoute('passman.Page.index') . "#/vault/" . $vault->getGuid() . "?show=" . $credential->getGuid()
 								);
-							} catch (\Exception $e) {
+							} catch (\Exception) {
 							}
 						}
 					}
-				} catch (DoesNotExistException $e) {
-				} catch (MultipleObjectsReturnedException $e) {
+				} catch (DoesNotExistException|MultipleObjectsReturnedException) {
 				}
 			}
 		}
