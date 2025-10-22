@@ -371,7 +371,7 @@ OC.L10N.register(
     "Connection to server lost" : "与服务器的连接断开",
     "Problem loading page, reloading in 5 seconds" : "加载页面出现问题，将在5秒后重新加载",
     "Saving …" : "正在保存…",
-    "Dismiss" : "忽略",
+    "Dismiss" : "关闭",
     "seconds ago" : "几秒前"
 },
 "nplurals=1; plural=0;");
