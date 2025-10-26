@@ -47,7 +47,7 @@ OC.L10N.register(
     "Failed to decrypt {{credential}}" : "Kunne ikke dekryptere {{credential}}",
     "Done" : "Færdig",
     "File read." : "Fil læst.",
-    "Proceed with the following steps to import your file" : "Gennemgå følgene trin for at importere din fil",
+    "Proceed with the following steps to import your file" : "Gennemgå følgende trin for at importere din fil",
     "Skipping unlabeled credential" : "Springer over ikke lablede legitimationsoplysninger ",
     "Adding {{credential}}" : "Tilføjer {{credential}}",
     "Added {{credential}}" : "Tilføjer {{credential}}",
