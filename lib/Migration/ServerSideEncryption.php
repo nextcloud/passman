@@ -43,12 +43,12 @@ class ServerSideEncryption implements IRepairStep {
 	private $installedVersion;
 
 	public function __construct(
-		private EncryptService $encryptService,
-		private IDBConnection $db,
-		private LoggerInterface $logger,
-		private CredentialService $credentialService,
-		private CredentialRevisionService $revisionService,
-		private FileService $fileService,
+		private readonly EncryptService $encryptService,
+		private readonly IDBConnection $db,
+		private readonly LoggerInterface $logger,
+		private readonly CredentialService $credentialService,
+		private readonly CredentialRevisionService $revisionService,
+		private readonly FileService $fileService,
 		IConfig $config,
 	) {
 		$this->installedVersion = $config->getAppValue('passman', 'installed_version');
