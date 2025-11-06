@@ -17,6 +17,7 @@ OC.L10N.register(
     "Copy to clipboard" : "Капіяваць у буфер абмену",
     "Copy password to clipboard" : "Капіяваць пароль у буфер абмену",
     "Username" : "Імя карыстальніка",
+    "Add tag" : "Дадаць тэг",
     "Text" : "Тэкст",
     "File" : "Файл",
     "Add" : "Дадаць",
