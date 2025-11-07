@@ -47,6 +47,7 @@ OC.L10N.register(
     "Decline" : "Rad etish",
     "Never" : "Hech qachon",
     "Tags" : "Tags",
+    "Loading …" : "Yuklanmoqda…",
     "email" : "email",
     "Description" : "Tavsif",
     "Connection to server lost" : "Connection to server lost",
