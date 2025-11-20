@@ -25,18 +25,21 @@ namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
+/**
+ * @template-extends QBMapper<Credential>
+ */
 class CredentialMapper extends QBMapper {
 	const TABLE_NAME = 'passman_credentials';
 
 	public function __construct(
 		IDBConnection $db,
-		private Utils $utils,
+		private readonly Utils $utils,
 	) {
 		parent::__construct($db, self::TABLE_NAME);
 	}
@@ -47,9 +50,9 @@ class CredentialMapper extends QBMapper {
 	 *
 	 * @param string $vault_id
 	 * @param string $user_id
-	 * @return Entity[]
+	 * @return Credential[]
 	 */
-	public function getCredentialsByVaultId(string $vault_id, string $user_id) {
+	public function getCredentialsByVaultId(string $vault_id, string $user_id): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -64,9 +67,10 @@ class CredentialMapper extends QBMapper {
 	 *
 	 * @param string $vault_id
 	 * @param string $user_id
-	 * @return Credential[]
+	 * @return Credential
+	 * @throws Exception
 	 */
-	public function getRandomCredentialByVaultId(string $vault_id, string $user_id) {
+	public function getRandomCredentialByVaultId(string $vault_id, string $user_id): Credential {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -76,20 +80,18 @@ class CredentialMapper extends QBMapper {
 			->setMaxResults(20);
 
 		$entities = $this->findEntities($qb);
-		$count = count($entities) - 1;
+		$maxEntitiesIndex = count($entities) - 1;
 
-		/** @var Credential[] $entity */
-		$entity = array_splice($entities, rand(0, $count), 1);
-		return $entity;
+		return $entities[rand(0, $maxEntitiesIndex)];
 	}
 
 	/**
 	 * Get expired credentials
 	 *
 	 * @param int $timestamp
-	 * @return Entity[]
+	 * @return Credential[]
 	 */
-	public function getExpiredCredentials(int $timestamp) {
+	public function getExpiredCredentials(int $timestamp): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -100,16 +102,16 @@ class CredentialMapper extends QBMapper {
 	}
 
 	/**
-	 * Get an credential by id.
+	 * Get a credential by id.
 	 * Optional user id
 	 *
 	 * @param int $credential_id
 	 * @param string|null $user_id
-	 * @return Entity
+	 * @return Credential
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialById(int $credential_id, string $user_id = null) {
+	public function getCredentialById(int $credential_id, ?string $user_id = null): Credential {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -126,11 +128,11 @@ class CredentialMapper extends QBMapper {
 	 * Get credential label by id
 	 *
 	 * @param int $credential_id
-	 * @return Entity
+	 * @return Credential partial Credential, containing only 'id' and 'label'
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialLabelById(int $credential_id) {
+	public function getCredentialLabelById(int $credential_id): Credential {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select(['id', 'label'])
 			->from(self::TABLE_NAME)
@@ -145,7 +147,7 @@ class CredentialMapper extends QBMapper {
 	 * @param $raw_credential
 	 * @return Credential
 	 */
-	public function create($raw_credential) {
+	public function create($raw_credential): Credential {
 		$credential = new Credential();
 
 		$credential->setGuid($this->utils->GUID());
@@ -176,13 +178,13 @@ class CredentialMapper extends QBMapper {
 	}
 
 	/**
-	 * @param $raw_credential array An array containing all the credential fields
-	 * @param $useRawUser bool
-	 * @return Credential|Entity The updated credential
+	 * @param array $raw_credential An array containing all the credential fields
+	 * @param bool $useRawUser
+	 * @return Credential The updated credential
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function updateCredential($raw_credential, bool $useRawUser) {
+	public function updateCredential(array $raw_credential, bool $useRawUser): Credential {
 		$original = $this->getCredentialByGUID($raw_credential['guid']);
 		$uid = ($useRawUser) ? $raw_credential['user_id'] : $original->getUserId();
 
@@ -216,11 +218,11 @@ class CredentialMapper extends QBMapper {
 		return parent::update($credential);
 	}
 
-	public function deleteCredential(Credential $credential) {
+	public function deleteCredential(Credential $credential): Credential {
 		return $this->delete($credential);
 	}
 
-	public function upd(Credential $credential) {
+	public function upd(Credential $credential): void {
 		$this->update($credential);
 	}
 
@@ -229,11 +231,11 @@ class CredentialMapper extends QBMapper {
 	 *
 	 * @param string $credential_guid
 	 * @param string|null $user_id
-	 * @return Entity
+	 * @return Credential
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getCredentialByGUID(string $credential_guid, string $user_id = null) {
+	public function getCredentialByGUID(string $credential_guid, ?string $user_id = null): Credential {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)

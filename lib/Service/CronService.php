@@ -32,11 +32,11 @@ use Psr\Log\LoggerInterface;
 class CronService {
 
 	public function __construct(
-		private CredentialService   $credentialService,
-		private LoggerInterface     $logger,
-		private Utils               $utils,
-		private NotificationService $notificationService,
-		private ActivityService     $activityService,
+		private readonly CredentialService   $credentialService,
+		private readonly LoggerInterface     $logger,
+		private readonly Utils               $utils,
+		private readonly NotificationService $notificationService,
+		private readonly ActivityService     $activityService,
 	) {
 	}
 
