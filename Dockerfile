@@ -1,6 +1,6 @@
 # Nextcloud - passman - custom dev container
 
-FROM ubuntu:20.04
+FROM ubuntu:24.04 AS base
 RUN /bin/bash -c "export DEBIAN_FRONTEND=noninteractive" && \
         /bin/bash -c "debconf-set-selections <<< 'mariadb-server mysql-server/root_password password PASS'" && \
         /bin/bash -c "debconf-set-selections <<< 'mariadb-server mysql-server/root_password_again password PASS'" && \
@@ -13,20 +13,19 @@ RUN /bin/bash -c "export DEBIAN_FRONTEND=noninteractive" && \
         cowsay-off \
         git \
         curl \
-        libapache2-mod-php7.4 \
+        libapache2-mod-php \
         mariadb-server \
-        php7.4 \
-        php7.4-mysql \
-        php7.4-curl \
-        php-dompdf \
-        php7.4-gd \
-        php7.4-mbstring \
-        php7.4-xml \
-        php7.4-zip \
-        php7.4-intl \
-        php7.4-bcmath \
-        php7.4-gmp \
-        php7.4-imagick \
+        php \
+        php-mysql \
+        php-curl \
+        php-gd \
+        php-mbstring \
+        php-xml \
+        php-zip \
+        php-intl \
+        php-bcmath \
+        php-gmp \
+        php-imagick \
         phpunit \
         wget \
         openssh-server \
@@ -35,7 +34,7 @@ RUN /bin/bash -c "export DEBIAN_FRONTEND=noninteractive" && \
         composer \
         sudo
 
-RUN  gem install sass && \
+RUN  npm install -g sass && \
      a2enmod ssl && \
      ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled && \
      git clone https://github.com/nextcloud/passman /var/www/passman && \
@@ -44,8 +43,8 @@ RUN  gem install sass && \
 
 ADD https://raw.githubusercontent.com/nextcloud/travis_ci/master/before_install.sh /var/www/passman
 
-RUN service mysql restart && \
-    mysql -uroot -pPASS -e "SET PASSWORD = PASSWORD('');" && \
+RUN service mariadb restart && \
+    mariadb -uroot -pPASS -e "SET PASSWORD = PASSWORD('');" && \
     sed  -i '0,/.*SSLCertificateChainFile.*/s/.*SSLCertificateChainFile.*/SSLCertificateChainFile \/etc\/ssl\/private\/fullchain.pem/' /etc/apache2/sites-enabled/default-ssl.conf && \
     sed -i '0,/.*ssl-cert-snakeoil.pem.*/s/.*ssl-cert-snakeoil.pem.*/SSLCertificateFile \/etc\/ssl\/private\/cert.pem/' /etc/apache2/sites-enabled/default-ssl.conf && \
     sed -i '0,/.*SSLCertificateKeyFile.*/s/.*SSLCertificateKeyFile.*/SSLCertificateKeyFile \/etc\/ssl\/private\/privkey.pem/' /etc/apache2/sites-enabled/default-ssl.conf && \
@@ -53,12 +52,12 @@ RUN service mysql restart && \
     cd /var/www/passman && \
     chmod +x before_install.sh && \
     sleep 1 && \
-    /bin/bash -c "./before_install.sh passman stable21 mysql; exit 0" && \
+    /bin/bash -c "./before_install.sh passman stable31 mysql; exit 0" && \
     rm /var/www/server/apps/passman/before_install.sh && \
     mv /var/www/server/* /var/www/html/ && \
     cd /var/www/html/ && \
     chmod +x occ && \
-    service mysql restart && \
+    service mariadb restart && \
     ./occ maintenance:install --database-name oc_autotest --database-user oc_autotest --admin-user admin --admin-pass admin --database mysql --database-pass 'owncloud' && \
     sed -i 's/\/var\/www\/server/\/var\/www\/html/g' /var/www/html/config/config.php && \
     cat /var/www/html/config/config.php && \
@@ -72,6 +71,8 @@ RUN service mysql restart && \
     ./occ config:system:set trusted_domains 2 --value=172.17.0.2 && \
     ./occ config:system:set trusted_domains 3 --value=passman.cc && \
     ./occ config:system:set trusted_domains 4 --value=demo.passman.cc && \
+    ./occ config:system:set trusted_domains 5 --value=localhost && \
+    ./occ config:system:set trusted_domains 6 --value=0.0.0.0 && \
                 chown -R www-data /var/www
 EXPOSE 80
 EXPOSE 443
@@ -81,5 +82,21 @@ RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD []
+
+FROM base AS dev
+ENV DEV=1
+RUN npm install -g browser-sync
+COPY auto-reload.sh /
+RUN  chmod +x /auto-reload.sh
+RUN openssl req -x509 -nodes -days 365 \
+        -newkey rsa:2048 \
+        -keyout /etc/ssl/private/privkey.pem \
+        -out /etc/ssl/private/cert.pem \
+        -subj "/C=DE/ST=Berlin/L=Berlin/O=MyCompany/OU=IT/CN=localhost" \
+    && cp /etc/ssl/private/cert.pem /etc/ssl/private/fullchain.pem && \
+    chsh -s /bin/bash www-data
+EXPOSE 3001
+
+FROM base AS prod
 
 #/usr/games/cowsay -f dragon.cow "you might now login using username:admin password:admin" && \ 

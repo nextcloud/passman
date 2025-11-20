@@ -1,0 +1,26 @@
+{
+    "name": "Passman Dev Container",
+    "dockerFile": "../Dockerfile",
+    "context": "..",
+    "overrideCommand": false,
+    "build": {
+        "target": "dev"
+    },
+    "appPort": ["3001:3001", "9001:80", "9002:443"],
+    "customizations": {
+        "vscodium": {
+            "extensions": [
+                "devsense.phptools-vscode",
+                "devsense.composer-php-vscode",
+                "gydunhn.javascript-essentials"
+            ],
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            }
+        }
+    },
+    "containerUser": "root",
+    "remoteUser": "www-data",
+    "workspaceFolder": "/var/www/passman",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/var/www/passman,type=bind,consistency=cache"
+}
