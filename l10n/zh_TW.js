@@ -132,6 +132,7 @@ OC.L10N.register(
     "Ignore" : "忽略",
     "Passman" : "Passman",
     "An error occurred!" : "發生錯誤！",
+    "Reason" : "理由",
     "E-mail" : "E-mail",
     "Expires:" : "到期日：",
     "Connection to server lost" : "伺服器斷線了",

@@ -363,7 +363,7 @@ OC.L10N.register(
     "Requests to destroy vault" : "Solicitudes para eliminar bóvedas",
     "Request ID" : "ID da solicitude",
     "Requested by" : "Solicitado por",
-    "Reason" : "Razón",
+    "Reason" : "Motivo",
     "Click here to request\n\t\t\t\t\tit" : "Prema aquí para\n\t\t\t\tsolicitalo",
     "Loading&hellip;" : "Cargando&hellip;",
     "E-mail" : "Correo-e",

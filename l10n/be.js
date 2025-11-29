@@ -65,6 +65,7 @@ OC.L10N.register(
     "Loading …" : "Загрузка …",
     "Description" : "Апісанне",
     "Remind me later" : "Нагадаць пазней",
+    "Reason" : "Прычына",
     "Connection to server lost" : "Злучэнне з серверам страчана",
     "Saving …" : "Захаванне …",
     "Dismiss" : "Адхіліць",
