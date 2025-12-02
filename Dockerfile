@@ -71,8 +71,6 @@ RUN service mariadb restart && \
     ./occ config:system:set trusted_domains 2 --value=172.17.0.2 && \
     ./occ config:system:set trusted_domains 3 --value=passman.cc && \
     ./occ config:system:set trusted_domains 4 --value=demo.passman.cc && \
-    ./occ config:system:set trusted_domains 5 --value=localhost && \
-    ./occ config:system:set trusted_domains 6 --value=0.0.0.0 && \
                 chown -R www-data /var/www
 EXPOSE 80
 EXPOSE 443
@@ -93,8 +91,13 @@ RUN openssl req -x509 -nodes -days 365 \
         -keyout /etc/ssl/private/privkey.pem \
         -out /etc/ssl/private/cert.pem \
         -subj "/C=DE/ST=Berlin/L=Berlin/O=MyCompany/OU=IT/CN=localhost" \
-    && cp /etc/ssl/private/cert.pem /etc/ssl/private/fullchain.pem && \
-    chsh -s /bin/bash www-data
+    && cp /etc/ssl/private/cert.pem /etc/ssl/private/fullchain.pem \
+    && chsh -s /bin/bash www-data \
+    && cd /var/www/html \
+    && service mariadb restart \
+    && ./occ config:system:set trusted_domains 5 --value=localhost \
+    && ./occ config:system:set trusted_domains 6 --value=0.0.0.0
+
 EXPOSE 3001
 
 FROM base AS prod
