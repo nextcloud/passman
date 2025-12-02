@@ -22,5 +22,6 @@
     "containerUser": "root",
     "remoteUser": "www-data",
     "workspaceFolder": "/var/www/passman",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/var/www/passman,type=bind,consistency=cache"
+    "workspaceMount": "source=${localWorkspaceFolder},target=/var/www/passman,type=bind,consistency=cache",
+    "runArgs": ["--log-opt", "max-size=10M", "--log-opt", "max-file=3"]
 }
