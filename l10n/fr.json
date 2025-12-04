@@ -186,7 +186,7 @@
     "A total of {{scan_result}} weak credentials were found." : "Un total de {{scan_result}} informations d'identification faibles ont été trouvées",
     "Score" : "Résultat",
     "Action" : "Action",
-    "Search users …" : "Rechercher des utilisateurs ...",
+    "Search users …" : "Rechercher des utilisateurs...",
     "Missing users? Only users that have vaults are shown." : "Utilisateurs manquants ? Seuls les utilisateurs avec un coffre-fort sont affichés.",
     "Cyphering" : "Chiffrement",
     "Uploading" : "Envoi en cours",
@@ -321,7 +321,7 @@
     "Simple Navigation" : "Navigation simple",
     "Someone has shared a credential with you." : "Quelqu'un a partagé une information d'identification avec vous.",
     "Click here to request it" : "Cliquez ici pour le demander",
-    "Loading …" : "Chargement ...",
+    "Loading …" : "Chargement...",
     "Oops! Credential not found. Maybe it expired." : "Oups ! Les identifiants n'ont pas été trouvés. Ils sont peut-être expirés.",
     "Mark as Compromised" : "Marquer comme compromis",
     "Compromised!" : "Compromis !",
@@ -368,7 +368,7 @@
     "Expires:" : "Expire le :",
     "Connection to server lost" : "La connexion au serveur a été perdue",
     "Problem loading page, reloading in 5 seconds" : "Problème de chargement de la page, actualisation dans 5 secondes",
-    "Saving …" : "Enregistrement ...",
+    "Saving …" : "Enregistrement...",
     "Dismiss" : "Ignorer",
     "seconds ago" : "il y a quelques secondes"
 },"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"

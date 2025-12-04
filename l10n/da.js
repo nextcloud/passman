@@ -238,7 +238,7 @@ OC.L10N.register(
     "Edit credential" : "Redigér legitimationsoplysninger",
     "Create new credential" : "Opret nye legitimationsoplysninger",
     "Save" : "Gem",
-    "Cancel" : "Annuller",
+    "Cancel" : "Annullér",
     "Settings" : "Indstillinger",
     "Share credential {{credential}}" : "Del legitimationsoplysninger {{credential}}",
     "Unshare" : "Ophæv deling",
