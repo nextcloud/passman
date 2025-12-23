@@ -31,9 +31,9 @@ use OCP\Notification\IManager;
 
 class NotificationService {
 	public function __construct(
-		private IManager $manager,
-		private IURLGenerator $urlGenerator,
-		private IDBConnection $db,
+		private readonly IManager $manager,
+		private readonly IURLGenerator $urlGenerator,
+		private readonly IDBConnection $db,
 	) {
 	}
 
