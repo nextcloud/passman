@@ -25,6 +25,7 @@ namespace OCA\Passman\Settings;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use OCA\Passman\AppInfo\Application;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
@@ -39,6 +40,7 @@ class Admin implements ISettings {
 	 * @param IConfig $config
 	 * @param IL10N $l
 	 * @param IAppManager $appManager
+	 * @param LoggerInterface $logger
 	 */
 	public function __construct(
 		protected IConfig $config,
@@ -53,8 +55,8 @@ class Admin implements ISettings {
 	 */
 	public function getForm(): TemplateResponse {
 		$hasInternetConnection = $this->config->getSystemValue('has_internet_connection', true);
-		$checkVersion = $this->config->getAppValue('passman', 'check_version', '1') === '1';
-		$localVersion = $this->appManager->getAppInfo('passman')["version"];
+		$checkVersion = $this->config->getAppValue(Application::APP_ID, 'check_version', '1') === '1';
+		$localVersion = $this->appManager->getAppInfo(Application::APP_ID)["version"];
 		$githubVersion = $this->l->t('Unable to get version info');
 		$githubReleaseUrl = null;
 
@@ -83,7 +85,7 @@ class Admin implements ISettings {
 			}
 		}
 
-		return new TemplateResponse('passman', 'admin', [
+		return new TemplateResponse(Application::APP_ID, 'admin', [
 			'localVersion' => $localVersion,
 			'githubVersion' => $githubVersion,
 			'githubReleaseUrl' => $githubReleaseUrl,
@@ -96,7 +98,7 @@ class Admin implements ISettings {
 	 * @return string
 	 */
 	public function getSection(): string {
-		return 'passman';
+		return Application::APP_ID;
 	}
 
 	/**
