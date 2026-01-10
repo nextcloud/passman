@@ -18,7 +18,6 @@ use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\NotificationService;
-use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
@@ -28,7 +27,6 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
-use OCP\IGroupManager;
 use OCP\IRequest;
 use OCP\IUserManager;
 use OCP\Notification\IManager;
@@ -42,7 +40,6 @@ class ShareController extends ApiController {
 		$AppName,
 		IRequest $request,
 		private $userId,
-		private readonly IGroupManager $groupManager,
 		private readonly IUserManager $userManager,
 		private readonly ActivityService $activityService,
 		private readonly VaultService $vaultService,
@@ -50,7 +47,6 @@ class ShareController extends ApiController {
 		private readonly CredentialService $credentialService,
 		private readonly NotificationService $notificationService,
 		private readonly FileService $fileService,
-		private readonly SettingsService $settings,
 		private readonly IManager $manager,
 	) {
 		parent::__construct(
@@ -538,7 +534,7 @@ class ShareController extends ApiController {
 				$acl->setPermissions($permission);
 				return $this->shareService->updateCredentialACL($acl);
 			} catch (\Exception) {
-
+				// handled by the ($acl === null) condition below
 			}
 
 			if ($acl === null) {
