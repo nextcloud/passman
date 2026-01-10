@@ -293,19 +293,6 @@ class ShareService {
 	}
 
 	/**
-	 * Gets the ACL on the credential for the user
-	 *
-	 * @param string|null $user_id
-	 * @param string $item_guid
-	 * @return SharingACL
-	 * @throws DoesNotExistException
-	 * @throws MultipleObjectsReturnedException
-	 */
-	public function getCredentialAclForUser(?string $user_id, string $item_guid): SharingACL {
-		return $this->sharingACL->getItemACL($user_id, $item_guid);
-	}
-
-	/**
 	 * Get pending share requests by guid
 	 *
 	 * @param string $item_guid

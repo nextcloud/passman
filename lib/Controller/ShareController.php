@@ -123,7 +123,7 @@ class ShareController extends ApiController {
 
 		$acl = null;
 		try {
-			$acl = $this->shareService->getCredentialAclForUser($first_vault['user_id'], $item_guid);
+			$acl = $this->shareService->getACL($first_vault['user_id'], $item_guid);
 		} catch (\Exception) {
 			// no need to catch this
 		}
@@ -207,7 +207,7 @@ class ShareController extends ApiController {
 		$acl = null;
 		$sr = null;
 		try {
-			$acl = $this->shareService->getCredentialAclForUser($user_id, $item_guid);
+			$acl = $this->shareService->getACL($user_id, $item_guid);
 		} catch (\Exception) {
 			// no need to handle this
 		}
