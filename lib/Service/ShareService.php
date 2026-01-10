@@ -43,7 +43,7 @@ class ShareService {
 		private readonly CredentialMapper $credential,
 		private readonly CredentialRevisionService $revisions,
 		private readonly EncryptService $encryptService,
-		private readonly IManager $IManager,
+		private readonly IManager $manager,
 	) {
 	}
 
@@ -389,11 +389,11 @@ class ShareService {
 		}
 		foreach ($request_list as $request) {
 			$this->deleteShareRequest($request);
-			$notification = $this->IManager->createNotification();
+			$notification = $this->manager->createNotification();
 			$notification->setApp('passman')
 				->setObject('passman_share_request', $request->getId())
 				->setUser($request->getTargetUserId());
-			$this->IManager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 		}
 	}
 }
