@@ -31,15 +31,15 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('RequestDeleteCtrl', ['$scope', '$location', '$http', '$routeParams', 'VaultService', 'NotificationService', '$translate',
-			function ($scope, $location, $http, $routeParams, VaultService, NotificationService, $translate) {
+		.controller('RequestDeleteCtrl', ['$scope', '$location', '$http', '$routeParams', 'VaultService', 'NotificationService', 'UrlService', '$translate',
+			function ($scope, $location, $http, $routeParams, VaultService, NotificationService, UrlService, $translate) {
 				$scope.reason = '';
 				VaultService.getVault({guid: $routeParams.vault_id}).then(function(vault){
 					$scope.pending_deletion = vault.delete_request_pending;
 				});
 
 				$scope.requestDeletion = function () {
-					var queryUrl = OC.generateUrl('apps/passman/admin/request-deletion/'+ $routeParams.vault_id);
+					var queryUrl = UrlService.generateUrl('/admin/request-deletion/'+ $routeParams.vault_id);
 					var params = {
 						reason: $scope.reason
 					};
@@ -51,7 +51,7 @@
 				};
 
 				$scope.removeRequestDeletion = function () {
-					var queryUrl = OC.generateUrl('apps/passman/admin/request-deletion/' + $routeParams.vault_id);
+					var queryUrl = UrlService.generateUrl('/admin/request-deletion/' + $routeParams.vault_id);
 					$http.delete(queryUrl).then(function () {
 						NotificationService.showNotification($translate.instant('deletion.removed'), 5000);
 						$location.path('#/');

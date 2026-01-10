@@ -21,6 +21,7 @@
  */
 
 $(document).ready(function () {
+    const urlPrefix = 'apps/passman-next';
 	var Settings = function (baseUrl) {
 		this._baseUrl = baseUrl;
 		this._settings = [];
@@ -83,7 +84,7 @@ $(document).ready(function () {
 	};
 
 
-	var settings = new Settings(OC.generateUrl('apps/passman/api/v2/settings'));
+	var settings = new Settings(OC.generateUrl(urlPrefix + '/api/v2/settings'));
 	settings.load();
 	// ADMIN SETTINGS
 
@@ -139,7 +140,7 @@ $(document).ready(function () {
 	};
 	$('.account_mover_selector').select2({
 		ajax: {
-			url: OC.generateUrl('apps/passman/admin/search'),
+			url: OC.generateUrl(urlPrefix + '/admin/search'),
 			dataType: 'json',
 			delay: 50,
 			data: function (param) {
@@ -173,7 +174,7 @@ $(document).ready(function () {
 		$(self).attr('disabled', 'disabled');
 		$(self).html('<i class="fa fa-spinner fa-spin"></i> ' + OC.L10N.translate('passman', 'Moving') + '...');
 		if (accountMover.source_account && accountMover.destination_account) {
-			$.post(OC.generateUrl('apps/passman/admin/move'), accountMover, function (data) {
+			$.post(OC.generateUrl(urlPrefix + '/admin/move'), accountMover, function (data) {
 				$(self).removeAttr('disabled');
 				$(self).html('Move');
 				if (data.success) {
@@ -223,14 +224,14 @@ $(document).ready(function () {
 		if (!confirm(OC.L10N.translate('passman', "Are you really sure?\nThis will delete the vault and all credentials in it!"))) {
 			return;
 		}
-		$.post(OC.generateUrl('apps/passman/admin/accept-delete-request'), req, function () {
+		$.post(OC.generateUrl(urlPrefix + '/admin/accept-delete-request'), req, function () {
 			$(el).parent().parent().remove();
 		});
 	}
 
 	function ignoreDeleteRequest (el, req) {
 		$.ajax({
-			url: OC.generateUrl('apps/passman/admin/request-deletion/' + req.vault_guid),
+			url: OC.generateUrl(urlPrefix + '/admin/request-deletion/' + req.vault_guid),
 			type: 'DELETE',
 			success: function () {
 				$(el).parent().parent().remove();
@@ -238,7 +239,7 @@ $(document).ready(function () {
 		});
 	}
 
-	$.get(OC.generateUrl('apps/passman/admin/delete-requests'), function (requests) {
+	$.get(OC.generateUrl(urlPrefix + '/admin/delete-requests'), function (requests) {
 		var table = $('#requests-table tbody');
 		$.each(requests, function (k, request) {
 			var accept = $('<span class="link accept">[Accept]&nbsp;</span>');

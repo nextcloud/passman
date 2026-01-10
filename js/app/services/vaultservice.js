@@ -32,13 +32,13 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('VaultService', ['$http', function ($http) {
+		.service('VaultService', ['UrlService', '$http', function (UrlService, $http) {
 			// AngularJS will instantiate a singleton by calling "new" on this function
 			var _this = this;
 			var _activeVault;
 			var service = {
 				getVaults: function () {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults');
+					var queryUrl = UrlService.generateUrl('/api/v2/vaults');
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -71,7 +71,7 @@
 
 				},
 				createVault: function (vaultName) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults');
+					var queryUrl = UrlService.generateUrl('/api/v2/vaults');
 					return $http.post(queryUrl, {vault_name: vaultName}).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -81,7 +81,7 @@
 					});
 				},
 				getVault: function (vault) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid);
+					var queryUrl = UrlService.generateUrl('/api/v2/vaults/' + vault.guid);
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							if (response.data.vault_settings) {
@@ -101,7 +101,7 @@
 					delete _vault.defaultVault;
 					delete _vault.vaultKey;
 					_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings));
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.guid);
+					var queryUrl = UrlService.generateUrl('/api/v2/vaults/' + _vault.guid);
 					return $http.patch(queryUrl, _vault).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -113,7 +113,7 @@
 				updateSharingKeys: function (vault) {
 					var _vault = angular.copy(vault);
 					delete _vault.vaultKey;
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + _vault.guid + '/sharing-keys');
+					var queryUrl = UrlService.generateUrl('/api/v2/vaults/' + _vault.guid + '/sharing-keys');
 					return $http.post(queryUrl, _vault).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -123,7 +123,7 @@
 					});
 				},
 				reEncryptACLSharingKeys: function (vault, oldVaultPass, newVaultPass, EncryptService) {
-					const queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vault/' + vault.guid + '/acl');
+					const queryUrl = UrlService.generateUrl('/api/v2/sharing/vault/' + vault.guid + '/acl');
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							const updateACLSharingKey = function (index) {
@@ -131,7 +131,7 @@
 								const decrypted_shared_key = EncryptService.decryptString(angular.copy(acl.shared_key), oldVaultPass);
 								acl.shared_key = EncryptService.encryptString(decrypted_shared_key, newVaultPass);
 
-								const patchUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + acl.item_guid + '/acl/shared_key');
+								const patchUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + acl.item_guid + '/acl/shared_key');
 								$http.patch(patchUrl, {
 									shared_key: acl.shared_key
 								}).then(function () {
@@ -147,8 +147,8 @@
 					});
 				},
 				deleteVault: function (vault, file_ids) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/vaults/' + vault.guid);
-					var deleteFilesUrl = OC.generateUrl('apps/passman/api/v2/files/delete');
+					var queryUrl = UrlService.generateUrl('/api/v2/vaults/' + vault.guid);
+					var deleteFilesUrl = UrlService.generateUrl('/api/v2/files/delete');
 					var filesData = {
 						"file_ids": JSON.stringify(file_ids)
 					};

@@ -27,6 +27,8 @@ var PassmanImporter = PassmanImporter || {};
 	'use strict';
 	// Define the importer
 
+    const APP_ID = 'passman-next';
+
 // Define the importer
 	PassmanImporter.randomData = {
 		info: {
@@ -60,7 +62,7 @@ var PassmanImporter = PassmanImporter || {};
 			var _this = this;
 			var generateCredential = function (max, i, callback) {
 				if (jQuery) {
-					var url = OC.generateUrl('apps/passman/api/internal/generate_person');
+					var url = OC.generateUrl('apps/' + APP_ID + '/api/internal/generate_person');
 					$.ajax({
 						url: url,
 						dataType: 'json',

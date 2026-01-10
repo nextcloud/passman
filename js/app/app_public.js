@@ -23,6 +23,8 @@
 (function () {
 	'use strict';
 
+    const APP_ID = 'passman-next';
+
 	angular
 		.module('passmanApp', [
 			'ngAnimate',
@@ -38,7 +40,10 @@
 		/** global: oc_requesttoken */
 		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
 	}]).config(function ($translateProvider) {
-		$translateProvider.useUrlLoader(OC.generateUrl('/apps/passman/api/v2/language'));
+		$translateProvider.useUrlLoader(OC.generateUrl('/apps/' + APP_ID + '/api/v2/language'));
 		$translateProvider.preferredLanguage('en');
-	});
+	}).run([
+        '$rootScope', function($rootScope) {
+            $rootScope.APP_ID = APP_ID;
+        }]);
 }());

@@ -23,6 +23,8 @@
 (function() {
   'use strict';
 
+  const APP_ID = 'passman-next';
+
   /**
    * @ngdoc overview
    * @name passmanApp
@@ -84,13 +86,14 @@
     localStorageServiceProvider.setNotify(true, true);
   }).config(function($translateProvider) {
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
-    $translateProvider.useUrlLoader(OC.generateUrl('/apps/passman/api/v2/language'));
+    $translateProvider.useUrlLoader(OC.generateUrl('/apps/' + APP_ID + '/api/v2/language'));
     $translateProvider.preferredLanguage('en');
   }).run([
     '$rootScope', function($rootScope) {
       $rootScope.$on('$routeChangeSuccess', function(e, curr, prev) {
         $('.ui-dialog-content').dialog('close');
       });
+      $rootScope.APP_ID = APP_ID;
     }]);
 
   /**
