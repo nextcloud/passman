@@ -120,6 +120,7 @@ OC.L10N.register(
     "Date" : "日期",
     "Accept" : "接受",
     "Decline" : "拒絕",
+    "Last accessed" : "上次存取",
     "Never" : "絕不",
     "Logout" : "登出",
     "Donate" : "斗內",
