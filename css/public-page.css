@@ -115,7 +115,6 @@ header {
           white-space: normal; }
 
 .credential_field {
-  /* overflow: hidden; */
   display: flex;
   flex-wrap: wrap;
   align-items: center; }

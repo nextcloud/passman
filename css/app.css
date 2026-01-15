@@ -1235,15 +1235,11 @@
   background: none;
   background-position-x: 0%;
   background-position-y: 0%;
-  background-repeat: repeat;
-  background-image: none;
-  background-size: auto;
   background-image: var(--icon-triangle-s-dark);
   background-size: 16px;
   background-repeat: no-repeat;
   background-position: center;
   border: none;
-  border-radius: 0;
   outline: none !important;
   box-shadow: none;
   content: " ";
@@ -1260,10 +1256,6 @@
 
 #app-navigation:not(.vue) > ul > li > .app-navigation-entry-bullet + a, #app-navigation:not(.vue) > ul > li > ul > li > .app-navigation-entry-bullet + a {
   background: rgba(0, 0, 0, 0) !important; }
-
-#app-navigation:not(.vue) > ul > li > a.svg, #app-navigation:not(.vue) > ul > li > ul > li > a.svg {
-  padding: 0 12px 0 44px;
-  padding-left: 44px; }
 
 #app-navigation:not(.vue) > ul > li > .app-navigation-entry-bullet, #app-navigation:not(.vue) > ul > li > ul > li > .app-navigation-entry-bullet {
   position: absolute;
