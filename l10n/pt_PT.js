@@ -91,6 +91,7 @@ OC.L10N.register(
     "Search Tags" : "Pesquisar Etiquetas",
     "Expired" : "Expirado",
     "Filter Tags" : "Filtrar Etiquetas",
+    "Someone has shared a credential with you." : "Alguém partilhou uma credencial consigo.",
     "Loading …" : "A carregar...",
     "email" : "email",
     "Description" : "Descrição",
