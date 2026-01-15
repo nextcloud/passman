@@ -338,18 +338,17 @@ module.exports = function (grunt) {
 							replacement: function (matchedString) {
 								jsResources = [];
 
-								var jsArray = matchedString.match(/script\([A-z']+,\s?'([\/A-z.-]+)'\);/g);
+								const jsArray = matchedString.match(/script\([A-z]+::[A-z_]+,\s?'([\/A-z.-]+)'\);/g);
 								jsArray.forEach(function (file) {
-									var regex = /script\([A-z']+,\s?'([\/A-z.-]+)'\);/g;
-									var matches = regex.exec(file);
+									const regex = /script\([A-z]+::[A-z_]+,\s?'([\/A-z.-]+)'\);/g;
+									const matches = regex.exec(file);
 									if (matches) {
 										jsResources.push("'js/" + matches[1] + ".js'");
-
 									}
 								});
 								//Replace the entire build-js-start to build-js-end block with this <script> tag
 
-								return "script('passman', 'passman.min');";
+								return "script(MyAppTemplateConfig::APP_ID, 'passman.min');";
 							}
 						},
 						{
@@ -357,7 +356,7 @@ module.exports = function (grunt) {
 							match: /\/\s?\*build\-css\-start[\s\S]*build\-css\-end+\*\//,
 							replacement: function (matchedString) {
 								//Replace the entire build-css-start to build-css-end block with this <link> tag
-								return "style('passman', 'passman.min');"
+								return "style(MyAppTemplateConfig::APP_ID, 'passman.min');";
 							}
 						}
 					]
