@@ -21,6 +21,7 @@
  *
  */
 
+use OCA\Passman\AppInfo\Application;
 use OCP\AppFramework\App;
 use Test\TestCase;
 
@@ -36,13 +37,13 @@ class AppTest extends TestCase {
 
     public function setUp() {
         parent::setUp();
-        $app = new App('passman');
+        $app = new App(Application::APP_ID);
         $this->container = $app->getContainer();
     }
 
     public function testAppInstalled() {
         $appManager = $this->container->query('OCP\App\IAppManager');
-        $this->assertTrue($appManager->isInstalled('passman'));
+        $this->assertTrue($appManager->isInstalled(Application::APP_ID));
     }
 
 }

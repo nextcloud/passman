@@ -12,6 +12,7 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Activity;
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Db\File;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Service\ActivityService;
@@ -221,7 +222,7 @@ class ShareController extends ApiController {
 		if ($sr) {
 			$this->shareService->cleanItemRequestsForUser($sr);
 			$notification = $this->manager->createNotification();
-			$notification->setApp('passman')
+			$notification->setApp(Application::APP_ID)
 				->setObject('passman_share_request', $sr->getId())
 				->setUser($user_id);
 			$this->manager->markProcessed($notification);
@@ -272,7 +273,7 @@ class ShareController extends ApiController {
 		}
 
 		$notification = $this->manager->createNotification();
-		$notification->setApp('passman')
+		$notification->setApp(Application::APP_ID)
 			->setObject('passman_share_request', $sr->getId())
 			->setUser($this->userId->getUID());
 		$this->manager->markProcessed($notification);
@@ -376,7 +377,7 @@ class ShareController extends ApiController {
 
 
 			$notification = $this->manager->createNotification();
-			$notification->setApp('passman')
+			$notification->setApp(Application::APP_ID)
 				->setObject('passman_share_request', $share_request_id)
 				->setUser($this->userId->getUID());
 			$this->manager->markProcessed($notification);

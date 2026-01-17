@@ -13,6 +13,7 @@ namespace OCA\Passman\Controller;
 
 use Doctrine\DBAL\Exception\DriverException;
 use OC\App\AppManager;
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\IconService;
 use OCA\Passman\Utility\Utils;
@@ -136,14 +137,14 @@ class IconController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getLocalIconList() {
-		$dir = $this->am->getAppPath('passman');
+		$dir = $this->am->getAppPath(Application::APP_ID);
 		$result = Utils::getDirContents($dir . '/img/icons');
 		$isLowerThanPhp8 = version_compare(phpversion(), '8.0', '<');
 
 		$icons = [];
 		foreach ($result as $icon) {
 			$iconPath = $icon;
-			$path = explode('passman/', (string) $iconPath);
+			$path = explode(Application::APP_ID . '/', (string) $iconPath);
 			$pack = explode('/', $path[1])[2];
 			$mime = mime_content_type($iconPath);
 			if ($mime !== 'directory') {
@@ -152,7 +153,7 @@ class IconController extends ApiController {
 				}
 				$icon = [];
 				$icon['mimetype'] = $mime;
-				$icon['url'] = $this->urlGenerator->linkTo('passman', $path[1]);
+				$icon['url'] = $this->urlGenerator->linkTo(Application::APP_ID, $path[1]);
 				$icon['pack'] = $pack;
 				$icon['data'] = base64_encode(file_get_contents($iconPath));
 				if (!isset($icons[$pack])) {

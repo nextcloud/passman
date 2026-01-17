@@ -23,6 +23,7 @@
 
 namespace OCA\Passman;
 
+use OCA\Passman\AppInfo\Application;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 use OCP\Notification\INotification;
@@ -41,13 +42,13 @@ class Notifier implements INotifier {
 	 * @param string $languageCode The code of the language that should be used to prepare the notification
 	 */
 	public function prepare(INotification $notification, string $languageCode): INotification {
-		if ($notification->getApp() !== 'passman') {
+		if ($notification->getApp() !== Application::APP_ID) {
 			// Not my app => throw
 			throw new \InvalidArgumentException();
 		}
 
 		// Read the language from the notification
-		$l = $this->factory->get('passman', $languageCode);
+		$l = $this->factory->get(Application::APP_ID, $languageCode);
 
 		// Set the icon for the notification
 		$notification->setIcon(
@@ -124,7 +125,7 @@ class Notifier implements INotifier {
 	 * @return string
 	 */
 	public function getID(): string {
-		return 'passman';
+		return Application::APP_ID;
 	}
 
 	/**
@@ -133,6 +134,6 @@ class Notifier implements INotifier {
 	 * @return string
 	 */
 	public function getName(): string {
-		return $this->factory->get('passman')->t('Passwords');
+		return $this->factory->get(Application::APP_ID)->t(Application::APP_LABEL);
 	}
 }

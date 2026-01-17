@@ -24,6 +24,7 @@
 namespace OCA\Passman\Service;
 
 
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
@@ -377,7 +378,7 @@ class ShareService {
 		foreach ($request_list as $request) {
 			$this->deleteShareRequest($request);
 			$notification = $this->manager->createNotification();
-			$notification->setApp('passman')
+			$notification->setApp(Application::APP_ID)
 				->setObject('passman_share_request', $request->getId())
 				->setUser($request->getTargetUserId());
 			$this->manager->markProcessed($notification);

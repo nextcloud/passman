@@ -53,6 +53,8 @@ use Psr\Log\LoggerInterface;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'passman';
+	public const APP_NAME = 'Passman';
+	public const APP_LABEL = 'Passwords';
 
 	public function __construct() {
 		parent::__construct(self::APP_ID);

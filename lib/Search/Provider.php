@@ -56,7 +56,7 @@ class Provider implements IProvider {
 	}
 
 	public function getName(): string {
-		return $this->l10n->t('Passman');
+		return $this->l10n->t(Application::APP_NAME);
 	}
 
 	public function getOrder(string $route, array $routeParameters): int {

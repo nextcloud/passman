@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\FileService;
 use OCP\AppFramework\Http\JSONResponse;
 use PHPUnit_Framework_TestCase;
@@ -51,7 +52,7 @@ class FileControllerTest extends PHPUnit_Framework_TestCase {
 		$request = $this->getMockBuilder('OCP\IRequest')->getMock();
 		$this->fileService = $this->createMock(FileService::class);
 		$this->controller = new FileController(
-			'passman', $request, $this->userId, $this->fileService
+			Application::APP_ID, $request, $this->userId, $this->fileService
 		);
 	}
 
