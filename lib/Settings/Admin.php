@@ -95,7 +95,7 @@ class Admin implements ISettings {
 	 * @return string
 	 */
 	public function getSection(): string {
-		return 'additional';
+		return 'passman';
 	}
 
 	/**
