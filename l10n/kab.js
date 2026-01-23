@@ -41,6 +41,7 @@ OC.L10N.register(
     "Loading …" : "Asali ...",
     "Description" : "Aglam",
     "Saving …" : "Asekles ...",
-    "Dismiss" : "Agi"
+    "Dismiss" : "Agi",
+    "seconds ago" : "Tasinin aya"
 },
 "nplurals=2; plural=(n != 1);");
