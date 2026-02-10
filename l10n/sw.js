@@ -78,6 +78,7 @@ OC.L10N.register(
     "Date" : "Tarehe",
     "Accept" : "Kubali",
     "Decline" : "Kataa",
+    "Last accessed" : "Last accessed",
     "Never" : "Kamwe",
     "Tags" : "Maoni",
     "Expired" : "Imeisha  muda",
