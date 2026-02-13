@@ -24,8 +24,8 @@ class SettingsController extends ApiController {
 		$AppName,
 		IRequest $request,
 		private $userId,
-		private SettingsService $settings,
-		private IL10N $l,
+		private readonly SettingsService $settings,
+		private readonly IL10N $l,
 	) {
 		parent::__construct(
 			$AppName,
