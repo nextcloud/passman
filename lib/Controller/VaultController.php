@@ -25,18 +25,16 @@ use Psr\Log\LoggerInterface;
 
 
 class VaultController extends ApiController {
-	private $userId;
-
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		$UserId,
-		private VaultService $vaultService,
-		private CredentialService $credentialService,
-		private DeleteVaultRequestService $deleteVaultRequestService,
-		private SettingsService $settings,
-		private FileService $fileService,
-		private LoggerInterface $logger,
+		private $userId,
+		private readonly VaultService $vaultService,
+		private readonly CredentialService $credentialService,
+		private readonly DeleteVaultRequestService $deleteVaultRequestService,
+		private readonly SettingsService $settings,
+		private readonly FileService $fileService,
+		private readonly LoggerInterface $logger,
 	) {
 		parent::__construct(
 			$AppName,
@@ -44,7 +42,6 @@ class VaultController extends ApiController {
 			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
-		$this->userId = $UserId;
 	}
 
 	/**
@@ -95,7 +92,7 @@ class VaultController extends ApiController {
 		$vault = null;
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			return new NotFoundJSONResponse();
 		}
 		$result = [];
@@ -146,8 +143,8 @@ class VaultController extends ApiController {
 		$vault = null;
 		try {
 			$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
-		} catch (\Exception $e) {
-			// No need to catch the execption
+		} catch (\Exception) {
+			// No need to catch the exception
 		}
 
 		if ($vault) {
@@ -181,7 +178,7 @@ class VaultController extends ApiController {
 					}
 				}
 			}
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			return new NotFoundJSONResponse();
 		}
 
