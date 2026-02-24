@@ -17,6 +17,7 @@ OC.L10N.register(
     "Size" : "Teɣzi",
     "Expiration date" : "Azemz n tagara",
     "Disabled" : "Ittwarermed",
+    "Export" : "Sifeḍ",
     "Change" : "Snifel",
     "Uploading" : "Tuzzna n ifuyla",
     "User" : "Aseqdac",
