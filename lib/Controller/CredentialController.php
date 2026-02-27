@@ -28,17 +28,15 @@ use OCP\IRequest;
 
 
 class CredentialController extends ApiController {
-	private $userId;
-
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		$userId,
-		private CredentialService $credentialService,
-		private ActivityService $activityService,
-		private CredentialRevisionService $credentialRevisionService,
-		private ShareService $sharingService,
-		private SettingsService $settings,
+		private $userId,
+		private readonly CredentialService $credentialService,
+		private readonly ActivityService $activityService,
+		private readonly CredentialRevisionService $credentialRevisionService,
+		private readonly ShareService $sharingService,
+		private readonly SettingsService $settings,
 	) {
 		parent::__construct(
 			$AppName,
@@ -46,7 +44,6 @@ class CredentialController extends ApiController {
 			'GET, POST, DELETE, PUT, PATCH, OPTIONS',
 			'Authorization, Content-Type, Accept',
 			86400);
-		$this->userId = $userId;
 	}
 
 
@@ -199,7 +196,7 @@ class CredentialController extends ApiController {
 
 		try {
 			$acl_list = $this->sharingService->getCredentialAclList($storedCredential->getGuid());
-		} catch (\Exception $exception) {
+		} catch (\Exception) {
 			// Just check if we have an acl list
 		}
 		if (!empty($acl_list)) {
@@ -264,7 +261,7 @@ class CredentialController extends ApiController {
 	public function deleteCredential($credential_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			return new NotFoundJSONResponse();
 		}
 		if ($credential instanceof Credential) {
@@ -285,7 +282,7 @@ class CredentialController extends ApiController {
 	public function getRevision($credential_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($credential_guid);
-		} catch (\Exception $ex) {
+		} catch (\Exception) {
 			return new NotFoundJSONResponse();
 		}
 		// If the request was made by the owner of the credential
@@ -320,7 +317,7 @@ class CredentialController extends ApiController {
 		$revision = null;
 		try {
 			$revision = $this->credentialRevisionService->getRevision($revision_id);
-		} catch (\Exception $exception) {
+		} catch (\Exception) {
 			return new JSONResponse([]);
 		}
 

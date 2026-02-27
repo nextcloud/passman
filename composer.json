@@ -6,5 +6,12 @@
             "email": "brantje@gmail.com"
         }
     ],
-    "require": {}
+    "license": "AGPL-3.0-or-later",
+    "scripts": {
+        "rector:check": "rector --dry-run --clear-cache",
+        "rector:fix": "rector"
+    },
+    "require-dev": {
+        "rector/rector": "^2.1"
+    }
 }

@@ -27,7 +27,6 @@ use Exception;
 use OCA\Passman\Db\File;
 use OCA\Passman\Db\FileMapper;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\IConfig;
 
@@ -37,8 +36,8 @@ class FileService {
 	private $server_key;
 
 	public function __construct(
-		private FileMapper $fileMapper,
-		private EncryptService $encryptService,
+		private readonly FileMapper $fileMapper,
+		private readonly EncryptService $encryptService,
 		IConfig $config,
 	) {
 		$this->server_key = $config->getSystemValue('passwordsalt', '');
@@ -49,12 +48,12 @@ class FileService {
 	 *
 	 * @param int $fileId
 	 * @param string|null $userId
-	 * @return array|File
+	 * @return File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 * @throws Exception
 	 */
-	public function getFile(int $fileId, string $userId = null) {
+	public function getFile(int $fileId, ?string $userId = null): File {
 		$file = $this->fileMapper->getFile($fileId, $userId);
 		return $this->encryptService->decryptFile($file);
 	}
@@ -64,30 +63,30 @@ class FileService {
 	 *
 	 * @param string $file_guid
 	 * @param string|null $userId
-	 * @return array|File
+	 * @return File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 * @throws Exception
 	 */
-	public function getFileByGuid(string $file_guid, string $userId = null) {
+	public function getFileByGuid(string $file_guid, ?string $userId = null): File {
 		$file = $this->fileMapper->getFileByGuid($file_guid, $userId);
 		return $this->encryptService->decryptFile($file);
 	}
 
 	/**
-	 * Upload a new file,
+	 * Upload a new file
 	 *
 	 * @param array $file
 	 * @param string $userId
-	 * @return array|File
+	 * @return File
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 * @throws Exception
 	 */
-	public function createFile(array $file, string $userId) {
+	public function createFile(array $file, string $userId): File {
 		$file = $this->encryptService->encryptFile($file);
-		$file = $this->fileMapper->create($file, $userId);
-		return $this->getFile($file->getId());
+		$fileEntity = $this->fileMapper->create($file, $userId);
+		return $this->getFile($fileEntity->getId());
 	}
 
 	/**
@@ -95,9 +94,9 @@ class FileService {
 	 *
 	 * @param int $file_id
 	 * @param string $userId
-	 * @return File|Entity
+	 * @return File
 	 */
-	public function deleteFile(int $file_id, string $userId) {
+	public function deleteFile(int $file_id, string $userId): File {
 		return $this->fileMapper->deleteFile($file_id, $userId);
 	}
 
@@ -108,7 +107,7 @@ class FileService {
 	 * @return File
 	 * @throws Exception
 	 */
-	public function updateFile(File $file) {
+	public function updateFile(File $file): File {
 		$file = $this->encryptService->encryptFile($file);
 		return $this->fileMapper->updateFile($file);
 	}
@@ -120,11 +119,11 @@ class FileService {
 	 * @return string[]
 	 * @throws Exception
 	 */
-	public function getFileGuidsFromUser(string $userId) {
-		$files = $this->fileMapper->getFileGuidsFromUser($userId);
+	public function getFileGuidsFromUser(string $userId): array {
+		$partialFiles = $this->fileMapper->getFileGuidsFromUser($userId);
 		$results = [];
-		foreach ($files as $fileGuid) {
-			$results[] = $fileGuid->getGuid();
+		foreach ($partialFiles as $partialFile) {
+			$results[] = $partialFile->getGuid();
 		}
 		return $results;
 	}

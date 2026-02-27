@@ -25,12 +25,14 @@ namespace OCA\Passman\Db;
 
 
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
+/**
+ * @template-extends QBMapper<DeleteVaultRequest>
+ */
 class DeleteVaultRequestMapper extends QBMapper {
 	const TABLE_NAME = 'passman_delete_vault_request';
 
@@ -41,17 +43,17 @@ class DeleteVaultRequestMapper extends QBMapper {
 	/**
 	 * Create a new enty in the db
 	 * @param DeleteVaultRequest $request
-	 * @return Entity
+	 * @return DeleteVaultRequest
 	 */
-	public function createRequest(DeleteVaultRequest $request) {
+	public function createRequest(DeleteVaultRequest $request): DeleteVaultRequest {
 		return $this->insert($request);
 	}
 
 	/**
 	 * Get all delete requests
-	 * @return Entity[]
+	 * @return DeleteVaultRequest[]
 	 */
-	public function getDeleteRequests() {
+	public function getDeleteRequests(): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME);
@@ -62,11 +64,11 @@ class DeleteVaultRequestMapper extends QBMapper {
 	/**
 	 * Get request for a vault guid
 	 * @param string $vault_guid
-	 * @return Entity
+	 * @return DeleteVaultRequest
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getDeleteRequestsForVault(string $vault_guid) {
+	public function getDeleteRequestsForVault(string $vault_guid): DeleteVaultRequest {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -80,8 +82,7 @@ class DeleteVaultRequestMapper extends QBMapper {
 	 * @param DeleteVaultRequest $request Request to delete
 	 * @return DeleteVaultRequest         The deleted request
 	 */
-	public function removeDeleteVaultRequest(DeleteVaultRequest $request) {
+	public function removeDeleteVaultRequest(DeleteVaultRequest $request): DeleteVaultRequest {
 		return $this->delete($request);
 	}
-
 }

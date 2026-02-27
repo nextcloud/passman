@@ -80,12 +80,12 @@ abstract class DatabaseHelperTest extends PHPUnit_Extensions_Database_TestCase {
 		$this->db->executeQuery($this->db->getDatabasePlatform()->getTruncateTableSQL($table_name));
 	}
 
-	/**
-	 * Initializes the table with the corresponding dataset on the dumps dir
-	 *
-	 * @param $table_name
-	 */
-	public function setUpTable($table_name){
+    /**
+     * Initializes the table with the corresponding dataset on the dumps dir
+     *
+     * @param string $table_name
+     */
+	public function setUpTable(string $table_name){
 		$table = $this->getTableDataset($table_name);
 		$table_no_prefix = substr($table_name, 3);
 

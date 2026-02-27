@@ -25,55 +25,54 @@ namespace OCA\Passman\Service;
 
 use OCA\Passman\Db\DeleteVaultRequest;
 use OCA\Passman\Db\DeleteVaultRequestMapper;
-use OCP\AppFramework\Db\Entity;
 
 
 class DeleteVaultRequestService {
 
 	public function __construct(
-		private DeleteVaultRequestMapper $deleteVaultRequestMapper,
+		private readonly DeleteVaultRequestMapper $deleteVaultRequestMapper,
 	) {
-	}
-
-	/**
-	 *  Create a new DeleteVaultRequest
-	 *
-	 * @param $request DeleteVaultRequest
-	 * @return DeleteVaultRequest
-	 */
-	public function createRequest(DeleteVaultRequest $request) {
-		return $this->deleteVaultRequestMapper->insert($request);
 	}
 
 	/**
 	 * Create a new DeleteVaultRequest
 	 *
-	 * @return Entity[]
+	 * @param $request DeleteVaultRequest
+	 * @return DeleteVaultRequest
 	 */
-	public function getDeleteRequests() {
+	public function createRequest(DeleteVaultRequest $request): DeleteVaultRequest {
+		return $this->deleteVaultRequestMapper->insert($request);
+	}
+
+	/**
+	 * Get all delete requests
+	 *
+	 * @return DeleteVaultRequest[]
+	 */
+	public function getDeleteRequests(): array {
 		return $this->deleteVaultRequestMapper->getDeleteRequests();
 	}
 
 	/**
-	 *  Create a new DeleteVaultRequest
+	 * Get DeleteVaultRequest for a specific vault by its guid
 	 *
 	 * @param $vault_guid string The vault guid
-	 * @return bool | Entity
+	 * @return bool | DeleteVaultRequest
 	 */
-	public function getDeleteRequestForVault(string $vault_guid) {
+	public function getDeleteRequestForVault(string $vault_guid): DeleteVaultRequest|bool {
 		try {
 			return $this->deleteVaultRequestMapper->getDeleteRequestsForVault($vault_guid);
-		} catch (\Exception $e) {
+		} catch (\Exception) {
 			return false;
 		}
 	}
 
 	/**
-	 *  Create a new DeleteVaultRequest
+	 *  Deletes the given DeleteVaultRequest
 	 *
 	 * @param $req DeleteVaultRequest
 	 */
-	public function removeDeleteRequestForVault(DeleteVaultRequest $req) {
+	public function removeDeleteRequestForVault(DeleteVaultRequest $req): void {
 		$this->deleteVaultRequestMapper->removeDeleteVaultRequest($req);
 	}
 }

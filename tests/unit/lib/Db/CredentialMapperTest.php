@@ -106,8 +106,7 @@ class CredentialMapperTest extends DatabaseHelperTest {
 		$tmp = $this->filterDataset($tmp, 'id', $data[0]->getId());
 		$this->assertCount(count($tmp), $data);
 
-		$tmp[0] = Credential::fromRow($tmp[0]);
-		$this->assertEquals($tmp, $data);
+		$this->assertEquals(Credential::fromRow($tmp[0]), $data);
 	}
 
 	/**
