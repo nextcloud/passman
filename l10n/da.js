@@ -232,7 +232,7 @@ OC.L10N.register(
     "Revision of" : "Revision af",
     "by" : "af",
     "No revisions found." : "Ingen revisioner fundet.",
-    "Label" : "Label",
+    "Label" : "Mærkat",
     "Restore revision" : "Genskab revision",
     "Delete revision" : "Slet revision",
     "Edit credential" : "Redigér legitimationsoplysninger",
