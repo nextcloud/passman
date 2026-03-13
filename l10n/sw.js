@@ -10,6 +10,7 @@ OC.L10N.register(
     "Done" : "Imefanyika",
     "Settings saved" : "Settings saved",
     "General settings" : "General settings",
+    "Password settings" : "Mipangilio ya nenosiri",
     "I understand the risks" : "I understand the risks",
     "Sharing" : "inashirikisha",
     "Share link" : "Shirikisha kiungo",
