@@ -28,7 +28,6 @@ namespace OCA\Passman\Service;
 // Upgraded to use openssl
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\File;
-use OCP\AppFramework\Db\Entity;
 use OCP\IConfig;
 
 /**
@@ -68,7 +67,16 @@ class EncryptService {
 
 	// The fields of a credential which are encrypted
 	public $encrypted_credential_fields = [
-		'description', 'username', 'password', 'files', 'custom_fields', 'otp', 'email', 'tags', 'url', 'icon'
+		'description',
+		'username',
+		'password',
+		'files',
+		'custom_fields',
+		'otp',
+		'email',
+		'tags',
+		'url',
+		'icon'
 	];
 
 	// Contains the server key
@@ -124,16 +132,15 @@ class EncryptService {
 	/**
 	 * Decrypt the data with the provided key
 	 *
-	 * @param string $data_hex The encrypted datat to decrypt
+	 * @param string|null $data_hex The encrypted data to decrypt. Accept null for dynamic caller compatibility, but always return false then.
 	 * @param string $key The key to use for decryption
 	 *
 	 * @returns string|false The returned string if decryption is successful
 	 *                           false if it is not
 	 */
-	public function decrypt($data_hex, $key) {
-
+	public function decrypt(?string $data_hex, string $key): bool|string {
 		if (!function_exists('hex2bin')) {
-			function hex2bin($str) {
+			function hex2bin(string $str): string {
 				$sbin = "";
 				$len = strlen($str);
 				for ($i = 0; $i < $len; $i += 2) {
@@ -143,6 +150,9 @@ class EncryptService {
 				return $sbin;
 			}
 		}
+		if ($data_hex === null) {
+			return false;
+		}
 
 		$data = hex2bin($data_hex);
 
@@ -150,13 +160,11 @@ class EncryptService {
 		$enc = substr($data, 128, -64);
 		$mac = substr($data, -64);
 
-		list ($cipherKey, $macKey, $iv) = $this->getKeys($salt, $key);
+		[$cipherKey, $macKey, $iv] = $this->getKeys($salt, $key);
 
-		if (hash_equals(hash_hmac('sha512', $enc, $macKey, true), $mac)) {
+		if (hash_equals(hash_hmac('sha512', $enc, (string)$macKey, true), $mac)) {
 			$dec = openssl_decrypt($enc, $this->cipher, $cipherKey, true, $iv);
-			$data = $this->unpad($dec);
-
-			return $data;
+			return $this->unpad($dec);
 		}
 
 		return false;
@@ -170,19 +178,17 @@ class EncryptService {
 	 *
 	 * @returns string The encrypted data
 	 */
-	public function encrypt($data, $key) {
+	public function encrypt(string $data, string $key): string {
 		if (function_exists('random_bytes')) {
 			$salt = random_bytes(128);
 		} else {
 			$salt = openssl_random_pseudo_bytes(128);
 		}
-		list ($cipherKey, $macKey, $iv) = $this->getKeys($salt, $key);
+		[$cipherKey, $macKey, $iv] = $this->getKeys($salt, $key);
 		$data = $this->pad($data);
 		$enc = openssl_encrypt($data, $this->cipher, $cipherKey, true, $iv);
-		$mac = hash_hmac('sha512', $enc, $macKey, true);
-		$data = bin2hex($salt . $enc . $mac);
-		return $data;
-
+		$mac = hash_hmac('sha512', $enc, (string)$macKey, true);
+		return bin2hex($salt . $enc . $mac);
 	}
 
 	/**
@@ -193,7 +199,7 @@ class EncryptService {
 	 *
 	 * @returns array An array of keys (a cipher key, a mac key, and a IV)
 	 */
-	protected function getKeys($salt, $key) {
+	protected function getKeys(string $salt, string $key): array {
 		$ivSize = openssl_cipher_iv_length($this->cipher);
 		$keySize = openssl_cipher_iv_length($this->cipher);
 		$length = 2 * $keySize + $ivSize;
@@ -219,7 +225,7 @@ class EncryptService {
 	 *
 	 * @returns string The derived key.
 	 */
-	protected function pbkdf2($algo, $key, $salt, $rounds, $length) {
+	protected function pbkdf2(string $algo, string $key, string $salt, int $rounds, int $length): string {
 		$size = strlen(hash($algo, '', true));
 		$len = ceil($length / $size);
 		$result = '';
@@ -238,10 +244,10 @@ class EncryptService {
 	/**
 	 * Pad the data with a random char chosen by the pad amount.
 	 *
-	 * @param $data
+	 * @param string $data
 	 * @return string
 	 */
-	protected function pad($data) {
+	protected function pad(string $data): string {
 		$length = $this->getKeySize();
 		$padAmount = $length - strlen($data) % $length;
 		if ($padAmount === 0) {
@@ -252,15 +258,20 @@ class EncryptService {
 
 
 	/**
-	 * Unpad the the data
+	 * Unpad the data
 	 *
-	 * @param $data
+	 * @param false|string $data
 	 * @return bool|string
 	 */
-	protected function unpad($data) {
+	protected function unpad(false|string $data): bool|string {
+		if ($data === false) {
+			return false;
+		}
 		$length = $this->getKeySize();
 		$last = ord($data[strlen($data) - 1]);
-		if ($last > $length) return false;
+		if ($last > $length) {
+			return false;
+		}
 		if (substr($data, -1 * $last) !== str_repeat(chr($last), $last)) {
 			return false;
 		}
@@ -269,24 +280,24 @@ class EncryptService {
 
 
 	/**
-	 * Encrypt a credential
+	 * Decrypt a credential
 	 *
-	 * @param Credential|Entity|array $credential the credential to decrypt
-	 * @return Credential|array
+	 * @param Credential|array $credential the credential to decrypt
+	 * @return Credential|array modified $credential input object of the same type
 	 * @throws \Exception
 	 */
-	public function decryptCredential($credential) {
+	public function decryptCredential(Credential|array $credential): Credential|array {
 		return $this->handleCredential($credential, EncryptService::OP_DECRYPT);
 	}
 
 	/**
 	 * Encrypt a credential
 	 *
-	 * @param Credential|array $credential the credential to encrypt
-	 * @return Credential|array
+	 * @param array|Credential $credential the credential to encrypt
+	 * @return Credential|array modified $credential input object of the same type
 	 * @throws \Exception
 	 */
-	public function encryptCredential($credential) {
+	public function encryptCredential(Credential|array $credential): Credential|array {
 		return $this->handleCredential($credential, EncryptService::OP_ENCRYPT);
 	}
 
@@ -297,29 +308,30 @@ class EncryptService {
 		if ($credential instanceof Credential) {
 			$userSuppliedKey = $credential->getLabel();
 			$sk = $credential->getSharedKey();
-			$userKey = (isset($sk)) ? $sk : $credential->getUserId();
+			$userKey = $sk ?? $credential->getUserId();
 		}
 		if (is_array($credential)) {
 			$userSuppliedKey = $credential['label'];
-			$userKey = (isset($credential['shared_key'])) ? $credential['shared_key'] : $credential['user_id'];
+			$userKey = $credential['shared_key'] ?? $credential['user_id'];
 		}
 		return [$userKey, $userSuppliedKey];
 	}
 
 	/**
-	 * Handles the encryption / decryption of a credential
+	 * Handles the encryption / decryption of a credential.
+	 * This modifies the $credential parameter object, slightly different based on the passed parameter type.
 	 *
 	 * @param Credential|array $credential the credential to encrypt
-	 * @return Credential|array
+	 * @return Credential|array modified $credential input object of the same type
 	 * @throws \Exception
 	 */
-	private function handleCredential($credential, $service_function) {
-		list($userKey, $userSuppliedKey) = $this->extractKeysFromCredential($credential);
+	private function handleCredential(Credential|array $credential, $service_function): Credential|array {
+		[$userKey, $userSuppliedKey] = $this->extractKeysFromCredential($credential);
 
-		$key = $this->makeKey($userKey, $this->server_key, $userSuppliedKey);
+		$key = static::makeKey($userKey, $this->server_key, $userSuppliedKey);
 		foreach ($this->encrypted_credential_fields as $field) {
 			if ($credential instanceof Credential) {
-				$field = str_replace(' ', '', str_replace('_', ' ', ucwords($field, '_')));
+				$field = str_replace(' ', '', str_replace('_', ' ', ucwords((string)$field, '_')));
 				$set = 'set' . $field;
 				$get = 'get' . $field;
 				$credential->{$set}($this->{$service_function}($credential->{$get}(), $key));
@@ -335,33 +347,34 @@ class EncryptService {
 	/**
 	 * Encrypt a file
 	 *
-	 * @param File|array $file
-	 * @return File|array
+	 * @param array|File $file
+	 * @return array|File modified $file input object of the same type
 	 * @throws \Exception
 	 */
-	public function encryptFile($file) {
+	public function encryptFile(array|File $file): array|File {
 		return $this->handleFile($file, EncryptService::OP_ENCRYPT);
 	}
 
 	/**
 	 * Decrypt a file
 	 *
-	 * @param File|Entity|array $file
-	 * @return array|File
+	 * @param array|File $file
+	 * @return array|File modified $file input object of the same type
 	 * @throws \Exception
 	 */
-	public function decryptFile($file) {
+	public function decryptFile(array|File $file): array|File {
 		return $this->handleFile($file, EncryptService::OP_DECRYPT);
 	}
 
 	/**
-	 * Handles the encryption / decryption of a File
+	 * Handles the encryption / decryption of a File.
+	 * This modifies the $file parameter object, slightly different based on the passed parameter type.
 	 *
-	 * @param File|array $file the credential to encrypt
-	 * @return File|array
+	 * @param array|File $file the file to encrypt/decrypt
+	 * @return array|File modified $file input object of the same type
 	 * @throws \Exception
 	 */
-	private function handleFile($file, $service_function) {
+	private function handleFile(array|File $file, $service_function): array|File {
 		$userKey = '';
 		$userSuppliedKey = '';
 		if ($file instanceof File) {
@@ -371,10 +384,10 @@ class EncryptService {
 
 		if (is_array($file)) {
 			$userSuppliedKey = $file['size'];
-			$userKey = md5($file['mimetype']);
+			$userKey = md5((string)$file['mimetype']);
 		}
 
-		$key = $this->makeKey($userKey, $this->server_key, $userSuppliedKey);
+		$key = static::makeKey($userKey, $this->server_key, $userSuppliedKey);
 
 
 		if ($file instanceof File) {
