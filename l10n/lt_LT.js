@@ -143,6 +143,7 @@ OC.L10N.register(
     "Public key" : "Viešasis raktas",
     "Key size" : "Rakto dydis",
     "Save keys" : "Įrašyti raktus",
+    "Result" : "Rezultatas",
     "Action" : "Veiksmas",
     "Missing users? Only users that have vaults are shown." : "Trūksta naudotojų? Yra rodomi tik naudotojai, turintys slėptuves.",
     "Uploading" : "Įkeliama",
