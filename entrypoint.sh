@@ -3,15 +3,20 @@
 # SIGTERM-handler
 term_handler() {
   service apache2 stop
-  service mysql stop
+  service mariadb stop
   exit 0
 }
 
 set -x
 
 service ssh start
-service mysql start
+service mariadb start
 service apache2 start
+
+# Start file watch for browser hot reload inside the devcontainer
+if [ "$DEV" = "1" ]; then
+  /auto-reload.sh &
+fi
 
 
 trap 'kill ${!}; term_handler' SIGTERM
