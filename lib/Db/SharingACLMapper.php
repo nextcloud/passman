@@ -25,12 +25,14 @@ namespace OCA\Passman\Db;
 
 
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
+/**
+ * @template-extends QBMapper<SharingACL>
+ */
 class SharingACLMapper extends QBMapper {
 	const TABLE_NAME = 'passman_sharing_acl';
 
@@ -39,11 +41,11 @@ class SharingACLMapper extends QBMapper {
 	}
 
 	/**
-	 * @param SharingACL $acl
-	 * @return SharingACL|Entity
+	 * @param SharingACL $sharingACL
+	 * @return SharingACL
 	 */
-	public function createACLEntry(SharingACL $acl) {
-		return $this->insert($acl);
+	public function createACLEntry(SharingACL $sharingACL): SharingACL {
+		return $this->insert($sharingACL);
 	}
 
 	/**
@@ -51,9 +53,9 @@ class SharingACLMapper extends QBMapper {
 	 *
 	 * @param string $user_id
 	 * @param string $vault_guid
-	 * @return Entity[]
+	 * @return SharingACL[]
 	 */
-	public function getVaultEntries(string $user_id, string $vault_guid) {
+	public function getVaultEntries(string $user_id, string $vault_guid): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -66,13 +68,13 @@ class SharingACLMapper extends QBMapper {
 	/**
 	 * Gets the acl for a given item guid
 	 *
-	 * @param string $user_id
+	 * @param string|null $user_id
 	 * @param string $item_guid
-	 * @return Entity
+	 * @return SharingACL
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getItemACL(?string $user_id, string $item_guid) {
+	public function getItemACL(?string $user_id, string $item_guid): SharingACL {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -91,9 +93,9 @@ class SharingACLMapper extends QBMapper {
 	 * Update an acl
 	 *
 	 * @param SharingACL $sharingACL
-	 * @return SharingACL|Entity
+	 * @return SharingACL
 	 */
-	public function updateCredentialACL(SharingACL $sharingACL) {
+	public function updateCredentialACL(SharingACL $sharingACL): SharingACL {
 		return $this->update($sharingACL);
 	}
 
@@ -101,9 +103,9 @@ class SharingACLMapper extends QBMapper {
 	 * Gets the currently accepted share requests from the given user for the given vault guid
 	 *
 	 * @param string $item_guid
-	 * @return Entity[]
+	 * @return SharingACL[]
 	 */
-	public function getCredentialAclList(string $item_guid) {
+	public function getCredentialAclList(string $item_guid): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -113,10 +115,10 @@ class SharingACLMapper extends QBMapper {
 	}
 
 	/**
-	 * @param SharingACL $ACL
-	 * @return SharingACL|Entity
+	 * @param SharingACL $sharingACL
+	 * @return SharingACL
 	 */
-	public function deleteShareACL(SharingACL $ACL) {
-		return $this->delete($ACL);
+	public function deleteShareACL(SharingACL $sharingACL): SharingACL {
+		return $this->delete($sharingACL);
 	}
 }
