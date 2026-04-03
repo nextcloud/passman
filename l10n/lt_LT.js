@@ -134,6 +134,7 @@ OC.L10N.register(
     "Total progress" : "Bendra eiga",
     "About Passman" : "Apie Passman",
     "Version" : "Versija",
+    "Bookmarklet" : "Adresyno skriptas",
     "Delete vault" : "Ištrinti slėptuvę",
     "Vault password" : "Slėptuvės slaptažodis",
     "This process is irreversible" : "Šis procesas yra nepanaikinamas",
