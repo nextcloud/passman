@@ -23,6 +23,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <licence>agpl</licence>
     <author homepage="https://github.com/brantje">Sander Brand</author>
     <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>
+    <author homepage="https://github.com/binsky08">Timo Triebensky</author>
     <namespace>Passman</namespace>
     <documentation>
         <admin>https://github.com/nextcloud/passman#readme</admin>
@@ -48,7 +49,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <background-jobs>
         <job>OCA\Passman\BackgroundJob\ExpireCredentials</job>
     </background-jobs>
-    
+
     <repair-steps>
         <post-migration>
             <step>OCA\Passman\Migration\ServerSideEncryption</step>
