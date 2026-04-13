@@ -88,7 +88,7 @@ return [
 		['name' => 'Icon#getLocalIconList', 'url' => '/api/v2/icon/list', 'verb' => 'GET'],
 
 		//
-		['name' => 'Vault#preflighted_cors', 'url' => '/api/v2/{path}', 'verb' => 'OPTIONS', 'requirements' => array('path' => '.+')],
+		['name' => 'Vault#preflighted_cors', 'url' => '/api/v2/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
 		//Internal API
 		['name' => 'Internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],
 		['name' => 'Internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],

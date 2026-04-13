@@ -25,19 +25,19 @@ namespace OCA\Passman\Db;
 
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
+/**
+ * @template-extends QBMapper<CredentialRevision>
+ */
 class CredentialRevisionMapper extends QBMapper {
 	const TABLE_NAME = 'passman_revisions';
-	private Utils $utils;
 
-	public function __construct(IDBConnection $db, Utils $utils) {
+	public function __construct(IDBConnection $db, private readonly Utils $utils) {
 		parent::__construct($db, self::TABLE_NAME);
-		$this->utils = $utils;
 	}
 
 
@@ -46,9 +46,9 @@ class CredentialRevisionMapper extends QBMapper {
 	 *
 	 * @param int $credential_id
 	 * @param string|null $user_id
-	 * @return Entity[]
+	 * @return CredentialRevision[]
 	 */
-	public function getRevisions(int $credential_id, string $user_id = null) {
+	public function getRevisions(int $credential_id, ?string $user_id = null): array {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -64,11 +64,11 @@ class CredentialRevisionMapper extends QBMapper {
 	/**
 	 * @param int $revision_id
 	 * @param string|null $user_id
-	 * @return Entity
+	 * @return CredentialRevision
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function getRevision(int $revision_id, string $user_id = null) {
+	public function getRevision(int $revision_id, ?string $user_id = null): CredentialRevision {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -83,13 +83,13 @@ class CredentialRevisionMapper extends QBMapper {
 
 	/**
 	 * Create a revision
-	 * @param $credential
-	 * @param $userId
-	 * @param $credential_id
-	 * @param $edited_by
+	 * @param mixed $credential
+	 * @param string $userId
+	 * @param int $credential_id
+	 * @param string $edited_by
 	 * @return CredentialRevision
 	 */
-	public function create($credential, $userId, $credential_id, $edited_by) {
+	public function create(mixed $credential, string $userId, int $credential_id, string $edited_by): CredentialRevision {
 		$revision = new CredentialRevision();
 		$revision->setGuid($this->utils->GUID());
 		$revision->setUserId($userId);
@@ -103,11 +103,11 @@ class CredentialRevisionMapper extends QBMapper {
 
 	/**
 	 * Delete a revision
-	 * @param $revision_id
-	 * @param $user_id
+	 * @param int $revision_id
+	 * @param string $user_id
 	 * @return CredentialRevision
 	 */
-	public function deleteRevision($revision_id, $user_id) {
+	public function deleteRevision(int $revision_id, string $user_id): CredentialRevision {
 		$revision = new CredentialRevision();
 		$revision->setId($revision_id);
 		$revision->setUserId($user_id);
