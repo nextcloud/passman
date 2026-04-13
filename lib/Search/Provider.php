@@ -87,7 +87,13 @@ class Provider implements IProvider {
 									$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
 									$credential->getLabel(),
 									\sprintf("Part of Passman vault %s", $vault->getName()),
-									$this->urlGenerator->linkToRoute('passman.Page.index') . "#/vault/" . $vault->getGuid() . "?show=" . $credential->getGuid()
+									sprintf(
+										"%s#/vault/%s?show=%s&showv=%s",
+										$this->urlGenerator->linkToRoute('passman.Page.index'),
+										$vault->getGuid(),
+										$credential->getGuid(),
+										$vault->getGuid()	// need to pass vault guid again, to preserve it if credential.js rewrites path to /
+									)
 								);
 							} catch (\Exception) {
 							}
