@@ -155,7 +155,7 @@
 						getPendingShareRequests();
 					}, 60000 * 5);
 				}
-				
+
 				$scope.$on('$destroy', function () {
 					$interval.cancel(refresh_data_interval);
 				});
@@ -606,8 +606,12 @@
 
                 $scope.checkURLAction = function () {
                     var search = $location.search();
-                    if (search.show !== undefined && $scope.active_vault.credentials !== undefined &&
-						$scope.active_vault.credentials.length > 0) {
+                    if (
+						search.show !== undefined &&
+						$scope.active_vault !== undefined &&
+						$scope.active_vault.credentials !== undefined &&
+						$scope.active_vault.credentials.length > 0
+					) {
                         $scope.closeSelected();
                         $scope.active_vault.credentials.forEach(function(credential, index, myArray) {
                             if (credential.guid === search.show) {

@@ -259,5 +259,27 @@
 					$event.currentTarget.classList.replace('fa-eye', 'fa-eye-slash');
 				}
 			};
+
+			$scope.$watch(function(){ return $scope.vaults; }, function(params){
+				if ($scope.vaults && $location.search().show && $location.search().showv) {
+					$scope.checkURLAction();
+				}
+			});
+
+			$scope.checkURLAction = function () {
+				const search = $location.search();
+				if (search.show !== undefined && search.showv !== undefined) {
+					// Try to preselect the requested vault if possible.
+					// If we are here, we got redirected from credential.js due to missing vault authentication.
+					if ($scope.vaults && $scope.vaults.length > 0) {
+						const filteredVault = $scope.vaults.find(function (vault) {
+							return vault.guid === search.showv;
+						});
+						if (filteredVault) {
+							$scope.selectVault(filteredVault);
+						}
+					}
+				}
+			};
 		}]);
 }());
