@@ -56,11 +56,11 @@ class Utils {
 	/**
 	 * @param string $uid
 	 * @param IUserManager $userManager
-	 * @return string
+	 * @return string|null
 	 */
-	public static function getNameByUid(string $uid, IUserManager $userManager){
+	public static function getNameByUid(string $uid, IUserManager $userManager): ?string {
 		$u = $userManager->get($uid);
-		return $u->getDisplayName();
+		return $u?->getDisplayName();
 	}
 
 	/**

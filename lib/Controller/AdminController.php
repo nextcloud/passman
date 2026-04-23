@@ -22,7 +22,7 @@ use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
-use OCP\IConfig;
+use OCP\IL10N;
 use OCP\IRequest;
 use OCP\IUserManager;
 
@@ -37,8 +37,8 @@ class AdminController extends ApiController {
 		private readonly FileService $fileService,
 		private readonly CredentialRevisionService $revisionService,
 		private readonly DeleteVaultRequestService $deleteVaultRequestService,
-		private readonly IConfig $config,
 		private readonly IUserManager $userManager,
+		private readonly IL10N $trans
 	) {
 		parent::__construct(
 			$AppName,
@@ -108,7 +108,8 @@ class AdminController extends ApiController {
 		$results = [];
 		foreach($requests as $request){
 			$r = $request->jsonSerialize();
-			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy(), $this->userManager);
+			$r['displayName'] = Utils::getNameByUid($request->getRequestedBy(), $this->userManager)
+				?? sprintf('(%s)', $this->trans->t('User not found'));
 			$results[] = $r;
 		}
 		return new JSONResponse($results);
