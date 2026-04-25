@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "%2$s 님의 %1$s 공유 요청을 받음",
     "%s has been shared with a link" : "%s이(가) 링크로 공유됨",
     "Passwords" : "암호",
+    "User not found" : "사용자를 찾을 수 없음",
     "Incorrect vault password!" : "비밀 저장소 암호가 잘못되었습니다!",
     "Passwords do not match" : "암호가 일치하지 않습니다",
     "General" : "일반",

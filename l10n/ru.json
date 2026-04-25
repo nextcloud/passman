@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Вы получили запрос на предоставление общего доступа к %1$s  от %2$s",
     "%s has been shared with a link" : "к %s был предоставлен общий доступ ссылкой",
     "Passwords" : "Пароли",
+    "User not found" : "Пользователь не найден",
     "Generating sharing keys (%s/2)" : "Генерация ключей совместного доступа (%s/2)",
     "Incorrect vault password!" : "Неверный пароль хранилища!",
     "Passwords do not match" : "Пароли не совпадают",

@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "User not found" : "Defnyddiwr heb ei ganfod",
     "General" : "Cyffredinol",
     "Done" : "Done",
     "Share link" : "Rhannu dolen",

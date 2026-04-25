@@ -16,6 +16,7 @@ OC.L10N.register(
     "The password of %1$s has expired, renew it now." : "תוקף הססמה עבור %1$s פג, יש לחדש אותה כעת.",
     "You received a share request for %1$s from %2$s" : "קיבלת בקשת שיתוף עבור %1$s מאת %2$s",
     "Passwords" : "ססמאות",
+    "User not found" : "המשתמש לא נמצא",
     "Incorrect vault password!" : "ססמת הכספת שגויה!",
     "Passwords do not match" : "הססמאות אינן תואמות",
     "General" : "כללי",

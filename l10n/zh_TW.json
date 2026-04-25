@@ -7,6 +7,7 @@
     "%1$s has been permanently deleted by %2$s" : "%1$s 已被 %2$s永久刪除",
     "The password of %1$s has expired, renew it now." : "%1$s 的密碼已過期，請立即更新",
     "Passwords" : "密碼",
+    "User not found" : "找不到使用者",
     "Passwords do not match" : "密碼不相符",
     "General" : "一般",
     "Custom Fields" : "自定義欄位",

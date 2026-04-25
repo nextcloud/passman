@@ -14,6 +14,7 @@ OC.L10N.register(
     "You permanently deleted %1$s" : "Tu neatgriezeniski izdzēsi %1$s",
     "%s has been shared with a link" : "%s koplietots izmantojot saiti",
     "Passwords" : "Paroles",
+    "User not found" : "Lietotājs nav atrasts",
     "Incorrect vault password!" : "Nepareiza glabātavas parole.",
     "Passwords do not match" : "Paroles nesakrīt",
     "General" : "Vispārīgi",

@@ -4,6 +4,7 @@ OC.L10N.register(
     "You created %1$s" : "Ai creat %1$s",
     "You deleted %1$s" : "Ai şters %1$s",
     "Passwords" : "Parole",
+    "User not found" : "Utilizatorul nu a fost găsit",
     "General" : "General",
     "An error occurred" : "A apărut o eraore",
     "Done" : "Realizat",

@@ -17,6 +17,7 @@
     "%1$s has been permanently deleted by %2$s" : "%2$s visiems laikams ištrynė %1$s",
     "You permanently deleted %1$s" : "Jūs visiems laikams ištrynėte %1$s",
     "Passwords" : "Slaptažodžiai",
+    "User not found" : "Naudotojas nerastas",
     "Incorrect vault password!" : "Neteisingas slėptuvės slaptažodis!",
     "Passwords do not match" : "Slaptažodžiai nesutampa",
     "General" : "Bendras",

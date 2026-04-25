@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "You received a share request for %1$s from %2$s",
     "%s has been shared with a link" : "%s has been shared with a link",
     "Passwords" : "Passwords",
+    "User not found" : "User not found",
     "Generating sharing keys (%s/2)" : "Generating sharing keys (%s/2)",
     "Incorrect vault password!" : "Incorrect vault password!",
     "Passwords do not match" : "Passwords do not match",

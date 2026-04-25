@@ -10,6 +10,7 @@ OC.L10N.register(
     "You updated %1$s" : "Päivitit %1$s",
     "You deleted %1$s" : "Poistit %1$s",
     "Passwords" : "Salasanat",
+    "User not found" : "Käyttäjää ei löydy",
     "Generating sharing keys (%s/2)" : "Luodaan jakamisavaimia (%s/2)",
     "Incorrect vault password!" : "Virheellinen holvin salasana!",
     "Passwords do not match" : "Salasanat eivät täsmää",

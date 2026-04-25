@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "%1$s-(r)entzako partekatze eskaera bat jaso duzu %2$s(r)engandik",
     "%s has been shared with a link" : "%s esteka batekin partekatu da",
     "Passwords" : "Pasahitzak",
+    "User not found" : "Ez da erabiltzailea aurkitu",
     "Generating sharing keys (%s/2)" : "Partekatze gakoak sortzen (%s/2)",
     "Incorrect vault password!" : "Gordailuaren pasahitza ez da zuzena!",
     "Passwords do not match" : "Pasahitzak ez datoz bat",

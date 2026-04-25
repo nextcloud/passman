@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You created %1$s" : "Та %1$s үүсгэлээ",
     "You deleted %1$s" : "Та %1$s-ийг устгалаа",
+    "User not found" : "Хэрэглэгч олдсонгүй",
     "General" : "Ерөнхий",
     "Custom Fields" : "Тусгай талбарууд",
     "An error occurred" : "Алдаа гарлаа",

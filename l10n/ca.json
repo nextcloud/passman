@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Heu rebut una sol·licitud de compartició de %1$s des de %2$s",
     "%s has been shared with a link" : "%s ha estat compartit amb un enllaç",
     "Passwords" : "Contrasenyes",
+    "User not found" : "No s'ha trobat l'usuari",
     "Generating sharing keys (%s/2)" : "S'estan generant les claus de compartició (%s/2)",
     "Incorrect vault password!" : "Contrasenya de la cripta incorrecta!",
     "Passwords do not match" : "Les contrasenyes no coincideixen",

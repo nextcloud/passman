@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "لقد استلمت طلب مشاركة لـ %1$s من%2$s",
     "%s has been shared with a link" : "%s تمت مشاركته من خلال رابط",
     "Passwords" : "كلمات المرور",
+    "User not found" : "المستخدم غير موجود",
     "Generating sharing keys (%s/2)" : "توليد مفاتيح المشاركة (%s / 2)",
     "Incorrect vault password!" : "رقم مرور الخزينة غير صحيح!",
     "Passwords do not match" : "كلمة المرور غير مطابقة",

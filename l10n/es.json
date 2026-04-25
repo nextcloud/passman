@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Has recibido una solicitud para compartir %1$s de %2$s",
     "%s has been shared with a link" : "%s ha sido compartido con un link",
     "Passwords" : "Contraseñas",
+    "User not found" : "Usuario no encontrado",
     "Generating sharing keys (%s/2)" : "Generando claves para compartir (%s/2)",
     "Incorrect vault password!" : "¡Contraseña de acceso incorrecta!",
     "Passwords do not match" : "Las contraseñas no coinciden",

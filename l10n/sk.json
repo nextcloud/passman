@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Obdržali ste požiadavku na zdieľanie %1$s od %2$s",
     "%s has been shared with a link" : "%s bol sprístupnený prostredníctvom odkazu",
     "Passwords" : "Heslá",
+    "User not found" : "Užívateľ nebol nájdený",
     "Generating sharing keys (%s/2)" : "Generovanie kľúčov pre zdieľanie (%s/2)",
     "Incorrect vault password!" : "Nesprávne heslo trezora!",
     "Passwords do not match" : "Heslá sa nezhodujú",

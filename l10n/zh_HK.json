@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "您收到了來自 %2$s 的 %1$s 的分享請求",
     "%s has been shared with a link" : "%s 已通過連結分享",
     "Passwords" : "密碼",
+    "User not found" : "找不到用戶",
     "Generating sharing keys (%s/2)" : "生成共享秘鑰（%s/2）",
     "Incorrect vault password!" : "錯誤的保險庫密碼！",
     "Passwords do not match" : "密碼不相符",

@@ -24,6 +24,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Você recebeu um pedido de partilha por parte de %2$s para %1$s",
     "%s has been shared with a link" : "%s partilhou uma hiperligação",
     "Passwords" : "Palavras-passe",
+    "User not found" : "Utilizador não encontrado",
     "General" : "Geral",
     "An error occurred" : "Ocorreu um erro",
     "Done" : "Concluído",

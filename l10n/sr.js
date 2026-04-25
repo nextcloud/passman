@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Примили сте захтев за дељење %1$s са %2$s",
     "%s has been shared with a link" : "%s је подељено везом",
     "Passwords" : "Лозинке",
+    "User not found" : "Корисник није нађен",
     "Generating sharing keys (%s/2)" : "Генерисање кључева за дељење (%s/2)",
     "Incorrect vault password!" : "Неисправна лозинка за сеф!",
     "Passwords do not match" : "Лозинке се не поклапају",

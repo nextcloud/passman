@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Obdrželi jste nový požadavek na sdílení %1$s od uživatele %2$s",
     "%s has been shared with a link" : "%s byl nasdílen pomocí odkazu",
     "Passwords" : "Hesla",
+    "User not found" : "Uživatel nenalezen",
     "Generating sharing keys (%s/2)" : "Vytváření klíčů pro sdílení (%s/2)",
     "Incorrect vault password!" : "Neplatné heslo k trezoru!",
     "Passwords do not match" : "Zadání hesla se neshodují",

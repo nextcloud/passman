@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Megosztási kérés érkezett a(z) %1$s elemhez a következőtől: %2$s",
     "%s has been shared with a link" : "%s megosztva hivatkozással",
     "Passwords" : "Jelszavak",
+    "User not found" : "A felhasználó nem található",
     "Generating sharing keys (%s/2)" : "Megosztási kulcsok előállítása (%s/2)",
     "Incorrect vault password!" : "Érvénytelen széfjelszó.",
     "Passwords do not match" : "A jelszavak nem egyeznek",

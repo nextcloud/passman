@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Þú fékkst beiðni um deilingu á %1$s frá %2$s",
     "%s has been shared with a link" : "%s hefur verið deilt með tengli",
     "Passwords" : "Lykilorð",
+    "User not found" : "Notandi fannst ekki",
     "Generating sharing keys (%s/2)" : "Útbý deilingarlykla ( %s/2)",
     "Incorrect vault password!" : "Rangt lykilorð fyrir lykilorðageymslu!",
     "Passwords do not match" : "Lykilorðin stemma ekki",

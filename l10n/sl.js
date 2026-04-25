@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : " %2$s vam pošilja prošnjo za souporabo %1$s.",
     "%s has been shared with a link" : "Datoteka »%s« je  v souporabi s povezavo",
     "Passwords" : "Gesla·",
+    "User not found" : "Uporabnika ni mogoče najti",
     "Generating sharing keys (%s/2)" : "Poteka ustvarjanje ključev za souporabo ( %s / 2)",
     "Incorrect vault password!" : "Napačno geslo zbirnika!",
     "Passwords do not match" : "Gesli se ne skladata",

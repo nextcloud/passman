@@ -16,6 +16,7 @@
     "The password of %1$s has expired, renew it now." : "La contraseña de %1$s caducó, anuévala agora.",
     "%1$s has been shared with %2$s" : "Compartióse %1$s con %2$s",
     "Passwords" : "Contraseñes",
+    "User not found" : "Nun s'atopó l'usuariu",
     "Incorrect vault password!" : "¡La contraseña de l'arca ye incorrueta!",
     "Passwords do not match" : "Les contraseñes nun concasen",
     "General" : "Xeneral",

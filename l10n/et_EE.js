@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Sa said kasutajat „%2$s“ „%1$s“ kirje jagamispäringu",
     "%s has been shared with a link" : "„%s“ kirje on lingiga jagatud",
     "Passwords" : "Salasõnad",
+    "User not found" : "Kasutajat ei leidu",
     "Generating sharing keys (%s/2)" : "Loon jagatud võtmeid (%s/2)",
     "Incorrect vault password!" : "Andmehoidla vale salasõna",
     "Passwords do not match" : "Salasõnad ei kattu",

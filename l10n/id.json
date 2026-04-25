@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Anda menerima permintaan berbagi untuk %1$s dari %2$s",
     "%s has been shared with a link" : "%s telah dibagikan dengan tautan",
     "Passwords" : "Kata sandi",
+    "User not found" : "Pengguna tidak ditemukan",
     "Generating sharing keys (%s/2)" : "Membuat kunci berbagi (%s/2)",
     "Incorrect vault password!" : "Kata sandi brankas salah!",
     "Passwords do not match" : "Kata sandi tidak cocok",

@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "%2$s から %1$s の共有リクエストを受信しました",
     "%s has been shared with a link" : "%s がリンクで共有されました",
     "Passwords" : "パスワード",
+    "User not found" : "ユーザーが見つかりません",
     "Generating sharing keys (%s/2)" : "共有キーを生成中 (%s/2)",
     "Incorrect vault password!" : "保管庫パスワードが間違っています！",
     "Passwords do not match" : "パスワードが一致しません",

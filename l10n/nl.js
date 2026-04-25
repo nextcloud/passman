@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Je ontving een verzoek om %1$s te delen met %2$s",
     "%s has been shared with a link" : "%s is gedeeld met een link",
     "Passwords" : "Wachtwoorden",
+    "User not found" : "Gebruiker niet gevonden",
     "Generating sharing keys (%s/2)" : "Genereren deelsleutels ( %s /2)",
     "Incorrect vault password!" : "Onjuist kluiswachtwoord",
     "Passwords do not match" : "Wachtwoorden komen niet overeen.",

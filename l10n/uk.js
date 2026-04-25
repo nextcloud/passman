@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Вам надійшов запит від %2$s щодо надання доступу до %1$s",
     "%s has been shared with a link" : "Надано доступ до %s за посиланням",
     "Passwords" : "Паролі",
+    "User not found" : "Користувача не знайдено",
     "Generating sharing keys (%s/2)" : "Генерація ключів спільного доступу (%s/2)",
     "Incorrect vault password!" : "Невірний пароль для сховища!",
     "Passwords do not match" : "Паролі не збігаються",

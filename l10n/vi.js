@@ -4,6 +4,7 @@ OC.L10N.register(
     "You created %1$s" : "Bạn đã tạo %1$s",
     "You deleted %1$s" : "Bạn đã xóa %1$s",
     "Passwords" : "Mật khẩu",
+    "User not found" : "Không tìm thấy người dùng",
     "Incorrect vault password!" : "Mật khẩu hòm khóa không đúng!",
     "Passwords do not match" : "Mật khẩu không khớp",
     "General" : "Tổng hợp",

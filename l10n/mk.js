@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "You created %1$s" : "Креиравте %1$s",
     "You deleted %1$s" : "Избришавте %1$s",
+    "User not found" : "Корисникот не е пронајден",
     "General" : "Општо",
     "Custom Fields" : "Произволни полиња",
     "Credential deleted" : "Акредитивите се избришани",

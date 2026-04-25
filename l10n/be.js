@@ -5,6 +5,7 @@ OC.L10N.register(
     "You renamed %1$s to %2$s" : "Вы перайменавалі %1$s у %2$s",
     "You deleted %1$s" : "Вы выдалілі %1$s",
     "Passwords" : "Паролі",
+    "User not found" : "Карыстальнік не знойдзены",
     "Passwords do not match" : "Паролі не супадаюць",
     "General" : "Агульныя",
     "An error occurred" : "Узнікла памылка",

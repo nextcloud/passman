@@ -5,6 +5,7 @@ OC.L10N.register(
     "You renamed %1$s to %2$s" : "Umeita jina upya %1$shadi%2$s",
     "You deleted %1$s" : "Umefuta %1$s",
     "Passwords" : "Passwords",
+    "User not found" : "Mtumiaji hapatikani",
     "General" : "Kuu",
     "An error occurred" : "Hitilafu imetokea",
     "Done" : "Imefanyika",

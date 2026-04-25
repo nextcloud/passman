@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "%1$s için %2$s üzerinden bir paylaşım isteği aldınız",
     "%s has been shared with a link" : "%s bağlantı ile paylaşıldı",
     "Passwords" : "Parolalar",
+    "User not found" : "Kullanıcı bulunamadı",
     "Generating sharing keys (%s/2)" : "Paylaşım anahtarları oluşturuluyor ( %s/2)",
     "Incorrect vault password!" : "Kasa parolası yanlış!",
     "Passwords do not match" : "Parola ile onayı aynı değil",

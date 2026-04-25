@@ -2,6 +2,7 @@ OC.L10N.register(
     "passman",
     {
     "Passwords" : "Parollar",
+    "User not found" : "Foydalanuvchi topilmadi",
     "General" : "Umumiy",
     "Error loading file" : "Faylni yuklashda xatolik yuz berdi",
     "Done" : "Bajarildi",

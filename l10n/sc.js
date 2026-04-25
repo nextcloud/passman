@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "As retzidu una rechesta de cumpartzidura pro %1$s dae %2$s",
     "%s has been shared with a link" : "%s est istadu cumpartzidu cun unu ligòngiu",
     "Passwords" : "Craes",
+    "User not found" : "Utèntzia no agatada",
     "Incorrect vault password!" : "Crae de sa cassaforte isballiada!",
     "Passwords do not match" : "Is craes no currespondent",
     "General" : "Generale",

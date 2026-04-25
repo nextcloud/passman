@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Du hast eine Anfrage zum Teilen von %1$s von %2$s erhalten",
     "%s has been shared with a link" : "%s wurde über einen Link geteilt",
     "Passwords" : "Passwörter",
+    "User not found" : "Benutzer nicht gefunden",
     "Generating sharing keys (%s/2)" : "Generiere Freigabe-Schlüssel (%s/2)",
     "Incorrect vault password!" : "Falsches Tresor-Passwort",
     "Passwords do not match" : "Passwörter stimmen nicht überein",

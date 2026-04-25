@@ -4,6 +4,7 @@ OC.L10N.register(
     "You created %1$s" : "Vi kreis %1$s",
     "You deleted %1$s" : "Vi forigis %1$s",
     "Passwords" : "Pasvortoj",
+    "User not found" : "Netrovita uzanto",
     "General" : "Ĝenerala",
     "Done" : "Farita",
     "File read." : "Dosiero legita.",

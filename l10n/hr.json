@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Primili ste zahtjev za dijeljenje za %1$s od %2$s",
     "%s has been shared with a link" : "%s je podijeljeno putem poveznice",
     "Passwords" : "Zaporke",
+    "User not found" : "Korisnik nije pronađen",
     "Generating sharing keys (%s/2)" : "Generiranje ključeva za dijeljenje (%s/2)",
     "Incorrect vault password!" : "Netočna zaporka trezora!",
     "Passwords do not match" : "Zaporke se ne podudaraju",

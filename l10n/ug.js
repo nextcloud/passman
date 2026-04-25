@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "سىز %2$s دىن%1$s نى تەلەپ قىلدىڭىز",
     "%s has been shared with a link" : "%s ئۇلىنىش بىلەن ئورتاقلاشتى",
     "Passwords" : "پارول",
+    "User not found" : "ئىشلەتكۈچى تېپىلمىدى",
     "Generating sharing keys (%s/2)" : "ئورتاقلىشىش كۇنۇپكىسى ھاسىل قىلىش (2/%s)",
     "Incorrect vault password!" : "ئامبار پارولى خاتا!",
     "Passwords do not match" : "پارول ماس كەلمەيدۇ",

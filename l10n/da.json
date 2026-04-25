@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Du har modtaget en delingsanmodning for %1$s fra %2$s",
     "%s has been shared with a link" : "%ser blevet delt med et link",
     "Passwords" : "Adgangskoder",
+    "User not found" : "Bruger ikke fundet",
     "Generating sharing keys (%s/2)" : "Generer delings nøgler (%s/2)",
     "Incorrect vault password!" : "Ukorrekt boks adgangskode",
     "Passwords do not match" : "Kodeord matchede ikke",

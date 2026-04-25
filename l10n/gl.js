@@ -25,6 +25,7 @@ OC.L10N.register(
     "You received a share request for %1$s from %2$s" : "Vde. recibiu unha solicitude para compartir %1$s desde %2$s",
     "%s has been shared with a link" : "%s foi compartido cunha ligazón",
     "Passwords" : "Contrasinais",
+    "User not found" : "Non se atopou o usuario",
     "Generating sharing keys (%s/2)" : "Xerando chaves para compartir ( %s / 2)",
     "Incorrect vault password!" : "Contrasinal da bóveda incorrecta!",
     "Passwords do not match" : "Os contrasinais non coinciden",

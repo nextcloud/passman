@@ -23,6 +23,7 @@
     "You received a share request for %1$s from %2$s" : "Fuair ​​tú iarratas comhroinnte ar %1$s ó %2$s",
     "%s has been shared with a link" : "Tá %s roinnte le nasc",
     "Passwords" : "Pasfhocail",
+    "User not found" : "Úsáideoir gan aimsiú",
     "Generating sharing keys (%s/2)" : "Eochracha comhroinnte á nginiúint (%s/2)",
     "Incorrect vault password!" : "Focal faire cruinneachán mícheart!",
     "Passwords do not match" : "Ní hionann pasfhocail",
