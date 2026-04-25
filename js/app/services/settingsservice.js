@@ -46,6 +46,9 @@
 			});
 
 			var cookie = localStorageService.get('settings');
+			if (cookie && cookie.defaultVaultPass !== undefined) {
+				delete cookie.defaultVaultPass;
+			}
 			settings = angular.merge(settings, cookie);
 			return {
 				getSettings: function () {
@@ -55,8 +58,11 @@
 					return settings[name];
 				},
 				setSetting: function (name, value) {
+					var storedSettings;
 					settings[name] = value;
-					localStorageService.set('settings', settings);
+					storedSettings = angular.copy(settings);
+					delete storedSettings.defaultVaultPass;
+					localStorageService.set('settings', storedSettings);
 				},
 				isEnabled: function (name) {
 					return settings[name] === 1 || settings[name] === '1';
