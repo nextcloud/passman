@@ -336,7 +336,7 @@ OC.L10N.register(
     "Your credential \"%s\" expired, click here to update the credential." : "Deine Anmeldedaten \"%s\" sind abgelaufen, klicke zur Aktualisierung deiner Anmeldedaten hier.",
     "Remind me later" : "Erinnere mich später",
     "Ignore" : "Ignorieren",
-    "%s shared \"%s\" with you. Click here to accept" : "%s teilt \"%s\" mit Dir. Um dies zu anzunehmen, klicke hier",
+    "%s shared \"%s\" with you. Click here to accept" : "%s teilt \"%s\" mit Dir. Um dies anzunehmen, klicke hier",
     "%s has declined your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit dir abgelehnt.",
     "%s has accepted your share request for \"%s\"." : "%s hat das Teilen von \"%s\" mit dir akzeptiert.",
     "Passman" : "Passman",
