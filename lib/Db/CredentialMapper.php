@@ -67,10 +67,10 @@ class CredentialMapper extends QBMapper {
 	 *
 	 * @param string $vault_id
 	 * @param string $user_id
-	 * @return Credential
+	 * @return Credential|null
 	 * @throws Exception
 	 */
-	public function getRandomCredentialByVaultId(string $vault_id, string $user_id): Credential {
+	public function getRandomCredentialByVaultId(string $vault_id, string $user_id): Credential|null {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from(self::TABLE_NAME)
@@ -80,6 +80,9 @@ class CredentialMapper extends QBMapper {
 			->setMaxResults(20);
 
 		$entities = $this->findEntities($qb);
+		if (empty($entities)) {
+			return null;
+		}
 		$maxEntitiesIndex = count($entities) - 1;
 
 		return $entities[rand(0, $maxEntitiesIndex)];
