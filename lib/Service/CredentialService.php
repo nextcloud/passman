@@ -148,12 +148,12 @@ class CredentialService {
 	 *
 	 * @param int $vault_id
 	 * @param string $user_id
-	 * @return Credential
+	 * @return Credential|null
 	 * @throws Exception
 	 */
-	public function getRandomCredentialByVaultId(int $vault_id, string $user_id): Credential {
+	public function getRandomCredentialByVaultId(int $vault_id, string $user_id): Credential|null {
 		$credential = $this->credentialMapper->getRandomCredentialByVaultId($vault_id, $user_id);
-		return $this->encryptService->decryptCredential($credential);
+		return $credential ? $this->encryptService->decryptCredential($credential) : null;
 	}
 
 	/**
