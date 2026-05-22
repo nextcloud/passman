@@ -171,7 +171,7 @@ OC.L10N.register(
     "Source account" : "Avota konts",
     "Destination account" : "Adresāta konts",
     "An error occurred!" : "Gadījās kļūda!",
-    "Request ID" : "Pieprasījuma ID",
+    "Request ID" : "Pieprasījuma Id",
     "Requested by" : "Pieprasa",
     "Reason" : "Iemesls",
     "E-mail" : "E-mail",
