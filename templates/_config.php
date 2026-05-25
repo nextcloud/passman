@@ -2,5 +2,5 @@
 
 class MyAppTemplateConfig
 {
-    public const APP_ID = 'passman-next';
+    public const APP_ID = 'passman';
 }

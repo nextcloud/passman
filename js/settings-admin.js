@@ -21,7 +21,7 @@
  */
 
 $(document).ready(function () {
-    const urlPrefix = 'apps/passman-next';
+    const urlPrefix = 'apps/passman';
 	var Settings = function (baseUrl) {
 		this._baseUrl = baseUrl;
 		this._settings = [];

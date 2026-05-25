@@ -27,7 +27,7 @@ var PassmanImporter = PassmanImporter || {};
 	'use strict';
 	// Define the importer
 
-    const APP_ID = 'passman-next';
+    const APP_ID = 'passman';
 
 // Define the importer
 	PassmanImporter.randomData = {

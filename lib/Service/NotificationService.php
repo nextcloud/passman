@@ -24,7 +24,7 @@
 namespace OCA\Passman\Service;
 
 
-use OCA\PassmanNext\AppInfo\Application;
+use OCA\Passman\AppInfo\Application;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\IURLGenerator;

@@ -23,7 +23,7 @@
 (function() {
   'use strict';
 
-  const APP_ID = 'passman-next';
+  const APP_ID = 'passman';
 
   /**
    * @ngdoc overview

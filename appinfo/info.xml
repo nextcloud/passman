@@ -59,7 +59,7 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <navigations>
         <navigation>
             <name>Passwords</name>
-            <route>passman-next.Page.index</route>
+            <route>passman.Page.index</route>
             <order>10</order>
         </navigation>
     </navigations>
