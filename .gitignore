@@ -1,8 +1,18 @@
-node_modules
+# IDE stuff
 .idea
+.vscode
+
+# dependencies
+node_modules
+vendor
+
+# artifacts
 .sass-cache
 npm-debug.log
-
-# Don't mess with other dev's config
-launch_phpunit.sh
 dist
+
+# don't mess with other dev's config
+launch_phpunit.sh
+
+# since we are using only dev dependencies atm, we can exclude it from polluting the repo
+composer.lock
