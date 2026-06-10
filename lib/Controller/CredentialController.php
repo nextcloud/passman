@@ -143,8 +143,8 @@ class CredentialController extends ApiController {
 
 
 		if (!hash_equals($storedCredential->getUserId(), $this->userId)) {
-			$acl = $this->sharingService->getCredentialAclForUser($this->userId, $storedCredential->getGuid());
-			if ($acl->hasPermission(SharingACL::WRITE)) {
+			$sharingAcl = $this->sharingService->getACL($this->userId, $storedCredential->getGuid());
+			if ($sharingAcl->hasPermission(SharingACL::WRITE)) {
 				$credential['shared_key'] = $storedCredential->getSharedKey();
 			} else {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
@@ -153,7 +153,7 @@ class CredentialController extends ApiController {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
 
-			if (!$acl->hasPermission(SharingACL::FILES)) {
+			if (!$sharingAcl->hasPermission(SharingACL::FILES)) {
 				// what ever the client transmitted, if it has no files permission, the previous files content will be preserved
 				$credential['files'] = $storedCredential->getFiles();
 			}

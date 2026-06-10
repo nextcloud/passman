@@ -31,10 +31,10 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('FileService', ['$http', 'EncryptService', function ($http, EncryptService) {
+		.service('FileService', ['$http', 'EncryptService', 'UrlService', function ($http, EncryptService, UrlService) {
 			return {
 				uploadFile: function (file, key) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/file');
+					var queryUrl = UrlService.generateUrl('/api/v2/file');
 					var _file = angular.copy(file);
 					_file.filename = EncryptService.encryptString(_file.filename, key);
 					var data = EncryptService.encryptString(angular.copy(file.data), key);
@@ -48,7 +48,7 @@
 					});
 				},
 				deleteFile: function (file) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/file/' + file.file_id);
+					var queryUrl = UrlService.generateUrl('/api/v2/file/' + file.file_id);
 					var _file = angular.copy(file);
 					return $http.delete(queryUrl, _file).then(function (response) {
 						if (response.data) {
@@ -59,7 +59,7 @@
 					});
 				},
 				getFile: function (file) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/file/' + file.file_id);
+					var queryUrl = UrlService.generateUrl('/api/v2/file/' + file.file_id);
 					var _file = angular.copy(file);
 					return $http.get(queryUrl, _file).then(function (response) {
 						if (response.data) {
@@ -80,7 +80,7 @@
 				 * @returns {*}
 				 */
 				updateFile: function (file, key) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/file/' + file.file_id);
+					var queryUrl = UrlService.generateUrl('/api/v2/file/' + file.file_id);
 					var _file = angular.copy(file);
 					_file.filename = EncryptService.encryptString(_file.filename, key);
 					var data = EncryptService.encryptString(angular.copy(file.file_data), key);

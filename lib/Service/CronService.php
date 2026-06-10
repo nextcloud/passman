@@ -24,6 +24,7 @@
 namespace OCA\Passman\Service;
 
 use OCA\Passman\Activity;
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Utility\Utils;
 use OCP\DB\Exception;
@@ -45,10 +46,10 @@ class CronService {
 		$expired_credentials = $this->credentialService->getExpiredCredentials($this->utils->getTime());
 		foreach ($expired_credentials as $credential) {
 			try {
-				$this->logger->debug($credential->getLabel() . ' is expired, checking notifications!', ['app' => 'passman']);
+				$this->logger->debug($credential->getLabel() . ' is expired, checking notifications!', ['app' => Application::APP_ID]);
 				if (!$this->notificationService->hasCredentialExpirationNotification($credential)) {
 				$link = $this->credentialService->getDirectEditLink($credential);
-					$this->logger->debug($credential->getLabel() . ' is expired, adding notification!', ['app' => 'passman']);
+					$this->logger->debug($credential->getLabel() . ' is expired, adding notification!', ['app' => Application::APP_ID]);
 					$this->activityService->add(
 						Activity::SUBJECT_ITEM_EXPIRED, [$credential->getLabel(), $credential->getUserId()],
 						'', [],
@@ -56,7 +57,7 @@ class CronService {
 					$this->notificationService->credentialExpiredNotification($credential, $link);
 				}
 			} catch (Exception $exception) {
-				$this->logger->error('Error while creating a notification: ' . $exception->getMessage(), ['app' => 'passman']);
+				$this->logger->error('Error while creating a notification: ' . $exception->getMessage(), ['app' => Application::APP_ID]);
 			}
 		}
 	}

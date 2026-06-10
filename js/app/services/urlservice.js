@@ -23,43 +23,29 @@
 (function () {
 	'use strict';
 
-
 	/**
 	 * @ngdoc service
-	 * @name passmanApp.SettingsService
+	 * @name passmanApp.UrlService
 	 * @description
-	 * # SettingsService
+	 * # UrlService
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('SettingsService', ['UrlService', 'localStorageService', '$http', '$rootScope', function (UrlService, localStorageService, $http, $rootScope) {
-			var settings = {
-				defaultVault: null,
-				defaultVaultPass: null
-			};
-
-			$http.get(UrlService.generateUrl('/api/v2/settings')).then(function (response) {
-				if (response.data) {
-					settings = angular.merge(settings, response.data);
-					$rootScope.$broadcast('settings_loaded');
-				}
-			});
-
-			var cookie = localStorageService.get('settings');
-			settings = angular.merge(settings, cookie);
+		.service('UrlService', ['$rootScope', function ($rootScope) {
 			return {
-				getSettings: function () {
-					return settings;
-				},
-				getSetting: function (name) {
-					return settings[name];
-				},
-				setSetting: function (name, value) {
-					settings[name] = value;
-					localStorageService.set('settings', settings);
-				},
-				isEnabled: function (name) {
-					return settings[name] === 1 || settings[name] === '1';
+                /**
+                 * Like OC.generateUrl, but with an additional apps/<appid>/ prefix
+                 * @returns {*}
+                 */
+                generateUrl: function (localAppUrl) {
+                    let prefix = 'apps/' + $rootScope.APP_ID;
+                    if (!localAppUrl) {
+                        localAppUrl = '';
+                    }
+                    if (!localAppUrl.startsWith('/')) {
+                        prefix += '/';
+                    }
+					return OC.generateUrl(prefix + localAppUrl);
 				}
 			};
 		}]);

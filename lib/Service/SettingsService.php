@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\AppInfo\Application;
 use OCP\IConfig;
 
 
@@ -47,16 +48,16 @@ class SettingsService {
 		private $appName,
 	) {
 		$this->settings = [
-			'link_sharing_enabled' => intval($this->config->getAppValue('passman', 'link_sharing_enabled', 1)),
-			'user_sharing_enabled' => intval($this->config->getAppValue('passman', 'user_sharing_enabled', 1)),
-			'vault_key_strength' => intval($this->config->getAppValue('passman', 'vault_key_strength', 3)),
-			'check_version' => intval($this->config->getAppValue('passman', 'check_version', 1)),
-			'https_check' => intval($this->config->getAppValue('passman', 'https_check', 1)),
-			'disable_contextmenu' => intval($this->config->getAppValue('passman', 'disable_contextmenu', 1)),
-			'server_side_encryption' => $this->config->getAppValue('passman', 'server_side_encryption', 'aes-256-cbc'),
-			'rounds_pbkdf2_stretching' => $this->config->getAppValue('passman', 'rounds_pbkdf2_stretching', 100),
-			'disable_debugger' => $this->config->getAppValue('passman', 'disable_debugger', 1),
-			'enable_global_search' => $this->config->getAppValue('passman', 'enable_global_search', 0),
+			'link_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'link_sharing_enabled', 1)),
+			'user_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'user_sharing_enabled', 1)),
+			'vault_key_strength' => intval($this->config->getAppValue(Application::APP_ID, 'vault_key_strength', 3)),
+			'check_version' => intval($this->config->getAppValue(Application::APP_ID, 'check_version', 1)),
+			'https_check' => intval($this->config->getAppValue(Application::APP_ID, 'https_check', 1)),
+			'disable_contextmenu' => intval($this->config->getAppValue(Application::APP_ID, 'disable_contextmenu', 1)),
+			'server_side_encryption' => $this->config->getAppValue(Application::APP_ID, 'server_side_encryption', 'aes-256-cbc'),
+			'rounds_pbkdf2_stretching' => $this->config->getAppValue(Application::APP_ID, 'rounds_pbkdf2_stretching', 100),
+			'disable_debugger' => $this->config->getAppValue(Application::APP_ID, 'disable_debugger', 1),
+			'enable_global_search' => $this->config->getAppValue(Application::APP_ID, 'enable_global_search', 0),
 			'settings_loaded' => 1
 		];
 	}
@@ -78,7 +79,7 @@ class SettingsService {
 	 * @return mixed
 	 */
 	public function getAppSetting($key, $default_value = null) {
-		$value = $this->settings[$key] ?: $this->config->getAppValue('passman', $key, $default_value);
+		$value = $this->settings[$key] ?: $this->config->getAppValue(Application::APP_ID, $key, $default_value);
 		if (in_array($key, $this->numeric_settings)) {
 			$value = intval($value);
 		}
@@ -94,7 +95,7 @@ class SettingsService {
 	 */
 	public function setAppSetting($key, $value) {
 		$this->settings[$key] = $value;
-		$this->config->setAppValue('passman', $key, $value);
+		$this->config->setAppValue(Application::APP_ID, $key, $value);
 	}
 
 	/**

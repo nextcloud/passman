@@ -32,8 +32,8 @@
 	 * This file is part of passman, licensed under AGPLv3
 	 */
 	angular.module('passmanApp')
-		.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL', 'EncryptService', '$translate', '$rootScope',
-			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService, $translate, $rootScope) {
+		.controller('ShareCtrl', ['$scope', 'VaultService', 'CredentialService', 'SettingsService', '$location', '$routeParams', 'ShareService', 'NotificationService', 'SharingACL', 'EncryptService', 'UrlService', '$translate', '$rootScope',
+			function ($scope, VaultService, CredentialService, SettingsService, $location, $routeParams, ShareService, NotificationService, SharingACL, EncryptService, UrlService, $translate, $rootScope) {
 				$scope.active_vault = VaultService.getActiveVault();
 
 
@@ -305,7 +305,7 @@
 					var port;
 					var defaultPort = ($location.$$protocol === 'http') ? 80 : 443;
 					port = (defaultPort !== $location.$$port) ? ':'+ $location.$$port : '';
-					return $location.$$protocol + '://' + $location.$$host + port + OC.generateUrl('apps/passman/share/public#') + hash;
+					return $location.$$protocol + '://' + $location.$$host + port + UrlService.generateUrl('/share/public#') + hash;
 				};
 
 				$scope.sharing_complete = true;

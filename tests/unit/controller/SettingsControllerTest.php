@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\SettingsService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\TemplateResponse;
@@ -43,10 +44,10 @@ class SettingsControllerTest extends PHPUnit_Framework_TestCase {
 		$IL10N = $this->getMockBuilder('OCP\IL10N')->getMock();
 		$config = $this->getMockBuilder('OCP\IConfig')->getMock();
 		$userId = 'admin';
-		$settings = new SettingsService($userId, $config, 'passman');
+		$settings = new SettingsService($userId, $config, Application::APP_ID);
 
 		$this->controller = new SettingsController(
-			'passman', $request, $userId, $settings, $IL10N
+			Application::APP_ID, $request, $userId, $settings, $IL10N
 		);
 	}
 

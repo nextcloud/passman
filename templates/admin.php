@@ -2,10 +2,12 @@
 /** @var \OCP\IL10N $l */
 /** @var array $_ */
 
-script('passman', 'settings-admin');
+include_once '_config.php';
 
-style('passman', 'admin');
-style('passman', 'vendor/font-awesome/font-awesome.min');
+script(MyAppTemplateConfig::APP_ID, 'settings-admin');
+
+style(MyAppTemplateConfig::APP_ID, 'admin');
+style(MyAppTemplateConfig::APP_ID, 'vendor/font-awesome/font-awesome.min');
 ?>
 
 <div id="passwordSharingSettings" class="followup section">

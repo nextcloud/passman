@@ -24,12 +24,15 @@
 namespace OCA\Passman\Service;
 
 
+use OCA\Passman\AppInfo\Application;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 use OCP\IURLGenerator;
 use OCP\Notification\IManager;
 
 class NotificationService {
+    public const APP_URL_PREFIX = 'index.php/apps/' . Application::APP_ID;
+
 	public function __construct(
 		private readonly IManager $manager,
 		private readonly IURLGenerator $urlGenerator,
@@ -37,8 +40,8 @@ class NotificationService {
 	) {
 	}
 
-	function credentialExpiredNotification($credential, $link) {
-		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman'));
+	public function credentialExpiredNotification($credential, $link) {
+		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', self::APP_URL_PREFIX));
 		$notification = $this->manager->createNotification();
 		$remindAction = $notification->createAction();
 		$remindAction->setLabel('remind')
@@ -48,7 +51,7 @@ class NotificationService {
 		$declineAction->setLabel('ignore')
 			->setLink($api . '/api/internal/notifications/read/' . $credential->getId(), 'DELETE');
 
-		$notification->setApp('passman')
+		$notification->setApp(Application::APP_ID)
 			->setUser($credential->getUserId())
 			->setDateTime(new \DateTime())
 			->setObject('credential', $credential->getId()) // Set notification type and id
@@ -61,16 +64,16 @@ class NotificationService {
 	}
 
 
-	function credentialSharedNotification($data) {
-		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman/#/'));
-		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', 'index.php/apps/passman'));
+	public function credentialSharedNotification($data) {
+		$link = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', self::APP_URL_PREFIX . '/#/'));
+		$api = $this->urlGenerator->getAbsoluteURL($this->urlGenerator->linkTo('', self::APP_URL_PREFIX));
 		$notification = $this->manager->createNotification();
 
 		$declineAction = $notification->createAction();
 		$declineAction->setLabel('decline')
 			->setLink($api . '/api/v2/sharing/decline/' . $data['req_id'], 'DELETE');
 
-		$notification->setApp('passman')
+		$notification->setApp(Application::APP_ID)
 			->setUser($data['target_user'])
 			->setDateTime(new \DateTime())
 			->setObject('passman_share_request', $data['req_id']) // type and id
@@ -82,9 +85,9 @@ class NotificationService {
 	}
 
 
-	function credentialDeclinedSharedNotification($data) {
+	public function credentialDeclinedSharedNotification($data) {
 		$notification = $this->manager->createNotification();
-		$notification->setApp('passman')
+		$notification->setApp(Application::APP_ID)
 			->setUser($data['target_user'])
 			->setDateTime(new \DateTime())
 			->setObject('passman_share_request', $data['req_id']) // type and id
@@ -93,9 +96,9 @@ class NotificationService {
 	}
 
 
-	function credentialAcceptedSharedNotification($data) {
+	public function credentialAcceptedSharedNotification($data) {
 		$notification = $this->manager->createNotification();
-		$notification->setApp('passman')
+		$notification->setApp(Application::APP_ID)
 			->setUser($data['target_user'])
 			->setDateTime(new \DateTime())
 			->setObject('passman_share_request', $data['req_id']) // type and id
@@ -103,7 +106,7 @@ class NotificationService {
 		$this->manager->notify($notification);
 	}
 
-	function hasCredentialExpirationNotification($credential): bool {
+	public function hasCredentialExpirationNotification($credential): bool {
 		$qb = $this->db->getQueryBuilder();
 		$qb->select('*')
 			->from('notifications')
@@ -112,7 +115,7 @@ class NotificationService {
 			return $qb->executeQuery()->rowCount() !== 0;
 	}
 
-	function deleteNotificationsOfCredential($credential) {
+	public function deleteNotificationsOfCredential($credential) {
 		$qb = $this->db->getQueryBuilder();
 		$qb->delete('notifications')
 			->where($qb->expr()->eq('object_id', $qb->createNamedParameter($credential->getId(), IQueryBuilder::PARAM_INT)))
@@ -120,9 +123,9 @@ class NotificationService {
 		return $qb->executeStatement();
 	}
 
-	function markNotificationOfCredentialAsProcessed(int $credential_id, string $user_id): void {
+	public function markNotificationOfCredentialAsProcessed(int $credential_id, string $user_id): void {
 		$notification = $this->manager->createNotification();
-		$notification->setApp('passman')
+		$notification->setApp(Application::APP_ID)
 			->setObject('credential', $credential_id)
 			->setUser($user_id);
 		$this->manager->markProcessed($notification);

@@ -95,7 +95,7 @@ class FileController extends ApiController {
 		try {
 			$file = $this->fileService->getFile($file_id, $this->userId);
 		} catch (\Exception) {
-
+			// do just nothing when having problems getting the requested file
 		}
 		if ($file) {
 			if ($file_data) {

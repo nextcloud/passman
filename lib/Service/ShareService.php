@@ -24,6 +24,7 @@
 namespace OCA\Passman\Service;
 
 
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
@@ -43,7 +44,7 @@ class ShareService {
 		private readonly CredentialMapper $credential,
 		private readonly CredentialRevisionService $revisions,
 		private readonly EncryptService $encryptService,
-		private readonly IManager $IManager,
+		private readonly IManager $manager,
 	) {
 	}
 
@@ -293,19 +294,6 @@ class ShareService {
 	}
 
 	/**
-	 * Gets the ACL on the credential for the user
-	 *
-	 * @param string|null $user_id
-	 * @param string $item_guid
-	 * @return SharingACL
-	 * @throws DoesNotExistException
-	 * @throws MultipleObjectsReturnedException
-	 */
-	public function getCredentialAclForUser(?string $user_id, string $item_guid): SharingACL {
-		return $this->sharingACL->getItemACL($user_id, $item_guid);
-	}
-
-	/**
 	 * Get pending share requests by guid
 	 *
 	 * @param string $item_guid
@@ -389,11 +377,11 @@ class ShareService {
 		}
 		foreach ($request_list as $request) {
 			$this->deleteShareRequest($request);
-			$notification = $this->IManager->createNotification();
-			$notification->setApp('passman')
+			$notification = $this->manager->createNotification();
+			$notification->setApp(Application::APP_ID)
 				->setObject('passman_share_request', $request->getId())
 				->setUser($request->getTargetUserId());
-			$this->IManager->markProcessed($notification);
+			$this->manager->markProcessed($notification);
 		}
 	}
 }

@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\SettingsService;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
@@ -39,14 +40,14 @@ class SettingsController extends ApiController {
 	 * @return TemplateResponse
 	 */
 	public function getForm() {
-		return new TemplateResponse('passman', 'part.admin');
+		return new TemplateResponse(Application::APP_ID, 'part.admin');
 	}
 
 	/**
 	 * @return string the section ID, e.g. 'sharing'
 	 */
 	public function getSection() {
-		return 'passman';
+		return Application::APP_ID;
 	}
 
 	/**

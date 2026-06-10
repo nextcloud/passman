@@ -35,7 +35,6 @@ use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\CronService;
 use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\NotificationService;
-use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
@@ -44,8 +43,6 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\IDBConnection;
-use OCP\IGroupManager;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use OCP\Notification\IManager;
@@ -56,6 +53,8 @@ use Psr\Log\LoggerInterface;
 
 class Application extends App implements IBootstrap {
 	public const APP_ID = 'passman';
+	public const APP_NAME = 'Passman';
+	public const APP_LABEL = 'Passwords';
 
 	public function __construct() {
 		parent::__construct(self::APP_ID);
@@ -79,8 +78,6 @@ class Application extends App implements IBootstrap {
 		$context->registerService('ShareController', function (ContainerInterface $c) {
 			/** @var IUserManager $userManager */
 			$userManager = $c->get(IUserManager::class);
-			/** @var IGroupManager $groupManager */
-			$groupManager = $c->get(IGroupManager::class);
 			/** @var IUserSession $userSession */
 			$userSession = $c->get(IUserSession::class);
 
@@ -88,7 +85,6 @@ class Application extends App implements IBootstrap {
 				$c->get('AppName'),
 				$c->get('Request'),
 				$userSession->getUser(),
-				$groupManager,
 				$userManager,
 				$c->get(ActivityService::class),
 				$c->get(VaultService::class),
@@ -96,7 +92,6 @@ class Application extends App implements IBootstrap {
 				$c->get(CredentialService::class),
 				$c->get(NotificationService::class),
 				$c->get(FileService::class),
-				$c->get(SettingsService::class),
 				$c->get(IManager::class)
 			);
 		});
@@ -107,8 +102,7 @@ class Application extends App implements IBootstrap {
 				$c->get(LoggerInterface::class),
 				$c->get(Utils::class),
 				$c->get(NotificationService::class),
-				$c->get(ActivityService::class),
-				$c->get(IDBConnection::class)
+				$c->get(ActivityService::class)
 			));
 
 		$context->registerService('Logger', fn(ContainerInterface $c) => $c->get(ServerContainer::class)->getLogger());

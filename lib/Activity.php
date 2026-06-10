@@ -23,12 +23,13 @@
 
 namespace OCA\Passman;
 
+use OCA\Passman\AppInfo\Application;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 
 class Activity implements \OCP\Activity\IExtension {
-	const FILTER_PASSMAN = 'passman';
-	const APP_NAME = 'passman';
+	const FILTER_PASSMAN = Application::APP_ID;
+	const APP_NAME = Application::APP_ID;
 	const TYPE_ITEM_ACTION = 'passman_item_action';
 	const TYPE_ITEM_EXPIRED = 'passman_item_expired';
 	const TYPE_ITEM_SHARED = 'passman_item_shared';
@@ -197,13 +198,13 @@ class Activity implements \OCP\Activity\IExtension {
 				case self::SUBJECT_ITEM_DESTROYED:
 				case self::SUBJECT_ITEM_DESTROYED_SELF:
 					return [
-						0 => 'passman',
+						0 => Application::APP_ID,
 						1 => 'username',
 					];
 				case self::SUBJECT_APPLY_REV:
 				case self::SUBJECT_APPLY_REV_SELF:
 					return [
-						0 => 'passman',
+						0 => Application::APP_ID,
 						1 => 'username',
 						2 => '', //unknown
 					];
@@ -213,7 +214,7 @@ class Activity implements \OCP\Activity\IExtension {
 				case self::SUBJECT_ITEM_SHARED:
 				case self::SUBJECT_ITEM_SHARED_PUBLICLY:
 					return [
-						0 => 'passman',
+						0 => Application::APP_ID,
 					];
 			}
 		}
@@ -261,8 +262,8 @@ class Activity implements \OCP\Activity\IExtension {
 			'top' => [],
 			'apps' => [self::FILTER_PASSMAN =>
 				[
-					'id' => 'passman',
-					'name' => (string)$l->t('Passwords'),
+					'id' => Application::APP_ID,
+					'name' => (string)$l->t(Application::APP_LABEL),
 					'url' => $this->URLGenerator->linkToRoute('activity.Activities.showList', ['filter' => self::FILTER_PASSMAN]),
 				],
 			],

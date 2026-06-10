@@ -56,7 +56,7 @@ class Provider implements IProvider {
 	}
 
 	public function getName(): string {
-		return $this->l10n->t('Passman');
+		return $this->l10n->t(Application::APP_NAME);
 	}
 
 	public function getOrder(string $route, array $routeParameters): int {
@@ -89,7 +89,7 @@ class Provider implements IProvider {
 									\sprintf("Part of Passman vault %s", $vault->getName()),
 									sprintf(
 										"%s#/vault/%s?show=%s&showv=%s",
-										$this->urlGenerator->linkToRoute('passman.Page.index'),
+										$this->urlGenerator->linkToRoute(Application::APP_ID . '.Page.index'),
 										$vault->getGuid(),
 										$credential->getGuid(),
 										$vault->getGuid()	// need to pass vault guid again, to preserve it if credential.js rewrites path to /

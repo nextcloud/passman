@@ -30,7 +30,7 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', function ($http, EncryptService, VaultService, FileService) {
+		.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', 'UrlService', function ($http, EncryptService, VaultService, FileService, UrlService) {
 			var credential = {
 				'credential_id': null,
 				'guid': null,
@@ -72,7 +72,7 @@
 
 					_credential.expire_time = new Date(angular.copy(credential.expire_time)).getTime() / 1000;
 
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials');
+					var queryUrl = UrlService.generateUrl('/api/v2/credentials');
 					return $http.post(queryUrl, _credential).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -91,7 +91,7 @@
 					}
 					_credential.expire_time = new Date(angular.copy(credential.expire_time)).getTime() / 1000;
 
-					const queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential.guid);
+					const queryUrl = UrlService.generateUrl('/api/v2/credentials/' + credential.guid);
 					return $http.patch(queryUrl, _credential).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -101,7 +101,7 @@
 					});
 				},
 				getCredential: function (guid) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + guid);
+					var queryUrl = UrlService.generateUrl('/api/v2/credentials/' + guid);
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -111,7 +111,7 @@
 					});
 				},
 				destroyCredential: function (guid) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + guid);
+					var queryUrl = UrlService.generateUrl('/api/v2/credentials/' + guid);
 					return $http.delete(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -171,7 +171,7 @@
 					return key;
 				},
 				getRevisions: function (guid) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + guid + '/revision');
+					var queryUrl = UrlService.generateUrl('/api/v2/credentials/' + guid + '/revision');
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -183,7 +183,7 @@
 				updateRevision: function (revision) {
 					var _revision = angular.copy(revision);
 					_revision.credential_data = window.btoa(JSON.stringify(_revision.credential_data));
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + revision.credential_data.guid + '/revision/' + revision.revision_id);
+					var queryUrl = UrlService.generateUrl('/api/v2/credentials/' + revision.credential_data.guid + '/revision/' + revision.revision_id);
 					return $http.patch(queryUrl, _revision).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -193,7 +193,7 @@
 					});
 				},
 				deleteRevision: function (credential_guid, revision_id) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/credentials/' + credential_guid + '/revision/' + revision_id);
+					var queryUrl = UrlService.generateUrl('/api/v2/credentials/' + credential_guid + '/revision/' + revision_id);
 					return $http.delete(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;

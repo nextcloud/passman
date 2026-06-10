@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\AppInfo\Application;
 use OCP\AppFramework\Http\JSONResponse;
 use PHPUnit_Framework_TestCase;
 
@@ -45,7 +46,7 @@ class InternalControllerTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$this->controller = new InternalController(
-			'passman', $request, $this->userId, $this->credentialService, $config
+			Application::APP_ID, $request, $this->userId, $this->credentialService, $config
 		);
 	}
 

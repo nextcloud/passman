@@ -32,8 +32,8 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('passmanApp')
-		.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', '$location', '$routeParams', '$http', 'EncryptService', 'NotificationService', '$sce', '$translate',
-			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, $location, $routeParams, $http, EncryptService, NotificationService, $sce, $translate) {
+		.controller('SettingsCtrl', ['$scope', '$rootScope', 'SettingsService', 'VaultService', 'CredentialService', 'UrlService', '$location', '$routeParams', '$http', 'EncryptService', 'NotificationService', '$sce', '$translate',
+			function ($scope, $rootScope, SettingsService, VaultService, CredentialService, UrlService, $location, $routeParams, $http, EncryptService, NotificationService, $sce, $translate) {
 				$scope.vault_settings = {};
 				$scope.new_vault_name = '';
 				$scope.showGenericImport = false;
@@ -147,7 +147,7 @@
 				};
 
 				var getPassmanVersion = function () {
-					var url = OC.generateUrl('apps/passman/api/internal/version');
+					var url = UrlService.generateUrl('/api/internal/version');
 					$http.get(url).then(function (result) {
 						$scope.passman_version = result.data.version;
 					});

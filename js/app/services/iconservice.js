@@ -31,10 +31,10 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('IconService', ['$http', function ($http) {
+		.service('IconService', ['UrlService', '$http', function (UrlService, $http) {
 			return {
 				getIcons: function () {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/icon/list');
+					var queryUrl = UrlService.generateUrl('/api/v2/icon/list');
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;

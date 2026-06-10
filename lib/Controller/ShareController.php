@@ -12,13 +12,13 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Activity;
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Db\File;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Service\ActivityService;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\NotificationService;
-use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Service\ShareService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
@@ -28,7 +28,6 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
-use OCP\IGroupManager;
 use OCP\IRequest;
 use OCP\IUserManager;
 use OCP\Notification\IManager;
@@ -42,7 +41,6 @@ class ShareController extends ApiController {
 		$AppName,
 		IRequest $request,
 		private $userId,
-		private readonly IGroupManager $groupManager,
 		private readonly IUserManager $userManager,
 		private readonly ActivityService $activityService,
 		private readonly VaultService $vaultService,
@@ -50,7 +48,6 @@ class ShareController extends ApiController {
 		private readonly CredentialService $credentialService,
 		private readonly NotificationService $notificationService,
 		private readonly FileService $fileService,
-		private readonly SettingsService $settings,
 		private readonly IManager $manager,
 	) {
 		parent::__construct(
@@ -127,7 +124,7 @@ class ShareController extends ApiController {
 
 		$acl = null;
 		try {
-			$acl = $this->shareService->getCredentialAclForUser($first_vault['user_id'], $item_guid);
+			$acl = $this->shareService->getACL($first_vault['user_id'], $item_guid);
 		} catch (\Exception) {
 			// no need to catch this
 		}
@@ -211,7 +208,7 @@ class ShareController extends ApiController {
 		$acl = null;
 		$sr = null;
 		try {
-			$acl = $this->shareService->getCredentialAclForUser($user_id, $item_guid);
+			$acl = $this->shareService->getACL($user_id, $item_guid);
 		} catch (\Exception) {
 			// no need to handle this
 		}
@@ -225,7 +222,7 @@ class ShareController extends ApiController {
 		if ($sr) {
 			$this->shareService->cleanItemRequestsForUser($sr);
 			$notification = $this->manager->createNotification();
-			$notification->setApp('passman')
+			$notification->setApp(Application::APP_ID)
 				->setObject('passman_share_request', $sr->getId())
 				->setUser($user_id);
 			$this->manager->markProcessed($notification);
@@ -276,7 +273,7 @@ class ShareController extends ApiController {
 		}
 
 		$notification = $this->manager->createNotification();
-		$notification->setApp('passman')
+		$notification->setApp(Application::APP_ID)
 			->setObject('passman_share_request', $sr->getId())
 			->setUser($this->userId->getUID());
 		$this->manager->markProcessed($notification);
@@ -380,7 +377,7 @@ class ShareController extends ApiController {
 
 
 			$notification = $this->manager->createNotification();
-			$notification->setApp('passman')
+			$notification->setApp(Application::APP_ID)
 				->setObject('passman_share_request', $share_request_id)
 				->setUser($this->userId->getUID());
 			$this->manager->markProcessed($notification);
@@ -538,7 +535,7 @@ class ShareController extends ApiController {
 				$acl->setPermissions($permission);
 				return $this->shareService->updateCredentialACL($acl);
 			} catch (\Exception) {
-
+				// handled by the ($acl === null) condition below
 			}
 
 			if ($acl === null) {

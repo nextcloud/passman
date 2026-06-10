@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Service;
 
+use OCA\Passman\AppInfo\Application;
 use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -54,7 +55,7 @@ class ActivityService {
 		if($user) {
 			$activity = $this->manager->generateEvent();
 			$activity->setType($type);
-			$activity->setApp('passman');
+			$activity->setApp(Application::APP_ID);
 			$activity->setSubject($subject, $subjectParams);
 			$activity->setLink($link);
 			$activity->setAffectedUser($user);

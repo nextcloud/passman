@@ -32,7 +32,7 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('ShareService', ['$http', 'VaultService', 'EncryptService', 'CredentialService', function ($http, VaultService, EncryptService, CredentialService) {
+		.service('ShareService', ['$http', 'VaultService', 'EncryptService', 'CredentialService', 'UrlService', function ($http, VaultService, EncryptService, CredentialService, UrlService) {
 			// Setup sjcl random engine to max paranoia level and start collecting data
 			var paranoia_level = 10;
 			/** global: sjcl */
@@ -41,7 +41,7 @@
 
 			return {
 				search: function (string) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/search');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/search');
 					return $http.post(queryUrl, {search: string}).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -51,7 +51,7 @@
 					});
 				},
 				shareWithUser: function (credential, target_user_data) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/share');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/share');
 					return $http.post(queryUrl,
 						{
 							item_id: credential.credential_id,
@@ -62,7 +62,7 @@
 					);
 				},
 				getVaultsByUser: function (userId) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vaults/' + userId);
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/vaults/' + userId);
 					return $http.get(queryUrl, {search: userId}).then(function (response) {
 						if (response.data) {
 							for (var i = 0; i < response.data.length; i++) {
@@ -76,7 +76,7 @@
 					});
 				},
 				getPendingRequests: function () {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/pending');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/pending');
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -84,7 +84,7 @@
 					});
 				},
 				saveSharingRequest: function (request, crypted_shared_key) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/save');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/save');
 					return $http.post(queryUrl, {
 						item_guid: request.item_guid,
 						target_vault_guid: request.target_vault_guid,
@@ -94,33 +94,33 @@
 					});
 				},
 				declineSharingRequest: function (request) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/decline/' + request.req_id);
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/decline/' + request.req_id);
 					return $http.delete(queryUrl).then(function (response) {
 						return response.data;
 					});
 				},
 				unshareCredential: function (credential) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid);
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + credential.guid);
 					return $http.delete(queryUrl).then(function (response) {
 						return response.data;
 					});
 				},
 
 				unshareCredentialFromUser: function (credential, user_id) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/' + user_id);
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + credential.guid + '/' + user_id);
 					return $http.delete(queryUrl).then(function (response) {
 						return response.data;
 					});
 				},
 
 				createPublicSharedCredential: function (shareObj) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/public');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/public');
 					return $http.post(queryUrl, shareObj).then(function (response) {
 						return response.data;
 					});
 				},
 				getPublicSharedCredential: function (credential_guid) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential_guid + '/public');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + credential_guid + '/public');
 					return $http.get(queryUrl).then(function (response) {
 							if (response.data) {
 								return response;
@@ -133,7 +133,7 @@
 						});
 				},
 				getSharedCredentialACL: function (credential) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/acl');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + credential.guid + '/acl');
 					return $http.get(queryUrl).then(function (response) {
 							if (response.data) {
 								return response.data;
@@ -146,13 +146,13 @@
 						});
 				},
 				updateCredentialAcl: function (credential, acl) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/acl');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + credential.guid + '/acl');
 					return $http.patch(queryUrl, acl).then(function (response) {
 						return response.data;
 					});
 				},
 				getCredendialsSharedWithUs: function (vault_guid) {
-					var queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/vault/' + vault_guid + '/get');
+					var queryUrl = UrlService.generateUrl('/api/v2/sharing/vault/' + vault_guid + '/get');
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -160,7 +160,7 @@
 					});
 				},
 				downloadSharedFile: function (credential, file) {
-					const queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/file/' + file.guid);
+					const queryUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + credential.guid + '/file/' + file.guid);
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							return response.data;
@@ -168,7 +168,7 @@
 					});
 				},
 				uploadSharedFile: function (credential, file, key) {
-					const queryUrl = OC.generateUrl('apps/passman/api/v2/sharing/credential/' + credential.guid + '/file');
+					const queryUrl = UrlService.generateUrl('/api/v2/sharing/credential/' + credential.guid + '/file');
 					let _file = angular.copy(file);
 					_file.filename = EncryptService.encryptString(_file.filename, key);
 					const data = EncryptService.encryptString(angular.copy(file.data), key);

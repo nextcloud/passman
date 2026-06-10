@@ -23,6 +23,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\DeleteVaultRequestService;
 use OCA\Passman\Service\SettingsService;
@@ -52,7 +53,7 @@ class VaultControllerTest extends PHPUnit_Framework_TestCase {
 		$this->deleteVaultRequestService = $this->createMock(DeleteVaultRequestService::class);
 
 		$this->controller = new VaultController(
-			'passman', $request, $this->userId, $this->vaultService, $this->credentialService, $this->deleteVaultRequestService,  $this->settingsService
+			Application::APP_ID, $request, $this->userId, $this->vaultService, $this->credentialService, $this->deleteVaultRequestService,  $this->settingsService
 		);
 	}
 

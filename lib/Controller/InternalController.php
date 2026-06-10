@@ -11,6 +11,7 @@
 
 namespace OCA\Passman\Controller;
 
+use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\NotificationService;
 use OCP\App\IAppManager;
@@ -80,7 +81,7 @@ class InternalController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function getAppVersion() {
-		return new JSONResponse(['version' => $this->appManager->getAppInfo('passman')["version"]]);
+		return new JSONResponse(['version' => $this->appManager->getAppInfo(Application::APP_ID)["version"]]);
 	}
 
 	/**
@@ -99,12 +100,12 @@ class InternalController extends ApiController {
 	 */
 	public function getSettings() {
 		$settings = [
-			'link_sharing_enabled' => intval($this->config->getAppValue('passman', 'link_sharing_enabled', 1)),
-			'user_sharing_enabled' => intval($this->config->getAppValue('passman', 'user_sharing_enabled', 1)),
-			'vault_key_strength' => intval($this->config->getAppValue('passman', 'vault_key_strength', 3)),
-			'check_version' => intval($this->config->getAppValue('passman', 'check_version', 1)),
-			'https_check' => intval($this->config->getAppValue('passman', 'https_check', 1)),
-			'disable_contextmenu' => intval($this->config->getAppValue('passman', 'disable_contextmenu', 1)),
+			'link_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'link_sharing_enabled', 1)),
+			'user_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'user_sharing_enabled', 1)),
+			'vault_key_strength' => intval($this->config->getAppValue(Application::APP_ID, 'vault_key_strength', 3)),
+			'check_version' => intval($this->config->getAppValue(Application::APP_ID, 'check_version', 1)),
+			'https_check' => intval($this->config->getAppValue(Application::APP_ID, 'https_check', 1)),
+			'disable_contextmenu' => intval($this->config->getAppValue(Application::APP_ID, 'disable_contextmenu', 1)),
 		];
 		return new JSONResponse($settings);
 	}
@@ -116,7 +117,7 @@ class InternalController extends ApiController {
 		if (is_numeric($value)) {
 			$value = intval($value);
 		}
-		$this->config->setAppValue('passman', $key, $value);
+		$this->config->setAppValue(Application::APP_ID, $key, $value);
 	}
 
 }
