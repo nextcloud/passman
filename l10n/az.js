@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "You created %1$s" : "Siz yaratdınız %1$s",
     "You deleted %1$s" : "Siz silindiniz %1$s",
-    "Passwords" : "Parollar",
     "General" : "Ümumi",
     "Done" : "Done",
     "Settings saved" : "Parametrlər yaddaşa verildi",
@@ -47,6 +46,7 @@ OC.L10N.register(
     "Never" : "Heç vaxt",
     "Tags" : "Işarələr",
     "Description" : "Açıqlanma",
+    "Passwords" : "Parollar",
     "An error occurred!" : "Səhv baş verdi!",
     "Dismiss" : "Rədd et",
     "seconds ago" : "saniyələr öncə"

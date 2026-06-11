@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "You created %1$s" : "Vi kreis %1$s",
     "You deleted %1$s" : "Vi forigis %1$s",
-    "Passwords" : "Pasvortoj",
     "User not found" : "Netrovita uzanto",
     "General" : "Ĝenerala",
     "Done" : "Farita",
@@ -79,6 +78,7 @@ OC.L10N.register(
     "Loading …" : "Ŝargas …",
     "email" : "retpoŝtadreso",
     "Description" : "Priskribo",
+    "Passwords" : "Pasvortoj",
     "An error occurred!" : "Eraro okazis!",
     "E-mail" : "Retpoŝto",
     "Connection to server lost" : "Konekto al servilo perdita",

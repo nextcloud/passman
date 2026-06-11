@@ -1,7 +1,6 @@
 OC.L10N.register(
     "passman",
     {
-    "Passwords" : "Parollar",
     "User not found" : "Foydalanuvchi topilmadi",
     "General" : "Umumiy",
     "Error loading file" : "Faylni yuklashda xatolik yuz berdi",
@@ -54,6 +53,7 @@ OC.L10N.register(
     "Loading …" : "Yuklanmoqda…",
     "email" : "email",
     "Description" : "Tavsif",
+    "Passwords" : "Parollar",
     "E-mail" : "E-mail",
     "Connection to server lost" : "Connection to server lost",
     "Saving …" : "Saqlanmoqda...",

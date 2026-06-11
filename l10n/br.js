@@ -2,7 +2,6 @@ OC.L10N.register(
     "passman",
     {
     "You deleted %1$s" : "Dilamet ho peus %1$s",
-    "Passwords" : "Gerioù-tremen",
     "General" : "Hollek",
     "Done" : "Graet",
     "Settings saved" : "Stummoù enrollet",
@@ -61,6 +60,7 @@ OC.L10N.register(
     "Loading …" : "O Kargañ ...",
     "email" : "email",
     "Description" : "Diskrivadur",
+    "Passwords" : "Gerioù-tremen",
     "E-mail" : "Postel",
     "Expires:" : "Termenn :",
     "Connection to server lost" : "Kelet eo bet ar c'henstagañ gant ar servijour",

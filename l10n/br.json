@@ -1,6 +1,5 @@
 { "translations": {
     "You deleted %1$s" : "Dilamet ho peus %1$s",
-    "Passwords" : "Gerioù-tremen",
     "General" : "Hollek",
     "Done" : "Graet",
     "Settings saved" : "Stummoù enrollet",
@@ -59,6 +58,7 @@
     "Loading …" : "O Kargañ ...",
     "email" : "email",
     "Description" : "Diskrivadur",
+    "Passwords" : "Gerioù-tremen",
     "E-mail" : "Postel",
     "Expires:" : "Termenn :",
     "Connection to server lost" : "Kelet eo bet ar c'henstagañ gant ar servijour",

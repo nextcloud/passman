@@ -1,6 +1,7 @@
 OC.L10N.register(
     "passman",
     {
+    "You created %1$s" : "Tesnulfaḍ-d %1$s",
     "You deleted %1$s" : "Tekkseḍ %1$s",
     "General" : "Amatu",
     "Done" : "Immed",

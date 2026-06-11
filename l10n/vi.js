@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "You created %1$s" : "Bạn đã tạo %1$s",
     "You deleted %1$s" : "Bạn đã xóa %1$s",
-    "Passwords" : "Mật khẩu",
     "User not found" : "Không tìm thấy người dùng",
     "Incorrect vault password!" : "Mật khẩu hòm khóa không đúng!",
     "Passwords do not match" : "Mật khẩu không khớp",
@@ -86,6 +85,7 @@ OC.L10N.register(
     "Loading …" : "Đang tải...",
     "email" : "Thư điện tử",
     "Description" : "Mô tả",
+    "Passwords" : "Mật khẩu",
     "An error occurred!" : "Có một lỗi đã xảy ra!",
     "E-mail" : "Email",
     "Connection to server lost" : "Kết nối tới máy chủ bị mất",

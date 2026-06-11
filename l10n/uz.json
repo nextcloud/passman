@@ -1,5 +1,4 @@
 { "translations": {
-    "Passwords" : "Parollar",
     "User not found" : "Foydalanuvchi topilmadi",
     "General" : "Umumiy",
     "Error loading file" : "Faylni yuklashda xatolik yuz berdi",
@@ -52,6 +51,7 @@
     "Loading …" : "Yuklanmoqda…",
     "email" : "email",
     "Description" : "Tavsif",
+    "Passwords" : "Parollar",
     "E-mail" : "E-mail",
     "Connection to server lost" : "Connection to server lost",
     "Saving …" : "Saqlanmoqda...",

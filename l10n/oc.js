@@ -3,7 +3,6 @@ OC.L10N.register(
     {
     "You created %1$s" : "Avètz creat %1$s",
     "You deleted %1$s" : "Avètz suprimit %1$s",
-    "Passwords" : "Senhals",
     "User not found" : "Utilizaire pas trobat",
     "Passwords do not match" : "Los senhals correspondon pas",
     "General" : "Generals",
@@ -68,6 +67,7 @@ OC.L10N.register(
     "Expired" : "Expirat",
     "Loading …" : "Cargament…",
     "Description" : "Descripcion",
+    "Passwords" : "Senhals",
     "An error occurred!" : "Una error s'es produsida !",
     "Loading&hellip;" : "Cargament&hellip;",
     "Connection to server lost" : "Connexion al servidor perduda",
