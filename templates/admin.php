@@ -2,9 +2,11 @@
 /** @var \OCP\IL10N $l */
 /** @var array $_ */
 
+use OCP\Util;
+
 include_once '_config.php';
 
-script(MyAppTemplateConfig::APP_ID, 'settings-admin');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'settings-admin', 'core');
 
 style(MyAppTemplateConfig::APP_ID, 'admin');
 style(MyAppTemplateConfig::APP_ID, 'vendor/font-awesome/font-awesome.min');

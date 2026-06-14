@@ -4,6 +4,7 @@
  *
  * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
  * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
+ * @copyright 2026 Timo Triebensky (timo@binsky.org)
  * @license GNU AGPL version 3 or any later version
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,10 +25,8 @@
 namespace OCA\Passman\Service;
 
 use OCA\Passman\AppInfo\Application;
-use OCP\IConfig;
-use OCP\AppFramework\Db\DoesNotExistException;
-
-use OCA\Passman\Db\FileMapper;
+use OCP\Activity\IManager;
+use OCP\Server;
 
 
 class ActivityService {
@@ -35,7 +34,7 @@ class ActivityService {
 	private $manager;
 
 	public function __construct() {
-			$this->manager = \OC::$server->getActivityManager();
+			$this->manager = Server::get(IManager::class);
 	}
 
 	/**
@@ -45,13 +44,19 @@ class ActivityService {
 	 * @param $message string
 	 * @param $messageParams array
 	 * @param $link string
-	 * @param $user string
+	 * @param $user string|null
 	 * @param $type string
 	 * @return array
 	 */
-	public function add($subject, $subjectParams = [],
-						$message = '', $messageParams = [],
-						$link = '', $user = null, $type = '') {
+	public function add(
+		string  $subject,
+		array   $subjectParams = [],
+		string  $message = '',
+		array   $messageParams = [],
+		string  $link = '',
+		?string $user = null,
+		string $type = ''
+	) {
 		if($user) {
 			$activity = $this->manager->generateEvent();
 			$activity->setType($type);
