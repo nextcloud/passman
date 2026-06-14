@@ -209,6 +209,163 @@
  *
  * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
  * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
+ * @copyright 2026 Timo Triebensky (timo@binsky.org)
+ * @license GNU AGPL version 3 or any later version
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+/**
+ * jQuery UI dialog theming for Passman.
+ * dialogClass is applied on the .ui-dialog element itself, not a wrapper.
+ */
+.ui-widget-overlay.ui-front {
+  background: var(--color-box-shadow, rgba(0, 0, 0, 0.5));
+  opacity: 0.8;
+  z-index: 9998;
+}
+
+.ui-dialog {
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-large, var(--border-radius));
+  background: var(--color-main-background);
+  color: var(--color-main-text);
+  box-shadow: 0 0 30px var(--color-box-shadow);
+  font-family: var(--font-face);
+  z-index: 9999 !important;
+}
+.ui-dialog.ui-widget, .ui-dialog.ui-widget-content {
+  border: 1px solid var(--color-border);
+  background: var(--color-main-background);
+  color: var(--color-main-text);
+}
+.ui-dialog .ui-dialog-titlebar {
+  padding: 12px 16px;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: var(--border-radius-large, var(--border-radius)) var(--border-radius-large, var(--border-radius)) 0 0;
+  background: var(--color-main-background);
+  color: var(--color-main-text);
+  font-weight: 600;
+  font-size: var(--default-font-size);
+}
+.ui-dialog .ui-dialog-title {
+  float: none;
+  margin: 0;
+  width: auto;
+  padding-inline-end: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+  position: absolute;
+  inset-inline-end: 8px;
+  top: 50%;
+  width: var(--default-clickable-area);
+  height: var(--default-clickable-area);
+  margin: -20px 0 0 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: var(--border-radius) !important;
+}
+.ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus, .ui-dialog .ui-dialog-titlebar-close:active {
+  background: var(--color-background-hover) !important;
+  border: none !important;
+}
+.ui-dialog .ui-dialog-titlebar-close .ui-button-icon,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon-closethick {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: none !important;
+  background-color: transparent;
+  background-image: var(--icon-close-dark, var(--icon-close-000));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.ui-dialog .ui-dialog-content {
+  padding: 16px;
+  border: none;
+  background: var(--color-main-background);
+  color: var(--color-main-text);
+  overflow: auto;
+}
+.ui-dialog .ui-dialog-buttonpane {
+  margin: 0;
+  padding: 12px 16px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-main-background);
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: none;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-button {
+  margin: 0;
+}
+.ui-dialog .ui-button {
+  min-height: var(--default-clickable-area);
+  padding: 7px 14px;
+  border: 1px solid var(--color-border-dark) !important;
+  background: var(--color-main-background) !important;
+  color: var(--color-main-text) !important;
+  border-radius: var(--border-radius);
+  font-family: var(--font-face);
+  font-weight: normal;
+}
+.ui-dialog .ui-button:hover, .ui-dialog .ui-button:focus {
+  border-color: var(--color-border-dark) !important;
+  background: var(--color-background-hover) !important;
+  color: var(--color-main-text) !important;
+}
+.ui-dialog .ui-button.ui-state-active, .ui-dialog .ui-button:active {
+  border-color: var(--color-primary-element) !important;
+  background: var(--color-primary-element) !important;
+  color: var(--color-primary-text) !important;
+}
+.ui-dialog .ui-resizable-handle {
+  display: none !important;
+}
+
+.ui-dialog.shareincoming-dialog,
+.ui-dialog.iconpicker-dialog,
+.ui-dialog.custom-search-dialog {
+  border-radius: var(--border-radius-large, var(--border-radius));
+  box-shadow: 0 0 30px var(--color-box-shadow);
+}
+
+.ui-dialog.custom-search-dialog .ui-dialog-buttonpane.ui-helper-clearfix {
+  display: none;
+}
+
+/**
+ * Nextcloud - passman
+ *
+ * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
+ * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
  * @license GNU AGPL version 3 or any later version
  *
  * This program is free software: you can redistribute it and/or modify
@@ -285,45 +442,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-.iconpicker-dialog {
-  border-radius: var(--border-radius-large) !important;
-  box-shadow: 0 0 30px var(--color-box-shadow);
-}
-.iconpicker-dialog .ui-dialog {
-  border-radius: var(--border-radius-large);
-  box-shadow: 0 0 30px var(--color-box-shadow);
-}
-.iconpicker-dialog .ui-widget-header {
-  background: none;
-}
-.iconpicker-dialog .ui-icon-closethick {
-  background-position: inherit;
-}
-.iconpicker-dialog .ui-button .ui-icon {
-  background-image: var(--icon-close-000);
-}
-.iconpicker-dialog .ui-button-icon {
-  border: none !important;
-}
-.iconpicker-dialog .ui-icon {
-  border: none !important;
-}
-.iconpicker-dialog .ui-icon-closethick {
-  border: none !important;
-}
-.iconpicker-dialog .ui-corner-all {
-  border: none !important;
-}
-.iconpicker-dialog .ui-state-default {
-  background: white !important;
-}
-.iconpicker-dialog .ui-button {
-  background: white !important;
-}
-.iconpicker-dialog {
-  z-index: 9999 !important;
-}
-
+/**
+ * Icon picker dialog content.
+ * Shell styling lives in partials/jquery-ui-dialog.scss
+ */
 #iconPicker .iconList {
   float: left;
   width: 60%;
@@ -369,6 +491,7 @@
  * Nextcloud - passman
  *
  * @copyright Copyright (c) 2019, Felix Nuesse (felix.nuesse@t-online.de)
+ * @copyright 2026 Timo Triebensky (timo@binsky.org)
  * @license GNU AGPL version 3 or any later version
  *
  * This program is free software: you can redistribute it and/or modify
@@ -385,47 +508,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-.shareincoming-dialog {
-  border-radius: var(--border-radius-large) !important;
-  box-shadow: 0 0 30px var(--color-box-shadow);
+/**
+ * Share incoming request dialog content.
+ * Shell styling lives in partials/jquery-ui-dialog.scss
+ */
+.ui-dialog.shareincoming-dialog .ui-dialog-content .table {
+  width: 100%;
+  border-collapse: collapse;
 }
-.shareincoming-dialog .ui-dialog {
-  border-radius: var(--border-radius-large);
-  box-shadow: 0 0 30px var(--color-box-shadow);
+.ui-dialog.shareincoming-dialog .ui-dialog-content .table th,
+.ui-dialog.shareincoming-dialog .ui-dialog-content .table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
 }
-.shareincoming-dialog .ui-widget-header {
-  background: none !important;
+.ui-dialog.shareincoming-dialog .ui-dialog-content .table thead td {
+  font-weight: 600;
+  color: var(--color-text-maxcontrast);
 }
-.shareincoming-dialog .ui-icon-closethick {
-  background-position: inherit;
+.ui-dialog.shareincoming-dialog .ui-dialog-content .link {
+  cursor: pointer;
+  color: var(--color-primary-element);
 }
-.shareincoming-dialog .ui-button .ui-icon {
-  background-image: var(--icon-close-000);
-}
-.shareincoming-dialog .ui-button:hover .ui-icon {
-  background-image: var(--icon-close-000);
-  cursor: pointer !important;
-}
-.shareincoming-dialog .ui-button-icon {
-  border: none !important;
-}
-.shareincoming-dialog .ui-icon {
-  border: none !important;
-}
-.shareincoming-dialog .ui-icon-closethick {
-  border: none !important;
-}
-.shareincoming-dialog .ui-corner-all {
-  border: none !important;
-}
-.shareincoming-dialog .ui-state-default {
-  background: white !important;
-}
-.shareincoming-dialog .ui-button {
-  background: white !important;
-}
-.shareincoming-dialog {
-  z-index: 9999 !important;
+.ui-dialog.shareincoming-dialog .ui-dialog-content .link:hover {
+  text-decoration: underline;
 }
 
 /**
@@ -1942,10 +2049,6 @@ label[for=confirmVaultDelete], label[for=skipFirstRow] {
 
 .hide-animation.ng-hide {
   opacity: 0;
-}
-
-.ui-dialog {
-  z-index: 9999;
 }
 
 #notification .row {

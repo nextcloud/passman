@@ -25,6 +25,7 @@
 @import 'partials/button';
 @import 'partials/popovermenu';
 @import 'partials/tabs';
+@import 'partials/jquery-ui-dialog';
 @import 'partials/pwgen';
 @import 'partials/icon-picker';
 @import 'partials/share-incoming';
@@ -53,9 +54,6 @@
 }
 
 
-.ui-dialog{
-  z-index: 9999;
-}
 #notification{
   .row{
     margin-left: 0 !important;
