@@ -31,7 +31,7 @@
 	 */
 
 	angular.module('passmanApp')
-		.directive('passwordGen', function ($timeout, $translate) {
+		.directive('passwordGen', function ($timeout, $translate, NotificationService) {
 			/* jshint ignore:start */
 			function Arcfour () {
 				this.j = this.i = 0, this.S = []
@@ -190,13 +190,12 @@
 					});
 					//
 					scope.onSuccess = function (e) {
-						//@TODO move OC.Notification to a service
-						OC.Notification.showTemporary($translate.instant('password.copied'));
+						NotificationService.showNotification($translate.instant('password.copied'));
 						e.clearSelection();
 					};
 
 					scope.onError = function () {
-						OC.Notification.showTemporary('Press Ctrl+C to copy!');
+						NotificationService.showNotification('Press Ctrl+C to copy!');
 					};
 					scope.progressDivShow = false;
 					scope.generatePasswordStart = function () {
