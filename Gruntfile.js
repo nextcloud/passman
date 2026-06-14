@@ -40,6 +40,7 @@ module.exports = function (grunt) {
 					"PassmanImporter": true,
 					"PassmanExporter": true,
 					"OC": true,
+					"OCP": true,
 					"window": true,
 					"console": true,
 					"CRYPTO": true,
