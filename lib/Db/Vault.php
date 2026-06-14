@@ -81,4 +81,26 @@ class Vault extends Entity implements  \JsonSerializable{
 			'last_access' => $this->getlastAccess(),
 		];
 	}
+
+	/**
+	 * Complete, lossless serialization for backup/restore: every column with its
+	 * exact DB name and raw value, no transforms. Unlike jsonSerialize() (the API
+	 * shape), this must round-trip via Entity::fromRow().
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toBackupArray(): array {
+		return [
+			'id' => $this->getId(),
+			'guid' => $this->getGuid(),
+			'user_id' => $this->getUserId(),
+			'name' => $this->getName(),
+			'vault_settings' => $this->getVaultSettings(),
+			'created' => $this->getCreated(),
+			'last_access' => $this->getLastAccess(),
+			'public_sharing_key' => $this->getPublicSharingKey(),
+			'private_sharing_key' => $this->getPrivateSharingKey(),
+			'sharing_keys_generated' => $this->getSharingKeysGenerated(),
+		];
+	}
 }

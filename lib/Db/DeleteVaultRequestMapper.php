@@ -62,6 +62,36 @@ class DeleteVaultRequestMapper extends QBMapper {
 	}
 
 	/**
+	 * Obtains all delete requests for the given vault guid. Intended for backup/admin tooling.
+	 *
+	 * @param string $vault_guid
+	 * @return DeleteVaultRequest[]
+	 */
+	public function getByVaultGuid(string $vault_guid): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('vault_guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all delete requests created by the given user. Intended for backup/admin tooling.
+	 *
+	 * @param string $requested_by
+	 * @return DeleteVaultRequest[]
+	 */
+	public function getByRequestedBy(string $requested_by): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('requested_by', $qb->createNamedParameter($requested_by, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
 	 * Get request for a vault guid
 	 * @param string $vault_guid
 	 * @return DeleteVaultRequest

@@ -64,4 +64,20 @@ class DeleteVaultRequest extends Entity implements  \JsonSerializable{
 			'created' => $this->getCreated(),
 		];
 	}
+
+	/**
+	 * Complete, lossless serialization for backup/restore: every column with its
+	 * exact DB name and raw value. Must round-trip via Entity::fromRow().
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toBackupArray(): array {
+		return [
+			'id' => $this->getId(),
+			'vault_guid' => $this->getVaultGuid(),
+			'reason' => $this->getReason(),
+			'requested_by' => $this->getRequestedBy(),
+			'created' => $this->getCreated(),
+		];
+	}
 }

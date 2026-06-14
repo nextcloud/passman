@@ -95,6 +95,27 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
         ];
     }
 
+    /**
+     * Complete, lossless serialization for backup/restore: every column with its
+     * exact DB name and raw value (`id` not renamed). Must round-trip via Entity::fromRow().
+     *
+     * @return array<string, mixed>
+     */
+    public function toBackupArray(): array {
+        return [
+            'id' => $this->getId(),
+            'item_id' => $this->getItemId(),
+            'item_guid' => $this->getItemGuid(),
+            'target_user_id' => $this->getTargetUserId(),
+            'from_user_id' => $this->getFromUserId(),
+            'target_vault_id' => $this->getTargetVaultId(),
+            'target_vault_guid' => $this->getTargetVaultGuid(),
+            'shared_key' => $this->getSharedKey(),
+            'permissions' => $this->getPermissions(),
+            'created' => $this->getCreated(),
+        ];
+    }
+
     function asACLJson(){
         return [
             'item_id' => $this->getItemId(),

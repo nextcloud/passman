@@ -49,6 +49,49 @@ class SharingACLMapper extends QBMapper {
 	}
 
 	/**
+	 * Obtains all ACL entries across all users and vaults. Intended for backup/admin tooling.
+	 *
+	 * @return SharingACL[]
+	 */
+	public function getAll(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME);
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all ACL entries belonging to the given user. Intended for backup/admin tooling.
+	 *
+	 * @param string $user_id
+	 * @return SharingACL[]
+	 */
+	public function getByUser(string $user_id): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all ACL entries for the given vault guid. Intended for backup/admin tooling.
+	 *
+	 * @param string $vault_guid
+	 * @return SharingACL[]
+	 */
+	public function getByVaultGuid(string $vault_guid): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('vault_guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
 	 * Gets the currently accepted share requests from the given user for the given vault guid
 	 *
 	 * @param string $user_id

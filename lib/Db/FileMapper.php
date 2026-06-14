@@ -127,6 +127,34 @@ class FileMapper extends QBMapper {
 	}
 
 	/**
+	 * Obtains all files across all users. Intended for backup/admin tooling.
+	 *
+	 * @return File[]
+	 */
+	public function getAllFiles(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME);
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all files owned by the given user (full rows). Intended for backup/admin tooling.
+	 *
+	 * @param string $user_id
+	 * @return File[]
+	 */
+	public function getFilesByUser(string $user_id): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
 	 * @param string $user_id
 	 * @return File[] array of incomplete File objects, containing only the guid
 	 */

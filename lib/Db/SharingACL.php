@@ -100,4 +100,27 @@ class SharingACL extends PermissionEntity implements \JsonSerializable
             'pending' => false,
         ];
     }
+
+    /**
+     * Complete, lossless serialization for backup/restore: every column with its
+     * exact DB name and raw value (no extra `pending` flag, `id` not renamed).
+     * Must round-trip via Entity::fromRow().
+     *
+     * @return array<string, mixed>
+     */
+    public function toBackupArray(): array {
+        return [
+            'id' => $this->getId(),
+            'item_id' => $this->getItemId(),
+            'item_guid' => $this->getItemGuid(),
+            'vault_id' => $this->getVaultId(),
+            'vault_guid' => $this->getVaultGuid(),
+            'user_id' => $this->getUserId(),
+            'created' => $this->getCreated(),
+            'expire' => $this->getExpire(),
+            'expire_views' => $this->getExpireViews(),
+            'permissions' => $this->getPermissions(),
+            'shared_key' => $this->getSharedKey(),
+        ];
+    }
 }

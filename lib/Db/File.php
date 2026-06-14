@@ -75,4 +75,24 @@ class File extends Entity implements  \JsonSerializable{
 			'mimetype' => $this->getMimetype(),
 		];
 	}
+
+	/**
+	 * Complete, lossless serialization for backup/restore: every column with its
+	 * exact DB name and raw value (includes `user_id`, which jsonSerialize() omits).
+	 * Must round-trip via Entity::fromRow().
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toBackupArray(): array {
+		return [
+			'id' => $this->getId(),
+			'guid' => $this->getGuid(),
+			'user_id' => $this->getUserId(),
+			'mimetype' => $this->getMimetype(),
+			'filename' => $this->getFilename(),
+			'size' => $this->getSize(),
+			'created' => $this->getCreated(),
+			'file_data' => $this->getFileData(),
+		];
+	}
 }

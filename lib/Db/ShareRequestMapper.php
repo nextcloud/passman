@@ -50,6 +50,52 @@ class ShareRequestMapper extends QBMapper {
 	}
 
 	/**
+	 * Obtains all share requests across all users. Intended for backup/admin tooling.
+	 *
+	 * @return ShareRequest[]
+	 */
+	public function getAll(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME);
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all share requests sent to or from the given user. Intended for backup/admin tooling.
+	 *
+	 * @param string $user_id
+	 * @return ShareRequest[]
+	 */
+	public function getByUser(string $user_id): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->orX(
+				$qb->expr()->eq('target_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)),
+				$qb->expr()->eq('from_user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR))
+			));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all share requests targeting the given vault guid. Intended for backup/admin tooling.
+	 *
+	 * @param string $target_vault_guid
+	 * @return ShareRequest[]
+	 */
+	public function getByTargetVaultGuid(string $target_vault_guid): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('target_vault_guid', $qb->createNamedParameter($target_vault_guid, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
 	 * Obtains a request by the given item and vault GUID pair
 	 *
 	 * @param string $item_guid

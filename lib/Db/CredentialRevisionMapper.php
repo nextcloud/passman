@@ -42,6 +42,34 @@ class CredentialRevisionMapper extends QBMapper {
 
 
 	/**
+	 * Obtains all revisions across all users and credentials. Intended for backup/admin tooling.
+	 *
+	 * @return CredentialRevision[]
+	 */
+	public function getAll(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME);
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all revisions owned by the given user. Intended for backup/admin tooling.
+	 *
+	 * @param string $user_id
+	 * @return CredentialRevision[]
+	 */
+	public function getByUser(string $user_id): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
 	 * Get revisions from a credential
 	 *
 	 * @param int $credential_id

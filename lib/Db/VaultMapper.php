@@ -78,6 +78,19 @@ class VaultMapper extends QBMapper {
 
 
 	/**
+	 * Obtains all vaults across all users. Intended for backup/admin tooling.
+	 *
+	 * @return Vault[]
+	 */
+	public function getAllVaults(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME);
+
+		return $this->findEntities($qb);
+	}
+
+	/**
 	 * @param string $user_id
 	 * @return Vault[]
 	 */

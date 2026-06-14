@@ -46,6 +46,34 @@ class CredentialMapper extends QBMapper {
 
 
 	/**
+	 * Obtains all credentials across all users and vaults. Intended for backup/admin tooling.
+	 *
+	 * @return Credential[]
+	 */
+	public function getAll(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME);
+
+		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Obtains all credentials owned by the given user. Intended for backup/admin tooling.
+	 *
+	 * @param string $user_id
+	 * @return Credential[]
+	 */
+	public function getByUser(string $user_id): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('user_id', $qb->createNamedParameter($user_id, IQueryBuilder::PARAM_STR)));
+
+		return $this->findEntities($qb);
+	}
+
+	/**
 	 * Obtains the credentials by vault id (not guid)
 	 *
 	 * @param string $vault_id

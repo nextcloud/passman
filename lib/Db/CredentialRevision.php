@@ -71,4 +71,24 @@ class CredentialRevision extends Entity implements \JsonSerializable {
             'edited_by' => $this->getEditedBy(),
 		];
 	}
+
+	/**
+	 * Complete, lossless serialization for backup/restore: every column with its
+	 * exact DB name and raw value (raw `credential_data`, not base64/json decoded;
+	 * includes `credential_id` and `user_id`, which jsonSerialize() omits).
+	 * Must round-trip via Entity::fromRow().
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toBackupArray(): array {
+		return [
+			'id' => $this->getId(),
+			'guid' => $this->getGuid(),
+			'credential_id' => $this->getCredentialId(),
+			'user_id' => $this->getUserId(),
+			'created' => $this->getCreated(),
+			'credential_data' => $this->getCredentialData(),
+			'edited_by' => $this->getEditedBy(),
+		];
+	}
 }

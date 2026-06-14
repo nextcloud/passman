@@ -148,4 +148,39 @@ class Credential extends Entity implements  \JsonSerializable{
 			'compromised' => $this->getCompromised()
 		];
 	}
+
+	/**
+	 * Complete, lossless serialization for backup/restore: every column with its
+	 * exact DB name and raw value (e.g. raw `icon`, not json_decoded). Unlike
+	 * jsonSerialize() (the API shape), this must round-trip via Entity::fromRow().
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function toBackupArray(): array {
+		return [
+			'id' => $this->getId(),
+			'guid' => $this->getGuid(),
+			'user_id' => $this->getUserId(),
+			'vault_id' => $this->getVaultId(),
+			'label' => $this->getLabel(),
+			'description' => $this->getDescription(),
+			'created' => $this->getCreated(),
+			'changed' => $this->getChanged(),
+			'tags' => $this->getTags(),
+			'email' => $this->getEmail(),
+			'username' => $this->getUsername(),
+			'password' => $this->getPassword(),
+			'url' => $this->getUrl(),
+			'renew_interval' => $this->getRenewInterval(),
+			'expire_time' => $this->getExpireTime(),
+			'delete_time' => $this->getDeleteTime(),
+			'files' => $this->getFiles(),
+			'custom_fields' => $this->getCustomFields(),
+			'otp' => $this->getOtp(),
+			'hidden' => $this->getHidden(),
+			'compromised' => $this->getCompromised(),
+			'shared_key' => $this->getSharedKey(),
+			'icon' => $this->getIcon(),
+		];
+	}
 }
