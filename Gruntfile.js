@@ -342,9 +342,9 @@ module.exports = function (grunt) {
 							replacement: function (matchedString) {
 								jsResources = [];
 
-								const jsArray = matchedString.match(/Util::addScript\([A-z]+::[A-z_]+,\s?'([\d\/A-z.-]+)',\s?'([\/A-z.-]+)'\);/g);
+								const jsArray = matchedString.match(/Util::addScript\([A-z]+::[A-z_]+,\s?'([\d\/A-z.-]+)'(,\s?'([\/A-z.-]+)')?\);/g);
 								jsArray.forEach(function (file) {
-									const regex = /Util::addScript\([A-z]+::[A-z_]+,\s?'([\d\/A-z.-]+)',\s?'([\/A-z.-]+)'\);/g;
+									const regex = /Util::addScript\([A-z]+::[A-z_]+,\s?'([\d\/A-z.-]+)'(,\s?'([\/A-z.-]+)')?\);/g;
 									const matches = regex.exec(file);
 									if (matches) {
 										jsResources.push("'js/" + matches[1] + ".js'");
