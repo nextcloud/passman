@@ -6,8 +6,11 @@ use OCP\Util;
 
 include_once '_config.php';
 
+/*build-js-start*/
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-3.7.1.min', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min', 'core');
+/*build-js-end*/
+
 Util::addScript(MyAppTemplateConfig::APP_ID, 'settings-admin', 'core');
 
 style(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min');
