@@ -8,6 +8,8 @@ include_once '_config.php';
  * Javascripts
  */
 /*build-js-start*/
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-3.7.1.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular/angular.min', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-animate/angular-animate.min', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-cookies/angular-cookies.min', 'core');
@@ -64,6 +66,7 @@ Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/ngenter', 'core');
 style(MyAppTemplateConfig::APP_ID, 'vendor/ng-password-meter/ng-password-meter');
 style(MyAppTemplateConfig::APP_ID, 'vendor/bootstrap/bootstrap.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/bootstrap/bootstrap-theme.min');
+style(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/font-awesome/font-awesome.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/angular-xeditable/xeditable.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/ng-tags-input/ng-tags-input.min');

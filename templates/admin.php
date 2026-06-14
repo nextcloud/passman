@@ -6,8 +6,11 @@ use OCP\Util;
 
 include_once '_config.php';
 
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-3.7.1.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'settings-admin', 'core');
 
+style(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min');
 style(MyAppTemplateConfig::APP_ID, 'admin');
 style(MyAppTemplateConfig::APP_ID, 'vendor/font-awesome/font-awesome.min');
 ?>
