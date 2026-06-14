@@ -228,12 +228,12 @@ style(MyAppTemplateConfig::APP_ID, 'app');
                 <div class="settings-container">
                     <button ng-click="logout()"><span class="link">{{'logout' | translate }}</span></button>
                 </div>
-                <div class="donation-container settings-container">
+                <!-- <div class="donation-container settings-container">
                     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2"
                        target="_blank" class="link" ng-click="settingsShown = false;">
                         <button class="donation-container">{{ 'donate' | translate }}</button>
                     </a>
-                </div>
+                </div> -->
                 <div class="settings-container">
                     <div ng-show="session_time_left">
                         <small>{{'session.time.left' | translate:translationData}}</small>

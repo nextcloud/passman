@@ -211,9 +211,9 @@ style(MyAppTemplateConfig::APP_ID, 'public-page');
 				<a href="https://github.com/nextcloud/passman" target="_blank"
 				   class="link">GitHub</a> | <a
 						href="https://github.com/nextcloud/passman/wiki"
-						target="_blank" class="link">Wiki</a> | <a
+						target="_blank" class="link">Wiki</a><!-- | <a
 						href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2"
-						target="_blank" class="link">Donate</a>
+						target="_blank" class="link">Donate</a> -->
 			</div>
 		</div>
 	</div>
