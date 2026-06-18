@@ -11,6 +11,7 @@ OC.L10N.register(
     "Value" : "Nilai",
     "Type" : "Jenis",
     "Size" : "Saiz",
+    "Expiration date" : "Expiration date",
     "Export" : "Eksport",
     "Import" : "Import",
     "Uploading" : "Uploading",
@@ -30,6 +31,7 @@ OC.L10N.register(
     "Share" : "Kongsi",
     "Date" : "Date",
     "Description" : "Keterangan",
-    "An error occurred!" : "Ralat berlaku!"
+    "An error occurred!" : "Ralat berlaku!",
+    "Dismiss" : "Dismiss"
 },
 "nplurals=1; plural=0;");

@@ -8,6 +8,7 @@ OC.L10N.register(
     "File" : "Faýl",
     "Type" : "Görnüşi",
     "Filename" : "Faýlyň ady",
+    "Expiration date" : "Expiration date",
     "User" : "Ulanyjy",
     "Files" : "Faýllar",
     "Pending" : "Garaşylýar",

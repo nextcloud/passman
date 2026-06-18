@@ -5,6 +5,7 @@ OC.L10N.register(
     "Username" : "Nombre d'usuario",
     "Actions" : "Acions",
     "Size" : "Grandario",
+    "Expiration date" : "Expiration date",
     "Disabled" : "Desactivau",
     "Public key" : "Clau pública",
     "Read" : "Leyer",
@@ -12,6 +13,7 @@ OC.L10N.register(
     "Files" : "Archivos",
     "Pending" : "Pendient",
     "Details" : "Detalles",
+    "Save" : "Save",
     "Cancel" : "Cancelar",
     "Settings" : "Configuración",
     "Password" : "Clau",
@@ -19,6 +21,7 @@ OC.L10N.register(
     "Delete" : "Borrar",
     "Share" : "Compartir",
     "Never" : "Nunca",
-    "Tags" : "Etiquetas"
+    "Tags" : "Etiquetas",
+    "Dismiss" : "Dismiss"
 },
 "nplurals=2; plural=(n != 1);");

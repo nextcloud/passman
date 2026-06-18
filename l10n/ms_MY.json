@@ -9,6 +9,7 @@
     "Value" : "Nilai",
     "Type" : "Jenis",
     "Size" : "Saiz",
+    "Expiration date" : "Expiration date",
     "Export" : "Eksport",
     "Import" : "Import",
     "Uploading" : "Uploading",
@@ -28,6 +29,7 @@
     "Share" : "Kongsi",
     "Date" : "Date",
     "Description" : "Keterangan",
-    "An error occurred!" : "Ralat berlaku!"
+    "An error occurred!" : "Ralat berlaku!",
+    "Dismiss" : "Dismiss"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

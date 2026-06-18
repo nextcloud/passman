@@ -34,6 +34,7 @@ OC.L10N.register(
     "Never" : "Երբեք",
     "Description" : "Նկարագրություն",
     "An error occurred!" : "Սխալ պատահեց",
+    "Dismiss" : "Dismiss",
     "seconds ago" : "վրկ. առաջ"
 },
 "nplurals=2; plural=(n != 1);");

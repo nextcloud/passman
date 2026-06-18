@@ -27,6 +27,7 @@ OC.L10N.register(
     "Actions" : "Дзеянні",
     "Filename" : "Назва файла",
     "Size" : "Памер",
+    "Expiration date" : "Expiration date",
     "Disabled" : "Адключана",
     "Export" : "Экспарт",
     "Change" : "Змяніць",

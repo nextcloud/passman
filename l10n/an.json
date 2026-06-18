@@ -3,6 +3,7 @@
     "Username" : "Nombre d'usuario",
     "Actions" : "Acions",
     "Size" : "Grandario",
+    "Expiration date" : "Expiration date",
     "Disabled" : "Desactivau",
     "Public key" : "Clau pública",
     "Read" : "Leyer",
@@ -10,6 +11,7 @@
     "Files" : "Archivos",
     "Pending" : "Pendient",
     "Details" : "Detalles",
+    "Save" : "Save",
     "Cancel" : "Cancelar",
     "Settings" : "Configuración",
     "Password" : "Clau",
@@ -17,6 +19,7 @@
     "Delete" : "Borrar",
     "Share" : "Compartir",
     "Never" : "Nunca",
-    "Tags" : "Etiquetas"
+    "Tags" : "Etiquetas",
+    "Dismiss" : "Dismiss"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

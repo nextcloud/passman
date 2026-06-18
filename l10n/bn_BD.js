@@ -40,6 +40,7 @@ OC.L10N.register(
     "Tags" : "ট্যাগ",
     "Description" : "বিবরণ",
     "An error occurred!" : "সমস্যা দেখা দিয়েছে !",
+    "Dismiss" : "Dismiss",
     "seconds ago" : "সেকেন্ড পূর্বে"
 },
 "nplurals=2; plural=(n != 1);");

@@ -24,6 +24,7 @@ OC.L10N.register(
     "Date" : "Date",
     "Description" : "تصریح",
     "An error occurred!" : "ایک خرابی واقع ہوئی!",
+    "Dismiss" : "Dismiss",
     "seconds ago" : "سیکنڈز پہلے"
 },
 "nplurals=2; plural=(n != 1);");

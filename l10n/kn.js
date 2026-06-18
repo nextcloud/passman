@@ -30,6 +30,7 @@ OC.L10N.register(
     "Delete" : "﻿ಅಳಿಸಿ",
     "Share" : "﻿ಹಂಚಿಕೊಳ್ಳಿ",
     "Date" : "Date",
-    "An error occurred!" : "ದೋಷ ಕಂಡುಬಂದಿದೆ!"
+    "An error occurred!" : "ದೋಷ ಕಂಡುಬಂದಿದೆ!",
+    "Dismiss" : "Dismiss"
 },
 "nplurals=2; plural=(n > 1);");

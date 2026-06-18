@@ -50,6 +50,7 @@ OC.L10N.register(
     "Passman" : "Passman",
     "An error occurred!" : "ஒரு வழு ஏற்பட்டுள்ளது!",
     "E-mail" : "E-mail",
+    "Dismiss" : "Dismiss",
     "seconds ago" : "செக்கன்களுக்கு முன்"
 },
 "nplurals=2; plural=(n != 1);");

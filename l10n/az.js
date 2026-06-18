@@ -15,6 +15,7 @@ OC.L10N.register(
     "Type" : "Type",
     "Actions" : "İşlər",
     "Size" : "Həcm",
+    "Expiration date" : "Expiration date",
     "Disabled" : "Dayandırılıb",
     "Export" : "Çıxarış",
     "Change" : "Dəyiş",

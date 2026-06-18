@@ -8,6 +8,7 @@ OC.L10N.register(
     "File" : "Faidhle",
     "Type" : "Seòrsa",
     "Filename" : "Ainm an fhaidhle",
+    "Expiration date" : "Expiration date",
     "Version" : "Tionndadh",
     "User" : "Cleachdaiche",
     "Files" : "Faidhlichean",

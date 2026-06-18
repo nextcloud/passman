@@ -12,6 +12,7 @@ OC.L10N.register(
     "Filename" : "ගොනු නාමය",
     "Size" : "ප්‍රමාණය",
     "Secret" : "රහස",
+    "Expiration date" : "Expiration date",
     "Disabled" : "අබල කර ඇත",
     "Version" : "අනුවාදය",
     "Uploading" : "උඩුගත වෙමින්",
@@ -28,6 +29,7 @@ OC.L10N.register(
     "Email" : "විද්‍යුත් තැපෑල",
     "Notes" : "සටහන්",
     "Edit" : "සංස්කරණය",
+    "Delete" : "Delete",
     "Share" : "බෙදාගන්න",
     "Date" : "දිනය",
     "Accept" : "පිළිගන්න",
@@ -35,6 +37,7 @@ OC.L10N.register(
     "Loading …" : "පූරණය වෙමින් …",
     "Description" : "විස්තරය",
     "E-mail" : "විද්‍යුත් තැපෑල",
+    "Dismiss" : "Dismiss",
     "seconds ago" : "තත්පර කිහිපයකට පෙර"
 },
 "nplurals=2; plural=(n != 1);");
