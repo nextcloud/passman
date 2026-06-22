@@ -88,7 +88,7 @@ style(MyAppTemplateConfig::APP_ID, 'public-page');
 					it")); ?>
 				</button>
 				<button class="button-geen" ng-if="loading"><i
-							class="fa fa-spinner fa-spin"></i><?php p($l->t("Loading&hellip;")); ?>
+							class="fa fa-spinner fa-spin"></i><?php p($l->t("Loading")); ?>&hellip;
 				</button>
 			</div>
 			<div ng-if="expired">
