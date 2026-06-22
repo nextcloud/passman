@@ -92,7 +92,7 @@ style(MyAppTemplateConfig::APP_ID, 'bookmarklet');
 
 ?>
 
-<div id="app" ng-app="passmanApp" ng-controller="BookmarkletCtrl">
+<div id="app" ng-app="passmanApp" ng-jq="" ng-controller="BookmarkletCtrl">
 	<div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
 		{{ 'http.warning' | translate }}
 		<i class="fa fa-times fa-2x" alt="Close"

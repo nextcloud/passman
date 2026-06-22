@@ -128,7 +128,7 @@ style(MyAppTemplateConfig::APP_ID, 'app');
 /*build-css-end*/
 ?>
 
-<div id="app" ng-app="passmanApp" ng-controller="MainCtrl" style="display: flex;">
+<div id="app" ng-app="passmanApp" ng-jq="" ng-controller="MainCtrl" style="display: flex;">
     <div id="logoutTimer"></div>
     <div id="warning_bar" class="warning_bar template-hidden" ng-if="using_http && http_warning_hidden == false" ng-init="removeHiddenStyles()">
         {{ 'http.warning' | translate }}

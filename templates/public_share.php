@@ -76,7 +76,7 @@ style(MyAppTemplateConfig::APP_ID, 'app');
 style(MyAppTemplateConfig::APP_ID, 'public-page');
 
 ?>
-<div class="share-controller" ng-app="passmanApp" ng-controller="PublicSharedCredential">
+<div class="share-controller" ng-app="passmanApp" ng-jq="" ng-controller="PublicSharedCredential">
 	<div class="share-container">
         <div class="row">
 		<div class="credential_container">
