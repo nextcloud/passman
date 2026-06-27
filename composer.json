@@ -10,6 +10,7 @@
     "scripts": {
         "rector:check": "rector --dry-run --clear-cache",
         "rector:fix": "rector",
+        "test": "phpunit -c tests/Unit/phpunit.xml --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations",
         "test:unit": "phpunit -c tests/Unit/phpunit.xml --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations --exclude-group DB --exclude-group slow",
         "test:db": "phpunit -c tests/Unit/phpunit.xml --group DB --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations"
     },
