@@ -9,7 +9,9 @@
     "license": "AGPL-3.0-or-later",
     "scripts": {
         "rector:check": "rector --dry-run --clear-cache",
-        "rector:fix": "rector"
+        "rector:fix": "rector",
+        "test:unit": "phpunit -c tests/Unit/phpunit.xml --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations --exclude-group DB --exclude-group slow",
+        "test:db": "phpunit -c tests/Unit/phpunit.xml --group DB --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations"
     },
     "require-dev": {
         "rector/rector": "^2.1",

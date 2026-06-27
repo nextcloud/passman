@@ -1,22 +1,5 @@
-<phpunit bootstrap="tests/bootstrap.php" colors="true">
-    <testsuites>
-        <testsuite name="unit">
-            <directory>./tests/unit</directory>
-            <exclude>./tests/unit/lib/Db</exclude>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./lib/Utility</directory>
-            <directory suffix=".php">./lib/BackgroundJob</directory>
-            <directory suffix=".php">./controller</directory>
-
-            <!--<file>/path/to/file</file>-->
-            <!--<exclude>-->
-            <!--<directory suffix=".php">/path/to/dir</directory>-->
-            <!--<file>/path/to/file</file>-->
-            <!--</exclude>-->
-        </whitelist>
-
-    </filter>
-</phpunit>
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Deprecated: use tests/Unit/phpunit.xml instead.
+  Run: cd ../.. && lib/composer/bin/phpunit -c apps/passman/tests/Unit/phpunit.xml
+-->
