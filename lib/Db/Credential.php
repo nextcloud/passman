@@ -121,7 +121,7 @@ class Credential extends Entity implements  \JsonSerializable{
 	/**
 	 * Turns entity attributes into an array
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize(): mixed {
 		return [
 			'credential_id' => $this->getId(),
 			'guid' => $this->getGuid(),

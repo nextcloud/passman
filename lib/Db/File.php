@@ -64,7 +64,7 @@ class File extends Entity implements  \JsonSerializable{
 	/**
 	 * Turns entity attributes into an array
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize(): mixed {
 		return [
 			'file_id' => $this->getId(),
 			'filename' => $this->getFilename(),

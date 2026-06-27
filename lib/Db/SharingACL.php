@@ -83,7 +83,7 @@ class SharingACL extends PermissionEntity implements \JsonSerializable
      * which is a value of any type other than a resource.
      * @since 5.4.0
      */
-    function jsonSerialize()
+    function jsonSerialize(): mixed
     {
         return [
             'acl_id' => $this->getId(),

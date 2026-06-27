@@ -71,7 +71,7 @@ class Vault extends Entity implements  \JsonSerializable{
 	/**
 	 * Turns entity attributes into an array
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize(): mixed {
 		return [
 			'vault_id' => $this->getId(),
 			'guid' => $this->getGuid(),

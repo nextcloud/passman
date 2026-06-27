@@ -55,7 +55,7 @@ class DeleteVaultRequest extends Entity implements  \JsonSerializable{
 	/**
 	 * Turns entity attributes into an array
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize(): mixed {
 		return [
 			'id' => $this->getId(),
 			'vault_guid' => $this->getVaultGuid(),
