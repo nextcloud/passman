@@ -20,3 +20,4 @@ composer.lock
 # PHPUnit
 /tests/Unit/.phpunit.cache
 /tests/Unit/.phpunit.result.cache
+/build/php-unit.clover
