@@ -20,47 +20,60 @@
  *
  */
 header {
-  display: none; }
+  display: none;
+}
 
 #content-wrapper {
-  padding-top: 0; }
+  padding-top: 0;
+}
 
 #app-content {
   margin-left: 0;
-  overflow-x: auto; }
+  overflow-x: auto;
+}
 
 #app-content-wrapper {
-  min-height: inherit !important; }
+  min-height: inherit !important;
+}
 
 .warning_bar .fa-times {
-  margin-right: 20px; }
+  margin-right: 20px;
+}
 
 #passman-controls .breadcrumb {
-  padding-left: 0; }
-  #passman-controls .breadcrumb a, #passman-controls .breadcrumb a i {
-    cursor: default; }
+  padding-left: 0;
+}
+#passman-controls .breadcrumb a, #passman-controls .breadcrumb a i {
+  cursor: default;
+}
 
 .tab_container {
   padding-top: 10px;
   margin-bottom: 60px;
-  overflow: scroll; }
-  .tab_container div {
-    margin-bottom: 5px;
-    overflow: hidden; }
+  overflow: scroll;
+}
+.tab_container div {
+  margin-bottom: 5px;
+  overflow: hidden;
+}
 
 .vault_wrapper {
-  margin-top: 70px; }
+  margin-top: 70px;
+}
 
 .active_vault {
   float: right;
   text-align: right;
   padding-right: 5px;
-  font-size: 10px; }
+  font-size: 10px;
+}
 
 .angularjs-datetime-picker {
-  z-index: 9999; }
+  z-index: 9999;
+}
 
 .icon-picker {
-  display: none; }
+  display: none;
+}
 
 /*# sourceMappingURL=bookmarklet.css.map */

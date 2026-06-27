@@ -12,6 +12,7 @@
         "rector:fix": "rector"
     },
     "require-dev": {
-        "rector/rector": "^2.1"
+        "rector/rector": "^2.1",
+        "nextcloud/rector": "^0.5.1"
     }
 }

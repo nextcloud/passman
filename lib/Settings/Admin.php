@@ -4,6 +4,7 @@
  *
  * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
  * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
+ * @copyright 2026 Timo Triebensky (timo@binsky.org)
  * @license GNU AGPL version 3 or any later version
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,6 +29,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use OCA\Passman\AppInfo\Application;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IAppConfig;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\Settings\ISettings;
@@ -41,12 +43,14 @@ class Admin implements ISettings {
 	 * @param IL10N $l
 	 * @param IAppManager $appManager
 	 * @param LoggerInterface $logger
+	 * @param IAppConfig $appConfig
 	 */
 	public function __construct(
 		protected IConfig $config,
 		private readonly IL10N $l,
 		private readonly IAppManager $appManager,
 		private readonly LoggerInterface $logger,
+        private readonly IAppConfig $appConfig,
 	) {
 	}
 
@@ -55,7 +59,7 @@ class Admin implements ISettings {
 	 */
 	public function getForm(): TemplateResponse {
 		$hasInternetConnection = $this->config->getSystemValue('has_internet_connection', true);
-		$checkVersion = $this->config->getAppValue(Application::APP_ID, 'check_version', '1') === '1';
+		$checkVersion = $this->appConfig->getValueString(Application::APP_ID, 'check_version', '1') === '1';
 		$localVersion = $this->appManager->getAppInfo(Application::APP_ID)["version"];
 		$githubVersion = $this->l->t('Unable to get version info');
 		$githubReleaseUrl = null;

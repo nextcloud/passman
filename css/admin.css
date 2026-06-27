@@ -1,18 +1,242 @@
-#passwordSharingSettings #mover table td {
-  padding: 5px; }
-#passwordSharingSettings #mover input[type="text"] {
-  width: 350px; }
-#passwordSharingSettings #mover .account_mover_selector {
-  width: 350px; }
-  #passwordSharingSettings #mover .account_mover_selector .select2-choice {
-    height: 34px; }
-#passwordSharingSettings #requests-table {
-  width: 100%; }
-#passwordSharingSettings .link {
-  cursor: pointer; }
-#passwordSharingSettings .link.accept:hover {
-  color: var(--color-error); }
-#passwordSharingSettings .link.ignore:hover {
-  color: var(--color-primary); }
+.passman-admin h2 {
+  margin-top: 0;
+}
+.passman-admin .passman-admin-version {
+  margin-bottom: 24px;
+  margin-top: 5px;
+  line-height: 1.6;
+}
+.passman-admin .passman-admin-tabs {
+  margin-top: 16px;
+}
+.passman-admin .passman-admin-tabs .tabHeaders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-bottom: 2px solid var(--color-border);
+}
+.passman-admin .passman-admin-tabs .tabHeaders .tabHeader {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--default-clickable-area);
+  padding: 10px 20px;
+  margin: 0 4px -2px 0;
+  border: 2px solid transparent;
+  border-bottom: none;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  color: var(--color-text-maxcontrast);
+  text-decoration: none;
+  background-color: transparent;
+  font: inherit;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.passman-admin .passman-admin-tabs .tabHeaders .tabHeader.selected {
+  color: var(--color-main-text);
+  font-weight: 600;
+  background-color: var(--color-main-background);
+  border-color: var(--color-border);
+  border-bottom-color: var(--color-main-background);
+}
+.passman-admin .passman-admin-tabs .tabHeaders .tabHeader:hover:not(.selected), .passman-admin .passman-admin-tabs .tabHeaders .tabHeader:focus-visible:not(.selected) {
+  color: var(--color-main-text);
+  background-color: var(--color-background-hover);
+}
+.passman-admin .passman-admin-tabs .tabHeaders .tabHeader:focus-visible {
+  outline: 2px solid var(--color-primary-element);
+  outline-offset: 2px;
+}
+.passman-admin .passman-admin-tabs .tabsContainer {
+  margin-top: 0;
+  padding: 24px;
+  border: 2px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  background-color: var(--color-main-background);
+}
+.passman-admin .passman-admin-tabs .tabsContainer .tab {
+  padding: 0;
+}
+.passman-admin .passman-admin-tabs .tabsContainer .tab.hidden {
+  display: none;
+}
+.passman-admin .passman-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+.passman-admin .passman-admin-setting {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0px 0;
+}
+.passman-admin .passman-admin-setting label {
+  cursor: pointer;
+  line-height: var(--default-clickable-area);
+}
+.passman-admin .passman-admin-setting--select {
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+  margin-top: 15px;
+}
+.passman-admin .passman-admin-setting--select label {
+  font-weight: 600;
+}
+.passman-admin .passman-admin-select,
+.passman-admin .passman-admin-input {
+  width: 100%;
+  max-width: 360px;
+  min-height: var(--default-clickable-area);
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--border-radius);
+  background-color: var(--color-main-background);
+  color: var(--color-main-text);
+  font-size: var(--default-font-size);
+  box-sizing: border-box;
+}
+.passman-admin .passman-admin-select:focus-visible,
+.passman-admin .passman-admin-input:focus-visible {
+  outline: 2px solid var(--color-primary-element);
+  outline-offset: -2px;
+}
+.passman-admin .passman-admin-mover {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+.passman-admin .passman-admin-form-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) minmax(0, 1fr);
+  gap: 12px 16px;
+  align-items: start;
+}
+.passman-admin .passman-admin-form-row label {
+  padding-top: 8px;
+  font-weight: 600;
+}
+.passman-admin .passman-admin-user-search-wrap {
+  position: relative;
+  max-width: 360px;
+  width: 100%;
+}
+.passman-admin .passman-admin-user-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+  background-color: var(--color-main-background);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 8px var(--color-box-shadow);
+  max-height: 240px;
+  overflow-y: auto;
+}
+.passman-admin .passman-admin-user-dropdown.hidden {
+  display: none;
+}
+.passman-admin .passman-admin-user-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: var(--color-main-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.passman-admin .passman-admin-user-option:hover, .passman-admin .passman-admin-user-option:focus-visible {
+  background-color: var(--color-background-hover);
+  outline: none;
+}
+.passman-admin .passman-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.passman-admin .passman-admin-status {
+  font-weight: 600;
+}
+.passman-admin .passman-admin-status--success {
+  color: var(--color-success);
+}
+.passman-admin .passman-admin-status--error {
+  color: var(--color-error);
+}
+.passman-admin .passman-admin-status.hidden {
+  display: none;
+}
+.passman-admin .passman-admin-table-wrap {
+  overflow-x: auto;
+  margin-top: 12px;
+}
+.passman-admin .passman-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.passman-admin .passman-admin-table th,
+.passman-admin .passman-admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+}
+.passman-admin .passman-admin-table th {
+  font-weight: 600;
+  color: var(--color-text-maxcontrast);
+}
+.passman-admin .passman-admin-table tbody tr:hover {
+  background-color: var(--color-background-hover);
+}
+.passman-admin .passman-admin-action {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  margin-inline-end: 8px;
+  border: none;
+  border-radius: var(--border-radius);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.passman-admin .passman-admin-action--accept {
+  color: var(--color-error);
+}
+.passman-admin .passman-admin-action--accept:hover, .passman-admin .passman-admin-action--accept:focus-visible {
+  background-color: var(--color-error);
+  color: var(--color-primary-text);
+}
+.passman-admin .passman-admin-action--ignore {
+  color: var(--color-primary-element);
+}
+.passman-admin .passman-admin-action--ignore:hover, .passman-admin .passman-admin-action--ignore:focus-visible {
+  background-color: var(--color-primary-element);
+  color: var(--color-primary-text);
+}
+
+@media (max-width: 640px) {
+  .passman-admin .passman-admin-form-row {
+    grid-template-columns: 1fr;
+  }
+  .passman-admin .passman-admin-select,
+  .passman-admin .passman-admin-input,
+  .passman-admin .passman-admin-user-search-wrap {
+    max-width: none;
+  }
+}
 
 /*# sourceMappingURL=admin.css.map */

@@ -13,9 +13,9 @@ use OCP\Settings\IIconSection;
 
 class AdminSection implements IIconSection {
 	public function __construct(
-		private string $appName,
-		private IURLGenerator $url,
-		private IL10N $l,
+		private readonly string $appName,
+		private readonly IURLGenerator $url,
+		private readonly IL10N $l,
 	) {
 	}
 

@@ -18,6 +18,9 @@ return RectorConfig::configure()
 	])
 	->withPhpSets(php84: true)
 	->withTypeCoverageLevel(0)
+	->withSets([
+		\Nextcloud\Rector\Set\NextcloudSets::NEXTCLOUD_34
+	])
 	->withSkip([
 		// skip rule since it marks code that's intended, as it is
 		\Rector\Php70\Rector\FuncCall\RandomFunctionRector::class,

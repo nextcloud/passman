@@ -17,7 +17,7 @@ Features:
 - Password analyzer
 - Share passwords internally and via link in a secure manner.
 - Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )
-For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
+For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
     <version>2.5.1</version>
     <licence>agpl</licence>
@@ -38,12 +38,12 @@ For an demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/share_credential.png">https://img.passman.cc/share_credential.png</screenshot>
     <screenshot small-thumbnail="https://img.passman.cc/thumbs/password_audit.png">https://img.passman.cc/password_audit.png</screenshot>
     <dependencies>
-        <php min-version="8.0"/>
+        <php min-version="8.2"/>
         <database>sqlite</database>
         <database>pgsql</database>
         <database min-version="5.5">mysql</database>
         <lib>openssl</lib>
-        <nextcloud min-version="26" max-version="33"/>
+        <nextcloud min-version="34" max-version="34"/>
     </dependencies>
 
     <background-jobs>

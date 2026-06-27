@@ -40,6 +40,7 @@ module.exports = function (grunt) {
 					"PassmanImporter": true,
 					"PassmanExporter": true,
 					"OC": true,
+					"OCP": true,
 					"window": true,
 					"console": true,
 					"CRYPTO": true,
@@ -225,7 +226,10 @@ module.exports = function (grunt) {
 					'js/vendor/sha/sha.js',
 					'js/vendor/llqrcode/llqrcode.js',
 					'js/vendor/download.js',
-					'js/vendor/ui-sortable/sortable.js', 'js/lib/promise.js',
+					'js/vendor/ui-sortable/sortable.js',
+					'js/vendor/jquery-3.7.1.min.js',
+					'js/vendor/jquery-ui.min.js',
+					'js/lib/promise.js',
 					'js/lib/crypto_wrap.js',
 					'js/lib/otpauth.umd.js',
 					'js/app/app.js',
@@ -338,9 +342,9 @@ module.exports = function (grunt) {
 							replacement: function (matchedString) {
 								jsResources = [];
 
-								const jsArray = matchedString.match(/script\([A-z]+::[A-z_]+,\s?'([\/A-z.-]+)'\);/g);
+								const jsArray = matchedString.match(/Util::addScript\([A-z]+::[A-z_]+,\s?'([\d\/A-z.-]+)'(,\s?'([\/A-z.-]+)')?\);/g);
 								jsArray.forEach(function (file) {
-									const regex = /script\([A-z]+::[A-z_]+,\s?'([\/A-z.-]+)'\);/g;
+									const regex = /Util::addScript\([A-z]+::[A-z_]+,\s?'([\d\/A-z.-]+)'(,\s?'([\/A-z.-]+)')?\);/g;
 									const matches = regex.exec(file);
 									if (matches) {
 										jsResources.push("'js/" + matches[1] + ".js'");
@@ -348,7 +352,7 @@ module.exports = function (grunt) {
 								});
 								//Replace the entire build-js-start to build-js-end block with this <script> tag
 
-								return "script(MyAppTemplateConfig::APP_ID, 'passman.min');";
+								return "Util::addScript(MyAppTemplateConfig::APP_ID, 'passman.min');";
 							}
 						},
 						{

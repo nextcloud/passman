@@ -2,6 +2,7 @@
  * Nextcloud - passman
  *
  * @copyright Copyright (c) 2019, Felix Nuesse (felix.nuesse@t-online.de)
+ * @copyright 2026 Timo Triebensky (timo@binsky.org)
  * @license GNU AGPL version 3 or any later version
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,39 +20,38 @@
  *
  */
 
-.shareincoming-dialog{
-  border-radius: var(--border-radius-large) !important;
-  box-shadow: 0 0 30px var(--color-box-shadow);
+/**
+ * Share incoming request dialog content.
+ * Shell styling lives in partials/jquery-ui-dialog.scss
+ */
 
-  .ui-dialog{
-    border-radius: var(--border-radius-large);
-    box-shadow: 0 0 30px var(--color-box-shadow);
-  }
-  .ui-widget-header {
-    background: none !important;
-  }
+.ui-dialog.shareincoming-dialog {
+	.ui-dialog-content {
+		.table {
+			width: 100%;
+			border-collapse: collapse;
 
-  .ui-icon-closethick {
-    background-position: inherit;
-  }
+			th,
+			td {
+				padding: 8px 10px;
+				border-bottom: 1px solid var(--color-border);
+				text-align: start;
+				vertical-align: top;
+			}
 
-  .ui-button .ui-icon {
-    background-image: var(--icon-close-000);
-  }
+			thead td {
+				font-weight: 600;
+				color: var(--color-text-maxcontrast);
+			}
+		}
 
-  .ui-button:hover .ui-icon {
-    background-image: var(--icon-close-000);
-    cursor: pointer !important;
-  }
+		.link {
+			cursor: pointer;
+			color: var(--color-primary-element);
 
-  .ui-button-icon {border: none !important;}
-  .ui-icon {border: none !important;}
-  .ui-icon-closethick {border: none !important;}
-  .ui-corner-all {border: none !important;}
-  .ui-state-default {background: white !important;}
-  .ui-button {background: white !important;}
-
-
-  //This moves the modal from tbe background to the foreground so that it is actually visible
-  z-index: 9999 !important;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
 }
