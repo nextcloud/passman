@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  Deprecated: use tests/Unit/phpunit.xml instead.
-  Run: cd ../.. && lib/composer/bin/phpunit -c apps/passman/tests/Unit/phpunit.xml
--->
