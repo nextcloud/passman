@@ -35,10 +35,9 @@ use OCP\IURLGenerator;
 use OCP\Search\ISearchQuery;
 use OCP\Search\SearchResult;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Search\Provider
- */
+#[CoversClass(\OCA\Passman\Search\Provider::class)]
 class ProviderTest extends TestCase {
 	private Provider $provider;
 
@@ -59,27 +58,22 @@ class ProviderTest extends TestCase {
 		);
 	}
 
-	/** @covers ::getId */
 	public function testGetId(): void {
 		$this->assertSame(Application::APP_ID, $this->provider->getId());
 	}
 
-	/** @covers ::getName */
 	public function testGetName(): void {
 		$this->assertSame(Application::APP_NAME, $this->provider->getName());
 	}
 
-	/** @covers ::getOrder */
 	public function testGetOrderInAppRoute(): void {
 		$this->assertSame(-1, $this->provider->getOrder('passman.Page.index', []));
 	}
 
-	/** @covers ::getOrder */
 	public function testGetOrderOutsideApp(): void {
 		$this->assertSame(25, $this->provider->getOrder('files.view.index', []));
 	}
 
-	/** @covers ::search */
 	public function testSearchWhenDisabled(): void {
 		$user = $this->createMock(\OCP\IUser::class);
 		$query = $this->createMock(ISearchQuery::class);

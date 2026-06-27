@@ -38,11 +38,10 @@ use OCP\IDBConnection;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\CredentialRevisionMapper
- */
 #[Group(name: 'DB')]
+#[CoversClass(\OCA\Passman\Db\CredentialRevisionMapper::class)]
 class CredentialRevisionMapperTest extends TestCase {
 	use DbTestTrait;
 
@@ -82,7 +81,6 @@ class CredentialRevisionMapperTest extends TestCase {
 		return $credential->getId();
 	}
 
-	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
@@ -113,7 +111,6 @@ class CredentialRevisionMapperTest extends TestCase {
 		$this->mapper->getRevision(PHP_INT_MAX);
 	}
 
-	/** @covers ::getRevisions */
 	public function testGetRevisions(): void {
 		$credentialId = $this->createCredentialId();
 		$first = $this->mapper->create('first', self::TEST_USER, $credentialId, self::EDITED_BY);
@@ -133,7 +130,6 @@ class CredentialRevisionMapperTest extends TestCase {
 		$this->assertCount(0, $this->mapper->getRevisions(PHP_INT_MAX));
 	}
 
-	/** @covers ::deleteRevision */
 	public function testDeleteRevision(): void {
 		$credentialId = $this->createCredentialId();
 		$revision = $this->mapper->create('to delete', self::TEST_USER, $credentialId, self::EDITED_BY);

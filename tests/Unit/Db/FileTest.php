@@ -28,10 +28,9 @@ namespace OCA\Passman\Tests\Unit\Db;
 
 use OCA\Passman\Db\File;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\File
- */
+#[CoversClass(\OCA\Passman\Db\File::class)]
 class FileTest extends TestCase {
 	private const TEST_DATA = [
 
@@ -67,13 +66,11 @@ class FileTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['file_data'], $this->file->getFileData());
 	}
 
-	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->file->setMimetype('text/json');
 		$this->assertEquals('text/json', $this->file->getMimetype());
 	}
 
-	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expected = [
 			'file_id' => self::TEST_DATA['id'],

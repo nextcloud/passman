@@ -36,10 +36,9 @@ use OCP\Config\IUserConfig;
 use OCP\IL10N;
 use OCP\IRequest;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Controller\SettingsController
- */
+#[CoversClass(\OCA\Passman\Controller\SettingsController::class)]
 class SettingsControllerTest extends TestCase {
 	use AppConfigMockTrait;
 
@@ -61,37 +60,31 @@ class SettingsControllerTest extends TestCase {
 		);
 	}
 
-	/** @covers ::getForm */
 	public function testGetForm(): void {
 		$result = $this->controller->getForm();
 		$this->assertInstanceOf(TemplateResponse::class, $result);
 	}
 
-	/** @covers ::getSection */
 	public function testGetSection(): void {
 		$result = $this->controller->getSection();
 		$this->assertIsString($result);
 	}
 
-	/** @covers ::getPriority */
 	public function testGetPriority(): void {
 		$result = $this->controller->getPriority();
 		$this->assertIsNumeric($result);
 	}
 
-	/** @covers ::getSettings */
 	public function testGetSettings(): void {
 		$result = $this->controller->getsettings();
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
-	/** @covers ::saveUserSetting */
 	public function testSaveUserSetting(): void {
 		$result = $this->controller->saveUserSetting('test', 'value');
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
-	/** @covers ::saveAdminSetting */
 	public function testSaveAdminSetting(): void {
 		$result = $this->controller->saveAdminSetting('admin', 'value');
 		$this->assertInstanceOf(JSONResponse::class, $result);

@@ -27,11 +27,10 @@ declare(strict_types=1);
 namespace OCA\Passman\Tests\Unit\Db;
 
 use OCA\Passman\Db\EntityJSONSerializer;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Test\TestCase;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\EntityJSONSerializer
- */
+#[CoversNothing]
 class EntityJSONSerializerTest extends TestCase {
 	private const TEST_FIELDS = [
 		'an_string' => 'value',
@@ -50,12 +49,10 @@ class EntityJSONSerializerTest extends TestCase {
 		$this->serializer = new EntityJSONSerializerTestStub(self::TEST_FIELDS);
 	}
 
-	/** @covers ::serializeFields */
 	public function testSerializeFieldsFull(): void {
 		$this->assertEquals(self::TEST_FIELDS, $this->serializer->serializeFields(array_keys(self::TEST_FIELDS)));
 	}
 
-	/** @covers ::serializeFields */
 	public function testSerializeFieldsPartial(): void {
 		$fields = ['an_string', 'an_int', 'an_int_array'];
 		$expectedData = [];

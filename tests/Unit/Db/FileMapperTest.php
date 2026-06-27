@@ -36,11 +36,10 @@ use OCP\IDBConnection;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\FileMapper
- */
 #[Group(name: 'DB')]
+#[CoversClass(\OCA\Passman\Db\FileMapper::class)]
 class FileMapperTest extends TestCase {
 	use DbTestTrait;
 
@@ -79,7 +78,6 @@ class FileMapperTest extends TestCase {
 		], $overrides);
 	}
 
-	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
@@ -104,7 +102,6 @@ class FileMapperTest extends TestCase {
 		$this->mapper->getFile(PHP_INT_MAX, 'noone');
 	}
 
-	/** @covers ::getFileByGuid */
 	public function testGetFileByGuid(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 
@@ -118,7 +115,6 @@ class FileMapperTest extends TestCase {
 		$this->mapper->getFileByGuid('missing-guid', 'noone');
 	}
 
-	/** @covers ::deleteFile */
 	public function testDeleteFile(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 
@@ -128,7 +124,6 @@ class FileMapperTest extends TestCase {
 		$this->mapper->getFile($created->getId());
 	}
 
-	/** @covers ::updateFile */
 	public function testUpdateFile(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 		$created->setFilename($created->getFilename() . ' Altered!');

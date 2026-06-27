@@ -36,11 +36,10 @@ use OCP\IDBConnection;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\ShareRequestMapper
- */
 #[Group(name: 'DB')]
+#[CoversClass(\OCA\Passman\Db\ShareRequestMapper::class)]
 class ShareRequestMapperTest extends TestCase {
 	use DbTestTrait;
 
@@ -88,7 +87,6 @@ class ShareRequestMapperTest extends TestCase {
 		return $request;
 	}
 
-	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
@@ -113,7 +111,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->assertSame($inserted->jsonSerialize(), $loaded->jsonSerialize());
 	}
 
-	/** @covers ::getRequestsByItemGuid */
 	public function testGetRequestsByItemGuid(): void {
 		$itemGuid = 'shared-item-' . uniqid('', true);
 		$first = $this->mapper->createRequest($this->buildShareRequest([
@@ -133,7 +130,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->assertContains($second->getId(), $ids);
 	}
 
-	/** @covers ::getUserPendingRequests */
 	public function testGetUserPendingRequests(): void {
 		$request = $this->mapper->createRequest($this->buildShareRequest());
 
@@ -143,7 +139,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->assertSame($request->getId(), $results[0]->getId());
 	}
 
-	/** @covers ::cleanItemRequestsForUser */
 	public function testCleanItemRequestsForUser(): void {
 		$itemId = 12345;
 		$request = $this->mapper->createRequest($this->buildShareRequest([
@@ -162,7 +157,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->assertSame($request->getItemId(), $itemId);
 	}
 
-	/** @covers ::getShareRequestById */
 	public function testGetShareRequestById(): void {
 		$request = $this->mapper->createRequest($this->buildShareRequest());
 
@@ -173,7 +167,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->mapper->getShareRequestById(PHP_INT_MAX);
 	}
 
-	/** @covers ::deleteShareRequest */
 	public function testDeleteShareRequest(): void {
 		$request = $this->mapper->createRequest($this->buildShareRequest());
 
@@ -184,7 +177,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->mapper->getShareRequestById($request->getId());
 	}
 
-	/** @covers ::updateShareRequest */
 	public function testUpdateShareRequest(): void {
 		$request = $this->mapper->createRequest($this->buildShareRequest());
 		$request->setTargetVaultId($request->getTargetVaultId() + 50);

@@ -30,10 +30,9 @@ use JsonSerializable;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Utility\PermissionEntity;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\ShareRequest
- */
+#[CoversClass(\OCA\Passman\Db\ShareRequest::class)]
 class ShareRequestTest extends TestCase {
 	private const TEST_DATA = [
 		'id' => 233,
@@ -72,25 +71,21 @@ class ShareRequestTest extends TestCase {
 		$this->assertSame(self::TEST_DATA['from_user_id'], $this->request->getFromUserId());
 	}
 
-	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->request->setSharedKey('ASDF THIS IS A KEY');
 		$this->assertSame('ASDF THIS IS A KEY', $this->request->getSharedKey());
 	}
 
-	/** @coversNothing */
 	public function testPermissionSystemIsWorking(): void {
 		$this->assertTrue($this->request->hasPermission(ShareRequest::FILES));
 		$this->assertFalse($this->request->hasPermission(ShareRequest::OWNER));
 	}
 
-	/** @coversNothing */
 	public function testInheritsExpectedClasses(): void {
 		$this->assertInstanceOf(PermissionEntity::class, $this->request);
 		$this->assertInstanceOf(JsonSerializable::class, $this->request);
 	}
 
-	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expected = [
 			'req_id' => self::TEST_DATA['id'],
@@ -108,7 +103,6 @@ class ShareRequestTest extends TestCase {
 		$this->assertSame($expected, $this->request->jsonSerialize());
 	}
 
-	/** @covers ::asACLJson */
 	public function testAsACLJson(): void {
 		$expected = [
 			'item_id' => self::TEST_DATA['item_id'],

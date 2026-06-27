@@ -31,13 +31,9 @@ use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\EntityJSONSerializer;
 use OCP\AppFramework\Db\Entity;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\Credential
- * @uses \OCA\Passman\Db\EntityJSONSerializer
- * @uses \OCP\AppFramework\Db\Entity
- * @uses \JsonSerializable
- */
+#[CoversClass(\OCA\Passman\Db\Credential::class)]
 class CredentialTest extends TestCase {
 	private const TEST_DATA = [
 		'id' => 5,
@@ -72,7 +68,6 @@ class CredentialTest extends TestCase {
 		$this->credential = Credential::fromRow(self::TEST_DATA);
 	}
 
-	/** @coversNothing */
 	public function testInstances(): void {
 		$this->assertInstanceOf(Entity::class, $this->credential);
 		$this->assertInstanceOf(JsonSerializable::class, $this->credential);
@@ -108,13 +103,11 @@ class CredentialTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['compromised'], $this->credential->getCompromised());
 	}
 
-	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->credential->setUserId('Sander');
 		$this->assertSame('Sander', $this->credential->getUserId());
 	}
 
-	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$comparisonArray = [
 			'credential_id' => self::TEST_DATA['id'],

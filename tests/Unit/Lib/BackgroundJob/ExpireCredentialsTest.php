@@ -32,12 +32,10 @@ use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\IConfig;
 use ReflectionClass;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\BackgroundJob\ExpireCredentials
- */
+#[CoversClass(\OCA\Passman\BackgroundJob\ExpireCredentials::class)]
 class ExpireCredentialsTest extends TestCase {
-	/** @covers ::run */
 	public function testRun(): void {
 		$cronService = $this->createMock(CronService::class);
 		$cronService->expects($this->once())->method('expireCredentials');

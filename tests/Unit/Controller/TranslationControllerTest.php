@@ -32,10 +32,9 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\IL10N;
 use OCP\IRequest;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Controller\TranslationController
- */
+#[CoversClass(\OCA\Passman\Controller\TranslationController::class)]
 class TranslationControllerTest extends TestCase {
 	private TranslationController $controller;
 
@@ -48,7 +47,6 @@ class TranslationControllerTest extends TestCase {
 		);
 	}
 
-	/** @covers ::getLanguageStrings */
 	public function testGetLanguageStrings(): void {
 		$result = $this->controller->getLanguageStrings(null);
 		$this->assertInstanceOf(JSONResponse::class, $result);

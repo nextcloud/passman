@@ -28,10 +28,9 @@ namespace OCA\Passman\Tests\Unit\Db;
 
 use OCA\Passman\Db\CredentialRevision;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\CredentialRevision
- */
+#[CoversClass(\OCA\Passman\Db\CredentialRevision::class)]
 class CredentialRevisionTest extends TestCase {
 	private const TEST_DATA = [
 		'id' => 30,
@@ -64,13 +63,11 @@ class CredentialRevisionTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['edited_by'], $this->revision->getEditedBy());
 	}
 
-	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->revision->setEditedBy('WolFi');
 		$this->assertEquals('WolFi', $this->revision->getEditedBy());
 	}
 
-	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expected = [
 			'revision_id' => self::TEST_DATA['id'],

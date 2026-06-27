@@ -30,10 +30,11 @@ use OCA\Passman\AppInfo\Application;
 use OCP\App\IAppManager;
 use OCP\Server;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversNothing;
 
+#[CoversNothing]
 class ApplicationTest extends TestCase {
-	/** @coversNothing */
-	public function testAppInstalled(): void {
+		public function testAppInstalled(): void {
 		$appManager = Server::get(IAppManager::class);
 		$this->assertTrue($appManager->isInstalled(Application::APP_ID));
 	}

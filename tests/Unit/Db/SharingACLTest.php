@@ -30,10 +30,9 @@ use JsonSerializable;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Utility\PermissionEntity;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\SharingACL
- */
+#[CoversClass(\OCA\Passman\Db\SharingACL::class)]
 class SharingACLTest extends TestCase {
 	private const TEST_DATA = [
 		'id' => 55,
@@ -74,25 +73,21 @@ class SharingACLTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['shared_key'], $this->acl->getSharedKey());
 	}
 
-	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->acl->setSharedKey('ASDF THIS IS A KEY');
 		$this->assertEquals('ASDF THIS IS A KEY', $this->acl->getSharedKey());
 	}
 
-	/** @coversNothing */
 	public function testInheritedExpectedClasses(): void {
 		$this->assertInstanceOf(PermissionEntity::class, $this->acl);
 		$this->assertInstanceOf(JsonSerializable::class, $this->acl);
 	}
 
-	/** @coversNothing */
 	public function testPermissionSystemIsWorking(): void {
 		$this->assertTrue($this->acl->hasPermission(PermissionEntity::FILES));
 		$this->assertFalse($this->acl->hasPermission(PermissionEntity::OWNER));
 	}
 
-	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expected = [
 			'acl_id' => self::TEST_DATA['id'],

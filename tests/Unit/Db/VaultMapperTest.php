@@ -35,11 +35,10 @@ use OCP\IDBConnection;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\VaultMapper
- */
 #[Group(name: 'DB')]
+#[CoversClass(\OCA\Passman\Db\VaultMapper::class)]
 class VaultMapperTest extends TestCase {
 	private const TEST_USER = 'passman_mapper_test_user';
 
@@ -66,12 +65,10 @@ class VaultMapperTest extends TestCase {
 		$qb->executeStatement();
 	}
 
-	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
-	/** @covers ::findByGuid */
 	public function testFindByGuid(): void {
 		$vault = $this->mapper->create('Example vault', self::TEST_USER);
 
@@ -83,7 +80,6 @@ class VaultMapperTest extends TestCase {
 		$this->mapper->findByGuid('asdf', 'fdsa');
 	}
 
-	/** @covers ::findVaultsFromUser */
 	public function testFindVaultsFromUser(): void {
 		$this->mapper->create('Vault A', self::TEST_USER);
 		$this->mapper->create('Vault B', self::TEST_USER);
@@ -95,7 +91,6 @@ class VaultMapperTest extends TestCase {
 		$this->assertSame(self::TEST_USER, $vaults[0]->getUserId());
 	}
 
-	/** @covers ::updateVault */
 	public function testUpdateVault(): void {
 		$vault = $this->mapper->create('Original name', self::TEST_USER);
 		$vault->setName('ASDF');
@@ -107,7 +102,6 @@ class VaultMapperTest extends TestCase {
 		$this->assertNotSame('Original name', $updated->getName());
 	}
 
-	/** @covers ::setLastAccess */
 	public function testSetLastAccess(): void {
 		$vault = $this->mapper->create('Access test', self::TEST_USER);
 		$before = $vault->getLastAccess();
@@ -120,7 +114,6 @@ class VaultMapperTest extends TestCase {
 		$this->assertSame($expectedTime, $updated->getLastAccess());
 	}
 
-	/** @covers ::create */
 	public function testCreate(): void {
 		$vault = $this->mapper->create('test vault name', self::TEST_USER);
 		$vaultsInDb = $this->mapper->findVaultsFromUser(self::TEST_USER);
@@ -132,7 +125,6 @@ class VaultMapperTest extends TestCase {
 		$this->assertEquals($vault->jsonSerialize(), $vaultsInDb[0]->jsonSerialize());
 	}
 
-	/** @covers ::updateSharingKeys */
 	public function testUpdateSharingKeys(): void {
 		$vault = $this->mapper->create('Sharing keys', self::TEST_USER);
 		$privateKey = 'a private key';

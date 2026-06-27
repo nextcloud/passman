@@ -30,10 +30,9 @@ use JsonSerializable;
 use OCA\Passman\Db\Vault;
 use OCP\AppFramework\Db\Entity;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\Vault
- */
+#[CoversClass(\OCA\Passman\Db\Vault::class)]
 class VaultTest extends TestCase {
 	private const TEST_DATA = [
 		'id' => 1,
@@ -77,19 +76,16 @@ pbbPwdc88kGcdqBzWQIDAQAB
 		$this->assertEquals(self::TEST_DATA['vault_settings'], $this->vault->getVaultSettings());
 	}
 
-	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->vault->setVaultSettings('{json:"object"}');
 		$this->assertEquals('{json:"object"}', $this->vault->getVaultSettings());
 	}
 
-	/** @coversNothing */
 	public function testInheritedExpectedClasses(): void {
 		$this->assertInstanceOf(JsonSerializable::class, $this->vault);
 		$this->assertInstanceOf(Entity::class, $this->vault);
 	}
 
-	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expectedData = [
 			'vault_id' => self::TEST_DATA['id'],

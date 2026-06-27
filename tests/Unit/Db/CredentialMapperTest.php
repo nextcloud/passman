@@ -37,11 +37,10 @@ use OCP\IDBConnection;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @coversDefaultClass \OCA\Passman\Db\CredentialMapper
- */
 #[Group(name: 'DB')]
+#[CoversClass(\OCA\Passman\Db\CredentialMapper::class)]
 class CredentialMapperTest extends TestCase {
 	use DbTestTrait;
 
@@ -75,7 +74,6 @@ class CredentialMapperTest extends TestCase {
 		return $this->mapper->create($this->sampleCredentialData($vault->getId(), self::TEST_USER, $overrides));
 	}
 
-	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
@@ -97,7 +95,6 @@ class CredentialMapperTest extends TestCase {
 		$this->mapper->getCredentialById(PHP_INT_MAX);
 	}
 
-	/** @covers ::getCredentialsByVaultId */
 	public function testGetCredentialsByVaultId(): void {
 		$vault = $this->vaultMapper->create('Vault', self::TEST_USER);
 		$first = $this->mapper->create($this->sampleCredentialData($vault->getId(), self::TEST_USER, ['label' => 'A']));
@@ -111,7 +108,6 @@ class CredentialMapperTest extends TestCase {
 		$this->assertContains($second->getLabel(), $labels);
 	}
 
-	/** @covers ::getRandomCredentialByVaultId */
 	public function testGetRandomCredentialByVaultId(): void {
 		$vault = $this->vaultMapper->create('Vault', self::TEST_USER);
 		$this->mapper->create($this->sampleCredentialData($vault->getId(), self::TEST_USER, ['label' => 'random pick']));
@@ -123,7 +119,6 @@ class CredentialMapperTest extends TestCase {
 		$this->assertSame($vault->getId(), $credential->getVaultId());
 	}
 
-	/** @covers ::getExpiredCredentials */
 	public function testGetExpiredCredentials(): void {
 		$vault = $this->vaultMapper->create('Vault', self::TEST_USER);
 		$expired = $this->mapper->create($this->sampleCredentialData($vault->getId(), self::TEST_USER, [
@@ -141,7 +136,6 @@ class CredentialMapperTest extends TestCase {
 		$this->assertContains($expired->getId(), $ids);
 	}
 
-	/** @covers ::getCredentialLabelById */
 	public function testGetCredentialLabelById(): void {
 		$created = $this->createVaultAndCredential(['label' => 'label lookup']);
 
@@ -154,7 +148,6 @@ class CredentialMapperTest extends TestCase {
 		$this->mapper->getCredentialLabelById(PHP_INT_MAX);
 	}
 
-	/** @covers ::getCredentialByGUID */
 	public function testGetCredentialByGUID(): void {
 		$created = $this->createVaultAndCredential();
 
@@ -168,7 +161,6 @@ class CredentialMapperTest extends TestCase {
 		$this->mapper->getCredentialByGUID('missing-guid');
 	}
 
-	/** @covers ::updateCredential */
 	public function testUpdateCredential(): void {
 		$created = $this->createVaultAndCredential(['label' => 'before']);
 
@@ -200,7 +192,6 @@ class CredentialMapperTest extends TestCase {
 		$this->assertSame('after', $fromDb->getLabel());
 	}
 
-	/** @covers ::deleteCredential */
 	public function testDeleteCredential(): void {
 		$created = $this->createVaultAndCredential();
 
@@ -210,7 +201,6 @@ class CredentialMapperTest extends TestCase {
 		$this->mapper->getCredentialByGUID($created->getGuid());
 	}
 
-	/** @covers ::upd */
 	public function testUpd(): void {
 		$created = $this->createVaultAndCredential(['url' => 'https://before.example.com']);
 		$created->setUrl('https://after.example.com');
