@@ -13,9 +13,11 @@
         "test": "phpunit -c tests/Unit/phpunit.xml --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations",
         "test:unit": "phpunit -c tests/Unit/phpunit.xml --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations --exclude-group DB --exclude-group slow",
         "test:db": "phpunit -c tests/Unit/phpunit.xml --group DB --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations",
-        "test:coverage": "mkdir -p build && phpunit -c tests/Unit/phpunit.xml --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations --coverage-clover build/php-unit.clover"
+        "test:coverage": "mkdir -p build && phpunit -c tests/Unit/phpunit.xml --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations --coverage-clover build/php-unit.clover",
+        "test:clear-cache": "rm -rf tests/Unit/.phpunit.cache"
     },
     "require-dev": {
+        "phpunit/phpunit": "^12.5",
         "rector/rector": "^2.1",
         "nextcloud/rector": "^0.5.1"
     }
