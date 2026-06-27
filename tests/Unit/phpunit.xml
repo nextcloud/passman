@@ -4,8 +4,9 @@
 		 timeoutForMediumTests="900"
 		 timeoutForLargeTests="900"
 		 cacheDirectory=".phpunit.cache"
+		 requireCoverageMetadata="true"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd">
+		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.5/phpunit.xsd">
 	<testsuite name="Passman App Tests">
 		<directory suffix="Test.php">.</directory>
 	</testsuite>
@@ -14,5 +15,13 @@
 			<directory>../../lib</directory>
 			<directory>../../appinfo</directory>
 		</include>
+		<exclude>
+			<directory>../../lib/Migration</directory>
+		</exclude>
 	</source>
+	<coverage>
+		<report>
+			<clover outputFile="../../build/php-unit.clover"/>
+		</report>
+	</coverage>
 </phpunit>
