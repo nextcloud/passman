@@ -32,6 +32,7 @@ use OCP\Server;
 use Test\TestCase;
 
 class ApplicationTest extends TestCase {
+	/** @coversNothing */
 	public function testAppInstalled(): void {
 		$appManager = Server::get(IAppManager::class);
 		$this->assertTrue($appManager->isInstalled(Application::APP_ID));

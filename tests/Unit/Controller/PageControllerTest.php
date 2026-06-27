@@ -42,6 +42,7 @@ class PageControllerTest extends TestCase {
 		$this->controller = new PageController($this->createMock(IRequest::class));
 	}
 
+	/** @covers ::index */
 	public function testIndex(): void {
 		$result = $this->controller->index();
 		$this->assertEquals([], $result->getParams());
@@ -49,6 +50,7 @@ class PageControllerTest extends TestCase {
 		$this->assertInstanceOf(TemplateResponse::class, $result);
 	}
 
+	/** @covers ::bookmarklet */
 	public function testBookmarklet(): void {
 		$result = $this->controller->bookmarklet('http://google.com', 'Google');
 		$this->assertEquals(['url' => 'http://google.com', 'title' => 'Google'], $result->getParams());
@@ -56,6 +58,7 @@ class PageControllerTest extends TestCase {
 		$this->assertInstanceOf(TemplateResponse::class, $result);
 	}
 
+	/** @covers ::publicSharePage */
 	public function testPublicSharePage(): void {
 		$result = $this->controller->publicSharePage();
 		$this->assertEquals('public_share', $result->getTemplateName());

@@ -34,12 +34,14 @@ use Test\TestCase;
  * @coversDefaultClass \OCA\Passman\Utility\NotFoundJSONResponse
  */
 class NotFoundJSONResponseTest extends TestCase {
+	/** @covers ::__construct */
 	public function testOnEmptyResponse(): void {
 		$data = new NotFoundJSONResponse();
 		$this->assertEquals(Http::STATUS_NOT_FOUND, $data->getStatus());
 		$this->assertJsonStringEqualsJsonString('[]', $data->render(), 'Expected empty JSON response');
 	}
 
+	/** @covers ::__construct */
 	public function testOnDataResult(): void {
 		$data = [
 			'field' => 'value',

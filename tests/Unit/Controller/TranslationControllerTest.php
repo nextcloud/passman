@@ -48,6 +48,7 @@ class TranslationControllerTest extends TestCase {
 		);
 	}
 
+	/** @covers ::getLanguageStrings */
 	public function testGetLanguageStrings(): void {
 		$result = $this->controller->getLanguageStrings(null);
 		$this->assertInstanceOf(JSONResponse::class, $result);

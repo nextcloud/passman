@@ -55,6 +55,7 @@ class EncryptServiceTest extends TestCase {
 		$this->service = new EncryptService($settingsService, $config);
 	}
 
+	/** @covers ::makeKey */
 	public function testMakeKey(): void {
 		$key = $this->service->makeKey('userKey', 'serverKey', 'userSuppliedKey');
 		$this->assertSame(

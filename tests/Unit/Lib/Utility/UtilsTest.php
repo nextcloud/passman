@@ -34,6 +34,7 @@ use Test\TestCase;
  * @coversDefaultClass OCA\Passman\Utility\Utils
  */
 class UtilsTest extends TestCase {
+	/** @covers ::GUID */
 	public function testGUID(): void {
 		$pattern = '/[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}/';
 		$this->assertSame(1, preg_match($pattern, Utils::GUID()));
@@ -41,6 +42,7 @@ class UtilsTest extends TestCase {
 	}
 
 	#[Group('slow')]
+	/** @covers ::getTime */
 	public function testGetTime(): void {
 		$oldTime = Utils::getTime();
 		sleep(1);
@@ -49,6 +51,7 @@ class UtilsTest extends TestCase {
 		$this->assertEquals($oldTime + 1, $newTime, "Evaluating that $oldTime +1 === $newTime");
 	}
 
+	/** @covers ::getMicroTime */
 	public function testGetMicroTime(): void {
 		$oldTime = Utils::getMicroTime();
 		usleep(10);

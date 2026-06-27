@@ -52,6 +52,10 @@ class FileTest extends TestCase {
 		$this->file = File::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::fromRow
+	 * @covers ::getter
+	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->file->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->file->getGuid());
@@ -63,11 +67,13 @@ class FileTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['file_data'], $this->file->getFileData());
 	}
 
+	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->file->setMimetype('text/json');
 		$this->assertEquals('text/json', $this->file->getMimetype());
 	}
 
+	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expected = [
 			'file_id' => self::TEST_DATA['id'],

@@ -61,24 +61,28 @@ class VaultControllerTest extends TestCase {
 		);
 	}
 
+	/** @covers ::listVaults */
 	public function testListVaults(): void {
 		$this->vaultService->method('getByUser')->willReturn([]);
 		$result = $this->controller->listVaults();
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
+	/** @covers ::create */
 	public function testCreate(): void {
 		$this->vaultService->method('createVault')->willReturn(new Vault());
 		$result = $this->controller->create('My test vault');
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
+	/** @covers ::get */
 	public function testGet(): void {
 		$this->vaultService->method('getByGuid')->willThrowException(new \RuntimeException('not found'));
 		$result = $this->controller->get('');
 		$this->assertInstanceOf(NotFoundJSONResponse::class, $result);
 	}
 
+	/** @covers ::update */
 	public function testUpdate(): void {
 		$this->vaultService->method('getByGuid')->willReturn(new Vault());
 		$this->vaultService->method('updateVault');
@@ -86,12 +90,14 @@ class VaultControllerTest extends TestCase {
 		$this->addToAssertionCount(1);
 	}
 
+	/** @covers ::updateSharingKeys */
 	public function testUpdateSharingKeys(): void {
 		$this->vaultService->method('getByGuid')->willThrowException(new \RuntimeException('not found'));
 		$this->controller->updateSharingKeys('6AD30804-BFFC-4EFC-97F8-20A126FA1709', null, null);
 		$this->addToAssertionCount(1);
 	}
 
+	/** @covers ::delete */
 	public function testDelete(): void {
 		$this->vaultService->method('getByGuid')->willThrowException(new \RuntimeException('not found'));
 		$result = $this->controller->delete('');

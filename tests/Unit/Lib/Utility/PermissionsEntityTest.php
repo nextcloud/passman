@@ -47,6 +47,7 @@ class PermissionsEntityTest extends TestCase {
 		};
 	}
 
+	/** @coversNothing */
 	public function testPermissionConstants(): void {
 		$this->assertEquals(0b00000001, PermissionEntity::READ);
 		$this->assertEquals(0b00000010, PermissionEntity::WRITE);
@@ -55,6 +56,7 @@ class PermissionsEntityTest extends TestCase {
 		$this->assertEquals(0b10000000, PermissionEntity::OWNER);
 	}
 
+	/** @covers ::addPermission */
 	public function testAddPermission(): void {
 		$this->permission->setPermissions(0);
 		$this->assertEquals(0, $this->permission->getPermissions());
@@ -66,6 +68,7 @@ class PermissionsEntityTest extends TestCase {
 		$this->assertEquals(PermissionEntity::READ | PermissionEntity::FILES, $this->permission->getPermissions());
 	}
 
+	/** @covers ::removePermission */
 	public function testRemovePermission(): void {
 		$basePermissions = PermissionEntity::READ | PermissionEntity::WRITE | PermissionEntity::HISTORY;
 
@@ -82,6 +85,7 @@ class PermissionsEntityTest extends TestCase {
 		$this->assertEquals($expectedPermissions, $this->permission->getPermissions());
 	}
 
+	/** @covers ::hasPermission */
 	public function testHasPermission(): void {
 		$basePermissions = PermissionEntity::READ | PermissionEntity::WRITE | PermissionEntity::HISTORY;
 

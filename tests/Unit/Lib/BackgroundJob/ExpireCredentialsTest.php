@@ -34,9 +34,10 @@ use ReflectionClass;
 use Test\TestCase;
 
 /**
- * @covers \OCA\Passman\BackgroundJob\ExpireCredentials
+ * @coversDefaultClass \OCA\Passman\BackgroundJob\ExpireCredentials
  */
 class ExpireCredentialsTest extends TestCase {
+	/** @covers ::run */
 	public function testRun(): void {
 		$cronService = $this->createMock(CronService::class);
 		$cronService->expects($this->once())->method('expireCredentials');

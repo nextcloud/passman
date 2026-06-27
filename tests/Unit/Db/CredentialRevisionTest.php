@@ -50,6 +50,10 @@ class CredentialRevisionTest extends TestCase {
 		$this->revision = CredentialRevision::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::fromRow
+	 * @covers ::getter
+	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->revision->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->revision->getGuid());
@@ -60,11 +64,13 @@ class CredentialRevisionTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['edited_by'], $this->revision->getEditedBy());
 	}
 
+	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->revision->setEditedBy('WolFi');
 		$this->assertEquals('WolFi', $this->revision->getEditedBy());
 	}
 
+	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expected = [
 			'revision_id' => self::TEST_DATA['id'],

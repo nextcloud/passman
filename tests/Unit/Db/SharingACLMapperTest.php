@@ -87,10 +87,15 @@ class SharingACLMapperTest extends TestCase {
 		return $acl;
 	}
 
+	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
+	/**
+	 * @covers ::createACLEntry
+	 * @covers ::getItemACL
+	 */
 	public function testCreateAndGetItemACL(): void {
 		$acl = $this->mapper->createACLEntry($this->buildAcl());
 
@@ -100,6 +105,7 @@ class SharingACLMapperTest extends TestCase {
 		$this->assertEquals($acl->jsonSerialize(), $loaded->jsonSerialize());
 	}
 
+	/** @covers ::getVaultEntries */
 	public function testGetVaultEntries(): void {
 		$vaultGuid = 'vault-guid-' . uniqid('', true);
 		$first = $this->mapper->createACLEntry($this->buildAcl([
@@ -119,6 +125,7 @@ class SharingACLMapperTest extends TestCase {
 		$this->assertContains($second->getId(), $ids);
 	}
 
+	/** @covers ::updateCredentialACL */
 	public function testUpdateCredentialACL(): void {
 		$acl = $this->mapper->createACLEntry($this->buildAcl());
 		$originalExpire = $acl->getExpire();
@@ -132,6 +139,7 @@ class SharingACLMapperTest extends TestCase {
 		$this->assertSame($acl->getExpire(), $updated->getExpire());
 	}
 
+	/** @covers ::getCredentialAclList */
 	public function testGetCredentialAclList(): void {
 		$itemGuid = 'shared-item-' . uniqid('', true);
 		$first = $this->mapper->createACLEntry($this->buildAcl([
@@ -151,6 +159,7 @@ class SharingACLMapperTest extends TestCase {
 		$this->assertContains($second->getId(), $ids);
 	}
 
+	/** @covers ::deleteShareACL */
 	public function testDeleteShareACL(): void {
 		$acl = $this->mapper->createACLEntry($this->buildAcl());
 

@@ -56,24 +56,28 @@ class FileControllerTest extends TestCase {
 		);
 	}
 
+	/** @covers ::uploadFile */
 	public function testUploadFile(): void {
 		$this->fileService->method('createFile')->willReturn(new File());
 		$result = $this->controller->uploadFile('000', '0.png', 'image/png', 3);
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
+	/** @covers ::getFile */
 	public function testGetFile(): void {
 		$this->fileService->method('getFile')->with(1, 'example')->willReturn(new File());
 		$result = $this->controller->getFile(1);
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
+	/** @covers ::deleteFile */
 	public function testDeleteFile(): void {
 		$this->fileService->method('deleteFile')->with(1, 'example')->willReturn(new File());
 		$result = $this->controller->deleteFile(1);
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
+	/** @covers ::updateFile */
 	public function testUpdateFile(): void {
 		$file = new File();
 		$this->fileService->method('getFile')->with(1, 'example')->willReturn($file);

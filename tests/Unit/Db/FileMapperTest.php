@@ -79,10 +79,15 @@ class FileMapperTest extends TestCase {
 		], $overrides);
 	}
 
+	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
+	/**
+	 * @covers ::create
+	 * @covers ::getFile
+	 */
 	public function testCreateAndGetFile(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 
@@ -99,6 +104,7 @@ class FileMapperTest extends TestCase {
 		$this->mapper->getFile(PHP_INT_MAX, 'noone');
 	}
 
+	/** @covers ::getFileByGuid */
 	public function testGetFileByGuid(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 
@@ -112,6 +118,7 @@ class FileMapperTest extends TestCase {
 		$this->mapper->getFileByGuid('missing-guid', 'noone');
 	}
 
+	/** @covers ::deleteFile */
 	public function testDeleteFile(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 
@@ -121,6 +128,7 @@ class FileMapperTest extends TestCase {
 		$this->mapper->getFile($created->getId());
 	}
 
+	/** @covers ::updateFile */
 	public function testUpdateFile(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 		$created->setFilename($created->getFilename() . ' Altered!');

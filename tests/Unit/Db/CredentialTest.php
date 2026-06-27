@@ -72,11 +72,16 @@ class CredentialTest extends TestCase {
 		$this->credential = Credential::fromRow(self::TEST_DATA);
 	}
 
+	/** @coversNothing */
 	public function testInstances(): void {
 		$this->assertInstanceOf(Entity::class, $this->credential);
 		$this->assertInstanceOf(JsonSerializable::class, $this->credential);
 	}
 
+	/**
+	 * @covers ::getter
+	 * @covers ::fromRow
+	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->credential->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->credential->getGuid());
@@ -103,11 +108,13 @@ class CredentialTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['compromised'], $this->credential->getCompromised());
 	}
 
+	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->credential->setUserId('Sander');
 		$this->assertSame('Sander', $this->credential->getUserId());
 	}
 
+	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$comparisonArray = [
 			'credential_id' => self::TEST_DATA['id'],

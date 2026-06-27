@@ -63,6 +63,7 @@ class InternalControllerTest extends TestCase {
 		);
 	}
 
+	/** @covers ::remind */
 	public function testRemind(): void {
 		$this->credentialService->method('getCredentialById')->with(1, 'john')->willReturn(new \OCA\Passman\Db\Credential());
 		$this->credentialService->method('updateCredentialEntity');
@@ -70,17 +71,20 @@ class InternalControllerTest extends TestCase {
 		$this->addToAssertionCount(1);
 	}
 
+	/** @covers ::read */
 	public function testRead(): void {
 		$this->credentialService->method('credentialExistsById')->with(1)->willReturn(false);
 		$this->controller->read(1);
 		$this->addToAssertionCount(1);
 	}
 
+	/** @covers ::getSettings */
 	public function testGetSettings(): void {
 		$result = $this->controller->getSettings();
 		$this->assertInstanceOf(JSONResponse::class, $result);
 	}
 
+	/** @covers ::saveSettings */
 	public function testSaveSettings(): void {
 		$this->controller->saveSettings('test', 'test');
 		$this->addToAssertionCount(1);

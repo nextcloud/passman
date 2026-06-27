@@ -60,6 +60,10 @@ pbbPwdc88kGcdqBzWQIDAQAB
 		$this->vault = Vault::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::getter
+	 * @covers ::fromRow
+	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->vault->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->vault->getGuid());
@@ -73,16 +77,19 @@ pbbPwdc88kGcdqBzWQIDAQAB
 		$this->assertEquals(self::TEST_DATA['vault_settings'], $this->vault->getVaultSettings());
 	}
 
+	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->vault->setVaultSettings('{json:"object"}');
 		$this->assertEquals('{json:"object"}', $this->vault->getVaultSettings());
 	}
 
+	/** @coversNothing */
 	public function testInheritedExpectedClasses(): void {
 		$this->assertInstanceOf(JsonSerializable::class, $this->vault);
 		$this->assertInstanceOf(Entity::class, $this->vault);
 	}
 
+	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expectedData = [
 			'vault_id' => self::TEST_DATA['id'],

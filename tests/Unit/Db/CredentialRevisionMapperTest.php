@@ -82,10 +82,15 @@ class CredentialRevisionMapperTest extends TestCase {
 		return $credential->getId();
 	}
 
+	/** @coversNothing */
 	public function testClassType(): void {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
+	/**
+	 * @covers ::create
+	 * @covers ::getRevision
+	 */
 	public function testCreateAndGetRevision(): void {
 		$credentialId = $this->createCredentialId();
 		$payload = 'credential data stuff';
@@ -108,6 +113,7 @@ class CredentialRevisionMapperTest extends TestCase {
 		$this->mapper->getRevision(PHP_INT_MAX);
 	}
 
+	/** @covers ::getRevisions */
 	public function testGetRevisions(): void {
 		$credentialId = $this->createCredentialId();
 		$first = $this->mapper->create('first', self::TEST_USER, $credentialId, self::EDITED_BY);
@@ -127,6 +133,7 @@ class CredentialRevisionMapperTest extends TestCase {
 		$this->assertCount(0, $this->mapper->getRevisions(PHP_INT_MAX));
 	}
 
+	/** @covers ::deleteRevision */
 	public function testDeleteRevision(): void {
 		$credentialId = $this->createCredentialId();
 		$revision = $this->mapper->create('to delete', self::TEST_USER, $credentialId, self::EDITED_BY);

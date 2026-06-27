@@ -56,6 +56,10 @@ class SharingACLTest extends TestCase {
 		$this->acl = SharingACL::fromRow(self::TEST_DATA);
 	}
 
+	/**
+	 * @covers ::fromRow
+	 * @covers ::getter
+	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->acl->getId());
 		$this->assertEquals(self::TEST_DATA['item_id'], $this->acl->getItemId());
@@ -70,21 +74,25 @@ class SharingACLTest extends TestCase {
 		$this->assertEquals(self::TEST_DATA['shared_key'], $this->acl->getSharedKey());
 	}
 
+	/** @covers ::setter */
 	public function testSetters(): void {
 		$this->acl->setSharedKey('ASDF THIS IS A KEY');
 		$this->assertEquals('ASDF THIS IS A KEY', $this->acl->getSharedKey());
 	}
 
+	/** @coversNothing */
 	public function testInheritedExpectedClasses(): void {
 		$this->assertInstanceOf(PermissionEntity::class, $this->acl);
 		$this->assertInstanceOf(JsonSerializable::class, $this->acl);
 	}
 
+	/** @coversNothing */
 	public function testPermissionSystemIsWorking(): void {
 		$this->assertTrue($this->acl->hasPermission(PermissionEntity::FILES));
 		$this->assertFalse($this->acl->hasPermission(PermissionEntity::OWNER));
 	}
 
+	/** @covers ::jsonSerialize */
 	public function testJsonSerialize(): void {
 		$expected = [
 			'acl_id' => self::TEST_DATA['id'],

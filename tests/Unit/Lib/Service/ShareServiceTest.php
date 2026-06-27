@@ -73,6 +73,7 @@ class ShareServiceTest extends TestCase {
 		);
 	}
 
+	/** @covers ::createBulkRequests */
 	public function testCreateBulkRequests(): void {
 		$this->shareRequestMapper->expects($this->exactly(2))
 			->method('createRequest')
@@ -99,6 +100,7 @@ class ShareServiceTest extends TestCase {
 		$this->assertSame(PermissionEntity::READ, $requests[0]->getPermissions());
 	}
 
+	/** @covers ::createACLEntry */
 	public function testCreateACLEntrySetsCreatedTimestamp(): void {
 		$acl = new SharingACL();
 		$this->sharingACLMapper->expects($this->once())
@@ -114,6 +116,7 @@ class ShareServiceTest extends TestCase {
 		$this->assertGreaterThan(0, $result->getCreated());
 	}
 
+	/** @covers ::applyShare */
 	public function testApplyShareCreatesAclAndCleansPendingRequests(): void {
 		$request = new ShareRequest();
 		$request->setItemId(5);
@@ -143,6 +146,7 @@ class ShareServiceTest extends TestCase {
 		$this->service->applyShare('item-guid', 'vault-guid', 'final-key');
 	}
 
+	/** @covers ::getItemHistory */
 	public function testGetItemHistoryReturnsEmptyWithoutHistoryPermission(): void {
 		$acl = new SharingACL();
 		$acl->setPermissions(PermissionEntity::READ);
@@ -158,6 +162,7 @@ class ShareServiceTest extends TestCase {
 		$this->assertSame([], $this->service->getItemHistory('alice', 'item-guid'));
 	}
 
+	/** @covers ::unshareCredential */
 	public function testUnshareCredentialDeletesAclAndRequestsAndMarksNotifications(): void {
 		$acl = new SharingACL();
 		$acl->setId(1);

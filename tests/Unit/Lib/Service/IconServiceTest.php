@@ -33,6 +33,7 @@ use Test\TestCase;
  * @coversDefaultClass \OCA\Passman\Service\IconService
  */
 class IconServiceTest extends TestCase {
+	/** @covers ::urlType */
 	public function testUrlType(): void {
 		$this->assertEquals(IconService::URL_TYPE_ABSOLUTE, IconService::urlType('http://www.domain.com/images/fav.ico'));
 		$this->assertEquals(IconService::URL_TYPE_ABSOLUTE_SCHEME, IconService::urlType('//www.domain.com/images/fav.ico'));
@@ -40,6 +41,7 @@ class IconServiceTest extends TestCase {
 		$this->assertEquals(IconService::URL_TYPE_RELATIVE, IconService::urlType('../images/fav.ico'));
 	}
 
+	/** @covers ::getExtensionFromMimeType */
 	public function testGetExtMime(): void {
 		$this->assertEquals('ico', IconService::getExtensionFromMimeType('image/x-icon'));
 		$this->assertEquals('png', IconService::getExtensionFromMimeType('image/png'));

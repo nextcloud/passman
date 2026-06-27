@@ -50,10 +50,12 @@ class EntityJSONSerializerTest extends TestCase {
 		$this->serializer = new EntityJSONSerializerTestStub(self::TEST_FIELDS);
 	}
 
+	/** @covers ::serializeFields */
 	public function testSerializeFieldsFull(): void {
 		$this->assertEquals(self::TEST_FIELDS, $this->serializer->serializeFields(array_keys(self::TEST_FIELDS)));
 	}
 
+	/** @covers ::serializeFields */
 	public function testSerializeFieldsPartial(): void {
 		$fields = ['an_string', 'an_int', 'an_int_array'];
 		$expectedData = [];

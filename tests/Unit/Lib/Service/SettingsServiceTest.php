@@ -55,26 +55,31 @@ class SettingsServiceTest extends TestCase {
 		$this->service = new SettingsService('admin', Application::APP_ID, $appConfig, $userConfig);
 	}
 
+	/** @covers ::getAppSettings */
 	public function testGetAppSettings(): void {
 		$result = $this->service->getAppSettings();
 		$this->assertIsArray($result);
 	}
 
+	/** @covers ::getAppSetting */
 	public function testGetAppSetting(): void {
 		$result = $this->service->getAppSetting('settings_loaded', 1);
 		$this->assertSame(1, $result);
 	}
 
+	/** @covers ::setAppSetting */
 	public function testSetAppSetting(): void {
 		$this->service->setAppSetting('settings_loaded', 0);
 		$this->assertSame(0, $this->service->getAppSetting('settings_loaded'));
 	}
 
+	/** @covers ::setUserSetting */
 	public function testSetUserSetting(): void {
 		$this->service->setUserSetting('test', 'value');
 		$this->addToAssertionCount(1);
 	}
 
+	/** @covers ::isEnabled */
 	public function testIsEnabled(): void {
 		$result = $this->service->isEnabled('link_sharing_enabled');
 		$this->assertFalse($result);
