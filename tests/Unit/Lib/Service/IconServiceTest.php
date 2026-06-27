@@ -33,7 +33,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(\OCA\Passman\Service\IconService::class)]
 class IconServiceTest extends TestCase {
 	public function testUrlType(): void {
-		$this->assertEquals(IconService::URL_TYPE_ABSOLUTE, IconService::urlType('http://www.domain.com/images/fav.ico'));
+		$this->assertEquals(IconService::URL_TYPE_ABSOLUTE, IconService::urlType('https://www.domain.com/images/fav.ico'));
 		$this->assertEquals(IconService::URL_TYPE_ABSOLUTE_SCHEME, IconService::urlType('//www.domain.com/images/fav.ico'));
 		$this->assertEquals(IconService::URL_TYPE_ABSOLUTE_PATH, IconService::urlType('/images/fav.ico'));
 		$this->assertEquals(IconService::URL_TYPE_RELATIVE, IconService::urlType('../images/fav.ico'));

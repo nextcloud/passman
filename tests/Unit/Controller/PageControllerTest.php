@@ -49,8 +49,8 @@ class PageControllerTest extends TestCase {
 	}
 
 	public function testBookmarklet(): void {
-		$result = $this->controller->bookmarklet('http://google.com', 'Google');
-		$this->assertEquals(['url' => 'http://google.com', 'title' => 'Google'], $result->getParams());
+		$result = $this->controller->bookmarklet('https://google.com', 'Google');
+		$this->assertEquals(['url' => 'https://google.com', 'title' => 'Google'], $result->getParams());
 		$this->assertEquals('bookmarklet', $result->getTemplateName());
 		$this->assertInstanceOf(TemplateResponse::class, $result);
 	}
