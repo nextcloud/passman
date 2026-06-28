@@ -36,21 +36,21 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 use OCP\Server;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[Group(name: 'DB')]
-#[CoversClass(\OCA\Passman\Db\CredentialRevisionMapper::class)]
+#[CoversClass(CredentialRevisionMapper::class)]
 class CredentialRevisionMapperTest extends TestCase {
 	use DbTestTrait;
 
 	private const TEST_USER = 'passman_revision_mapper_test';
 	private const EDITED_BY = 'passman_revision_editor';
 
-	private IDBConnection $db;
-	private VaultMapper $vaultMapper;
-	private CredentialMapper $credentialMapper;
+	private IDBConnection            $db;
+	private VaultMapper              $vaultMapper;
+	private CredentialMapper         $credentialMapper;
 	private CredentialRevisionMapper $mapper;
 
 	protected function setUp(): void {
@@ -123,7 +123,7 @@ class CredentialRevisionMapperTest extends TestCase {
 		$this->assertCount(2, $forUser);
 		$this->assertContainsOnlyInstancesOf(CredentialRevision::class, $forUser);
 
-		$ids = array_map(static fn (CredentialRevision $r) => $r->getId(), $forUser);
+		$ids = array_map(static fn(CredentialRevision $r) => $r->getId(), $forUser);
 		$this->assertContains($first->getId(), $ids);
 		$this->assertContains($second->getId(), $ids);
 

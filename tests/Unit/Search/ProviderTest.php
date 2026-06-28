@@ -29,15 +29,16 @@ namespace OCA\Passman\Tests\Unit\Search;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Search\Provider;
 use OCA\Passman\Service\SettingsService;
-use OCP\IL10N;
 use OCP\IDBConnection;
+use OCP\IL10N;
 use OCP\IURLGenerator;
+use OCP\IUser;
 use OCP\Search\ISearchQuery;
 use OCP\Search\SearchResult;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Search\Provider::class)]
+#[CoversClass(Provider::class)]
 class ProviderTest extends TestCase {
 	private Provider $provider;
 
@@ -75,7 +76,7 @@ class ProviderTest extends TestCase {
 	}
 
 	public function testSearchWhenDisabled(): void {
-		$user = $this->createMock(\OCP\IUser::class);
+		$user = $this->createMock(IUser::class);
 		$query = $this->createMock(ISearchQuery::class);
 
 		$result = $this->provider->search($user, $query);

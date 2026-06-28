@@ -29,22 +29,22 @@ namespace OCA\Passman\Tests\Unit\Db;
 use JsonSerializable;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Utility\PermissionEntity;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Db\ShareRequest::class)]
+#[CoversClass(ShareRequest::class)]
 class ShareRequestTest extends TestCase {
 	private const TEST_DATA = [
-		'id' => 233,
-		'item_id' => 5,
-		'item_guid' => 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
-		'target_user_id' => 'WolFi',
-		'target_vault_id' => 1,
+		'id'                => 233,
+		'item_id'           => 5,
+		'item_guid'         => 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
+		'target_user_id'    => 'WolFi',
+		'target_vault_id'   => 1,
 		'target_vault_guid' => '0D4C9729-3A5E-49F5-A0EA-55FB77D640D0',
-		'shared_key' => 'eyJpdiI6IkllTjNqS3NTMkEvd3BHRnB5MjZwMkEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJtdG5CT2ZOL3hlRSIsImN0IjoieVo1S3hCUEJUSm0wZEo2VHFXNGZiOUxtc2lXb29BIn0=',
-		'permissions' => 0x07,
-		'created' => 1475854509,
-		'from_user_id' => 'Sander',
+		'shared_key'        => 'eyJpdiI6IkllTjNqS3NTMkEvd3BHRnB5MjZwMkEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJtdG5CT2ZOL3hlRSIsImN0IjoieVo1S3hCUEJUSm0wZEo2VHFXNGZiOUxtc2lXb29BIn0=',
+		'permissions'       => 0x07,
+		'created'           => 1475854509,
+		'from_user_id'      => 'Sander',
 	];
 
 	protected ShareRequest $request;
@@ -88,16 +88,16 @@ class ShareRequestTest extends TestCase {
 
 	public function testJsonSerialize(): void {
 		$expected = [
-			'req_id' => self::TEST_DATA['id'],
-			'item_id' => self::TEST_DATA['item_id'],
-			'item_guid' => self::TEST_DATA['item_guid'],
-			'target_user_id' => self::TEST_DATA['target_user_id'],
-			'target_vault_id' => self::TEST_DATA['target_vault_id'],
+			'req_id'            => self::TEST_DATA['id'],
+			'item_id'           => self::TEST_DATA['item_id'],
+			'item_guid'         => self::TEST_DATA['item_guid'],
+			'target_user_id'    => self::TEST_DATA['target_user_id'],
+			'target_vault_id'   => self::TEST_DATA['target_vault_id'],
 			'target_vault_guid' => self::TEST_DATA['target_vault_guid'],
-			'from_user_id' => self::TEST_DATA['from_user_id'],
-			'shared_key' => self::TEST_DATA['shared_key'],
-			'permissions' => self::TEST_DATA['permissions'],
-			'created' => self::TEST_DATA['created'],
+			'from_user_id'      => self::TEST_DATA['from_user_id'],
+			'shared_key'        => self::TEST_DATA['shared_key'],
+			'permissions'       => self::TEST_DATA['permissions'],
+			'created'           => self::TEST_DATA['created'],
 		];
 
 		$this->assertSame($expected, $this->request->jsonSerialize());
@@ -105,15 +105,15 @@ class ShareRequestTest extends TestCase {
 
 	public function testAsACLJson(): void {
 		$expected = [
-			'item_id' => self::TEST_DATA['item_id'],
-			'item_guid' => self::TEST_DATA['item_guid'],
-			'user_id' => self::TEST_DATA['target_user_id'],
-			'created' => self::TEST_DATA['created'],
+			'item_id'     => self::TEST_DATA['item_id'],
+			'item_guid'   => self::TEST_DATA['item_guid'],
+			'user_id'     => self::TEST_DATA['target_user_id'],
+			'created'     => self::TEST_DATA['created'],
 			'permissions' => self::TEST_DATA['permissions'],
-			'vault_id' => self::TEST_DATA['target_vault_id'],
-			'vault_guid' => self::TEST_DATA['target_vault_guid'],
-			'shared_key' => self::TEST_DATA['shared_key'],
-			'pending' => true,
+			'vault_id'    => self::TEST_DATA['target_vault_id'],
+			'vault_guid'  => self::TEST_DATA['target_vault_guid'],
+			'shared_key'  => self::TEST_DATA['shared_key'],
+			'pending'     => true,
 		];
 
 		$this->assertSame($expected, $this->request->asACLJson());

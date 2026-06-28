@@ -27,10 +27,10 @@ declare(strict_types=1);
 namespace OCA\Passman\Tests\Unit\Lib\Service;
 
 use OCA\Passman\Service\IconService;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Service\IconService::class)]
+#[CoversClass(IconService::class)]
 class IconServiceTest extends TestCase {
 	public function testUrlType(): void {
 		$this->assertEquals(IconService::URL_TYPE_ABSOLUTE, IconService::urlType('https://www.domain.com/images/fav.ico'));

@@ -35,19 +35,19 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 use OCP\Server;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[Group(name: 'DB')]
-#[CoversClass(\OCA\Passman\Db\CredentialMapper::class)]
+#[CoversClass(CredentialMapper::class)]
 class CredentialMapperTest extends TestCase {
 	use DbTestTrait;
 
 	private const TEST_USER = 'passman_credential_mapper_test';
 
-	private IDBConnection $db;
-	private VaultMapper $vaultMapper;
+	private IDBConnection    $db;
+	private VaultMapper      $vaultMapper;
 	private CredentialMapper $mapper;
 
 	protected function setUp(): void {
@@ -103,7 +103,7 @@ class CredentialMapperTest extends TestCase {
 		$credentials = $this->mapper->getCredentialsByVaultId((string)$vault->getId(), self::TEST_USER);
 
 		$this->assertCount(2, $credentials);
-		$labels = array_map(static fn (Credential $c) => $c->getLabel(), $credentials);
+		$labels = array_map(static fn(Credential $c) => $c->getLabel(), $credentials);
 		$this->assertContains($first->getLabel(), $labels);
 		$this->assertContains($second->getLabel(), $labels);
 	}
@@ -122,17 +122,17 @@ class CredentialMapperTest extends TestCase {
 	public function testGetExpiredCredentials(): void {
 		$vault = $this->vaultMapper->create('Vault', self::TEST_USER);
 		$expired = $this->mapper->create($this->sampleCredentialData($vault->getId(), self::TEST_USER, [
-			'label' => 'expired',
+			'label'       => 'expired',
 			'expire_time' => Utils::getTime() - 100,
 		]));
 		$this->mapper->create($this->sampleCredentialData($vault->getId(), self::TEST_USER, [
-			'label' => 'valid',
+			'label'       => 'valid',
 			'expire_time' => Utils::getTime() + 3600,
 		]));
 
 		$results = $this->mapper->getExpiredCredentials(Utils::getTime());
 
-		$ids = array_map(static fn (Credential $c) => $c->getId(), $results);
+		$ids = array_map(static fn(Credential $c) => $c->getId(), $results);
 		$this->assertContains($expired->getId(), $ids);
 	}
 
@@ -165,24 +165,24 @@ class CredentialMapperTest extends TestCase {
 		$created = $this->createVaultAndCredential(['label' => 'before']);
 
 		$updated = $this->mapper->updateCredential([
-			'guid' => $created->getGuid(),
-			'label' => 'after',
-			'description' => 'updated description',
-			'tags' => 'new-tag',
-			'email' => 'new@example.com',
-			'username' => 'new-user',
-			'password' => 'new-pass',
-			'url' => 'https://new.example.com',
-			'icon' => 'icon-data',
+			'guid'           => $created->getGuid(),
+			'label'          => 'after',
+			'description'    => 'updated description',
+			'tags'           => 'new-tag',
+			'email'          => 'new@example.com',
+			'username'       => 'new-user',
+			'password'       => 'new-pass',
+			'url'            => 'https://new.example.com',
+			'icon'           => 'icon-data',
 			'renew_interval' => 10,
-			'expire_time' => Utils::getTime() + 7200,
-			'files' => '{files}',
-			'custom_fields' => '{fields}',
-			'otp' => 'otp',
-			'hidden' => true,
-			'delete_time' => Utils::getTime() + 1000,
-			'compromised' => null,
-			'shared_key' => 'shared',
+			'expire_time'    => Utils::getTime() + 7200,
+			'files'          => '{files}',
+			'custom_fields'  => '{fields}',
+			'otp'            => 'otp',
+			'hidden'         => true,
+			'delete_time'    => Utils::getTime() + 1000,
+			'compromised'    => null,
+			'shared_key'     => 'shared',
 		], false);
 
 		$this->assertSame('after', $updated->getLabel());

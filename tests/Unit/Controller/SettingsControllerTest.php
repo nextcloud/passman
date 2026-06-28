@@ -35,10 +35,10 @@ use OCP\AppFramework\Http\TemplateResponse;
 use OCP\Config\IUserConfig;
 use OCP\IL10N;
 use OCP\IRequest;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Controller\SettingsController::class)]
+#[CoversClass(SettingsController::class)]
 class SettingsControllerTest extends TestCase {
 	use AppConfigMockTrait;
 

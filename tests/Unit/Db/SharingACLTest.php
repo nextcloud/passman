@@ -29,23 +29,23 @@ namespace OCA\Passman\Tests\Unit\Db;
 use JsonSerializable;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Utility\PermissionEntity;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Db\SharingACL::class)]
+#[CoversClass(SharingACL::class)]
 class SharingACLTest extends TestCase {
 	private const TEST_DATA = [
-		'id' => 55,
-		'item_id' => 5,
-		'item_guid' => 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
-		'user_id' => 'WolFi',
-		'created' => 1475854509,
-		'expire' => 0,
+		'id'           => 55,
+		'item_id'      => 5,
+		'item_guid'    => 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
+		'user_id'      => 'WolFi',
+		'created'      => 1475854509,
+		'expire'       => 0,
 		'expire_views' => 0,
-		'permissions' => 0x07,
-		'vault_id' => 1,
-		'vault_guid' => 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
-		'shared_key' => 'eyJpdiI6IkllTjNqS3NTMkEvd3BHRnB5MjZwMkEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJtdG5CT2ZOL3hlRSIsImN0IjoieVo1S3hCUEJUSm0wZEo2VHFXNGZiOUxtc2lXb29BIn0=',
+		'permissions'  => 0x07,
+		'vault_id'     => 1,
+		'vault_guid'   => 'FA8D80E0-90AB-4D7A-9937-913F486C24EA',
+		'shared_key'   => 'eyJpdiI6IkllTjNqS3NTMkEvd3BHRnB5MjZwMkEiLCJ2IjoxLCJpdGVyIjoxMDAwLCJrcyI6MjU2LCJ0cyI6NjQsIm1vZGUiOiJjY20iLCJhZGF0YSI6IiIsImNpcGhlciI6ImFlcyIsInNhbHQiOiJtdG5CT2ZOL3hlRSIsImN0IjoieVo1S3hCUEJUSm0wZEo2VHFXNGZiOUxtc2lXb29BIn0=',
 	];
 
 	protected SharingACL $acl;
@@ -90,18 +90,18 @@ class SharingACLTest extends TestCase {
 
 	public function testJsonSerialize(): void {
 		$expected = [
-			'acl_id' => self::TEST_DATA['id'],
-			'item_id' => self::TEST_DATA['item_id'],
-			'item_guid' => self::TEST_DATA['item_guid'],
-			'user_id' => self::TEST_DATA['user_id'],
-			'created' => self::TEST_DATA['created'],
-			'expire' => self::TEST_DATA['expire'],
+			'acl_id'       => self::TEST_DATA['id'],
+			'item_id'      => self::TEST_DATA['item_id'],
+			'item_guid'    => self::TEST_DATA['item_guid'],
+			'user_id'      => self::TEST_DATA['user_id'],
+			'created'      => self::TEST_DATA['created'],
+			'expire'       => self::TEST_DATA['expire'],
 			'expire_views' => self::TEST_DATA['expire_views'],
-			'permissions' => self::TEST_DATA['permissions'],
-			'vault_id' => self::TEST_DATA['vault_id'],
-			'vault_guid' => self::TEST_DATA['vault_guid'],
-			'shared_key' => self::TEST_DATA['shared_key'],
-			'pending' => false,
+			'permissions'  => self::TEST_DATA['permissions'],
+			'vault_id'     => self::TEST_DATA['vault_id'],
+			'vault_guid'   => self::TEST_DATA['vault_guid'],
+			'shared_key'   => self::TEST_DATA['shared_key'],
+			'pending'      => false,
 		];
 
 		$this->assertEquals($expected, $this->acl->jsonSerialize());

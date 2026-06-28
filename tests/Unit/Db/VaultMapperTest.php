@@ -33,17 +33,17 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 use OCP\Server;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[Group(name: 'DB')]
-#[CoversClass(\OCA\Passman\Db\VaultMapper::class)]
+#[CoversClass(VaultMapper::class)]
 class VaultMapperTest extends TestCase {
 	private const TEST_USER = 'passman_mapper_test_user';
 
 	private IDBConnection $db;
-	private VaultMapper $mapper;
+	private VaultMapper   $mapper;
 
 	protected function setUp(): void {
 		parent::setUp();

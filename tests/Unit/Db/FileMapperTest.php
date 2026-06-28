@@ -34,19 +34,19 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 use OCP\Server;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[Group(name: 'DB')]
-#[CoversClass(\OCA\Passman\Db\FileMapper::class)]
+#[CoversClass(FileMapper::class)]
 class FileMapperTest extends TestCase {
 	use DbTestTrait;
 
 	private const TEST_USER = 'passman_file_mapper_test';
 
 	private IDBConnection $db;
-	private FileMapper $mapper;
+	private FileMapper    $mapper;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -72,9 +72,9 @@ class FileMapperTest extends TestCase {
 		$fileData = 'some file data for testing';
 		return array_merge([
 			'file_data' => $fileData,
-			'filename' => 'Test file',
-			'mimetype' => 'text/plain',
-			'size' => strlen($fileData),
+			'filename'  => 'Test file',
+			'mimetype'  => 'text/plain',
+			'size'      => strlen($fileData),
 		], $overrides);
 	}
 

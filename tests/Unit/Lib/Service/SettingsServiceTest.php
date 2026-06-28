@@ -30,10 +30,10 @@ use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Tests\Unit\Support\AppConfigMockTrait;
 use OCP\Config\IUserConfig;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Service\SettingsService::class)]
+#[CoversClass(SettingsService::class)]
 class SettingsServiceTest extends TestCase {
 	use AppConfigMockTrait;
 

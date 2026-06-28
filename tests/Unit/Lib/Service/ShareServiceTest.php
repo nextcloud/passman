@@ -38,19 +38,19 @@ use OCA\Passman\Service\ShareService;
 use OCA\Passman\Utility\PermissionEntity;
 use OCP\Notification\IManager;
 use OCP\Notification\INotification;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(\OCA\Passman\Service\ShareService::class)]
+#[CoversClass(ShareService::class)]
 class ShareServiceTest extends TestCase {
-	private SharingACLMapper&MockObject $sharingACLMapper;
-	private ShareRequestMapper&MockObject $shareRequestMapper;
-	private CredentialMapper&MockObject $credentialMapper;
+	private SharingACLMapper&MockObject          $sharingACLMapper;
+	private ShareRequestMapper&MockObject        $shareRequestMapper;
+	private CredentialMapper&MockObject          $credentialMapper;
 	private CredentialRevisionService&MockObject $revisionService;
-	private EncryptService&MockObject $encryptService;
-	private IManager&MockObject $notificationManager;
-	private ShareService $service;
+	private EncryptService&MockObject            $encryptService;
+	private IManager&MockObject                  $notificationManager;
+	private ShareService                         $service;
 
 	protected function setUp(): void {
 		parent::setUp();

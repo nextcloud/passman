@@ -28,6 +28,7 @@ namespace OCA\Passman\Tests\Unit\Controller;
 
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Controller\InternalController;
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\NotificationService;
 use OCA\Passman\Tests\Unit\Support\AppConfigMockTrait;
@@ -35,15 +36,15 @@ use OCP\App\IAppManager;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Controller\InternalController::class)]
+#[CoversClass(InternalController::class)]
 class InternalControllerTest extends TestCase {
 	use AppConfigMockTrait;
 
 	private InternalController $controller;
-	private CredentialService $credentialService;
+	private CredentialService  $credentialService;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -63,7 +64,7 @@ class InternalControllerTest extends TestCase {
 	}
 
 	public function testRemind(): void {
-		$this->credentialService->method('getCredentialById')->with(1, 'john')->willReturn(new \OCA\Passman\Db\Credential());
+		$this->credentialService->method('getCredentialById')->with(1, 'john')->willReturn(new Credential());
 		$this->credentialService->method('updateCredentialEntity');
 		$this->controller->remind(1);
 		$this->addToAssertionCount(1);

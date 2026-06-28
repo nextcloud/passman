@@ -34,19 +34,19 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 use OCP\Server;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[Group(name: 'DB')]
-#[CoversClass(\OCA\Passman\Db\ShareRequestMapper::class)]
+#[CoversClass(ShareRequestMapper::class)]
 class ShareRequestMapperTest extends TestCase {
 	use DbTestTrait;
 
 	private const FROM_USER = 'passman_share_from_user';
 	private const TARGET_USER = 'passman_share_target_user';
 
-	private IDBConnection $db;
+	private IDBConnection      $db;
 	private ShareRequestMapper $mapper;
 
 	protected function setUp(): void {
@@ -114,18 +114,18 @@ class ShareRequestMapperTest extends TestCase {
 	public function testGetRequestsByItemGuid(): void {
 		$itemGuid = 'shared-item-' . uniqid('', true);
 		$first = $this->mapper->createRequest($this->buildShareRequest([
-			'setItemGuid' => $itemGuid,
+			'setItemGuid'     => $itemGuid,
 			'setTargetUserId' => self::TARGET_USER,
 		]));
 		$second = $this->mapper->createRequest($this->buildShareRequest([
-			'setItemGuid' => $itemGuid,
+			'setItemGuid'     => $itemGuid,
 			'setTargetUserId' => self::TARGET_USER . '_2',
 		]));
 
 		$results = $this->mapper->getRequestsByItemGuid($itemGuid);
 
 		$this->assertCount(2, $results);
-		$ids = array_map(static fn (ShareRequest $r) => $r->getId(), $results);
+		$ids = array_map(static fn(ShareRequest $r) => $r->getId(), $results);
 		$this->assertContains($first->getId(), $ids);
 		$this->assertContains($second->getId(), $ids);
 	}
@@ -195,7 +195,7 @@ class ShareRequestMapperTest extends TestCase {
 	public function testGetPendingShareRequestsAndUpdatePermissions(): void {
 		$itemGuid = 'pending-item-' . uniqid('', true);
 		$request = $this->mapper->createRequest($this->buildShareRequest([
-			'setItemGuid' => $itemGuid,
+			'setItemGuid'    => $itemGuid,
 			'setPermissions' => 1,
 		]));
 

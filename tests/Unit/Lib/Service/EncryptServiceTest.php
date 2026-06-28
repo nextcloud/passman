@@ -32,10 +32,10 @@ use OCA\Passman\Service\SettingsService;
 use OCA\Passman\Tests\Unit\Support\AppConfigMockTrait;
 use OCP\Config\IUserConfig;
 use OCP\IConfig;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Service\EncryptService::class)]
+#[CoversClass(EncryptService::class)]
 class EncryptServiceTest extends TestCase {
 	use AppConfigMockTrait;
 

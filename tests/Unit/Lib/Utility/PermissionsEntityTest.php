@@ -27,10 +27,10 @@ declare(strict_types=1);
 namespace OCA\Passman\Tests\Unit\Lib\Utility;
 
 use OCA\Passman\Utility\PermissionEntity;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Utility\PermissionEntity::class)]
+#[CoversClass(PermissionEntity::class)]
 class PermissionsEntityTest extends TestCase {
 	protected PermissionEntity $permission;
 

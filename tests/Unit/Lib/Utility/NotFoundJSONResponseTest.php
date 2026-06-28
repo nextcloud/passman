@@ -28,10 +28,10 @@ namespace OCA\Passman\Tests\Unit\Lib\Utility;
 
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\Http;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Utility\NotFoundJSONResponse::class)]
+#[CoversClass(NotFoundJSONResponse::class)]
 class NotFoundJSONResponseTest extends TestCase {
 	public function testOnEmptyResponse(): void {
 		$data = new NotFoundJSONResponse();
@@ -41,7 +41,7 @@ class NotFoundJSONResponseTest extends TestCase {
 
 	public function testOnDataResult(): void {
 		$data = [
-			'field' => 'value',
+			'field'   => 'value',
 			'boolean' => true,
 			'integer' => 21,
 		];

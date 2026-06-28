@@ -32,14 +32,14 @@ use OCA\Passman\Db\File;
 use OCA\Passman\Service\FileService;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Log\LoggerInterface;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(\OCA\Passman\Controller\FileController::class)]
+#[CoversClass(FileController::class)]
 class FileControllerTest extends TestCase {
 	private FileController $controller;
-	private FileService $fileService;
+	private FileService    $fileService;
 
 	protected function setUp(): void {
 		parent::setUp();

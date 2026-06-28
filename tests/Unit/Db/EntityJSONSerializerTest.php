@@ -33,12 +33,12 @@ use Test\TestCase;
 #[CoversNothing]
 class EntityJSONSerializerTest extends TestCase {
 	private const TEST_FIELDS = [
-		'an_string' => 'value',
-		'an_int' => 1234,
-		'a_bool' => true,
-		'null' => null,
-		'a_double' => 4.563,
-		'an_int_array' => [1, 32, 55, 134],
+		'an_string'       => 'value',
+		'an_int'          => 1234,
+		'a_bool'          => true,
+		'null'            => null,
+		'a_double'        => 4.563,
+		'an_int_array'    => [1, 32, 55, 134],
 		'an_string_array' => ['asdf', 'fdsa'],
 	];
 
@@ -67,10 +67,10 @@ class EntityJSONSerializerTestStub {
 	use EntityJSONSerializer;
 
 	public string $an_string;
-	public int $an_int;
-	public bool $a_bool;
-	public mixed $null;
-	public float $a_double;
+	public int    $an_int;
+	public bool   $a_bool;
+	public mixed  $null;
+	public float  $a_double;
 	/** @var list<int> */
 	public array $an_int_array;
 	/** @var list<string> */

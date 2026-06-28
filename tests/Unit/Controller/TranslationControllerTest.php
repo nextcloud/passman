@@ -31,10 +31,10 @@ use OCA\Passman\Controller\TranslationController;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IL10N;
 use OCP\IRequest;
-use Test\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Test\TestCase;
 
-#[CoversClass(\OCA\Passman\Controller\TranslationController::class)]
+#[CoversClass(TranslationController::class)]
 class TranslationControllerTest extends TestCase {
 	private TranslationController $controller;
 

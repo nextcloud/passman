@@ -34,18 +34,18 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
 use OCP\IDBConnection;
 use OCP\Server;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
 #[Group(name: 'DB')]
-#[CoversClass(\OCA\Passman\Db\SharingACLMapper::class)]
+#[CoversClass(SharingACLMapper::class)]
 class SharingACLMapperTest extends TestCase {
 	use DbTestTrait;
 
 	private const TEST_USER = 'passman_acl_mapper_test';
 
-	private IDBConnection $db;
+	private IDBConnection    $db;
 	private SharingACLMapper $mapper;
 
 	protected function setUp(): void {
@@ -107,17 +107,17 @@ class SharingACLMapperTest extends TestCase {
 		$vaultGuid = 'vault-guid-' . uniqid('', true);
 		$first = $this->mapper->createACLEntry($this->buildAcl([
 			'setVaultGuid' => $vaultGuid,
-			'setItemGuid' => 'item-a-' . uniqid('', true),
+			'setItemGuid'  => 'item-a-' . uniqid('', true),
 		]));
 		$second = $this->mapper->createACLEntry($this->buildAcl([
 			'setVaultGuid' => $vaultGuid,
-			'setItemGuid' => 'item-b-' . uniqid('', true),
+			'setItemGuid'  => 'item-b-' . uniqid('', true),
 		]));
 
 		$entries = $this->mapper->getVaultEntries(self::TEST_USER, $vaultGuid);
 
 		$this->assertCount(2, $entries);
-		$ids = array_map(static fn (SharingACL $entry) => $entry->getId(), $entries);
+		$ids = array_map(static fn(SharingACL $entry) => $entry->getId(), $entries);
 		$this->assertContains($first->getId(), $ids);
 		$this->assertContains($second->getId(), $ids);
 	}
@@ -139,17 +139,17 @@ class SharingACLMapperTest extends TestCase {
 		$itemGuid = 'shared-item-' . uniqid('', true);
 		$first = $this->mapper->createACLEntry($this->buildAcl([
 			'setItemGuid' => $itemGuid,
-			'setUserId' => self::TEST_USER,
+			'setUserId'   => self::TEST_USER,
 		]));
 		$second = $this->mapper->createACLEntry($this->buildAcl([
 			'setItemGuid' => $itemGuid,
-			'setUserId' => self::TEST_USER . '_2',
+			'setUserId'   => self::TEST_USER . '_2',
 		]));
 
 		$list = $this->mapper->getCredentialAclList($itemGuid);
 
 		$this->assertCount(2, $list);
-		$ids = array_map(static fn (SharingACL $entry) => $entry->getId(), $list);
+		$ids = array_map(static fn(SharingACL $entry) => $entry->getId(), $list);
 		$this->assertContains($first->getId(), $ids);
 		$this->assertContains($second->getId(), $ids);
 	}

@@ -27,11 +27,11 @@ declare(strict_types=1);
 namespace OCA\Passman\Tests\Unit\Lib\Utility;
 
 use OCA\Passman\Utility\Utils;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(\OCA\Passman\Utility\Utils::class)]
+#[CoversClass(Utils::class)]
 class UtilsTest extends TestCase {
 	public function testGUID(): void {
 		$pattern = '/[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}/';
