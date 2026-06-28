@@ -27,12 +27,19 @@ declare(strict_types=1);
 namespace OCA\Passman\Tests\Unit\Search;
 
 use OCA\Passman\AppInfo\Application;
+use OCA\Passman\Db\CredentialMapper;
+use OCA\Passman\Db\ShareRequestMapper;
+use OCA\Passman\Db\SharingACLMapper;
 use OCA\Passman\Search\Provider;
+use OCA\Passman\Service\CredentialRevisionService;
+use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\SettingsService;
+use OCA\Passman\Service\ShareService;
 use OCP\IDBConnection;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\IUser;
+use OCP\Notification\IManager;
 use OCP\Search\ISearchQuery;
 use OCP\Search\SearchResult;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -51,11 +58,21 @@ class ProviderTest extends TestCase {
 		$settings = $this->createMock(SettingsService::class);
 		$settings->method('getAppSetting')->willReturn(0);
 
+		$shareService = new ShareService(
+			$this->createMock(SharingACLMapper::class),
+			$this->createMock(ShareRequestMapper::class),
+			$this->createMock(CredentialMapper::class),
+			$this->createMock(CredentialRevisionService::class),
+			$this->createMock(EncryptService::class),
+			$this->createMock(IManager::class),
+		);
+
 		$this->provider = new Provider(
 			$l10n,
 			$this->createMock(IURLGenerator::class),
 			$this->createMock(IDBConnection::class),
 			$settings,
+			$shareService
 		);
 	}
 
