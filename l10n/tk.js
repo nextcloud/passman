@@ -22,6 +22,7 @@ OC.L10N.register(
     "Delete" : "Pozmak",
     "Share" : "Paýlaş",
     "Tags" : "Bellikler",
+    "Move" : "Göçüriň",
     "E-mail" : "E-mail",
     "Dismiss" : "Ýapmak.",
     "seconds ago" : "Sekunt öň"

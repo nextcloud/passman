@@ -294,6 +294,7 @@
     "Move credentials from one account to another" : "Mover credenciales de una cuenta a otra",
     "Source account" : "Cuenta fuente",
     "Destination account" : "Cuenta destino",
+    "Move" : "Mover",
     "Credentials moved!" : "¡Se movieron las credenciales!",
     "An error occurred!" : "¡Se presentó un error!",
     "Requests to destroy vault" : "Solicitudes para destruir bóvedas",

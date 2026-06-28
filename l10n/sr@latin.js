@@ -35,8 +35,8 @@ OC.L10N.register(
     "Date" : "Date",
     "Never" : "Nikad",
     "Tags" : "Oznake",
-    "Loading …" : "Učitavanje...",
     "Description" : "Opis",
+    "Move" : "Premesti",
     "E-mail" : "Adresa e-pošte",
     "Dismiss" : "Odbaci",
     "seconds ago" : "pre par sekundi"

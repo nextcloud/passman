@@ -43,6 +43,7 @@ OC.L10N.register(
     "Never" : "Nunquam",
     "Tags" : "Etiquettas",
     "Description" : "Description",
+    "Move" : "Mover",
     "An error occurred!" : "Il occurreva un error!",
     "Dismiss" : "Dimitter",
     "seconds ago" : "secundas passate"

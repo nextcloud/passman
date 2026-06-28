@@ -18,6 +18,7 @@ use OCP\App\IAppManager;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\IAppConfig;
 use OCP\IConfig;
 use OCP\IRequest;
 
@@ -30,6 +31,7 @@ class InternalController extends ApiController {
 		private readonly NotificationService $notificationService,
 		private readonly IConfig $config,
 		private readonly IAppManager $appManager,
+        private readonly IAppConfig $appConfig,
 	) {
 		parent::__construct(
 			$AppName,
@@ -100,12 +102,12 @@ class InternalController extends ApiController {
 	 */
 	public function getSettings() {
 		$settings = [
-			'link_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'link_sharing_enabled', 1)),
-			'user_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'user_sharing_enabled', 1)),
-			'vault_key_strength' => intval($this->config->getAppValue(Application::APP_ID, 'vault_key_strength', 3)),
-			'check_version' => intval($this->config->getAppValue(Application::APP_ID, 'check_version', 1)),
-			'https_check' => intval($this->config->getAppValue(Application::APP_ID, 'https_check', 1)),
-			'disable_contextmenu' => intval($this->config->getAppValue(Application::APP_ID, 'disable_contextmenu', 1)),
+			'link_sharing_enabled' => intval($this->appConfig->getValue(Application::APP_ID, 'link_sharing_enabled', 1)),
+			'user_sharing_enabled' => intval($this->appConfig->getValue(Application::APP_ID, 'user_sharing_enabled', 1)),
+			'vault_key_strength' => intval($this->appConfig->getValue(Application::APP_ID, 'vault_key_strength', 3)),
+			'check_version' => intval($this->appConfig->getValue(Application::APP_ID, 'check_version', 1)),
+			'https_check' => intval($this->appConfig->getValue(Application::APP_ID, 'https_check', 1)),
+			'disable_contextmenu' => intval($this->appConfig->getValue(Application::APP_ID, 'disable_contextmenu', 1)),
 		];
 		return new JSONResponse($settings);
 	}
@@ -117,7 +119,7 @@ class InternalController extends ApiController {
 		if (is_numeric($value)) {
 			$value = intval($value);
 		}
-		$this->config->setAppValue(Application::APP_ID, $key, $value);
+		$this->appConfig->setValue(Application::APP_ID, $key, $value);
 	}
 
 }

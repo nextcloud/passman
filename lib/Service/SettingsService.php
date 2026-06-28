@@ -24,7 +24,8 @@
 namespace OCA\Passman\Service;
 
 use OCA\Passman\AppInfo\Application;
-use OCP\IConfig;
+use OCP\Config\IUserConfig;
+use OCP\IAppConfig;
 
 
 class SettingsService {
@@ -44,20 +45,21 @@ class SettingsService {
 
 	public function __construct(
 		private $userId,
-		private readonly IConfig $config,
 		private $appName,
+        private readonly IAppConfig $appConfig,
+        private readonly IUserConfig $userConfig,
 	) {
 		$this->settings = [
-			'link_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'link_sharing_enabled', 1)),
-			'user_sharing_enabled' => intval($this->config->getAppValue(Application::APP_ID, 'user_sharing_enabled', 1)),
-			'vault_key_strength' => intval($this->config->getAppValue(Application::APP_ID, 'vault_key_strength', 3)),
-			'check_version' => intval($this->config->getAppValue(Application::APP_ID, 'check_version', 1)),
-			'https_check' => intval($this->config->getAppValue(Application::APP_ID, 'https_check', 1)),
-			'disable_contextmenu' => intval($this->config->getAppValue(Application::APP_ID, 'disable_contextmenu', 1)),
-			'server_side_encryption' => $this->config->getAppValue(Application::APP_ID, 'server_side_encryption', 'aes-256-cbc'),
-			'rounds_pbkdf2_stretching' => $this->config->getAppValue(Application::APP_ID, 'rounds_pbkdf2_stretching', 100),
-			'disable_debugger' => $this->config->getAppValue(Application::APP_ID, 'disable_debugger', 1),
-			'enable_global_search' => $this->config->getAppValue(Application::APP_ID, 'enable_global_search', 0),
+			'link_sharing_enabled' => intval($this->appConfig->getValue(Application::APP_ID, 'link_sharing_enabled', 1)),
+			'user_sharing_enabled' => intval($this->appConfig->getValue(Application::APP_ID, 'user_sharing_enabled', 1)),
+			'vault_key_strength' => intval($this->appConfig->getValue(Application::APP_ID, 'vault_key_strength', 3)),
+			'check_version' => intval($this->appConfig->getValue(Application::APP_ID, 'check_version', 1)),
+			'https_check' => intval($this->appConfig->getValue(Application::APP_ID, 'https_check', 1)),
+			'disable_contextmenu' => intval($this->appConfig->getValue(Application::APP_ID, 'disable_contextmenu', 1)),
+			'server_side_encryption' => $this->appConfig->getValue(Application::APP_ID, 'server_side_encryption', 'aes-256-cbc'),
+			'rounds_pbkdf2_stretching' => $this->appConfig->getValue(Application::APP_ID, 'rounds_pbkdf2_stretching', 100),
+			'disable_debugger' => $this->appConfig->getValue(Application::APP_ID, 'disable_debugger', 1),
+			'enable_global_search' => $this->appConfig->getValue(Application::APP_ID, 'enable_global_search', 0),
 			'settings_loaded' => 1
 		];
 	}
@@ -79,7 +81,7 @@ class SettingsService {
 	 * @return mixed
 	 */
 	public function getAppSetting($key, $default_value = null) {
-		$value = $this->settings[$key] ?: $this->config->getAppValue(Application::APP_ID, $key, $default_value);
+		$value = $this->settings[$key] ?: $this->appConfig->getValue(Application::APP_ID, $key, $default_value);
 		if (in_array($key, $this->numeric_settings)) {
 			$value = intval($value);
 		}
@@ -95,7 +97,7 @@ class SettingsService {
 	 */
 	public function setAppSetting($key, $value) {
 		$this->settings[$key] = $value;
-		$this->config->setAppValue(Application::APP_ID, $key, $value);
+		$this->appConfig->setValue(Application::APP_ID, $key, $value);
 	}
 
 	/**
@@ -106,7 +108,7 @@ class SettingsService {
 	 */
 
 	public function setUserSetting($key, $value) {
-		return $this->config->setUserValue($this->userId, $this->appName, $key, $value);
+		return $this->userConfig->setValueString($this->userId, $this->appName, $key, $value);
 	}
 
 	/**

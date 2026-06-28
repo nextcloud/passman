@@ -36,6 +36,7 @@ OC.L10N.register(
     "Accept" : "Prihvati",
     "Decline" : "Odbij",
     "Description" : "Opis",
+    "Move" : "Move",
     "An error occurred!" : "Desila se greška!",
     "Dismiss" : "Dismiss"
 },

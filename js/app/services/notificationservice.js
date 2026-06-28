@@ -30,23 +30,38 @@
  * Service in the passmanApp.
  */
 angular.module('passmanApp')
-	.service('NotificationService', ['$timeout', function ($timeout) {
-		var to ;
+	.service('NotificationService', function () {
+		var DEFAULT_TIMEOUT = 7000;
+
+		function showToast(text, time, closeCallback) {
+			if (typeof OCP === 'undefined' || !OCP.Toast) {
+				console.error('OCP.Toast is not available');
+				return { hideToast: function () {} };
+			}
+
+			var options = {
+				timeout: time || DEFAULT_TIMEOUT,
+			};
+
+			if (closeCallback) {
+				options.onRemove = closeCallback;
+			}
+
+			return OCP.Toast.message(text, options);
+		}
+
 		return {
 			showNotification: function (text, time, closeCallback) {
-				var notification = OC.Notification.showHtml(text);
-				to =$timeout(function () {
-					OC.Notification.hide(notification, closeCallback);
-				}, time);
-				return notification;
+				return showToast(text, time, closeCallback);
 			},
 			hideNotification: function (notification) {
-				$timeout.cancel(to);
-				OC.Notification.hide(notification);
+				if (notification && typeof notification.hideToast === 'function') {
+					notification.hideToast();
+				}
 			},
 			hideAll: function () {
-				OC.Notification.hide();
+				// @nextcloud/dialogs toasts are independent; no global dismiss API
 			}
 		};
-	}]);
+	});
 }());

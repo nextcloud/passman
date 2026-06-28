@@ -1,72 +1,76 @@
 <?php
 
+use OCP\Util;
+
 include_once '_config.php';
 
 /*
  * Javascripts
  */
 /*build-js-start*/
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular/angular.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-animate/angular-animate.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-cookies/angular-cookies.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-resource/angular-resource.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-route/angular-route.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-sanitize/angular-sanitize.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-touch/angular-touch.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-local-storage/angular-local-storage.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-off-click/angular-off-click.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angularjs-datetime-picker/angularjs-datetime-picker.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-translate/angular-translate.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-translate/angular-translate-loader-url.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/ng-password-meter/ng-password-meter');
-script(MyAppTemplateConfig::APP_ID, 'vendor/sjcl/sjcl');
-script(MyAppTemplateConfig::APP_ID, 'vendor/zxcvbn/zxcvbn');
-script(MyAppTemplateConfig::APP_ID, 'vendor/ng-clipboard/clipboard.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/ng-clipboard/ngclipboard');
-script(MyAppTemplateConfig::APP_ID, 'vendor/ng-tags-input/ng-tags-input.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/angular-xeditable/xeditable.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/sha/sha');
-script(MyAppTemplateConfig::APP_ID, 'vendor/llqrcode/llqrcode');
-script(MyAppTemplateConfig::APP_ID, 'vendor/forge.0.6.9.min');
-script(MyAppTemplateConfig::APP_ID, 'vendor/download');
-script(MyAppTemplateConfig::APP_ID, 'vendor/ui-sortable/sortable');
-script(MyAppTemplateConfig::APP_ID, 'vendor/papa-parse/papaparse.min');
-script(MyAppTemplateConfig::APP_ID, 'lib/promise');
-script(MyAppTemplateConfig::APP_ID, 'lib/crypto_wrap');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-3.7.1.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular/angular.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-animate/angular-animate.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-cookies/angular-cookies.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-resource/angular-resource.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-route/angular-route.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-sanitize/angular-sanitize.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-touch/angular-touch.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-local-storage/angular-local-storage.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-off-click/angular-off-click.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angularjs-datetime-picker/angularjs-datetime-picker.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-translate/angular-translate.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-translate/angular-translate-loader-url.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/ng-password-meter/ng-password-meter', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/sjcl/sjcl', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/zxcvbn/zxcvbn', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/ng-clipboard/clipboard.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/ng-clipboard/ngclipboard', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/ng-tags-input/ng-tags-input.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/angular-xeditable/xeditable.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/sha/sha', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/llqrcode/llqrcode', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/forge.0.6.9.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/download', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/ui-sortable/sortable', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/papa-parse/papaparse.min', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/promise', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/crypto_wrap', 'core');
 
 
-script(MyAppTemplateConfig::APP_ID, 'app/app');
-script(MyAppTemplateConfig::APP_ID, 'templates');
-script(MyAppTemplateConfig::APP_ID, 'app/controllers/edit_credential');
-script(MyAppTemplateConfig::APP_ID, 'app/controllers/bookmarklet');
-script(MyAppTemplateConfig::APP_ID, 'app/filters/range');
-script(MyAppTemplateConfig::APP_ID, 'app/filters/propsfilter');
-script(MyAppTemplateConfig::APP_ID, 'app/filters/byte');
-script(MyAppTemplateConfig::APP_ID, 'app/filters/tagfilter');
-script(MyAppTemplateConfig::APP_ID, 'app/filters/escapeHTML');
-script(MyAppTemplateConfig::APP_ID, 'app/filters/as');
-script(MyAppTemplateConfig::APP_ID, 'app/filters/toHHMMSS');
-script(MyAppTemplateConfig::APP_ID, 'app/services/vaultservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/credentialservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/settingsservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/fileservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/encryptservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/tagservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/notificationservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/shareservice');
-script(MyAppTemplateConfig::APP_ID, 'app/services/urlservice');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/passwordgen');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/fileselect');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/progressbar');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/otp');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/qrreader');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/tooltip');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/use-theme');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/credentialfield');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/ngenter');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/autoscroll');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/clickselect');
-script(MyAppTemplateConfig::APP_ID, 'app/directives/colorfromstring');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/app', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'templates', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/controllers/edit_credential', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/controllers/bookmarklet', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/range', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/propsfilter', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/byte', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/tagfilter', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/escapeHTML', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/as', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/toHHMMSS', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/vaultservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/credentialservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/settingsservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/fileservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/encryptservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/tagservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/notificationservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/shareservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/urlservice', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/passwordgen', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/fileselect', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/progressbar', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/otp', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/qrreader', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/tooltip', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/use-theme', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/credentialfield', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/ngenter', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/autoscroll', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/clickselect', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/colorfromstring', 'core');
 /*build-js-end*/
 
 /*
@@ -76,6 +80,7 @@ script(MyAppTemplateConfig::APP_ID, 'app/directives/colorfromstring');
 style(MyAppTemplateConfig::APP_ID, 'vendor/ng-password-meter/ng-password-meter');
 style(MyAppTemplateConfig::APP_ID, 'vendor/bootstrap/bootstrap.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/bootstrap/bootstrap-theme.min');
+style(MyAppTemplateConfig::APP_ID, 'vendor/jquery-ui.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/font-awesome/font-awesome.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/angular-xeditable/xeditable.min');
 style(MyAppTemplateConfig::APP_ID, 'vendor/ng-tags-input/ng-tags-input.min');
@@ -87,7 +92,7 @@ style(MyAppTemplateConfig::APP_ID, 'bookmarklet');
 
 ?>
 
-<div id="app" ng-app="passmanApp" ng-controller="BookmarkletCtrl">
+<div id="app" ng-app="passmanApp" ng-jq="" ng-controller="BookmarkletCtrl">
 	<div class="warning_bar" ng-if="using_http && http_warning_hidden == false">
 		{{ 'http.warning' | translate }}
 		<i class="fa fa-times fa-2x" alt="Close"

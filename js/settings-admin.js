@@ -21,7 +21,42 @@
  */
 
 $(document).ready(function () {
-    const urlPrefix = 'apps/passman';
+	const urlPrefix = 'apps/passman';
+
+	// Token injection logic required for ajax requests with Nextcloud 34+ since they removed their upstream jquery
+	function getRequestToken() {
+		if (typeof OC !== 'undefined' && OC.requestToken) {
+			return OC.requestToken;
+		}
+		if (typeof oc_requesttoken !== 'undefined' && oc_requesttoken) {
+			return oc_requesttoken;
+		}
+		var head = document.head || document.getElementsByTagName('head')[0];
+		return (head && head.dataset.requesttoken) ? head.dataset.requesttoken : '';
+	}
+
+	function getAjaxMethod(options) {
+		return (options.type || options.method || 'GET').toUpperCase();
+	}
+
+	$.ajaxPrefilter(function (options) {
+		var token = getRequestToken();
+		if (!token) {
+			return;
+		}
+
+		var method = getAjaxMethod(options);
+
+		// Nextcloud accepts CSRF via the requesttoken header; avoid mutating POST data
+		// because jQuery expects urlencoded bodies to be strings before sending.
+		options.headers = $.extend({}, options.headers, { requesttoken: token });
+
+		if (method === 'GET' && options.url && options.url.indexOf('requesttoken=') === -1) {
+			options.url += (options.url.indexOf('?') === -1 ? '?' : '&')
+				+ 'requesttoken=' + encodeURIComponent(token);
+		}
+	});
+
 	var Settings = function (baseUrl) {
 		this._baseUrl = baseUrl;
 		this._settings = [];
@@ -83,9 +118,88 @@ $(document).ready(function () {
 		}
 	};
 
+	function initTabs() {
+		var $tabs = $('#passman-tabs');
+
+		function activateTab(tabId) {
+			$tabs.find('.tabHeader').removeClass('selected').attr('aria-selected', 'false');
+			$tabs.find('.tabHeader[data-tab="' + tabId + '"]').addClass('selected').attr('aria-selected', 'true');
+			$tabs.find('.tabsContainer .tab').addClass('hidden');
+			$tabs.find('.tabsContainer .tab[data-tab="' + tabId + '"]').removeClass('hidden');
+		}
+
+		$tabs.find('.tabHeader').on('click', function (event) {
+			event.preventDefault();
+			activateTab($(this).data('tab'));
+		});
+	}
+
+	function initUserSearch(inputId, hiddenId) {
+		var $input = $('#' + inputId);
+		var $hidden = $('#' + hiddenId);
+		var $dropdown = $input.closest('.passman-admin-user-search-wrap').find('.passman-admin-user-dropdown');
+		var searchTimeout;
+
+		$input.on('input', function () {
+			var term = $(this).val().trim();
+			$hidden.val('');
+
+			if (term.length < 1) {
+				$dropdown.empty().addClass('hidden');
+				return;
+			}
+
+			clearTimeout(searchTimeout);
+			searchTimeout = setTimeout(function () {
+				$.getJSON(OC.generateUrl(urlPrefix + '/admin/search'), { term: term }, function (data) {
+					$dropdown.empty();
+
+					if (!data.length) {
+						$dropdown.addClass('hidden');
+						return;
+					}
+
+					$.each(data, function (_, user) {
+						var label = user.label || user.value;
+						var $item = $('<button type="button" class="passman-admin-user-option"></button>')
+							.text(label)
+							.attr('data-value', user.value);
+						$dropdown.append($('<li></li>').append($item));
+					});
+
+					$dropdown.removeClass('hidden');
+				});
+			}, 200);
+		});
+
+		$dropdown.on('click', '.passman-admin-user-option', function () {
+			$input.val($(this).text());
+			$hidden.val($(this).attr('data-value'));
+			$dropdown.empty().addClass('hidden');
+		});
+
+		$(document).on('click.passman-admin-user-search', function (event) {
+			if (!$(event.target).closest('.passman-admin-user-search-wrap').length) {
+				$dropdown.addClass('hidden');
+			}
+		});
+	}
+
+	function showMoveStatus($element) {
+		$('#moveStatusSucceeded, #moveStatusFailed').addClass('hidden');
+		$element.removeClass('hidden');
+		setTimeout(function () {
+			$element.addClass('hidden');
+		}, 3500);
+	}
 
 	var settings = new Settings(OC.generateUrl(urlPrefix + '/api/v2/settings'));
 	settings.load();
+
+	initTabs();
+	initUserSearch('source_account_input', 'source_account');
+	initUserSearch('destination_account_input', 'destination_account');
+
 	// ADMIN SETTINGS
 
 	// fill the boxes
@@ -134,61 +248,33 @@ $(document).ready(function () {
 		$('form[name="passman_settings"]')[1].remove();
 	}
 
-	var accountMover = {
-		'source_account': '',
-		'destination_account': ''
-	};
-	$('.account_mover_selector').select2({
-		ajax: {
-			url: OC.generateUrl(urlPrefix + '/admin/search'),
-			dataType: 'json',
-			delay: 50,
-			data: function (param) {
-				return {
-					term: param
-				};
-			},
-			results: function (data) {
-				var res = [];
-				for (var i = 0; i < data.length; i++) {
-					res.push({
-						id: i,
-						text: data[i].value
-					});
-				}
-				return {
-					results: res
-				};
-			},
-			cache: true
-		},
-		placeholder: 'Search for a user',
-		minimumInputLength: 1
-	});
-
 	$('#move_credentials').click(function () {
 		var self = this;
-		accountMover.source_account = $('#s2id_source_account a .select2-chosen').html();
-		accountMover.destination_account = $('#s2id_destination_account a .select2-chosen').html();
-		$('#moveStatus').hide();
-		$(self).attr('disabled', 'disabled');
-		$(self).html('<i class="fa fa-spinner fa-spin"></i> ' + OC.L10N.translate('passman', 'Moving') + '...');
+		var $button = $(self);
+		var moveLabel = $button.data('label') || $button.text();
+		var accountMover = {
+			source_account: $('#source_account').val(),
+			destination_account: $('#destination_account').val()
+		};
+
+		$('#moveStatusSucceeded, #moveStatusFailed').addClass('hidden');
+		$button.prop('disabled', true);
+		$button.text(OC.L10N.translate('passman', 'Moving') + '...');
+
 		if (accountMover.source_account && accountMover.destination_account) {
 			$.post(OC.generateUrl(urlPrefix + '/admin/move'), accountMover, function (data) {
-				$(self).removeAttr('disabled');
-				$(self).html('Move');
+				$button.prop('disabled', false);
+				$button.text(moveLabel);
 				if (data.success) {
-					$('#moveStatusSucceeded').fadeIn();
-					setTimeout(function () {
-						$('#moveStatusSucceeded').fadeOut();
-					}, 3500);
+					showMoveStatus($('#moveStatusSucceeded'));
 				} else {
-					$('#moveStatusFailed').fadeIn();
-					setTimeout(function () {
-						$('#moveStatusFailed').fadeOut();
-					}, 3500);
+					showMoveStatus($('#moveStatusFailed'));
 				}
 			});
+		} else {
+			$button.prop('disabled', false);
+			$button.text(moveLabel);
+			showMoveStatus($('#moveStatusFailed'));
 		}
 	});
 
@@ -225,7 +311,7 @@ $(document).ready(function () {
 			return;
 		}
 		$.post(OC.generateUrl(urlPrefix + '/admin/accept-delete-request'), req, function () {
-			$(el).parent().parent().remove();
+			$(el).closest('tr').remove();
 		});
 	}
 
@@ -234,7 +320,7 @@ $(document).ready(function () {
 			url: OC.generateUrl(urlPrefix + '/admin/request-deletion/' + req.vault_guid),
 			type: 'DELETE',
 			success: function () {
-				$(el).parent().parent().remove();
+				$(el).closest('tr').remove();
 			}
 		});
 	}
@@ -242,23 +328,21 @@ $(document).ready(function () {
 	$.get(OC.generateUrl(urlPrefix + '/admin/delete-requests'), function (requests) {
 		var table = $('#requests-table tbody');
 		$.each(requests, function (k, request) {
-			var accept = $('<span class="link accept">[Accept]&nbsp;</span>');
+			var accept = $('<button type="button" class="passman-admin-action passman-admin-action--accept"></button>')
+				.text(OC.L10N.translate('passman', 'Accept'));
 			accept.click(function () {
-				var _self = this;
-				acceptDeleteRequest(_self, request);
+				acceptDeleteRequest(this, request);
 			});
 
-			var ignore = $('<span class="link ignore">[Ignore]</span>');
+			var ignore = $('<button type="button" class="passman-admin-action passman-admin-action--ignore"></button>')
+				.text(OC.L10N.translate('passman', 'Ignore'));
 			ignore.click(function () {
-				var _self = this;
-				ignoreDeleteRequest(_self, request);
+				ignoreDeleteRequest(this, request);
 			});
 
 			var cols = $('<td>' + request.id + '</td><td>' + request.displayName + '</td><td>' + request.reason + '</td><td>' + format_date(request.created * 1000 )+ '</td>');
-			var actions = $('<td></td>').append(accept).append(ignore);
+			var actions = $('<td class="passman-admin-table-actions"></td>').append(accept).append(ignore);
 			table.append($('<tr></tr>').append(cols).append(actions));
 		});
 	});
-
-	$('#passman-tabs').tabs();
 });

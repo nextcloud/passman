@@ -57,7 +57,6 @@ OC.L10N.register(
     "Logout" : "Teken af",
     "Donate" : "Skenk",
     "Tags" : "Etikette",
-    "Loading …" : "Laai …",
     "email" : "e-pos",
     "Description" : "Beskrywing",
     "Passman" : "Passman",

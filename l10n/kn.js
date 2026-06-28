@@ -30,6 +30,7 @@ OC.L10N.register(
     "Delete" : "﻿ಅಳಿಸಿ",
     "Share" : "﻿ಹಂಚಿಕೊಳ್ಳಿ",
     "Date" : "Date",
+    "Move" : "Move",
     "An error occurred!" : "ದೋಷ ಕಂಡುಬಂದಿದೆ!",
     "Dismiss" : "Dismiss"
 },

@@ -16,3 +16,8 @@ launch_phpunit.sh
 
 # since we are using only dev dependencies atm, we can exclude it from polluting the repo
 composer.lock
+
+# PHPUnit
+/tests/Unit/.phpunit.cache
+/tests/Unit/.phpunit.result.cache
+/build/php-unit.clover

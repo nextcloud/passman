@@ -40,8 +40,8 @@ OC.L10N.register(
     "Accept" : "Derbyn",
     "Decline" : "Gwrthod",
     "Tags" : "Tagiau",
-    "Loading …" : "Yn llwytho …",
     "Description" : "Disgrifiad",
+    "Move" : "Symud",
     "An error occurred!" : "Digwyddodd gwall!",
     "Dismiss" : "Dismiss",
     "seconds ago" : "eiliad yn ôl"

@@ -33,6 +33,7 @@ OC.L10N.register(
     "Date" : "Date",
     "Never" : "Երբեք",
     "Description" : "Նկարագրություն",
+    "Move" : "Տեղափոխել",
     "An error occurred!" : "Սխալ պատահեց",
     "Dismiss" : "Dismiss",
     "seconds ago" : "վրկ. առաջ"

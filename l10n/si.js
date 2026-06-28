@@ -34,7 +34,7 @@ OC.L10N.register(
     "Date" : "දිනය",
     "Accept" : "පිළිගන්න",
     "Decline" : "ප්‍රතික්ෂේප",
-    "Loading …" : "පූරණය වෙමින් …",
+    "Loading" : "පූරණය වෙමින්",
     "Description" : "විස්තරය",
     "E-mail" : "විද්‍යුත් තැපෑල",
     "Dismiss" : "Dismiss",

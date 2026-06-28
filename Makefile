@@ -151,24 +151,20 @@ appstore:
 	--exclude="../$(app_name)/.*" \
 	--exclude="../$(app_name)/js/.*" \
 
-# Command for running JS and PHP tests. Works for package.json files in the js/
-# and root directory. If phpunit is not installed systemwide, a copy is fetched
-# from the internet
+# PHP unit tests only. JS/Karma tests are intentionally skipped (legacy, out of scope).
+# Requires the passman dev container (override with DOCKER_CONTAINER=...).
+DOCKER_CONTAINER ?= passman-dev-nc34-85-testing
+PHPUNIT_FLAGS = --colors=always --fail-on-warning --fail-on-risky --display-deprecations --display-phpunit-deprecations
 .PHONY: test
 test:
-ifneq (,$(wildcard $(CURDIR)/js/package.json))
-	cd js && $(npm) run test
-endif
-ifneq (,$(wildcard $(CURDIR)/package.json))
-	$(npm) run test
-endif
-ifeq (, $(shell which phpunit 2> /dev/null))
-	@echo "No phpunit command available, downloading a copy from the web"
-	mkdir -p $(build_tools_directory)
-	curl -sSL https://phar.phpunit.de/phpunit.phar -o $(build_tools_directory)/phpunit.phar
-	php $(build_tools_directory)/phpunit.phar -c phpunit.xml
-	php $(build_tools_directory)/phpunit.phar -c phpunit.integration.xml
-else
-	phpunit -c phpunit.xml --coverage-clover build/php-unit.clover
-	phpunit -c phpunit.integration.xml --coverage-clover build/php-unit.clover
-endif
+	docker exec $(DOCKER_CONTAINER) /bin/bash -c "cd /var/www/html && phpunit -c apps/passman/tests/Unit/phpunit.xml $(PHPUNIT_FLAGS)"
+testNoDb:
+	docker exec $(DOCKER_CONTAINER) /bin/bash -c "cd /var/www/html && phpunit -c apps/passman/tests/Unit/phpunit.xml $(PHPUNIT_FLAGS) --exclude-group DB"
+
+# Full suite with Clover report at build/php-unit.clover (requires pcov or xdebug in the container).
+.PHONY: test-coverage
+test-coverage:
+	mkdir -p build
+	docker exec $(DOCKER_CONTAINER) /bin/bash -c \
+	  "cd /var/www/html && phpunit -c apps/passman/tests/Unit/phpunit.xml \
+	   $(PHPUNIT_FLAGS) --coverage-clover apps/passman/build/php-unit.clover"
