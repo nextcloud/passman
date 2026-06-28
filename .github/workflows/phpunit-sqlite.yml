@@ -8,13 +8,15 @@
 
 name: PHPUnit SQLite
 
-on: pull_request
+on:
+  push:
+  pull_request:
 
 permissions:
   contents: read
 
 concurrency:
-  group: phpunit-sqlite-${{ github.head_ref || github.run_id }}
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -59,6 +61,7 @@ jobs:
               - '.php-cs-fixer.dist.php'
               - 'composer.json'
               - 'composer.lock'
+              - 'sonar-project.properties'
 
   phpunit-sqlite:
     runs-on: ubuntu-latest
@@ -138,6 +141,14 @@ jobs:
         working-directory: apps/${{ env.APP_NAME }}
         run: composer run test
 
+      - name: Upload coverage report
+        if: github.event_name == 'pull_request' && strategy.job-index == 0 && steps.check_phpunit.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: php-unit-clover
+          path: apps/${{ env.APP_NAME }}/build/php-unit.clover
+          if-no-files-found: error
+
       - name: Skipped
         if: steps.check_phpunit.outcome == 'failure'
         run: |
@@ -156,4 +167,12 @@ jobs:
 
     steps:
       - name: Summary status
-        run: if ${{ needs.changes.outputs.src != 'false' && needs.phpunit-sqlite.result != 'success' }}; then exit 1; fi
+        run: |
+          if [ "${{ needs.changes.outputs.src }}" = "false" ]; then
+            echo "No relevant changes detected, skipping."
+            exit 0
+          fi
+          if [ "${{ needs.phpunit-sqlite.result }}" != "success" ]; then
+            echo "PHPUnit job failed or was cancelled."
+            exit 1
+          fi
