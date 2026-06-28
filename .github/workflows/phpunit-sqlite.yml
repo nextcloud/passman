@@ -1,0 +1,178 @@
+# This workflow is provided via the organization template repository
+#
+# https://github.com/nextcloud/.github
+# https://docs.github.com/en/actions/learn-github-actions/sharing-workflows-with-your-organization
+#
+# SPDX-FileCopyrightText: 2022-2024 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: MIT
+
+name: PHPUnit SQLite
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest-low
+    outputs:
+      php-version: ${{ steps.versions.outputs.php-available-list }}
+      server-max: ${{ steps.versions.outputs.branches-max-list }}
+    steps:
+      - name: Checkout app
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Get version matrix
+        id: versions
+        uses: icewind1991/nextcloud-version-matrix@v1.3.2
+
+  changes:
+    runs-on: ubuntu-latest-low
+    permissions:
+      contents: read
+      pull-requests: read
+
+    outputs:
+      src: ${{ steps.changes.outputs.src}}
+
+    steps:
+      - uses: dorny/paths-filter@v4
+        id: changes
+        continue-on-error: true
+        with:
+          filters: |
+            src:
+              - '.github/workflows/**'
+              - 'appinfo/**'
+              - 'lib/**'
+              - 'templates/**'
+              - 'tests/**'
+              - 'vendor/**'
+              - 'vendor-bin/**'
+              - '.php-cs-fixer.dist.php'
+              - 'composer.json'
+              - 'composer.lock'
+              - 'sonar-project.properties'
+
+  phpunit-sqlite:
+    runs-on: ubuntu-latest
+
+    needs: [changes, matrix]
+    if: needs.changes.outputs.src != 'false'
+
+    strategy:
+      matrix:
+        php-versions: ${{ fromJson(needs.matrix.outputs.php-version) }}
+        server-versions: ${{ fromJson(needs.matrix.outputs.server-max) }}
+
+    name: SQLite PHP ${{ matrix.php-versions }} Nextcloud ${{ matrix.server-versions }}
+
+    steps:
+      - name: Set app env
+        if: ${{ env.APP_NAME == '' }}
+        run: |
+          # Split and keep last
+          echo "APP_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+
+      - name: Checkout server
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+          submodules: true
+          repository: nextcloud/server
+          ref: ${{ matrix.server-versions }}
+
+      - name: Checkout app
+        uses: actions/checkout@v7.0.0
+        with:
+          persist-credentials: false
+          path: apps/${{ env.APP_NAME }}
+
+      - name: Set up php ${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@2.37.2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: bz2, ctype, curl, dom, fileinfo, gd, iconv, intl, json, libxml, mbstring, openssl, pcntl, posix, session, simplexml, xmlreader, xmlwriter, zip, zlib, sqlite, pdo_sqlite
+          coverage: pcov
+          ini-file: development
+          ini-values: disable_functions=
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check composer file existence
+        id: check_composer
+        uses: andstor/file-existence-action@v3.1.0
+        with:
+          files: apps/${{ env.APP_NAME }}/composer.json
+
+      - name: Set up dependencies
+        if: steps.check_composer.outputs.files_exists == 'true'
+        working-directory: apps/${{ env.APP_NAME }}
+        run: |
+          composer remove nextcloud/ocp --dev --no-scripts || true
+          composer i
+
+      - name: Set up Nextcloud
+        env:
+          DB_PORT: 4444
+        run: |
+          mkdir data
+          ./occ maintenance:install --verbose --database=sqlite --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass admin
+          ./occ app:enable --force ${{ env.APP_NAME }}
+
+      - name: Check PHPUnit script is defined
+        id: check_phpunit
+        continue-on-error: true
+        working-directory: apps/${{ env.APP_NAME }}
+        run: |
+          composer run --list | grep '^  test ' | wc -l | grep 1
+
+      - name: PHPUnit
+        if: steps.check_phpunit.outcome == 'success'
+        working-directory: apps/${{ env.APP_NAME }}
+        run: composer run test
+
+      - name: Upload coverage report
+        if: github.event_name == 'pull_request' && strategy.job-index == 0 && steps.check_phpunit.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: php-unit-clover
+          path: apps/${{ env.APP_NAME }}/build/php-unit.clover
+          if-no-files-found: error
+
+      - name: Skipped
+        if: steps.check_phpunit.outcome == 'failure'
+        run: |
+          echo 'PHPUnit test script is not specified in composer.json'
+          exit 1
+
+  summary:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest-low
+    needs: [changes, phpunit-sqlite]
+
+    if: always()
+
+    name: phpunit-sqlite-summary
+
+    steps:
+      - name: Summary status
+        run: |
+          if [ "${{ needs.changes.outputs.src }}" = "false" ]; then
+            echo "No relevant changes detected, skipping."
+            exit 0
+          fi
+          if [ "${{ needs.phpunit-sqlite.result }}" != "success" ]; then
+            echo "PHPUnit job failed or was cancelled."
+            exit 1
+          fi

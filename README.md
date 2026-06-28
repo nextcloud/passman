@@ -134,7 +134,7 @@ If you want a production-ready container, use the [Nextcloud Docker](https://hub
   * CSS uses SASS, so Ruby and SASS must be installed.
   * `templates.js` and the CSS are built with `grunt`.
   * Watch for changes using `grunt watch`.
-  * Run unit tests — Install phpunit globally, setup environment variables in the `launch_phpunit.sh` script, and run the script. All arguments passed to `launch_phpunit.sh` are forwarded to phpunit.
+  * Run PHP unit tests in the dev container: `make test` (full suite) or `make testNoDb` (without DB group). Generate a Clover coverage report with `make test-coverage` (requires pcov or xdebug in the container). Customize container name with like `DOCKER_CONTAINER=passman-dev-latest-testing make test` (override with your own container name).
 
 ## Main developers
   * Brantje
