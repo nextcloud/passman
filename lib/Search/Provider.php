@@ -4,6 +4,7 @@
  *
  * @copyright Copyright (c) 2016, Sander Brand (brantje@gmail.com)
  * @copyright Copyright (c) 2016, Marcos Zuriaga Miguel (wolfi@wolfi.es)
+ * @copyright 2026 Timo Triebensky (timo@binsky.org)
  * @license GNU AGPL version 3 or any later version
  *
  * This program is free software: you can redistribute it and/or modify
@@ -27,6 +28,7 @@ use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\VaultMapper;
 use OCA\Passman\Service\SettingsService;
+use OCA\Passman\Service\ShareService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -47,6 +49,7 @@ class Provider implements IProvider {
 		private readonly IURLGenerator $urlGenerator,
 		private readonly IDBConnection $db,
 		private readonly SettingsService $settings,
+		private readonly ShareService $shareService,
 	) {
 
 	}
@@ -79,7 +82,6 @@ class Provider implements IProvider {
 			foreach ($vaults as $vault) {
 				try {
 					$credentials = $credentialMapper->getCredentialsByVaultId($vault->getId(), $vault->getUserId());
-
 					foreach ($credentials as $credential) {
 						if (str_contains($credential->getLabel(), $query->getTerm())) {
 							try {
@@ -96,6 +98,28 @@ class Provider implements IProvider {
 									)
 								);
 							} catch (\Exception) {
+							}
+						}
+					}
+
+					$sharedCredentials = $this->shareService->getSharedItems($vault->getUserId(), $vault->getGuid());
+					foreach ($sharedCredentials as $sharedCredential) {
+						if (str_contains($sharedCredential['credential_data']['label'], $query->getTerm())) {
+							try {
+								$searchResultEntries[] = new SearchResultEntry(
+									$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),
+									$sharedCredential['credential_data']['label'],
+									\sprintf("Shared with Passman vault %s", $vault->getName()),
+									sprintf(
+										"%s#/vault/%s?show=%s&showv=%s",
+										$this->urlGenerator->linkToRoute(Application::APP_ID . '.Page.index'),
+										$vault->getGuid(),
+										$sharedCredential['credential_data']['guid'],
+										$vault->getGuid()	// need to pass vault guid again, to preserve it if credential.js rewrites path to /
+									)
+								);
+							} catch (\Exception) {
+								// just prevent breaking the search in case of (like) decryption errors
 							}
 						}
 					}
