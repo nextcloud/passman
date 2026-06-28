@@ -48,6 +48,7 @@ OC.L10N.register(
     "Donate" : "Donér",
     "Tags" : "Emneord",
     "Description" : "Skildring",
+    "Move" : "Move",
     "An error occurred!" : "Ein feil oppstod!",
     "E-mail" : "E-post",
     "Saving …" : "Lagrar …",

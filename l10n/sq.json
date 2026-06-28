@@ -291,6 +291,7 @@
     "Move credentials from one account to another" : "Lëvizi kredencialet nga një llogari te tjetra",
     "Source account" : "Llogaria burim",
     "Destination account" : "Llogaria destinacion",
+    "Move" : "Zhvendos",
     "Credentials moved!" : "Kredencialet u lëvizën!",
     "An error occurred!" : "Ndodhi një gabim!",
     "Requests to destroy vault" : "Kërkesa për të shkatërruar kasafortën",

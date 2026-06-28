@@ -31,6 +31,7 @@ OC.L10N.register(
     "Share" : "Kongsi",
     "Date" : "Date",
     "Description" : "Keterangan",
+    "Move" : "Move",
     "An error occurred!" : "Ralat berlaku!",
     "Dismiss" : "Dismiss"
 },

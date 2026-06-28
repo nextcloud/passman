@@ -142,7 +142,6 @@ OC.L10N.register(
     "Show All" : "Amosar too",
     "Tags" : "Etiquetes",
     "Expired" : "Caducó",
-    "Loading …" : "Cargando…",
     "Description" : "Descripción",
     "Unable to get version info" : "Nun ye posible consiguir la información de la versión",
     "Passwords" : "Contraseñes",

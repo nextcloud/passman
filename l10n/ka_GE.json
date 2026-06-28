@@ -295,6 +295,7 @@
     "Move credentials from one account to another" : "უფლებამოსილებების ერთი ანგარიშიდან მეორეზე გადატანა",
     "Source account" : "საწყისი ანგარიში",
     "Destination account" : "დანიშნულების ანგარიში",
+    "Move" : "გადატანა",
     "Credentials moved!" : "უფლებამოსილებები გადატანილია!",
     "An error occurred!" : "დაფიქსირდა შეცდომა!",
     "Requests to destroy vault" : "მოთხოვნები სეიფის გაუქმებაზე",

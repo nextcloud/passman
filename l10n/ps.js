@@ -19,6 +19,7 @@ OC.L10N.register(
     "Share" : "شریکول",
     "Tags" : "نښکې",
     "email" : "ايمیل",
+    "Move" : "انتقال",
     "Dismiss" : "Dismiss"
 },
 "nplurals=2; plural=(n != 1);");

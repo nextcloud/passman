@@ -25,6 +25,7 @@ OC.L10N.register(
     "Delete" : "Sguab às",
     "Share" : "Co-roinn",
     "Tags" : "Tagaichean",
+    "Move" : "Gluais",
     "Dismiss" : "Leig seachad",
     "seconds ago" : "diog air ais"
 },

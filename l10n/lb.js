@@ -36,6 +36,7 @@ OC.L10N.register(
     "Date" : "Date",
     "Tags" : "Tags",
     "Description" : "Beschreiwung",
+    "Move" : "Verschieben",
     "Connection to server lost" : "Verbindung zum Server verluer",
     "Dismiss" : "Ofbriechen",
     "seconds ago" : "Sekonnen hier"

@@ -39,6 +39,7 @@ OC.L10N.register(
     "Date" : "Date",
     "Tags" : "ট্যাগ",
     "Description" : "বিবরণ",
+    "Move" : "Move",
     "An error occurred!" : "সমস্যা দেখা দিয়েছে !",
     "Dismiss" : "Dismiss",
     "seconds ago" : "সেকেন্ড পূর্বে"

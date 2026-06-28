@@ -23,6 +23,7 @@ OC.L10N.register(
     "Share" : "تقسیم",
     "Date" : "Date",
     "Description" : "تصریح",
+    "Move" : "Move",
     "An error occurred!" : "ایک خرابی واقع ہوئی!",
     "Dismiss" : "Dismiss",
     "seconds ago" : "سیکنڈز پہلے"
