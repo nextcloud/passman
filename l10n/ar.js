@@ -359,6 +359,7 @@ OC.L10N.register(
     "Source account" : "حساب المصدر",
     "Search for a user" : "البحث عن مستخدِم",
     "Destination account" : "حساب الوجهة",
+    "Move" : "نقل",
     "Credentials moved!" : "تم نقل بيانات الاعتماد!",
     "An error occurred!" : "حدث خطأ!",
     "Requests to destroy vault" : "طلبات لتدمير الخزينة",

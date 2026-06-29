@@ -48,6 +48,7 @@ OC.L10N.register(
     "Tags" : "Işarələr",
     "Description" : "Açıqlanma",
     "Passwords" : "Parollar",
+    "Move" : "Move",
     "An error occurred!" : "Səhv baş verdi!",
     "Dismiss" : "Rədd et",
     "seconds ago" : "saniyələr öncə"

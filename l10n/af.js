@@ -60,6 +60,7 @@ OC.L10N.register(
     "email" : "e-pos",
     "Description" : "Beskrywing",
     "Passman" : "Passman",
+    "Move" : "Skuif",
     "E-mail" : "E-pos",
     "Connection to server lost" : "Verbinding met bediener verloor",
     "Saving …" : "Word gestoor …",
