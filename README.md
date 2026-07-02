@@ -7,23 +7,23 @@ Passman is a full featured, open source password manager for Nextcloud.
 Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_general) to participate in all sorts of topical discussions about Passman and its apps!
 
 ## Contents
-  * [Features](https://github.com/nextcloud/passman#features)
-  * [External apps](https://github.com/nextcloud/passman#external-apps)
-  * [Screenshots](https://github.com/nextcloud/passman#screenshots)
-  * [Database Compatibility](https://github.com/nextcloud/passman#database-compatibility)
-  * [Security](https://github.com/nextcloud/passman#security)
-    * [Password generation](https://github.com/nextcloud/passman#password-generation)
-    * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
-  * [API](https://github.com/nextcloud/passman#api)
-  * [Docker](https://github.com/nextcloud/passman#docker)
-  * [Development](https://github.com/nextcloud/passman#development)
-  * [Support Passman](https://github.com/nextcloud/passman#support-passman)
-  * [Contributing](https://github.com/nextcloud/passman#contributing)
+  * [Features](#features)
+  * [External apps](#external-apps)
+  * [Screenshots](#screenshots)
+  * [Database Compatibility](#database-compatibility)
+  * [Security](#security)
+    * [Password generation](#password-generation)
+    * [Storing credentials](#storing-credentials)
+  * [API](#api)
+  * [Docker](#docker)
+  * [Development](#development)
+  * [Support Passman](#support-passman)
+  * [Contributing](#contributing)
 
 ## Features
 * Multiple vaults
 * Vault keys are never sent to the server
-* 256-bit AES-encrypted credentials (see [security](https://github.com/nextcloud/passman#security))
+* 256-bit AES-encrypted credentials (see [security](#security))
 * User-defined custom credentials fields
 * Built-in OTP (One Time Password) generator
 * Password analyzer
@@ -41,7 +41,7 @@ Try a Passman demo [here](https://demo.passman.cc).
 
 ## External apps
 ### Android app
-Our native [Passman Android](https://github.com/nextcloud/passman-android) app is available for download from the [Google Play Store](https://play.google.com/store/apps/details?id=com.nextcloud.passman), [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/es.wolfi.app.passman) and [F-Droid](https://f-droid.org/app/es.wolfi.app.passman).
+Our native [Passman Android](https://github.com/nextcloud/passman-android) app is available for download from the [Google Play Store](https://play.google.com/store/apps/details?id=es.wolfi.app.passman.alpha), [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/es.wolfi.app.passman) and [F-Droid](https://f-droid.org/app/es.wolfi.app.passman).
 
 ### Browser extension
 [The legacy Firefox / Chrome extension](https://github.com/nextcloud/passman-webextension) is the "old-stable", but **not maintained** and no longer available in the Chrome Web Store since it's MV2 based.
