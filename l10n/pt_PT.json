@@ -141,6 +141,7 @@
     "Offline attack, slow hash, many cores" : "Ataque off-line, hash lento, muitos núcleos",
     "10B/second" : "10B/segundo",
     "Offline attack, fast hash, many cores" : "Ataque off-line, hash rápido, muitos núcleos",
+    "Pattern" : "Padrão",
     "Dictionary name" : "Nome do dicionário",
     "Rank" : "Classificação",
     "Base guesses" : "Suposições básicas",
