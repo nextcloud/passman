@@ -1,85 +1,85 @@
 # Passman
-Passman is a full featured password manager.
+Passman is a full featured, open source password manager for Nextcloud.
 
-[![Build Status](https://travis-ci.org/nextcloud/passman.svg?branch=master)](https://travis-ci.org/nextcloud/passman)
-[![Docker Automated buid](https://img.shields.io/docker/build/brantje/passman.svg)](hub.docker.com/r/brantje/passman/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nextcloud/passman&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/749bb288c9fd4592a73056549d44a85e)](https://www.codacy.com/app/brantje/passman?utm_source=github.com&utm_medium=referral&utm_content=nextcloud/passman&utm_campaign=Badge_Coverage)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nextcloud/passman/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nextcloud/passman/?branch=master)
+[![PHPUnit SQLite](https://github.com/nextcloud/passman/actions/workflows/phpunit-sqlite.yml/badge.svg)](https://github.com/nextcloud/passman/actions/workflows/phpunit-sqlite.yml)
 
 ## Join us!
 Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_general) to participate in all sorts of topical discussions about Passman and its apps!
 
 ## Contents
-  * [Screenshots](https://github.com/nextcloud/passman#Screenshots) 
-  * [Features](https://github.com/nextcloud/passman#features) 
-  * [External apps](https://github.com/nextcloud/passman#external-apps)
-  * [Security](https://github.com/nextcloud/passman#security)
-    * [Password generation](https://github.com/nextcloud/passman#password-generation)
-    * [Storing credentials](https://github.com/nextcloud/passman#storing-credentials)
-  * [Support passman](https://github.com/nextcloud/passman#support-passman)
-  * [Development](https://github.com/nextcloud/passman#development)
-  * [API](https://github.com/nextcloud/passman#api)
-  * [Docker](https://github.com/nextcloud/passman#docker)
-  * [Maintainers](https://github.com/nextcloud/passman#main-developers)
-  * [Contributors](https://github.com/nextcloud/passman#contributors)
+  * [Features](#features)
+  * [External apps](#external-apps)
+  * [Screenshots](#screenshots)
+  * [Database Compatibility](#database-compatibility)
+  * [Security](#security)
+    * [Password generation](#password-generation)
+    * [Storing credentials](#storing-credentials)
+  * [API](#api)
+  * [Docker](#docker)
+  * [Development](#development)
+  * [Support Passman](#support-passman)
+  * [Contributing](#contributing)
+
+## Features
+* Multiple vaults
+* Vault keys are never sent to the server
+* 256-bit AES-encrypted credentials (see [security](#security))
+* User-defined custom credentials fields
+* Built-in OTP (One Time Password) generator
+* Password analyzer
+* Securely share passwords internally and via link
+* Import from various password managers:
+	- KeePass
+	- LastPass
+	- DashLane
+	- ZOHO
+	- Clipperz.is
+	- EnPass
+	- [ocPasswords](https://github.com/fcturner/passwords)
+
+Try a Passman demo [here](https://demo.passman.cc).
+
+## External apps
+### Android app
+Our native [Passman Android](https://github.com/nextcloud/passman-android) app is available for download from the [Google Play Store](https://play.google.com/store/apps/details?id=es.wolfi.app.passman.alpha), [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/es.wolfi.app.passman) and [F-Droid](https://f-droid.org/app/es.wolfi.app.passman).
+
+### Browser extension
+[The legacy Firefox / Chrome extension](https://github.com/nextcloud/passman-webextension) is the "old-stable", but **not maintained** and no longer available in the Chrome Web Store since it's MV2 based.
+
+A [follow-up extension](https://github.com/nextcloud/passman-webextension-mv3) is in active development and **currently considered unstable**. It's available but in open beta / development phase.
 
 ## Screenshots
-![Logged in to vault](http://i.imgur.com/ciShQZg.png)   
+![Logged in to vault](http://i.imgur.com/ciShQZg.png)
 
-![Credential selected](http://i.imgur.com/3tENldT.png)   
+![Credential selected](http://i.imgur.com/3tENldT.png)
 
-![Edit credential](http://i.imgur.com/Iwm3hUe.png)   
+![Edit credential](http://i.imgur.com/Iwm3hUe.png)
 
 ![Password tool](http://i.imgur.com/ZYkN70r.png)
 
-For more screenshots: [Click here](http://imgur.com/a/giKVt)
-
-## Features:
-  * Multiple vaults
-  * Vault keys are never sent to the server
-  * 256-bit AES-encrypted credentials (see [security](https://github.com/nextcloud/passman#security))
-  * User-defined custom credentials fields
-  * Built-in OTP (One Time Password) generator
-  * Password analyzer
-  * Securely share passwords internally and via link
-  * Import from various password managers:
-    - KeePass
-    - LastPass
-    - DashLane
-    - ZOHO
-    - Clipperz.is
-    - EnPass
-    - [ocPasswords](https://github.com/fcturner/passwords)
-  
-Try a Passman demo [here](https://demo.passman.cc).
-
-## Tested on
-- Nextcloud 14
-
-For older Versions see the [Releases Tab](https://github.com/nextcloud/passman/releases)
-
-## External apps
-  * [Firefox / chrome extension](https://github.com/nextcloud/passman-webextension)
-  * [Android app](https://github.com/nextcloud/passman-android)
+More screenshots are available on the [Nextcloud App Store](https://apps.nextcloud.com/apps/passman) and [imgur](http://imgur.com/a/giKVt).
 
 ## Database Compatibility
 
-|   | Supported | Tested | Untested |
-| :--- | :---: | :---: | :---: |
-| SQL Lite | • |   |   |
-| MySQL / MariaDB | • |   |   |
-| travis |   | • |   |
-| pgsql | • |   |   |
+|                 | Supported |
+|:----------------|:---------:|
+| SQLite          |     •     |
+| MySQL / MariaDB |     •     |
+| PostgreSQL      |     •     |
+
+CI runs PHPUnit against SQLite on GitHub Actions.
 
 ## Security
 
 ### Password generation
-Passman can generate passwords *and* measure their strength using [zxcvbn](https://github.com/dropbox/zxcvbn).   
-![](http://i.imgur.com/2qVBUfM.png)   
+Passman can generate passwords *and* measure their strength using [zxcvbn](https://github.com/dropbox/zxcvbn).
 
-Generate passwords as you like   
-![](http://i.imgur.com/jcRicOV.png)   
+![](https://i.imgur.com/2qVBUfM.png)
+
+Generate passwords as you like.
+
+![](https://i.imgur.com/jcRicOV.png)
+
 Passwords are generated using `sjcl` randomization.
 
 ### Storing credentials
@@ -95,57 +95,64 @@ You supply a vault key which sjcl uses to encrypt your credentials. Your encrypt
 ### Sharing credentials
 Passman allows users to share passwords. *(Administrators may disable this feature.)*
 
-## API 
+## API
 Passman offers a [developer API](https://github.com/nextcloud/passman/wiki/API).
-
-## Support Passman
-Passman is open source but we’ll gladly accept a beer *or pizza!* Please consider donating:
-  * [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6YS8F97PETVU2)
-  * [Patreon](https://www.patreon.com/user?u=4833592)
-  * [Flattr](https://flattr.com/@passman)
-  * bitcoin: 1H2c5tkGX54n48yEtM4Wm4UrAGTW85jQpe
-
-## Code reviews
-If you have any code improvements:
-  * Clone us
-  * Make your edits
-  * Add your name to the contributors
-  * Send a [PR](https://github.com/nextcloud/passman/pulls)
-
-Or, if you’re feeling lazy, create an issue and we’ll think about it.
+Unfortunately it is very outdated and not maintained. You're welcome to update it.
 
 ## Docker
-To run Passman with [Docker](https://www.docker.com/), use our test Docker image. Supply your own self-signed SSL certs or use [Let’s Encrypt](https://letsencrypt.org/). Please note: The Docker image is for _testing *only*_ as database user / password are hardcoded.   
-    
-If you’d like to *spice up* our Passman Docker image into a full-fledged, production-ready install, you’re welcome to do so. Please note:
-  * Port 80 and 443 are used
-  * SSL is enabled (or disabled if no certs are found)
-  * Container startup time must be less than 15 seconds
+Passman Docker images are currently maintained in [passman-dev-docker-build](https://github.com/binsky08/passman-dev-docker-build).
 
-Example:   
+| Image | Docker Hub | Use for |
+| :--- | :--- | :--- |
+| **Development** | [binsky/passman-dev](https://hub.docker.com/r/binsky/passman-dev) | Local hacking: bind-mount your checkout, run grunt, try different Nextcloud/PHP stacks |
+| **Demo** | [binsky/passman-demo](https://hub.docker.com/r/binsky/passman-demo) | Pre-baked instances (e.g. [demo.passman.cc](https://demo.passman.cc)) without dev tooling |
+
+Default login for all images: `admin` / `admin`.
+
+Quick start (development):
 ```
-docker run -p 8080:80 -p 8443:443 -v /directory/cert.pem:/data/ssl/cert.pem -v /directory/cert.key:/data/ssl/cert.key brantje/passman
+docker run -d -p 8080:80 -p 8443:443 \
+  -v /path/to/passman:/var/www/html/apps/passman \
+  --name passman-dev \
+  binsky/passman-dev:latest
 ```
-        
-If you want a production-ready container, use the [Nextcloud Docker](https://hub.docker.com/_/nextcloud/) and install Passman as an app.
+
+See the [repository README](https://github.com/binsky08/passman-dev-docker-build#quick-start-development) for TLS setup, available tags, and SSH/sshfs mounting.
+
+For production deployments, use the official [Nextcloud Docker](https://hub.docker.com/_/nextcloud/) image and install Passman as an app.
 
 ## Development
-  * Passman uses a single `.js` file for templates which minimizes XHR template requests.   
-  * CSS uses SASS, so Ruby and SASS must be installed.
-  * `templates.js` and the CSS are built with `grunt`.
+Start from a [passman-dev](https://github.com/binsky08/passman-dev-docker-build) container, then work inside `/var/www/html/apps/passman`:
+
+  * Passman uses a single `.js` file for templates which minimizes XHR template requests.
+  * Our CSS is written in SASS.
+  * `templates.js` and the CSS are built with `grunt` / `grunt build`.
   * Watch for changes using `grunt watch`.
-  * Run PHP unit tests in the dev container: `make test` (full suite) or `make testNoDb` (without DB group). Generate a Clover coverage report with `make test-coverage` (requires pcov or xdebug in the container). Customize container name with like `DOCKER_CONTAINER=passman-dev-latest-testing make test` (override with your own container name).
+  * To run PHP unit tests in the running dev container, ...
+    * run on your host: `make test` (full suite) or `make testNoDb` (without DB group). Generate a Clover coverage report with `make test-coverage` (requires pcov or xdebug in the container). Customize the container name with `DOCKER_CONTAINER=passman-dev-nc34-85-testing make test`.
+    * or run in the container: `cd /var/www/html/apps/passman && composer run test`
+    * after switching branches or on cache-issues, run `cd /var/www/html/apps/passman && composer run test:clear-cache`
 
-## Main developers
-  * Brantje
-  * Animalillo
+## Support Passman
+Passman is open source and lives from contributions like [pull request](https://github.com/nextcloud/passman/pulls),
+but we’ll also gladly accept a Club Mate *or pizza!*
 
-## Contributors
-Add yours when creating a [pull request](https://help.github.com/articles/creating-a-pull-request/)!
-  * Newhinton
-  * [binsky](https://github.com/binsky08)
-  * [HolgerHees](https://github.com/HolgerHees)
+Please consider donating:
+* [Ko-Fi](https://ko-fi.com/passman)
+* ~~Patreon~~ (may come back soon)
+
+## Contributing
+Pull requests and [issues](https://github.com/nextcloud/passman/issues) are welcome. Fork the repo, make your changes, and open a [pull request](https://github.com/nextcloud/passman/pulls). Add your name to the contributors list below when you do.
+
+**Maintainers:**
+- [Brantje](https://github.com/brantje)
+- [Animalillo](https://github.com/animalillo)
+- [binsky](https://github.com/binsky08)
+
+**Contributors:**
+- Newhinton
+- [HolgerHees](https://github.com/HolgerHees)
 
 ## FAQ
-**Are you adding something to check if malicious code is executing on the browser?**   
+**Are you adding something to check if malicious code is executing on the browser?**
 No, because malicious code can edit functions that check for malicious code.
