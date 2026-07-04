@@ -272,6 +272,8 @@ module.exports = function (grunt) {
 						'js/vendor/download.js',
 						'js/vendor/ui-sortable/sortable.js',
 						'js/vendor/papa-parse/papaparse.min.js',
+						'js/vendor/jquery-3.7.1.min.js',
+						'js/vendor/jquery-ui.min.js',
 						'js/lib/promise.js',
 						'js/lib/crypto_wrap.js',
 						'js/lib/otpauth.umd.js',
