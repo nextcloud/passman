@@ -3,8 +3,8 @@
 .vscode
 
 # dependencies
-node_modules
-vendor
+/node_modules
+/vendor
 
 # artifacts
 .sass-cache
