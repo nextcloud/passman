@@ -3,9 +3,11 @@
         xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>passman</id>
     <name>Passman</name>
-    <summary>Passman is a full featured password manager.</summary>
-    <description><![CDATA[Passman is a full featured password manager.
-Features:
+    <summary>Passman is a full-featured password manager.</summary>
+    <description><![CDATA[
+**Passman** is a full-featured, open source password manager for Nextcloud.
+
+## Features:
 - Vaults
 - Vault key is never sent to the server
 - Browser extension for easy access to passwords
@@ -16,10 +18,12 @@ Features:
 - Built-in OTP (One Time Password) generator
 - Password analyzer
 - Share passwords internally and via link in a secure manner.
-- Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is )
+- Import from various password managers (KeePass, LastPass, DashLane, ZOHO, Clipperz.is)
+
+## Demo
 For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 ]]></description>
-    <version>2.6.0</version>
+    <version>2.6.1</version>
     <licence>agpl</licence>
     <author homepage="https://github.com/brantje">Sander Brand</author>
     <author homepage="https://github.com/animalillo">Marcos Zuriaga</author>
