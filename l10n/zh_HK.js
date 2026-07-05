@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "無法獲取版本信息 ",
     "Passman" : "Passman",
     "Passwords" : "密碼",
-    "Passman is a full featured password manager." : "Passman 是一個全能的密碼管理器。",
     "Passman Settings" : "Passman 設定",
     "GitHub version:" : "GitHub 版本：",
     "A newer version of Passman is available" : "有較新版本的 Passman 可用",

@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "Αδυναμία λήψης πληροφορίες έκδοσης",
     "Passman" : "Passman",
     "Passwords" : "Συνθηματικά",
-    "Passman is a full featured password manager." : "Ο Passman είναι ένας πλήρης διαχειριστής κωδικών πρόσβασης.",
     "Passman Settings" : "Ρυθμίσεις Passman",
     "GitHub version:" : "Έκδοση GitHub:",
     "A newer version of Passman is available" : "Μια νέα έκδοση του Passman είναι διαθέσιμη",

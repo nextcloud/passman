@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "Не могу да дохватим информације о верзији",
     "Passman" : "Менаџер Лозинки",
     "Passwords" : "Лозинке",
-    "Passman is a full featured password manager." : "Passman је менаџер лозинки са заокруженим функционалностима.",
     "Passman Settings" : "Поставке Менаџера Лозинки",
     "GitHub version:" : "GitHub vерзија:",
     "A newer version of Passman is available" : "Доступна је нова верзија Менаџера Лозинки",

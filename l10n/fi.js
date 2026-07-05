@@ -232,7 +232,6 @@ OC.L10N.register(
     "Unable to get version info" : "Versiotiedon haku epäonnistui",
     "Passman" : "Passman",
     "Passwords" : "Salasanat",
-    "Passman is a full featured password manager." : "Passman on runsain ominaisuuksin varusteltu salasanojen hallintasovellus.",
     "Passman Settings" : "Passman-asetukset",
     "GitHub version:" : "GitHub-versio:",
     "A newer version of Passman is available" : "Uudempi versio Passmanista on saatavilla",

@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "Gat ekki náð í upplýsingar um útgáfu",
     "Passman" : "Passman",
     "Passwords" : "Lykilorð",
-    "Passman is a full featured password manager." : "Passman er fullbúin lykilorðastýring.",
     "Passman Settings" : "Stillingar Passman",
     "GitHub version:" : "Útgáfa Github:",
     "A newer version of Passman is available" : "Nýrri útgáfa Passman er tiltæk",

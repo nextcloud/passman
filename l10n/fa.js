@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "امکان دریافت اطلاعات نسخه وجود ندارد",
     "Passman" : "Passman",
     "Passwords" : "رمزهای عبور",
-    "Passman is a full featured password manager." : "Passman یک مدیر رمز عبور کامل است.",
     "Passman Settings" : "تنظیمات Passman",
     "GitHub version:" : "نسخه GitHub:",
     "A newer version of Passman is available" : "نسخه جدیدتری از Passman در دسترس است",

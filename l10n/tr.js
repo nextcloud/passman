@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "Sürüm bilgileri alınamadı",
     "Passman" : "Passman",
     "Passwords" : "Parolalar",
-    "Passman is a full featured password manager." : "Passman uygulaması tam özellikli bir parola yönetimi sağlar.",
     "Passman Settings" : "Passman ayarları",
     "GitHub version:" : "GitHub sürümü:",
     "A newer version of Passman is available" : "Yeni bir Passman sürümü yayınlanmış",

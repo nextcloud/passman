@@ -340,7 +340,6 @@ OC.L10N.register(
     "Unable to get version info" : "Ezin izan da bertsio informazioa lortu",
     "Passman" : "Passman",
     "Passwords" : "Pasahitzak",
-    "Passman is a full featured password manager." : "Passman ezaugarriz betetako pasahitz kudeatzaile bat da.",
     "Passman Settings" : "Passman ezarpenak",
     "GitHub version:" : "GitHub bertsioa:",
     "A newer version of Passman is available" : "Passman bertsio berri bat dago eskuragarri",

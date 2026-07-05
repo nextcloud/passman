@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "A verzióinformáció nem érhető el",
     "Passman" : "Jelszókezelő",
     "Passwords" : "Jelszavak",
-    "Passman is a full featured password manager." : "A Passman egy teljeskörű jelszókezelő.",
     "Passman Settings" : "Jelszókezelő beállításai",
     "GitHub version:" : "GitHub verzió:",
     "A newer version of Passman is available" : "A Jelszókezelő új verziója érhető el",

@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "Kunne ikke hente versjonsinfo",
     "Passman" : "Passman",
     "Passwords" : "Passord",
-    "Passman is a full featured password manager." : "Passman er en fullverdig passordbehandler.",
     "Passman Settings" : "Passman-innstillinger",
     "GitHub version:" : "GitHub-versjon:",
     "A newer version of Passman is available" : "En nyere versjon av Passman er tilgjengelig",

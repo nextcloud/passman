@@ -331,7 +331,6 @@ OC.L10N.register(
     "Unable to get version info" : "버전 정보를 가져올 수 없음",
     "Passman" : "Passman",
     "Passwords" : "암호",
-    "Passman is a full featured password manager." : "Passman은 모든 기능을 갖춘 암호 관리자입니다.",
     "Passman Settings" : "Passman 설정",
     "GitHub version:" : "GitHub 버전:",
     "A newer version of Passman is available" : "Passman의 새 버전을 사용할 수 있음",

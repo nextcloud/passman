@@ -341,7 +341,6 @@ OC.L10N.register(
     "Unable to get version info" : "Не вдається отримати інформацію про версію ",
     "Passman" : "Пасажир.",
     "Passwords" : "Паролі",
-    "Passman is a full featured password manager." : "Passman - це повнофункціональний менеджер паролів.",
     "Passman Settings" : "Налаштування Passman",
     "GitHub version:" : "Версія на GitHub:",
     "A newer version of Passman is available" : "Доступна нова версія Passman",
