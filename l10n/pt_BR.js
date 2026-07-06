@@ -341,6 +341,7 @@ OC.L10N.register(
     "Unable to get version info" : "Não foi possível obter informações sobre a versão",
     "Passman" : "Passman",
     "Passwords" : "Senhas",
+    "Passman is a full-featured password manager." : "O Passman é um gerenciador de senhas com todos os recursos.",
     "Passman Settings" : "Configurações do Passman",
     "GitHub version:" : "Versão GitHub:",
     "Local version:" : "Versão local:",
