@@ -319,7 +319,7 @@ OC.L10N.register(
     "Bad Strength" : "Погана сила",
     "Expired" : "Закінчився",
     "Compromised" : "Скомпрометований",
-    "Filter Tags" : "Фільтрувати теги",
+    "Filter Tags" : "Фільтрувати мітки",
     "Simple Navigation" : "Проста навігація",
     "Someone has shared a credential with you." : "З вами поділилися даними авторизації.",
     "Click here to request it" : "Натисніть тут, щоб подати запит",
