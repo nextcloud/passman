@@ -34,10 +34,10 @@
 			// AngularJS will instantiate a singleton by calling "new" on this function
 			var encryption_config = {
 				adata: "",
-				iter: 1000,
+				iter: 100000,
 				ks: 256,
 				mode: 'ccm',
-				ts: 64
+				ts: 128
 			};
 
 			return {
