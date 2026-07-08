@@ -308,7 +308,7 @@ OC.L10N.register(
     "Warning! Adding credentials over HTTP is insecure!" : "Увага! Додавання облікових даних через HTTP є небезпечним!",
     "Logged into {{vault_name}}" : "Увійшов в систему {{vault_name}}",
     "Change vault" : "Сховище змін",
-    "Deleted credentials" : "Видалені облікові дані",
+    "Deleted credentials" : "Вилучені облікові дані",
     "Logout" : "Вийти",
     "Donate" : "Пожертвувати кошти",
     "Show All" : "Показати все",
