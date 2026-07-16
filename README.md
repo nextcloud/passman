@@ -37,7 +37,7 @@ Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_gener
 	- EnPass
 	- [ocPasswords](https://github.com/fcturner/passwords)
 
-Try a Passman demo [here](https://demo.passman.cc).
+**Try a Passman demo [here](https://demo.passman.cc).**
 
 ## External apps
 ### Android app
@@ -46,7 +46,7 @@ Our native [Passman Android](https://github.com/nextcloud/passman-android) app i
 ### Browser extension
 [The legacy Firefox / Chrome extension](https://github.com/nextcloud/passman-webextension) is the "old-stable", but **not maintained** and no longer available in the Chrome Web Store since it's MV2 based.
 
-A [follow-up extension](https://github.com/nextcloud/passman-webextension-mv3) is in active development and **currently considered unstable**. It's available but in open beta / development phase.
+A [follow-up extension](https://gitlab.com/binsky08/passman-webextension-v3) is in active development and **currently considered unstable**. It's available but in open beta / development phase.
 
 ## Screenshots
 ![Logged in to vault](http://i.imgur.com/ciShQZg.png)
@@ -138,8 +138,8 @@ Passman is open source and lives from contributions like [pull request](https://
 but we’ll also gladly accept a Club Mate *or pizza!*
 
 Please consider donating:
+* [Patreon](https://www.patreon.com/passman)
 * [Ko-Fi](https://ko-fi.com/passman)
-* ~~Patreon~~ (may come back soon)
 
 ## Contributing
 Pull requests and [issues](https://github.com/nextcloud/passman/issues) are welcome. Fork the repo, make your changes, and open a [pull request](https://github.com/nextcloud/passman/pulls). Add your name to the contributors list below when you do.
