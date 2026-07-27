@@ -6,20 +6,6 @@ Passman is a full featured, open source password manager for Nextcloud.
 ## Join us!
 Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_general) to participate in all sorts of topical discussions about Passman and its apps!
 
-## Contents
-  * [Features](#features)
-  * [External apps](#external-apps)
-  * [Screenshots](#screenshots)
-  * [Database Compatibility](#database-compatibility)
-  * [Security](#security)
-    * [Password generation](#password-generation)
-    * [Storing credentials](#storing-credentials)
-  * [API](#api)
-  * [Docker](#docker)
-  * [Development](#development)
-  * [Support Passman](#support-passman)
-  * [Contributing](#contributing)
-
 ## Features
 * Multiple vaults
 * Vault keys are never sent to the server
@@ -28,7 +14,7 @@ Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_gener
 * Built-in OTP (One Time Password) generator
 * Password analyzer
 * Securely share passwords internally and via link
-* Import from various password managers:
+* Import from various password managers (experimental):
 	- KeePass
 	- LastPass
 	- DashLane
@@ -40,13 +26,24 @@ Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_gener
 **Try a Passman demo [here](https://demo.passman.cc).**
 
 ## External apps
+### Browser extension
+[Passman Webextension](https://github.com/nextcloud/passman-webextension) is our new, fully rewritten browser extension for the Passman Nextcloud app, using modern frontend and extension frameworks.
+
+[![Chrome webstore](https://img.passman.cc/assets/chromewebstore.png)](https://chrome.google.com/webstore/detail/passman/hlpjhlifkgmoibhollggngbbhbejecph)
+[![AMO](https://img.passman.cc/assets/AMO-button_1.png)](https://addons.mozilla.org/en-US/firefox/addon/passman/) 
+
 ### Android app
 Our native [Passman Android](https://github.com/nextcloud/passman-android) app is available for download from the [Google Play Store](https://play.google.com/store/apps/details?id=es.wolfi.app.passman.alpha), [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/es.wolfi.app.passman) and [F-Droid](https://f-droid.org/app/es.wolfi.app.passman).
 
-### Browser extension
-[The legacy Firefox / Chrome extension](https://github.com/nextcloud/passman-webextension) is the "old-stable", but **not maintained** and no longer available in the Chrome Web Store since it's MV2 based.
-
-A [follow-up extension](https://gitlab.com/binsky08/passman-webextension-v3) is in active development and **currently considered unstable**. It's available but in open beta / development phase.
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+alt="Get it on Play Store"
+height="80">](https://play.google.com/store/apps/details?id=es.wolfi.app.passman.alpha)
+[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
+alt="Get it on IzzyOnDroid"
+height="80">](https://apt.izzysoft.de/fdroid/index/apk/es.wolfi.app.passman)
+[<img src="https://f-droid.org/badge/get-it-on.png"
+alt="Get it on F-Droid"
+height="80">](https://f-droid.org/app/es.wolfi.app.passman)
 
 ## Screenshots
 ![Logged in to vault](http://i.imgur.com/ciShQZg.png)
