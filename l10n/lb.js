@@ -16,6 +16,7 @@ OC.L10N.register(
     "Disabled" : "Deaktivéiert",
     "Export" : "Exportéieren",
     "Import" : "Importéieren",
+    "Key size" : "Schlësselgréisst",
     "Uploading" : "Uploading",
     "User" : "User",
     "Files" : "Fichieren",
