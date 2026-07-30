@@ -328,7 +328,7 @@ OC.L10N.register(
     "Mark as Compromised" : "Pažymėti kaip pažeistą",
     "Compromised!" : "Pažeistas!",
     "This password is compromised. You can only remove this warning by changing the password." : "Šis slaptažodis yra pažeistas. Šį įspėjimą galite pašalinti tik pakeisdami slaptažodį.",
-    "email" : "elektroninis paštas",
+    "email" : "el. paštas",
     "Description" : "Aprašas",
     "Custom Search:" : "Tinkinta paieška:",
     "Revert to defaults" : "Grąžinti numatytuosius nustatymus",
