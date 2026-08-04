@@ -350,6 +350,7 @@ OC.L10N.register(
     "Allow users on this server to share passwords with other users" : "Permet als usuaris d'aquest servidor compartir contrasenyes amb altres usuaris",
     "Move credentials from one account to another" : "Mou les credencials d'un compte a un altre",
     "Source account" : "Compte d'origen",
+    "Search for a user" : "Cerca un usuari",
     "Destination account" : "Compte de destinació",
     "Move" : "Mou",
     "Credentials moved!" : "S'han mogut les credencials!",
