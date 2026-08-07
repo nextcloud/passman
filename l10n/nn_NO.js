@@ -34,6 +34,7 @@ OC.L10N.register(
     "Cancel" : "Avbryt",
     "Settings" : "Instillingar",
     "Unshare" : "Fjern deling",
+    "Account" : "Konto",
     "Password" : "Passord",
     "Email" : "Epost",
     "URL" : "URL",
