@@ -26,6 +26,9 @@ use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\PublicPage;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IRequest;
@@ -64,9 +67,9 @@ class ShareController extends ApiController {
 	 * @param $item_guid
 	 * @param $permissions
 	 * @param $expire_timestamp
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
@@ -99,10 +102,8 @@ class ShareController extends ApiController {
 
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function applyIntermediateShare($item_id, $item_guid, $vaults, $permissions) {
 		/**
 		 * Assemble notification
@@ -170,10 +171,8 @@ class ShareController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function searchUsers($search) {
 		$users = [];
 		$usersTmp = $this->userManager->searchDisplayName($search, $this->limit, $this->offset);
@@ -191,19 +190,15 @@ class ShareController extends ApiController {
 	}
 
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function unshareCredential($item_guid) {
 		$this->shareService->unshareCredential($item_guid);
 		return new JSONResponse(['result' => true]);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function unshareCredentialFromUser($item_guid, $user_id) {
 		$acl = null;
 		$sr = null;
@@ -233,20 +228,16 @@ class ShareController extends ApiController {
 		return new JSONResponse(['result' => true]);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function search($search) {
 		$user_search = $this->searchUsers($search);
 		return new JSONResponse($user_search);
 	}
 
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getVaultsByUser($user_id) {
 		$user_vaults = $this->vaultService->getByUser($user_id);
 		$result = [];
@@ -261,10 +252,8 @@ class ShareController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function savePendingRequest($item_guid, $target_vault_guid, $final_shared_key) {
 		try {
 			$sr = $this->shareService->getRequestByGuid($item_guid, $target_vault_guid);
@@ -293,10 +282,8 @@ class ShareController extends ApiController {
 		$this->shareService->applyShare($item_guid, $target_vault_guid, $final_shared_key);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getPendingRequests() {
 		try {
 			$requests = $this->shareService->getUserPendingRequests($this->userId->getUID());
@@ -316,9 +303,9 @@ class ShareController extends ApiController {
 	/**
 	 * @param $item_guid
 	 * @return JSONResponse
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getRevisions($item_guid) {
 		try {
 			return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
@@ -330,9 +317,9 @@ class ShareController extends ApiController {
 	/**
 	 * Obtains the list of credentials shared with this vault
 	 *
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getVaultItems($vault_guid) {
 		try {
 			return new JSONResponse($this->shareService->getSharedItems($this->userId->getUID(), $vault_guid));
@@ -344,9 +331,9 @@ class ShareController extends ApiController {
 	/**
 	 * Obtains the list of acl entries for credentials shared with this vault
 	 *
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getVaultAclEntries($vault_guid) {
 		try {
 			return new JSONResponse($this->shareService->getVaultAclList($this->userId->getUID(), $vault_guid));
@@ -358,9 +345,9 @@ class ShareController extends ApiController {
 	/**
 	 * @param $share_request_id
 	 * @return JSONResponse
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function deleteShareRequest($share_request_id) {
 		try {
 
@@ -392,10 +379,10 @@ class ShareController extends ApiController {
 	/**
 	 * @param $credential_guid
 	 * @return JSONResponse
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 * @PublicPage
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	#[PublicPage]
 	public function getPublicCredentialData($credential_guid) {
 		//@TODO Check expire date
 		$acl = $this->shareService->getACL(null, $credential_guid);
@@ -426,9 +413,9 @@ class ShareController extends ApiController {
 	 * @param $item_guid
 	 * @return JSONResponse|NotFoundResponse
 	 * @throws \OCP\DB\Exception
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getItemAcl($item_guid) {
 		$acl = $this->shareService->getCredentialAclList($item_guid);
 		$pending = $this->shareService->getCredentialPendingAclList($item_guid);
@@ -454,9 +441,9 @@ class ShareController extends ApiController {
 	 * @return array|File|NotFoundJSONResponse
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getFile($item_guid, $file_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
@@ -484,9 +471,9 @@ class ShareController extends ApiController {
 	 * @param $size
 	 * @return DataResponse|NotFoundJSONResponse|JSONResponse
 	 * @throws \Exception
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function uploadFile($item_guid, $data, $filename, $mimetype, $size) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
@@ -519,9 +506,9 @@ class ShareController extends ApiController {
 	 * @param  $user_id
 	 * @param $permission
 	 * @return JSONResponse
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function updateSharedCredentialACL($item_guid, $user_id, $permission) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
@@ -549,9 +536,9 @@ class ShareController extends ApiController {
 	 * @param $item_guid
 	 * @param $shared_key
 	 * @return JSONResponse
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function updateSharedCredentialACLSharedKey($item_guid, $shared_key) {
 		/** @var SharingACL $acl */
 		$acl = $this->shareService->getACL($this->userId->getUID(), $item_guid);

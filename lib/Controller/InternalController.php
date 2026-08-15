@@ -17,6 +17,8 @@ use OCA\Passman\Service\NotificationService;
 use OCP\App\IAppManager;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IAppConfig;
 use OCP\IConfig;
@@ -41,9 +43,7 @@ class InternalController extends ApiController {
 			86400);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
+	#[NoAdminRequired]
 	public function remind($credential_id) {
 		$credential = $this->credentialService->getCredentialById($credential_id, $this->userId);
 		if ($credential) {
@@ -54,9 +54,7 @@ class InternalController extends ApiController {
 		}
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
+	#[NoAdminRequired]
 	public function read($credential_id) {
 		try {
 			// need to check overall credential existence before, since getCredentialById() method call below throws a
@@ -78,17 +76,13 @@ class InternalController extends ApiController {
 		}
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getAppVersion() {
 		return new JSONResponse(['version' => $this->appManager->getAppInfo(Application::APP_ID)["version"]]);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
+	#[NoAdminRequired]
 	public function generatePerson() {
 		$context = ['http' => ['method' => 'GET'], 'ssl' => ['verify_peer' => false, 'allow_self_signed' => true]];
 		$context = stream_context_create($context);
@@ -96,10 +90,8 @@ class InternalController extends ApiController {
 		return new JSONResponse($random_person);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getSettings() {
 		$settings = [
 			'link_sharing_enabled' => intval($this->appConfig->getValue(Application::APP_ID, 'link_sharing_enabled', 1)),
@@ -112,9 +104,7 @@ class InternalController extends ApiController {
 		return new JSONResponse($settings);
 	}
 
-	/**
-	 * @NoCSRFRequired
-	 */
+	#[NoCSRFRequired]
 	public function saveSettings($key, $value) {
 		if (is_numeric($value)) {
 			$value = intval($value);

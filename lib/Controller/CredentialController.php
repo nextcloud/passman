@@ -22,6 +22,8 @@ use OCA\Passman\Service\ShareService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -47,10 +49,8 @@ class CredentialController extends ApiController {
 	}
 
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function createCredential($changed, $created,
 	                                 $credential_id, $custom_fields, $delete_time,
 	                                 $description, $email, $expire_time, $favicon, $files, $guid,
@@ -94,19 +94,15 @@ class CredentialController extends ApiController {
 		return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getCredential($credential_guid) {
 		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 		return new JSONResponse($credential);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function updateCredential($changed, $created,
 	                                 $credential_id, $custom_fields, $delete_time, $credential_guid,
 	                                 $description, $email, $expire_time, $icon, $files, $guid,
@@ -254,10 +250,8 @@ class CredentialController extends ApiController {
 		return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function deleteCredential($credential_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
@@ -275,10 +269,10 @@ class CredentialController extends ApiController {
 	}
 
 	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 * @throws \Exception
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getRevision($credential_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($credential_guid);
@@ -300,19 +294,15 @@ class CredentialController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function deleteRevision($credential_id, $revision_id) {
 		$result = $this->credentialRevisionService->deleteRevision($revision_id, $this->userId);
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function updateRevision($revision_id, $credential_data) {
 		$revision = null;
 		try {

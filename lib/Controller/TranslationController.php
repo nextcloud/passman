@@ -12,6 +12,9 @@
 namespace OCA\Passman\Controller;
 
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\PublicPage;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IL10N;
 use OCP\IRequest;
@@ -31,12 +34,9 @@ class TranslationController extends ApiController {
 			86400);
 	}
 
-
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 * @PublicPage
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	#[PublicPage]
 	public function getLanguageStrings() {
 		$translations = [
 			// js/app/controllers/bookmarklet.js

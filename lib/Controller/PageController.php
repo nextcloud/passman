@@ -13,9 +13,11 @@ namespace OCA\Passman\Controller;
 
 use OCA\Passman\AppInfo\Application;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\PublicPage;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
-use OCP\Util;
 
 class PageController extends Controller {
 
@@ -30,28 +32,24 @@ class PageController extends Controller {
 	 *          basically the only required method to add this exemption, don't
 	 *          add it to any other method if you don't exactly know what it does
 	 *
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function index() {
 		return new TemplateResponse($this->appName, 'main');  // templates/main.php
 	}
 
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function bookmarklet($url='', $title='') {
 		$params = ['url' => $url, 'title' => $title];
 		return new TemplateResponse($this->appName, 'bookmarklet', $params);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 * @PublicPage
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
+	#[PublicPage]
 	public function publicSharePage() {
 		return new TemplateResponse($this->appName, 'public_share', [], TemplateResponse::RENDER_AS_PUBLIC);
 	}
