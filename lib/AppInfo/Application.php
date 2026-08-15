@@ -42,6 +42,7 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\IRequest;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use OCP\Notification\IManager;
@@ -82,7 +83,7 @@ class Application extends App implements IBootstrap {
 
 			return new ShareController(
 				$c->get('AppName'),
-				$c->get('Request'),
+				$c->get(IRequest::class),
 				$userSession->getUser(),
 				$userManager,
 				$c->get(ActivityService::class),
