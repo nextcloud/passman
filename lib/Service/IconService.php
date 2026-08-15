@@ -55,7 +55,7 @@ class IconService {
 	/**
 	 * @var string favicon type (file extension, ex: ico|gif|png)
 	 */
-	public string $icoType;
+	public ?string $icoType = null;
 
 	/**
 	 * @var string favicon url determination method (default /favicon.ico or found in head>link tag)
@@ -75,12 +75,12 @@ class IconService {
 	/**
 	 * @var string md5 of $icoData
 	 */
-	public string $icoMd5;
+	public ?string $icoMd5 = null;
 
 	/**
 	 * @var string favicon binary data
 	 */
-	public string $icoData;
+	public ?string $icoData = null;
 
 	/**
 	 * @var array Additional debug info
@@ -305,6 +305,10 @@ class IconService {
 		if (in_array($info['content_type'], $textTypes) || preg_match('#(</html>|</b>)#i', (string) $content)) {
 			$this->error = "Seems to be a text document";
 			return false;
+		}
+
+		if (empty($this->icoType)) {
+			$this->icoType = self::getExtension($this->icoUrl);
 		}
 
 		// All right baby !

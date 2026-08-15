@@ -91,9 +91,9 @@ class IconController extends ApiController {
 
 		try {
 			$icon = new IconService($url);
-			if ($icon->icoExists) {
+			if ($icon->icoExists && !empty($icon->icoData)) {
 				$data = $icon->icoData;
-				$type = $icon->icoType;
+				$type = $icon->icoType ?? $type;
 			}
 		} catch (\InvalidArgumentException) {
 			//no need to do stuff in catch
