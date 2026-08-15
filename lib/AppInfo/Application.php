@@ -24,7 +24,6 @@
 namespace OCA\Passman\AppInfo;
 
 use OC\Files\View;
-use OC\ServerContainer;
 use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Middleware\APIMiddleware;
 use OCA\Passman\Middleware\ShareMiddleware;
@@ -105,12 +104,12 @@ class Application extends App implements IBootstrap {
 				$c->get(ActivityService::class)
 			));
 
-		$context->registerService('Logger', fn(ContainerInterface $c) => $c->get(ServerContainer::class)->getLogger());
+		$context->registerService('Logger', fn(ContainerInterface $c) => $c->get(LoggerInterface::class));
 	}
 
 	public function boot(IBootContext $context): void {
 		/** @var IManager $manager */
-		$manager = $context->getAppContainer()->query(IManager::class);
+		$manager = $context->getAppContainer()->get(IManager::class);
 		$manager->registerNotifierService(Notifier::class);
 
 		Util::addTranslations(self::APP_ID);

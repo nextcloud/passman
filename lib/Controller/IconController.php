@@ -12,11 +12,11 @@
 namespace OCA\Passman\Controller;
 
 use Doctrine\DBAL\Exception\DriverException;
-use OC\App\AppManager;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\IconService;
 use OCA\Passman\Utility\Utils;
+use OCP\App\IAppManager;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
@@ -34,7 +34,7 @@ class IconController extends ApiController {
 		IRequest $request,
 		private $userId,
 		private readonly CredentialService $credentialService,
-		private readonly AppManager $am,
+		private readonly IAppManager $am,
 		private readonly IURLGenerator $urlGenerator,
 	) {
 		parent::__construct(
