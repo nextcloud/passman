@@ -37,8 +37,7 @@
 			'pascalprecht.translate'
 
 		]).config(['$httpProvider', function ($httpProvider) {
-		/** global: oc_requesttoken */
-		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
+		$httpProvider.defaults.headers.common.requesttoken = GetRequestToken();
 	}]).config(function ($translateProvider) {
 		$translateProvider.useUrlLoader(OC.generateUrl('/apps/' + APP_ID + '/api/v2/language'));
 		$translateProvider.preferredLanguage('en');
