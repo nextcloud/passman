@@ -27,10 +27,10 @@ var PassmanImporter = PassmanImporter || {};
 	'use strict';
 	// Define the importer
 	var steps = [
-		'Backups for the Passwords app need to be enabled on the Admin panel (they are disabled by default).',
 		'On the Passwords App, in the bottom left corner, press Settings',
-		'Press "Download Backup"',
-		'Confirm the export and save the file'
+		'Open the "Backup or export" section',
+		'Select "Predefined CSV" as export format and check "Export Passwords"',
+		'Press "Export" and save the downloaded CSV file'
 	];
 	PassmanImporter.passwordsApp = {
 		info: {
@@ -47,14 +47,18 @@ var PassmanImporter = PassmanImporter || {};
 			var credential_list = [];
 			for (var i = 0; i < parsed_csv.length; i++) {
 				var row = parsed_csv[i];
+				var username = row.username || '';
+				var label = row.label || PassmanImporter.join_([row.website, username], ' - ');
 				var _credential = PassmanImporter.newCredential();
-				_credential.label = row.website + ' - '+ row.username;
-				_credential.username = row.username;
-				_credential.password = row.password;
-				_credential.url = row.fulladdress;
-				_credential.description = row.notes;
+				_credential.label = label;
+				_credential.username = username;
+				_credential.password = row.password || '';
+				_credential.url = row.url || row.fulladdress || '';
+				_credential.description = row.notes || '';
 
-				credential_list.push(_credential);
+				if (label) {
+					credential_list.push(_credential);
+				}
 
 				var progress = {
 					percent: i / parsed_csv.length * 100,
