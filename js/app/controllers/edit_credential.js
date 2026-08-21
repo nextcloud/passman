@@ -102,23 +102,40 @@
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
 				}
+				var supported_custom_field_types = ['text', 'password', 'file'];
+				var applyMissingCustomFieldTypes = function (credential) {
+					if (!credential || !angular.isArray(credential.custom_fields)) {
+						return credential;
+					}
+					for (var i = 0; i < credential.custom_fields.length; i++) {
+						var field = credential.custom_fields[i];
+						if (supported_custom_field_types.indexOf(field.field_type) !== -1) {
+							continue;
+						}
+						if (field.value !== null && angular.isObject(field.value) && field.value.filename !== undefined) {
+							field.field_type = 'file';
+						} else {
+							field.field_type = (field.secret === true || field.secret === 1 || field.secret === '1') ? 'password' : 'text';
+						}
+					}
+					return credential;
+				};
+
 				var storedCredential = SettingsService.getSetting('edit_credential');
 
 				if (!storedCredential) {
 					$scope.storedCredential = {}; // this line is required for reactive model binding to update the value from the async callback
 					CredentialService.getCredential($routeParams.credential_id).then(function (result) {
-						$scope.storedCredential = CredentialService.decryptCredential(angular.copy(result));
+						$scope.storedCredential = applyMissingCustomFieldTypes(CredentialService.decryptCredential(angular.copy(result)));
 						$scope.storedCredential.password_repeat = angular.copy($scope.storedCredential.password);
 						$scope.storedCredential.expire_time = $scope.storedCredential.expire_time * 1000;
-
 						//store password to check if it was changed if this credential has been compromised
 						$scope.oldPassword = $scope.storedCredential.password;
 					});
 				} else {
-					$scope.storedCredential = CredentialService.decryptCredential(angular.copy(storedCredential));
+					$scope.storedCredential = applyMissingCustomFieldTypes(CredentialService.decryptCredential(angular.copy(storedCredential)));
 					$scope.storedCredential.password_repeat = angular.copy($scope.storedCredential.password);
 					$scope.storedCredential.expire_time = $scope.storedCredential.expire_time * 1000;
-
 					//store password to check if it was changed if this credential has been compromised
 					$scope.oldPassword = $scope.storedCredential.password;
 				}

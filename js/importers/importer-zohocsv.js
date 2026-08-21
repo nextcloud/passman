@@ -59,7 +59,8 @@ var PassmanImporter = PassmanImporter || {};
 								{
 									'label': key,
 									'value': value,
-									'secret': false
+									'secret': false,
+									'field_type': 'text'
 								}
 							);
 						}
