@@ -34,42 +34,68 @@ var PassmanImporter = PassmanImporter || {};
 		}
 	};
 
+	var addTag = function (tags, name) {
+		var text = (name === undefined || name === null) ? '' : String(name).trim();
+		if (text.length === 0) {
+			return;
+		}
+		for (var t = 0; t < tags.length; t++) {
+			if (tags[t].text === text) {
+				return;
+			}
+		}
+		tags.push({text: text});
+	};
+
+	var parseGroups = function (row) {
+		var tags = [];
+		var group_paths = [row.group, row.group_tree];
+		for (var g = 0; g < group_paths.length; g++) {
+			if (!group_paths[g]) {
+				continue;
+			}
+			var exploded_tree = String(group_paths[g]).split(/[\\/]+/);
+			for (var t = 0; t < exploded_tree.length; t++) {
+				addTag(tags, exploded_tree[t]);
+			}
+		}
+		return tags;
+	};
+
+	var getLabel = function (row) {
+		return row.account || row.title || null;
+	};
+
 	PassmanImporter.keepassCsv.readFile = function (file_data) {
 		/** global: C_Promise */
 		var p = new C_Promise(function () {
-			var parsed_csv = PassmanImporter.readCsv(file_data);
+			var parsed_csv = PassmanImporter.readCsv(file_data).filter(function (row) {
+				return getLabel(row) !== null;
+			});
 			var credential_list = [];
 			for (var i = 0; i < parsed_csv.length; i++) {
 				var row = parsed_csv[i];
 				var _credential = PassmanImporter.newCredential();
-				_credential.label = row.account;
-				_credential.username = row.login_name;
-				_credential.password = row.password;
-				_credential.url = row.web_site;
-				_credential.description = row.comments;
-				if (row.hasOwnProperty('expires')) {
-					row.expires = row.expires.replace('"', '');
-					_credential.expire_time = new Date(row.expires).getTime() / 1000;
-				}
-
-				var tags = (row.group) ? [{text: row.group}] : [];
-				if (row.hasOwnProperty('group_tree')) {
-					var exploded_tree = row.group_tree.split('\\\\');
-					for (var t = 0; t < exploded_tree.length; t++) {
-						if (exploded_tree[t].trim().length > 0) {
-							tags.push({text: exploded_tree[t].trim()});
-						}
+				_credential.label = getLabel(row);
+				_credential.username = row.login_name || row.username || null;
+				_credential.password = row.password || null;
+				_credential.url = row.web_site || row.url || null;
+				_credential.description = row.comments || row.notes || null;
+				if (row.expires) {
+					var expire_time = new Date(String(row.expires).replace(/"/g, '')).getTime();
+					if (!isNaN(expire_time)) {
+						_credential.expire_time = expire_time / 1000;
 					}
 				}
-				_credential.tags = tags;
+
+				_credential.tags = parseGroups(row);
 				credential_list.push(_credential);
 
 				var progress = {
-					percent: i / parsed_csv.length * 100,
-					loaded: i,
+					percent: (i + 1) / parsed_csv.length * 100,
+					loaded: i + 1,
 					total: parsed_csv.length
 				};
-
 				this.call_progress(progress);
 			}
 			this.call_then(credential_list);
