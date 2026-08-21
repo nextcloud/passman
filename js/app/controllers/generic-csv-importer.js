@@ -129,6 +129,23 @@
 				var tagMapper = function (t) {
 					return {text: t};
 				};
+				var parseTimestampToSeconds = function (value) {
+					if (value === null || value === undefined) {
+						return null;
+					}
+					if (typeof value === 'number') {
+						return isFinite(value) ? Math.floor(value) : null;
+					}
+					const rawValue = String(value).trim();
+					if (rawValue === '') {
+						return null;
+					}
+					if (/^[+-]?\d+(\.\d+)?$/.test(rawValue)) {
+						return Math.floor(parseFloat(rawValue));
+					}
+					const parsedDate = Date.parse(rawValue);
+					return isNaN(parsedDate) ? null : Math.floor(parsedDate / 1000);
+				};
 				var rowToCredential = async function (row) {
 					let _credential = PassmanImporter.newCredential();
 					for(let k = 0; k < $scope.import_fields.length; k++){
@@ -216,9 +233,9 @@
 							} else if(field === 'compromised'){
 								_credential[field] = (row[k] === 'true' || row[k] === '1');
 							} else if (field === 'created' || field === 'changed' || field === 'expire_time' || field === 'delete_time') {
-								const num = parseInt(row[k]);
-								if (!isNaN(num)) {
-									_credential[field] = num;
+								const seconds = parseTimestampToSeconds(row[k]);
+								if (seconds !== null) {
+									_credential[field] = seconds;
 								}
 							} else{
 								_credential[field] = row[k];
