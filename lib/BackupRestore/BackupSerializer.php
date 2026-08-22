@@ -29,31 +29,34 @@ use OCA\Passman\Exception\InvalidBackupException;
 /**
  * Converts a BackupArchive to and from the on-disk JSON artifact format.
  *
- * Artifact shape: { "manifest": {...}, "<section>": [ {col: value, ...}, ... ], ... }
+ * Artifact shape: { "manifest": {...}, "sections": ["<section>": [ {col: value, ...}, ... ], ...] }
  * A single generic path handles every section via {@see BackupArchive::SECTIONS}.
  */
 class BackupSerializer {
 
 	private const JSON_DEPTH = 512;
+	public const JSON_ENCODE_DEFAULT_FLAGS = JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
 	/**
 	 * Serialize an archive to the JSON artifact string.
 	 *
 	 * @throws InvalidBackupException on encoding failure
 	 */
-	public function encode(BackupArchive $archive): string {
+	public function encode(BackupArchive $archive, bool $pretty = true): string {
 		$archive->refreshCounts();
+		$archive->manifest->calculateArchiveChecksum($archive);
 
-		$data = ['manifest' => $archive->manifest->toArray()];
-		foreach (BackupArchive::SECTIONS as $section) {
-			$data[$section] = array_values($archive->section($section)->rows);
-		}
+		$data = [
+			'manifest' => $archive->manifest->toArray(),
+			'sections' => $archive->sectionsToArray(),
+		];
 
 		try {
-			return json_encode(
-				$data,
-				JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
-			);
+			$flags = self::JSON_ENCODE_DEFAULT_FLAGS;
+			if ($pretty) {
+				$flags |= JSON_PRETTY_PRINT;
+			}
+			return json_encode($data, $flags);
 		} catch (\JsonException $e) {
 			throw new InvalidBackupException('Failed to encode backup artifact: ' . $e->getMessage(), 0, $e);
 		}
@@ -62,7 +65,7 @@ class BackupSerializer {
 	/**
 	 * Parse and validate a JSON artifact string into an archive.
 	 *
-	 * @throws InvalidBackupException on invalid JSON or unsupported/malformed manifest
+	 * @throws InvalidBackupException on invalid JSON, an unsupported/malformed manifest or if the manifest checksum does not match the content
 	 */
 	public function decode(string $json): BackupArchive {
 		try {
@@ -71,13 +74,26 @@ class BackupSerializer {
 			throw new InvalidBackupException('Backup artifact is not valid JSON: ' . $e->getMessage(), 0, $e);
 		}
 
-		if (!is_array($data) || !isset($data['manifest']) || !is_array($data['manifest'])) {
+		if (
+			!is_array($data) ||
+			!isset($data['manifest']) ||
+			!isset($data['sections']) ||
+			!is_array($data['manifest']) ||
+			!is_array($data['sections'])
+		) {
 			throw new InvalidBackupException('Backup artifact is missing its manifest');
 		}
 
 		$archive = new BackupArchive(BackupManifest::fromArray($data['manifest']));
 		foreach (BackupArchive::SECTIONS as $section) {
-			$archive->snapshots[$section] = new TableSnapshot($section, $this->readRows($section, $data[$section] ?? []));
+			$archive->snapshots[$section] = new TableSnapshot($section, $this->readRows($section, $data['sections'][$section] ?? []));
+		}
+
+		if (!$archive->manifest->validateArchiveChecksum($archive)) {
+			throw new InvalidBackupException(
+				'The manifest and content of the backup artifact do not match its checksum. '
+				. 'The artifact was modified or is incomplete.'
+			);
 		}
 
 		return $archive;

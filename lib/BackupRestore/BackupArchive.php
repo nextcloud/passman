@@ -70,6 +70,18 @@ class BackupArchive {
 	}
 
 	/**
+	 * The sections as they are stored in the artifact: section name => list of rows,
+	 * in {@see BackupArchive::SECTIONS} order.
+	 */
+	public function sectionsToArray(): array {
+		$sections = [];
+		foreach (self::SECTIONS as $section) {
+			$sections[$section] = array_values($this->snapshots[$section]->rows);
+		}
+		return $sections;
+	}
+
+	/**
 	 * Recompute per-section counts and store them on the manifest.
 	 *
 	 * @return array<string, int>

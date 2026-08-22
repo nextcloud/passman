@@ -43,19 +43,26 @@ class BackupManifest {
 	public const MODE_RAW = 'raw';
 	public const MODES = [self::MODE_PORTABLE, self::MODE_RAW];
 
+	public const CHECKSUM_ALGORITHM = 'sha256';
+
+	/** The one manifest field which cannot be covered by the checksum: the checksum itself. */
+	private const CHECKSUM_FIELD = 'checksum';
+
 	/**
 	 * @param array<string, int> $counts Number of rows per section (informational).
+	 * @param string|null $checksum Digest over every other field of this manifest plus the archive sections.
 	 */
 	public function __construct(
-		public int $formatVersion,
-		public string $appVersion,
-		public int $createdAt,
-		public string $scope,
-		public string $encryptionMode,
-		public string $instanceId,
+		public int     $formatVersion,
+		public string  $appVersion,
+		public int     $createdAt,
+		public string  $scope,
+		public string  $encryptionMode,
+		public string  $instanceId,
 		public ?string $targetUserId = null,
 		public ?string $targetVaultGuid = null,
-		public array $counts = [],
+		public array   $counts = [],
+		public ?string $checksum = null,
 	) {
 	}
 
@@ -76,16 +83,81 @@ class BackupManifest {
 	 */
 	public function toArray(): array {
 		return [
-			'format_version' => $this->formatVersion,
-			'app_version' => $this->appVersion,
-			'created_at' => $this->createdAt,
-			'scope' => $this->scope,
-			'encryption_mode' => $this->encryptionMode,
-			'instance_id' => $this->instanceId,
-			'target_user_id' => $this->targetUserId,
-			'target_vault_guid' => $this->targetVaultGuid,
-			'counts' => $this->counts,
+			'format_version'     => $this->formatVersion,
+			'app_version'        => $this->appVersion,
+			'created_at'         => $this->createdAt,
+			'scope'              => $this->scope,
+			'encryption_mode'    => $this->encryptionMode,
+			'instance_id'        => $this->instanceId,
+			'target_user_id'     => $this->targetUserId,
+			'target_vault_guid'  => $this->targetVaultGuid,
+			'counts'             => $this->counts,
+			self::CHECKSUM_FIELD => $this->checksum,
 		];
+	}
+
+	/**
+	 * Adds a checksum to this manifest about its own fields and the given archive content.
+	 *
+	 * This is an integrity check against truncated or edited artifacts, not a signature:
+	 * a portable artifact has to stay verifiable on a foreign instance, which cannot know a key of the instance that wrote it.
+	 *
+	 * May add a signature of this checksum later, if someone requests it.
+	 *
+	 * @param BackupArchive $backupArchive
+	 * @return void
+	 * @throws InvalidBackupException when the manifest or a section cannot be encoded
+	 */
+	public function calculateArchiveChecksum(BackupArchive $backupArchive): void {
+		$this->checksum = $this->computeArchiveChecksum($backupArchive);
+	}
+
+	/**
+	 * Whether this manifest and the sections of the given archive still match the stored checksum.
+	 *
+	 * @throws InvalidBackupException when the manifest or a section cannot be encoded
+	 */
+	public function validateArchiveChecksum(BackupArchive $backupArchive): bool {
+		return !empty($this->checksum) && hash_equals($this->checksum, $this->computeArchiveChecksum($backupArchive));
+	}
+
+	/**
+	 * Digest over every field of this manifest except the checksum itself, followed by the
+	 * content of every section in {@see BackupArchive::SECTIONS} order.
+	 *
+	 * The manifest is hashed in the canonical field order and types of {@see self::toArray()},
+	 * so reformatting or reordering the stored manifest keys does not invalidate an artifact,
+	 * while changing any value does.
+	 *
+	 * @throws InvalidBackupException when the manifest or a section cannot be encoded
+	 */
+	private function computeArchiveChecksum(BackupArchive $backupArchive): string {
+		$fields = $this->toArray();
+		unset($fields[self::CHECKSUM_FIELD]);
+
+		$context = hash_init(self::CHECKSUM_ALGORITHM);
+		hash_update($context, 'manifest');
+		hash_update($context, self::encodeForChecksum('manifest', $fields));
+		// sections are encoded and hashed one by one to avoid excessive memory usage
+		foreach ($backupArchive->sectionsToArray() as $section => $rows) {
+			hash_update($context, $section);
+			hash_update($context, self::encodeForChecksum($section, $rows));
+		}
+		return hash_final($context);
+	}
+
+	/**
+	 * @param array<string|int, mixed> $data
+	 * @throws InvalidBackupException when the data cannot be encoded
+	 */
+	private static function encodeForChecksum(string $subject, array $data): string {
+		try {
+			return json_encode($data, BackupSerializer::JSON_ENCODE_DEFAULT_FLAGS);
+		} catch (\JsonException $e) {
+			throw new InvalidBackupException(
+				'Failed to encode the "' . $subject . '" part of the backup for checksumming: ' . $e->getMessage(), 0, $e
+			);
+		}
 	}
 
 	/**
@@ -112,6 +184,11 @@ class BackupManifest {
 			throw new InvalidBackupException('Unknown encryption mode: "' . $mode . '"');
 		}
 
+		$checksum = isset($data[self::CHECKSUM_FIELD]) ? (string)$data[self::CHECKSUM_FIELD] : null;
+		if (empty($checksum)) {
+			throw new InvalidBackupException('The manifest is missing its checksum');
+		}
+
 		return new self(
 			$formatVersion,
 			isset($data['app_version']) ? (string)$data['app_version'] : '',
@@ -122,6 +199,7 @@ class BackupManifest {
 			isset($data['target_user_id']) ? (string)$data['target_user_id'] : null,
 			isset($data['target_vault_guid']) ? (string)$data['target_vault_guid'] : null,
 			isset($data['counts']) && is_array($data['counts']) ? $data['counts'] : [],
+			$checksum,
 		);
 	}
 }

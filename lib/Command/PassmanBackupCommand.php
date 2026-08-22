@@ -75,8 +75,9 @@ class PassmanBackupCommand extends AbstractInteractiveCommand {
 				'encryption',
 				null,
 				InputOption::VALUE_REQUIRED,
-				'How to handle the nextcloud server side encryption: "' . BackupManifest::MODE_PORTABLE . '" strips it so the artifact can be restored '
-				. 'on any instance, "' . BackupManifest::MODE_RAW . '" keeps every column verbatim (restorable on this instance only).' . PHP_EOL
+				'How to handle the nextcloud server side encryption:' . PHP_EOL
+				. '- "' . BackupManifest::MODE_PORTABLE . '" strips it so the artifact can be restored on any instance,' . PHP_EOL
+				. '- "' . BackupManifest::MODE_RAW . '" keeps every protected column verbatim (restorable on this instance only).' . PHP_EOL
 				. 'The encryption is bound to the encryption settings (like secret and passwordsalt) of this Nextcloud instance config.php',
 				BackupManifest::MODE_PORTABLE
 			)
@@ -147,6 +148,8 @@ class PassmanBackupCommand extends AbstractInteractiveCommand {
 		foreach ($manifest->counts as $section => $count) {
 			$messages->writeln(sprintf('  %-22s %d', $section, $count));
 		}
+
+		$messages->writeln('Checksum (' . BackupManifest::CHECKSUM_ALGORITHM . '): ' . $manifest->checksum);
 
 		if ($target !== null) {
 			$messages->writeln('Written to ' . $target);
