@@ -60,6 +60,8 @@ class VaultMapper extends QBMapper {
 	}
 
 	/**
+	 * Obtains a vault by its guid, restricted to the given user id.
+	 *
 	 * @param string $vault_guid
 	 * @param string $user_id
 	 * @return Vault
@@ -76,6 +78,24 @@ class VaultMapper extends QBMapper {
 		return $this->findEntity($qb);
 	}
 
+	/**
+	 * Obtains a vault by its guid, regardless of its owner. Intended for backup/admin tooling.
+	 *
+	 * @param string $vault_guid
+	 * @return Vault
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getByGuid(string $vault_guid): Vault {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('*')
+			->from(self::TABLE_NAME)
+			->where($qb->expr()->eq('guid', $qb->createNamedParameter($vault_guid, IQueryBuilder::PARAM_STR)));
+
+		// Note: Unfortunately guid is not a unique column, so it's theoretically possible having the same one multiple times,
+		// especially if not filtered by user. Is that the case MultipleObjectsReturnedException is thrown.
+		return $this->findEntity($qb);
+	}
 
 	/**
 	 * Obtains all vaults across all users. Intended for backup/admin tooling.
