@@ -36,6 +36,7 @@ Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/download', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/auth', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/promise', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/crypto_wrap', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/otpauth.umd', 'core');
 
 
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/app_public', 'core');
