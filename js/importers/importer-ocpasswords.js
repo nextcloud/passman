@@ -40,6 +40,8 @@ var PassmanImporter = PassmanImporter || {};
 		}
 	};
 
+	var DEFAULT_FOLDER_ID = '00000000-0000-0000-0000-000000000000';
+
 	var parseTags = function (row) {
 		var tags = [];
 		var addTag = function (text) {
@@ -54,6 +56,13 @@ var PassmanImporter = PassmanImporter || {};
 			}
 			tags.push({text: text});
 		};
+
+		// since Passman does not support folders, we'll import the folder as a tag if it's not the default folder
+		var folder = (row.folder || '').trim();
+		var folderId = row.folder_id || '';
+		if (folder && folderId !== DEFAULT_FOLDER_ID && folder.toLowerCase() !== 'home') {
+			addTag(folder);
+		}
 
 		if (row.tags) {
 			var tagLabels = String(row.tags).split(',');
