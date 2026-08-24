@@ -63,13 +63,70 @@ var PassmanImporter = PassmanImporter || {};
 	};
 
 	var getLabel = function (row) {
-		return row.account || row.title || null;
+		return row.account || row.title || row.web_site || row.url || null;
+	};
+
+	var parseOtp = function (row) {
+		var raw = row.totp || row.otp || row.totp_seed;
+		if (raw === undefined || raw === null) {
+			return null;
+		}
+		var value = String(raw).trim();
+		if (value.length === 0) {
+			return null;
+		}
+
+		if (value.toLowerCase().indexOf('otpauth://') !== 0) {
+			return {
+				secret: value
+			};
+		}
+
+		try {
+			/** global: URL */
+			var uri = new URL(value);
+			var type = (uri.href.toLowerCase().indexOf('totp/') !== -1) ? 'totp' : 'hotp';
+			var labelPath = uri.pathname.replace(/^\/+/, '');
+			if (labelPath.toLowerCase().indexOf(type + '/') === 0) {
+				labelPath = labelPath.substring(type.length + 1);
+			}
+			var secret = uri.searchParams.get('secret');
+			if (!secret) {
+				return null;
+			}
+			return {
+				type: type,
+				label: decodeURIComponent(labelPath),
+				issuer: uri.searchParams.get('issuer'),
+				secret: secret,
+				algorithm: uri.searchParams.get('algorithm') ? uri.searchParams.get('algorithm') : 'SHA1',
+				period: uri.searchParams.get('period') ? parseInt(uri.searchParams.get('period'), 10) : 30,
+				digits: uri.searchParams.get('digits') ? parseInt(uri.searchParams.get('digits'), 10) : 6,
+				qr_uri: {
+					image: '',
+					qrData: value
+				}
+			};
+		} catch (e) {
+			var secretMatch = /[?&]secret=([^&]+)/i.exec(value);
+			if (!secretMatch) {
+				return null;
+			}
+			return {
+				secret: decodeURIComponent(secretMatch[1]),
+				qr_uri: {
+					image: '',
+					qrData: value
+				}
+			};
+		}
 	};
 
 	PassmanImporter.keepassCsv.readFile = function (file_data) {
 		/** global: C_Promise */
 		var p = new C_Promise(function () {
 			var parsed_csv = PassmanImporter.readCsv(file_data).filter(function (row) {
+				// don't import if a label is missing or can't be derived from other fields
 				return getLabel(row) !== null;
 			});
 			var credential_list = [];
@@ -89,6 +146,12 @@ var PassmanImporter = PassmanImporter || {};
 				}
 
 				_credential.tags = parseGroups(row);
+
+				var otp = parseOtp(row);
+				if (otp) {
+					_credential.otp = otp;
+				}
+
 				credential_list.push(_credential);
 
 				var progress = {
