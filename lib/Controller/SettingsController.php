@@ -14,6 +14,8 @@ namespace OCA\Passman\Controller;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\SettingsService;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IL10N;
@@ -63,10 +65,9 @@ class SettingsController extends ApiController {
 
 	/**
 	 * Get all settings
-	 *
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getSettings() {
 		$settings = $this->settings->getAppSettings();
 		return new JSONResponse($settings);
@@ -74,10 +75,9 @@ class SettingsController extends ApiController {
 
 	/**
 	 * Save a user setting
-	 *
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function saveUserSetting($key, $value) {
 		$this->settings->setUserSetting($key, $value);
 		return new JSONResponse('OK');
@@ -86,9 +86,8 @@ class SettingsController extends ApiController {
 
 	/**
 	 * Save a app setting
-	 *
-	 * @NoCSRFRequired
 	 */
+	#[NoCSRFRequired]
 	public function saveAdminSetting($key, $value) {
 		$this->settings->setAppSetting($key, $value);
 		return new JSONResponse('OK');

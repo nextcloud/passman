@@ -24,7 +24,6 @@
 namespace OCA\Passman\AppInfo;
 
 use OC\Files\View;
-use OC\ServerContainer;
 use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Middleware\APIMiddleware;
 use OCA\Passman\Middleware\ShareMiddleware;
@@ -43,6 +42,7 @@ use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\IRequest;
 use OCP\IUserManager;
 use OCP\IUserSession;
 use OCP\Notification\IManager;
@@ -83,7 +83,7 @@ class Application extends App implements IBootstrap {
 
 			return new ShareController(
 				$c->get('AppName'),
-				$c->get('Request'),
+				$c->get(IRequest::class),
 				$userSession->getUser(),
 				$userManager,
 				$c->get(ActivityService::class),
@@ -105,12 +105,12 @@ class Application extends App implements IBootstrap {
 				$c->get(ActivityService::class)
 			));
 
-		$context->registerService('Logger', fn(ContainerInterface $c) => $c->get(ServerContainer::class)->getLogger());
+		$context->registerService('Logger', fn(ContainerInterface $c) => $c->get(LoggerInterface::class));
 	}
 
 	public function boot(IBootContext $context): void {
 		/** @var IManager $manager */
-		$manager = $context->getAppContainer()->query(IManager::class);
+		$manager = $context->getAppContainer()->get(IManager::class);
 		$manager->registerNotifierService(Notifier::class);
 
 		Util::addTranslations(self::APP_ID);
