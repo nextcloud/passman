@@ -150,7 +150,8 @@
 								_credential.custom_fields.push({
 									'label': key,
 									'value': row[k],
-									'secret': 0
+									'secret': 0,
+									'field_type': 'text'
 								});
 							} else if(field === 'custom_fields'){
 								if (row[k] !== undefined && (typeof row[k] === 'string' || row[k] instanceof String) && row[k].length > 1){
