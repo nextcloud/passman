@@ -80,8 +80,7 @@
     });
   }).config([
     '$httpProvider', function($httpProvider) {
-      /** global: oc_requesttoken */
-      $httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
+      $httpProvider.defaults.headers.common.requesttoken = GetRequestToken();
     }]).config(function(localStorageServiceProvider) {
     localStorageServiceProvider.setNotify(true, true);
   }).config(function($translateProvider) {
