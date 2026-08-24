@@ -2113,7 +2113,7 @@ label[for=confirmVaultDelete], label[for=skipFirstRow] {
   white-space: nowrap;
   overflow: hidden;
   flex: 0 0 auto;
-  max-width: 200px;
+  max-width: 400px;
 }
 #passman-controls .breadcrumb li.crumb > a.icon-home,
 #passman-controls .breadcrumb li.crumb > a.icon-delete,
