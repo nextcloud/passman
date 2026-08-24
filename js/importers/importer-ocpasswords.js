@@ -27,7 +27,7 @@ var PassmanImporter = PassmanImporter || {};
 	'use strict';
 	// Define the importer
 	var steps = [
-		'On the Passwords App, in the bottom left corner, press Settings',
+		'On the Passwords App, in the bottom left corner, press "Backup and Restore"',
 		'Open the "Backup or export" section',
 		'Select "Predefined CSV" as export format and check "Export Passwords"',
 		'Press "Export" and save the downloaded CSV file'
