@@ -305,7 +305,7 @@ class TranslationController extends ApiController {
 			'leet.variations' => $this->trans->t('l33t-variations'),
 
 			// templates/views/credential_revisions.html
-			'showing.revisions' => $this->trans->t('Showing revisions of'),
+			'showing.revisions' => $this->trans->t('Showing revisions of "{{label}}"'),
 			'revision.of' => $this->trans->t('Revision of'),
 			'revision.edited.by' => $this->trans->t('by'),
 			'no.revisions' => $this->trans->t('No revisions found.'),
