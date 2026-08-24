@@ -53,7 +53,7 @@
 						matching: ['password', 'pass', 'pw', 'login_password']
 					},
 					{
-						label: 'TOTP Secret or Object',
+						label: 'TOTP Secret, Object or otpauth URL',
 						prop: 'otp',
 						matching: ['otp', 'otp_object', 'totp', 'login_totp']
 					},
@@ -99,7 +99,7 @@
 					{
 						label: 'Changed',
 						prop: 'changed',
-						matching: ['changed', 'edited']
+						matching: ['changed', 'edited', 'last edited', 'last modified']
 					},
 					{
 						label: 'Expire time',
@@ -129,21 +129,99 @@
 				var tagMapper = function (t) {
 					return {text: t};
 				};
+				var parseTimestampToSeconds = function (value) {
+					if (value === null || value === undefined) {
+						return null;
+					}
+					if (typeof value === 'number') {
+						return isFinite(value) ? Math.floor(value) : null;
+					}
+					const rawValue = String(value).trim();
+					if (rawValue === '') {
+						return null;
+					}
+					if (/^[+-]?\d+(\.\d+)?$/.test(rawValue)) {
+						return Math.floor(parseFloat(rawValue));
+					}
+					const parsedDate = Date.parse(rawValue);
+					return isNaN(parsedDate) ? null : Math.floor(parsedDate / 1000);
+				};
+				var parseOtpValue = function (raw) {
+					if (raw === undefined || raw === null) {
+						return null;
+					}
+					const value = String(raw).trim();
+					if (value.length === 0 || value === '{}') {
+						return null;
+					}
+
+					if (value.toLowerCase().indexOf('otpauth://') !== 0) {
+						return {
+							secret: value
+						};
+					}
+
+					try {
+						/** global: URL */
+						const uri = new URL(value);
+						const type = (uri.href.toLowerCase().indexOf('totp/') !== -1) ? 'totp' : 'hotp';
+						let labelPath = uri.pathname.replace(/^\/+/, '');
+						if (labelPath.toLowerCase().indexOf(type + '/') === 0) {
+							labelPath = labelPath.substring(type.length + 1);
+						}
+						const secret = uri.searchParams.get('secret');
+						if (!secret) {
+							return null;
+						}
+						return {
+							type: type,
+							label: decodeURIComponent(labelPath),
+							issuer: uri.searchParams.get('issuer'),
+							secret: secret,
+							algorithm: uri.searchParams.get('algorithm') ? uri.searchParams.get('algorithm') : 'SHA1',
+							period: uri.searchParams.get('period') ? parseInt(uri.searchParams.get('period'), 10) : 30,
+							digits: uri.searchParams.get('digits') ? parseInt(uri.searchParams.get('digits'), 10) : 6,
+							qr_uri: {
+								image: '',
+								qrData: value
+							}
+						};
+					} catch (e) {
+						const secretMatch = /[?&]secret=([^&]+)/i.exec(value);
+						if (!secretMatch) {
+							return null;
+						}
+						return {
+							secret: decodeURIComponent(secretMatch[1]),
+							qr_uri: {
+								image: '',
+								qrData: value
+							}
+						};
+					}
+				};
 				var rowToCredential = async function (row) {
 					let _credential = PassmanImporter.newCredential();
 					for(let k = 0; k < $scope.import_fields.length; k++){
 						const field = $scope.import_fields[k];
 						if(field){
 							if(field === 'otp'){
-								if (typeof row[k] === 'object' || row[k].includes('{"')) {
-									const otpobj = JSON.parse(row[k]);
+								const otpCell = row[k];
+								if (otpCell === undefined || otpCell === null || otpCell === '' || otpCell === '{}') {
+									continue;
+								}
+								if (typeof otpCell === 'object' || (typeof otpCell === 'string' && otpCell.includes('{"'))) {
+									const otpobj = typeof otpCell === 'object' ? otpCell : JSON.parse(otpCell);
 									if (typeof otpobj === 'object' && otpobj.secret !== undefined && otpobj.algorithm !== undefined && otpobj.period !== undefined && otpobj.digits !== undefined) {
 										_credential.otp = otpobj;
 									} else if (otpobj.secret !== undefined) {
 										_credential.otp.secret = otpobj.secret;
 									}
-								} else if (row[k] !== '{}') {
-									_credential.otp.secret = row[k];
+								} else {
+									const parsedOtp = parseOtpValue(otpCell);
+									if (parsedOtp) {
+										_credential.otp = parsedOtp;
+									}
 								}
 							} else if(field === 'custom_field'){
 								const key = ($scope.matched) ? $scope.parsed_csv[0][k] : 'Custom field '+ k;
@@ -217,9 +295,9 @@
 							} else if(field === 'compromised'){
 								_credential[field] = (row[k] === 'true' || row[k] === '1');
 							} else if (field === 'created' || field === 'changed' || field === 'expire_time' || field === 'delete_time') {
-								const num = parseInt(row[k]);
-								if (!isNaN(num)) {
-									_credential[field] = num;
+								const seconds = parseTimestampToSeconds(row[k]);
+								if (seconds !== null) {
+									_credential[field] = seconds;
 								}
 							} else{
 								_credential[field] = row[k];
