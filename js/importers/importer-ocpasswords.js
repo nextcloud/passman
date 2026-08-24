@@ -27,10 +27,10 @@ var PassmanImporter = PassmanImporter || {};
 	'use strict';
 	// Define the importer
 	var steps = [
-		'Backups for the Passwords app need to be enabled on the Admin panel (they are disabled by default).',
-		'On the Passwords App, in the bottom left corner, press Settings',
-		'Press "Download Backup"',
-		'Confirm the export and save the file'
+		'On the Passwords App, in the bottom left corner, press "Backup and Restore"',
+		'Open the "Backup or export" section',
+		'Select "Predefined CSV" as export format and check "Export Passwords"',
+		'Press "Export" and save the downloaded CSV file'
 	];
 	PassmanImporter.passwordsApp = {
 		info: {
@@ -40,6 +40,88 @@ var PassmanImporter = PassmanImporter || {};
 		}
 	};
 
+	var parseTags = function (row) {
+		var tags = [];
+		var addTag = function (text) {
+			text = (text || '').trim();
+			if (!text) {
+				return;
+			}
+			for (var i = 0; i < tags.length; i++) {
+				if (tags[i].text === text) {
+					return;
+				}
+			}
+			tags.push({text: text});
+		};
+
+		if (row.tags) {
+			var tagLabels = String(row.tags).split(',');
+			for (let tag of tagLabels) {
+				addTag(tag);
+			}
+		}
+
+		return tags;
+	};
+
+	var parseEdited = function (edited) {
+		if (!edited) {
+			return null;
+		}
+		var timestamp = Date.parse(edited);
+		if (!isNaN(timestamp)) {
+			return Math.floor(timestamp / 1000);
+		}
+		return null;
+	};
+
+	var parseCustomFields = function (raw, credential) {
+		if (!raw) {
+			return credential;
+		}
+		var lines = String(raw).split(/\r?\n/);
+		for (var i = 0; i < lines.length; i++) {
+			var line = lines[i].trim();
+			if (!line) {
+				continue;
+			}
+
+			var label = '';
+			var value = line;
+			var type = 'text';
+			var colonIndex = line.indexOf(':');
+			if (colonIndex !== -1) {
+				label = line.substring(0, colonIndex).trim();
+				value = line.substring(colonIndex + 1).trim();
+				var commaIndex = label.lastIndexOf(',');
+				if (commaIndex !== -1) {
+					type = label.substring(commaIndex + 1).trim().toLowerCase();
+					label = label.substring(0, commaIndex).trim();
+				}
+			}
+			if (!label) {
+				label = type;
+			}
+
+			// since Passman does not support custom fields of type email, we just import it into our dedicated email field if not already set
+			if (type === 'email' && !credential.email) {
+				credential.email = value;
+				continue;
+			}
+
+			// any other custom field type (like "file" of the Password App, that does not contain the actual file) will be imported with type text
+			var fieldType = (type === 'secret' || type === 'password') ? 'password' : 'text';
+			credential.custom_fields.push({
+				label: label,
+				value: value,
+				secret: fieldType === 'password',
+				field_type: fieldType
+			});
+		}
+		return credential;
+	};
+
 	PassmanImporter.passwordsApp.readFile = function (file_data) {
 		/** global: C_Promise */
 		var p = new C_Promise(function () {
@@ -47,14 +129,25 @@ var PassmanImporter = PassmanImporter || {};
 			var credential_list = [];
 			for (var i = 0; i < parsed_csv.length; i++) {
 				var row = parsed_csv[i];
+				var username = row.username || '';
+				var label = row.label || PassmanImporter.join_([row.website, username], ' - ');
 				var _credential = PassmanImporter.newCredential();
-				_credential.label = row.website + ' - '+ row.username;
-				_credential.username = row.username;
-				_credential.password = row.password;
-				_credential.url = row.fulladdress;
-				_credential.description = row.notes;
+				_credential.label = label;
+				_credential.username = username;
+				_credential.password = row.password || '';
+				_credential.url = row.url || row.fulladdress || '';
+				_credential.description = row.notes || '';
+				_credential.tags = parseTags(row);
+				parseCustomFields(row.custom_fields, _credential);
 
-				credential_list.push(_credential);
+				const edited = parseEdited(row.edited);
+				if (edited) {
+					_credential.changed = edited;
+				}
+
+				if (label) {
+					credential_list.push(_credential);
+				}
 
 				var progress = {
 					percent: i / parsed_csv.length * 100,
