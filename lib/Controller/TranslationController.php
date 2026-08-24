@@ -388,6 +388,11 @@ class TranslationController extends ApiController {
 			'vault.default' => $this->trans->t('Set this vault as the default.'),
 			'vault.auto.login' => $this->trans->t('Log into this vault automatically.'),
 			'auto.logout' => $this->trans->t('Log out of this vault automatically after:'),
+			'auto.logout.minutes.30' => $this->trans->t('30 minutes'),
+			'auto.logout.minutes.60' => $this->trans->t('60 minutes'),
+			'auto.logout.minutes.90' => $this->trans->t('90 minutes'),
+			'auto.logout.hours.3' => $this->trans->t('3 hours'),
+			'auto.logout.hours.8' => $this->trans->t('8 hours'),
 			'vault.decrypt' => $this->trans->t('Decrypt vault'),
 
 			'req.intro1' => $this->trans->t('Seems you lost the vault password and you\'re unable to log in.'),

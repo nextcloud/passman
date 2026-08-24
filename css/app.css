@@ -644,7 +644,11 @@
   width: 100%;
 }
 .vault_wrapper .login_opts {
+  margin-top: 10px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 @media screen and (max-width: 768px) {
