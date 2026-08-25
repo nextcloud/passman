@@ -52,6 +52,7 @@ OC.L10N.register(
     "Accept" : "ยอมรับ",
     "Decline" : "ปฏิเสธ",
     "Never" : "ไม่เคย",
+    "30 minutes" : "30 นาที",
     "Donate" : "บริจาค",
     "Tags" : "แท็ก",
     "Loading" : "กำลังโหลด",

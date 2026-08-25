@@ -63,6 +63,8 @@ OC.L10N.register(
     "Decline" : "Refuză",
     "Last accessed" : "Ultima accesare",
     "Never" : "Niciodată",
+    "30 minutes" : "30 de minute",
+    "3 hours" : "3 ore",
     "Logged into {{vault_name}}" : "Autentificat în {{vault_name}}",
     "Tags" : "Etichete",
     "email" : "email",

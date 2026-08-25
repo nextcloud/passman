@@ -228,7 +228,6 @@ OC.L10N.register(
     "Base guesses" : "التخمينات الأساسية",
     "Uppercase variations" : "متغيرات الأحرف الكبيرة",
     "l33t-variations" : "متغيرات- l33t",
-    "Showing revisions of" : "عرض مراجعات الـ",
     "Revision of" : "تنقيح لـ",
     "by" : "من قبل",
     "No revisions found." : "لا يتم العثور على أي تنقيحات",

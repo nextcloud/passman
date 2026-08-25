@@ -75,6 +75,8 @@ OC.L10N.register(
     "Accept" : "Прифати",
     "Decline" : "Одбиј",
     "Never" : "Никогаш",
+    "30 minutes" : "30 минути",
+    "3 hours" : "3 часа",
     "Logout" : "Одјава",
     "Donate" : "Донирај",
     "Tags" : "Ознаки",
