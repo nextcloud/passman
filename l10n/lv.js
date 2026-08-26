@@ -85,6 +85,7 @@ OC.L10N.register(
     "Total progress" : "Kopējā norise",
     "About Passman" : "Par Passman",
     "Version" : "Versija",
+    "Donate to support development" : "Ziedot, lai atbalstītu izstrādi",
     "Bookmarklet" : "Grāmatzīmes",
     "Vault password" : "Glabātavas parole",
     "Import type" : "Ievietošanas veids",

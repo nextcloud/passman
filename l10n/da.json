@@ -292,6 +292,7 @@
     "Log out of this vault automatically after:" : "Log automatisk ud af denne boks efter:",
     "30 minutes" : "30 minutter",
     "60 minutes" : "60 minutter",
+    "3 hours" : "3 timer",
     "8 hours" : "8 timer",
     "Decrypt vault" : "Dekrypter boks",
     "Seems you lost the vault password and you're unable to log in." : "Det lader til at du har mistet din boksadgangskode og ikke er i stand til at logge på",
