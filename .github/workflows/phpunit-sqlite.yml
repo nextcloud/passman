@@ -64,7 +64,7 @@ jobs:
               - 'sonar-project.properties'
 
   phpunit-sqlite:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-low
 
     needs: [changes, matrix]
     if: needs.changes.outputs.src != 'false'
