@@ -349,58 +349,6 @@ var OC={
 	},
 
 	/**
-	 * Load a script for the server and load it. If the script is already loaded,
-	 * the event handler will be called directly
-	 * @param {string} app the app id to which the script belongs
-	 * @param {string} script the filename of the script
-	 * @param ready event handler to be called when the script is loaded
-	 */
-	addScript:function(app,script,ready){
-		var deferred, path=OC.filePath(app,'js',script+'.js');
-		if(!OC.addScript.loaded[path]){
-			if(ready){
-				deferred=$.getScript(path,ready);
-			}else{
-				deferred=$.getScript(path);
-			}
-			OC.addScript.loaded[path]=deferred;
-		}else{
-			if(ready){
-				ready();
-			}
-		}
-		return OC.addScript.loaded[path];
-	},
-	/**
-	 * Loads a CSS file
-	 * @param {string} app the app id to which the css style belongs
-	 * @param {string} style the filename of the css file
-	 */
-	addStyle:function(app,style){
-		var path=OC.filePath(app,'css',style+'.css');
-		if(OC.addStyle.loaded.indexOf(path)===-1){
-			OC.addStyle.loaded.push(path);
-			if (document.createStyleSheet) {
-				document.createStyleSheet(path);
-			} else {
-				style=$('<link rel="stylesheet" type="text/css" href="'+path+'"/>');
-				$('head').append(style);
-			}
-		}
-	},
-
-	/**
-	 * Loads translations for the given app asynchronously.
-	 *
-	 * @param {String} app app name
-	 * @param {Function} callback callback to call after loading
-	 * @return {Promise}
-	 */
-	addTranslations: function(app, callback) {
-		return OC.L10N.load(app, callback);
-	},
-
-	/**
 	 * Returns the base name of the given path.
 	 * For example for "/abc/somefile.txt" it will return "somefile.txt"
 	 *
