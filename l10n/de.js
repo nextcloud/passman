@@ -62,7 +62,7 @@ OC.L10N.register(
     "The first 5 lines of the CSV are shown." : "Die ersten 5 Zeilen der CSV-Datei werden angezeigt. ",
     "Assign the proper fields to each column." : "Die richtigen Felder zu jeder Spalte zuordnen",
     "Example of imported credential" : " Beispiel einer importierten Anmeldeinformation ",
-    "Missing an importer? Click here to try it with the generic CSV importer." : "Fehlt ein Importer? Hier klciken, um es mit dem generischen CSV-Importer zu versuchen.",
+    "Missing an importer? Click here to try it with the generic CSV importer." : "Fehlt ein Importer? Hier klicken, um es mit dem generischen CSV-Importer zu versuchen.",
     "Go back to importers." : "Zurück zur Importfunktion.",
     "Revision deleted" : "Revision gelöscht",
     "Revision restored" : "Revision wiederhergestellt",
