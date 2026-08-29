@@ -27,17 +27,10 @@ namespace OCA\Passman\Service;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\BackupRestore\BackupArchive;
 use OCA\Passman\BackupRestore\BackupManifest;
+use OCA\Passman\BackupRestore\ScopeReader;
 use OCA\Passman\Db\Credential;
-use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\CredentialRevision;
-use OCA\Passman\Db\CredentialRevisionMapper;
-use OCA\Passman\Db\DeleteVaultRequestMapper;
 use OCA\Passman\Db\File;
-use OCA\Passman\Db\FileMapper;
-use OCA\Passman\Db\ShareRequestMapper;
-use OCA\Passman\Db\SharingACLMapper;
-use OCA\Passman\Db\Vault;
-use OCA\Passman\Db\VaultMapper;
 use OCA\Passman\Utility\Utils;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -46,25 +39,19 @@ use OCP\IConfig;
 /**
  * Exports Passman data into an in-memory {@see BackupArchive}.
  *
- * The scope decides which rows are read, the encryption mode decides how they
- * are stored: `portable` strips the Nextcloud server side encryption layer so
- * the artifact can be restored on any instance, `raw` copies every column
- * verbatim (restorable on this instance only). The end to end encryption layer
- * is never touched.
+ * The scope decides which rows are read (via the shared {@see ScopeReader}), the
+ * encryption mode decides how they are stored: `portable` strips the Nextcloud
+ * server side encryption layer so the artifact can be restored on any instance,
+ * `raw` copies every column verbatim (restorable on this instance only). The end
+ * to end encryption layer is never touched.
  */
 readonly class BackupService {
 
 	public function __construct(
-		private VaultMapper              $vaultMapper,
-		private CredentialMapper         $credentialMapper,
-		private FileMapper               $fileMapper,
-		private CredentialRevisionMapper $revisionMapper,
-		private SharingACLMapper         $sharingACLMapper,
-		private ShareRequestMapper       $shareRequestMapper,
-		private DeleteVaultRequestMapper $deleteVaultRequestMapper,
-		private EncryptService           $encryptService,
-		private IAppManager              $appManager,
-		private IConfig                  $config,
+		private ScopeReader    $scopeReader,
+		private EncryptService $encryptService,
+		private IAppManager    $appManager,
+		private IConfig        $config,
 	) {
 	}
 
@@ -105,11 +92,14 @@ readonly class BackupService {
 			$scope === BackupManifest::SCOPE_VAULT ? $vaultGuid : null,
 		));
 
-		match ($scope) {
-			BackupManifest::SCOPE_USER => $this->collectUser($archive, (string)$userId),
-			BackupManifest::SCOPE_VAULT => $this->collectVault($archive, (string)$vaultGuid),
-			default => $this->collectInstance($archive),
-		};
+		$selection = $this->scopeReader->read($scope, $userId, $vaultGuid);
+		$this->addVerbatimRows($archive, BackupArchive::SECTION_VAULTS, $selection->vaults);
+		$this->addCredentials($archive, $selection->credentials);
+		$this->addFiles($archive, $selection->files);
+		$this->addRevisions($archive, $selection->revisions);
+		$this->addVerbatimRows($archive, BackupArchive::SECTION_SHARING_ACL, $selection->sharingAcl);
+		$this->addVerbatimRows($archive, BackupArchive::SECTION_SHARE_REQUESTS, $selection->shareRequests);
+		$this->addVerbatimRows($archive, BackupArchive::SECTION_DELETE_VAULT_REQUESTS, $selection->deleteVaultRequests);
 
 		$archive->refreshCounts();
 		return $archive;
@@ -143,100 +133,6 @@ readonly class BackupService {
 		}
 
 		return $caveats;
-	}
-
-	private function collectInstance(BackupArchive $archive): void {
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_VAULTS, $this->vaultMapper->getAllVaults());
-		$this->addCredentials($archive, $this->credentialMapper->getAll());
-		$this->addFiles($archive, $this->fileMapper->getAllFiles());
-		$this->addRevisions($archive, $this->revisionMapper->getAll());
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_SHARING_ACL, $this->sharingACLMapper->getAll());
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_SHARE_REQUESTS, $this->shareRequestMapper->getAll());
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_DELETE_VAULT_REQUESTS, $this->deleteVaultRequestMapper->getDeleteRequests());
-	}
-
-	private function collectUser(BackupArchive $archive, string $userId): void {
-		$vaults = $this->vaultMapper->findVaultsFromUser($userId);
-		$credentials = $this->credentialMapper->getByUser($userId);
-
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_VAULTS, $vaults);
-		$this->addSharingRows($archive, $vaults, $credentials, $userId);
-		$this->addCredentials($archive, $credentials);
-		$this->addFiles($archive, $this->fileMapper->getFilesByUser($userId));
-		$this->addRevisions($archive, $this->revisionMapper->getByUser($userId));
-	}
-
-	/**
-	 * @throws DoesNotExistException
-	 */
-	private function collectVault(BackupArchive $archive, string $vaultGuid): void {
-		$vault = $this->vaultMapper->getByGuid($vaultGuid);
-		$credentials = $this->credentialMapper->getCredentialsByVaultId((string)$vault->getId(), $vault->getUserId());
-
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_VAULTS, [$vault]);
-		$this->addSharingRows($archive, [$vault], $credentials, null);
-		$this->addCredentials($archive, $credentials);
-		$this->addRevisions($archive, $this->getRevisionsOfCredentials($credentials));
-	}
-
-	/**
-	 * Collects the sharing rows referencing one of the given vaults or credentials,
-	 * plus the rows referencing the user itself when a user scope is exported.
-	 *
-	 * @param Vault[] $vaults
-	 * @param Credential[] $credentials
-	 */
-	private function addSharingRows(BackupArchive $archive, array $vaults, array $credentials, ?string $userId): void {
-		$acl = [];
-		$shareRequests = [];
-		$deleteRequests = [];
-
-		if ($userId !== null) {
-			$acl[] = $this->sharingACLMapper->getByUser($userId);
-			$shareRequests[] = $this->shareRequestMapper->getByUser($userId);
-			$deleteRequests[] = $this->deleteVaultRequestMapper->getByRequestedBy($userId);
-		}
-
-		foreach ($vaults as $vault) {
-			$acl[] = $this->sharingACLMapper->getByVaultGuid($vault->getGuid());
-			$shareRequests[] = $this->shareRequestMapper->getByTargetVaultGuid($vault->getGuid());
-			$deleteRequests[] = $this->deleteVaultRequestMapper->getByVaultGuid($vault->getGuid());
-		}
-
-		foreach ($credentials as $credential) {
-			$acl[] = $this->sharingACLMapper->getCredentialAclList($credential->getGuid());
-			$shareRequests[] = $this->shareRequestMapper->getShareRequestsByItemGuid($credential->getGuid());
-		}
-
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_SHARING_ACL, $this->uniqueById($acl));
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_SHARE_REQUESTS, $this->uniqueById($shareRequests));
-		$this->addVerbatimRows($archive, BackupArchive::SECTION_DELETE_VAULT_REQUESTS, $this->uniqueById($deleteRequests));
-	}
-
-	/**
-	 * @param Credential[] $credentials
-	 * @return CredentialRevision[]
-	 */
-	private function getRevisionsOfCredentials(array $credentials): array {
-		$revisions = [];
-		foreach ($credentials as $credential) {
-			$revisions[] = $this->revisionMapper->getRevisions($credential->getId());
-		}
-		return $this->uniqueById($revisions);
-	}
-
-	/**
-	 * Flattens the results of overlapping scope queries, keeping every row once.
-	 *
-	 * @param array<int, array> $entityLists lists of entities exposing getId()
-	 * @return array<int, object>
-	 */
-	private function uniqueById(array $entityLists): array {
-		$unique = [];
-		foreach (array_merge([], ...$entityLists) as $entity) {
-			$unique[$entity->getId()] = $entity;
-		}
-		return array_values($unique);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Nextcloud - passman
+ * Nextcloud - Passman
  *
  * @copyright 2026 Timo Triebensky (timo@binsky.org)
  * @license GNU AGPL version 3 or any later version
@@ -53,7 +53,7 @@ class PassmanBackupCommand extends AbstractInteractiveCommand {
 		$this
 			->setName('passman:backup')
 			->setDescription(
-				'Export passman data into a (JSON) backup artifact.' . PHP_EOL
+				'Export Passman data into a (JSON) backup artifact.' . PHP_EOL
 				. '  Without --output the artifact goes to stdout and every message to stderr, which keeps piping the artifact intact.'
 			)
 			->addOption(

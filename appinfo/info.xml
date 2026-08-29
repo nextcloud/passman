@@ -75,5 +75,6 @@ For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 
     <commands>
         <command>OCA\Passman\Command\PassmanBackupCommand</command>
+        <command>OCA\Passman\Command\PassmanRestoreCommand</command>
     </commands>
 </info>
