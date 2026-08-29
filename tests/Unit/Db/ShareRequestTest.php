@@ -103,6 +103,17 @@ class ShareRequestTest extends TestCase {
 		$this->assertSame($expected, $this->request->jsonSerialize());
 	}
 
+	public function testToBackupArrayUsesDbColumnNamesIncludingId(): void {
+		$backup = $this->request->toBackupArray();
+
+		$this->assertSame(self::TEST_DATA['id'], $backup['id']);
+		$this->assertArrayNotHasKey('req_id', $backup);
+		foreach (self::TEST_DATA as $column => $value) {
+			$this->assertArrayHasKey($column, $backup);
+			$this->assertEquals($value, $backup[$column]);
+		}
+	}
+
 	public function testAsACLJson(): void {
 		$expected = [
 			'item_id'     => self::TEST_DATA['item_id'],

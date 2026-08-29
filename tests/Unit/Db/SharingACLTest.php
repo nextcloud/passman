@@ -106,4 +106,16 @@ class SharingACLTest extends TestCase {
 
 		$this->assertEquals($expected, $this->acl->jsonSerialize());
 	}
+
+	public function testToBackupArrayUsesDbColumnNamesWithoutPendingFlag(): void {
+		$backup = $this->acl->toBackupArray();
+
+		$this->assertSame(self::TEST_DATA['id'], $backup['id']);
+		$this->assertArrayNotHasKey('acl_id', $backup);
+		$this->assertArrayNotHasKey('pending', $backup);
+		foreach (self::TEST_DATA as $column => $value) {
+			$this->assertArrayHasKey($column, $backup);
+			$this->assertEquals($value, $backup[$column]);
+		}
+	}
 }

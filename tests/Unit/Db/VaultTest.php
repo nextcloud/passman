@@ -98,4 +98,15 @@ pbbPwdc88kGcdqBzWQIDAQAB
 
 		$this->assertEquals($expectedData, $this->vault->jsonSerialize());
 	}
+
+	public function testToBackupArrayUsesDbColumnNamesIncludingId(): void {
+		$backup = $this->vault->toBackupArray();
+
+		$this->assertSame(self::TEST_DATA['id'], $backup['id']);
+		$this->assertArrayNotHasKey('vault_id', $backup);
+		foreach (self::TEST_DATA as $column => $value) {
+			$this->assertArrayHasKey($column, $backup);
+			$this->assertEquals($value, $backup[$column]);
+		}
+	}
 }

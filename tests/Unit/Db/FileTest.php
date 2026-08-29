@@ -84,4 +84,16 @@ class FileTest extends TestCase {
 
 		$this->assertEquals($expected, $this->file->jsonSerialize());
 	}
+
+	public function testToBackupArrayUsesDbColumnNamesIncludingUserId(): void {
+		$backup = $this->file->toBackupArray();
+
+		$this->assertSame(self::TEST_DATA['id'], $backup['id']);
+		$this->assertSame(self::TEST_DATA['user_id'], $backup['user_id']);
+		$this->assertArrayNotHasKey('file_id', $backup);
+		foreach (self::TEST_DATA as $column => $value) {
+			$this->assertArrayHasKey($column, $backup);
+			$this->assertEquals($value, $backup[$column]);
+		}
+	}
 }

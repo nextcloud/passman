@@ -136,4 +136,16 @@ class CredentialTest extends TestCase {
 
 		$this->assertEquals($comparisonArray, $this->credential->jsonSerialize());
 	}
+
+	public function testToBackupArrayUsesDbColumnNamesIncludingRawIcon(): void {
+		$backup = $this->credential->toBackupArray();
+
+		$this->assertSame(self::TEST_DATA['id'], $backup['id']);
+		$this->assertSame(self::TEST_DATA['icon'], $backup['icon']);
+		$this->assertArrayNotHasKey('credential_id', $backup);
+		foreach (self::TEST_DATA as $column => $value) {
+			$this->assertArrayHasKey($column, $backup);
+			$this->assertEquals($value, $backup[$column]);
+		}
+	}
 }

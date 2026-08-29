@@ -79,4 +79,18 @@ class CredentialRevisionTest extends TestCase {
 
 		$this->assertEquals($expected, $this->revision->jsonSerialize());
 	}
+
+	public function testToBackupArrayKeepsRawCredentialDataAndDbIds(): void {
+		$backup = $this->revision->toBackupArray();
+
+		$this->assertSame(self::TEST_DATA['id'], $backup['id']);
+		$this->assertSame(self::TEST_DATA['credential_id'], $backup['credential_id']);
+		$this->assertSame(self::TEST_DATA['user_id'], $backup['user_id']);
+		$this->assertSame(self::TEST_DATA['credential_data'], $backup['credential_data']);
+		$this->assertArrayNotHasKey('revision_id', $backup);
+		foreach (self::TEST_DATA as $column => $value) {
+			$this->assertArrayHasKey($column, $backup);
+			$this->assertEquals($value, $backup[$column]);
+		}
+	}
 }
