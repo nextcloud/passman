@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "General" : "Allgemeng",
     "Done" : "Done",
+    "Settings saved" : "Astellunge gespäichert",
     "Sharing" : "Gedeelt",
     "Share with users and groups" : "Mat Benotzer a Gruppen deelen",
     "Share link" : "Link deelen",
