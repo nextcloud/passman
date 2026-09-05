@@ -112,6 +112,7 @@ OC.L10N.register(
     "Email" : "電子郵件",
     "URL" : "URL",
     "Notes" : "筆記",
+    "Changed" : "已變更",
     "Created" : "已新增",
     "Edit" : "退出",
     "Delete" : "刪除",
