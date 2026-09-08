@@ -30,6 +30,9 @@ use OCA\Passman\Utility\Utils;
 use OCP\IDBConnection;
 
 trait DbTestTrait {
+	/** User id prefix for backup/restore DB tests so leftover rows are easy to spot and clean. */
+	protected const PASSMAN_BACKUP_RESTORE_USER_PREFIX = 'passman_br_';
+
 	protected function deletePassmanRows(IDBConnection $db, string $table, string $userColumn, string $userId): void {
 		$qb = $db->getQueryBuilder();
 		$qb->delete($table)
@@ -48,6 +51,22 @@ trait DbTestTrait {
 	}
 
 	/**
+	 * Removes every Passman row of the given users (all seven tables), children before parents.
+	 */
+	protected function deleteAllPassmanRowsForUsers(IDBConnection $db, string ...$userIds): void {
+		foreach ($userIds as $userId) {
+			$this->deletePassmanRows($db, 'passman_delete_vault_request', 'requested_by', $userId);
+			$this->deleteShareRequestsForUser($db, $userId);
+			$this->deletePassmanRows($db, 'passman_sharing_acl', 'user_id', $userId);
+			$this->deletePassmanRows($db, 'passman_revisions', 'user_id', $userId);
+			$this->deletePassmanRows($db, 'passman_files', 'user_id', $userId);
+			$this->deletePassmanRows($db, 'passman_credentials', 'user_id', $userId);
+			$this->deletePassmanRows($db, 'passman_vaults', 'user_id', $userId);
+		}
+	}
+
+	/**
+	 * Creates sample credential data for testing, no e2e encryption applied, but should be fine for just the backend tests.
 	 * @return array<string, mixed>
 	 */
 	protected function sampleCredentialData(int $vaultId, string $userId, array $overrides = []): array {
