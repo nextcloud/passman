@@ -26,10 +26,12 @@ namespace OCA\Passman\Tests\Unit\Lib\BackupRestore\Restore;
 
 use OCA\Passman\BackupRestore\BackupArchive;
 use OCA\Passman\BackupRestore\Restore\EntityWriter;
+use OCA\Passman\BackupRestore\Restore\RestoreContext;
 use OCA\Passman\BackupRestore\RestoreResult;
 use OCA\Passman\Db\DeleteVaultRequest;
 use OCA\Passman\Db\DeleteVaultRequestMapper;
 use OCA\Passman\Exception\InvalidBackupException;
+use OCA\Passman\Service\RestoreService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use Test\TestCase;
@@ -60,7 +62,7 @@ class EntityWriterTest extends TestCase {
 			DeleteVaultRequest::class,
 			['vault_guid' => 'vault-1', 'foo_column' => 'x'],
 			null,
-			$this->result,
+			$this->context(),
 		);
 	}
 
@@ -79,7 +81,7 @@ class EntityWriterTest extends TestCase {
 			DeleteVaultRequest::class,
 			['vault_guid' => 'vault-1', 'reason' => null],
 			null,
-			$this->result,
+			$this->context(),
 		);
 
 		$this->assertSame(1, $this->result->inserted[BackupArchive::SECTION_DELETE_VAULT_REQUESTS]);
@@ -100,10 +102,50 @@ class EntityWriterTest extends TestCase {
 			DeleteVaultRequest::class,
 			['vault_guid' => 'vault-1'],
 			42,
-			$this->result,
+			$this->context(),
 		);
 
 		$this->assertSame(1, $this->result->updated[BackupArchive::SECTION_DELETE_VAULT_REQUESTS]);
 		$this->assertSame(0, $this->result->inserted[BackupArchive::SECTION_DELETE_VAULT_REQUESTS]);
+	}
+
+	public function testDryRunInsertDoesNotWriteAndAssignsASyntheticId(): void {
+		$this->mapper->expects($this->never())->method('insert');
+		$this->mapper->expects($this->never())->method('update');
+
+		$entity = $this->writer->store(
+			BackupArchive::SECTION_DELETE_VAULT_REQUESTS,
+			$this->mapper,
+			DeleteVaultRequest::class,
+			['vault_guid' => 'vault-1'],
+			null,
+			$this->context(true),
+		);
+
+		$this->assertSame(1, $entity->getId());
+		$this->assertSame(1, $this->result->inserted[BackupArchive::SECTION_DELETE_VAULT_REQUESTS]);
+		$this->assertSame(0, $this->result->updated[BackupArchive::SECTION_DELETE_VAULT_REQUESTS]);
+	}
+
+	public function testDryRunUpdateDoesNotWrite(): void {
+		$this->mapper->expects($this->never())->method('insert');
+		$this->mapper->expects($this->never())->method('update');
+
+		$entity = $this->writer->store(
+			BackupArchive::SECTION_DELETE_VAULT_REQUESTS,
+			$this->mapper,
+			DeleteVaultRequest::class,
+			['vault_guid' => 'vault-1'],
+			42,
+			$this->context(true, RestoreService::MODE_MERGE),
+		);
+
+		$this->assertSame(42, $entity->getId());
+		$this->assertSame(1, $this->result->updated[BackupArchive::SECTION_DELETE_VAULT_REQUESTS]);
+		$this->assertSame(0, $this->result->inserted[BackupArchive::SECTION_DELETE_VAULT_REQUESTS]);
+	}
+
+	private function context(bool $dryRun = false, string $mode = RestoreService::MODE_REPLACE): RestoreContext {
+		return new RestoreContext($mode, $this->result, $dryRun);
 	}
 }

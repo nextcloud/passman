@@ -26,7 +26,6 @@ namespace OCA\Passman\BackupRestore\Restore;
 
 use OCA\Passman\BackupRestore\BackupArchive;
 use OCA\Passman\BackupRestore\BackupManifest;
-use OCA\Passman\BackupRestore\RestoreResult;
 use OCA\Passman\BackupRestore\ScopeReader;
 use OCA\Passman\BackupRestore\ScopeSelection;
 use OCA\Passman\Db\CredentialMapper;
@@ -47,6 +46,8 @@ use OCP\AppFramework\Db\QBMapper;
  *
  * Reads the scope via {@see ScopeReader}, then deletes over {@see BackupArchive::SECTIONS} in reverse:
  * children before parents, mirroring the dependency order the sections are inserted in.
+ *
+ * A dry-run still walks the scope and increments {@see \OCA\Passman\BackupRestore\RestoreResult::$deleted}, but does not delete.
  */
 readonly class RestoreScopeCleaner {
 
@@ -65,7 +66,7 @@ readonly class RestoreScopeCleaner {
 	/**
 	 * @throws \RuntimeException when the manifest targets a vault guid which is ambiguous on this instance
 	 */
-	public function clean(BackupManifest $manifest, RestoreResult $result): void {
+	public function clean(BackupManifest $manifest, RestoreContext $context): void {
 		try {
 			$scope = $this->scopeReader->forManifest($manifest);
 		} catch (DoesNotExistException) {
@@ -84,8 +85,10 @@ readonly class RestoreScopeCleaner {
 		foreach (array_reverse(BackupArchive::SECTIONS) as $section) {
 			$mapper = $this->mapperFor($section);
 			foreach ($scope->entities($section) as $entity) {
-				$mapper->delete($entity);
-				$result->countDeleted($section);
+				if (!$context->isDryRun()) {
+					$mapper->delete($entity);
+				}
+				$context->result->countDeleted($section);
 			}
 		}
 	}

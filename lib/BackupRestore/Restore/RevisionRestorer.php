@@ -83,7 +83,7 @@ readonly class RevisionRestorer implements SectionRestorer {
 				$existingId = $existingRevisions[$newCredentialId][BackupRow::readString($row, 'guid') ?? ''] ?? null;
 			}
 
-			$this->entityWriter->store($section, $this->revisionMapper, CredentialRevision::class, $row, $existingId, $context->result);
+			$this->entityWriter->store($section, $this->revisionMapper, CredentialRevision::class, $row, $existingId, $context);
 		}
 	}
 }

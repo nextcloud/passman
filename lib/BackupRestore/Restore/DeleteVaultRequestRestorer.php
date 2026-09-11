@@ -57,7 +57,7 @@ readonly class DeleteVaultRequestRestorer implements SectionRestorer {
 					'delete request of the vault "' . $vaultGuid . '"'
 				)?->getId()
 				: null;
-			$this->entityWriter->store($section, $this->deleteVaultRequestMapper, DeleteVaultRequest::class, $row, $existingId, $context->result);
+			$this->entityWriter->store($section, $this->deleteVaultRequestMapper, DeleteVaultRequest::class, $row, $existingId, $context);
 		}
 	}
 }

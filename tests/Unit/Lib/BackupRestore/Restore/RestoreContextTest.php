@@ -78,4 +78,18 @@ class RestoreContextTest extends TestCase {
 		$this->assertTrue($merge->isMerge());
 		$this->assertFalse($replace->isMerge());
 	}
+
+	public function testIsDryRunDefaultsToFalse(): void {
+		$context = new RestoreContext(RestoreService::MODE_REPLACE, new RestoreResult());
+
+		$this->assertFalse($context->isDryRun());
+	}
+
+	public function testAllocateDryRunIdIncrementsFromOne(): void {
+		$context = new RestoreContext(RestoreService::MODE_REPLACE, new RestoreResult(), true);
+
+		$this->assertTrue($context->isDryRun());
+		$this->assertSame(1, $context->allocateDryRunId());
+		$this->assertSame(2, $context->allocateDryRunId());
+	}
 }

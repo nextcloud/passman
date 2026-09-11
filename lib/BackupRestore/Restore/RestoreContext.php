@@ -29,8 +29,11 @@ use OCA\Passman\Service\RestoreService;
 
 /**
  * Mutable state of a single restore run:
- * the chosen mode, the result being built up, and the old-id -> this-instance-id maps,
+ * the chosen mode, whether this is a dry-run, the result being built up, and the old-id -> this-instance-id maps,
  * that every section restorer feeds and consults, since every id of the artifact is regenerated on insert.
+ *
+ * A dry-run still fills those maps: inserts get a synthetic id from
+ * {@see allocateDryRunId()} so child rows can remap without a database write.
  */
 final class RestoreContext {
 
@@ -40,9 +43,12 @@ final class RestoreContext {
 	/** @var array<int, int> old credential id => credential id on this instance */
 	private array $credentialIds = [];
 
+	private int $nextDryRunId = 0;
+
 	public function __construct(
 		private readonly string $mode,
 		public readonly RestoreResult $result,
+		private readonly bool $dryRun = false,
 	) {
 	}
 
@@ -52,6 +58,17 @@ final class RestoreContext {
 
 	public function isMerge(): bool {
 		return $this->mode === RestoreService::MODE_MERGE;
+	}
+
+	public function isDryRun(): bool {
+		return $this->dryRun;
+	}
+
+	/**
+	 * Next synthetic id for a dry-run insert, so child remaps still work without writing anything.
+	 */
+	public function allocateDryRunId(): int {
+		return ++$this->nextDryRunId;
 	}
 
 	public function rememberVault(?int $oldId, int $newId): void {

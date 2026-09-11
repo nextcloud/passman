@@ -248,6 +248,36 @@ class BackupRestoreRoundTripTest extends TestCase {
 		);
 	}
 
+	public function testDryRunLeavesRowsUnchangedAndCountsMatchASubsequentRestore(): void {
+		$seed = $this->seedGraph(self::USER_A, withSecondVault: false);
+		$beforeIds = $this->idsForUser(self::USER_A);
+		$archive = $this->backupUser(self::USER_A, BackupManifest::MODE_PORTABLE);
+
+		$dry = $this->restoreService->restore($archive, RestoreService::MODE_REPLACE, dryRun: true);
+
+		$this->assertSame($beforeIds, $this->idsForUser(self::USER_A));
+		$this->assertSame(
+			$seed['credential']->getId(),
+			$this->credentialMapper->getCredentialByGUID($seed['credential']->getGuid())->getId(),
+		);
+		$this->assertSectionContentsMatch($archive, $this->backupUser(self::USER_A, BackupManifest::MODE_PORTABLE));
+		$this->assertGreaterThan(0, $dry->totalDeleted());
+		$this->assertGreaterThan(0, $dry->totalInserted());
+		$this->assertSame(0, $dry->totalUpdated());
+
+		$real = $this->restoreService->restore($archive, RestoreService::MODE_REPLACE);
+
+		$this->assertSame($dry->deleted, $real->deleted);
+		$this->assertSame($dry->inserted, $real->inserted);
+		$this->assertSame($dry->updated, $real->updated);
+		$this->assertSame($dry->skipped, $real->skipped);
+		$this->assertNotSame(
+			$beforeIds['credentials'],
+			$this->idsForUser(self::USER_A)['credentials'],
+			'the subsequent real restore must still rewrite numeric ids',
+		);
+	}
+
 	public function testForeignRawRestoreIsRejectedWithoutForceAndInsertsWithForce(): void {
 		$this->seedGraph(self::USER_A, withSecondVault: false);
 		$archive = $this->backupUser(self::USER_A, BackupManifest::MODE_RAW);

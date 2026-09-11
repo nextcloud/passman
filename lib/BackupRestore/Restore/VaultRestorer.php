@@ -47,7 +47,7 @@ readonly class VaultRestorer implements SectionRestorer {
 
 		foreach ($archive->section($section)->rows as $row) {
 			$existingId = $context->isMerge() ? $this->lookup->findVault(BackupRow::readString($row, 'guid'))?->getId() : null;
-			$vault = $this->entityWriter->store($section, $this->vaultMapper, Vault::class, $row, $existingId, $context->result);
+			$vault = $this->entityWriter->store($section, $this->vaultMapper, Vault::class, $row, $existingId, $context);
 
 			$context->rememberVault(BackupRow::readInt($row, 'id'), $vault->getId());
 		}

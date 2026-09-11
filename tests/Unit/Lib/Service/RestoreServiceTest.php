@@ -24,9 +24,11 @@ declare(strict_types=1);
 
 namespace OCA\Passman\Tests\Unit\Lib\Service;
 
+use OCA\Passman\BackupRestore\Restore\RestoreContext;
 use OCA\Passman\BackupRestore\Restore\RestorePipeline;
 use OCA\Passman\BackupRestore\Restore\RestorePreflight;
 use OCA\Passman\BackupRestore\Restore\RestoreScopeCleaner;
+use OCA\Passman\Exception\InvalidBackupException;
 use OCA\Passman\Service\RestoreService;
 use OCA\Passman\Tests\Unit\Support\BackupArchiveFactory;
 use OCP\IDBConnection;
@@ -119,5 +121,97 @@ class RestoreServiceTest extends TestCase {
 		$this->expectExceptionMessage('boom');
 
 		$service->restore(BackupArchiveFactory::archive(), RestoreService::MODE_MERGE);
+	}
+
+	public function testDryRunDoesNotCommitATransactionAndStillRunsThePipeline(): void {
+		$archive = BackupArchiveFactory::archive();
+		$cleaner = $this->createMock(RestoreScopeCleaner::class);
+		$pipeline = $this->createMock(RestorePipeline::class);
+		$db = $this->createMock(IDBConnection::class);
+
+		$cleaner->expects($this->never())->method('clean');
+		$pipeline->expects($this->once())->method('run');
+		$db->expects($this->once())->method('beginTransaction');
+		$db->expects($this->never())->method('commit');
+		$db->expects($this->once())->method('rollBack');
+
+		$service = new RestoreService(
+			$this->createStub(RestorePreflight::class),
+			$cleaner,
+			$pipeline,
+			$db,
+		);
+		$service->restore($archive, RestoreService::MODE_MERGE, dryRun: true);
+	}
+
+	public function testDryRunReplaceStillCleansTheScopeWithoutATransaction(): void {
+		$archive = BackupArchiveFactory::archive();
+		$cleaner = $this->createMock(RestoreScopeCleaner::class);
+		$pipeline = $this->createMock(RestorePipeline::class);
+		$db = $this->createMock(IDBConnection::class);
+
+		$cleaner->expects($this->once())
+			->method('clean')
+			->with(
+				$archive->manifest,
+				$this->callback(static fn(RestoreContext $context): bool => $context->isDryRun() && !$context->isMerge()),
+			);
+		$pipeline->expects($this->once())->method('run');
+
+		$db->expects($this->once())->method('beginTransaction');
+		$db->expects($this->never())->method('commit');
+		$db->expects($this->once())->method('rollBack');
+
+		$service = new RestoreService(
+			$this->createStub(RestorePreflight::class),
+			$cleaner,
+			$pipeline,
+			$db,
+		);
+		$service->restore($archive, RestoreService::MODE_REPLACE, dryRun: true);
+	}
+
+	public function testDryRunStillRunsPreflightAndDoesNotStartThePipeline(): void {
+		$preflight = $this->createMock(RestorePreflight::class);
+		$pipeline = $this->createMock(RestorePipeline::class);
+		$db = $this->createMock(IDBConnection::class);
+		$preflight->expects($this->once())
+			->method('assertRestorable')
+			->willThrowException(new InvalidBackupException('foreign'));
+		$pipeline->expects($this->never())->method('run');
+		$db->expects($this->never())->method('beginTransaction');
+
+		$service = new RestoreService(
+			$preflight,
+			$this->createStub(RestoreScopeCleaner::class),
+			$pipeline,
+			$db,
+		);
+
+		$this->expectException(InvalidBackupException::class);
+		$this->expectExceptionMessage('foreign');
+
+		$service->restore(BackupArchiveFactory::archive(), RestoreService::MODE_MERGE, dryRun: true);
+	}
+
+	public function testDryRunExceptionDoesAlsoRollBackTheSafetynetTransaction(): void {
+		$pipeline = $this->createMock(RestorePipeline::class);
+		$db = $this->createMock(IDBConnection::class);
+		$pipeline->expects($this->once())->method('run')->willThrowException(new \RuntimeException('boom'));
+		$db->expects($this->once())->method('beginTransaction');
+		$db->expects($this->once())->method('rollBack');
+		$db->expects($this->never())->method('commit');
+
+		$service = new RestoreService(
+			$this->createStub(RestorePreflight::class),
+			$this->createStub(RestoreScopeCleaner::class),
+			$pipeline,
+			$db,
+		);
+
+		$this->expectException(\RuntimeException::class);
+		$this->expectExceptionMessage('boom');
+
+		$service->restore(BackupArchiveFactory::archive(), RestoreService::MODE_MERGE, dryRun: true);
 	}
 }

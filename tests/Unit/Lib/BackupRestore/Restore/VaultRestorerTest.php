@@ -92,4 +92,38 @@ class VaultRestorerTest extends TestCase {
 		$this->assertSame(42, $context->vaultId(10));
 		$this->assertSame(1, $context->result->updated[BackupArchive::SECTION_VAULTS]);
 	}
+
+	public function testDryRunReplaceDoesNotInsertAndRemembersSyntheticIds(): void {
+		$archive = BackupArchiveFactory::archive(sectionRows: [
+			BackupArchive::SECTION_VAULTS => [['id' => 10, 'guid' => 'vault-1', 'name' => 'Personal']],
+		]);
+		$context = new RestoreContext(RestoreService::MODE_REPLACE, new RestoreResult(), true);
+
+		$this->lookup->expects($this->never())->method('findVault');
+		$this->vaultMapper->expects($this->never())->method('insert');
+		$this->vaultMapper->expects($this->never())->method('update');
+
+		$this->restorer->restore($archive, $context);
+
+		$this->assertSame(1, $context->vaultId(10));
+		$this->assertSame(1, $context->result->inserted[BackupArchive::SECTION_VAULTS]);
+		$this->assertSame(0, $context->result->updated[BackupArchive::SECTION_VAULTS]);
+	}
+
+	public function testDryRunMergeLooksUpGuidWithoutUpdating(): void {
+		$archive = BackupArchiveFactory::archive(sectionRows: [
+			BackupArchive::SECTION_VAULTS => [['id' => 10, 'guid' => 'vault-1']],
+		]);
+		$existing = Vault::fromRow(['id' => 42, 'guid' => 'vault-1']);
+		$context = new RestoreContext(RestoreService::MODE_MERGE, new RestoreResult(), true);
+
+		$this->lookup->expects($this->once())->method('findVault')->with('vault-1')->willReturn($existing);
+		$this->vaultMapper->expects($this->never())->method('insert');
+		$this->vaultMapper->expects($this->never())->method('update');
+
+		$this->restorer->restore($archive, $context);
+
+		$this->assertSame(42, $context->vaultId(10));
+		$this->assertSame(1, $context->result->updated[BackupArchive::SECTION_VAULTS]);
+	}
 }

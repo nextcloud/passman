@@ -24,7 +24,6 @@ declare(strict_types=1);
 
 namespace OCA\Passman\BackupRestore\Restore;
 
-use OCA\Passman\BackupRestore\RestoreResult;
 use OCA\Passman\Exception\InvalidBackupException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\QBMapper;
@@ -42,6 +41,9 @@ final class EntityWriter {
 	 * The mapper `create()` methods cannot be used here:
 	 * they generate a new guid and only cover the columns of the live API.
 	 *
+	 * A dry-run still builds the entity and counts the write, but does not call the mapper.
+	 * Inserts receive a synthetic id from {@see RestoreContext::allocateDryRunId()}.
+	 *
 	 * @param class-string<Entity> $entityClass
 	 * @param QBMapper<Entity> $mapper
 	 * @param array<string, mixed> $row
@@ -49,16 +51,23 @@ final class EntityWriter {
 	 * @throws InvalidBackupException when the row does not match the entity
 	 * @throws Exception when the mapper insert or update fails
 	 */
-	public function store(string $section, QBMapper $mapper, string $entityClass, array $row, ?int $existingId, RestoreResult $result): Entity {
+	public function store(string $section, QBMapper $mapper, string $entityClass, array $row, ?int $existingId, RestoreContext $context): Entity {
 		$entity = $this->buildEntity($section, $entityClass, $row);
 
 		if ($existingId === null) {
-			$result->countInserted($section);
+			$context->result->countInserted($section);
+			if ($context->isDryRun()) {
+				$entity->setId($context->allocateDryRunId());
+				return $entity;
+			}
 			return $mapper->insert($entity);
 		}
 
 		$entity->setId($existingId);
-		$result->countUpdated($section);
+		$context->result->countUpdated($section);
+		if ($context->isDryRun()) {
+			return $entity;
+		}
 		return $mapper->update($entity);
 	}
 

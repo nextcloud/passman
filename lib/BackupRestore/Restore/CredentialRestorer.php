@@ -72,7 +72,7 @@ readonly class CredentialRestorer implements SectionRestorer {
 				Credential::class,
 				$row,
 				$existingId,
-				$context->result
+				$context
 			);
 
 			$context->rememberCredential(BackupRow::readInt($row, 'id'), $credential->getId());

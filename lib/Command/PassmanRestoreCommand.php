@@ -72,6 +72,13 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 				InputOption::VALUE_NONE,
 				'Restore a "' . BackupManifest::MODE_RAW . '" artifact of another instance anyway. Its server side encrypted '
 				. 'columns stay unreadable on this instance'
+			)
+			->addOption(
+				'dry-run',
+				null,
+				InputOption::VALUE_NONE,
+				'Simulate the restore without writing. Still runs lookups, remapping and encryption and reports '
+				. 'insert, update, delete and skip counts. Skips the replace confirmation.'
 			);
 	}
 
@@ -79,6 +86,7 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 		$source = $this->readStringOption($input, 'input');
 		$mode = (string)$input->getOption('mode');
 		$force = (bool)$input->getOption('force');
+		$dryRun = (bool)$input->getOption('dry-run');
 
 		if ($source === null) {
 			$output->writeln('<error>The --input option with the path of a backup artifact is required</error>');
@@ -103,7 +111,7 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 
 		$this->printManifest($output, $archive, $source, $mode);
 
-		if ($mode === RestoreService::MODE_REPLACE) {
+		if ($mode === RestoreService::MODE_REPLACE && !$dryRun) {
 			$interactionCheck = parent::execute($input, $output);
 			if ($interactionCheck !== self::SUCCESS) {
 				return $interactionCheck;
@@ -114,13 +122,14 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 		}
 
 		try {
-			$result = $this->restoreService->restore($archive, $mode, $force);
+			// use named parameters for clarity (to definitely not confuse the dry-run option with the replace mode)
+			$result = $this->restoreService->restore($archive, $mode, force: $force, dryRun: $dryRun);
 		} catch (\InvalidArgumentException|\RuntimeException|Exception $e) {
 			$output->writeln('<error>' . $e->getMessage() . '</error>');
 			return self::FAILURE;
 		}
 
-		$this->printSummary($output, $result);
+		$this->printSummary($output, $result, $dryRun);
 		return self::SUCCESS;
 	}
 
@@ -166,9 +175,10 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 		$output->writeln('');
 	}
 
-	private function printSummary(OutputInterface $output, RestoreResult $result): void {
+	private function printSummary(OutputInterface $output, RestoreResult $result, bool $dryRun): void {
 		$output->writeln(sprintf(
-			'Restored %d rows (%d inserted, %d updated), deleted %d rows, skipped %d rows:',
+			'%s %d rows (%d inserted, %d updated), deleted %d rows, skipped %d rows:',
+			$dryRun ? 'Would restore' : 'Restored',
 			$result->totalInserted() + $result->totalUpdated(),
 			$result->totalInserted(),
 			$result->totalUpdated(),
@@ -190,6 +200,10 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 
 		foreach ($result->warnings as $warning) {
 			$output->writeln('<comment>' . $warning . '</comment>');
+		}
+
+		if ($dryRun) {
+			$output->writeln('Dry run; no changes were written');
 		}
 	}
 

@@ -24,9 +24,12 @@ declare(strict_types=1);
 
 namespace OCA\Passman\Tests\Unit\Command;
 
+use OCA\Passman\BackupRestore\BackupArchive;
 use OCA\Passman\BackupRestore\BackupSerializer;
+use OCA\Passman\BackupRestore\RestoreResult;
 use OCA\Passman\Command\PassmanRestoreCommand;
 use OCA\Passman\Service\RestoreService;
+use OCA\Passman\Tests\Unit\Support\BackupArchiveFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Console\Command\Command;
@@ -82,5 +85,44 @@ class PassmanRestoreCommandTest extends TestCase {
 
 		$this->assertSame(Command::FAILURE, $status);
 		$this->assertStringContainsString('does not exist or cannot be read', $this->tester->getDisplay());
+	}
+
+	/**
+	 * Just a test with an empty archive. Should be enough for a basic structural test here.
+	 * A more comprehensive test with a "real fake data" lives in BackupRestoreRoundTripTest :)
+	 */
+	public function testDryRunReplaceSucceedsWithoutAnyInteractionForAnEmptyArchive(): void {
+		$path = tempnam(sys_get_temp_dir(), 'passman-restore-');
+		$this->assertNotFalse($path);
+		file_put_contents($path, '{}');
+
+		$archive = BackupArchiveFactory::archive();
+		$result = new RestoreResult();
+		$result->countInserted(BackupArchive::SECTION_VAULTS);
+		$result->countDeleted(BackupArchive::SECTION_VAULTS);
+
+		$this->serializer->expects($this->once())->method('decode')->willReturn($archive);
+		$this->restoreService->method('getCaveats')->willReturn([]);
+		$this->restoreService->expects($this->once())
+			->method('restore')
+			->with($archive, RestoreService::MODE_REPLACE, false, true)
+			->willReturn($result);
+
+		try {
+			$status = $this->tester->execute([
+				'--input' => $path,
+				'--mode' => RestoreService::MODE_REPLACE,
+				'--dry-run' => true,
+			], ['interactive' => false]);
+		} finally {
+			unlink($path);
+		}
+
+		$this->assertSame(Command::SUCCESS, $status);
+		$display = $this->tester->getDisplay();
+		$this->assertStringContainsString('Would restore', $display);
+		$this->assertStringContainsString('Dry run; no changes were written', $display);
+		$this->assertStringNotContainsString('Type "yes"', $display);
+		$this->assertStringNotContainsString('--no-interaction', $display);
 	}
 }

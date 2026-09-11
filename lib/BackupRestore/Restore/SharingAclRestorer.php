@@ -70,7 +70,7 @@ readonly class SharingAclRestorer implements SectionRestorer {
 					'sharing acl entry of the credential "' . $itemGuid . '"'
 				)?->getId()
 				: null;
-			$this->entityWriter->store($section, $this->sharingACLMapper, SharingACL::class, $row, $existingId, $context->result);
+			$this->entityWriter->store($section, $this->sharingACLMapper, SharingACL::class, $row, $existingId, $context);
 		}
 	}
 }

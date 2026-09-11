@@ -48,6 +48,8 @@ use OCP\IDBConnection;
  * A `portable` artifact holds data without the Nextcloud server side encryption layer, so it is
  * re-applied here with the key material of this instance, see {@see ServerEncryptionApplier}.
  * A `raw` artifact is inserted verbatim. The end to end encryption layer is never touched.
+ *
+ * A dry-run still does preflight, lookups, remapping, encryption and counting, but opens no transaction and writes nothing.
  */
 readonly class RestoreService {
 
@@ -73,34 +75,43 @@ readonly class RestoreService {
 	 *
 	 * @param string $mode one of self::MODE_*
 	 * @param bool $force restore a raw artifact of a foreign instance anyway
+	 * @param bool $dryRun simulate the restore without writing
 	 * @return RestoreResult counts per section plus one warning per skipped row
 	 * @throws \InvalidArgumentException on an unknown restore mode
 	 * @throws InvalidBackupException when the artifact cannot be applied to this instance
 	 * @throws \RuntimeException when a guid of the artifact is ambiguous on this instance
 	 * @throws \OCP\DB\Exception on any database error, the whole restore is rolled back
 	 */
-	public function restore(BackupArchive $archive, string $mode, bool $force = false): RestoreResult {
+	public function restore(BackupArchive $archive, string $mode, bool $force = false, bool $dryRun = false): RestoreResult {
 		if (!self::isValidMode($mode)) {
 			throw new \InvalidArgumentException('Unknown restore mode: "' . $mode . '"');
 		}
 		$this->preflight->assertRestorable($archive->manifest, $force);
 
-		$context = new RestoreContext($mode, new RestoreResult());
+		$context = new RestoreContext($mode, new RestoreResult(), $dryRun);
 
 		$this->db->beginTransaction();
 		try {
-			if ($mode === self::MODE_REPLACE) {
-				$this->cleaner->clean($archive->manifest, $context->result);
+			$this->applyArchive($archive, $mode, $context);
+			// let's take the transaction as a second security net against accidental writes even when the called classes "should" handle dry run mode properly
+			if ($dryRun) {
+				$this->db->rollBack();
+			} else {
+				$this->db->commit();
 			}
-			$this->pipeline->run($archive, $context);
-
-			$this->db->commit();
 		} catch (\Throwable $e) {
 			$this->db->rollBack();
 			throw $e;
 		}
 
 		return $context->result;
+	}
+
+	private function applyArchive(BackupArchive $archive, string $mode, RestoreContext $context): void {
+		if ($mode === self::MODE_REPLACE) {
+			$this->cleaner->clean($archive->manifest, $context);
+		}
+		$this->pipeline->run($archive, $context);
 	}
 
 	/**

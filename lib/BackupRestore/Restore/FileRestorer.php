@@ -56,7 +56,7 @@ readonly class FileRestorer implements SectionRestorer {
 			}
 
 			$existingId = $context->isMerge() ? $this->lookup->findFile(BackupRow::readString($row, 'guid'))?->getId() : null;
-			$this->entityWriter->store($section, $this->fileMapper, File::class, $row, $existingId, $context->result);
+			$this->entityWriter->store($section, $this->fileMapper, File::class, $row, $existingId, $context);
 		}
 	}
 }

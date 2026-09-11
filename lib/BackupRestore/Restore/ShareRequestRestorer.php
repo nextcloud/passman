@@ -69,7 +69,7 @@ readonly class ShareRequestRestorer implements SectionRestorer {
 					'share request of the credential "' . $itemGuid . '" for the vault "' . $vaultGuid . '"'
 				)?->getId()
 				: null;
-			$this->entityWriter->store($section, $this->shareRequestMapper, ShareRequest::class, $row, $existingId, $context->result);
+			$this->entityWriter->store($section, $this->shareRequestMapper, ShareRequest::class, $row, $existingId, $context);
 		}
 	}
 }

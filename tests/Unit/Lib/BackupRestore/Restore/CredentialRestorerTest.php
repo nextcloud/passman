@@ -148,4 +148,33 @@ class CredentialRestorerTest extends TestCase {
 
 		$this->assertSame(55, $context->credentialId(2));
 	}
+
+	public function testDryRunPortablePathStillEncryptsWithoutInserting(): void {
+		$archive = BackupArchiveFactory::archive(
+			BackupArchiveFactory::manifest(encryptionMode: BackupManifest::MODE_PORTABLE),
+			[
+				BackupArchive::SECTION_CREDENTIALS => [[
+					'id' => 2,
+					'guid' => 'cred-1',
+					'vault_id' => 10,
+					'username' => 'alice',
+				]],
+			],
+		);
+		$context = new RestoreContext(RestoreService::MODE_REPLACE, new RestoreResult(), true);
+		$context->rememberVault(10, 100);
+
+		$this->lookup->expects($this->never())->method('findCredential');
+		$this->encryptionApplier->expects($this->once())
+			->method('credentialRow')
+			->with($this->callback(static fn(array $row): bool => $row['vault_id'] === 100))
+			->willReturnCallback(static fn(array $row): array => $row);
+		$this->credentialMapper->expects($this->never())->method('insert');
+		$this->credentialMapper->expects($this->never())->method('update');
+
+		$this->restorer->restore($archive, $context);
+
+		$this->assertSame(1, $context->credentialId(2));
+		$this->assertSame(1, $context->result->inserted[BackupArchive::SECTION_CREDENTIALS]);
+	}
 }
