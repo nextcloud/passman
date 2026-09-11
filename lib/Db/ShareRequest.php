@@ -79,7 +79,7 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
      * which is a value of any type other than a resource.
      * @since 5.4.0
      */
-    function jsonSerialize(): mixed
+    public function jsonSerialize(): mixed
     {
         return [
             'req_id' => $this->getId(),
@@ -95,7 +95,7 @@ class ShareRequest extends PermissionEntity implements \JsonSerializable {
         ];
     }
 
-    function asACLJson(){
+    public function asACLJson(){
         return [
             'item_id' => $this->getItemId(),
             'item_guid' => $this->getItemGuid(),

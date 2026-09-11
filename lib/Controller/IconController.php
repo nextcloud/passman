@@ -152,9 +152,7 @@ class IconController extends ApiController {
 				$icon['url'] = $this->urlGenerator->linkTo(Application::APP_ID, $path[1]);
 				$icon['pack'] = $pack;
 				$icon['data'] = base64_encode(file_get_contents($iconPath));
-				if (!isset($icons[$pack])) {
-					$icons[$pack] = [];
-				}
+				$icons[$pack] ??= [];
 				$icons[$pack][] = $icon;
 			}
 		}
