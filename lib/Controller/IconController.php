@@ -58,7 +58,7 @@ class IconController extends ApiController {
 
 		if ($icon->icoExists) {
 			$icon_json['type'] = $icon->icoType;
-			$icon_json['content'] = base64_encode($icon->icoData);
+			$icon_json['content'] = base64_encode((string) $icon->icoData);
 			return new JSONResponse($icon_json);
 		}
 

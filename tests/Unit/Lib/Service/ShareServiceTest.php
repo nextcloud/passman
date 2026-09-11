@@ -102,9 +102,7 @@ class ShareServiceTest extends TestCase {
 		$acl = new SharingACL();
 		$this->sharingACLMapper->expects($this->once())
 			->method('createACLEntry')
-			->with($this->callback(static function (SharingACL $entry): bool {
-				return $entry->getCreated() !== null && $entry->getCreated() > 0;
-			}))
+			->with($this->callback(static fn(SharingACL $entry): bool => $entry->getCreated() !== null && $entry->getCreated() > 0))
 			->willReturnArgument(0);
 
 		$result = $this->service->createACLEntry($acl);
@@ -129,11 +127,9 @@ class ShareServiceTest extends TestCase {
 			->willReturn($request);
 		$this->sharingACLMapper->expects($this->once())
 			->method('createACLEntry')
-			->with($this->callback(static function (SharingACL $acl): bool {
-				return $acl->getUserId() === 'alice'
+			->with($this->callback(static fn(SharingACL $acl): bool => $acl->getUserId() === 'alice'
 					&& $acl->getSharedKey() === 'final-key'
-					&& $acl->getPermissions() === (PermissionEntity::READ | PermissionEntity::WRITE);
-			}))
+					&& $acl->getPermissions() === (PermissionEntity::READ | PermissionEntity::WRITE)))
 			->willReturnArgument(0);
 		$this->shareRequestMapper->expects($this->once())
 			->method('cleanItemRequestsForUser')
