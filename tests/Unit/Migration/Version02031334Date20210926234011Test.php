@@ -26,10 +26,14 @@ declare(strict_types=1);
 
 namespace OCA\Passman\Tests\Unit\Migration;
 
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\SchemaConfig;
 use Doctrine\DBAL\Types\Type;
 use OC\DB\Connection;
 use OC\DB\SchemaWrapper;
+use OCA\Passman\Migration\Version02031334Date20210926234011;
 use OCP\DB\Types;
+use OCP\Migration\IOutput;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Group;
@@ -41,7 +45,7 @@ use TypeError;
  * Contract for Version02031334: migrating credentials.label from TEXT to STRING(2048)
  * using APIs that exist on both Nextcloud 34 (Doctrine Table) and 35 (OCP ITable).
  *
- * The current migration (before our NC35 changes) compares getType() to Type::getType('string')
+ * The migration before our NC35 changes compared getType() to Type::getType('string')
  * and calls changeColumn(). That identity check is not portable, and changeColumn() is not
  * declared on NC 35's ITable (only forwarded via __call).
  */
@@ -118,6 +122,40 @@ class Version02031334Date20210926234011Test extends TestCase {
 		]);
 	}
 
+	// test against the real migration code
+	public function testChangeSchemaWidensTextLabelToString2048(): void {
+		$schema = $this->isolatedPassmanCredentialsSchema(Types::TEXT);
+		$migration = new Version02031334Date20210926234011();
+
+		$result = $migration->changeSchema(
+			$this->createStub(IOutput::class),
+			static fn () => $schema,
+			[],
+		);
+
+		$this->assertNotNull($result);
+		$column = $result->getTable('passman_credentials')->getColumn('label');
+		$this->assertSame(Types::STRING, $column->getType()->getName());
+		$this->assertSame(2048, $column->getLength());
+	}
+
+	// test against the real migration code
+	public function testChangeSchemaLeavesString2048Unchanged(): void {
+		$schema = $this->isolatedPassmanCredentialsSchema(Types::STRING, 2048);
+		$migration = new Version02031334Date20210926234011();
+
+		$result = $migration->changeSchema(
+			$this->createStub(IOutput::class),
+			static fn () => $schema,
+			[],
+		);
+
+		$this->assertNotNull($result);
+		$column = $result->getTable('passman_credentials')->getColumn('label');
+		$this->assertSame(Types::STRING, $column->getType()->getName());
+		$this->assertSame(2048, $column->getLength());
+	}
+
 	public function testDualCompatWidenPersistsTextLabelAsString2048(): void {
 		$this->persistLabelTable(Types::TEXT);
 		$before = $this->reloadTable()->getColumn('label');
@@ -130,6 +168,20 @@ class Version02031334Date20210926234011Test extends TestCase {
 		$after = $this->reloadTable()->getColumn('label');
 		$this->assertSame(Types::STRING, $after->getType()->getName());
 		$this->assertSame(2048, $after->getLength());
+	}
+
+	private function isolatedPassmanCredentialsSchema(string $labelType, ?int $length = null): SchemaWrapper {
+		$config = new SchemaConfig();
+		$config->setName($this->connection->getDatabase());
+		$doctrineSchema = new Schema([], [], $config);
+		$table = $doctrineSchema->createTable($this->connection->getPrefix() . 'passman_credentials');
+		$options = ['notnull' => true];
+		if ($length !== null) {
+			$options['length'] = $length;
+		}
+		$table->addColumn('label', $labelType, $options);
+
+		return new SchemaWrapper($this->connection, $doctrineSchema);
 	}
 
 	private function persistLabelTable(string $type, ?int $length = null): void {
