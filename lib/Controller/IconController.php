@@ -11,7 +11,6 @@
 
 namespace OCA\Passman\Controller;
 
-use Doctrine\DBAL\Exception\DriverException;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\IconService;
@@ -23,6 +22,7 @@ use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\DataDownloadResponse;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\DB\Exception as DbException;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 
@@ -108,12 +108,9 @@ class IconController extends ApiController {
 				if ($credential) {
 					$this->credentialService->updateCredential($credential);
 				}
-			} catch (DriverException) {
-				/**
-				 * @FIXME Syntax error or access violation: 1118 Row size too large
-				 * This happens when favicons are quite big.
-				 * Githubs one is 33kb and triggers the try catch
-				 */
+			} catch (DbException) {
+				// Oversized favicon: MySQL TEXT (64KiB) / InnoDB row size (1118).
+				// Return the downloaded icon anyway.
 			}
 		}
 
