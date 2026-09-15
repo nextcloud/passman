@@ -33,6 +33,8 @@ inputs:
 runs:
   using: composite
   steps:
+    # Keep the local action on the workspace root. Checking nextcloud/server out
+    # at "." would delete .github/actions/phpunit and break the composite post-run.
     - name: Checkout server
       uses: actions/checkout@v7
       with:
@@ -40,12 +42,13 @@ runs:
         submodules: true
         repository: nextcloud/server
         ref: ${{ inputs.server-version }}
+        path: server
 
     - name: Checkout app
       uses: actions/checkout@v7
       with:
         persist-credentials: false
-        path: apps/${{ github.event.repository.name }}
+        path: server/apps/${{ github.event.repository.name }}
 
     - name: Set up php ${{ inputs.php-version }}
       uses: shivammathur/setup-php@2.37.2
@@ -70,17 +73,18 @@ runs:
       id: check_composer
       uses: andstor/file-existence-action@v3.1.0
       with:
-        files: apps/${{ github.event.repository.name }}/composer.json
+        files: server/apps/${{ github.event.repository.name }}/composer.json
 
     - name: Set up dependencies
       if: steps.check_composer.outputs.files_exists == 'true'
-      working-directory: apps/${{ github.event.repository.name }}
+      working-directory: server/apps/${{ github.event.repository.name }}
       shell: bash
       run: |
         composer remove nextcloud/ocp --dev --no-scripts || true
         composer i
 
     - name: Set up Nextcloud
+      working-directory: server
       env:
         DB_PORT: 4444
       shell: bash
@@ -92,14 +96,14 @@ runs:
     - name: Check PHPUnit script is defined
       id: check_phpunit
       continue-on-error: true
-      working-directory: apps/${{ github.event.repository.name }}
+      working-directory: server/apps/${{ github.event.repository.name }}
       shell: bash
       run: |
         composer run --list | grep '^  test ' | wc -l | grep 1
 
     - name: PHPUnit
       if: steps.check_phpunit.outcome == 'success'
-      working-directory: apps/${{ github.event.repository.name }}
+      working-directory: server/apps/${{ github.event.repository.name }}
       shell: bash
       run: composer run test ${{ inputs.phpunit-args }}
 
@@ -108,14 +112,14 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: php-unit-clover
-        path: apps/${{ github.event.repository.name }}/build/php-unit.clover
+        path: server/apps/${{ github.event.repository.name }}/build/php-unit.clover
         if-no-files-found: error
 
     - name: Print logs
       if: always()
       shell: bash
       run: |
-        cat data/nextcloud.log
+        cat server/data/nextcloud.log
 
     - name: Skipped
       if: steps.check_phpunit.outcome == 'failure'
