@@ -20,29 +20,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  matrix:
-    runs-on: ubuntu-latest-low
-    outputs:
-      php-version: ${{ steps.versions.outputs.php-available-list }}
-      server-max: ${{ steps.versions.outputs.branches-max-list }}
-    steps:
-      - name: Checkout app
-        uses: actions/checkout@v7.0.0
-        with:
-          persist-credentials: false
-
-      - name: Get version matrix
-        id: versions
-        uses: icewind1991/nextcloud-version-matrix@v1.3.2
-
-  changes:
+  changes-and-matrix:
     runs-on: ubuntu-latest-low
     permissions:
       contents: read
       pull-requests: read
 
     outputs:
-      src: ${{ steps.changes.outputs.src}}
+      src: ${{ steps.changes.outputs.src }}
+      matrix: ${{ steps.versions.outputs.sparse-matrix }}
 
     steps:
       - uses: dorny/paths-filter@v4
@@ -63,16 +49,26 @@ jobs:
               - 'composer.lock'
               - 'sonar-project.properties'
 
+      - name: Checkout app
+        if: steps.changes.outputs.src != 'false'
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Get version matrix
+        if: steps.changes.outputs.src != 'false'
+        id: versions
+        uses: nextcloud-libraries/nextcloud-version-matrix@v1.3.3
+
   phpunit-sqlite:
     runs-on: ubuntu-latest-low
 
-    needs: [changes, matrix]
-    if: needs.changes.outputs.src != 'false'
+    needs: changes-and-matrix
+    if: needs.changes-and-matrix.outputs.src != 'false'
 
     strategy:
-      matrix:
-        php-versions: ${{ fromJson(needs.matrix.outputs.php-version) }}
-        server-versions: ${{ fromJson(needs.matrix.outputs.server-max) }}
+      fail-fast: false
+      matrix: ${{ fromJson(needs.changes-and-matrix.outputs.matrix) }}
 
     name: SQLite PHP ${{ matrix.php-versions }} Nextcloud ${{ matrix.server-versions }}
 
@@ -84,7 +80,7 @@ jobs:
           echo "APP_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
 
       - name: Checkout server
-        uses: actions/checkout@v7.0.0
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
           submodules: true
@@ -92,7 +88,7 @@ jobs:
           ref: ${{ matrix.server-versions }}
 
       - name: Checkout app
-        uses: actions/checkout@v7.0.0
+        uses: actions/checkout@v7
         with:
           persist-credentials: false
           path: apps/${{ env.APP_NAME }}
@@ -101,6 +97,7 @@ jobs:
         uses: shivammathur/setup-php@2.37.2
         with:
           php-version: ${{ matrix.php-versions }}
+          # https://docs.nextcloud.com/server/stable/admin_manual/installation/php_configuration.html
           extensions: bz2, ctype, curl, dom, fileinfo, gd, iconv, intl, json, libxml, mbstring, openssl, pcntl, posix, session, simplexml, xmlreader, xmlwriter, zip, zlib, sqlite, pdo_sqlite
           coverage: pcov
           ini-file: development
@@ -149,6 +146,11 @@ jobs:
           path: apps/${{ env.APP_NAME }}/build/php-unit.clover
           if-no-files-found: error
 
+      - name: Print logs
+        if: always()
+        run: |
+          cat data/nextcloud.log
+
       - name: Skipped
         if: steps.check_phpunit.outcome == 'failure'
         run: |
@@ -159,7 +161,7 @@ jobs:
     permissions:
       contents: none
     runs-on: ubuntu-latest-low
-    needs: [changes, phpunit-sqlite]
+    needs: [changes-and-matrix, phpunit-sqlite]
 
     if: always()
 
@@ -168,7 +170,7 @@ jobs:
     steps:
       - name: Summary status
         run: |
-          if [ "${{ needs.changes.outputs.src }}" = "false" ]; then
+          if [ "${{ needs.changes-and-matrix.outputs.src }}" = "false" ]; then
             echo "No relevant changes detected, skipping."
             exit 0
           fi
