@@ -57,7 +57,13 @@ jobs:
     name: phpunit-sqlite-summary
 
     steps:
-      - uses: ./.github/actions/phpunit-summary
-        with:
-          src: ${{ needs.changes-and-matrix.outputs.src }}
-          phpunit-result: ${{ needs.phpunit-sqlite.result }}
+      - name: Summary status
+        run: |
+          if [ "${{ needs.changes-and-matrix.outputs.src }}" = "false" ]; then
+            echo "No relevant changes detected, skipping."
+            exit 0
+          fi
+          if [ "${{ needs.phpunit-sqlite.result }}" != "success" ]; then
+            echo "PHPUnit job failed or was cancelled."
+            exit 1
+          fi
