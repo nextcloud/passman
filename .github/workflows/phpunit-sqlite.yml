@@ -37,6 +37,11 @@ jobs:
     name: SQLite PHP ${{ matrix.php-versions }} Nextcloud ${{ matrix.server-versions }}
 
     steps:
+      - name: Checkout app
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
       - uses: ./.github/actions/phpunit
         with:
           database: sqlite
