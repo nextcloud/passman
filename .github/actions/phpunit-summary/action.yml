@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2022-2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: MIT
+
+name: PHPUnit summary
+description: Fail the workflow when PHPUnit was required and did not succeed
+
+inputs:
+  src:
+    description: changes-and-matrix src output
+    required: true
+  phpunit-result:
+    description: Result of the PHPUnit job
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Summary status
+      shell: bash
+      run: |
+        if [ "${{ inputs.src }}" = "false" ]; then
+          echo "No relevant changes detected, skipping."
+          exit 0
+        fi
+        if [ "${{ inputs.phpunit-result }}" != "success" ]; then
+          echo "PHPUnit job failed or was cancelled."
+          exit 1
+        fi
