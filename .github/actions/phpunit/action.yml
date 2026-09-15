@@ -1,0 +1,125 @@
+# SPDX-FileCopyrightText: 2022-2026 Nextcloud GmbH and Nextcloud contributors
+# SPDX-License-Identifier: MIT
+
+name: Run Passman PHPUnit
+description: Install Nextcloud, enable Passman, and run the full PHPUnit suite
+
+inputs:
+  database:
+    description: Nextcloud database type (sqlite, mysql, pgsql)
+    required: true
+  php-version:
+    description: PHP version to install
+    required: true
+  server-version:
+    description: nextcloud/server branch to check out
+    required: true
+  php-db-extensions:
+    description: Database PHP extensions (e.g. sqlite, pdo_sqlite)
+    required: true
+  coverage:
+    description: setup-php coverage driver (pcov or none)
+    required: false
+    default: none
+  upload-coverage:
+    description: Upload clover coverage artifact (true/false)
+    required: false
+    default: 'false'
+  phpunit-args:
+    description: Extra arguments appended to composer run test
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout server
+      uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+        submodules: true
+        repository: nextcloud/server
+        ref: ${{ inputs.server-version }}
+
+    - name: Checkout app
+      uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+        path: apps/${{ github.event.repository.name }}
+
+    - name: Set up php ${{ inputs.php-version }}
+      uses: shivammathur/setup-php@2.37.2
+      with:
+        php-version: ${{ inputs.php-version }}
+        # https://docs.nextcloud.com/server/stable/admin_manual/installation/php_configuration.html
+        extensions: bz2, ctype, curl, dom, fileinfo, gd, iconv, intl, json, libxml, mbstring, openssl, pcntl, posix, session, simplexml, xmlreader, xmlwriter, zip, zlib, ${{ inputs.php-db-extensions }}
+        coverage: ${{ inputs.coverage }}
+        ini-file: development
+        ini-values: disable_functions=
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Enable ONLY_FULL_GROUP_BY MySQL option
+      if: ${{ inputs.database == 'mysql' }}
+      shell: bash
+      run: |
+        echo "SET GLOBAL sql_mode=(SELECT CONCAT(@@sql_mode,',ONLY_FULL_GROUP_BY'));" | mysql -h 127.0.0.1 -P 4444 -u root -prootpassword
+        echo 'SELECT @@sql_mode;' | mysql -h 127.0.0.1 -P 4444 -u root -prootpassword
+
+    - name: Check composer file existence
+      id: check_composer
+      uses: andstor/file-existence-action@v3.1.0
+      with:
+        files: apps/${{ github.event.repository.name }}/composer.json
+
+    - name: Set up dependencies
+      if: steps.check_composer.outputs.files_exists == 'true'
+      working-directory: apps/${{ github.event.repository.name }}
+      shell: bash
+      run: |
+        composer remove nextcloud/ocp --dev --no-scripts || true
+        composer i
+
+    - name: Set up Nextcloud
+      env:
+        DB_PORT: 4444
+      shell: bash
+      run: |
+        mkdir data
+        ./occ maintenance:install --verbose --database=${{ inputs.database }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass admin
+        ./occ app:enable --force ${{ github.event.repository.name }}
+
+    - name: Check PHPUnit script is defined
+      id: check_phpunit
+      continue-on-error: true
+      working-directory: apps/${{ github.event.repository.name }}
+      shell: bash
+      run: |
+        composer run --list | grep '^  test ' | wc -l | grep 1
+
+    - name: PHPUnit
+      if: steps.check_phpunit.outcome == 'success'
+      working-directory: apps/${{ github.event.repository.name }}
+      shell: bash
+      run: composer run test ${{ inputs.phpunit-args }}
+
+    - name: Upload coverage report
+      if: ${{ inputs.upload-coverage == 'true' && github.event_name == 'pull_request' && strategy.job-index == 0 && steps.check_phpunit.outcome == 'success' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: php-unit-clover
+        path: apps/${{ github.event.repository.name }}/build/php-unit.clover
+        if-no-files-found: error
+
+    - name: Print logs
+      if: always()
+      shell: bash
+      run: |
+        cat data/nextcloud.log
+
+    - name: Skipped
+      if: steps.check_phpunit.outcome == 'failure'
+      shell: bash
+      run: |
+        echo 'PHPUnit test script is not specified in composer.json'
+        exit 1
