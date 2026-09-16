@@ -31,8 +31,10 @@ use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\VaultMapper;
 use OCA\Passman\Tests\Unit\Support\DbTestTrait;
 use OCA\Passman\Utility\Utils;
+use Doctrine\DBAL\Exception\DriverException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\QBMapper;
+use OCP\DB\Exception as DbException;
 use OCP\IDBConnection;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -186,6 +188,53 @@ class CredentialMapperTest extends TestCase {
 
 		$fromDb = $this->mapper->getCredentialByGUID($created->getGuid());
 		$this->assertSame('after', $fromDb->getLabel());
+	}
+
+	public function testUpdateCredentialWithOversizedIconThrowsOcpDbException(): void {
+		$provider = $this->db->getDatabaseProvider(true);
+		if ($provider !== IDBConnection::PLATFORM_MYSQL && $provider !== IDBConnection::PLATFORM_MARIADB) {
+			$this->markTestSkipped('MySQL/MariaDB reject oversized packets; SQLite and Postgres do not');
+		}
+
+		$packetLimit = (int)$this->db->executeQuery('SELECT @@max_allowed_packet')->fetchOne();
+		$this->assertGreaterThan(0, $packetLimit);
+
+		$created = $this->createVaultAndCredential();
+		// Doctrine maps credentials.icon ('text') to LONGTEXT, so a GitHub-sized favicon
+		// does not overflow the column. Exceed max_allowed_packet so the driver still rejects.
+		$icon = json_encode([
+			'type'    => 'png',
+			'content' => str_repeat('A', $packetLimit),
+		], JSON_THROW_ON_ERROR);
+
+		try {
+			$this->mapper->updateCredential([
+				'guid'           => $created->getGuid(),
+				'label'          => $created->getLabel(),
+				'description'    => $created->getDescription(),
+				'tags'           => $created->getTags(),
+				'email'          => $created->getEmail(),
+				'username'       => $created->getUsername(),
+				'password'       => $created->getPassword(),
+				'url'            => $created->getUrl(),
+				'icon'           => $icon,
+				'renew_interval' => $created->getRenewInterval(),
+				'expire_time'    => $created->getExpireTime(),
+				'files'          => $created->getFiles(),
+				'custom_fields'  => $created->getCustomFields(),
+				'otp'            => $created->getOtp(),
+				'hidden'         => $created->getHidden(),
+				'delete_time'    => $created->getDeleteTime(),
+				'compromised'    => $created->getCompromised(),
+			], false);
+			$this->fail('Expected the database to reject the oversized icon');
+		} catch (DbException $e) {
+			$this->assertNotInstanceOf(DriverException::class, $e);
+			$this->assertInstanceOf(DriverException::class, $e->getPrevious());
+		} finally {
+			$this->db->close();
+			$this->db->connect();
+		}
 	}
 
 	public function testDeleteCredential(): void {

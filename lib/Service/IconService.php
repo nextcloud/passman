@@ -70,7 +70,7 @@ class IconService {
 	/**
 	 * @var bool tell if the favicon exists (set after calling IconService)
 	 */
-	public bool $icoExists;
+	public bool $icoExists = false;
 
 	/**
 	 * @var string md5 of $icoData

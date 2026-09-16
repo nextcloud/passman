@@ -2,7 +2,7 @@
 Passman is a full featured, open source password manager for Nextcloud.
 
 [![Nextcloud](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnextcloud%2Fpassman%2Fmaster%2Fappinfo%2Finfo.xml&query=concat%28string%28%2F%2Fnextcloud%2F%40min-version%29%2Csubstring%28concat%28%27%E2%80%93%27%2Cstring%28%2F%2Fnextcloud%2F%40max-version%29%29%2C1%2C%28string%28%2F%2Fnextcloud%2F%40min-version%29%21%3Dstring%28%2F%2Fnextcloud%2F%40max-version%29%29%2Astring-length%28concat%28%27%E2%80%93%27%2Cstring%28%2F%2Fnextcloud%2F%40max-version%29%29%29%29%29&label=Nextcloud&color=0082c9&logo=nextcloud&logoColor=white)](https://github.com/nextcloud/passman/blob/master/appinfo/info.xml)
-[![PHP](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnextcloud%2Fpassman%2Fnc35%2Fappinfo%2Finfo.xml&query=concat%28string%28%2F%2Fphp%2F%40min-version%29%2Csubstring%28concat%28%27%E2%80%93%27%2Cstring%28%2F%2Fphp%2F%40max-version%29%29%2C1%2C%28string%28%2F%2Fnextcloud%2F%40min-version%29%21%3Dstring%28%2F%2Fnextcloud%2F%40max-version%29%29%2Astring-length%28concat%28%27%E2%80%93%27%2Cstring%28%2F%2Fnextcloud%2F%40max-version%29%29%29%29%29&label=PHP&color=0082c9&logo=php&logoColor=white)](https://github.com/nextcloud/passman/blob/master/appinfo/info.xml)
+[![PHP](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnextcloud%2Fpassman%2Fmaster%2Fappinfo%2Finfo.xml&query=concat%28string%28%2F%2Fphp%2F%40min-version%29%2Csubstring%28concat%28%27%E2%80%93%27%2Cstring%28%2F%2Fphp%2F%40max-version%29%29%2C1%2C%28string%28%2F%2Fphp%2F%40min-version%29%21%3Dstring%28%2F%2Fphp%2F%40max-version%29%29%2Astring-length%28concat%28%27%E2%80%93%27%2Cstring%28%2F%2Fphp%2F%40max-version%29%29%29%29%29&label=PHP&color=0082c9&logo=php&logoColor=white)](https://github.com/nextcloud/passman/blob/master/appinfo/info.xml)
 
 [![PHPUnit SQLite](https://github.com/nextcloud/passman/actions/workflows/phpunit-sqlite.yml/badge.svg)](https://github.com/nextcloud/passman/actions/workflows/phpunit-sqlite.yml)
 [![PHPUnit MySQL](https://github.com/nextcloud/passman/actions/workflows/phpunit-mysql.yml/badge.svg)](https://github.com/nextcloud/passman/actions/workflows/phpunit-mysql.yml)
@@ -35,7 +35,7 @@ Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_gener
 [Passman Webextension](https://github.com/nextcloud/passman-webextension) is our new, fully rewritten browser extension for the Passman Nextcloud app, using modern frontend and extension frameworks.
 
 [![Chrome webstore](https://img.passman.cc/assets/chromewebstore.png)](https://chrome.google.com/webstore/detail/passman/hlpjhlifkgmoibhollggngbbhbejecph)
-[![AMO](https://img.passman.cc/assets/AMO-button_1.png)](https://addons.mozilla.org/en-US/firefox/addon/passman/) 
+[![AMO](https://img.passman.cc/assets/AMO-button_1.png)](https://addons.mozilla.org/en-US/firefox/addon/passman/)
 
 ### Android app
 Our native [Passman Android](https://github.com/nextcloud/passman-android) app is available for download from the [Google Play Store](https://play.google.com/store/apps/details?id=es.wolfi.app.passman.alpha), [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/es.wolfi.app.passman) and [F-Droid](https://f-droid.org/app/es.wolfi.app.passman).
