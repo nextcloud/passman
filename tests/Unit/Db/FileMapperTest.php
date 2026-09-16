@@ -82,10 +82,6 @@ class FileMapperTest extends TestCase {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
-	/**
-	 * @covers ::create
-	 * @covers ::getFile
-	 */
 	public function testCreateAndGetFile(): void {
 		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
 

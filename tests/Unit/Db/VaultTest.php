@@ -59,10 +59,6 @@ pbbPwdc88kGcdqBzWQIDAQAB
 		$this->vault = Vault::fromRow(self::TEST_DATA);
 	}
 
-	/**
-	 * @covers ::getter
-	 * @covers ::fromRow
-	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->vault->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->vault->getGuid());
