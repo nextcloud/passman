@@ -2,6 +2,8 @@
 Passman is a full featured, open source password manager for Nextcloud.
 
 [![PHPUnit SQLite](https://github.com/nextcloud/passman/actions/workflows/phpunit-sqlite.yml/badge.svg)](https://github.com/nextcloud/passman/actions/workflows/phpunit-sqlite.yml)
+[![PHPUnit MySQL](https://github.com/nextcloud/passman/actions/workflows/phpunit-mysql.yml/badge.svg)](https://github.com/nextcloud/passman/actions/workflows/phpunit-mysql.yml)
+[![PHPUnit PostgreSQL](https://github.com/nextcloud/passman/actions/workflows/phpunit-pgsql.yml/badge.svg)](https://github.com/nextcloud/passman/actions/workflows/phpunit-pgsql.yml)
 
 ## Join us!
 Visit the [“Passman General Talk” Telegram Group](https://t.me/passman_general) to participate in all sorts of topical discussions about Passman and its apps!
@@ -64,7 +66,7 @@ More screenshots are available on the [Nextcloud App Store](https://apps.nextclo
 | MySQL / MariaDB |     •     |
 | PostgreSQL      |     •     |
 
-CI runs PHPUnit against SQLite on GitHub Actions.
+CI runs PHPUnit against SQLite, MySQL and PostgreSQL on GitHub Actions.
 
 ## Security
 
