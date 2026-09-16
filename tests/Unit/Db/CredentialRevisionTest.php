@@ -49,10 +49,6 @@ class CredentialRevisionTest extends TestCase {
 		$this->revision = CredentialRevision::fromRow(self::TEST_DATA);
 	}
 
-	/**
-	 * @covers ::fromRow
-	 * @covers ::getter
-	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->revision->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->revision->getGuid());

@@ -6,7 +6,7 @@
 # SPDX-FileCopyrightText: 2022-2024 Nextcloud GmbH and Nextcloud contributors
 # SPDX-License-Identifier: MIT
 
-name: PHPUnit SQLite
+name: PHPUnit PostgreSQL
 
 on:
   push:
@@ -23,8 +23,10 @@ concurrency:
 jobs:
   changes-and-matrix:
     uses: ./.github/workflows/phpunit-prepare.yml
+    with:
+      extra-matrix: '{"pgsql-versions": ["16"]}'
 
-  phpunit-sqlite:
+  phpunit-pgsql:
     runs-on: ubuntu-latest-low
 
     needs: changes-and-matrix
@@ -34,7 +36,18 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.changes-and-matrix.outputs.matrix) }}
 
-    name: SQLite PHP ${{ matrix.php-versions }} Nextcloud ${{ matrix.server-versions }}
+    name: PostgreSQL ${{ matrix.pgsql-versions }} PHP ${{ matrix.php-versions }} Nextcloud ${{ matrix.server-versions }}
+
+    services:
+      postgres:
+        image: ghcr.io/nextcloud/continuous-integration-postgres-${{ matrix.pgsql-versions }}:latest # zizmor: ignore[unpinned-images]
+        ports:
+          - 4444:5432/tcp
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: rootpassword
+          POSTGRES_DB: nextcloud
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 2s --health-retries 5
 
     steps:
       - name: Checkout app
@@ -44,22 +57,22 @@ jobs:
 
       - uses: ./.github/actions/phpunit
         with:
-          database: sqlite
+          database: pgsql
           php-version: ${{ matrix.php-versions }}
           server-version: ${{ matrix.server-versions }}
-          php-db-extensions: sqlite, pdo_sqlite
-          coverage: pcov
-          upload-coverage: true
+          php-db-extensions: pgsql, pdo_pgsql
+          coverage: none
+          phpunit-args: -- --no-coverage
 
   summary:
     permissions:
       contents: none
     runs-on: ubuntu-latest-low
-    needs: [changes-and-matrix, phpunit-sqlite]
+    needs: [changes-and-matrix, phpunit-pgsql]
 
     if: always()
 
-    name: phpunit-sqlite-summary
+    name: phpunit-pgsql-summary
 
     steps:
       - name: Summary status
@@ -68,7 +81,7 @@ jobs:
             echo "No relevant changes detected, skipping."
             exit 0
           fi
-          if [ "${{ needs.phpunit-sqlite.result }}" != "success" ]; then
+          if [ "${{ needs.phpunit-pgsql.result }}" != "success" ]; then
             echo "PHPUnit job failed or was cancelled."
             exit 1
           fi
