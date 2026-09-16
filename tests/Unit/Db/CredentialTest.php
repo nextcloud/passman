@@ -72,10 +72,6 @@ class CredentialTest extends TestCase {
 		$this->assertInstanceOf(JsonSerializable::class, $this->credential);
 	}
 
-	/**
-	 * @covers ::getter
-	 * @covers ::fromRow
-	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->credential->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->credential->getGuid());

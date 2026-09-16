@@ -6,7 +6,7 @@
 # SPDX-FileCopyrightText: 2022-2024 Nextcloud GmbH and Nextcloud contributors
 # SPDX-License-Identifier: MIT
 
-name: PHPUnit SQLite
+name: PHPUnit MySQL
 
 on:
   push:
@@ -23,8 +23,10 @@ concurrency:
 jobs:
   changes-and-matrix:
     uses: ./.github/workflows/phpunit-prepare.yml
+    with:
+      extra-matrix: '{"mysql-versions": ["8.4"]}'
 
-  phpunit-sqlite:
+  phpunit-mysql:
     runs-on: ubuntu-latest-low
 
     needs: changes-and-matrix
@@ -34,7 +36,16 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.changes-and-matrix.outputs.matrix) }}
 
-    name: SQLite PHP ${{ matrix.php-versions }} Nextcloud ${{ matrix.server-versions }}
+    name: MySQL ${{ matrix.mysql-versions }} PHP ${{ matrix.php-versions }} Nextcloud ${{ matrix.server-versions }}
+
+    services:
+      mysql:
+        image: ghcr.io/nextcloud/continuous-integration-mysql-${{ matrix.mysql-versions }}:latest # zizmor: ignore[unpinned-images]
+        ports:
+          - 4444:3306/tcp
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+        options: --health-cmd="mysqladmin ping" --health-interval 5s --health-timeout 2s --health-retries 10
 
     steps:
       - name: Checkout app
@@ -44,22 +55,22 @@ jobs:
 
       - uses: ./.github/actions/phpunit
         with:
-          database: sqlite
+          database: mysql
           php-version: ${{ matrix.php-versions }}
           server-version: ${{ matrix.server-versions }}
-          php-db-extensions: sqlite, pdo_sqlite
-          coverage: pcov
-          upload-coverage: true
+          php-db-extensions: mysql, pdo_mysql
+          coverage: none
+          phpunit-args: -- --no-coverage
 
   summary:
     permissions:
       contents: none
     runs-on: ubuntu-latest-low
-    needs: [changes-and-matrix, phpunit-sqlite]
+    needs: [changes-and-matrix, phpunit-mysql]
 
     if: always()
 
-    name: phpunit-sqlite-summary
+    name: phpunit-mysql-summary
 
     steps:
       - name: Summary status
@@ -68,7 +79,7 @@ jobs:
             echo "No relevant changes detected, skipping."
             exit 0
           fi
-          if [ "${{ needs.phpunit-sqlite.result }}" != "success" ]; then
+          if [ "${{ needs.phpunit-mysql.result }}" != "success" ]; then
             echo "PHPUnit job failed or was cancelled."
             exit 1
           fi

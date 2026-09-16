@@ -80,10 +80,6 @@ class CredentialMapperTest extends TestCase {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
-	/**
-	 * @covers ::create
-	 * @covers ::getCredentialById
-	 */
 	public function testCreateAndGetCredentialById(): void {
 		$created = $this->createVaultAndCredential(['label' => 'created credential']);
 

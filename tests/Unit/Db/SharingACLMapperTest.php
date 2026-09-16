@@ -90,10 +90,6 @@ class SharingACLMapperTest extends TestCase {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
-	/**
-	 * @covers ::createACLEntry
-	 * @covers ::getItemACL
-	 */
 	public function testCreateAndGetItemACL(): void {
 		$acl = $this->mapper->createACLEntry($this->buildAcl());
 
