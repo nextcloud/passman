@@ -447,18 +447,26 @@ class ShareController extends ApiController {
 	#[PublicPage]
 	public function getFile($item_guid, $file_guid) {
 		try {
+			// throws if no credential exists for the requested guid
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+
+			// $this->userId does not exist for anonymous share link downloads
+			$userId = ($this->userId) ? $this->userId->getUID() : null;
+			// throws if no credential exists for the requested guid
+			$acl = $this->shareService->getACL($userId, $credential->getGuid());
+
+			// if the credential share already expired, do not gain access to the corresponding file
+			if ($acl->getExpire() > 0 && Utils::getTime() > $acl->getExpire()) {
+				return new NotFoundJSONResponse();
+			}
+
+			if ($acl->hasPermission(SharingACL::FILES)) {
+				// get file by guid and check if it is owned by the owner of the shared credential
+				// throws if no file exists for the requested guid
+				return $this->fileService->getFileByGuid($file_guid, $credential->getUserId());
+			}
 		} catch (\Exception) {
 			return new NotFoundJSONResponse();
-		}
-
-		// $this->userId does not exist for anonymous share link downloads
-		$userId = ($this->userId) ? $this->userId->getUID() : null;
-		$acl = $this->shareService->getACL($userId, $credential->getGuid());
-
-		if ($acl->hasPermission(SharingACL::FILES)) {
-		    // get file by guid and check if it is owned by the owner of the shared credential
-			return $this->fileService->getFileByGuid($file_guid, $credential->getUserId());
 		}
 
 		return new NotFoundJSONResponse();
