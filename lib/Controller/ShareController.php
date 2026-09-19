@@ -444,6 +444,7 @@ class ShareController extends ApiController {
 	 */
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
+	#[PublicPage]
 	public function getFile($item_guid, $file_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($item_guid);
