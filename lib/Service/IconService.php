@@ -330,7 +330,6 @@ class IconService {
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0');
@@ -352,7 +351,6 @@ class IconService {
 		$info['effective_url'] = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 		$info['redirect_count'] = curl_getinfo($ch, CURLINFO_REDIRECT_COUNT);
 		$info['content_type'] = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-		curl_close($ch);
 
 		if ($info['curl_errno'] !== CURLE_OK || in_array($info['http_code'], [403, 404, 500, 503])) {
 			return false;
