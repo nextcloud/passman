@@ -237,9 +237,7 @@ class CredentialController extends ApiController {
 			$credential['shared_key'] = '';
 		}
 
-		if (!isset($credential['shared_key'])) {
-			$credential['shared_key'] = $storedCredential->getSharedKey();
-		}
+		$credential['shared_key'] ??= $storedCredential->getSharedKey();
 
 		if (!$skip_revision) {
 			$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);

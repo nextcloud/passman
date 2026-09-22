@@ -7,6 +7,7 @@ namespace OCA\Passman\Migration;
 use Closure;
 use Doctrine\DBAL\Types\Type;
 use OCP\DB\ISchemaWrapper;
+use OCP\DB\Types;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
 
@@ -39,11 +40,20 @@ class Version02031334Date20210926234011 extends SimpleMigrationStep {
 				$table->dropIndex('passman_credential_label_index');
 			}
 			$labelColumn = $table->getColumn('label');
-			if ($labelColumn->getLength() < 2048 || $labelColumn->getType() !== Type::getType('string')) {
-				$table->changeColumn('label', [
-					'type' => Type::getType('string'),
-					'length' => 2048
-				]);
+			$typeName = $labelColumn->getType()->getName();
+			if (($labelColumn->getLength() ?? 0) < 2048 || $typeName !== Types::STRING) {
+				if (interface_exists(\OCP\DB\Schema\ITable::class) && $table instanceof \OCP\DB\Schema\ITable) {
+					$table->modifyColumn('label', [
+						'type' => Types::STRING,
+						'length' => 2048,
+					]);
+				} else {
+					// Doctrine Table::modifyColumn() TypeErrors on a string type name.
+					$table->modifyColumn('label', [
+						'type' => Type::getType(Types::STRING),
+						'length' => 2048,
+					]);
+				}
 			}
 		}
 
