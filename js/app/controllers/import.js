@@ -77,6 +77,91 @@
 				loaded: 0,
 				total: 0
 			};
+
+			/**
+			 * Needed to remove the custom _history property from the credential object before sending it to the server.
+			 */
+			var toImportPayload = function (credential) {
+				var payload = angular.copy(credential);
+				delete payload._history;
+				payload.vault_id = $scope.active_vault.vault_id;
+				return payload;
+			};
+
+			/**
+			 * Called after importCredentialWithHistory to log the import and call addCredential again for the next credential.
+			 */
+			var finishCredential = function (parsed_data_index, label, revisionCount) {
+				if (revisionCount) {
+					_log($translate.instant('import.added.revisions', {
+						credential: label,
+						count: revisionCount
+					}));
+				} else {
+					_log($translate.instant('import.added', {credential: label}));
+				}
+				if (parsed_data[parsed_data_index + 1]) {
+					$scope.import_progress = {
+						progress: parsed_data_index / parsed_data.length * 100,
+						loaded: parsed_data_index,
+						total: parsed_data.length
+					};
+					addCredential(parsed_data_index + 1);
+				} else {
+					$scope.import_progress = {
+						progress: 100,
+						loaded: parsed_data.length,
+						total: parsed_data.length
+					};
+					_log($translate.instant('done'));
+					$rootScope.refresh();
+				}
+			};
+
+			/**
+			 * Import the given credential (with its history if _history property is present) into the server.
+			 * @param {Object} _credential The credential to import.
+			 * @returns {Promise} A promise that resolves to the imported credential.
+			 */
+			var importCredentialWithHistory = function (_credential) {
+				var history = Array.isArray(_credential._history) ? _credential._history : [];
+				var versions = history.concat([_credential]);
+				var first = toImportPayload(versions[0]);
+				if (!first.label) {
+					first.label = _credential.label;
+				}
+
+				return CredentialService.createCredential(first).then(function (created) {
+					if (!created.credential_id) {
+						return created;
+					}
+
+					var applyVersion = function (index, previous) {
+						if (index >= versions.length) {
+							return previous;
+						}
+						var next = toImportPayload(versions[index]);
+						next.guid = previous.guid;
+						next.credential_id = previous.credential_id;
+						if (!next.label) {
+							next.label = _credential.label;
+						}
+						return CredentialService.updateCredential(next).then(function (updated) {
+							return applyVersion(index + 1, updated);
+						});
+					};
+
+					if (versions.length === 1) {
+						return created;
+					}
+					return applyVersion(1, created);
+				});
+			};
+
+			/**
+			 * Recursive function chain, starts with index 0 and will be called again after importCredentialWithHistory -> finishCredential -> addCredential.
+			 * The abort condition if part of finishCredential.
+			 */
 			var addCredential = function (parsed_data_index) {
 				if (!parsed_data[parsed_data_index]) {
 					return;
@@ -89,28 +174,18 @@
 					}
 					return;
 				}
-				_log($translate.instant('import.adding', {credential: _credential.label }));
-				_credential.vault_id = $scope.active_vault.vault_id;
-				CredentialService.createCredential(_credential).then(function (result) {
-					if (result.credential_id) {
-						_log($translate.instant('import.added', {credential: _credential.label }));
-						if (parsed_data[parsed_data_index + 1]) {
-							$scope.import_progress = {
-								progress: parsed_data_index / parsed_data.length * 100,
-								loaded: parsed_data_index,
-								total: parsed_data.length
-							};
-
-							addCredential(parsed_data_index + 1);
-						} else {
-							$scope.import_progress = {
-								progress: 100,
-								loaded: parsed_data.length,
-								total: parsed_data.length
-							};
-							_log($translate.instant('done'));
-							$rootScope.refresh();
-						}
+				var revisionCount = Array.isArray(_credential._history) ? _credential._history.length : 0;
+				if (revisionCount) {
+					_log($translate.instant('import.adding.revisions', {
+						credential: _credential.label,
+						count: revisionCount
+					}));
+				} else {
+					_log($translate.instant('import.adding', {credential: _credential.label }));
+				}
+				importCredentialWithHistory(_credential).then(function (result) {
+					if (result && result.credential_id) {
+						finishCredential(parsed_data_index, _credential.label, revisionCount);
 					}
 				});
 			};
@@ -127,7 +202,7 @@
 				if (file_data) {
 					var process = $window.PassmanImporter[$scope.selectedImporter.id];
 
-					if ($scope.selectedImporter.id === 'passmanJson'){
+					if (process && typeof process.setRequiredServices === 'function') {
 						process.setRequiredServices(FileService, EncryptService);
 					}
 
@@ -147,6 +222,10 @@
 						}
 					}).progress(function (progress) {
 						$scope.file_read_progress = progress;
+						$scope.$digest();
+					}).error(function (err) {
+						_log($translate.instant('import.parse.error'));
+						console.error(err);
 						$scope.$digest();
 					});
 				}
