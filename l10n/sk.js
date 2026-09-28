@@ -274,7 +274,7 @@ OC.L10N.register(
     "Hello there!" : "Zdravím!",
     "It does not seem that you have any passwords. Do you want to add one?" : "Nezdá sa, že by ste mali nejaké heslá. Chcete nejaké pridať?",
     "You don't have good credentials" : "Nemáte bezpečné prihlasovacie údaje",
-    "You don't have medium credentials" : "Nemáte priemerne bezpečné prihlasovacie údaje",
+    "You don't have medium credentials" : "Nemáte prihlasovacie údaje strednej úrovne bezpečnosti",
     "You don't have bad credentials" : "Nemáte málo bezpečné prihlasovacie údaje",
     "You don't have expired credentials" : "Nemáte prihlasovacie údaje po skončení platnosti",
     "You don't have deleted credentials" : "Nemáte vymazané prihlasovacie údaje",
