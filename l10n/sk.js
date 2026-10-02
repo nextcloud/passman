@@ -329,7 +329,7 @@ OC.L10N.register(
     "Someone has shared a credential with you." : "Niekto vám sprístupnil prihlasovací údaj.",
     "Click here to request it" : "Kliknite sem pre vytvorenie požiadavky",
     "Loading" : "Načítava sa",
-    "Oops! Credential not found. Maybe it expired." : "Ups! Prihlasovací údaj nenájdený.  Je možné že mu skončila platnosť.",
+    "Oops! Credential not found. Maybe it expired." : "Ups! Prihlasovací údaj sa nenašiel. Možno mu skončila platnosť.",
     "Mark as Compromised" : "Označiť ako kompromitované",
     "Compromised!" : "Ohrozené!",
     "This password is compromised. You can only remove this warning by changing the password." : "Toto heslo je ohrozené. Toto upozornenie môžete odstrániť iba zmenou hesla.",
