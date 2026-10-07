@@ -188,7 +188,7 @@ OC.L10N.register(
     "A total of {{scan_result}} weak credentials were found." : "Našlo sa spolu {{scan_result}} slabých hesiel.",
     "Score" : "Skóre",
     "Action" : "Akcia",
-    "Search users …" : "Vyhľadať užívateľov ...",
+    "Search users …" : "Vyhľadať používateľov …",
     "Missing users? Only users that have vaults are shown." : "Chýbajú používatelia? Zobrazení sú iba používatelia, ktorí majú trezor.",
     "Cyphering" : "Šifrovanie",
     "Uploading" : "Nahrávanie",
