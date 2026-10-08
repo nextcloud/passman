@@ -376,7 +376,7 @@ OC.L10N.register(
     "Reason" : "Neden",
     "Click here to request\n\t\t\t\t\tit" : "Buraya tıklayarak \n\t\t\t\t\tisteyin",
     "E-mail" : "E-posta",
-    "Expires:" : "Geçerlilik süresi sonu:",
+    "Expires:" : "Geçerlilik sonu:",
     "Connection to server lost" : "Sunucu bağlantısı kesildi",
     "Problem loading page, reloading in 5 seconds" : "Sayfa yüklenirken sorun çıktı, 5 saniye içinde yeniden yüklenecek",
     "Saving …" : "Kaydediliyor …",
