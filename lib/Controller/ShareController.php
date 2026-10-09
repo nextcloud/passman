@@ -30,6 +30,7 @@ use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\Attribute\PublicPage;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IRequest;
@@ -435,8 +436,11 @@ class ShareController extends ApiController {
 	#[NoCSRFRequired]
 	#[PublicPage]
 	public function getPublicCredentialData($credential_guid) {
-		//@TODO Check expire date
-		$acl = $this->shareService->getACL(null, $credential_guid);
+		try {
+			$acl = $this->shareService->getACL(null, $credential_guid);
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
 
 		if ($acl->getExpire() > 0 && Utils::getTime() > $acl->getExpire()) {
 			return new NotFoundJSONResponse();
@@ -543,7 +547,11 @@ class ShareController extends ApiController {
 
 		// only check acl, if the uploading user is not the credential owner
 		if ($credential->getUserId() != $this->userId->getUID()) {
-			$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+			try {
+				$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+			} catch (\Exception) {
+				return new NotFoundJSONResponse();
+			}
 			if (!$acl->hasPermission(SharingACL::FILES)) {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}
