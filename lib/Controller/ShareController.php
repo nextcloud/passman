@@ -221,6 +221,12 @@ class ShareController extends ApiController {
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
 	public function unshareCredential($item_guid) {
+		try {
+			// only the owner of a credential is allowed to unshare it
+			$this->credentialService->getCredentialByGUID($item_guid, $this->userId->getUID());
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
 		$this->shareService->unshareCredential($item_guid);
 		return new JSONResponse(['result' => true]);
 	}
@@ -228,6 +234,13 @@ class ShareController extends ApiController {
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
 	public function unshareCredentialFromUser($item_guid, $user_id) {
+		try {
+			// only the owner of a credential is allowed to unshare it
+			$this->credentialService->getCredentialByGUID($item_guid, $this->userId->getUID());
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
+
 		$acl = null;
 		$sr = null;
 		try {
@@ -286,6 +299,10 @@ class ShareController extends ApiController {
 		try {
 			$sr = $this->shareService->getRequestByGuid($item_guid, $target_vault_guid);
 		} catch (\Exception) {
+			return new NotFoundResponse();
+		}
+		// only the target user is allowed to accept a share request
+		if ($sr->getTargetUserId() !== $this->userId->getUID()) {
 			return new NotFoundResponse();
 		}
 
@@ -379,7 +396,11 @@ class ShareController extends ApiController {
 	public function deleteShareRequest($share_request_id) {
 		try {
 
-			$sr = $this->shareService->getShareRequestById($share_request_id);
+			$sr = $this->shareService->getShareRequestById((int)$share_request_id);
+			// only the target user is allowed to decline a share request
+			if ($sr->getTargetUserId() !== $this->userId->getUID()) {
+				return new NotFoundJSONResponse();
+			}
 			$notification = [
 				'from_user' => ucfirst((string) $this->userId->getDisplayName()),
 				'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
