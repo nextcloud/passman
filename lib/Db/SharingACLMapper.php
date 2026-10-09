@@ -115,6 +115,36 @@ class SharingACLMapper extends QBMapper {
 	}
 
 	/**
+	 * Finds acl entries whose item_id does not reference the credential identified by their item_guid.
+	 * Such entries could be a result of manipulated acl item ids (passman <= 2.6.3) or leftovers of deleted credentials.
+	 *
+	 * @return array<int, array<string, mixed>> acl data joined with the owners of the credentials,
+	 *     referenced by item_id (item_id_*) and item_guid (item_guid_*), null if a credential does not exist
+	 * @throws \OCP\DB\Exception
+	 */
+	public function findEntriesWithMismatchingItemId(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('a.id', 'a.item_id', 'a.item_guid', 'a.user_id', 'a.created', 'a.expire', 'a.expire_views', 'a.permissions')
+			->selectAlias('ci.guid', 'item_id_credential_guid')
+			->selectAlias('ci.user_id', 'item_id_credential_owner')
+			->selectAlias('cg.id', 'item_guid_credential_id')
+			->selectAlias('cg.user_id', 'item_guid_credential_owner')
+			->from(self::TABLE_NAME, 'a')
+			->leftJoin('a', CredentialMapper::TABLE_NAME, 'ci', $qb->expr()->eq('ci.id', 'a.item_id'))
+			->leftJoin('a', CredentialMapper::TABLE_NAME, 'cg', $qb->expr()->eq('cg.guid', 'a.item_guid'))
+			->where($qb->expr()->orX(
+				$qb->expr()->isNull('ci.id'),
+				$qb->expr()->neq('ci.guid', 'a.item_guid'),
+			))
+			->orderBy('a.id');
+
+		$result = $qb->executeQuery();
+		$rows = $result->fetchAll();
+		$result->closeCursor();
+		return $rows;
+	}
+
+	/**
 	 * @param SharingACL $sharingACL
 	 * @return SharingACL
 	 */

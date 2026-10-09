@@ -26,8 +26,11 @@ declare(strict_types=1);
 
 namespace OCA\Passman\Tests\Unit\Db;
 
+use OCA\Passman\Db\Credential;
+use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Db\SharingACLMapper;
+use OCA\Passman\Db\VaultMapper;
 use OCA\Passman\Tests\Unit\Support\DbTestTrait;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -64,6 +67,15 @@ class SharingACLMapperTest extends TestCase {
 	private function resetData(): void {
 		$this->deletePassmanRows($this->db, 'passman_sharing_acl', 'user_id', self::TEST_USER);
 		$this->deletePassmanRows($this->db, 'passman_sharing_acl', 'user_id', self::TEST_USER . '_2');
+		foreach ([self::TEST_USER, self::TEST_USER . '_2'] as $userId) {
+			$this->deletePassmanRows($this->db, 'passman_credentials', 'user_id', $userId);
+			$this->deletePassmanRows($this->db, 'passman_vaults', 'user_id', $userId);
+		}
+	}
+
+	private function createCredential(string $userId): Credential {
+		$vault = (new VaultMapper($this->db, new Utils()))->create('Test vault', $userId);
+		return (new CredentialMapper($this->db, new Utils()))->create($this->sampleCredentialData($vault->getId(), $userId));
 	}
 
 	private function buildAcl(array $overrides = []): SharingACL {
@@ -157,5 +169,41 @@ class SharingACLMapperTest extends TestCase {
 
 		$this->expectException(DoesNotExistException::class);
 		$this->mapper->getItemACL(self::TEST_USER, $acl->getItemGuid());
+	}
+
+	public function testFindEntriesWithMismatchingItemId(): void {
+		$ownCredential = $this->createCredential(self::TEST_USER);
+		$foreignCredential = $this->createCredential(self::TEST_USER . '_2');
+
+		$valid = $this->mapper->createACLEntry($this->buildAcl([
+			'setItemId'   => $ownCredential->getId(),
+			'setItemGuid' => $ownCredential->getGuid(),
+		]));
+		$foreign = $this->mapper->createACLEntry($this->buildAcl([
+			'setItemId'   => $foreignCredential->getId(),
+			'setItemGuid' => $ownCredential->getGuid(),
+		]));
+		$missing = $this->mapper->createACLEntry($this->buildAcl([
+			'setItemId'   => PHP_INT_MAX,
+			'setItemGuid' => $ownCredential->getGuid(),
+		]));
+
+		$rows = [];
+		foreach ($this->mapper->findEntriesWithMismatchingItemId() as $row) {
+			$rows[(int)$row['id']] = $row;
+		}
+
+		$this->assertArrayNotHasKey($valid->getId(), $rows);
+
+		$this->assertArrayHasKey($foreign->getId(), $rows);
+		$this->assertSame($foreignCredential->getGuid(), $rows[$foreign->getId()]['item_id_credential_guid']);
+		$this->assertSame(self::TEST_USER . '_2', $rows[$foreign->getId()]['item_id_credential_owner']);
+		$this->assertSame(self::TEST_USER, $rows[$foreign->getId()]['item_guid_credential_owner']);
+		$this->assertEquals($ownCredential->getId(), $rows[$foreign->getId()]['item_guid_credential_id']);
+
+		$this->assertArrayHasKey($missing->getId(), $rows);
+		$this->assertNull($rows[$missing->getId()]['item_id_credential_guid']);
+		$this->assertNull($rows[$missing->getId()]['item_id_credential_owner']);
+		$this->assertSame(self::TEST_USER, $rows[$missing->getId()]['item_guid_credential_owner']);
 	}
 }
