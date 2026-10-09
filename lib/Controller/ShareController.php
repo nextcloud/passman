@@ -26,6 +26,7 @@ use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\Attribute\PublicPage;
@@ -72,9 +73,28 @@ class ShareController extends ApiController {
 	#[NoCSRFRequired]
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
 		try {
-			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+			// only the owner of a credential is allowed to share it publicly
+			$credential = $this->credentialService->getCredentialByGUID($item_guid, $this->userId->getUID());
 		} catch (\Exception) {
 			return new NotFoundResponse();
+		}
+
+		// item_id has to reference the same credential as item_guid
+		if ((int)$item_id !== $credential->getId()) {
+			return new NotFoundResponse();
+		}
+
+		// the db columns are unsigned int, a public share is read-only (optionally including files)
+		$isInRange = static fn($value, int $min = 0): bool => is_numeric($value) && $value >= $min && $value < PHP_INT_MAX;
+		$allowed_permissions = SharingACL::READ | SharingACL::FILES;
+		if (!$isInRange($permissions) || !$isInRange($expire_timestamp) || !$isInRange($expire_views, 1)) {
+			return new JSONResponse(['error' => 'Invalid share parameters'], Http::STATUS_BAD_REQUEST);
+		}
+		$permissions = (int)$permissions;
+		$expire_timestamp = (int)$expire_timestamp;
+		$expire_views = (int)$expire_views;
+		if (($permissions & ~$allowed_permissions) !== 0 || !($permissions & SharingACL::READ)) {
+			return new JSONResponse(['error' => 'Invalid share parameters'], Http::STATUS_BAD_REQUEST);
 		}
 
 		try {
@@ -84,8 +104,8 @@ class ShareController extends ApiController {
 		}
 
 
-		$acl->setItemId($item_id);
-		$acl->setItemGuid($item_guid);
+		$acl->setItemId($credential->getId());
+		$acl->setItemGuid($credential->getGuid());
 		$acl->setPermissions($permissions);
 		$acl->setExpire($expire_timestamp);
 		$acl->setExpireViews($expire_views);
@@ -110,7 +130,15 @@ class ShareController extends ApiController {
 		 */
 		//@TODO add expire_time
 		//@TODO add expire_views
-		$credential = $this->credentialService->getCredentialById($item_id, $this->userId->getUID());
+		try {
+			$credential = $this->credentialService->getCredentialById((int)$item_id, $this->userId->getUID());
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
+		// item_guid has to reference the same credential as item_id
+		if ($credential->getGuid() !== $item_guid) {
+			return new NotFoundJSONResponse();
+		}
 		$credential_owner = $credential->getUserId();
 
 		$first_vault = $vaults[0];
@@ -377,6 +405,8 @@ class ShareController extends ApiController {
 	}
 
 	/**
+	 * todo: the -1 views idea for unlimited view no longer works / did never work since it is based on an unsigned db column
+	 * todo: to re-add this functionality, migrate to signed or find a better flag-like solution
 	 * @param $credential_guid
 	 * @return JSONResponse
 	 */

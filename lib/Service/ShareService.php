@@ -25,6 +25,7 @@ namespace OCA\Passman\Service;
 
 
 use OCA\Passman\AppInfo\Application;
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
@@ -182,7 +183,12 @@ class ShareService {
 			return null;
 		}
 
-		$credential = $this->credential->getCredentialById($sharingACL->getItemId());
+		try {
+			$credential = $this->getCredentialForACL($sharingACL);
+		} catch (DoesNotExistException) {
+			// skip inconsistent entries instead of failing the whole (vault) item list
+			return null;
+		}
 		$credential = $this->encryptService->decryptCredential($credential);
 
 		$serializableSharingACL = $sharingACL->jsonSerialize();
@@ -193,6 +199,22 @@ class ShareService {
 		}
 		unset($serializableSharingACL['credential_data']['shared_key']);
 		return $serializableSharingACL;
+	}
+
+	/**
+	 * Resolves the credential an ACL entry points to.
+	 * The ACL's item_id must belong to the credential identified by the ACL's item_guid,
+	 * otherwise a manipulated item_id could be used to access arbitrary credentials.
+	 *
+	 * @throws MultipleObjectsReturnedException
+	 * @throws DoesNotExistException
+	 */
+	private function getCredentialForACL(SharingACL $sharingACL): Credential {
+		$credential = $this->credential->getCredentialById($sharingACL->getItemId());
+		if ($credential->getGuid() !== $sharingACL->getItemGuid()) {
+			throw new DoesNotExistException('Item not found or wrong access level');
+		}
+		return $credential;
 	}
 
 	/**
@@ -223,7 +245,8 @@ class ShareService {
 			return [];
 		}
 
-		return $this->revisions->getRevisions($acl->getItemId());
+		$credential = $this->getCredentialForACL($acl);
+		return $this->revisions->getRevisions($credential->getId());
 	}
 
 
