@@ -34,6 +34,7 @@ use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IRequest;
+use OCP\IUser;
 use OCP\IUserManager;
 use OCP\Notification\IManager;
 
@@ -45,7 +46,8 @@ class ShareController extends ApiController {
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		private $userId,
+		// IUser instead of the usual uid string, since this controller is registered manually in Application::register()
+		private readonly ?IUser $userId,
 		private readonly IUserManager $userManager,
 		private readonly ActivityService $activityService,
 		private readonly VaultService $vaultService,
@@ -354,7 +356,7 @@ class ShareController extends ApiController {
 	#[NoCSRFRequired]
 	public function getRevisions($item_guid) {
 		try {
-			return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
+			return new JSONResponse($this->shareService->getItemHistory($this->userId->getUID(), $item_guid));
 		} catch (\Exception) {
 			return new NotFoundJSONResponse();
 		}
