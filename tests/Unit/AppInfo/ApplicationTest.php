@@ -33,9 +33,11 @@ use OCP\IUser;
 use OCP\IUserSession;
 use OCP\Server;
 use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Group;
 use Test\TestCase;
 
 #[CoversNothing]
+#[Group(name: 'DB')]
 class ApplicationTest extends TestCase {
 	public function testAppInstalled(): void {
 		$appManager = Server::get(IAppManager::class);
