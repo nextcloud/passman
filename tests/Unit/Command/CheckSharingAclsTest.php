@@ -45,62 +45,84 @@ class CheckSharingAclsTest extends TestCase {
 
 	private function row(array $overrides = []): array {
 		return array_merge([
-			'id'                         => 3,
-			'item_id'                    => 42,
-			'item_guid'                  => 'own-guid',
-			'user_id'                    => null,
-			'created'                    => 0,
-			'expire'                     => 0,
-			'expire_views'               => 5,
-			'permissions'                => 1,
-			'item_id_credential_guid'    => 'victim-guid',
-			'item_id_credential_owner'   => 'victim',
-			'item_guid_credential_id'    => 7,
-			'item_guid_credential_owner' => 'attacker',
+			'id'                                  => 3,
+			'item_id'                             => 42,
+			'item_guid'                           => 'own-guid',
+			'user_id'                             => null,
+			'created'                             => 0,
+			'expire'                              => 0,
+			'expire_views'                        => 5,
+			'permissions'                         => 1,
+			'item_id_credential_guid'             => 'victim-guid',
+			'item_id_credential_owner'            => 'victim',
+			'item_guid_credential_id'             => 7,
+			'item_guid_credential_owner'          => 'attacker',
+			'item_guid_credential_has_shared_key' => 0,
 		], $overrides);
 	}
 
 	public function testReportsNoEntries(): void {
-		$this->mapper->method('findEntriesWithMismatchingItemId')->willReturn([]);
+		$this->mapper->method('findInconsistentEntries')->willReturn([]);
 
 		$this->assertSame(0, $this->tester->execute([]));
-		$this->assertStringContainsString('No sharing ACL entries with mismatching item_id found.', $this->tester->getDisplay());
+		$this->assertStringContainsString('No inconsistent sharing ACL entries found.', $this->tester->getDisplay());
 	}
 
-	public function testListsMismatchingEntriesAsTable(): void {
-		$this->mapper->method('findEntriesWithMismatchingItemId')->willReturn([$this->row()]);
+	public function testListsInconsistentEntriesAsTable(): void {
+		$this->mapper->method('findInconsistentEntries')->willReturn([$this->row()]);
 
 		$this->assertSame(0, $this->tester->execute([]));
 		$display = $this->tester->getDisplay();
 		$this->assertStringContainsString('public link', $display);
+		$this->assertStringContainsString('item_guid shared key', $display);
 		$this->assertStringContainsString('victim', $display);
 		$this->assertStringContainsString('attacker', $display);
 		$this->assertStringContainsString(CheckSharingAcls::REASON_FOREIGN_CREDENTIAL, $display);
-		$this->assertStringContainsString('Found 1 sharing ACL entries', $display);
+		$this->assertStringContainsString('Found 1 inconsistent sharing ACL entries', $display);
 	}
 
-	public function testListsMismatchingEntriesAsJson(): void {
-		$this->mapper->method('findEntriesWithMismatchingItemId')->willReturn([
+	public function testListsInconsistentEntriesAsJson(): void {
+		$this->mapper->method('findInconsistentEntries')->willReturn([
 			$this->row(),
 			$this->row([
-				'id'                       => 4,
-				'user_id'                  => 'alice',
-				'created'                  => 1760000000,
-				'item_id_credential_guid'  => null,
-				'item_id_credential_owner' => null,
+				'id'                                  => 4,
+				'user_id'                             => 'alice',
+				'created'                             => 1760000000,
+				'item_id_credential_guid'             => null,
+				'item_id_credential_owner'            => null,
+				'item_guid_credential_has_shared_key' => 1,
+			]),
+			$this->row([
+				'id'                                  => 5,
+				'item_guid_credential_id'             => null,
+				'item_guid_credential_owner'          => null,
+				'item_guid_credential_has_shared_key' => null,
+			]),
+			$this->row([
+				'id'                       => 6,
+				'item_id'                  => 7,
+				'item_id_credential_guid'  => 'own-guid',
+				'item_id_credential_owner' => 'attacker',
 			]),
 		]);
 
 		$this->assertSame(0, $this->tester->execute(['--json' => true]));
 		$entries = json_decode($this->tester->getDisplay(), true);
 
-		$this->assertCount(2, $entries);
+		$this->assertCount(4, $entries);
 		$this->assertSame('public link', $entries[0]['shared_with']);
 		$this->assertNull($entries[0]['created']);
 		$this->assertSame('victim', $entries[0]['item_id_credential_owner']);
 		$this->assertSame(CheckSharingAcls::REASON_FOREIGN_CREDENTIAL, $entries[0]['reason']);
+		$this->assertFalse($entries[0]['item_guid_credential_has_shared_key']);
 		$this->assertSame('alice', $entries[1]['shared_with']);
 		$this->assertSame(date('Y-m-d H:i:s', 1760000000), $entries[1]['created']);
 		$this->assertSame(CheckSharingAcls::REASON_MISSING_CREDENTIAL, $entries[1]['reason']);
+		$this->assertTrue($entries[1]['item_guid_credential_has_shared_key']);
+		$this->assertNull($entries[2]['item_guid_credential_id']);
+		$this->assertNull($entries[2]['item_guid_credential_has_shared_key']);
+		$this->assertSame(CheckSharingAcls::REASON_FOREIGN_CREDENTIAL, $entries[2]['reason']);
+		$this->assertSame(CheckSharingAcls::REASON_NO_SHARED_KEY, $entries[3]['reason']);
+		$this->assertFalse($entries[3]['item_guid_credential_has_shared_key']);
 	}
 }

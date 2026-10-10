@@ -73,9 +73,9 @@ class SharingACLMapperTest extends TestCase {
 		}
 	}
 
-	private function createCredential(string $userId): Credential {
+	private function createCredential(string $userId, array $overrides = []): Credential {
 		$vault = (new VaultMapper($this->db, new Utils()))->create('Test vault', $userId);
-		return (new CredentialMapper($this->db, new Utils()))->create($this->sampleCredentialData($vault->getId(), $userId));
+		return (new CredentialMapper($this->db, new Utils()))->create($this->sampleCredentialData($vault->getId(), $userId, $overrides));
 	}
 
 	private function buildAcl(array $overrides = []): SharingACL {
@@ -171,11 +171,17 @@ class SharingACLMapperTest extends TestCase {
 		$this->mapper->getItemACL(self::TEST_USER, $acl->getItemGuid());
 	}
 
-	public function testFindEntriesWithMismatchingItemId(): void {
+	public function testFindInconsistentEntries(): void {
 		$ownCredential = $this->createCredential(self::TEST_USER);
+		$sharedCredential = $this->createCredential(self::TEST_USER, ['shared_key' => 'encrypted-shared-key']);
 		$foreignCredential = $this->createCredential(self::TEST_USER . '_2');
 
 		$valid = $this->mapper->createACLEntry($this->buildAcl([
+			'setItemId'   => $sharedCredential->getId(),
+			'setItemGuid' => $sharedCredential->getGuid(),
+		]));
+		// matching item_id and item_guid, but every legitimate share requires a shared key
+		$matchingWithoutSharedKey = $this->mapper->createACLEntry($this->buildAcl([
 			'setItemId'   => $ownCredential->getId(),
 			'setItemGuid' => $ownCredential->getGuid(),
 		]));
@@ -187,23 +193,45 @@ class SharingACLMapperTest extends TestCase {
 			'setItemId'   => PHP_INT_MAX,
 			'setItemGuid' => $ownCredential->getGuid(),
 		]));
+		$foreignWithSharedKey = $this->mapper->createACLEntry($this->buildAcl([
+			'setItemId'   => $foreignCredential->getId(),
+			'setItemGuid' => $sharedCredential->getGuid(),
+		]));
+		$unknownGuid = $this->mapper->createACLEntry($this->buildAcl([
+			'setItemId'   => $foreignCredential->getId(),
+			'setItemGuid' => 'unknown-guid-' . uniqid('', true),
+		]));
 
 		$rows = [];
-		foreach ($this->mapper->findEntriesWithMismatchingItemId() as $row) {
+		foreach ($this->mapper->findInconsistentEntries() as $row) {
 			$rows[(int)$row['id']] = $row;
 		}
 
 		$this->assertArrayNotHasKey($valid->getId(), $rows);
+
+		$this->assertArrayHasKey($matchingWithoutSharedKey->getId(), $rows);
+		$this->assertSame($ownCredential->getGuid(), $rows[$matchingWithoutSharedKey->getId()]['item_id_credential_guid']);
+		$this->assertEquals(0, $rows[$matchingWithoutSharedKey->getId()]['item_guid_credential_has_shared_key']);
 
 		$this->assertArrayHasKey($foreign->getId(), $rows);
 		$this->assertSame($foreignCredential->getGuid(), $rows[$foreign->getId()]['item_id_credential_guid']);
 		$this->assertSame(self::TEST_USER . '_2', $rows[$foreign->getId()]['item_id_credential_owner']);
 		$this->assertSame(self::TEST_USER, $rows[$foreign->getId()]['item_guid_credential_owner']);
 		$this->assertEquals($ownCredential->getId(), $rows[$foreign->getId()]['item_guid_credential_id']);
+		$this->assertEquals(0, $rows[$foreign->getId()]['item_guid_credential_has_shared_key']);
 
 		$this->assertArrayHasKey($missing->getId(), $rows);
 		$this->assertNull($rows[$missing->getId()]['item_id_credential_guid']);
 		$this->assertNull($rows[$missing->getId()]['item_id_credential_owner']);
 		$this->assertSame(self::TEST_USER, $rows[$missing->getId()]['item_guid_credential_owner']);
+
+		$this->assertArrayHasKey($foreignWithSharedKey->getId(), $rows);
+		$this->assertEquals(1, $rows[$foreignWithSharedKey->getId()]['item_guid_credential_has_shared_key']);
+		$this->assertArrayNotHasKey('shared_key', $rows[$foreignWithSharedKey->getId()]);
+
+		$this->assertArrayHasKey($unknownGuid->getId(), $rows);
+		$this->assertNull($rows[$unknownGuid->getId()]['item_guid_credential_id']);
+		$this->assertNull($rows[$unknownGuid->getId()]['item_guid_credential_owner']);
+		$this->assertNull($rows[$unknownGuid->getId()]['item_guid_credential_has_shared_key']);
 	}
 }

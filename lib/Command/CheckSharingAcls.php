@@ -38,6 +38,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CheckSharingAcls extends Command {
 	public const REASON_FOREIGN_CREDENTIAL = 'item_id references a different credential';
 	public const REASON_MISSING_CREDENTIAL = 'item_id references no existing credential';
+	public const REASON_NO_SHARED_KEY = 'item_guid credential has no shared key';
 
 	public function __construct(
 		private readonly SharingACLMapper $sharingACLMapper,
@@ -48,12 +49,12 @@ class CheckSharingAcls extends Command {
 	protected function configure(): void {
 		$this
 			->setName('passman:sharing:check-acls')
-			->setDescription('List sharing ACL entries whose item_id does not match the credential of their item_guid')
+			->setDescription('List sharing ACL entries with mismatching item_id and item_guid or without a shared key of the shared credential')
 			->addOption('json', null, InputOption::VALUE_NONE, 'Output the result as JSON');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$entries = array_map($this->formatEntry(...), $this->sharingACLMapper->findEntriesWithMismatchingItemId());
+		$entries = array_map($this->formatEntry(...), $this->sharingACLMapper->findInconsistentEntries());
 
 		if ($input->getOption('json')) {
 			$output->writeln(json_encode($entries, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
@@ -61,13 +62,13 @@ class CheckSharingAcls extends Command {
 		}
 
 		if (empty($entries)) {
-			$output->writeln('<info>No sharing ACL entries with mismatching item_id found.</info>');
+			$output->writeln('<info>No inconsistent sharing ACL entries found.</info>');
 			return self::SUCCESS;
 		}
 
 		$table = new Table($output);
 		$table->setHeaders([
-			'ACL id', 'Shared with', 'Created', 'item_guid', 'item_guid owner', 'item_id', 'item_id owner', 'Reason',
+			'ACL id', 'Shared with', 'Created', 'item_guid', 'item_guid owner', 'item_guid shared key', 'item_id', 'item_id owner', 'Reason',
 		]);
 		foreach ($entries as $entry) {
 			$table->addRow([
@@ -76,6 +77,11 @@ class CheckSharingAcls extends Command {
 				$entry['created'],
 				$entry['item_guid'],
 				$entry['item_guid_credential_owner'] ?? '-',
+				match ($entry['item_guid_credential_has_shared_key']) {
+					true => 'yes',
+					false => 'no',
+					null => '-',
+				},
 				$entry['item_id'],
 				$entry['item_id_credential_owner'] ?? '-',
 				$entry['reason'],
@@ -83,28 +89,41 @@ class CheckSharingAcls extends Command {
 		}
 		$table->render();
 
-		$output->writeln(sprintf('<comment>Found %d sharing ACL entries with mismatching item_id and item_guid.</comment>', count($entries)));
+		$output->writeln(sprintf('<comment>Found %d inconsistent sharing ACL entries.</comment>', count($entries)));
 		$output->writeln('Entries referencing a different credential may be the result of an attempt to access foreign credentials,');
 		$output->writeln('the "item_id owner" is the user whose credential was exposed. Passman ignores such entries since the fix.');
+		$output->writeln('Every share (link or user) requires the credential to have a shared key. Without one ("item_guid shared key" = no),');
+		$output->writeln('the entry cannot belong to a legitimate share of the item_guid owner, even if item_id and item_guid match.');
 		return self::SUCCESS;
 	}
 
 	private function formatEntry(array $row): array {
 		$created = (int)$row['created'];
 		return [
-			'acl_id'                     => (int)$row['id'],
-			'shared_with'                => $row['user_id'] ?? 'public link',
-			'created'                    => $created > 0 ? date('Y-m-d H:i:s', $created) : null,
-			'permissions'                => (int)$row['permissions'],
-			'expire'                     => (int)$row['expire'],
-			'expire_views'               => (int)$row['expire_views'],
-			'item_guid'                  => $row['item_guid'],
-			'item_guid_credential_id'    => $row['item_guid_credential_id'] !== null ? (int)$row['item_guid_credential_id'] : null,
-			'item_guid_credential_owner' => $row['item_guid_credential_owner'],
-			'item_id'                    => (int)$row['item_id'],
-			'item_id_credential_guid'    => $row['item_id_credential_guid'],
-			'item_id_credential_owner'   => $row['item_id_credential_owner'],
-			'reason'                     => $row['item_id_credential_guid'] === null ? self::REASON_MISSING_CREDENTIAL : self::REASON_FOREIGN_CREDENTIAL,
+			'acl_id'                              => (int)$row['id'],
+			'shared_with'                         => $row['user_id'] ?? 'public link',
+			'created'                             => $created > 0 ? date('Y-m-d H:i:s', $created) : null,
+			'permissions'                         => (int)$row['permissions'],
+			'expire'                              => (int)$row['expire'],
+			'expire_views'                        => (int)$row['expire_views'],
+			'item_guid'                           => $row['item_guid'],
+			'item_guid_credential_id'             => $row['item_guid_credential_id'] !== null ? (int)$row['item_guid_credential_id'] : null,
+			'item_guid_credential_owner'          => $row['item_guid_credential_owner'],
+			'item_guid_credential_has_shared_key' => $row['item_guid_credential_has_shared_key'] !== null ? (bool)$row['item_guid_credential_has_shared_key'] : null,
+			'item_id'                             => (int)$row['item_id'],
+			'item_id_credential_guid'             => $row['item_id_credential_guid'],
+			'item_id_credential_owner'            => $row['item_id_credential_owner'],
+			'reason'                              => $this->getReason($row),
 		];
+	}
+
+	private function getReason(array $row): string {
+		if ($row['item_id_credential_guid'] === null) {
+			return self::REASON_MISSING_CREDENTIAL;
+		}
+		if ($row['item_id_credential_guid'] !== $row['item_guid']) {
+			return self::REASON_FOREIGN_CREDENTIAL;
+		}
+		return self::REASON_NO_SHARED_KEY;
 	}
 }
