@@ -231,6 +231,20 @@ class ShareService {
 	}
 
 	/**
+	 * Gets the acl for a given credential, only if it references the credential by item_id and item_guid.
+	 * Use this instead of getACL() to check if a user is allowed to access a credential.
+	 *
+	 * @param string|null $user_id
+	 * @param Credential $credential
+	 * @return SharingACL
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getCredentialACL(?string $user_id, Credential $credential): SharingACL {
+		return $this->sharingACL->getCredentialACL($user_id, $credential);
+	}
+
+	/**
 	 * Gets history from the given item checking the user's permissions to access it
 	 *
 	 * @param string|null $user_id

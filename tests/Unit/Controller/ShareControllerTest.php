@@ -27,6 +27,7 @@ namespace OCA\Passman\Tests\Unit\Controller;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Controller\ShareController;
 use OCA\Passman\Db\Credential;
+use OCA\Passman\Db\File;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\SharingACL;
 use OCA\Passman\Service\ActivityService;
@@ -382,8 +383,9 @@ class ShareControllerTest extends TestCase {
 
 	public function testUploadFileRejectsUserWithoutAcl(): void {
 		$this->credentialService->method('getCredentialByGUID')->with('item-guid')->willReturn($this->credential(5, 'item-guid', 'bob'));
-		$this->shareService->method('getACL')
-			->with(self::USER, 'item-guid')
+		// also thrown for acl entries whose item_id does not match the credential
+		$this->shareService->method('getCredentialACL')
+			->with(self::USER, $this->isInstanceOf(Credential::class))
 			->willThrowException(new DoesNotExistException(''));
 		$this->fileService->expects($this->never())->method('createFile');
 
@@ -396,12 +398,34 @@ class ShareControllerTest extends TestCase {
 		$acl = new SharingACL();
 		$acl->setPermissions(PermissionEntity::READ);
 		$this->credentialService->method('getCredentialByGUID')->with('item-guid')->willReturn($this->credential(5, 'item-guid', 'bob'));
-		$this->shareService->method('getACL')->with(self::USER, 'item-guid')->willReturn($acl);
+		$this->shareService->method('getCredentialACL')->with(self::USER, $this->isInstanceOf(Credential::class))->willReturn($acl);
 		$this->fileService->expects($this->never())->method('createFile');
 
 		$response = $this->controller->uploadFile('item-guid', 'data', 'file.txt', 'text/plain', 4);
 
 		$this->assertInstanceOf(DataResponse::class, $response);
 		$this->assertSame(Http::STATUS_UNAUTHORIZED, $response->getStatus());
+	}
+
+	public function testGetFileRejectsMismatchingAcl(): void {
+		$this->credentialService->method('getCredentialByGUID')->with('item-guid')->willReturn($this->credential(5, 'item-guid', 'bob'));
+		$this->shareService->method('getCredentialACL')
+			->with(self::USER, $this->isInstanceOf(Credential::class))
+			->willThrowException(new DoesNotExistException(''));
+		$this->fileService->expects($this->never())->method('getFileByGuid');
+
+		$this->assertInstanceOf(NotFoundJSONResponse::class, $this->controller->getFile('item-guid', 'file-guid'));
+	}
+
+	public function testGetFileReturnsFileOfCredentialOwner(): void {
+		$acl = new SharingACL();
+		$acl->setPermissions(PermissionEntity::READ | PermissionEntity::FILES);
+		$acl->setExpire(0);
+		$this->credentialService->method('getCredentialByGUID')->with('item-guid')->willReturn($this->credential(5, 'item-guid', 'bob'));
+		$this->shareService->method('getCredentialACL')->with(self::USER, $this->isInstanceOf(Credential::class))->willReturn($acl);
+		$file = new File();
+		$this->fileService->expects($this->once())->method('getFileByGuid')->with('file-guid', 'bob')->willReturn($file);
+
+		$this->assertSame($file, $this->controller->getFile('item-guid', 'file-guid'));
 	}
 }

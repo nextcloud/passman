@@ -90,6 +90,25 @@ class SharingACLMapper extends QBMapper {
 	}
 
 	/**
+	 * Gets the acl of the given user (null for public shares) for the given credential.
+	 * Only returns entries that reference the credential by both, item_id and item_guid,
+	 * so manipulated entries (passman <= 2.6.3) don't grant access to the credential.
+	 *
+	 * @param string|null $user_id
+	 * @param Credential $credential
+	 * @return SharingACL
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getCredentialACL(?string $user_id, Credential $credential): SharingACL {
+		$acl = $this->getItemACL($user_id, $credential->getGuid());
+		if ($acl->getItemId() !== $credential->getId()) {
+			throw new DoesNotExistException('Did expect one result but found none when executing');
+		}
+		return $acl;
+	}
+
+	/**
 	 * Update an acl
 	 *
 	 * @param SharingACL $sharingACL

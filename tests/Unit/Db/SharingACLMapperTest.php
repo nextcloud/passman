@@ -234,4 +234,25 @@ class SharingACLMapperTest extends TestCase {
 		$this->assertNull($rows[$unknownGuid->getId()]['item_guid_credential_owner']);
 		$this->assertNull($rows[$unknownGuid->getId()]['item_guid_credential_has_shared_key']);
 	}
+
+	public function testGetCredentialACLRequiresMatchingItemId(): void {
+		$ownCredential = $this->createCredential(self::TEST_USER);
+		$foreignCredential = $this->createCredential(self::TEST_USER . '_2');
+
+		$valid = $this->mapper->createACLEntry($this->buildAcl([
+			'setItemId'   => $ownCredential->getId(),
+			'setItemGuid' => $ownCredential->getGuid(),
+		]));
+		// manipulated entry: guid of the foreign credential, item_id of an own credential
+		$this->mapper->createACLEntry($this->buildAcl([
+			'setUserId'   => self::TEST_USER . '_2',
+			'setItemId'   => $ownCredential->getId(),
+			'setItemGuid' => $foreignCredential->getGuid(),
+		]));
+
+		$this->assertSame($valid->getId(), $this->mapper->getCredentialACL(self::TEST_USER, $ownCredential)->getId());
+
+		$this->expectException(DoesNotExistException::class);
+		$this->mapper->getCredentialACL(self::TEST_USER . '_2', $foreignCredential);
+	}
 }

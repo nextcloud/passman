@@ -510,7 +510,7 @@ class ShareController extends ApiController {
 			// $this->userId does not exist for anonymous share link downloads
 			$userId = ($this->userId) ? $this->userId->getUID() : null;
 			// throws if no credential exists for the requested guid
-			$acl = $this->shareService->getACL($userId, $credential->getGuid());
+			$acl = $this->shareService->getCredentialACL($userId, $credential);
 
 			// if the credential share already expired, do not gain access to the corresponding file
 			if ($acl->getExpire() > 0 && Utils::getTime() > $acl->getExpire()) {
@@ -550,7 +550,7 @@ class ShareController extends ApiController {
 		// only check acl, if the uploading user is not the credential owner
 		if ($credential->getUserId() != $this->userId->getUID()) {
 			try {
-				$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+				$acl = $this->shareService->getCredentialACL($this->userId->getUID(), $credential);
 			} catch (\Exception) {
 				return new NotFoundJSONResponse();
 			}
