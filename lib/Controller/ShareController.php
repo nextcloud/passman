@@ -26,12 +26,15 @@ use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\Attribute\PublicPage;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\IRequest;
+use OCP\IUser;
 use OCP\IUserManager;
 use OCP\Notification\IManager;
 
@@ -43,7 +46,8 @@ class ShareController extends ApiController {
 	public function __construct(
 		$AppName,
 		IRequest $request,
-		private $userId,
+		// IUser instead of the usual uid string, since this controller is registered manually in Application::register()
+		private readonly ?IUser $userId,
 		private readonly IUserManager $userManager,
 		private readonly ActivityService $activityService,
 		private readonly VaultService $vaultService,
@@ -72,9 +76,28 @@ class ShareController extends ApiController {
 	#[NoCSRFRequired]
 	public function createPublicShare($item_id, $item_guid, $permissions, $expire_timestamp, $expire_views) {
 		try {
-			$credential = $this->credentialService->getCredentialByGUID($item_guid);
+			// only the owner of a credential is allowed to share it publicly
+			$credential = $this->credentialService->getCredentialByGUID($item_guid, $this->userId->getUID());
 		} catch (\Exception) {
 			return new NotFoundResponse();
+		}
+
+		// item_id has to reference the same credential as item_guid
+		if ((int)$item_id !== $credential->getId()) {
+			return new NotFoundResponse();
+		}
+
+		// the db columns are unsigned int, a public share is read-only (optionally including files)
+		$isInRange = static fn($value, int $min = 0): bool => is_numeric($value) && $value >= $min && $value < PHP_INT_MAX;
+		$allowed_permissions = SharingACL::READ | SharingACL::FILES;
+		if (!$isInRange($permissions) || !$isInRange($expire_timestamp) || !$isInRange($expire_views, 1)) {
+			return new JSONResponse(['error' => 'Invalid share parameters'], Http::STATUS_BAD_REQUEST);
+		}
+		$permissions = (int)$permissions;
+		$expire_timestamp = (int)$expire_timestamp;
+		$expire_views = (int)$expire_views;
+		if (($permissions & ~$allowed_permissions) !== 0 || !($permissions & SharingACL::READ)) {
+			return new JSONResponse(['error' => 'Invalid share parameters'], Http::STATUS_BAD_REQUEST);
 		}
 
 		try {
@@ -84,8 +107,8 @@ class ShareController extends ApiController {
 		}
 
 
-		$acl->setItemId($item_id);
-		$acl->setItemGuid($item_guid);
+		$acl->setItemId($credential->getId());
+		$acl->setItemGuid($credential->getGuid());
 		$acl->setPermissions($permissions);
 		$acl->setExpire($expire_timestamp);
 		$acl->setExpireViews($expire_views);
@@ -110,7 +133,15 @@ class ShareController extends ApiController {
 		 */
 		//@TODO add expire_time
 		//@TODO add expire_views
-		$credential = $this->credentialService->getCredentialById($item_id, $this->userId->getUID());
+		try {
+			$credential = $this->credentialService->getCredentialById((int)$item_id, $this->userId->getUID());
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
+		// item_guid has to reference the same credential as item_id
+		if ($credential->getGuid() !== $item_guid) {
+			return new NotFoundJSONResponse();
+		}
 		$credential_owner = $credential->getUserId();
 
 		$first_vault = $vaults[0];
@@ -193,6 +224,12 @@ class ShareController extends ApiController {
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
 	public function unshareCredential($item_guid) {
+		try {
+			// only the owner of a credential is allowed to unshare it
+			$this->credentialService->getCredentialByGUID($item_guid, $this->userId->getUID());
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
 		$this->shareService->unshareCredential($item_guid);
 		return new JSONResponse(['result' => true]);
 	}
@@ -200,6 +237,13 @@ class ShareController extends ApiController {
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
 	public function unshareCredentialFromUser($item_guid, $user_id) {
+		try {
+			// only the owner of a credential is allowed to unshare it
+			$this->credentialService->getCredentialByGUID($item_guid, $this->userId->getUID());
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
+
 		$acl = null;
 		$sr = null;
 		try {
@@ -260,6 +304,10 @@ class ShareController extends ApiController {
 		} catch (\Exception) {
 			return new NotFoundResponse();
 		}
+		// only the target user is allowed to accept a share request
+		if ($sr->getTargetUserId() !== $this->userId->getUID()) {
+			return new NotFoundResponse();
+		}
 
 		$notification = $this->manager->createNotification();
 		$notification->setApp(Application::APP_ID)
@@ -308,7 +356,7 @@ class ShareController extends ApiController {
 	#[NoCSRFRequired]
 	public function getRevisions($item_guid) {
 		try {
-			return new JSONResponse($this->shareService->getItemHistory($this->userId, $item_guid));
+			return new JSONResponse($this->shareService->getItemHistory($this->userId->getUID(), $item_guid));
 		} catch (\Exception) {
 			return new NotFoundJSONResponse();
 		}
@@ -351,7 +399,11 @@ class ShareController extends ApiController {
 	public function deleteShareRequest($share_request_id) {
 		try {
 
-			$sr = $this->shareService->getShareRequestById($share_request_id);
+			$sr = $this->shareService->getShareRequestById((int)$share_request_id);
+			// only the target user is allowed to decline a share request
+			if ($sr->getTargetUserId() !== $this->userId->getUID()) {
+				return new NotFoundJSONResponse();
+			}
 			$notification = [
 				'from_user' => ucfirst((string) $this->userId->getDisplayName()),
 				'credential_label' => $this->credentialService->getCredentialLabelById($sr->getItemId())->getLabel(),
@@ -377,6 +429,8 @@ class ShareController extends ApiController {
 	}
 
 	/**
+	 * todo: the -1 views idea for unlimited view no longer works / did never work since it is based on an unsigned db column
+	 * todo: to re-add this functionality, migrate to signed or find a better flag-like solution
 	 * @param $credential_guid
 	 * @return JSONResponse
 	 */
@@ -384,8 +438,11 @@ class ShareController extends ApiController {
 	#[NoCSRFRequired]
 	#[PublicPage]
 	public function getPublicCredentialData($credential_guid) {
-		//@TODO Check expire date
-		$acl = $this->shareService->getACL(null, $credential_guid);
+		try {
+			$acl = $this->shareService->getACL(null, $credential_guid);
+		} catch (\Exception) {
+			return new NotFoundJSONResponse();
+		}
 
 		if ($acl->getExpire() > 0 && Utils::getTime() > $acl->getExpire()) {
 			return new NotFoundJSONResponse();
@@ -453,7 +510,7 @@ class ShareController extends ApiController {
 			// $this->userId does not exist for anonymous share link downloads
 			$userId = ($this->userId) ? $this->userId->getUID() : null;
 			// throws if no credential exists for the requested guid
-			$acl = $this->shareService->getACL($userId, $credential->getGuid());
+			$acl = $this->shareService->getCredentialACL($userId, $credential);
 
 			// if the credential share already expired, do not gain access to the corresponding file
 			if ($acl->getExpire() > 0 && Utils::getTime() > $acl->getExpire()) {
@@ -492,7 +549,11 @@ class ShareController extends ApiController {
 
 		// only check acl, if the uploading user is not the credential owner
 		if ($credential->getUserId() != $this->userId->getUID()) {
-			$acl = $this->shareService->getACL($this->userId->getUID(), $credential->getGuid());
+			try {
+				$acl = $this->shareService->getCredentialACL($this->userId->getUID(), $credential);
+			} catch (\Exception) {
+				return new NotFoundJSONResponse();
+			}
 			if (!$acl->hasPermission(SharingACL::FILES)) {
 				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
 			}

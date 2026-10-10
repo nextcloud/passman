@@ -27,6 +27,7 @@ declare(strict_types=1);
 namespace OCA\Passman\Tests\Unit\Lib\Service;
 
 use OCA\Passman\AppInfo\Application;
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\ShareRequest;
 use OCA\Passman\Db\ShareRequestMapper;
@@ -36,6 +37,7 @@ use OCA\Passman\Service\CredentialRevisionService;
 use OCA\Passman\Service\EncryptService;
 use OCA\Passman\Service\ShareService;
 use OCA\Passman\Utility\PermissionEntity;
+use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\Notification\IManager;
 use OCP\Notification\INotification;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -128,8 +130,8 @@ class ShareServiceTest extends TestCase {
 		$this->sharingACLMapper->expects($this->once())
 			->method('createACLEntry')
 			->with($this->callback(static fn(SharingACL $acl): bool => $acl->getUserId() === 'alice'
-					&& $acl->getSharedKey() === 'final-key'
-					&& $acl->getPermissions() === (PermissionEntity::READ | PermissionEntity::WRITE)))
+				&& $acl->getSharedKey() === 'final-key'
+				&& $acl->getPermissions() === (PermissionEntity::READ | PermissionEntity::WRITE)))
 			->willReturnArgument(0);
 		$this->shareRequestMapper->expects($this->once())
 			->method('cleanItemRequestsForUser')
@@ -196,5 +198,75 @@ class ShareServiceTest extends TestCase {
 			->with($notification);
 
 		$this->service->unshareCredential('item-guid');
+	}
+
+	private function createPublicAcl(int $itemId, string $itemGuid): SharingACL {
+		$acl = new SharingACL();
+		$acl->setItemId($itemId);
+		$acl->setItemGuid($itemGuid);
+		$acl->setPermissions(PermissionEntity::READ | PermissionEntity::HISTORY);
+		return $acl;
+	}
+
+	private function createCredential(int $id, string $guid): Credential {
+		$credential = new Credential();
+		$credential->setId($id);
+		$credential->setGuid($guid);
+		return $credential;
+	}
+
+	public function testGetSharedItemReturnsCredentialMatchingAclGuid(): void {
+		$this->sharingACLMapper->method('getItemACL')
+			->with(null, 'item-guid')
+			->willReturn($this->createPublicAcl(5, 'item-guid'));
+		$this->credentialMapper->method('getCredentialById')
+			->with(5)
+			->willReturn($this->createCredential(5, 'item-guid'));
+		$this->encryptService->method('decryptCredential')->willReturnArgument(0);
+
+		$result = $this->service->getSharedItem(null, 'item-guid');
+
+		$this->assertSame('item-guid', $result['credential_data']['guid']);
+	}
+
+	public function testGetSharedItemRejectsAclWithForeignItemId(): void {
+		// ACL for the attacker's own credential, but item_id points to a credential of another user
+		$this->sharingACLMapper->method('getItemACL')
+			->with(null, 'own-guid')
+			->willReturn($this->createPublicAcl(42, 'own-guid'));
+		$this->credentialMapper->method('getCredentialById')
+			->with(42)
+			->willReturn($this->createCredential(42, 'victim-guid'));
+		$this->encryptService->expects($this->never())->method('decryptCredential');
+
+		$this->expectException(DoesNotExistException::class);
+		$this->service->getSharedItem(null, 'own-guid');
+	}
+
+	public function testGetSharedItemsSkipsAclWithForeignItemId(): void {
+		$this->sharingACLMapper->method('getVaultEntries')
+			->with('alice', 'vault-guid')
+			->willReturn([$this->createPublicAcl(5, 'item-guid'), $this->createPublicAcl(42, 'own-guid')]);
+		$this->credentialMapper->method('getCredentialById')
+			->willReturnCallback(fn(int $id): Credential => $this->createCredential($id, $id === 5 ? 'item-guid' : 'victim-guid'));
+		$this->encryptService->method('decryptCredential')->willReturnArgument(0);
+
+		$result = $this->service->getSharedItems('alice', 'vault-guid');
+
+		$this->assertCount(1, $result);
+		$this->assertSame('item-guid', $result[0]['credential_data']['guid']);
+	}
+
+	public function testGetItemHistoryRejectsAclWithForeignItemId(): void {
+		$this->sharingACLMapper->method('getItemACL')
+			->with('alice', 'own-guid')
+			->willReturn($this->createPublicAcl(42, 'own-guid'));
+		$this->credentialMapper->method('getCredentialById')
+			->with(42)
+			->willReturn($this->createCredential(42, 'victim-guid'));
+		$this->revisionService->expects($this->never())->method('getRevisions');
+
+		$this->expectException(DoesNotExistException::class);
+		$this->service->getItemHistory('alice', 'own-guid');
 	}
 }

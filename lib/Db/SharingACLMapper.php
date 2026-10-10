@@ -90,6 +90,25 @@ class SharingACLMapper extends QBMapper {
 	}
 
 	/**
+	 * Gets the acl of the given user (null for public shares) for the given credential.
+	 * Only returns entries that reference the credential by both, item_id and item_guid,
+	 * so manipulated entries (passman <= 2.6.3) don't grant access to the credential.
+	 *
+	 * @param string|null $user_id
+	 * @param Credential $credential
+	 * @return SharingACL
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getCredentialACL(?string $user_id, Credential $credential): SharingACL {
+		$acl = $this->getItemACL($user_id, $credential->getGuid());
+		if ($acl->getItemId() !== $credential->getId()) {
+			throw new DoesNotExistException('Did expect one result but found none when executing');
+		}
+		return $acl;
+	}
+
+	/**
 	 * Update an acl
 	 *
 	 * @param SharingACL $sharingACL
@@ -112,6 +131,47 @@ class SharingACLMapper extends QBMapper {
 			->where($qb->expr()->eq('item_guid', $qb->createNamedParameter($item_guid, IQueryBuilder::PARAM_STR)));
 
 		return $this->findEntities($qb);
+	}
+
+	/**
+	 * Finds acl entries whose item_id does not reference the credential identified by their item_guid,
+	 * or whose item_guid credential has no shared key (which every legitimate share requires).
+	 * Such entries could be a result of manipulated acl entries (passman <= 2.6.3) or leftovers of deleted credentials.
+	 *
+	 * @return array<int, array<string, mixed>> acl data joined with the owners of the credentials,
+	 *     referenced by item_id (item_id_*) and item_guid (item_guid_*), null if a credential does not exist.
+	 *     item_guid_credential_has_shared_key is 1 if the item_guid credential has a shared key, which is
+	 *     required for share links, so entries with 0 cannot belong to a legitimate share link.
+	 * @throws \OCP\DB\Exception
+	 */
+	public function findInconsistentEntries(): array {
+		$qb = $this->db->getQueryBuilder();
+		$qb->select('a.id', 'a.item_id', 'a.item_guid', 'a.user_id', 'a.created', 'a.expire', 'a.expire_views', 'a.permissions')
+			->selectAlias('ci.guid', 'item_id_credential_guid')
+			->selectAlias('ci.user_id', 'item_id_credential_owner')
+			->selectAlias('cg.id', 'item_guid_credential_id')
+			->selectAlias('cg.user_id', 'item_guid_credential_owner')
+			// only expose whether the credential has a shared key (required for share links), not the key itself
+			->selectAlias($qb->createFunction(sprintf(
+				"CASE WHEN %1\$s IS NULL THEN NULL WHEN %2\$s IS NULL OR %2\$s = '' THEN 0 ELSE 1 END",
+				$qb->getColumnName('id', 'cg'),
+				$qb->getColumnName('shared_key', 'cg'),
+			)), 'item_guid_credential_has_shared_key')
+			->from(self::TABLE_NAME, 'a')
+			->leftJoin('a', CredentialMapper::TABLE_NAME, 'ci', $qb->expr()->eq('ci.id', 'a.item_id'))
+			->leftJoin('a', CredentialMapper::TABLE_NAME, 'cg', $qb->expr()->eq('cg.guid', 'a.item_guid'))
+			->where($qb->expr()->orX(
+				$qb->expr()->isNull('ci.id'),
+				$qb->expr()->neq('ci.guid', 'a.item_guid'),
+				$qb->expr()->isNull('cg.shared_key'),
+				$qb->expr()->emptyString('cg.shared_key'),
+			))
+			->orderBy('a.id');
+
+		$result = $qb->executeQuery();
+		$rows = $result->fetchAll();
+		$result->closeCursor();
+		return $rows;
 	}
 
 	/**

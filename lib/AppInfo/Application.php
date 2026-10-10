@@ -75,6 +75,7 @@ class Application extends App implements IBootstrap {
 		$context->registerMiddleware(ShareMiddleware::class);
 		$context->registerMiddleware(APIMiddleware::class);
 
+		// todo: check if we could refactor this into an auto-wired controller, like all the others
 		$context->registerService('ShareController', function (ContainerInterface $c) {
 			/** @var IUserManager $userManager */
 			$userManager = $c->get(IUserManager::class);

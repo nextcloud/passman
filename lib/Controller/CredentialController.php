@@ -139,7 +139,11 @@ class CredentialController extends ApiController {
 
 
 		if (!hash_equals($storedCredential->getUserId(), $this->userId)) {
-			$sharingAcl = $this->sharingService->getACL($this->userId, $storedCredential->getGuid());
+			try {
+				$sharingAcl = $this->sharingService->getCredentialACL($this->userId, $storedCredential);
+			} catch (\Exception) {
+				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+			}
 			if ($sharingAcl->hasPermission(SharingACL::WRITE)) {
 				$credential['shared_key'] = $storedCredential->getSharedKey();
 			} else {
@@ -281,7 +285,11 @@ class CredentialController extends ApiController {
 		if ($this->userId === $credential->getUserId()) {
 			$result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);
 		} else {
-			$acl = $this->sharingService->getACL($this->userId, $credential_guid);
+			try {
+				$acl = $this->sharingService->getCredentialACL($this->userId, $credential);
+			} catch (\Exception) {
+				return new NotFoundJSONResponse();
+			}
 			if ($acl->hasPermission(SharingACL::HISTORY)) {
 				$result = $this->credentialRevisionService->getRevisions($credential->getId());
 			} else {
@@ -304,7 +312,8 @@ class CredentialController extends ApiController {
 	public function updateRevision($revision_id, $credential_data) {
 		$revision = null;
 		try {
-			$revision = $this->credentialRevisionService->getRevision($revision_id);
+			// revisions are stored with the credential owner as user_id, only the owner is allowed to update them
+			$revision = $this->credentialRevisionService->getRevision((int)$revision_id, $this->userId);
 		} catch (\Exception) {
 			return new JSONResponse([]);
 		}
