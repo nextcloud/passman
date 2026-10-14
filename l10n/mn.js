@@ -68,6 +68,8 @@ OC.L10N.register(
     "Accept" : "Хүлээн зөвшөөрөх",
     "Decline" : "Зөвшөөрөхгүй",
     "Never" : "хэзээч",
+    "30 minutes" : "30 минут",
+    "3 hours" : "3 —Ü–∞–≥",
     "Tags" : "Tag-үүд",
     "Expired" : "Дууссан",
     "Loading" : "Ачааллаж байна",

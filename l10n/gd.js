@@ -24,6 +24,7 @@ OC.L10N.register(
     "Edit" : "Deasaich",
     "Delete" : "Sguab às",
     "Share" : "Co-roinn",
+    "30 minutes" : "Leth-uair a thìde",
     "Tags" : "Tagaichean",
     "Move" : "Gluais",
     "Dismiss" : "Leig seachad",

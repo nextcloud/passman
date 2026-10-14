@@ -73,6 +73,7 @@ OC.L10N.register(
     "Accept" : "Akcepti",
     "Decline" : "Malakcepti",
     "Never" : "Neniam",
+    "30 minutes" : "30 minutoj",
     "Tags" : "Etikedoj",
     "Expired" : "Senvalidiĝis",
     "Loading" : "Ŝargado",

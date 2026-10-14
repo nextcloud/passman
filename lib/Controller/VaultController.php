@@ -17,6 +17,8 @@ use OCA\Passman\Service\DeleteVaultRequestService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use Psr\Log\LoggerInterface;
@@ -40,10 +42,8 @@ class VaultController extends ApiController {
 			86400);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function listVaults() {
 		$result = [];
 		$vaults = $this->vaultService->getByUser($this->userId);
@@ -71,19 +71,15 @@ class VaultController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function create($vault_name) {
 		$vault = $this->vaultService->createVault($vault_name, $this->userId);
 		return new JSONResponse($vault);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function get($vault_guid) {
 		$vault = null;
 		try {
@@ -116,10 +112,8 @@ class VaultController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function update($vault_guid, $name, $vault_settings) {
 		$vault = $this->vaultService->getByGuid($vault_guid, $this->userId);
 		if ($name && $vault) {
@@ -131,10 +125,8 @@ class VaultController extends ApiController {
 		$this->vaultService->updateVault($vault);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function updateSharingKeys($vault_guid, $private_sharing_key, $public_sharing_key) {
 		$vault = null;
 		try {
@@ -150,10 +142,8 @@ class VaultController extends ApiController {
 		return;
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function delete($vault_guid) {
 		$failed_credential_guids = [];
 		try {

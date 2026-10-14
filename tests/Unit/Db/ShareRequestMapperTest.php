@@ -91,10 +91,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
-	/**
-	 * @covers ::createRequest
-	 * @covers ::getRequestByItemAndVaultGuid
-	 */
 	public function testCreateRequestAndGetByItemAndVaultGuid(): void {
 		$request = $this->buildShareRequest();
 		$inserted = $this->mapper->createRequest($request);
@@ -188,10 +184,6 @@ class ShareRequestMapperTest extends TestCase {
 		$this->assertSame($request->getTargetVaultId(), $fromDb->getTargetVaultId());
 	}
 
-	/**
-	 * @covers ::getPendingShareRequests
-	 * @covers ::updatePendingRequestPermissions
-	 */
 	public function testGetPendingShareRequestsAndUpdatePermissions(): void {
 		$itemGuid = 'pending-item-' . uniqid('', true);
 		$request = $this->mapper->createRequest($this->buildShareRequest([

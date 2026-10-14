@@ -85,10 +85,6 @@ class CredentialRevisionMapperTest extends TestCase {
 		$this->assertInstanceOf(QBMapper::class, $this->mapper);
 	}
 
-	/**
-	 * @covers ::create
-	 * @covers ::getRevision
-	 */
 	public function testCreateAndGetRevision(): void {
 		$credentialId = $this->createCredentialId();
 		$payload = 'credential data stuff';

@@ -21,6 +21,7 @@ use OCA\Passman\Service\FileService;
 use OCA\Passman\Service\VaultService;
 use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IL10N;
 use OCP\IRequest;
@@ -143,9 +144,7 @@ class AdminController extends ApiController {
 		return new JSONResponse(['result' => true]);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
+	#[NoAdminRequired]
 	public function requestDeletion($vault_guid, $reason) {
 		$req = $this->deleteVaultRequestService->getDeleteRequestForVault($vault_guid);
 		if($req){
@@ -165,9 +164,7 @@ class AdminController extends ApiController {
 		return new JSONResponse(['result' => $result]);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 */
+	#[NoAdminRequired]
 	public function deleteRequestDeletion($vault_guid) {
 		$delete_request = false;
 		$result = false;

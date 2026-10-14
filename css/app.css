@@ -197,8 +197,8 @@
 }
 
 .tab_container {
-  border: 1px solid #eee;
-  border-top-color: #0082c9;
+  border: 1px solid var(--color-border);
+  border-top-color: var(--color-primary-element);
   border-bottom-width: 0;
   clear: both;
   padding: 0 1em;
@@ -644,7 +644,11 @@
   width: 100%;
 }
 .vault_wrapper .login_opts {
+  margin-top: 10px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 @media screen and (max-width: 768px) {
@@ -2109,7 +2113,7 @@ label[for=confirmVaultDelete], label[for=skipFirstRow] {
   white-space: nowrap;
   overflow: hidden;
   flex: 0 0 auto;
-  max-width: 200px;
+  max-width: 400px;
 }
 #passman-controls .breadcrumb li.crumb > a.icon-home,
 #passman-controls .breadcrumb li.crumb > a.icon-delete,

@@ -25,6 +25,7 @@ namespace OCA\Passman\Service;
 
 
 use OCA\Passman\AppInfo\Application;
+use OCA\Passman\Db\Credential;
 use OCA\Passman\Db\CredentialMapper;
 use OCA\Passman\Db\CredentialRevision;
 use OCA\Passman\Db\ShareRequest;
@@ -182,7 +183,12 @@ class ShareService {
 			return null;
 		}
 
-		$credential = $this->credential->getCredentialById($sharingACL->getItemId());
+		try {
+			$credential = $this->getCredentialForACL($sharingACL);
+		} catch (DoesNotExistException) {
+			// skip inconsistent entries instead of failing the whole (vault) item list
+			return null;
+		}
 		$credential = $this->encryptService->decryptCredential($credential);
 
 		$serializableSharingACL = $sharingACL->jsonSerialize();
@@ -196,6 +202,22 @@ class ShareService {
 	}
 
 	/**
+	 * Resolves the credential an ACL entry points to.
+	 * The ACL's item_id must belong to the credential identified by the ACL's item_guid,
+	 * otherwise a manipulated item_id could be used to access arbitrary credentials.
+	 *
+	 * @throws MultipleObjectsReturnedException
+	 * @throws DoesNotExistException
+	 */
+	private function getCredentialForACL(SharingACL $sharingACL): Credential {
+		$credential = $this->credential->getCredentialById($sharingACL->getItemId());
+		if ($credential->getGuid() !== $sharingACL->getItemGuid()) {
+			throw new DoesNotExistException('Item not found or wrong access level');
+		}
+		return $credential;
+	}
+
+	/**
 	 * Gets the acl for a given item guid
 	 *
 	 * @param string|null $user_id
@@ -206,6 +228,20 @@ class ShareService {
 	 */
 	public function getACL(?string $user_id, string $item_guid): SharingACL {
 		return $this->sharingACL->getItemACL($user_id, $item_guid);
+	}
+
+	/**
+	 * Gets the acl for a given credential, only if it references the credential by item_id and item_guid.
+	 * Use this instead of getACL() to check if a user is allowed to access a credential.
+	 *
+	 * @param string|null $user_id
+	 * @param Credential $credential
+	 * @return SharingACL
+	 * @throws DoesNotExistException
+	 * @throws MultipleObjectsReturnedException
+	 */
+	public function getCredentialACL(?string $user_id, Credential $credential): SharingACL {
+		return $this->sharingACL->getCredentialACL($user_id, $credential);
 	}
 
 	/**
@@ -223,7 +259,8 @@ class ShareService {
 			return [];
 		}
 
-		return $this->revisions->getRevisions($acl->getItemId());
+		$credential = $this->getCredentialForACL($acl);
+		return $this->revisions->getRevisions($credential->getId());
 	}
 
 

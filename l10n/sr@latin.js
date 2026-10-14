@@ -34,6 +34,8 @@ OC.L10N.register(
     "Share" : "Deljenje",
     "Date" : "Date",
     "Never" : "Nikad",
+    "30 minutes" : "30 minuta",
+    "3 hours" : "3 sata",
     "Tags" : "Oznake",
     "Description" : "Opis",
     "Move" : "Premesti",

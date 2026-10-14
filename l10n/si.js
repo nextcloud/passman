@@ -34,6 +34,8 @@ OC.L10N.register(
     "Date" : "දිනය",
     "Accept" : "පිළිගන්න",
     "Decline" : "ප්‍රතික්ෂේප",
+    "30 minutes" : "විනාඩි 30 යි",
+    "3 hours" : "හෝරා 3 යි",
     "Loading" : "පූරණය වෙමින්",
     "Description" : "විස්තරය",
     "E-mail" : "විද්‍යුත් තැපෑල",

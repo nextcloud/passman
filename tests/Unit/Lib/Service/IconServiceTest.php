@@ -46,4 +46,12 @@ class IconServiceTest extends TestCase {
 		$this->assertEquals('jpg', IconService::getExtensionFromMimeType('image/jpeg'));
 		$this->assertEquals('jpg', IconService::getExtensionFromMimeType('image/jpg'));
 	}
+
+	public function testDownloadAsReturnsFalseForUnreachableUrl(): void {
+		$service = new IconService('http://127.0.0.1:1/', null, false);
+		$info = [];
+
+		$this->assertFalse($service->downloadAs('http://127.0.0.1:1/', $info));
+		$this->assertNotSame(CURLE_OK, $info['curl_errno']);
+	}
 }

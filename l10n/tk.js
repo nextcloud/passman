@@ -21,6 +21,7 @@ OC.L10N.register(
     "Edit" : "Redaktirläň",
     "Delete" : "Pozmak",
     "Share" : "Paýlaş",
+    "30 minutes" : "30 minut",
     "Tags" : "Bellikler",
     "Move" : "Göçüriň",
     "E-mail" : "E-mail",

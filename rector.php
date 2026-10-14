@@ -16,10 +16,11 @@ return RectorConfig::configure()
 		__DIR__ . '/templates',
 		__DIR__ . '/tests',
 	])
-	->withPhpSets(php84: true)
+	// should match the minimum supported / possible php version of the oldest supported Nextcloud version
+	->withPhpSets(php82: true)
 	->withTypeCoverageLevel(0)
 	->withSets([
-		\Nextcloud\Rector\Set\NextcloudSets::NEXTCLOUD_34
+		\Nextcloud\Rector\Set\NextcloudSets::NEXTCLOUD_35
 	])
 	->withSkip([
 		// skip rule since it marks code that's intended, as it is

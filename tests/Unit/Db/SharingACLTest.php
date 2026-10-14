@@ -55,10 +55,6 @@ class SharingACLTest extends TestCase {
 		$this->acl = SharingACL::fromRow(self::TEST_DATA);
 	}
 
-	/**
-	 * @covers ::fromRow
-	 * @covers ::getter
-	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->acl->getId());
 		$this->assertEquals(self::TEST_DATA['item_id'], $this->acl->getItemId());

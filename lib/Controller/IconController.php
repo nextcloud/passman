@@ -11,16 +11,18 @@
 
 namespace OCA\Passman\Controller;
 
-use Doctrine\DBAL\Exception\DriverException;
-use OC\App\AppManager;
 use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\IconService;
 use OCA\Passman\Utility\Utils;
+use OCP\App\IAppManager;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\DataDownloadResponse;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\DB\Exception as DbException;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 
@@ -32,7 +34,7 @@ class IconController extends ApiController {
 		IRequest $request,
 		private $userId,
 		private readonly CredentialService $credentialService,
-		private readonly AppManager $am,
+		private readonly IAppManager $am,
 		private readonly IURLGenerator $urlGenerator,
 	) {
 		parent::__construct(
@@ -43,10 +45,8 @@ class IconController extends ApiController {
 			86400);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getSingleIcon($base64Url) {
 		$url = base64_decode(str_replace('_', '/', $base64Url));
 		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
@@ -58,17 +58,15 @@ class IconController extends ApiController {
 
 		if ($icon->icoExists) {
 			$icon_json['type'] = $icon->icoType;
-			$icon_json['content'] = base64_encode($icon->icoData);
+			$icon_json['content'] = base64_encode((string) $icon->icoData);
 			return new JSONResponse($icon_json);
 		}
 
 		return new JSONResponse();
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getIcon($base64Url, $credentialId) {
 		$url = base64_decode(str_replace('_', '/', $base64Url));
 
@@ -91,9 +89,9 @@ class IconController extends ApiController {
 
 		try {
 			$icon = new IconService($url);
-			if ($icon->icoExists) {
+			if ($icon->icoExists && !empty($icon->icoData)) {
 				$data = $icon->icoData;
-				$type = $icon->icoType;
+				$type = $icon->icoType ?? $type;
 			}
 		} catch (\InvalidArgumentException) {
 			//no need to do stuff in catch
@@ -110,12 +108,9 @@ class IconController extends ApiController {
 				if ($credential) {
 					$this->credentialService->updateCredential($credential);
 				}
-			} catch (DriverException) {
-				/**
-				 * @FIXME Syntax error or access violation: 1118 Row size too large
-				 * This happens when favicons are quite big.
-				 * Githubs one is 33kb and triggers the try catch
-				 */
+			} catch (DbException) {
+				// Oversized favicon: MySQL TEXT (64KiB) / InnoDB row size (1118).
+				// Return the downloaded icon anyway.
 			}
 		}
 
@@ -132,10 +127,8 @@ class IconController extends ApiController {
 		return $response;
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getLocalIconList() {
 		$dir = $this->am->getAppPath(Application::APP_ID);
 		$result = Utils::getDirContents($dir . '/img/icons');
@@ -156,9 +149,7 @@ class IconController extends ApiController {
 				$icon['url'] = $this->urlGenerator->linkTo(Application::APP_ID, $path[1]);
 				$icon['pack'] = $pack;
 				$icon['data'] = base64_encode(file_get_contents($iconPath));
-				if (!isset($icons[$pack])) {
-					$icons[$pack] = [];
-				}
+				$icons[$pack] ??= [];
 				$icons[$pack][] = $icon;
 			}
 		}

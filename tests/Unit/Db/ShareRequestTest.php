@@ -54,10 +54,6 @@ class ShareRequestTest extends TestCase {
 		$this->request = ShareRequest::fromRow(self::TEST_DATA);
 	}
 
-	/**
-	 * @covers ::fromRow
-	 * @covers ::getter
-	 */
 	public function testGetters(): void {
 		$this->assertSame(self::TEST_DATA['id'], $this->request->getId());
 		$this->assertSame(self::TEST_DATA['item_id'], $this->request->getItemId());

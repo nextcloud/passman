@@ -51,10 +51,6 @@ class FileTest extends TestCase {
 		$this->file = File::fromRow(self::TEST_DATA);
 	}
 
-	/**
-	 * @covers ::fromRow
-	 * @covers ::getter
-	 */
 	public function testGetters(): void {
 		$this->assertEquals(self::TEST_DATA['id'], $this->file->getId());
 		$this->assertEquals(self::TEST_DATA['guid'], $this->file->getGuid());

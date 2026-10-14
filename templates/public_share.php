@@ -33,8 +33,10 @@ Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/sha/sha', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/llqrcode/llqrcode', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/forge.0.6.9.min', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'vendor/download', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/auth', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/promise', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/crypto_wrap', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'lib/otpauth.umd', 'core');
 
 
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/app_public', 'core');

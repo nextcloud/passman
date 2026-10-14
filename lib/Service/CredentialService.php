@@ -186,7 +186,7 @@ class CredentialService {
 		if ($credential->getUserId() === $user_id) {
 			return $this->encryptService->decryptCredential($credential);
 		} else {
-			$acl = $this->sharingACL->getItemACL($user_id, $credential->getGuid());
+			$acl = $this->sharingACL->getCredentialACL($user_id, $credential);
 			if ($acl->hasPermission(SharingACL::READ)) {
 				return $this->encryptService->decryptCredential($credential);
 			} else {

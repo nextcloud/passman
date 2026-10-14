@@ -22,6 +22,8 @@ use OCA\Passman\Service\ShareService;
 use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
@@ -47,10 +49,8 @@ class CredentialController extends ApiController {
 	}
 
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function createCredential($changed, $created,
 	                                 $credential_id, $custom_fields, $delete_time,
 	                                 $description, $email, $expire_time, $favicon, $files, $guid,
@@ -94,19 +94,15 @@ class CredentialController extends ApiController {
 		return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getCredential($credential_guid) {
 		$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
 		return new JSONResponse($credential);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function updateCredential($changed, $created,
 	                                 $credential_id, $custom_fields, $delete_time, $credential_guid,
 	                                 $description, $email, $expire_time, $icon, $files, $guid,
@@ -143,7 +139,11 @@ class CredentialController extends ApiController {
 
 
 		if (!hash_equals($storedCredential->getUserId(), $this->userId)) {
-			$sharingAcl = $this->sharingService->getACL($this->userId, $storedCredential->getGuid());
+			try {
+				$sharingAcl = $this->sharingService->getCredentialACL($this->userId, $storedCredential);
+			} catch (\Exception) {
+				return new DataResponse(['msg' => 'Not authorized'], Http::STATUS_UNAUTHORIZED);
+			}
 			if ($sharingAcl->hasPermission(SharingACL::WRITE)) {
 				$credential['shared_key'] = $storedCredential->getSharedKey();
 			} else {
@@ -241,9 +241,7 @@ class CredentialController extends ApiController {
 			$credential['shared_key'] = '';
 		}
 
-		if (!isset($credential['shared_key'])) {
-			$credential['shared_key'] = $storedCredential->getSharedKey();
-		}
+		$credential['shared_key'] ??= $storedCredential->getSharedKey();
 
 		if (!$skip_revision) {
 			$this->credentialRevisionService->createRevision($storedCredential, $storedCredential->getUserId(), $credential_id, $this->userId);
@@ -254,10 +252,8 @@ class CredentialController extends ApiController {
 		return new JSONResponse($this->credentialService->getCredentialByGUID($credential->getGuid()));
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function deleteCredential($credential_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
@@ -275,10 +271,10 @@ class CredentialController extends ApiController {
 	}
 
 	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
 	 * @throws \Exception
 	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function getRevision($credential_guid) {
 		try {
 			$credential = $this->credentialService->getCredentialByGUID($credential_guid);
@@ -289,7 +285,11 @@ class CredentialController extends ApiController {
 		if ($this->userId === $credential->getUserId()) {
 			$result = $this->credentialRevisionService->getRevisions($credential->getId(), $this->userId);
 		} else {
-			$acl = $this->sharingService->getACL($this->userId, $credential_guid);
+			try {
+				$acl = $this->sharingService->getCredentialACL($this->userId, $credential);
+			} catch (\Exception) {
+				return new NotFoundJSONResponse();
+			}
 			if ($acl->hasPermission(SharingACL::HISTORY)) {
 				$result = $this->credentialRevisionService->getRevisions($credential->getId());
 			} else {
@@ -300,23 +300,20 @@ class CredentialController extends ApiController {
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function deleteRevision($credential_id, $revision_id) {
 		$result = $this->credentialRevisionService->deleteRevision($revision_id, $this->userId);
 		return new JSONResponse($result);
 	}
 
-	/**
-	 * @NoAdminRequired
-	 * @NoCSRFRequired
-	 */
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function updateRevision($revision_id, $credential_data) {
 		$revision = null;
 		try {
-			$revision = $this->credentialRevisionService->getRevision($revision_id);
+			// revisions are stored with the credential owner as user_id, only the owner is allowed to update them
+			$revision = $this->credentialRevisionService->getRevision((int)$revision_id, $this->userId);
 		} catch (\Exception) {
 			return new JSONResponse([]);
 		}

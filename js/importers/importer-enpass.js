@@ -96,7 +96,8 @@ var PassmanImporter = PassmanImporter || {};
 							new_credential.custom_fields.push({
 								'label': key,
 								'value': enpass_credential[key],
-								'secret': isSecret
+								'secret': isSecret,
+								'field_type': (isSecret === 1) ? 'password' : 'text'
 							})
 						}
 					}

@@ -104,7 +104,7 @@ class Provider implements IProvider {
 
 					$sharedCredentials = $this->shareService->getSharedItems($vault->getUserId(), $vault->getGuid());
 					foreach ($sharedCredentials as $sharedCredential) {
-						if (str_contains($sharedCredential['credential_data']['label'], $query->getTerm())) {
+						if (str_contains((string) $sharedCredential['credential_data']['label'], $query->getTerm())) {
 							try {
 								$searchResultEntries[] = new SearchResultEntry(
 									$this->urlGenerator->imagePath(Application::APP_ID, 'app.svg'),

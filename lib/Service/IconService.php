@@ -55,7 +55,7 @@ class IconService {
 	/**
 	 * @var string favicon type (file extension, ex: ico|gif|png)
 	 */
-	public string $icoType;
+	public ?string $icoType = null;
 
 	/**
 	 * @var string favicon url determination method (default /favicon.ico or found in head>link tag)
@@ -70,17 +70,17 @@ class IconService {
 	/**
 	 * @var bool tell if the favicon exists (set after calling IconService)
 	 */
-	public bool $icoExists;
+	public bool $icoExists = false;
 
 	/**
 	 * @var string md5 of $icoData
 	 */
-	public string $icoMd5;
+	public ?string $icoMd5 = null;
 
 	/**
 	 * @var string favicon binary data
 	 */
-	public string $icoData;
+	public ?string $icoData = null;
 
 	/**
 	 * @var array Additional debug info
@@ -307,6 +307,10 @@ class IconService {
 			return false;
 		}
 
+		if (empty($this->icoType)) {
+			$this->icoType = self::getExtension($this->icoUrl);
+		}
+
 		// All right baby !
 		$this->icoData = $content;
 		$this->icoMd5 = md5((string) $content);
@@ -326,7 +330,6 @@ class IconService {
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0');
@@ -348,7 +351,6 @@ class IconService {
 		$info['effective_url'] = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 		$info['redirect_count'] = curl_getinfo($ch, CURLINFO_REDIRECT_COUNT);
 		$info['content_type'] = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-		curl_close($ch);
 
 		if ($info['curl_errno'] !== CURLE_OK || in_array($info['http_code'], [403, 404, 500, 503])) {
 			return false;

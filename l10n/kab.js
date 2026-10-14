@@ -63,6 +63,7 @@ OC.L10N.register(
     "Accept" : "Agez",
     "Decline" : "Agwi",
     "Never" : "Weṛǧin",
+    "30 minutes" : "30 n tesdatin",
     "Donate" : "Mudd tawsa",
     "Tags" : "Tibzimin",
     "Expired" : "Ad yekfu",

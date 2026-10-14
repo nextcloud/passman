@@ -23,24 +23,12 @@
 $(document).ready(function () {
 	const urlPrefix = 'apps/passman';
 
-	// Token injection logic required for ajax requests with Nextcloud 34+ since they removed their upstream jquery
-	function getRequestToken() {
-		if (typeof OC !== 'undefined' && OC.requestToken) {
-			return OC.requestToken;
-		}
-		if (typeof oc_requesttoken !== 'undefined' && oc_requesttoken) {
-			return oc_requesttoken;
-		}
-		var head = document.head || document.getElementsByTagName('head')[0];
-		return (head && head.dataset.requesttoken) ? head.dataset.requesttoken : '';
-	}
-
 	function getAjaxMethod(options) {
 		return (options.type || options.method || 'GET').toUpperCase();
 	}
 
 	$.ajaxPrefilter(function (options) {
-		var token = getRequestToken();
+		var token = GetRequestToken();
 		if (!token) {
 			return;
 		}

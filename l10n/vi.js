@@ -79,6 +79,8 @@ OC.L10N.register(
     "Accept" : "Đồng ý",
     "Decline" : "Từ chối",
     "Never" : "Không bao giờ",
+    "30 minutes" : "30 phút",
+    "3 hours" : "3 tiếng",
     "Logout" : "đăng xuất",
     "Tags" : "Thẻ",
     "Expired" : "Đã hết hạn",

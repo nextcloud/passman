@@ -49,6 +49,8 @@ OC.L10N.register(
     "Accept" : "Qabul qiling",
     "Decline" : "Rad etish",
     "Never" : "Hech qachon",
+    "30 minutes" : "30 daqiqa",
+    "3 hours" : "3 soat",
     "Tags" : "Tags",
     "Loading" : "Yuklanmoqda",
     "email" : "email",
