@@ -62,6 +62,8 @@ For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
 
     <commands>
         <command>OCA\Passman\Command\CheckSharingAcls</command>
+		<command>OCA\Passman\Command\PassmanBackupCommand</command>
+		<command>OCA\Passman\Command\PassmanRestoreCommand</command>
     </commands>
 
     <navigations>
@@ -76,9 +78,4 @@ For a demo of this app visit [https://demo.passman.cc](https://demo.passman.cc)
         <admin>OCA\Passman\Settings\Admin</admin>
         <admin-section>OCA\Passman\Settings\AdminSection</admin-section>
     </settings>
-
-    <commands>
-        <command>OCA\Passman\Command\PassmanBackupCommand</command>
-        <command>OCA\Passman\Command\PassmanRestoreCommand</command>
-    </commands>
 </info>
