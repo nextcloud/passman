@@ -39,7 +39,7 @@ OC.L10N.register(
     "Credential updated" : "Запись обновлена",
     "Credential recovered" : "Запись восстановлена",
     "Credential destroyed" : "Учетные данные уничтожены",
-    "Error downloading file, you probably have insufficient permissions" : "Ошибка загрузки файла, возможно у вас недостаточно прав доступа",
+    "Error downloading file, you probably have insufficient permissions" : "Ошибка скачивания файла, возможно, у вас недостаточно прав доступа",
     "An error occurred" : "Произошла ошибка",
     "Invalid QR code" : "Неверный QR код",
     "Starting export" : "Начинается экспорт",
