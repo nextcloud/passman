@@ -102,7 +102,7 @@
 				if ($scope.active_vault) {
 					$scope.$parent.selectedVault = true;
 				}
-				var supported_custom_field_types = ['text', 'password', 'file'];
+				var supported_custom_field_types = ['text', 'password', 'file', 'passkey'];
 				var applyMissingCustomFieldTypes = function (credential) {
 					if (!credential || !angular.isArray(credential.custom_fields)) {
 						return credential;
@@ -114,6 +114,8 @@
 						}
 						if (field.value !== null && angular.isObject(field.value) && field.value.filename !== undefined) {
 							field.field_type = 'file';
+						} else if (field.value !== null && angular.isObject(field.value) && field.value.domain !== undefined && field.value.key !== undefined) {
+							field.field_type = 'passkey';
 						} else {
 							field.field_type = (field.secret === true || field.secret === 1 || field.secret === '1') ? 'password' : 'text';
 						}
