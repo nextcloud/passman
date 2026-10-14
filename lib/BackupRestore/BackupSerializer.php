@@ -67,7 +67,7 @@ class BackupSerializer {
 	 *
 	 * @throws InvalidBackupException on invalid JSON, an unsupported/malformed manifest or if the manifest checksum does not match the content
 	 */
-	public function decode(string $json): BackupArchive {
+	public function decode(string $json, bool $disableCheckSumValidation = false): BackupArchive {
 		try {
 			$data = json_decode($json, true, self::JSON_DEPTH, JSON_THROW_ON_ERROR);
 		} catch (\JsonException $e) {
@@ -89,7 +89,7 @@ class BackupSerializer {
 			$archive->snapshots[$section] = new TableSnapshot($section, $this->readRows($section, $data['sections'][$section] ?? []));
 		}
 
-		if (!$archive->manifest->validateArchiveChecksum($archive)) {
+		if (!$archive->manifest->validateArchiveChecksum($archive) && !$disableCheckSumValidation) {
 			throw new InvalidBackupException(
 				'The manifest and content of the backup artifact do not match its checksum. '
 				. 'The artifact was modified or is incomplete.'

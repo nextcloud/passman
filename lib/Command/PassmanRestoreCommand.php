@@ -71,7 +71,7 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 				null,
 				InputOption::VALUE_NONE,
 				'Restore a "' . BackupManifest::MODE_RAW . '" artifact of another instance anyway. Its server side encrypted '
-				. 'columns stay unreadable on this instance'
+				. 'columns stay unreadable on this instance. Also disables thr backup checksum verification if applicable.'
 			)
 			->addOption(
 				'dry-run',
@@ -103,7 +103,7 @@ class PassmanRestoreCommand extends AbstractInteractiveCommand {
 		}
 
 		try {
-			$archive = $this->serializer->decode($artifact);
+			$archive = $this->serializer->decode($artifact, $force);
 		} catch (\RuntimeException $e) {
 			$output->writeln('<error>' . $e->getMessage() . '</error>');
 			return self::FAILURE;
