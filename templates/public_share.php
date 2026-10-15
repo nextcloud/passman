@@ -45,6 +45,7 @@ Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/range', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/propsfilter', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/byte', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/escapeHTML', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/utf8base64service', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/vaultservice', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/credentialservice', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/settingsservice', 'core');

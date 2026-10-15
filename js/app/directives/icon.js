@@ -30,7 +30,7 @@
    * # passwordGen
    */
   angular.module('passmanApp').directive('credentialIcon', [
-    '$window', 'UrlService', function($window, UrlService) {
+    '$window', 'UrlService', 'Utf8Base64Service', function($window, UrlService, Utf8Base64Service) {
       return {
         template: '<img ng-src="{{ iconUrl }}" class="icon-image-size">',
         restrict: 'E',
@@ -46,7 +46,7 @@
               scope.iconUrl = 'data:image/'+ scope.credential.icon.type +';base64,' + scope.credential.icon.content;
             } else {
               if(scope.credential.url) {
-                var url = window.btoa(angular.copy(scope.credential.url)).replace('/', '_');
+                var url = Utf8Base64Service.encode(scope.credential.url).replace('/', '_');
                 scope.iconUrl = UrlService.generateUrl('/api/v2/icon/') + url + '/' +
                     scope.credential.credential_id;
               }
