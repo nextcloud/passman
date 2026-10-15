@@ -135,4 +135,31 @@ class CredentialControllerTest extends TestCase {
 
 		$this->controller->updateRevision('7', 'data');
 	}
+
+	public function testDeleteRevisionReturnsNotFoundForForeignOrMissingRevision(): void {
+		// The service throws when the revision does not exist or is not owned by the caller;
+		// the controller must translate that into a 404, not delete and not 500.
+		$this->revisionService->expects($this->once())
+			->method('deleteRevision')
+			->with(7, self::USER)
+			->willThrowException(new DoesNotExistException(''));
+
+		$response = $this->controller->deleteRevision('5', '7');
+
+		$this->assertInstanceOf(NotFoundJSONResponse::class, $response);
+		$this->assertSame(Http::STATUS_NOT_FOUND, $response->getStatus());
+	}
+
+	public function testDeleteRevisionDeletesOwnRevision(): void {
+		$revision = new CredentialRevision();
+		$this->revisionService->expects($this->once())
+			->method('deleteRevision')
+			->with(7, self::USER)
+			->willReturn($revision);
+
+		$response = $this->controller->deleteRevision('5', '7');
+
+		$this->assertInstanceOf(JSONResponse::class, $response);
+		$this->assertSame(Http::STATUS_OK, $response->getStatus());
+	}
 }

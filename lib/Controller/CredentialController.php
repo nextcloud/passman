@@ -303,7 +303,12 @@ class CredentialController extends ApiController {
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
 	public function deleteRevision($credential_id, $revision_id) {
-		$result = $this->credentialRevisionService->deleteRevision($revision_id, $this->userId);
+		try {
+			$result = $this->credentialRevisionService->deleteRevision((int)$revision_id, $this->userId);
+		} catch (\Exception) {
+			// revision does not exist or does not belong to the requesting user
+			return new NotFoundJSONResponse();
+		}
 		return new JSONResponse($result);
 	}
 

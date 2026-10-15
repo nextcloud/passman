@@ -46,6 +46,7 @@ class CredentialRevisionMapperTest extends TestCase {
 	use DbTestTrait;
 
 	private const TEST_USER = 'passman_revision_mapper_test';
+	private const TEST_USER_2 = 'passman_revision_mapper_test_2';
 	private const EDITED_BY = 'passman_revision_editor';
 
 	private IDBConnection            $db;
@@ -71,6 +72,7 @@ class CredentialRevisionMapperTest extends TestCase {
 
 	private function resetData(): void {
 		$this->deletePassmanRows($this->db, 'passman_revisions', 'user_id', self::TEST_USER);
+		$this->deletePassmanRows($this->db, 'passman_revisions', 'user_id', self::TEST_USER_2);
 		$this->deletePassmanRows($this->db, 'passman_credentials', 'user_id', self::TEST_USER);
 		$this->deletePassmanRows($this->db, 'passman_vaults', 'user_id', self::TEST_USER);
 	}
@@ -134,5 +136,23 @@ class CredentialRevisionMapperTest extends TestCase {
 
 		$this->expectException(DoesNotExistException::class);
 		$this->mapper->getRevision($revision->getId(), self::TEST_USER);
+	}
+
+	public function testDeleteRevisionDoesNotDeleteForeignRevision(): void {
+		$credentialId = $this->createCredentialId();
+		$revision = $this->mapper->create('to keep', self::TEST_USER, $credentialId, self::EDITED_BY);
+
+		// Another user must not be able to delete a revision they do not own.
+		// QBMapper::delete() keys on the entity id only, so this guards against the former cross-user delete IDOR.
+		try {
+			$this->mapper->deleteRevision($revision->getId(), self::TEST_USER_2);
+			$this->fail('Expected DoesNotExistException when deleting a foreign revision');
+		} catch (DoesNotExistException) {
+			// expected
+		}
+
+		// The revision must still exist and belong to its owner.
+		$stillThere = $this->mapper->getRevision($revision->getId(), self::TEST_USER);
+		$this->assertSame($revision->getId(), $stillThere->getId());
 	}
 }
