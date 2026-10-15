@@ -30,6 +30,9 @@ use OCA\Passman\AppInfo\Application;
 use OCA\Passman\Controller\FileController;
 use OCA\Passman\Db\File;
 use OCA\Passman\Service\FileService;
+use OCA\Passman\Utility\NotFoundJSONResponse;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -71,6 +74,37 @@ class FileControllerTest extends TestCase {
 		$this->fileService->method('deleteFile')->with(1, 'example')->willReturn(new File());
 		$result = $this->controller->deleteFile(1);
 		$this->assertInstanceOf(JSONResponse::class, $result);
+		$this->assertSame(Http::STATUS_OK, $result->getStatus());
+	}
+
+	public function testDeleteFileReturnsNotFoundForForeignOrMissingFile(): void {
+		// The service throws when the file does not exist or is not owned by the caller;
+		// the controller must translate that into a 404, not delete and not 500.
+		$this->fileService->method('deleteFile')->with(1, 'example')
+			->willThrowException(new DoesNotExistException('nope'));
+		$result = $this->controller->deleteFile(1);
+		$this->assertInstanceOf(NotFoundJSONResponse::class, $result);
+		$this->assertSame(Http::STATUS_NOT_FOUND, $result->getStatus());
+	}
+
+	public function testDeleteFilesReportsForeignIdsAsFailed(): void {
+		// Id 1 is owned (deleted); id 2 is foreign/missing (service throws) and must be
+		// reported as failed rather than silently deleted.
+		$this->fileService->method('deleteFile')->willReturnCallback(
+			function (int $fileId, string $userId): File {
+				$this->assertSame('example', $userId);
+				if ($fileId === 2) {
+					throw new DoesNotExistException('nope');
+				}
+				return new File();
+			}
+		);
+
+		$result = $this->controller->deleteFiles('[1, 2]');
+		$this->assertInstanceOf(JSONResponse::class, $result);
+		$data = $result->getData();
+		$this->assertFalse($data['ok']);
+		$this->assertSame([2], $data['failed']);
 	}
 
 	public function testUpdateFile(): void {

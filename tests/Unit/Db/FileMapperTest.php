@@ -44,6 +44,7 @@ class FileMapperTest extends TestCase {
 	use DbTestTrait;
 
 	private const TEST_USER = 'passman_file_mapper_test';
+	private const TEST_USER_2 = 'passman_file_mapper_test_2';
 
 	private IDBConnection $db;
 	private FileMapper    $mapper;
@@ -63,6 +64,7 @@ class FileMapperTest extends TestCase {
 
 	private function resetData(): void {
 		$this->deletePassmanRows($this->db, 'passman_files', 'user_id', self::TEST_USER);
+		$this->deletePassmanRows($this->db, 'passman_files', 'user_id', self::TEST_USER_2);
 	}
 
 	/**
@@ -118,6 +120,23 @@ class FileMapperTest extends TestCase {
 
 		$this->expectException(DoesNotExistException::class);
 		$this->mapper->getFile($created->getId());
+	}
+
+	public function testDeleteFileDoesNotDeleteForeignFile(): void {
+		$created = $this->mapper->create($this->sampleFileData(), self::TEST_USER);
+
+		// Another user must not be able to delete a file they do not own.
+		// QBMapper::delete() keys on the entity id only, so this guards against the former cross-user delete IDOR.
+		try {
+			$this->mapper->deleteFile($created->getId(), self::TEST_USER_2);
+			$this->fail('Expected DoesNotExistException when deleting a foreign file');
+		} catch (DoesNotExistException) {
+			// expected
+		}
+
+		// The file must still exist and belong to its owner.
+		$stillThere = $this->mapper->getFile($created->getId(), self::TEST_USER);
+		$this->assertSame($created->getId(), $stillThere->getId());
 	}
 
 	public function testUpdateFile(): void {
