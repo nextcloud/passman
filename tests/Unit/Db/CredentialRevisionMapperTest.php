@@ -155,4 +155,27 @@ class CredentialRevisionMapperTest extends TestCase {
 		$stillThere = $this->mapper->getRevision($revision->getId(), self::TEST_USER);
 		$this->assertSame($revision->getId(), $stillThere->getId());
 	}
+
+	public function testDeleteRevisionRejectsMismatchedCredential(): void {
+		$credentialId = $this->createCredentialId();
+		$otherCredentialId = $this->createCredentialId();
+		$revision = $this->mapper->create('to keep', self::TEST_USER, $credentialId, self::EDITED_BY);
+
+		// Deleting with the wrong credential id must be refused even for the owner,
+		// so a revision cannot be deleted through an unrelated credential's URL.
+		try {
+			$this->mapper->deleteRevision($revision->getId(), self::TEST_USER, $otherCredentialId);
+			$this->fail('Expected DoesNotExistException when credential id does not match');
+		} catch (DoesNotExistException) {
+			// expected
+		}
+
+		$stillThere = $this->mapper->getRevision($revision->getId(), self::TEST_USER);
+		$this->assertSame($revision->getId(), $stillThere->getId());
+
+		// With the correct credential id the deletion succeeds.
+		$this->mapper->deleteRevision($revision->getId(), self::TEST_USER, $credentialId);
+		$this->expectException(DoesNotExistException::class);
+		$this->mapper->getRevision($revision->getId(), self::TEST_USER);
+	}
 }

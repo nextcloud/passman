@@ -119,7 +119,7 @@ class CredentialService {
 			'', [],
 			'', $userId, Activity::TYPE_ITEM_ACTION);
 		$this->shareService->unshareCredential($credential->getGuid());
-		foreach ($this->credentialRevisionService->getRevisions($credential->getId()) as $revision) {
+		foreach ($this->credentialRevisionService->getRevisions($credential->getId(), $userId) as $revision) {
 			$id = $revision['revision_id'];
 			if (isset($id)) {
 				$this->credentialRevisionService->deleteRevision($id, $userId);
