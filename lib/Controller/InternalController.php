@@ -83,14 +83,6 @@ class InternalController extends ApiController {
 	}
 
 	#[NoAdminRequired]
-	public function generatePerson() {
-		$context = ['http' => ['method' => 'GET'], 'ssl' => ['verify_peer' => false, 'allow_self_signed' => true]];
-		$context = stream_context_create($context);
-		$random_person = json_decode(file_get_contents('http://api.namefake.com/', false, $context));
-		return new JSONResponse($random_person);
-	}
-
-	#[NoAdminRequired]
 	#[NoCSRFRequired]
 	public function getSettings() {
 		$settings = [
