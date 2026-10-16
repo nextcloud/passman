@@ -23,6 +23,7 @@ use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\DataDownloadResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\DB\Exception as DbException;
+use OCP\Http\Client\IClientService;
 use OCP\IRequest;
 use OCP\IURLGenerator;
 
@@ -36,6 +37,7 @@ class IconController extends ApiController {
 		private readonly CredentialService $credentialService,
 		private readonly IAppManager $am,
 		private readonly IURLGenerator $urlGenerator,
+		private readonly IClientService $clientService,
 	) {
 		parent::__construct(
 			$AppName,
@@ -53,8 +55,11 @@ class IconController extends ApiController {
 			$url = "http://" . $url;
 		}
 
-
-		$icon = new IconService($url);
+		try {
+			$icon = new IconService($this->clientService->newClient(), $url);
+		} catch (\InvalidArgumentException) {
+			return new JSONResponse();
+		}
 
 		if ($icon->icoExists) {
 			$icon_json['type'] = $icon->icoType;
@@ -88,7 +93,7 @@ class IconController extends ApiController {
 		$type = 'png';
 
 		try {
-			$icon = new IconService($url);
+			$icon = new IconService($this->clientService->newClient(), $url);
 			if ($icon->icoExists && !empty($icon->icoData)) {
 				$data = $icon->icoData;
 				$type = $icon->icoType ?? $type;
