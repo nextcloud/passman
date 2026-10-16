@@ -97,6 +97,7 @@ Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/icon', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/directives/iconpicker', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'importers/import-main', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'importers/importer-keepasscsv', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'importers/importer-keepassxml', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'importers/importer-lastpasscsv', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'importers/importer-dashlanecsv', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'importers/importer-zohocsv', 'core');

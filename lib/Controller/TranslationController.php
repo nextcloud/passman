@@ -74,9 +74,12 @@ class TranslationController extends ApiController {
 
 			'import.no.label' => $this->trans->t('Skipping unlabeled credential'),
 			'import.adding' => $this->trans->t('Adding {{credential}}'),
+			'import.adding.revisions' => $this->trans->t('Adding {{credential}} including {{count}} revision(s)'),
 			'import.added' => $this->trans->t('Added {{credential}}'),
+			'import.added.revisions' => $this->trans->t('Added {{credential}} with {{count}} revision(s)'),
 			'import.skipping' => $this->trans->t('Skipping credential, missing label on line {{line}}'),
 			'import.loaded' => $this->trans->t('Parsed {{num}} credentials, starting to import'),
+			'import.parse.error' => $this->trans->t('Unable to parse the import file.'),
 			'import.importing' => $this->trans->t('Importing'),
 			'import.start' => $this->trans->t('Start import'),
 
