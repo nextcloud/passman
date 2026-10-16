@@ -163,7 +163,7 @@ OC.L10N.register(
     "Version" : "Версия",
     "Donate to support development" : "Поддержать разработку пожертвованием",
     "Bookmarklet" : "Букмарклет",
-    "Save your passwords with one click." : "Сохраняйте пароли в один клик.",
+    "Save your passwords with one click." : "Сохраняйте пароли одним нажатием.",
     "Drag below button to your bookmark toolbar." : "Перетащите кнопку ниже на панель закладок.",
     "Delete vault" : "Удалить хранилище",
     "Vault password" : "Пароль хранилища",
