@@ -30,7 +30,7 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', 'UrlService', function ($http, EncryptService, VaultService, FileService, UrlService) {
+		.service('CredentialService', ['$http', 'EncryptService', 'VaultService', 'FileService', 'UrlService', 'Utf8Base64Service', function ($http, EncryptService, VaultService, FileService, UrlService, Utf8Base64Service) {
 			var credential = {
 				'credential_id': null,
 				'guid': null,
@@ -182,7 +182,7 @@
 				},
 				updateRevision: function (revision) {
 					var _revision = angular.copy(revision);
-					_revision.credential_data = window.btoa(JSON.stringify(_revision.credential_data));
+					_revision.credential_data = Utf8Base64Service.encode(JSON.stringify(_revision.credential_data));
 					var queryUrl = UrlService.generateUrl('/api/v2/credentials/' + revision.credential_data.guid + '/revision/' + revision.revision_id);
 					return $http.patch(queryUrl, _revision).then(function (response) {
 						if (response.data) {

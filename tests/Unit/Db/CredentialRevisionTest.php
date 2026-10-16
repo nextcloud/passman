@@ -75,4 +75,16 @@ class CredentialRevisionTest extends TestCase {
 
 		$this->assertEquals($expected, $this->revision->jsonSerialize());
 	}
+
+	public function testJsonSerializeDecodesUtf8EuroInCredentialLabel(): void {
+		$this->revision->setCredentialData(
+			'eyJndWlkIjoiODMxRDM0RkMtRTdDMC00NTQxLUJENjgtNTA3NzQ3ODI0MTkyIiwibGFiZWwiOiJCYW5rIOKCrCJ9'
+		);
+
+		$serialized = $this->revision->jsonSerialize();
+
+		$this->assertIsObject($serialized['credential_data']);
+		$this->assertSame('Bank €', $serialized['credential_data']->label);
+		$this->assertSame('831D34FC-E7C0-4541-BD68-507747824192', $serialized['credential_data']->guid);
+	}
 }
