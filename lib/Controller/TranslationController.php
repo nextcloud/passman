@@ -352,6 +352,7 @@ class TranslationController extends ApiController {
 			'sharereq.title' => $this->trans->t('You have incoming share requests.'),
 			'sharereq.line1' => $this->trans->t('If you want to put the credential in another vault,'),
 			'sharereq.line2' => $this->trans->t('log out of this vault and log into the vault you want the shared credential in.'),
+			'sharereq.other.vaults' => $this->trans->t('You have incoming share requests in other vaults:'),
 			'permissions' => $this->trans->t('Permissions'),
 			'received.from' => $this->trans->t('Received from'),
 			'date' => $this->trans->t('Date'),
