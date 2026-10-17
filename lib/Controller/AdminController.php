@@ -23,6 +23,7 @@ use OCA\Passman\Utility\Utils;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\IGroupManager;
 use OCP\IL10N;
 use OCP\IRequest;
 use OCP\IUserManager;
@@ -39,6 +40,7 @@ class AdminController extends ApiController {
 		private readonly CredentialRevisionService $revisionService,
 		private readonly DeleteVaultRequestService $deleteVaultRequestService,
 		private readonly IUserManager $userManager,
+		private readonly IGroupManager $groupManager,
 		private readonly IL10N $trans
 	) {
 		parent::__construct(
@@ -164,6 +166,11 @@ class AdminController extends ApiController {
 		return new JSONResponse(['result' => $result]);
 	}
 
+	/**
+	 * Cancels a pending vault deletion request.
+	 * Allowed for the user who requested the deletion and for admins (ignoring a request in the admin settings).
+	 * A request of another user is treated like a missing one, so the response does not reveal its existence.
+	 */
 	#[NoAdminRequired]
 	public function deleteRequestDeletion($vault_guid) {
 		$delete_request = false;
@@ -174,7 +181,12 @@ class AdminController extends ApiController {
 			// Ignore it
 		}
 
-		if ($delete_request instanceof DeleteVaultRequest) {
+		if (
+			$delete_request instanceof DeleteVaultRequest &&
+			(
+				$delete_request->getRequestedBy() === $this->userId || $this->groupManager->isAdmin($this->userId)
+			)
+		) {
 			$this->deleteVaultRequestService->removeDeleteRequestForVault($delete_request);
 			$result = true;
 		}
