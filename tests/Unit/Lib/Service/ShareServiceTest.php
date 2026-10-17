@@ -100,6 +100,29 @@ class ShareServiceTest extends TestCase {
 		$this->assertSame(PermissionEntity::READ, $requests[0]->getPermissions());
 	}
 
+	private static function pendingRequest(int $id, string $targetUserId, int $targetVaultId): ShareRequest {
+		$request = new ShareRequest();
+		$request->setId($id);
+		$request->setItemGuid('item-guid');
+		$request->setTargetUserId($targetUserId);
+		$request->setTargetVaultId($targetVaultId);
+		return $request;
+	}
+
+	public function testCredentialPendingAclListContainsEachTargetUserOnce(): void {
+		// Sharing creates one request per vault of the target user (#866: alice with two vaults was listed twice)
+		$this->shareRequestMapper->method('getRequestsByItemGuid')->with('item-guid')->willReturn([
+			self::pendingRequest(1, 'alice', 11),
+			self::pendingRequest(2, 'bob', 21),
+			self::pendingRequest(3, 'alice', 12),
+		]);
+
+		$pending = $this->service->getCredentialPendingAclList('item-guid');
+
+		$this->assertSame(['alice', 'bob'], array_map(static fn(ShareRequest $r): string => $r->getTargetUserId(), $pending));
+		$this->assertSame([1, 2], array_map(static fn(ShareRequest $r): int => $r->getId(), $pending));
+	}
+
 	public function testCreateACLEntrySetsCreatedTimestamp(): void {
 		$acl = new SharingACL();
 		$this->sharingACLMapper->expects($this->once())
