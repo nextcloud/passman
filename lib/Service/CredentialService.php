@@ -176,7 +176,7 @@ class CredentialService {
 	 * Get a single credential.
 	 *
 	 * @param int $credential_id
-	 * @param string|null $user_id
+	 * @param string|null $user_id validates the given user id has at least READ permissions
 	 * @return Credential
 	 * @throws DoesNotExistException
 	 * @throws MultipleObjectsReturnedException
@@ -196,15 +196,18 @@ class CredentialService {
 	}
 
 	/**
-	 * Check if a credential exists by id.
+	 * Get a credential by id, only if it is owned by the given user.
+	 * Unlike getCredentialById(), access through a share is not sufficient.
 	 *
 	 * @param int $credential_id
-	 * @return bool
-	 * @throws DoesNotExistException
+	 * @param string $user_id
+	 * @return Credential
+	 * @throws DoesNotExistException if the credential does not exist or is not owned by the user
 	 * @throws MultipleObjectsReturnedException
 	 */
-	public function credentialExistsById(int $credential_id): bool {
-		return $this->credentialMapper->getCredentialById($credential_id) !== null;
+	public function getOwnedCredentialById(int $credential_id, string $user_id): Credential {
+		$credential = $this->credentialMapper->getCredentialById($credential_id, $user_id);
+		return $this->encryptService->decryptCredential($credential);
 	}
 
 	/**
