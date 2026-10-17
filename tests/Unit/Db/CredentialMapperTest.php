@@ -93,6 +93,14 @@ class CredentialMapperTest extends TestCase {
 		$this->mapper->getCredentialById(PHP_INT_MAX);
 	}
 
+	public function testGetCredentialByIdScopedToUserRejectsOtherUser(): void {
+		// The owner-only lookup (used e.g. for the expiry notification actions) relies on this.
+		$created = $this->createVaultAndCredential();
+
+		$this->expectException(DoesNotExistException::class);
+		$this->mapper->getCredentialById($created->getId(), self::TEST_USER . '_other');
+	}
+
 	public function testGetCredentialsByVaultId(): void {
 		$vault = $this->vaultMapper->create('Vault', self::TEST_USER);
 		$first = $this->mapper->create($this->sampleCredentialData($vault->getId(), self::TEST_USER, ['label' => 'A']));

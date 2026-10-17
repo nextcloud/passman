@@ -33,8 +33,8 @@
 	 */
 	angular.module('passmanApp')
 		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate',
-			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate) {
+			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$translate',
+			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $translate) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -580,7 +580,9 @@
                 $scope.selectedCredential = false;
                 $scope.selectCredential = function (credential) {
                     if (credential.description) {
-                        credential.description_html = $sce.trustAsHtml(angular.copy(credential.description).replace("\n", '<br />'));
+                        // The description can come from another user (shares), so it must not be trusted.
+                        // ng-bind-html sanitizes the untrusted string via ngSanitize.
+                        credential.description_html = angular.copy(credential.description).replace(/\n/g, '<br />');
                     }
                     $scope.selectedCredential = angular.copy(credential);
                     $rootScope.$emit('app_menu', true);

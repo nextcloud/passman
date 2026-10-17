@@ -302,8 +302,17 @@ class CredentialController extends ApiController {
 
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
-	public function deleteRevision($credential_id, $revision_id) {
-		$result = $this->credentialRevisionService->deleteRevision($revision_id, $this->userId);
+	public function deleteRevision($credential_guid, $revision_id) {
+		try {
+			// Resolve the credential by guid scoped to the requesting user: this confirms the
+			// credential exists and is owned by the caller, and yields its id for cross-validation.
+			$credential = $this->credentialService->getCredentialByGUID($credential_guid, $this->userId);
+			// The revision must be owned by the user AND belong to the credential from the URL.
+			$result = $this->credentialRevisionService->deleteRevision((int)$revision_id, $this->userId, $credential->getId());
+		} catch (\Exception) {
+			// credential/revision does not exist, is not owned by the user, or they do not match
+			return new NotFoundJSONResponse();
+		}
 		return new JSONResponse($result);
 	}
 

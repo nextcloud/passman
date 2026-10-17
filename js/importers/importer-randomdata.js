@@ -23,11 +23,8 @@
 // Importers should always start with this
 /** global: PassmanImporter */
 var PassmanImporter = PassmanImporter || {};
-(function(window, $, PassmanImporter) {
+(function (window, $, PassmanImporter) {
 	'use strict';
-	// Define the importer
-
-    const APP_ID = 'passman';
 
 // Define the importer
 	PassmanImporter.randomData = {
@@ -36,6 +33,52 @@ var PassmanImporter = PassmanImporter || {};
 			id: 'randomData',
 			exportSteps: ['Create\'s 50 random credentials for testing purposes.']
 		}
+	};
+
+	// The random data is generated locally; no server or third party request is needed.
+	// Since this is basically only a showcase importer, it doesn't matter at all.
+	const firstNames = ['alice', 'bob', 'carol', 'dave', 'erin', 'frank', 'grace', 'heidi', 'ivan', 'judy',
+		'mallory', 'niaj', 'olivia', 'peggy', 'rupert', 'sybil', 'trent', 'victor', 'walter', 'zoe'];
+	const lastNames = ['smith', 'miller', 'meyer', 'jones', 'brown', 'wilson', 'taylor', 'clark', 'lewis',
+		'walker', 'hall', 'young', 'king', 'wright', 'scott', 'green', 'baker', 'adams', 'nelson', 'hill'];
+	const domainWords = ['blue', 'red', 'green', 'fast', 'cloud', 'web', 'net', 'data', 'shop', 'mail',
+		'host', 'soft', 'micro', 'star', 'sun', 'moon', 'tech', 'apps', 'bank', 'game'];
+	const tlds = ['com', 'net', 'org', 'de', 'io', 'eu', 'info', 'dev', 'local'];
+	const passwordChars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*()-_=+€';
+
+	// uniform random integer in [0, max)
+	var randomInt = function (max) {
+		var buffer = new Uint32Array(1);
+		var limit = Math.floor(0x100000000 / max) * max;
+		do {
+			window.crypto.getRandomValues(buffer);
+		} while (buffer[0] >= limit);
+		return buffer[0] % max;
+	};
+
+	var pick = function (list) {
+		return list[randomInt(list.length)];
+	};
+
+	var insecureRandomPassword = function (length) {
+		var password = '';
+		for (var i = 0; i < length; i++) {
+			password += passwordChars.charAt(randomInt(passwordChars.length));
+		}
+		return password;
+	};
+
+	var generatePerson = function () {
+		var domain = pick(domainWords) + pick(domainWords) + '.' + pick(tlds);
+		var username = pick(firstNames) + '.' + pick(lastNames) + randomInt(100);
+		return {
+			domain: domain,
+			email_u: username,
+			email_d: domain,
+			username: username,
+			password: insecureRandomPassword(16),
+			url: 'https://' + domain + '/'
+		};
 	};
 
 	PassmanImporter.randomData.readFile = function () {
@@ -57,67 +100,38 @@ var PassmanImporter = PassmanImporter || {};
 					'Certificate',
 					'Serials'
 				];
-			var label;
+			var max = 50;
 			var credential_list = [];
-			var _this = this;
-			var generateCredential = function (max, i, callback) {
-				if (jQuery) {
-					var url = OC.generateUrl('apps/' + APP_ID + '/api/internal/generate_person');
-					$.ajax({
-						url: url,
-						dataType: 'json',
-						success: function (data) {
-							if(data) {
-								var _credential = PassmanImporter.newCredential();
-								label = (Math.random() >= 0.5) ? data.domain : data.email_d + ' - ' + data.email_u;
-								_credential.label = label;
-								_credential.username = data.username;
-								_credential.password = data.password;
-								_credential.url = data.url;
 
-								var tag_amount = Math.floor(Math.random() * 5);
-								var ta = 0;
-								var _tags = [];
-								while (ta < tag_amount) {
-									var item = tags[Math.floor(Math.random() * tags.length)];
-									if (_tags.indexOf(item) === -1) {
-										_tags.push(item);
-										ta++
-									}
-								}
-								_credential.tags = _tags.map(function (item) {
-									if (item) {
-										return {text: item}
-									}
+			for (var i = 1; i <= max; i++) {
+				var data = generatePerson();
+				var _credential = PassmanImporter.newCredential();
+				_credential.label = (randomInt(2) === 0) ? data.domain : data.email_d + ' - ' + data.email_u;
+				_credential.username = data.username;
+				_credential.password = data.password;
+				_credential.url = data.url;
 
-								}).filter(function (item) {
-									return (item);
-								});
-								credential_list.push(_credential);
-
-								if (i < max) {
-									var progress = {
-										percent: i / max * 100,
-										loaded: i,
-										total: max
-									};
-									_this.call_progress(progress);
-									generateCredential(max, i + 1, callback)
-								} else {
-									callback(credential_list)
-								}
-							} else {
-								generateCredential(max, i , callback)
-							}
-						}
-					});
+				var tag_amount = randomInt(5);
+				var _tags = [];
+				while (_tags.length < tag_amount) {
+					var item = pick(tags);
+					if (_tags.indexOf(item) === -1) {
+						_tags.push(item);
+					}
 				}
-			};
+				_credential.tags = _tags.map(function (item) {
+					return {text: item};
+				});
+				credential_list.push(_credential);
 
+				this.call_progress({
+					percent: i / max * 100,
+					loaded: i,
+					total: max
+				});
+			}
 
-			generateCredential(50, 1, function (credential_list) {
-				_this.call_then(credential_list);
-			});
+			this.call_then(credential_list);
 		});
 	};
 })(window, $, PassmanImporter);

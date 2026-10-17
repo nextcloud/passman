@@ -12,6 +12,7 @@
 namespace OCA\Passman\Controller;
 
 use OCA\Passman\Service\FileService;
+use OCA\Passman\Utility\NotFoundJSONResponse;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
@@ -59,7 +60,12 @@ class FileController extends ApiController {
 	#[NoAdminRequired]
 	#[NoCSRFRequired]
 	public function deleteFile($file_id) {
-		return new JSONResponse($this->fileService->deleteFile($file_id, $this->userId));
+		try {
+			return new JSONResponse($this->fileService->deleteFile($file_id, $this->userId));
+		} catch (\Exception) {
+			// file does not exist or does not belong to the requesting user
+			return new NotFoundJSONResponse(['failed' => $file_id]);
+		}
 	}
 
 	#[NoAdminRequired]
@@ -101,6 +107,6 @@ class FileController extends ApiController {
 				return new JSONResponse($this->fileService->updateFile($file));
 			}
 		}
-		return new JSONResponse(['failed' => $file_id], Http::STATUS_NOT_FOUND);
+		return new NotFoundJSONResponse(['failed' => $file_id]);
 	}
 }
