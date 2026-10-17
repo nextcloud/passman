@@ -32,7 +32,7 @@
 	 * Service in the passmanApp.
 	 */
 	angular.module('passmanApp')
-		.service('VaultService', ['UrlService', '$http', function (UrlService, $http) {
+		.service('VaultService', ['UrlService', '$http', 'Utf8Base64Service', function (UrlService, $http, Utf8Base64Service) {
 			// AngularJS will instantiate a singleton by calling "new" on this function
 			var _this = this;
 			var _activeVault;
@@ -85,7 +85,7 @@
 					return $http.get(queryUrl).then(function (response) {
 						if (response.data) {
 							if (response.data.vault_settings) {
-								response.data.vault_settings = JSON.parse(window.atob(response.data.vault_settings));
+								response.data.vault_settings = JSON.parse(Utf8Base64Service.decode(response.data.vault_settings));
 							} else {
 								response.data.vault_settings = {};
 							}
@@ -100,7 +100,7 @@
 					delete _vault.defaultVaultPass;
 					delete _vault.defaultVault;
 					delete _vault.vaultKey;
-					_vault.vault_settings = window.btoa(JSON.stringify(_vault.vault_settings));
+					_vault.vault_settings = Utf8Base64Service.encode(JSON.stringify(_vault.vault_settings));
 					var queryUrl = UrlService.generateUrl('/api/v2/vaults/' + _vault.guid);
 					return $http.patch(queryUrl, _vault).then(function (response) {
 						if (response.data) {
