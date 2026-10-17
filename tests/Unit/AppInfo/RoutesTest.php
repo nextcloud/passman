@@ -24,11 +24,50 @@ declare(strict_types=1);
 
 namespace OCA\Passman\Tests\Unit\AppInfo;
 
+use OCP\AppFramework\Http\Attribute\AppApiAdminAccessWithoutUser;
+use OCP\AppFramework\Http\Attribute\AuthorizedAdminSetting;
+use OCP\AppFramework\Http\Attribute\ExAppRequired;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\PublicPage;
+use OCP\AppFramework\Http\Attribute\SubAdminRequired;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use Test\TestCase;
 
 #[CoversNothing]
 class RoutesTest extends TestCase {
+	/**
+	 * Routes that must stay admin-only. Nextcloud's SecurityMiddleware requires an admin
+	 * for every controller method unless an attribute (or annotation) relaxes it.
+	 */
+	private const ADMIN_ONLY_ROUTES = [
+		'Admin#searchUser',
+		'Admin#moveCredentials',
+		'Admin#listRequests',
+		'Admin#acceptRequestDeletion',
+		'Settings#saveAdminSetting',
+	];
+
+	/**
+	 * Admin controller routes that are deliberately callable by any logged-in user.
+	 * These do their own authorization checks.
+	 */
+	private const ADMIN_CONTROLLER_USER_ROUTES = [
+		'Admin#requestDeletion',
+		'Admin#deleteRequestDeletion',
+	];
+
+	/**
+	 * Attributes that lift the admin requirement of the SecurityMiddleware.
+	 */
+	private const ADMIN_REQUIREMENT_RELAXING_ATTRIBUTES = [
+		NoAdminRequired::class,
+		PublicPage::class,
+		SubAdminRequired::class,
+		AuthorizedAdminSetting::class,
+		ExAppRequired::class,
+		AppApiAdminAccessWithoutUser::class,
+	];
+
 	/**
 	 * @return list<array{name: string, url: string, verb: string}>
 	 */
@@ -60,6 +99,44 @@ class RoutesTest extends TestCase {
 				(new \ReflectionMethod($class, $method))->isPublic(),
 				"Route {$route['name']}: method $class::$method is not public"
 			);
+		}
+	}
+
+	public function testAdminOnlyRoutesDoNotRelaxTheAdminRequirement(): void {
+		$routeNames = array_column(self::routes(), 'name');
+
+		foreach (self::ADMIN_ONLY_ROUTES as $name) {
+			$this->assertContains($name, $routeNames, "Admin-only route $name is not routed anymore, update the list");
+
+			[$class, $method] = self::resolve($name);
+			$reflection = new \ReflectionMethod($class, $method);
+
+			foreach (self::ADMIN_REQUIREMENT_RELAXING_ATTRIBUTES as $attribute) {
+				$this->assertEmpty(
+					$reflection->getAttributes($attribute),
+					"Route $name: $class::$method must stay admin-only but has #[$attribute]"
+				);
+			}
+
+			// Nextcloud still honours the deprecated docblock annotations
+			$this->assertDoesNotMatchRegularExpression(
+				'/@(NoAdminRequired|PublicPage|SubAdminRequired|AuthorizedAdminSetting|ExAppRequired)\b/',
+				(string) $reflection->getDocComment(),
+				"Route $name: $class::$method must stay admin-only but has an annotation relaxing it"
+			);
+		}
+	}
+
+	public function testEveryAdminControllerRouteIsClassified(): void {
+		// A new route on the AdminController has to be consciously added to one of the lists
+		foreach (self::routes() as $route) {
+			if (str_starts_with($route['name'], 'Admin#')) {
+				$this->assertContains(
+					$route['name'],
+					[...self::ADMIN_ONLY_ROUTES, ...self::ADMIN_CONTROLLER_USER_ROUTES],
+					"Route {$route['name']} is neither listed as admin-only nor as user route"
+				);
+			}
 		}
 	}
 }
