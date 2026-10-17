@@ -31,10 +31,8 @@ use OCA\Passman\Controller\InternalController;
 use OCA\Passman\Db\Credential;
 use OCA\Passman\Service\CredentialService;
 use OCA\Passman\Service\NotificationService;
-use OCA\Passman\Tests\Unit\Support\AppConfigMockTrait;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Db\DoesNotExistException;
-use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -44,8 +42,6 @@ use Test\TestCase;
 
 #[CoversClass(InternalController::class)]
 class InternalControllerTest extends TestCase {
-	use AppConfigMockTrait;
-
 	private InternalController             $controller;
 	private CredentialService&MockObject   $credentialService;
 	private NotificationService&MockObject $notificationService;
@@ -64,7 +60,6 @@ class InternalControllerTest extends TestCase {
 			$this->notificationService,
 			$this->createMock(IConfig::class),
 			$this->createMock(IAppManager::class),
-			$this->createAppConfigMock(),
 		);
 	}
 
@@ -124,13 +119,4 @@ class InternalControllerTest extends TestCase {
 		$this->assertNull($this->controller->$action('1'));
 	}
 
-	public function testGetSettings(): void {
-		$result = $this->controller->getSettings();
-		$this->assertInstanceOf(JSONResponse::class, $result);
-	}
-
-	public function testSaveSettings(): void {
-		$this->controller->saveSettings('test', 'test');
-		$this->addToAssertionCount(1);
-	}
 }
