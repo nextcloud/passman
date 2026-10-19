@@ -262,6 +262,7 @@
     "You have incoming share requests." : "Você tem solicitações de compartilhamento.",
     "If you want to put the credential in another vault," : "Se você quiser colocar a credencial em outro cofre,",
     "log out of this vault and log into the vault you want the shared credential in." : "saia deste cofre e faça o login no cofre em que você deseja a credencial compartilhada.",
+    "You have incoming share requests in other vaults:" : "Você tem solicitações de compartilhamento pendentes em outros cofres:",
     "Permissions" : "Permissões",
     "Received from" : "Recebido de",
     "Date" : "Data",

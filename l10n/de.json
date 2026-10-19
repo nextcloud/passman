@@ -262,6 +262,7 @@
     "You have incoming share requests." : "Du hast eingehende Freigabeanforderungen.",
     "If you want to put the credential in another vault," : "Wenn du die Anmeldeinformation in einen anderen Tresor verschieben möchtest,",
     "log out of this vault and log into the vault you want the shared credential in." : "melden dich bei diesem Tresor ab und melde dich bei dem Tresor, der die geteilte Zugangsdaten beinhaltet, wieder an.",
+    "You have incoming share requests in other vaults:" : "Du hast eingehende Freigabeanfragen in anderen Tresoren:",
     "Permissions" : "Rechte",
     "Received from" : "Erhalten von",
     "Date" : "Datum",

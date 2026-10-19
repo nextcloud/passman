@@ -262,6 +262,7 @@
     "You have incoming share requests." : "У вас входящие запросы на общий доступ.",
     "If you want to put the credential in another vault," : "Если вы хотите поместить запись в другое хранилище,",
     "log out of this vault and log into the vault you want the shared credential in." : "выйдите из этого хранилища и войдите в то, в которое хотите добавить общую запись.",
+    "You have incoming share requests in other vaults:" : "Входящие запросы на общий доступ есть и в других хранилищах:",
     "Permissions" : "Права доступа",
     "Received from" : "Получено от",
     "Date" : "Дата",
