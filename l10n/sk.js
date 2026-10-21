@@ -264,6 +264,7 @@ OC.L10N.register(
     "You have incoming share requests." : "Máte prichádzajúce požiadavky na zdieľanie",
     "If you want to put the credential in another vault," : "Ak chete premiestniť prihlasovací údaj do iného trezora,",
     "log out of this vault and log into the vault you want the shared credential in." : "odhláste sa z tohto trezoru a prihláste sa do trezoru, v ktorom chcete zdieľané prihlasovacie údaje.",
+    "You have incoming share requests in other vaults:" : "V iných trezoroch máte prichádzajúce žiadosti o zdieľanie:",
     "Permissions" : "Oprávnenia",
     "Received from" : "Prijaté od",
     "Date" : "Dátum",
