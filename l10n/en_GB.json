@@ -262,6 +262,7 @@
     "You have incoming share requests." : "You have incoming share requests.",
     "If you want to put the credential in another vault," : "If you want to put the credential in another vault,",
     "log out of this vault and log into the vault you want the shared credential in." : "log out of this vault and log into the vault you want the shared credential in.",
+    "You have incoming share requests in other vaults:" : "You have incoming share requests in other vaults:",
     "Permissions" : "Permissions",
     "Received from" : "Received from",
     "Date" : "Date",

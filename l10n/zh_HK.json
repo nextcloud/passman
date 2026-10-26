@@ -262,6 +262,7 @@
     "You have incoming share requests." : "您收到分享請求。",
     "If you want to put the credential in another vault," : "如果您想將身分驗證放在另一個保險庫中，",
     "log out of this vault and log into the vault you want the shared credential in." : "登出此保險庫並登入到您要分享身分驗證的保險庫。",
+    "You have incoming share requests in other vaults:" : "你在其他保險庫中有待處理的分享請求：",
     "Permissions" : "權限",
     "Received from" : "收到自",
     "Date" : "日期",
