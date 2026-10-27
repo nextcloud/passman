@@ -322,12 +322,21 @@ class ShareService {
 	}
 
 	/**
+	 * Get the pending share requests of a credential, one per target user.
+	 * Sharing creates a request for every vault of the target user, but the ACL list must show each user once.
+	 *
 	 * @param string $item_guid
 	 * @return ShareRequest[]
 	 * @throws Exception
 	 */
 	public function getCredentialPendingAclList(string $item_guid): array {
-		return $this->shareRequest->getRequestsByItemGuid($item_guid);
+		$requests = [];
+		// since we had to remove the grouping from the DB query (see https://github.com/nextcloud/passman/pull/778),
+		// we'll simply "group" it here in php logic. not perfect, but it restores the behaviour before the regression.
+		foreach ($this->shareRequest->getRequestsByItemGuid($item_guid) as $request) {
+			$requests[$request->getTargetUserId()] ??= $request;
+		}
+		return array_values($requests);
 	}
 
 	/**

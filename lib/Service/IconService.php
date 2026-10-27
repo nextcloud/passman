@@ -23,8 +23,14 @@
 
 namespace OCA\Passman\Service;
 
+use OCP\Http\Client\IClient;
 
 class IconService {
+	/**
+	 * Only these schemes may be fetched. Anything else (ftp, file, gopher, ...) is rejected before a request is made.
+	 */
+	private const ALLOWED_SCHEMES = ['http', 'https'];
+
 	// URL types
 	const URL_TYPE_ABSOLUTE = 1;
 	const URL_TYPE_ABSOLUTE_SCHEME = 2;
@@ -88,32 +94,31 @@ class IconService {
 	public array $debugInfo;
 
 	/**
-	 * @var string|null HTTP proxy (ex: localhost:8888)
-	 */
-	protected mixed $httpProxy;
-
-	/**
-	 * @var bool SSL verify peer (default: true)
-	 */
-	protected bool $sslVerify;
-
-	/**
 	 * Create a new IconService object, search & download favicon if $auto is true
 	 *
+	 * All requests go through the Nextcloud HTTP client, which applies the server's SSRF protection
+	 * (no requests to local/private addresses unless allow_local_remote_servers is enabled, DNS pinning,
+	 * re-check on redirects), proxy and TLS settings.
+	 *
+	 * @param IClient $client Nextcloud HTTP client (IClientService::newClient())
 	 * @param string $url Page URL
-	 * @param array|null $options Optional settings
 	 * @param bool $auto Search & download favicon on instantiation
 	 */
-	public function __construct(string $url, ?array $options = null, bool $auto = true) {
+	public function __construct(
+		private readonly IClient $client,
+		string                   $url,
+		bool                     $auto = true,
+	) {
 		if (empty($url)) {
 			throw new \InvalidArgumentException("url is empty");
 		}
 		if (self::urlType($url) != self::URL_TYPE_ABSOLUTE) {
 			throw new \InvalidArgumentException("'" . $url . "' is not an absolute url");
 		}
+		if (!self::hasAllowedScheme($url)) {
+			throw new \InvalidArgumentException("'" . $url . "' does not use an allowed scheme (http, https)");
+		}
 		$this->url = $url;
-		$this->httpProxy = $options['httpProxy'] ?? null;
-		$this->sslVerify = isset($options['sslVerify']) && $options['sslVerify'] === false ? false : true;
 		if ($auto) {
 			$this->getFaviconUrl();
 			$this->downloadFavicon();
@@ -146,9 +151,8 @@ class IconService {
 		// Downloading the page
 		$info = [];
 		$html = $this->downloadAs($url, $info);
-		if ($info['curl_errno'] !== CURLE_OK) {
-			$this->error = $info['curl_error'];
-			$this->debugInfo['document_curl_errno'] = $info['curl_errno'];
+		if ($info['error'] !== null) {
+			$this->error = $info['error'];
 			return false;
 		}
 
@@ -181,7 +185,7 @@ class IconService {
 	}
 
 
-	private function parseLinkElement($htmlHead, $pageUrlInfo, $base_href){
+	private function parseLinkElement($htmlHead, $pageUrlInfo, $base_href) {
 		if (preg_match('#<\s*link[^>]*(rel=(["\'])[^>\2]*icon[^>\2]*\2)[^>]*>#i', (string) $htmlHead, $matches)) {
 			$link_tag = $matches[0];
 			$this->debugInfo['link_tag'] = $link_tag;
@@ -301,10 +305,15 @@ class IconService {
 			$this->error = "Empty content";
 			return false;
 		}
-		$textTypes = ['text/html', 'text/plain'];
-		if (in_array($info['content_type'], $textTypes) || preg_match('#(</html>|</b>)#i', (string) $content)) {
-			$this->error = "Seems to be a text document";
+		// Only ever hand out image data: this keeps the fetcher from being usable to read
+		// arbitrary (e.g. internal JSON/XML) responses, even where local servers are allowed.
+		if (!self::isImage((string) $content)) {
+			$this->error = "Not an image"; // (probably)
 			return false;
+		}
+		if (self::isSvg((string) $content)) {
+			// the frontend builds data:image/<type> URIs, which need the full svg+xml subtype
+			$this->icoType = 'svg+xml';
 		}
 
 		if (empty($this->icoType)) {
@@ -319,43 +328,105 @@ class IconService {
 	}
 
 	/**
-	 * Download URL as Firefox with cURL
+	 * Download URL through the Nextcloud HTTP client
 	 * Details available in $info if provided
 	 *
 	 * @param string $url URL to download
-	 * @param array $info Download metadata
-	 * @return bool|mixed
+	 * @param array $info Download metadata: error (null on success), http_code, effective_url, content_type
+	 * @return false|string
 	 */
 	public function downloadAs($url, &$info = null) {
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_MAXREDIRS, 20);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0');
-		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-		// Don't check SSL certificate to allow autosigned certificate
-		if ($this->sslVerify === false) {
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		}
+		$info = [
+			'error'         => null,
+			'http_code'     => 0,
+			'effective_url' => $url,
+			'content_type'  => '',
+		];
 
-		// Set HTTP proxy
-		if ($this->httpProxy) {
-			curl_setopt($ch, CURLOPT_PROXY, $this->httpProxy);
-		}
-
-		$content = curl_exec($ch);
-		$info['curl_errno'] = curl_errno($ch);
-		$info['curl_error'] = curl_error($ch);
-		$info['http_code'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		$info['effective_url'] = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-		$info['redirect_count'] = curl_getinfo($ch, CURLINFO_REDIRECT_COUNT);
-		$info['content_type'] = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-
-		if ($info['curl_errno'] !== CURLE_OK || in_array($info['http_code'], [403, 404, 500, 503])) {
+		// URLs found in the fetched HTML (link/base tags) could be attacker controlled as well
+		if (!self::hasAllowedScheme((string) $url)) {
+			$info['error'] = 'URL scheme not allowed';
 			return false;
 		}
-		return $content;
+
+		try {
+			$response = $this->client->get($url, [
+				'timeout'     => 3,
+				'http_errors' => false,
+				'headers'     => [
+					'User-Agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0',
+				],
+				// track the final URL after redirects (called for every hop, the last one wins);
+				// $stats is a GuzzleHttp\TransferStats
+				'on_stats'    => static function ($stats) use (&$info): void {
+					$info['effective_url'] = (string) $stats->getEffectiveUri();
+				},
+			]);
+		} catch (\Exception $e) {
+			// includes LocalServerException for blocked local/private addresses
+			$info['error'] = $e->getMessage();
+			return false;
+		}
+
+		$info['http_code'] = $response->getStatusCode();
+		$info['content_type'] = $response->getHeader('Content-Type');
+
+		if (in_array($info['http_code'], [403, 404, 500, 503])) {
+			return false;
+		}
+		return (string) $response->getBody();
+	}
+
+	/**
+	 * @param string $url
+	 * @return bool true if the URL uses http or https
+	 */
+	public static function hasAllowedScheme(string $url): bool {
+		$scheme = parse_url($url, PHP_URL_SCHEME);
+		return is_string($scheme) && in_array(strtolower($scheme), self::ALLOWED_SCHEMES, true);
+	}
+
+	/**
+	 * Try to detect the content type from the data itself (the Content-Type header is server controlled)
+	 *
+	 * @param string $content
+	 * @return bool true if the data is an image
+	 */
+	public static function isImage(string $content): bool {
+		$mimeType = (new \finfo(FILEINFO_MIME_TYPE))->buffer($content);
+		return (is_string($mimeType) && str_starts_with($mimeType, 'image/')) || self::isSvg($content);
+	}
+
+	/**
+	 * Let's check that the document's root element is <svg>.
+	 * Other XML documents or HTML that merely contains an <svg> are not accepted.
+	 *
+	 * @param string $content
+	 * @return bool true if the data is an SVG document
+	 */
+	public static function isSvg(string $content): bool {
+		if (empty($content)) {
+			return false;
+		}
+		$reader = new \XMLReader();
+		$previousErrorConfig = libxml_use_internal_errors(true);
+		try {
+			// LIBXML_NONET: never load external resources (DTDs/entities)
+			if (!$reader->XML($content, null, LIBXML_NONET)) {
+				return false;
+			}
+			// Stream up to the first element only; entities are not substituted and the rest of the document is never parsed.
+			while ($reader->read()) {
+				if ($reader->nodeType === \XMLReader::ELEMENT) {
+					return $reader->localName === 'svg';
+				}
+			}
+			return false;
+		} finally {
+			$reader->close();
+			libxml_clear_errors();
+			libxml_use_internal_errors($previousErrorConfig);
+		}
 	}
 
 	/**

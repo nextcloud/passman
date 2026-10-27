@@ -264,6 +264,7 @@ OC.L10N.register(
     "You have incoming share requests." : "Vous avez des nouvelles demandes de partage.",
     "If you want to put the credential in another vault," : "Si vous souhaitez déplacer les informations d'identification dans un autre coffre-fort,",
     "log out of this vault and log into the vault you want the shared credential in." : "déconnectez-vous de ce coffre-fort et connectez-vous au coffre-fort dans lequel vous souhaitez que les informations d'identification partagées soient insérées.",
+    "You have incoming share requests in other vaults:" : "Vous avez des demandes entrantes de partage dans d'autres coffres-forts :",
     "Permissions" : "Permissions",
     "Received from" : "Reçu de",
     "Date" : "Date",

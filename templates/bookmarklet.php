@@ -51,6 +51,7 @@ Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/tagfilter', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/escapeHTML', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/as', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/filters/toHHMMSS', 'core');
+Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/utf8base64service', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/vaultservice', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/credentialservice', 'core');
 Util::addScript(MyAppTemplateConfig::APP_ID, 'app/services/settingsservice', 'core');

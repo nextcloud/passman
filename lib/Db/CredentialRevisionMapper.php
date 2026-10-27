@@ -133,12 +133,20 @@ class CredentialRevisionMapper extends QBMapper {
 	 * Delete a revision
 	 * @param int $revision_id
 	 * @param string $user_id
+	 * @param int|null $credential_id if given, the revision must belong to this credential
 	 * @return CredentialRevision
+	 * @throws DoesNotExistException if the revision does not exist, does not belong to the user,
+	 *                               or does not belong to the given credential
+	 * @throws MultipleObjectsReturnedException
 	 */
-	public function deleteRevision(int $revision_id, string $user_id): CredentialRevision {
-		$revision = new CredentialRevision();
-		$revision->setId($revision_id);
-		$revision->setUserId($user_id);
+	public function deleteRevision(int $revision_id, string $user_id, ?int $credential_id = null): CredentialRevision {
+		// Fetch the revision scoped by user_id first: QBMapper::delete() builds its WHERE clause
+		// from the entity id only, so a bare delete() would ignore the user_id.
+		// getRevision() throws if the revision does not exist or is not owned by $user_id.
+		$revision = $this->getRevision($revision_id, $user_id);
+		if ($credential_id !== null && $revision->getCredentialId() !== $credential_id) {
+			throw new DoesNotExistException('Revision does not belong to the given credential');
+		}
 		return $this->delete($revision);
 	}
 }

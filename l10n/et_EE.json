@@ -262,6 +262,7 @@
     "You have incoming share requests." : "Sulle on saabunud jagamispalveid.",
     "If you want to put the credential in another vault," : "Kui soovid salasõnakirjet lisada teise andmehoidlasse, siis",
     "log out of this vault and log into the vault you want the shared credential in." : "logi sellest andmehoidlast välja ja logi sisse sellesse andmehoidlasse, kus tahad salasõnakirjet näha.",
+    "You have incoming share requests in other vaults:" : "Sulle on saabunud jagamispalveid teste andmehoidlate kohta:",
     "Permissions" : "Õigused",
     "Received from" : "Saatja",
     "Date" : "Kuupäev",

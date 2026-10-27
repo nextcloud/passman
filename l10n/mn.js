@@ -70,6 +70,7 @@ OC.L10N.register(
     "Never" : "хэзээч",
     "30 minutes" : "30 минут",
     "3 hours" : "3 —Ü–∞–≥",
+    "Donate" : "Хандив өгөх",
     "Tags" : "Tag-үүд",
     "Expired" : "Дууссан",
     "Loading" : "Ачааллаж байна",

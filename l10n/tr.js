@@ -264,6 +264,7 @@ OC.L10N.register(
     "You have incoming share requests." : "Size gönderilmiş paylaşım istekleri var.",
     "If you want to put the credential in another vault," : "Kimlik doğrulama bilgilerini başka bir kasaya koymak istiyorsanız,",
     "log out of this vault and log into the vault you want the shared credential in." : "bu kasadaki oturumunuzu kapatın ve kimlik doğrulama bilgilerini taşımak istediğiniz diğer kasada oturum açın.",
+    "You have incoming share requests in other vaults:" : "Diğer kasalarda gelen paylaşım istekleriniz var:",
     "Permissions" : "İzinler",
     "Received from" : "Gönderen",
     "Date" : "Tarih",

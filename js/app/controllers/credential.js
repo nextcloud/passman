@@ -33,8 +33,8 @@
 	 */
 	angular.module('passmanApp')
 		.controller('CredentialCtrl', ['$scope', 'VaultService', 'SettingsService', '$location', 'CredentialService',
-			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$sce', '$translate',
-			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $sce, $translate) {
+			'$rootScope', 'FileService', 'EncryptService', 'TagService', '$timeout', 'NotificationService', 'CacheService', 'ShareService', 'SharingACL', '$interval', '$filter', '$routeParams', '$translate',
+			function ($scope, VaultService, SettingsService, $location, CredentialService, $rootScope, FileService, EncryptService, TagService, $timeout, NotificationService, CacheService, ShareService, SharingACL, $interval, $filter, $routeParams, $translate) {
 				$scope.active_vault = VaultService.getActiveVault();
 				if (!SettingsService.getSetting('defaultVault') || !SettingsService.getSetting('defaultVaultPass')) {
 					if (!$scope.active_vault) {
@@ -126,15 +126,49 @@
 					});
 				};
 
-				var getPendingShareRequests = function () {
+				/**
+				 * Tell the user which of their other vaults have pending share requests.
+				 * A share request can only be accepted in the vault it was made for (the shared key is encrypted
+				 * with that vault's sharing key), so vaults created after the share was made have none.
+				 */
+				var notifyAboutShareRequestsInOtherVaults = function (shareRequests) {
+					var vaultGuids = [];
+					for (var i = 0; i < shareRequests.length; i++) {
+						if (vaultGuids.indexOf(shareRequests[i].target_vault_guid) === -1) {
+							vaultGuids.push(shareRequests[i].target_vault_guid);
+						}
+					}
+					VaultService.getVaults().then(function (vaults) {
+						var vaultNames = [];
+						for (var v = 0; v < vaults.length; v++) {
+							if (vaultGuids.indexOf(vaults[v].guid) !== -1) {
+								vaultNames.push(vaults[v].name);
+							}
+						}
+						if (vaultNames.length > 0) {
+							NotificationService.showNotification($translate.instant('sharereq.other.vaults') + ' ' + vaultNames.join(', '), 10000);
+						}
+					});
+				};
+
+				var getPendingShareRequests = function (notifyOtherVaults) {
 					ShareService.getPendingRequests().then(function (shareRequests) {
-						if (shareRequests.length > 0) {
+						if (!shareRequests || shareRequests.length === 0) {
+							return;
+						}
+						// the popup only lists the requests of the active vault, so only open it if there are any
+						var activeVaultRequests = shareRequests.filter(function (request) {
+							return request.target_vault_id === $scope.active_vault.vault_id;
+						});
+						if (activeVaultRequests.length > 0) {
 							$scope.incoming_share_requests = shareRequests;
 							jQuery('.share_popup').dialog({
 								width: 800,
 								modal: true,
 								dialogClass: 'shareincoming-dialog'
 							});
+						} else if (notifyOtherVaults) {
+							notifyAboutShareRequestsInOtherVaults(shareRequests);
 						}
 					});
 				};
@@ -149,10 +183,11 @@
           			} else {
             			fetchCredentials();
           			}
-					getPendingShareRequests();
+					// hint about requests in other vaults once when opening the vault, not on every refresh
+					getPendingShareRequests(true);
 					refresh_data_interval = $interval(function () {
 						fetchCredentials();
-						getPendingShareRequests();
+						getPendingShareRequests(false);
 					}, 60000 * 5);
 				}
 
@@ -580,7 +615,9 @@
                 $scope.selectedCredential = false;
                 $scope.selectCredential = function (credential) {
                     if (credential.description) {
-                        credential.description_html = $sce.trustAsHtml(angular.copy(credential.description).replace("\n", '<br />'));
+                        // The description can come from another user (shares), so it must not be trusted.
+                        // ng-bind-html sanitizes the untrusted string via ngSanitize.
+                        credential.description_html = angular.copy(credential.description).replace(/\n/g, '<br />');
                     }
                     $scope.selectedCredential = angular.copy(credential);
                     $rootScope.$emit('app_menu', true);

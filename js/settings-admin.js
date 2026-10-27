@@ -328,7 +328,13 @@ $(document).ready(function () {
 				ignoreDeleteRequest(this, request);
 			});
 
-			var cols = $('<td>' + request.id + '</td><td>' + request.displayName + '</td><td>' + request.reason + '</td><td>' + format_date(request.created * 1000 )+ '</td>');
+			// The reason and the display name are user-controlled: insert them as text, never as HTML
+			var cols = [
+				$('<td></td>').text(request.id),
+				$('<td></td>').text(request.displayName),
+				$('<td></td>').text(request.reason),
+				$('<td></td>').text(format_date(request.created * 1000))
+			];
 			var actions = $('<td class="passman-admin-table-actions"></td>').append(accept).append(ignore);
 			table.append($('<tr></tr>').append(cols).append(actions));
 		});

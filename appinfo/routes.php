@@ -93,7 +93,6 @@ return [
 		['name' => 'Internal#remind', 'url' => '/api/internal/notifications/remind/{credential_id}', 'verb' => 'POST'],
 		['name' => 'Internal#read', 'url' => '/api/internal/notifications/read/{credential_id}', 'verb' => 'DELETE'],
 		['name' => 'Internal#getAppVersion', 'url' => '/api/internal/version', 'verb' => 'GET'],
-		['name' => 'Internal#generatePerson', 'url' => '/api/internal/generate_person', 'verb' => 'GET'],
 
 		//Admin routes
 		['name' => 'Admin#searchUser', 'url' => '/admin/search', 'verb' => 'GET'],

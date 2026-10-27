@@ -109,11 +109,14 @@ class FileMapper extends QBMapper {
 	 * @param int $file_id
 	 * @param string $userId
 	 * @return File
+	 * @throws DoesNotExistException if the file does not exist or does not belong to the user
+	 * @throws MultipleObjectsReturnedException
 	 */
 	public function deleteFile(int $file_id, string $userId): File {
-		$file = new File();
-		$file->setId($file_id);
-		$file->setUserId($userId);
+		// Fetch the file scoped by user_id first: QBMapper::delete() builds its WHERE clause
+		// from the entity id only, so a bare delete() would ignore the user_id.
+		// getFile() throws if the file does not exist or is not owned by $userId.
+		$file = $this->getFile($file_id, $userId);
 		return $this->delete($file);
 	}
 

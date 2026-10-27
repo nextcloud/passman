@@ -97,10 +97,11 @@ class CredentialRevisionService {
 	 *
 	 * @param int $revision_id
 	 * @param string $user_id
+	 * @param int|null $credential_id if given, the revision must belong to this credential
 	 * @return CredentialRevision
 	 */
-	public function deleteRevision(int $revision_id, string $user_id): CredentialRevision {
-		return $this->credentialRevisionMapper->deleteRevision($revision_id, $user_id);
+	public function deleteRevision(int $revision_id, string $user_id, ?int $credential_id = null): CredentialRevision {
+		return $this->credentialRevisionMapper->deleteRevision($revision_id, $user_id, $credential_id);
 	}
 
 	/**

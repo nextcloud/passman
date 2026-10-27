@@ -75,6 +75,7 @@ OC.L10N.register(
     "Never" : "Aldri",
     "Donate" : "Donér",
     "Tags" : "Emneord",
+    "Loading" : "Lastar inn",
     "Description" : "Skildring",
     "Move" : "Move",
     "An error occurred!" : "Ein feil oppstod!",

@@ -135,4 +135,52 @@ class CredentialControllerTest extends TestCase {
 
 		$this->controller->updateRevision('7', 'data');
 	}
+
+	public function testDeleteRevisionReturnsNotFoundForForeignOrMissingRevision(): void {
+		// The credential is owned by the caller, but the revision lookup throws because the
+		// revision does not exist, is not owned by the caller, or belongs to another credential.
+		// The controller must translate that into a 404, not delete and not 500.
+		$this->credentialService->method('getCredentialByGUID')
+			->with('item-guid', self::USER)
+			->willReturn($this->foreignCredential());
+		$this->revisionService->expects($this->once())
+			->method('deleteRevision')
+			->with(7, self::USER, 5)
+			->willThrowException(new DoesNotExistException(''));
+
+		$response = $this->controller->deleteRevision('item-guid', '7');
+
+		$this->assertInstanceOf(NotFoundJSONResponse::class, $response);
+		$this->assertSame(Http::STATUS_NOT_FOUND, $response->getStatus());
+	}
+
+	public function testDeleteRevisionReturnsNotFoundForForeignCredential(): void {
+		// The credential guid does not resolve for this user: nothing must be deleted.
+		$this->credentialService->method('getCredentialByGUID')
+			->with('item-guid', self::USER)
+			->willThrowException(new DoesNotExistException(''));
+		$this->revisionService->expects($this->never())->method('deleteRevision');
+
+		$response = $this->controller->deleteRevision('item-guid', '7');
+
+		$this->assertInstanceOf(NotFoundJSONResponse::class, $response);
+		$this->assertSame(Http::STATUS_NOT_FOUND, $response->getStatus());
+	}
+
+	public function testDeleteRevisionDeletesOwnRevision(): void {
+		// foreignCredential()->getId() is 5; the revision must be cross-validated against it.
+		$revision = new CredentialRevision();
+		$this->credentialService->method('getCredentialByGUID')
+			->with('item-guid', self::USER)
+			->willReturn($this->foreignCredential());
+		$this->revisionService->expects($this->once())
+			->method('deleteRevision')
+			->with(7, self::USER, 5)
+			->willReturn($revision);
+
+		$response = $this->controller->deleteRevision('item-guid', '7');
+
+		$this->assertInstanceOf(JSONResponse::class, $response);
+		$this->assertSame(Http::STATUS_OK, $response->getStatus());
+	}
 }

@@ -30,7 +30,7 @@
    * # passwordGen
    */
   angular.module('passmanApp').directive('iconPicker', [
-    '$window', 'IconService', '$http', 'NotificationService', 'UrlService', '$translate', function($window, IconService, $http, NotificationService, UrlService, $translate) {
+    '$window', 'IconService', '$http', 'NotificationService', 'UrlService', '$translate', 'Utf8Base64Service', function($window, IconService, $http, NotificationService, UrlService, $translate, Utf8Base64Service) {
       return {
         templateUrl: 'views/partials/icon-picker.html',
         restrict: 'A',
@@ -117,7 +117,7 @@
 
             scope.refreshUrlIcon = function(){
 				NotificationService.showNotification($translate.instant('use.icon.refresh.trying'), 5000);
-				var queryUrl = UrlService.generateUrl('/api/v2/geticon/'+btoa(scope.credential.url));
+				var queryUrl = UrlService.generateUrl('/api/v2/geticon/' + Utf8Base64Service.encode(scope.credential.url));
 				$http.get(queryUrl).then(function (response) {
 				    if(typeof response.data.content !== 'undefined'){
 					    scope.customIcon = {};

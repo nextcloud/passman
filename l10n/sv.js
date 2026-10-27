@@ -264,6 +264,7 @@ OC.L10N.register(
     "You have incoming share requests." : "Du har inkommande delningsförfrågningar.",
     "If you want to put the credential in another vault," : "Om du vill lägga inloggningsinloggningsinloggningsuppgifterna i ett annat valv,",
     "log out of this vault and log into the vault you want the shared credential in." : "logga ut från det här valvet och logga in i valvet där du vill spara de delade inloggningsuppgifterna.",
+    "You have incoming share requests in other vaults:" : "Du har inkommande delningsförfrågningar i andra valv:",
     "Permissions" : "Behörigheter",
     "Received from" : "Mottaget från",
     "Date" : "Datum",
