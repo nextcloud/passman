@@ -84,6 +84,7 @@ OC.L10N.register(
     "Loading" : "Се вчитува",
     "email" : "е-пошта",
     "Description" : "Опис",
+    "Search for a user" : "Пребарај корисници",
     "Move" : "Премести",
     "An error occurred!" : "Се случи грешка",
     "E-mail" : "е-пошта",
