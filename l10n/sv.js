@@ -106,7 +106,7 @@ OC.L10N.register(
     "Use this icon" : "Använd denna ikon",
     "Delete current icon" : "Ta bort aktuell ikon",
     "Get icon from page" : "Hämta ikonen från sidan",
-    "This may take a few seconds …" : "Detta kan ta några sekunder …",
+    "This may take a few seconds …" : "Detta kan ta några sekunder …",
     "There was an error fetching the icon!" : "Det gick inte att hämta ikonen!",
     "Selected icon" : "Vald ikon",
     "Field label" : "Fältetikett",
